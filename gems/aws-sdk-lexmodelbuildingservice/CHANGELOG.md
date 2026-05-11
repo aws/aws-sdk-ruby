@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2026-05-04)
+------------------
+
+* Feature - Lex V1 is deprecated, use Lex V2 instead
+
 1.102.0 (2026-03-18)
 ------------------
 

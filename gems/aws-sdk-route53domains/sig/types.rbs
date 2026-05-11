@@ -481,6 +481,12 @@ module Aws::Route53Domains
       SENSITIVE: []
     end
 
+    class TLDInMaintenance
+      attr_accessor message: ::String
+      attr_accessor tld: ::String
+      SENSITIVE: []
+    end
+
     class TLDRulesViolation
       attr_accessor message: ::String
       SENSITIVE: []

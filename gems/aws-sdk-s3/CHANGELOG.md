@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.221.0 (2026-05-06)
+------------------
+
+* Feature - Validate outpost access point resource name
+
 1.220.0 (2026-04-22)
 ------------------
 

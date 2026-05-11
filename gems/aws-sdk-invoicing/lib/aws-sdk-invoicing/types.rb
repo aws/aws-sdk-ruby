@@ -510,10 +510,16 @@ module Aws::Invoicing
     #   The name of the entity that issues the Amazon Web Services invoice.
     #   @return [String]
     #
+    # @!attribute [rw] billing_entity
+    #   Helps you identify whether your invoices are for Amazon Web Services
+    #   Marketplace or for purchases of other Amazon Web Services services.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/Entity AWS API Documentation
     #
     class Entity < Struct.new(
-      :invoicing_entity)
+      :invoicing_entity,
+      :billing_entity)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -593,10 +599,10 @@ module Aws::Invoicing
     #   @return [Array<String>]
     #
     # @!attribute [rw] bill_source_accounts
-    #   A list of Amazon Web Services account account IDs used to filter
-    #   invoice units. These are payer accounts from other Organizations
-    #   that have delegated their billing responsibility to the receiver
-    #   account through the billing transfer feature.
+    #   A list of Amazon Web Services account IDs used to filter invoice
+    #   units. These are payer accounts from other Organizations that have
+    #   delegated their billing responsibility to the receiver account
+    #   through the billing transfer feature.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/Filters AWS API Documentation
@@ -867,12 +873,27 @@ module Aws::Invoicing
     #   The name of the entity that issues the Amazon Web Services invoice.
     #   @return [String]
     #
+    # @!attribute [rw] receiver_role
+    #   The role of the invoice receiver to filter by.
+    #
+    #   <note markdown="1"> When `ReceiverRole` is specified:
+    #
+    #    * Data is available starting `2025-06-01`. Queries for periods
+    #     before `2025-06-01` return a validation error.
+    #
+    #   * `TimeInterval` supports a time interval of up to 5 years. Without
+    #     `ReceiverRole`, `TimeInterval` is limited to one month.
+    #
+    #    </note>
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceSummariesFilter AWS API Documentation
     #
     class InvoiceSummariesFilter < Struct.new(
       :time_interval,
       :billing_period,
-      :invoicing_entity)
+      :invoicing_entity,
+      :receiver_role)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -914,6 +935,21 @@ module Aws::Invoicing
     #   The invoice due date.
     #   @return [Time]
     #
+    # @!attribute [rw] bill_source_accounts
+    #   The list of Amazon Web Services account IDs that are the bill source
+    #   of the invoice. Currently, only a single bill source account is
+    #   returned.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] bill_source_accounts_total_count
+    #   The total number of accounts that are the bill source of the
+    #   invoice.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] receiver_role
+    #   The role of the invoice receiver.
+    #   @return [String]
+    #
     # @!attribute [rw] entity
     #   The organization name providing Amazon Web Services services.
     #   @return [Types::Entity]
@@ -922,8 +958,21 @@ module Aws::Invoicing
     #   The billing period of the invoice-related document.
     #   @return [Types::BillingPeriod]
     #
+    # @!attribute [rw] invoice_frequency
+    #   The frequency of the invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] bill_type
+    #   The type of the bill.
+    #   @return [String]
+    #
     # @!attribute [rw] invoice_type
     #   The type of invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] commercial_invoice_id
+    #   The commercial invoice ID. This is only applicable for tax invoices
+    #   and identifies the associated commercial invoice.
     #   @return [String]
     #
     # @!attribute [rw] original_invoice_id
@@ -932,6 +981,16 @@ module Aws::Invoicing
     #
     # @!attribute [rw] purchase_order_number
     #   The purchase order number associated to the invoice.
+    #   @return [String]
+    #
+    # @!attribute [rw] einvoice_delivery_status
+    #   The e-invoice delivery status.
+    #   @return [String]
+    #
+    # @!attribute [rw] tax_authority_status
+    #   The current status of an invoice as reported to the tax authority.
+    #   This captures scenarios where an invoice may be cancelled after
+    #   issuance.
     #   @return [String]
     #
     # @!attribute [rw] base_currency_amount
@@ -953,11 +1012,19 @@ module Aws::Invoicing
       :invoice_id,
       :issued_date,
       :due_date,
+      :bill_source_accounts,
+      :bill_source_accounts_total_count,
+      :receiver_role,
       :entity,
       :billing_period,
+      :invoice_frequency,
+      :bill_type,
       :invoice_type,
+      :commercial_invoice_id,
       :original_invoice_id,
       :purchase_order_number,
+      :einvoice_delivery_status,
+      :tax_authority_status,
       :base_currency_amount,
       :tax_currency_amount,
       :payment_currency_amount)
@@ -1028,11 +1095,11 @@ module Aws::Invoicing
     #   @return [Array<String>]
     #
     # @!attribute [rw] bill_source_accounts
-    #   A list of Amazon Web Services account account IDs that have
-    #   delegated their billing responsibility to the receiver account
-    #   through transfer billing. Unlike linked accounts, these bill source
-    #   accounts can be payer accounts from other organizations that have
-    #   authorized billing transfer to this account.
+    #   A list of Amazon Web Services account IDs that have delegated their
+    #   billing responsibility to the receiver account through transfer
+    #   billing. Unlike linked accounts, these bill source accounts can be
+    #   payer accounts from other organizations that have authorized billing
+    #   transfer to this account.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/InvoiceUnitRule AWS API Documentation
@@ -1680,6 +1747,14 @@ module Aws::Invoicing
 
     # Supplemental document associated with the invoice.
     #
+    # @!attribute [rw] document_type
+    #   The type of supplemental document.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_id
+    #   The ID of the supplemental document.
+    #   @return [String]
+    #
     # @!attribute [rw] document_url
     #   The pre-signed URL to download invoice supplemental document.
     #   @return [String]
@@ -1691,6 +1766,8 @@ module Aws::Invoicing
     # @see http://docs.aws.amazon.com/goto/WebAPI/invoicing-2024-12-01/SupplementalDocument AWS API Documentation
     #
     class SupplementalDocument < Struct.new(
+      :document_type,
+      :document_id,
       :document_url,
       :document_url_expiration_date)
       SENSITIVE = []

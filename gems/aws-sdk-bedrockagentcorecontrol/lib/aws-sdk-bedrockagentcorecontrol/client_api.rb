@@ -128,6 +128,11 @@ module Aws::BedrockAgentCoreControl
     CodeInterpreterStatus = Shapes::StringShape.new(name: 'CodeInterpreterStatus')
     CodeInterpreterSummaries = Shapes::ListShape.new(name: 'CodeInterpreterSummaries')
     CodeInterpreterSummary = Shapes::StructureShape.new(name: 'CodeInterpreterSummary')
+    CoinbaseCdpApiKeyIdType = Shapes::StringShape.new(name: 'CoinbaseCdpApiKeyIdType')
+    CoinbaseCdpApiKeySecretType = Shapes::StringShape.new(name: 'CoinbaseCdpApiKeySecretType')
+    CoinbaseCdpConfigurationInput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationInput')
+    CoinbaseCdpConfigurationOutput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationOutput')
+    CoinbaseCdpWalletSecretType = Shapes::StringShape.new(name: 'CoinbaseCdpWalletSecretType')
     ComponentConfiguration = Shapes::StructureShape.new(name: 'ComponentConfiguration')
     ComponentConfigurationMap = Shapes::MapShape.new(name: 'ComponentConfigurationMap')
     ComponentIdentifier = Shapes::StringShape.new(name: 'ComponentIdentifier')
@@ -188,6 +193,12 @@ module Aws::BedrockAgentCoreControl
     CreateOauth2CredentialProviderResponse = Shapes::StructureShape.new(name: 'CreateOauth2CredentialProviderResponse')
     CreateOnlineEvaluationConfigRequest = Shapes::StructureShape.new(name: 'CreateOnlineEvaluationConfigRequest')
     CreateOnlineEvaluationConfigResponse = Shapes::StructureShape.new(name: 'CreateOnlineEvaluationConfigResponse')
+    CreatePaymentConnectorRequest = Shapes::StructureShape.new(name: 'CreatePaymentConnectorRequest')
+    CreatePaymentConnectorResponse = Shapes::StructureShape.new(name: 'CreatePaymentConnectorResponse')
+    CreatePaymentCredentialProviderRequest = Shapes::StructureShape.new(name: 'CreatePaymentCredentialProviderRequest')
+    CreatePaymentCredentialProviderResponse = Shapes::StructureShape.new(name: 'CreatePaymentCredentialProviderResponse')
+    CreatePaymentManagerRequest = Shapes::StructureShape.new(name: 'CreatePaymentManagerRequest')
+    CreatePaymentManagerResponse = Shapes::StructureShape.new(name: 'CreatePaymentManagerResponse')
     CreatePolicyEngineRequest = Shapes::StructureShape.new(name: 'CreatePolicyEngineRequest')
     CreatePolicyEngineResponse = Shapes::StructureShape.new(name: 'CreatePolicyEngineResponse')
     CreatePolicyRequest = Shapes::StructureShape.new(name: 'CreatePolicyRequest')
@@ -206,6 +217,8 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderName = Shapes::StringShape.new(name: 'CredentialProviderName')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     CredentialProviderVendorType = Shapes::StringShape.new(name: 'CredentialProviderVendorType')
+    CredentialsProviderConfiguration = Shapes::UnionShape.new(name: 'CredentialsProviderConfiguration')
+    CredentialsProviderConfigurations = Shapes::ListShape.new(name: 'CredentialsProviderConfigurations')
     CustomClaimValidationType = Shapes::StructureShape.new(name: 'CustomClaimValidationType')
     CustomClaimValidationsType = Shapes::ListShape.new(name: 'CustomClaimValidationsType')
     CustomConfigurationInput = Shapes::UnionShape.new(name: 'CustomConfigurationInput')
@@ -262,6 +275,12 @@ module Aws::BedrockAgentCoreControl
     DeleteOauth2CredentialProviderResponse = Shapes::StructureShape.new(name: 'DeleteOauth2CredentialProviderResponse')
     DeleteOnlineEvaluationConfigRequest = Shapes::StructureShape.new(name: 'DeleteOnlineEvaluationConfigRequest')
     DeleteOnlineEvaluationConfigResponse = Shapes::StructureShape.new(name: 'DeleteOnlineEvaluationConfigResponse')
+    DeletePaymentConnectorRequest = Shapes::StructureShape.new(name: 'DeletePaymentConnectorRequest')
+    DeletePaymentConnectorResponse = Shapes::StructureShape.new(name: 'DeletePaymentConnectorResponse')
+    DeletePaymentCredentialProviderRequest = Shapes::StructureShape.new(name: 'DeletePaymentCredentialProviderRequest')
+    DeletePaymentCredentialProviderResponse = Shapes::StructureShape.new(name: 'DeletePaymentCredentialProviderResponse')
+    DeletePaymentManagerRequest = Shapes::StructureShape.new(name: 'DeletePaymentManagerRequest')
+    DeletePaymentManagerResponse = Shapes::StructureShape.new(name: 'DeletePaymentManagerResponse')
     DeletePolicyEngineRequest = Shapes::StructureShape.new(name: 'DeletePolicyEngineRequest')
     DeletePolicyEngineResponse = Shapes::StructureShape.new(name: 'DeletePolicyEngineResponse')
     DeletePolicyRequest = Shapes::StructureShape.new(name: 'DeletePolicyRequest')
@@ -282,6 +301,8 @@ module Aws::BedrockAgentCoreControl
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     Double = Shapes::FloatShape.new(name: 'Double')
+    EfsAccessPointArn = Shapes::StringShape.new(name: 'EfsAccessPointArn')
+    EfsAccessPointConfiguration = Shapes::StructureShape.new(name: 'EfsAccessPointConfiguration')
     EncryptionFailure = Shapes::StructureShape.new(name: 'EncryptionFailure')
     EndpointIpAddressType = Shapes::StringShape.new(name: 'EndpointIpAddressType')
     EndpointName = Shapes::StringShape.new(name: 'EndpointName')
@@ -393,6 +414,12 @@ module Aws::BedrockAgentCoreControl
     GetOauth2CredentialProviderResponse = Shapes::StructureShape.new(name: 'GetOauth2CredentialProviderResponse')
     GetOnlineEvaluationConfigRequest = Shapes::StructureShape.new(name: 'GetOnlineEvaluationConfigRequest')
     GetOnlineEvaluationConfigResponse = Shapes::StructureShape.new(name: 'GetOnlineEvaluationConfigResponse')
+    GetPaymentConnectorRequest = Shapes::StructureShape.new(name: 'GetPaymentConnectorRequest')
+    GetPaymentConnectorResponse = Shapes::StructureShape.new(name: 'GetPaymentConnectorResponse')
+    GetPaymentCredentialProviderRequest = Shapes::StructureShape.new(name: 'GetPaymentCredentialProviderRequest')
+    GetPaymentCredentialProviderResponse = Shapes::StructureShape.new(name: 'GetPaymentCredentialProviderResponse')
+    GetPaymentManagerRequest = Shapes::StructureShape.new(name: 'GetPaymentManagerRequest')
+    GetPaymentManagerResponse = Shapes::StructureShape.new(name: 'GetPaymentManagerResponse')
     GetPolicyEngineRequest = Shapes::StructureShape.new(name: 'GetPolicyEngineRequest')
     GetPolicyEngineResponse = Shapes::StructureShape.new(name: 'GetPolicyEngineResponse')
     GetPolicyGenerationRequest = Shapes::StructureShape.new(name: 'GetPolicyGenerationRequest')
@@ -550,6 +577,13 @@ module Aws::BedrockAgentCoreControl
     ListOnlineEvaluationConfigsRequest = Shapes::StructureShape.new(name: 'ListOnlineEvaluationConfigsRequest')
     ListOnlineEvaluationConfigsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOnlineEvaluationConfigsRequestMaxResultsInteger')
     ListOnlineEvaluationConfigsResponse = Shapes::StructureShape.new(name: 'ListOnlineEvaluationConfigsResponse')
+    ListPaymentConnectorsRequest = Shapes::StructureShape.new(name: 'ListPaymentConnectorsRequest')
+    ListPaymentConnectorsResponse = Shapes::StructureShape.new(name: 'ListPaymentConnectorsResponse')
+    ListPaymentCredentialProvidersRequest = Shapes::StructureShape.new(name: 'ListPaymentCredentialProvidersRequest')
+    ListPaymentCredentialProvidersRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListPaymentCredentialProvidersRequestMaxResultsInteger')
+    ListPaymentCredentialProvidersResponse = Shapes::StructureShape.new(name: 'ListPaymentCredentialProvidersResponse')
+    ListPaymentManagersRequest = Shapes::StructureShape.new(name: 'ListPaymentManagersRequest')
+    ListPaymentManagersResponse = Shapes::StructureShape.new(name: 'ListPaymentManagersResponse')
     ListPoliciesRequest = Shapes::StructureShape.new(name: 'ListPoliciesRequest')
     ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
     ListPolicyEnginesRequest = Shapes::StructureShape.new(name: 'ListPolicyEnginesRequest')
@@ -676,6 +710,28 @@ module Aws::BedrockAgentCoreControl
     OnlineEvaluationExecutionStatus = Shapes::StringShape.new(name: 'OnlineEvaluationExecutionStatus')
     OutputConfig = Shapes::StructureShape.new(name: 'OutputConfig')
     OverrideType = Shapes::StringShape.new(name: 'OverrideType')
+    PaymentConnectorId = Shapes::StringShape.new(name: 'PaymentConnectorId')
+    PaymentConnectorName = Shapes::StringShape.new(name: 'PaymentConnectorName')
+    PaymentConnectorStatus = Shapes::StringShape.new(name: 'PaymentConnectorStatus')
+    PaymentConnectorSummaries = Shapes::ListShape.new(name: 'PaymentConnectorSummaries')
+    PaymentConnectorSummary = Shapes::StructureShape.new(name: 'PaymentConnectorSummary')
+    PaymentConnectorType = Shapes::StringShape.new(name: 'PaymentConnectorType')
+    PaymentCredentialProviderArn = Shapes::StringShape.new(name: 'PaymentCredentialProviderArn')
+    PaymentCredentialProviderArnType = Shapes::StringShape.new(name: 'PaymentCredentialProviderArnType')
+    PaymentCredentialProviderConfiguration = Shapes::StructureShape.new(name: 'PaymentCredentialProviderConfiguration')
+    PaymentCredentialProviderItem = Shapes::StructureShape.new(name: 'PaymentCredentialProviderItem')
+    PaymentCredentialProviderVendorType = Shapes::StringShape.new(name: 'PaymentCredentialProviderVendorType')
+    PaymentCredentialProviders = Shapes::ListShape.new(name: 'PaymentCredentialProviders')
+    PaymentManagerArn = Shapes::StringShape.new(name: 'PaymentManagerArn')
+    PaymentManagerId = Shapes::StringShape.new(name: 'PaymentManagerId')
+    PaymentManagerName = Shapes::StringShape.new(name: 'PaymentManagerName')
+    PaymentManagerStatus = Shapes::StringShape.new(name: 'PaymentManagerStatus')
+    PaymentManagerSummaries = Shapes::ListShape.new(name: 'PaymentManagerSummaries')
+    PaymentManagerSummary = Shapes::StructureShape.new(name: 'PaymentManagerSummary')
+    PaymentProviderConfigurationInput = Shapes::UnionShape.new(name: 'PaymentProviderConfigurationInput')
+    PaymentProviderConfigurationOutput = Shapes::UnionShape.new(name: 'PaymentProviderConfigurationOutput')
+    PaymentsAuthorizerType = Shapes::StringShape.new(name: 'PaymentsAuthorizerType')
+    PaymentsDescription = Shapes::StringShape.new(name: 'PaymentsDescription')
     Policies = Shapes::ListShape.new(name: 'Policies')
     Policy = Shapes::StructureShape.new(name: 'Policy')
     PolicyArn = Shapes::StringShape.new(name: 'PolicyArn')
@@ -763,6 +819,8 @@ module Aws::BedrockAgentCoreControl
     RuntimeTargetConfiguration = Shapes::StructureShape.new(name: 'RuntimeTargetConfiguration')
     S3BucketUri = Shapes::StringShape.new(name: 'S3BucketUri')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
+    S3FilesAccessPointArn = Shapes::StringShape.new(name: 'S3FilesAccessPointArn')
+    S3FilesAccessPointConfiguration = Shapes::StructureShape.new(name: 'S3FilesAccessPointConfiguration')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
     S3LocationBucketString = Shapes::StringShape.new(name: 'S3LocationBucketString')
     S3LocationPrefixString = Shapes::StringShape.new(name: 'S3LocationPrefixString')
@@ -806,6 +864,8 @@ module Aws::BedrockAgentCoreControl
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     SessionConfig = Shapes::StructureShape.new(name: 'SessionConfig')
     SessionConfigSessionTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'SessionConfigSessionTimeoutMinutesInteger')
+    SessionConfiguration = Shapes::StructureShape.new(name: 'SessionConfiguration')
+    SessionConfigurationSessionTimeoutInSecondsInteger = Shapes::IntegerShape.new(name: 'SessionConfigurationSessionTimeoutInSecondsInteger')
     SessionStorageConfiguration = Shapes::StructureShape.new(name: 'SessionStorageConfiguration')
     SetTokenVaultCMKRequest = Shapes::StructureShape.new(name: 'SetTokenVaultCMKRequest')
     SetTokenVaultCMKResponse = Shapes::StructureShape.new(name: 'SetTokenVaultCMKResponse')
@@ -826,10 +886,17 @@ module Aws::BedrockAgentCoreControl
     StreamDeliveryResource = Shapes::UnionShape.new(name: 'StreamDeliveryResource')
     StreamDeliveryResources = Shapes::StructureShape.new(name: 'StreamDeliveryResources')
     StreamDeliveryResourcesList = Shapes::ListShape.new(name: 'StreamDeliveryResourcesList')
+    StreamingConfiguration = Shapes::StructureShape.new(name: 'StreamingConfiguration')
     String = Shapes::StringShape.new(name: 'String')
     StringListValidation = Shapes::StructureShape.new(name: 'StringListValidation')
     StringListValidationMaxItemsInteger = Shapes::IntegerShape.new(name: 'StringListValidationMaxItemsInteger')
     StringValidation = Shapes::StructureShape.new(name: 'StringValidation')
+    StripePrivyAppIdType = Shapes::StringShape.new(name: 'StripePrivyAppIdType')
+    StripePrivyAppSecretType = Shapes::StringShape.new(name: 'StripePrivyAppSecretType')
+    StripePrivyAuthorizationIdType = Shapes::StringShape.new(name: 'StripePrivyAuthorizationIdType')
+    StripePrivyAuthorizationPrivateKeyType = Shapes::StringShape.new(name: 'StripePrivyAuthorizationPrivateKeyType')
+    StripePrivyConfigurationInput = Shapes::StructureShape.new(name: 'StripePrivyConfigurationInput')
+    StripePrivyConfigurationOutput = Shapes::StructureShape.new(name: 'StripePrivyConfigurationOutput')
     SubmitRegistryRecordForApprovalRequest = Shapes::StructureShape.new(name: 'SubmitRegistryRecordForApprovalRequest')
     SubmitRegistryRecordForApprovalResponse = Shapes::StructureShape.new(name: 'SubmitRegistryRecordForApprovalResponse')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -934,6 +1001,12 @@ module Aws::BedrockAgentCoreControl
     UpdateOauth2CredentialProviderResponse = Shapes::StructureShape.new(name: 'UpdateOauth2CredentialProviderResponse')
     UpdateOnlineEvaluationConfigRequest = Shapes::StructureShape.new(name: 'UpdateOnlineEvaluationConfigRequest')
     UpdateOnlineEvaluationConfigResponse = Shapes::StructureShape.new(name: 'UpdateOnlineEvaluationConfigResponse')
+    UpdatePaymentConnectorRequest = Shapes::StructureShape.new(name: 'UpdatePaymentConnectorRequest')
+    UpdatePaymentConnectorResponse = Shapes::StructureShape.new(name: 'UpdatePaymentConnectorResponse')
+    UpdatePaymentCredentialProviderRequest = Shapes::StructureShape.new(name: 'UpdatePaymentCredentialProviderRequest')
+    UpdatePaymentCredentialProviderResponse = Shapes::StructureShape.new(name: 'UpdatePaymentCredentialProviderResponse')
+    UpdatePaymentManagerRequest = Shapes::StructureShape.new(name: 'UpdatePaymentManagerRequest')
+    UpdatePaymentManagerResponse = Shapes::StructureShape.new(name: 'UpdatePaymentManagerResponse')
     UpdatePolicyEngineRequest = Shapes::StructureShape.new(name: 'UpdatePolicyEngineRequest')
     UpdatePolicyEngineResponse = Shapes::StructureShape.new(name: 'UpdatePolicyEngineResponse')
     UpdatePolicyRequest = Shapes::StructureShape.new(name: 'UpdatePolicyRequest')
@@ -1256,6 +1329,16 @@ module Aws::BedrockAgentCoreControl
     CodeInterpreterSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CodeInterpreterSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "lastUpdatedAt"))
     CodeInterpreterSummary.struct_class = Types::CodeInterpreterSummary
+
+    CoinbaseCdpConfigurationInput.add_member(:api_key_id, Shapes::ShapeRef.new(shape: CoinbaseCdpApiKeyIdType, required: true, location_name: "apiKeyId"))
+    CoinbaseCdpConfigurationInput.add_member(:api_key_secret, Shapes::ShapeRef.new(shape: CoinbaseCdpApiKeySecretType, required: true, location_name: "apiKeySecret"))
+    CoinbaseCdpConfigurationInput.add_member(:wallet_secret, Shapes::ShapeRef.new(shape: CoinbaseCdpWalletSecretType, required: true, location_name: "walletSecret"))
+    CoinbaseCdpConfigurationInput.struct_class = Types::CoinbaseCdpConfigurationInput
+
+    CoinbaseCdpConfigurationOutput.add_member(:api_key_id, Shapes::ShapeRef.new(shape: CoinbaseCdpApiKeyIdType, required: true, location_name: "apiKeyId"))
+    CoinbaseCdpConfigurationOutput.add_member(:api_key_secret_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "apiKeySecretArn"))
+    CoinbaseCdpConfigurationOutput.add_member(:wallet_secret_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "walletSecretArn"))
+    CoinbaseCdpConfigurationOutput.struct_class = Types::CoinbaseCdpConfigurationOutput
 
     ComponentConfiguration.add_member(:configuration, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "configuration"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
@@ -1610,6 +1693,56 @@ module Aws::BedrockAgentCoreControl
     CreateOnlineEvaluationConfigResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     CreateOnlineEvaluationConfigResponse.struct_class = Types::CreateOnlineEvaluationConfigResponse
 
+    CreatePaymentConnectorRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    CreatePaymentConnectorRequest.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
+    CreatePaymentConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    CreatePaymentConnectorRequest.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    CreatePaymentConnectorRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    CreatePaymentConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreatePaymentConnectorRequest.struct_class = Types::CreatePaymentConnectorRequest
+
+    CreatePaymentConnectorResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    CreatePaymentConnectorResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    CreatePaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
+    CreatePaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    CreatePaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    CreatePaymentConnectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    CreatePaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    CreatePaymentConnectorResponse.struct_class = Types::CreatePaymentConnectorResponse
+
+    CreatePaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    CreatePaymentCredentialProviderRequest.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    CreatePaymentCredentialProviderRequest.add_member(:provider_configuration_input, Shapes::ShapeRef.new(shape: PaymentProviderConfigurationInput, required: true, location_name: "providerConfigurationInput"))
+    CreatePaymentCredentialProviderRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreatePaymentCredentialProviderRequest.struct_class = Types::CreatePaymentCredentialProviderRequest
+
+    CreatePaymentCredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    CreatePaymentCredentialProviderResponse.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    CreatePaymentCredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: PaymentCredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    CreatePaymentCredentialProviderResponse.add_member(:provider_configuration_output, Shapes::ShapeRef.new(shape: PaymentProviderConfigurationOutput, required: true, location_name: "providerConfigurationOutput"))
+    CreatePaymentCredentialProviderResponse.struct_class = Types::CreatePaymentCredentialProviderResponse
+
+    CreatePaymentManagerRequest.add_member(:name, Shapes::ShapeRef.new(shape: PaymentManagerName, required: true, location_name: "name"))
+    CreatePaymentManagerRequest.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    CreatePaymentManagerRequest.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, required: true, location_name: "authorizerType"))
+    CreatePaymentManagerRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    CreatePaymentManagerRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreatePaymentManagerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreatePaymentManagerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreatePaymentManagerRequest.struct_class = Types::CreatePaymentManagerRequest
+
+    CreatePaymentManagerResponse.add_member(:payment_manager_arn, Shapes::ShapeRef.new(shape: PaymentManagerArn, required: true, location_name: "paymentManagerArn"))
+    CreatePaymentManagerResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    CreatePaymentManagerResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentManagerName, required: true, location_name: "name"))
+    CreatePaymentManagerResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, required: true, location_name: "authorizerType"))
+    CreatePaymentManagerResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    CreatePaymentManagerResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    CreatePaymentManagerResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
+    CreatePaymentManagerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    CreatePaymentManagerResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentManagerStatus, required: true, location_name: "status"))
+    CreatePaymentManagerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreatePaymentManagerResponse.struct_class = Types::CreatePaymentManagerResponse
+
     CreatePolicyEngineRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
     CreatePolicyEngineRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePolicyEngineRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -1699,6 +1832,16 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderConfiguration.struct_class = Types::CredentialProviderConfiguration
 
     CredentialProviderConfigurations.member = Shapes::ShapeRef.new(shape: CredentialProviderConfiguration)
+
+    CredentialsProviderConfiguration.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "coinbaseCDP"))
+    CredentialsProviderConfiguration.add_member(:stripe_privy, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "stripePrivy"))
+    CredentialsProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CredentialsProviderConfiguration.add_member_subclass(:coinbase_cdp, Types::CredentialsProviderConfiguration::CoinbaseCdp)
+    CredentialsProviderConfiguration.add_member_subclass(:stripe_privy, Types::CredentialsProviderConfiguration::StripePrivy)
+    CredentialsProviderConfiguration.add_member_subclass(:unknown, Types::CredentialsProviderConfiguration::Unknown)
+    CredentialsProviderConfiguration.struct_class = Types::CredentialsProviderConfiguration
+
+    CredentialsProviderConfigurations.member = Shapes::ShapeRef.new(shape: CredentialsProviderConfiguration)
 
     CustomClaimValidationType.add_member(:inbound_token_claim_name, Shapes::ShapeRef.new(shape: InboundTokenClaimNameType, required: true, location_name: "inboundTokenClaimName"))
     CustomClaimValidationType.add_member(:inbound_token_claim_value_type, Shapes::ShapeRef.new(shape: InboundTokenClaimValueType, required: true, location_name: "inboundTokenClaimValueType"))
@@ -1952,6 +2095,28 @@ module Aws::BedrockAgentCoreControl
     DeleteOnlineEvaluationConfigResponse.add_member(:status, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigStatus, required: true, location_name: "status"))
     DeleteOnlineEvaluationConfigResponse.struct_class = Types::DeleteOnlineEvaluationConfigResponse
 
+    DeletePaymentConnectorRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    DeletePaymentConnectorRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    DeletePaymentConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeletePaymentConnectorRequest.struct_class = Types::DeletePaymentConnectorRequest
+
+    DeletePaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    DeletePaymentConnectorResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, location_name: "paymentConnectorId"))
+    DeletePaymentConnectorResponse.struct_class = Types::DeletePaymentConnectorResponse
+
+    DeletePaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    DeletePaymentCredentialProviderRequest.struct_class = Types::DeletePaymentCredentialProviderRequest
+
+    DeletePaymentCredentialProviderResponse.struct_class = Types::DeletePaymentCredentialProviderResponse
+
+    DeletePaymentManagerRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    DeletePaymentManagerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeletePaymentManagerRequest.struct_class = Types::DeletePaymentManagerRequest
+
+    DeletePaymentManagerResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentManagerStatus, required: true, location_name: "status"))
+    DeletePaymentManagerResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, location_name: "paymentManagerId"))
+    DeletePaymentManagerResponse.struct_class = Types::DeletePaymentManagerResponse
+
     DeletePolicyEngineRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
     DeletePolicyEngineRequest.struct_class = Types::DeletePolicyEngineRequest
 
@@ -2009,6 +2174,10 @@ module Aws::BedrockAgentCoreControl
     Descriptors.add_member(:custom, Shapes::ShapeRef.new(shape: CustomDescriptor, location_name: "custom"))
     Descriptors.add_member(:agent_skills, Shapes::ShapeRef.new(shape: AgentSkillsDescriptor, location_name: "agentSkills"))
     Descriptors.struct_class = Types::Descriptors
+
+    EfsAccessPointConfiguration.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: EfsAccessPointArn, required: true, location_name: "accessPointArn"))
+    EfsAccessPointConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
+    EfsAccessPointConfiguration.struct_class = Types::EfsAccessPointConfiguration
 
     EncryptionFailure.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     EncryptionFailure.struct_class = Types::EncryptionFailure
@@ -2119,8 +2288,12 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfiguration.struct_class = Types::ExtractionConfiguration
 
     FilesystemConfiguration.add_member(:session_storage, Shapes::ShapeRef.new(shape: SessionStorageConfiguration, location_name: "sessionStorage"))
+    FilesystemConfiguration.add_member(:s3_files_access_point, Shapes::ShapeRef.new(shape: S3FilesAccessPointConfiguration, location_name: "s3FilesAccessPoint"))
+    FilesystemConfiguration.add_member(:efs_access_point, Shapes::ShapeRef.new(shape: EfsAccessPointConfiguration, location_name: "efsAccessPoint"))
     FilesystemConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     FilesystemConfiguration.add_member_subclass(:session_storage, Types::FilesystemConfiguration::SessionStorage)
+    FilesystemConfiguration.add_member_subclass(:s3_files_access_point, Types::FilesystemConfiguration::S3FilesAccessPoint)
+    FilesystemConfiguration.add_member_subclass(:efs_access_point, Types::FilesystemConfiguration::EfsAccessPoint)
     FilesystemConfiguration.add_member_subclass(:unknown, Types::FilesystemConfiguration::Unknown)
     FilesystemConfiguration.struct_class = Types::FilesystemConfiguration
 
@@ -2476,6 +2649,49 @@ module Aws::BedrockAgentCoreControl
     GetOnlineEvaluationConfigResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
     GetOnlineEvaluationConfigResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     GetOnlineEvaluationConfigResponse.struct_class = Types::GetOnlineEvaluationConfigResponse
+
+    GetPaymentConnectorRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    GetPaymentConnectorRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    GetPaymentConnectorRequest.struct_class = Types::GetPaymentConnectorRequest
+
+    GetPaymentConnectorResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    GetPaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
+    GetPaymentConnectorResponse.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    GetPaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    GetPaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    GetPaymentConnectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetPaymentConnectorResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    GetPaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    GetPaymentConnectorResponse.struct_class = Types::GetPaymentConnectorResponse
+
+    GetPaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    GetPaymentCredentialProviderRequest.struct_class = Types::GetPaymentCredentialProviderRequest
+
+    GetPaymentCredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    GetPaymentCredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: PaymentCredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    GetPaymentCredentialProviderResponse.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    GetPaymentCredentialProviderResponse.add_member(:provider_configuration_output, Shapes::ShapeRef.new(shape: PaymentProviderConfigurationOutput, required: true, location_name: "providerConfigurationOutput"))
+    GetPaymentCredentialProviderResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
+    GetPaymentCredentialProviderResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
+    GetPaymentCredentialProviderResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    GetPaymentCredentialProviderResponse.struct_class = Types::GetPaymentCredentialProviderResponse
+
+    GetPaymentManagerRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    GetPaymentManagerRequest.struct_class = Types::GetPaymentManagerRequest
+
+    GetPaymentManagerResponse.add_member(:payment_manager_arn, Shapes::ShapeRef.new(shape: PaymentManagerArn, required: true, location_name: "paymentManagerArn"))
+    GetPaymentManagerResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    GetPaymentManagerResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentManagerName, required: true, location_name: "name"))
+    GetPaymentManagerResponse.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    GetPaymentManagerResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, required: true, location_name: "authorizerType"))
+    GetPaymentManagerResponse.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    GetPaymentManagerResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    GetPaymentManagerResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
+    GetPaymentManagerResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetPaymentManagerResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    GetPaymentManagerResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentManagerStatus, required: true, location_name: "status"))
+    GetPaymentManagerResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    GetPaymentManagerResponse.struct_class = Types::GetPaymentManagerResponse
 
     GetPolicyEngineRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
     GetPolicyEngineRequest.struct_class = Types::GetPolicyEngineRequest
@@ -3038,6 +3254,31 @@ module Aws::BedrockAgentCoreControl
     ListOnlineEvaluationConfigsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListOnlineEvaluationConfigsResponse.struct_class = Types::ListOnlineEvaluationConfigsResponse
 
+    ListPaymentConnectorsRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    ListPaymentConnectorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPaymentConnectorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPaymentConnectorsRequest.struct_class = Types::ListPaymentConnectorsRequest
+
+    ListPaymentConnectorsResponse.add_member(:payment_connectors, Shapes::ShapeRef.new(shape: PaymentConnectorSummaries, required: true, location_name: "paymentConnectors"))
+    ListPaymentConnectorsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPaymentConnectorsResponse.struct_class = Types::ListPaymentConnectorsResponse
+
+    ListPaymentCredentialProvidersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPaymentCredentialProvidersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListPaymentCredentialProvidersRequestMaxResultsInteger, location_name: "maxResults"))
+    ListPaymentCredentialProvidersRequest.struct_class = Types::ListPaymentCredentialProvidersRequest
+
+    ListPaymentCredentialProvidersResponse.add_member(:credential_providers, Shapes::ShapeRef.new(shape: PaymentCredentialProviders, required: true, location_name: "credentialProviders"))
+    ListPaymentCredentialProvidersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListPaymentCredentialProvidersResponse.struct_class = Types::ListPaymentCredentialProvidersResponse
+
+    ListPaymentManagersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPaymentManagersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPaymentManagersRequest.struct_class = Types::ListPaymentManagersRequest
+
+    ListPaymentManagersResponse.add_member(:payment_managers, Shapes::ShapeRef.new(shape: PaymentManagerSummaries, required: true, location_name: "paymentManagers"))
+    ListPaymentManagersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPaymentManagersResponse.struct_class = Types::ListPaymentManagersResponse
+
     ListPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPoliciesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPoliciesRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
@@ -3123,6 +3364,8 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration.add_member(:supported_versions, Shapes::ShapeRef.new(shape: McpSupportedVersions, location_name: "supportedVersions"))
     MCPGatewayConfiguration.add_member(:instructions, Shapes::ShapeRef.new(shape: McpInstructions, location_name: "instructions"))
     MCPGatewayConfiguration.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
+    MCPGatewayConfiguration.add_member(:session_configuration, Shapes::ShapeRef.new(shape: SessionConfiguration, location_name: "sessionConfiguration"))
+    MCPGatewayConfiguration.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "streamingConfiguration"))
     MCPGatewayConfiguration.struct_class = Types::MCPGatewayConfiguration
 
     ManagedResourceDetails.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "domain"))
@@ -3451,6 +3694,56 @@ module Aws::BedrockAgentCoreControl
     OutputConfig.add_member(:cloud_watch_config, Shapes::ShapeRef.new(shape: CloudWatchOutputConfig, required: true, location_name: "cloudWatchConfig"))
     OutputConfig.struct_class = Types::OutputConfig
 
+    PaymentConnectorSummaries.member = Shapes::ShapeRef.new(shape: PaymentConnectorSummary)
+
+    PaymentConnectorSummary.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    PaymentConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
+    PaymentConnectorSummary.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    PaymentConnectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    PaymentConnectorSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    PaymentConnectorSummary.struct_class = Types::PaymentConnectorSummary
+
+    PaymentCredentialProviderConfiguration.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: PaymentCredentialProviderArn, required: true, location_name: "credentialProviderArn"))
+    PaymentCredentialProviderConfiguration.struct_class = Types::PaymentCredentialProviderConfiguration
+
+    PaymentCredentialProviderItem.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    PaymentCredentialProviderItem.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    PaymentCredentialProviderItem.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: PaymentCredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    PaymentCredentialProviderItem.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
+    PaymentCredentialProviderItem.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
+    PaymentCredentialProviderItem.struct_class = Types::PaymentCredentialProviderItem
+
+    PaymentCredentialProviders.member = Shapes::ShapeRef.new(shape: PaymentCredentialProviderItem)
+
+    PaymentManagerSummaries.member = Shapes::ShapeRef.new(shape: PaymentManagerSummary)
+
+    PaymentManagerSummary.add_member(:payment_manager_arn, Shapes::ShapeRef.new(shape: PaymentManagerArn, required: true, location_name: "paymentManagerArn"))
+    PaymentManagerSummary.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    PaymentManagerSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentManagerName, required: true, location_name: "name"))
+    PaymentManagerSummary.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    PaymentManagerSummary.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, required: true, location_name: "authorizerType"))
+    PaymentManagerSummary.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    PaymentManagerSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentManagerStatus, required: true, location_name: "status"))
+    PaymentManagerSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "createdAt"))
+    PaymentManagerSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    PaymentManagerSummary.struct_class = Types::PaymentManagerSummary
+
+    PaymentProviderConfigurationInput.add_member(:coinbase_cdp_configuration, Shapes::ShapeRef.new(shape: CoinbaseCdpConfigurationInput, location_name: "coinbaseCdpConfiguration"))
+    PaymentProviderConfigurationInput.add_member(:stripe_privy_configuration, Shapes::ShapeRef.new(shape: StripePrivyConfigurationInput, location_name: "stripePrivyConfiguration"))
+    PaymentProviderConfigurationInput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PaymentProviderConfigurationInput.add_member_subclass(:coinbase_cdp_configuration, Types::PaymentProviderConfigurationInput::CoinbaseCdpConfiguration)
+    PaymentProviderConfigurationInput.add_member_subclass(:stripe_privy_configuration, Types::PaymentProviderConfigurationInput::StripePrivyConfiguration)
+    PaymentProviderConfigurationInput.add_member_subclass(:unknown, Types::PaymentProviderConfigurationInput::Unknown)
+    PaymentProviderConfigurationInput.struct_class = Types::PaymentProviderConfigurationInput
+
+    PaymentProviderConfigurationOutput.add_member(:coinbase_cdp_configuration, Shapes::ShapeRef.new(shape: CoinbaseCdpConfigurationOutput, location_name: "coinbaseCdpConfiguration"))
+    PaymentProviderConfigurationOutput.add_member(:stripe_privy_configuration, Shapes::ShapeRef.new(shape: StripePrivyConfigurationOutput, location_name: "stripePrivyConfiguration"))
+    PaymentProviderConfigurationOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    PaymentProviderConfigurationOutput.add_member_subclass(:coinbase_cdp_configuration, Types::PaymentProviderConfigurationOutput::CoinbaseCdpConfiguration)
+    PaymentProviderConfigurationOutput.add_member_subclass(:stripe_privy_configuration, Types::PaymentProviderConfigurationOutput::StripePrivyConfiguration)
+    PaymentProviderConfigurationOutput.add_member_subclass(:unknown, Types::PaymentProviderConfigurationOutput::Unknown)
+    PaymentProviderConfigurationOutput.struct_class = Types::PaymentProviderConfigurationOutput
+
     Policies.member = Shapes::ShapeRef.new(shape: Policy)
 
     Policy.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
@@ -3670,6 +3963,10 @@ module Aws::BedrockAgentCoreControl
     S3Configuration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "bucketOwnerAccountId"))
     S3Configuration.struct_class = Types::S3Configuration
 
+    S3FilesAccessPointConfiguration.add_member(:access_point_arn, Shapes::ShapeRef.new(shape: S3FilesAccessPointArn, required: true, location_name: "accessPointArn"))
+    S3FilesAccessPointConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
+    S3FilesAccessPointConfiguration.struct_class = Types::S3FilesAccessPointConfiguration
+
     S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3LocationBucketString, required: true, location_name: "bucket"))
     S3Location.add_member(:prefix, Shapes::ShapeRef.new(shape: S3LocationPrefixString, required: true, location_name: "prefix"))
     S3Location.add_member(:version_id, Shapes::ShapeRef.new(shape: S3LocationVersionIdString, location_name: "versionId"))
@@ -3766,6 +4063,9 @@ module Aws::BedrockAgentCoreControl
     SessionConfig.add_member(:session_timeout_minutes, Shapes::ShapeRef.new(shape: SessionConfigSessionTimeoutMinutesInteger, required: true, location_name: "sessionTimeoutMinutes"))
     SessionConfig.struct_class = Types::SessionConfig
 
+    SessionConfiguration.add_member(:session_timeout_in_seconds, Shapes::ShapeRef.new(shape: SessionConfigurationSessionTimeoutInSecondsInteger, location_name: "sessionTimeoutInSeconds"))
+    SessionConfiguration.struct_class = Types::SessionConfiguration
+
     SessionStorageConfiguration.add_member(:mount_path, Shapes::ShapeRef.new(shape: MountPath, required: true, location_name: "mountPath"))
     SessionStorageConfiguration.struct_class = Types::SessionStorageConfiguration
 
@@ -3839,12 +4139,27 @@ module Aws::BedrockAgentCoreControl
 
     StreamDeliveryResourcesList.member = Shapes::ShapeRef.new(shape: StreamDeliveryResource)
 
+    StreamingConfiguration.add_member(:enable_response_streaming, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableResponseStreaming"))
+    StreamingConfiguration.struct_class = Types::StreamingConfiguration
+
     StringListValidation.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedStringListValuesList, location_name: "allowedValues"))
     StringListValidation.add_member(:max_items, Shapes::ShapeRef.new(shape: StringListValidationMaxItemsInteger, location_name: "maxItems"))
     StringListValidation.struct_class = Types::StringListValidation
 
     StringValidation.add_member(:allowed_values, Shapes::ShapeRef.new(shape: AllowedStringValuesList, required: true, location_name: "allowedValues"))
     StringValidation.struct_class = Types::StringValidation
+
+    StripePrivyConfigurationInput.add_member(:app_id, Shapes::ShapeRef.new(shape: StripePrivyAppIdType, required: true, location_name: "appId"))
+    StripePrivyConfigurationInput.add_member(:app_secret, Shapes::ShapeRef.new(shape: StripePrivyAppSecretType, required: true, location_name: "appSecret"))
+    StripePrivyConfigurationInput.add_member(:authorization_private_key, Shapes::ShapeRef.new(shape: StripePrivyAuthorizationPrivateKeyType, required: true, location_name: "authorizationPrivateKey"))
+    StripePrivyConfigurationInput.add_member(:authorization_id, Shapes::ShapeRef.new(shape: StripePrivyAuthorizationIdType, required: true, location_name: "authorizationId"))
+    StripePrivyConfigurationInput.struct_class = Types::StripePrivyConfigurationInput
+
+    StripePrivyConfigurationOutput.add_member(:app_id, Shapes::ShapeRef.new(shape: StripePrivyAppIdType, required: true, location_name: "appId"))
+    StripePrivyConfigurationOutput.add_member(:app_secret_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "appSecretArn"))
+    StripePrivyConfigurationOutput.add_member(:authorization_private_key_arn, Shapes::ShapeRef.new(shape: Secret, required: true, location_name: "authorizationPrivateKeyArn"))
+    StripePrivyConfigurationOutput.add_member(:authorization_id, Shapes::ShapeRef.new(shape: StripePrivyAuthorizationIdType, required: true, location_name: "authorizationId"))
+    StripePrivyConfigurationOutput.struct_class = Types::StripePrivyConfigurationOutput
 
     SubmitRegistryRecordForApprovalRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     SubmitRegistryRecordForApprovalRequest.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordIdentifier, required: true, location: "uri", location_name: "recordId"))
@@ -4257,6 +4572,54 @@ module Aws::BedrockAgentCoreControl
     UpdateOnlineEvaluationConfigResponse.add_member(:execution_status, Shapes::ShapeRef.new(shape: OnlineEvaluationExecutionStatus, required: true, location_name: "executionStatus"))
     UpdateOnlineEvaluationConfigResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
     UpdateOnlineEvaluationConfigResponse.struct_class = Types::UpdateOnlineEvaluationConfigResponse
+
+    UpdatePaymentConnectorRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    UpdatePaymentConnectorRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    UpdatePaymentConnectorRequest.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    UpdatePaymentConnectorRequest.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, location_name: "type"))
+    UpdatePaymentConnectorRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, location_name: "credentialProviderConfigurations"))
+    UpdatePaymentConnectorRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdatePaymentConnectorRequest.struct_class = Types::UpdatePaymentConnectorRequest
+
+    UpdatePaymentConnectorResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    UpdatePaymentConnectorResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    UpdatePaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
+    UpdatePaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    UpdatePaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
+    UpdatePaymentConnectorResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    UpdatePaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    UpdatePaymentConnectorResponse.struct_class = Types::UpdatePaymentConnectorResponse
+
+    UpdatePaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    UpdatePaymentCredentialProviderRequest.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    UpdatePaymentCredentialProviderRequest.add_member(:provider_configuration_input, Shapes::ShapeRef.new(shape: PaymentProviderConfigurationInput, required: true, location_name: "providerConfigurationInput"))
+    UpdatePaymentCredentialProviderRequest.struct_class = Types::UpdatePaymentCredentialProviderRequest
+
+    UpdatePaymentCredentialProviderResponse.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
+    UpdatePaymentCredentialProviderResponse.add_member(:credential_provider_vendor, Shapes::ShapeRef.new(shape: PaymentCredentialProviderVendorType, required: true, location_name: "credentialProviderVendor"))
+    UpdatePaymentCredentialProviderResponse.add_member(:credential_provider_arn, Shapes::ShapeRef.new(shape: PaymentCredentialProviderArnType, required: true, location_name: "credentialProviderArn"))
+    UpdatePaymentCredentialProviderResponse.add_member(:provider_configuration_output, Shapes::ShapeRef.new(shape: PaymentProviderConfigurationOutput, required: true, location_name: "providerConfigurationOutput"))
+    UpdatePaymentCredentialProviderResponse.add_member(:created_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdTime"))
+    UpdatePaymentCredentialProviderResponse.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastUpdatedTime"))
+    UpdatePaymentCredentialProviderResponse.struct_class = Types::UpdatePaymentCredentialProviderResponse
+
+    UpdatePaymentManagerRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    UpdatePaymentManagerRequest.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
+    UpdatePaymentManagerRequest.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, location_name: "authorizerType"))
+    UpdatePaymentManagerRequest.add_member(:authorizer_configuration, Shapes::ShapeRef.new(shape: AuthorizerConfiguration, location_name: "authorizerConfiguration"))
+    UpdatePaymentManagerRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "roleArn"))
+    UpdatePaymentManagerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdatePaymentManagerRequest.struct_class = Types::UpdatePaymentManagerRequest
+
+    UpdatePaymentManagerResponse.add_member(:payment_manager_arn, Shapes::ShapeRef.new(shape: PaymentManagerArn, required: true, location_name: "paymentManagerArn"))
+    UpdatePaymentManagerResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    UpdatePaymentManagerResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentManagerName, required: true, location_name: "name"))
+    UpdatePaymentManagerResponse.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: PaymentsAuthorizerType, required: true, location_name: "authorizerType"))
+    UpdatePaymentManagerResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    UpdatePaymentManagerResponse.add_member(:workload_identity_details, Shapes::ShapeRef.new(shape: WorkloadIdentityDetails, location_name: "workloadIdentityDetails"))
+    UpdatePaymentManagerResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    UpdatePaymentManagerResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentManagerStatus, required: true, location_name: "status"))
+    UpdatePaymentManagerResponse.struct_class = Types::UpdatePaymentManagerResponse
 
     UpdatePolicyEngineRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
     UpdatePolicyEngineRequest.add_member(:description, Shapes::ShapeRef.new(shape: UpdatedDescription, location_name: "description"))
@@ -4752,6 +5115,54 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_payment_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePaymentConnector"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors"
+        o.input = Shapes::ShapeRef.new(shape: CreatePaymentConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePaymentConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:create_payment_credential_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePaymentCredentialProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/CreatePaymentCredentialProvider"
+        o.input = Shapes::ShapeRef.new(shape: CreatePaymentCredentialProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePaymentCredentialProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionFailure)
+      end)
+
+      api.add_operation(:create_payment_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreatePaymentManager"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers"
+        o.input = Shapes::ShapeRef.new(shape: CreatePaymentManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreatePaymentManagerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePolicy"
         o.http_method = "POST"
@@ -5028,6 +5439,46 @@ module Aws::BedrockAgentCoreControl
         o.input = Shapes::ShapeRef.new(shape: DeleteOnlineEvaluationConfigRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteOnlineEvaluationConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_payment_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePaymentConnector"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePaymentConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePaymentConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_payment_credential_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePaymentCredentialProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/DeletePaymentCredentialProvider"
+        o.input = Shapes::ShapeRef.new(shape: DeletePaymentCredentialProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePaymentCredentialProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:delete_payment_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeletePaymentManager"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}"
+        o.input = Shapes::ShapeRef.new(shape: DeletePaymentManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeletePaymentManagerResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -5325,6 +5776,47 @@ module Aws::BedrockAgentCoreControl
         o.output = Shapes::ShapeRef.new(shape: GetOnlineEvaluationConfigResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_payment_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPaymentConnector"
+        o.http_method = "GET"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: GetPaymentConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPaymentConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_payment_credential_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPaymentCredentialProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/GetPaymentCredentialProvider"
+        o.input = Shapes::ShapeRef.new(shape: GetPaymentCredentialProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPaymentCredentialProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_payment_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPaymentManager"
+        o.http_method = "GET"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}"
+        o.input = Shapes::ShapeRef.new(shape: GetPaymentManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPaymentManagerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -5741,6 +6233,62 @@ module Aws::BedrockAgentCoreControl
         o.output = Shapes::ShapeRef.new(shape: ListOnlineEvaluationConfigsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_payment_connectors, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPaymentConnectors"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors-list"
+        o.input = Shapes::ShapeRef.new(shape: ListPaymentConnectorsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPaymentConnectorsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_payment_credential_providers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPaymentCredentialProviders"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/ListPaymentCredentialProviders"
+        o.input = Shapes::ShapeRef.new(shape: ListPaymentCredentialProvidersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPaymentCredentialProvidersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_payment_managers, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPaymentManagers"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers-list"
+        o.input = Shapes::ShapeRef.new(shape: ListPaymentManagersRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPaymentManagersResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
@@ -6174,6 +6722,54 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_payment_connector, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePaymentConnector"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePaymentConnectorRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePaymentConnectorResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_payment_credential_provider, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePaymentCredentialProvider"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/UpdatePaymentCredentialProvider"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePaymentCredentialProviderRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePaymentCredentialProviderResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: DecryptionFailure)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: EncryptionFailure)
+      end)
+
+      api.add_operation(:update_payment_manager, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePaymentManager"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePaymentManagerRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePaymentManagerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

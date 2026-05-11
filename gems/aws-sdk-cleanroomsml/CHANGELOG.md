@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.44.0 (2026-05-05)
+------------------
+
+* Feature - Increase max configurable output limits in the Clean Rooms ML configured model algorithm association resource.
+
 1.43.0 (2026-03-18)
 ------------------
 

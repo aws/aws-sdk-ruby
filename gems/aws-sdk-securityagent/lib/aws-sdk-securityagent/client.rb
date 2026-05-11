@@ -476,19 +476,22 @@ module Aws::SecurityAgent
 
     # @!group API Operations
 
-    # Adds an Artifact for the given agent space
+    # Uploads an artifact to an agent space. Artifacts provide additional
+    # context for security testing, such as architecture diagrams, API
+    # specifications, or configuration files.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to add the artifact to.
     #
     # @option params [required, String, StringIO, File] :artifact_content
-    #   Binary content of the artifact
+    #   The binary content of the artifact to upload.
     #
     # @option params [required, String] :artifact_type
-    #   Type of the artifact file
+    #   The file type of the artifact. Valid values include TXT, PNG, JPEG,
+    #   MD, PDF, DOCX, DOC, JSON, and YAML.
     #
     # @option params [required, String] :file_name
-    #   Name of the artifact file
+    #   The file name of the artifact.
     #
     # @return [Types::AddArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -516,13 +519,14 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes multiple pentests in a single request
+    # Deletes one or more pentests from an agent space.
     #
     # @option params [required, Array<String>] :pentest_ids
-    #   List of pentest IDs to delete
+    #   The list of pentest identifiers to delete.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentests exist
+    #   The unique identifier of the agent space that contains the pentests to
+    #   delete.
     #
     # @return [Types::BatchDeletePentestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -592,10 +596,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple agent spaces in a single request
+    # Retrieves information about one or more agent spaces.
     #
     # @option params [required, Array<String>] :agent_space_ids
-    #   List of agent space IDs to retrieve
+    #   The list of agent space identifiers to retrieve.
     #
     # @return [Types::BatchGetAgentSpacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -649,13 +653,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieve the list of artifact metadata for the given agent space
+    # Retrieves metadata for one or more artifacts in an agent space.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifacts.
     #
     # @option params [required, Array<String>] :artifact_ids
-    #   List of artifact identifiers
+    #   The list of artifact identifiers to retrieve metadata for.
     #
     # @return [Types::BatchGetArtifactMetadataOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -685,13 +689,14 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple findings in a single request
+    # Retrieves information about one or more security findings in an agent
+    # space.
     #
     # @option params [required, Array<String>] :finding_ids
-    #   List of finding IDs to retrieve
+    #   The list of finding identifiers to retrieve.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the findings exist
+    #   The unique identifier of the agent space that contains the findings.
     #
     # @return [Types::BatchGetFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -743,13 +748,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple tasks for a pentest job in a single request
+    # Retrieves information about one or more tasks within a pentest job.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the tasks.
     #
     # @option params [required, Array<String>] :task_ids
-    #   List of task IDs to retrieve
+    #   The list of task identifiers to retrieve.
     #
     # @return [Types::BatchGetPentestJobTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -795,13 +800,15 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple pentest jobs in a single request
+    # Retrieves information about one or more pentest jobs in an agent
+    # space.
     #
     # @option params [required, Array<String>] :pentest_job_ids
-    #   List of pentest job IDs to retrieve
+    #   The list of pentest job identifiers to retrieve.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest
+    #   jobs.
     #
     # @return [Types::BatchGetPentestJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -887,13 +894,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple pentests in a single request
+    # Retrieves information about one or more pentests in an agent space.
     #
     # @option params [required, Array<String>] :pentest_ids
-    #   List of pentest IDs to retrieve
+    #   The list of pentest identifiers to retrieve.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentests.
     #
     # @return [Types::BatchGetPentestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -962,10 +969,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves multiple target domains in a single request
+    # Retrieves information about one or more target domains.
     #
     # @option params [required, Array<String>] :target_domain_ids
-    #   List of target domain IDs to retrieve
+    #   The list of target domain identifiers to retrieve.
     #
     # @return [Types::BatchGetTargetDomainsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -984,7 +991,8 @@ module Aws::SecurityAgent
     #   resp.target_domains[0].target_domain_id #=> String
     #   resp.target_domains[0].domain_name #=> String
     #   resp.target_domains[0].verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED", "UNREACHABLE"
-    #   resp.target_domains[0].verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE"
+    #   resp.target_domains[0].verification_status_reason #=> String
+    #   resp.target_domains[0].verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE", "PRIVATE_VPC"
     #   resp.target_domains[0].verification_details.dns_txt.token #=> String
     #   resp.target_domains[0].verification_details.dns_txt.dns_record_name #=> String
     #   resp.target_domains[0].verification_details.dns_txt.dns_record_type #=> String, one of "TXT"
@@ -1004,31 +1012,31 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates an agent space record
+    # Creates a new agent space. An agent space is a dedicated workspace for
+    # securing a specific application.
     #
     # @option params [required, String] :name
-    #   Name of the agent space
+    #   The name of the agent space.
     #
     # @option params [String] :description
-    #   Description of the agent space
+    #   A description of the agent space.
     #
     # @option params [Types::AWSResources] :aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The AWS resources to associate with the agent space.
     #
     # @option params [Array<String>] :target_domain_ids
-    #   Target domain IDs to associate with the agent space
+    #   The list of target domain identifiers to associate with the agent
+    #   space.
     #
     # @option params [Types::CodeReviewSettings] :code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The code review settings for the agent space.
     #
     # @option params [String] :kms_key_id
-    #   Identifier of the KMS key used to encrypt data. Can be a key ID, key
-    #   ARN, alias name, or alias ARN. If not specified, an AWS managed key is
-    #   used.
+    #   The identifier of the AWS KMS key to use for encrypting data in the
+    #   agent space.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to associate with the agent space
+    #   The tags to associate with the agent space.
     #
     # @return [Types::CreateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1110,21 +1118,23 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a new application
+    # Creates a new application. An application is the top-level
+    # organizational unit that supports IAM Identity Center integration.
     #
     # @option params [String] :idc_instance_arn
-    #   ARN of the IAM Identity Center instance used for user authentication.
-    #   Optional for non-IdC applications
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance to
+    #   associate with the application.
     #
     # @option params [String] :role_arn
-    #   ARN of the IAM role that the application uses to access AWS resources
-    #   on your behalf
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   application.
     #
     # @option params [String] :default_kms_key_id
-    #   Default KMS key identifier used to encrypt application data
+    #   The identifier of the default AWS KMS key to use for encrypting data
+    #   in the application.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to associate with the application
+    #   The tags to associate with the application.
     #
     # @return [Types::CreateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1154,23 +1164,24 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates the Integration of the Security Agent App with an external
-    # Provider
+    # Creates a new integration with a third-party provider, such as GitHub,
+    # for code review and remediation.
     #
     # @option params [required, String] :provider
-    #   Provider to integrate with
+    #   The integration provider. Currently, only GITHUB is supported.
     #
     # @option params [required, Types::ProviderInput] :input
-    #   Provider-specific input parameters
+    #   The provider-specific input required to create the integration.
     #
     # @option params [required, String] :integration_display_name
-    #   Display name for the integration
+    #   The display name for the integration.
     #
     # @option params [String] :kms_key_id
-    #   KMS key ID for encrypting integration details
+    #   The identifier of the AWS KMS key to use for encrypting data
+    #   associated with the integration.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to associate with the integration
+    #   The tags to associate with the integration.
     #
     # @return [Types::CreateIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1207,22 +1218,24 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Adds a single member to an agent space with specified role
+    # Creates a new membership, granting a user access to an agent space
+    # within an application.
     #
     # @option params [required, String] :application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #
     # @option params [required, String] :agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to grant access to.
     #
     # @option params [required, String] :membership_id
-    #   Member identifier (userId or agentSpaceId)
+    #   The unique identifier for the membership.
     #
     # @option params [required, String] :member_type
-    #   Type of member (USER or AGENT\_SPACE)
+    #   The type of member. Currently, only USER is supported.
     #
     # @option params [Types::MembershipConfig] :config
-    #   Membership details (user or agent specific)
+    #   The configuration for the membership, such as the user role.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1249,35 +1262,39 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a new pentest configuration
+    # Creates a new pentest configuration in an agent space. A pentest
+    # defines the security test parameters, including target assets, risk
+    # type exclusions, and logging configuration.
     #
     # @option params [required, String] :title
-    #   Title of the pentest
+    #   The title of the pentest.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest should be created
+    #   The unique identifier of the agent space to create the pentest in.
     #
     # @option params [Types::Assets] :assets
-    #   Assets to be tested during the pentest
+    #   The assets to include in the pentest, such as endpoints, actors,
+    #   documents, and source code.
     #
     # @option params [Array<String>] :exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The list of risk types to exclude from the pentest.
     #
     # @option params [String] :service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role to use for the pentest.
     #
     # @option params [Types::CloudWatchLog] :log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The CloudWatch Logs configuration for the pentest.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The VPC configuration for the pentest.
     #
     # @option params [Types::NetworkTrafficConfig] :network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The network traffic configuration for the pentest, including custom
+    #   headers and traffic rules.
     #
     # @option params [String] :code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The code remediation strategy for the pentest. Valid values are
+    #   AUTOMATIC and DISABLED.
     #
     # @return [Types::CreatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1399,22 +1416,26 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a target domain record
+    # Creates a new target domain for penetration testing. A target domain
+    # is a web domain that must be registered and verified before it can be
+    # tested.
     #
     # @option params [required, String] :target_domain_name
-    #   Domain name of the target domain
+    #   The domain name to register as a target domain.
     #
     # @option params [required, String] :verification_method
-    #   Verification method for the target domain
+    #   The method to use for verifying domain ownership. Valid values are
+    #   DNS\_TXT, HTTP\_ROUTE, and PRIVATE\_VPC.
     #
     # @option params [Hash<String,String>] :tags
-    #   Tags to associate with the target domain
+    #   The tags to associate with the target domain.
     #
     # @return [Types::CreateTargetDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateTargetDomainOutput#target_domain_id #target_domain_id} => String
     #   * {Types::CreateTargetDomainOutput#domain_name #domain_name} => String
     #   * {Types::CreateTargetDomainOutput#verification_status #verification_status} => String
+    #   * {Types::CreateTargetDomainOutput#verification_status_reason #verification_status_reason} => String
     #   * {Types::CreateTargetDomainOutput#verification_details #verification_details} => Types::VerificationDetails
     #   * {Types::CreateTargetDomainOutput#created_at #created_at} => Time
     #   * {Types::CreateTargetDomainOutput#verified_at #verified_at} => Time
@@ -1423,7 +1444,7 @@ module Aws::SecurityAgent
     #
     #   resp = client.create_target_domain({
     #     target_domain_name: "String", # required
-    #     verification_method: "DNS_TXT", # required, accepts DNS_TXT, HTTP_ROUTE
+    #     verification_method: "DNS_TXT", # required, accepts DNS_TXT, HTTP_ROUTE, PRIVATE_VPC
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1434,7 +1455,8 @@ module Aws::SecurityAgent
     #   resp.target_domain_id #=> String
     #   resp.domain_name #=> String
     #   resp.verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED", "UNREACHABLE"
-    #   resp.verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE"
+    #   resp.verification_status_reason #=> String
+    #   resp.verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE", "PRIVATE_VPC"
     #   resp.verification_details.dns_txt.token #=> String
     #   resp.verification_details.dns_txt.dns_record_name #=> String
     #   resp.verification_details.dns_txt.dns_record_type #=> String, one of "TXT"
@@ -1452,10 +1474,11 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes an agent space record
+    # Deletes an agent space and all of its associated resources, including
+    # pentests, findings, and artifacts.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space to delete
+    #   The unique identifier of the agent space to delete.
     #
     # @return [Types::DeleteAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1480,10 +1503,11 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes an application
+    # Deletes an application and its associated configuration, including IAM
+    # Identity Center settings.
     #
     # @option params [required, String] :application_id
-    #   Application ID
+    #   The unique identifier of the application to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1502,13 +1526,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Delete an Artifact from the given agent space
+    # Deletes an artifact from an agent space.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #
     # @option params [required, String] :artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1528,11 +1552,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes the Integration of the Security Agent App with an external
-    # Provider
+    # Deletes an integration with a third-party provider.
     #
     # @option params [required, String] :integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration to delete.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1551,19 +1574,20 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Removes a single member associated to an agent space
+    # Deletes a membership, revoking a user's access to an agent space.
     #
     # @option params [required, String] :application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #
     # @option params [required, String] :agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to revoke access from.
     #
     # @option params [required, String] :membership_id
-    #   Member identifier (userId or agentSpaceId)
+    #   The unique identifier of the membership to delete.
     #
     # @option params [String] :member_type
-    #   Type of member (USER or AGENT\_SPACE)
+    #   The type of member to remove.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -1585,10 +1609,11 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes a target domain record
+    # Deletes a target domain registration. After deletion, the domain can
+    # no longer be used for penetration testing.
     #
     # @option params [required, String] :target_domain_id
-    #   Unique identifier of the target domain to delete
+    #   The unique identifier of the target domain to delete.
     #
     # @return [Types::DeleteTargetDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1613,10 +1638,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves application details by application ID
+    # Retrieves information about an application.
     #
     # @option params [required, String] :application_id
-    #   Application ID
+    #   The unique identifier of the application to retrieve.
     #
     # @return [Types::GetApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1652,13 +1677,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieve an Artifact for the given agent space
+    # Retrieves an artifact from an agent space.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #
     # @option params [required, String] :artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact to retrieve.
     #
     # @return [Types::GetArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1693,10 +1718,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Gets Integration metadata from the provided id
+    # Retrieves information about an integration.
     #
     # @option params [required, String] :integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration to retrieve.
     #
     # @return [Types::GetIntegrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1731,11 +1756,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Initiates the registration of Security Agent App for an external
-    # Provider
+    # Initiates the OAuth registration flow with a third-party provider.
+    # Returns a redirect URL and CSRF state token for completing the
+    # authorization.
     #
     # @option params [required, String] :provider
-    #   Provider to register with
+    #   The provider to initiate registration with. Currently, only GITHUB is
+    #   supported.
     #
     # @return [Types::InitiateProviderRegistrationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1762,13 +1789,16 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists agent spaces
+    # Returns a paginated list of agent space summaries in your account.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of agent spaces to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListAgentSpacesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1802,13 +1832,16 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists all applications in the account
+    # Returns a paginated list of application summaries in your account.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListApplicationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1842,16 +1875,20 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists the artifacts for the associated agent space
+    # Returns a paginated list of artifact summaries for the specified agent
+    # space.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to list artifacts for.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListArtifactsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1885,25 +1922,27 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists discovered endpoints associated with a pentest job with optional
-    # URI prefix filtering
+    # Returns a paginated list of endpoints discovered during a pentest job
+    # execution.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of discovered endpoints to return in a single request
-    #   (default: 50)
+    #   The maximum number of results to return in a single call.
     #
     # @option params [required, String] :pentest_job_id
-    #   Identifier of the pentest job for which to retrieve discovered
-    #   endpoints
+    #   The unique identifier of the pentest job to list discovered endpoints
+    #   for.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #
     # @option params [String] :prefix
-    #   Optional URI prefix filter to narrow down results
+    #   A prefix to filter discovered endpoints by URI.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @return [Types::ListDiscoveredEndpointsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1943,37 +1982,37 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists findings with filtering and pagination support. When filters are
-    # applied, the actual number of results returned may be less than the
-    # specified limit
+    # Lists the security findings for a pentest job.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of findings to return in a single request (default: 50)
+    #   The maximum number of results to return in a single call.
     #
     # @option params [required, String] :pentest_job_id
-    #   Identifier of the pentest job for which to retrieve associated
-    #   findings
+    #   The unique identifier of the pentest job to list findings for.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [String] :risk_type
-    #   Filter findings by risk type
+    #   Filter findings by risk type.
     #
     # @option params [String] :risk_level
-    #   Filter findings by risk level
+    #   Filter findings by risk level.
     #
     # @option params [String] :status
-    #   Filter findings by status
+    #   Filter findings by status.
     #
     # @option params [String] :confidence
-    #   Filter findings by confidence level
+    #   Filter findings by confidence level.
     #
     # @option params [String] :name
-    #   Filter findings by name (case-insensitive substring search)
+    #   Filter findings by name.
     #
     # @return [Types::ListFindingsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2021,22 +2060,27 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists the integrated resources for an agent space
+    # Lists the integrated resources for an agent space, optionally filtered
+    # by integration or resource type.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to list integrated resources
+    #   for.
     #
     # @option params [String] :integration_id
-    #   Filter integrated resources by a specific integration
+    #   The unique identifier of the integration to filter by.
     #
     # @option params [String] :resource_type
-    #   Filter integrated resources by resource type
+    #   The type of resource to filter by.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListIntegratedResourcesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2076,16 +2120,20 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Retrieves the Integrations associated with the user's account
+    # Lists the integrations in your account, optionally filtered by
+    # provider or provider type.
     #
     # @option params [Types::IntegrationFilter] :filter
-    #   Filter criteria for integrations
+    #   A filter to apply to the list of integrations.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListIntegrationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2124,22 +2172,27 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists all members associated to an agent space with pagination support
+    # Returns a paginated list of membership summaries for the specified
+    # agent space within an application.
     #
     # @option params [required, String] :application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #
     # @option params [required, String] :agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to list memberships for.
     #
     # @option params [String] :member_type
-    #   Filter by member type
+    #   Filter memberships by member type.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @return [Types::ListMembershipsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2183,25 +2236,30 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists tasks associated with a specific pentest job
+    # Returns a paginated list of task summaries for the specified pentest
+    # job, optionally filtered by step name or category.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of tasks to return in a single request
+    #   The maximum number of results to return in a single call.
     #
     # @option params [String] :pentest_job_id
-    #   Identifier of the pentest job whose tasks to list
+    #   The unique identifier of the pentest job to list tasks for.
     #
     # @option params [String] :step_name
-    #   Filter tasks by step name
+    #   Filter tasks by step name. Valid values include PREFLIGHT,
+    #   STATIC\_ANALYSIS, PENTEST, and FINALIZING.
     #
     # @option params [String] :category_name
     #   Filter tasks by category name.
     #
     # @option params [String] :next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @return [Types::ListPentestJobTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2244,19 +2302,23 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists pentest jobs associated with a pentest
+    # Returns a paginated list of pentest job summaries for the specified
+    # pentest configuration.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of pentest jobs to return in a single request
+    #   The maximum number of results to return in a single call.
     #
     # @option params [required, String] :pentest_id
-    #   Identifier of the pentest for which to retrieve associated jobs
+    #   The unique identifier of the pentest to list jobs for.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @return [Types::ListPentestJobsForPentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2294,16 +2356,20 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists pentests with optional filtering by status
+    # Returns a paginated list of pentest summaries for the specified agent
+    # space.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of pentests to return in a single request
+    #   The maximum number of results to return in a single call.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space to list pentests for.
     #
     # @return [Types::ListPentestsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2339,10 +2405,10 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists tags for a Security Agent resource
+    # Returns the tags associated with the specified resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource to list tags for
+    #   The Amazon Resource Name (ARN) of the resource to list tags for.
     #
     # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2368,13 +2434,16 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Lists target domains
+    # Returns a paginated list of target domain summaries in your account.
     #
     # @option params [String] :next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #
     # @option params [Integer] :max_results
-    #   Maximum number of target domains to return
+    #   The maximum number of results to return in a single call.
     #
     # @return [Types::ListTargetDomainsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2407,16 +2476,18 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Starts code remediation for the specified findings
+    # Initiates code remediation for one or more security findings. This
+    # creates pull requests in integrated repositories to fix the identified
+    # vulnerabilities.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #
     # @option params [required, String] :pentest_job_id
-    #   Identifier of the pentest job to start code remediation for
+    #   The unique identifier of the pentest job that produced the findings.
     #
     # @option params [required, Array<String>] :finding_ids
-    #   Identifiers of the findings to start code remediation for
+    #   The list of finding identifiers to initiate code remediation for.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2437,13 +2508,14 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Initiates the execution of a pentest
+    # Starts a new pentest job for a pentest configuration. The job executes
+    # the security tests defined in the pentest.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #
     # @option params [required, String] :pentest_id
-    #   Identifier of the pentest to execute
+    #   The unique identifier of the pentest to start a job for.
     #
     # @return [Types::StartPentestJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2481,13 +2553,14 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Stops the execution of a running pentest
+    # Stops a running pentest job. The job transitions to a stopping state
+    # and then to stopped after cleanup completes.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #
     # @option params [required, String] :pentest_job_id
-    #   Identifier of the pentest job to stop
+    #   The unique identifier of the pentest job to stop.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2507,13 +2580,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Adds tags to a Security Agent resource
+    # Adds tags to a resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource to tag
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #
     # @option params [required, Hash<String,String>] :tags
-    #   Tags to add to the resource
+    #   The tags to add to the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2535,13 +2608,13 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Removes tags from a Security Agent resource
+    # Removes tags from a resource.
     #
     # @option params [required, String] :resource_arn
-    #   ARN of the resource to untag
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
     #
     # @option params [required, Array<String>] :tag_keys
-    #   List of tag keys to remove from the resource
+    #   The list of tag keys to remove from the resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2561,26 +2634,28 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates an agent space record
+    # Updates the configuration of an existing agent space, including its
+    # name, description, AWS resources, target domains, and code review
+    # settings.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space to update
+    #   The unique identifier of the agent space to update.
     #
     # @option params [String] :name
-    #   Name of the agent space
+    #   The updated name of the agent space.
     #
     # @option params [String] :description
-    #   Description of the agent space
+    #   The updated description of the agent space.
     #
     # @option params [Types::AWSResources] :aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The updated AWS resources to associate with the agent space.
     #
     # @option params [Array<String>] :target_domain_ids
-    #   Target domain IDs to associate with the agent space
+    #   The updated list of target domain identifiers to associate with the
+    #   agent space.
     #
     # @option params [Types::CodeReviewSettings] :code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The updated code review settings for the agent space.
     #
     # @return [Types::UpdateAgentSpaceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2657,18 +2732,18 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates application configuration
+    # Updates the configuration of an existing application, including the
+    # IAM role and default KMS key.
     #
     # @option params [required, String] :application_id
-    #   Application ID
+    #   The unique identifier of the application to update.
     #
     # @option params [String] :role_arn
-    #   ARN of the IAM role that the application uses to access AWS resources
-    #   on your behalf
+    #   The updated Amazon Resource Name (ARN) of the IAM role for the
+    #   application.
     #
     # @option params [String] :default_kms_key_id
-    #   Default KMS key identifier. Use an empty string to remove the default
-    #   KMS key.
+    #   The updated identifier of the default AWS KMS key for the application.
     #
     # @return [Types::UpdateApplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2695,19 +2770,19 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates an existing security finding with new details or status
+    # Updates the status or risk level of a security finding.
     #
     # @option params [required, String] :finding_id
-    #   Identifier of the finding to update
+    #   The unique identifier of the finding to update.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the finding exists
+    #   The unique identifier of the agent space that contains the finding.
     #
     # @option params [String] :risk_level
-    #   Updated severity level of the identified risk
+    #   The updated risk level for the finding.
     #
     # @option params [String] :status
-    #   Updated status of the finding
+    #   The updated status for the finding.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2729,16 +2804,17 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates the integrated resources for an agent space
+    # Updates the integrated resources for an agent space, including their
+    # capabilities.
     #
     # @option params [required, String] :agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space.
     #
     # @option params [required, String] :integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration.
     #
     # @option params [required, Array<Types::IntegratedResourceInputItem>] :items
-    #   List of integrated resources to update
+    #   The list of integrated resource items to update.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -2774,38 +2850,37 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates an existing pentest with new configuration or settings
+    # Updates an existing pentest configuration.
     #
     # @option params [required, String] :pentest_id
-    #   Identifier of the pentest to update
+    #   The unique identifier of the pentest to update.
     #
     # @option params [required, String] :agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest.
     #
     # @option params [String] :title
-    #   New title for the pentest
+    #   The updated title of the pentest.
     #
     # @option params [Types::Assets] :assets
-    #   Updated assets to be tested
+    #   The updated assets for the pentest.
     #
     # @option params [Array<String>] :exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The updated list of risk types to exclude from the pentest.
     #
     # @option params [String] :service_role
-    #   Updated service role ARN for accessing customer resources
+    #   The updated IAM service role for the pentest.
     #
     # @option params [Types::CloudWatchLog] :log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The updated CloudWatch Logs configuration for the pentest.
     #
     # @option params [Types::VpcConfig] :vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The updated VPC configuration for the pentest.
     #
     # @option params [Types::NetworkTrafficConfig] :network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The updated network traffic configuration for the pentest.
     #
     # @option params [String] :code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The updated code remediation strategy for the pentest.
     #
     # @return [Types::UpdatePentestOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2928,19 +3003,20 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Updates a target domain record
+    # Updates the verification method for a target domain.
     #
     # @option params [required, String] :target_domain_id
-    #   Unique identifier of the target domain to update
+    #   The unique identifier of the target domain to update.
     #
     # @option params [required, String] :verification_method
-    #   Verification method for the target domain
+    #   The updated verification method for the target domain.
     #
     # @return [Types::UpdateTargetDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateTargetDomainOutput#target_domain_id #target_domain_id} => String
     #   * {Types::UpdateTargetDomainOutput#domain_name #domain_name} => String
     #   * {Types::UpdateTargetDomainOutput#verification_status #verification_status} => String
+    #   * {Types::UpdateTargetDomainOutput#verification_status_reason #verification_status_reason} => String
     #   * {Types::UpdateTargetDomainOutput#verification_details #verification_details} => Types::VerificationDetails
     #   * {Types::UpdateTargetDomainOutput#created_at #created_at} => Time
     #   * {Types::UpdateTargetDomainOutput#verified_at #verified_at} => Time
@@ -2949,7 +3025,7 @@ module Aws::SecurityAgent
     #
     #   resp = client.update_target_domain({
     #     target_domain_id: "TargetDomainId", # required
-    #     verification_method: "DNS_TXT", # required, accepts DNS_TXT, HTTP_ROUTE
+    #     verification_method: "DNS_TXT", # required, accepts DNS_TXT, HTTP_ROUTE, PRIVATE_VPC
     #   })
     #
     # @example Response structure
@@ -2957,7 +3033,8 @@ module Aws::SecurityAgent
     #   resp.target_domain_id #=> String
     #   resp.domain_name #=> String
     #   resp.verification_status #=> String, one of "PENDING", "VERIFIED", "FAILED", "UNREACHABLE"
-    #   resp.verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE"
+    #   resp.verification_status_reason #=> String
+    #   resp.verification_details.method #=> String, one of "DNS_TXT", "HTTP_ROUTE", "PRIVATE_VPC"
     #   resp.verification_details.dns_txt.token #=> String
     #   resp.verification_details.dns_txt.dns_record_name #=> String
     #   resp.verification_details.dns_txt.dns_record_type #=> String, one of "TXT"
@@ -2975,10 +3052,11 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Verifies ownership for a registered target domain
+    # Initiates verification of a target domain. This checks whether the
+    # domain ownership verification token has been properly configured.
     #
     # @option params [required, String] :target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain to verify.
     #
     # @return [Types::VerifyTargetDomainOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2988,6 +3066,7 @@ module Aws::SecurityAgent
     #   * {Types::VerifyTargetDomainOutput#updated_at #updated_at} => Time
     #   * {Types::VerifyTargetDomainOutput#verified_at #verified_at} => Time
     #   * {Types::VerifyTargetDomainOutput#status #status} => String
+    #   * {Types::VerifyTargetDomainOutput#verification_status_reason #verification_status_reason} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3003,6 +3082,7 @@ module Aws::SecurityAgent
     #   resp.updated_at #=> Time
     #   resp.verified_at #=> Time
     #   resp.status #=> String, one of "PENDING", "VERIFIED", "FAILED", "UNREACHABLE"
+    #   resp.verification_status_reason #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/VerifyTargetDomain AWS API Documentation
     #
@@ -3031,7 +3111,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.0.0'
+      context[:gem_version] = '1.1.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

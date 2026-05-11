@@ -360,6 +360,7 @@ module Aws
         def target_domain_id: () -> ::String
         def domain_name: () -> ::String
         def verification_status: () -> ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+        def verification_status_reason: () -> ::String
         def verification_details: () -> Types::VerificationDetails
         def created_at: () -> ::Time
         def verified_at: () -> ::Time
@@ -367,7 +368,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_target_domain-instance_method
       def create_target_domain: (
                                   target_domain_name: ::String,
-                                  verification_method: ("DNS_TXT" | "HTTP_ROUTE"),
+                                  verification_method: ("DNS_TXT" | "HTTP_ROUTE" | "PRIVATE_VPC"),
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateTargetDomainResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTargetDomainResponseSuccess
@@ -900,6 +901,7 @@ module Aws
         def target_domain_id: () -> ::String
         def domain_name: () -> ::String
         def verification_status: () -> ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+        def verification_status_reason: () -> ::String
         def verification_details: () -> Types::VerificationDetails
         def created_at: () -> ::Time
         def verified_at: () -> ::Time
@@ -907,7 +909,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_target_domain-instance_method
       def update_target_domain: (
                                   target_domain_id: ::String,
-                                  verification_method: ("DNS_TXT" | "HTTP_ROUTE")
+                                  verification_method: ("DNS_TXT" | "HTTP_ROUTE" | "PRIVATE_VPC")
                                 ) -> _UpdateTargetDomainResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTargetDomainResponseSuccess
 
@@ -919,6 +921,7 @@ module Aws
         def updated_at: () -> ::Time
         def verified_at: () -> ::Time
         def status: () -> ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+        def verification_status_reason: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#verify_target_domain-instance_method
       def verify_target_domain: (

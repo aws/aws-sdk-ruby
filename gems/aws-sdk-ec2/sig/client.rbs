@@ -7294,7 +7294,8 @@ module Aws
                                        },
                                      ],
                                      ?max_results: ::Integer,
-                                     ?next_token: ::String
+                                     ?next_token: ::String,
+                                     ?include_unsupported_in_region: bool
                                    ) -> _DescribeInstanceTypesResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceTypesResponseSuccess
 
@@ -12890,9 +12891,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_managed_resource_visibility-instance_method
       def modify_managed_resource_visibility: (
                                                 ?dry_run: bool,
-                                                ?default_visibility: ("hidden" | "visible")
+                                                default_visibility: ("hidden" | "visible")
                                               ) -> _ModifyManagedResourceVisibilityResponseSuccess
-                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyManagedResourceVisibilityResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyManagedResourceVisibilityResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_network_interface_attribute-instance_method
       def modify_network_interface_attribute: (
@@ -13731,6 +13732,7 @@ module Aws
                                            ?remote_ipv_4_network_cidr: ::String,
                                            ?local_ipv_6_network_cidr: ::String,
                                            ?remote_ipv_6_network_cidr: ::String,
+                                           ?tunnel_bandwidth: ("standard" | "large"),
                                            ?dry_run: bool
                                          ) -> _ModifyVpnConnectionOptionsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyVpnConnectionOptionsResponseSuccess

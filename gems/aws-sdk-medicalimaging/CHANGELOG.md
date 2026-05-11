@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-05-05)
+------------------
+
+* Feature - Add support for DICOM Json Metadata Override features in startDICOMImportJob API
+
 1.44.0 (2026-04-01)
 ------------------
 

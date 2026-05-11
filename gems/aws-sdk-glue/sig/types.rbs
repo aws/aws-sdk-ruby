@@ -1905,6 +1905,7 @@ module Aws::Glue
       attr_accessor cloud_watch_metrics_enabled: bool
       attr_accessor results_s3_prefix: ::String
       attr_accessor composite_rule_evaluation_method: ("COLUMN" | "ROW")
+      attr_accessor custom_log_group_prefix: ::String
       SENSITIVE: []
     end
 
@@ -2008,6 +2009,7 @@ module Aws::Glue
       attr_accessor data_source: Types::DataSource
       attr_accessor started_before: ::Time
       attr_accessor started_after: ::Time
+      attr_accessor ruleset_name: ::String
       SENSITIVE: []
     end
 

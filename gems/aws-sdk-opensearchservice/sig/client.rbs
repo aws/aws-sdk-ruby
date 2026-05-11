@@ -320,7 +320,8 @@ module Aws
                            },
                            ?vpc_options: {
                              subnet_ids: Array[::String]?,
-                             security_group_ids: Array[::String]?
+                             security_group_ids: Array[::String]?,
+                             egress_enabled: bool?
                            },
                            ?cognito_options: {
                              enabled: bool?,
@@ -527,7 +528,8 @@ module Aws
                                  domain_arn: ::String,
                                  vpc_options: {
                                    subnet_ids: Array[::String]?,
-                                   security_group_ids: Array[::String]?
+                                   security_group_ids: Array[::String]?,
+                                   egress_enabled: bool?
                                  },
                                  ?client_token: ::String
                                ) -> _CreateVpcEndpointResponseSuccess
@@ -1441,7 +1443,8 @@ module Aws
                                   },
                                   ?vpc_options: {
                                     subnet_ids: Array[::String]?,
-                                    security_group_ids: Array[::String]?
+                                    security_group_ids: Array[::String]?,
+                                    egress_enabled: bool?
                                   },
                                   ?cognito_options: {
                                     enabled: bool?,
@@ -1634,7 +1637,8 @@ module Aws
                                  vpc_endpoint_id: ::String,
                                  vpc_options: {
                                    subnet_ids: Array[::String]?,
-                                   security_group_ids: Array[::String]?
+                                   security_group_ids: Array[::String]?,
+                                   egress_enabled: bool?
                                  }
                                ) -> _UpdateVpcEndpointResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcEndpointResponseSuccess

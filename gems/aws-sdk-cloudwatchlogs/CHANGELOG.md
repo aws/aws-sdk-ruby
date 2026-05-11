@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.149.0 (2026-05-04)
+------------------
+
+* Feature - Adding an additional optional deliverySourceConfiguration field to PutDeliverySource API. This enables customers to pass service-specific configurations through IngestionHub such as tracing enablement or sampling rates that will be propagated to the source resource.
+
 1.148.0 (2026-05-01)
 ------------------
 

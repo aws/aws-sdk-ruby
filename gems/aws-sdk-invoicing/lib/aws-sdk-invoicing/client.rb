@@ -643,6 +643,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Creates a procurement portal preference configuration for e-invoice
     # delivery and purchase order retrieval. This preference defines how
     # invoices are delivered to a procurement portal and how purchase orders
@@ -888,6 +893,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Deletes an existing procurement portal preference. This action cannot
     # be undone. Active e-invoice delivery and PO retrieval configurations
     # will be terminated.
@@ -979,6 +989,8 @@ module Aws::Invoicing
     #       invoice_id: "abc123", 
     #       supplemental_documents: [
     #         {
+    #           document_id: "supp-doc-1", 
+    #           document_type: "TAX_E_INVOICE", 
     #           document_url: "https://abcd123.com?securityTokenForSupplementalDoc", 
     #           document_url_expiration_date: Time.parse("2025-04-01T01:00:00.000Z"), 
     #         }, 
@@ -998,6 +1010,8 @@ module Aws::Invoicing
     #   resp.invoice_pdf.document_url #=> String
     #   resp.invoice_pdf.document_url_expiration_date #=> Time
     #   resp.invoice_pdf.supplemental_documents #=> Array
+    #   resp.invoice_pdf.supplemental_documents[0].document_type #=> String, one of "GOVERNMENT_INVOICE", "TAX_E_INVOICE", "PAYMENT_RECEIPT", "SUPPLEMENT"
+    #   resp.invoice_pdf.supplemental_documents[0].document_id #=> String
     #   resp.invoice_pdf.supplemental_documents[0].document_url #=> String
     #   resp.invoice_pdf.supplemental_documents[0].document_url_expiration_date #=> Time
     #
@@ -1105,6 +1119,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Retrieves the details of a specific procurement portal preference
     # configuration.
     #
@@ -1305,17 +1324,27 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         bill_source_accounts: [
+    #           "111111111111", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
     #         billing_period: {
     #           month: 1, 
     #           year: 2025, 
     #         }, 
+    #         commercial_invoice_id: "2222222222", 
     #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
     #         entity: {
+    #           billing_entity: "AWS", 
     #           invoicing_entity: "Amazon Web Services, Inc.", 
     #         }, 
+    #         invoice_frequency: "RECURRING", 
     #         invoice_id: "1111111111", 
     #         invoice_type: "INVOICE", 
     #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         original_invoice_id: "1111111111", 
     #         payment_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1342,6 +1371,9 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         purchase_order_number: "PO-12345", 
+    #         receiver_role: "BUYER", 
+    #         tax_authority_status: "ISSUED", 
     #         tax_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1406,14 +1438,22 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         bill_source_accounts: [
+    #           "111111111111", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
     #         billing_period: {
     #           month: 1, 
     #           year: 2025, 
     #         }, 
     #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
     #         entity: {
+    #           billing_entity: "AWS", 
     #           invoicing_entity: "Amazon Web Services, Inc.", 
     #         }, 
+    #         invoice_frequency: "RECURRING", 
     #         invoice_id: "1111111111", 
     #         invoice_type: "INVOICE", 
     #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
@@ -1443,6 +1483,8 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         receiver_role: "BUYER", 
+    #         tax_authority_status: "ISSUED", 
     #         tax_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1507,14 +1549,22 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         bill_source_accounts: [
+    #           "111111111111", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
     #         billing_period: {
     #           month: 1, 
     #           year: 2025, 
     #         }, 
     #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
     #         entity: {
+    #           billing_entity: "AWS", 
     #           invoicing_entity: "Amazon Web Services, Inc.", 
     #         }, 
+    #         invoice_frequency: "RECURRING", 
     #         invoice_id: "1111111111", 
     #         invoice_type: "INVOICE", 
     #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
@@ -1544,6 +1594,120 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         receiver_role: "BUYER", 
+    #         tax_authority_status: "ISSUED", 
+    #         tax_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: ListInvoiceSummaries filtered by ReceiverRole
+    #
+    #   resp = client.list_invoice_summaries({
+    #     filter: {
+    #       receiver_role: "SELLER", 
+    #       time_interval: {
+    #         end_date: Time.parse(1751328000), 
+    #         start_date: Time.parse(1748736000), 
+    #       }, 
+    #     }, 
+    #     selector: {
+    #       resource_type: "ACCOUNT_ID", 
+    #       value: "111111111111", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     invoice_summaries: [
+    #       {
+    #         account_id: "111111111111", 
+    #         base_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         bill_source_accounts: [
+    #           "222222222222", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
+    #         billing_period: {
+    #           month: 6, 
+    #           year: 2025, 
+    #         }, 
+    #         due_date: Time.parse("2025-07-15T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
+    #         entity: {
+    #           billing_entity: "AWS_MARKETPLACE", 
+    #           invoicing_entity: "Amazon Web Services, Inc.", 
+    #         }, 
+    #         invoice_frequency: "RECURRING", 
+    #         invoice_id: "1111111111", 
+    #         invoice_type: "INVOICE", 
+    #         issued_date: Time.parse("2025-06-15T01:00:00.000Z"), 
+    #         payment_currency_amount: {
+    #           amount_breakdown: {
+    #             discounts: {
+    #               total_amount: "1.00", 
+    #             }, 
+    #             sub_total_amount: "1.00", 
+    #             taxes: {
+    #               breakdown: [
+    #                 {
+    #                   amount: "1", 
+    #                   description: "VAT", 
+    #                   rate: "1.0", 
+    #                 }, 
+    #               ], 
+    #               total_amount: "1.00", 
+    #             }, 
+    #           }, 
+    #           currency_code: "USD", 
+    #           currency_exchange_details: {
+    #             rate: "1.0", 
+    #             source_currency_code: "USD", 
+    #             target_currency_code: "USD", 
+    #           }, 
+    #           total_amount: "1.00", 
+    #           total_amount_before_tax: "1.00", 
+    #         }, 
+    #         receiver_role: "SELLER", 
+    #         tax_authority_status: "ISSUED", 
     #         tax_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1609,14 +1773,22 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         bill_source_accounts: [
+    #           "111111111111", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
     #         billing_period: {
     #           month: 1, 
     #           year: 2025, 
     #         }, 
     #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
     #         entity: {
+    #           billing_entity: "AWS", 
     #           invoicing_entity: "Amazon Web Services, Inc.", 
     #         }, 
+    #         invoice_frequency: "RECURRING", 
     #         invoice_id: "1111111111", 
     #         invoice_type: "INVOICE", 
     #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
@@ -1646,6 +1818,8 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         receiver_role: "BUYER", 
+    #         tax_authority_status: "ISSUED", 
     #         tax_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1712,14 +1886,22 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         bill_source_accounts: [
+    #           "111111111111", 
+    #         ], 
+    #         bill_source_accounts_total_count: 1, 
+    #         bill_type: "ANNIVERSARY", 
     #         billing_period: {
     #           month: 1, 
     #           year: 2025, 
     #         }, 
     #         due_date: Time.parse("2025-04-01T01:00:00.000Z"), 
+    #         einvoice_delivery_status: "DELIVERED", 
     #         entity: {
+    #           billing_entity: "AWS", 
     #           invoicing_entity: "Amazon Web Services, Inc.", 
     #         }, 
+    #         invoice_frequency: "RECURRING", 
     #         invoice_id: "1111111111", 
     #         invoice_type: "INVOICE", 
     #         issued_date: Time.parse("2025-04-01T01:00:00.000Z"), 
@@ -1749,6 +1931,8 @@ module Aws::Invoicing
     #           total_amount: "1.00", 
     #           total_amount_before_tax: "1.00", 
     #         }, 
+    #         receiver_role: "BUYER", 
+    #         tax_authority_status: "ISSUED", 
     #         tax_currency_amount: {
     #           amount_breakdown: {
     #             discounts: {
@@ -1796,6 +1980,7 @@ module Aws::Invoicing
     #         year: 1, # required
     #       },
     #       invoicing_entity: "BasicString",
+    #       receiver_role: "SELLER", # accepts SELLER, RESELLER, BUYER
     #     },
     #     next_token: "NextTokenString",
     #     max_results: 1,
@@ -1808,12 +1993,22 @@ module Aws::Invoicing
     #   resp.invoice_summaries[0].invoice_id #=> String
     #   resp.invoice_summaries[0].issued_date #=> Time
     #   resp.invoice_summaries[0].due_date #=> Time
+    #   resp.invoice_summaries[0].bill_source_accounts #=> Array
+    #   resp.invoice_summaries[0].bill_source_accounts[0] #=> String
+    #   resp.invoice_summaries[0].bill_source_accounts_total_count #=> Integer
+    #   resp.invoice_summaries[0].receiver_role #=> String, one of "SELLER", "RESELLER", "BUYER"
     #   resp.invoice_summaries[0].entity.invoicing_entity #=> String
+    #   resp.invoice_summaries[0].entity.billing_entity #=> String, one of "AWS", "AWS_MARKETPLACE"
     #   resp.invoice_summaries[0].billing_period.month #=> Integer
     #   resp.invoice_summaries[0].billing_period.year #=> Integer
-    #   resp.invoice_summaries[0].invoice_type #=> String, one of "INVOICE", "CREDIT_MEMO"
+    #   resp.invoice_summaries[0].invoice_frequency #=> String, one of "ONE_TIME", "RECURRING"
+    #   resp.invoice_summaries[0].bill_type #=> String, one of "ANNIVERSARY", "PURCHASE", "REFUND"
+    #   resp.invoice_summaries[0].invoice_type #=> String, one of "INVOICE", "CREDIT_MEMO", "PAYMENT_RECEIPT"
+    #   resp.invoice_summaries[0].commercial_invoice_id #=> String
     #   resp.invoice_summaries[0].original_invoice_id #=> String
     #   resp.invoice_summaries[0].purchase_order_number #=> String
+    #   resp.invoice_summaries[0].einvoice_delivery_status #=> String, one of "DELIVERED", "NOT_DELIVERED"
+    #   resp.invoice_summaries[0].tax_authority_status #=> String, one of "ISSUED", "CANCELLED"
     #   resp.invoice_summaries[0].base_currency_amount.total_amount #=> String
     #   resp.invoice_summaries[0].base_currency_amount.total_amount_before_tax #=> String
     #   resp.invoice_summaries[0].base_currency_amount.currency_code #=> String
@@ -2078,6 +2273,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Retrieves a list of procurement portal preferences associated with the
     # Amazon Web Services account.
     #
@@ -2286,6 +2486,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Updates an existing procurement portal preference configuration. This
     # operation can modify settings for e-invoice delivery and purchase
     # order retrieval.
@@ -2607,6 +2812,11 @@ module Aws::Invoicing
       req.send_request(options)
     end
 
+    # <i> <b>This feature API is subject to changing at any time. For more
+    # information, see the <a
+    # href="https://aws.amazon.com/service-terms/">Amazon Web Services
+    # Service Terms</a> (Betas and Previews).</b> </i>
+    #
     # Updates the status of a procurement portal preference, including the
     # activation state of e-invoice delivery and purchase order retrieval
     # features.
@@ -2690,7 +2900,7 @@ module Aws::Invoicing
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-invoicing'
-      context[:gem_version] = '1.21.0'
+      context[:gem_version] = '1.22.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

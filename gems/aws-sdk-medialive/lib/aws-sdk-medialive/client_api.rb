@@ -708,7 +708,9 @@ module Aws::MediaLive
     MediaConnectFlowRequest = Shapes::StructureShape.new(name: 'MediaConnectFlowRequest')
     MediaConnectRouterContainerSettings = Shapes::StructureShape.new(name: 'MediaConnectRouterContainerSettings')
     MediaConnectRouterGroupSettings = Shapes::StructureShape.new(name: 'MediaConnectRouterGroupSettings')
+    MediaConnectRouterOutputConnection = Shapes::StructureShape.new(name: 'MediaConnectRouterOutputConnection')
     MediaConnectRouterOutputConnectionMap = Shapes::StructureShape.new(name: 'MediaConnectRouterOutputConnectionMap')
+    MediaConnectRouterOutputConnections = Shapes::MapShape.new(name: 'MediaConnectRouterOutputConnections')
     MediaConnectRouterOutputDestinationSettings = Shapes::StructureShape.new(name: 'MediaConnectRouterOutputDestinationSettings')
     MediaConnectRouterOutputEncryptionType = Shapes::StringShape.new(name: 'MediaConnectRouterOutputEncryptionType')
     MediaConnectRouterOutputSettings = Shapes::StructureShape.new(name: 'MediaConnectRouterOutputSettings')
@@ -4189,9 +4191,15 @@ module Aws::MediaLive
     MediaConnectRouterGroupSettings.add_member(:availability_zones, Shapes::ShapeRef.new(shape: __listOf__string, location_name: "availabilityZones"))
     MediaConnectRouterGroupSettings.struct_class = Types::MediaConnectRouterGroupSettings
 
+    MediaConnectRouterOutputConnection.add_member(:router_input_arn, Shapes::ShapeRef.new(shape: __string, location_name: "routerInputArn"))
+    MediaConnectRouterOutputConnection.struct_class = Types::MediaConnectRouterOutputConnection
+
     MediaConnectRouterOutputConnectionMap.add_member(:pipeline_0, Shapes::ShapeRef.new(shape: __string, location_name: "pipeline0"))
     MediaConnectRouterOutputConnectionMap.add_member(:pipeline_1, Shapes::ShapeRef.new(shape: __string, location_name: "pipeline1"))
     MediaConnectRouterOutputConnectionMap.struct_class = Types::MediaConnectRouterOutputConnectionMap
+
+    MediaConnectRouterOutputConnections.key = Shapes::ShapeRef.new(shape: __string)
+    MediaConnectRouterOutputConnections.value = Shapes::ShapeRef.new(shape: MediaConnectRouterOutputConnection)
 
     MediaConnectRouterOutputDestinationSettings.add_member(:encryption_type, Shapes::ShapeRef.new(shape: MediaConnectRouterOutputEncryptionType, location_name: "encryptionType"))
     MediaConnectRouterOutputDestinationSettings.add_member(:secret_arn, Shapes::ShapeRef.new(shape: __string, location_name: "secretArn"))
@@ -4612,6 +4620,7 @@ module Aws::MediaLive
     PipelineDetail.add_member(:active_motion_graphics_uri, Shapes::ShapeRef.new(shape: __string, location_name: "activeMotionGraphicsUri"))
     PipelineDetail.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: __string, location_name: "pipelineId"))
     PipelineDetail.add_member(:channel_engine_version, Shapes::ShapeRef.new(shape: ChannelEngineVersionResponse, location_name: "channelEngineVersion"))
+    PipelineDetail.add_member(:media_connect_router_output_connection_map, Shapes::ShapeRef.new(shape: MediaConnectRouterOutputConnections, location_name: "mediaConnectRouterOutputConnectionMap"))
     PipelineDetail.struct_class = Types::PipelineDetail
 
     PipelineLockingSettings.add_member(:pipeline_locking_method, Shapes::ShapeRef.new(shape: PipelineLockingMethod, location_name: "pipelineLockingMethod"))

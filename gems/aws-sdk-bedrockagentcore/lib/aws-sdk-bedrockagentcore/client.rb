@@ -922,6 +922,215 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Create a new payment instrument for a connector
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment instrument.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The ID of the payment connector to use for this instrument.
+    #
+    # @option params [required, String] :payment_instrument_type
+    #   The type of payment instrument being created.
+    #
+    # @option params [required, Types::PaymentInstrumentDetails] :payment_instrument_details
+    #   The details of the payment instrument.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePaymentInstrumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePaymentInstrumentResponse#payment_instrument #payment_instrument} => Types::PaymentInstrument
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_payment_instrument({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     payment_instrument_type: "EMBEDDED_CRYPTO_WALLET", # required, accepts EMBEDDED_CRYPTO_WALLET
+    #     payment_instrument_details: { # required
+    #       embedded_crypto_wallet: {
+    #         network: "ETHEREUM", # required, accepts ETHEREUM, SOLANA
+    #         linked_accounts: [ # required
+    #           {
+    #             email: {
+    #               email_address: "Email", # required
+    #             },
+    #             sms: {
+    #               phone_number: "PhoneNumber", # required
+    #             },
+    #             developer_jwt: {
+    #               kid: "JwtKeyId", # required
+    #               sub: "LinkedAccountDeveloperJwtSubString", # required
+    #             },
+    #             o_auth_2: {
+    #               google: {
+    #                 sub: "OAuth2AuthenticationSubString", # required
+    #                 email_address: "Email",
+    #                 name: "OAuth2AuthenticationNameString",
+    #                 username: "OAuth2AuthenticationUsernameString",
+    #               },
+    #               apple: {
+    #                 sub: "OAuth2AuthenticationSubString", # required
+    #                 email_address: "Email",
+    #                 name: "OAuth2AuthenticationNameString",
+    #                 username: "OAuth2AuthenticationUsernameString",
+    #               },
+    #               x: {
+    #                 sub: "OAuth2AuthenticationSubString", # required
+    #                 email_address: "Email",
+    #                 name: "OAuth2AuthenticationNameString",
+    #                 username: "OAuth2AuthenticationUsernameString",
+    #               },
+    #               telegram: {
+    #                 sub: "OAuth2AuthenticationSubString", # required
+    #                 email_address: "Email",
+    #                 name: "OAuth2AuthenticationNameString",
+    #                 username: "OAuth2AuthenticationUsernameString",
+    #               },
+    #               github: {
+    #                 sub: "OAuth2AuthenticationSubString", # required
+    #                 email_address: "Email",
+    #                 name: "OAuth2AuthenticationNameString",
+    #                 username: "OAuth2AuthenticationUsernameString",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #         wallet_address: "String",
+    #         redirect_url: "EmbeddedCryptoWalletRedirectUrlString",
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_instrument.payment_instrument_id #=> String
+    #   resp.payment_instrument.payment_manager_arn #=> String
+    #   resp.payment_instrument.payment_connector_id #=> String
+    #   resp.payment_instrument.user_id #=> String
+    #   resp.payment_instrument.payment_instrument_type #=> String, one of "EMBEDDED_CRYPTO_WALLET"
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.network #=> String, one of "ETHEREUM", "SOLANA"
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts #=> Array
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].email.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].sms.phone_number #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].developer_jwt.kid #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].developer_jwt.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.wallet_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.redirect_url #=> String
+    #   resp.payment_instrument.created_at #=> Time
+    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instrument.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentInstrument AWS API Documentation
+    #
+    # @overload create_payment_instrument(params = {})
+    # @param [Hash] params ({})
+    def create_payment_instrument(params = {}, options = {})
+      req = build_request(:create_payment_instrument, params)
+      req.send_request(options)
+    end
+
+    # Create a new payment manager session
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment session.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #
+    # @option params [Types::SessionLimits] :limits
+    #   The spending limits for this payment session.
+    #
+    # @option params [required, Integer] :expiry_time_in_minutes
+    #   The session expiry time in minutes. Must be between 15 and 480
+    #   minutes.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreatePaymentSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePaymentSessionResponse#payment_session #payment_session} => Types::PaymentSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_payment_session({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     limits: {
+    #       max_spend_amount: { # required
+    #         value: "String", # required
+    #         currency: "USD", # required, accepts USD
+    #       },
+    #     },
+    #     expiry_time_in_minutes: 1, # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_session.payment_session_id #=> String
+    #   resp.payment_session.payment_manager_arn #=> String
+    #   resp.payment_session.limits.max_spend_amount.value #=> String
+    #   resp.payment_session.limits.max_spend_amount.currency #=> String, one of "USD"
+    #   resp.payment_session.user_id #=> String
+    #   resp.payment_session.expiry_time_in_minutes #=> Integer
+    #   resp.payment_session.created_at #=> Time
+    #   resp.payment_session.available_limits.available_spend_amount.value #=> String
+    #   resp.payment_session.available_limits.available_spend_amount.currency #=> String, one of "USD"
+    #   resp.payment_session.available_limits.updated_at #=> Time
+    #   resp.payment_session.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentSession AWS API Documentation
+    #
+    # @overload create_payment_session(params = {})
+    # @param [Hash] params ({})
+    def create_payment_session(params = {}, options = {})
+      req = build_request(:create_payment_session, params)
+      req.send_request(options)
+    end
+
     # Deletes an A/B test and its associated gateway rules.
     #
     # @option params [required, String] :ab_test_id
@@ -1065,6 +1274,131 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def delete_memory_record(params = {}, options = {})
       req = build_request(:delete_memory_record, params)
+      req.send_request(options)
+    end
+
+    # Delete a payment instrument
+    #
+    # Marks a payment instrument as deleted by updating its status to
+    # DELETED. This is a soft delete operation that preserves the record in
+    # the database for audit and compliance purposes. The record remains
+    # queryable for audit purposes but is excluded from normal list and get
+    # operations.
+    #
+    # Deleting an already-deleted or non-existent instrument returns
+    # ResourceNotFoundException (404).
+    #
+    # Authorization: The caller must own the instrument (accountId, userId,
+    # and paymentManagerId must match). If authorization fails, a 403
+    # Forbidden error is returned.
+    #
+    # Timestamp Management: The updatedAt timestamp is set to the current
+    # time, while createdAt is preserved. The version field is incremented
+    # for optimistic locking.
+    #
+    # Errors:
+    #
+    # * ResourceNotFoundException: The instrument does not exist or is
+    #   already deleted
+    # * AccessDeniedException: The caller is not authorized to delete this
+    #   instrument
+    # * ValidationException: Required fields are missing or invalid
+    # * InternalServerException: An unexpected server error occurred
+    #
+    # @option params [String] :user_id
+    #   The user ID making the delete request. Must match the instrument's
+    #   userId.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The payment manager ARN. Must match the instrument's
+    #   paymentManagerArn.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The payment connector ID. Must match the instrument's
+    #   paymentConnectorId.
+    #
+    # @option params [required, String] :payment_instrument_id
+    #   The payment instrument ID to delete.
+    #
+    # @return [Types::DeletePaymentInstrumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePaymentInstrumentResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_payment_instrument({
+    #     user_id: "UserId",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     payment_instrument_id: "PaymentInstrumentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentInstrument AWS API Documentation
+    #
+    # @overload delete_payment_instrument(params = {})
+    # @param [Hash] params ({})
+    def delete_payment_instrument(params = {}, options = {})
+      req = build_request(:delete_payment_instrument, params)
+      req.send_request(options)
+    end
+
+    # Delete a payment manager session
+    #
+    # Permanently removes a payment session record from the database. This
+    # is a hard delete operation that removes the session completely.
+    #
+    # Deleting a non-existent or already-deleted session returns
+    # ResourceNotFoundException (404).
+    #
+    # Authorization: The caller must own the session (accountId, userId, and
+    # paymentManagerId must match). If authorization fails, a 403 Forbidden
+    # error is returned.
+    #
+    # Errors:
+    #
+    # * ResourceNotFoundException: The session does not exist or has already
+    #   been deleted
+    # * AccessDeniedException: The caller is not authorized to delete this
+    #   session
+    # * ValidationException: Required fields are missing or invalid
+    # * InternalServerException: An unexpected server error occurred
+    #
+    # @option params [String] :user_id
+    #   The user ID making the delete request. Must match the session's
+    #   userId.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The payment manager ARN. Must match the session's paymentManagerArn.
+    #
+    # @option params [required, String] :payment_session_id
+    #   The payment session ID to delete.
+    #
+    # @return [Types::DeletePaymentSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePaymentSessionResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_payment_session({
+    #     user_id: "UserId",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_session_id: "PaymentSessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "ACTIVE", "EXPIRED", "DELETED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentSession AWS API Documentation
+    #
+    # @overload delete_payment_session(params = {})
+    # @param [Hash] params ({})
+    def delete_payment_session(params = {}, options = {})
+      req = build_request(:delete_payment_session, params)
       req.send_request(options)
     end
 
@@ -1671,6 +2005,196 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # Get a payment instrument by ID
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment instrument.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #
+    # @option params [String] :payment_connector_id
+    #   The ID of the payment connector.
+    #
+    # @option params [required, String] :payment_instrument_id
+    #   The ID of the payment instrument to retrieve.
+    #
+    # @return [Types::GetPaymentInstrumentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentInstrumentResponse#payment_instrument #payment_instrument} => Types::PaymentInstrument
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_instrument({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_connector_id: "PaymentConnectorId",
+    #     payment_instrument_id: "PaymentInstrumentId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_instrument.payment_instrument_id #=> String
+    #   resp.payment_instrument.payment_manager_arn #=> String
+    #   resp.payment_instrument.payment_connector_id #=> String
+    #   resp.payment_instrument.user_id #=> String
+    #   resp.payment_instrument.payment_instrument_type #=> String, one of "EMBEDDED_CRYPTO_WALLET"
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.network #=> String, one of "ETHEREUM", "SOLANA"
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts #=> Array
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].email.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].sms.phone_number #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].developer_jwt.kid #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].developer_jwt.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.google.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.apple.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.x.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.telegram.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.sub #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.email_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.name #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.linked_accounts[0].o_auth_2.github.username #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.wallet_address #=> String
+    #   resp.payment_instrument.payment_instrument_details.embedded_crypto_wallet.redirect_url #=> String
+    #   resp.payment_instrument.created_at #=> Time
+    #   resp.payment_instrument.status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instrument.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrument AWS API Documentation
+    #
+    # @overload get_payment_instrument(params = {})
+    # @param [Hash] params ({})
+    def get_payment_instrument(params = {}, options = {})
+      req = build_request(:get_payment_instrument, params)
+      req.send_request(options)
+    end
+
+    # Get the balance of a payment instrument
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment instrument.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The ID of the payment connector associated with this instrument.
+    #
+    # @option params [required, String] :payment_instrument_id
+    #   The ID of the payment instrument to query balance for.
+    #
+    # @option params [required, String] :chain
+    #   The specific blockchain chain to query balance on. Required because
+    #   balances are chain-specific — the same wallet address may hold
+    #   different token balances on different chains.
+    #
+    # @option params [required, String] :token
+    #   The token to query balance for. Required to specify which supported
+    #   token's balance to return.
+    #
+    # @return [Types::GetPaymentInstrumentBalanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentInstrumentBalanceResponse#payment_instrument_id #payment_instrument_id} => String
+    #   * {Types::GetPaymentInstrumentBalanceResponse#token_balance #token_balance} => Types::TokenBalance
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_instrument_balance({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     payment_instrument_id: "PaymentInstrumentId", # required
+    #     chain: "BASE", # required, accepts BASE, BASE_SEPOLIA, ETHEREUM, SOLANA, SOLANA_DEVNET
+    #     token: "USDC", # required, accepts USDC
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_instrument_id #=> String
+    #   resp.token_balance.amount #=> String
+    #   resp.token_balance.decimals #=> Integer
+    #   resp.token_balance.token #=> String, one of "USDC"
+    #   resp.token_balance.network #=> String, one of "ETHEREUM", "SOLANA"
+    #   resp.token_balance.chain #=> String, one of "BASE", "BASE_SEPOLIA", "ETHEREUM", "SOLANA", "SOLANA_DEVNET"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentBalance AWS API Documentation
+    #
+    # @overload get_payment_instrument_balance(params = {})
+    # @param [Hash] params ({})
+    def get_payment_instrument_balance(params = {}, options = {})
+      req = build_request(:get_payment_instrument_balance, params)
+      req.send_request(options)
+    end
+
+    # Get a payment session
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment session.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #
+    # @option params [required, String] :payment_session_id
+    #   The ID of the payment session to retrieve.
+    #
+    # @return [Types::GetPaymentSessionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentSessionResponse#payment_session #payment_session} => Types::PaymentSession
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_session({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_session_id: "PaymentSessionId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_session.payment_session_id #=> String
+    #   resp.payment_session.payment_manager_arn #=> String
+    #   resp.payment_session.limits.max_spend_amount.value #=> String
+    #   resp.payment_session.limits.max_spend_amount.currency #=> String, one of "USD"
+    #   resp.payment_session.user_id #=> String
+    #   resp.payment_session.expiry_time_in_minutes #=> Integer
+    #   resp.payment_session.created_at #=> Time
+    #   resp.payment_session.available_limits.available_spend_amount.value #=> String
+    #   resp.payment_session.available_limits.available_spend_amount.currency #=> String, one of "USD"
+    #   resp.payment_session.available_limits.updated_at #=> Time
+    #   resp.payment_session.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentSession AWS API Documentation
+    #
+    # @overload get_payment_session(params = {})
+    # @param [Hash] params ({})
+    def get_payment_session(params = {}, options = {})
+      req = build_request(:get_payment_session, params)
+      req.send_request(options)
+    end
+
     # Retrieves detailed information about a recommendation, including its
     # configuration, status, and results.
     #
@@ -1890,6 +2414,64 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def get_resource_oauth_2_token(params = {}, options = {})
       req = build_request(:get_resource_oauth_2_token, params)
+      req.send_request(options)
+    end
+
+    # Generates authentication tokens for payment providers that use
+    # vendor-specific authentication mechanisms.
+    #
+    # @option params [required, String] :workload_identity_token
+    #   Workload access token for authorization. Named workloadIdentityToken
+    #   for consistency with APIKey and OAuth2CredentialProvider.
+    #
+    # @option params [required, String] :resource_credential_provider_name
+    #   Name of the payment credential provider to use
+    #
+    # @option params [required, Types::PaymentTokenRequestInput] :payment_token_request
+    #   Vendor-specific token request input Contains all request parameters in
+    #   a type-safe, vendor-specific structure
+    #
+    # @return [Types::GetResourcePaymentTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetResourcePaymentTokenResponse#payment_token_response #payment_token_response} => Types::PaymentTokenResponseOutput
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_resource_payment_token({
+    #     workload_identity_token: "WorkloadIdentityTokenType", # required
+    #     resource_credential_provider_name: "CredentialProviderName", # required
+    #     payment_token_request: { # required
+    #       coinbase_cdp_token_request: {
+    #         request_method: "GET", # required, accepts GET, POST, PUT, DELETE, PATCH
+    #         request_host: "PaymentRequestHostType",
+    #         request_path: "PaymentRequestPathType", # required
+    #         include_wallet_auth_token: false,
+    #         request_body: "CoinbaseCdpPaymentRequestBodyType",
+    #       },
+    #       stripe_privy_token_request: {
+    #         request_host: "StripePrivyRequestHostType",
+    #         request_path: "StripePrivyRequestPathType", # required
+    #         request_body: "StripePrivyRequestBodyType", # required
+    #         include_authorization_signature: false,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_token_response.coinbase_cdp_token_response.bearer_token #=> String
+    #   resp.payment_token_response.coinbase_cdp_token_response.wallet_auth_token #=> String
+    #   resp.payment_token_response.stripe_privy_token_response.authorization_signature #=> String
+    #   resp.payment_token_response.stripe_privy_token_response.request_expiry #=> Integer
+    #   resp.payment_token_response.stripe_privy_token_response.app_id #=> String
+    #   resp.payment_token_response.stripe_privy_token_response.basic_auth_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourcePaymentToken AWS API Documentation
+    #
+    # @overload get_resource_payment_token(params = {})
+    # @param [Hash] params ({})
+    def get_resource_payment_token(params = {}, options = {})
+      req = build_request(:get_resource_payment_token, params)
       req.send_request(options)
     end
 
@@ -3196,7 +3778,7 @@ module Aws::BedrockAgentCore
     #                 custom_parameters: {
     #                   "OAuthCustomParametersKey" => "OAuthCustomParametersValue",
     #                 },
-    #                 grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE
+    #                 grant_type: "CLIENT_CREDENTIALS", # accepts CLIENT_CREDENTIALS, AUTHORIZATION_CODE, TOKEN_EXCHANGE
     #                 default_return_url: "OAuthDefaultReturnUrl",
     #               },
     #             },
@@ -3887,6 +4469,120 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
+    # List payment instruments for a manager
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with the payment instruments.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns the payment instruments.
+    #
+    # @option params [String] :payment_connector_id
+    #   The ID of the payment connector to filter by.
+    #
+    # @option params [String] :next_token
+    #   Token for pagination to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single response.
+    #
+    # @return [Types::ListPaymentInstrumentsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPaymentInstrumentsResponse#payment_instruments #payment_instruments} => Array&lt;Types::PaymentInstrumentSummary&gt;
+    #   * {Types::ListPaymentInstrumentsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_payment_instruments({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_connector_id: "PaymentConnectorId",
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_instruments #=> Array
+    #   resp.payment_instruments[0].payment_instrument_id #=> String
+    #   resp.payment_instruments[0].payment_manager_arn #=> String
+    #   resp.payment_instruments[0].payment_connector_id #=> String
+    #   resp.payment_instruments[0].user_id #=> String
+    #   resp.payment_instruments[0].payment_instrument_type #=> String, one of "EMBEDDED_CRYPTO_WALLET"
+    #   resp.payment_instruments[0].status #=> String, one of "INITIATED", "ACTIVE", "FAILED", "DELETED"
+    #   resp.payment_instruments[0].created_at #=> Time
+    #   resp.payment_instruments[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentInstruments AWS API Documentation
+    #
+    # @overload list_payment_instruments(params = {})
+    # @param [Hash] params ({})
+    def list_payment_instruments(params = {}, options = {})
+      req = build_request(:list_payment_instruments, params)
+      req.send_request(options)
+    end
+
+    # List payment manager sessions
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with the payment sessions.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager that owns the sessions.
+    #
+    # @option params [String] :next_token
+    #   Token for pagination to retrieve the next set of results.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return in a single response.
+    #
+    # @return [Types::ListPaymentSessionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPaymentSessionsResponse#payment_sessions #payment_sessions} => Array&lt;Types::PaymentSessionSummary&gt;
+    #   * {Types::ListPaymentSessionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_payment_sessions({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_sessions #=> Array
+    #   resp.payment_sessions[0].payment_session_id #=> String
+    #   resp.payment_sessions[0].payment_manager_arn #=> String
+    #   resp.payment_sessions[0].user_id #=> String
+    #   resp.payment_sessions[0].expiry_time_in_minutes #=> Integer
+    #   resp.payment_sessions[0].created_at #=> Time
+    #   resp.payment_sessions[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentSessions AWS API Documentation
+    #
+    # @overload list_payment_sessions(params = {})
+    # @param [Hash] params ({})
+    def list_payment_sessions(params = {}, options = {})
+      req = build_request(:list_payment_sessions, params)
+      req.send_request(options)
+    end
+
     # Lists all recommendations in the account, with optional filtering by
     # status.
     #
@@ -4004,6 +4700,87 @@ module Aws::BedrockAgentCore
     # @param [Hash] params ({})
     def list_sessions(params = {}, options = {})
       req = build_request(:list_sessions, params)
+      req.send_request(options)
+    end
+
+    # Process a payment transaction
+    #
+    # @option params [String] :user_id
+    #   The user ID associated with this payment.
+    #
+    # @option params [String] :agent_name
+    #   The agent name associated with this request, used for observability.
+    #
+    # @option params [required, String] :payment_manager_arn
+    #   The ARN of the payment manager handling this payment.
+    #
+    # @option params [required, String] :payment_session_id
+    #   The ID of the payment session for this transaction.
+    #
+    # @option params [required, String] :payment_instrument_id
+    #   The ID of the payment instrument to use for this transaction.
+    #
+    # @option params [required, String] :payment_type
+    #   The type of payment being processed.
+    #
+    # @option params [required, Types::PaymentInput] :payment_input
+    #   The payment input details specific to the payment type.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::ProcessPaymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ProcessPaymentResponse#process_payment_id #process_payment_id} => String
+    #   * {Types::ProcessPaymentResponse#payment_manager_arn #payment_manager_arn} => String
+    #   * {Types::ProcessPaymentResponse#payment_session_id #payment_session_id} => String
+    #   * {Types::ProcessPaymentResponse#payment_instrument_id #payment_instrument_id} => String
+    #   * {Types::ProcessPaymentResponse#payment_type #payment_type} => String
+    #   * {Types::ProcessPaymentResponse#status #status} => String
+    #   * {Types::ProcessPaymentResponse#payment_output #payment_output} => Types::PaymentOutput
+    #   * {Types::ProcessPaymentResponse#created_at #created_at} => Time
+    #   * {Types::ProcessPaymentResponse#updated_at #updated_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.process_payment({
+    #     user_id: "UserId",
+    #     agent_name: "PaymentAgentName",
+    #     payment_manager_arn: "PaymentManagerArn", # required
+    #     payment_session_id: "PaymentSessionId", # required
+    #     payment_instrument_id: "PaymentInstrumentId", # required
+    #     payment_type: "CRYPTO_X402", # required, accepts CRYPTO_X402
+    #     payment_input: { # required
+    #       crypto_x402: {
+    #         version: "String", # required
+    #         payload: { # required
+    #         },
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.process_payment_id #=> String
+    #   resp.payment_manager_arn #=> String
+    #   resp.payment_session_id #=> String
+    #   resp.payment_instrument_id #=> String
+    #   resp.payment_type #=> String, one of "CRYPTO_X402"
+    #   resp.status #=> String, one of "PROOF_GENERATED"
+    #   resp.payment_output.crypto_x402.version #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProcessPayment AWS API Documentation
+    #
+    # @overload process_payment(params = {})
+    # @param [Hash] params ({})
+    def process_payment(params = {}, options = {})
+      req = build_request(:process_payment, params)
       req.send_request(options)
     end
 
@@ -5337,7 +6114,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.31.0'
+      context[:gem_version] = '1.32.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

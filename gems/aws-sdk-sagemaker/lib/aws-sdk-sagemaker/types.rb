@@ -6319,6 +6319,12 @@ module Aws::SageMaker
     #   group.
     #   @return [String]
     #
+    # @!attribute [rw] image_version_status
+    #   The status of the image version for the instance group. Indicates
+    #   whether the instance group is running the latest image version or if
+    #   an update is available.
+    #   @return [String]
+    #
     # @!attribute [rw] active_operations
     #   A map indicating active operations currently in progress for the
     #   instance group of a SageMaker HyperPod cluster. When there is a
@@ -6402,6 +6408,7 @@ module Aws::SageMaker
       :scheduled_update_config,
       :current_image_id,
       :desired_image_id,
+      :image_version_status,
       :active_operations,
       :kubernetes_config,
       :capacity_requirements,
@@ -7071,6 +7078,10 @@ module Aws::SageMaker
     #   The ID of the Amazon Machine Image (AMI) desired for the node.
     #   @return [String]
     #
+    # @!attribute [rw] image_version_status
+    #   The status of the image version for the cluster node.
+    #   @return [String]
+    #
     # @!attribute [rw] ultra_server_info
     #   Contains information about the UltraServer.
     #   @return [Types::UltraServerInfo]
@@ -7112,6 +7123,7 @@ module Aws::SageMaker
       :placement,
       :current_image_id,
       :desired_image_id,
+      :image_version_status,
       :ultra_server_info,
       :kubernetes_config,
       :capacity_type,
@@ -7165,6 +7177,10 @@ module Aws::SageMaker
     #   The private DNS hostname of the SageMaker HyperPod cluster node.
     #   @return [String]
     #
+    # @!attribute [rw] image_version_status
+    #   The status of the image version for the cluster node.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterNodeSummary AWS API Documentation
     #
     class ClusterNodeSummary < Struct.new(
@@ -7176,7 +7192,8 @@ module Aws::SageMaker
       :last_software_update_time,
       :instance_status,
       :ultra_server_info,
-      :private_dns_hostname)
+      :private_dns_hostname,
+      :image_version_status)
       SENSITIVE = []
       include Aws::Structure
     end

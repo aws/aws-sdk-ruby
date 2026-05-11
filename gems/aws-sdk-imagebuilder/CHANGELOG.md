@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.103.0 (2026-05-06)
+------------------
+
+* Feature - The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.
+
 1.102.0 (2026-04-17)
 ------------------
 

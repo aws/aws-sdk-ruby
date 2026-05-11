@@ -830,6 +830,7 @@ module Aws::SecurityHub
     DateFilter = Shapes::StructureShape.new(name: 'DateFilter')
     DateFilterList = Shapes::ListShape.new(name: 'DateFilterList')
     DateRange = Shapes::StructureShape.new(name: 'DateRange')
+    DateRangeComparison = Shapes::StringShape.new(name: 'DateRangeComparison')
     DateRangeUnit = Shapes::StringShape.new(name: 'DateRangeUnit')
     DeclineInvitationsRequest = Shapes::StructureShape.new(name: 'DeclineInvitationsRequest')
     DeclineInvitationsResponse = Shapes::StructureShape.new(name: 'DeclineInvitationsResponse')
@@ -926,6 +927,8 @@ module Aws::SecurityHub
     FirewallPolicyStatelessCustomActionsList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessCustomActionsList')
     FirewallPolicyStatelessRuleGroupReferencesDetails = Shapes::StructureShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesDetails')
     FirewallPolicyStatelessRuleGroupReferencesList = Shapes::ListShape.new(name: 'FirewallPolicyStatelessRuleGroupReferencesList')
+    GenerateRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Request')
+    GenerateRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GenerateRecommendedPolicyV2Response')
     GeneratorDetails = Shapes::StructureShape.new(name: 'GeneratorDetails')
     GeoLocation = Shapes::StructureShape.new(name: 'GeoLocation')
     GetAdministratorAccountRequest = Shapes::StructureShape.new(name: 'GetAdministratorAccountRequest')
@@ -964,6 +967,8 @@ module Aws::SecurityHub
     GetMasterAccountResponse = Shapes::StructureShape.new(name: 'GetMasterAccountResponse')
     GetMembersRequest = Shapes::StructureShape.new(name: 'GetMembersRequest')
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
+    GetRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GetRecommendedPolicyV2Request')
+    GetRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GetRecommendedPolicyV2Response')
     GetResourcesStatisticsV2Request = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Request')
     GetResourcesStatisticsV2Response = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Response')
     GetResourcesTrendsV2Request = Shapes::StructureShape.new(name: 'GetResourcesTrendsV2Request')
@@ -1141,6 +1146,11 @@ module Aws::SecurityHub
     Ranges = Shapes::ListShape.new(name: 'Ranges')
     RatioScale = Shapes::IntegerShape.new(name: 'RatioScale')
     Recommendation = Shapes::StructureShape.new(name: 'Recommendation')
+    RecommendationError = Shapes::StructureShape.new(name: 'RecommendationError')
+    RecommendationStatus = Shapes::StringShape.new(name: 'RecommendationStatus')
+    RecommendationStep = Shapes::UnionShape.new(name: 'RecommendationStep')
+    RecommendationSteps = Shapes::ListShape.new(name: 'RecommendationSteps')
+    RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
     Record = Shapes::StructureShape.new(name: 'Record')
     RecordState = Shapes::StringShape.new(name: 'RecordState')
     Records = Shapes::ListShape.new(name: 'Records')
@@ -1344,6 +1354,7 @@ module Aws::SecurityHub
     UnprocessedStandardsControlAssociations = Shapes::ListShape.new(name: 'UnprocessedStandardsControlAssociations')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UnusedPermissionsRecommendationStep = Shapes::StructureShape.new(name: 'UnusedPermissionsRecommendationStep')
     UpdateActionTargetRequest = Shapes::StructureShape.new(name: 'UpdateActionTargetRequest')
     UpdateActionTargetResponse = Shapes::StructureShape.new(name: 'UpdateActionTargetResponse')
     UpdateAggregatorV2Request = Shapes::StructureShape.new(name: 'UpdateAggregatorV2Request')
@@ -5779,6 +5790,7 @@ module Aws::SecurityHub
 
     DateRange.add_member(:value, Shapes::ShapeRef.new(shape: Integer, location_name: "Value"))
     DateRange.add_member(:unit, Shapes::ShapeRef.new(shape: DateRangeUnit, location_name: "Unit"))
+    DateRange.add_member(:comparison, Shapes::ShapeRef.new(shape: DateRangeComparison, location_name: "Comparison"))
     DateRange.struct_class = Types::DateRange
 
     DeclineInvitationsRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: AccountIdList, required: true, location_name: "AccountIds"))
@@ -6084,6 +6096,11 @@ module Aws::SecurityHub
 
     FirewallPolicyStatelessRuleGroupReferencesList.member = Shapes::ShapeRef.new(shape: FirewallPolicyStatelessRuleGroupReferencesDetails)
 
+    GenerateRecommendedPolicyV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "MetadataUid"))
+    GenerateRecommendedPolicyV2Request.struct_class = Types::GenerateRecommendedPolicyV2Request
+
+    GenerateRecommendedPolicyV2Response.struct_class = Types::GenerateRecommendedPolicyV2Response
+
     GeneratorDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     GeneratorDetails.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
     GeneratorDetails.add_member(:labels, Shapes::ShapeRef.new(shape: TypeList, location_name: "Labels"))
@@ -6262,6 +6279,19 @@ module Aws::SecurityHub
     GetMembersResponse.add_member(:members, Shapes::ShapeRef.new(shape: MemberList, location_name: "Members"))
     GetMembersResponse.add_member(:unprocessed_accounts, Shapes::ShapeRef.new(shape: ResultList, location_name: "UnprocessedAccounts"))
     GetMembersResponse.struct_class = Types::GetMembersResponse
+
+    GetRecommendedPolicyV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "MetadataUid"))
+    GetRecommendedPolicyV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    GetRecommendedPolicyV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    GetRecommendedPolicyV2Request.struct_class = Types::GetRecommendedPolicyV2Request
+
+    GetRecommendedPolicyV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetRecommendedPolicyV2Response.add_member(:recommendation_type, Shapes::ShapeRef.new(shape: RecommendationType, location_name: "RecommendationType"))
+    GetRecommendedPolicyV2Response.add_member(:recommendation_steps, Shapes::ShapeRef.new(shape: RecommendationSteps, location_name: "RecommendationSteps"))
+    GetRecommendedPolicyV2Response.add_member(:error, Shapes::ShapeRef.new(shape: RecommendationError, location_name: "Error"))
+    GetRecommendedPolicyV2Response.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "Status"))
+    GetRecommendedPolicyV2Response.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
+    GetRecommendedPolicyV2Response.struct_class = Types::GetRecommendedPolicyV2Response
 
     GetResourcesStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: ResourceGroupByRules, required: true, location_name: "GroupByRules"))
     GetResourcesStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceScopes, location_name: "Scopes"))
@@ -6910,6 +6940,18 @@ module Aws::SecurityHub
     Recommendation.add_member(:text, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Text"))
     Recommendation.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Url"))
     Recommendation.struct_class = Types::Recommendation
+
+    RecommendationError.add_member(:code, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Code"))
+    RecommendationError.add_member(:message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Message"))
+    RecommendationError.struct_class = Types::RecommendationError
+
+    RecommendationStep.add_member(:unused_permissions, Shapes::ShapeRef.new(shape: UnusedPermissionsRecommendationStep, location_name: "UnusedPermissions"))
+    RecommendationStep.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecommendationStep.add_member_subclass(:unused_permissions, Types::RecommendationStep::UnusedPermissions)
+    RecommendationStep.add_member_subclass(:unknown, Types::RecommendationStep::Unknown)
+    RecommendationStep.struct_class = Types::RecommendationStep
+
+    RecommendationSteps.member = Shapes::ShapeRef.new(shape: RecommendationStep)
 
     Record.add_member(:json_path, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "JsonPath"))
     Record.add_member(:record_index, Shapes::ShapeRef.new(shape: Long, location_name: "RecordIndex"))
@@ -7703,6 +7745,13 @@ module Aws::SecurityHub
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UnusedPermissionsRecommendationStep.add_member(:recommended_action, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RecommendedAction"))
+    UnusedPermissionsRecommendationStep.add_member(:existing_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExistingPolicy"))
+    UnusedPermissionsRecommendationStep.add_member(:existing_policy_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExistingPolicyId"))
+    UnusedPermissionsRecommendationStep.add_member(:policy_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "PolicyUpdatedAt"))
+    UnusedPermissionsRecommendationStep.add_member(:recommended_policy, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RecommendedPolicy"))
+    UnusedPermissionsRecommendationStep.struct_class = Types::UnusedPermissionsRecommendationStep
 
     UpdateActionTargetRequest.add_member(:action_target_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "ActionTargetArn"))
     UpdateActionTargetRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
@@ -8639,6 +8688,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:generate_recommended_policy_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateRecommendedPolicyV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/recommendedPolicyV2/{MetadataUid}"
+        o.input = Shapes::ShapeRef.new(shape: GenerateRecommendedPolicyV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GenerateRecommendedPolicyV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_administrator_account, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAdministratorAccount"
         o.http_method = "GET"
@@ -8913,6 +8976,26 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_recommended_policy_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRecommendedPolicyV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/recommendedPolicyV2/{MetadataUid}"
+        o.input = Shapes::ShapeRef.new(shape: GetRecommendedPolicyV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetRecommendedPolicyV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_resources_statistics_v2, Seahorse::Model::Operation.new.tap do |o|

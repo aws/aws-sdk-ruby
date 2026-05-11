@@ -32,6 +32,7 @@ module Aws::Route53Domains
   # * {DuplicateRequest}
   # * {InvalidInput}
   # * {OperationLimitExceeded}
+  # * {TLDInMaintenance}
   # * {TLDRulesViolation}
   # * {UnsupportedTLD}
   #
@@ -118,6 +119,26 @@ module Aws::Route53Domains
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class TLDInMaintenance < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Route53Domains::Types::TLDInMaintenance] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def tld
+        @data[:tld]
       end
     end
 

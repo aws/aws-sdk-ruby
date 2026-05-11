@@ -2376,6 +2376,7 @@ module Aws::OpenSearchService
     VPCDerivedInfo.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
     VPCDerivedInfo.add_member(:availability_zones, Shapes::ShapeRef.new(shape: StringList, location_name: "AvailabilityZones"))
     VPCDerivedInfo.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
+    VPCDerivedInfo.add_member(:egress_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EgressEnabled"))
     VPCDerivedInfo.struct_class = Types::VPCDerivedInfo
 
     VPCDerivedInfoStatus.add_member(:options, Shapes::ShapeRef.new(shape: VPCDerivedInfo, required: true, location_name: "Options"))
@@ -2384,6 +2385,7 @@ module Aws::OpenSearchService
 
     VPCOptions.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SubnetIds"))
     VPCOptions.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "SecurityGroupIds"))
+    VPCOptions.add_member(:egress_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "EgressEnabled"))
     VPCOptions.struct_class = Types::VPCOptions
 
     ValidationException.struct_class = Types::ValidationException

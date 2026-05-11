@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-05-05)
+------------------
+
+* Feature - Adds support for tagging CloudFront Functions and KeyValueStores resources.
+
 1.144.0 (2026-04-29)
 ------------------
 

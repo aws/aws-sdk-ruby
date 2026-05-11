@@ -8,6 +8,54 @@
 module Aws::MarketplaceAgreement
   module Types
 
+    class AcceptAgreementCancellationRequestInput
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_cancellation_request_id: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAgreementCancellationRequestOutput
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_cancellation_request_id: ::String
+      attr_accessor status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED")
+      attr_accessor reason_code: ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class AcceptAgreementPaymentRequestInput
+      attr_accessor payment_request_id: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor purchase_order_reference: ::String
+      SENSITIVE: []
+    end
+
+    class AcceptAgreementPaymentRequestOutput
+      attr_accessor payment_request_id: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor status: ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor charge_amount: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class AcceptAgreementRequestInput
+      attr_accessor agreement_request_id: ::String
+      attr_accessor purchase_orders: ::Array[Types::PurchaseOrder]
+      SENSITIVE: []
+    end
+
+    class AcceptAgreementRequestOutput
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
     class AcceptedTerm
       attr_accessor legal_term: Types::LegalTerm
       attr_accessor support_term: Types::SupportTerm
@@ -60,6 +108,7 @@ module Aws::MarketplaceAgreement
     class AccessDeniedException
       attr_accessor request_id: ::String
       attr_accessor message: ::String
+      attr_accessor reason: ("INVALID_ACCOUNT_STATE" | "DENIED_BY_PRIVATE_MARKETPLACE_POLICY" | "FAILED_KYC_COMPLIANCE" | "MISSING_MFA" | "INVALID_ACCESS")
       SENSITIVE: []
     end
 
@@ -72,6 +121,16 @@ module Aws::MarketplaceAgreement
       attr_accessor catalog: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AgreementEntitlement
+      attr_accessor resource: Types::Resource
+      attr_accessor type: ::String
+      attr_accessor registration_token: ::String
+      attr_accessor status: ("PROVISIONED" | "SCHEDULED" | "PENDING" | "FAILED" | "DEPROVISIONED")
+      attr_accessor status_reason_code: ("PROVISIONING_IN_PROGRESS" | "FUTURE_START_DATE" | "INVALID_PAYMENT_INSTRUMENT" | "INCOMPATIBLE_CURRENCY" | "ACCOUNT_SUSPENDED" | "UNSUPPORTED_OPERATION" | "AGREEMENT_INACTIVE" | "AGREEMENT_ACTIVE" | "PRODUCT_RESTRICTED")
+      attr_accessor license_arn: ::String
       SENSITIVE: []
     end
 
@@ -150,6 +209,7 @@ module Aws::MarketplaceAgreement
 
     class ByolPricingTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       SENSITIVE: []
     end
 
@@ -172,6 +232,14 @@ module Aws::MarketplaceAgreement
       SENSITIVE: [:description]
     end
 
+    class CancelAgreementInput
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelAgreementOutput < Aws::EmptyStructure
+    end
+
     class CancelAgreementPaymentRequestInput
       attr_accessor payment_request_id: ::String
       attr_accessor agreement_id: ::String
@@ -191,8 +259,32 @@ module Aws::MarketplaceAgreement
       SENSITIVE: [:description]
     end
 
+    class Charge
+      attr_accessor id: ::String
+      attr_accessor revision: ::Integer
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_type: ::String
+      attr_accessor purchase_order_reference: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor amount: ::String
+      attr_accessor time: ::Time
+      SENSITIVE: []
+    end
+
+    class ChargeSummary
+      attr_accessor currency_code: ::String
+      attr_accessor new_agreement_value: ::String
+      attr_accessor new_agreement_value_after_tax: ::String
+      attr_accessor expected_charges: ::Array[Types::ExpectedCharge]
+      attr_accessor estimated_taxes: Types::EstimatedTaxes
+      attr_accessor itemized_charges: ::Array[Types::ItemizedCharge]
+      attr_accessor invoicing_entity: Types::InvoicingEntity
+      SENSITIVE: []
+    end
+
     class ConfigurableUpfrontPricingTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::ConfigurableUpfrontRateCardItem]
       attr_accessor configuration: Types::ConfigurableUpfrontPricingTermConfiguration
@@ -216,13 +308,29 @@ module Aws::MarketplaceAgreement
       attr_accessor request_id: ::String
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("Agreement" | "Charge" | "PaymentRequest")
+      attr_accessor resource_type: ("Agreement" | "AgreementRequest" | "AgreementProposal" | "Charge" | "PaymentRequest" | "Invoice" | "AgreementCancellationRequest" | "BillingAdjustmentRequest")
       SENSITIVE: []
     end
 
     class Constraints
       attr_accessor multiple_dimension_selection: ::String
       attr_accessor quantity_configuration: ::String
+      SENSITIVE: []
+    end
+
+    class CreateAgreementRequestInput
+      attr_accessor client_token: ::String
+      attr_accessor intent: ("NEW" | "AMEND" | "REPLACE")
+      attr_accessor requested_terms: ::Array[Types::RequestedTerm]
+      attr_accessor source_agreement_identifier: ::String
+      attr_accessor agreement_proposal_identifier: ::String
+      attr_accessor tax_configuration: Types::TaxConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateAgreementRequestOutput
+      attr_accessor agreement_request_id: ::String
+      attr_accessor charge_summary: Types::ChargeSummary
       SENSITIVE: []
     end
 
@@ -264,6 +372,22 @@ module Aws::MarketplaceAgreement
       SENSITIVE: []
     end
 
+    class EstimatedTaxes
+      attr_accessor breakdown: ::Array[Types::TaxBreakdownItem]
+      attr_accessor total_amount: ::String
+      SENSITIVE: []
+    end
+
+    class ExpectedCharge
+      attr_accessor id: ::String
+      attr_accessor time: ::Time
+      attr_accessor amount: ::String
+      attr_accessor amount_after_tax: ::String
+      attr_accessor timing: ("ON_ACCEPTANCE" | "SCHEDULED" | "BILLING_PERIOD")
+      attr_accessor estimated_taxes: Types::EstimatedTaxes
+      SENSITIVE: []
+    end
+
     class Filter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
@@ -272,6 +396,7 @@ module Aws::MarketplaceAgreement
 
     class FixedUpfrontPricingTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor duration: ::String
       attr_accessor price: ::String
@@ -281,6 +406,7 @@ module Aws::MarketplaceAgreement
 
     class FreeTrialPricingTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor duration: ::String
       attr_accessor grants: ::Array[Types::GrantItem]
       SENSITIVE: []
@@ -302,6 +428,19 @@ module Aws::MarketplaceAgreement
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
+    end
+
+    class GetAgreementEntitlementsInput
+      attr_accessor agreement_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetAgreementEntitlementsOutput
+      attr_accessor agreement_entitlements: ::Array[Types::AgreementEntitlement]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
     end
 
     class GetAgreementPaymentRequestInput
@@ -383,8 +522,18 @@ module Aws::MarketplaceAgreement
       SENSITIVE: []
     end
 
+    class ItemizedCharge
+      attr_accessor dimension_key: ::String
+      attr_accessor new_quantity: ::Integer
+      attr_accessor old_quantity: ::Integer
+      attr_accessor charge_reference: ::String
+      attr_accessor incremental_charge_amount: ::String
+      SENSITIVE: []
+    end
+
     class LegalTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor documents: ::Array[Types::DocumentItem]
       SENSITIVE: []
     end
@@ -403,6 +552,21 @@ module Aws::MarketplaceAgreement
     class ListAgreementCancellationRequestsOutput
       attr_accessor next_token: ::String
       attr_accessor items: ::Array[Types::AgreementCancellationRequestSummary]
+      SENSITIVE: []
+    end
+
+    class ListAgreementChargesInput
+      attr_accessor catalog: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListAgreementChargesOutput
+      attr_accessor items: ::Array[Types::Charge]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -475,6 +639,7 @@ module Aws::MarketplaceAgreement
 
     class PaymentScheduleTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor schedule: ::Array[Types::ScheduleItem]
       SENSITIVE: []
@@ -499,6 +664,14 @@ module Aws::MarketplaceAgreement
       SENSITIVE: []
     end
 
+    class PurchaseOrder
+      attr_accessor charge_id: ::String
+      attr_accessor charge_revision: ::Integer
+      attr_accessor agreement_id: ::String
+      attr_accessor purchase_order_reference: ::String
+      SENSITIVE: []
+    end
+
     class RateCardItem
       attr_accessor dimension_key: ::String
       attr_accessor price: ::String
@@ -507,14 +680,56 @@ module Aws::MarketplaceAgreement
 
     class RecurringPaymentTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor billing_period: ::String
       attr_accessor price: ::String
       SENSITIVE: []
     end
 
+    class RejectAgreementCancellationRequestInput
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_cancellation_request_id: ::String
+      attr_accessor rejection_reason: ::String
+      SENSITIVE: [:rejection_reason]
+    end
+
+    class RejectAgreementCancellationRequestOutput
+      attr_accessor agreement_id: ::String
+      attr_accessor agreement_cancellation_request_id: ::String
+      attr_accessor status: ("PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED" | "VALIDATION_FAILED")
+      attr_accessor status_message: ::String
+      attr_accessor reason_code: ("INCORRECT_TERMS_ACCEPTED" | "REPLACING_AGREEMENT" | "TEST_AGREEMENT" | "ALTERNATIVE_PROCUREMENT_CHANNEL" | "PRODUCT_DISCONTINUED" | "UNINTENDED_RENEWAL" | "BUYER_DISSATISFACTION" | "OTHER")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
+    class RejectAgreementPaymentRequestInput
+      attr_accessor payment_request_id: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor rejection_reason: ::String
+      SENSITIVE: []
+    end
+
+    class RejectAgreementPaymentRequestOutput
+      attr_accessor payment_request_id: ::String
+      attr_accessor agreement_id: ::String
+      attr_accessor status: ("VALIDATING" | "VALIDATION_FAILED" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "CANCELLED")
+      attr_accessor status_message: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor charge_amount: ::String
+      attr_accessor currency_code: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
     class RenewalTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor configuration: Types::RenewalTermConfiguration
       SENSITIVE: []
     end
@@ -522,6 +737,29 @@ module Aws::MarketplaceAgreement
     class RenewalTermConfiguration
       attr_accessor enable_auto_renew: bool
       SENSITIVE: []
+    end
+
+    class RequestedTerm
+      attr_accessor id: ::String
+      attr_accessor configuration: Types::RequestedTermConfiguration
+      SENSITIVE: []
+    end
+
+    class RequestedTermConfiguration
+      attr_accessor configurable_upfront_pricing_term_configuration: Types::ConfigurableUpfrontPricingTermConfiguration
+      attr_accessor renewal_term_configuration: Types::RenewalTermConfiguration
+      attr_accessor variable_payment_term_configuration: Types::VariablePaymentTermConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class ConfigurableUpfrontPricingTermConfiguration < RequestedTermConfiguration
+      end
+      class RenewalTermConfiguration < RequestedTermConfiguration
+      end
+      class VariablePaymentTermConfiguration < RequestedTermConfiguration
+      end
+      class Unknown < RequestedTermConfiguration
+      end
     end
 
     class Resource
@@ -534,7 +772,7 @@ module Aws::MarketplaceAgreement
       attr_accessor request_id: ::String
       attr_accessor message: ::String
       attr_accessor resource_id: ::String
-      attr_accessor resource_type: ("Agreement" | "Charge" | "PaymentRequest")
+      attr_accessor resource_type: ("Agreement" | "AgreementRequest" | "AgreementProposal" | "Charge" | "PaymentRequest" | "Invoice" | "AgreementCancellationRequest" | "BillingAdjustmentRequest")
       SENSITIVE: []
     end
 
@@ -606,6 +844,16 @@ module Aws::MarketplaceAgreement
       SENSITIVE: [:description]
     end
 
+    class ServiceQuotaExceededException
+      attr_accessor request_id: ::String
+      attr_accessor message: ::String
+      attr_accessor quota_code: ::String
+      attr_accessor service_code: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor resource_id: ::String
+      SENSITIVE: []
+    end
+
     class Sort
       attr_accessor sort_by: ::String
       attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
@@ -614,7 +862,20 @@ module Aws::MarketplaceAgreement
 
     class SupportTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor refund_policy: ::String
+      SENSITIVE: []
+    end
+
+    class TaxBreakdownItem
+      attr_accessor amount: ::String
+      attr_accessor rate: ::String
+      attr_accessor type: ::String
+      SENSITIVE: []
+    end
+
+    class TaxConfiguration
+      attr_accessor tax_estimation: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -624,8 +885,17 @@ module Aws::MarketplaceAgreement
       SENSITIVE: []
     end
 
+    class UpdatePurchaseOrdersInput
+      attr_accessor purchase_orders: ::Array[Types::PurchaseOrder]
+      SENSITIVE: []
+    end
+
+    class UpdatePurchaseOrdersOutput < Aws::EmptyStructure
+    end
+
     class UsageBasedPricingTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor rate_cards: ::Array[Types::UsageBasedRateCardItem]
       SENSITIVE: []
@@ -639,7 +909,7 @@ module Aws::MarketplaceAgreement
     class ValidationException
       attr_accessor request_id: ::String
       attr_accessor message: ::String
-      attr_accessor reason: ("INVALID_AGREEMENT_ID" | "MISSING_AGREEMENT_ID" | "INVALID_CATALOG" | "INVALID_FILTER_NAME" | "INVALID_FILTER_VALUES" | "INVALID_SORT_BY" | "INVALID_SORT_ORDER" | "INVALID_NEXT_TOKEN" | "INVALID_MAX_RESULTS" | "INVALID_TERM_ID" | "MISSING_TERM_ID" | "MISSING_NAME" | "INVALID_NAME" | "INVALID_DESCRIPTION" | "MISSING_CHARGE_AMOUNT" | "INVALID_CHARGE_AMOUNT" | "MISSING_PAYMENT_REQUEST_ID" | "INVALID_PAYMENT_REQUEST_ID" | "MISSING_PARTY_TYPE" | "INVALID_PARTY_TYPE" | "UNSUPPORTED_FILTERS" | "INVALID_REJECTION_REASON" | "INVALID_PAYMENT_REQUEST_STATUS" | "OTHER")
+      attr_accessor reason: ("MISSING_BILLING_ADJUSTMENTS" | "BILLING_ADJUSTMENTS_LIMIT_EXCEEDED" | "MISSING_INVOICE_ID" | "INVALID_ADJUSTMENT_AMOUNT" | "MISSING_ADJUSTMENT_AMOUNT" | "INVALID_REASON_CODE" | "MISSING_REASON_CODE" | "MISSING_DESCRIPTION" | "INVALID_INVOICE_ADJUSTMENT_PERIOD" | "INVALID_CURRENCY_CODE" | "MISSING_CURRENCY_CODE" | "EXCEEDED_MAXIMUM_ADJUSTMENT_AMOUNT" | "MISSING_BILLING_ADJUSTMENT_REQUEST_ENTRY" | "MULTIPLE_AGREEMENT_IDS" | "INVALID_AGREEMENT_CANCELLATION_REQUEST_ID" | "MISSING_AGREEMENT_CANCELLATION_REQUEST_ID" | "MISSING_REASON" | "INVALID_REASON" | "INVALID_STATUS" | "INVALID_AGREEMENT_ID" | "MISSING_AGREEMENT_ID" | "INVALID_CATALOG" | "INVALID_FILTERS" | "INVALID_FILTER_NAME" | "MISSING_FILTER_NAME" | "INVALID_FILTER_VALUES" | "MISSING_FILTER_VALUES" | "INVALID_SORT_BY" | "INVALID_SORT_ORDER" | "INVALID_NEXT_TOKEN" | "INVALID_MAX_RESULTS" | "INVALID_TERM_ID" | "MISSING_TERM_ID" | "MISSING_NAME" | "INVALID_NAME" | "INVALID_DESCRIPTION" | "MISSING_CHARGE_AMOUNT" | "INVALID_CHARGE_AMOUNT" | "MISSING_PAYMENT_REQUEST_ID" | "INVALID_PAYMENT_REQUEST_ID" | "MISSING_PARTY_TYPE" | "INVALID_PARTY_TYPE" | "UNSUPPORTED_FILTERS" | "INVALID_CLIENT_TOKEN" | "INVALID_INTENT" | "MISSING_INTENT" | "INVALID_SOURCE_AGREEMENT_IDENTIFIER" | "MISSING_SOURCE_AGREEMENT_IDENTIFIER" | "INVALID_AGREEMENT_PROPOSAL_IDENTIFIER" | "MISSING_AGREEMENT_PROPOSAL_IDENTIFIER" | "INVALID_REQUESTED_TERMS" | "MISSING_REQUESTED_TERMS" | "INVALID_REQUESTED_TERM_ID" | "MISSING_REQUESTED_TERM_ID" | "INVALID_REQUESTED_TERM_CONFIGURATION" | "MISSING_REQUESTED_TERM_CONFIGURATION" | "INVALID_AGREEMENT_REQUEST_ID" | "MISSING_AGREEMENT_REQUEST_ID" | "INVALID_PURCHASE_ORDERS" | "MISSING_PURCHASE_ORDERS" | "INVALID_CHARGE_ID" | "MISSING_CHARGE_ID" | "INVALID_CHARGE_REVISION" | "MISSING_CHARGE_REVISION" | "INVALID_AGREEMENT_TYPE" | "INVALID_PURCHASE_ORDER_REFERENCE" | "INACTIVE_AGREEMENT" | "SUPERSEDED_AGREEMENT_PROPOSAL" | "EXPIRED_AGREEMENT_PROPOSAL" | "MISSING_MANDATORY_TERMS" | "INCOMPATIBLE_TERMS" | "MISSING_USAGE_AGREEMENT" | "INVALID_INCREMENTAL_CHARGE" | "MISSING_ACCOUNT_ADDRESS" | "UNSUPPORTED_ACTION" | "INVALID_REJECTION_REASON" | "INVALID_PAYMENT_REQUEST_STATUS" | "OTHER" | "DUPLICATE_CHARGES" | "UNSUPPORTED_ACCOUNT_PLAN" | "DUPLICATE_AGREEMENT_IN_ORGANIZATION" | "MISSING_PURCHASE_ORDER_REFERENCE")
       attr_accessor fields: ::Array[Types::ValidationExceptionField]
       SENSITIVE: []
     end
@@ -652,6 +922,7 @@ module Aws::MarketplaceAgreement
 
     class ValidityTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor agreement_duration: ::String
       attr_accessor agreement_start_date: ::Time
       attr_accessor agreement_end_date: ::Time
@@ -660,6 +931,7 @@ module Aws::MarketplaceAgreement
 
     class VariablePaymentTerm
       attr_accessor type: ::String
+      attr_accessor id: ::String
       attr_accessor currency_code: ::String
       attr_accessor max_total_charge_amount: ::String
       attr_accessor configuration: Types::VariablePaymentTermConfiguration

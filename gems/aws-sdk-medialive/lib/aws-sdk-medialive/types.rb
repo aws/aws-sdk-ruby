@@ -10716,6 +10716,12 @@ module Aws::MediaLive
     #   Current engine version of the encoder for this pipeline.
     #   @return [Types::ChannelEngineVersionResponse]
     #
+    # @!attribute [rw] media_connect_router_output_connection_map
+    #   A map of output names to the MediaConnect Router connection for this
+    #   pipeline. Only present for channels with MediaConnect Router
+    #   outputs.
+    #   @return [Hash<String,Types::MediaConnectRouterOutputConnection>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PipelineDetail AWS API Documentation
     #
     class PipelineDetail < Struct.new(
@@ -10724,7 +10730,8 @@ module Aws::MediaLive
       :active_motion_graphics_action_name,
       :active_motion_graphics_uri,
       :pipeline_id,
-      :channel_engine_version)
+      :channel_engine_version,
+      :media_connect_router_output_connection_map)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23074,10 +23081,7 @@ module Aws::MediaLive
     # Media Connect Router Output Settings
     #
     # @!attribute [rw] connected_router_inputs
-    #   Shows the MediaConnect Router Inputs that are connected to this
-    #   output. This parameter is purely informative, and editing it will
-    #   have no effect. To connect or disconnect MediaConnect Router Inputs,
-    #   go to MediaConnect.
+    #   This parameter is deprecated and unused.
     #   @return [Types::MediaConnectRouterOutputConnectionMap]
     #
     # @!attribute [rw] container_settings
@@ -23095,6 +23099,21 @@ module Aws::MediaLive
       :connected_router_inputs,
       :container_settings,
       :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Connection details for a single pipeline of a MediaConnect Router
+    # output.
+    #
+    # @!attribute [rw] router_input_arn
+    #   The ARN of the MediaConnect Router Input connected to this pipeline.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MediaConnectRouterOutputConnection AWS API Documentation
+    #
+    class MediaConnectRouterOutputConnection < Struct.new(
+      :router_input_arn)
       SENSITIVE = []
       include Aws::Structure
     end

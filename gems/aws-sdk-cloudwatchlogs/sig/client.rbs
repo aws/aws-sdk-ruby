@@ -1161,7 +1161,8 @@ module Aws
                                  name: ::String,
                                  resource_arn: ::String,
                                  log_type: ::String,
-                                 ?tags: Hash[::String, ::String]
+                                 ?tags: Hash[::String, ::String],
+                                 ?delivery_source_configuration: Hash[::String, ::String]
                                ) -> _PutDeliverySourceResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverySourceResponseSuccess
 

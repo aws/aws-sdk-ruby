@@ -640,6 +640,14 @@ module Aws::BedrockAgentCoreControl
     #         session_storage: {
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_files_access_point: {
+    #           access_point_arn: "S3FilesAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #         },
+    #         efs_access_point: {
+    #           access_point_arn: "EfsAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #         },
     #       },
     #     ],
     #     tags: {
@@ -1383,6 +1391,12 @@ module Aws::BedrockAgentCoreControl
     #         supported_versions: ["McpVersion"],
     #         instructions: "McpInstructions",
     #         search_type: "SEMANTIC", # accepts SEMANTIC
+    #         session_configuration: {
+    #           session_timeout_in_seconds: 1,
+    #         },
+    #         streaming_configuration: {
+    #           enable_response_streaming: false,
+    #         },
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -1484,6 +1498,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
+    #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
+    #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -2128,6 +2144,14 @@ module Aws::BedrockAgentCoreControl
     #             session_storage: {
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_files_access_point: {
+    #               access_point_arn: "S3FilesAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
+    #             efs_access_point: {
+    #               access_point_arn: "EfsAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
     #           },
     #         ],
     #       },
@@ -2372,6 +2396,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -3307,6 +3335,347 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def create_online_evaluation_config(params = {}, options = {})
       req = build_request(:create_online_evaluation_config, params)
+      req.send_request(options)
+    end
+
+    # Creates a new payment connector for a payment manager. A payment
+    # connector integrates with a supported payment provider to enable
+    # payment processing capabilities.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the payment manager to create the connector
+    #   for.
+    #
+    # @option params [required, String] :name
+    #   The name of the payment connector.
+    #
+    # @option params [String] :description
+    #   A description of the payment connector.
+    #
+    # @option params [required, String] :type
+    #   The type of payment connector, which determines the payment provider
+    #   integration.
+    #
+    # @option params [required, Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
+    #   The credential provider configurations for the payment connector.
+    #   These configurations specify how the connector authenticates with the
+    #   payment provider.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::CreatePaymentConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePaymentConnectorResponse#payment_connector_id #payment_connector_id} => String
+    #   * {Types::CreatePaymentConnectorResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::CreatePaymentConnectorResponse#name #name} => String
+    #   * {Types::CreatePaymentConnectorResponse#type #type} => String
+    #   * {Types::CreatePaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
+    #   * {Types::CreatePaymentConnectorResponse#created_at #created_at} => Time
+    #   * {Types::CreatePaymentConnectorResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_payment_connector({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     name: "PaymentConnectorName", # required
+    #     description: "PaymentsDescription",
+    #     type: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy
+    #     credential_provider_configurations: [ # required
+    #       {
+    #         coinbase_cdp: {
+    #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         stripe_privy: {
+    #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connector_id #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_provider_configurations #=> Array
+    #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentConnector AWS API Documentation
+    #
+    # @overload create_payment_connector(params = {})
+    # @param [Hash] params ({})
+    def create_payment_connector(params = {}, options = {})
+      req = build_request(:create_payment_connector, params)
+      req.send_request(options)
+    end
+
+    # Creates a new payment credential provider for storing authentication
+    # credentials used by payment connectors to communicate with external
+    # payment providers.
+    #
+    # @option params [required, String] :name
+    #   Unique name for the payment credential provider
+    #
+    # @option params [required, String] :credential_provider_vendor
+    #   The vendor type (e.g., CoinbaseCDP)
+    #
+    # @option params [required, Types::PaymentProviderConfigurationInput] :provider_configuration_input
+    #   Configuration specific to the vendor, including API credentials
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Optional tags for resource organization
+    #
+    # @return [Types::CreatePaymentCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePaymentCredentialProviderResponse#name #name} => String
+    #   * {Types::CreatePaymentCredentialProviderResponse#credential_provider_vendor #credential_provider_vendor} => String
+    #   * {Types::CreatePaymentCredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
+    #   * {Types::CreatePaymentCredentialProviderResponse#provider_configuration_output #provider_configuration_output} => Types::PaymentProviderConfigurationOutput
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_payment_credential_provider({
+    #     name: "CredentialProviderName", # required
+    #     credential_provider_vendor: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy
+    #     provider_configuration_input: { # required
+    #       coinbase_cdp_configuration: {
+    #         api_key_id: "CoinbaseCdpApiKeyIdType", # required
+    #         api_key_secret: "CoinbaseCdpApiKeySecretType", # required
+    #         wallet_secret: "CoinbaseCdpWalletSecretType", # required
+    #       },
+    #       stripe_privy_configuration: {
+    #         app_id: "StripePrivyAppIdType", # required
+    #         app_secret: "StripePrivyAppSecretType", # required
+    #         authorization_private_key: "StripePrivyAuthorizationPrivateKeyType", # required
+    #         authorization_id: "StripePrivyAuthorizationIdType", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.credential_provider_vendor #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_provider_arn #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_id #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.wallet_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_id #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_private_key_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentCredentialProvider AWS API Documentation
+    #
+    # @overload create_payment_credential_provider(params = {})
+    # @param [Hash] params ({})
+    def create_payment_credential_provider(params = {}, options = {})
+      req = build_request(:create_payment_credential_provider, params)
+      req.send_request(options)
+    end
+
+    # Creates a new payment manager in your Amazon Web Services account. A
+    # payment manager serves as the top-level resource for managing payment
+    # processing capabilities, including payment connectors that integrate
+    # with supported payment providers.
+    #
+    # If you specify `CUSTOM_JWT` as the `authorizerType`, you must provide
+    # an `authorizerConfiguration`.
+    #
+    # @option params [required, String] :name
+    #   The name of the payment manager.
+    #
+    # @option params [String] :description
+    #   A description of the payment manager.
+    #
+    # @option params [required, String] :authorizer_type
+    #   The type of authorizer to use for the payment manager.
+    #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM credentials.
+    #
+    # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
+    #   The authorizer configuration for the payment manager.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the payment
+    #   manager assumes to access resources on your behalf.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of tag keys and values to assign to the payment manager.
+    #
+    # @return [Types::CreatePaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreatePaymentManagerResponse#payment_manager_arn #payment_manager_arn} => String
+    #   * {Types::CreatePaymentManagerResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::CreatePaymentManagerResponse#name #name} => String
+    #   * {Types::CreatePaymentManagerResponse#authorizer_type #authorizer_type} => String
+    #   * {Types::CreatePaymentManagerResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
+    #   * {Types::CreatePaymentManagerResponse#role_arn #role_arn} => String
+    #   * {Types::CreatePaymentManagerResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
+    #   * {Types::CreatePaymentManagerResponse#created_at #created_at} => Time
+    #   * {Types::CreatePaymentManagerResponse#status #status} => String
+    #   * {Types::CreatePaymentManagerResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_payment_manager({
+    #     name: "PaymentManagerName", # required
+    #     description: "PaymentsDescription",
+    #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_configuration: {
+    #       custom_jwt_authorizer: {
+    #         discovery_url: "DiscoveryUrl", # required
+    #         allowed_audience: ["AllowedAudience"],
+    #         allowed_clients: ["AllowedClient"],
+    #         allowed_scopes: ["AllowedScopeType"],
+    #         custom_claims: [
+    #           {
+    #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #             inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #             authorizing_claim_match_value: { # required
+    #               claim_match_value: { # required
+    #                 match_value_string: "MatchValueString",
+    #                 match_value_string_list: ["MatchValueString"],
+    #               },
+    #               claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #             },
+    #           },
+    #         ],
+    #         private_endpoint: {
+    #           self_managed_lattice_resource: {
+    #             resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #           },
+    #           managed_vpc_resource: {
+    #             vpc_identifier: "VpcIdentifier", # required
+    #             subnet_ids: ["SubnetId"], # required
+    #             endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #             security_group_ids: ["SecurityGroupIdentifier"],
+    #             tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #             routing_domain: "RoutingDomain",
+    #           },
+    #         },
+    #         private_endpoint_overrides: [
+    #           {
+    #             domain: "PrivateEndpointOverrideDomain", # required
+    #             private_endpoint: { # required
+    #               self_managed_lattice_resource: {
+    #                 resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #               },
+    #               managed_vpc_resource: {
+    #                 vpc_identifier: "VpcIdentifier", # required
+    #                 subnet_ids: ["SubnetId"], # required
+    #                 endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                 security_group_ids: ["SecurityGroupIdentifier"],
+    #                 tags: {
+    #                   "TagKey" => "TagValue",
+    #                 },
+    #                 routing_domain: "RoutingDomain",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     role_arn: "RoleArn", # required
+    #     client_token: "ClientToken",
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_manager_arn #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.name #=> String
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.role_arn #=> String
+    #   resp.workload_identity_details.workload_identity_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManager AWS API Documentation
+    #
+    # @overload create_payment_manager(params = {})
+    # @param [Hash] params ({})
+    def create_payment_manager(params = {}, options = {})
+      req = build_request(:create_payment_manager, params)
       req.send_request(options)
     end
 
@@ -4345,6 +4714,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -4497,6 +4870,125 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def delete_online_evaluation_config(params = {}, options = {})
       req = build_request(:delete_online_evaluation_config, params)
+      req.send_request(options)
+    end
+
+    # Deletes a payment connector.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The unique identifier of the payment connector to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::DeletePaymentConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePaymentConnectorResponse#status #status} => String
+    #   * {Types::DeletePaymentConnectorResponse#payment_connector_id #payment_connector_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_payment_connector({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.payment_connector_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentConnector AWS API Documentation
+    #
+    # @overload delete_payment_connector(params = {})
+    # @param [Hash] params ({})
+    def delete_payment_connector(params = {}, options = {})
+      req = build_request(:delete_payment_connector, params)
+      req.send_request(options)
+    end
+
+    # Deletes a payment credential provider and its associated stored
+    # credentials.
+    #
+    # @option params [required, String] :name
+    #   The name of the payment credential provider to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_payment_credential_provider({
+    #     name: "CredentialProviderName", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentCredentialProvider AWS API Documentation
+    #
+    # @overload delete_payment_credential_provider(params = {})
+    # @param [Hash] params ({})
+    def delete_payment_credential_provider(params = {}, options = {})
+      req = build_request(:delete_payment_credential_provider, params)
+      req.send_request(options)
+    end
+
+    # Deletes a payment manager. All payment connectors associated with the
+    # payment manager must be deleted before the payment manager can be
+    # deleted. This operation initiates the deletion process asynchronously.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the payment manager to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::DeletePaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeletePaymentManagerResponse#status #status} => String
+    #   * {Types::DeletePaymentManagerResponse#payment_manager_id #payment_manager_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_payment_manager({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.payment_manager_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentManager AWS API Documentation
+    #
+    # @overload delete_payment_manager(params = {})
+    # @param [Hash] params ({})
+    def delete_payment_manager(params = {}, options = {})
+      req = build_request(:delete_payment_manager, params)
       req.send_request(options)
     end
 
@@ -4830,6 +5322,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.metadata_configuration.require_mmdsv2 #=> Boolean
     #   resp.filesystem_configurations #=> Array
     #   resp.filesystem_configurations[0].session_storage.mount_path #=> String
+    #   resp.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
+    #   resp.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
+    #   resp.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -5332,6 +5828,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
+    #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
+    #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -5680,6 +6178,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -6093,6 +6595,187 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_online_evaluation_config(params = {}, options = {})
       req = build_request(:get_online_evaluation_config, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific payment connector.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The unique identifier of the payment connector to retrieve.
+    #
+    # @return [Types::GetPaymentConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentConnectorResponse#payment_connector_id #payment_connector_id} => String
+    #   * {Types::GetPaymentConnectorResponse#name #name} => String
+    #   * {Types::GetPaymentConnectorResponse#description #description} => String
+    #   * {Types::GetPaymentConnectorResponse#type #type} => String
+    #   * {Types::GetPaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
+    #   * {Types::GetPaymentConnectorResponse#created_at #created_at} => Time
+    #   * {Types::GetPaymentConnectorResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetPaymentConnectorResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_connector({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connector_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_provider_configurations #=> Array
+    #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnector AWS API Documentation
+    #
+    # @overload get_payment_connector(params = {})
+    # @param [Hash] params ({})
+    def get_payment_connector(params = {}, options = {})
+      req = build_request(:get_payment_connector, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific payment credential provider.
+    #
+    # @option params [required, String] :name
+    #   The name of the payment credential provider to retrieve.
+    #
+    # @return [Types::GetPaymentCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentCredentialProviderResponse#name #name} => String
+    #   * {Types::GetPaymentCredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
+    #   * {Types::GetPaymentCredentialProviderResponse#credential_provider_vendor #credential_provider_vendor} => String
+    #   * {Types::GetPaymentCredentialProviderResponse#provider_configuration_output #provider_configuration_output} => Types::PaymentProviderConfigurationOutput
+    #   * {Types::GetPaymentCredentialProviderResponse#created_time #created_time} => Time
+    #   * {Types::GetPaymentCredentialProviderResponse#last_updated_time #last_updated_time} => Time
+    #   * {Types::GetPaymentCredentialProviderResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_credential_provider({
+    #     name: "CredentialProviderName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.credential_provider_arn #=> String
+    #   resp.credential_provider_vendor #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_id #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.wallet_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_id #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_private_key_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_id #=> String
+    #   resp.created_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentCredentialProvider AWS API Documentation
+    #
+    # @overload get_payment_credential_provider(params = {})
+    # @param [Hash] params ({})
+    def get_payment_credential_provider(params = {}, options = {})
+      req = build_request(:get_payment_credential_provider, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a specific payment manager.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the payment manager to retrieve.
+    #
+    # @return [Types::GetPaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPaymentManagerResponse#payment_manager_arn #payment_manager_arn} => String
+    #   * {Types::GetPaymentManagerResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::GetPaymentManagerResponse#name #name} => String
+    #   * {Types::GetPaymentManagerResponse#description #description} => String
+    #   * {Types::GetPaymentManagerResponse#authorizer_type #authorizer_type} => String
+    #   * {Types::GetPaymentManagerResponse#authorizer_configuration #authorizer_configuration} => Types::AuthorizerConfiguration
+    #   * {Types::GetPaymentManagerResponse#role_arn #role_arn} => String
+    #   * {Types::GetPaymentManagerResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
+    #   * {Types::GetPaymentManagerResponse#created_at #created_at} => Time
+    #   * {Types::GetPaymentManagerResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::GetPaymentManagerResponse#status #status} => String
+    #   * {Types::GetPaymentManagerResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_payment_manager({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_manager_arn #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_clients[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_scopes[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_name #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].inbound_token_claim_value_type #=> String, one of "STRING", "STRING_ARRAY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_value.match_value_string_list[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.custom_claims[0].authorizing_claim_match_value.claim_match_operator #=> String, one of "EQUALS", "CONTAINS", "CONTAINS_ANY"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].domain #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.vpc_identifier #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.subnet_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.endpoint_ip_address_type #=> String, one of "IPV4", "IPV6"
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids #=> Array
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.security_group_ids[0] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags #=> Hash
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.tags["TagKey"] #=> String
+    #   resp.authorizer_configuration.custom_jwt_authorizer.private_endpoint_overrides[0].private_endpoint.managed_vpc_resource.routing_domain #=> String
+    #   resp.role_arn #=> String
+    #   resp.workload_identity_details.workload_identity_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentManager AWS API Documentation
+    #
+    # @overload get_payment_manager(params = {})
+    # @param [Hash] params ({})
+    def get_payment_manager(params = {}, options = {})
+      req = build_request(:get_payment_manager, params)
       req.send_request(options)
     end
 
@@ -7396,6 +8079,149 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Lists all payment connectors for a specified payment manager.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the payment manager whose connectors to list.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListPaymentConnectorsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPaymentConnectorsResponse#payment_connectors #payment_connectors} => Array&lt;Types::PaymentConnectorSummary&gt;
+    #   * {Types::ListPaymentConnectorsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_payment_connectors({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connectors #=> Array
+    #   resp.payment_connectors[0].payment_connector_id #=> String
+    #   resp.payment_connectors[0].name #=> String
+    #   resp.payment_connectors[0].type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.payment_connectors[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.payment_connectors[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentConnectors AWS API Documentation
+    #
+    # @overload list_payment_connectors(params = {})
+    # @param [Hash] params ({})
+    def list_payment_connectors(params = {}, options = {})
+      req = build_request(:list_payment_connectors, params)
+      req.send_request(options)
+    end
+
+    # Lists all payment credential providers in the account.
+    #
+    # @option params [String] :next_token
+    #   Pagination token.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @return [Types::ListPaymentCredentialProvidersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPaymentCredentialProvidersResponse#credential_providers #credential_providers} => Array&lt;Types::PaymentCredentialProviderItem&gt;
+    #   * {Types::ListPaymentCredentialProvidersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_payment_credential_providers({
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.credential_providers #=> Array
+    #   resp.credential_providers[0].name #=> String
+    #   resp.credential_providers[0].credential_provider_vendor #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_providers[0].credential_provider_arn #=> String
+    #   resp.credential_providers[0].created_time #=> Time
+    #   resp.credential_providers[0].last_updated_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentCredentialProviders AWS API Documentation
+    #
+    # @overload list_payment_credential_providers(params = {})
+    # @param [Hash] params ({})
+    def list_payment_credential_providers(params = {}, options = {})
+      req = build_request(:list_payment_credential_providers, params)
+      req.send_request(options)
+    end
+
+    # Lists all payment managers in the account.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in the response. If the total
+    #   number of results is greater than this value, use the token returned
+    #   in the response in the `nextToken` field when making another request
+    #   to return the next batch of results.
+    #
+    # @option params [String] :next_token
+    #   If the total number of results is greater than the `maxResults` value
+    #   provided in the request, enter the token returned in the `nextToken`
+    #   field in the response in this field to return the next batch of
+    #   results.
+    #
+    # @return [Types::ListPaymentManagersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPaymentManagersResponse#payment_managers #payment_managers} => Array&lt;Types::PaymentManagerSummary&gt;
+    #   * {Types::ListPaymentManagersResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_payment_managers({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_managers #=> Array
+    #   resp.payment_managers[0].payment_manager_arn #=> String
+    #   resp.payment_managers[0].payment_manager_id #=> String
+    #   resp.payment_managers[0].name #=> String
+    #   resp.payment_managers[0].description #=> String
+    #   resp.payment_managers[0].authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.payment_managers[0].role_arn #=> String
+    #   resp.payment_managers[0].status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.payment_managers[0].created_at #=> Time
+    #   resp.payment_managers[0].last_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentManagers AWS API Documentation
+    #
+    # @overload list_payment_managers(params = {})
+    # @param [Hash] params ({})
+    def list_payment_managers(params = {}, options = {})
+      req = build_request(:list_payment_managers, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of policies within the AgentCore Policy engine. This
     # operation supports pagination and filtering to help administrators
     # manage and discover policies across policy engines. Results can be
@@ -8452,6 +9278,14 @@ module Aws::BedrockAgentCoreControl
     #         session_storage: {
     #           mount_path: "MountPath", # required
     #         },
+    #         s3_files_access_point: {
+    #           access_point_arn: "S3FilesAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #         },
+    #         efs_access_point: {
+    #           access_point_arn: "EfsAccessPointArn", # required
+    #           mount_path: "MountPath", # required
+    #         },
     #       },
     #     ],
     #     client_token: "ClientToken",
@@ -8878,6 +9712,12 @@ module Aws::BedrockAgentCoreControl
     #         supported_versions: ["McpVersion"],
     #         instructions: "McpInstructions",
     #         search_type: "SEMANTIC", # accepts SEMANTIC
+    #         session_configuration: {
+    #           session_timeout_in_seconds: 1,
+    #         },
+    #         streaming_configuration: {
+    #           enable_response_streaming: false,
+    #         },
     #       },
     #     },
     #     authorizer_type: "CUSTOM_JWT", # required, accepts CUSTOM_JWT, AWS_IAM, NONE, AUTHENTICATE_ONLY
@@ -8976,6 +9816,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.protocol_configuration.mcp.supported_versions[0] #=> String
     #   resp.protocol_configuration.mcp.instructions #=> String
     #   resp.protocol_configuration.mcp.search_type #=> String, one of "SEMANTIC"
+    #   resp.protocol_configuration.mcp.session_configuration.session_timeout_in_seconds #=> Integer
+    #   resp.protocol_configuration.mcp.streaming_configuration.enable_response_streaming #=> Boolean
     #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM", "NONE", "AUTHENTICATE_ONLY"
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.allowed_audience #=> Array
@@ -9600,6 +10442,14 @@ module Aws::BedrockAgentCoreControl
     #             session_storage: {
     #               mount_path: "MountPath", # required
     #             },
+    #             s3_files_access_point: {
+    #               access_point_arn: "S3FilesAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
+    #             efs_access_point: {
+    #               access_point_arn: "EfsAccessPointArn", # required
+    #               mount_path: "MountPath", # required
+    #             },
     #           },
     #         ],
     #       },
@@ -9847,6 +10697,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.mount_path #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.access_point_arn #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].efs_access_point.mount_path #=> String
     #   resp.harness.environment_artifact.container_configuration.container_uri #=> String
     #   resp.harness.environment_variables #=> Hash
     #   resp.harness.environment_variables["EnvironmentVariableKey"] #=> String
@@ -10910,6 +11764,286 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Updates an existing payment connector. This operation uses PATCH
+    # semantics, so you only need to specify the fields you want to change.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #
+    # @option params [required, String] :payment_connector_id
+    #   The unique identifier of the payment connector to update.
+    #
+    # @option params [String] :description
+    #   The updated description of the payment connector.
+    #
+    # @option params [String] :type
+    #   The updated type of the payment connector.
+    #
+    # @option params [Array<Types::CredentialsProviderConfiguration>] :credential_provider_configurations
+    #   The updated credential provider configurations for the payment
+    #   connector.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::UpdatePaymentConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePaymentConnectorResponse#payment_connector_id #payment_connector_id} => String
+    #   * {Types::UpdatePaymentConnectorResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::UpdatePaymentConnectorResponse#name #name} => String
+    #   * {Types::UpdatePaymentConnectorResponse#type #type} => String
+    #   * {Types::UpdatePaymentConnectorResponse#credential_provider_configurations #credential_provider_configurations} => Array&lt;Types::CredentialsProviderConfiguration&gt;
+    #   * {Types::UpdatePaymentConnectorResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdatePaymentConnectorResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_payment_connector({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     payment_connector_id: "PaymentConnectorId", # required
+    #     description: "PaymentsDescription",
+    #     type: "CoinbaseCDP", # accepts CoinbaseCDP, StripePrivy
+    #     credential_provider_configurations: [
+    #       {
+    #         coinbase_cdp: {
+    #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #         stripe_privy: {
+    #           credential_provider_arn: "PaymentCredentialProviderArn", # required
+    #         },
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_connector_id #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_provider_configurations #=> Array
+    #   resp.credential_provider_configurations[0].coinbase_cdp.credential_provider_arn #=> String
+    #   resp.credential_provider_configurations[0].stripe_privy.credential_provider_arn #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentConnector AWS API Documentation
+    #
+    # @overload update_payment_connector(params = {})
+    # @param [Hash] params ({})
+    def update_payment_connector(params = {}, options = {})
+      req = build_request(:update_payment_connector, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing payment credential provider with new
+    # authentication credentials.
+    #
+    # @option params [required, String] :name
+    #   The name of the payment credential provider to update.
+    #
+    # @option params [required, String] :credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #
+    # @option params [required, Types::PaymentProviderConfigurationInput] :provider_configuration_input
+    #   Configuration specific to the vendor, including API credentials
+    #
+    # @return [Types::UpdatePaymentCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePaymentCredentialProviderResponse#name #name} => String
+    #   * {Types::UpdatePaymentCredentialProviderResponse#credential_provider_vendor #credential_provider_vendor} => String
+    #   * {Types::UpdatePaymentCredentialProviderResponse#credential_provider_arn #credential_provider_arn} => String
+    #   * {Types::UpdatePaymentCredentialProviderResponse#provider_configuration_output #provider_configuration_output} => Types::PaymentProviderConfigurationOutput
+    #   * {Types::UpdatePaymentCredentialProviderResponse#created_time #created_time} => Time
+    #   * {Types::UpdatePaymentCredentialProviderResponse#last_updated_time #last_updated_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_payment_credential_provider({
+    #     name: "CredentialProviderName", # required
+    #     credential_provider_vendor: "CoinbaseCDP", # required, accepts CoinbaseCDP, StripePrivy
+    #     provider_configuration_input: { # required
+    #       coinbase_cdp_configuration: {
+    #         api_key_id: "CoinbaseCdpApiKeyIdType", # required
+    #         api_key_secret: "CoinbaseCdpApiKeySecretType", # required
+    #         wallet_secret: "CoinbaseCdpWalletSecretType", # required
+    #       },
+    #       stripe_privy_configuration: {
+    #         app_id: "StripePrivyAppIdType", # required
+    #         app_secret: "StripePrivyAppSecretType", # required
+    #         authorization_private_key: "StripePrivyAuthorizationPrivateKeyType", # required
+    #         authorization_id: "StripePrivyAuthorizationIdType", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.name #=> String
+    #   resp.credential_provider_vendor #=> String, one of "CoinbaseCDP", "StripePrivy"
+    #   resp.credential_provider_arn #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_id #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.api_key_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.coinbase_cdp_configuration.wallet_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_id #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.app_secret_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_private_key_arn.secret_arn #=> String
+    #   resp.provider_configuration_output.stripe_privy_configuration.authorization_id #=> String
+    #   resp.created_time #=> Time
+    #   resp.last_updated_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentCredentialProvider AWS API Documentation
+    #
+    # @overload update_payment_credential_provider(params = {})
+    # @param [Hash] params ({})
+    def update_payment_credential_provider(params = {}, options = {})
+      req = build_request(:update_payment_credential_provider, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing payment manager. This operation uses PATCH
+    # semantics, so you only need to specify the fields you want to change.
+    #
+    # @option params [required, String] :payment_manager_id
+    #   The unique identifier of the payment manager to update.
+    #
+    # @option params [String] :description
+    #   The updated description of the payment manager.
+    #
+    # @option params [String] :authorizer_type
+    #   The updated authorizer type for the payment manager.
+    #
+    # @option params [Types::AuthorizerConfiguration] :authorizer_configuration
+    #   The updated authorizer configuration for the payment manager.
+    #
+    # @option params [String] :role_arn
+    #   The updated Amazon Resource Name (ARN) of the IAM role for the payment
+    #   manager.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a previous
+    #   request, the service ignores the request, but doesn't return an
+    #   error. For more information, see [Ensuring idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #
+    # @return [Types::UpdatePaymentManagerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePaymentManagerResponse#payment_manager_arn #payment_manager_arn} => String
+    #   * {Types::UpdatePaymentManagerResponse#payment_manager_id #payment_manager_id} => String
+    #   * {Types::UpdatePaymentManagerResponse#name #name} => String
+    #   * {Types::UpdatePaymentManagerResponse#authorizer_type #authorizer_type} => String
+    #   * {Types::UpdatePaymentManagerResponse#role_arn #role_arn} => String
+    #   * {Types::UpdatePaymentManagerResponse#workload_identity_details #workload_identity_details} => Types::WorkloadIdentityDetails
+    #   * {Types::UpdatePaymentManagerResponse#last_updated_at #last_updated_at} => Time
+    #   * {Types::UpdatePaymentManagerResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_payment_manager({
+    #     payment_manager_id: "PaymentManagerId", # required
+    #     description: "PaymentsDescription",
+    #     authorizer_type: "CUSTOM_JWT", # accepts CUSTOM_JWT, AWS_IAM
+    #     authorizer_configuration: {
+    #       custom_jwt_authorizer: {
+    #         discovery_url: "DiscoveryUrl", # required
+    #         allowed_audience: ["AllowedAudience"],
+    #         allowed_clients: ["AllowedClient"],
+    #         allowed_scopes: ["AllowedScopeType"],
+    #         custom_claims: [
+    #           {
+    #             inbound_token_claim_name: "InboundTokenClaimNameType", # required
+    #             inbound_token_claim_value_type: "STRING", # required, accepts STRING, STRING_ARRAY
+    #             authorizing_claim_match_value: { # required
+    #               claim_match_value: { # required
+    #                 match_value_string: "MatchValueString",
+    #                 match_value_string_list: ["MatchValueString"],
+    #               },
+    #               claim_match_operator: "EQUALS", # required, accepts EQUALS, CONTAINS, CONTAINS_ANY
+    #             },
+    #           },
+    #         ],
+    #         private_endpoint: {
+    #           self_managed_lattice_resource: {
+    #             resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #           },
+    #           managed_vpc_resource: {
+    #             vpc_identifier: "VpcIdentifier", # required
+    #             subnet_ids: ["SubnetId"], # required
+    #             endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #             security_group_ids: ["SecurityGroupIdentifier"],
+    #             tags: {
+    #               "TagKey" => "TagValue",
+    #             },
+    #             routing_domain: "RoutingDomain",
+    #           },
+    #         },
+    #         private_endpoint_overrides: [
+    #           {
+    #             domain: "PrivateEndpointOverrideDomain", # required
+    #             private_endpoint: { # required
+    #               self_managed_lattice_resource: {
+    #                 resource_configuration_identifier: "ResourceConfigurationIdentifier",
+    #               },
+    #               managed_vpc_resource: {
+    #                 vpc_identifier: "VpcIdentifier", # required
+    #                 subnet_ids: ["SubnetId"], # required
+    #                 endpoint_ip_address_type: "IPV4", # required, accepts IPV4, IPV6
+    #                 security_group_ids: ["SecurityGroupIdentifier"],
+    #                 tags: {
+    #                   "TagKey" => "TagValue",
+    #                 },
+    #                 routing_domain: "RoutingDomain",
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     role_arn: "RoleArn",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.payment_manager_arn #=> String
+    #   resp.payment_manager_id #=> String
+    #   resp.name #=> String
+    #   resp.authorizer_type #=> String, one of "CUSTOM_JWT", "AWS_IAM"
+    #   resp.role_arn #=> String
+    #   resp.workload_identity_details.workload_identity_arn #=> String
+    #   resp.last_updated_at #=> Time
+    #   resp.status #=> String, one of "CREATING", "UPDATING", "DELETING", "READY", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManager AWS API Documentation
+    #
+    # @overload update_payment_manager(params = {})
+    # @param [Hash] params ({})
+    def update_payment_manager(params = {}, options = {})
+      req = build_request(:update_payment_manager, params)
+      req.send_request(options)
+    end
+
     # Updates an existing policy within the AgentCore Policy system. This
     # operation allows modification of the policy description and definition
     # while maintaining the policy's identity. The updated policy is
@@ -11546,7 +12680,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.42.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

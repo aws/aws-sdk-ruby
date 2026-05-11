@@ -8371,12 +8371,21 @@ module Aws::Glue
     #   ROW/COLUMN
     #   @return [String]
     #
+    # @!attribute [rw] custom_log_group_prefix
+    #   A custom prefix for the CloudWatch log group names. When specified,
+    #   evaluation run logs are written to `<CustomLogGroupPrefix>/error`
+    #   and `<CustomLogGroupPrefix>/output` instead of the default
+    #   `/aws-glue/data-quality/error` and `/aws-glue/data-quality/output`
+    #   log groups.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityEvaluationRunAdditionalRunOptions AWS API Documentation
     #
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       :cloud_watch_metrics_enabled,
       :results_s3_prefix,
-      :composite_rule_evaluation_method)
+      :composite_rule_evaluation_method,
+      :custom_log_group_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8794,12 +8803,17 @@ module Aws::Glue
     #   Filter results by runs that started after this time.
     #   @return [Time]
     #
+    # @!attribute [rw] ruleset_name
+    #   Filter results by the name of the ruleset.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityRulesetEvaluationRunFilter AWS API Documentation
     #
     class DataQualityRulesetEvaluationRunFilter < Struct.new(
       :data_source,
       :started_before,
-      :started_after)
+      :started_after,
+      :ruleset_name)
       SENSITIVE = []
       include Aws::Structure
     end

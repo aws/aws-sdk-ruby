@@ -624,6 +624,24 @@ module Aws::VPCLattice
     #   The number of IPv4 addresses in each ENI for the resource gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   Indicates how DNS is resolved for resource configurations associated
+    #   to this resource gateway. ResourceConfigDnsResolution is set at
+    #   creation time and cannot be changed.
+    #
+    #   * `IN_VPC` - DNS resolution occurs privately within the resource
+    #     gateway's VPC. DNS queries for resources behind this resource
+    #     gateway resolve using the DNS resolvers defined in the VPC's DHCP
+    #     option sets. Use this when your resource domain names are hosted
+    #     in private Route 53 hosted zones or on-premises DNS servers
+    #     reachable from the VPC.
+    #
+    #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
+    #     queries for resources behind this resource gateway resolve using
+    #     standard public DNS. Use this when your resource domain names are
+    #     publicly resolvable.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags for the resource gateway.
     #   @return [Hash<String,String>]
@@ -638,6 +656,7 @@ module Aws::VPCLattice
       :security_group_ids,
       :ip_address_type,
       :ipv4_addresses_per_eni,
+      :resource_config_dns_resolution,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -679,6 +698,11 @@ module Aws::VPCLattice
     #   The number of IPv4 addresses in each ENI for the resource gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   The DNS resolution type for resource configurations that are
+    #   associated with this resource gateway.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceGatewayResponse AWS API Documentation
     #
     class CreateResourceGatewayResponse < Struct.new(
@@ -690,7 +714,8 @@ module Aws::VPCLattice
       :subnet_ids,
       :security_group_ids,
       :ip_address_type,
-      :ipv4_addresses_per_eni)
+      :ipv4_addresses_per_eni,
+      :resource_config_dns_resolution)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2345,6 +2370,14 @@ module Aws::VPCLattice
     #   The IDs of the VPC subnets for resource gateway.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] service_managed
+    #   Indicates whether the resource gateway is managed by an AWS service.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] managed_by
+    #   The AWS service that manages the resource gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] security_group_ids
     #   The security group IDs associated with the resource gateway.
     #   @return [Array<String>]
@@ -2356,6 +2389,11 @@ module Aws::VPCLattice
     # @!attribute [rw] ipv4_addresses_per_eni
     #   The number of IPv4 addresses in each ENI for the resource gateway.
     #   @return [Integer]
+    #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   The DNS resolution type for resource configurations that are
+    #   associated with this resource gateway.
+    #   @return [String]
     #
     # @!attribute [rw] created_at
     #   The date and time that the resource gateway was created, in ISO-8601
@@ -2376,9 +2414,12 @@ module Aws::VPCLattice
       :status,
       :vpc_id,
       :subnet_ids,
+      :service_managed,
+      :managed_by,
       :security_group_ids,
       :ip_address_type,
       :ipv4_addresses_per_eni,
+      :resource_config_dns_resolution,
       :created_at,
       :last_updated_at)
       SENSITIVE = []
@@ -4325,6 +4366,11 @@ module Aws::VPCLattice
     #   The number of IPv4 addresses in each ENI for the resource gateway.
     #   @return [Integer]
     #
+    # @!attribute [rw] resource_config_dns_resolution
+    #   The DNS resolution type for resource configurations that are
+    #   associated with this resource gateway.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time that the VPC endpoint association was created, in
     #   ISO-8601 format.
@@ -4347,6 +4393,7 @@ module Aws::VPCLattice
       :security_group_ids,
       :ip_address_type,
       :ipv4_addresses_per_eni,
+      :resource_config_dns_resolution,
       :created_at,
       :last_updated_at)
       SENSITIVE = []
@@ -5323,7 +5370,7 @@ module Aws::VPCLattice
     #
     #   * `DRAINING`: The target is being deregistered. No new connections
     #     are sent to this target while current connections are being
-    #     drained. The default draining time is 5 minutes.
+    #     drained. The default draining time is 1 minute.
     #
     #   * `UNAVAILABLE`: Health checks are unavailable for the target group.
     #

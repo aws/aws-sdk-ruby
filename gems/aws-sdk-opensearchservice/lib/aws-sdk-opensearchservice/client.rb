@@ -1251,6 +1251,7 @@ module Aws::OpenSearchService
     #     vpc_options: {
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       egress_enabled: false,
     #     },
     #     cognito_options: {
     #       enabled: false,
@@ -1418,6 +1419,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.vpc_options.egress_enabled #=> Boolean
     #   resp.domain_status.cognito_options.enabled #=> Boolean
     #   resp.domain_status.cognito_options.user_pool_id #=> String
     #   resp.domain_status.cognito_options.identity_pool_id #=> String
@@ -1776,6 +1778,7 @@ module Aws::OpenSearchService
     #     vpc_options: { # required
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       egress_enabled: false,
     #     },
     #     client_token: "ClientToken",
     #   })
@@ -1792,6 +1795,7 @@ module Aws::OpenSearchService
     #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
     #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
     #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.egress_enabled #=> Boolean
     #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.vpc_endpoint.endpoint #=> String
     #
@@ -1950,6 +1954,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.vpc_options.egress_enabled #=> Boolean
     #   resp.domain_status.cognito_options.enabled #=> Boolean
     #   resp.domain_status.cognito_options.user_pool_id #=> String
     #   resp.domain_status.cognito_options.identity_pool_id #=> String
@@ -2349,6 +2354,7 @@ module Aws::OpenSearchService
     #   resp.domain_status.vpc_options.availability_zones[0] #=> String
     #   resp.domain_status.vpc_options.security_group_ids #=> Array
     #   resp.domain_status.vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status.vpc_options.egress_enabled #=> Boolean
     #   resp.domain_status.cognito_options.enabled #=> Boolean
     #   resp.domain_status.cognito_options.user_pool_id #=> String
     #   resp.domain_status.cognito_options.identity_pool_id #=> String
@@ -2625,6 +2631,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.vpc_options.options.availability_zones[0] #=> String
     #   resp.domain_config.vpc_options.options.security_group_ids #=> Array
     #   resp.domain_config.vpc_options.options.security_group_ids[0] #=> String
+    #   resp.domain_config.vpc_options.options.egress_enabled #=> Boolean
     #   resp.domain_config.vpc_options.status.creation_date #=> Time
     #   resp.domain_config.vpc_options.status.update_date #=> Time
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
@@ -2941,6 +2948,7 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].vpc_options.availability_zones[0] #=> String
     #   resp.domain_status_list[0].vpc_options.security_group_ids #=> Array
     #   resp.domain_status_list[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.domain_status_list[0].vpc_options.egress_enabled #=> Boolean
     #   resp.domain_status_list[0].cognito_options.enabled #=> Boolean
     #   resp.domain_status_list[0].cognito_options.user_pool_id #=> String
     #   resp.domain_status_list[0].cognito_options.identity_pool_id #=> String
@@ -3113,6 +3121,7 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.vpc_options.availability_zones[0] #=> String
     #   resp.dry_run_config.vpc_options.security_group_ids #=> Array
     #   resp.dry_run_config.vpc_options.security_group_ids[0] #=> String
+    #   resp.dry_run_config.vpc_options.egress_enabled #=> Boolean
     #   resp.dry_run_config.cognito_options.enabled #=> Boolean
     #   resp.dry_run_config.cognito_options.user_pool_id #=> String
     #   resp.dry_run_config.cognito_options.identity_pool_id #=> String
@@ -3676,6 +3685,7 @@ module Aws::OpenSearchService
     #   resp.vpc_endpoints[0].vpc_options.availability_zones[0] #=> String
     #   resp.vpc_endpoints[0].vpc_options.security_group_ids #=> Array
     #   resp.vpc_endpoints[0].vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoints[0].vpc_options.egress_enabled #=> Boolean
     #   resp.vpc_endpoints[0].status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.vpc_endpoints[0].endpoint #=> String
     #   resp.vpc_endpoint_errors #=> Array
@@ -5770,6 +5780,7 @@ module Aws::OpenSearchService
     #     vpc_options: {
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       egress_enabled: false,
     #     },
     #     cognito_options: {
     #       enabled: false,
@@ -5954,6 +5965,7 @@ module Aws::OpenSearchService
     #   resp.domain_config.vpc_options.options.availability_zones[0] #=> String
     #   resp.domain_config.vpc_options.options.security_group_ids #=> Array
     #   resp.domain_config.vpc_options.options.security_group_ids[0] #=> String
+    #   resp.domain_config.vpc_options.options.egress_enabled #=> Boolean
     #   resp.domain_config.vpc_options.status.creation_date #=> Time
     #   resp.domain_config.vpc_options.status.update_date #=> Time
     #   resp.domain_config.vpc_options.status.update_version #=> Integer
@@ -6400,6 +6412,7 @@ module Aws::OpenSearchService
     #     vpc_options: { # required
     #       subnet_ids: ["String"],
     #       security_group_ids: ["String"],
+    #       egress_enabled: false,
     #     },
     #   })
     #
@@ -6415,6 +6428,7 @@ module Aws::OpenSearchService
     #   resp.vpc_endpoint.vpc_options.availability_zones[0] #=> String
     #   resp.vpc_endpoint.vpc_options.security_group_ids #=> Array
     #   resp.vpc_endpoint.vpc_options.security_group_ids[0] #=> String
+    #   resp.vpc_endpoint.vpc_options.egress_enabled #=> Boolean
     #   resp.vpc_endpoint.status #=> String, one of "CREATING", "CREATE_FAILED", "ACTIVE", "UPDATING", "UPDATE_FAILED", "DELETING", "DELETE_FAILED"
     #   resp.vpc_endpoint.endpoint #=> String
     #
@@ -6511,7 +6525,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

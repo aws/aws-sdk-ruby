@@ -10,34 +10,35 @@
 module Aws::SecurityAgent
   module Types
 
-    # AWS resource configurations associated with the agent space
+    # The AWS resources associated with an agent space, including VPCs, log
+    # groups, S3 buckets, secrets, Lambda functions, and IAM roles.
     #
     # @!attribute [rw] vpcs
-    #   VPC configurations that the Security Agent accesses in the customer
-    #   environment
+    #   The VPC configurations associated with the agent space.
     #   @return [Array<Types::VpcConfig>]
     #
     # @!attribute [rw] log_groups
-    #   CloudWatch log group ARNs or names used to store Security Agent logs
+    #   The Amazon Resource Names (ARNs) of the CloudWatch log groups
+    #   associated with the agent space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] s3_buckets
-    #   S3 bucket ARNs or names used to store Security Agent artifacts
+    #   The Amazon Resource Names (ARNs) of the S3 buckets associated with
+    #   the agent space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] secret_arns
-    #   SecretsManager secret ARNs or names used to store tester credentials
-    #   for pentests
+    #   The Amazon Resource Names (ARNs) of the Secrets Manager secrets
+    #   associated with the agent space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] lambda_function_arns
-    #   Lambda function ARNs or names used to retrieve tester credentials
-    #   for pentests
+    #   The Amazon Resource Names (ARNs) of the Lambda functions associated
+    #   with the agent space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] iam_roles
-    #   IAM role ARNs that the Security Agent can assume to access customer
-    #   resources
+    #   The IAM roles associated with the agent space.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AWSResources AWS API Documentation
@@ -53,10 +54,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Request denied due to insufficient permissions
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] message
-    #   Error description
+    #   Error description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AccessDeniedException AWS API Documentation
@@ -67,23 +68,24 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents an entity that interacts with the system during security
-    # testing
+    # Represents an actor used during penetration testing. An actor defines
+    # a user or entity that interacts with the target application, including
+    # authentication credentials and target URIs.
     #
     # @!attribute [rw] identifier
-    #   Unique identifier for the actor (case-insensitive)
+    #   The unique identifier for the actor.
     #   @return [String]
     #
     # @!attribute [rw] uris
-    #   List of URIs accessible with the actor's credentials
+    #   The list of URIs that the actor targets during testing.
     #   @return [Array<String>]
     #
     # @!attribute [rw] authentication
-    #   Authentication information used by the actor to access resources
+    #   The authentication configuration for the actor.
     #   @return [Types::Authentication]
     #
     # @!attribute [rw] description
-    #   Additional description or details about the actor
+    #   A description of the actor.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Actor AWS API Documentation
@@ -98,19 +100,20 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to add the artifact to.
     #   @return [String]
     #
     # @!attribute [rw] artifact_content
-    #   Binary content of the artifact
+    #   The binary content of the artifact to upload.
     #   @return [String]
     #
     # @!attribute [rw] artifact_type
-    #   Type of the artifact file
+    #   The file type of the artifact. Valid values include TXT, PNG, JPEG,
+    #   MD, PDF, DOCX, DOC, JSON, and YAML.
     #   @return [String]
     #
     # @!attribute [rw] file_name
-    #   Name of the artifact file
+    #   The file name of the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AddArtifactInput AWS API Documentation
@@ -125,7 +128,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the created artifact
+    #   The unique identifier assigned to the uploaded artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AddArtifactOutput AWS API Documentation
@@ -136,45 +139,46 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Agent space structure
+    # Represents an agent space, which is a dedicated workspace for securing
+    # a specific application. An agent space contains the configuration,
+    # resources, and settings needed for security testing.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the agent space
+    #   The name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the agent space
+    #   A description of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] aws_resources
-    #   AWS resource configurations
+    #   The AWS resources associated with the agent space.
     #   @return [Types::AWSResources]
     #
     # @!attribute [rw] target_domain_ids
-    #   List of target domain IDs registered with the agent space
+    #   The list of target domain identifiers associated with the agent
+    #   space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The code review settings for the agent space.
     #   @return [Types::CodeReviewSettings]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier of the KMS key used to encrypt data. Can be a key ID, key
-    #   ARN, alias name, or alias ARN. If not specified, an AWS managed key
-    #   is used.
+    #   The identifier of the AWS KMS key used to encrypt data in the agent
+    #   space.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the agent space was created
+    #   The date and time the agent space was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the agent space was last updated
+    #   The date and time the agent space was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AgentSpace AWS API Documentation
@@ -193,22 +197,22 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for an agent space
+    # Contains summary information about an agent space.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the agent space
+    #   The name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the agent space was created
+    #   The date and time the agent space was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the agent space was last updated
+    #   The date and time the agent space was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/AgentSpaceSummary AWS API Documentation
@@ -222,22 +226,23 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Application summary for list operations
+    # Contains summary information about an application.
     #
     # @!attribute [rw] application_id
-    #   Unique identifier of the application
+    #   The unique identifier of the application.
     #   @return [String]
     #
     # @!attribute [rw] application_name
-    #   Name of the application, automatically assigned by the service
+    #   The name of the application.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Domain where the application is available
+    #   The domain associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] default_kms_key_id
-    #   Default KMS key identifier used to encrypt application data
+    #   The identifier of the default AWS KMS key used to encrypt data for
+    #   the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ApplicationSummary AWS API Documentation
@@ -251,14 +256,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Files containing relevant data for review
+    # Represents an artifact that provides context for security testing,
+    # such as documentation, diagrams, or configuration files.
     #
     # @!attribute [rw] contents
-    #   The content of the artifact
+    #   The content of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The file type of the artifact
+    #   The file type of the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Artifact AWS API Documentation
@@ -270,22 +276,22 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Metadata in relation to the artifact
+    # Contains metadata about an artifact.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] file_name
-    #   Name of the artifact file
+    #   The file name of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the artifact was last updated
+    #   The date and time the artifact was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ArtifactMetadataItem AWS API Documentation
@@ -299,18 +305,18 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information about an artifact
+    # Contains summary information about an artifact.
     #
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] file_name
-    #   Name of the artifact file
+    #   The file name of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_type
-    #   Type of the artifact file
+    #   The file type of the artifact.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ArtifactSummary AWS API Documentation
@@ -323,26 +329,28 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Collection of assets to be tested or used during a pentest
+    # The collection of assets used in a pentest configuration, including
+    # endpoints, actors, documents, source code repositories, and integrated
+    # repositories.
     #
     # @!attribute [rw] endpoints
-    #   List of web application endpoints to test
+    #   The list of endpoints to test during the pentest.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] actors
-    #   List of actors that interact with the system
+    #   The list of actors used during penetration testing.
     #   @return [Array<Types::Actor>]
     #
     # @!attribute [rw] documents
-    #   List of documents providing context for testing
+    #   The list of documents that provide context for the pentest.
     #   @return [Array<Types::DocumentInfo>]
     #
     # @!attribute [rw] source_code
-    #   List of source code repositories for static analysis
+    #   The list of source code repositories to analyze during the pentest.
     #   @return [Array<Types::SourceCodeRepository>]
     #
     # @!attribute [rw] integrated_repositories
-    #   List of integrated code repositories
+    #   The list of integrated repositories associated with the pentest.
     #   @return [Array<Types::IntegratedRepository>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Assets AWS API Documentation
@@ -357,14 +365,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Authentication information used to access protected resources
+    # The authentication configuration for an actor, specifying the provider
+    # type and credentials.
     #
     # @!attribute [rw] provider_type
-    #   Provider type for the authentication credentials
+    #   The type of authentication provider. Valid values include
+    #   SECRETS\_MANAGER, AWS\_LAMBDA, AWS\_IAM\_ROLE, and AWS\_INTERNAL.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Authentication credential value or reference
+    #   The authentication value, such as a secret ARN, Lambda function ARN,
+    #   or IAM role ARN, depending on the provider type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Authentication AWS API Documentation
@@ -376,14 +387,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for deleting multiple pentests
+    # Input for deleting multiple pentests.
     #
     # @!attribute [rw] pentest_ids
-    #   List of pentest IDs to delete
+    #   The list of pentest identifiers to delete.
     #   @return [Array<String>]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentests exist
+    #   The unique identifier of the agent space that contains the pentests
+    #   to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDeletePentestsInput AWS API Documentation
@@ -395,15 +407,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchDeletePentests operation
+    # Output for the BatchDeletePentests operation.
     #
     # @!attribute [rw] deleted
-    #   List of successfully deleted pentests
+    #   The list of pentests that were successfully deleted.
     #   @return [Array<Types::Pentest>]
     #
     # @!attribute [rw] failed
-    #   List of pentests that could not be deleted and the reasons for
-    #   failure
+    #   The list of pentests that failed to delete, including the reason for
+    #   each failure.
     #   @return [Array<Types::DeletePentestFailure>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDeletePentestsOutput AWS API Documentation
@@ -415,10 +427,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for batch retrieving agent spaces
+    # Input for batch retrieving agent spaces.
     #
     # @!attribute [rw] agent_space_ids
-    #   List of agent space IDs to retrieve
+    #   The list of agent space identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetAgentSpacesInput AWS API Documentation
@@ -429,14 +441,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetAgentSpaces operation
+    # Output for the BatchGetAgentSpaces operation.
     #
     # @!attribute [rw] agent_spaces
-    #   List of agent spaces that were successfully retrieved
+    #   The list of agent spaces that were found.
     #   @return [Array<Types::AgentSpace>]
     #
     # @!attribute [rw] not_found
-    #   List of agent space IDs that could not be found
+    #   The list of agent space identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetAgentSpacesOutput AWS API Documentation
@@ -449,11 +461,12 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the
+    #   artifacts.
     #   @return [String]
     #
     # @!attribute [rw] artifact_ids
-    #   List of artifact identifiers
+    #   The list of artifact identifiers to retrieve metadata for.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetArtifactMetadataInput AWS API Documentation
@@ -466,7 +479,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] artifact_metadata_list
-    #   List of artifact metadata
+    #   The list of artifact metadata items that were found.
     #   @return [Array<Types::ArtifactMetadataItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetArtifactMetadataOutput AWS API Documentation
@@ -477,14 +490,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for BatchGetFindings operation
+    # Input for BatchGetFindings operation.
     #
     # @!attribute [rw] finding_ids
-    #   List of finding IDs to retrieve
+    #   The list of finding identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the findings exist
+    #   The unique identifier of the agent space that contains the findings.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetFindingsInput AWS API Documentation
@@ -496,14 +509,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetFindings operation
+    # Output for the BatchGetFindings operation.
     #
     # @!attribute [rw] findings
-    #   List of successfully retrieved findings
+    #   The list of findings that were found.
     #   @return [Array<Types::Finding>]
     #
     # @!attribute [rw] not_found
-    #   List of finding IDs that could not be found
+    #   The list of finding identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetFindingsOutput AWS API Documentation
@@ -515,14 +528,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for retrieving multiple tasks by their IDs for a pentest job
+    # Input for retrieving multiple tasks associated with a pentest job.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the tasks.
     #   @return [String]
     #
     # @!attribute [rw] task_ids
-    #   List of task IDs to retrieve
+    #   The list of task identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestJobTasksInput AWS API Documentation
@@ -534,14 +547,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetPentestJobTasks operation
+    # Output for the BatchGetPentestJobTasks operation.
     #
     # @!attribute [rw] tasks
-    #   List of successfully retrieved tasks
+    #   The list of tasks that were found.
     #   @return [Array<Types::Task>]
     #
     # @!attribute [rw] not_found
-    #   List of task IDs that could not be found
+    #   The list of task identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestJobTasksOutput AWS API Documentation
@@ -553,14 +566,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for BatchGetPentestJobs operation
+    # Input for BatchGetPentestJobs operation.
     #
     # @!attribute [rw] pentest_job_ids
-    #   List of pentest job IDs to retrieve
+    #   The list of pentest job identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest
+    #   jobs.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestJobsInput AWS API Documentation
@@ -572,14 +586,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetPentestJobs operation
+    # Output for the BatchGetPentestJobs operation.
     #
     # @!attribute [rw] pentest_jobs
-    #   List of successfully retrieved pentest jobs
+    #   The list of pentest jobs that were found.
     #   @return [Array<Types::PentestJob>]
     #
     # @!attribute [rw] not_found
-    #   List of pentest job IDs that could not be found
+    #   The list of pentest job identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestJobsOutput AWS API Documentation
@@ -591,14 +605,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for retrieving multiple pentests by their IDs
+    # Input for retrieving multiple pentests by their IDs.
     #
     # @!attribute [rw] pentest_ids
-    #   List of pentest IDs to retrieve
+    #   The list of pentest identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentests.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestsInput AWS API Documentation
@@ -610,14 +624,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetPentests operation
+    # Output for the BatchGetPentests operation.
     #
     # @!attribute [rw] pentests
-    #   List of successfully retrieved pentests
+    #   The list of pentests that were found.
     #   @return [Array<Types::Pentest>]
     #
     # @!attribute [rw] not_found
-    #   List of pentest IDs that could not be found
+    #   The list of pentest identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetPentestsOutput AWS API Documentation
@@ -629,10 +643,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for batch retrieving target domains
+    # Input for batch retrieving target domains.
     #
     # @!attribute [rw] target_domain_ids
-    #   List of target domain IDs to retrieve
+    #   The list of target domain identifiers to retrieve.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetTargetDomainsInput AWS API Documentation
@@ -643,14 +657,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the BatchGetTargetDomains operation
+    # Output for the BatchGetTargetDomains operation.
     #
     # @!attribute [rw] target_domains
-    #   List of target domains that were successfully retrieved
+    #   The list of target domains that were found.
     #   @return [Array<Types::TargetDomain>]
     #
     # @!attribute [rw] not_found
-    #   List of target domain IDs that could not be found
+    #   The list of target domain identifiers that were not found.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetTargetDomainsOutput AWS API Documentation
@@ -662,14 +676,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a category classification for tasks
+    # Represents a category assigned to a security testing task.
     #
     # @!attribute [rw] name
-    #   Name of the category
+    #   The name of the category.
     #   @return [String]
     #
     # @!attribute [rw] is_primary
-    #   Whether this is the primary category for the task
+    #   Indicates whether this is the primary category for the task.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Category AWS API Documentation
@@ -681,14 +695,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Reference to logs stored in CloudWatch
+    # The Amazon CloudWatch Logs configuration for pentest job logging.
     #
     # @!attribute [rw] log_group
-    #   Name of the CloudWatch log group
+    #   The name of the CloudWatch log group.
     #   @return [String]
     #
     # @!attribute [rw] log_stream
-    #   Name of the CloudWatch log stream
+    #   The name of the CloudWatch log stream.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CloudWatchLog AWS API Documentation
@@ -700,18 +714,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Information about task for code remediation
+    # Represents a code remediation task that was initiated to fix a
+    # security finding.
     #
     # @!attribute [rw] status
-    #   Current status of the code remediation task
+    #   The current status of the code remediation task.
     #   @return [String]
     #
     # @!attribute [rw] status_reason
-    #   Reason for the current code remediation task status
+    #   The reason for the current status of the code remediation task.
     #   @return [String]
     #
     # @!attribute [rw] task_details
-    #   Details of the code remediation for each repository
+    #   The list of details for the code remediation task, including
+    #   repository name, code diff link, and pull request link.
     #   @return [Array<Types::CodeRemediationTaskDetails>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTask AWS API Documentation
@@ -724,18 +740,19 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Code remediation details for a single repository
+    # Contains details about a code remediation task, including links to the
+    # code diff and pull request.
     #
     # @!attribute [rw] repo_name
-    #   Name of the repository
+    #   The name of the repository where the remediation was applied.
     #   @return [String]
     #
     # @!attribute [rw] code_diff_link
-    #   Link to the code diff for the remediation
+    #   The link to the code diff for the remediation.
     #   @return [String]
     #
     # @!attribute [rw] pull_request_link
-    #   Link to the pull request for the remediation
+    #   The link to the pull request created for the remediation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeRemediationTaskDetails AWS API Documentation
@@ -748,14 +765,16 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Details of code review settings
+    # The code review settings for an agent space, controlling which types
+    # of scanning are enabled.
     #
     # @!attribute [rw] controls_scanning
-    #   Whether Controls are utilized for code review analysis
+    #   Indicates whether controls scanning is enabled for code reviews.
     #   @return [Boolean]
     #
     # @!attribute [rw] general_purpose_scanning
-    #   Whether general purpose analysis is performed for code review
+    #   Indicates whether general-purpose scanning is enabled for code
+    #   reviews.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewSettings AWS API Documentation
@@ -767,10 +786,11 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Request conflicts with current resource state
+    # The request could not be completed due to a conflict with the current
+    # state of the resource.
     #
     # @!attribute [rw] message
-    #   Error description
+    #   Error description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ConflictException AWS API Documentation
@@ -781,37 +801,36 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for creating a new agent space
+    # Input for creating a new agent space.
     #
     # @!attribute [rw] name
-    #   Name of the agent space
+    #   The name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the agent space
+    #   A description of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The AWS resources to associate with the agent space.
     #   @return [Types::AWSResources]
     #
     # @!attribute [rw] target_domain_ids
-    #   Target domain IDs to associate with the agent space
+    #   The list of target domain identifiers to associate with the agent
+    #   space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The code review settings for the agent space.
     #   @return [Types::CodeReviewSettings]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier of the KMS key used to encrypt data. Can be a key ID, key
-    #   ARN, alias name, or alias ARN. If not specified, an AWS managed key
-    #   is used.
+    #   The identifier of the AWS KMS key to use for encrypting data in the
+    #   agent space.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the agent space
+    #   The tags to associate with the agent space.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateAgentSpaceInput AWS API Documentation
@@ -828,45 +847,44 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the CreateAgentSpace operation
+    # Output for the CreateAgentSpace operation.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the created agent space
+    #   The unique identifier of the created agent space.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the created agent space
+    #   The name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the created agent space
+    #   The description of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The AWS resources associated with the agent space.
     #   @return [Types::AWSResources]
     #
     # @!attribute [rw] target_domain_ids
-    #   List of target domain IDs registered with the agent space
+    #   The list of target domain identifiers associated with the agent
+    #   space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The code review settings for the agent space.
     #   @return [Types::CodeReviewSettings]
     #
     # @!attribute [rw] kms_key_id
-    #   Identifier of the KMS key used to encrypt data. Can be a key ID, key
-    #   ARN, alias name, or alias ARN. If not specified, an AWS managed key
-    #   is used.
+    #   The identifier of the AWS KMS key used to encrypt data in the agent
+    #   space.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the agent space was created
+    #   The date and time the agent space was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the agent space was last updated
+    #   The date and time the agent space was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateAgentSpaceOutput AWS API Documentation
@@ -886,21 +904,22 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] idc_instance_arn
-    #   ARN of the IAM Identity Center instance used for user
-    #   authentication. Optional for non-IdC applications
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance
+    #   to associate with the application.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role that the application uses to access AWS
-    #   resources on your behalf
+    #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+    #   application.
     #   @return [String]
     #
     # @!attribute [rw] default_kms_key_id
-    #   Default KMS key identifier used to encrypt application data
+    #   The identifier of the default AWS KMS key to use for encrypting data
+    #   in the application.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the application
+    #   The tags to associate with the application.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateApplicationRequest AWS API Documentation
@@ -915,7 +934,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the created application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateApplicationResponse AWS API Documentation
@@ -927,23 +946,24 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] provider
-    #   Provider to integrate with
+    #   The integration provider. Currently, only GITHUB is supported.
     #   @return [String]
     #
     # @!attribute [rw] input
-    #   Provider-specific input parameters
+    #   The provider-specific input required to create the integration.
     #   @return [Types::ProviderInput]
     #
     # @!attribute [rw] integration_display_name
-    #   Display name for the integration
+    #   The display name for the integration.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   KMS key ID for encrypting integration details
+    #   The identifier of the AWS KMS key to use for encrypting data
+    #   associated with the integration.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the integration
+    #   The tags to associate with the integration.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateIntegrationInput AWS API Documentation
@@ -959,7 +979,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] integration_id
-    #   Unique identifier of the created integration
+    #   The unique identifier of the created integration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateIntegrationOutput AWS API Documentation
@@ -970,26 +990,27 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Request structure for adding a single member to an agent space
+    # Request structure for adding a single member to an agent space.
     #
     # @!attribute [rw] application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to grant access to.
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   Member identifier (userId or agentSpaceId)
+    #   The unique identifier for the membership.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   Type of member (USER or AGENT\_SPACE)
+    #   The type of member. Currently, only USER is supported.
     #   @return [String]
     #
     # @!attribute [rw] config
-    #   Membership details (user or agent specific)
+    #   The configuration for the membership, such as the user role.
     #   @return [Types::MembershipConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateMembershipRequest AWS API Documentation
@@ -1004,49 +1025,51 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Response structure for adding a single member to an agent space
+    # Response structure for adding a single member to an agent space.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateMembershipResponse AWS API Documentation
     #
     class CreateMembershipResponse < Aws::EmptyStructure; end
 
-    # Input for creating a new pentest
+    # Input for creating a new pentest.
     #
     # @!attribute [rw] title
-    #   Title of the pentest
+    #   The title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest should be created
+    #   The unique identifier of the agent space to create the pentest in.
     #   @return [String]
     #
     # @!attribute [rw] assets
-    #   Assets to be tested during the pentest
+    #   The assets to include in the pentest, such as endpoints, actors,
+    #   documents, and source code.
     #   @return [Types::Assets]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The list of risk types to exclude from the pentest.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role to use for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The CloudWatch Logs configuration for the pentest.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The VPC configuration for the pentest.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The network traffic configuration for the pentest, including custom
+    #   headers and traffic rules.
     #   @return [Types::NetworkTrafficConfig]
     #
     # @!attribute [rw] code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The code remediation strategy for the pentest. Valid values are
+    #   AUTOMATIC and DISABLED.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestInput AWS API Documentation
@@ -1065,43 +1088,42 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the CreatePentest operation
+    # Output for the CreatePentest operation.
     #
     # @!attribute [rw] pentest_id
-    #   Unique identifier of the created pentest
+    #   The unique identifier of the created pentest.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title of the created pentest
+    #   The title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest was created
+    #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest was last updated
+    #   The date and time the pentest was last updated, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] assets
-    #   Assets to be tested in the created pentest
+    #   The assets included in the pentest.
     #   @return [Types::Assets]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The list of risk types excluded from the pentest.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role used for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The CloudWatch Logs configuration for the pentest.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest was created
+    #   The unique identifier of the agent space that contains the pentest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreatePentestOutput AWS API Documentation
@@ -1120,18 +1142,19 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for creating a new target domain
+    # Input for creating a new target domain.
     #
     # @!attribute [rw] target_domain_name
-    #   Domain name of the target domain
+    #   The domain name to register as a target domain.
     #   @return [String]
     #
     # @!attribute [rw] verification_method
-    #   Verification method for the target domain
+    #   The method to use for verifying domain ownership. Valid values are
+    #   DNS\_TXT, HTTP\_ROUTE, and PRIVATE\_VPC.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to associate with the target domain
+    #   The tags to associate with the target domain.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateTargetDomainInput AWS API Documentation
@@ -1144,30 +1167,35 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the CreateTargetDomain operation
+    # Output for the CreateTargetDomain operation.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the created target domain
+    #   The unique identifier of the created target domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the created target domain
+    #   The domain name of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] verification_status
-    #   Current verification status of the registered target domain
+    #   The current verification status of the target domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_status_reason
+    #   The reason for the current target domain verification status.
     #   @return [String]
     #
     # @!attribute [rw] verification_details
-    #   Verification details to verify registered target domain
+    #   The verification details for the target domain, including the
+    #   verification token and instructions.
     #   @return [Types::VerificationDetails]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the target domain was registered
+    #   The date and time the target domain was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] verified_at
-    #   Timestamp when the target domain was last successfully verified
+    #   The date and time the target domain was verified, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateTargetDomainOutput AWS API Documentation
@@ -1176,6 +1204,7 @@ module Aws::SecurityAgent
       :target_domain_id,
       :domain_name,
       :verification_status,
+      :verification_status_reason,
       :verification_details,
       :created_at,
       :verified_at)
@@ -1183,14 +1212,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Custom headers to be set for network requests
+    # A custom HTTP header to include in network traffic during penetration
+    # testing.
     #
     # @!attribute [rw] name
-    #   Name of header to set value for
+    #   The name of the custom header.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   Value to set for header
+    #   The value of the custom header.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CustomHeader AWS API Documentation
@@ -1202,10 +1232,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for deleting an agent space
+    # Input for deleting an agent space.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space to delete
+    #   The unique identifier of the agent space to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteAgentSpaceInput AWS API Documentation
@@ -1216,10 +1246,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the DeleteAgentSpace operation
+    # Output for the DeleteAgentSpace operation.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the deleted agent space
+    #   The unique identifier of the deleted agent space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteAgentSpaceOutput AWS API Documentation
@@ -1231,7 +1261,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the application to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteApplicationRequest AWS API Documentation
@@ -1243,11 +1273,11 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteArtifactInput AWS API Documentation
@@ -1264,7 +1294,7 @@ module Aws::SecurityAgent
     class DeleteArtifactOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteIntegrationInput AWS API Documentation
@@ -1279,22 +1309,23 @@ module Aws::SecurityAgent
     #
     class DeleteIntegrationOutput < Aws::EmptyStructure; end
 
-    # Request structure for removing a single member from an agent space
+    # Request structure for removing a single member from an agent space.
     #
     # @!attribute [rw] application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to revoke access from.
     #   @return [String]
     #
     # @!attribute [rw] membership_id
-    #   Member identifier (userId or agentSpaceId)
+    #   The unique identifier of the membership to delete.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   Type of member (USER or AGENT\_SPACE)
+    #   The type of member to remove.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteMembershipRequest AWS API Documentation
@@ -1308,20 +1339,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Response structure for removing a single member from an agent space
+    # Response structure for removing a single member from an agent space.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteMembershipResponse AWS API Documentation
     #
     class DeleteMembershipResponse < Aws::EmptyStructure; end
 
-    # Information about a failed pentest deletion attempt
+    # Contains information about a pentest that failed to delete.
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the pentest that failed to delete
+    #   The unique identifier of the pentest that failed to delete.
     #   @return [String]
     #
     # @!attribute [rw] reason
-    #   Reason for the deletion failure
+    #   The reason the pentest failed to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeletePentestFailure AWS API Documentation
@@ -1333,10 +1364,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for deleting a target domain
+    # Input for deleting a target domain.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain to delete
+    #   The unique identifier of the target domain to delete.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteTargetDomainInput AWS API Documentation
@@ -1347,10 +1378,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the DeleteTargetDomain operation
+    # Output for the DeleteTargetDomain operation.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the deleted target domain
+    #   The unique identifier of the deleted target domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteTargetDomainOutput AWS API Documentation
@@ -1361,34 +1392,36 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a discovered endpoint during pentest execution
+    # Represents an endpoint discovered during a pentest job.
     #
     # @!attribute [rw] uri
-    #   The URI of the discovered endpoint
+    #   The URI of the discovered endpoint.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job that discovered this endpoint
+    #   The unique identifier of the pentest job that discovered the
+    #   endpoint.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   Identifier of the task that discovered this endpoint
+    #   The unique identifier of the task that discovered the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Identifier of the agent space where the endpoint was discovered
+    #   The unique identifier of the agent space associated with the
+    #   discovered endpoint.
     #   @return [String]
     #
     # @!attribute [rw] evidence
-    #   Optional evidence or additional information about the endpoint
+    #   The evidence that led to the discovery of the endpoint.
     #   @return [String]
     #
     # @!attribute [rw] operation
-    #   Operation or action associated with the endpoint
+    #   The HTTP operation associated with the discovered endpoint.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Additional description of the endpoint
+    #   A description of the discovered endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DiscoveredEndpoint AWS API Documentation
@@ -1405,18 +1438,19 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents dns txt verification details
+    # Contains DNS verification details for a target domain, including the
+    # DNS record to create for domain ownership verification.
     #
     # @!attribute [rw] token
-    #   Token used to verify domain ownership
+    #   The verification token to include in the DNS record value.
     #   @return [String]
     #
     # @!attribute [rw] dns_record_name
-    #   Record name to be added in DNS for target domain
+    #   The name of the DNS record to create for verification.
     #   @return [String]
     #
     # @!attribute [rw] dns_record_type
-    #   Type of record to be added in DNS for target domain
+    #   The type of DNS record to create. Currently, only TXT is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DnsVerification AWS API Documentation
@@ -1429,14 +1463,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Information about a document relevant to security testing
+    # Represents a document that provides context for security testing.
     #
     # @!attribute [rw] s3_location
-    #   S3 storage location of the document
+    #   The Amazon S3 location of the document.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Artifact ID of the document
+    #   The unique identifier of the artifact associated with the document.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DocumentInfo AWS API Documentation
@@ -1448,10 +1482,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a web application endpoint to be tested
+    # Represents a target endpoint for penetration testing.
     #
     # @!attribute [rw] uri
-    #   URI of the endpoint to test
+    #   The URI of the endpoint.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Endpoint AWS API Documentation
@@ -1462,14 +1496,16 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Error information regarding the pentest job
+    # Contains error information for a pentest job that encountered an
+    # error.
     #
     # @!attribute [rw] code
-    #   Pentest job failure error code
+    #   The error code. Valid values include CLIENT\_ERROR, INTERNAL\_ERROR,
+    #   and STOPPED\_BY\_USER.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Pentest job failure error message
+    #   A message describing the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ErrorInformation AWS API Documentation
@@ -1481,18 +1517,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Additional context about a pentest or task execution
+    # Contains contextual information about the execution of a pentest job,
+    # such as errors, warnings, or informational messages.
     #
     # @!attribute [rw] context_type
-    #   The category of context
+    #   The type of context. Valid values include ERROR, CLIENT\_ERROR,
+    #   WARNING, and INFO.
     #   @return [String]
     #
     # @!attribute [rw] context
-    #   Context associated with a pentest or task execution
+    #   The context message.
     #   @return [String]
     #
     # @!attribute [rw] timestamp
-    #   Timestamp associated with a pentest or task execution
+    #   The date and time the context was recorded, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ExecutionContext AWS API Documentation
@@ -1505,78 +1543,86 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a security vulnerability or issue discovered during testing
+    # Represents a security finding discovered during a pentest job. A
+    # finding contains details about a vulnerability, including its risk
+    # level, confidence, and remediation status.
     #
     # @!attribute [rw] finding_id
-    #   Unique identifier for the finding
+    #   The unique identifier of the finding.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Identifier of the agent space that created this finding
+    #   The unique identifier of the agent space associated with the
+    #   finding.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the finding.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job
+    #   The unique identifier of the pentest job that produced the finding.
     #   @return [String]
     #
     # @!attribute [rw] task_id
-    #   Identifier of the associated task
+    #   The unique identifier of the task that produced the finding.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name or title of the finding
+    #   The name of the finding.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Detailed description of the security vulnerability
+    #   A description of the finding.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the finding
+    #   The current status of the finding. Valid values include ACTIVE,
+    #   RESOLVED, ACCEPTED, and FALSE\_POSITIVE.
     #   @return [String]
     #
     # @!attribute [rw] risk_type
-    #   Type of security risk identified
+    #   The type of security risk identified by the finding.
     #   @return [String]
     #
     # @!attribute [rw] risk_level
-    #   Severity level of the identified risk
+    #   The risk level of the finding. Valid values include UNKNOWN,
+    #   INFORMATIONAL, LOW, MEDIUM, HIGH, and CRITICAL.
     #   @return [String]
     #
     # @!attribute [rw] risk_score
-    #   Risk score associated with the finding
+    #   The numerical risk score of the finding.
     #   @return [String]
     #
     # @!attribute [rw] reasoning
-    #   Justification for the assigned risk score
+    #   The reasoning behind the finding, explaining why it was identified
+    #   as a vulnerability.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Confidence level of the finding
+    #   The confidence level of the finding. Valid values include
+    #   FALSE\_POSITIVE, UNCONFIRMED, LOW, MEDIUM, and HIGH.
     #   @return [String]
     #
     # @!attribute [rw] attack_script
-    #   Proof-of-concept code demonstrating the vulnerability
+    #   The attack script used to reproduce the finding.
     #   @return [String]
     #
     # @!attribute [rw] code_remediation_task
-    #   Code remediation task associated with this finding
+    #   The code remediation task associated with the finding, if code
+    #   remediation was initiated.
     #   @return [Types::CodeRemediationTask]
     #
     # @!attribute [rw] last_updated_by
-    #   Identifier of the task or agent that last updated this finding
+    #   The identifier of the entity that last updated the finding.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the finding was created
+    #   The date and time the finding was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the finding was last updated
+    #   The date and time the finding was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Finding AWS API Documentation
@@ -1604,50 +1650,51 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for a security finding
+    # Contains summary information about a security finding.
     #
     # @!attribute [rw] finding_id
-    #   Unique identifier for the finding
+    #   The unique identifier of the finding.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Identifier of the agent space that created this finding
+    #   The unique identifier of the agent space associated with the
+    #   finding.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the finding.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job
+    #   The unique identifier of the pentest job that produced the finding.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name or title of the finding
+    #   The name of the finding.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the finding
+    #   The current status of the finding.
     #   @return [String]
     #
     # @!attribute [rw] risk_type
-    #   Type of security risk identified
+    #   The type of security risk identified by the finding.
     #   @return [String]
     #
     # @!attribute [rw] risk_level
-    #   Severity level of the identified risk
+    #   The risk level of the finding.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Confidence level of the finding
+    #   The confidence level of the finding.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the finding was created
+    #   The date and time the finding was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the finding was last updated
+    #   The date and time the finding was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/FindingSummary AWS API Documentation
@@ -1669,7 +1716,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the application to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetApplicationRequest AWS API Documentation
@@ -1681,28 +1728,29 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the application.
     #   @return [String]
     #
     # @!attribute [rw] domain
-    #   Domain where the application is available
+    #   The domain associated with the application.
     #   @return [String]
     #
     # @!attribute [rw] application_name
-    #   Name of the application, automatically assigned by the service
+    #   The name of the application.
     #   @return [String]
     #
     # @!attribute [rw] idc_configuration
-    #   IAM Identity Center configuration for the application
+    #   The IAM Identity Center configuration for the application.
     #   @return [Types::IdCConfiguration]
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role that the application uses to access AWS
-    #   resources on your behalf
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   application.
     #   @return [String]
     #
     # @!attribute [rw] default_kms_key_id
-    #   Default KMS key identifier used to encrypt application data
+    #   The identifier of the default AWS KMS key used to encrypt data for
+    #   the application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetApplicationResponse AWS API Documentation
@@ -1719,11 +1767,11 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetArtifactInput AWS API Documentation
@@ -1736,23 +1784,23 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space that contains the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact_id
-    #   Unique identifier of the artifact
+    #   The unique identifier of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] artifact
-    #   Artifact details
+    #   The artifact content and type.
     #   @return [Types::Artifact]
     #
     # @!attribute [rw] file_name
-    #   Name of the artifact file
+    #   The file name of the artifact.
     #   @return [String]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the artifact was last updated
+    #   The date and time the artifact was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetArtifactOutput AWS API Documentation
@@ -1768,7 +1816,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration to retrieve.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetIntegrationInput AWS API Documentation
@@ -1780,27 +1828,28 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration.
     #   @return [String]
     #
     # @!attribute [rw] installation_id
-    #   Installation identifier from the provider
+    #   The installation identifier from the integration provider.
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   Provider type
+    #   The integration provider.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
-    #   Type of provider integration
+    #   The type of the integration provider.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for the integration
+    #   The display name of the integration.
     #   @return [String]
     #
     # @!attribute [rw] kms_key_id
-    #   KMS key ID for encrypting integration details
+    #   The identifier of the AWS KMS key used to encrypt data associated
+    #   with the integration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GetIntegrationOutput AWS API Documentation
@@ -1816,18 +1865,19 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input parameters for GitHub integration
+    # The input required to create a GitHub integration, including the OAuth
+    # authorization code and CSRF state.
     #
     # @!attribute [rw] code
-    #   Authorization code from OAuth flow
+    #   The OAuth authorization code received from GitHub.
     #   @return [String]
     #
     # @!attribute [rw] state
-    #   CSRF state token for OAuth security
+    #   The CSRF state token for validating the OAuth flow.
     #   @return [String]
     #
     # @!attribute [rw] organization_name
-    #   Name of the GitHub organization
+    #   The name of the GitHub organization to integrate with.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitHubIntegrationInput AWS API Documentation
@@ -1840,22 +1890,24 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Metadata specific to a GitHub repository integrated resource
+    # Contains metadata about a GitHub repository that is integrated with
+    # the service.
     #
     # @!attribute [rw] name
-    #   Name of the resource e.g. repository name, etc
+    #   The name of the GitHub repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_resource_id
-    #   Unique resource identifier from the vendor
+    #   The provider-specific resource identifier for the GitHub repository.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   Owner of the repository
+    #   The owner of the GitHub repository.
     #   @return [String]
     #
     # @!attribute [rw] access_type
-    #   Access / Visibility Type of the integrated resource
+    #   The access type of the GitHub repository. Valid values are PRIVATE
+    #   and PUBLIC.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitHubRepositoryMetadata AWS API Documentation
@@ -1869,14 +1921,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # GitHub repository resource details
+    # Represents a GitHub repository resource used in an integration.
     #
     # @!attribute [rw] name
-    #   Name of the resource e.g. repository name, etc
+    #   The name of the GitHub repository.
     #   @return [String]
     #
     # @!attribute [rw] owner
-    #   Owner of the repository
+    #   The owner of the GitHub repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitHubRepositoryResource AWS API Documentation
@@ -1888,14 +1940,16 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Capabilities for GitHub repositories
+    # The capabilities enabled for a GitHub resource integration.
     #
     # @!attribute [rw] leave_comments
-    #   Post code review comments on pull requests
+    #   Indicates whether the integration can leave comments on pull
+    #   requests.
     #   @return [Boolean]
     #
     # @!attribute [rw] remediate_code
-    #   Create pull requests with automated fixes
+    #   Indicates whether the integration can create code remediation pull
+    #   requests.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GitHubResourceCapabilities AWS API Documentation
@@ -1907,14 +1961,16 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents http route verification details
+    # Contains HTTP route verification details for a target domain,
+    # including the route path and token to serve for domain ownership
+    # verification.
     #
     # @!attribute [rw] token
-    #   Token used to verify domain ownership
+    #   The verification token to serve at the specified route path.
     #   @return [String]
     #
     # @!attribute [rw] route_path
-    #   Route path where verification token should be placed
+    #   The HTTP route path where the verification token must be served.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/HttpVerification AWS API Documentation
@@ -1926,15 +1982,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # IdC configuration containing application and instance ARNs
+    # The IAM Identity Center configuration for an application.
     #
     # @!attribute [rw] idc_application_arn
-    #   ARN of the IAM Identity Center application associated with this
-    #   application
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center
+    #   application.
     #   @return [String]
     #
     # @!attribute [rw] idc_instance_arn
-    #   ARN of the IAM Identity Center instance used for user authentication
+    #   The Amazon Resource Name (ARN) of the IAM Identity Center instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IdCConfiguration AWS API Documentation
@@ -1947,7 +2003,8 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] provider
-    #   Provider to register with
+    #   The provider to initiate registration with. Currently, only GITHUB
+    #   is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/InitiateProviderRegistrationInput AWS API Documentation
@@ -1959,11 +2016,12 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] redirect_to
-    #   OAuth redirect URL
+    #   The URL to redirect the user to for completing the OAuth
+    #   authorization.
     #   @return [String]
     #
     # @!attribute [rw] csrf_state
-    #   CSRF state token for OAuth security
+    #   The CSRF state token to use when completing the OAuth flow.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/InitiateProviderRegistrationOutput AWS API Documentation
@@ -1975,15 +2033,16 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Information about an integrated repository
+    # Represents a code repository that is integrated with the service
+    # through a third-party provider.
     #
     # @!attribute [rw] integration_id
-    #   Integration identifier
+    #   The unique identifier of the integration that provides access to the
+    #   repository.
     #   @return [String]
     #
     # @!attribute [rw] provider_resource_id
-    #   External provider resource identifier, e.g., Github repository
-    #   identifier
+    #   The provider-specific resource identifier for the repository.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedRepository AWS API Documentation
@@ -1995,12 +2054,13 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Integrated resource details from a provider
+    # Represents an integrated resource from a third-party provider. This is
+    # a union type that contains provider-specific resource information.
     #
     # @note IntegratedResource is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] github_repository
-    #   GitHub repository resource
+    #   The GitHub repository resource information.
     #   @return [Types::GitHubRepositoryResource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResource AWS API Documentation
@@ -2016,14 +2076,15 @@ module Aws::SecurityAgent
       class Unknown < IntegratedResource; end
     end
 
-    # Input item for updating an integrated resource
+    # Represents an input item for updating integrated resources, including
+    # the resource and its capabilities.
     #
     # @!attribute [rw] resource
-    #   Configuration of the resource
+    #   The integrated resource to update.
     #   @return [Types::IntegratedResource]
     #
     # @!attribute [rw] capabilities
-    #   Provider-specific capabilities for the resource
+    #   The capabilities to enable for the integrated resource.
     #   @return [Types::ProviderResourceCapabilities]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResourceInputItem AWS API Documentation
@@ -2035,12 +2096,13 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Metadata about an integrated resource
+    # Contains metadata about an integrated resource. This is a union type
+    # that contains provider-specific metadata.
     #
     # @note IntegratedResourceMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of IntegratedResourceMetadata corresponding to the set member.
     #
     # @!attribute [rw] github_repository
-    #   Metadata for a GitHub repository resource
+    #   The GitHub repository metadata.
     #   @return [Types::GitHubRepositoryMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResourceMetadata AWS API Documentation
@@ -2056,18 +2118,19 @@ module Aws::SecurityAgent
       class Unknown < IntegratedResourceMetadata; end
     end
 
-    # Summary information about an integrated resource
+    # Contains summary information about an integrated resource.
     #
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration that provides access to the
+    #   resource.
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The integrated resource details
+    #   The metadata for the integrated resource.
     #   @return [Types::IntegratedResourceMetadata]
     #
     # @!attribute [rw] capabilities
-    #   Capabilities of the integrated resource
+    #   The capabilities enabled for the integrated resource.
     #   @return [Types::ProviderResourceCapabilities]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegratedResourceSummary AWS API Documentation
@@ -2080,16 +2143,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Filter criteria for integrations
+    # A filter for listing integrations. This is a union type where you can
+    # filter by provider or provider type.
     #
     # @note IntegrationFilter is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] provider
-    #   Filter by provider
+    #   Filter integrations by provider.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
-    #   Filter by provider type
+    #   Filter integrations by provider type.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegrationFilter AWS API Documentation
@@ -2107,26 +2171,26 @@ module Aws::SecurityAgent
       class Unknown < IntegrationFilter; end
     end
 
-    # Summary information about an integration
+    # Contains summary information about an integration.
     #
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration.
     #   @return [String]
     #
     # @!attribute [rw] installation_id
-    #   Installation identifier from the provider
+    #   The installation identifier from the integration provider.
     #   @return [String]
     #
     # @!attribute [rw] provider
-    #   Provider type
+    #   The integration provider.
     #   @return [String]
     #
     # @!attribute [rw] provider_type
-    #   Type of provider integration
+    #   The type of the integration provider.
     #   @return [String]
     #
     # @!attribute [rw] display_name
-    #   Display name for the integration
+    #   The display name of the integration.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/IntegrationSummary AWS API Documentation
@@ -2141,10 +2205,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Unexpected server error occurred
+    # An unexpected error occurred during the processing of your request.
     #
     # @!attribute [rw] message
-    #   Error description
+    #   Error description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/InternalServerException AWS API Documentation
@@ -2155,14 +2219,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for listing agent spaces
+    # Input for listing agent spaces.
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of agent spaces to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListAgentSpacesInput AWS API Documentation
@@ -2174,14 +2241,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListAgentSpaces operation
+    # Output for the ListAgentSpaces operation.
     #
     # @!attribute [rw] agent_space_summaries
-    #   List of agent space summaries
+    #   The list of agent space summaries.
     #   @return [Array<Types::AgentSpaceSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for next page of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListAgentSpacesOutput AWS API Documentation
@@ -2194,11 +2264,14 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListApplicationsRequest AWS API Documentation
@@ -2211,11 +2284,14 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_summaries
-    #   List of application summaries
+    #   The list of application summaries.
     #   @return [Array<Types::ApplicationSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for next page of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListApplicationsResponse AWS API Documentation
@@ -2228,15 +2304,18 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to list artifacts for.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListArtifactsInput AWS API Documentation
@@ -2250,11 +2329,14 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] artifact_summaries
-    #   List of artifact summaries
+    #   The list of artifact summaries.
     #   @return [Array<Types::ArtifactSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListArtifactsOutput AWS API Documentation
@@ -2266,28 +2348,30 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for ListDiscoveredEndpoints operation
+    # Input for ListDiscoveredEndpoints operation.
     #
     # @!attribute [rw] max_results
-    #   Maximum number of discovered endpoints to return in a single request
-    #   (default: 50)
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job for which to retrieve discovered
-    #   endpoints
+    #   The unique identifier of the pentest job to list discovered
+    #   endpoints for.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] prefix
-    #   Optional URI prefix filter to narrow down results
+    #   A prefix to filter discovered endpoints by URI.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListDiscoveredEndpointsInput AWS API Documentation
@@ -2302,14 +2386,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListDiscoveredEndpoints operation
+    # Output for the ListDiscoveredEndpoints operation.
     #
     # @!attribute [rw] discovered_endpoints
-    #   List of discovered endpoints for the pentest job
+    #   The list of discovered endpoints.
     #   @return [Array<Types::DiscoveredEndpoint>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListDiscoveredEndpointsOutput AWS API Documentation
@@ -2321,44 +2408,45 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for ListFindings operation with filtering support
+    # Input for ListFindings operation with filtering support.
     #
     # @!attribute [rw] max_results
-    #   Maximum number of findings to return in a single request (default:
-    #   50)
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job for which to retrieve associated
-    #   findings
+    #   The unique identifier of the pentest job to list findings for.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] risk_type
-    #   Filter findings by risk type
+    #   Filter findings by risk type.
     #   @return [String]
     #
     # @!attribute [rw] risk_level
-    #   Filter findings by risk level
+    #   Filter findings by risk level.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Filter findings by status
+    #   Filter findings by status.
     #   @return [String]
     #
     # @!attribute [rw] confidence
-    #   Filter findings by confidence level
+    #   Filter findings by confidence level.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Filter findings by name (case-insensitive substring search)
+    #   Filter findings by name.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListFindingsInput AWS API Documentation
@@ -2377,14 +2465,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListFindings operation
+    # Output for the ListFindings operation.
     #
     # @!attribute [rw] findings_summaries
-    #   List of finding summaries matching the filter criteria
+    #   The list of finding summaries.
     #   @return [Array<Types::FindingSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListFindingsOutput AWS API Documentation
@@ -2397,23 +2488,27 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space to list integrated
+    #   resources for.
     #   @return [String]
     #
     # @!attribute [rw] integration_id
-    #   Filter integrated resources by a specific integration
+    #   The unique identifier of the integration to filter by.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   Filter integrated resources by resource type
+    #   The type of resource to filter by.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegratedResourcesInput AWS API Documentation
@@ -2429,11 +2524,14 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] integrated_resource_summaries
-    #   List of integrated resources
+    #   The list of integrated resource summaries.
     #   @return [Array<Types::IntegratedResourceSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegratedResourcesOutput AWS API Documentation
@@ -2446,15 +2544,18 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] filter
-    #   Filter criteria for integrations
+    #   A filter to apply to the list of integrations.
     #   @return [Types::IntegrationFilter]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegrationsInput AWS API Documentation
@@ -2468,11 +2569,14 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] integration_summaries
-    #   List of integration summaries
+    #   The list of integration summaries.
     #   @return [Array<Types::IntegrationSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListIntegrationsOutput AWS API Documentation
@@ -2484,26 +2588,30 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Request structure for listing agent space members
+    # Request structure for listing agent space members.
     #
     # @!attribute [rw] application_id
-    #   Application identifier
+    #   The unique identifier of the application that contains the agent
+    #   space.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space to list memberships for.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   Filter by member type
+    #   Filter memberships by member type.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of results to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListMembershipsRequest AWS API Documentation
@@ -2518,14 +2626,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Response structure for listing members associated to an agent space
+    # Response structure for listing members associated to an agent space.
     #
     # @!attribute [rw] membership_summaries
-    #   List of membership summaries
+    #   The list of membership summaries.
     #   @return [Array<Types::MembershipSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for next page of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListMembershipsResponse AWS API Documentation
@@ -2537,22 +2648,23 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for listing tasks associated with a specific pentest job
+    # Input for listing tasks associated with a pentest job.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of tasks to return in a single request
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job whose tasks to list
+    #   The unique identifier of the pentest job to list tasks for.
     #   @return [String]
     #
     # @!attribute [rw] step_name
-    #   Filter tasks by step name
+    #   Filter tasks by step name. Valid values include PREFLIGHT,
+    #   STATIC\_ANALYSIS, PENTEST, and FINALIZING.
     #   @return [String]
     #
     # @!attribute [rw] category_name
@@ -2560,7 +2672,10 @@ module Aws::SecurityAgent
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobTasksInput AWS API Documentation
@@ -2576,14 +2691,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListPentestJobTasks operation
+    # Output for the ListPentestJobTasks operation.
     #
     # @!attribute [rw] task_summaries
-    #   List of task summaries associated with the specified pentest job
+    #   The list of task summaries.
     #   @return [Array<Types::TaskSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobTasksOutput AWS API Documentation
@@ -2595,22 +2713,25 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for ListPentestJobsForPentest operation
+    # Input for ListPentestJobsForPentest operation.
     #
     # @!attribute [rw] max_results
-    #   Maximum number of pentest jobs to return in a single request
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the pentest for which to retrieve associated jobs
+    #   The unique identifier of the pentest to list jobs for.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentestInput AWS API Documentation
@@ -2624,14 +2745,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListPentestJobsForPentest operation
+    # Output for the ListPentestJobsForPentest operation.
     #
     # @!attribute [rw] pentest_job_summaries
-    #   List of pentest job summaries associated with the pentest
+    #   The list of pentest job summaries.
     #   @return [Array<Types::PentestJobSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestJobsForPentestOutput AWS API Documentation
@@ -2643,18 +2767,21 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for listing pentests with optional filtering
+    # Input for listing pentests with optional filtering.
     #
     # @!attribute [rw] max_results
-    #   Maximum number of pentests to return in a single request
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space to list pentests for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestsInput AWS API Documentation
@@ -2667,14 +2794,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListPentests operation
+    # Output for the ListPentests operation.
     #
     # @!attribute [rw] pentest_summaries
-    #   List of pentest summaries matching the filter criteria
+    #   The list of pentest summaries.
     #   @return [Array<Types::PentestSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for pagination to retrieve the next set of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListPentestsOutput AWS API Documentation
@@ -2686,10 +2816,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for ListTagsForResource operation
+    # Input for ListTagsForResource operation.
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource to list tags for
+    #   The Amazon Resource Name (ARN) of the resource to list tags for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListTagsForResourceInput AWS API Documentation
@@ -2700,10 +2830,10 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for ListTagsForResource operation
+    # Output for ListTagsForResource operation.
     #
     # @!attribute [rw] tags
-    #   Tags associated with the resource
+    #   The tags associated with the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListTagsForResourceOutput AWS API Documentation
@@ -2714,14 +2844,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for listing target domains
+    # Input for listing target domains.
     #
     # @!attribute [rw] next_token
-    #   Token for pagination
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @!attribute [rw] max_results
-    #   Maximum number of target domains to return
+    #   The maximum number of results to return in a single call.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListTargetDomainsInput AWS API Documentation
@@ -2733,14 +2866,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the ListTargetDomains operation
+    # Output for the ListTargetDomains operation.
     #
     # @!attribute [rw] target_domain_summaries
-    #   List of target domain summaries
+    #   The list of target domain summaries.
     #   @return [Array<Types::TargetDomainSummary>]
     #
     # @!attribute [rw] next_token
-    #   Token for next page of results
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListTargetDomainsOutput AWS API Documentation
@@ -2752,14 +2888,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Location information for execution logs
+    # The log location for a task, specifying where task execution logs are
+    # stored.
     #
     # @!attribute [rw] log_type
-    #   Type of log storage
+    #   The type of log storage. Currently, only CLOUDWATCH is supported.
     #   @return [String]
     #
     # @!attribute [rw] cloud_watch_log
-    #   CloudWatch log information if logs are stored in CloudWatch
+    #   The CloudWatch Logs location for the task logs.
     #   @return [Types::CloudWatchLog]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/LogLocation AWS API Documentation
@@ -2771,12 +2908,13 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Metadata associated with the member
+    # Contains metadata about a member. This is a union type that contains
+    # member-type-specific metadata.
     #
     # @note MemberMetadata is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MemberMetadata corresponding to the set member.
     #
     # @!attribute [rw] user
-    #   User metadata for USER members
+    #   The user metadata for the member.
     #   @return [Types::UserMetadata]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MemberMetadata AWS API Documentation
@@ -2792,14 +2930,15 @@ module Aws::SecurityAgent
       class Unknown < MemberMetadata; end
     end
 
-    # Member-specific configuration
+    # The configuration for a membership. This is a union type that contains
+    # member-type-specific configuration.
     #
     # @note MembershipConfig is a union - when making an API calls you must set exactly one of the members.
     #
     # @note MembershipConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of MembershipConfig corresponding to the set member.
     #
     # @!attribute [rw] user
-    #   Configuration for user members
+    #   The user configuration for the membership.
     #   @return [Types::UserConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MembershipConfig AWS API Documentation
@@ -2815,46 +2954,46 @@ module Aws::SecurityAgent
       class Unknown < MembershipConfig; end
     end
 
-    # Membership summary for list operations
+    # Contains summary information about a membership.
     #
     # @!attribute [rw] membership_id
-    #   Member identifier (userId or agentSpaceId)
+    #   The unique identifier of the membership.
     #   @return [String]
     #
     # @!attribute [rw] application_id
-    #   Application identifier
+    #   The unique identifier of the application.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Agent space identifier
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   Type of member
+    #   The type of member.
     #   @return [String]
     #
     # @!attribute [rw] config
-    #   Configuration specific to the member type
+    #   The configuration for the membership.
     #   @return [Types::MembershipConfig]
     #
     # @!attribute [rw] metadata
-    #   Member-specific metadata
+    #   The metadata for the member.
     #   @return [Types::MemberMetadata]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the membership was created (ISO 8601)
+    #   The date and time the membership was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the membership was last updated (ISO 8601)
+    #   The date and time the membership was last updated, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] created_by
-    #   User ID who created the membership
+    #   The identifier of the entity that created the membership.
     #   @return [String]
     #
     # @!attribute [rw] updated_by
-    #   User ID who last updated the membership
+    #   The identifier of the entity that last updated the membership.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MembershipSummary AWS API Documentation
@@ -2874,14 +3013,17 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Configuration for network traffic filtering
+    # The network traffic configuration for a pentest, including custom
+    # headers and traffic rules.
     #
     # @!attribute [rw] rules
-    #   Traffic filtering rules
+    #   The list of network traffic rules that control which URLs are
+    #   allowed or denied during testing.
     #   @return [Array<Types::NetworkTrafficRule>]
     #
     # @!attribute [rw] custom_headers
-    #   Custom headers for requests
+    #   The list of custom HTTP headers to include in network traffic during
+    #   testing.
     #   @return [Array<Types::CustomHeader>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/NetworkTrafficConfig AWS API Documentation
@@ -2893,18 +3035,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Network traffic filtering rule
+    # A rule that controls network traffic during penetration testing by
+    # allowing or denying traffic to specific URL patterns.
     #
     # @!attribute [rw] effect
-    #   Action to take when the rule matches
+    #   The effect of the rule. Valid values are ALLOW and DENY.
     #   @return [String]
     #
     # @!attribute [rw] pattern
-    #   Pattern to match against
+    #   The URL pattern to match for the rule.
     #   @return [String]
     #
     # @!attribute [rw] network_traffic_rule_type
-    #   Type of network traffic rule
+    #   The type of the network traffic rule. Currently, only URL is
+    #   supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/NetworkTrafficRule AWS API Documentation
@@ -2917,55 +3061,56 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a pentest configuration and execution details
+    # Represents a pentest configuration that defines the parameters for
+    # security testing, including target assets, risk type exclusions, and
+    # infrastructure settings.
     #
     # @!attribute [rw] pentest_id
-    #   Unique identifier for the pentest
+    #   The unique identifier of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the pentest
+    #   The title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] assets
-    #   Collection of assets to be tested or used during the pentest
+    #   The assets included in the pentest.
     #   @return [Types::Assets]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The list of risk types excluded from the pentest.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role used for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The CloudWatch Logs configuration for the pentest.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The VPC configuration for the pentest.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The network traffic configuration for the pentest.
     #   @return [Types::NetworkTrafficConfig]
     #
     # @!attribute [rw] code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The code remediation strategy for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest was created
+    #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest was last updated
+    #   The date and time the pentest was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Pentest AWS API Documentation
@@ -2987,99 +3132,101 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a pentest job
+    # Represents a pentest job, which is an execution instance of a pentest.
+    # A pentest job progresses through preflight, static analysis, pentest,
+    # and finalizing steps.
     #
     # @!attribute [rw] pentest_job_id
-    #   Unique identifier of the pentest job
+    #   The unique identifier of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the job.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the pentest
+    #   The title of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] overview
-    #   Overview or description of the pentest job
+    #   An overview of the pentest job results.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the pentest job
+    #   The current status of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] endpoints
-    #   List of web application endpoints to test
+    #   The list of endpoints being tested in the pentest job.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] actors
-    #   List of actors that interact with the system
+    #   The list of actors used during the pentest job.
     #   @return [Array<Types::Actor>]
     #
     # @!attribute [rw] documents
-    #   List of documents providing context for testing
+    #   The list of documents providing context for the pentest job.
     #   @return [Array<Types::DocumentInfo>]
     #
     # @!attribute [rw] source_code
-    #   List of source code repositories for static analysis
+    #   The list of source code repositories analyzed during the pentest
+    #   job.
     #   @return [Array<Types::SourceCodeRepository>]
     #
     # @!attribute [rw] exclude_paths
-    #   List of URL paths to exclude from testing
+    #   The list of paths excluded from the pentest job.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] allowed_domains
-    #   List of allowed domains for network access
+    #   The list of domains allowed during the pentest job.
     #   @return [Array<Types::Endpoint>]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest job
+    #   The list of risk types excluded from the pentest job.
     #   @return [Array<String>]
     #
     # @!attribute [rw] steps
-    #   List of execution steps for the pentest job
+    #   The list of steps in the pentest job execution.
     #   @return [Array<Types::Step>]
     #
     # @!attribute [rw] execution_context
-    #   A list of execution context messages associated with the pentest job
+    #   The execution context messages for the pentest job.
     #   @return [Array<Types::ExecutionContext>]
     #
     # @!attribute [rw] service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role used for the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest job logs are
-    #   stored
+    #   The CloudWatch Logs configuration for the pentest job.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The VPC configuration for the pentest job.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The network traffic configuration for the pentest job.
     #   @return [Types::NetworkTrafficConfig]
     #
     # @!attribute [rw] error_information
-    #   Error information regarding the pentest job
+    #   Error information if the pentest job encountered an error.
     #   @return [Types::ErrorInformation]
     #
     # @!attribute [rw] integrated_repositories
-    #   List of integrated code repositories
+    #   The list of integrated repositories associated with the pentest job.
     #   @return [Array<Types::IntegratedRepository>]
     #
     # @!attribute [rw] code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The code remediation strategy for the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest job was created
+    #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest job was last updated
+    #   The date and time the pentest job was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/PentestJob AWS API Documentation
@@ -3112,30 +3259,30 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for a pentest job
+    # Contains summary information about a pentest job.
     #
     # @!attribute [rw] pentest_job_id
-    #   Unique identifier of the pentest job
+    #   The unique identifier of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the job.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the pentest
+    #   The title of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the pentest job
+    #   The current status of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest job was created
+    #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest job was last updated
+    #   The date and time the pentest job was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/PentestJobSummary AWS API Documentation
@@ -3151,26 +3298,26 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for a pentest
+    # Contains summary information about a pentest.
     #
     # @!attribute [rw] pentest_id
-    #   Unique identifier for the pentest
+    #   The unique identifier of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the pentest
+    #   The title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest was created
+    #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest was last updated
+    #   The date and time the pentest was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/PentestSummary AWS API Documentation
@@ -3185,12 +3332,13 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Provider-specific input parameters for integration
+    # The provider-specific input for creating an integration. This is a
+    # union type that contains provider-specific configuration.
     #
     # @note ProviderInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] github
-    #   GitHub integration input
+    #   The GitHub-specific input for creating an integration.
     #   @return [Types::GitHubIntegrationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderInput AWS API Documentation
@@ -3206,14 +3354,16 @@ module Aws::SecurityAgent
       class Unknown < ProviderInput; end
     end
 
-    # Provider-specific capabilities for integrated resources
+    # The capabilities for an integrated resource from a third-party
+    # provider. This is a union type that contains provider-specific
+    # capabilities.
     #
     # @note ProviderResourceCapabilities is a union - when making an API calls you must set exactly one of the members.
     #
     # @note ProviderResourceCapabilities is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ProviderResourceCapabilities corresponding to the set member.
     #
     # @!attribute [rw] github
-    #   Capabilities for GitHub repositories
+    #   The GitHub-specific resource capabilities.
     #   @return [Types::GitHubResourceCapabilities]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ProviderResourceCapabilities AWS API Documentation
@@ -3229,10 +3379,12 @@ module Aws::SecurityAgent
       class Unknown < ProviderResourceCapabilities; end
     end
 
-    # Specified resource was not found
+    # The specified resource was not found. Verify that the resource
+    # identifier is correct and that the resource exists in the specified
+    # agent space or account.
     #
     # @!attribute [rw] message
-    #   Error description
+    #   Error description.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ResourceNotFoundException AWS API Documentation
@@ -3243,10 +3395,11 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Information about a source code repository for static analysis
+    # Represents a source code repository used for security analysis during
+    # a pentest.
     #
     # @!attribute [rw] s3_location
-    #   S3 storage location of the repository
+    #   The Amazon S3 location of the source code repository archive.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/SourceCodeRepository AWS API Documentation
@@ -3257,18 +3410,18 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for the StartCodeRemediation operation
+    # Input for the StartCodeRemediation operation.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest job exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job to start code remediation for
+    #   The unique identifier of the pentest job that produced the findings.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
-    #   Identifiers of the findings to start code remediation for
+    #   The list of finding identifiers to initiate code remediation for.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeRemediationInput AWS API Documentation
@@ -3281,20 +3434,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the StartCodeRemediation operation
+    # Output for the StartCodeRemediation operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeRemediationOutput AWS API Documentation
     #
     class StartCodeRemediationOutput < Aws::EmptyStructure; end
 
-    # Input for starting the execution of a pentest
+    # Input for starting the execution of a pentest.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the pentest to execute
+    #   The unique identifier of the pentest to start a job for.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartPentestJobInput AWS API Documentation
@@ -3306,34 +3459,34 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the StartPentestJob operation
+    # Output for the StartPentestJob operation.
     #
     # @!attribute [rw] title
-    #   Title of the pentest job
+    #   The title of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the pentest job
+    #   The current status of the pentest job.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest job was created
+    #   The date and time the pentest job was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest job was last updated
+    #   The date and time the pentest job was last updated, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] pentest_id
-    #   Unique identifier of the pentest
+    #   The unique identifier of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Unique identifier of the pentest job
+    #   The unique identifier of the started pentest job.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartPentestJobOutput AWS API Documentation
@@ -3350,22 +3503,24 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a single step in pentest job execution
+    # Represents a step in the pentest job execution pipeline. Steps include
+    # preflight, static analysis, pentest, and finalizing.
     #
     # @!attribute [rw] name
-    #   Name of the execution step
+    #   The name of the step. Valid values include PREFLIGHT,
+    #   STATIC\_ANALYSIS, PENTEST, and FINALIZING.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Current status of the step
+    #   The current status of the step.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the step was created
+    #   The date and time the step was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the step was last updated
+    #   The date and time the step was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Step AWS API Documentation
@@ -3379,14 +3534,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for stopping the execution of a pentest
+    # Input for stopping the execution of a pentest.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job to stop
+    #   The unique identifier of the pentest job to stop.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopPentestJobInput AWS API Documentation
@@ -3398,20 +3553,20 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the StopPentestJob operation
+    # Output for the StopPentestJob operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopPentestJobOutput AWS API Documentation
     #
     class StopPentestJobOutput < Aws::EmptyStructure; end
 
-    # Input for TagResource operation
+    # Input for TagResource operation.
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource to tag
+    #   The Amazon Resource Name (ARN) of the resource to tag.
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   Tags to add to the resource
+    #   The tags to add to the resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TagResourceInput AWS API Documentation
@@ -3423,36 +3578,42 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for TagResource operation
+    # Output for TagResource operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TagResourceOutput AWS API Documentation
     #
     class TagResourceOutput < Aws::EmptyStructure; end
 
-    # Represents a target domain
+    # Represents a target domain registered for penetration testing. A
+    # target domain must be verified through DNS TXT or HTTP route
+    # verification before it can be used in pentests.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the registered target domain
+    #   The domain name of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] verification_status
-    #   Current verification status of the registered target domain
+    #   The current verification status of the target domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_status_reason
+    #   The reason for the current target domain verification status.
     #   @return [String]
     #
     # @!attribute [rw] verification_details
-    #   Verification details to verify registered target domain
+    #   The verification details for the target domain.
     #   @return [Types::VerificationDetails]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the target domain was registered
+    #   The date and time the target domain was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] verified_at
-    #   Timestamp when the target domain was last successfully verified
+    #   The date and time the target domain was verified, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TargetDomain AWS API Documentation
@@ -3461,6 +3622,7 @@ module Aws::SecurityAgent
       :target_domain_id,
       :domain_name,
       :verification_status,
+      :verification_status_reason,
       :verification_details,
       :created_at,
       :verified_at)
@@ -3468,18 +3630,18 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for a target domain
+    # Contains summary information about a target domain.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the registered target domain
+    #   The domain name of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] verification_status
-    #   Current verification status of the registered target domain
+    #   The current verification status of the target domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TargetDomainSummary AWS API Documentation
@@ -3492,58 +3654,60 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Represents a task within a pentest job
+    # Represents an individual security test task within a pentest job. Each
+    # task targets a specific risk type or endpoint and executes
+    # independently.
     #
     # @!attribute [rw] task_id
-    #   Unique identifier for the task
+    #   The unique identifier of the task.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the task.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job this task belongs to
+    #   The unique identifier of the pentest job that contains the task.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Identifier of the agent space this task belongs to
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the task
+    #   The title of the task.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Detailed description of the task's purpose and scope
+    #   A description of the task.
     #   @return [String]
     #
     # @!attribute [rw] categories
-    #   List of categories associated with this task
+    #   The list of categories assigned to the task.
     #   @return [Array<Types::Category>]
     #
     # @!attribute [rw] risk_type
-    #   Type of security risk this task is designed to test
+    #   The type of security risk the task is testing for.
     #   @return [String]
     #
     # @!attribute [rw] target_endpoint
-    #   Target endpoint for this security test
+    #   The target endpoint being tested by the task.
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] execution_status
-    #   Current status of the task execution
+    #   The current execution status of the task.
     #   @return [String]
     #
     # @!attribute [rw] logs_location
-    #   Location of execution logs for auditing and review
+    #   The location of the task execution logs.
     #   @return [Types::LogLocation]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the task was created
+    #   The date and time the task was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the task was last updated
+    #   The date and time the task was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Task AWS API Documentation
@@ -3566,42 +3730,42 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Summary information for a task
+    # Contains summary information about a task.
     #
     # @!attribute [rw] task_id
-    #   Unique identifier for the task
+    #   The unique identifier of the task.
     #   @return [String]
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the parent pentest
+    #   The unique identifier of the pentest associated with the task.
     #   @return [String]
     #
     # @!attribute [rw] pentest_job_id
-    #   Identifier of the pentest job this task belongs to
+    #   The unique identifier of the pentest job that contains the task.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   Identifier of the agent space this task belongs to
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title or name of the task
+    #   The title of the task.
     #   @return [String]
     #
     # @!attribute [rw] risk_type
-    #   Type of security risk this task is designed to test
+    #   The type of security risk the task is testing for.
     #   @return [String]
     #
     # @!attribute [rw] execution_status
-    #   Current status of the task execution
+    #   The current execution status of the task.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the task was created
+    #   The date and time the task was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the task was last updated
+    #   The date and time the task was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/TaskSummary AWS API Documentation
@@ -3620,18 +3784,18 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Request denied due to throttling
+    # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
-    #   Error description
+    #   Error description.
     #   @return [String]
     #
     # @!attribute [rw] service_code
-    #   Service code for throttling limit
+    #   Service code for throttling limit.
     #   @return [String]
     #
     # @!attribute [rw] quota_code
-    #   Quota code for throttling limit
+    #   Quota code for throttling limit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ThrottlingException AWS API Documentation
@@ -3644,14 +3808,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for UntagResource operation
+    # Input for UntagResource operation.
     #
     # @!attribute [rw] resource_arn
-    #   ARN of the resource to untag
+    #   The Amazon Resource Name (ARN) of the resource to remove tags from.
     #   @return [String]
     #
     # @!attribute [rw] tag_keys
-    #   List of tag keys to remove from the resource
+    #   The list of tag keys to remove from the resource.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UntagResourceInput AWS API Documentation
@@ -3663,37 +3827,37 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for UntagResource operation
+    # Output for UntagResource operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
 
-    # Input for updating an agent space
+    # Input for updating an agent space.
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space to update
+    #   The unique identifier of the agent space to update.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the agent space
+    #   The updated name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the agent space
+    #   The updated description of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The updated AWS resources to associate with the agent space.
     #   @return [Types::AWSResources]
     #
     # @!attribute [rw] target_domain_ids
-    #   Target domain IDs to associate with the agent space
+    #   The updated list of target domain identifiers to associate with the
+    #   agent space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The updated code review settings for the agent space.
     #   @return [Types::CodeReviewSettings]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateAgentSpaceInput AWS API Documentation
@@ -3709,39 +3873,39 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the UpdateAgentSpace operation
+    # Output for the UpdateAgentSpace operation.
     #
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the updated agent space.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   Name of the agent space
+    #   The name of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] description
-    #   Description of the agent space
+    #   The description of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] aws_resources
-    #   AWS resource configurations associated with the agent space
+    #   The AWS resources associated with the agent space.
     #   @return [Types::AWSResources]
     #
     # @!attribute [rw] target_domain_ids
-    #   List of target domain IDs registered with the agent space
+    #   The list of target domain identifiers associated with the agent
+    #   space.
     #   @return [Array<String>]
     #
     # @!attribute [rw] code_review_settings
-    #   Configuration for code review analysis, including controls scanning
-    #   and general purpose scanning settings
+    #   The code review settings for the agent space.
     #   @return [Types::CodeReviewSettings]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the agent space was created
+    #   The date and time the agent space was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the agent space was last updated
+    #   The date and time the agent space was last updated, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateAgentSpaceOutput AWS API Documentation
@@ -3760,17 +3924,17 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the application to update.
     #   @return [String]
     #
     # @!attribute [rw] role_arn
-    #   ARN of the IAM role that the application uses to access AWS
-    #   resources on your behalf
+    #   The updated Amazon Resource Name (ARN) of the IAM role for the
+    #   application.
     #   @return [String]
     #
     # @!attribute [rw] default_kms_key_id
-    #   Default KMS key identifier. Use an empty string to remove the
-    #   default KMS key.
+    #   The updated identifier of the default AWS KMS key for the
+    #   application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateApplicationRequest AWS API Documentation
@@ -3784,7 +3948,7 @@ module Aws::SecurityAgent
     end
 
     # @!attribute [rw] application_id
-    #   Application ID
+    #   The unique identifier of the updated application.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateApplicationResponse AWS API Documentation
@@ -3795,22 +3959,22 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for updating an existing security finding
+    # Input for updating an existing security finding.
     #
     # @!attribute [rw] finding_id
-    #   Identifier of the finding to update
+    #   The unique identifier of the finding to update.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the finding exists
+    #   The unique identifier of the agent space that contains the finding.
     #   @return [String]
     #
     # @!attribute [rw] risk_level
-    #   Updated severity level of the identified risk
+    #   The updated risk level for the finding.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Updated status of the finding
+    #   The updated status for the finding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateFindingInput AWS API Documentation
@@ -3824,22 +3988,22 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the UpdateFinding operation
+    # Output for the UpdateFinding operation.
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateFindingOutput AWS API Documentation
     #
     class UpdateFindingOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] agent_space_id
-    #   Unique identifier of the agent space
+    #   The unique identifier of the agent space.
     #   @return [String]
     #
     # @!attribute [rw] integration_id
-    #   Unique identifier of the integration
+    #   The unique identifier of the integration.
     #   @return [String]
     #
     # @!attribute [rw] items
-    #   List of integrated resources to update
+    #   The list of integrated resource items to update.
     #   @return [Array<Types::IntegratedResourceInputItem>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateIntegratedResourcesInput AWS API Documentation
@@ -3856,47 +4020,46 @@ module Aws::SecurityAgent
     #
     class UpdateIntegratedResourcesOutput < Aws::EmptyStructure; end
 
-    # Input for updating an existing pentest
+    # Input for updating an existing pentest.
     #
     # @!attribute [rw] pentest_id
-    #   Identifier of the pentest to update
+    #   The unique identifier of the pentest to update.
     #   @return [String]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   New title for the pentest
+    #   The updated title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] assets
-    #   Updated assets to be tested
+    #   The updated assets for the pentest.
     #   @return [Types::Assets]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The updated list of risk types to exclude from the pentest.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   Updated service role ARN for accessing customer resources
+    #   The updated IAM service role for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The updated CloudWatch Logs configuration for the pentest.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] vpc_config
-    #   VPC configuration that the Security Agent accesses
+    #   The updated VPC configuration for the pentest.
     #   @return [Types::VpcConfig]
     #
     # @!attribute [rw] network_traffic_config
-    #   Configuration for network traffic filtering
+    #   The updated network traffic configuration for the pentest.
     #   @return [Types::NetworkTrafficConfig]
     #
     # @!attribute [rw] code_remediation_strategy
-    #   Strategy for code remediation on findings
+    #   The updated code remediation strategy for the pentest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestInput AWS API Documentation
@@ -3916,43 +4079,42 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the UpdatePentest operation
+    # Output for the UpdatePentest operation.
     #
     # @!attribute [rw] pentest_id
-    #   Unique identifier of the updated pentest
+    #   The unique identifier of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] title
-    #   Title of the updated pentest
+    #   The title of the pentest.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the pentest was created
+    #   The date and time the pentest was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the pentest was last updated
+    #   The date and time the pentest was last updated, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] assets
-    #   Assets to be tested in the updated pentest
+    #   The assets included in the pentest.
     #   @return [Types::Assets]
     #
     # @!attribute [rw] exclude_risk_types
-    #   A list of risk types excluded from the pentest execution
+    #   The list of risk types excluded from the pentest.
     #   @return [Array<String>]
     #
     # @!attribute [rw] service_role
-    #   Service role ARN for accessing customer resources
+    #   The IAM service role used for the pentest.
     #   @return [String]
     #
     # @!attribute [rw] log_config
-    #   CloudWatch log group and stream prefix where pentest execution logs
-    #   are stored
+    #   The CloudWatch Logs configuration for the pentest.
     #   @return [Types::CloudWatchLog]
     #
     # @!attribute [rw] agent_space_id
-    #   ID of the agent space where the pentest exists
+    #   The unique identifier of the agent space that contains the pentest.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdatePentestOutput AWS API Documentation
@@ -3971,14 +4133,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Input for updating a target domain
+    # Input for updating a target domain.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain to update
+    #   The unique identifier of the target domain to update.
     #   @return [String]
     #
     # @!attribute [rw] verification_method
-    #   Verification method for the target domain
+    #   The updated verification method for the target domain.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateTargetDomainInput AWS API Documentation
@@ -3990,30 +4152,34 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Output for the UpdateTargetDomain operation
+    # Output for the UpdateTargetDomain operation.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the target domain
+    #   The domain name of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] verification_status
-    #   Current verification status of the registered target domain
+    #   The current verification status of the target domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_status_reason
+    #   The reason for the current target domain verification status.
     #   @return [String]
     #
     # @!attribute [rw] verification_details
-    #   Verification details to verify registered target domain
+    #   The updated verification details for the target domain.
     #   @return [Types::VerificationDetails]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the target domain was registered
+    #   The date and time the target domain was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] verified_at
-    #   Timestamp when the target domain was last successfully verified
+    #   The date and time the target domain was verified, in UTC format.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateTargetDomainOutput AWS API Documentation
@@ -4022,6 +4188,7 @@ module Aws::SecurityAgent
       :target_domain_id,
       :domain_name,
       :verification_status,
+      :verification_status_reason,
       :verification_details,
       :created_at,
       :verified_at)
@@ -4029,10 +4196,11 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # User membership configuration
+    # The configuration for a user membership, including the role assigned
+    # to the user within the agent space.
     #
     # @!attribute [rw] role
-    #   Role of the user associated to the agent space
+    #   The role assigned to the user. Currently, only MEMBER is supported.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UserConfig AWS API Documentation
@@ -4043,14 +4211,15 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # User-specific metadata
+    # Contains metadata about a user member, including the username and
+    # email address.
     #
     # @!attribute [rw] username
-    #   User name/display name
+    #   The username of the user.
     #   @return [String]
     #
     # @!attribute [rw] email
-    #   User email address
+    #   The email address of the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UserMetadata AWS API Documentation
@@ -4062,18 +4231,14 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # A standard error for input validation failures. This should be thrown
-    # by services when a member of the input structure falls outside of the
-    # modeled or documented constraints.
+    # The input fails to satisfy the constraints specified by the service.
     #
     # @!attribute [rw] message
     #   A summary of the validation failure.
     #   @return [String]
     #
     # @!attribute [rw] field_list
-    #   A list of specific failures encountered while validating the input.
-    #   A member can appear in this list more than once if it failed to
-    #   satisfy multiple constraints.
+    #   A list of specific failures encountered during validation.
     #   @return [Array<Types::ValidationExceptionField>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ValidationException AWS API Documentation
@@ -4089,7 +4254,7 @@ module Aws::SecurityAgent
     #
     # @!attribute [rw] path
     #   A JSONPointer expression to the structure member whose value failed
-    #   to satisfy the modeled constraints.
+    #   to satisfy the modeled constraint.
     #   @return [String]
     #
     # @!attribute [rw] message
@@ -4105,18 +4270,19 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
-    # Verification details to verify registered target domain
+    # Contains the verification details for a target domain, including the
+    # verification method and provider-specific details.
     #
     # @!attribute [rw] method
-    #   Type of domain ownership verification method
+    #   The verification method used for the target domain.
     #   @return [String]
     #
     # @!attribute [rw] dns_txt
-    #   Represents dns txt verification details
+    #   The DNS TXT verification details.
     #   @return [Types::DnsVerification]
     #
     # @!attribute [rw] http_route
-    #   Represents http route verification details
+    #   The HTTP route verification details.
     #   @return [Types::HttpVerification]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/VerificationDetails AWS API Documentation
@@ -4130,10 +4296,10 @@ module Aws::SecurityAgent
     end
 
     # Input for verifying ownership for a registered target domain in an
-    # agent space
+    # agent space.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain to verify.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/VerifyTargetDomainInput AWS API Documentation
@@ -4145,30 +4311,34 @@ module Aws::SecurityAgent
     end
 
     # Output for verifying ownership for a registered target domain in an
-    # agent space
+    # agent space.
     #
     # @!attribute [rw] target_domain_id
-    #   Unique identifier of the target domain
+    #   The unique identifier of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] domain_name
-    #   Name of the registered target domain
+    #   The domain name of the target domain.
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   Timestamp when the target domain was registered
+    #   The date and time the target domain was created, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   Timestamp when the target domain was last updated
+    #   The date and time the target domain was last updated, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] verified_at
-    #   Timestamp when the target domain was last successfully verified
+    #   The date and time the target domain was verified, in UTC format.
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   Current verification status of the registered target domain
+    #   The verification status of the target domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] verification_status_reason
+    #   The reason for the current target domain verification status.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/VerifyTargetDomainOutput AWS API Documentation
@@ -4179,23 +4349,27 @@ module Aws::SecurityAgent
       :created_at,
       :updated_at,
       :verified_at,
-      :status)
+      :status,
+      :verification_status_reason)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Customer VPC configuration that the Security Agent accesses
+    # The VPC configuration for a pentest, specifying the VPC, security
+    # groups, and subnets to use during testing.
     #
     # @!attribute [rw] vpc_arn
-    #   ARN or ID of the customer VPC
+    #   The Amazon Resource Name (ARN) of the VPC.
     #   @return [String]
     #
     # @!attribute [rw] security_group_arns
-    #   List of security group ARNs or IDs in the customer VPC
+    #   The Amazon Resource Names (ARNs) of the security groups for the VPC
+    #   configuration.
     #   @return [Array<String>]
     #
     # @!attribute [rw] subnet_arns
-    #   List of subnet ARNs or IDs in the customer VPC
+    #   The Amazon Resource Names (ARNs) of the subnets for the VPC
+    #   configuration.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/VpcConfig AWS API Documentation

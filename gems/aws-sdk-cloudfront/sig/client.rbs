@@ -1084,7 +1084,15 @@ module Aws
                                  ]?
                                }?
                              },
-                             function_code: ::String
+                             function_code: ::String,
+                             ?tags: {
+                               items: Array[
+                                 {
+                                   key: ::String,
+                                   value: ::String?
+                                 },
+                               ]?
+                             }
                            ) -> _CreateFunctionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionResponseSuccess
 
@@ -1153,6 +1161,14 @@ module Aws
                                     ?import_source: {
                                       source_type: ("S3"),
                                       source_arn: ::String
+                                    },
+                                    ?tags: {
+                                      items: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String?
+                                        },
+                                      ]?
                                     }
                                   ) -> _CreateKeyValueStoreResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyValueStoreResponseSuccess

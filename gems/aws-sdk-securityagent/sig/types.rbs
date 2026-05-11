@@ -330,7 +330,7 @@ module Aws::SecurityAgent
 
     class CreateTargetDomainInput
       attr_accessor target_domain_name: ::String
-      attr_accessor verification_method: ("DNS_TXT" | "HTTP_ROUTE")
+      attr_accessor verification_method: ("DNS_TXT" | "HTTP_ROUTE" | "PRIVATE_VPC")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -339,6 +339,7 @@ module Aws::SecurityAgent
       attr_accessor target_domain_id: ::String
       attr_accessor domain_name: ::String
       attr_accessor verification_status: ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+      attr_accessor verification_status_reason: ::String
       attr_accessor verification_details: Types::VerificationDetails
       attr_accessor created_at: ::Time
       attr_accessor verified_at: ::Time
@@ -1038,6 +1039,7 @@ module Aws::SecurityAgent
       attr_accessor target_domain_id: ::String
       attr_accessor domain_name: ::String
       attr_accessor verification_status: ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+      attr_accessor verification_status_reason: ::String
       attr_accessor verification_details: Types::VerificationDetails
       attr_accessor created_at: ::Time
       attr_accessor verified_at: ::Time
@@ -1181,7 +1183,7 @@ module Aws::SecurityAgent
 
     class UpdateTargetDomainInput
       attr_accessor target_domain_id: ::String
-      attr_accessor verification_method: ("DNS_TXT" | "HTTP_ROUTE")
+      attr_accessor verification_method: ("DNS_TXT" | "HTTP_ROUTE" | "PRIVATE_VPC")
       SENSITIVE: []
     end
 
@@ -1189,6 +1191,7 @@ module Aws::SecurityAgent
       attr_accessor target_domain_id: ::String
       attr_accessor domain_name: ::String
       attr_accessor verification_status: ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+      attr_accessor verification_status_reason: ::String
       attr_accessor verification_details: Types::VerificationDetails
       attr_accessor created_at: ::Time
       attr_accessor verified_at: ::Time
@@ -1219,7 +1222,7 @@ module Aws::SecurityAgent
     end
 
     class VerificationDetails
-      attr_accessor method: ("DNS_TXT" | "HTTP_ROUTE")
+      attr_accessor method: ("DNS_TXT" | "HTTP_ROUTE" | "PRIVATE_VPC")
       attr_accessor dns_txt: Types::DnsVerification
       attr_accessor http_route: Types::HttpVerification
       SENSITIVE: []
@@ -1237,6 +1240,7 @@ module Aws::SecurityAgent
       attr_accessor updated_at: ::Time
       attr_accessor verified_at: ::Time
       attr_accessor status: ("PENDING" | "VERIFIED" | "FAILED" | "UNREACHABLE")
+      attr_accessor verification_status_reason: ::String
       SENSITIVE: []
     end
 

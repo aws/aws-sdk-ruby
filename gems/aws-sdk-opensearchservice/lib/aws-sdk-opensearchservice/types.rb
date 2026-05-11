@@ -9021,13 +9021,21 @@ module Aws::OpenSearchService
     #   the domain.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] egress_enabled
+    #   Indicates whether egress traffic from the domain is routed through
+    #   the customer VPC. When `true`, outbound traffic flows through the
+    #   VPC. When `false`, outbound traffic goes through the public
+    #   internet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VPCDerivedInfo AWS API Documentation
     #
     class VPCDerivedInfo < Struct.new(
       :vpc_id,
       :subnet_ids,
       :availability_zones,
-      :security_group_ids)
+      :security_group_ids,
+      :egress_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9071,11 +9079,19 @@ module Aws::OpenSearchService
     #   Service uses the default security group for the VPC.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] egress_enabled
+    #   Controls whether egress traffic from the domain is routed through
+    #   the customer VPC. When `true`, outbound traffic flows through the
+    #   VPC. When `false`, outbound traffic goes through the public
+    #   internet.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/VPCOptions AWS API Documentation
     #
     class VPCOptions < Struct.new(
       :subnet_ids,
-      :security_group_ids)
+      :security_group_ids,
+      :egress_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

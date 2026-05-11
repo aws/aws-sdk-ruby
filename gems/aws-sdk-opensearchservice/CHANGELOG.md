@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-05-05)
+------------------
+
+* Feature - Amazon OpenSearch Service now supports VPC egress, enabling outbound traffic from your OpenSearch domain to route privately through your VPC instead of the public internet.
+
 1.97.0 (2026-04-27)
 ------------------
 

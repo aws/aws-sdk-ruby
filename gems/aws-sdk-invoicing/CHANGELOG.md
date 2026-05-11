@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.22.0 (2026-05-07)
+------------------
+
+* Feature - Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response
+
 1.21.0 (2026-03-18)
 ------------------
 

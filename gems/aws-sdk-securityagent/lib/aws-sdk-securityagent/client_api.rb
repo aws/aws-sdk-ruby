@@ -556,6 +556,7 @@ module Aws::SecurityAgent
     CreateTargetDomainOutput.add_member(:target_domain_id, Shapes::ShapeRef.new(shape: TargetDomainId, required: true, location_name: "targetDomainId"))
     CreateTargetDomainOutput.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainName"))
     CreateTargetDomainOutput.add_member(:verification_status, Shapes::ShapeRef.new(shape: TargetDomainStatus, required: true, location_name: "verificationStatus"))
+    CreateTargetDomainOutput.add_member(:verification_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "verificationStatusReason"))
     CreateTargetDomainOutput.add_member(:verification_details, Shapes::ShapeRef.new(shape: VerificationDetails, location_name: "verificationDetails"))
     CreateTargetDomainOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     CreateTargetDomainOutput.add_member(:verified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "verifiedAt"))
@@ -1120,6 +1121,7 @@ module Aws::SecurityAgent
     TargetDomain.add_member(:target_domain_id, Shapes::ShapeRef.new(shape: TargetDomainId, required: true, location_name: "targetDomainId"))
     TargetDomain.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainName"))
     TargetDomain.add_member(:verification_status, Shapes::ShapeRef.new(shape: TargetDomainStatus, location_name: "verificationStatus"))
+    TargetDomain.add_member(:verification_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "verificationStatusReason"))
     TargetDomain.add_member(:verification_details, Shapes::ShapeRef.new(shape: VerificationDetails, location_name: "verificationDetails"))
     TargetDomain.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TargetDomain.add_member(:verified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "verifiedAt"))
@@ -1250,6 +1252,7 @@ module Aws::SecurityAgent
     UpdateTargetDomainOutput.add_member(:target_domain_id, Shapes::ShapeRef.new(shape: TargetDomainId, required: true, location_name: "targetDomainId"))
     UpdateTargetDomainOutput.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainName"))
     UpdateTargetDomainOutput.add_member(:verification_status, Shapes::ShapeRef.new(shape: TargetDomainStatus, required: true, location_name: "verificationStatus"))
+    UpdateTargetDomainOutput.add_member(:verification_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "verificationStatusReason"))
     UpdateTargetDomainOutput.add_member(:verification_details, Shapes::ShapeRef.new(shape: VerificationDetails, location_name: "verificationDetails"))
     UpdateTargetDomainOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     UpdateTargetDomainOutput.add_member(:verified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "verifiedAt"))
@@ -1288,6 +1291,7 @@ module Aws::SecurityAgent
     VerifyTargetDomainOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     VerifyTargetDomainOutput.add_member(:verified_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "verifiedAt"))
     VerifyTargetDomainOutput.add_member(:status, Shapes::ShapeRef.new(shape: TargetDomainStatus, location_name: "status"))
+    VerifyTargetDomainOutput.add_member(:verification_status_reason, Shapes::ShapeRef.new(shape: String, location_name: "verificationStatusReason"))
     VerifyTargetDomainOutput.struct_class = Types::VerifyTargetDomainOutput
 
     VpcConfig.add_member(:vpc_arn, Shapes::ShapeRef.new(shape: VpcArn, location_name: "vpcArn"))
@@ -1661,6 +1665,7 @@ module Aws::SecurityAgent
         o.output = Shapes::ShapeRef.new(shape: ListIntegrationsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o[:pager] = Aws::Pager.new(

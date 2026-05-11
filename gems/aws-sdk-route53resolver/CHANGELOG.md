@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.96.0 (2026-05-07)
+------------------
+
+* Feature - Adds supports for DNS64 on inbound endpoints and IPv6 forwarding through the internet gateway (IGW) on outbound endpoints, making it easier to manage hybrid DNS across IPv4 and IPv6 networks.
+
 1.95.0 (2026-03-18)
 ------------------
 

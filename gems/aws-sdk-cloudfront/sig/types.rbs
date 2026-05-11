@@ -630,6 +630,7 @@ module Aws::CloudFront
       attr_accessor name: ::String
       attr_accessor function_config: Types::FunctionConfig
       attr_accessor function_code: ::String
+      attr_accessor tags: Types::Tags
       SENSITIVE: [:function_code]
     end
 
@@ -680,6 +681,7 @@ module Aws::CloudFront
       attr_accessor name: ::String
       attr_accessor comment: ::String
       attr_accessor import_source: Types::ImportSource
+      attr_accessor tags: Types::Tags
       SENSITIVE: []
     end
 

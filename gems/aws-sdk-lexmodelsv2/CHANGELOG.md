@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2026-05-06)
+------------------
+
+* Feature - Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.
+
 1.89.0 (2026-03-18)
 ------------------
 

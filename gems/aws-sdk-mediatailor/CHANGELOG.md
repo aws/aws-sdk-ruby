@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.118.0 (2026-05-05)
+------------------
+
+* Feature - Added support for Monetization Functions. Monetization Functions let you enrich ad requests with external data and transform session parameters using JSONata expressions, without deploying custom infrastructure.
+
 1.117.0 (2026-04-06)
 ------------------
 

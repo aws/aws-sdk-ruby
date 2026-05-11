@@ -1077,6 +1077,13 @@ module Aws::LexModelsV2
     # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
     #   Unified speech settings to configure for the new bot locale.
     #
+    # @option params [Types::AudioFillerSettings] :audio_filler_settings
+    #   Audio filler settings to configure for the new bot locale. When
+    #   enabled, Amazon Lex plays a brief background audio filler during
+    #   speech-to-speech interactions to mask processing delays. Requires
+    #   `unifiedSpeechSettings` (speech-to-speech) to be configured on the bot
+    #   locale.
+    #
     # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
     #   Speech-to-text settings to configure for the new bot locale.
     #
@@ -1100,6 +1107,7 @@ module Aws::LexModelsV2
     #   * {Types::CreateBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::CreateBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
     #   * {Types::CreateBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::CreateBotLocaleResponse#audio_filler_settings #audio_filler_settings} => Types::AudioFillerSettings
     #   * {Types::CreateBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::CreateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::CreateBotLocaleResponse#creation_date_time #creation_date_time} => Time
@@ -1123,6 +1131,13 @@ module Aws::LexModelsV2
     #         model_arn: "BedrockModelArn", # required
     #         voice_id: "VoiceId",
     #       },
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME", # accepts MELODY_CHIPPER_CHIME, MELODY_CURIOUS_CRAWL, MELODY_RISING_RIPPLE, MELODY_PATIENT_PING, MELODY_PONDERING_PONG, TYPING_KINETIC_KEYS, TYPING_QUIET_QWERTY
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1,
     #     },
     #     speech_recognition_settings: {
     #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
@@ -1199,6 +1214,11 @@ module Aws::LexModelsV2
     #   resp.voice_settings.voice_id #=> String
     #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
     #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.audio_filler_settings.enabled #=> Boolean
+    #   resp.audio_filler_settings.audio_type #=> String, one of "MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"
+    #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
     #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
@@ -3729,6 +3749,7 @@ module Aws::LexModelsV2
     #   * {Types::DescribeBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::DescribeBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
     #   * {Types::DescribeBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::DescribeBotLocaleResponse#audio_filler_settings #audio_filler_settings} => Types::AudioFillerSettings
     #   * {Types::DescribeBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::DescribeBotLocaleResponse#intents_count #intents_count} => Integer
     #   * {Types::DescribeBotLocaleResponse#slot_types_count #slot_types_count} => Integer
@@ -3762,6 +3783,11 @@ module Aws::LexModelsV2
     #   resp.voice_settings.voice_id #=> String
     #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
     #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.audio_filler_settings.enabled #=> Boolean
+    #   resp.audio_filler_settings.audio_type #=> String, one of "MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"
+    #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
     #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
@@ -4233,6 +4259,11 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.model_arn #=> String
     #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.enabled #=> Boolean
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.audio_type #=> String, one of "MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.start_delay_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -8803,6 +8834,13 @@ module Aws::LexModelsV2
     #             voice_id: "VoiceId",
     #           },
     #         },
+    #         audio_filler_settings: {
+    #           enabled: false,
+    #           audio_type: "MELODY_CHIPPER_CHIME", # accepts MELODY_CHIPPER_CHIME, MELODY_CURIOUS_CRAWL, MELODY_RISING_RIPPLE, MELODY_PATIENT_PING, MELODY_PONDERING_PONG, TYPING_KINETIC_KEYS, TYPING_QUIET_QWERTY
+    #           start_delay_in_milliseconds: 1,
+    #           minimum_play_duration_in_milliseconds: 1,
+    #           response_delivery_delay_in_milliseconds: 1,
+    #         },
     #       },
     #       custom_vocabulary_import_specification: {
     #         bot_id: "Id", # required
@@ -8856,6 +8894,11 @@ module Aws::LexModelsV2
     #   resp.resource_specification.bot_locale_import_specification.speech_detection_sensitivity #=> String, one of "Default", "HighNoiseTolerance", "MaximumNoiseTolerance"
     #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.model_arn #=> String
     #   resp.resource_specification.bot_locale_import_specification.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.enabled #=> Boolean
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.audio_type #=> String, one of "MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.start_delay_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
+    #   resp.resource_specification.bot_locale_import_specification.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_id #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.bot_version #=> String
     #   resp.resource_specification.custom_vocabulary_import_specification.locale_id #=> String
@@ -9471,6 +9514,11 @@ module Aws::LexModelsV2
     # @option params [Types::UnifiedSpeechSettings] :unified_speech_settings
     #   Updated unified speech settings to apply to the bot locale.
     #
+    # @option params [Types::AudioFillerSettings] :audio_filler_settings
+    #   Updated audio filler settings to apply to the bot locale. When
+    #   enabled, requires `unifiedSpeechSettings` (speech-to-speech) to be
+    #   configured on the bot locale.
+    #
     # @option params [Types::SpeechRecognitionSettings] :speech_recognition_settings
     #   Updated speech-to-text settings to apply to the bot locale.
     #
@@ -9496,6 +9544,7 @@ module Aws::LexModelsV2
     #   * {Types::UpdateBotLocaleResponse#nlu_intent_confidence_threshold #nlu_intent_confidence_threshold} => Float
     #   * {Types::UpdateBotLocaleResponse#voice_settings #voice_settings} => Types::VoiceSettings
     #   * {Types::UpdateBotLocaleResponse#unified_speech_settings #unified_speech_settings} => Types::UnifiedSpeechSettings
+    #   * {Types::UpdateBotLocaleResponse#audio_filler_settings #audio_filler_settings} => Types::AudioFillerSettings
     #   * {Types::UpdateBotLocaleResponse#speech_recognition_settings #speech_recognition_settings} => Types::SpeechRecognitionSettings
     #   * {Types::UpdateBotLocaleResponse#bot_locale_status #bot_locale_status} => String
     #   * {Types::UpdateBotLocaleResponse#failure_reasons #failure_reasons} => Array&lt;String&gt;
@@ -9522,6 +9571,13 @@ module Aws::LexModelsV2
     #         model_arn: "BedrockModelArn", # required
     #         voice_id: "VoiceId",
     #       },
+    #     },
+    #     audio_filler_settings: {
+    #       enabled: false,
+    #       audio_type: "MELODY_CHIPPER_CHIME", # accepts MELODY_CHIPPER_CHIME, MELODY_CURIOUS_CRAWL, MELODY_RISING_RIPPLE, MELODY_PATIENT_PING, MELODY_PONDERING_PONG, TYPING_KINETIC_KEYS, TYPING_QUIET_QWERTY
+    #       start_delay_in_milliseconds: 1,
+    #       minimum_play_duration_in_milliseconds: 1,
+    #       response_delivery_delay_in_milliseconds: 1,
     #     },
     #     speech_recognition_settings: {
     #       speech_model_preference: "Standard", # accepts Standard, Neural, Deepgram
@@ -9598,6 +9654,11 @@ module Aws::LexModelsV2
     #   resp.voice_settings.voice_id #=> String
     #   resp.unified_speech_settings.speech_foundation_model.model_arn #=> String
     #   resp.unified_speech_settings.speech_foundation_model.voice_id #=> String
+    #   resp.audio_filler_settings.enabled #=> Boolean
+    #   resp.audio_filler_settings.audio_type #=> String, one of "MELODY_CHIPPER_CHIME", "MELODY_CURIOUS_CRAWL", "MELODY_RISING_RIPPLE", "MELODY_PATIENT_PING", "MELODY_PONDERING_PONG", "TYPING_KINETIC_KEYS", "TYPING_QUIET_QWERTY"
+    #   resp.audio_filler_settings.start_delay_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.minimum_play_duration_in_milliseconds #=> Integer
+    #   resp.audio_filler_settings.response_delivery_delay_in_milliseconds #=> Integer
     #   resp.speech_recognition_settings.speech_model_preference #=> String, one of "Standard", "Neural", "Deepgram"
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.api_token_secret_arn #=> String
     #   resp.speech_recognition_settings.speech_model_config.deepgram_config.model_id #=> String
@@ -10987,7 +11048,7 @@ module Aws::LexModelsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lexmodelsv2'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

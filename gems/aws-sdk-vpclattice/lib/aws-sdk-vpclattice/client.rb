@@ -993,6 +993,23 @@ module Aws::VPCLattice
     # @option params [Integer] :ipv4_addresses_per_eni
     #   The number of IPv4 addresses in each ENI for the resource gateway.
     #
+    # @option params [String] :resource_config_dns_resolution
+    #   Indicates how DNS is resolved for resource configurations associated
+    #   to this resource gateway. ResourceConfigDnsResolution is set at
+    #   creation time and cannot be changed.
+    #
+    #   * `IN_VPC` - DNS resolution occurs privately within the resource
+    #     gateway's VPC. DNS queries for resources behind this resource
+    #     gateway resolve using the DNS resolvers defined in the VPC's DHCP
+    #     option sets. Use this when your resource domain names are hosted in
+    #     private Route 53 hosted zones or on-premises DNS servers reachable
+    #     from the VPC.
+    #
+    #   * `PUBLIC` - DNS resolution occurs against public DNS resolvers. DNS
+    #     queries for resources behind this resource gateway resolve using
+    #     standard public DNS. Use this when your resource domain names are
+    #     publicly resolvable.
+    #
     # @option params [Hash<String,String>] :tags
     #   The tags for the resource gateway.
     #
@@ -1007,6 +1024,7 @@ module Aws::VPCLattice
     #   * {Types::CreateResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
     #   * {Types::CreateResourceGatewayResponse#ip_address_type #ip_address_type} => String
     #   * {Types::CreateResourceGatewayResponse#ipv4_addresses_per_eni #ipv4_addresses_per_eni} => Integer
+    #   * {Types::CreateResourceGatewayResponse#resource_config_dns_resolution #resource_config_dns_resolution} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -1018,6 +1036,7 @@ module Aws::VPCLattice
     #     security_group_ids: ["SecurityGroupId"],
     #     ip_address_type: "IPV4", # accepts IPV4, IPV6, DUALSTACK
     #     ipv4_addresses_per_eni: 1,
+    #     resource_config_dns_resolution: "IN_VPC", # accepts IN_VPC, PUBLIC
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -1036,6 +1055,7 @@ module Aws::VPCLattice
     #   resp.security_group_ids[0] #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.ipv4_addresses_per_eni #=> Integer
+    #   resp.resource_config_dns_resolution #=> String, one of "IN_VPC", "PUBLIC"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/vpc-lattice-2022-11-30/CreateResourceGateway AWS API Documentation
     #
@@ -2479,9 +2499,12 @@ module Aws::VPCLattice
     #   * {Types::GetResourceGatewayResponse#status #status} => String
     #   * {Types::GetResourceGatewayResponse#vpc_id #vpc_id} => String
     #   * {Types::GetResourceGatewayResponse#subnet_ids #subnet_ids} => Array&lt;String&gt;
+    #   * {Types::GetResourceGatewayResponse#service_managed #service_managed} => Boolean
+    #   * {Types::GetResourceGatewayResponse#managed_by #managed_by} => String
     #   * {Types::GetResourceGatewayResponse#security_group_ids #security_group_ids} => Array&lt;String&gt;
     #   * {Types::GetResourceGatewayResponse#ip_address_type #ip_address_type} => String
     #   * {Types::GetResourceGatewayResponse#ipv4_addresses_per_eni #ipv4_addresses_per_eni} => Integer
+    #   * {Types::GetResourceGatewayResponse#resource_config_dns_resolution #resource_config_dns_resolution} => String
     #   * {Types::GetResourceGatewayResponse#created_at #created_at} => Time
     #   * {Types::GetResourceGatewayResponse#last_updated_at #last_updated_at} => Time
     #
@@ -2500,10 +2523,13 @@ module Aws::VPCLattice
     #   resp.vpc_id #=> String
     #   resp.subnet_ids #=> Array
     #   resp.subnet_ids[0] #=> String
+    #   resp.service_managed #=> Boolean
+    #   resp.managed_by #=> String
     #   resp.security_group_ids #=> Array
     #   resp.security_group_ids[0] #=> String
     #   resp.ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.ipv4_addresses_per_eni #=> Integer
+    #   resp.resource_config_dns_resolution #=> String, one of "IN_VPC", "PUBLIC"
     #   resp.created_at #=> Time
     #   resp.last_updated_at #=> Time
     #
@@ -3264,6 +3290,7 @@ module Aws::VPCLattice
     #   resp.items[0].security_group_ids[0] #=> String
     #   resp.items[0].ip_address_type #=> String, one of "IPV4", "IPV6", "DUALSTACK"
     #   resp.items[0].ipv4_addresses_per_eni #=> Integer
+    #   resp.items[0].resource_config_dns_resolution #=> String, one of "IN_VPC", "PUBLIC"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].last_updated_at #=> Time
     #   resp.next_token #=> String
@@ -4616,7 +4643,7 @@ module Aws::VPCLattice
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-vpclattice'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

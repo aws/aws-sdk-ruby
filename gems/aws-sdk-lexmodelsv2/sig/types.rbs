@@ -275,6 +275,15 @@ module Aws::LexModelsV2
       SENSITIVE: []
     end
 
+    class AudioFillerSettings
+      attr_accessor enabled: bool
+      attr_accessor audio_type: ("MELODY_CHIPPER_CHIME" | "MELODY_CURIOUS_CRAWL" | "MELODY_RISING_RIPPLE" | "MELODY_PATIENT_PING" | "MELODY_PONDERING_PONG" | "TYPING_KINETIC_KEYS" | "TYPING_QUIET_QWERTY")
+      attr_accessor start_delay_in_milliseconds: ::Integer
+      attr_accessor minimum_play_duration_in_milliseconds: ::Integer
+      attr_accessor response_delivery_delay_in_milliseconds: ::Integer
+      SENSITIVE: []
+    end
+
     class AudioLogDestination
       attr_accessor s3_bucket: Types::S3BucketLogDestination
       SENSITIVE: []
@@ -479,6 +488,7 @@ module Aws::LexModelsV2
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       SENSITIVE: []
     end
 
@@ -774,6 +784,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
@@ -789,6 +800,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor creation_date_time: ::Time
@@ -1344,6 +1356,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor intents_count: ::Integer
       attr_accessor slot_types_count: ::Integer
@@ -3516,6 +3529,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor generative_ai_settings: Types::GenerativeAISettings
       attr_accessor speech_detection_sensitivity: ("Default" | "HighNoiseTolerance" | "MaximumNoiseTolerance")
@@ -3531,6 +3545,7 @@ module Aws::LexModelsV2
       attr_accessor nlu_intent_confidence_threshold: ::Float
       attr_accessor voice_settings: Types::VoiceSettings
       attr_accessor unified_speech_settings: Types::UnifiedSpeechSettings
+      attr_accessor audio_filler_settings: Types::AudioFillerSettings
       attr_accessor speech_recognition_settings: Types::SpeechRecognitionSettings
       attr_accessor bot_locale_status: ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
       attr_accessor failure_reasons: ::Array[::String]

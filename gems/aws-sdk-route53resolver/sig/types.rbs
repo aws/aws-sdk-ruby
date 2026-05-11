@@ -143,6 +143,8 @@ module Aws::Route53Resolver
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
       attr_accessor rni_enhanced_metrics_enabled: bool
       attr_accessor target_name_server_metrics_enabled: bool
+      attr_accessor dns_64_enabled: bool
+      attr_accessor ipv_6_internet_access_enabled: bool
       SENSITIVE: []
     end
 
@@ -930,6 +932,8 @@ module Aws::Route53Resolver
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
       attr_accessor rni_enhanced_metrics_enabled: bool
       attr_accessor target_name_server_metrics_enabled: bool
+      attr_accessor dns_64_enabled: bool
+      attr_accessor ipv_6_internet_access_enabled: bool
       SENSITIVE: []
     end
 
@@ -1177,6 +1181,8 @@ module Aws::Route53Resolver
       attr_accessor protocols: ::Array[("DoH" | "Do53" | "DoH-FIPS")]
       attr_accessor rni_enhanced_metrics_enabled: bool
       attr_accessor target_name_server_metrics_enabled: bool
+      attr_accessor dns_64_enabled: bool
+      attr_accessor ipv_6_internet_access_enabled: bool
       SENSITIVE: []
     end
 

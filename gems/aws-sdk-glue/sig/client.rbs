@@ -5051,7 +5051,8 @@ module Aws
                                                            }?
                                                          },
                                                          started_before: ::Time?,
-                                                         started_after: ::Time?
+                                                         started_after: ::Time?,
+                                                         ruleset_name: ::String?
                                                        },
                                                        ?next_token: ::String,
                                                        ?max_results: ::Integer
@@ -6167,7 +6168,8 @@ module Aws
                                                        ?additional_run_options: {
                                                          cloud_watch_metrics_enabled: bool?,
                                                          results_s3_prefix: ::String?,
-                                                         composite_rule_evaluation_method: ("COLUMN" | "ROW")?
+                                                         composite_rule_evaluation_method: ("COLUMN" | "ROW")?,
+                                                         custom_log_group_prefix: ::String?
                                                        },
                                                        ruleset_names: Array[::String],
                                                        ?additional_data_sources: Hash[::String, {

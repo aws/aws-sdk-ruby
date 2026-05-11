@@ -220,6 +220,7 @@ module Aws::VPCLattice
     RegisterTargetsRequestTargetsList = Shapes::ListShape.new(name: 'RegisterTargetsRequestTargetsList')
     RegisterTargetsResponse = Shapes::StructureShape.new(name: 'RegisterTargetsResponse')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+    ResourceConfigDnsResolution = Shapes::StringShape.new(name: 'ResourceConfigDnsResolution')
     ResourceConfigurationArn = Shapes::StringShape.new(name: 'ResourceConfigurationArn')
     ResourceConfigurationDefinition = Shapes::UnionShape.new(name: 'ResourceConfigurationDefinition')
     ResourceConfigurationId = Shapes::StringShape.new(name: 'ResourceConfigurationId')
@@ -479,6 +480,7 @@ module Aws::VPCLattice
     CreateResourceGatewayRequest.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: CreateResourceGatewayRequestSecurityGroupIdsList, location_name: "securityGroupIds"))
     CreateResourceGatewayRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceGatewayIpAddressType, location_name: "ipAddressType"))
     CreateResourceGatewayRequest.add_member(:ipv4_addresses_per_eni, Shapes::ShapeRef.new(shape: Ipv4AddressesPerEni, location_name: "ipv4AddressesPerEni"))
+    CreateResourceGatewayRequest.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     CreateResourceGatewayRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
     CreateResourceGatewayRequest.struct_class = Types::CreateResourceGatewayRequest
 
@@ -493,6 +495,7 @@ module Aws::VPCLattice
     CreateResourceGatewayResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
     CreateResourceGatewayResponse.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceGatewayIpAddressType, location_name: "ipAddressType"))
     CreateResourceGatewayResponse.add_member(:ipv4_addresses_per_eni, Shapes::ShapeRef.new(shape: Ipv4AddressesPerEni, location_name: "ipv4AddressesPerEni"))
+    CreateResourceGatewayResponse.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     CreateResourceGatewayResponse.struct_class = Types::CreateResourceGatewayResponse
 
     CreateRuleRequest.add_member(:service_identifier, Shapes::ShapeRef.new(shape: ServiceIdentifier, required: true, location: "uri", location_name: "serviceIdentifier"))
@@ -836,9 +839,12 @@ module Aws::VPCLattice
     GetResourceGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResourceGatewayStatus, location_name: "status"))
     GetResourceGatewayResponse.add_member(:vpc_id, Shapes::ShapeRef.new(shape: VpcId, location_name: "vpcId"))
     GetResourceGatewayResponse.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetList, location_name: "subnetIds"))
+    GetResourceGatewayResponse.add_member(:service_managed, Shapes::ShapeRef.new(shape: Boolean, location_name: "serviceManaged"))
+    GetResourceGatewayResponse.add_member(:managed_by, Shapes::ShapeRef.new(shape: String, location_name: "managedBy"))
     GetResourceGatewayResponse.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
     GetResourceGatewayResponse.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceGatewayIpAddressType, location_name: "ipAddressType"))
     GetResourceGatewayResponse.add_member(:ipv4_addresses_per_eni, Shapes::ShapeRef.new(shape: Ipv4AddressesPerEni, location_name: "ipv4AddressesPerEni"))
+    GetResourceGatewayResponse.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     GetResourceGatewayResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     GetResourceGatewayResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     GetResourceGatewayResponse.struct_class = Types::GetResourceGatewayResponse
@@ -1276,6 +1282,7 @@ module Aws::VPCLattice
     ResourceGatewaySummary.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: SecurityGroupList, location_name: "securityGroupIds"))
     ResourceGatewaySummary.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: ResourceGatewayIpAddressType, location_name: "ipAddressType"))
     ResourceGatewaySummary.add_member(:ipv4_addresses_per_eni, Shapes::ShapeRef.new(shape: Ipv4AddressesPerEni, location_name: "ipv4AddressesPerEni"))
+    ResourceGatewaySummary.add_member(:resource_config_dns_resolution, Shapes::ShapeRef.new(shape: ResourceConfigDnsResolution, location_name: "resourceConfigDnsResolution"))
     ResourceGatewaySummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     ResourceGatewaySummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     ResourceGatewaySummary.struct_class = Types::ResourceGatewaySummary

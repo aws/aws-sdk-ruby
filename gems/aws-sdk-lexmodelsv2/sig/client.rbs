@@ -278,6 +278,7 @@ module Aws
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
         def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def audio_filler_settings: () -> Types::AudioFillerSettings
         def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def creation_date_time: () -> ::Time
@@ -300,6 +301,13 @@ module Aws
                                    model_arn: ::String,
                                    voice_id: ::String?
                                  }
+                               },
+                               ?audio_filler_settings: {
+                                 enabled: bool?,
+                                 audio_type: ("MELODY_CHIPPER_CHIME" | "MELODY_CURIOUS_CRAWL" | "MELODY_RISING_RIPPLE" | "MELODY_PATIENT_PING" | "MELODY_PONDERING_PONG" | "TYPING_KINETIC_KEYS" | "TYPING_QUIET_QWERTY")?,
+                                 start_delay_in_milliseconds: ::Integer?,
+                                 minimum_play_duration_in_milliseconds: ::Integer?,
+                                 response_delivery_delay_in_milliseconds: ::Integer?
                                },
                                ?speech_recognition_settings: {
                                  speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
@@ -6121,6 +6129,7 @@ module Aws
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
         def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def audio_filler_settings: () -> Types::AudioFillerSettings
         def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def intents_count: () -> ::Integer
         def slot_types_count: () -> ::Integer
@@ -7410,6 +7419,13 @@ module Aws
                                   model_arn: ::String,
                                   voice_id: ::String?
                                 }
+                              }?,
+                              audio_filler_settings: {
+                                enabled: bool?,
+                                audio_type: ("MELODY_CHIPPER_CHIME" | "MELODY_CURIOUS_CRAWL" | "MELODY_RISING_RIPPLE" | "MELODY_PATIENT_PING" | "MELODY_PONDERING_PONG" | "TYPING_KINETIC_KEYS" | "TYPING_QUIET_QWERTY")?,
+                                start_delay_in_milliseconds: ::Integer?,
+                                minimum_play_duration_in_milliseconds: ::Integer?,
+                                response_delivery_delay_in_milliseconds: ::Integer?
                               }?
                             }?,
                             custom_vocabulary_import_specification: {
@@ -7667,6 +7683,7 @@ module Aws
         def nlu_intent_confidence_threshold: () -> ::Float
         def voice_settings: () -> Types::VoiceSettings
         def unified_speech_settings: () -> Types::UnifiedSpeechSettings
+        def audio_filler_settings: () -> Types::AudioFillerSettings
         def speech_recognition_settings: () -> Types::SpeechRecognitionSettings
         def bot_locale_status: () -> ("Creating" | "Building" | "Built" | "ReadyExpressTesting" | "Failed" | "Deleting" | "NotBuilt" | "Importing" | "Processing")
         def failure_reasons: () -> ::Array[::String]
@@ -7692,6 +7709,13 @@ module Aws
                                    model_arn: ::String,
                                    voice_id: ::String?
                                  }
+                               },
+                               ?audio_filler_settings: {
+                                 enabled: bool?,
+                                 audio_type: ("MELODY_CHIPPER_CHIME" | "MELODY_CURIOUS_CRAWL" | "MELODY_RISING_RIPPLE" | "MELODY_PATIENT_PING" | "MELODY_PONDERING_PONG" | "TYPING_KINETIC_KEYS" | "TYPING_QUIET_QWERTY")?,
+                                 start_delay_in_milliseconds: ::Integer?,
+                                 minimum_play_duration_in_milliseconds: ::Integer?,
+                                 response_delivery_delay_in_milliseconds: ::Integer?
                                },
                                ?speech_recognition_settings: {
                                  speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,

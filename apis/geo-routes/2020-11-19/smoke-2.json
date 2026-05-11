@@ -1,13 +1,11 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "CalculateIsolinesSuccess",
-    "operationName" : "CalculateIsolines",
+    "id" : "CalculateRoutesSuccess",
+    "operationName" : "CalculateRoutes",
     "input" : {
-      "Thresholds" : {
-        "Time" : [ 60 ]
-      },
-      "Origin" : [ -123.116796, 49.281476 ]
+      "Origin" : [ -123.253374, 49.351673 ],
+      "Destination" : [ -123.930756, 49.1314 ]
     },
     "expectation" : {
       "success" : { }
@@ -19,11 +17,14 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "CalculateRoutesSuccess",
-    "operationName" : "CalculateRoutes",
+    "id" : "SnapToRoadsSuccess",
+    "operationName" : "SnapToRoads",
     "input" : {
-      "Origin" : [ -123.253374, 49.351673 ],
-      "Destination" : [ -123.930756, 49.1314 ]
+      "TracePoints" : [ {
+        "Position" : [ 8.53404, 50.16364 ]
+      }, {
+        "Position" : [ 8.53379056, 50.16352417 ]
+      } ]
     },
     "expectation" : {
       "success" : { }
@@ -58,14 +59,11 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SnapToRoadsSuccess",
-    "operationName" : "SnapToRoads",
+    "id" : "OptimizeWaypointsSuccess",
+    "operationName" : "OptimizeWaypoints",
     "input" : {
-      "TracePoints" : [ {
-        "Position" : [ 8.53404, 50.16364 ]
-      }, {
-        "Position" : [ 8.53379056, 50.16352417 ]
-      } ]
+      "Origin" : [ -123.253374, 49.351673 ],
+      "Destination" : [ -123.930756, 49.1314 ]
     },
     "expectation" : {
       "success" : { }
@@ -77,11 +75,13 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "OptimizeWaypointsSuccess",
-    "operationName" : "OptimizeWaypoints",
+    "id" : "CalculateIsolinesSuccess",
+    "operationName" : "CalculateIsolines",
     "input" : {
-      "Origin" : [ -123.253374, 49.351673 ],
-      "Destination" : [ -123.930756, 49.1314 ]
+      "Thresholds" : {
+        "Time" : [ 60 ]
+      },
+      "Origin" : [ -123.116796, 49.281476 ]
     },
     "expectation" : {
       "success" : { }

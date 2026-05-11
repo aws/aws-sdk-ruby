@@ -777,7 +777,7 @@ module Aws::Route53Domains
     # 3.  When the registration has been deleted, we'll send you a
     #     confirmation to the registrant contact. The email will come from
     #     `noreply@domainnameverification.net` or
-    #     `noreply@registrar.amazon.com`.
+    #     `noreply@emailverification.info` or `noreply@registrar.amazon`.
     #
     #
     #
@@ -1221,7 +1221,8 @@ module Aws::Route53Domains
     #
     # @option params [required, Integer] :suggestion_count
     #   The number of suggested domain names that you want Route 53 to return.
-    #   Specify a value between 1 and 50.
+    #   Specify a value between 1 and 50. Note that fewer than the requested
+    #   number might be returned.
     #
     # @option params [required, Boolean] :only_available
     #   If `OnlyAvailable` is `true`, Route 53 returns only domain names that
@@ -2159,12 +2160,19 @@ module Aws::Route53Domains
     # @option params [String] :idn_lang_code
     #   Reserved for future use.
     #
-    # @option params [required, Integer] :duration_in_years
-    #   The number of years that you want to register the domain for. Domains
-    #   are registered for a minimum of one year. The maximum period depends
-    #   on the top-level domain.
+    # @option params [Integer] :duration_in_years
+    #   Reserved for future use.
+    #
+    #   Currently, the effect of a domain transfer on the registration period
+    #   varies by TLD. For information about how transferring a domain affects
+    #   the expiration date, see the Transfer Term column in the pricing
+    #   information at [Amazon Route 53 Pricing][1].
     #
     #   Default: 1
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/route53/pricing/
     #
     # @option params [Array<Types::Nameserver>] :nameservers
     #   Contains details for the host and glue IP addresses.
@@ -2255,7 +2263,7 @@ module Aws::Route53Domains
     #   resp = client.transfer_domain({
     #     domain_name: "DomainName", # required
     #     idn_lang_code: "LangCode",
-    #     duration_in_years: 1, # required
+    #     duration_in_years: 1,
     #     nameservers: [
     #       {
     #         name: "HostName", # required
@@ -2860,7 +2868,7 @@ module Aws::Route53Domains
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.92.0'
+      context[:gem_version] = '1.93.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

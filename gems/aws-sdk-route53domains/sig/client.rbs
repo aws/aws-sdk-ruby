@@ -509,7 +509,7 @@ module Aws
       def transfer_domain: (
                              domain_name: ::String,
                              ?idn_lang_code: ::String,
-                             duration_in_years: ::Integer,
+                             ?duration_in_years: ::Integer,
                              ?nameservers: Array[
                                {
                                  name: ::String,

@@ -148,6 +148,7 @@ module Aws::Invoicing
 
     class Entity
       attr_accessor invoicing_entity: ::String
+      attr_accessor billing_entity: ("AWS" | "AWS_MARKETPLACE")
       SENSITIVE: []
     end
 
@@ -246,6 +247,7 @@ module Aws::Invoicing
       attr_accessor time_interval: Types::DateInterval
       attr_accessor billing_period: Types::BillingPeriod
       attr_accessor invoicing_entity: ::String
+      attr_accessor receiver_role: ("SELLER" | "RESELLER" | "BUYER")
       SENSITIVE: []
     end
 
@@ -260,11 +262,19 @@ module Aws::Invoicing
       attr_accessor invoice_id: ::String
       attr_accessor issued_date: ::Time
       attr_accessor due_date: ::Time
+      attr_accessor bill_source_accounts: ::Array[::String]
+      attr_accessor bill_source_accounts_total_count: ::Integer
+      attr_accessor receiver_role: ("SELLER" | "RESELLER" | "BUYER")
       attr_accessor entity: Types::Entity
       attr_accessor billing_period: Types::BillingPeriod
-      attr_accessor invoice_type: ("INVOICE" | "CREDIT_MEMO")
+      attr_accessor invoice_frequency: ("ONE_TIME" | "RECURRING")
+      attr_accessor bill_type: ("ANNIVERSARY" | "PURCHASE" | "REFUND")
+      attr_accessor invoice_type: ("INVOICE" | "CREDIT_MEMO" | "PAYMENT_RECEIPT")
+      attr_accessor commercial_invoice_id: ::String
       attr_accessor original_invoice_id: ::String
       attr_accessor purchase_order_number: ::String
+      attr_accessor einvoice_delivery_status: ("DELIVERED" | "NOT_DELIVERED")
+      attr_accessor tax_authority_status: ("ISSUED" | "CANCELLED")
       attr_accessor base_currency_amount: Types::InvoiceCurrencyAmount
       attr_accessor tax_currency_amount: Types::InvoiceCurrencyAmount
       attr_accessor payment_currency_amount: Types::InvoiceCurrencyAmount
@@ -447,6 +457,8 @@ module Aws::Invoicing
     end
 
     class SupplementalDocument
+      attr_accessor document_type: ("GOVERNMENT_INVOICE" | "TAX_E_INVOICE" | "PAYMENT_RECEIPT" | "SUPPLEMENT")
+      attr_accessor document_id: ::String
       attr_accessor document_url: ::String
       attr_accessor document_url_expiration_date: ::Time
       SENSITIVE: []

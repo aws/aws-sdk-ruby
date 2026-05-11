@@ -459,6 +459,7 @@ module Aws::GeoRoutes
     WaypointOptimizationDestinationOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDestinationOptions')
     WaypointOptimizationDriverOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDriverOptions')
     WaypointOptimizationDrivingDistanceOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationDrivingDistanceOptions')
+    WaypointOptimizationDrivingDistanceOptionsDrivingDistanceLong = Shapes::IntegerShape.new(name: 'WaypointOptimizationDrivingDistanceOptionsDrivingDistanceLong')
     WaypointOptimizationExclusionOptions = Shapes::StructureShape.new(name: 'WaypointOptimizationExclusionOptions')
     WaypointOptimizationFailedConstraint = Shapes::StructureShape.new(name: 'WaypointOptimizationFailedConstraint')
     WaypointOptimizationFailedConstraintList = Shapes::ListShape.new(name: 'WaypointOptimizationFailedConstraintList')
@@ -1767,7 +1768,7 @@ module Aws::GeoRoutes
     WaypointOptimizationDriverOptions.add_member(:treat_service_time_as, Shapes::ShapeRef.new(shape: WaypointOptimizationServiceTimeTreatment, location_name: "TreatServiceTimeAs"))
     WaypointOptimizationDriverOptions.struct_class = Types::WaypointOptimizationDriverOptions
 
-    WaypointOptimizationDrivingDistanceOptions.add_member(:driving_distance, Shapes::ShapeRef.new(shape: DistanceMeters, required: true, location_name: "DrivingDistance"))
+    WaypointOptimizationDrivingDistanceOptions.add_member(:driving_distance, Shapes::ShapeRef.new(shape: WaypointOptimizationDrivingDistanceOptionsDrivingDistanceLong, required: true, location_name: "DrivingDistance"))
     WaypointOptimizationDrivingDistanceOptions.struct_class = Types::WaypointOptimizationDrivingDistanceOptions
 
     WaypointOptimizationExclusionOptions.add_member(:countries, Shapes::ShapeRef.new(shape: CountryCodeList, required: true, location_name: "Countries"))

@@ -2662,6 +2662,7 @@ module Aws::MediaLive
       attr_accessor active_motion_graphics_uri: ::String
       attr_accessor pipeline_id: ::String
       attr_accessor channel_engine_version: Types::ChannelEngineVersionResponse
+      attr_accessor media_connect_router_output_connection_map: ::Hash[::String, Types::MediaConnectRouterOutputConnection]
       SENSITIVE: []
     end
 
@@ -5995,6 +5996,11 @@ module Aws::MediaLive
       attr_accessor connected_router_inputs: Types::MediaConnectRouterOutputConnectionMap
       attr_accessor container_settings: Types::MediaConnectRouterContainerSettings
       attr_accessor destination: Types::OutputLocationRef
+      SENSITIVE: []
+    end
+
+    class MediaConnectRouterOutputConnection
+      attr_accessor router_input_arn: ::String
       SENSITIVE: []
     end
   end

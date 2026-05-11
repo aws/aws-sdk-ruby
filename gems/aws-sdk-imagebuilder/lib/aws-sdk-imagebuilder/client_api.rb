@@ -1379,7 +1379,7 @@ module Aws::Imagebuilder
     ImportComponentResponse.add_member(:component_build_version_arn, Shapes::ShapeRef.new(shape: ComponentBuildVersionArn, location_name: "componentBuildVersionArn"))
     ImportComponentResponse.struct_class = Types::ImportComponentResponse
 
-    ImportDiskImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "name"))
+    ImportDiskImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     ImportDiskImageRequest.add_member(:semantic_version, Shapes::ShapeRef.new(shape: VersionNumber, required: true, location_name: "semanticVersion"))
     ImportDiskImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "description"))
     ImportDiskImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "platform"))
@@ -2924,6 +2924,8 @@ module Aws::Imagebuilder
         o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:import_vm_image, Seahorse::Model::Operation.new.tap do |o|

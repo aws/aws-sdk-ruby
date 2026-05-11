@@ -1129,8 +1129,8 @@ module Aws::MediaTailor
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the prefetch schedule. Tags are key-value
-    #   pairs that you can associate with Amazon resources to help with
+    #   The tags assigned to the prefetch schedule. Tags are key-value pairs
+    #   that you can associate with Amazon resources to help with
     #   organization, access control, and cost tracking. For more
     #   information, see [Tagging AWS Elemental MediaTailor Resources][1].
     #
@@ -1263,7 +1263,7 @@ module Aws::MediaTailor
     #   @return [Array<Types::AudienceMedia>]
     #
     # @!attribute [rw] tags
-    #   The tags to assign to the program. Tags are key-value pairs that you
+    #   The tags assigned to the program. Tags are key-value pairs that you
     #   can associate with Amazon resources to help with organization,
     #   access control, and cost tracking. For more information, see
     #   [Tagging AWS Elemental MediaTailor Resources][1].
@@ -1488,6 +1488,43 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # The configuration for a `CUSTOM_OUTPUT` function. MediaTailor
+    # evaluates the output expressions against the current session state and
+    # commits the results as output bindings. `CUSTOM_OUTPUT` functions do
+    # not make external calls. For more information, see [CUSTOM\_OUTPUT][1]
+    # in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-custom-output.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. Set this to `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings. Each key is a namespaced output path (such
+    #   as `player_params.device_type` or `temp.variant`), and each value is
+    #   an expression that MediaTailor evaluates at runtime against the
+    #   current session state. For more information about expression syntax,
+    #   see [JSONata expression reference][1] in the *MediaTailor User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/CustomOutputConfiguration AWS API Documentation
+    #
+    class CustomOutputConfiguration < Struct.new(
+      :runtime,
+      :output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for DASH content.
     #
     # @!attribute [rw] manifest_endpoint_prefix
@@ -1647,6 +1684,22 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteChannelResponse AWS API Documentation
     #
     class DeleteChannelResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] function_id
+    #   The identifier of the function to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteFunctionRequest AWS API Documentation
+    #
+    class DeleteFunctionRequest < Struct.new(
+      :function_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteFunctionResponse AWS API Documentation
+    #
+    class DeleteFunctionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] live_source_name
     #   The name of the live source.
@@ -2166,6 +2219,86 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # -- Define Mixin --
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_request_configuration
+    #   The configuration for an `HTTP_REQUEST` function.
+    #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] custom_output_configuration
+    #   The configuration for a `CUSTOM_OUTPUT` function.
+    #   @return [Types::CustomOutputConfiguration]
+    #
+    # @!attribute [rw] sequential_executor_configuration
+    #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
+    #   @return [Types::SequentialExecutorConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the function. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/Function AWS API Documentation
+    #
+    class Function < Struct.new(
+      :function_id,
+      :function_type,
+      :description,
+      :http_request_configuration,
+      :custom_output_configuration,
+      :sequential_executor_configuration,
+      :tags,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a child function within a `SEQUENTIAL_EXECUTOR`
+    # function.
+    #
+    # @!attribute [rw] run_condition
+    #   An optional expression that evaluates to a boolean. MediaTailor
+    #   evaluates this expression immediately before running the step, using
+    #   the accumulated state at that point in the sequence. If the
+    #   expression evaluates to `false`, MediaTailor skips the step and
+    #   moves to the next one. If omitted, the step always runs.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the child function to execute in this step.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/FunctionRef AWS API Documentation
+    #
+    class FunctionRef < Struct.new(
+      :run_condition,
+      :function_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] channel_name
     #   The name of the channel associated with this Channel Policy.
     #   @return [String]
@@ -2252,6 +2385,76 @@ module Aws::MediaTailor
     class GetChannelScheduleResponse < Struct.new(
       :items,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # -- Request/Response DataStructures --
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetFunctionRequest AWS API Documentation
+    #
+    class GetFunctionRequest < Struct.new(
+      :function_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # -- Define Mixin --
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_request_configuration
+    #   The configuration for an `HTTP_REQUEST` function.
+    #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] custom_output_configuration
+    #   The configuration for a `CUSTOM_OUTPUT` function.
+    #   @return [Types::CustomOutputConfiguration]
+    #
+    # @!attribute [rw] sequential_executor_configuration
+    #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
+    #   @return [Types::SequentialExecutorConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the function. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetFunctionResponse AWS API Documentation
+    #
+    class GetFunctionResponse < Struct.new(
+      :function_id,
+      :function_type,
+      :description,
+      :http_request_configuration,
+      :custom_output_configuration,
+      :sequential_executor_configuration,
+      :tags,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2423,6 +2626,19 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] function_mapping
+    #   A map of lifecycle hook event names to function identifiers. The
+    #   function mapping specifies which function MediaTailor executes at
+    #   each lifecycle hook during ad insertion. Valid keys are
+    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfigurationResponse AWS API Documentation
     #
     class GetPlaybackConfigurationResponse < Struct.new(
@@ -2447,7 +2663,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      :ad_decision_server_configuration)
+      :ad_decision_server_configuration,
+      :function_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2666,6 +2883,70 @@ module Aws::MediaTailor
       include Aws::Structure
     end
 
+    # -- Function Configuration DataStructure
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. Set this to `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   A map of output bindings. Each key is a namespaced output path (such
+    #   as `player_params.device_type` or `temp.identity`), and each value
+    #   is an expression that MediaTailor evaluates at runtime. Output
+    #   expressions in an `HTTP_REQUEST` function can reference the
+    #   `response` object returned by the HTTP call. For more information
+    #   about expression syntax, see [JSONata expression reference][1] in
+    #   the *MediaTailor User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-jsonata.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] method_type
+    #   The HTTP method for the request. Valid values: `GET` and `POST`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_timeout_milliseconds
+    #   The maximum time, in milliseconds, that MediaTailor waits for a
+    #   response from the external service. If the call exceeds this
+    #   timeout, MediaTailor sets the response status code to `null` and
+    #   proceeds with output expression evaluation. Valid values: `100` to
+    #   `2000`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] url
+    #   An expression that evaluates to the request URL. Use `{%...%}`
+    #   delimiters for dynamic expressions. The maximum length after
+    #   evaluation is 2,048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] body
+    #   An expression that evaluates to the request body. Used with `POST`
+    #   requests. The maximum size after evaluation is 64 KB.
+    #   @return [String]
+    #
+    # @!attribute [rw] headers
+    #   A map of HTTP header names to expression values. MediaTailor
+    #   evaluates each header value expression at runtime and includes the
+    #   result in the outbound HTTP request. Maximum 50 headers.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/HttpRequestConfiguration AWS API Documentation
+    #
+    class HttpRequestConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :method_type,
+      :request_timeout_milliseconds,
+      :url,
+      :body,
+      :headers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # For `SCTE35_ENHANCED` output, defines a key and corresponding value.
     # MediaTailor generates these pairs within the `EXT-X-ASSET`tag.
     #
@@ -2800,6 +3081,69 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListChannelsResponse AWS API Documentation
     #
     class ListChannelsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of functions that you want MediaTailor to return
+    #   in response to the current request. If there are more than
+    #   `MaxResults` functions, use the value of `NextToken` in the response
+    #   to get the next page of results.
+    #
+    #   The default value is 100. MediaTailor uses token-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token returned by the list request when results exceed
+    #   the maximum allowed. Use the token to fetch the next page of
+    #   results.
+    #
+    #   For the first `ListFunctions` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListFunctionsRequest AWS API Documentation
+    #
+    class ListFunctionsRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of functions associated with your account in the current
+    #   Region.
+    #   @return [Array<Types::Function>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token returned by the list request when results exceed
+    #   the maximum allowed. Use the token to fetch the next page of
+    #   results.
+    #
+    #   For the first `ListFunctions` request, omit this value. For
+    #   subsequent requests, get the value of `NextToken` from the previous
+    #   response and specify that value for `NextToken` in the request.
+    #   Continue making requests until the response no longer includes a
+    #   `NextToken` value, which indicates that all results have been
+    #   retrieved.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListFunctionsResponse AWS API Documentation
+    #
+    class ListFunctionsResponse < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -3323,6 +3667,13 @@ module Aws::MediaTailor
     #
     # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/log-types.html
     #
+    # @!attribute [rw] publish_opt_in_event_types
+    #   Indicates that MediaTailor will emit the selected events in the logs
+    #   for playback sessions that are initialized with this configuration.
+    #   These events are not emitted by default and must be explicitly opted
+    #   in.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] exclude_event_types
     #   Indicates that MediaTailor won't emit the selected events in the
     #   logs for playback sessions that are initialized with this
@@ -3332,6 +3683,7 @@ module Aws::MediaTailor
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ManifestServiceInteractionLog AWS API Documentation
     #
     class ManifestServiceInteractionLog < Struct.new(
+      :publish_opt_in_event_types,
       :exclude_event_types)
       SENSITIVE = []
       include Aws::Structure
@@ -3501,6 +3853,19 @@ module Aws::MediaTailor
     #   requests.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] function_mapping
+    #   A map of lifecycle hook event names to function identifiers. The
+    #   function mapping specifies which function MediaTailor executes at
+    #   each lifecycle hook during ad insertion. Valid keys are
+    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PlaybackConfiguration AWS API Documentation
     #
     class PlaybackConfiguration < Struct.new(
@@ -3525,7 +3890,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      :ad_decision_server_configuration)
+      :ad_decision_server_configuration,
+      :function_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3737,6 +4103,133 @@ module Aws::MediaTailor
     #
     class PutChannelPolicyResponse < Aws::EmptyStructure; end
 
+    # -- Define Mixin --
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the function. The identifier must be unique within
+    #   your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_type
+    #   The type of the function. The function type determines what the
+    #   function can do at runtime. Valid values: `CUSTOM_OUTPUT` evaluates
+    #   expressions and produces output bindings with no external calls.
+    #   `HTTP_REQUEST` makes an HTTP call to an external service and
+    #   evaluates output expressions that can reference the response.
+    #   `SEQUENTIAL_EXECUTOR` runs a sequence of child functions in order,
+    #   passing data between steps through temporary data. For more
+    #   information, see [Function types and composition][1] in the
+    #   *MediaTailor User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_request_configuration
+    #   The configuration for an `HTTP_REQUEST` function. Specifies the HTTP
+    #   method, URL, headers, body, timeout, and output expressions.
+    #   Required when `FunctionType` is `HTTP_REQUEST`.
+    #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] custom_output_configuration
+    #   The configuration for a `CUSTOM_OUTPUT` function. Specifies the
+    #   runtime and output expressions. Required when `FunctionType` is
+    #   `CUSTOM_OUTPUT`.
+    #   @return [Types::CustomOutputConfiguration]
+    #
+    # @!attribute [rw] sequential_executor_configuration
+    #   The configuration for a `SEQUENTIAL_EXECUTOR` function. Specifies
+    #   the ordered list of child functions to execute, an optional output
+    #   block, and a timeout. Required when `FunctionType` is
+    #   `SEQUENTIAL_EXECUTOR`.
+    #   @return [Types::SequentialExecutorConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags to assign to the function. Tags are key-value pairs that
+    #   you can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutFunctionRequest AWS API Documentation
+    #
+    class PutFunctionRequest < Struct.new(
+      :function_id,
+      :function_type,
+      :description,
+      :http_request_configuration,
+      :custom_output_configuration,
+      :sequential_executor_configuration,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # -- Define Mixin --
+    #
+    # @!attribute [rw] function_id
+    #   The identifier of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] function_type
+    #   The type of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the function.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_request_configuration
+    #   The configuration for an `HTTP_REQUEST` function.
+    #   @return [Types::HttpRequestConfiguration]
+    #
+    # @!attribute [rw] custom_output_configuration
+    #   The configuration for a `CUSTOM_OUTPUT` function.
+    #   @return [Types::CustomOutputConfiguration]
+    #
+    # @!attribute [rw] sequential_executor_configuration
+    #   The configuration for a `SEQUENTIAL_EXECUTOR` function.
+    #   @return [Types::SequentialExecutorConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags assigned to the function. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization,
+    #   access control, and cost tracking. For more information, see
+    #   [Tagging AWS Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the function.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutFunctionResponse AWS API Documentation
+    #
+    class PutFunctionResponse < Struct.new(
+      :function_id,
+      :function_type,
+      :description,
+      :http_request_configuration,
+      :custom_output_configuration,
+      :sequential_executor_configuration,
+      :tags,
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] ad_decision_server_url
     #   The URL for the ad decision server (ADS). This includes the
     #   specification of static parameters and placeholders for dynamic
@@ -3869,6 +4362,19 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] function_mapping
+    #   A map of lifecycle hook event names to function identifiers. The
+    #   function mapping specifies which function MediaTailor executes at
+    #   each lifecycle hook during ad insertion. Valid keys are
+    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationRequest AWS API Documentation
     #
     class PutPlaybackConfigurationRequest < Struct.new(
@@ -3888,7 +4394,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      :ad_decision_server_configuration)
+      :ad_decision_server_configuration,
+      :function_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4049,6 +4556,19 @@ module Aws::MediaTailor
     #   body content, and compression options.
     #   @return [Types::AdDecisionServerConfiguration]
     #
+    # @!attribute [rw] function_mapping
+    #   A map of lifecycle hook event names to function identifiers. The
+    #   function mapping specifies which function MediaTailor executes at
+    #   each lifecycle hook during ad insertion. Valid keys are
+    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfigurationResponse AWS API Documentation
     #
     class PutPlaybackConfigurationResponse < Struct.new(
@@ -4073,7 +4593,8 @@ module Aws::MediaTailor
       :transcode_profile_name,
       :video_content_source_url,
       :ad_conditioning_configuration,
-      :ad_decision_server_configuration)
+      :ad_decision_server_configuration,
+      :function_mapping)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4505,6 +5026,54 @@ module Aws::MediaTailor
       :segments_expected,
       :sub_segment_num,
       :sub_segments_expected)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a `SEQUENTIAL_EXECUTOR` function. A
+    # `SEQUENTIAL_EXECUTOR` runs a sequence of child functions in order,
+    # passing data between steps through temporary data. For more
+    # information, see [SEQUENTIAL\_EXECUTOR][1] in the *MediaTailor User
+    # Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types-sequential-executor.html
+    #
+    # @!attribute [rw] runtime
+    #   The expression language used to evaluate expressions in the function
+    #   configuration. Set this to `JSONata`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output
+    #   An optional map of output bindings that controls which bindings the
+    #   sequence commits to the session state after all steps complete. If
+    #   omitted, MediaTailor commits all accumulated output bindings from
+    #   all child steps.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] function_list
+    #   An ordered list of 1 to 10 steps. Each step specifies a child
+    #   function to execute and an optional run condition expression that
+    #   controls whether the step runs. MediaTailor executes steps in order,
+    #   passing data between steps through temporary data.
+    #   @return [Array<Types::FunctionRef>]
+    #
+    # @!attribute [rw] timeout_milliseconds
+    #   The maximum time, in milliseconds, for the entire sequence to
+    #   complete. This timeout covers all steps, including any HTTP calls
+    #   made by child functions. If the sequence exceeds this timeout,
+    #   MediaTailor discards all output from the sequence and proceeds with
+    #   default behavior.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/SequentialExecutorConfiguration AWS API Documentation
+    #
+    class SequentialExecutorConfiguration < Struct.new(
+      :runtime,
+      :output,
+      :function_list,
+      :timeout_milliseconds)
       SENSITIVE = []
       include Aws::Structure
     end

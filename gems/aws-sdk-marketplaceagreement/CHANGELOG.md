@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2026-05-05)
+------------------
+
+* Feature - With this release, Agreements API provides a programmatic way to generate quotes, accept offers, track charges and entitlements, manage renewals and cancellations, and streamline operations entirely through APIs without navigating to the AWS Marketplace website or AWS Management Console.
+
 1.35.0 (2026-03-31)
 ------------------
 

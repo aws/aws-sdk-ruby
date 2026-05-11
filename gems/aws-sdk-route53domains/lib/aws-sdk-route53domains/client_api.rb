@@ -152,6 +152,7 @@ module Aws::Route53Domains
     State = Shapes::StringShape.new(name: 'State')
     StatusFlag = Shapes::StringShape.new(name: 'StatusFlag')
     String = Shapes::StringShape.new(name: 'String')
+    TLDInMaintenance = Shapes::StructureShape.new(name: 'TLDInMaintenance')
     TLDRulesViolation = Shapes::StructureShape.new(name: 'TLDRulesViolation')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -538,6 +539,10 @@ module Aws::Route53Domains
     SortCondition.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, required: true, location_name: "SortOrder"))
     SortCondition.struct_class = Types::SortCondition
 
+    TLDInMaintenance.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
+    TLDInMaintenance.add_member(:tld, Shapes::ShapeRef.new(shape: TldName, location_name: "tld"))
+    TLDInMaintenance.struct_class = Types::TLDInMaintenance
+
     TLDRulesViolation.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     TLDRulesViolation.struct_class = Types::TLDRulesViolation
 
@@ -551,7 +556,7 @@ module Aws::Route53Domains
 
     TransferDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     TransferDomainRequest.add_member(:idn_lang_code, Shapes::ShapeRef.new(shape: LangCode, location_name: "IdnLangCode"))
-    TransferDomainRequest.add_member(:duration_in_years, Shapes::ShapeRef.new(shape: DurationInYears, required: true, location_name: "DurationInYears"))
+    TransferDomainRequest.add_member(:duration_in_years, Shapes::ShapeRef.new(shape: DurationInYears, location_name: "DurationInYears"))
     TransferDomainRequest.add_member(:nameservers, Shapes::ShapeRef.new(shape: NameserverList, location_name: "Nameservers"))
     TransferDomainRequest.add_member(:auth_code, Shapes::ShapeRef.new(shape: DomainAuthCode, location_name: "AuthCode"))
     TransferDomainRequest.add_member(:auto_renew, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoRenew"))
@@ -691,6 +696,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: CheckDomainAvailabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:check_domain_transferability, Seahorse::Model::Operation.new.tap do |o|
@@ -701,6 +707,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: CheckDomainTransferabilityResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:delete_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -815,6 +822,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: GetDomainSuggestionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:get_operation_detail, Seahorse::Model::Operation.new.tap do |o|
@@ -892,6 +900,7 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:register_domain, Seahorse::Model::Operation.new.tap do |o|
@@ -941,6 +950,7 @@ module Aws::Route53Domains
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:resend_operation_authorization, Seahorse::Model::Operation.new.tap do |o|
@@ -950,6 +960,7 @@ module Aws::Route53Domains
         o.input = Shapes::ShapeRef.new(shape: ResendOperationAuthorizationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:retrieve_domain_auth_code, Seahorse::Model::Operation.new.tap do |o|
@@ -960,6 +971,7 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: RetrieveDomainAuthCodeResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
+        o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
       end)
 
       api.add_operation(:transfer_domain, Seahorse::Model::Operation.new.tap do |o|

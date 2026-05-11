@@ -44,7 +44,7 @@ module Aws::MWAA
       attr_accessor logging_configuration: Types::LoggingConfigurationInput
       attr_accessor weekly_maintenance_window_start: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE")
       attr_accessor min_workers: ::Integer
       attr_accessor schedulers: ::Integer
       attr_accessor endpoint_management: ("CUSTOMER" | "SERVICE")
@@ -111,7 +111,7 @@ module Aws::MWAA
       attr_accessor last_update: Types::LastUpdate
       attr_accessor weekly_maintenance_window_start: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE")
       attr_accessor min_workers: ::Integer
       attr_accessor schedulers: ::Integer
       attr_accessor webserver_vpc_endpoint_service: ::String
@@ -257,6 +257,11 @@ module Aws::MWAA
       SENSITIVE: [:rest_api_response]
     end
 
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class StatisticSet
       attr_accessor sample_count: ::Integer
       attr_accessor sum: ::Float
@@ -305,7 +310,7 @@ module Aws::MWAA
       attr_accessor source_bucket_arn: ::String
       attr_accessor startup_script_s3_path: ::String
       attr_accessor startup_script_s3_object_version: ::String
-      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY")
+      attr_accessor webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE")
       attr_accessor weekly_maintenance_window_start: ::String
       SENSITIVE: [:airflow_configuration_options]
     end

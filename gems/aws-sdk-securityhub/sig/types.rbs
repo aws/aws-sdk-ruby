@@ -5234,6 +5234,7 @@ module Aws::SecurityHub
     class DateRange
       attr_accessor value: ::Integer
       attr_accessor unit: ("DAYS")
+      attr_accessor comparison: ("WITHIN" | "OLDER_THAN")
       SENSITIVE: []
     end
 
@@ -5652,6 +5653,14 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GenerateRecommendedPolicyV2Request
+      attr_accessor metadata_uid: ::String
+      SENSITIVE: []
+    end
+
+    class GenerateRecommendedPolicyV2Response < Aws::EmptyStructure
+    end
+
     class GeneratorDetails
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -5901,6 +5910,23 @@ module Aws::SecurityHub
     class GetMembersResponse
       attr_accessor members: ::Array[Types::Member]
       attr_accessor unprocessed_accounts: ::Array[Types::Result]
+      SENSITIVE: []
+    end
+
+    class GetRecommendedPolicyV2Request
+      attr_accessor metadata_uid: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRecommendedPolicyV2Response
+      attr_accessor next_token: ::String
+      attr_accessor recommendation_type: ("UNUSED_PERMISSION_RECOMMENDATION")
+      attr_accessor recommendation_steps: ::Array[Types::RecommendationStep]
+      attr_accessor error: Types::RecommendationError
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor resource_arn: ::String
       SENSITIVE: []
     end
 
@@ -6715,6 +6741,23 @@ module Aws::SecurityHub
       attr_accessor text: ::String
       attr_accessor url: ::String
       SENSITIVE: []
+    end
+
+    class RecommendationError
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RecommendationStep
+      attr_accessor unused_permissions: Types::UnusedPermissionsRecommendationStep
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class UnusedPermissions < RecommendationStep
+      end
+      class Unknown < RecommendationStep
+      end
     end
 
     class Record
@@ -7586,6 +7629,15 @@ module Aws::SecurityHub
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UnusedPermissionsRecommendationStep
+      attr_accessor recommended_action: ::String
+      attr_accessor existing_policy: ::String
+      attr_accessor existing_policy_id: ::String
+      attr_accessor policy_updated_at: ::Time
+      attr_accessor recommended_policy: ::String
+      SENSITIVE: []
     end
 
     class UpdateActionTargetRequest

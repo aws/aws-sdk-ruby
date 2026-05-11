@@ -2318,6 +2318,16 @@ module Aws::CloudWatchLogs
     #   resp.configuration_templates[0].allowed_field_delimiters[0] #=> String
     #   resp.configuration_templates[0].allowed_suffix_path_fields #=> Array
     #   resp.configuration_templates[0].allowed_suffix_path_fields[0] #=> String
+    #   resp.configuration_templates[0].delivery_source_configuration #=> Array
+    #   resp.configuration_templates[0].delivery_source_configuration[0].key_name #=> String
+    #   resp.configuration_templates[0].delivery_source_configuration[0].value_type #=> String, one of "string", "boolean", "int", "double", "long"
+    #   resp.configuration_templates[0].delivery_source_configuration[0].default_value #=> String
+    #   resp.configuration_templates[0].delivery_source_configuration[0].supported_values #=> Array
+    #   resp.configuration_templates[0].delivery_source_configuration[0].supported_values[0] #=> String
+    #   resp.configuration_templates[0].delivery_source_configuration[0].min_value #=> Float
+    #   resp.configuration_templates[0].delivery_source_configuration[0].max_value #=> Float
+    #   resp.configuration_templates[0].s3_tables_integration.datasource_name #=> String
+    #   resp.configuration_templates[0].s3_tables_integration.datasource_type #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeConfigurationTemplates AWS API Documentation
@@ -2478,6 +2488,10 @@ module Aws::CloudWatchLogs
     #   resp.delivery_sources[0].log_type #=> String
     #   resp.delivery_sources[0].tags #=> Hash
     #   resp.delivery_sources[0].tags["TagKey"] #=> String
+    #   resp.delivery_sources[0].delivery_source_configuration #=> Hash
+    #   resp.delivery_sources[0].delivery_source_configuration["DeliverySourceConfigurationKey"] #=> String
+    #   resp.delivery_sources[0].status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.delivery_sources[0].status_reason #=> String, one of "RESOURCE_DELETED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeDeliverySources AWS API Documentation
@@ -3940,6 +3954,10 @@ module Aws::CloudWatchLogs
     #   resp.delivery_source.log_type #=> String
     #   resp.delivery_source.tags #=> Hash
     #   resp.delivery_source.tags["TagKey"] #=> String
+    #   resp.delivery_source.delivery_source_configuration #=> Hash
+    #   resp.delivery_source.delivery_source_configuration["DeliverySourceConfigurationKey"] #=> String
+    #   resp.delivery_source.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.delivery_source.status_reason #=> String, one of "RESOURCE_DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetDeliverySource AWS API Documentation
     #
@@ -6693,6 +6711,11 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #
+    # @option params [Hash<String,String>] :delivery_source_configuration
+    #   A map of key-value pairs to configure the delivery source. Both keys
+    #   and values must be between 1 and 255 characters in length. For
+    #   example, `{"samplingRate": "50"}`.
+    #
     # @return [Types::PutDeliverySourceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutDeliverySourceResponse#delivery_source #delivery_source} => Types::DeliverySource
@@ -6706,6 +6729,9 @@ module Aws::CloudWatchLogs
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
+    #     delivery_source_configuration: {
+    #       "DeliverySourceConfigurationKey" => "DeliverySourceConfigurationValue",
+    #     },
     #   })
     #
     # @example Response structure
@@ -6718,6 +6744,10 @@ module Aws::CloudWatchLogs
     #   resp.delivery_source.log_type #=> String
     #   resp.delivery_source.tags #=> Hash
     #   resp.delivery_source.tags["TagKey"] #=> String
+    #   resp.delivery_source.delivery_source_configuration #=> Hash
+    #   resp.delivery_source.delivery_source_configuration["DeliverySourceConfigurationKey"] #=> String
+    #   resp.delivery_source.status #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.delivery_source.status_reason #=> String, one of "RESOURCE_DELETED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliverySource AWS API Documentation
     #
@@ -9260,7 +9290,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.148.0'
+      context[:gem_version] = '1.149.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

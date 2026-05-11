@@ -134,6 +134,8 @@ module Aws::CloudWatchLogs
       attr_accessor allowed_action_for_allow_vended_logs_delivery_for_resource: ::String
       attr_accessor allowed_field_delimiters: ::Array[::String]
       attr_accessor allowed_suffix_path_fields: ::Array[::String]
+      attr_accessor delivery_source_configuration: ::Array[Types::DeliverySourceConfigurationSchema]
+      attr_accessor s3_tables_integration: Types::S3TablesIntegration
       SENSITIVE: []
     end
 
@@ -463,6 +465,19 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_type: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor delivery_source_configuration: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor status_reason: ("RESOURCE_DELETED")
+      SENSITIVE: []
+    end
+
+    class DeliverySourceConfigurationSchema
+      attr_accessor key_name: ::String
+      attr_accessor value_type: ("string" | "boolean" | "int" | "double" | "long")
+      attr_accessor default_value: ::String
+      attr_accessor supported_values: ::Array[::String]
+      attr_accessor min_value: ::Float
+      attr_accessor max_value: ::Float
       SENSITIVE: []
     end
 
@@ -1725,6 +1740,7 @@ module Aws::CloudWatchLogs
       attr_accessor resource_arn: ::String
       attr_accessor log_type: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor delivery_source_configuration: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2002,6 +2018,12 @@ module Aws::CloudWatchLogs
       attr_accessor status_reason: ::String
       attr_accessor created_time_stamp: ::Integer
       attr_accessor parent_source_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class S3TablesIntegration
+      attr_accessor datasource_name: ::String
+      attr_accessor datasource_type: ::String
       SENSITIVE: []
     end
 

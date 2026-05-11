@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-05-07)
+------------------
+
+* Feature - Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+
+1.44.0 (2026-05-06)
+------------------
+
+* Feature - Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.
+
+1.43.0 (2026-05-04)
+------------------
+
+* Feature - Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.
+
 1.42.0 (2026-04-30)
 ------------------
 

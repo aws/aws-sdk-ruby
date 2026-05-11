@@ -89,6 +89,7 @@ module Aws::MWAA
     Schedulers = Shapes::IntegerShape.new(name: 'Schedulers')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupList = Shapes::ListShape.new(name: 'SecurityGroupList')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     StatisticSet = Shapes::StructureShape.new(name: 'StatisticSet')
     String = Shapes::StringShape.new(name: 'String')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -316,6 +317,9 @@ module Aws::MWAA
 
     SecurityGroupList.member = Shapes::ShapeRef.new(shape: SecurityGroupId)
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     StatisticSet.add_member(:sample_count, Shapes::ShapeRef.new(shape: Integer, location_name: "SampleCount"))
     StatisticSet.add_member(:sum, Shapes::ShapeRef.new(shape: Double, location_name: "Sum"))
     StatisticSet.add_member(:minimum, Shapes::ShapeRef.new(shape: Double, location_name: "Minimum"))
@@ -419,6 +423,7 @@ module Aws::MWAA
         }
         o.input = Shapes::ShapeRef.new(shape: CreateEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: CreateEnvironmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -447,6 +452,7 @@ module Aws::MWAA
         }
         o.input = Shapes::ShapeRef.new(shape: DeleteEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteEnvironmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -567,6 +573,7 @@ module Aws::MWAA
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateEnvironmentInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateEnvironmentOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)

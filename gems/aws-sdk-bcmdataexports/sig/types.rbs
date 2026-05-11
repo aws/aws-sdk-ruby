@@ -214,7 +214,7 @@ module Aws::BCMDataExports
     end
 
     class S3OutputConfigurations
-      attr_accessor output_type: ("CUSTOM")
+      attr_accessor output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT")
       attr_accessor format: ("TEXT_OR_CSV" | "PARQUET")
       attr_accessor compression: ("GZIP" | "PARQUET")
       attr_accessor overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")

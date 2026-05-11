@@ -929,21 +929,25 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.first_observed_at[0].end #=> String
     #   resp.rules[0].criteria.first_observed_at[0].date_range.value #=> Integer
     #   resp.rules[0].criteria.first_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.first_observed_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.rules[0].criteria.last_observed_at #=> Array
     #   resp.rules[0].criteria.last_observed_at[0].start #=> String
     #   resp.rules[0].criteria.last_observed_at[0].end #=> String
     #   resp.rules[0].criteria.last_observed_at[0].date_range.value #=> Integer
     #   resp.rules[0].criteria.last_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.last_observed_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.rules[0].criteria.created_at #=> Array
     #   resp.rules[0].criteria.created_at[0].start #=> String
     #   resp.rules[0].criteria.created_at[0].end #=> String
     #   resp.rules[0].criteria.created_at[0].date_range.value #=> Integer
     #   resp.rules[0].criteria.created_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.created_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.rules[0].criteria.updated_at #=> Array
     #   resp.rules[0].criteria.updated_at[0].start #=> String
     #   resp.rules[0].criteria.updated_at[0].end #=> String
     #   resp.rules[0].criteria.updated_at[0].date_range.value #=> Integer
     #   resp.rules[0].criteria.updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.updated_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.rules[0].criteria.confidence #=> Array
     #   resp.rules[0].criteria.confidence[0].gte #=> Float
     #   resp.rules[0].criteria.confidence[0].lte #=> Float
@@ -1026,6 +1030,7 @@ module Aws::SecurityHub
     #   resp.rules[0].criteria.note_updated_at[0].end #=> String
     #   resp.rules[0].criteria.note_updated_at[0].date_range.value #=> Integer
     #   resp.rules[0].criteria.note_updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.rules[0].criteria.note_updated_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.rules[0].criteria.note_updated_by #=> Array
     #   resp.rules[0].criteria.note_updated_by[0].value #=> String
     #   resp.rules[0].criteria.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -1622,6 +1627,7 @@ module Aws::SecurityHub
     #               date_range: {
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
+    #                 comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #               },
     #             },
     #           ],
@@ -1632,6 +1638,7 @@ module Aws::SecurityHub
     #               date_range: {
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
+    #                 comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #               },
     #             },
     #           ],
@@ -1642,6 +1649,7 @@ module Aws::SecurityHub
     #               date_range: {
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
+    #                 comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #               },
     #             },
     #           ],
@@ -1652,6 +1660,7 @@ module Aws::SecurityHub
     #               date_range: {
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
+    #                 comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #               },
     #             },
     #           ],
@@ -1808,6 +1817,7 @@ module Aws::SecurityHub
     #               date_range: {
     #                 value: 1,
     #                 unit: "DAYS", # accepts DAYS
+    #                 comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #               },
     #             },
     #           ],
@@ -2587,6 +2597,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -2597,6 +2608,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -2607,6 +2619,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -2617,6 +2630,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -2773,6 +2787,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -2918,6 +2933,7 @@ module Aws::SecurityHub
     #                   date_range: {
     #                     value: 1,
     #                     unit: "DAYS", # accepts DAYS
+    #                     comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                   },
     #                 },
     #               },
@@ -3480,6 +3496,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3490,6 +3507,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3500,6 +3518,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3510,6 +3529,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3734,6 +3754,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3744,6 +3765,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3772,6 +3794,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3871,6 +3894,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3911,6 +3935,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -3945,6 +3970,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -4010,6 +4036,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -5713,6 +5740,31 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Begins the recommended policy generation to remediate a Security Hub
+    # finding. `GenerateRecommendedPolicyV2` only supports findings for
+    # unused permissions.
+    #
+    # @option params [required, String] :metadata_uid
+    #   The unique identifier (ID) of Security Hub OCSF findings found under
+    #   the `metadata.uid` field of the finding.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_recommended_policy_v2({
+    #     metadata_uid: "NonEmptyString", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GenerateRecommendedPolicyV2 AWS API Documentation
+    #
+    # @overload generate_recommended_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def generate_recommended_policy_v2(params = {}, options = {})
+      req = build_request(:generate_recommended_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Provides the details for the Security Hub CSPM administrator account
     # for the current member account.
     #
@@ -5835,6 +5887,7 @@ module Aws::SecurityHub
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.end #=> String
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.date_range.value #=> Integer
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.date_range.unit #=> String, one of "DAYS"
+    #   resp.criteria.ocsf_finding_criteria.composite_filters[0].date_filters[0].filter.date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters #=> Array
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].field_name #=> String, one of "compliance.assessments.meets_criteria", "vulnerabilities.is_exploit_available", "vulnerabilities.is_fix_available"
     #   resp.criteria.ocsf_finding_criteria.composite_filters[0].boolean_filters[0].filter.value #=> Boolean
@@ -6481,6 +6534,7 @@ module Aws::SecurityHub
     #                     date_range: {
     #                       value: 1,
     #                       unit: "DAYS", # accepts DAYS
+    #                       comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                     },
     #                   },
     #                 },
@@ -6757,6 +6811,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -6767,6 +6822,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -6777,6 +6833,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -6787,6 +6844,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7011,6 +7069,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7021,6 +7080,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7049,6 +7109,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7148,6 +7209,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7188,6 +7250,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7222,6 +7285,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7287,6 +7351,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -7592,6 +7657,7 @@ module Aws::SecurityHub
     #                 date_range: {
     #                   value: 1,
     #                   unit: "DAYS", # accepts DAYS
+    #                   comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                 },
     #               },
     #             },
@@ -7831,21 +7897,25 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.first_observed_at[0].end #=> String
     #   resp.insights[0].filters.first_observed_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.first_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.first_observed_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.last_observed_at #=> Array
     #   resp.insights[0].filters.last_observed_at[0].start #=> String
     #   resp.insights[0].filters.last_observed_at[0].end #=> String
     #   resp.insights[0].filters.last_observed_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.last_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.last_observed_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.created_at #=> Array
     #   resp.insights[0].filters.created_at[0].start #=> String
     #   resp.insights[0].filters.created_at[0].end #=> String
     #   resp.insights[0].filters.created_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.created_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.created_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.updated_at #=> Array
     #   resp.insights[0].filters.updated_at[0].start #=> String
     #   resp.insights[0].filters.updated_at[0].end #=> String
     #   resp.insights[0].filters.updated_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.updated_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.severity_product #=> Array
     #   resp.insights[0].filters.severity_product[0].gte #=> Float
     #   resp.insights[0].filters.severity_product[0].lte #=> Float
@@ -7969,11 +8039,13 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.process_launched_at[0].end #=> String
     #   resp.insights[0].filters.process_launched_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.process_launched_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.process_launched_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.process_terminated_at #=> Array
     #   resp.insights[0].filters.process_terminated_at[0].start #=> String
     #   resp.insights[0].filters.process_terminated_at[0].end #=> String
     #   resp.insights[0].filters.process_terminated_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.process_terminated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.process_terminated_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.threat_intel_indicator_type #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_type[0].value #=> String
     #   resp.insights[0].filters.threat_intel_indicator_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -7988,6 +8060,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].end #=> String
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.threat_intel_indicator_last_observed_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.threat_intel_indicator_source #=> Array
     #   resp.insights[0].filters.threat_intel_indicator_source[0].value #=> String
     #   resp.insights[0].filters.threat_intel_indicator_source[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -8037,6 +8110,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].end #=> String
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.resource_aws_ec2_instance_launched_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id #=> Array
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id[0].value #=> String
     #   resp.insights[0].filters.resource_aws_s3_bucket_owner_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -8057,6 +8131,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].end #=> String
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.resource_aws_iam_access_key_created_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.resource_aws_iam_user_user_name #=> Array
     #   resp.insights[0].filters.resource_aws_iam_user_user_name[0].value #=> String
     #   resp.insights[0].filters.resource_aws_iam_user_user_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -8074,6 +8149,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.resource_container_launched_at[0].end #=> String
     #   resp.insights[0].filters.resource_container_launched_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.resource_container_launched_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.resource_container_launched_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.resource_details_other #=> Array
     #   resp.insights[0].filters.resource_details_other[0].key #=> String
     #   resp.insights[0].filters.resource_details_other[0].value #=> String
@@ -8107,6 +8183,7 @@ module Aws::SecurityHub
     #   resp.insights[0].filters.note_updated_at[0].end #=> String
     #   resp.insights[0].filters.note_updated_at[0].date_range.value #=> Integer
     #   resp.insights[0].filters.note_updated_at[0].date_range.unit #=> String, one of "DAYS"
+    #   resp.insights[0].filters.note_updated_at[0].date_range.comparison #=> String, one of "WITHIN", "OLDER_THAN"
     #   resp.insights[0].filters.note_updated_by #=> Array
     #   resp.insights[0].filters.note_updated_by[0].value #=> String
     #   resp.insights[0].filters.note_updated_by[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS", "PREFIX_NOT_EQUALS", "CONTAINS", "NOT_CONTAINS", "CONTAINS_WORD"
@@ -8348,6 +8425,67 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Retrieves the recommended policy to remediate a Security Hub finding.
+    # `GetRecommendedPolicyV2` only supports findings for unused
+    # permissions.
+    #
+    # @option params [required, String] :metadata_uid
+    #   The unique identifier (ID) of Security Hub OCSF findings found under
+    #   the `metadata.uid` field of the finding.
+    #
+    # @option params [String] :next_token
+    #   The token used to paginate the `RecommendationSteps` list returned. On
+    #   your first call to `GetRecommendedPolicyV2`, omit this parameter or
+    #   set it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of recommendation steps to return.
+    #
+    # @return [Types::GetRecommendedPolicyV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetRecommendedPolicyV2Response#next_token #next_token} => String
+    #   * {Types::GetRecommendedPolicyV2Response#recommendation_type #recommendation_type} => String
+    #   * {Types::GetRecommendedPolicyV2Response#recommendation_steps #recommendation_steps} => Array&lt;Types::RecommendationStep&gt;
+    #   * {Types::GetRecommendedPolicyV2Response#error #error} => Types::RecommendationError
+    #   * {Types::GetRecommendedPolicyV2Response#status #status} => String
+    #   * {Types::GetRecommendedPolicyV2Response#resource_arn #resource_arn} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_recommended_policy_v2({
+    #     metadata_uid: "NonEmptyString", # required
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.recommendation_type #=> String, one of "UNUSED_PERMISSION_RECOMMENDATION"
+    #   resp.recommendation_steps #=> Array
+    #   resp.recommendation_steps[0].unused_permissions.recommended_action #=> String
+    #   resp.recommendation_steps[0].unused_permissions.existing_policy #=> String
+    #   resp.recommendation_steps[0].unused_permissions.existing_policy_id #=> String
+    #   resp.recommendation_steps[0].unused_permissions.policy_updated_at #=> Time
+    #   resp.recommendation_steps[0].unused_permissions.recommended_policy #=> String
+    #   resp.error.code #=> String
+    #   resp.error.message #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.resource_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRecommendedPolicyV2 AWS API Documentation
+    #
+    # @overload get_recommended_policy_v2(params = {})
+    # @param [Hash] params ({})
+    def get_recommended_policy_v2(params = {}, options = {})
+      req = build_request(:get_recommended_policy_v2, params)
+      req.send_request(options)
+    end
+
     # Retrieves statistical information about Amazon Web Services resources
     # and their associated security findings.
     #
@@ -8413,6 +8551,7 @@ module Aws::SecurityHub
     #                     date_range: {
     #                       value: 1,
     #                       unit: "DAYS", # accepts DAYS
+    #                       comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                     },
     #                   },
     #                 },
@@ -8628,6 +8767,7 @@ module Aws::SecurityHub
     #                 date_range: {
     #                   value: 1,
     #                   unit: "DAYS", # accepts DAYS
+    #                   comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                 },
     #               },
     #             },
@@ -10347,6 +10487,7 @@ module Aws::SecurityHub
     #                   date_range: {
     #                     value: 1,
     #                     unit: "DAYS", # accepts DAYS
+    #                     comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #                   },
     #                 },
     #               },
@@ -10849,6 +10990,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -10859,6 +11001,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -10869,6 +11012,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -10879,6 +11023,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11103,6 +11248,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11113,6 +11259,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11141,6 +11288,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11240,6 +11388,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11280,6 +11429,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11314,6 +11464,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11379,6 +11530,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11607,6 +11759,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11617,6 +11770,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11627,6 +11781,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11637,6 +11792,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11861,6 +12017,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11871,6 +12028,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11899,6 +12057,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -11998,6 +12157,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -12038,6 +12198,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -12072,6 +12233,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -12137,6 +12299,7 @@ module Aws::SecurityHub
     #           date_range: {
     #             value: 1,
     #             unit: "DAYS", # accepts DAYS
+    #             comparison: "WITHIN", # accepts WITHIN, OLDER_THAN
     #           },
     #         },
     #       ],
@@ -12548,7 +12711,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.154.0'
+      context[:gem_version] = '1.155.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

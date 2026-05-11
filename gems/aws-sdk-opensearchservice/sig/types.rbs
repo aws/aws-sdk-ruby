@@ -2301,6 +2301,7 @@ module Aws::OpenSearchService
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor availability_zones: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor egress_enabled: bool
       SENSITIVE: []
     end
 
@@ -2313,6 +2314,7 @@ module Aws::OpenSearchService
     class VPCOptions
       attr_accessor subnet_ids: ::Array[::String]
       attr_accessor security_group_ids: ::Array[::String]
+      attr_accessor egress_enabled: bool
       SENSITIVE: []
     end
 

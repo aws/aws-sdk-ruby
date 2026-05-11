@@ -363,6 +363,10 @@ module Aws::MedicalImaging
     #   The error message thrown if an import job fails.
     #   @return [String]
     #
+    # @!attribute [rw] import_configuration
+    #   The object containing `DicomJsonMetadataImportConfiguration`.
+    #   @return [Types::ImportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/DICOMImportJobProperties AWS API Documentation
     #
     class DICOMImportJobProperties < Struct.new(
@@ -375,7 +379,8 @@ module Aws::MedicalImaging
       :submitted_at,
       :input_s3_uri,
       :output_s3_uri,
-      :message)
+      :message,
+      :import_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -723,6 +728,46 @@ module Aws::MedicalImaging
       :image_set_state,
       :image_set_workflow_status)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration parameters that are specific to DICOM JSON metadata
+    # import operations.
+    #
+    # @!attribute [rw] dicom_metadata_mappings
+    #   Maps DCM files to their metadata.
+    #   @return [Array<Types::DicomMetadataMapping>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/DicomJsonMetadataImportConfiguration AWS API Documentation
+    #
+    class DicomJsonMetadataImportConfiguration < Struct.new(
+      :dicom_metadata_mappings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Maps DCM files to their metadata.
+    #
+    # @!attribute [rw] study_instance_uid
+    #   The Study Instance UID that identifies the study.
+    #   @return [String]
+    #
+    # @!attribute [rw] series_instance_uid
+    #   The Series Instance UID that identifies the series. This parameter
+    #   is optional because the mapping might be at the study level.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_file_path
+    #   The path to the JSON metadata file relative to inputS3Uri.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/DicomMetadataMapping AWS API Documentation
+    #
+    class DicomMetadataMapping < Struct.new(
+      :study_instance_uid,
+      :series_instance_uid,
+      :metadata_file_path)
+      SENSITIVE = [:study_instance_uid, :series_instance_uid]
       include Aws::Structure
     end
 
@@ -1143,6 +1188,30 @@ module Aws::MedicalImaging
       :is_primary)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration options for different types of import operations.
+    #
+    # @note ImportConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ImportConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ImportConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] dicom_json_metadata_import_configuration
+    #   The configuration parameters that are specific to DICOM JSON
+    #   metadata import operations.
+    #   @return [Types::DicomJsonMetadataImportConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/ImportConfiguration AWS API Documentation
+    #
+    class ImportConfiguration < Struct.new(
+      :dicom_json_metadata_import_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DicomJsonMetadataImportConfiguration < ImportConfiguration; end
+      class Unknown < ImportConfiguration; end
     end
 
     # An unexpected error occurred during processing of the request.
@@ -1637,6 +1706,10 @@ module Aws::MedicalImaging
     #   The account ID of the source S3 bucket owner.
     #   @return [String]
     #
+    # @!attribute [rw] import_configuration
+    #   The import configuration for the import job.
+    #   @return [Types::ImportConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/StartDICOMImportJobRequest AWS API Documentation
     #
     class StartDICOMImportJobRequest < Struct.new(
@@ -1646,7 +1719,8 @@ module Aws::MedicalImaging
       :datastore_id,
       :input_s3_uri,
       :output_s3_uri,
-      :input_owner_account_id)
+      :input_owner_account_id,
+      :import_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

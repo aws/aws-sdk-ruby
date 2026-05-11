@@ -247,6 +247,94 @@ module Aws
                         ) -> _CreateEventResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventResponseSuccess
 
+      interface _CreatePaymentInstrumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePaymentInstrumentResponse]
+        def payment_instrument: () -> Types::PaymentInstrument
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#create_payment_instrument-instance_method
+      def create_payment_instrument: (
+                                       ?user_id: ::String,
+                                       ?agent_name: ::String,
+                                       payment_manager_arn: ::String,
+                                       payment_connector_id: ::String,
+                                       payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET"),
+                                       payment_instrument_details: {
+                                         embedded_crypto_wallet: {
+                                           network: ("ETHEREUM" | "SOLANA"),
+                                           linked_accounts: Array[
+                                             {
+                                               email: {
+                                                 email_address: ::String
+                                               }?,
+                                               sms: {
+                                                 phone_number: ::String
+                                               }?,
+                                               developer_jwt: {
+                                                 kid: ::String,
+                                                 sub: ::String
+                                               }?,
+                                               o_auth_2: {
+                                                 google: {
+                                                   sub: ::String,
+                                                   email_address: ::String?,
+                                                   name: ::String?,
+                                                   username: ::String?
+                                                 }?,
+                                                 apple: {
+                                                   sub: ::String,
+                                                   email_address: ::String?,
+                                                   name: ::String?,
+                                                   username: ::String?
+                                                 }?,
+                                                 x: {
+                                                   sub: ::String,
+                                                   email_address: ::String?,
+                                                   name: ::String?,
+                                                   username: ::String?
+                                                 }?,
+                                                 telegram: {
+                                                   sub: ::String,
+                                                   email_address: ::String?,
+                                                   name: ::String?,
+                                                   username: ::String?
+                                                 }?,
+                                                 github: {
+                                                   sub: ::String,
+                                                   email_address: ::String?,
+                                                   name: ::String?,
+                                                   username: ::String?
+                                                 }?
+                                               }?
+                                             },
+                                           ],
+                                           wallet_address: ::String?,
+                                           redirect_url: ::String?
+                                         }?
+                                       },
+                                       ?client_token: ::String
+                                     ) -> _CreatePaymentInstrumentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentInstrumentResponseSuccess
+
+      interface _CreatePaymentSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePaymentSessionResponse]
+        def payment_session: () -> Types::PaymentSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#create_payment_session-instance_method
+      def create_payment_session: (
+                                    ?user_id: ::String,
+                                    ?agent_name: ::String,
+                                    payment_manager_arn: ::String,
+                                    ?limits: {
+                                      max_spend_amount: {
+                                        value: ::String,
+                                        currency: ("USD")
+                                      }
+                                    },
+                                    expiry_time_in_minutes: ::Integer,
+                                    ?client_token: ::String
+                                  ) -> _CreatePaymentSessionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentSessionResponseSuccess
+
       interface _DeleteABTestResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteABTestResponse]
         def ab_test_id: () -> ::String
@@ -294,6 +382,31 @@ module Aws
                                   memory_record_id: ::String
                                 ) -> _DeleteMemoryRecordResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMemoryRecordResponseSuccess
+
+      interface _DeletePaymentInstrumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentInstrumentResponse]
+        def status: () -> ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_payment_instrument-instance_method
+      def delete_payment_instrument: (
+                                       ?user_id: ::String,
+                                       payment_manager_arn: ::String,
+                                       payment_connector_id: ::String,
+                                       payment_instrument_id: ::String
+                                     ) -> _DeletePaymentInstrumentResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePaymentInstrumentResponseSuccess
+
+      interface _DeletePaymentSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentSessionResponse]
+        def status: () -> ("ACTIVE" | "EXPIRED" | "DELETED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#delete_payment_session-instance_method
+      def delete_payment_session: (
+                                    ?user_id: ::String,
+                                    payment_manager_arn: ::String,
+                                    payment_session_id: ::String
+                                  ) -> _DeletePaymentSessionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePaymentSessionResponseSuccess
 
       interface _DeleteRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteRecommendationResponse]
@@ -477,6 +590,50 @@ module Aws
                              ) -> _GetMemoryRecordResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemoryRecordResponseSuccess
 
+      interface _GetPaymentInstrumentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentInstrumentResponse]
+        def payment_instrument: () -> Types::PaymentInstrument
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_payment_instrument-instance_method
+      def get_payment_instrument: (
+                                    ?user_id: ::String,
+                                    ?agent_name: ::String,
+                                    payment_manager_arn: ::String,
+                                    ?payment_connector_id: ::String,
+                                    payment_instrument_id: ::String
+                                  ) -> _GetPaymentInstrumentResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentInstrumentResponseSuccess
+
+      interface _GetPaymentInstrumentBalanceResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentInstrumentBalanceResponse]
+        def payment_instrument_id: () -> ::String
+        def token_balance: () -> Types::TokenBalance
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_payment_instrument_balance-instance_method
+      def get_payment_instrument_balance: (
+                                            ?user_id: ::String,
+                                            ?agent_name: ::String,
+                                            payment_manager_arn: ::String,
+                                            payment_connector_id: ::String,
+                                            payment_instrument_id: ::String,
+                                            chain: ("BASE" | "BASE_SEPOLIA" | "ETHEREUM" | "SOLANA" | "SOLANA_DEVNET"),
+                                            token: ("USDC")
+                                          ) -> _GetPaymentInstrumentBalanceResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentInstrumentBalanceResponseSuccess
+
+      interface _GetPaymentSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentSessionResponse]
+        def payment_session: () -> Types::PaymentSession
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_payment_session-instance_method
+      def get_payment_session: (
+                                 ?user_id: ::String,
+                                 ?agent_name: ::String,
+                                 payment_manager_arn: ::String,
+                                 payment_session_id: ::String
+                               ) -> _GetPaymentSessionResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentSessionResponseSuccess
+
       interface _GetRecommendationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRecommendationResponse]
         def recommendation_id: () -> ::String
@@ -529,6 +686,32 @@ module Aws
                                         ?audiences: Array[::String]
                                       ) -> _GetResourceOauth2TokenResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceOauth2TokenResponseSuccess
+
+      interface _GetResourcePaymentTokenResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePaymentTokenResponse]
+        def payment_token_response: () -> Types::PaymentTokenResponseOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#get_resource_payment_token-instance_method
+      def get_resource_payment_token: (
+                                        workload_identity_token: ::String,
+                                        resource_credential_provider_name: ::String,
+                                        payment_token_request: {
+                                          coinbase_cdp_token_request: {
+                                            request_method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH"),
+                                            request_host: ::String?,
+                                            request_path: ::String,
+                                            include_wallet_auth_token: bool?,
+                                            request_body: ::String?
+                                          }?,
+                                          stripe_privy_token_request: {
+                                            request_host: ::String?,
+                                            request_path: ::String,
+                                            request_body: ::String,
+                                            include_authorization_signature: bool?
+                                          }?
+                                        }
+                                      ) -> _GetResourcePaymentTokenResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePaymentTokenResponseSuccess
 
       interface _GetWorkloadAccessTokenResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetWorkloadAccessTokenResponse]
@@ -803,7 +986,7 @@ module Aws
                                         provider_arn: ::String,
                                         scopes: Array[::String],
                                         custom_parameters: Hash[::String, ::String]?,
-                                        grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE")?,
+                                        grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")?,
                                         default_return_url: ::String?
                                       }?
                                     }?
@@ -983,6 +1166,37 @@ module Aws
                                ) -> _ListMemoryRecordsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoryRecordsResponseSuccess
 
+      interface _ListPaymentInstrumentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentInstrumentsResponse]
+        def payment_instruments: () -> ::Array[Types::PaymentInstrumentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_payment_instruments-instance_method
+      def list_payment_instruments: (
+                                      ?user_id: ::String,
+                                      ?agent_name: ::String,
+                                      payment_manager_arn: ::String,
+                                      ?payment_connector_id: ::String,
+                                      ?next_token: ::String,
+                                      ?max_results: ::Integer
+                                    ) -> _ListPaymentInstrumentsResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentInstrumentsResponseSuccess
+
+      interface _ListPaymentSessionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentSessionsResponse]
+        def payment_sessions: () -> ::Array[Types::PaymentSessionSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#list_payment_sessions-instance_method
+      def list_payment_sessions: (
+                                   ?user_id: ::String,
+                                   ?agent_name: ::String,
+                                   payment_manager_arn: ::String,
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer
+                                 ) -> _ListPaymentSessionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentSessionsResponseSuccess
+
       interface _ListRecommendationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRecommendationsResponse]
         def recommendation_summaries: () -> ::Array[Types::RecommendationSummary]
@@ -1012,6 +1226,37 @@ module Aws
                            }
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ProcessPaymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ProcessPaymentResponse]
+        def process_payment_id: () -> ::String
+        def payment_manager_arn: () -> ::String
+        def payment_session_id: () -> ::String
+        def payment_instrument_id: () -> ::String
+        def payment_type: () -> ("CRYPTO_X402")
+        def status: () -> ("PROOF_GENERATED")
+        def payment_output: () -> Types::PaymentOutput
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCore/Client.html#process_payment-instance_method
+      def process_payment: (
+                             ?user_id: ::String,
+                             ?agent_name: ::String,
+                             payment_manager_arn: ::String,
+                             payment_session_id: ::String,
+                             payment_instrument_id: ::String,
+                             payment_type: ("CRYPTO_X402"),
+                             payment_input: {
+                               crypto_x402: {
+                                 version: ::String,
+                                 payload: {
+                                 }
+                               }?
+                             },
+                             ?client_token: ::String
+                           ) -> _ProcessPaymentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ProcessPaymentResponseSuccess
 
       interface _RetrieveMemoryRecordsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveMemoryRecordsOutput]

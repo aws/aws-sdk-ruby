@@ -133,7 +133,18 @@ module Aws::CloudWatchLogs
     DeliveryDestinations = Shapes::ListShape.new(name: 'DeliveryDestinations')
     DeliveryId = Shapes::StringShape.new(name: 'DeliveryId')
     DeliverySource = Shapes::StructureShape.new(name: 'DeliverySource')
+    DeliverySourceConfiguration = Shapes::MapShape.new(name: 'DeliverySourceConfiguration')
+    DeliverySourceConfigurationKey = Shapes::StringShape.new(name: 'DeliverySourceConfigurationKey')
+    DeliverySourceConfigurationNumericValue = Shapes::FloatShape.new(name: 'DeliverySourceConfigurationNumericValue')
+    DeliverySourceConfigurationSchema = Shapes::StructureShape.new(name: 'DeliverySourceConfigurationSchema')
+    DeliverySourceConfigurationSchemaField = Shapes::StringShape.new(name: 'DeliverySourceConfigurationSchemaField')
+    DeliverySourceConfigurationSchemaValueType = Shapes::StringShape.new(name: 'DeliverySourceConfigurationSchemaValueType')
+    DeliverySourceConfigurationSchemas = Shapes::ListShape.new(name: 'DeliverySourceConfigurationSchemas')
+    DeliverySourceConfigurationSupportedValues = Shapes::ListShape.new(name: 'DeliverySourceConfigurationSupportedValues')
+    DeliverySourceConfigurationValue = Shapes::StringShape.new(name: 'DeliverySourceConfigurationValue')
     DeliverySourceName = Shapes::StringShape.new(name: 'DeliverySourceName')
+    DeliverySourceStatus = Shapes::StringShape.new(name: 'DeliverySourceStatus')
+    DeliverySourceStatusReason = Shapes::StringShape.new(name: 'DeliverySourceStatusReason')
     DeliverySources = Shapes::ListShape.new(name: 'DeliverySources')
     DeliverySuffixPath = Shapes::StringShape.new(name: 'DeliverySuffixPath')
     Descending = Shapes::BooleanShape.new(name: 'Descending')
@@ -560,6 +571,9 @@ module Aws::CloudWatchLogs
     S3TableIntegrationSourceStatus = Shapes::StringShape.new(name: 'S3TableIntegrationSourceStatus')
     S3TableIntegrationSourceStatusReason = Shapes::StringShape.new(name: 'S3TableIntegrationSourceStatusReason')
     S3TableIntegrationSources = Shapes::ListShape.new(name: 'S3TableIntegrationSources')
+    S3TablesDatasourceName = Shapes::StringShape.new(name: 'S3TablesDatasourceName')
+    S3TablesDatasourceType = Shapes::StringShape.new(name: 'S3TablesDatasourceType')
+    S3TablesIntegration = Shapes::StructureShape.new(name: 'S3TablesIntegration')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     ScheduleExpression = Shapes::StringShape.new(name: 'ScheduleExpression')
     ScheduleTimezone = Shapes::StringShape.new(name: 'ScheduleTimezone')
@@ -794,6 +808,8 @@ module Aws::CloudWatchLogs
     ConfigurationTemplate.add_member(:allowed_action_for_allow_vended_logs_delivery_for_resource, Shapes::ShapeRef.new(shape: AllowedActionForAllowVendedLogsDeliveryForResource, location_name: "allowedActionForAllowVendedLogsDeliveryForResource"))
     ConfigurationTemplate.add_member(:allowed_field_delimiters, Shapes::ShapeRef.new(shape: AllowedFieldDelimiters, location_name: "allowedFieldDelimiters"))
     ConfigurationTemplate.add_member(:allowed_suffix_path_fields, Shapes::ShapeRef.new(shape: RecordFields, location_name: "allowedSuffixPathFields"))
+    ConfigurationTemplate.add_member(:delivery_source_configuration, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemas, location_name: "deliverySourceConfiguration"))
+    ConfigurationTemplate.add_member(:s3_tables_integration, Shapes::ShapeRef.new(shape: S3TablesIntegration, location_name: "s3TablesIntegration"))
     ConfigurationTemplate.struct_class = Types::ConfigurationTemplate
 
     ConfigurationTemplateDeliveryConfigValues.add_member(:record_fields, Shapes::ShapeRef.new(shape: RecordFields, location_name: "recordFields"))
@@ -1041,7 +1057,25 @@ module Aws::CloudWatchLogs
     DeliverySource.add_member(:service, Shapes::ShapeRef.new(shape: Service, location_name: "service"))
     DeliverySource.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, location_name: "logType"))
     DeliverySource.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DeliverySource.add_member(:delivery_source_configuration, Shapes::ShapeRef.new(shape: DeliverySourceConfiguration, location_name: "deliverySourceConfiguration"))
+    DeliverySource.add_member(:status, Shapes::ShapeRef.new(shape: DeliverySourceStatus, location_name: "status"))
+    DeliverySource.add_member(:status_reason, Shapes::ShapeRef.new(shape: DeliverySourceStatusReason, location_name: "statusReason"))
     DeliverySource.struct_class = Types::DeliverySource
+
+    DeliverySourceConfiguration.key = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationKey)
+    DeliverySourceConfiguration.value = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationValue)
+
+    DeliverySourceConfigurationSchema.add_member(:key_name, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaField, required: true, location_name: "keyName"))
+    DeliverySourceConfigurationSchema.add_member(:value_type, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaValueType, required: true, location_name: "valueType"))
+    DeliverySourceConfigurationSchema.add_member(:default_value, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaField, required: true, location_name: "defaultValue"))
+    DeliverySourceConfigurationSchema.add_member(:supported_values, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSupportedValues, location_name: "supportedValues"))
+    DeliverySourceConfigurationSchema.add_member(:min_value, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationNumericValue, location_name: "minValue"))
+    DeliverySourceConfigurationSchema.add_member(:max_value, Shapes::ShapeRef.new(shape: DeliverySourceConfigurationNumericValue, location_name: "maxValue"))
+    DeliverySourceConfigurationSchema.struct_class = Types::DeliverySourceConfigurationSchema
+
+    DeliverySourceConfigurationSchemas.member = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchema)
+
+    DeliverySourceConfigurationSupportedValues.member = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaField)
 
     DeliverySources.member = Shapes::ShapeRef.new(shape: DeliverySource)
 
@@ -2058,6 +2092,7 @@ module Aws::CloudWatchLogs
     PutDeliverySourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     PutDeliverySourceRequest.add_member(:log_type, Shapes::ShapeRef.new(shape: LogType, required: true, location_name: "logType"))
     PutDeliverySourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    PutDeliverySourceRequest.add_member(:delivery_source_configuration, Shapes::ShapeRef.new(shape: DeliverySourceConfiguration, location_name: "deliverySourceConfiguration"))
     PutDeliverySourceRequest.struct_class = Types::PutDeliverySourceRequest
 
     PutDeliverySourceResponse.add_member(:delivery_source, Shapes::ShapeRef.new(shape: DeliverySource, location_name: "deliverySource"))
@@ -2281,6 +2316,10 @@ module Aws::CloudWatchLogs
     S3TableIntegrationSource.struct_class = Types::S3TableIntegrationSource
 
     S3TableIntegrationSources.member = Shapes::ShapeRef.new(shape: S3TableIntegrationSource)
+
+    S3TablesIntegration.add_member(:datasource_name, Shapes::ShapeRef.new(shape: S3TablesDatasourceName, location_name: "datasourceName"))
+    S3TablesIntegration.add_member(:datasource_type, Shapes::ShapeRef.new(shape: S3TablesDatasourceType, location_name: "datasourceType"))
+    S3TablesIntegration.struct_class = Types::S3TablesIntegration
 
     ScheduledQueryDestination.add_member(:destination_type, Shapes::ShapeRef.new(shape: ScheduledQueryDestinationType, location_name: "destinationType"))
     ScheduledQueryDestination.add_member(:destination_identifier, Shapes::ShapeRef.new(shape: String, location_name: "destinationIdentifier"))

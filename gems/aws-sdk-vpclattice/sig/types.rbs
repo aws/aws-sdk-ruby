@@ -138,6 +138,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")
       attr_accessor ipv4_addresses_per_eni: ::Integer
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
@@ -152,6 +153,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")
       attr_accessor ipv4_addresses_per_eni: ::Integer
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       SENSITIVE: []
     end
 
@@ -609,9 +611,12 @@ module Aws::VPCLattice
       attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       attr_accessor vpc_id: ::String
       attr_accessor subnet_ids: ::Array[::String]
+      attr_accessor service_managed: bool
+      attr_accessor managed_by: ::String
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")
       attr_accessor ipv4_addresses_per_eni: ::Integer
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -1183,6 +1188,7 @@ module Aws::VPCLattice
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")
       attr_accessor ipv4_addresses_per_eni: ::Integer
+      attr_accessor resource_config_dns_resolution: ("IN_VPC" | "PUBLIC")
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
