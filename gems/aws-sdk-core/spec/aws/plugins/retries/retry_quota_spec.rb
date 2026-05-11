@@ -18,7 +18,7 @@ module Aws
       end
 
       describe '#checkout_capacity' do
-        let(:error) { double('ErrorInspector', networking?: false) }
+        let(:error) { double('ErrorInspector', throttling_error?: false) }
 
         it 'returns the requested capacity when available' do
           initial_capacity = retry_quota.instance_variable_get(:@available_capacity)
@@ -30,11 +30,11 @@ module Aws
             .to eq(initial_capacity - checked_out_capacity)
         end
 
-        it 'checks out the timeout cost when the error is a networking error' do
-          error = double('ErrorInspector', networking?: true)
+        it 'checks out the timeout cost when the error is a throttling error' do
+          error = double('ErrorInspector', throttling_error?: true)
 
           checked_out_capacity = retry_quota.checkout_capacity(error)
-          expect(checked_out_capacity).to eq(Retries::RetryQuota::TIMEOUT_RETRY_COST)
+          expect(checked_out_capacity).to eq(Retries::RetryQuota::THROTTLING_RETRY_COST)
         end
 
         it 'returns 0 when there is insufficient capacity' do
