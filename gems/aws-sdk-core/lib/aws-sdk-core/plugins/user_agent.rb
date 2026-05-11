@@ -172,7 +172,9 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
           # Used to be RUBY_ENGINE/RUBY_VERSION
           def language_metadata
             metadata = "lang/#{RUBY_ENGINE}##{RUBY_ENGINE_VERSION} md/#{RUBY_VERSION}"
-            [:YJIT, :ZJIT].each do |jit|
+            return metadata unless RUBY_ENGINE == 'ruby'
+
+            %i[YJIT ZJIT].each do |jit|
               next unless RubyVM.const_defined?(jit)
 
               mode = RubyVM.const_get(jit)
