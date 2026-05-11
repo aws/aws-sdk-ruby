@@ -41,32 +41,32 @@ module Aws
         :retry_limit,
         default: 3,
         doc_type: Integer,
-        docstring: <<-DOCS)
-The maximum number of times to retry failed requests.  Only
-~ 500 level server errors and certain ~ 400 level client errors
-are retried.  Generally, these are throttling errors, data
-checksum errors, networking errors, timeout errors, auth errors,
-endpoint discovery, and errors from expired credentials.
-This option is only used in the `legacy` retry mode.
+        docstring: <<~DOCS)
+          The maximum number of times to retry failed requests.  Only
+          ~ 500 level server errors and certain ~ 400 level client errors
+          are retried.  Generally, these are throttling errors, data
+          checksum errors, networking errors, timeout errors, auth errors,
+          endpoint discovery, and errors from expired credentials.
+          This option is only used in the `legacy` retry mode.
         DOCS
 
       option(
         :retry_max_delay,
         default: 0,
         doc_type: Integer,
-        docstring: <<-DOCS)
-The maximum number of seconds to delay between retries (0 for no limit)
-used by the default backoff function. This option is only used in the
-`legacy` retry mode.
+        docstring: <<~DOCS)
+          The maximum number of seconds to delay between retries (0 for no limit)
+          used by the default backoff function. This option is only used in the
+          `legacy` retry mode.
         DOCS
 
       option(
         :retry_base_delay,
         default: 0.3,
         doc_type: Float,
-        docstring: <<-DOCS)
-The base delay in seconds used by the default backoff function. This option
-is only used in the `legacy` retry mode.
+        docstring: <<~DOCS)
+          The base delay in seconds used by the default backoff function. This option
+          is only used in the `legacy` retry mode.
         DOCS
 
       option(
@@ -74,45 +74,43 @@ is only used in the `legacy` retry mode.
         default: :none,
         doc_type: Symbol,
         rbs_type: '(:none | :equal | :full | ^(Integer) -> Integer)',
-        docstring: <<-DOCS)
-A delay randomiser function used by the default backoff function.
-Some predefined functions can be referenced by name - :none, :equal, :full,
-otherwise a Proc that takes and returns a number. This option is only used
-in the `legacy` retry mode.
+        docstring: <<~DOCS)
+          A delay randomiser function used by the default backoff function.
+          Some predefined functions can be referenced by name - :none, :equal, :full,
+          otherwise a Proc that takes and returns a number. This option is only used
+          in the `legacy` retry mode.
 
-@see https://www.awsarchitectureblog.com/2015/03/backoff.html
+          @see https://www.awsarchitectureblog.com/2015/03/backoff.html
         DOCS
 
       option(
         :retry_backoff,
         default: DEFAULT_BACKOFF,
         doc_type: Proc,
-        docstring: <<-DOCS)
-A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
-This option is only used in the `legacy` retry mode.
+        docstring: <<~DOCS)
+          A proc or lambda used for backoff. Defaults to 2**retries * retry_base_delay.
+          This option is only used in the `legacy` retry mode.
         DOCS
 
       # END LEGACY OPTIONS
 
       option(
         :retry_mode,
-        default: 'legacy',
+        default: 'standard',
         doc_type: String,
         rbs_type: '("legacy" | "standard" | "adaptive")',
-        docstring: <<-DOCS) do |cfg|
-Specifies which retry algorithm to use. Values are:
+        docstring: <<~DOCS) do |cfg|
+          Specifies which retry algorithm to use. Values are:
 
-* `legacy` - The pre-existing retry behavior.  This is default value if
-  no retry mode is provided.
+          * `legacy` - The pre-existing retry behavior.
 
-* `standard` - A standardized set of retry rules across the AWS SDKs.
-  This includes support for retry quotas, which limit the number of
-  unsuccessful retries a client can make.
+          * `standard` - A standardized set of retry rules across the AWS SDKs.
+            This includes support for retry quotas, which limit the number of
+            unsuccessful retries a client can make. This is default value if
+            no retry mode is provided.
 
-* `adaptive` - An experimental retry mode that includes all the
-  functionality of `standard` mode along with automatic client side
-  throttling.  This is a provisional mode that may change behavior
-  in the future.
+          * `adaptive` - A retry mode that includes all the functionality of
+            `standard` mode along with automatic client side throttling.
         DOCS
         resolve_retry_mode(cfg)
       end
@@ -121,11 +119,11 @@ Specifies which retry algorithm to use. Values are:
         :max_attempts,
         default: 3,
         doc_type: Integer,
-        docstring: <<-DOCS) do |cfg|
-An integer representing the maximum number attempts that will be made for
-a single request, including the initial attempt.  For example,
-setting this value to 5 will result in a request being retried up to
-4 times. Used in `standard` and `adaptive` retry modes.
+        docstring: <<~DOCS) do |cfg|
+          An integer representing the maximum number attempts that will be made for
+          a single request, including the initial attempt.  For example,
+          setting this value to 5 will result in a request being retried up to
+          4 times. Used in `standard` and `adaptive` retry modes.
         DOCS
         resolve_max_attempts(cfg)
       end
@@ -134,11 +132,11 @@ setting this value to 5 will result in a request being retried up to
         :adaptive_retry_wait_to_fill,
         default: true,
         doc_type: 'Boolean',
-        docstring: <<-DOCS) do |cfg|
-Used only in `adaptive` retry mode.  When true, the request will sleep
-until there is sufficent client side capacity to retry the request.
-When false, the request will raise a `RetryCapacityNotAvailableError` and will
-not retry instead of sleeping.
+        docstring: <<~DOCS) do |cfg|
+          Used only in `adaptive` retry mode.  When true, the request will sleep
+          until there is sufficent client side capacity to retry the request.
+          When false, the request will raise a `RetryCapacityNotAvailableError` and will
+          not retry instead of sleeping.
         DOCS
         resolve_adaptive_retry_wait_to_fill(cfg)
       end
@@ -147,10 +145,10 @@ not retry instead of sleeping.
         :correct_clock_skew,
         default: true,
         doc_type: 'Boolean',
-        docstring: <<-DOCS) do |cfg|
-Used only in `standard` and adaptive retry modes. Specifies whether to apply
-a clock skew correction and retry requests with skewed client clocks.
-      DOCS
+        docstring: <<~DOCS) do |cfg|
+          Used only in `standard` and adaptive retry modes. Specifies whether to apply
+          a clock skew correction and retry requests with skewed client clocks.
+        DOCS
         resolve_correct_clock_skew(cfg)
       end
 
@@ -169,31 +167,35 @@ a clock skew correction and retry requests with skewed client clocks.
             cfg.defaults_mode_config_resolver.resolve(:retry_mode)
           end
 
-          value = ENV['AWS_RETRY_MODE'] ||
-                  Aws.shared_config.retry_mode(profile: cfg.profile) ||
-                  default_mode_value ||
-                  'legacy'
+        value = ENV['AWS_RETRY_MODE'] ||
+                Aws.shared_config.retry_mode(profile: cfg.profile) ||
+                default_mode_value ||
+                'standard'
         # Raise if provided value is not one of the retry modes
         if value != 'legacy' && value != 'standard' && value != 'adaptive'
           raise ArgumentError,
-            'Must provide either `legacy`, `standard`, or `adaptive` for '\
-            'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
+                'Must provide either `legacy`, `standard`, or `adaptive` for '\
+                'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
         end
         value
       end
 
       def self.resolve_max_attempts(cfg)
         value = (ENV['AWS_MAX_ATTEMPTS']) ||
-                Aws.shared_config.max_attempts(profile: cfg.profile) ||
-                '3'
-        value = value.to_i
-        # Raise if provided value is not a positive integer
-        if value <= 0
-          raise ArgumentError,
-            'Must provide a positive integer for max_attempts profile '\
-            'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+                Aws.shared_config.max_attempts(profile: cfg.profile)
+        if value
+          value = value.to_i
+          # Raise if provided value is not a positive integer
+          if value <= 0
+            raise ArgumentError,
+                  'Must provide a positive integer for max_attempts profile '\
+                  'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+          end
+          return value
         end
-        value
+
+        service_id = cfg.api.metadata['serviceId'] if cfg.respond_to?(:api)
+        ['DynamoDB', 'DynamoDB Streams'].include?(service_id) ? 4 : 3
       end
 
       def self.resolve_adaptive_retry_wait_to_fill(cfg)
@@ -203,9 +205,9 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
-            'Must provide either `true` or `false` for '\
-            'adaptive_retry_wait_to_fill profile option or for '\
-            'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+                'Must provide either `true` or `false` for '\
+                'adaptive_retry_wait_to_fill profile option or for '\
+                'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
         end
         value == 'true'
       end
@@ -217,9 +219,9 @@ a clock skew correction and retry requests with skewed client clocks.
         # Raise if provided value is not true or false
         if value != 'true' && value != 'false'
           raise ArgumentError,
-            'Must provide either `true` or `false` for '\
-            'correct_clock_skew profile option or for '\
-            'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+                'Must provide either `true` or `false` for '\
+                'correct_clock_skew profile option or for '\
+                'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
         end
         value == 'true'
       end
@@ -227,6 +229,14 @@ a clock skew correction and retry requests with skewed client clocks.
       class Handler < Seahorse::Client::Handler
         # Max backoff (in seconds)
         MAX_BACKOFF = 20
+
+        # Hard-coded combination of services and operations as having the
+        # longPoll trait. To be removed when trait is enabled.
+        LONG_POLLING_OPERATIONS = {
+          'SQS' => Set[:receive_message],
+          'SFN' => Set[:get_activity_task],
+          'SWF' => Set[:poll_for_activity_task, :poll_for_decision_task]
+        }.freeze
 
         def call(context)
           context.metadata[:retries] ||= {}
@@ -260,12 +270,17 @@ a clock skew correction and retry requests with skewed client clocks.
 
           return response if context.retries >= config.max_attempts - 1
 
-          context.metadata[:retries][:capacity_amount] =
-            config.retry_quota.checkout_capacity(error_inspector)
-          return response unless context.metadata[:retries][:capacity_amount] > 0
+          capacity_amount = config.retry_quota.checkout_capacity(error_inspector)
+          context.metadata[:retries][:capacity_amount] = capacity_amount
 
-          delay = exponential_backoff(context.retries)
+          return response if capacity_amount <= 0 && !long_polling_operation?(context)
+
+          service_id = context.config.api.metadata['serviceId']
+          delay = backoff(context, error_inspector, service_id)
           Kernel.sleep(delay)
+
+          return response if capacity_amount <= 0
+
           retry_request(context, error_inspector)
         end
 
@@ -311,9 +326,44 @@ a clock skew correction and retry requests with skewed client clocks.
             context.http_response.body.respond_to?(:truncate)
         end
 
-        def exponential_backoff(retries)
+        def long_polling_operation?(context)
+          return true if context.operation['longPoll']
+
+          # Hard-coded failback until the trait is enabled
+          service_id = context.config.api.metadata['serviceId']
+          LONG_POLLING_OPERATIONS.include?([service_id, context.operation_name])
+        end
+
+        def backoff(context, error_inspector, service_id)
+          exp_backoff = exponential_backoff(context.retries, error_inspector, service_id)
+          retry_after = parse_retry_after(context)
+          return exp_backoff unless retry_after
+
+          backoff_duration = [retry_after, exp_backoff].max
+          [backoff_duration, exp_backoff + 5].min
+        end
+
+        def exponential_backoff(retries, error_inspector, service_id)
           # for a transient error, use backoff
-          [Kernel.rand * 2**retries, MAX_BACKOFF].min
+          backoff_scalar = if error_inspector.throttling_error?
+                             1
+                           elsif ['DynamoDB', 'DynamoDB Streams'].include?(service_id)
+                             0.025
+                           else
+                             0.05
+                           end
+          Kernel.rand * [backoff_scalar * 2**retries, MAX_BACKOFF].min
+        end
+
+        def parse_retry_after(context)
+          retry_after = context.http_response.headers['x-amx-retry-after']
+          return nil unless retry_after
+
+          Integer(retry_after) / 1000.0
+        rescue ArgumentError
+          context.config.logger&.debug(
+            "Failed to parse x-amz-retry-after header value: #{retry_after.inspect}"
+          )
         end
 
         def retry_request(context, error)
