@@ -38,6 +38,26 @@ module Aws
         }
       JSON
 
+      let(:oauth2_error_resp) { <<~JSON.strip }
+        {
+          "__type":"Oauth2ErrorResponse",
+          "error_description":"foo"
+        }
+      JSON
+
+      it 'extracts oauth2 error message from error_description' do
+        client.stub_responses(
+          :batch_get_item,
+          { status_code: 400, body: oauth2_error_resp, headers: {} }
+        )
+
+        expect { client.batch_get_item(request_items: {}) }
+          .to raise_error do |e|
+          expect(e.code).to eq('Oauth2ErrorResponse')
+          expect(e.message).to eq('foo')
+        end
+      end
+
       it 'extracts error data' do
         client.stub_responses(
           :batch_get_item,

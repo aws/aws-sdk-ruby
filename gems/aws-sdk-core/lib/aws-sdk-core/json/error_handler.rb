@@ -68,7 +68,7 @@ module Aws
         if code == 'RequestEntityTooLarge'
           'Request body must be less than 1 MB'
         else
-          json['message'] || json['Message'] || ''
+          json['message'] || json['Message'] || json['error_description'] || ''
         end
       end
 
