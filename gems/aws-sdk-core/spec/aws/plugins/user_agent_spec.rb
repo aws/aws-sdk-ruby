@@ -111,7 +111,7 @@ module Aws
           resp.context.http_request.headers['User-Agent']
         end
 
-        it 'includes md/yjit when YJIT is enabled' do
+        it 'includes md/yjit when YJIT is enabled', skip: (RUBY_ENGINE != 'ruby') do
           stub_jit(:YJIT, enabled: true)
           stub_jit(:ZJIT, enabled: false)
 
@@ -119,7 +119,7 @@ module Aws
           expect(user_agent_for(client)).not_to include('md/zjit')
         end
 
-        it 'includes md/zjit when ZJIT is enabled' do
+        it 'includes md/zjit when ZJIT is enabled', skip: (RUBY_ENGINE != 'ruby') do
           stub_jit(:YJIT, enabled: false)
           stub_jit(:ZJIT, enabled: true)
 
