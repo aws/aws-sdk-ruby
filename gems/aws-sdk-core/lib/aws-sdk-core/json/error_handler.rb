@@ -68,6 +68,7 @@ module Aws
         if code == 'RequestEntityTooLarge'
           'Request body must be less than 1 MB'
         else
+          # SSO OIDC returns error message in error_description, following OAuth 2.0 spec.
           json['message'] || json['Message'] || json['error_description'] || ''
         end
       end

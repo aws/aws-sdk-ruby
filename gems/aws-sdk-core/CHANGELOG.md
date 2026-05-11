@@ -1,6 +1,7 @@
 Unreleased Changes
 ------------------
 * Feature - Add YJIT & ZJIT tracking to user agent.
+* Issue - Fix error messaging in SSO OIDC.
 
 3.246.0 (2026-04-23)
 ------------------
