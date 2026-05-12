@@ -108,7 +108,7 @@ module Aws
 
       option(
         :retry_mode,
-        default: 'standard',
+        default: 'legacy', # TODO: Change to 'standard' when new retries become default
         doc_type: String,
         rbs_type: '("legacy" | "standard" | "adaptive")',
         docstring: <<~DOCS) do |cfg|
@@ -388,11 +388,14 @@ module Aws
           retry_after = context.http_response.headers['x-amz-retry-after']
           return nil unless retry_after
 
-          Integer(retry_after) / 1000.0
-        rescue ArgumentError
-          context.config.logger&.debug(
-            "Failed to parse x-amz-retry-after header value: #{retry_after.inspect}"
-          )
+          unless retry_after.match?(/\A\d+\z/)
+            context.config.logger&.debug(
+              "Failed to parse x-amz-retry-after header value: #{retry_after.inspect}"
+            )
+            return nil
+          end
+
+          retry_after.to_i / 1000.0
         end
 
         def retry_request(context, error)
