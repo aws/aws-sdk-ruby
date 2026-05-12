@@ -8,8 +8,16 @@ module Aws
     describe RetryErrors do
       let(:client) { RetryErrorsSvc::Client.new(stub_responses: true) }
 
-      it 'defaults config.retry_mode to standard' do
+      it 'defaults config.retry_mode to standard when new retries enabled' do
+        allow(RetryErrors).to receive(:new_retries?).and_return(true)
+        client = RetryErrorsSvc::Client.new(stub_responses: true)
         expect(client.config.retry_mode).to eq('standard')
+      end
+
+      it 'defaults config.retry_mode to legacy when new retries disabled' do
+        allow(RetryErrors).to receive(:new_retries?).and_return(false)
+        client = RetryErrorsSvc::Client.new(stub_responses: true)
+        expect(client.config.retry_mode).to eq('legacy')
       end
 
       it 'can configure retry_mode with shared config' do
@@ -148,6 +156,7 @@ module Aws
 
       context 'standard mode' do
         before(:each) do
+          allow(RetryErrors).to receive(:new_retries?).and_return(true)
           config.retry_mode = 'standard'
           allow(Kernel).to receive(:rand).and_return(1)
         end
@@ -354,6 +363,7 @@ module Aws
           end
 
           it 'retries errors' do
+            config.max_attempts = 4
             test_case_def = [
               {
                 response: { status_code: 500, error: service_error },
@@ -516,6 +526,198 @@ module Aws
           handle_with_retry(test_case_def)
         end
 
+      end
+
+      # TODO: Remove this context when new retries become default
+      context 'standard mode (old retries)' do
+        before(:each) do
+          allow(RetryErrors).to receive(:new_retries?).and_return(false)
+          config.retry_mode = 'standard'
+          allow(Kernel).to receive(:rand).and_return(1)
+        end
+
+        it 'retry eventually succeeds' do
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 495, retries: 2 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'fails due to max attempts reached' do
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'fails due to retry quota reached after a single retry' do
+          config.retry_quota.instance_variable_set(:@available_capacity, 5)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 1 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'does not retry if the retry quota is 0' do
+          config.retry_quota.instance_variable_set(:@available_capacity, 0)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 0, retries: 0 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'uses exponential backoff timing' do
+          config.max_attempts = 5
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 485, retries: 3, delay: 4 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4, delay: 8 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'does not exceed the max backoff time' do
+          config.max_attempts = 5
+          stub_const('Aws::Plugins::RetryErrors::Handler::MAX_BACKOFF', 3)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 495, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 490, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 485, retries: 3, delay: 3 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4, delay: 3 }
+            },
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 480, retries: 4 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'fails due to retry quota bucket exhaustion' do
+          config.max_attempts = 5
+          config.retry_quota.instance_variable_set(:@available_capacity, 10)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 5, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 502, error: service_error },
+              expect: { available_capacity: 0, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 503, error: service_error },
+              expect: { available_capacity: 0, retries: 2 }
+            }
+          ]
+
+          handle_with_retry(test_case_def)
+        end
+
+        it 'recovers after successful responses' do
+          config.max_attempts = 5
+          config.retry_quota.instance_variable_set(:@available_capacity, 15)
+
+          test_case_def = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 10, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 502, error: service_error },
+              expect: { available_capacity: 5, retries: 2, delay: 2 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 10, retries: 2 }
+            }
+          ]
+          handle_with_retry(test_case_def)
+
+          test_case_post_success = [
+            {
+              response: { status_code: 500, error: service_error },
+              expect: { available_capacity: 5, retries: 1, delay: 1 }
+            },
+            {
+              response: { status_code: 200, error: nil },
+              expect: { available_capacity: 10, retries: 1 }
+            }
+          ]
+          reset_request
+          handle_with_retry(test_case_post_success)
+        end
       end
 
       context 'adaptive mode' do

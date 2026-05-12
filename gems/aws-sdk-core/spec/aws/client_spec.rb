@@ -46,7 +46,9 @@ module Aws
         end
       end
 
+      # TODO: Update retries to 2 and remove stub when new retries become default
       it 'raises a helpful error on possible incorrect regions' do
+        allow(Aws::Plugins::RetryErrors).to receive(:new_retries?).and_return(false)
 
         # simulate an error from connecting to an unknown endpoint
         stub_request(:any, /.*/).
@@ -65,7 +67,7 @@ module Aws
         end
 
         expect(e).to be_kind_of(Errors::NoSuchEndpointError)
-        expect(e.context.retries).to be(2) # updated to retry based on customer request
+        expect(e.context.retries).to be(3)
         expect(e.message).to include('us-east-1')
         expect(e.message).to include('us-west-1')
         expect(e.message).to include('cn-north-1')

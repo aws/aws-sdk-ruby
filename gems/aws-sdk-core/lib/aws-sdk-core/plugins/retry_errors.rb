@@ -10,6 +10,18 @@ module Aws
   module Plugins
     # @api private
     class RetryErrors < Seahorse::Client::Plugin
+      # TODO: Remove this gate and hardcode new retry behavior once
+      # AWS_NEW_RETRIES_2026 is enabled by default, which includes:
+      # - Default retry_mode to 'standard'
+      # - Default max_attempts to 4 for DynamoDB
+      # - Remove the old retries branch in Handler#call
+      # - Remove the old retries branch in #exponential_backoff
+      # - Remove LEGACY_RETRY_COST and TIMEOUT_RETRY_COST from RetryQuota
+      # @api private
+      def self.new_retries?
+        ENV.fetch('AWS_NEW_RETRIES_2026', 'false').downcase == 'true'
+      end
+
       # BEGIN LEGACY OPTIONS
       EQUAL_JITTER = ->(delay) { (delay / 2) + Kernel.rand(0..(delay / 2)) }
       FULL_JITTER = ->(delay) { Kernel.rand(0..delay) }
@@ -170,7 +182,7 @@ module Aws
         value = ENV['AWS_RETRY_MODE'] ||
                 Aws.shared_config.retry_mode(profile: cfg.profile) ||
                 default_mode_value ||
-                'standard'
+                (new_retries? ? 'standard' : 'legacy') # TODO: default to 'standard' when new retries become default
         # Raise if provided value is not one of the retry modes
         if value != 'legacy' && value != 'standard' && value != 'adaptive'
           raise ArgumentError,
@@ -194,8 +206,13 @@ module Aws
           return value
         end
 
-        service_id = cfg.api.metadata['serviceId'] if cfg.respond_to?(:api)
-        ['DynamoDB', 'DynamoDB Streams'].include?(service_id) ? 4 : 3
+        # TODO: Remove gate and keep only the new retries branch
+        if RetryErrors.new_retries?
+          service_id = cfg.api.metadata['serviceId'] if cfg.respond_to?(:api)
+          ['DynamoDB', 'DynamoDB Streams'].include?(service_id) ? 4 : 3
+        else
+          3
+        end
       end
 
       def self.resolve_adaptive_retry_wait_to_fill(cfg)
@@ -273,13 +290,21 @@ module Aws
           capacity_amount = config.retry_quota.checkout_capacity(error_inspector)
           context.metadata[:retries][:capacity_amount] = capacity_amount
 
-          return response if capacity_amount <= 0 && !long_polling_operation?(context)
+          # TODO: Remove gate and keep only the new retries branch
+          if RetryErrors.new_retries?
+            return response if capacity_amount <= 0 && !long_polling_operation?(context)
 
-          service_id = context.config.api.metadata['serviceId']
-          delay = backoff(context, error_inspector, service_id)
-          Kernel.sleep(delay)
+            service_id = context.config.api.metadata['serviceId']
+            delay = backoff(context, error_inspector, service_id)
+            Kernel.sleep(delay)
 
-          return response if capacity_amount <= 0
+            return response if capacity_amount <= 0
+          else
+            return response unless capacity_amount > 0
+
+            delay = exponential_backoff(context.retries)
+            Kernel.sleep(delay)
+          end
 
           retry_request(context, error_inspector)
         end
@@ -343,16 +368,20 @@ module Aws
           [backoff_duration, exp_backoff + 5].min
         end
 
-        def exponential_backoff(retries, error_inspector, service_id)
-          # for a transient error, use backoff
-          backoff_scalar = if error_inspector.throttling_error?
-                             1
-                           elsif ['DynamoDB', 'DynamoDB Streams'].include?(service_id)
-                             0.025
-                           else
-                             0.05
-                           end
-          Kernel.rand * [backoff_scalar * 2**retries, MAX_BACKOFF].min
+        # TODO: Remove gate, remove default nil params, keep only new retries branch
+        def exponential_backoff(retries, error_inspector = nil, service_id = nil)
+          if RetryErrors.new_retries?
+            backoff_scalar = if error_inspector.throttling_error?
+                               1
+                             elsif ['DynamoDB', 'DynamoDB Streams'].include?(service_id)
+                               0.025
+                             else
+                               0.05
+                             end
+            Kernel.rand * [backoff_scalar * 2**retries, MAX_BACKOFF].min
+          else
+            [Kernel.rand * 2**retries, MAX_BACKOFF].min
+          end
         end
 
         def parse_retry_after(context)

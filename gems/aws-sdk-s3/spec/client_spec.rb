@@ -763,7 +763,10 @@ module Aws
         end
       end
 
+      # TODO: Update retries to 2 and remove stub when new retries become default
       describe "200 errors response handling" do
+        before { allow(Aws::Plugins::RetryErrors).to receive(:new_retries?).and_return(false) }
+
         {
           complete_multipart_upload: { upload_id: 'upload-id' },
           copy_object: { copy_source: 'bucket/key' },
@@ -796,7 +799,7 @@ module Aws
               key: 'key'
             }.merge(params))
             expect(resp.error).to be_kind_of(S3::Errors::InternalError)
-            expect(resp.context.retries).to eq(2)
+            expect(resp.context.retries).to eq(3)
             expect(resp.data).to be(nil)
           end
 
@@ -815,7 +818,7 @@ module Aws
               key: 'key'
             }.merge(params))
             expect(resp.error).to be_kind_of(Seahorse::Client::NetworkingError)
-            expect(resp.context.retries).to eq(2)
+            expect(resp.context.retries).to eq(3)
             expect(resp.data).to be(nil)
           end
         end

@@ -24,6 +24,13 @@ module Aws
         expect(client.config.retry_jitter).to eq(:none)
       end
 
+      # TODO: Remove when new retries become default
+      it 'defaults config.retry_mode to legacy' do
+        allow(RetryErrors).to receive(:new_retries?).and_return(false)
+        client = RetryErrorsSvc::Client.new(stub_responses: true)
+        expect(client.config.retry_mode).to eq('legacy')
+      end
+
       it 'uses the legacy handler when retry_mode is legacy' do
         client = RetryErrorsSvc::Client.new(retry_mode: 'legacy', region: 'us-west-2')
         expect(client.handlers.entries.map(&:handler_class)).to include(RetryErrors::LegacyHandler)
