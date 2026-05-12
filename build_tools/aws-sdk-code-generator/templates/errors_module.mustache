@@ -58,7 +58,7 @@ module {{module_name}}
       {{#members}}
 
       # @return [{{type}}]
-      def {{name}}
+      def {{name}}{{#detailed_message}}(highlight: true, **){{/detailed_message}}
         {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
       end
       {{/members}}

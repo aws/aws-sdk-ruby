@@ -13,10 +13,12 @@ module AwsSdkCodeGenerator
         # excluding event shapes marked as error
         if error_struct?(shape)
           members = shape['members'].inject([]) do |arr, (k, v)|
+            member_name = Underscore.underscore(k)
             arr << {
-              name: Underscore.underscore(k),
+              name: member_name,
               type: Docstring.ucfirst(v['type'] ||'String'),
-              shared: k.downcase == 'message' || k.downcase == 'code'
+              shared: k.downcase == 'message' || k.downcase == 'code',
+              detailed_message: member_name == 'detailed_message'
             }
             arr
           end
