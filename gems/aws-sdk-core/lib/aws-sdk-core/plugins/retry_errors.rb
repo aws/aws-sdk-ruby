@@ -10,18 +10,6 @@ module Aws
   module Plugins
     # @api private
     class RetryErrors < Seahorse::Client::Plugin
-      # TODO: Remove this gate and hardcode new retry behavior once
-      # AWS_NEW_RETRIES_2026 is enabled by default, which includes:
-      # - Default retry_mode to 'standard'
-      # - Default max_attempts to 4 for DynamoDB
-      # - Remove the old retries branch in Handler#call
-      # - Remove the old retries branch in #exponential_backoff
-      # - Remove LEGACY_RETRY_COST and TIMEOUT_RETRY_COST from RetryQuota
-      # @api private
-      def self.new_retries?
-        ENV.fetch('AWS_NEW_RETRIES_2026', 'false').downcase == 'true'
-      end
-
       # BEGIN LEGACY OPTIONS
       EQUAL_JITTER = ->(delay) { (delay / 2) + Kernel.rand(0..(delay / 2)) }
       FULL_JITTER = ->(delay) { Kernel.rand(0..delay) }
@@ -158,7 +146,7 @@ module Aws
         default: true,
         doc_type: 'Boolean',
         docstring: <<~DOCS) do |cfg|
-          Used only in `standard` and adaptive retry modes. Specifies whether to apply
+          Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
           a clock skew correction and retry requests with skewed client clocks.
         DOCS
         resolve_correct_clock_skew(cfg)
@@ -173,74 +161,91 @@ module Aws
       # @api private undocumented
       option(:clock_skew) { Retries::ClockSkew.new }
 
-      def self.resolve_retry_mode(cfg)
-        default_mode_value =
-          if cfg.respond_to?(:defaults_mode_config_resolver)
-            cfg.defaults_mode_config_resolver.resolve(:retry_mode)
-          end
+      DYNAMODB_SERVICES = Set['DynamoDB', 'DynamoDB Streams'].freeze
 
-        value = ENV['AWS_RETRY_MODE'] ||
-                Aws.shared_config.retry_mode(profile: cfg.profile) ||
-                default_mode_value ||
-                (new_retries? ? 'standard' : 'legacy') # TODO: default to 'standard' when new retries become default
-        # Raise if provided value is not one of the retry modes
-        if value != 'legacy' && value != 'standard' && value != 'adaptive'
-          raise ArgumentError,
-                'Must provide either `legacy`, `standard`, or `adaptive` for '\
-                'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
+      class << self
+        # TODO: Remove this gate and hardcode new retry behavior once
+        # AWS_NEW_RETRIES_2026 is enabled by default, which includes:
+        # - Default retry_mode to 'standard'
+        # - Default max_attempts to 4 for DynamoDB
+        # - Remove the old retries branch in Handler#call
+        # - Remove the old retries branch in #exponential_backoff
+        # - Remove LEGACY_RETRY_COST and TIMEOUT_RETRY_COST from RetryQuota
+        def new_retries?
+          ENV.fetch('AWS_NEW_RETRIES_2026', 'false').downcase == 'true'
         end
-        value
-      end
 
-      def self.resolve_max_attempts(cfg)
-        value = (ENV['AWS_MAX_ATTEMPTS']) ||
-                Aws.shared_config.max_attempts(profile: cfg.profile)
-        if value
-          value = value.to_i
-          # Raise if provided value is not a positive integer
-          if value <= 0
+        def resolve_retry_mode(cfg)
+          default_mode_value =
+            if cfg.respond_to?(:defaults_mode_config_resolver)
+              cfg.defaults_mode_config_resolver.resolve(:retry_mode)
+            end
+
+          value = ENV['AWS_RETRY_MODE'] ||
+                  Aws.shared_config.retry_mode(profile: cfg.profile) ||
+                  default_mode_value ||
+                  (new_retries? ? 'standard' : 'legacy') # TODO: default to 'standard' when new retries become default
+          # Raise if provided value is not one of the retry modes
+          if value != 'legacy' && value != 'standard' && value != 'adaptive'
             raise ArgumentError,
-                  'Must provide a positive integer for max_attempts profile '\
-                  'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+                  'Must provide either `legacy`, `standard`, or `adaptive` for '\
+                    'retry_mode profile option or for ENV[\'AWS_RETRY_MODE\']'
           end
-          return value
+          value
         end
 
-        # TODO: Remove gate and keep only the new retries branch
-        if RetryErrors.new_retries?
+        def resolve_max_attempts(cfg)
+          value = (ENV['AWS_MAX_ATTEMPTS']) ||
+                  Aws.shared_config.max_attempts(profile: cfg.profile)
+          if value
+            value = value.to_i
+            # Raise if provided value is not a positive integer
+            if value <= 0
+              raise ArgumentError,
+                    'Must provide a positive integer for max_attempts profile '\
+                      'option or for ENV[\'AWS_MAX_ATTEMPTS\']'
+            end
+            return value
+          end
+
+          default_max_attempts(cfg)
+        end
+
+        def default_max_attempts(cfg)
+          # TODO: Remove gate and keep only the new retries branch
+          return 3 unless new_retries?
+
           service_id = cfg.api.metadata['serviceId'] if cfg.respond_to?(:api)
-          ['DynamoDB', 'DynamoDB Streams'].include?(service_id) ? 4 : 3
-        else
-          3
+          DYNAMODB_SERVICES.include?(service_id) ? 4 : 3
         end
-      end
 
-      def self.resolve_adaptive_retry_wait_to_fill(cfg)
-        value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] ||
-          Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) ||
-          'true'
-        # Raise if provided value is not true or false
-        if value != 'true' && value != 'false'
-          raise ArgumentError,
-                'Must provide either `true` or `false` for '\
-                'adaptive_retry_wait_to_fill profile option or for '\
-                'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+        def resolve_adaptive_retry_wait_to_fill(cfg)
+          value = ENV['AWS_ADAPTIVE_RETRY_WAIT_TO_FILL'] ||
+                  Aws.shared_config.adaptive_retry_wait_to_fill(profile: cfg.profile) ||
+                  'true'
+          # Raise if provided value is not true or false
+          if value != 'true' && value != 'false'
+            raise ArgumentError,
+                  'Must provide either `true` or `false` for '\
+                    'adaptive_retry_wait_to_fill profile option or for '\
+                    'ENV[\'AWS_ADAPTIVE_RETRY_WAIT_TO_FILL\']'
+          end
+          value == 'true'
         end
-        value == 'true'
-      end
 
-      def self.resolve_correct_clock_skew(cfg)
-        value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
-          Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
-          'true'
-        # Raise if provided value is not true or false
-        if value != 'true' && value != 'false'
-          raise ArgumentError,
-                'Must provide either `true` or `false` for '\
-                'correct_clock_skew profile option or for '\
-                'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+        def resolve_correct_clock_skew(cfg)
+          value = ENV['AWS_CORRECT_CLOCK_SKEW'] ||
+                  Aws.shared_config.correct_clock_skew(profile: cfg.profile) ||
+                  'true'
+          # Raise if provided value is not true or false
+          if value != 'true' && value != 'false'
+            raise ArgumentError,
+                  'Must provide either `true` or `false` for '\
+                    'correct_clock_skew profile option or for '\
+                    'ENV[\'AWS_CORRECT_CLOCK_SKEW\']'
+          end
+          value == 'true'
         end
-        value == 'true'
       end
 
       class Handler < Seahorse::Client::Handler
@@ -291,7 +296,7 @@ module Aws
           context.metadata[:retries][:capacity_amount] = capacity_amount
 
           # TODO: Remove gate and keep only the new retries branch
-          if RetryErrors.new_retries?
+          if new_retries?
             return response if capacity_amount <= 0 && !long_polling_operation?(context)
 
             service_id = context.config.api.metadata['serviceId']
@@ -310,6 +315,10 @@ module Aws
         end
 
         private
+
+        def new_retries?
+          RetryErrors.new_retries?
+        end
 
         def with_metric(retry_mode, &block)
           Aws::Plugins::UserAgent.metric("RETRY_MODE_#{retry_mode.upcase}", &block)
@@ -370,10 +379,10 @@ module Aws
 
         # TODO: Remove gate, remove default nil params, keep only new retries branch
         def exponential_backoff(retries, error_inspector = nil, service_id = nil)
-          if RetryErrors.new_retries?
+          if new_retries?
             backoff_scalar = if error_inspector.throttling_error?
                                1
-                             elsif ['DynamoDB', 'DynamoDB Streams'].include?(service_id)
+                             elsif DYNAMODB_SERVICES.include?(service_id)
                                0.025
                              else
                                0.05
