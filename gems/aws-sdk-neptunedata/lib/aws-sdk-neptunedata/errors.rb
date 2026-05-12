@@ -78,7 +78,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -103,7 +103,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -128,7 +128,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -157,7 +157,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -182,7 +182,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -211,7 +211,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -240,7 +240,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -269,7 +269,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -294,7 +294,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -323,7 +323,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -348,7 +348,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -373,7 +373,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -398,7 +398,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -423,7 +423,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -448,7 +448,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -473,7 +473,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -498,7 +498,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -523,7 +523,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -552,7 +552,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -577,7 +577,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -602,7 +602,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -627,7 +627,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -652,7 +652,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -681,7 +681,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -706,7 +706,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -731,7 +731,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -756,7 +756,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -785,7 +785,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -810,7 +810,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -835,7 +835,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -860,7 +860,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -889,7 +889,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -918,7 +918,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
@@ -947,7 +947,7 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      def detailed_message
+      def detailed_message(highlight: true, **)
         @data[:detailed_message]
       end
 
