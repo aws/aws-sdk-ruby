@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Add new retry behavior behind `AWS_NEW_RETRIES_2026` environment variable. When enabled, defaults to `standard` retry mode, service-specific tuning for DynamoDB, long-polling backoff support, and `x-amz-retry-after` header support.
+
 3.246.0 (2026-04-23)
 ------------------
 
