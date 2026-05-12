@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2026-05-04)
+------------------
+
+* Feature - Updates the type of the MediaLiveRouterOutputConnectionMap.
+
 1.183.0 (2026-04-08)
 ------------------
 

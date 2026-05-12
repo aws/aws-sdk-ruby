@@ -1395,7 +1395,8 @@ module Aws
                                        batch_config: {
                                          max_batch_open_ms: ::Integer?,
                                          max_batch_size: ::Integer?,
-                                         max_batch_size_bytes: ::Integer?
+                                         max_batch_size_bytes: ::Integer?,
+                                         batch_across_topics: bool?
                                        }?
                                      }?,
                                      kafka: {
@@ -1608,7 +1609,8 @@ module Aws
                                      batch_config: {
                                        max_batch_open_ms: ::Integer?,
                                        max_batch_size: ::Integer?,
-                                       max_batch_size_bytes: ::Integer?
+                                       max_batch_size_bytes: ::Integer?,
+                                       batch_across_topics: bool?
                                      }?
                                    }?,
                                    kafka: {
@@ -4143,7 +4145,8 @@ module Aws
                                         batch_config: {
                                           max_batch_open_ms: ::Integer?,
                                           max_batch_size: ::Integer?,
-                                          max_batch_size_bytes: ::Integer?
+                                          max_batch_size_bytes: ::Integer?,
+                                          batch_across_topics: bool?
                                         }?
                                       }?,
                                       kafka: {
@@ -4356,7 +4359,8 @@ module Aws
                                       batch_config: {
                                         max_batch_open_ms: ::Integer?,
                                         max_batch_size: ::Integer?,
-                                        max_batch_size_bytes: ::Integer?
+                                        max_batch_size_bytes: ::Integer?,
+                                        batch_across_topics: bool?
                                       }?
                                     }?,
                                     kafka: {

@@ -6006,6 +6006,7 @@ module Aws::EC2
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor include_unsupported_in_region: bool
       SENSITIVE: []
     end
 
@@ -11633,6 +11634,7 @@ module Aws::EC2
       attr_accessor neuron_info: Types::NeuronInfo
       attr_accessor phc_support: ("unsupported" | "supported")
       attr_accessor reboot_migration_support: ("unsupported" | "supported")
+      attr_accessor supported_in_region: bool
       SENSITIVE: []
     end
 
@@ -14140,6 +14142,7 @@ module Aws::EC2
       attr_accessor remote_ipv_4_network_cidr: ::String
       attr_accessor local_ipv_6_network_cidr: ::String
       attr_accessor remote_ipv_6_network_cidr: ::String
+      attr_accessor tunnel_bandwidth: ("standard" | "large")
       attr_accessor dry_run: bool
       SENSITIVE: []
     end

@@ -7188,7 +7188,7 @@ module Aws::GeoRoutes
     #
     class WaypointOptimizationDrivingDistanceOptions < Struct.new(
       :driving_distance)
-      SENSITIVE = [:driving_distance]
+      SENSITIVE = []
       include Aws::Structure
     end
 

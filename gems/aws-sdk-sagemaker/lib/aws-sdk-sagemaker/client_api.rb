@@ -436,6 +436,7 @@ module Aws::SageMaker
     ClusterFsxLustreConfig = Shapes::StructureShape.new(name: 'ClusterFsxLustreConfig')
     ClusterFsxMountPath = Shapes::StringShape.new(name: 'ClusterFsxMountPath')
     ClusterFsxOpenZfsConfig = Shapes::StructureShape.new(name: 'ClusterFsxOpenZfsConfig')
+    ClusterImageVersionStatus = Shapes::StringShape.new(name: 'ClusterImageVersionStatus')
     ClusterInstanceCount = Shapes::IntegerShape.new(name: 'ClusterInstanceCount')
     ClusterInstanceGroupDetails = Shapes::StructureShape.new(name: 'ClusterInstanceGroupDetails')
     ClusterInstanceGroupDetailsList = Shapes::ListShape.new(name: 'ClusterInstanceGroupDetailsList')
@@ -4024,6 +4025,7 @@ module Aws::SageMaker
     ClusterInstanceGroupDetails.add_member(:scheduled_update_config, Shapes::ShapeRef.new(shape: ScheduledUpdateConfig, location_name: "ScheduledUpdateConfig"))
     ClusterInstanceGroupDetails.add_member(:current_image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "CurrentImageId"))
     ClusterInstanceGroupDetails.add_member(:desired_image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "DesiredImageId"))
+    ClusterInstanceGroupDetails.add_member(:image_version_status, Shapes::ShapeRef.new(shape: ClusterImageVersionStatus, location_name: "ImageVersionStatus"))
     ClusterInstanceGroupDetails.add_member(:active_operations, Shapes::ShapeRef.new(shape: ActiveOperations, location_name: "ActiveOperations"))
     ClusterInstanceGroupDetails.add_member(:kubernetes_config, Shapes::ShapeRef.new(shape: ClusterKubernetesConfigDetails, location_name: "KubernetesConfig"))
     ClusterInstanceGroupDetails.add_member(:capacity_requirements, Shapes::ShapeRef.new(shape: ClusterCapacityRequirements, location_name: "CapacityRequirements"))
@@ -4155,6 +4157,7 @@ module Aws::SageMaker
     ClusterNodeDetails.add_member(:placement, Shapes::ShapeRef.new(shape: ClusterInstancePlacement, location_name: "Placement"))
     ClusterNodeDetails.add_member(:current_image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "CurrentImageId"))
     ClusterNodeDetails.add_member(:desired_image_id, Shapes::ShapeRef.new(shape: ImageId, location_name: "DesiredImageId"))
+    ClusterNodeDetails.add_member(:image_version_status, Shapes::ShapeRef.new(shape: ClusterImageVersionStatus, location_name: "ImageVersionStatus"))
     ClusterNodeDetails.add_member(:ultra_server_info, Shapes::ShapeRef.new(shape: UltraServerInfo, location_name: "UltraServerInfo"))
     ClusterNodeDetails.add_member(:kubernetes_config, Shapes::ShapeRef.new(shape: ClusterKubernetesConfigNodeDetails, location_name: "KubernetesConfig"))
     ClusterNodeDetails.add_member(:capacity_type, Shapes::ShapeRef.new(shape: ClusterCapacityType, location_name: "CapacityType"))
@@ -4176,6 +4179,7 @@ module Aws::SageMaker
     ClusterNodeSummary.add_member(:instance_status, Shapes::ShapeRef.new(shape: ClusterInstanceStatusDetails, required: true, location_name: "InstanceStatus"))
     ClusterNodeSummary.add_member(:ultra_server_info, Shapes::ShapeRef.new(shape: UltraServerInfo, location_name: "UltraServerInfo"))
     ClusterNodeSummary.add_member(:private_dns_hostname, Shapes::ShapeRef.new(shape: ClusterPrivateDnsHostname, location_name: "PrivateDnsHostname"))
+    ClusterNodeSummary.add_member(:image_version_status, Shapes::ShapeRef.new(shape: ClusterImageVersionStatus, location_name: "ImageVersionStatus"))
     ClusterNodeSummary.struct_class = Types::ClusterNodeSummary
 
     ClusterOnDemandOptions.struct_class = Types::ClusterOnDemandOptions

@@ -832,6 +832,7 @@ module Aws::CloudWatch
     class PutDashboardInput
       attr_accessor dashboard_name: ::String
       attr_accessor dashboard_body: ::String
+      attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
 

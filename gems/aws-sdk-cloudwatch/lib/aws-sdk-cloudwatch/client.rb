@@ -699,8 +699,8 @@ module Aws::CloudWatch
     end
 
     # Deletes all dashboards that you specify. You can specify up to 100
-    # dashboards to delete. If there is an error during this call, no
-    # dashboards are deleted.
+    # dashboards to delete. If there is an error during this call, the
+    # operation attempts to delete as many dashboards as possible.
     #
     # @option params [required, Array<String>] :dashboard_names
     #   The dashboards to be deleted. This parameter is required.
@@ -2376,8 +2376,8 @@ module Aws::CloudWatch
     # Returns the current status of vended metric enrichment for the
     # account, including whether CloudWatch vended metrics are enriched with
     # resource ARN and resource tag labels and queryable using PromQL. For
-    # the list of supported resources, see [Supported AWS infrastructure
-    # metrics][1].
+    # the list of supported resources, see [Supported Amazon Web Services
+    # infrastructure metrics][1].
     #
     #
     #
@@ -2723,7 +2723,8 @@ module Aws::CloudWatch
     end
 
     # Displays the tags associated with a CloudWatch resource. Currently,
-    # alarms and Contributor Insights rules support tagging.
+    # alarms, dashboards, metric streams and Contributor Insights rules
+    # support tagging.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the CloudWatch resource that you want to view tags for.
@@ -2733,6 +2734,13 @@ module Aws::CloudWatch
     #
     #   The ARN format of a Contributor Insights rule is
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
+    #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
+    #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -3354,6 +3362,24 @@ module Aws::CloudWatch
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
     #
+    # @option params [Array<Types::Tag>] :tags
+    #   A list of key-value pairs to associate with the dashboard. You can
+    #   associate as many as 50 tags with a dashboard.
+    #
+    #   Tags can help you organize and categorize your dashboards. You can
+    #   also use them to scope user permissions by granting a user permission
+    #   to access or change only dashboards with certain tag values.
+    #
+    #   You can use this parameter only when creating a new dashboard. If you
+    #   specify `Tags` when updating an existing dashboard, the tag updates
+    #   are ignored. To add or update tags on an existing dashboard, use
+    #   [TagResource][1]. To remove tags, use [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
+    #
     # @return [Types::PutDashboardOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutDashboardOutput#dashboard_validation_messages #dashboard_validation_messages} => Array&lt;Types::DashboardValidationMessage&gt;
@@ -3363,6 +3389,12 @@ module Aws::CloudWatch
     #   resp = client.put_dashboard({
     #     dashboard_name: "DashboardName", # required
     #     dashboard_body: "DashboardBody", # required
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4610,11 +4642,11 @@ module Aws::CloudWatch
     end
 
     # Enables enrichment and PromQL access for CloudWatch vended metrics for
-    # [supported AWS resources][1] in the account. Once enabled, metrics
-    # that contain a resource identifier dimension (for example, EC2
-    # `CPUUtilization` with an `InstanceId` dimension) are enriched with
-    # resource ARN and resource tag labels and become queryable using
-    # PromQL.
+    # [supported Amazon Web Services resources][1] in the account. Once
+    # enabled, metrics that contain a resource identifier dimension (for
+    # example, EC2 `CPUUtilization` with an `InstanceId` dimension) are
+    # enriched with resource ARN and resource tag labels and become
+    # queryable using PromQL.
     #
     # Before calling this operation, you must enable resource tags on
     # telemetry for your account. For more information, see [Enable resource
@@ -4663,9 +4695,9 @@ module Aws::CloudWatch
     end
 
     # Disables enrichment and PromQL access for CloudWatch vended metrics
-    # for [supported AWS resources][1] in the account. After disabling,
-    # these metrics are no longer enriched with resource ARN and resource
-    # tag labels, and cannot be queried using PromQL.
+    # for [supported Amazon Web Services resources][1] in the account. After
+    # disabling, these metrics are no longer enriched with resource ARN and
+    # resource tag labels, and cannot be queried using PromQL.
     #
     #
     #
@@ -4684,7 +4716,7 @@ module Aws::CloudWatch
 
     # Assigns one or more tags (key-value pairs) to the specified CloudWatch
     # resource. Currently, the only CloudWatch resources that can be tagged
-    # are alarms and Contributor Insights rules.
+    # are alarms, dashboards, metric streams and Contributor Insights rules.
     #
     # Tags can help you organize and categorize your resources. You can also
     # use them to scope user permissions by granting a user permission to
@@ -4709,6 +4741,13 @@ module Aws::CloudWatch
     #
     #   The ARN format of a Contributor Insights rule is
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
+    #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
+    #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -4743,7 +4782,9 @@ module Aws::CloudWatch
       req.send_request(options)
     end
 
-    # Removes one or more tags from the specified resource.
+    # Removes one or more tags from the specified resource. Currently,
+    # alarms, dashboards, metric streams and Contributor Insights rules
+    # support tagging.
     #
     # @option params [required, String] :resource_arn
     #   The ARN of the CloudWatch resource that you're removing tags from.
@@ -4753,6 +4794,13 @@ module Aws::CloudWatch
     #
     #   The ARN format of a Contributor Insights rule is
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name `
+    #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
+    #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined by
     #   Amazon CloudWatch][1] in the *Amazon Web Services General Reference*.
@@ -4800,7 +4848,7 @@ module Aws::CloudWatch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatch'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

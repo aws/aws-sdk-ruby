@@ -134,6 +134,8 @@ module Aws::CloudWatchLogs
       attr_accessor allowed_action_for_allow_vended_logs_delivery_for_resource: ::String
       attr_accessor allowed_field_delimiters: ::Array[::String]
       attr_accessor allowed_suffix_path_fields: ::Array[::String]
+      attr_accessor delivery_source_configuration: ::Array[Types::DeliverySourceConfigurationSchema]
+      attr_accessor s3_tables_integration: Types::S3TablesIntegration
       SENSITIVE: []
     end
 
@@ -463,6 +465,19 @@ module Aws::CloudWatchLogs
       attr_accessor service: ::String
       attr_accessor log_type: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor delivery_source_configuration: ::Hash[::String, ::String]
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor status_reason: ("RESOURCE_DELETED")
+      SENSITIVE: []
+    end
+
+    class DeliverySourceConfigurationSchema
+      attr_accessor key_name: ::String
+      attr_accessor value_type: ("string" | "boolean" | "int" | "double" | "long")
+      attr_accessor default_value: ::String
+      attr_accessor supported_values: ::Array[::String]
+      attr_accessor min_value: ::Float
+      attr_accessor max_value: ::Float
       SENSITIVE: []
     end
 
@@ -1261,6 +1276,7 @@ module Aws::CloudWatchLogs
       attr_accessor limit: ::Integer
       attr_accessor data_sources: ::Array[Types::DataSourceFilter]
       attr_accessor field_index_names: ::Array[::String]
+      attr_accessor log_group_tags: ::Array[Types::TagFilter]
       SENSITIVE: []
     end
 
@@ -1724,6 +1740,7 @@ module Aws::CloudWatchLogs
       attr_accessor resource_arn: ::String
       attr_accessor log_type: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor delivery_source_configuration: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -2004,6 +2021,12 @@ module Aws::CloudWatchLogs
       SENSITIVE: []
     end
 
+    class S3TablesIntegration
+      attr_accessor datasource_name: ::String
+      attr_accessor datasource_type: ::String
+      SENSITIVE: []
+    end
+
     class ScheduledQueryDestination
       attr_accessor destination_type: ("S3")
       attr_accessor destination_identifier: ::String
@@ -2131,6 +2154,12 @@ module Aws::CloudWatchLogs
     class SuppressionPeriod
       attr_accessor value: ::Integer
       attr_accessor suppression_unit: ("SECONDS" | "MINUTES" | "HOURS")
+      SENSITIVE: []
+    end
+
+    class TagFilter
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 

@@ -27,6 +27,10 @@ module Aws
       class OperationLimitExceeded < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end
+      class TLDInMaintenance < ::Aws::Errors::ServiceError
+        def message: () -> ::String
+        def tld: () -> ::String
+      end
       class TLDRulesViolation < ::Aws::Errors::ServiceError
         def message: () -> ::String
       end

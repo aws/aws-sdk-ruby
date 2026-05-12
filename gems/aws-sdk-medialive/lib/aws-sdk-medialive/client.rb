@@ -1981,6 +1981,8 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.channel.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -3525,6 +3527,8 @@ module Aws::MediaLive
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -4792,6 +4796,8 @@ module Aws::MediaLive
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -7315,6 +7321,8 @@ module Aws::MediaLive
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -8389,6 +8397,8 @@ module Aws::MediaLive
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -9508,6 +9518,8 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.channel.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -10505,6 +10517,8 @@ module Aws::MediaLive
     #   resp.channel.pipeline_details[0].pipeline_id #=> String
     #   resp.channel.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.channel.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.channel.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.channel.pipelines_running_count #=> Integer
     #   resp.channel.role_arn #=> String
     #   resp.channel.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -12112,6 +12126,8 @@ module Aws::MediaLive
     #   resp.pipeline_details[0].pipeline_id #=> String
     #   resp.pipeline_details[0].channel_engine_version.expiration_date #=> Time
     #   resp.pipeline_details[0].channel_engine_version.version #=> String
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map #=> Hash
+    #   resp.pipeline_details[0].media_connect_router_output_connection_map["__string"].router_input_arn #=> String
     #   resp.pipelines_running_count #=> Integer
     #   resp.role_arn #=> String
     #   resp.state #=> String, one of "CREATING", "CREATE_FAILED", "IDLE", "STARTING", "RUNNING", "RECOVERING", "STOPPING", "DELETING", "DELETED", "UPDATING", "UPDATE_FAILED"
@@ -15477,7 +15493,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.183.0'
+      context[:gem_version] = '1.184.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

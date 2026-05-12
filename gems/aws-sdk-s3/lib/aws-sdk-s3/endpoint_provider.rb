@@ -710,10 +710,13 @@ module Aws::S3
                               if (outpost_type = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[2]"))
                                 if (access_point_name = Aws::Endpoints::Matchers.attr(bucket_arn, "resourceId[3]"))
                                   if Aws::Endpoints::Matchers.string_equals?(outpost_type, "accesspoint")
-                                    if Aws::Endpoints::Matchers.set?(parameters.endpoint) && (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
-                                      return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "#{bucket_arn['region']}"}]})
+                                    if Aws::Endpoints::Matchers.valid_host_label?(access_point_name, false)
+                                      if Aws::Endpoints::Matchers.set?(parameters.endpoint) && (url = Aws::Endpoints::Matchers.parse_url(parameters.endpoint))
+                                        return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.#{url['authority']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "#{bucket_arn['region']}"}]})
+                                      end
+                                      return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.s3-outposts.#{bucket_arn['region']}.#{bucket_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "#{bucket_arn['region']}"}]})
                                     end
-                                    return Aws::Endpoints::Endpoint.new(url: "https://#{access_point_name}-#{bucket_arn['accountId']}.#{outpost_id}.s3-outposts.#{bucket_arn['region']}.#{bucket_partition['dnsSuffix']}", headers: {}, properties: {"authSchemes" => [{"disableDoubleEncoding" => true, "name" => "sigv4a", "signingName" => "s3-outposts", "signingRegionSet" => ["*"]}, {"disableDoubleEncoding" => true, "name" => "sigv4", "signingName" => "s3-outposts", "signingRegion" => "#{bucket_arn['region']}"}]})
+                                    raise ArgumentError, "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `#{access_point_name}`"
                                   end
                                   raise ArgumentError, "Expected an outpost type `accesspoint`, found #{outpost_type}"
                                 end

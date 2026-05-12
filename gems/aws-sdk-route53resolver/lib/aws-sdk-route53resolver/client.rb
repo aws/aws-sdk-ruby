@@ -633,6 +633,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/AssociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -1302,6 +1304,32 @@ module Aws::Route53Resolver
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
     #
+    # @option params [Boolean] :dns_64_enabled
+    #   Specifies whether DNS64 is enabled for the inbound Resolver endpoint.
+    #   When set to `true`, Route 53 Resolver synthesizes AAAA (IPv6) records
+    #   for IPv4-only services by prepending the `64:ff9b::/96` prefix to the
+    #   IPv4 address. This enables IPv6-only clients that send queries through
+    #   the inbound endpoint to reach IPv4-only services. DNS64 works with
+    #   NAT64 to provide complete IPv6-to-IPv4 translation. Default is false.
+    #
+    # @option params [Boolean] :ipv_6_internet_access_enabled
+    #   Specifies whether IPv6 internet access is enabled for the outbound
+    #   Resolver endpoint. When set to `true`, the endpoint elastic network
+    #   interfaces (ENIs) can forward DNS queries to public IPv6 targets
+    #   through an internet gateway. Default is false.
+    #
+    #   When you enable IPv6 internet access, use network controls like
+    #   security groups, NACLs, or egress-only internet gateways to protect
+    #   the endpoint ENIs from unsolicited ingress traffic. Be aware that some
+    #   network controls can affect DNS query throughput due to connection
+    #   tracking. For more information, see [Amazon EC2 security group
+    #   connection tracking][1] and [Resolver endpoint scaling][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html
+    #
     # @return [Types::CreateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -1332,6 +1360,8 @@ module Aws::Route53Resolver
     #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #     rni_enhanced_metrics_enabled: false,
     #     target_name_server_metrics_enabled: false,
+    #     dns_64_enabled: false,
+    #     ipv_6_internet_access_enabled: false,
     #   })
     #
     # @example Response structure
@@ -1356,6 +1386,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpoint AWS API Documentation
     #
@@ -1851,6 +1883,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DeleteResolverEndpoint AWS API Documentation
     #
@@ -2070,6 +2104,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/DisassociateResolverEndpointIpAddress AWS API Documentation
     #
@@ -2502,6 +2538,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/GetResolverEndpoint AWS API Documentation
     #
@@ -3526,6 +3564,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoints[0].protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoints[0].rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoints[0].target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoints[0].dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoints[0].ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ListResolverEndpoints AWS API Documentation
     #
@@ -4887,6 +4927,32 @@ module Aws::Route53Resolver
     #
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
     #
+    # @option params [Boolean] :dns_64_enabled
+    #   Specifies whether DNS64 is enabled for the inbound Resolver endpoint.
+    #   When set to `true`, Route 53 Resolver synthesizes AAAA (IPv6) records
+    #   for IPv4-only services by prepending the `64:ff9b::/96` prefix to the
+    #   IPv4 address. This enables IPv6-only clients that send queries through
+    #   the inbound endpoint to reach IPv4-only services. DNS64 works with
+    #   NAT64 to provide complete IPv6-to-IPv4 translation.
+    #
+    # @option params [Boolean] :ipv_6_internet_access_enabled
+    #   Specifies whether IPv6 internet access is enabled for the outbound
+    #   Resolver endpoint. When set to `true`, the endpoint elastic network
+    #   interfaces (ENIs) can forward DNS queries to public IPv6 targets
+    #   through an internet gateway.
+    #
+    #   When you enable IPv6 internet access, use network controls like
+    #   security groups, NACLs, or egress-only internet gateways to protect
+    #   the endpoint ENIs from unsolicited ingress traffic. Be aware that some
+    #   network controls can affect DNS query throughput due to connection
+    #   tracking. For more information, see [Amazon EC2 security group
+    #   connection tracking][1] and [Resolver endpoint scaling][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html
+    #
     # @return [Types::UpdateResolverEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateResolverEndpointResponse#resolver_endpoint #resolver_endpoint} => Types::ResolverEndpoint
@@ -4906,6 +4972,8 @@ module Aws::Route53Resolver
     #     protocols: ["DoH"], # accepts DoH, Do53, DoH-FIPS
     #     rni_enhanced_metrics_enabled: false,
     #     target_name_server_metrics_enabled: false,
+    #     dns_64_enabled: false,
+    #     ipv_6_internet_access_enabled: false,
     #   })
     #
     # @example Response structure
@@ -4930,6 +4998,8 @@ module Aws::Route53Resolver
     #   resp.resolver_endpoint.protocols[0] #=> String, one of "DoH", "Do53", "DoH-FIPS"
     #   resp.resolver_endpoint.rni_enhanced_metrics_enabled #=> Boolean
     #   resp.resolver_endpoint.target_name_server_metrics_enabled #=> Boolean
+    #   resp.resolver_endpoint.dns_64_enabled #=> Boolean
+    #   resp.resolver_endpoint.ipv_6_internet_access_enabled #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpoint AWS API Documentation
     #
@@ -5023,7 +5093,7 @@ module Aws::Route53Resolver
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53resolver'
-      context[:gem_version] = '1.95.0'
+      context[:gem_version] = '1.96.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

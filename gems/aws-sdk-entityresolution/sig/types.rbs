@@ -652,6 +652,11 @@ module Aws::EntityResolution
       SENSITIVE: []
     end
 
+    class MatchingConfig
+      attr_accessor enable_transitive_matching: bool
+      SENSITIVE: []
+    end
+
     class MatchingWorkflowSummary
       attr_accessor workflow_name: ::String
       attr_accessor workflow_arn: ::String
@@ -807,6 +812,7 @@ module Aws::EntityResolution
 
     class RuleConditionProperties
       attr_accessor rules: ::Array[Types::RuleCondition]
+      attr_accessor matching_config: Types::MatchingConfig
       SENSITIVE: []
     end
 

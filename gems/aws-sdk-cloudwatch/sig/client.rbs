@@ -678,7 +678,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#put_dashboard-instance_method
       def put_dashboard: (
                            dashboard_name: ::String,
-                           dashboard_body: ::String
+                           dashboard_body: ::String,
+                           ?tags: Array[
+                             {
+                               key: ::String,
+                               value: ::String
+                             },
+                           ]
                          ) -> _PutDashboardResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDashboardResponseSuccess
 

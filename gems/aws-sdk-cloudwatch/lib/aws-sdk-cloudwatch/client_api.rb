@@ -1047,6 +1047,7 @@ module Aws::CloudWatch
 
     PutDashboardInput.add_member(:dashboard_name, Shapes::ShapeRef.new(shape: DashboardName, required: true, location_name: "DashboardName"))
     PutDashboardInput.add_member(:dashboard_body, Shapes::ShapeRef.new(shape: DashboardBody, required: true, location_name: "DashboardBody"))
+    PutDashboardInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     PutDashboardInput.struct_class = Types::PutDashboardInput
 
     PutDashboardOutput.add_member(:dashboard_validation_messages, Shapes::ShapeRef.new(shape: DashboardValidationMessages, location_name: "DashboardValidationMessages"))
@@ -1257,7 +1258,6 @@ module Aws::CloudWatch
         o.input = Shapes::ShapeRef.new(shape: DeleteDashboardsInput)
         o.output = Shapes::ShapeRef.new(shape: DeleteDashboardsOutput)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
-        o.errors << Shapes::ShapeRef.new(shape: DashboardNotFoundError)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)

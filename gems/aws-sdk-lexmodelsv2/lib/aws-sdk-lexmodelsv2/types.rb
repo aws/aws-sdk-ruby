@@ -1538,6 +1538,58 @@ module Aws::LexModelsV2
       include Aws::Structure
     end
 
+    # Configuration that plays background filler audio during
+    # speech-to-speech interactions to mask processing delays and improve
+    # the perceived responsiveness of the bot.
+    #
+    # Audio filler requires `unifiedSpeechSettings` (speech-to-speech) to be
+    # enabled on the bot locale when `enabled` is `true`.
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether audio filler playback is enabled for the bot
+    #   locale. Set to `true` to play filler audio while Amazon Lex
+    #   processes a user utterance. Set to `false` to disable filler audio.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] audio_type
+    #   The identifier of the audio filler to play while Amazon Lex
+    #   processes the user's input. This field is required when `enabled`
+    #   is `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_delay_in_milliseconds
+    #   The time, in milliseconds, to wait after the end of the user's
+    #   utterance before starting audio filler playback. Valid range is
+    #   `500` to `5000` milliseconds. If not specified, Amazon Lex uses a
+    #   default of `2500` milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_play_duration_in_milliseconds
+    #   The minimum time, in milliseconds, that audio filler plays once it
+    #   has started, even if the bot response becomes ready sooner. Valid
+    #   range is `1000` to `5000` milliseconds. If not specified, Amazon Lex
+    #   uses a default of `3000` milliseconds.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_delivery_delay_in_milliseconds
+    #   The silent delay, in milliseconds, inserted between the end of audio
+    #   filler playback and the start of the bot's response. Valid range is
+    #   `200` to `1000` milliseconds. If not specified, Amazon Lex uses a
+    #   default of `500` milliseconds.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/AudioFillerSettings AWS API Documentation
+    #
+    class AudioFillerSettings < Struct.new(
+      :enabled,
+      :audio_type,
+      :start_delay_in_milliseconds,
+      :minimum_play_duration_in_milliseconds,
+      :response_delivery_delay_in_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The location of audio log files collected when conversation logging is
     # enabled for a bot.
     #
@@ -2414,6 +2466,12 @@ module Aws::LexModelsV2
     #   configuration.
     #   @return [Types::UnifiedSpeechSettings]
     #
+    # @!attribute [rw] audio_filler_settings
+    #   Audio filler settings to apply when importing the bot locale
+    #   configuration. Audio filler requires `unifiedSpeechSettings`
+    #   (speech-to-speech) to be enabled when `enabled` is `true`.
+    #   @return [Types::AudioFillerSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/models.lex.v2-2020-08-07/BotLocaleImportSpecification AWS API Documentation
     #
     class BotLocaleImportSpecification < Struct.new(
@@ -2424,7 +2482,8 @@ module Aws::LexModelsV2
       :voice_settings,
       :speech_recognition_settings,
       :speech_detection_sensitivity,
-      :unified_speech_settings)
+      :unified_speech_settings,
+      :audio_filler_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3586,6 +3645,14 @@ module Aws::LexModelsV2
     #   Unified speech settings to configure for the new bot locale.
     #   @return [Types::UnifiedSpeechSettings]
     #
+    # @!attribute [rw] audio_filler_settings
+    #   Audio filler settings to configure for the new bot locale. When
+    #   enabled, Amazon Lex plays a brief background audio filler during
+    #   speech-to-speech interactions to mask processing delays. Requires
+    #   `unifiedSpeechSettings` (speech-to-speech) to be configured on the
+    #   bot locale.
+    #   @return [Types::AudioFillerSettings]
+    #
     # @!attribute [rw] speech_recognition_settings
     #   Speech-to-text settings to configure for the new bot locale.
     #   @return [Types::SpeechRecognitionSettings]
@@ -3612,6 +3679,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :unified_speech_settings,
+      :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
       :speech_detection_sensitivity)
@@ -3652,6 +3720,10 @@ module Aws::LexModelsV2
     # @!attribute [rw] unified_speech_settings
     #   The unified speech settings configured for the created bot locale.
     #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] audio_filler_settings
+    #   The audio filler settings configured for the created bot locale.
+    #   @return [Types::AudioFillerSettings]
     #
     # @!attribute [rw] speech_recognition_settings
     #   The speech-to-text settings configured for the created bot locale.
@@ -3699,6 +3771,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :unified_speech_settings,
+      :audio_filler_settings,
       :speech_recognition_settings,
       :bot_locale_status,
       :creation_date_time,
@@ -6033,6 +6106,10 @@ module Aws::LexModelsV2
     #   The unified speech settings configured for the bot locale.
     #   @return [Types::UnifiedSpeechSettings]
     #
+    # @!attribute [rw] audio_filler_settings
+    #   The audio filler settings configured for the bot locale.
+    #   @return [Types::AudioFillerSettings]
+    #
     # @!attribute [rw] speech_recognition_settings
     #   The speech-to-text settings configured for the bot locale.
     #   @return [Types::SpeechRecognitionSettings]
@@ -6098,6 +6175,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :unified_speech_settings,
+      :audio_filler_settings,
       :speech_recognition_settings,
       :intents_count,
       :slot_types_count,
@@ -15067,6 +15145,12 @@ module Aws::LexModelsV2
     #   Updated unified speech settings to apply to the bot locale.
     #   @return [Types::UnifiedSpeechSettings]
     #
+    # @!attribute [rw] audio_filler_settings
+    #   Updated audio filler settings to apply to the bot locale. When
+    #   enabled, requires `unifiedSpeechSettings` (speech-to-speech) to be
+    #   configured on the bot locale.
+    #   @return [Types::AudioFillerSettings]
+    #
     # @!attribute [rw] speech_recognition_settings
     #   Updated speech-to-text settings to apply to the bot locale.
     #   @return [Types::SpeechRecognitionSettings]
@@ -15095,6 +15179,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :unified_speech_settings,
+      :audio_filler_settings,
       :speech_recognition_settings,
       :generative_ai_settings,
       :speech_detection_sensitivity)
@@ -15136,6 +15221,10 @@ module Aws::LexModelsV2
     # @!attribute [rw] unified_speech_settings
     #   The updated unified speech settings for the bot locale.
     #   @return [Types::UnifiedSpeechSettings]
+    #
+    # @!attribute [rw] audio_filler_settings
+    #   The updated audio filler settings for the bot locale.
+    #   @return [Types::AudioFillerSettings]
     #
     # @!attribute [rw] speech_recognition_settings
     #   The updated speech-to-text settings for the bot locale.
@@ -15185,6 +15274,7 @@ module Aws::LexModelsV2
       :nlu_intent_confidence_threshold,
       :voice_settings,
       :unified_speech_settings,
+      :audio_filler_settings,
       :speech_recognition_settings,
       :bot_locale_status,
       :failure_reasons,

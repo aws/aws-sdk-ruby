@@ -2658,6 +2658,13 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
     #   `
     #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
+    #   `
+    #
     #   For more information about ARN format, see [ Resource Types Defined
     #   by Amazon CloudWatch][1] in the *Amazon Web Services General
     #   Reference*.
@@ -4048,11 +4055,32 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A list of key-value pairs to associate with the dashboard. You can
+    #   associate as many as 50 tags with a dashboard.
+    #
+    #   Tags can help you organize and categorize your dashboards. You can
+    #   also use them to scope user permissions by granting a user
+    #   permission to access or change only dashboards with certain tag
+    #   values.
+    #
+    #   You can use this parameter only when creating a new dashboard. If
+    #   you specify `Tags` when updating an existing dashboard, the tag
+    #   updates are ignored. To add or update tags on an existing dashboard,
+    #   use [TagResource][1]. To remove tags, use [UntagResource][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html
+    #   [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutDashboardInput AWS API Documentation
     #
     class PutDashboardInput < Struct.new(
       :dashboard_name,
-      :dashboard_body)
+      :dashboard_body,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5276,6 +5304,13 @@ module Aws::CloudWatch
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
     #   `
     #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
+    #   `
+    #
     #   For more information about ARN format, see [ Resource Types Defined
     #   by Amazon CloudWatch][1] in the *Amazon Web Services General
     #   Reference*.
@@ -5310,6 +5345,13 @@ module Aws::CloudWatch
     #
     #   The ARN format of a Contributor Insights rule is
     #   `arn:aws:cloudwatch:Region:account-id:insight-rule/insight-rule-name
+    #   `
+    #
+    #   The ARN format of a dashboard is
+    #   `arn:aws:cloudwatch::account-id:dashboard/dashboard-name `
+    #
+    #   The ARN format of a metric stream is
+    #   `arn:aws:cloudwatch:Region:account-id:metric-stream/metric-stream-name
     #   `
     #
     #   For more information about ARN format, see [ Resource Types Defined

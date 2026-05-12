@@ -1391,10 +1391,17 @@ module Aws::IoT
     #   Maximum size of a message batch, in bytes.
     #   @return [Integer]
     #
+    # @!attribute [rw] batch_across_topics
+    #   Whether to allow batching messages from different MQTT topics into a
+    #   single HTTP request. By default, only messages from the same topic
+    #   are batched together. The default value is `false`.
+    #   @return [Boolean]
+    #
     class BatchConfig < Struct.new(
       :max_batch_open_ms,
       :max_batch_size,
-      :max_batch_size_bytes)
+      :max_batch_size_bytes,
+      :batch_across_topics)
       SENSITIVE = []
       include Aws::Structure
     end

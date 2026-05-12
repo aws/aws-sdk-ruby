@@ -22,6 +22,11 @@ module Aws::AppStream
     Action = Shapes::StringShape.new(name: 'Action')
     AdminAppLicenseUsageList = Shapes::ListShape.new(name: 'AdminAppLicenseUsageList')
     AdminAppLicenseUsageRecord = Shapes::StructureShape.new(name: 'AdminAppLicenseUsageRecord')
+    AgentAccessConfig = Shapes::StructureShape.new(name: 'AgentAccessConfig')
+    AgentAccessConfigForUpdate = Shapes::StructureShape.new(name: 'AgentAccessConfigForUpdate')
+    AgentAccessSetting = Shapes::StructureShape.new(name: 'AgentAccessSetting')
+    AgentAccessSettingList = Shapes::ListShape.new(name: 'AgentAccessSettingList')
+    AgentAction = Shapes::StringShape.new(name: 'AgentAction')
     AgentSoftwareVersion = Shapes::StringShape.new(name: 'AgentSoftwareVersion')
     AmiName = Shapes::StringShape.new(name: 'AmiName')
     AppBlock = Shapes::StructureShape.new(name: 'AppBlock')
@@ -306,8 +311,11 @@ module Aws::AppStream
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RuntimeValidationConfig = Shapes::StructureShape.new(name: 'RuntimeValidationConfig')
     S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
+    S3BucketArn = Shapes::StringShape.new(name: 'S3BucketArn')
     S3Key = Shapes::StringShape.new(name: 'S3Key')
     S3Location = Shapes::StructureShape.new(name: 'S3Location')
+    ScreenImageFormat = Shapes::StringShape.new(name: 'ScreenImageFormat')
+    ScreenResolution = Shapes::StringShape.new(name: 'ScreenResolution')
     ScriptDetails = Shapes::StructureShape.new(name: 'ScriptDetails')
     SecurityGroupIdList = Shapes::ListShape.new(name: 'SecurityGroupIdList')
     ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
@@ -428,6 +436,26 @@ module Aws::AppStream
     AdminAppLicenseUsageRecord.add_member(:license_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "LicenseType"))
     AdminAppLicenseUsageRecord.add_member(:user_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "UserId"))
     AdminAppLicenseUsageRecord.struct_class = Types::AdminAppLicenseUsageRecord
+
+    AgentAccessConfig.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, required: true, location_name: "Settings"))
+    AgentAccessConfig.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
+    AgentAccessConfig.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    AgentAccessConfig.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, required: true, location_name: "ScreenResolution"))
+    AgentAccessConfig.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, required: true, location_name: "ScreenImageFormat"))
+    AgentAccessConfig.struct_class = Types::AgentAccessConfig
+
+    AgentAccessConfigForUpdate.add_member(:settings, Shapes::ShapeRef.new(shape: AgentAccessSettingList, location_name: "Settings"))
+    AgentAccessConfigForUpdate.add_member(:s3_bucket_arn, Shapes::ShapeRef.new(shape: S3BucketArn, location_name: "S3BucketArn"))
+    AgentAccessConfigForUpdate.add_member(:screenshots_upload_enabled, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "ScreenshotsUploadEnabled"))
+    AgentAccessConfigForUpdate.add_member(:screen_resolution, Shapes::ShapeRef.new(shape: ScreenResolution, location_name: "ScreenResolution"))
+    AgentAccessConfigForUpdate.add_member(:screen_image_format, Shapes::ShapeRef.new(shape: ScreenImageFormat, location_name: "ScreenImageFormat"))
+    AgentAccessConfigForUpdate.struct_class = Types::AgentAccessConfigForUpdate
+
+    AgentAccessSetting.add_member(:agent_action, Shapes::ShapeRef.new(shape: AgentAction, required: true, location_name: "AgentAction"))
+    AgentAccessSetting.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, required: true, location_name: "Permission"))
+    AgentAccessSetting.struct_class = Types::AgentAccessSetting
+
+    AgentAccessSettingList.member = Shapes::ShapeRef.new(shape: AgentAccessSetting)
 
     AppBlock.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
     AppBlock.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "Arn"))
@@ -776,6 +804,7 @@ module Aws::AppStream
     CreateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     CreateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     CreateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    CreateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
     CreateStackRequest.struct_class = Types::CreateStackRequest
 
     CreateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))
@@ -1480,6 +1509,7 @@ module Aws::AppStream
     Stack.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     Stack.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     Stack.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    Stack.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfig, location_name: "AgentAccessConfig"))
     Stack.struct_class = Types::Stack
 
     StackAttributes.member = Shapes::ShapeRef.new(shape: StackAttribute)
@@ -1682,6 +1712,7 @@ module Aws::AppStream
     UpdateStackRequest.add_member(:embed_host_domains, Shapes::ShapeRef.new(shape: EmbedHostDomains, location_name: "EmbedHostDomains"))
     UpdateStackRequest.add_member(:streaming_experience_settings, Shapes::ShapeRef.new(shape: StreamingExperienceSettings, location_name: "StreamingExperienceSettings"))
     UpdateStackRequest.add_member(:content_redirection, Shapes::ShapeRef.new(shape: ContentRedirection, location_name: "ContentRedirection"))
+    UpdateStackRequest.add_member(:agent_access_config, Shapes::ShapeRef.new(shape: AgentAccessConfigForUpdate, location_name: "AgentAccessConfig"))
     UpdateStackRequest.struct_class = Types::UpdateStackRequest
 
     UpdateStackResult.add_member(:stack, Shapes::ShapeRef.new(shape: Stack, location_name: "Stack"))

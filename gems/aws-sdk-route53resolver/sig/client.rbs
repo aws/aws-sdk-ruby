@@ -244,7 +244,9 @@ module Aws
                                       ?resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK"),
                                       ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
                                       ?rni_enhanced_metrics_enabled: bool,
-                                      ?target_name_server_metrics_enabled: bool
+                                      ?target_name_server_metrics_enabled: bool,
+                                      ?dns_64_enabled: bool,
+                                      ?ipv_6_internet_access_enabled: bool
                                     ) -> _CreateResolverEndpointResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverEndpointResponseSuccess
 
@@ -1005,7 +1007,9 @@ module Aws
                                       ],
                                       ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
                                       ?rni_enhanced_metrics_enabled: bool,
-                                      ?target_name_server_metrics_enabled: bool
+                                      ?target_name_server_metrics_enabled: bool,
+                                      ?dns_64_enabled: bool,
+                                      ?ipv_6_internet_access_enabled: bool
                                     ) -> _UpdateResolverEndpointResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResolverEndpointResponseSuccess
 

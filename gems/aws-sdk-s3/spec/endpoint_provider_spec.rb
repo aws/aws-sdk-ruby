@@ -5534,6 +5534,19 @@ module Aws::S3
       end
     end
 
+    context "validates against access point host label" do
+      let(:expected) do
+        {"error" => "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `invalid.bucket#`"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-west-2", use_fips: false, use_dual_stack: false, accelerate: false, bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:invalid.bucket#"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
     context "object lambda @us-east-1" do
       let(:expected) do
         {"endpoint" => {"properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "s3-object-lambda", "signingRegion" => "us-east-1", "disableDoubleEncoding" => true}]}, "url" => "https://mybanner-123456789012.s3-object-lambda.us-east-1.amazonaws.com"}}

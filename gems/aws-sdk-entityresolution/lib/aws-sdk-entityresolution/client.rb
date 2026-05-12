@@ -943,6 +943,9 @@ module Aws::EntityResolution
     #             condition: "RuleConditionConditionString", # required
     #           },
     #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false,
+    #         },
     #       },
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
@@ -990,6 +993,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
+    #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -1649,6 +1653,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
+    #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.created_at #=> Time
@@ -2676,6 +2681,9 @@ module Aws::EntityResolution
     #             condition: "RuleConditionConditionString", # required
     #           },
     #         ],
+    #         matching_config: {
+    #           enable_transitive_matching: false,
+    #         },
     #       },
     #       provider_properties: {
     #         provider_service_arn: "ProviderServiceArn", # required
@@ -2719,6 +2727,7 @@ module Aws::EntityResolution
     #   resp.resolution_techniques.rule_condition_properties.rules #=> Array
     #   resp.resolution_techniques.rule_condition_properties.rules[0].rule_name #=> String
     #   resp.resolution_techniques.rule_condition_properties.rules[0].condition #=> String
+    #   resp.resolution_techniques.rule_condition_properties.matching_config.enable_transitive_matching #=> Boolean
     #   resp.resolution_techniques.provider_properties.provider_service_arn #=> String
     #   resp.resolution_techniques.provider_properties.intermediate_source_configuration.intermediate_s3_path #=> String
     #   resp.incremental_run_config.incremental_run_type #=> String, one of "IMMEDIATE"
@@ -2817,7 +2826,7 @@ module Aws::EntityResolution
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-entityresolution'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

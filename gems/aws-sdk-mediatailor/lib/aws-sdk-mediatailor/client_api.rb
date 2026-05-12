@@ -59,6 +59,7 @@ module Aws::MediaTailor
     CreateSourceLocationResponse = Shapes::StructureShape.new(name: 'CreateSourceLocationResponse')
     CreateVodSourceRequest = Shapes::StructureShape.new(name: 'CreateVodSourceRequest')
     CreateVodSourceResponse = Shapes::StructureShape.new(name: 'CreateVodSourceResponse')
+    CustomOutputConfiguration = Shapes::StructureShape.new(name: 'CustomOutputConfiguration')
     DashConfiguration = Shapes::StructureShape.new(name: 'DashConfiguration')
     DashConfigurationForPut = Shapes::StructureShape.new(name: 'DashConfigurationForPut')
     DashPlaylistSettings = Shapes::StructureShape.new(name: 'DashPlaylistSettings')
@@ -67,6 +68,8 @@ module Aws::MediaTailor
     DeleteChannelPolicyResponse = Shapes::StructureShape.new(name: 'DeleteChannelPolicyResponse')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
     DeleteChannelResponse = Shapes::StructureShape.new(name: 'DeleteChannelResponse')
+    DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
+    DeleteFunctionResponse = Shapes::StructureShape.new(name: 'DeleteFunctionResponse')
     DeleteLiveSourceRequest = Shapes::StructureShape.new(name: 'DeleteLiveSourceRequest')
     DeleteLiveSourceResponse = Shapes::StructureShape.new(name: 'DeleteLiveSourceResponse')
     DeletePlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'DeletePlaybackConfigurationRequest')
@@ -89,11 +92,18 @@ module Aws::MediaTailor
     DescribeSourceLocationResponse = Shapes::StructureShape.new(name: 'DescribeSourceLocationResponse')
     DescribeVodSourceRequest = Shapes::StructureShape.new(name: 'DescribeVodSourceRequest')
     DescribeVodSourceResponse = Shapes::StructureShape.new(name: 'DescribeVodSourceResponse')
+    EventName = Shapes::StringShape.new(name: 'EventName')
     FillPolicy = Shapes::StringShape.new(name: 'FillPolicy')
+    Function = Shapes::StructureShape.new(name: 'Function')
+    FunctionMapping = Shapes::MapShape.new(name: 'FunctionMapping')
+    FunctionRef = Shapes::StructureShape.new(name: 'FunctionRef')
+    FunctionType = Shapes::StringShape.new(name: 'FunctionType')
     GetChannelPolicyRequest = Shapes::StructureShape.new(name: 'GetChannelPolicyRequest')
     GetChannelPolicyResponse = Shapes::StructureShape.new(name: 'GetChannelPolicyResponse')
     GetChannelScheduleRequest = Shapes::StructureShape.new(name: 'GetChannelScheduleRequest')
     GetChannelScheduleResponse = Shapes::StructureShape.new(name: 'GetChannelScheduleResponse')
+    GetFunctionRequest = Shapes::StructureShape.new(name: 'GetFunctionRequest')
+    GetFunctionResponse = Shapes::StructureShape.new(name: 'GetFunctionResponse')
     GetPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationRequest')
     GetPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'GetPlaybackConfigurationResponse')
     GetPrefetchScheduleRequest = Shapes::StructureShape.new(name: 'GetPrefetchScheduleRequest')
@@ -104,6 +114,7 @@ module Aws::MediaTailor
     HttpPackageConfiguration = Shapes::StructureShape.new(name: 'HttpPackageConfiguration')
     HttpPackageConfigurations = Shapes::ListShape.new(name: 'HttpPackageConfigurations')
     HttpRequest = Shapes::StructureShape.new(name: 'HttpRequest')
+    HttpRequestConfiguration = Shapes::StructureShape.new(name: 'HttpRequestConfiguration')
     InsertionMode = Shapes::StringShape.new(name: 'InsertionMode')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     KeyValuePair = Shapes::StructureShape.new(name: 'KeyValuePair')
@@ -111,6 +122,8 @@ module Aws::MediaTailor
     ListAlertsResponse = Shapes::StructureShape.new(name: 'ListAlertsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListFunctionsRequest = Shapes::StructureShape.new(name: 'ListFunctionsRequest')
+    ListFunctionsResponse = Shapes::StructureShape.new(name: 'ListFunctionsResponse')
     ListLiveSourcesRequest = Shapes::StructureShape.new(name: 'ListLiveSourcesRequest')
     ListLiveSourcesResponse = Shapes::StructureShape.new(name: 'ListLiveSourcesResponse')
     ListPlaybackConfigurationsRequest = Shapes::StructureShape.new(name: 'ListPlaybackConfigurationsRequest')
@@ -135,9 +148,11 @@ module Aws::MediaTailor
     ManifestProcessingRules = Shapes::StructureShape.new(name: 'ManifestProcessingRules')
     ManifestServiceExcludeEventType = Shapes::StringShape.new(name: 'ManifestServiceExcludeEventType')
     ManifestServiceInteractionLog = Shapes::StructureShape.new(name: 'ManifestServiceInteractionLog')
+    ManifestServicePublishOptInEventType = Shapes::StringShape.new(name: 'ManifestServicePublishOptInEventType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
     Method = Shapes::StringShape.new(name: 'Method')
+    MethodType = Shapes::StringShape.new(name: 'MethodType')
     Mode = Shapes::StringShape.new(name: 'Mode')
     Operator = Shapes::StringShape.new(name: 'Operator')
     OriginManifestType = Shapes::StringShape.new(name: 'OriginManifestType')
@@ -149,6 +164,8 @@ module Aws::MediaTailor
     PrefetchScheduleType = Shapes::StringShape.new(name: 'PrefetchScheduleType')
     PutChannelPolicyRequest = Shapes::StructureShape.new(name: 'PutChannelPolicyRequest')
     PutChannelPolicyResponse = Shapes::StructureShape.new(name: 'PutChannelPolicyResponse')
+    PutFunctionRequest = Shapes::StructureShape.new(name: 'PutFunctionRequest')
+    PutFunctionResponse = Shapes::StructureShape.new(name: 'PutFunctionResponse')
     PutPlaybackConfigurationRequest = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationRequest')
     PutPlaybackConfigurationResponse = Shapes::StructureShape.new(name: 'PutPlaybackConfigurationResponse')
     RecurringConsumption = Shapes::StructureShape.new(name: 'RecurringConsumption')
@@ -159,6 +176,7 @@ module Aws::MediaTailor
     RequestOutputs = Shapes::ListShape.new(name: 'RequestOutputs')
     ResponseOutputItem = Shapes::StructureShape.new(name: 'ResponseOutputItem')
     ResponseOutputs = Shapes::ListShape.new(name: 'ResponseOutputs')
+    RuntimeType = Shapes::StringShape.new(name: 'RuntimeType')
     ScheduleAdBreak = Shapes::StructureShape.new(name: 'ScheduleAdBreak')
     ScheduleConfiguration = Shapes::StructureShape.new(name: 'ScheduleConfiguration')
     ScheduleEntry = Shapes::StructureShape.new(name: 'ScheduleEntry')
@@ -167,6 +185,7 @@ module Aws::MediaTailor
     SegmentDeliveryConfiguration = Shapes::StructureShape.new(name: 'SegmentDeliveryConfiguration')
     SegmentationDescriptor = Shapes::StructureShape.new(name: 'SegmentationDescriptor')
     SegmentationDescriptorList = Shapes::ListShape.new(name: 'SegmentationDescriptorList')
+    SequentialExecutorConfiguration = Shapes::StructureShape.new(name: 'SequentialExecutorConfiguration')
     SlateSource = Shapes::StructureShape.new(name: 'SlateSource')
     SourceLocation = Shapes::StructureShape.new(name: 'SourceLocation')
     SpliceInsertMessage = Shapes::StructureShape.new(name: 'SpliceInsertMessage')
@@ -212,6 +231,8 @@ module Aws::MediaTailor
     __listOfAudienceMedia = Shapes::ListShape.new(name: '__listOfAudienceMedia')
     __listOfAvailMatchingCriteria = Shapes::ListShape.new(name: '__listOfAvailMatchingCriteria')
     __listOfChannel = Shapes::ListShape.new(name: '__listOfChannel')
+    __listOfFunctionsRef = Shapes::ListShape.new(name: '__listOfFunctionsRef')
+    __listOfFunctionsResponse = Shapes::ListShape.new(name: '__listOfFunctionsResponse')
     __listOfLiveSource = Shapes::ListShape.new(name: '__listOfLiveSource')
     __listOfLoggingStrategies = Shapes::ListShape.new(name: '__listOfLoggingStrategies')
     __listOfPlaybackConfiguration = Shapes::ListShape.new(name: '__listOfPlaybackConfiguration')
@@ -224,6 +245,7 @@ module Aws::MediaTailor
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
     __manifestServiceExcludeEventTypesList = Shapes::ListShape.new(name: '__manifestServiceExcludeEventTypesList')
+    __manifestServicePublishOptInEventTypesList = Shapes::ListShape.new(name: '__manifestServicePublishOptInEventTypesList')
     __mapOf__string = Shapes::MapShape.new(name: '__mapOf__string')
     __string = Shapes::StringShape.new(name: '__string')
     __timestampUnix = Shapes::TimestampShape.new(name: '__timestampUnix', timestampFormat: "unixTimestamp")
@@ -470,6 +492,10 @@ module Aws::MediaTailor
     CreateVodSourceResponse.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     CreateVodSourceResponse.struct_class = Types::CreateVodSourceResponse
 
+    CustomOutputConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeType, required: true, location_name: "Runtime"))
+    CustomOutputConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Output"))
+    CustomOutputConfiguration.struct_class = Types::CustomOutputConfiguration
+
     DashConfiguration.add_member(:manifest_endpoint_prefix, Shapes::ShapeRef.new(shape: __string, location_name: "ManifestEndpointPrefix"))
     DashConfiguration.add_member(:mpd_location, Shapes::ShapeRef.new(shape: __string, location_name: "MpdLocation"))
     DashConfiguration.add_member(:origin_manifest_type, Shapes::ShapeRef.new(shape: OriginManifestType, location_name: "OriginManifestType"))
@@ -497,6 +523,11 @@ module Aws::MediaTailor
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
 
     DeleteChannelResponse.struct_class = Types::DeleteChannelResponse
+
+    DeleteFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionId"))
+    DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
+
+    DeleteFunctionResponse.struct_class = Types::DeleteFunctionResponse
 
     DeleteLiveSourceRequest.add_member(:live_source_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "LiveSourceName"))
     DeleteLiveSourceRequest.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "SourceLocationName"))
@@ -610,6 +641,23 @@ module Aws::MediaTailor
     DescribeVodSourceResponse.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
     DescribeVodSourceResponse.struct_class = Types::DescribeVodSourceResponse
 
+    Function.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "FunctionId"))
+    Function.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, required: true, location_name: "FunctionType"))
+    Function.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    Function.add_member(:http_request_configuration, Shapes::ShapeRef.new(shape: HttpRequestConfiguration, location_name: "HttpRequestConfiguration"))
+    Function.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "CustomOutputConfiguration"))
+    Function.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
+    Function.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    Function.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    Function.struct_class = Types::Function
+
+    FunctionMapping.key = Shapes::ShapeRef.new(shape: EventName)
+    FunctionMapping.value = Shapes::ShapeRef.new(shape: __string)
+
+    FunctionRef.add_member(:run_condition, Shapes::ShapeRef.new(shape: __string, location_name: "RunCondition"))
+    FunctionRef.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, location_name: "FunctionId"))
+    FunctionRef.struct_class = Types::FunctionRef
+
     GetChannelPolicyRequest.add_member(:channel_name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "ChannelName"))
     GetChannelPolicyRequest.struct_class = Types::GetChannelPolicyRequest
 
@@ -626,6 +674,19 @@ module Aws::MediaTailor
     GetChannelScheduleResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfScheduleEntry, location_name: "Items"))
     GetChannelScheduleResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     GetChannelScheduleResponse.struct_class = Types::GetChannelScheduleResponse
+
+    GetFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionId"))
+    GetFunctionRequest.struct_class = Types::GetFunctionRequest
+
+    GetFunctionResponse.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "FunctionId"))
+    GetFunctionResponse.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, required: true, location_name: "FunctionType"))
+    GetFunctionResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    GetFunctionResponse.add_member(:http_request_configuration, Shapes::ShapeRef.new(shape: HttpRequestConfiguration, location_name: "HttpRequestConfiguration"))
+    GetFunctionResponse.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "CustomOutputConfiguration"))
+    GetFunctionResponse.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
+    GetFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    GetFunctionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    GetFunctionResponse.struct_class = Types::GetFunctionResponse
 
     GetPlaybackConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
     GetPlaybackConfigurationRequest.struct_class = Types::GetPlaybackConfigurationRequest
@@ -652,6 +713,7 @@ module Aws::MediaTailor
     GetPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     GetPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     GetPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
+    GetPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     GetPlaybackConfigurationResponse.struct_class = Types::GetPlaybackConfigurationResponse
 
     GetPrefetchScheduleRequest.add_member(:name, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "Name"))
@@ -692,6 +754,15 @@ module Aws::MediaTailor
     HttpRequest.add_member(:compress_request, Shapes::ShapeRef.new(shape: CompressionMethod, location_name: "CompressRequest"))
     HttpRequest.struct_class = Types::HttpRequest
 
+    HttpRequestConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeType, required: true, location_name: "Runtime"))
+    HttpRequestConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Output"))
+    HttpRequestConfiguration.add_member(:method_type, Shapes::ShapeRef.new(shape: MethodType, required: true, location_name: "MethodType"))
+    HttpRequestConfiguration.add_member(:request_timeout_milliseconds, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "RequestTimeoutMilliseconds"))
+    HttpRequestConfiguration.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "Url"))
+    HttpRequestConfiguration.add_member(:body, Shapes::ShapeRef.new(shape: __string, location_name: "Body"))
+    HttpRequestConfiguration.add_member(:headers, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Headers"))
+    HttpRequestConfiguration.struct_class = Types::HttpRequestConfiguration
+
     KeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Key"))
     KeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
     KeyValuePair.struct_class = Types::KeyValuePair
@@ -712,6 +783,14 @@ module Aws::MediaTailor
     ListChannelsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfChannel, location_name: "Items"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
+
+    ListFunctionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
+    ListFunctionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "NextToken"))
+    ListFunctionsRequest.struct_class = Types::ListFunctionsRequest
+
+    ListFunctionsResponse.add_member(:items, Shapes::ShapeRef.new(shape: __listOfFunctionsResponse, location_name: "Items"))
+    ListFunctionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location_name: "NextToken"))
+    ListFunctionsResponse.struct_class = Types::ListFunctionsResponse
 
     ListLiveSourcesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListLiveSourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "nextToken"))
@@ -791,6 +870,7 @@ module Aws::MediaTailor
     ManifestProcessingRules.add_member(:ad_marker_passthrough, Shapes::ShapeRef.new(shape: AdMarkerPassthrough, location_name: "AdMarkerPassthrough"))
     ManifestProcessingRules.struct_class = Types::ManifestProcessingRules
 
+    ManifestServiceInteractionLog.add_member(:publish_opt_in_event_types, Shapes::ShapeRef.new(shape: __manifestServicePublishOptInEventTypesList, location_name: "PublishOptInEventTypes"))
     ManifestServiceInteractionLog.add_member(:exclude_event_types, Shapes::ShapeRef.new(shape: __manifestServiceExcludeEventTypesList, location_name: "ExcludeEventTypes"))
     ManifestServiceInteractionLog.struct_class = Types::ManifestServiceInteractionLog
 
@@ -816,6 +896,7 @@ module Aws::MediaTailor
     PlaybackConfiguration.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PlaybackConfiguration.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PlaybackConfiguration.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
+    PlaybackConfiguration.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PlaybackConfiguration.struct_class = Types::PlaybackConfiguration
 
     PrefetchConsumption.add_member(:avail_matching_criteria, Shapes::ShapeRef.new(shape: __listOfAvailMatchingCriteria, location_name: "AvailMatchingCriteria"))
@@ -848,6 +929,25 @@ module Aws::MediaTailor
 
     PutChannelPolicyResponse.struct_class = Types::PutChannelPolicyResponse
 
+    PutFunctionRequest.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "FunctionId"))
+    PutFunctionRequest.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, required: true, location_name: "FunctionType"))
+    PutFunctionRequest.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    PutFunctionRequest.add_member(:http_request_configuration, Shapes::ShapeRef.new(shape: HttpRequestConfiguration, location_name: "HttpRequestConfiguration"))
+    PutFunctionRequest.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "CustomOutputConfiguration"))
+    PutFunctionRequest.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
+    PutFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    PutFunctionRequest.struct_class = Types::PutFunctionRequest
+
+    PutFunctionResponse.add_member(:function_id, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "FunctionId"))
+    PutFunctionResponse.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, required: true, location_name: "FunctionType"))
+    PutFunctionResponse.add_member(:description, Shapes::ShapeRef.new(shape: __string, location_name: "Description"))
+    PutFunctionResponse.add_member(:http_request_configuration, Shapes::ShapeRef.new(shape: HttpRequestConfiguration, location_name: "HttpRequestConfiguration"))
+    PutFunctionResponse.add_member(:custom_output_configuration, Shapes::ShapeRef.new(shape: CustomOutputConfiguration, location_name: "CustomOutputConfiguration"))
+    PutFunctionResponse.add_member(:sequential_executor_configuration, Shapes::ShapeRef.new(shape: SequentialExecutorConfiguration, location_name: "SequentialExecutorConfiguration"))
+    PutFunctionResponse.add_member(:tags, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "tags"))
+    PutFunctionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "Arn"))
+    PutFunctionResponse.struct_class = Types::PutFunctionResponse
+
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
     PutPlaybackConfigurationRequest.add_member(:avail_suppression, Shapes::ShapeRef.new(shape: AvailSuppression, location_name: "AvailSuppression"))
     PutPlaybackConfigurationRequest.add_member(:bumper, Shapes::ShapeRef.new(shape: Bumper, location_name: "Bumper"))
@@ -865,6 +965,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationRequest.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationRequest.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PutPlaybackConfigurationRequest.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
+    PutPlaybackConfigurationRequest.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PutPlaybackConfigurationRequest.struct_class = Types::PutPlaybackConfigurationRequest
 
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_url, Shapes::ShapeRef.new(shape: __string, location_name: "AdDecisionServerUrl"))
@@ -889,6 +990,7 @@ module Aws::MediaTailor
     PutPlaybackConfigurationResponse.add_member(:video_content_source_url, Shapes::ShapeRef.new(shape: __string, location_name: "VideoContentSourceUrl"))
     PutPlaybackConfigurationResponse.add_member(:ad_conditioning_configuration, Shapes::ShapeRef.new(shape: AdConditioningConfiguration, location_name: "AdConditioningConfiguration"))
     PutPlaybackConfigurationResponse.add_member(:ad_decision_server_configuration, Shapes::ShapeRef.new(shape: AdDecisionServerConfiguration, location_name: "AdDecisionServerConfiguration"))
+    PutPlaybackConfigurationResponse.add_member(:function_mapping, Shapes::ShapeRef.new(shape: FunctionMapping, location_name: "FunctionMapping"))
     PutPlaybackConfigurationResponse.struct_class = Types::PutPlaybackConfigurationResponse
 
     RecurringConsumption.add_member(:retrieved_ad_expiration_seconds, Shapes::ShapeRef.new(shape: __integer, location_name: "RetrievedAdExpirationSeconds"))
@@ -968,6 +1070,12 @@ module Aws::MediaTailor
     SegmentationDescriptor.struct_class = Types::SegmentationDescriptor
 
     SegmentationDescriptorList.member = Shapes::ShapeRef.new(shape: SegmentationDescriptor)
+
+    SequentialExecutorConfiguration.add_member(:runtime, Shapes::ShapeRef.new(shape: RuntimeType, required: true, location_name: "Runtime"))
+    SequentialExecutorConfiguration.add_member(:output, Shapes::ShapeRef.new(shape: __mapOf__string, location_name: "Output"))
+    SequentialExecutorConfiguration.add_member(:function_list, Shapes::ShapeRef.new(shape: __listOfFunctionsRef, required: true, location_name: "FunctionList"))
+    SequentialExecutorConfiguration.add_member(:timeout_milliseconds, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "TimeoutMilliseconds"))
+    SequentialExecutorConfiguration.struct_class = Types::SequentialExecutorConfiguration
 
     SlateSource.add_member(:source_location_name, Shapes::ShapeRef.new(shape: __string, location_name: "SourceLocationName"))
     SlateSource.add_member(:vod_source_name, Shapes::ShapeRef.new(shape: __string, location_name: "VodSourceName"))
@@ -1153,6 +1261,10 @@ module Aws::MediaTailor
 
     __listOfChannel.member = Shapes::ShapeRef.new(shape: Channel)
 
+    __listOfFunctionsRef.member = Shapes::ShapeRef.new(shape: FunctionRef)
+
+    __listOfFunctionsResponse.member = Shapes::ShapeRef.new(shape: Function)
+
     __listOfLiveSource.member = Shapes::ShapeRef.new(shape: LiveSource)
 
     __listOfLoggingStrategies.member = Shapes::ShapeRef.new(shape: LoggingStrategy)
@@ -1174,6 +1286,8 @@ module Aws::MediaTailor
     __listOf__string.member = Shapes::ShapeRef.new(shape: __string)
 
     __manifestServiceExcludeEventTypesList.member = Shapes::ShapeRef.new(shape: ManifestServiceExcludeEventType)
+
+    __manifestServicePublishOptInEventTypesList.member = Shapes::ShapeRef.new(shape: ManifestServicePublishOptInEventType)
 
     __mapOf__string.key = Shapes::ShapeRef.new(shape: __string)
     __mapOf__string.value = Shapes::ShapeRef.new(shape: __string)
@@ -1278,6 +1392,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/channel/{ChannelName}/policy"
         o.input = Shapes::ShapeRef.new(shape: DeleteChannelPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteChannelPolicyResponse)
+      end)
+
+      api.add_operation(:delete_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFunction"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/function/{FunctionId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteFunctionResponse)
       end)
 
       api.add_operation(:delete_live_source, Seahorse::Model::Operation.new.tap do |o|
@@ -1390,6 +1512,14 @@ module Aws::MediaTailor
         )
       end)
 
+      api.add_operation(:get_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFunction"
+        o.http_method = "GET"
+        o.http_request_uri = "/function/{FunctionId}"
+        o.input = Shapes::ShapeRef.new(shape: GetFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFunctionResponse)
+      end)
+
       api.add_operation(:get_playback_configuration, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPlaybackConfiguration"
         o.http_method = "GET"
@@ -1426,6 +1556,20 @@ module Aws::MediaTailor
         o.http_request_uri = "/channels"
         o.input = Shapes::ShapeRef.new(shape: ListChannelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListChannelsResponse)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_functions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFunctions"
+        o.http_method = "GET"
+        o.http_request_uri = "/functions"
+        o.input = Shapes::ShapeRef.new(shape: ListFunctionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFunctionsResponse)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1519,6 +1663,14 @@ module Aws::MediaTailor
         o.http_request_uri = "/channel/{ChannelName}/policy"
         o.input = Shapes::ShapeRef.new(shape: PutChannelPolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutChannelPolicyResponse)
+      end)
+
+      api.add_operation(:put_function, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutFunction"
+        o.http_method = "PUT"
+        o.http_request_uri = "/function/{FunctionId}"
+        o.input = Shapes::ShapeRef.new(shape: PutFunctionRequest)
+        o.output = Shapes::ShapeRef.new(shape: PutFunctionResponse)
       end)
 
       api.add_operation(:put_playback_configuration, Seahorse::Model::Operation.new.tap do |o|

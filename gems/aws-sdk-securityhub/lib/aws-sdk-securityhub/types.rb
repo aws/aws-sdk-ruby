@@ -23755,11 +23755,20 @@ module Aws::SecurityHub
     #   A date range unit for the date filter.
     #   @return [String]
     #
+    # @!attribute [rw] comparison
+    #   The condition to apply to a date range filter. If you specify
+    #   `WITHIN`, Security Hub filters for dates within the specified date
+    #   range. If you specify `OLDER_THAN`, Security Hub filters for dates
+    #   before the specified date range. If you don't specify a value, the
+    #   default is `WITHIN`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/DateRange AWS API Documentation
     #
     class DateRange < Struct.new(
       :value,
-      :unit)
+      :unit,
+      :comparison)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -25230,6 +25239,23 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of Security Hub OCSF findings found under
+    #   the `metadata.uid` field of the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GenerateRecommendedPolicyV2Request AWS API Documentation
+    #
+    class GenerateRecommendedPolicyV2Request < Struct.new(
+      :metadata_uid)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GenerateRecommendedPolicyV2Response AWS API Documentation
+    #
+    class GenerateRecommendedPolicyV2Response < Aws::EmptyStructure; end
+
     # Provides metadata for the Amazon CodeGuru detector associated with a
     # finding. This field pertains to findings that relate to Lambda
     # functions. Amazon Inspector identifies policy violations and
@@ -26166,6 +26192,70 @@ module Aws::SecurityHub
     class GetMembersResponse < Struct.new(
       :members,
       :unprocessed_accounts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of Security Hub OCSF findings found under
+    #   the `metadata.uid` field of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate the `RecommendationSteps` list returned.
+    #   On your first call to `GetRecommendedPolicyV2`, omit this parameter
+    #   or set it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of recommendation steps to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRecommendedPolicyV2Request AWS API Documentation
+    #
+    class GetRecommendedPolicyV2Request < Struct.new(
+      :metadata_uid,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_type
+    #   The type of recommendation for the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommendation_steps
+    #   The recommended steps to take to resolve the finding.
+    #   @return [Array<Types::RecommendationStep>]
+    #
+    # @!attribute [rw] error
+    #   Detailed information for a `FAILED` retrieval status.
+    #   @return [Types::RecommendationError]
+    #
+    # @!attribute [rw] status
+    #   The current status of the recommended policy retrieval.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_arn
+    #   The ARN of the resource of the finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRecommendedPolicyV2Response AWS API Documentation
+    #
+    class GetRecommendedPolicyV2Response < Struct.new(
+      :next_token,
+      :recommendation_type,
+      :recommendation_steps,
+      :error,
+      :status,
+      :resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29307,6 +29397,50 @@ module Aws::SecurityHub
       :url)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains information about the reason that the retrieval of a
+    # recommended policy for a finding failed.
+    #
+    # @!attribute [rw] code
+    #   The error code for a failed retrieval of a recommended policy for a
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The error message for a failed retrieval of a recommended policy for
+    #   a finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RecommendationError AWS API Documentation
+    #
+    class RecommendationError < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a recommended step to remediate a Security
+    # Hub finding.
+    #
+    # @note RecommendationStep is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RecommendationStep corresponding to the set member.
+    #
+    # @!attribute [rw] unused_permissions
+    #   A recommended step to remediate an unused permissions finding.
+    #   @return [Types::UnusedPermissionsRecommendationStep]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RecommendationStep AWS API Documentation
+    #
+    class RecommendationStep < Struct.new(
+      :unused_permissions,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UnusedPermissions < RecommendationStep; end
+      class Unknown < RecommendationStep; end
     end
 
     # An occurrence of sensitive data in an Apache Avro object container or
@@ -32740,9 +32874,10 @@ module Aws::SecurityHub
     #
     #   * `ResourceType NOT_EQUALS AwsEc2NetworkInterface`
     #
-    #   `CONTAINS` and `NOT_CONTAINS` operators can be used only with
-    #   automation rules V1. `CONTAINS_WORD` operator is only supported in
-    #   `GetFindingsV2`, `GetFindingStatisticsV2`, `GetResourcesV2`, and
+    #   The `CONTAINS` operator works with automation rules V1 and V2. The
+    #   `NOT_CONTAINS` operator works only with automation rules V1. The
+    #   `CONTAINS_WORD` operator works only in the `GetFindingsV2`,
+    #   `GetFindingStatisticsV2`, `GetResourcesV2`, and
     #   `GetResourcesStatisticsV2` APIs. For more information, see
     #   [Automation rules][1] in the *Security Hub CSPM User Guide*.
     #
@@ -33185,6 +33320,46 @@ module Aws::SecurityHub
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # Contains information about the action to take for a policy in an
+    # unused permissions finding.
+    #
+    # @!attribute [rw] recommended_action
+    #   A recommendation of whether to create or detach a policy for an
+    #   unused permissions finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy
+    #   The contents of the existing policy identified by `ExistingPolicyId`
+    #   which needs to be replaced, when the `RecommendedAction` is
+    #   `CREATE_POLICY`.
+    #   @return [String]
+    #
+    # @!attribute [rw] existing_policy_id
+    #   The ID of an existing policy to be replaced or detached.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_updated_at
+    #   The time at which the existing policy for the unused permissions
+    #   finding was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] recommended_policy
+    #   The contents of the least-privileged recommended replacement for
+    #   `ExistingPolicyId`, when the `RecommendedAction` is `CREATE_POLICY`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/UnusedPermissionsRecommendationStep AWS API Documentation
+    #
+    class UnusedPermissionsRecommendationStep < Struct.new(
+      :recommended_action,
+      :existing_policy,
+      :existing_policy_id,
+      :policy_updated_at,
+      :recommended_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] action_target_arn
     #   The ARN of the custom action target to update.

@@ -3326,6 +3326,7 @@ module Aws::Glue
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:cloud_watch_metrics_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "CloudWatchMetricsEnabled"))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:results_s3_prefix, Shapes::ShapeRef.new(shape: UriString, location_name: "ResultsS3Prefix"))
     DataQualityEvaluationRunAdditionalRunOptions.add_member(:composite_rule_evaluation_method, Shapes::ShapeRef.new(shape: DQCompositeRuleEvaluationMethod, location_name: "CompositeRuleEvaluationMethod"))
+    DataQualityEvaluationRunAdditionalRunOptions.add_member(:custom_log_group_prefix, Shapes::ShapeRef.new(shape: GenericString, location_name: "CustomLogGroupPrefix"))
     DataQualityEvaluationRunAdditionalRunOptions.struct_class = Types::DataQualityEvaluationRunAdditionalRunOptions
 
     DataQualityGlueTable.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -3421,6 +3422,7 @@ module Aws::Glue
     DataQualityRulesetEvaluationRunFilter.add_member(:data_source, Shapes::ShapeRef.new(shape: DataSource, required: true, location_name: "DataSource"))
     DataQualityRulesetEvaluationRunFilter.add_member(:started_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedBefore"))
     DataQualityRulesetEvaluationRunFilter.add_member(:started_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartedAfter"))
+    DataQualityRulesetEvaluationRunFilter.add_member(:ruleset_name, Shapes::ShapeRef.new(shape: NameString, location_name: "RulesetName"))
     DataQualityRulesetEvaluationRunFilter.struct_class = Types::DataQualityRulesetEvaluationRunFilter
 
     DataQualityRulesetEvaluationRunList.member = Shapes::ShapeRef.new(shape: DataQualityRulesetEvaluationRunDescription)

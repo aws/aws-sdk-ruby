@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.35.0 (2026-05-07)
+------------------
+
+* Feature - With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.
+
 1.34.0 (2026-03-26)
 ------------------
 

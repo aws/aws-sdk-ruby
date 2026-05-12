@@ -640,6 +640,22 @@ module Aws::CloudWatchLogs
     #   delivery that delivers to an S3 bucket.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] delivery_source_configuration
+    #   The schema of the delivery source configuration that is available
+    #   for this log type. Each element describes a configuration that can
+    #   be set when calling [PutDeliverySource][1], including the
+    #   configuration name, type, and default value.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    #   @return [Array<Types::DeliverySourceConfigurationSchema>]
+    #
+    # @!attribute [rw] s3_tables_integration
+    #   The S3 Tables integration configuration for this configuration
+    #   template, including the datasource name and type.
+    #   @return [Types::S3TablesIntegration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ConfigurationTemplate AWS API Documentation
     #
     class ConfigurationTemplate < Struct.new(
@@ -652,7 +668,9 @@ module Aws::CloudWatchLogs
       :allowed_output_formats,
       :allowed_action_for_allow_vended_logs_delivery_for_resource,
       :allowed_field_delimiters,
-      :allowed_suffix_path_fields)
+      :allowed_suffix_path_fields,
+      :delivery_source_configuration,
+      :s3_tables_integration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2017,6 +2035,23 @@ module Aws::CloudWatchLogs
     #   The tags that have been assigned to this delivery source.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] delivery_source_configuration
+    #   The map of key-value pairs that configure the delivery source.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] status
+    #   The status of the delivery source. A delivery source can have the
+    #   status `ACTIVE` or `INACTIVE`. Note: This value is defined for
+    #   selective log types.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   The reason for the status of the delivery source. A status reason of
+    #   `RESOURCE_DELETED` indicates that the resource associated with the
+    #   delivery source has been deleted. Note: This value is defined for
+    #   selective log types.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliverySource AWS API Documentation
     #
     class DeliverySource < Struct.new(
@@ -2025,7 +2060,60 @@ module Aws::CloudWatchLogs
       :resource_arns,
       :service,
       :log_type,
-      :tags)
+      :tags,
+      :delivery_source_configuration,
+      :status,
+      :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes a single configuration for a log type,
+    # including its name, value type, default value, and the range of
+    # supported values.
+    #
+    # @!attribute [rw] key_name
+    #   The name of the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] value_type
+    #   The data type of the configuration value. Valid values are `string`,
+    #   `boolean`, `int`, `double`, and `long`.
+    #   @return [String]
+    #
+    # @!attribute [rw] default_value
+    #   The default value of the configuration that is used when a value is
+    #   not specified in a [PutDeliverySource][1] request.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+    #   @return [String]
+    #
+    # @!attribute [rw] supported_values
+    #   The list of allowed values for the configuration. Empty for
+    #   free-form configuration.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] min_value
+    #   The minimum numeric value allowed for the configuration. This
+    #   applies only when the `valueType` is a numeric type.
+    #   @return [Float]
+    #
+    # @!attribute [rw] max_value
+    #   The maximum numeric value allowed for the configuration. This
+    #   applies only when the `valueType` is a numeric type.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeliverySourceConfigurationSchema AWS API Documentation
+    #
+    class DeliverySourceConfigurationSchema < Struct.new(
+      :key_name,
+      :value_type,
+      :default_value,
+      :supported_values,
+      :min_value,
+      :max_value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5199,6 +5287,11 @@ module Aws::CloudWatchLogs
     #   names, each with 1 to 512 characters.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] log_group_tags
+    #   An array of tag filters to return only log groups that have specific
+    #   tags. Multiple filters are combined with AND logic.
+    #   @return [Array<Types::TagFilter>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/ListLogGroupsRequest AWS API Documentation
     #
     class ListLogGroupsRequest < Struct.new(
@@ -5209,7 +5302,8 @@ module Aws::CloudWatchLogs
       :next_token,
       :limit,
       :data_sources,
-      :field_index_names)
+      :field_index_names,
+      :log_group_tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7834,13 +7928,20 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] delivery_source_configuration
+    #   A map of key-value pairs to configure the delivery source. Both keys
+    #   and values must be between 1 and 255 characters in length. For
+    #   example, `{"samplingRate": "50"}`.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutDeliverySourceRequest AWS API Documentation
     #
     class PutDeliverySourceRequest < Struct.new(
       :name,
       :resource_arn,
       :log_type,
-      :tags)
+      :tags,
+      :delivery_source_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9139,6 +9240,26 @@ module Aws::CloudWatchLogs
       include Aws::Structure
     end
 
+    # Contains information about the S3 Tables integration configuration for
+    # a configuration template.
+    #
+    # @!attribute [rw] datasource_name
+    #   The name of the S3 Tables datasource.
+    #   @return [String]
+    #
+    # @!attribute [rw] datasource_type
+    #   The type of the S3 Tables datasource.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/S3TablesIntegration AWS API Documentation
+    #
+    class S3TablesIntegration < Struct.new(
+      :datasource_name,
+      :datasource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a destination where scheduled query results are
     # processed, including processing status and any error messages.
     #
@@ -9713,6 +9834,42 @@ module Aws::CloudWatchLogs
     class SuppressionPeriod < Struct.new(
       :value,
       :suppression_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tag filter that specifies a tag key and optional tag values for
+    # filtering log groups by tags.
+    #
+    # @!attribute [rw] key
+    #   The tag key to filter on.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   An optional list of tag values to filter on.
+    #
+    #   * If you specify a filter that contains more than one value for a
+    #     key, the response returns log groups that match any of the
+    #     specified values for that key.
+    #
+    #   * If you don't specify values, the response returns all log groups
+    #     that are tagged with that key, with any or no value.
+    #
+    #   * Use `*` for wildcard matching. For example, `prod*` matches values
+    #     that start with `prod`.
+    #
+    #   * Use `!` as a prefix for negation. For example, `!prod` matches
+    #     values that are not `prod`.
+    #
+    #   * Exact matching and negation are case-sensitive. Wildcard matching
+    #     is case-insensitive.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/TagFilter AWS API Documentation
+    #
+    class TagFilter < Struct.new(
+      :key,
+      :values)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2811,6 +2811,7 @@ module Aws::QConnect
       attr_accessor start_timestamp: ::Time
       attr_accessor end_timestamp: ::Time
       attr_accessor status: ("OK" | "ERROR" | "TIMEOUT")
+      attr_accessor status_description: ::String
       attr_accessor request_id: ::String
       attr_accessor origin_request_id: ::String
       attr_accessor attributes: Types::SpanAttributes
@@ -2852,6 +2853,7 @@ module Aws::QConnect
       attr_accessor prompt_type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
       attr_accessor prompt_name: ::String
       attr_accessor prompt_version: ::Integer
+      attr_accessor time_to_first_token_ms: ::Integer
       SENSITIVE: []
     end
 
@@ -2875,6 +2877,7 @@ module Aws::QConnect
       attr_accessor text: Types::SpanTextValue
       attr_accessor tool_use: Types::SpanToolUseValue
       attr_accessor tool_result: Types::SpanToolResultValue
+      attr_accessor reasoning: Types::SpanReasoningValue
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -2884,8 +2887,15 @@ module Aws::QConnect
       end
       class ToolResult < SpanMessageValue
       end
+      class Reasoning < SpanMessageValue
+      end
       class Unknown < SpanMessageValue
       end
+    end
+
+    class SpanReasoningValue
+      attr_accessor value: ::String
+      SENSITIVE: [:value]
     end
 
     class SpanTextValue

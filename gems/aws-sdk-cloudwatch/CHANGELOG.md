@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.135.0 (2026-05-01)
+------------------
+
+* Feature - This release adds tag support for CloudWatch Dashboards. The PutDashboard API now accepts a Tags parameter, allowing you to tag dashboards at creation time. Additionally, the TagResource, UntagResource, and ListTagsForResource APIs now support dashboard ARNs as resources.
+
 1.134.0 (2026-04-16)
 ------------------
 

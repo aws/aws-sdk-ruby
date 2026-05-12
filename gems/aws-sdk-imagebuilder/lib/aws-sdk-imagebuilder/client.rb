@@ -3432,7 +3432,7 @@ module Aws::Imagebuilder
     # @example Request syntax with placeholder values
     #
     #   resp = client.import_disk_image({
-    #     name: "NonEmptyString", # required
+    #     name: "ResourceName", # required
     #     semantic_version: "VersionNumber", # required
     #     description: "NonEmptyString",
     #     platform: "NonEmptyString", # required
@@ -6125,7 +6125,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.102.0'
+      context[:gem_version] = '1.103.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

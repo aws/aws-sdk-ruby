@@ -377,6 +377,7 @@ module Aws::IoT
       attr_accessor max_batch_open_ms: ::Integer
       attr_accessor max_batch_size: ::Integer
       attr_accessor max_batch_size_bytes: ::Integer
+      attr_accessor batch_across_topics: bool
       SENSITIVE: []
     end
 

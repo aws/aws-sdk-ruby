@@ -104,11 +104,12 @@ module Aws
                                                        playback_configuration_name: ::String,
                                                        ?enabled_logging_strategies: Array[("VENDED_LOGS" | "LEGACY_CLOUDWATCH")],
                                                        ?ads_interaction_log: {
-                                                         publish_opt_in_event_types: Array[("RAW_ADS_RESPONSE" | "RAW_ADS_REQUEST")]?,
-                                                         exclude_event_types: Array[("AD_MARKER_FOUND" | "NON_AD_MARKER_FOUND" | "MAKING_ADS_REQUEST" | "MODIFIED_TARGET_URL" | "VAST_REDIRECT" | "EMPTY_VAST_RESPONSE" | "EMPTY_VMAP_RESPONSE" | "VAST_RESPONSE" | "REDIRECTED_VAST_RESPONSE" | "FILLED_AVAIL" | "FILLED_OVERLAY_AVAIL" | "BEACON_FIRED" | "WARNING_NO_ADVERTISEMENTS" | "WARNING_VPAID_AD_DROPPED" | "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" | "ERROR_UNKNOWN" | "ERROR_UNKNOWN_HOST" | "ERROR_DISALLOWED_HOST" | "ERROR_ADS_IO" | "ERROR_ADS_TIMEOUT" | "ERROR_ADS_RESPONSE_PARSE" | "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" | "ERROR_ADS_INVALID_RESPONSE" | "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" | "ERROR_VAST_REDIRECT_MULTIPLE_VAST" | "ERROR_VAST_REDIRECT_FAILED" | "ERROR_VAST_MISSING_MEDIAFILES" | "ERROR_VAST_MISSING_CREATIVES" | "ERROR_VAST_MISSING_OVERLAYS" | "ERROR_VAST_MISSING_IMPRESSION" | "ERROR_VAST_INVALID_VAST_AD_TAG_URI" | "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" | "ERROR_VAST_MULTIPLE_LINEAR" | "ERROR_VAST_INVALID_MEDIA_FILE" | "ERROR_FIRING_BEACON_FAILED" | "ERROR_PERSONALIZATION_DISABLED" | "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" | "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" | "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" | "INTERSTITIAL_VOD_SUCCESS" | "INTERSTITIAL_VOD_FAILURE")]?
+                                                         publish_opt_in_event_types: Array[("RAW_ADS_RESPONSE" | "RAW_ADS_REQUEST" | "PRE_ADS_REQUEST_HOOK_SUMMARY" | "PRE_ADS_REQUEST_FUNCTION_COMPLETED")]?,
+                                                         exclude_event_types: Array[("AD_MARKER_FOUND" | "NON_AD_MARKER_FOUND" | "MAKING_ADS_REQUEST" | "MODIFIED_TARGET_URL" | "VAST_REDIRECT" | "EMPTY_VAST_RESPONSE" | "EMPTY_VMAP_RESPONSE" | "VAST_RESPONSE" | "REDIRECTED_VAST_RESPONSE" | "FILLED_AVAIL" | "FILLED_OVERLAY_AVAIL" | "BEACON_FIRED" | "WARNING_NO_ADVERTISEMENTS" | "WARNING_VPAID_AD_DROPPED" | "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED" | "ERROR_UNKNOWN" | "ERROR_UNKNOWN_HOST" | "ERROR_DISALLOWED_HOST" | "ERROR_ADS_IO" | "ERROR_ADS_TIMEOUT" | "ERROR_ADS_RESPONSE_PARSE" | "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT" | "ERROR_ADS_INVALID_RESPONSE" | "ERROR_VAST_REDIRECT_EMPTY_RESPONSE" | "ERROR_VAST_REDIRECT_MULTIPLE_VAST" | "ERROR_VAST_REDIRECT_FAILED" | "ERROR_VAST_MISSING_MEDIAFILES" | "ERROR_VAST_MISSING_CREATIVES" | "ERROR_VAST_MISSING_OVERLAYS" | "ERROR_VAST_MISSING_IMPRESSION" | "ERROR_VAST_INVALID_VAST_AD_TAG_URI" | "ERROR_VAST_MULTIPLE_TRACKING_EVENTS" | "ERROR_VAST_MULTIPLE_LINEAR" | "ERROR_VAST_INVALID_MEDIA_FILE" | "ERROR_FIRING_BEACON_FAILED" | "ERROR_PERSONALIZATION_DISABLED" | "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET" | "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS" | "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS" | "INTERSTITIAL_VOD_SUCCESS" | "INTERSTITIAL_VOD_FAILURE" | "PRE_ADS_REQUEST_HOOK_ERROR" | "PRE_ADS_REQUEST_FUNCTION_ERROR")]?
                                                        },
                                                        ?manifest_service_interaction_log: {
-                                                         exclude_event_types: Array[("GENERATED_MANIFEST" | "ORIGIN_MANIFEST" | "SESSION_INITIALIZED" | "TRACKING_RESPONSE" | "CONFIG_SYNTAX_ERROR" | "CONFIG_SECURITY_ERROR" | "UNKNOWN_HOST" | "TIMEOUT_ERROR" | "CONNECTION_ERROR" | "IO_ERROR" | "UNKNOWN_ERROR" | "HOST_DISALLOWED" | "PARSING_ERROR" | "MANIFEST_ERROR" | "NO_MASTER_OR_MEDIA_PLAYLIST" | "NO_MASTER_PLAYLIST" | "NO_MEDIA_PLAYLIST" | "INCOMPATIBLE_HLS_VERSION" | "SCTE35_PARSING_ERROR" | "INVALID_SINGLE_PERIOD_DASH_MANIFEST" | "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" | "LAST_PERIOD_MISSING_AUDIO" | "LAST_PERIOD_MISSING_AUDIO_WARNING" | "ERROR_ORIGIN_PREFIX_INTERPOLATION" | "ERROR_ADS_INTERPOLATION" | "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" | "ERROR_CDN_AD_SEGMENT_INTERPOLATION" | "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" | "ERROR_SLATE_AD_URL_INTERPOLATION" | "ERROR_PROFILE_NAME_INTERPOLATION" | "ERROR_BUMPER_START_INTERPOLATION" | "ERROR_BUMPER_END_INTERPOLATION")]?
+                                                         publish_opt_in_event_types: Array[("PRE_SESSION_INIT_HOOK_SUMMARY" | "PRE_SESSION_INIT_FUNCTION_COMPLETED")]?,
+                                                         exclude_event_types: Array[("GENERATED_MANIFEST" | "ORIGIN_MANIFEST" | "SESSION_INITIALIZED" | "TRACKING_RESPONSE" | "CONFIG_SYNTAX_ERROR" | "CONFIG_SECURITY_ERROR" | "UNKNOWN_HOST" | "TIMEOUT_ERROR" | "CONNECTION_ERROR" | "IO_ERROR" | "UNKNOWN_ERROR" | "HOST_DISALLOWED" | "PARSING_ERROR" | "MANIFEST_ERROR" | "NO_MASTER_OR_MEDIA_PLAYLIST" | "NO_MASTER_PLAYLIST" | "NO_MEDIA_PLAYLIST" | "INCOMPATIBLE_HLS_VERSION" | "SCTE35_PARSING_ERROR" | "INVALID_SINGLE_PERIOD_DASH_MANIFEST" | "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST" | "LAST_PERIOD_MISSING_AUDIO" | "LAST_PERIOD_MISSING_AUDIO_WARNING" | "ERROR_ORIGIN_PREFIX_INTERPOLATION" | "ERROR_ADS_INTERPOLATION" | "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION" | "ERROR_CDN_AD_SEGMENT_INTERPOLATION" | "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION" | "ERROR_SLATE_AD_URL_INTERPOLATION" | "ERROR_PROFILE_NAME_INTERPOLATION" | "ERROR_BUMPER_START_INTERPOLATION" | "ERROR_BUMPER_END_INTERPOLATION" | "PRE_SESSION_INIT_HOOK_ERROR" | "PRE_SESSION_INIT_FUNCTION_ERROR")]?
                                                        }
                                                      ) -> _ConfigureLogsForPlaybackConfigurationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConfigureLogsForPlaybackConfigurationResponseSuccess
@@ -468,6 +469,15 @@ module Aws
                                  ) -> _DeleteChannelPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteChannelPolicyResponseSuccess
 
+      interface _DeleteFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteFunctionResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#delete_function-instance_method
+      def delete_function: (
+                             function_id: ::String
+                           ) -> _DeleteFunctionResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteFunctionResponseSuccess
+
       interface _DeleteLiveSourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLiveSourceResponse]
       end
@@ -649,6 +659,23 @@ module Aws
                                 ) -> _GetChannelScheduleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelScheduleResponseSuccess
 
+      interface _GetFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFunctionResponse]
+        def function_id: () -> ::String
+        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+        def description: () -> ::String
+        def http_request_configuration: () -> Types::HttpRequestConfiguration
+        def custom_output_configuration: () -> Types::CustomOutputConfiguration
+        def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration
+        def tags: () -> ::Hash[::String, ::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_function-instance_method
+      def get_function: (
+                          function_id: ::String
+                        ) -> _GetFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFunctionResponseSuccess
+
       interface _GetPlaybackConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaybackConfigurationResponse]
         def ad_decision_server_url: () -> ::String
@@ -673,6 +700,7 @@ module Aws
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
+        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#get_playback_configuration-instance_method
       def get_playback_configuration: (
@@ -723,6 +751,18 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListChannelsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListFunctionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFunctionsResponse]
+        def items: () -> ::Array[Types::Function]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#list_functions-instance_method
+      def list_functions: (
+                            ?max_results: ::Integer,
+                            ?next_token: ::String
+                          ) -> _ListFunctionsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFunctionsResponseSuccess
 
       interface _ListLiveSourcesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLiveSourcesResponse]
@@ -809,6 +849,50 @@ module Aws
                               ) -> _PutChannelPolicyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutChannelPolicyResponseSuccess
 
+      interface _PutFunctionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutFunctionResponse]
+        def function_id: () -> ::String
+        def function_type: () -> ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR")
+        def description: () -> ::String
+        def http_request_configuration: () -> Types::HttpRequestConfiguration
+        def custom_output_configuration: () -> Types::CustomOutputConfiguration
+        def sequential_executor_configuration: () -> Types::SequentialExecutorConfiguration
+        def tags: () -> ::Hash[::String, ::String]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_function-instance_method
+      def put_function: (
+                          function_id: ::String,
+                          function_type: ("HTTP_REQUEST" | "CUSTOM_OUTPUT" | "SEQUENTIAL_EXECUTOR"),
+                          ?description: ::String,
+                          ?http_request_configuration: {
+                            runtime: ("JSONATA"),
+                            output: Hash[::String, ::String]?,
+                            method_type: ("GET" | "POST"),
+                            request_timeout_milliseconds: ::Integer,
+                            url: ::String,
+                            body: ::String?,
+                            headers: Hash[::String, ::String]?
+                          },
+                          ?custom_output_configuration: {
+                            runtime: ("JSONATA"),
+                            output: Hash[::String, ::String]?
+                          },
+                          ?sequential_executor_configuration: {
+                            runtime: ("JSONATA"),
+                            output: Hash[::String, ::String]?,
+                            function_list: Array[
+                              {
+                                run_condition: ::String?,
+                                function_id: ::String?
+                              },
+                            ],
+                            timeout_milliseconds: ::Integer
+                          },
+                          ?tags: Hash[::String, ::String]
+                        ) -> _PutFunctionResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionResponseSuccess
+
       interface _PutPlaybackConfigurationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutPlaybackConfigurationResponse]
         def ad_decision_server_url: () -> ::String
@@ -833,6 +917,7 @@ module Aws
         def video_content_source_url: () -> ::String
         def ad_conditioning_configuration: () -> Types::AdConditioningConfiguration
         def ad_decision_server_configuration: () -> Types::AdDecisionServerConfiguration
+        def function_mapping: () -> ::Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#put_playback_configuration-instance_method
       def put_playback_configuration: (
@@ -881,7 +966,8 @@ module Aws
                                             headers: Hash[::String, ::String]?,
                                             compress_request: ("NONE" | "GZIP")?
                                           }?
-                                        }
+                                        },
+                                        ?function_mapping: Hash[("PRE_SESSION_INITIALIZATION" | "PRE_ADS_REQUEST"), ::String]
                                       ) -> _PutPlaybackConfigurationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPlaybackConfigurationResponseSuccess
 

@@ -150,6 +150,7 @@ module Aws::IoT
     AwsJobTimeoutConfig = Shapes::StructureShape.new(name: 'AwsJobTimeoutConfig')
     AwsJobTimeoutInProgressTimeoutInMinutes = Shapes::IntegerShape.new(name: 'AwsJobTimeoutInProgressTimeoutInMinutes')
     AwsJsonSubstitutionCommandPreprocessorConfig = Shapes::StructureShape.new(name: 'AwsJsonSubstitutionCommandPreprocessorConfig')
+    BatchAcrossTopics = Shapes::BooleanShape.new(name: 'BatchAcrossTopics')
     BatchConfig = Shapes::StructureShape.new(name: 'BatchConfig')
     BatchMode = Shapes::BooleanShape.new(name: 'BatchMode')
     BeforeSubstitutionFlag = Shapes::BooleanShape.new(name: 'BeforeSubstitutionFlag')
@@ -1846,6 +1847,7 @@ module Aws::IoT
     BatchConfig.add_member(:max_batch_open_ms, Shapes::ShapeRef.new(shape: MaxBatchOpenMs, location_name: "maxBatchOpenMs"))
     BatchConfig.add_member(:max_batch_size, Shapes::ShapeRef.new(shape: MaxBatchSize, location_name: "maxBatchSize"))
     BatchConfig.add_member(:max_batch_size_bytes, Shapes::ShapeRef.new(shape: MaxBatchSizeBytes, location_name: "maxBatchSizeBytes"))
+    BatchConfig.add_member(:batch_across_topics, Shapes::ShapeRef.new(shape: BatchAcrossTopics, location_name: "batchAcrossTopics"))
     BatchConfig.struct_class = Types::BatchConfig
 
     Behavior.add_member(:name, Shapes::ShapeRef.new(shape: BehaviorName, required: true, location_name: "name"))

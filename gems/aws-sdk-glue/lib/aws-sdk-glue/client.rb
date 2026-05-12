@@ -8138,6 +8138,7 @@ module Aws::Glue
     #   resp.additional_run_options.cloud_watch_metrics_enabled #=> Boolean
     #   resp.additional_run_options.results_s3_prefix #=> String
     #   resp.additional_run_options.composite_rule_evaluation_method #=> String, one of "COLUMN", "ROW"
+    #   resp.additional_run_options.custom_log_group_prefix #=> String
     #   resp.status #=> String, one of "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED", "TIMEOUT"
     #   resp.error_string #=> String
     #   resp.started_on #=> Time
@@ -13181,6 +13182,7 @@ module Aws::Glue
     #       },
     #       started_before: Time.now,
     #       started_after: Time.now,
+    #       ruleset_name: "NameString",
     #     },
     #     next_token: "PaginationToken",
     #     max_results: 1,
@@ -15943,6 +15945,7 @@ module Aws::Glue
     #       cloud_watch_metrics_enabled: false,
     #       results_s3_prefix: "UriString",
     #       composite_rule_evaluation_method: "COLUMN", # accepts COLUMN, ROW
+    #       custom_log_group_prefix: "GenericString",
     #     },
     #     ruleset_names: ["NameString"], # required
     #     additional_data_sources: {
@@ -19050,7 +19053,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.254.0'
+      context[:gem_version] = '1.255.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -83,6 +83,12 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class Amount
+      attr_accessor value: ::String
+      attr_accessor currency: ("USD")
+      SENSITIVE: []
+    end
+
     class AutomationStream
       attr_accessor stream_endpoint: ::String
       attr_accessor stream_status: ("ENABLED" | "DISABLED")
@@ -91,6 +97,12 @@ module Aws::BedrockAgentCore
 
     class AutomationStreamUpdate
       attr_accessor stream_status: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class AvailableLimits
+      attr_accessor available_spend_amount: Types::Amount
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -332,6 +344,21 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class CoinbaseCdpTokenRequestInput
+      attr_accessor request_method: ("GET" | "POST" | "PUT" | "DELETE" | "PATCH")
+      attr_accessor request_host: ::String
+      attr_accessor request_path: ::String
+      attr_accessor include_wallet_auth_token: bool
+      attr_accessor request_body: ::String
+      SENSITIVE: []
+    end
+
+    class CoinbaseCdpTokenResponseOutput
+      attr_accessor bearer_token: ::String
+      attr_accessor wallet_auth_token: ::String
+      SENSITIVE: [:bearer_token, :wallet_auth_token]
+    end
+
     class CompleteResourceTokenAuthRequest
       attr_accessor user_identifier: Types::UserIdentifier
       attr_accessor session_uri: ::String
@@ -468,6 +495,49 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class CreatePaymentInstrumentRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET")
+      attr_accessor payment_instrument_details: Types::PaymentInstrumentDetails
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePaymentInstrumentResponse
+      attr_accessor payment_instrument: Types::PaymentInstrument
+      SENSITIVE: []
+    end
+
+    class CreatePaymentSessionRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor limits: Types::SessionLimits
+      attr_accessor expiry_time_in_minutes: ::Integer
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePaymentSessionResponse
+      attr_accessor payment_session: Types::PaymentSession
+      SENSITIVE: []
+    end
+
+    class CryptoX402PaymentInput
+      attr_accessor version: ::String
+      attr_accessor payload: untyped
+      SENSITIVE: [:payload]
+    end
+
+    class CryptoX402PaymentOutput
+      attr_accessor version: ::String
+      attr_accessor payload: untyped
+      SENSITIVE: [:payload]
+    end
+
     class CustomDescriptor
       attr_accessor inline_content: ::String
       SENSITIVE: []
@@ -532,6 +602,31 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class DeletePaymentInstrumentRequest
+      attr_accessor user_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_instrument_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentInstrumentResponse
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class DeletePaymentSessionRequest
+      attr_accessor user_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_session_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentSessionResponse
+      attr_accessor status: ("ACTIVE" | "EXPIRED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class DeleteRecommendationRequest
       attr_accessor recommendation_id: ::String
       SENSITIVE: []
@@ -553,6 +648,14 @@ module Aws::BedrockAgentCore
 
     class DuplicateIdException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class EmbeddedCryptoWallet
+      attr_accessor network: ("ETHEREUM" | "SOLANA")
+      attr_accessor linked_accounts: ::Array[Types::LinkedAccount]
+      attr_accessor wallet_address: ::String
+      attr_accessor redirect_url: ::String
       SENSITIVE: []
     end
 
@@ -898,6 +1001,50 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class GetPaymentInstrumentBalanceRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor chain: ("BASE" | "BASE_SEPOLIA" | "ETHEREUM" | "SOLANA" | "SOLANA_DEVNET")
+      attr_accessor token: ("USDC")
+      SENSITIVE: []
+    end
+
+    class GetPaymentInstrumentBalanceResponse
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor token_balance: Types::TokenBalance
+      SENSITIVE: []
+    end
+
+    class GetPaymentInstrumentRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_instrument_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentInstrumentResponse
+      attr_accessor payment_instrument: Types::PaymentInstrument
+      SENSITIVE: []
+    end
+
+    class GetPaymentSessionRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_session_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentSessionResponse
+      attr_accessor payment_session: Types::PaymentSession
+      SENSITIVE: []
+    end
+
     class GetRecommendationRequest
       attr_accessor recommendation_id: ::String
       SENSITIVE: []
@@ -949,6 +1096,18 @@ module Aws::BedrockAgentCore
       attr_accessor session_uri: ::String
       attr_accessor session_status: ("IN_PROGRESS" | "FAILED")
       SENSITIVE: [:authorization_url, :access_token]
+    end
+
+    class GetResourcePaymentTokenRequest
+      attr_accessor workload_identity_token: ::String
+      attr_accessor resource_credential_provider_name: ::String
+      attr_accessor payment_token_request: Types::PaymentTokenRequestInput
+      SENSITIVE: [:workload_identity_token]
+    end
+
+    class GetResourcePaymentTokenResponse
+      attr_accessor payment_token_response: Types::PaymentTokenResponseOutput
+      SENSITIVE: []
     end
 
     class GetWorkloadAccessTokenForJWTRequest
@@ -1551,6 +1710,65 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class LinkedAccount
+      attr_accessor email: Types::LinkedAccountEmail
+      attr_accessor sms: Types::LinkedAccountSms
+      attr_accessor developer_jwt: Types::LinkedAccountDeveloperJwt
+      attr_accessor o_auth_2: Types::LinkedAccountOAuth2
+      attr_accessor unknown: untyped
+      SENSITIVE: [:email, :sms]
+
+      class Email < LinkedAccount
+      end
+      class Sms < LinkedAccount
+      end
+      class DeveloperJwt < LinkedAccount
+      end
+      class OAuth2 < LinkedAccount
+      end
+      class Unknown < LinkedAccount
+      end
+    end
+
+    class LinkedAccountDeveloperJwt
+      attr_accessor kid: ::String
+      attr_accessor sub: ::String
+      SENSITIVE: []
+    end
+
+    class LinkedAccountEmail
+      attr_accessor email_address: ::String
+      SENSITIVE: [:email_address]
+    end
+
+    class LinkedAccountOAuth2
+      attr_accessor google: Types::OAuth2Authentication
+      attr_accessor apple: Types::OAuth2Authentication
+      attr_accessor x: Types::OAuth2Authentication
+      attr_accessor telegram: Types::OAuth2Authentication
+      attr_accessor github: Types::OAuth2Authentication
+      attr_accessor unknown: untyped
+      SENSITIVE: [:google, :apple, :x, :telegram, :github]
+
+      class Google < LinkedAccountOAuth2
+      end
+      class Apple < LinkedAccountOAuth2
+      end
+      class X < LinkedAccountOAuth2
+      end
+      class Telegram < LinkedAccountOAuth2
+      end
+      class Github < LinkedAccountOAuth2
+      end
+      class Unknown < LinkedAccountOAuth2
+      end
+    end
+
+    class LinkedAccountSms
+      attr_accessor phone_number: ::String
+      SENSITIVE: [:phone_number]
+    end
+
     class ListABTestsRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -1660,6 +1878,37 @@ module Aws::BedrockAgentCore
 
     class ListMemoryRecordsOutput
       attr_accessor memory_record_summaries: ::Array[Types::MemoryRecordSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentInstrumentsRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPaymentInstrumentsResponse
+      attr_accessor payment_instruments: ::Array[Types::PaymentInstrumentSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentSessionsRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPaymentSessionsResponse
+      attr_accessor payment_sessions: ::Array[Types::PaymentSessionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -1890,11 +2139,19 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class OAuth2Authentication
+      attr_accessor sub: ::String
+      attr_accessor email_address: ::String
+      attr_accessor name: ::String
+      attr_accessor username: ::String
+      SENSITIVE: [:email_address]
+    end
+
     class OAuthCredentialProvider
       attr_accessor provider_arn: ::String
       attr_accessor scopes: ::Array[::String]
       attr_accessor custom_parameters: ::Hash[::String, ::String]
-      attr_accessor grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE")
+      attr_accessor grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")
       attr_accessor default_return_url: ::String
       SENSITIVE: []
     end
@@ -1924,9 +2181,142 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class PaymentInput
+      attr_accessor crypto_x402: Types::CryptoX402PaymentInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CryptoX402 < PaymentInput
+      end
+      class Unknown < PaymentInput
+      end
+    end
+
+    class PaymentInstrument
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET")
+      attr_accessor payment_instrument_details: Types::PaymentInstrumentDetails
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentInstrumentDetails
+      attr_accessor embedded_crypto_wallet: Types::EmbeddedCryptoWallet
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class EmbeddedCryptoWallet < PaymentInstrumentDetails
+      end
+      class Unknown < PaymentInstrumentDetails
+      end
+    end
+
+    class PaymentInstrumentSummary
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor user_id: ::String
+      attr_accessor payment_instrument_type: ("EMBEDDED_CRYPTO_WALLET")
+      attr_accessor status: ("INITIATED" | "ACTIVE" | "FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentOutput
+      attr_accessor crypto_x402: Types::CryptoX402PaymentOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CryptoX402 < PaymentOutput
+      end
+      class Unknown < PaymentOutput
+      end
+    end
+
+    class PaymentSession
+      attr_accessor payment_session_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor limits: Types::SessionLimits
+      attr_accessor user_id: ::String
+      attr_accessor expiry_time_in_minutes: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor available_limits: Types::AvailableLimits
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentSessionSummary
+      attr_accessor payment_session_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor user_id: ::String
+      attr_accessor expiry_time_in_minutes: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentTokenRequestInput
+      attr_accessor coinbase_cdp_token_request: Types::CoinbaseCdpTokenRequestInput
+      attr_accessor stripe_privy_token_request: Types::StripePrivyTokenRequestInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdpTokenRequest < PaymentTokenRequestInput
+      end
+      class StripePrivyTokenRequest < PaymentTokenRequestInput
+      end
+      class Unknown < PaymentTokenRequestInput
+      end
+    end
+
+    class PaymentTokenResponseOutput
+      attr_accessor coinbase_cdp_token_response: Types::CoinbaseCdpTokenResponseOutput
+      attr_accessor stripe_privy_token_response: Types::StripePrivyTokenResponseOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdpTokenResponse < PaymentTokenResponseOutput
+      end
+      class StripePrivyTokenResponse < PaymentTokenResponseOutput
+      end
+      class Unknown < PaymentTokenResponseOutput
+      end
+    end
+
     class PerVariantOnlineEvaluationConfig
       attr_accessor name: ::String
       attr_accessor online_evaluation_config_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ProcessPaymentRequest
+      attr_accessor user_id: ::String
+      attr_accessor agent_name: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_session_id: ::String
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor payment_type: ("CRYPTO_X402")
+      attr_accessor payment_input: Types::PaymentInput
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class ProcessPaymentResponse
+      attr_accessor process_payment_id: ::String
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_session_id: ::String
+      attr_accessor payment_instrument_id: ::String
+      attr_accessor payment_type: ("CRYPTO_X402")
+      attr_accessor status: ("PROOF_GENERATED")
+      attr_accessor payment_output: Types::PaymentOutput
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -2197,6 +2587,11 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SessionLimits
+      attr_accessor max_spend_amount: Types::Amount
+      SENSITIVE: []
+    end
+
     class SessionMetadataShape
       attr_accessor session_id: ::String
       attr_accessor test_scenario_id: ::String
@@ -2398,6 +2793,22 @@ module Aws::BedrockAgentCore
       end
     end
 
+    class StripePrivyTokenRequestInput
+      attr_accessor request_host: ::String
+      attr_accessor request_path: ::String
+      attr_accessor request_body: ::String
+      attr_accessor include_authorization_signature: bool
+      SENSITIVE: [:request_body]
+    end
+
+    class StripePrivyTokenResponseOutput
+      attr_accessor authorization_signature: ::String
+      attr_accessor request_expiry: ::Integer
+      attr_accessor app_id: ::String
+      attr_accessor basic_auth_token: ::String
+      SENSITIVE: [:authorization_signature, :basic_auth_token]
+    end
+
     class SystemPromptConfig
       attr_accessor text: ::String
       attr_accessor configuration_bundle: Types::SystemPromptConfigurationBundle
@@ -2447,6 +2858,15 @@ module Aws::BedrockAgentCore
     class ThrottlingException
       attr_accessor message: ::String
       attr_accessor event_type: untyped
+      SENSITIVE: []
+    end
+
+    class TokenBalance
+      attr_accessor amount: ::String
+      attr_accessor decimals: ::Integer
+      attr_accessor token: ("USDC")
+      attr_accessor network: ("ETHEREUM" | "SOLANA")
+      attr_accessor chain: ("BASE" | "BASE_SEPOLIA" | "ETHEREUM" | "SOLANA" | "SOLANA_DEVNET")
       SENSITIVE: []
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2026-05-04)
+------------------
+
+* Feature - Amazon VPC Lattice now supports privately resolvable DNS resources
+
 1.45.0 (2026-03-18)
 ------------------
 

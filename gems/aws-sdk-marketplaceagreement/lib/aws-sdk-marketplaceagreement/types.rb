@@ -10,6 +10,178 @@
 module Aws::MarketplaceAgreement
   module Types
 
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request to accept.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementCancellationRequestInput AWS API Documentation
+    #
+    class AcceptAgreementCancellationRequestInput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the accepted cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the cancellation request, which is `APPROVED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The original reason code provided when the cancellation request was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the cancellation reason, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the cancellation request was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the cancellation request was accepted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementCancellationRequestOutput AWS API Documentation
+    #
+    class AcceptAgreementCancellationRequestOutput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id,
+      :status,
+      :reason_code,
+      :description,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the payment request to accept.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_reference
+    #   An optional purchase order reference that buyers can provide to
+    #   associate the payment request with their internal purchase order
+    #   system.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementPaymentRequestInput AWS API Documentation
+    #
+    class AcceptAgreementPaymentRequestInput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :purchase_order_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the accepted payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the payment request, which is `APPROVED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the payment request, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount that was approved to be charged.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the payment request was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the payment request was accepted.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementPaymentRequestOutput AWS API Documentation
+    #
+    class AcceptAgreementPaymentRequestOutput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :name,
+      :description,
+      :charge_amount,
+      :currency_code,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_orders
+    #   A list of purchase orders associated with accepting a marketplace
+    #   agreement request.
+    #   @return [Array<Types::PurchaseOrder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementRequestInput AWS API Documentation
+    #
+    class AcceptAgreementRequestInput < Struct.new(
+      :agreement_request_id,
+      :purchase_orders)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement created or modified by
+    #   accepting the agreement request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AcceptAgreementRequestOutput AWS API Documentation
+    #
+    class AcceptAgreementRequestOutput < Struct.new(
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A subset of terms proposed by the proposer, which have been accepted
     # by the acceptor as part of agreement creation.
     #
@@ -144,13 +316,19 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the access denied exception.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AccessDeniedException AWS API Documentation
     #
     class AccessDeniedException < Struct.new(
       :request_id,
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -185,13 +363,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the cancellation request was created, as a
-    #   POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the cancellation request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the cancellation request was last updated, as
-    #   a POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the cancellation request was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementCancellationRequestSummary AWS API Documentation
@@ -205,6 +381,50 @@ module Aws::MarketplaceAgreement
       :catalog,
       :created_at,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an entitlement associated with an agreement, including the
+    # provisioning status, resource, and type.
+    #
+    # @!attribute [rw] resource
+    #   The resource that the entitlement is provisioned to, such as a
+    #   product.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] type
+    #   The type of entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_token
+    #   A short-lived token required by acceptors to register their account
+    #   with the product provider. The token is only valid for 30 minutes
+    #   after creation and is only applicable for purchase agreements.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of an entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason_code
+    #   Provides more information about the status of an entitlement.
+    #   @return [String]
+    #
+    # @!attribute [rw] license_arn
+    #   The Amazon Resource Name (ARN) of the AWS License Manager license
+    #   associated with the entitlement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/AgreementEntitlement AWS API Documentation
+    #
+    class AgreementEntitlement < Struct.new(
+      :resource,
+      :type,
+      :registration_token,
+      :status,
+      :status_reason_code,
+      :license_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -372,15 +592,13 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   The 3-letter ISO 4217 currency code for the adjustment amount (e.g.,
-    #   `USD`).
+    #   The 3-letter ISO 4217 currency code for the adjustment amount. Must
+    #   match the currency code of the offer associated with the agreement
+    #   (e.g., `USD`).
     #   @return [String]
     #
     # @!attribute [rw] adjustment_reason_code
-    #   The reason code for the billing adjustment. Valid values include
-    #   `INCORRECT_TERMS_ACCEPTED`, `INCORRECT_METERING`,
-    #   `TEST_ENVIRONMENT_CHARGES`, `ALTERNATIVE_PROCUREMENT_CHANNEL`,
-    #   `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    #   The reason code for the billing adjustment.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -467,13 +685,12 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the billing adjustment request was created,
-    #   as a POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the billing adjustment request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   The date and time when the billing adjustment request was last
-    #   updated, as a POSIX timestamp (Unix epoch seconds).
+    #   updated.
     #   @return [Time]
     #
     # @!attribute [rw] agreement_type
@@ -510,10 +727,15 @@ module Aws::MarketplaceAgreement
     #   Type of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ByolPricingTerm AWS API Documentation
     #
     class ByolPricingTerm < Struct.new(
-      :type)
+      :type,
+      :id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -573,12 +795,11 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] created_at
     #   The date and time when the cancellation request was originally
-    #   created, as a POSIX timestamp (Unix epoch seconds).
+    #   created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the cancellation request was cancelled, as a
-    #   POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the cancellation request was cancelled.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementCancellationRequestOutput AWS API Documentation
@@ -595,6 +816,22 @@ module Aws::MarketplaceAgreement
       SENSITIVE = [:description]
       include Aws::Structure
     end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementInput AWS API Documentation
+    #
+    class CancelAgreementInput < Struct.new(
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementOutput AWS API Documentation
+    #
+    class CancelAgreementOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] payment_request_id
     #   The unique identifier of the payment request to cancel.
@@ -644,13 +881,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the payment request was originally created,
-    #   in ISO 8601 format.
+    #   The date and time when the payment request was originally created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the payment request was cancelled, in ISO
-    #   8601 format.
+    #   The date and time when the payment request was cancelled.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CancelAgreementPaymentRequestOutput AWS API Documentation
@@ -669,11 +904,128 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Represents a charge associated with an agreement, including amount,
+    # timing, and purchase order details.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision number of the charge.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement that resulted in this charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   The type of agreement that resulted in this charge (for example,
+    #   `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_reference
+    #   The purchase order reference associated with the charge, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount
+    #   The amount of the charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The date and time when the charge will be incurred. This is
+    #   available only when the charge date is known.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/Charge AWS API Documentation
+    #
+    class Charge < Struct.new(
+      :id,
+      :revision,
+      :agreement_id,
+      :agreement_type,
+      :purchase_order_reference,
+      :currency_code,
+      :amount,
+      :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The `ChargeSummary` provides a detailed breakdown of charges that are
+    # associated with an agreement request. This is applicable only when a
+    # request is created for a `PurchaseAgreement`.
+    #
+    # <note markdown="1"> Tax and invoicing fields (such as `estimatedTaxes`, `amountAfterTax`,
+    # `newAgreementValueAfterTax`, and `invoicingEntity`) are returned on a
+    # best-effort basis and do not cause the request to fail if unavailable.
+    #
+    #  A `null` tax amount can have two meanings:
+    #
+    #  * Tax estimation was unavailable at the time of the request.
+    #
+    # * The charge timing is `BILLING_PERIOD`, so the charge amount is not
+    #   determined at request time. In this case, the tax breakdown may
+    #   still include the tax `rate` and `type`.
+    #
+    #  </note>
+    #
+    # @!attribute [rw] currency_code
+    #   The three-letter currency code for all charges (e.g., USD).
+    #   @return [String]
+    #
+    # @!attribute [rw] new_agreement_value
+    #   The total value of the agreement, which includes any amendments.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_agreement_value_after_tax
+    #   Expected new agreement value after estimated taxes are applied.
+    #   @return [String]
+    #
+    # @!attribute [rw] expected_charges
+    #   A list of expected charges for the agreement request.
+    #   @return [Array<Types::ExpectedCharge>]
+    #
+    # @!attribute [rw] estimated_taxes
+    #   Provides an aggregated view of estimated tax information for the
+    #   agreement.
+    #   @return [Types::EstimatedTaxes]
+    #
+    # @!attribute [rw] itemized_charges
+    #   An itemized list of charges for the agreement request.
+    #   @return [Array<Types::ItemizedCharge>]
+    #
+    # @!attribute [rw] invoicing_entity
+    #   The entity responsible for issuing the invoice.
+    #   @return [Types::InvoicingEntity]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ChargeSummary AWS API Documentation
+    #
+    class ChargeSummary < Struct.new(
+      :currency_code,
+      :new_agreement_value,
+      :new_agreement_value_after_tax,
+      :expected_charges,
+      :estimated_taxes,
+      :itemized_charges,
+      :invoicing_entity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines a prepaid payment model that allows buyers to configure the
     # entitlements they want to purchase and the duration.
     #
     # @!attribute [rw] type
     #   Category of selector.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the term.
     #   @return [String]
     #
     # @!attribute [rw] currency_code
@@ -693,6 +1045,7 @@ module Aws::MarketplaceAgreement
     #
     class ConfigurableUpfrontPricingTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :rate_cards,
       :configuration)
@@ -750,22 +1103,22 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
-    # The request could not be completed due to a conflict with the current
-    # state of the resource.
+    # Request was denied due to a resource conflict.
     #
     # @!attribute [rw] request_id
     #   The unique identifier for the error.
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
-    #   The unique identifier for the resource.
+    #   The unique identifier of the resource involved in the conflict.
     #   @return [String]
     #
     # @!attribute [rw] resource_type
-    #   The type of resource.
+    #   The type of the resource involved in the conflict.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ConflictException AWS API Documentation
@@ -798,6 +1151,85 @@ module Aws::MarketplaceAgreement
     class Constraints < Struct.new(
       :multiple_dimension_selection,
       :quantity_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] intent
+    #   The purpose and desired outcome of the agreement request. This is a
+    #   required parameter that determines how the agreement request is
+    #   processed.
+    #
+    #   * `NEW` – Creates a new agreement for terms in the request.
+    #
+    #   * `AMEND` – Modifies an existing agreement with terms that are
+    #     accepted in the request.
+    #
+    #   * `REPLACE` – Creates a new agreement with accepted terms and
+    #     replaces the existing agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_terms
+    #   A list of terms that define what is being accepted as part of the
+    #   agreement. Some terms require configuration.
+    #   @return [Array<Types::RequestedTerm>]
+    #
+    # @!attribute [rw] source_agreement_identifier
+    #   The agreement's identifier that the request acts upon.
+    #
+    #   This parameter is required for all non-`NEW` intents (i.e., `AMEND`
+    #   or `REPLACE`). Don't provide this parameter if the intent is `NEW`.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_proposal_identifier
+    #   The agreement proposal signed by the proposer. The proposal includes
+    #   the requested resources and the terms that outline an agreement
+    #   outcome.
+    #
+    #   This parameter is required if the intent is not `AMEND`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tax_configuration
+    #   Configuration for tax estimation in the agreement request response.
+    #   @return [Types::TaxConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CreateAgreementRequestInput AWS API Documentation
+    #
+    class CreateAgreementRequestInput < Struct.new(
+      :client_token,
+      :intent,
+      :requested_terms,
+      :source_agreement_identifier,
+      :agreement_proposal_identifier,
+      :tax_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_request_id
+    #   The unique identifier of the agreement request created. Use this
+    #   identifier with `AcceptAgreementRequest` to accept the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_summary
+    #   Provides details of the charges associated with the agreement
+    #   request. This is only applicable when a request is created for
+    #   `PurchaseAgreement`.
+    #   @return [Types::ChargeSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/CreateAgreementRequestOutput AWS API Documentation
+    #
+    class CreateAgreementRequestOutput < Struct.new(
+      :agreement_request_id,
+      :charge_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1018,6 +1450,71 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Provides an aggregated view of estimated tax information.
+    #
+    # @!attribute [rw] breakdown
+    #   A list of tax breakdown information.
+    #   @return [Array<Types::TaxBreakdownItem>]
+    #
+    # @!attribute [rw] total_amount
+    #   The total amount of tax aggregated from the tax breakdown.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/EstimatedTaxes AWS API Documentation
+    #
+    class EstimatedTaxes < Struct.new(
+      :breakdown,
+      :total_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Estimated charge for the request.
+    #
+    # @!attribute [rw] id
+    #   Unique identifier of the charge for a given agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] time
+    #   The date and time when the charge is due to be invoiced. This is
+    #   available only when the charge date is known.
+    #   @return [Time]
+    #
+    # @!attribute [rw] amount
+    #   The tax-exclusive amount of the charge. Only available when the
+    #   charge amount is known.
+    #   @return [String]
+    #
+    # @!attribute [rw] amount_after_tax
+    #   The tax-inclusive amount the acceptor has to pay. The amount is only
+    #   present for fixed charges.
+    #   @return [String]
+    #
+    # @!attribute [rw] timing
+    #   Indicates when the charge amount will be incurred. Values include
+    #   `ON_ACCEPTANCE` (charged immediately when the agreement request is
+    #   accepted), `BILLING_PERIOD` (charged on each billing period), and
+    #   `SCHEDULED` (charged at a predetermined future date).
+    #   @return [String]
+    #
+    # @!attribute [rw] estimated_taxes
+    #   Provides an aggregated view of estimated tax information for this
+    #   specific charge.
+    #   @return [Types::EstimatedTaxes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ExpectedCharge AWS API Documentation
+    #
+    class ExpectedCharge < Struct.new(
+      :id,
+      :time,
+      :amount,
+      :amount_after_tax,
+      :timing,
+      :estimated_taxes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The filter name and value pair that is used to return a more specific
     # list of results. Filters can be used to match a set of resources by
     # various criteria, such as `offerId` or `productId`.
@@ -1046,6 +1543,10 @@ module Aws::MarketplaceAgreement
     #   Category of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] currency_code
     #   Defines the currency for the prices mentioned in this term.
     #   @return [String]
@@ -1068,6 +1569,7 @@ module Aws::MarketplaceAgreement
     #
     class FixedUpfrontPricingTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :duration,
       :price,
@@ -1083,6 +1585,10 @@ module Aws::MarketplaceAgreement
     #   Category of the term.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the terms.
+    #   @return [String]
+    #
     # @!attribute [rw] duration
     #   Duration of the free trial period (5–31 days).
     #   @return [String]
@@ -1096,6 +1602,7 @@ module Aws::MarketplaceAgreement
     #
     class FreeTrialPricingTerm < Struct.new(
       :type,
+      :id,
       :duration,
       :grants)
       SENSITIVE = []
@@ -1139,9 +1646,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The current status of the cancellation request. Possible values
-    #   include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`, `CANCELLED`, and
-    #   `VALIDATION_FAILED`.
+    #   The current status of the cancellation request.
     #   @return [String]
     #
     # @!attribute [rw] status_message
@@ -1150,13 +1655,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the cancellation request was created, as a
-    #   POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the cancellation request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the cancellation request was last updated, as
-    #   a POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the cancellation request was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementCancellationRequestOutput AWS API Documentation
@@ -1171,6 +1674,48 @@ module Aws::MarketplaceAgreement
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of agreement entitlements to return in the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementEntitlementsInput AWS API Documentation
+    #
+    class GetAgreementEntitlementsInput < Struct.new(
+      :agreement_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_entitlements
+    #   A list of agreement entitlements which are part of the latest
+    #   agreement.
+    #   @return [Array<Types::AgreementEntitlement>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementEntitlementsOutput AWS API Documentation
+    #
+    class GetAgreementEntitlementsOutput < Struct.new(
+      :agreement_entitlements,
+      :next_token)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -1247,13 +1792,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the payment request was created, in ISO 8601
-    #   format.
+    #   The date and time when the payment request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the payment request was last updated, in ISO
-    #   8601 format.
+    #   The date and time when the payment request was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementPaymentRequestOutput AWS API Documentation
@@ -1283,7 +1826,7 @@ module Aws::MarketplaceAgreement
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start pagination
+    #   A token to specify where to start pagination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementTermsInput AWS API Documentation
@@ -1302,7 +1845,8 @@ module Aws::MarketplaceAgreement
     #   @return [Array<Types::AcceptedTerm>]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start pagination
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetAgreementTermsOutput AWS API Documentation
@@ -1374,13 +1918,12 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the billing adjustment request was created,
-    #   as a POSIX timestamp (Unix epoch seconds).
+    #   The date and time when the billing adjustment request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
     #   The date and time when the billing adjustment request was last
-    #   updated, as a POSIX timestamp (Unix epoch seconds).
+    #   updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/GetBillingAdjustmentRequestOutput AWS API Documentation
@@ -1433,6 +1976,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/InternalServerException AWS API Documentation
@@ -1463,14 +2007,14 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
-    # The entity that issues the AWS invoice.
+    # The entity responsible for issuing the invoice.
     #
     # @!attribute [rw] legal_name
-    #   The legal name of the invoicing entity.
+    #   Legal name of the entity issuing the invoice.
     #   @return [String]
     #
     # @!attribute [rw] branch_name
-    #   The branch name of the invoicing entity.
+    #   The branch where the issuing entity is operating from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/InvoicingEntity AWS API Documentation
@@ -1482,11 +2026,52 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # A breakdown of individual charges or line items within a billing or
+    # pricing context.
+    #
+    # @!attribute [rw] dimension_key
+    #   The dimension key as specified in the accepted term.
+    #   @return [String]
+    #
+    # @!attribute [rw] new_quantity
+    #   The requested quantity for this dimension.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] old_quantity
+    #   The existing quantity for this dimension from the source agreement.
+    #   This value is `0` for NEW intent.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] charge_reference
+    #   The identifier of the expected charge that this itemized charge
+    #   contributes to.
+    #   @return [String]
+    #
+    # @!attribute [rw] incremental_charge_amount
+    #   The total incremental charge amount for this dimension.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ItemizedCharge AWS API Documentation
+    #
+    class ItemizedCharge < Struct.new(
+      :dimension_key,
+      :new_quantity,
+      :old_quantity,
+      :charge_reference,
+      :incremental_charge_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the list of text agreements proposed to the acceptors. An
     # example is the end user license agreement (EULA).
     #
     # @!attribute [rw] type
     #   Category of the term being updated.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifer for the term.
     #   @return [String]
     #
     # @!attribute [rw] documents
@@ -1498,6 +2083,7 @@ module Aws::MarketplaceAgreement
     #
     class LegalTerm < Struct.new(
       :type,
+      :id,
       :documents)
       SENSITIVE = []
       include Aws::Structure
@@ -1517,8 +2103,6 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] status
     #   An optional parameter to filter cancellation requests by status.
-    #   Valid values include `PENDING_APPROVAL`, `APPROVED`, `REJECTED`,
-    #   `CANCELLED`, and `VALIDATION_FAILED`.
     #   @return [String]
     #
     # @!attribute [rw] agreement_type
@@ -1537,8 +2121,7 @@ module Aws::MarketplaceAgreement
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start pagination. Use the `nextToken`
-    #   value from a previous response to retrieve the next page of results.
+    #   A token to specify where to start pagination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementCancellationRequestsInput AWS API Documentation
@@ -1556,8 +2139,8 @@ module Aws::MarketplaceAgreement
     end
 
     # @!attribute [rw] next_token
-    #   A token to retrieve the next page of results. If `null`, there are
-    #   no more results to retrieve.
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -1570,6 +2153,57 @@ module Aws::MarketplaceAgreement
     class ListAgreementCancellationRequestsOutput < Struct.new(
       :next_token,
       :items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] catalog
+    #   The catalog in which the charges were created.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_type
+    #   Filter to retrieve charges of a specific agreement type (for
+    #   example, `PurchaseAgreement`).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of charges to return in the response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to specify where to start pagination.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementChargesInput AWS API Documentation
+    #
+    class ListAgreementChargesInput < Struct.new(
+      :catalog,
+      :agreement_id,
+      :agreement_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   A list of agreement charges.
+    #   @return [Array<Types::Charge>]
+    #
+    # @!attribute [rw] next_token
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementChargesOutput AWS API Documentation
+    #
+    class ListAgreementChargesOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1637,8 +2271,8 @@ module Aws::MarketplaceAgreement
     #   @return [Array<Types::AgreementInvoiceLineItemGroupSummary>]
     #
     # @!attribute [rw] next_token
-    #   A token to retrieve the next page of results. If not present, there
-    #   are no more results available.
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementInvoiceLineItemsOutput AWS API Documentation
@@ -1683,8 +2317,7 @@ module Aws::MarketplaceAgreement
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start pagination. Use the `nextToken`
-    #   value from a previous response to retrieve the next page of results.
+    #   A token to specify where to start pagination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListAgreementPaymentRequestsInput AWS API Documentation
@@ -1702,8 +2335,8 @@ module Aws::MarketplaceAgreement
     end
 
     # @!attribute [rw] next_token
-    #   A token to retrieve the next page of results. If `null`, there are
-    #   no more results to retrieve.
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -1732,12 +2365,12 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] created_after
     #   An optional filter to return billing adjustment requests created
-    #   after the specified POSIX timestamp (Unix epoch seconds).
+    #   after the specified timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] created_before
     #   An optional filter to return billing adjustment requests created
-    #   before the specified POSIX timestamp (Unix epoch seconds).
+    #   before the specified timestamp.
     #   @return [Time]
     #
     # @!attribute [rw] max_results
@@ -1756,8 +2389,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] next_token
-    #   A token to specify where to start pagination. Use the `nextToken`
-    #   value from a previous response to retrieve the next page of results.
+    #   A token to specify where to start pagination.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ListBillingAdjustmentRequestsInput AWS API Documentation
@@ -1776,8 +2408,8 @@ module Aws::MarketplaceAgreement
     end
 
     # @!attribute [rw] next_token
-    #   A token to retrieve the next page of results. If `null`, there are
-    #   no more results to retrieve.
+    #   The token used for pagination. The field is `null` if there are no
+    #   more results.
     #   @return [String]
     #
     # @!attribute [rw] items
@@ -1830,13 +2462,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The date and time when the payment request was created, in ISO 8601
-    #   format.
+    #   The date and time when the payment request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The date and time when the payment request was last updated, in ISO
-    #   8601 format.
+    #   The date and time when the payment request was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PaymentRequestSummary AWS API Documentation
@@ -1863,6 +2493,10 @@ module Aws::MarketplaceAgreement
     #   Type of the term.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] currency_code
     #   Defines the currency for the prices mentioned in the term.
     #   @return [String]
@@ -1877,6 +2511,7 @@ module Aws::MarketplaceAgreement
     #
     class PaymentScheduleTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :schedule)
       SENSITIVE = []
@@ -1949,6 +2584,37 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Contains information about a purchase order association to a charge
+    # within an agreement.
+    #
+    # @!attribute [rw] charge_id
+    #   The unique identifier of the charge to associate the purchase order
+    #   with.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_revision
+    #   The revision of the charge.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this charge.
+    #   @return [String]
+    #
+    # @!attribute [rw] purchase_order_reference
+    #   The purchase order reference to associate with the charge.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/PurchaseOrder AWS API Documentation
+    #
+    class PurchaseOrder < Struct.new(
+      :charge_id,
+      :charge_revision,
+      :agreement_id,
+      :purchase_order_reference)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the per unit rates for each individual product dimension.
     #
     # @!attribute [rw] dimension_key
@@ -1978,6 +2644,10 @@ module Aws::MarketplaceAgreement
     #   Type of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] currency_code
     #   Defines the currency for the prices mentioned in this term.
     #   @return [String]
@@ -1994,10 +2664,167 @@ module Aws::MarketplaceAgreement
     #
     class RecurringPaymentTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :billing_period,
       :price)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the cancellation request to reject.
+    #   @return [String]
+    #
+    # @!attribute [rw] rejection_reason
+    #   The reason for rejecting the cancellation request (1-2000
+    #   characters). This message is visible to the seller.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementCancellationRequestInput AWS API Documentation
+    #
+    class RejectAgreementCancellationRequestInput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id,
+      :rejection_reason)
+      SENSITIVE = [:rejection_reason]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this
+    #   cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_cancellation_request_id
+    #   The unique identifier of the rejected cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the cancellation request, which is `REJECTED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The rejection reason provided by the buyer.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason_code
+    #   The original reason code provided when the cancellation request was
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the cancellation reason, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the cancellation request was originally
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the cancellation request was rejected.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementCancellationRequestOutput AWS API Documentation
+    #
+    class RejectAgreementCancellationRequestOutput < Struct.new(
+      :agreement_id,
+      :agreement_cancellation_request_id,
+      :status,
+      :status_message,
+      :reason_code,
+      :description,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the payment request to reject.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with the payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] rejection_reason
+    #   An optional reason for rejecting the payment request (1-250
+    #   characters). This message is visible to the seller.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementPaymentRequestInput AWS API Documentation
+    #
+    class RejectAgreementPaymentRequestInput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :rejection_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_request_id
+    #   The unique identifier of the rejected payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the agreement associated with this payment
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the payment request, which is `REJECTED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_message
+    #   The rejection reason provided by the buyer, if any.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The descriptive name of the payment request.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The detailed description of the payment request, if provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] charge_amount
+    #   The amount that was requested to be charged.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency_code
+    #   The currency code for the charge amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the payment request was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the payment request was rejected.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RejectAgreementPaymentRequestOutput AWS API Documentation
+    #
+    class RejectAgreementPaymentRequestOutput < Struct.new(
+      :payment_request_id,
+      :agreement_id,
+      :status,
+      :status_message,
+      :name,
+      :description,
+      :charge_amount,
+      :currency_code,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 
@@ -2015,6 +2842,10 @@ module Aws::MarketplaceAgreement
     #   Category of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] configuration
     #   Additional parameters specified by the acceptor while accepting the
     #   term.
@@ -2024,6 +2855,7 @@ module Aws::MarketplaceAgreement
     #
     class RenewalTerm < Struct.new(
       :type,
+      :id,
       :configuration)
       SENSITIVE = []
       include Aws::Structure
@@ -2045,6 +2877,65 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # Defines what is being accepted as part of the agreement creation or
+    # update request, and it includes their configurations.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the term in the agreement proposal.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Additional configuration for the requested terms. This configuration
+    #   is applicable only to the terms that accept a customer-provided
+    #   configuration, such as `ConfigurableUpfrontPricingTerm`.
+    #   @return [Types::RequestedTermConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RequestedTerm AWS API Documentation
+    #
+    class RequestedTerm < Struct.new(
+      :id,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A tagged union that represents the term configuration provided by the
+    # acceptor. Only one configuration is accepted per term.
+    #
+    # @note RequestedTermConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] configurable_upfront_pricing_term_configuration
+    #   Defines a prepaid payment model that allows buyers to configure the
+    #   entitlements they want to purchase and the duration.
+    #   @return [Types::ConfigurableUpfrontPricingTermConfiguration]
+    #
+    # @!attribute [rw] renewal_term_configuration
+    #   Additional parameters specified by the acceptor while accepting the
+    #   term.
+    #   @return [Types::RenewalTermConfiguration]
+    #
+    # @!attribute [rw] variable_payment_term_configuration
+    #   Additional parameters specified by the acceptor while accepting the
+    #   variable payment term.
+    #   @return [Types::VariablePaymentTermConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/RequestedTermConfiguration AWS API Documentation
+    #
+    class RequestedTermConfiguration < Struct.new(
+      :configurable_upfront_pricing_term_configuration,
+      :renewal_term_configuration,
+      :variable_payment_term_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class ConfigurableUpfrontPricingTermConfiguration < RequestedTermConfiguration; end
+      class RenewalTermConfiguration < RequestedTermConfiguration; end
+      class VariablePaymentTermConfiguration < RequestedTermConfiguration; end
+      class Unknown < RequestedTermConfiguration; end
+    end
+
     # The list of resources involved in the agreement.
     #
     # @!attribute [rw] id
@@ -2057,8 +2948,8 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   Type of the resource, which is the product. Values include
-    #   `SaaSProduct` or `AmiProduct`.
+    #   Type of the resource, which is the product (for example,
+    #   `SaaSProduct`, `AmiProduct`, `ContainerProduct`).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/Resource AWS API Documentation
@@ -2077,6 +2968,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @!attribute [rw] resource_id
@@ -2136,8 +3028,8 @@ module Aws::MarketplaceAgreement
     #     (`AmiProduct`, `ContainerProduct`, `SaaSProduct`,
     #     `ProfessionalServicesProduct`, or `MachineLearningProduct`).
     #
-    #   * `PartyType` – The party type of the caller. For agreements where
-    #     the caller is the proposer, use the `Proposer` filter.
+    #   * `PartyType` – The party type of the caller. Use `Proposer` or
+    #     `Acceptor`.
     #
     #   * `AcceptorAccountId` – The AWS account ID of the party accepting
     #     the agreement terms.
@@ -2234,10 +3126,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] reason_code
-    #   The reason code for the cancellation request. Valid values include
-    #   `INCORRECT_TERMS_ACCEPTED`, `REPLACING_AGREEMENT`, `TEST_AGREEMENT`,
-    #   `ALTERNATIVE_PROCUREMENT_CHANNEL`, `PRODUCT_DISCONTINUED`,
-    #   `UNINTENDED_RENEWAL`, `BUYER_DISSATISFACTION`, and `OTHER`.
+    #   The reason code for the cancellation request.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -2286,13 +3175,11 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time when the cancellation request was created, as a POSIX
-    #   timestamp (Unix epoch seconds).
+    #   The time when the cancellation request was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The time when the cancellation request was last updated, as a POSIX
-    #   timestamp (Unix epoch seconds).
+    #   The time when the cancellation request was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementCancellationRequestOutput AWS API Documentation
@@ -2391,7 +3278,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] created_at
-    #   The time when the payment request was created, in ISO 8601 format.
+    #   The time when the payment request was created.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/SendAgreementPaymentRequestOutput AWS API Documentation
@@ -2406,6 +3293,46 @@ module Aws::MarketplaceAgreement
       :currency_code,
       :created_at)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Request exceeded the maximum allowed limit (quota) for a specific
+    # resource or API operation.
+    #
+    # @!attribute [rw] request_id
+    #   The unique identifier for the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Description of the error.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The code of the quota that was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The code of the service whose quota was exceeded.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that exceeded the quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier of the resource that exceeded the quota.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ServiceQuotaExceededException AWS API Documentation
+    #
+    class ServiceQuotaExceededException < Struct.new(
+      :request_id,
+      :message,
+      :quota_code,
+      :service_code,
+      :resource_type,
+      :resource_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -2437,6 +3364,10 @@ module Aws::MarketplaceAgreement
     #   Category of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] refund_policy
     #   Free-text field about the refund policy description that will be
     #   shown to customers as is on the website and console.
@@ -2446,7 +3377,47 @@ module Aws::MarketplaceAgreement
     #
     class SupportTerm < Struct.new(
       :type,
+      :id,
       :refund_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a single tax breakdown entry with amount, rate, and type.
+    #
+    # @!attribute [rw] amount
+    #   The estimated tax amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] rate
+    #   The tax rate, in decimals.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of tax (for example, VAT, ST, or GST).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/TaxBreakdownItem AWS API Documentation
+    #
+    class TaxBreakdownItem < Struct.new(
+      :amount,
+      :rate,
+      :type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration controls for tax estimation in the agreement request.
+    #
+    # @!attribute [rw] tax_estimation
+    #   Toggle to estimate tax as part of the response. Values include
+    #   `ENABLED` and `DISABLED`. Default is `DISABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/TaxConfiguration AWS API Documentation
+    #
+    class TaxConfiguration < Struct.new(
+      :tax_estimation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2458,6 +3429,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/ThrottlingException AWS API Documentation
@@ -2469,11 +3441,31 @@ module Aws::MarketplaceAgreement
       include Aws::Structure
     end
 
+    # @!attribute [rw] purchase_orders
+    #   Contains information about purchase order associations.
+    #   @return [Array<Types::PurchaseOrder>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/UpdatePurchaseOrdersInput AWS API Documentation
+    #
+    class UpdatePurchaseOrdersInput < Struct.new(
+      :purchase_orders)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-agreement-2020-03-01/UpdatePurchaseOrdersOutput AWS API Documentation
+    #
+    class UpdatePurchaseOrdersOutput < Aws::EmptyStructure; end
+
     # Defines a usage-based pricing model (typically, pay-as-you-go
     # pricing), where the customers are charged based on product usage.
     #
     # @!attribute [rw] type
     #   Category of the term.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
     #   @return [String]
     #
     # @!attribute [rw] currency_code
@@ -2488,6 +3480,7 @@ module Aws::MarketplaceAgreement
     #
     class UsageBasedPricingTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :rate_cards)
       SENSITIVE = []
@@ -2517,6 +3510,7 @@ module Aws::MarketplaceAgreement
     #   @return [String]
     #
     # @!attribute [rw] message
+    #   Description of the error.
     #   @return [String]
     #
     # @!attribute [rw] reason
@@ -2564,6 +3558,10 @@ module Aws::MarketplaceAgreement
     #   Category of the term being updated.
     #   @return [String]
     #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
+    #   @return [String]
+    #
     # @!attribute [rw] agreement_duration
     #   Defines the duration that the agreement remains active. If
     #   `AgreementStartDate` isn’t provided, the agreement duration is
@@ -2589,6 +3587,7 @@ module Aws::MarketplaceAgreement
     #
     class ValidityTerm < Struct.new(
       :type,
+      :id,
       :agreement_duration,
       :agreement_start_date,
       :agreement_end_date)
@@ -2602,6 +3601,10 @@ module Aws::MarketplaceAgreement
     #
     # @!attribute [rw] type
     #   Type of the term.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for the term.
     #   @return [String]
     #
     # @!attribute [rw] currency_code
@@ -2622,6 +3625,7 @@ module Aws::MarketplaceAgreement
     #
     class VariablePaymentTerm < Struct.new(
       :type,
+      :id,
       :currency_code,
       :max_total_charge_amount,
       :configuration)

@@ -1074,6 +1074,7 @@ module Aws::LexModelBuildingService
         o.name = "CreateBotVersion"
         o.http_method = "POST"
         o.http_request_uri = "/bots/{name}/versions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateBotVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateBotVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1088,6 +1089,7 @@ module Aws::LexModelBuildingService
         o.name = "CreateIntentVersion"
         o.http_method = "POST"
         o.http_request_uri = "/intents/{name}/versions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateIntentVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateIntentVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1102,6 +1104,7 @@ module Aws::LexModelBuildingService
         o.name = "CreateSlotTypeVersion"
         o.http_method = "POST"
         o.http_request_uri = "/slottypes/{name}/versions"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateSlotTypeVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateSlotTypeVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1116,6 +1119,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteBot"
         o.http_method = "DELETE"
         o.http_request_uri = "/bots/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteBotRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1130,6 +1134,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteBotAlias"
         o.http_method = "DELETE"
         o.http_request_uri = "/bots/{botName}/aliases/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteBotAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1144,6 +1149,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteBotChannelAssociation"
         o.http_method = "DELETE"
         o.http_request_uri = "/bots/{botName}/aliases/{aliasName}/channels/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteBotChannelAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1157,6 +1163,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteBotVersion"
         o.http_method = "DELETE"
         o.http_request_uri = "/bots/{name}/versions/{version}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteBotVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1171,6 +1178,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteIntent"
         o.http_method = "DELETE"
         o.http_request_uri = "/intents/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteIntentRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1185,6 +1193,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteIntentVersion"
         o.http_method = "DELETE"
         o.http_request_uri = "/intents/{name}/versions/{version}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteIntentVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1199,6 +1208,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteSlotType"
         o.http_method = "DELETE"
         o.http_request_uri = "/slottypes/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSlotTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1213,6 +1223,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteSlotTypeVersion"
         o.http_method = "DELETE"
         o.http_request_uri = "/slottypes/{name}/version/{version}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteSlotTypeVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1227,6 +1238,7 @@ module Aws::LexModelBuildingService
         o.name = "DeleteUtterances"
         o.http_method = "DELETE"
         o.http_request_uri = "/bots/{botName}/utterances/{userId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteUtterancesRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1239,6 +1251,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBot"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{name}/versions/{versionoralias}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1251,6 +1264,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBotAlias"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{botName}/aliases/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotAliasResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1263,6 +1277,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBotAliases"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{botName}/aliases/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotAliasesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotAliasesResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1280,6 +1295,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBotChannelAssociation"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{botName}/aliases/{aliasName}/channels/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotChannelAssociationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotChannelAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1292,6 +1308,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBotChannelAssociations"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{botName}/aliases/{aliasName}/channels/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotChannelAssociationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotChannelAssociationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1309,6 +1326,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBotVersions"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{name}/versions/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1327,6 +1345,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBots"
         o.http_method = "GET"
         o.http_request_uri = "/bots/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBotsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBotsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1345,6 +1364,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBuiltinIntent"
         o.http_method = "GET"
         o.http_request_uri = "/builtins/intents/{signature}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBuiltinIntentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBuiltinIntentResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1357,6 +1377,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBuiltinIntents"
         o.http_method = "GET"
         o.http_request_uri = "/builtins/intents/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBuiltinIntentsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBuiltinIntentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1374,6 +1395,7 @@ module Aws::LexModelBuildingService
         o.name = "GetBuiltinSlotTypes"
         o.http_method = "GET"
         o.http_request_uri = "/builtins/slottypes/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetBuiltinSlotTypesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBuiltinSlotTypesResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1391,6 +1413,7 @@ module Aws::LexModelBuildingService
         o.name = "GetExport"
         o.http_method = "GET"
         o.http_request_uri = "/exports/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetExportRequest)
         o.output = Shapes::ShapeRef.new(shape: GetExportResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1403,6 +1426,7 @@ module Aws::LexModelBuildingService
         o.name = "GetImport"
         o.http_method = "GET"
         o.http_request_uri = "/imports/{importId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetImportRequest)
         o.output = Shapes::ShapeRef.new(shape: GetImportResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1415,6 +1439,7 @@ module Aws::LexModelBuildingService
         o.name = "GetIntent"
         o.http_method = "GET"
         o.http_request_uri = "/intents/{name}/versions/{version}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetIntentRequest)
         o.output = Shapes::ShapeRef.new(shape: GetIntentResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1427,6 +1452,7 @@ module Aws::LexModelBuildingService
         o.name = "GetIntentVersions"
         o.http_method = "GET"
         o.http_request_uri = "/intents/{name}/versions/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetIntentVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetIntentVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1445,6 +1471,7 @@ module Aws::LexModelBuildingService
         o.name = "GetIntents"
         o.http_method = "GET"
         o.http_request_uri = "/intents/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetIntentsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetIntentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1463,6 +1490,7 @@ module Aws::LexModelBuildingService
         o.name = "GetMigration"
         o.http_method = "GET"
         o.http_request_uri = "/migrations/{migrationId}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMigrationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMigrationResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1475,6 +1503,7 @@ module Aws::LexModelBuildingService
         o.name = "GetMigrations"
         o.http_method = "GET"
         o.http_request_uri = "/migrations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetMigrationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetMigrationsResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1492,6 +1521,7 @@ module Aws::LexModelBuildingService
         o.name = "GetSlotType"
         o.http_method = "GET"
         o.http_request_uri = "/slottypes/{name}/versions/{version}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSlotTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSlotTypeResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1504,6 +1534,7 @@ module Aws::LexModelBuildingService
         o.name = "GetSlotTypeVersions"
         o.http_method = "GET"
         o.http_request_uri = "/slottypes/{name}/versions/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSlotTypeVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSlotTypeVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1522,6 +1553,7 @@ module Aws::LexModelBuildingService
         o.name = "GetSlotTypes"
         o.http_method = "GET"
         o.http_request_uri = "/slottypes/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetSlotTypesRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSlotTypesResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1540,6 +1572,7 @@ module Aws::LexModelBuildingService
         o.name = "GetUtterancesView"
         o.http_method = "GET"
         o.http_request_uri = "/bots/{botname}/utterances?view=aggregation"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: GetUtterancesViewRequest)
         o.output = Shapes::ShapeRef.new(shape: GetUtterancesViewResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1551,6 +1584,7 @@ module Aws::LexModelBuildingService
         o.name = "ListTagsForResource"
         o.http_method = "GET"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1563,6 +1597,7 @@ module Aws::LexModelBuildingService
         o.name = "PutBot"
         o.http_method = "PUT"
         o.http_request_uri = "/bots/{name}/versions/$LATEST"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBotRequest)
         o.output = Shapes::ShapeRef.new(shape: PutBotResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1576,6 +1611,7 @@ module Aws::LexModelBuildingService
         o.name = "PutBotAlias"
         o.http_method = "PUT"
         o.http_request_uri = "/bots/{botName}/aliases/{name}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutBotAliasRequest)
         o.output = Shapes::ShapeRef.new(shape: PutBotAliasResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1589,6 +1625,7 @@ module Aws::LexModelBuildingService
         o.name = "PutIntent"
         o.http_method = "PUT"
         o.http_request_uri = "/intents/{name}/versions/$LATEST"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutIntentRequest)
         o.output = Shapes::ShapeRef.new(shape: PutIntentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1602,6 +1639,7 @@ module Aws::LexModelBuildingService
         o.name = "PutSlotType"
         o.http_method = "PUT"
         o.http_request_uri = "/slottypes/{name}/versions/$LATEST"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutSlotTypeRequest)
         o.output = Shapes::ShapeRef.new(shape: PutSlotTypeResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1615,6 +1653,7 @@ module Aws::LexModelBuildingService
         o.name = "StartImport"
         o.http_method = "POST"
         o.http_request_uri = "/imports/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartImportRequest)
         o.output = Shapes::ShapeRef.new(shape: StartImportResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1626,6 +1665,7 @@ module Aws::LexModelBuildingService
         o.name = "StartMigration"
         o.http_method = "POST"
         o.http_request_uri = "/migrations"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartMigrationRequest)
         o.output = Shapes::ShapeRef.new(shape: StartMigrationResponse)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
@@ -1639,6 +1679,7 @@ module Aws::LexModelBuildingService
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
@@ -1652,6 +1693,7 @@ module Aws::LexModelBuildingService
         o.name = "UntagResource"
         o.http_method = "DELETE"
         o.http_request_uri = "/tags/{resourceArn}"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)

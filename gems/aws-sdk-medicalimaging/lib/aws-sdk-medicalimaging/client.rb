@@ -723,6 +723,10 @@ module Aws::MedicalImaging
     #   resp.job_properties.input_s3_uri #=> String
     #   resp.job_properties.output_s3_uri #=> String
     #   resp.job_properties.message #=> String
+    #   resp.job_properties.import_configuration.dicom_json_metadata_import_configuration.dicom_metadata_mappings #=> Array
+    #   resp.job_properties.import_configuration.dicom_json_metadata_import_configuration.dicom_metadata_mappings[0].study_instance_uid #=> String
+    #   resp.job_properties.import_configuration.dicom_json_metadata_import_configuration.dicom_metadata_mappings[0].series_instance_uid #=> String
+    #   resp.job_properties.import_configuration.dicom_json_metadata_import_configuration.dicom_metadata_mappings[0].metadata_file_path #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medical-imaging-2023-07-19/GetDICOMImportJob AWS API Documentation
     #
@@ -1206,9 +1210,11 @@ module Aws::MedicalImaging
     end
 
     # Start importing bulk data into an `ACTIVE` data store. The import job
-    # imports DICOM P10 files found in the S3 prefix specified by the
-    # `inputS3Uri` parameter. The import job stores processing results in
-    # the file specified by the `outputS3Uri` parameter.
+    # imports DICOM P10 files or enhances existing DICOM files with JSON
+    # metadata. The `importConfiguration` parameter specifies the import
+    # type. The data is found in the S3 prefix specified by the `inputS3Uri`
+    # parameter. The import job stores processing results in the file
+    # specified by the `outputS3Uri` parameter.
     #
     # @option params [String] :job_name
     #   The import job name.
@@ -1237,6 +1243,9 @@ module Aws::MedicalImaging
     # @option params [String] :input_owner_account_id
     #   The account ID of the source S3 bucket owner.
     #
+    # @option params [Types::ImportConfiguration] :import_configuration
+    #   The import configuration for the import job.
+    #
     # @return [Types::StartDICOMImportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDICOMImportJobResponse#datastore_id #datastore_id} => String
@@ -1254,6 +1263,17 @@ module Aws::MedicalImaging
     #     input_s3_uri: "S3Uri", # required
     #     output_s3_uri: "S3Uri", # required
     #     input_owner_account_id: "AwsAccountId",
+    #     import_configuration: {
+    #       dicom_json_metadata_import_configuration: {
+    #         dicom_metadata_mappings: [ # required
+    #           {
+    #             study_instance_uid: "DICOMStudyInstanceUID", # required
+    #             series_instance_uid: "DICOMSeriesInstanceUID",
+    #             metadata_file_path: "MetadataFilePath", # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -1423,7 +1443,7 @@ module Aws::MedicalImaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medicalimaging'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

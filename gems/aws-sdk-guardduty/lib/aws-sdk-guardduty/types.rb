@@ -167,10 +167,12 @@ module Aws::GuardDuty
       include Aws::Structure
     end
 
-    # Contains information about the account.
+    # Contains information about the Amazon Web Services account within
+    # which the activity took place.
     #
     # @!attribute [rw] uid
-    #   ID of the member's Amazon Web Services account
+    #   The Amazon Web Services account ID within which the activity took
+    #   place. This may differ from the account that owns the user identity.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -14444,7 +14446,9 @@ module Aws::GuardDuty
     #   @return [String]
     #
     # @!attribute [rw] account
-    #   Contains information about the Amazon Web Services account.
+    #   Contains information about the Amazon Web Services account within
+    #   which the activity took place. This is not necessarily the account
+    #   that owns the user identity.
     #   @return [Types::Account]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/guardduty-2017-11-28/User AWS API Documentation

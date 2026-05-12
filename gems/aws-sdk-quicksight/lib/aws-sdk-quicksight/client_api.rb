@@ -314,6 +314,7 @@ module Aws::QuickSight
     BrandSummary = Shapes::StructureShape.new(name: 'BrandSummary')
     BrandSummaryList = Shapes::ListShape.new(name: 'BrandSummaryList')
     BrandVersionStatus = Shapes::StringShape.new(name: 'BrandVersionStatus')
+    CACertificatesBundleS3Uri = Shapes::StringShape.new(name: 'CACertificatesBundleS3Uri')
     CIDR = Shapes::StringShape.new(name: 'CIDR')
     CalculatedColumn = Shapes::StructureShape.new(name: 'CalculatedColumn')
     CalculatedColumnList = Shapes::ListShape.new(name: 'CalculatedColumnList')
@@ -449,6 +450,10 @@ module Aws::QuickSight
     ControlSortConfiguration = Shapes::StructureShape.new(name: 'ControlSortConfiguration')
     ControlSortConfigurationList = Shapes::ListShape.new(name: 'ControlSortConfigurationList')
     ControlSortDirection = Shapes::StringShape.new(name: 'ControlSortDirection')
+    ControlTitleFontConfiguration = Shapes::StructureShape.new(name: 'ControlTitleFontConfiguration')
+    ControlTitleFormatText = Shapes::StructureShape.new(name: 'ControlTitleFormatText')
+    ControlTitlePlainText = Shapes::StringShape.new(name: 'ControlTitlePlainText')
+    ControlTitleRichText = Shapes::StringShape.new(name: 'ControlTitleRichText')
     Coordinate = Shapes::StructureShape.new(name: 'Coordinate')
     CoordinateLatitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLatitudeDouble')
     CoordinateLongitudeDouble = Shapes::FloatShape.new(name: 'CoordinateLongitudeDouble')
@@ -1723,6 +1728,7 @@ module Aws::QuickSight
     RefreshInterval = Shapes::StringShape.new(name: 'RefreshInterval')
     RefreshSchedule = Shapes::StructureShape.new(name: 'RefreshSchedule')
     RefreshSchedules = Shapes::ListShape.new(name: 'RefreshSchedules')
+    Region = Shapes::StringShape.new(name: 'Region')
     RegisterUserRequest = Shapes::StructureShape.new(name: 'RegisterUserRequest')
     RegisterUserResponse = Shapes::StructureShape.new(name: 'RegisterUserResponse')
     RegisteredCustomerManagedKey = Shapes::StructureShape.new(name: 'RegisteredCustomerManagedKey')
@@ -3694,6 +3700,8 @@ module Aws::QuickSight
     Capabilities.add_member(:extension, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Extension"))
     Capabilities.add_member(:manage_shared_folders, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "ManageSharedFolders"))
     Capabilities.add_member(:generate_analyses, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "GenerateAnalyses"))
+    Capabilities.add_member(:story, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Story"))
+    Capabilities.add_member(:scenario, Shapes::ShapeRef.new(shape: CapabilityState, location_name: "Scenario"))
     Capabilities.struct_class = Types::Capabilities
 
     CascadingControlConfiguration.add_member(:source_controls, Shapes::ShapeRef.new(shape: CascadingControlSourceList, location_name: "SourceControls"))
@@ -4054,6 +4062,14 @@ module Aws::QuickSight
     ControlSortConfiguration.struct_class = Types::ControlSortConfiguration
 
     ControlSortConfigurationList.member = Shapes::ShapeRef.new(shape: ControlSortConfiguration)
+
+    ControlTitleFontConfiguration.add_member(:font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "FontConfiguration"))
+    ControlTitleFontConfiguration.add_member(:text_alignment, Shapes::ShapeRef.new(shape: HorizontalTextAlignment, location_name: "TextAlignment"))
+    ControlTitleFontConfiguration.struct_class = Types::ControlTitleFontConfiguration
+
+    ControlTitleFormatText.add_member(:plain_text, Shapes::ShapeRef.new(shape: ControlTitlePlainText, location_name: "PlainText"))
+    ControlTitleFormatText.add_member(:rich_text, Shapes::ShapeRef.new(shape: ControlTitleRichText, location_name: "RichText"))
+    ControlTitleFormatText.struct_class = Types::ControlTitleFormatText
 
     Coordinate.add_member(:latitude, Shapes::ShapeRef.new(shape: CoordinateLatitudeDouble, required: true, location_name: "Latitude"))
     Coordinate.add_member(:longitude, Shapes::ShapeRef.new(shape: CoordinateLongitudeDouble, required: true, location_name: "Longitude"))
@@ -5181,8 +5197,9 @@ module Aws::QuickSight
     DefaultDateTimePickerControlOptions.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     DefaultDateTimePickerControlOptions.struct_class = Types::DefaultDateTimePickerControlOptions
 
-    DefaultFilterControlConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    DefaultFilterControlConfiguration.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     DefaultFilterControlConfiguration.add_member(:control_options, Shapes::ShapeRef.new(shape: DefaultFilterControlOptions, required: true, location_name: "ControlOptions"))
+    DefaultFilterControlConfiguration.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     DefaultFilterControlConfiguration.struct_class = Types::DefaultFilterControlConfiguration
 
     DefaultFilterControlOptions.add_member(:default_date_time_picker_options, Shapes::ShapeRef.new(shape: DefaultDateTimePickerControlOptions, location_name: "DefaultDateTimePickerOptions"))
@@ -6450,15 +6467,16 @@ module Aws::QuickSight
     FilterCrossSheetControl.struct_class = Types::FilterCrossSheetControl
 
     FilterDateTimePickerControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterDateTimePickerControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterDateTimePickerControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterDateTimePickerControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterDateTimePickerControl.add_member(:display_options, Shapes::ShapeRef.new(shape: DateTimePickerControlDisplayOptions, location_name: "DisplayOptions"))
     FilterDateTimePickerControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlDateTimePickerType, location_name: "Type"))
     FilterDateTimePickerControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    FilterDateTimePickerControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterDateTimePickerControl.struct_class = Types::FilterDateTimePickerControl
 
     FilterDropDownControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterDropDownControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterDropDownControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterDropDownControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterDropDownControl.add_member(:display_options, Shapes::ShapeRef.new(shape: DropDownControlDisplayOptions, location_name: "DisplayOptions"))
     FilterDropDownControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
@@ -6466,6 +6484,7 @@ module Aws::QuickSight
     FilterDropDownControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
     FilterDropDownControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     FilterDropDownControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    FilterDropDownControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterDropDownControl.struct_class = Types::FilterDropDownControl
 
     FilterGroup.add_member(:filter_group_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterGroupId"))
@@ -6486,13 +6505,14 @@ module Aws::QuickSight
     FilterListConfiguration.struct_class = Types::FilterListConfiguration
 
     FilterListControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterListControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterListControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterListControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterListControl.add_member(:display_options, Shapes::ShapeRef.new(shape: ListControlDisplayOptions, location_name: "DisplayOptions"))
     FilterListControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
     FilterListControl.add_member(:selectable_values, Shapes::ShapeRef.new(shape: FilterSelectableValues, location_name: "SelectableValues"))
     FilterListControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
     FilterListControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    FilterListControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterListControl.struct_class = Types::FilterListControl
 
     FilterOperation.add_member(:condition_expression, Shapes::ShapeRef.new(shape: Expression, location_name: "ConditionExpression"))
@@ -6512,10 +6532,11 @@ module Aws::QuickSight
     FilterOperationTargetVisualsConfiguration.struct_class = Types::FilterOperationTargetVisualsConfiguration
 
     FilterRelativeDateTimeControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterRelativeDateTimeControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterRelativeDateTimeControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterRelativeDateTimeControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterRelativeDateTimeControl.add_member(:display_options, Shapes::ShapeRef.new(shape: RelativeDateTimeControlDisplayOptions, location_name: "DisplayOptions"))
     FilterRelativeDateTimeControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
+    FilterRelativeDateTimeControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterRelativeDateTimeControl.struct_class = Types::FilterRelativeDateTimeControl
 
     FilterScopeConfiguration.add_member(:selected_sheets, Shapes::ShapeRef.new(shape: SelectedSheetsFilterScopeConfiguration, location_name: "SelectedSheets"))
@@ -6526,26 +6547,29 @@ module Aws::QuickSight
     FilterSelectableValues.struct_class = Types::FilterSelectableValues
 
     FilterSliderControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterSliderControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterSliderControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterSliderControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterSliderControl.add_member(:display_options, Shapes::ShapeRef.new(shape: SliderControlDisplayOptions, location_name: "DisplayOptions"))
     FilterSliderControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlSliderType, location_name: "Type"))
     FilterSliderControl.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MaximumValue"))
     FilterSliderControl.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MinimumValue"))
     FilterSliderControl.add_member(:step_size, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "StepSize"))
+    FilterSliderControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterSliderControl.struct_class = Types::FilterSliderControl
 
     FilterTextAreaControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterTextAreaControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterTextAreaControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterTextAreaControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterTextAreaControl.add_member(:delimiter, Shapes::ShapeRef.new(shape: TextAreaControlDelimiter, location_name: "Delimiter"))
     FilterTextAreaControl.add_member(:display_options, Shapes::ShapeRef.new(shape: TextAreaControlDisplayOptions, location_name: "DisplayOptions"))
+    FilterTextAreaControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterTextAreaControl.struct_class = Types::FilterTextAreaControl
 
     FilterTextFieldControl.add_member(:filter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "FilterControlId"))
-    FilterTextFieldControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    FilterTextFieldControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     FilterTextFieldControl.add_member(:source_filter_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "SourceFilterId"))
     FilterTextFieldControl.add_member(:display_options, Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: "DisplayOptions"))
+    FilterTextFieldControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     FilterTextFieldControl.struct_class = Types::FilterTextFieldControl
 
     FilteredVisualsList.member = Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId)
@@ -6612,7 +6636,7 @@ module Aws::QuickSight
 
     FoldersForResourceArnList.member = Shapes::ShapeRef.new(shape: Arn)
 
-    Font.add_member(:font_family, Shapes::ShapeRef.new(shape: String, location_name: "FontFamily"))
+    Font.add_member(:font_family, Shapes::ShapeRef.new(shape: LimitedString, location_name: "FontFamily"))
     Font.struct_class = Types::Font
 
     FontConfiguration.add_member(:font_size, Shapes::ShapeRef.new(shape: FontSize, location_name: "FontSize"))
@@ -6620,7 +6644,7 @@ module Aws::QuickSight
     FontConfiguration.add_member(:font_color, Shapes::ShapeRef.new(shape: HexColor, location_name: "FontColor"))
     FontConfiguration.add_member(:font_weight, Shapes::ShapeRef.new(shape: FontWeight, location_name: "FontWeight"))
     FontConfiguration.add_member(:font_style, Shapes::ShapeRef.new(shape: FontStyle, location_name: "FontStyle"))
-    FontConfiguration.add_member(:font_family, Shapes::ShapeRef.new(shape: String, location_name: "FontFamily"))
+    FontConfiguration.add_member(:font_family, Shapes::ShapeRef.new(shape: LimitedString, location_name: "FontFamily"))
     FontConfiguration.struct_class = Types::FontConfiguration
 
     FontList.member = Shapes::ShapeRef.new(shape: Font)
@@ -7109,6 +7133,7 @@ module Aws::QuickSight
     GetIdentityContextRequest.add_member(:user_identifier, Shapes::ShapeRef.new(shape: UserIdentifier, required: true, location_name: "UserIdentifier"))
     GetIdentityContextRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
     GetIdentityContextRequest.add_member(:session_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "SessionExpiresAt"))
+    GetIdentityContextRequest.add_member(:context_region, Shapes::ShapeRef.new(shape: Region, location_name: "ContextRegion"))
     GetIdentityContextRequest.struct_class = Types::GetIdentityContextRequest
 
     GetIdentityContextResponse.add_member(:status, Shapes::ShapeRef.new(shape: statusCode, required: true, location: "statusCode", location_name: "Status"))
@@ -8434,6 +8459,7 @@ module Aws::QuickSight
     OAuthParameters.add_member(:o_auth_scope, Shapes::ShapeRef.new(shape: OAuthScope, location_name: "OAuthScope"))
     OAuthParameters.add_member(:identity_provider_vpc_connection_properties, Shapes::ShapeRef.new(shape: VpcConnectionProperties, location_name: "IdentityProviderVpcConnectionProperties"))
     OAuthParameters.add_member(:identity_provider_resource_uri, Shapes::ShapeRef.new(shape: IdentityProviderResourceUri, location_name: "IdentityProviderResourceUri"))
+    OAuthParameters.add_member(:identity_provider_ca_certificates_bundle_s3_uri, Shapes::ShapeRef.new(shape: CACertificatesBundleS3Uri, location_name: "IdentityProviderCACertificatesBundleS3Uri"))
     OAuthParameters.struct_class = Types::OAuthParameters
 
     OperandList.member = Shapes::ShapeRef.new(shape: Identifier)
@@ -8499,9 +8525,10 @@ module Aws::QuickSight
     ParameterControlList.member = Shapes::ShapeRef.new(shape: ParameterControl)
 
     ParameterDateTimePickerControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterDateTimePickerControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterDateTimePickerControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterDateTimePickerControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterDateTimePickerControl.add_member(:display_options, Shapes::ShapeRef.new(shape: DateTimePickerControlDisplayOptions, location_name: "DisplayOptions"))
+    ParameterDateTimePickerControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterDateTimePickerControl.struct_class = Types::ParameterDateTimePickerControl
 
     ParameterDeclaration.add_member(:string_parameter_declaration, Shapes::ShapeRef.new(shape: StringParameterDeclaration, location_name: "StringParameterDeclaration"))
@@ -8513,7 +8540,7 @@ module Aws::QuickSight
     ParameterDeclarationList.member = Shapes::ShapeRef.new(shape: ParameterDeclaration)
 
     ParameterDropDownControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterDropDownControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterDropDownControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterDropDownControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterDropDownControl.add_member(:display_options, Shapes::ShapeRef.new(shape: DropDownControlDisplayOptions, location_name: "DisplayOptions"))
     ParameterDropDownControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
@@ -8521,16 +8548,18 @@ module Aws::QuickSight
     ParameterDropDownControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
     ParameterDropDownControl.add_member(:commit_mode, Shapes::ShapeRef.new(shape: CommitMode, location_name: "CommitMode"))
     ParameterDropDownControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    ParameterDropDownControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterDropDownControl.struct_class = Types::ParameterDropDownControl
 
     ParameterListControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterListControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterListControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterListControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterListControl.add_member(:display_options, Shapes::ShapeRef.new(shape: ListControlDisplayOptions, location_name: "DisplayOptions"))
     ParameterListControl.add_member(:type, Shapes::ShapeRef.new(shape: SheetControlListType, location_name: "Type"))
     ParameterListControl.add_member(:selectable_values, Shapes::ShapeRef.new(shape: ParameterSelectableValues, location_name: "SelectableValues"))
     ParameterListControl.add_member(:cascading_control_configuration, Shapes::ShapeRef.new(shape: CascadingControlConfiguration, location_name: "CascadingControlConfiguration"))
     ParameterListControl.add_member(:control_sort_configurations, Shapes::ShapeRef.new(shape: ControlSortConfigurationList, location_name: "ControlSortConfigurations"))
+    ParameterListControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterListControl.struct_class = Types::ParameterListControl
 
     ParameterSelectableValueList.member = Shapes::ShapeRef.new(shape: String)
@@ -8540,25 +8569,28 @@ module Aws::QuickSight
     ParameterSelectableValues.struct_class = Types::ParameterSelectableValues
 
     ParameterSliderControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterSliderControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterSliderControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterSliderControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterSliderControl.add_member(:display_options, Shapes::ShapeRef.new(shape: SliderControlDisplayOptions, location_name: "DisplayOptions"))
     ParameterSliderControl.add_member(:maximum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MaximumValue"))
     ParameterSliderControl.add_member(:minimum_value, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "MinimumValue"))
     ParameterSliderControl.add_member(:step_size, Shapes::ShapeRef.new(shape: Double, required: true, location_name: "StepSize"))
+    ParameterSliderControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterSliderControl.struct_class = Types::ParameterSliderControl
 
     ParameterTextAreaControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterTextAreaControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterTextAreaControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterTextAreaControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterTextAreaControl.add_member(:delimiter, Shapes::ShapeRef.new(shape: TextAreaControlDelimiter, location_name: "Delimiter"))
     ParameterTextAreaControl.add_member(:display_options, Shapes::ShapeRef.new(shape: TextAreaControlDisplayOptions, location_name: "DisplayOptions"))
+    ParameterTextAreaControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterTextAreaControl.struct_class = Types::ParameterTextAreaControl
 
     ParameterTextFieldControl.add_member(:parameter_control_id, Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId, required: true, location_name: "ParameterControlId"))
-    ParameterTextFieldControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, required: true, location_name: "Title"))
+    ParameterTextFieldControl.add_member(:title, Shapes::ShapeRef.new(shape: SheetControlTitle, location_name: "Title"))
     ParameterTextFieldControl.add_member(:source_parameter_name, Shapes::ShapeRef.new(shape: ParameterName, required: true, location_name: "SourceParameterName"))
     ParameterTextFieldControl.add_member(:display_options, Shapes::ShapeRef.new(shape: TextFieldControlDisplayOptions, location_name: "DisplayOptions"))
+    ParameterTextFieldControl.add_member(:control_title_format_text, Shapes::ShapeRef.new(shape: ControlTitleFormatText, location_name: "ControlTitleFormatText"))
     ParameterTextFieldControl.struct_class = Types::ParameterTextFieldControl
 
     Parameters.add_member(:string_parameters, Shapes::ShapeRef.new(shape: StringParameterList, location_name: "StringParameters"))
@@ -10964,6 +10996,7 @@ module Aws::QuickSight
     Typography.add_member(:data_label_font_configuration, Shapes::ShapeRef.new(shape: FontConfiguration, location_name: "DataLabelFontConfiguration"))
     Typography.add_member(:visual_title_font_configuration, Shapes::ShapeRef.new(shape: VisualTitleFontConfiguration, location_name: "VisualTitleFontConfiguration"))
     Typography.add_member(:visual_subtitle_font_configuration, Shapes::ShapeRef.new(shape: VisualSubtitleFontConfiguration, location_name: "VisualSubtitleFontConfiguration"))
+    Typography.add_member(:control_title_font_configuration, Shapes::ShapeRef.new(shape: ControlTitleFontConfiguration, location_name: "ControlTitleFontConfiguration"))
     Typography.struct_class = Types::Typography
 
     UIColorPalette.add_member(:primary_foreground, Shapes::ShapeRef.new(shape: HexColor, location_name: "PrimaryForeground"))

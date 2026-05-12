@@ -1022,7 +1022,13 @@ module Aws
                                  type: ::String?
                                },
                              ],
-                             ?field_index_names: Array[::String]
+                             ?field_index_names: Array[::String],
+                             ?log_group_tags: Array[
+                               {
+                                 key: ::String,
+                                 values: Array[::String]?
+                               },
+                             ]
                            ) -> _ListLogGroupsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogGroupsResponseSuccess
 
@@ -1155,7 +1161,8 @@ module Aws
                                  name: ::String,
                                  resource_arn: ::String,
                                  log_type: ::String,
-                                 ?tags: Hash[::String, ::String]
+                                 ?tags: Hash[::String, ::String],
+                                 ?delivery_source_configuration: Hash[::String, ::String]
                                ) -> _PutDeliverySourceResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverySourceResponseSuccess
 

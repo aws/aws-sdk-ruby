@@ -546,7 +546,7 @@ module Aws::BCMDataExports
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM", # required, accepts CUSTOM
+    #             output_type: "CUSTOM", # required, accepts CUSTOM, ATHENA, REDSHIFT
     #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
     #             compression: "GZIP", # required, accepts GZIP, PARQUET
     #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -642,7 +642,7 @@ module Aws::BCMDataExports
     #   resp.export.destination_configurations.s3_destination.s3_bucket_owner #=> String
     #   resp.export.destination_configurations.s3_destination.s3_prefix #=> String
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM", "ATHENA", "REDSHIFT"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
@@ -691,7 +691,7 @@ module Aws::BCMDataExports
     #   resp.export.destination_configurations.s3_destination.s3_bucket_owner #=> String
     #   resp.export.destination_configurations.s3_destination.s3_prefix #=> String
     #   resp.export.destination_configurations.s3_destination.s3_region #=> String
-    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM"
+    #   resp.export.destination_configurations.s3_destination.s3_output_configurations.output_type #=> String, one of "CUSTOM", "ATHENA", "REDSHIFT"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.format #=> String, one of "TEXT_OR_CSV", "PARQUET"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.compression #=> String, one of "GZIP", "PARQUET"
     #   resp.export.destination_configurations.s3_destination.s3_output_configurations.overwrite #=> String, one of "CREATE_NEW_REPORT", "OVERWRITE_REPORT"
@@ -1028,7 +1028,7 @@ module Aws::BCMDataExports
     #           s3_prefix: "GenericString", # required
     #           s3_region: "GenericString", # required
     #           s3_output_configurations: { # required
-    #             output_type: "CUSTOM", # required, accepts CUSTOM
+    #             output_type: "CUSTOM", # required, accepts CUSTOM, ATHENA, REDSHIFT
     #             format: "TEXT_OR_CSV", # required, accepts TEXT_OR_CSV, PARQUET
     #             compression: "GZIP", # required, accepts GZIP, PARQUET
     #             overwrite: "CREATE_NEW_REPORT", # required, accepts CREATE_NEW_REPORT, OVERWRITE_REPORT
@@ -1072,7 +1072,7 @@ module Aws::BCMDataExports
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bcmdataexports'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

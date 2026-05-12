@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.179.0 (2026-05-01)
+------------------
+
+* Feature - Add IdentityProviderCACertificatesBundleS3Uri for private CA certs with OAuth datasources. 256-char limit for FontFamily in themes. ControlTitleFormatText on all 13 filters. ControlTitleFontConfiguration. ContextRegion for cross-region identity context. Story,scenario in CreateCustomCapability API.
+
 1.178.0 (2026-04-17)
 ------------------
 

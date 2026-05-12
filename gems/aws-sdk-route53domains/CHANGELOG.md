@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.93.0 (2026-05-05)
+------------------
+
+* Feature - This release adds the TLDInMaintenance exception.
+
 1.92.0 (2026-03-18)
 ------------------
 

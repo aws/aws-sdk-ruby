@@ -32,6 +32,7 @@ module Aws::MWAA
   # * {ResourceNotFoundException}
   # * {RestApiClientException}
   # * {RestApiServerException}
+  # * {ServiceUnavailableException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -122,6 +123,21 @@ module Aws::MWAA
       # @return [String]
       def rest_api_response
         @data[:rest_api_response]
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MWAA::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

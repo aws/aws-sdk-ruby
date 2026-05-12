@@ -74,6 +74,7 @@ module Aws::Route53Resolver
     DisassociateResolverQueryLogConfigResponse = Shapes::StructureShape.new(name: 'DisassociateResolverQueryLogConfigResponse')
     DisassociateResolverRuleRequest = Shapes::StructureShape.new(name: 'DisassociateResolverRuleRequest')
     DisassociateResolverRuleResponse = Shapes::StructureShape.new(name: 'DisassociateResolverRuleResponse')
+    Dns64Enabled = Shapes::BooleanShape.new(name: 'Dns64Enabled')
     DnsThreatProtection = Shapes::StringShape.new(name: 'DnsThreatProtection')
     DomainListFileUrl = Shapes::StringShape.new(name: 'DomainListFileUrl')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
@@ -153,6 +154,7 @@ module Aws::Route53Resolver
     IpAddressesRequest = Shapes::ListShape.new(name: 'IpAddressesRequest')
     IpAddressesResponse = Shapes::ListShape.new(name: 'IpAddressesResponse')
     Ipv6 = Shapes::StringShape.new(name: 'Ipv6')
+    Ipv6InternetAccessEnabled = Shapes::BooleanShape.new(name: 'Ipv6InternetAccessEnabled')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
     ListDomainMaxResults = Shapes::IntegerShape.new(name: 'ListDomainMaxResults')
     ListFirewallConfigsMaxResult = Shapes::IntegerShape.new(name: 'ListFirewallConfigsMaxResult')
@@ -394,6 +396,8 @@ module Aws::Route53Resolver
     CreateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
     CreateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled", metadata: {"box" => true}))
     CreateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:dns_64_enabled, Shapes::ShapeRef.new(shape: Dns64Enabled, location_name: "Dns64Enabled", metadata: {"box" => true}))
+    CreateResolverEndpointRequest.add_member(:ipv_6_internet_access_enabled, Shapes::ShapeRef.new(shape: Ipv6InternetAccessEnabled, location_name: "Ipv6InternetAccessEnabled", metadata: {"box" => true}))
     CreateResolverEndpointRequest.struct_class = Types::CreateResolverEndpointRequest
 
     CreateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
@@ -971,6 +975,8 @@ module Aws::Route53Resolver
     ResolverEndpoint.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols"))
     ResolverEndpoint.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled"))
     ResolverEndpoint.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled"))
+    ResolverEndpoint.add_member(:dns_64_enabled, Shapes::ShapeRef.new(shape: Dns64Enabled, location_name: "Dns64Enabled"))
+    ResolverEndpoint.add_member(:ipv_6_internet_access_enabled, Shapes::ShapeRef.new(shape: Ipv6InternetAccessEnabled, location_name: "Ipv6InternetAccessEnabled"))
     ResolverEndpoint.struct_class = Types::ResolverEndpoint
 
     ResolverEndpoints.member = Shapes::ShapeRef.new(shape: ResolverEndpoint)
@@ -1172,6 +1178,8 @@ module Aws::Route53Resolver
     UpdateResolverEndpointRequest.add_member(:protocols, Shapes::ShapeRef.new(shape: ProtocolList, location_name: "Protocols", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.add_member(:rni_enhanced_metrics_enabled, Shapes::ShapeRef.new(shape: RniEnhancedMetricsEnabled, location_name: "RniEnhancedMetricsEnabled", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.add_member(:target_name_server_metrics_enabled, Shapes::ShapeRef.new(shape: TargetNameServerMetricsEnabled, location_name: "TargetNameServerMetricsEnabled", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:dns_64_enabled, Shapes::ShapeRef.new(shape: Dns64Enabled, location_name: "Dns64Enabled", metadata: {"box" => true}))
+    UpdateResolverEndpointRequest.add_member(:ipv_6_internet_access_enabled, Shapes::ShapeRef.new(shape: Ipv6InternetAccessEnabled, location_name: "Ipv6InternetAccessEnabled", metadata: {"box" => true}))
     UpdateResolverEndpointRequest.struct_class = Types::UpdateResolverEndpointRequest
 
     UpdateResolverEndpointResponse.add_member(:resolver_endpoint, Shapes::ShapeRef.new(shape: ResolverEndpoint, location_name: "ResolverEndpoint"))
@@ -1460,6 +1468,7 @@ module Aws::Route53Resolver
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteResolverRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteResolverRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
@@ -1516,6 +1525,7 @@ module Aws::Route53Resolver
         o.input = Shapes::ShapeRef.new(shape: DisassociateResolverRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: DisassociateResolverRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServiceErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

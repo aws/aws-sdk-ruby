@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.133.0 (2026-05-01)
+------------------
+
+* Feature - Amazon WorkSpaces Applications now enables AI agents to securely operate desktop applications. Administrators configure stacks to provide agents access to WorkSpaces. Agents can click, type, and take screenshots. Agents authenticate with AWS IAM credentials with activity logged in AWS CloudTrail.
+
 1.132.0 (2026-04-16)
 ------------------
 

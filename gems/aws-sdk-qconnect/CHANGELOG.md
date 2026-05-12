@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-05-01)
+------------------
+
+* Feature - Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
+
 1.52.0 (2026-04-06)
 ------------------
 

@@ -560,7 +560,9 @@ module Aws::QConnect
     SpanMessageValue = Shapes::UnionShape.new(name: 'SpanMessageValue')
     SpanMessageValueList = Shapes::ListShape.new(name: 'SpanMessageValueList')
     SpanOriginRequestIdString = Shapes::StringShape.new(name: 'SpanOriginRequestIdString')
+    SpanReasoningValue = Shapes::StructureShape.new(name: 'SpanReasoningValue')
     SpanStatus = Shapes::StringShape.new(name: 'SpanStatus')
+    SpanStatusDescriptionString = Shapes::StringShape.new(name: 'SpanStatusDescriptionString')
     SpanTextValue = Shapes::StructureShape.new(name: 'SpanTextValue')
     SpanToolResultValue = Shapes::StructureShape.new(name: 'SpanToolResultValue')
     SpanToolUseValue = Shapes::StructureShape.new(name: 'SpanToolUseValue')
@@ -2849,6 +2851,7 @@ module Aws::QConnect
     Span.add_member(:start_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTimestamp"))
     Span.add_member(:end_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTimestamp"))
     Span.add_member(:status, Shapes::ShapeRef.new(shape: SpanStatus, required: true, location_name: "status"))
+    Span.add_member(:status_description, Shapes::ShapeRef.new(shape: SpanStatusDescriptionString, location_name: "statusDescription"))
     Span.add_member(:request_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "requestId"))
     Span.add_member(:origin_request_id, Shapes::ShapeRef.new(shape: SpanOriginRequestIdString, location_name: "originRequestId"))
     Span.add_member(:attributes, Shapes::ShapeRef.new(shape: SpanAttributes, required: true, location_name: "attributes"))
@@ -2888,6 +2891,7 @@ module Aws::QConnect
     SpanAttributes.add_member(:prompt_type, Shapes::ShapeRef.new(shape: AIPromptType, location_name: "promptType"))
     SpanAttributes.add_member(:prompt_name, Shapes::ShapeRef.new(shape: Name, location_name: "promptName"))
     SpanAttributes.add_member(:prompt_version, Shapes::ShapeRef.new(shape: Integer, location_name: "promptVersion"))
+    SpanAttributes.add_member(:time_to_first_token_ms, Shapes::ShapeRef.new(shape: Integer, location_name: "timeToFirstTokenMs"))
     SpanAttributes.struct_class = Types::SpanAttributes
 
     SpanCitation.add_member(:content_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "contentId"))
@@ -2913,14 +2917,19 @@ module Aws::QConnect
     SpanMessageValue.add_member(:text, Shapes::ShapeRef.new(shape: SpanTextValue, location_name: "text"))
     SpanMessageValue.add_member(:tool_use, Shapes::ShapeRef.new(shape: SpanToolUseValue, location_name: "toolUse"))
     SpanMessageValue.add_member(:tool_result, Shapes::ShapeRef.new(shape: SpanToolResultValue, location_name: "toolResult"))
+    SpanMessageValue.add_member(:reasoning, Shapes::ShapeRef.new(shape: SpanReasoningValue, location_name: "reasoning"))
     SpanMessageValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     SpanMessageValue.add_member_subclass(:text, Types::SpanMessageValue::Text)
     SpanMessageValue.add_member_subclass(:tool_use, Types::SpanMessageValue::ToolUse)
     SpanMessageValue.add_member_subclass(:tool_result, Types::SpanMessageValue::ToolResult)
+    SpanMessageValue.add_member_subclass(:reasoning, Types::SpanMessageValue::Reasoning)
     SpanMessageValue.add_member_subclass(:unknown, Types::SpanMessageValue::Unknown)
     SpanMessageValue.struct_class = Types::SpanMessageValue
 
     SpanMessageValueList.member = Shapes::ShapeRef.new(shape: SpanMessageValue)
+
+    SpanReasoningValue.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, required: true, location_name: "value"))
+    SpanReasoningValue.struct_class = Types::SpanReasoningValue
 
     SpanTextValue.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptySensitiveString, required: true, location_name: "value"))
     SpanTextValue.add_member(:citations, Shapes::ShapeRef.new(shape: SpanCitationList, location_name: "citations"))

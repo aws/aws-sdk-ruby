@@ -4105,6 +4105,7 @@ module Aws::IoT
     #               max_batch_open_ms: 1,
     #               max_batch_size: 1,
     #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false,
     #             },
     #           },
     #           kafka: {
@@ -4320,6 +4321,7 @@ module Aws::IoT
     #             max_batch_open_ms: 1,
     #             max_batch_size: 1,
     #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false,
     #           },
     #         },
     #         kafka: {
@@ -8811,6 +8813,7 @@ module Aws::IoT
     #   resp.rule.actions[0].http.batch_config.max_batch_open_ms #=> Integer
     #   resp.rule.actions[0].http.batch_config.max_batch_size #=> Integer
     #   resp.rule.actions[0].http.batch_config.max_batch_size_bytes #=> Integer
+    #   resp.rule.actions[0].http.batch_config.batch_across_topics #=> Boolean
     #   resp.rule.actions[0].kafka.destination_arn #=> String
     #   resp.rule.actions[0].kafka.topic #=> String
     #   resp.rule.actions[0].kafka.key #=> String
@@ -8940,6 +8943,7 @@ module Aws::IoT
     #   resp.rule.error_action.http.batch_config.max_batch_open_ms #=> Integer
     #   resp.rule.error_action.http.batch_config.max_batch_size #=> Integer
     #   resp.rule.error_action.http.batch_config.max_batch_size_bytes #=> Integer
+    #   resp.rule.error_action.http.batch_config.batch_across_topics #=> Boolean
     #   resp.rule.error_action.kafka.destination_arn #=> String
     #   resp.rule.error_action.kafka.topic #=> String
     #   resp.rule.error_action.kafka.key #=> String
@@ -13527,6 +13531,7 @@ module Aws::IoT
     #               max_batch_open_ms: 1,
     #               max_batch_size: 1,
     #               max_batch_size_bytes: 1,
+    #               batch_across_topics: false,
     #             },
     #           },
     #           kafka: {
@@ -13742,6 +13747,7 @@ module Aws::IoT
     #             max_batch_open_ms: 1,
     #             max_batch_size: 1,
     #             max_batch_size_bytes: 1,
+    #             batch_across_topics: false,
     #           },
     #         },
     #         kafka: {
@@ -16658,7 +16664,7 @@ module Aws::IoT
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iot'
-      context[:gem_version] = '1.164.0'
+      context[:gem_version] = '1.165.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

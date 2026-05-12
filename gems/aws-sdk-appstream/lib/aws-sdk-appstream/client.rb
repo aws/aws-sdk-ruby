@@ -2449,6 +2449,10 @@ module Aws::AppStream
     #   session and the local client. Use HostToClient to redirect URLs from
     #   the remote desktop to the local browser.
     #
+    # @option params [Types::AgentAccessConfig] :agent_access_config
+    #   The configuration for agent access on the stack. If specified, agent
+    #   access is enabled for the stack.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -2500,6 +2504,18 @@ module Aws::AppStream
     #         denied_urls: ["UrlPattern"],
     #       },
     #     },
+    #     agent_access_config: {
+    #       settings: [ # required
+    #         {
+    #           agent_action: "COMPUTER_VISION", # required, accepts COMPUTER_VISION, COMPUTER_INPUT
+    #           permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720", # required, accepts W_1280xH_720
+    #       screen_image_format: "PNG", # required, accepts PNG, JPEG
+    #     },
     #   })
     #
     # @example Response structure
@@ -2539,6 +2555,13 @@ module Aws::AppStream
     #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stack.agent_access_config.settings #=> Array
+    #   resp.stack.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT"
+    #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.agent_access_config.s3_bucket_arn #=> String
+    #   resp.stack.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -4231,6 +4254,13 @@ module Aws::AppStream
     #   resp.stacks[0].content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stacks[0].content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stacks[0].content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stacks[0].agent_access_config.settings #=> Array
+    #   resp.stacks[0].agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT"
+    #   resp.stacks[0].agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stacks[0].agent_access_config.s3_bucket_arn #=> String
+    #   resp.stacks[0].agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stacks[0].agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.stacks[0].agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -6213,6 +6243,11 @@ module Aws::AppStream
     #   session and the local client. Use HostToClient to redirect URLs from
     #   the remote desktop to the local browser.
     #
+    # @option params [Types::AgentAccessConfigForUpdate] :agent_access_config
+    #   The configuration for agent access on the stack. Specify this to
+    #   update agent access settings. To remove agent access, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -6234,7 +6269,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
@@ -6262,6 +6297,18 @@ module Aws::AppStream
     #         allowed_urls: ["UrlPattern"],
     #         denied_urls: ["UrlPattern"],
     #       },
+    #     },
+    #     agent_access_config: {
+    #       settings: [
+    #         {
+    #           agent_action: "COMPUTER_VISION", # required, accepts COMPUTER_VISION, COMPUTER_INPUT
+    #           permission: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #       ],
+    #       s3_bucket_arn: "S3BucketArn",
+    #       screenshots_upload_enabled: false,
+    #       screen_resolution: "W_1280xH_720", # accepts W_1280xH_720
+    #       screen_image_format: "PNG", # accepts PNG, JPEG
     #     },
     #   })
     #
@@ -6302,6 +6349,13 @@ module Aws::AppStream
     #   resp.stack.content_redirection.host_to_client.allowed_urls[0] #=> String
     #   resp.stack.content_redirection.host_to_client.denied_urls #=> Array
     #   resp.stack.content_redirection.host_to_client.denied_urls[0] #=> String
+    #   resp.stack.agent_access_config.settings #=> Array
+    #   resp.stack.agent_access_config.settings[0].agent_action #=> String, one of "COMPUTER_VISION", "COMPUTER_INPUT"
+    #   resp.stack.agent_access_config.settings[0].permission #=> String, one of "ENABLED", "DISABLED"
+    #   resp.stack.agent_access_config.s3_bucket_arn #=> String
+    #   resp.stack.agent_access_config.screenshots_upload_enabled #=> Boolean
+    #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
+    #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -6417,7 +6471,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.132.0'
+      context[:gem_version] = '1.133.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

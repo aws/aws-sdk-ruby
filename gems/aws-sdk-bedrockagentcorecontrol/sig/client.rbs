@@ -183,6 +183,14 @@ module Aws
                                     {
                                       session_storage: {
                                         mount_path: ::String
+                                      }?,
+                                      s3_files_access_point: {
+                                        access_point_arn: ::String,
+                                        mount_path: ::String
+                                      }?,
+                                      efs_access_point: {
+                                        access_point_arn: ::String,
+                                        mount_path: ::String
                                       }?
                                     },
                                   ],
@@ -446,7 +454,13 @@ module Aws
                               mcp: {
                                 supported_versions: Array[::String]?,
                                 instructions: ::String?,
-                                search_type: ("SEMANTIC")?
+                                search_type: ("SEMANTIC")?,
+                                session_configuration: {
+                                  session_timeout_in_seconds: ::Integer?
+                                }?,
+                                streaming_configuration: {
+                                  enable_response_streaming: bool?
+                                }?
                               }?
                             },
                             authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE" | "AUTHENTICATE_ONLY"),
@@ -783,6 +797,14 @@ module Aws
                                 filesystem_configurations: Array[
                                   {
                                     session_storage: {
+                                      mount_path: ::String
+                                    }?,
+                                    s3_files_access_point: {
+                                      access_point_arn: ::String,
+                                      mount_path: ::String
+                                    }?,
+                                    efs_access_point: {
+                                      access_point_arn: ::String,
                                       mount_path: ::String
                                     }?
                                   },
@@ -1439,6 +1461,140 @@ module Aws
                                            ) -> _CreateOnlineEvaluationConfigResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOnlineEvaluationConfigResponseSuccess
 
+      interface _CreatePaymentConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePaymentConnectorResponse]
+        def payment_connector_id: () -> ::String
+        def payment_manager_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
+        def created_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_payment_connector-instance_method
+      def create_payment_connector: (
+                                      payment_manager_id: ::String,
+                                      name: ::String,
+                                      ?description: ::String,
+                                      type: ("CoinbaseCDP" | "StripePrivy"),
+                                      credential_provider_configurations: Array[
+                                        {
+                                          coinbase_cdp: {
+                                            credential_provider_arn: ::String
+                                          }?,
+                                          stripe_privy: {
+                                            credential_provider_arn: ::String
+                                          }?
+                                        },
+                                      ],
+                                      ?client_token: ::String
+                                    ) -> _CreatePaymentConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentConnectorResponseSuccess
+
+      interface _CreatePaymentCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePaymentCredentialProviderResponse]
+        def name: () -> ::String
+        def credential_provider_vendor: () -> ("CoinbaseCDP" | "StripePrivy")
+        def credential_provider_arn: () -> ::String
+        def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_payment_credential_provider-instance_method
+      def create_payment_credential_provider: (
+                                                name: ::String,
+                                                credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy"),
+                                                provider_configuration_input: {
+                                                  coinbase_cdp_configuration: {
+                                                    api_key_id: ::String,
+                                                    api_key_secret: ::String,
+                                                    wallet_secret: ::String
+                                                  }?,
+                                                  stripe_privy_configuration: {
+                                                    app_id: ::String,
+                                                    app_secret: ::String,
+                                                    authorization_private_key: ::String,
+                                                    authorization_id: ::String
+                                                  }?
+                                                },
+                                                ?tags: Hash[::String, ::String]
+                                              ) -> _CreatePaymentCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentCredentialProviderResponseSuccess
+
+      interface _CreatePaymentManagerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreatePaymentManagerResponse]
+        def payment_manager_arn: () -> ::String
+        def payment_manager_id: () -> ::String
+        def name: () -> ::String
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def role_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def created_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_payment_manager-instance_method
+      def create_payment_manager: (
+                                    name: ::String,
+                                    ?description: ::String,
+                                    authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                                    ?authorizer_configuration: {
+                                      custom_jwt_authorizer: {
+                                        discovery_url: ::String,
+                                        allowed_audience: Array[::String]?,
+                                        allowed_clients: Array[::String]?,
+                                        allowed_scopes: Array[::String]?,
+                                        custom_claims: Array[
+                                          {
+                                            inbound_token_claim_name: ::String,
+                                            inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
+                                            authorizing_claim_match_value: {
+                                              claim_match_value: {
+                                                match_value_string: ::String?,
+                                                match_value_string_list: Array[::String]?
+                                              },
+                                              claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
+                                            }
+                                          },
+                                        ]?,
+                                        private_endpoint: {
+                                          self_managed_lattice_resource: {
+                                            resource_configuration_identifier: ::String?
+                                          }?,
+                                          managed_vpc_resource: {
+                                            vpc_identifier: ::String,
+                                            subnet_ids: Array[::String],
+                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
+                                            security_group_ids: Array[::String]?,
+                                            tags: Hash[::String, ::String]?,
+                                            routing_domain: ::String?
+                                          }?
+                                        }?,
+                                        private_endpoint_overrides: Array[
+                                          {
+                                            domain: ::String,
+                                            private_endpoint: {
+                                              self_managed_lattice_resource: {
+                                                resource_configuration_identifier: ::String?
+                                              }?,
+                                              managed_vpc_resource: {
+                                                vpc_identifier: ::String,
+                                                subnet_ids: Array[::String],
+                                                endpoint_ip_address_type: ("IPV4" | "IPV6"),
+                                                security_group_ids: Array[::String]?,
+                                                tags: Hash[::String, ::String]?,
+                                                routing_domain: ::String?
+                                              }?
+                                            }
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                    role_arn: ::String,
+                                    ?client_token: ::String,
+                                    ?tags: Hash[::String, ::String]
+                                  ) -> _CreatePaymentManagerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentManagerResponseSuccess
+
       interface _CreatePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyResponse]
         def policy_id: () -> ::String
@@ -1825,6 +1981,40 @@ module Aws
                                              online_evaluation_config_id: ::String
                                            ) -> _DeleteOnlineEvaluationConfigResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteOnlineEvaluationConfigResponseSuccess
+
+      interface _DeletePaymentConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentConnectorResponse]
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def payment_connector_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_payment_connector-instance_method
+      def delete_payment_connector: (
+                                      payment_manager_id: ::String,
+                                      payment_connector_id: ::String,
+                                      ?client_token: ::String
+                                    ) -> _DeletePaymentConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePaymentConnectorResponseSuccess
+
+      interface _DeletePaymentCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentCredentialProviderResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_payment_credential_provider-instance_method
+      def delete_payment_credential_provider: (
+                                                name: ::String
+                                              ) -> _DeletePaymentCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePaymentCredentialProviderResponseSuccess
+
+      interface _DeletePaymentManagerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeletePaymentManagerResponse]
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def payment_manager_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_payment_manager-instance_method
+      def delete_payment_manager: (
+                                    payment_manager_id: ::String,
+                                    ?client_token: ::String
+                                  ) -> _DeletePaymentManagerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePaymentManagerResponseSuccess
 
       interface _DeletePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyResponse]
@@ -2225,6 +2415,61 @@ module Aws
                                         ) -> _GetOnlineEvaluationConfigResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOnlineEvaluationConfigResponseSuccess
 
+      interface _GetPaymentConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentConnectorResponse]
+        def payment_connector_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_payment_connector-instance_method
+      def get_payment_connector: (
+                                   payment_manager_id: ::String,
+                                   payment_connector_id: ::String
+                                 ) -> _GetPaymentConnectorResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentConnectorResponseSuccess
+
+      interface _GetPaymentCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentCredentialProviderResponse]
+        def name: () -> ::String
+        def credential_provider_arn: () -> ::String
+        def credential_provider_vendor: () -> ("CoinbaseCDP" | "StripePrivy")
+        def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_payment_credential_provider-instance_method
+      def get_payment_credential_provider: (
+                                             name: ::String
+                                           ) -> _GetPaymentCredentialProviderResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentCredentialProviderResponseSuccess
+
+      interface _GetPaymentManagerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPaymentManagerResponse]
+        def payment_manager_arn: () -> ::String
+        def payment_manager_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def authorizer_configuration: () -> Types::AuthorizerConfiguration
+        def role_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def created_at: () -> ::Time
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_payment_manager-instance_method
+      def get_payment_manager: (
+                                 payment_manager_id: ::String
+                               ) -> _GetPaymentManagerResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPaymentManagerResponseSuccess
+
       interface _GetPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyResponse]
         def policy_id: () -> ::String
@@ -2580,6 +2825,43 @@ module Aws
                                           ) -> _ListOnlineEvaluationConfigsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOnlineEvaluationConfigsResponseSuccess
 
+      interface _ListPaymentConnectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentConnectorsResponse]
+        def payment_connectors: () -> ::Array[Types::PaymentConnectorSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_payment_connectors-instance_method
+      def list_payment_connectors: (
+                                     payment_manager_id: ::String,
+                                     ?max_results: ::Integer,
+                                     ?next_token: ::String
+                                   ) -> _ListPaymentConnectorsResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentConnectorsResponseSuccess
+
+      interface _ListPaymentCredentialProvidersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentCredentialProvidersResponse]
+        def credential_providers: () -> ::Array[Types::PaymentCredentialProviderItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_payment_credential_providers-instance_method
+      def list_payment_credential_providers: (
+                                               ?next_token: ::String,
+                                               ?max_results: ::Integer
+                                             ) -> _ListPaymentCredentialProvidersResponseSuccess
+                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentCredentialProvidersResponseSuccess
+
+      interface _ListPaymentManagersResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPaymentManagersResponse]
+        def payment_managers: () -> ::Array[Types::PaymentManagerSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_payment_managers-instance_method
+      def list_payment_managers: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListPaymentManagersResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPaymentManagersResponseSuccess
+
       interface _ListPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPoliciesResponse]
         def policies: () -> ::Array[Types::Policy]
@@ -2892,6 +3174,14 @@ module Aws
                                     {
                                       session_storage: {
                                         mount_path: ::String
+                                      }?,
+                                      s3_files_access_point: {
+                                        access_point_arn: ::String,
+                                        mount_path: ::String
+                                      }?,
+                                      efs_access_point: {
+                                        access_point_arn: ::String,
+                                        mount_path: ::String
                                       }?
                                     },
                                   ],
@@ -3050,7 +3340,13 @@ module Aws
                               mcp: {
                                 supported_versions: Array[::String]?,
                                 instructions: ::String?,
-                                search_type: ("SEMANTIC")?
+                                search_type: ("SEMANTIC")?,
+                                session_configuration: {
+                                  session_timeout_in_seconds: ::Integer?
+                                }?,
+                                streaming_configuration: {
+                                  enable_response_streaming: bool?
+                                }?
                               }?
                             },
                             authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE" | "AUTHENTICATE_ONLY"),
@@ -3387,6 +3683,14 @@ module Aws
                                 filesystem_configurations: Array[
                                   {
                                     session_storage: {
+                                      mount_path: ::String
+                                    }?,
+                                    s3_files_access_point: {
+                                      access_point_arn: ::String,
+                                      mount_path: ::String
+                                    }?,
+                                    efs_access_point: {
+                                      access_point_arn: ::String,
                                       mount_path: ::String
                                     }?
                                   },
@@ -4213,6 +4517,138 @@ module Aws
                                              ?execution_status: ("ENABLED" | "DISABLED")
                                            ) -> _UpdateOnlineEvaluationConfigResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOnlineEvaluationConfigResponseSuccess
+
+      interface _UpdatePaymentConnectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePaymentConnectorResponse]
+        def payment_connector_id: () -> ::String
+        def payment_manager_id: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("CoinbaseCDP" | "StripePrivy")
+        def credential_provider_configurations: () -> ::Array[Types::CredentialsProviderConfiguration]
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_payment_connector-instance_method
+      def update_payment_connector: (
+                                      payment_manager_id: ::String,
+                                      payment_connector_id: ::String,
+                                      ?description: ::String,
+                                      ?type: ("CoinbaseCDP" | "StripePrivy"),
+                                      ?credential_provider_configurations: Array[
+                                        {
+                                          coinbase_cdp: {
+                                            credential_provider_arn: ::String
+                                          }?,
+                                          stripe_privy: {
+                                            credential_provider_arn: ::String
+                                          }?
+                                        },
+                                      ],
+                                      ?client_token: ::String
+                                    ) -> _UpdatePaymentConnectorResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePaymentConnectorResponseSuccess
+
+      interface _UpdatePaymentCredentialProviderResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePaymentCredentialProviderResponse]
+        def name: () -> ::String
+        def credential_provider_vendor: () -> ("CoinbaseCDP" | "StripePrivy")
+        def credential_provider_arn: () -> ::String
+        def provider_configuration_output: () -> Types::PaymentProviderConfigurationOutput
+        def created_time: () -> ::Time
+        def last_updated_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_payment_credential_provider-instance_method
+      def update_payment_credential_provider: (
+                                                name: ::String,
+                                                credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy"),
+                                                provider_configuration_input: {
+                                                  coinbase_cdp_configuration: {
+                                                    api_key_id: ::String,
+                                                    api_key_secret: ::String,
+                                                    wallet_secret: ::String
+                                                  }?,
+                                                  stripe_privy_configuration: {
+                                                    app_id: ::String,
+                                                    app_secret: ::String,
+                                                    authorization_private_key: ::String,
+                                                    authorization_id: ::String
+                                                  }?
+                                                }
+                                              ) -> _UpdatePaymentCredentialProviderResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePaymentCredentialProviderResponseSuccess
+
+      interface _UpdatePaymentManagerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePaymentManagerResponse]
+        def payment_manager_arn: () -> ::String
+        def payment_manager_id: () -> ::String
+        def name: () -> ::String
+        def authorizer_type: () -> ("CUSTOM_JWT" | "AWS_IAM")
+        def role_arn: () -> ::String
+        def workload_identity_details: () -> Types::WorkloadIdentityDetails
+        def last_updated_at: () -> ::Time
+        def status: () -> ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_payment_manager-instance_method
+      def update_payment_manager: (
+                                    payment_manager_id: ::String,
+                                    ?description: ::String,
+                                    ?authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
+                                    ?authorizer_configuration: {
+                                      custom_jwt_authorizer: {
+                                        discovery_url: ::String,
+                                        allowed_audience: Array[::String]?,
+                                        allowed_clients: Array[::String]?,
+                                        allowed_scopes: Array[::String]?,
+                                        custom_claims: Array[
+                                          {
+                                            inbound_token_claim_name: ::String,
+                                            inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
+                                            authorizing_claim_match_value: {
+                                              claim_match_value: {
+                                                match_value_string: ::String?,
+                                                match_value_string_list: Array[::String]?
+                                              },
+                                              claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
+                                            }
+                                          },
+                                        ]?,
+                                        private_endpoint: {
+                                          self_managed_lattice_resource: {
+                                            resource_configuration_identifier: ::String?
+                                          }?,
+                                          managed_vpc_resource: {
+                                            vpc_identifier: ::String,
+                                            subnet_ids: Array[::String],
+                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
+                                            security_group_ids: Array[::String]?,
+                                            tags: Hash[::String, ::String]?,
+                                            routing_domain: ::String?
+                                          }?
+                                        }?,
+                                        private_endpoint_overrides: Array[
+                                          {
+                                            domain: ::String,
+                                            private_endpoint: {
+                                              self_managed_lattice_resource: {
+                                                resource_configuration_identifier: ::String?
+                                              }?,
+                                              managed_vpc_resource: {
+                                                vpc_identifier: ::String,
+                                                subnet_ids: Array[::String],
+                                                endpoint_ip_address_type: ("IPV4" | "IPV6"),
+                                                security_group_ids: Array[::String]?,
+                                                tags: Hash[::String, ::String]?,
+                                                routing_domain: ::String?
+                                              }?
+                                            }
+                                          },
+                                        ]?
+                                      }?
+                                    },
+                                    ?role_arn: ::String,
+                                    ?client_token: ::String
+                                  ) -> _UpdatePaymentManagerResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePaymentManagerResponseSuccess
 
       interface _UpdatePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyResponse]

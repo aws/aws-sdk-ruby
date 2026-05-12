@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2026-05-06)
+------------------
+
+* Feature - Adds support for a CustomLogGroupPrefix parameter in StartDataQualityRulesetEvaluationRun to specify custom CloudWatch log group paths, and a RulesetName filter in ListDataQualityRulesetEvaluationRuns to filter evaluation runs by ruleset name.
+
 1.254.0 (2026-04-27)
 ------------------
 

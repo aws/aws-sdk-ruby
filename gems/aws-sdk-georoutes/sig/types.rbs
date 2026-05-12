@@ -550,7 +550,7 @@ module Aws::GeoRoutes
     end
 
     class RouteFerryNotice
-      attr_accessor code: ("AccuratePolylineUnavailable" | "NoSchedule" | "Other" | "ViolatedAvoidFerry" | "ViolatedAvoidRailFerry" | "SeasonalClosure" | "PotentialViolatedVehicleRestrictionUsage")
+      attr_accessor code: ("AccuratePolylineUnavailable" | "NoSchedule" | "Other" | "ViolatedAvoidFerry" | "ViolatedAvoidRailFerry" | "SeasonalClosure" | "PotentialViolatedVehicleRestrictionUsage" | "ViolatedAvoidAreas" | "ViolatedVehicleRestriction")
       attr_accessor impact: ("High" | "Low")
       SENSITIVE: []
     end
@@ -866,7 +866,7 @@ module Aws::GeoRoutes
     end
 
     class RoutePedestrianNotice
-      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidTunnel" | "ViolatedPedestrianOption")
+      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidTunnel" | "ViolatedPedestrianOption" | "ViolatedAvoidAreas")
       attr_accessor impact: ("High" | "Low")
       SENSITIVE: []
     end
@@ -1223,7 +1223,7 @@ module Aws::GeoRoutes
     end
 
     class RouteVehicleNotice
-      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "PotentialViolatedAvoidTollRoadUsage" | "PotentialViolatedCarpoolUsage" | "PotentialViolatedTurnRestrictionUsage" | "PotentialViolatedVehicleRestrictionUsage" | "PotentialViolatedZoneRestrictionUsage" | "SeasonalClosure" | "TollsDataTemporarilyUnavailable" | "TollsDataUnavailable" | "TollTransponder" | "ViolatedAvoidControlledAccessHighway" | "ViolatedAvoidDifficultTurns" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidSeasonalClosure" | "ViolatedAvoidTollRoad" | "ViolatedAvoidTollTransponder" | "ViolatedAvoidTruckRoadType" | "ViolatedAvoidTunnel" | "ViolatedAvoidUTurns" | "ViolatedBlockedRoad" | "ViolatedCarpool" | "ViolatedEmergencyGate" | "ViolatedStartDirection" | "ViolatedTurnRestriction" | "ViolatedVehicleRestriction" | "ViolatedZoneRestriction")
+      attr_accessor code: ("AccuratePolylineUnavailable" | "Other" | "PotentialViolatedAvoidTollRoadUsage" | "PotentialViolatedCarpoolUsage" | "PotentialViolatedTurnRestrictionUsage" | "PotentialViolatedVehicleRestrictionUsage" | "PotentialViolatedZoneRestrictionUsage" | "SeasonalClosure" | "TollsDataTemporarilyUnavailable" | "TollsDataUnavailable" | "TollTransponder" | "ViolatedAvoidControlledAccessHighway" | "ViolatedAvoidDifficultTurns" | "ViolatedAvoidDirtRoad" | "ViolatedAvoidSeasonalClosure" | "ViolatedAvoidTollRoad" | "ViolatedAvoidTollTransponder" | "ViolatedAvoidTruckRoadType" | "ViolatedAvoidTunnel" | "ViolatedAvoidUTurns" | "ViolatedBlockedRoad" | "ViolatedCarpool" | "ViolatedEmergencyGate" | "ViolatedStartDirection" | "ViolatedTurnRestriction" | "ViolatedVehicleRestriction" | "ViolatedZoneRestriction" | "TravelTimeExceedsDriverWorkHours")
       attr_accessor details: ::Array[Types::RouteVehicleNoticeDetail]
       attr_accessor impact: ("High" | "Low")
       SENSITIVE: []
@@ -1469,7 +1469,7 @@ module Aws::GeoRoutes
 
     class WaypointOptimizationDrivingDistanceOptions
       attr_accessor driving_distance: ::Integer
-      SENSITIVE: [:driving_distance]
+      SENSITIVE: []
     end
 
     class WaypointOptimizationExclusionOptions

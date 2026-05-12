@@ -137,6 +137,11 @@ module Aws::LexModelsV2
     AttachmentUrl = Shapes::StringShape.new(name: 'AttachmentUrl')
     AudioAndDTMFInputSpecification = Shapes::StructureShape.new(name: 'AudioAndDTMFInputSpecification')
     AudioFileS3Location = Shapes::StringShape.new(name: 'AudioFileS3Location')
+    AudioFillerDelayInMilliseconds = Shapes::IntegerShape.new(name: 'AudioFillerDelayInMilliseconds')
+    AudioFillerDeliveryDelayInMilliseconds = Shapes::IntegerShape.new(name: 'AudioFillerDeliveryDelayInMilliseconds')
+    AudioFillerDurationInMilliseconds = Shapes::IntegerShape.new(name: 'AudioFillerDurationInMilliseconds')
+    AudioFillerSettings = Shapes::StructureShape.new(name: 'AudioFillerSettings')
+    AudioFillerType = Shapes::StringShape.new(name: 'AudioFillerType')
     AudioLogDestination = Shapes::StructureShape.new(name: 'AudioLogDestination')
     AudioLogSetting = Shapes::StructureShape.new(name: 'AudioLogSetting')
     AudioLogSettingsList = Shapes::ListShape.new(name: 'AudioLogSettingsList')
@@ -1128,6 +1133,13 @@ module Aws::LexModelsV2
     AudioAndDTMFInputSpecification.add_member(:dtmf_specification, Shapes::ShapeRef.new(shape: DTMFSpecification, location_name: "dtmfSpecification"))
     AudioAndDTMFInputSpecification.struct_class = Types::AudioAndDTMFInputSpecification
 
+    AudioFillerSettings.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    AudioFillerSettings.add_member(:audio_type, Shapes::ShapeRef.new(shape: AudioFillerType, location_name: "audioType"))
+    AudioFillerSettings.add_member(:start_delay_in_milliseconds, Shapes::ShapeRef.new(shape: AudioFillerDelayInMilliseconds, location_name: "startDelayInMilliseconds"))
+    AudioFillerSettings.add_member(:minimum_play_duration_in_milliseconds, Shapes::ShapeRef.new(shape: AudioFillerDurationInMilliseconds, location_name: "minimumPlayDurationInMilliseconds"))
+    AudioFillerSettings.add_member(:response_delivery_delay_in_milliseconds, Shapes::ShapeRef.new(shape: AudioFillerDeliveryDelayInMilliseconds, location_name: "responseDeliveryDelayInMilliseconds"))
+    AudioFillerSettings.struct_class = Types::AudioFillerSettings
+
     AudioLogDestination.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3BucketLogDestination, required: true, location_name: "s3Bucket"))
     AudioLogDestination.struct_class = Types::AudioLogDestination
 
@@ -1300,6 +1312,7 @@ module Aws::LexModelsV2
     BotLocaleImportSpecification.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     BotLocaleImportSpecification.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
     BotLocaleImportSpecification.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    BotLocaleImportSpecification.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     BotLocaleImportSpecification.struct_class = Types::BotLocaleImportSpecification
 
     BotLocaleSortBy.add_member(:attribute, Shapes::ShapeRef.new(shape: BotLocaleSortAttribute, required: true, location_name: "attribute"))
@@ -1550,6 +1563,7 @@ module Aws::LexModelsV2
     CreateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, required: true, location_name: "nluIntentConfidenceThreshold"))
     CreateBotLocaleRequest.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     CreateBotLocaleRequest.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    CreateBotLocaleRequest.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     CreateBotLocaleRequest.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     CreateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     CreateBotLocaleRequest.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
@@ -1563,6 +1577,7 @@ module Aws::LexModelsV2
     CreateBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
     CreateBotLocaleResponse.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     CreateBotLocaleResponse.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    CreateBotLocaleResponse.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     CreateBotLocaleResponse.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     CreateBotLocaleResponse.add_member(:bot_locale_status, Shapes::ShapeRef.new(shape: BotLocaleStatus, location_name: "botLocaleStatus"))
     CreateBotLocaleResponse.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "creationDateTime"))
@@ -1993,6 +2008,7 @@ module Aws::LexModelsV2
     DescribeBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
     DescribeBotLocaleResponse.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     DescribeBotLocaleResponse.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    DescribeBotLocaleResponse.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     DescribeBotLocaleResponse.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     DescribeBotLocaleResponse.add_member(:intents_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "intentsCount"))
     DescribeBotLocaleResponse.add_member(:slot_types_count, Shapes::ShapeRef.new(shape: ResourceCount, location_name: "slotTypesCount"))
@@ -3735,6 +3751,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleRequest.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, required: true, location_name: "nluIntentConfidenceThreshold"))
     UpdateBotLocaleRequest.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     UpdateBotLocaleRequest.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    UpdateBotLocaleRequest.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     UpdateBotLocaleRequest.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     UpdateBotLocaleRequest.add_member(:generative_ai_settings, Shapes::ShapeRef.new(shape: GenerativeAISettings, location_name: "generativeAISettings"))
     UpdateBotLocaleRequest.add_member(:speech_detection_sensitivity, Shapes::ShapeRef.new(shape: SpeechDetectionSensitivity, location_name: "speechDetectionSensitivity"))
@@ -3748,6 +3765,7 @@ module Aws::LexModelsV2
     UpdateBotLocaleResponse.add_member(:nlu_intent_confidence_threshold, Shapes::ShapeRef.new(shape: ConfidenceThreshold, location_name: "nluIntentConfidenceThreshold"))
     UpdateBotLocaleResponse.add_member(:voice_settings, Shapes::ShapeRef.new(shape: VoiceSettings, location_name: "voiceSettings"))
     UpdateBotLocaleResponse.add_member(:unified_speech_settings, Shapes::ShapeRef.new(shape: UnifiedSpeechSettings, location_name: "unifiedSpeechSettings"))
+    UpdateBotLocaleResponse.add_member(:audio_filler_settings, Shapes::ShapeRef.new(shape: AudioFillerSettings, location_name: "audioFillerSettings"))
     UpdateBotLocaleResponse.add_member(:speech_recognition_settings, Shapes::ShapeRef.new(shape: SpeechRecognitionSettings, location_name: "speechRecognitionSettings"))
     UpdateBotLocaleResponse.add_member(:bot_locale_status, Shapes::ShapeRef.new(shape: BotLocaleStatus, location_name: "botLocaleStatus"))
     UpdateBotLocaleResponse.add_member(:failure_reasons, Shapes::ShapeRef.new(shape: FailureReasons, location_name: "failureReasons"))

@@ -5457,6 +5457,14 @@ module Aws::QuickSight
     #   The ability to generate analysis using AI
     #   @return [String]
     #
+    # @!attribute [rw] story
+    #   The ability to perform Story-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] scenario
+    #   The ability to perform Scenario-related actions.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Capabilities AWS API Documentation
     #
     class Capabilities < Struct.new(
@@ -5680,7 +5688,9 @@ module Aws::QuickSight
       :self_upgrade_user_role,
       :extension,
       :manage_shared_folders,
-      :generate_analyses)
+      :generate_analyses,
+      :story,
+      :scenario)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7288,6 +7298,46 @@ module Aws::QuickSight
     class ControlSortConfiguration < Struct.new(
       :selectable_values_sort,
       :control_column_sort)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configures the display properties of the control title.
+    #
+    # @!attribute [rw] font_configuration
+    #   Configures the font settings for the control title.
+    #   @return [Types::FontConfiguration]
+    #
+    # @!attribute [rw] text_alignment
+    #   Determines the alignment of the control title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ControlTitleFontConfiguration AWS API Documentation
+    #
+    class ControlTitleFontConfiguration < Struct.new(
+      :font_configuration,
+      :text_alignment)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The title format text configuration for a sheet control. This is a
+    # tagged union type. Specify either `PlainText` or `RichText`, but not
+    # both.
+    #
+    # @!attribute [rw] plain_text
+    #   The plain text format of the title text.
+    #   @return [String]
+    #
+    # @!attribute [rw] rich_text
+    #   The rich text format of the title text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ControlTitleFormatText AWS API Documentation
+    #
+    class ControlTitleFormatText < Struct.new(
+      :plain_text,
+      :rich_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13239,11 +13289,16 @@ module Aws::QuickSight
     #   The control option for the `DefaultFilterControlConfiguration`.
     #   @return [Types::DefaultFilterControlOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the default filter control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DefaultFilterControlConfiguration AWS API Documentation
     #
     class DefaultFilterControlConfiguration < Struct.new(
       :title,
-      :control_options)
+      :control_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19409,6 +19464,10 @@ module Aws::QuickSight
     #   `DateTimePickerControl`.
     #   @return [String]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDateTimePickerControl AWS API Documentation
     #
     class FilterDateTimePickerControl < Struct.new(
@@ -19417,7 +19476,8 @@ module Aws::QuickSight
       :source_filter_id,
       :display_options,
       :type,
-      :commit_mode)
+      :commit_mode,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19472,6 +19532,10 @@ module Aws::QuickSight
     #   one sort configuration can be applied per control.
     #   @return [Array<Types::ControlSortConfiguration>]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterDropDownControl AWS API Documentation
     #
     class FilterDropDownControl < Struct.new(
@@ -19483,7 +19547,8 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
-      :control_sort_configurations)
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19626,6 +19691,10 @@ module Aws::QuickSight
     #   one sort configuration can be applied per control.
     #   @return [Array<Types::ControlSortConfiguration>]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterListControl AWS API Documentation
     #
     class FilterListControl < Struct.new(
@@ -19636,7 +19705,8 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
-      :control_sort_configurations)
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19749,6 +19819,10 @@ module Aws::QuickSight
     #   `FilterRelativeDateTimeControl`.
     #   @return [String]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterRelativeDateTimeControl AWS API Documentation
     #
     class FilterRelativeDateTimeControl < Struct.new(
@@ -19756,7 +19830,8 @@ module Aws::QuickSight
       :title,
       :source_filter_id,
       :display_options,
-      :commit_mode)
+      :commit_mode,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19841,6 +19916,10 @@ module Aws::QuickSight
     #   The number of increments that the slider bar is divided into.
     #   @return [Float]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterSliderControl AWS API Documentation
     #
     class FilterSliderControl < Struct.new(
@@ -19851,7 +19930,8 @@ module Aws::QuickSight
       :type,
       :maximum_value,
       :minimum_value,
-      :step_size)
+      :step_size,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19879,6 +19959,10 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::TextAreaControlDisplayOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterTextAreaControl AWS API Documentation
     #
     class FilterTextAreaControl < Struct.new(
@@ -19886,7 +19970,8 @@ module Aws::QuickSight
       :title,
       :source_filter_id,
       :delimiter,
-      :display_options)
+      :display_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19909,13 +19994,18 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::TextFieldControlDisplayOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/FilterTextFieldControl AWS API Documentation
     #
     class FilterTextFieldControl < Struct.new(
       :filter_control_id,
       :title,
       :source_filter_id,
-      :display_options)
+      :display_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22640,13 +22730,35 @@ module Aws::QuickSight
     #   The timestamp at which the session will expire.
     #   @return [Time]
     #
+    # @!attribute [rw] context_region
+    #   The region in which the context is to be used. Use this parameter to
+    #   obtain an identity context for cross-region use.
+    #
+    #   The specified region must meet the following conditions:
+    #
+    #   * The region must be in the same Amazon Web Services partition as
+    #     the region you are calling from. Cross-partition requests are not
+    #     supported. For example, you cannot specify a region in the
+    #     `aws-cn` partition when calling from a region in the `aws`
+    #     partition.
+    #
+    #   * It must be a valid Amazon QuickSight supported region.
+    #
+    #   * The calling customer account must be enabled in the specified
+    #     context region.
+    #
+    #   * This parameter is not supported when calling from an opt-in
+    #     region.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/GetIdentityContextRequest AWS API Documentation
     #
     class GetIdentityContextRequest < Struct.new(
       :aws_account_id,
       :user_identifier,
       :namespace,
-      :session_expires_at)
+      :session_expires_at,
+      :context_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29013,13 +29125,21 @@ module Aws::QuickSight
     #   The resource uri of the identity provider.
     #   @return [String]
     #
+    # @!attribute [rw] identity_provider_ca_certificates_bundle_s3_uri
+    #   The S3 URI of the identity provider's CA certificates bundle in PEM
+    #   format. Use this parameter to provide a custom CA certificate bundle
+    #   for the identity provider when the default trust store does not
+    #   include the required certificates.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/OAuthParameters AWS API Documentation
     #
     class OAuthParameters < Struct.new(
       :token_provider_url,
       :o_auth_scope,
       :identity_provider_vpc_connection_properties,
-      :identity_provider_resource_uri)
+      :identity_provider_resource_uri,
+      :identity_provider_ca_certificates_bundle_s3_uri)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29321,13 +29441,18 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::DateTimePickerControlDisplayOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterDateTimePickerControl AWS API Documentation
     #
     class ParameterDateTimePickerControl < Struct.new(
       :parameter_control_id,
       :title,
       :source_parameter_name,
-      :display_options)
+      :display_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29414,6 +29539,10 @@ module Aws::QuickSight
     #   one sort configuration can be applied per control.
     #   @return [Array<Types::ControlSortConfiguration>]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterDropDownControl AWS API Documentation
     #
     class ParameterDropDownControl < Struct.new(
@@ -29425,7 +29554,8 @@ module Aws::QuickSight
       :selectable_values,
       :cascading_control_configuration,
       :commit_mode,
-      :control_sort_configurations)
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29468,6 +29598,10 @@ module Aws::QuickSight
     #   one sort configuration can be applied per control.
     #   @return [Array<Types::ControlSortConfiguration>]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterListControl AWS API Documentation
     #
     class ParameterListControl < Struct.new(
@@ -29478,7 +29612,8 @@ module Aws::QuickSight
       :type,
       :selectable_values,
       :cascading_control_configuration,
-      :control_sort_configurations)
+      :control_sort_configurations,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29533,6 +29668,10 @@ module Aws::QuickSight
     #   The number of increments that the slider bar is divided into.
     #   @return [Float]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterSliderControl AWS API Documentation
     #
     class ParameterSliderControl < Struct.new(
@@ -29542,7 +29681,8 @@ module Aws::QuickSight
       :display_options,
       :maximum_value,
       :minimum_value,
-      :step_size)
+      :step_size,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29570,6 +29710,10 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::TextAreaControlDisplayOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterTextAreaControl AWS API Documentation
     #
     class ParameterTextAreaControl < Struct.new(
@@ -29577,7 +29721,8 @@ module Aws::QuickSight
       :title,
       :source_parameter_name,
       :delimiter,
-      :display_options)
+      :display_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29600,13 +29745,18 @@ module Aws::QuickSight
     #   The display options of a control.
     #   @return [Types::TextFieldControlDisplayOptions]
     #
+    # @!attribute [rw] control_title_format_text
+    #   The title text format configuration for the control.
+    #   @return [Types::ControlTitleFormatText]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ParameterTextFieldControl AWS API Documentation
     #
     class ParameterTextFieldControl < Struct.new(
       :parameter_control_id,
       :title,
       :source_parameter_name,
-      :display_options)
+      :display_options,
+      :control_title_format_text)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -41240,6 +41390,10 @@ module Aws::QuickSight
     #   Configures the display properties of the visual sub-title.
     #   @return [Types::VisualSubtitleFontConfiguration]
     #
+    # @!attribute [rw] control_title_font_configuration
+    #   Configures the display properties of the control title.
+    #   @return [Types::ControlTitleFontConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/Typography AWS API Documentation
     #
     class Typography < Struct.new(
@@ -41250,7 +41404,8 @@ module Aws::QuickSight
       :legend_value_font_configuration,
       :data_label_font_configuration,
       :visual_title_font_configuration,
-      :visual_subtitle_font_configuration)
+      :visual_subtitle_font_configuration,
+      :control_title_font_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

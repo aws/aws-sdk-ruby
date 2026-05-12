@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2026-05-06)
+------------------
+
+* Feature - Release GenerateRecommendedPolicyV2 and GetRecommendedPolicyV2 APIs. This supports generating and retrieving policy recommendations to remediate unused permissions findings that are now being supported on Security Hub.
+
 1.154.0 (2026-04-13)
 ------------------
 

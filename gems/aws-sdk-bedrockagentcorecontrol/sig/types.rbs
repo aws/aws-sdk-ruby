@@ -337,6 +337,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:description]
     end
 
+    class CoinbaseCdpConfigurationInput
+      attr_accessor api_key_id: ::String
+      attr_accessor api_key_secret: ::String
+      attr_accessor wallet_secret: ::String
+      SENSITIVE: [:api_key_secret, :wallet_secret]
+    end
+
+    class CoinbaseCdpConfigurationOutput
+      attr_accessor api_key_id: ::String
+      attr_accessor api_key_secret_arn: Types::Secret
+      attr_accessor wallet_secret_arn: Types::Secret
+      SENSITIVE: []
+    end
+
     class ComponentConfiguration
       attr_accessor configuration: untyped
       SENSITIVE: []
@@ -777,6 +791,68 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CreatePaymentConnectorRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreatePaymentConnectorResponse
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class CreatePaymentCredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provider_configuration_input: Types::PaymentProviderConfigurationInput
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePaymentCredentialProviderResponse
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor provider_configuration_output: Types::PaymentProviderConfigurationOutput
+      SENSITIVE: []
+    end
+
+    class CreatePaymentManagerRequest
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreatePaymentManagerResponse
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor created_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class CreatePolicyEngineRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -892,6 +968,20 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY" | "CALLER_IAM_CREDENTIALS" | "JWT_PASSTHROUGH")
       attr_accessor credential_provider: Types::CredentialProvider
       SENSITIVE: []
+    end
+
+    class CredentialsProviderConfiguration
+      attr_accessor coinbase_cdp: Types::PaymentCredentialProviderConfiguration
+      attr_accessor stripe_privy: Types::PaymentCredentialProviderConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdp < CredentialsProviderConfiguration
+      end
+      class StripePrivy < CredentialsProviderConfiguration
+      end
+      class Unknown < CredentialsProviderConfiguration
+      end
     end
 
     class CustomClaimValidationType
@@ -1267,6 +1357,39 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class DeletePaymentConnectorRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentConnectorResponse
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor payment_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentCredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentCredentialProviderResponse < Aws::EmptyStructure
+    end
+
+    class DeletePaymentManagerRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeletePaymentManagerResponse
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor payment_manager_id: ::String
+      SENSITIVE: []
+    end
+
     class DeletePolicyEngineRequest
       attr_accessor policy_engine_id: ::String
       SENSITIVE: []
@@ -1345,6 +1468,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor a2a: Types::A2aDescriptor
       attr_accessor custom: Types::CustomDescriptor
       attr_accessor agent_skills: Types::AgentSkillsDescriptor
+      SENSITIVE: []
+    end
+
+    class EfsAccessPointConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
       SENSITIVE: []
     end
 
@@ -1501,10 +1630,16 @@ module Aws::BedrockAgentCoreControl
 
     class FilesystemConfiguration
       attr_accessor session_storage: Types::SessionStorageConfiguration
+      attr_accessor s3_files_access_point: Types::S3FilesAccessPointConfiguration
+      attr_accessor efs_access_point: Types::EfsAccessPointConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class SessionStorage < FilesystemConfiguration
+      end
+      class S3FilesAccessPoint < FilesystemConfiguration
+      end
+      class EfsAccessPoint < FilesystemConfiguration
       end
       class Unknown < FilesystemConfiguration
       end
@@ -1937,6 +2072,61 @@ module Aws::BedrockAgentCoreControl
       attr_accessor updated_at: ::Time
       attr_accessor failure_reason: ::String
       SENSITIVE: [:description]
+    end
+
+    class GetPaymentConnectorRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor payment_connector_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentConnectorResponse
+      attr_accessor payment_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class GetPaymentCredentialProviderRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentCredentialProviderResponse
+      attr_accessor name: ::String
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provider_configuration_output: Types::PaymentProviderConfigurationOutput
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GetPaymentManagerRequest
+      attr_accessor payment_manager_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPaymentManagerResponse
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
     end
 
     class GetPolicyEngineRequest
@@ -2725,6 +2915,43 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListPaymentConnectorsRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentConnectorsResponse
+      attr_accessor payment_connectors: ::Array[Types::PaymentConnectorSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentCredentialProvidersRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPaymentCredentialProvidersResponse
+      attr_accessor credential_providers: ::Array[Types::PaymentCredentialProviderItem]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentManagersRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListPaymentManagersResponse
+      attr_accessor payment_managers: ::Array[Types::PaymentManagerSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPoliciesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -2847,6 +3074,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor supported_versions: ::Array[::String]
       attr_accessor instructions: ::String
       attr_accessor search_type: ("SEMANTIC")
+      attr_accessor session_configuration: Types::SessionConfiguration
+      attr_accessor streaming_configuration: Types::StreamingConfiguration
       SENSITIVE: []
     end
 
@@ -3286,6 +3515,70 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class PaymentConnectorSummary
+      attr_accessor payment_connector_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentCredentialProviderConfiguration
+      attr_accessor credential_provider_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PaymentCredentialProviderItem
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentManagerSummary
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class PaymentProviderConfigurationInput
+      attr_accessor coinbase_cdp_configuration: Types::CoinbaseCdpConfigurationInput
+      attr_accessor stripe_privy_configuration: Types::StripePrivyConfigurationInput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdpConfiguration < PaymentProviderConfigurationInput
+      end
+      class StripePrivyConfiguration < PaymentProviderConfigurationInput
+      end
+      class Unknown < PaymentProviderConfigurationInput
+      end
+    end
+
+    class PaymentProviderConfigurationOutput
+      attr_accessor coinbase_cdp_configuration: Types::CoinbaseCdpConfigurationOutput
+      attr_accessor stripe_privy_configuration: Types::StripePrivyConfigurationOutput
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdpConfiguration < PaymentProviderConfigurationOutput
+      end
+      class StripePrivyConfiguration < PaymentProviderConfigurationOutput
+      end
+      class Unknown < PaymentProviderConfigurationOutput
+      end
+    end
+
     class Policy
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
@@ -3568,6 +3861,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class S3FilesAccessPointConfiguration
+      attr_accessor access_point_arn: ::String
+      attr_accessor mount_path: ::String
+      SENSITIVE: []
+    end
+
     class S3Location
       attr_accessor bucket: ::String
       attr_accessor prefix: ::String
@@ -3696,6 +3995,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class SessionConfiguration
+      attr_accessor session_timeout_in_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class SessionStorageConfiguration
       attr_accessor mount_path: ::String
       SENSITIVE: []
@@ -3796,6 +4100,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class StreamingConfiguration
+      attr_accessor enable_response_streaming: bool
+      SENSITIVE: []
+    end
+
     class StringListValidation
       attr_accessor allowed_values: ::Array[::String]
       attr_accessor max_items: ::Integer
@@ -3804,6 +4113,22 @@ module Aws::BedrockAgentCoreControl
 
     class StringValidation
       attr_accessor allowed_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class StripePrivyConfigurationInput
+      attr_accessor app_id: ::String
+      attr_accessor app_secret: ::String
+      attr_accessor authorization_private_key: ::String
+      attr_accessor authorization_id: ::String
+      SENSITIVE: [:app_secret, :authorization_private_key]
+    end
+
+    class StripePrivyConfigurationOutput
+      attr_accessor app_id: ::String
+      attr_accessor app_secret_arn: Types::Secret
+      attr_accessor authorization_private_key_arn: Types::Secret
+      attr_accessor authorization_id: ::String
       SENSITIVE: []
     end
 
@@ -4315,6 +4640,66 @@ module Aws::BedrockAgentCoreControl
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "ERROR")
       attr_accessor execution_status: ("ENABLED" | "DISABLED")
       attr_accessor failure_reason: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentConnectorRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor description: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentConnectorResponse
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentCredentialProviderRequest
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provider_configuration_input: Types::PaymentProviderConfigurationInput
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentCredentialProviderResponse
+      attr_accessor name: ::String
+      attr_accessor credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor credential_provider_arn: ::String
+      attr_accessor provider_configuration_output: Types::PaymentProviderConfigurationOutput
+      attr_accessor created_time: ::Time
+      attr_accessor last_updated_time: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentManagerRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor description: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor authorizer_configuration: Types::AuthorizerConfiguration
+      attr_accessor role_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePaymentManagerResponse
+      attr_accessor payment_manager_arn: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor name: ::String
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
+      attr_accessor role_arn: ::String
+      attr_accessor workload_identity_details: Types::WorkloadIdentityDetails
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 

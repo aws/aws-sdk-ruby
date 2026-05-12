@@ -23,6 +23,9 @@ module Aws::Invoicing
     BasicStringWithoutSpace = Shapes::StringShape.new(name: 'BasicStringWithoutSpace')
     BatchGetInvoiceProfileRequest = Shapes::StructureShape.new(name: 'BatchGetInvoiceProfileRequest')
     BatchGetInvoiceProfileResponse = Shapes::StructureShape.new(name: 'BatchGetInvoiceProfileResponse')
+    BillSourceAccountList = Shapes::ListShape.new(name: 'BillSourceAccountList')
+    BillType = Shapes::StringShape.new(name: 'BillType')
+    BillingEntity = Shapes::StringShape.new(name: 'BillingEntity')
     BillingPeriod = Shapes::StructureShape.new(name: 'BillingPeriod')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BuyerDomain = Shapes::StringShape.new(name: 'BuyerDomain')
@@ -50,6 +53,7 @@ module Aws::Invoicing
     EinvoiceDeliveryDocumentType = Shapes::StringShape.new(name: 'EinvoiceDeliveryDocumentType')
     EinvoiceDeliveryDocumentTypes = Shapes::ListShape.new(name: 'EinvoiceDeliveryDocumentTypes')
     EinvoiceDeliveryPreference = Shapes::StructureShape.new(name: 'EinvoiceDeliveryPreference')
+    EinvoiceDeliveryStatus = Shapes::StringShape.new(name: 'EinvoiceDeliveryStatus')
     EmailString = Shapes::StringShape.new(name: 'EmailString')
     Entity = Shapes::StructureShape.new(name: 'Entity')
     FeesBreakdown = Shapes::StructureShape.new(name: 'FeesBreakdown')
@@ -65,6 +69,7 @@ module Aws::Invoicing
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     InvoiceCurrencyAmount = Shapes::StructureShape.new(name: 'InvoiceCurrencyAmount')
+    InvoiceFrequency = Shapes::StringShape.new(name: 'InvoiceFrequency')
     InvoicePDF = Shapes::StructureShape.new(name: 'InvoicePDF')
     InvoiceProfile = Shapes::StructureShape.new(name: 'InvoiceProfile')
     InvoiceSummaries = Shapes::ListShape.new(name: 'InvoiceSummaries')
@@ -110,6 +115,7 @@ module Aws::Invoicing
     PutProcurementPortalPreferenceRequest = Shapes::StructureShape.new(name: 'PutProcurementPortalPreferenceRequest')
     PutProcurementPortalPreferenceResponse = Shapes::StructureShape.new(name: 'PutProcurementPortalPreferenceResponse')
     ReceiverAddress = Shapes::StructureShape.new(name: 'ReceiverAddress')
+    ReceiverRole = Shapes::StringShape.new(name: 'ReceiverRole')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
     ResourceTagKey = Shapes::StringShape.new(name: 'ResourceTagKey')
@@ -122,11 +128,13 @@ module Aws::Invoicing
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StringWithoutNewLine = Shapes::StringShape.new(name: 'StringWithoutNewLine')
     SupplementalDocument = Shapes::StructureShape.new(name: 'SupplementalDocument')
+    SupplementalDocumentType = Shapes::StringShape.new(name: 'SupplementalDocumentType')
     SupplementalDocuments = Shapes::ListShape.new(name: 'SupplementalDocuments')
     SupplierDomain = Shapes::StringShape.new(name: 'SupplierDomain')
     TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagrisArn = Shapes::StringShape.new(name: 'TagrisArn')
+    TaxAuthorityStatus = Shapes::StringShape.new(name: 'TaxAuthorityStatus')
     TaxInheritanceDisabledFlag = Shapes::BooleanShape.new(name: 'TaxInheritanceDisabledFlag')
     TaxesBreakdown = Shapes::StructureShape.new(name: 'TaxesBreakdown')
     TaxesBreakdownAmount = Shapes::StructureShape.new(name: 'TaxesBreakdownAmount')
@@ -164,6 +172,8 @@ module Aws::Invoicing
 
     BatchGetInvoiceProfileResponse.add_member(:profiles, Shapes::ShapeRef.new(shape: ProfileList, location_name: "Profiles"))
     BatchGetInvoiceProfileResponse.struct_class = Types::BatchGetInvoiceProfileResponse
+
+    BillSourceAccountList.member = Shapes::ShapeRef.new(shape: AccountIdString)
 
     BillingPeriod.add_member(:month, Shapes::ShapeRef.new(shape: Month, required: true, location_name: "Month"))
     BillingPeriod.add_member(:year, Shapes::ShapeRef.new(shape: Year, required: true, location_name: "Year"))
@@ -256,6 +266,7 @@ module Aws::Invoicing
     EinvoiceDeliveryPreference.struct_class = Types::EinvoiceDeliveryPreference
 
     Entity.add_member(:invoicing_entity, Shapes::ShapeRef.new(shape: BasicString, location_name: "InvoicingEntity"))
+    Entity.add_member(:billing_entity, Shapes::ShapeRef.new(shape: BillingEntity, location_name: "BillingEntity"))
     Entity.struct_class = Types::Entity
 
     FeesBreakdown.add_member(:breakdown, Shapes::ShapeRef.new(shape: FeesBreakdownAmountList, location_name: "Breakdown"))
@@ -330,6 +341,7 @@ module Aws::Invoicing
     InvoiceSummariesFilter.add_member(:time_interval, Shapes::ShapeRef.new(shape: DateInterval, location_name: "TimeInterval"))
     InvoiceSummariesFilter.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))
     InvoiceSummariesFilter.add_member(:invoicing_entity, Shapes::ShapeRef.new(shape: BasicString, location_name: "InvoicingEntity"))
+    InvoiceSummariesFilter.add_member(:receiver_role, Shapes::ShapeRef.new(shape: ReceiverRole, location_name: "ReceiverRole"))
     InvoiceSummariesFilter.struct_class = Types::InvoiceSummariesFilter
 
     InvoiceSummariesSelector.add_member(:resource_type, Shapes::ShapeRef.new(shape: ListInvoiceSummariesResourceType, required: true, location_name: "ResourceType"))
@@ -340,11 +352,19 @@ module Aws::Invoicing
     InvoiceSummary.add_member(:invoice_id, Shapes::ShapeRef.new(shape: BasicString, location_name: "InvoiceId"))
     InvoiceSummary.add_member(:issued_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "IssuedDate"))
     InvoiceSummary.add_member(:due_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DueDate"))
+    InvoiceSummary.add_member(:bill_source_accounts, Shapes::ShapeRef.new(shape: BillSourceAccountList, location_name: "BillSourceAccounts"))
+    InvoiceSummary.add_member(:bill_source_accounts_total_count, Shapes::ShapeRef.new(shape: Integer, location_name: "BillSourceAccountsTotalCount"))
+    InvoiceSummary.add_member(:receiver_role, Shapes::ShapeRef.new(shape: ReceiverRole, location_name: "ReceiverRole"))
     InvoiceSummary.add_member(:entity, Shapes::ShapeRef.new(shape: Entity, location_name: "Entity"))
     InvoiceSummary.add_member(:billing_period, Shapes::ShapeRef.new(shape: BillingPeriod, location_name: "BillingPeriod"))
+    InvoiceSummary.add_member(:invoice_frequency, Shapes::ShapeRef.new(shape: InvoiceFrequency, location_name: "InvoiceFrequency"))
+    InvoiceSummary.add_member(:bill_type, Shapes::ShapeRef.new(shape: BillType, location_name: "BillType"))
     InvoiceSummary.add_member(:invoice_type, Shapes::ShapeRef.new(shape: InvoiceType, location_name: "InvoiceType"))
+    InvoiceSummary.add_member(:commercial_invoice_id, Shapes::ShapeRef.new(shape: BasicString, location_name: "CommercialInvoiceId"))
     InvoiceSummary.add_member(:original_invoice_id, Shapes::ShapeRef.new(shape: BasicString, location_name: "OriginalInvoiceId"))
     InvoiceSummary.add_member(:purchase_order_number, Shapes::ShapeRef.new(shape: BasicString, location_name: "PurchaseOrderNumber"))
+    InvoiceSummary.add_member(:einvoice_delivery_status, Shapes::ShapeRef.new(shape: EinvoiceDeliveryStatus, location_name: "EinvoiceDeliveryStatus"))
+    InvoiceSummary.add_member(:tax_authority_status, Shapes::ShapeRef.new(shape: TaxAuthorityStatus, location_name: "TaxAuthorityStatus"))
     InvoiceSummary.add_member(:base_currency_amount, Shapes::ShapeRef.new(shape: InvoiceCurrencyAmount, location_name: "BaseCurrencyAmount"))
     InvoiceSummary.add_member(:tax_currency_amount, Shapes::ShapeRef.new(shape: InvoiceCurrencyAmount, location_name: "TaxCurrencyAmount"))
     InvoiceSummary.add_member(:payment_currency_amount, Shapes::ShapeRef.new(shape: InvoiceCurrencyAmount, location_name: "PaymentCurrencyAmount"))
@@ -505,6 +525,8 @@ module Aws::Invoicing
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: BasicString, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    SupplementalDocument.add_member(:document_type, Shapes::ShapeRef.new(shape: SupplementalDocumentType, location_name: "DocumentType"))
+    SupplementalDocument.add_member(:document_id, Shapes::ShapeRef.new(shape: StringWithoutNewLine, location_name: "DocumentId"))
     SupplementalDocument.add_member(:document_url, Shapes::ShapeRef.new(shape: StringWithoutNewLine, location_name: "DocumentUrl"))
     SupplementalDocument.add_member(:document_url_expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "DocumentUrlExpirationDate"))
     SupplementalDocument.struct_class = Types::SupplementalDocument

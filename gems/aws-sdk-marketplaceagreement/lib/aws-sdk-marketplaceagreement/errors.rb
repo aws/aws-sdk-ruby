@@ -31,6 +31,7 @@ module Aws::MarketplaceAgreement
   # * {ConflictException}
   # * {InternalServerException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
   #
@@ -57,6 +58,11 @@ module Aws::MarketplaceAgreement
       # @return [String]
       def message
         @message || @data[:message]
+      end
+
+      # @return [String]
+      def reason
+        @data[:reason]
       end
     end
 
@@ -137,6 +143,46 @@ module Aws::MarketplaceAgreement
       # @return [String]
       def resource_type
         @data[:resource_type]
+      end
+    end
+
+    class ServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MarketplaceAgreement::Types::ServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def quota_code
+        @data[:quota_code]
+      end
+
+      # @return [String]
+      def service_code
+        @data[:service_code]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
       end
     end
 

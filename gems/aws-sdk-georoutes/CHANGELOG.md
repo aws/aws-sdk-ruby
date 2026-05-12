@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.21.0 (2026-05-04)
+------------------
+
+* Feature - Added support for TravelTimeExceedsDriverWorkHours, ViolatedBlockedRoad, and ViolatedVehicleRestriction notice codes to the CalculateRoutes API response.
+
 1.20.0 (2026-04-01)
 ------------------
 

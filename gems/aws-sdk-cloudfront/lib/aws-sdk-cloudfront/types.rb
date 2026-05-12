@@ -2937,12 +2937,17 @@ module Aws::CloudFront
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateFunctionRequest AWS API Documentation
     #
     class CreateFunctionRequest < Struct.new(
       :name,
       :function_config,
-      :function_code)
+      :function_code,
+      :tags)
       SENSITIVE = [:function_code]
       include Aws::Structure
     end
@@ -3093,12 +3098,17 @@ module Aws::CloudFront
     #   must be in a valid JSON format.
     #   @return [Types::ImportSource]
     #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateKeyValueStoreRequest AWS API Documentation
     #
     class CreateKeyValueStoreRequest < Struct.new(
       :name,
       :comment,
-      :import_source)
+      :import_source,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end

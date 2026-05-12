@@ -246,6 +246,7 @@ module Aws
         def security_group_ids: () -> ::Array[::String]
         def ip_address_type: () -> ("IPV4" | "IPV6" | "DUALSTACK")
         def ipv4_addresses_per_eni: () -> ::Integer
+        def resource_config_dns_resolution: () -> ("IN_VPC" | "PUBLIC")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#create_resource_gateway-instance_method
       def create_resource_gateway: (
@@ -256,6 +257,7 @@ module Aws
                                      ?security_group_ids: Array[::String],
                                      ?ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK"),
                                      ?ipv4_addresses_per_eni: ::Integer,
+                                     ?resource_config_dns_resolution: ("IN_VPC" | "PUBLIC"),
                                      ?tags: Hash[::String, ::String]
                                    ) -> _CreateResourceGatewayResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceGatewayResponseSuccess
@@ -743,9 +745,12 @@ module Aws
         def status: () -> ("ACTIVE" | "CREATE_IN_PROGRESS" | "UPDATE_IN_PROGRESS" | "DELETE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
         def vpc_id: () -> ::String
         def subnet_ids: () -> ::Array[::String]
+        def service_managed: () -> bool
+        def managed_by: () -> ::String
         def security_group_ids: () -> ::Array[::String]
         def ip_address_type: () -> ("IPV4" | "IPV6" | "DUALSTACK")
         def ipv4_addresses_per_eni: () -> ::Integer
+        def resource_config_dns_resolution: () -> ("IN_VPC" | "PUBLIC")
         def created_at: () -> ::Time
         def last_updated_at: () -> ::Time
       end

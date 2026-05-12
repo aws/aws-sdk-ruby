@@ -10647,6 +10647,10 @@ module Aws::QConnect
     #   Span completion status
     #   @return [String]
     #
+    # @!attribute [rw] status_description
+    #   Human-readable error description when status is ERROR or TIMEOUT
+    #   @return [String]
+    #
     # @!attribute [rw] request_id
     #   The service request ID that initiated the operation
     #   @return [String]
@@ -10671,6 +10675,7 @@ module Aws::QConnect
       :start_timestamp,
       :end_timestamp,
       :status,
+      :status_description,
       :request_id,
       :origin_request_id,
       :attributes)
@@ -10817,6 +10822,11 @@ module Aws::QConnect
     #   AI prompt version number
     #   @return [Integer]
     #
+    # @!attribute [rw] time_to_first_token_ms
+    #   Time to first token in milliseconds, measured from when Amazon
+    #   Bedrock was invoked to when the first token was returned
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SpanAttributes AWS API Documentation
     #
     class SpanAttributes < Struct.new(
@@ -10853,7 +10863,8 @@ module Aws::QConnect
       :prompt_id,
       :prompt_type,
       :prompt_name,
-      :prompt_version)
+      :prompt_version,
+      :time_to_first_token_ms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10904,7 +10915,7 @@ module Aws::QConnect
     #   @return [Time]
     #
     # @!attribute [rw] values
-    #   Message content values (text, tool use, tool result)
+    #   Message content values (text, tool use, tool result, reasoning)
     #   @return [Array<Types::SpanMessageValue>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SpanMessage AWS API Documentation
@@ -10918,7 +10929,8 @@ module Aws::QConnect
       include Aws::Structure
     end
 
-    # Message content value - can be text, tool invocation, or tool result
+    # Message content value - can be text, tool invocation, tool result, or
+    # reasoning
     #
     # @note SpanMessageValue is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SpanMessageValue corresponding to the set member.
     #
@@ -10934,12 +10946,17 @@ module Aws::QConnect
     #   Tool result message content
     #   @return [Types::SpanToolResultValue]
     #
+    # @!attribute [rw] reasoning
+    #   Model reasoning and it's internal decision making process
+    #   @return [Types::SpanReasoningValue]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SpanMessageValue AWS API Documentation
     #
     class SpanMessageValue < Struct.new(
       :text,
       :tool_use,
       :tool_result,
+      :reasoning,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -10948,7 +10965,22 @@ module Aws::QConnect
       class Text < SpanMessageValue; end
       class ToolUse < SpanMessageValue; end
       class ToolResult < SpanMessageValue; end
+      class Reasoning < SpanMessageValue; end
       class Unknown < SpanMessageValue; end
+    end
+
+    # Model reasoning and it's internal decision making process
+    #
+    # @!attribute [rw] value
+    #   The reasoning text content
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SpanReasoningValue AWS API Documentation
+    #
+    class SpanReasoningValue < Struct.new(
+      :value)
+      SENSITIVE = [:value]
+      include Aws::Structure
     end
 
     # Text message content

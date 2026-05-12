@@ -80,6 +80,107 @@ module Aws::AppStream
       include Aws::Structure
     end
 
+    # The configuration for agent access on a stack. Agent access enables AI
+    # agents to interact with desktop applications during streaming
+    # sessions.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action. You must specify at least one setting.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored. Required when ScreenshotsUploadEnabled is
+    #   true.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Indicates whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AgentAccessConfig AWS API Documentation
+    #
+    class AgentAccessConfig < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for updating agent access on a stack. This type
+    # supports partial updates, so you only need to specify the fields you
+    # want to change.
+    #
+    # @!attribute [rw] settings
+    #   The list of agent access settings that define permissions for each
+    #   agent action.
+    #   @return [Array<Types::AgentAccessSetting>]
+    #
+    # @!attribute [rw] s3_bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket where agent
+    #   screenshots are stored.
+    #   @return [String]
+    #
+    # @!attribute [rw] screenshots_upload_enabled
+    #   Indicates whether screenshot uploads to Amazon S3 are enabled for
+    #   agent sessions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] screen_resolution
+    #   The screen resolution for the agent streaming environment.
+    #   @return [String]
+    #
+    # @!attribute [rw] screen_image_format
+    #   The image format for agent screen captures.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AgentAccessConfigForUpdate AWS API Documentation
+    #
+    class AgentAccessConfigForUpdate < Struct.new(
+      :settings,
+      :s3_bucket_arn,
+      :screenshots_upload_enabled,
+      :screen_resolution,
+      :screen_image_format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A permission setting for an agent action. Each setting specifies an
+    # agent action and whether it is enabled or disabled.
+    #
+    # @!attribute [rw] agent_action
+    #   The agent action to configure. Valid values are COMPUTER\_VISION and
+    #   COMPUTER\_INPUT. If you enable COMPUTER\_INPUT, you must also enable
+    #   COMPUTER\_VISION.
+    #   @return [String]
+    #
+    # @!attribute [rw] permission
+    #   Whether the agent action is enabled or disabled.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/AgentAccessSetting AWS API Documentation
+    #
+    class AgentAccessSetting < Struct.new(
+      :agent_action,
+      :permission)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes an app block.
     #
     # App blocks are a WorkSpaces Applications resource that stores the
@@ -2320,6 +2421,11 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the stack. If specified, agent
+    #   access is enabled for the stack.
+    #   @return [Types::AgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -2335,7 +2441,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      :content_redirection)
+      :content_redirection,
+      :agent_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5858,6 +5965,11 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] agent_access_config
+    #   The agent access configuration of the stack, if agent access is
+    #   enabled.
+    #   @return [Types::AgentAccessConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -5875,7 +5987,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      :content_redirection)
+      :content_redirection,
+      :agent_access_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6920,6 +7033,12 @@ module Aws::AppStream
     #   URLs from the remote desktop to the local browser.
     #   @return [Types::ContentRedirection]
     #
+    # @!attribute [rw] agent_access_config
+    #   The configuration for agent access on the stack. Specify this to
+    #   update agent access settings. To remove agent access, use
+    #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
+    #   @return [Types::AgentAccessConfigForUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -6936,7 +7055,8 @@ module Aws::AppStream
       :access_endpoints,
       :embed_host_domains,
       :streaming_experience_settings,
-      :content_redirection)
+      :content_redirection,
+      :agent_access_config)
       SENSITIVE = []
       include Aws::Structure
     end

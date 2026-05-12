@@ -1359,6 +1359,7 @@ module Aws::CloudFront
     CreateFunctionRequest.add_member(:name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "Name"))
     CreateFunctionRequest.add_member(:function_config, Shapes::ShapeRef.new(shape: FunctionConfig, required: true, location_name: "FunctionConfig"))
     CreateFunctionRequest.add_member(:function_code, Shapes::ShapeRef.new(shape: FunctionBlob, required: true, location_name: "FunctionCode"))
+    CreateFunctionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
     CreateFunctionResult.add_member(:function_summary, Shapes::ShapeRef.new(shape: FunctionSummary, location_name: "FunctionSummary"))
@@ -1407,6 +1408,7 @@ module Aws::CloudFront
     CreateKeyValueStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: KeyValueStoreName, required: true, location_name: "Name"))
     CreateKeyValueStoreRequest.add_member(:comment, Shapes::ShapeRef.new(shape: KeyValueStoreComment, location_name: "Comment"))
     CreateKeyValueStoreRequest.add_member(:import_source, Shapes::ShapeRef.new(shape: ImportSource, location_name: "ImportSource"))
+    CreateKeyValueStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateKeyValueStoreRequest.struct_class = Types::CreateKeyValueStoreRequest
 
     CreateKeyValueStoreResult.add_member(:key_value_store, Shapes::ShapeRef.new(shape: KeyValueStore, location_name: "KeyValueStore"))

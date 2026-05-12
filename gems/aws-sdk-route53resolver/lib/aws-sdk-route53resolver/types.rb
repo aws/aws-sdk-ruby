@@ -725,6 +725,35 @@ module Aws::Route53Resolver
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] dns_64_enabled
+    #   Specifies whether DNS64 is enabled for the inbound Resolver
+    #   endpoint. When set to `true`, Route 53 Resolver synthesizes AAAA
+    #   (IPv6) records for IPv4-only services by prepending the
+    #   `64:ff9b::/96` prefix to the IPv4 address. This enables IPv6-only
+    #   clients that send queries through the inbound endpoint to reach
+    #   IPv4-only services. DNS64 works with NAT64 to provide complete
+    #   IPv6-to-IPv4 translation. Default is false.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_internet_access_enabled
+    #   Specifies whether IPv6 internet access is enabled for the outbound
+    #   Resolver endpoint. When set to `true`, the endpoint elastic network
+    #   interfaces (ENIs) can forward DNS queries to public IPv6 targets
+    #   through an internet gateway. Default is false.
+    #
+    #   When you enable IPv6 internet access, use network controls like
+    #   security groups, NACLs, or egress-only internet gateways to protect
+    #   the endpoint ENIs from unsolicited ingress traffic. Be aware that
+    #   some network controls can affect DNS query throughput due to
+    #   connection tracking. For more information, see [Amazon EC2 security
+    #   group connection tracking][1] and [Resolver endpoint scaling][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/CreateResolverEndpointRequest AWS API Documentation
     #
     class CreateResolverEndpointRequest < Struct.new(
@@ -739,7 +768,9 @@ module Aws::Route53Resolver
       :resolver_endpoint_type,
       :protocols,
       :rni_enhanced_metrics_enabled,
-      :target_name_server_metrics_enabled)
+      :target_name_server_metrics_enabled,
+      :dns_64_enabled,
+      :ipv_6_internet_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4358,6 +4389,20 @@ module Aws::Route53Resolver
     #   endpoint.
     #   @return [Boolean]
     #
+    # @!attribute [rw] dns_64_enabled
+    #   Indicates whether DNS64 is enabled for the inbound Resolver
+    #   endpoint. When `true`, Route 53 Resolver synthesizes AAAA (IPv6)
+    #   records for IPv4-only services by prepending the `64:ff9b::/96`
+    #   prefix to the IPv4 address.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_internet_access_enabled
+    #   Indicates whether IPv6 internet access is enabled for the outbound
+    #   Resolver endpoint. When `true`, the endpoint elastic network
+    #   interfaces (ENIs) can forward DNS queries to public IPv6 targets
+    #   through an internet gateway.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/ResolverEndpoint AWS API Documentation
     #
     class ResolverEndpoint < Struct.new(
@@ -4378,7 +4423,9 @@ module Aws::Route53Resolver
       :resolver_endpoint_type,
       :protocols,
       :rni_enhanced_metrics_enabled,
-      :target_name_server_metrics_enabled)
+      :target_name_server_metrics_enabled,
+      :dns_64_enabled,
+      :ipv_6_internet_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5674,6 +5721,35 @@ module Aws::Route53Resolver
     #   [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] dns_64_enabled
+    #   Specifies whether DNS64 is enabled for the inbound Resolver
+    #   endpoint. When set to `true`, Route 53 Resolver synthesizes AAAA
+    #   (IPv6) records for IPv4-only services by prepending the
+    #   `64:ff9b::/96` prefix to the IPv4 address. This enables IPv6-only
+    #   clients that send queries through the inbound endpoint to reach
+    #   IPv4-only services. DNS64 works with NAT64 to provide complete
+    #   IPv6-to-IPv4 translation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipv_6_internet_access_enabled
+    #   Specifies whether IPv6 internet access is enabled for the outbound
+    #   Resolver endpoint. When set to `true`, the endpoint elastic network
+    #   interfaces (ENIs) can forward DNS queries to public IPv6 targets
+    #   through an internet gateway.
+    #
+    #   When you enable IPv6 internet access, use network controls like
+    #   security groups, NACLs, or egress-only internet gateways to protect
+    #   the endpoint ENIs from unsolicited ingress traffic. Be aware that
+    #   some network controls can affect DNS query throughput due to
+    #   connection tracking. For more information, see [Amazon EC2 security
+    #   group connection tracking][1] and [Resolver endpoint scaling][2].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html
+    #   [2]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53resolver-2018-04-01/UpdateResolverEndpointRequest AWS API Documentation
     #
     class UpdateResolverEndpointRequest < Struct.new(
@@ -5683,7 +5759,9 @@ module Aws::Route53Resolver
       :update_ip_addresses,
       :protocols,
       :rni_enhanced_metrics_enabled,
-      :target_name_server_metrics_enabled)
+      :target_name_server_metrics_enabled,
+      :dns_64_enabled,
+      :ipv_6_internet_access_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

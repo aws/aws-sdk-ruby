@@ -1732,7 +1732,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].ferry_leg_details.departure.place.waypoint_index #=> Integer
     #   resp.routes[0].legs[0].ferry_leg_details.departure.time #=> String
     #   resp.routes[0].legs[0].ferry_leg_details.notices #=> Array
-    #   resp.routes[0].legs[0].ferry_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "NoSchedule", "Other", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry", "SeasonalClosure", "PotentialViolatedVehicleRestrictionUsage"
+    #   resp.routes[0].legs[0].ferry_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "NoSchedule", "Other", "ViolatedAvoidFerry", "ViolatedAvoidRailFerry", "SeasonalClosure", "PotentialViolatedVehicleRestrictionUsage", "ViolatedAvoidAreas", "ViolatedVehicleRestriction"
     #   resp.routes[0].legs[0].ferry_leg_details.notices[0].impact #=> String, one of "High", "Low"
     #   resp.routes[0].legs[0].ferry_leg_details.pass_through_waypoints #=> Array
     #   resp.routes[0].legs[0].ferry_leg_details.pass_through_waypoints[0].geometry_offset #=> Integer
@@ -1782,7 +1782,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].pedestrian_leg_details.departure.place.waypoint_index #=> Integer
     #   resp.routes[0].legs[0].pedestrian_leg_details.departure.time #=> String
     #   resp.routes[0].legs[0].pedestrian_leg_details.notices #=> Array
-    #   resp.routes[0].legs[0].pedestrian_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "Other", "ViolatedAvoidDirtRoad", "ViolatedAvoidTunnel", "ViolatedPedestrianOption"
+    #   resp.routes[0].legs[0].pedestrian_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "Other", "ViolatedAvoidDirtRoad", "ViolatedAvoidTunnel", "ViolatedPedestrianOption", "ViolatedAvoidAreas"
     #   resp.routes[0].legs[0].pedestrian_leg_details.notices[0].impact #=> String, one of "High", "Low"
     #   resp.routes[0].legs[0].pedestrian_leg_details.pass_through_waypoints #=> Array
     #   resp.routes[0].legs[0].pedestrian_leg_details.pass_through_waypoints[0].geometry_offset #=> Integer
@@ -1916,7 +1916,7 @@ module Aws::GeoRoutes
     #   resp.routes[0].legs[0].vehicle_leg_details.incidents[0].start_time #=> String
     #   resp.routes[0].legs[0].vehicle_leg_details.incidents[0].type #=> String, one of "Accident", "Congestion", "Construction", "DisabledVehicle", "LaneRestriction", "MassTransit", "Other", "PlannedEvent", "RoadClosure", "RoadHazard", "Weather"
     #   resp.routes[0].legs[0].vehicle_leg_details.notices #=> Array
-    #   resp.routes[0].legs[0].vehicle_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "Other", "PotentialViolatedAvoidTollRoadUsage", "PotentialViolatedCarpoolUsage", "PotentialViolatedTurnRestrictionUsage", "PotentialViolatedVehicleRestrictionUsage", "PotentialViolatedZoneRestrictionUsage", "SeasonalClosure", "TollsDataTemporarilyUnavailable", "TollsDataUnavailable", "TollTransponder", "ViolatedAvoidControlledAccessHighway", "ViolatedAvoidDifficultTurns", "ViolatedAvoidDirtRoad", "ViolatedAvoidSeasonalClosure", "ViolatedAvoidTollRoad", "ViolatedAvoidTollTransponder", "ViolatedAvoidTruckRoadType", "ViolatedAvoidTunnel", "ViolatedAvoidUTurns", "ViolatedBlockedRoad", "ViolatedCarpool", "ViolatedEmergencyGate", "ViolatedStartDirection", "ViolatedTurnRestriction", "ViolatedVehicleRestriction", "ViolatedZoneRestriction"
+    #   resp.routes[0].legs[0].vehicle_leg_details.notices[0].code #=> String, one of "AccuratePolylineUnavailable", "Other", "PotentialViolatedAvoidTollRoadUsage", "PotentialViolatedCarpoolUsage", "PotentialViolatedTurnRestrictionUsage", "PotentialViolatedVehicleRestrictionUsage", "PotentialViolatedZoneRestrictionUsage", "SeasonalClosure", "TollsDataTemporarilyUnavailable", "TollsDataUnavailable", "TollTransponder", "ViolatedAvoidControlledAccessHighway", "ViolatedAvoidDifficultTurns", "ViolatedAvoidDirtRoad", "ViolatedAvoidSeasonalClosure", "ViolatedAvoidTollRoad", "ViolatedAvoidTollTransponder", "ViolatedAvoidTruckRoadType", "ViolatedAvoidTunnel", "ViolatedAvoidUTurns", "ViolatedBlockedRoad", "ViolatedCarpool", "ViolatedEmergencyGate", "ViolatedStartDirection", "ViolatedTurnRestriction", "ViolatedVehicleRestriction", "ViolatedZoneRestriction", "TravelTimeExceedsDriverWorkHours"
     #   resp.routes[0].legs[0].vehicle_leg_details.notices[0].details #=> Array
     #   resp.routes[0].legs[0].vehicle_leg_details.notices[0].details[0].title #=> String
     #   resp.routes[0].legs[0].vehicle_leg_details.notices[0].details[0].violated_constraints.all_hazards_restricted #=> Boolean
@@ -2540,7 +2540,7 @@ module Aws::GeoRoutes
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-georoutes'
-      context[:gem_version] = '1.20.0'
+      context[:gem_version] = '1.21.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

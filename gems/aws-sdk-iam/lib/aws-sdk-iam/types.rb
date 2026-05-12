@@ -1123,6 +1123,12 @@ module Aws::IAM
     #   see [Obtaining the thumbprint for an OpenID Connect provider][1] in
     #   the *IAM user Guide*.
     #
+    #   <note markdown="1"> If your OIDC provider's discovery endpoint and JWKS endpoint
+    #   (`jwks_uri`) use different certificates or hosts, include the
+    #   thumbprints for both endpoints in this list.
+    #
+    #    </note>
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/identity-providers-oidc-obtain-thumbprint.html

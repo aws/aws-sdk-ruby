@@ -2427,6 +2427,23 @@ module Aws::EntityResolution
       include Aws::Structure
     end
 
+    # An object that contains configuration settings for the matching
+    # process in a rule-based matching workflow.
+    #
+    # @!attribute [rw] enable_transitive_matching
+    #   Enables transitive matching for the rule-based matching workflow.
+    #   When enabled, records that match through different rules are grouped
+    #   together into the same match group.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/MatchingConfig AWS API Documentation
+    #
+    class MatchingConfig < Struct.new(
+      :enable_transitive_matching)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of `MatchingWorkflowSummary` objects, each of which contain the
     # fields `workflowName`, `workflowArn`, `resolutionType`, `createdAt`,
     # `updatedAt`.
@@ -3063,10 +3080,16 @@ module Aws::EntityResolution
     #   `condition`.
     #   @return [Array<Types::RuleCondition>]
     #
+    # @!attribute [rw] matching_config
+    #   An object that contains configuration settings for the matching
+    #   process.
+    #   @return [Types::MatchingConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/entityresolution-2018-05-10/RuleConditionProperties AWS API Documentation
     #
     class RuleConditionProperties < Struct.new(
-      :rules)
+      :rules,
+      :matching_config)
       SENSITIVE = []
       include Aws::Structure
     end

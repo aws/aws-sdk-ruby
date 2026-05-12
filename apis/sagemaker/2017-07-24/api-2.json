@@ -5647,7 +5647,8 @@
         "ml.r6id.12xlarge",
         "ml.r6id.16xlarge",
         "ml.r6id.24xlarge",
-        "ml.r6id.32xlarge"
+        "ml.r6id.32xlarge",
+        "ml.p5.4xlarge"
       ]
     },
     "AppLifecycleManagement":{
@@ -8050,6 +8051,13 @@
         "MountPath":{"shape":"ClusterFsxMountPath"}
       }
     },
+    "ClusterImageVersionStatus":{
+      "type":"string",
+      "enum":[
+        "UpToDate",
+        "UpdateAvailable"
+      ]
+    },
     "ClusterInstanceCount":{
       "type":"integer",
       "box":true,
@@ -8078,6 +8086,7 @@
         "ScheduledUpdateConfig":{"shape":"ScheduledUpdateConfig"},
         "CurrentImageId":{"shape":"ImageId"},
         "DesiredImageId":{"shape":"ImageId"},
+        "ImageVersionStatus":{"shape":"ClusterImageVersionStatus"},
         "ActiveOperations":{"shape":"ActiveOperations"},
         "KubernetesConfig":{"shape":"ClusterKubernetesConfigDetails"},
         "CapacityRequirements":{"shape":"ClusterCapacityRequirements"},
@@ -8509,6 +8518,7 @@
         "Placement":{"shape":"ClusterInstancePlacement"},
         "CurrentImageId":{"shape":"ImageId"},
         "DesiredImageId":{"shape":"ImageId"},
+        "ImageVersionStatus":{"shape":"ClusterImageVersionStatus"},
         "UltraServerInfo":{"shape":"UltraServerInfo"},
         "KubernetesConfig":{"shape":"ClusterKubernetesConfigNodeDetails"},
         "CapacityType":{"shape":"ClusterCapacityType"},
@@ -8572,7 +8582,8 @@
         "LastSoftwareUpdateTime":{"shape":"Timestamp"},
         "InstanceStatus":{"shape":"ClusterInstanceStatusDetails"},
         "UltraServerInfo":{"shape":"UltraServerInfo"},
-        "PrivateDnsHostname":{"shape":"ClusterPrivateDnsHostname"}
+        "PrivateDnsHostname":{"shape":"ClusterPrivateDnsHostname"},
+        "ImageVersionStatus":{"shape":"ClusterImageVersionStatus"}
       }
     },
     "ClusterNonNegativeInstanceCount":{

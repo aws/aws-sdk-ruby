@@ -275,7 +275,10 @@ module Aws
                                               rule_name: ::String,
                                               condition: ::String
                                             },
-                                          ]
+                                          ],
+                                          matching_config: {
+                                            enable_transitive_matching: bool?
+                                          }?
                                         }?,
                                         provider_properties: {
                                           provider_service_arn: ::String,
@@ -871,7 +874,10 @@ module Aws
                                               rule_name: ::String,
                                               condition: ::String
                                             },
-                                          ]
+                                          ],
+                                          matching_config: {
+                                            enable_transitive_matching: bool?
+                                          }?
                                         }?,
                                         provider_properties: {
                                           provider_service_arn: ::String,

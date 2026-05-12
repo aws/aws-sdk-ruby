@@ -939,7 +939,9 @@ module Aws::Route53Domains
     #
     #   DONT\_KNOW
     #
-    #   : Reserved for future use.
+    #   : The TLD registry didn't respond in time or didn't provide a
+    #     definitive answer about domain transferability, which can occur
+    #     due to registry maintenance or temporary delays.
     #
     #   DOMAIN\_IN\_OWN\_ACCOUNT
     #
@@ -1035,8 +1037,10 @@ module Aws::Route53Domains
     #   domain. Here are the top-level domains that require additional
     #   parameters and the names of the parameters that they require:
     #
-    #   .com.au and .net.au
-    #   : * `AU_ID_NUMBER`
+    #   .au, .com.au, and .net.au
+    #   : * `AU_REGISTRANT_NAME`
+    #
+    #     * `AU_ID_NUMBER`
     #
     #     * `AU_ID_TYPE`
     #
@@ -1047,6 +1051,106 @@ module Aws::Route53Domains
     #       * `ACN` (Australian company number)
     #
     #       * `TM` (Trademark number)
+    #     * `AU_ELIGIBILITY_TYPE`
+    #
+    #       Valid values include the following:
+    #
+    #       * CHARITABLE\_TRUST (Charitable trust)
+    #
+    #       * CHARITY (Charity)
+    #
+    #       * CHILD\_CARE\_CENTRE (Child care centre)
+    #
+    #       * CLUB (Club)
+    #
+    #       * COMMERCIAL\_STATUTORY\_BODY (Commercial statutory body)
+    #
+    #       * COMMONWEALTH\_ENTITY (Commonwealth entity)
+    #
+    #       * COMPANY (Company)
+    #
+    #       * COMPANY\_LIMITED\_BY\_GUARANTEE (Company limited by guarantee)
+    #
+    #       * EDUCATIONAL\_INSTITUTION (Educational institution)
+    #
+    #       * GOVERNMENT\_SCHOOL (Government school)
+    #
+    #       * HIGHER\_EDUCATION\_INSTITUTION (Higher education institution)
+    #
+    #       * INCORPORATED\_ASSOCIATION (Incorporated association)
+    #
+    #       * INDIGENOUS\_CORPORATION (Indigenous corporation)
+    #
+    #       * INDUSTRY\_BODY (Industry body)
+    #
+    #       * INDUSTRY\_ORGANISATION (Industry association)
+    #
+    #       * NATIONAL\_BODY (National body)
+    #
+    #       * NON\_DISTRIBUTING\_COOPERATIVE (Non-distributing cooperative)
+    #
+    #       * NON\_GOVERNMENT\_SCHOOL (Non-government school)
+    #
+    #       * NON\_PROFIT\_ORGANISATION (Non-profit organisation)
+    #
+    #       * NON\_TRADING\_COOPERATIVE (Non-trading cooperative)
+    #
+    #       * NOT\_FOR\_PROFIT\_COMMUNITY\_GROUP (Not-for-profit community
+    #         group)
+    #
+    #       * PARTNERSHIP (Partnership)
+    #
+    #       * PEAK\_STATE\_TERRITORY\_BODY (Peak state/territory body)
+    #
+    #       * PENDING\_TM\_OWNER (Pending TM owner)
+    #
+    #       * POLITICAL\_PARTY (Political party)
+    #
+    #       * PRESCHOOL (Pre-school)
+    #
+    #       * PUBLIC\_PRIVATE\_ANCILLARY\_FUND (Public/private ancillary
+    #         fund)
+    #
+    #       * REGISTERED\_BUSINESS (Registered business)
+    #
+    #       * REGISTERED\_ORGANISATION (Registered organisation)
+    #
+    #       * REGISTRABLE\_BODY (Registrable body)
+    #
+    #       * RESEARCH\_ORGANISATION (Research organisation)
+    #
+    #       * STATUTORY\_BODY (Statutory body)
+    #
+    #       * TRADE\_UNION (Trade union)
+    #
+    #       * TRADEMARK\_OWNER (Trademark owner)
+    #
+    #       * TRADING\_COOPERATIVE (Trading cooperative)
+    #
+    #       * TRAINING\_ORGANISATION (Training organisation)
+    #
+    #       * TRUST (Trust)
+    #
+    #       * UNINCORPORATED\_ASSOCIATION (Unincorporated association)
+    #
+    #       * EDUCATION\_AND\_CARE\_SERVICES\_CHILDCARE (Education and care
+    #         services (child care))
+    #
+    #       * GOVERNMENT\_BODY (Government body)
+    #
+    #       * PROVIDER\_OF\_NON\_ACCREDITED\_TRAINING (Provider of
+    #         non-accredited training)
+    #
+    #       * RELIGIOUS\_CHURCH\_GROUP (Religious/church group)
+    #
+    #       * SOLE\_TRADER (Sole trader)
+    #     * `AU_POLICY_REASON`
+    #
+    #       Valid values include the following:
+    #
+    #       * `POLICY_REASON_1`
+    #
+    #         `POLICY_REASON_2`
     #
     #   .ca
     #   : * `BRAND_NUMBER`
@@ -1600,8 +1704,7 @@ module Aws::Route53Domains
     #   @return [Time]
     #
     # @!attribute [rw] reseller
-    #   Reseller of the domain. Domains registered or transferred using
-    #   Route 53 domains will have `"Amazon"` as the reseller.
+    #   Reserved for future use.
     #   @return [String]
     #
     # @!attribute [rw] dns_sec
@@ -1708,7 +1811,8 @@ module Aws::Route53Domains
     #
     # @!attribute [rw] suggestion_count
     #   The number of suggested domain names that you want Route 53 to
-    #   return. Specify a value between 1 and 50.
+    #   return. Specify a value between 1 and 50. Note that fewer than the
+    #   requested number might be returned.
     #   @return [Integer]
     #
     # @!attribute [rw] only_available
@@ -2627,6 +2731,27 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # The top-level domain is currently undergoing maintenance and the
+    # request cannot be processed. Try again later.
+    #
+    # @!attribute [rw] message
+    #   The top-level domain is currently undergoing maintenance and the
+    #   request cannot be processed. Try again later.
+    #   @return [String]
+    #
+    # @!attribute [rw] tld
+    #   The top-level domain that is currently undergoing maintenance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TLDInMaintenance AWS API Documentation
+    #
+    class TLDInMaintenance < Struct.new(
+      :message,
+      :tld)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The top-level domain does not support this operation.
     #
     # @!attribute [rw] message
@@ -2699,11 +2824,18 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] duration_in_years
-    #   The number of years that you want to register the domain for.
-    #   Domains are registered for a minimum of one year. The maximum period
-    #   depends on the top-level domain.
+    #   Reserved for future use.
+    #
+    #   Currently, the effect of a domain transfer on the registration
+    #   period varies by TLD. For information about how transferring a
+    #   domain affects the expiration date, see the Transfer Term column in
+    #   the pricing information at [Amazon Route 53 Pricing][1].
     #
     #   Default: 1
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/route53/pricing/
     #   @return [Integer]
     #
     # @!attribute [rw] nameservers

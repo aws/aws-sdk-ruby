@@ -106,6 +106,7 @@ module Aws::MedicalImaging
       attr_accessor input_s3_uri: ::String
       attr_accessor output_s3_uri: ::String
       attr_accessor message: ::String
+      attr_accessor import_configuration: Types::ImportConfiguration
       SENSITIVE: []
     end
 
@@ -199,6 +200,18 @@ module Aws::MedicalImaging
       attr_accessor image_set_state: ("ACTIVE" | "LOCKED" | "DELETED")
       attr_accessor image_set_workflow_status: ("CREATED" | "COPIED" | "COPYING" | "COPYING_WITH_READ_ONLY_ACCESS" | "COPY_FAILED" | "UPDATING" | "UPDATING_FOR_STUDY_CONSISTENCY" | "UPDATED" | "UPDATE_FAILED" | "DELETING" | "DELETED" | "IMPORTING" | "IMPORTED" | "IMPORT_FAILED")
       SENSITIVE: []
+    end
+
+    class DicomJsonMetadataImportConfiguration
+      attr_accessor dicom_metadata_mappings: ::Array[Types::DicomMetadataMapping]
+      SENSITIVE: []
+    end
+
+    class DicomMetadataMapping
+      attr_accessor study_instance_uid: ::String
+      attr_accessor series_instance_uid: ::String
+      attr_accessor metadata_file_path: ::String
+      SENSITIVE: [:study_instance_uid, :series_instance_uid]
     end
 
     class GetDICOMImportJobRequest
@@ -303,6 +316,17 @@ module Aws::MedicalImaging
       attr_accessor dicom_tags: Types::DICOMTags
       attr_accessor is_primary: bool
       SENSITIVE: []
+    end
+
+    class ImportConfiguration
+      attr_accessor dicom_json_metadata_import_configuration: Types::DicomJsonMetadataImportConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class DicomJsonMetadataImportConfiguration < ImportConfiguration
+      end
+      class Unknown < ImportConfiguration
+      end
     end
 
     class InternalServerException
@@ -476,6 +500,7 @@ module Aws::MedicalImaging
       attr_accessor input_s3_uri: ::String
       attr_accessor output_s3_uri: ::String
       attr_accessor input_owner_account_id: ::String
+      attr_accessor import_configuration: Types::ImportConfiguration
       SENSITIVE: []
     end
 

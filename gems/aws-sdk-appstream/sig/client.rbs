@@ -506,6 +506,18 @@ module Aws
                               allowed_urls: Array[::String]?,
                               denied_urls: Array[::String]?
                             }?
+                          },
+                          ?agent_access_config: {
+                            settings: Array[
+                              {
+                                agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT"),
+                                permission: ("ENABLED" | "DISABLED")
+                              },
+                            ],
+                            s3_bucket_arn: ::String?,
+                            screenshots_upload_enabled: bool?,
+                            screen_resolution: ("W_1280xH_720"),
+                            screen_image_format: ("PNG" | "JPEG")
                           }
                         ) -> _CreateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackResponseSuccess
@@ -1389,7 +1401,7 @@ module Aws
                           ?delete_storage_connectors: bool,
                           ?redirect_url: ::String,
                           ?feedback_url: ::String,
-                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION")],
+                          ?attributes_to_delete: Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "AGENT_ACCESS_CONFIG")],
                           ?user_settings: Array[
                             {
                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION"),
@@ -1417,6 +1429,18 @@ module Aws
                               allowed_urls: Array[::String]?,
                               denied_urls: Array[::String]?
                             }?
+                          },
+                          ?agent_access_config: {
+                            settings: Array[
+                              {
+                                agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT"),
+                                permission: ("ENABLED" | "DISABLED")
+                              },
+                            ]?,
+                            s3_bucket_arn: ::String?,
+                            screenshots_upload_enabled: bool?,
+                            screen_resolution: ("W_1280xH_720")?,
+                            screen_image_format: ("PNG" | "JPEG")?
                           }
                         ) -> _UpdateStackResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStackResponseSuccess

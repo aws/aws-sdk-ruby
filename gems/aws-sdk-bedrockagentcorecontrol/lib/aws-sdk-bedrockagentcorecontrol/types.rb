@@ -1096,6 +1096,55 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Coinbase CDP configuration - credentials provided by Coinbase
+    # Developer Platform
+    #
+    # @!attribute [rw] api_key_id
+    #   The API key identifier provided by Coinbase Developer Platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_secret
+    #   The API key secret provided by Coinbase Developer Platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] wallet_secret
+    #   The wallet secret provided by Coinbase Developer Platform.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CoinbaseCdpConfigurationInput AWS API Documentation
+    #
+    class CoinbaseCdpConfigurationInput < Struct.new(
+      :api_key_id,
+      :api_key_secret,
+      :wallet_secret)
+      SENSITIVE = [:api_key_secret, :wallet_secret]
+      include Aws::Structure
+    end
+
+    # Coinbase CDP configuration output with secret ARNs
+    #
+    # @!attribute [rw] api_key_id
+    #   The API key identifier provided by Coinbase Developer Platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] api_key_secret_arn
+    #   Contains information about a secret in AWS Secrets Manager.
+    #   @return [Types::Secret]
+    #
+    # @!attribute [rw] wallet_secret_arn
+    #   Contains information about a secret in AWS Secrets Manager.
+    #   @return [Types::Secret]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CoinbaseCdpConfigurationOutput AWS API Documentation
+    #
+    class CoinbaseCdpConfigurationOutput < Struct.new(
+      :api_key_id,
+      :api_key_secret_arn,
+      :wallet_secret_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a component within a configuration bundle. The
     # component type is inferred from the component identifier ARN.
     #
@@ -2958,6 +3007,282 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager to create the connector
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of payment connector, which determines the payment provider
+    #   integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_configurations
+    #   The credential provider configurations for the payment connector.
+    #   These configurations specify how the connector authenticates with
+    #   the payment provider.
+    #   @return [Array<Types::CredentialsProviderConfiguration>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentConnectorRequest AWS API Documentation
+    #
+    class CreatePaymentConnectorRequest < Struct.new(
+      :payment_manager_id,
+      :name,
+      :description,
+      :type,
+      :credential_provider_configurations,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the created payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the created payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the created payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_configurations
+    #   The credential provider configurations for the created payment
+    #   connector.
+    #   @return [Array<Types::CredentialsProviderConfiguration>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment connector. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentConnectorResponse AWS API Documentation
+    #
+    class CreatePaymentConnectorResponse < Struct.new(
+      :payment_connector_id,
+      :payment_manager_id,
+      :name,
+      :type,
+      :credential_provider_configurations,
+      :created_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   Unique name for the payment credential provider
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   The vendor type (e.g., CoinbaseCDP)
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration_input
+    #   Configuration specific to the vendor, including API credentials
+    #   @return [Types::PaymentProviderConfigurationInput]
+    #
+    # @!attribute [rw] tags
+    #   Optional tags for resource organization
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentCredentialProviderRequest AWS API Documentation
+    #
+    class CreatePaymentCredentialProviderRequest < Struct.new(
+      :name,
+      :credential_provider_vendor,
+      :provider_configuration_input,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the created payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the created payment credential
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration_output
+    #   Output configuration (contains secret ARNs, excludes actual secret
+    #   values)
+    #   @return [Types::PaymentProviderConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentCredentialProviderResponse AWS API Documentation
+    #
+    class CreatePaymentCredentialProviderResponse < Struct.new(
+      :name,
+      :credential_provider_vendor,
+      :credential_provider_arn,
+      :provider_configuration_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The type of authorizer to use for the payment manager.
+    #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM
+    #     credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_configuration
+    #   The authorizer configuration for the payment manager.
+    #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the payment
+    #   manager assumes to access resources on your behalf.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of tag keys and values to assign to the payment manager.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManagerRequest AWS API Documentation
+    #
+    class CreatePaymentManagerRequest < Struct.new(
+      :name,
+      :description,
+      :authorizer_type,
+      :authorizer_configuration,
+      :role_arn,
+      :client_token,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_arn
+    #   The Amazon Resource Name (ARN) of the created payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the created payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the created payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The type of authorizer for the created payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_configuration
+    #   Represents inbound authorization configuration options used to
+    #   authenticate incoming requests.
+    #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   created payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_details
+    #   The information about the workload identity.
+    #   @return [Types::WorkloadIdentityDetails]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment manager was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment manager. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the created payment manager.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentManagerResponse AWS API Documentation
+    #
+    class CreatePaymentManagerResponse < Struct.new(
+      :payment_manager_arn,
+      :payment_manager_id,
+      :name,
+      :authorizer_type,
+      :authorizer_configuration,
+      :role_arn,
+      :workload_identity_details,
+      :created_at,
+      :status,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The customer-assigned immutable name for the policy engine. This
     #   name identifies the policy engine and cannot be changed after
@@ -3503,6 +3828,39 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The credential provider configuration for a payment connector.
+    # Specifies the payment provider type and its associated credential
+    # provider.
+    #
+    # @note CredentialsProviderConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note CredentialsProviderConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of CredentialsProviderConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] coinbase_cdp
+    #   The credential provider configuration for a Coinbase CDP payment
+    #   connector.
+    #   @return [Types::PaymentCredentialProviderConfiguration]
+    #
+    # @!attribute [rw] stripe_privy
+    #   The credential provider configuration for a Stripe Privy payment
+    #   connector.
+    #   @return [Types::PaymentCredentialProviderConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CredentialsProviderConfiguration AWS API Documentation
+    #
+    class CredentialsProviderConfiguration < Struct.new(
+      :coinbase_cdp,
+      :stripe_privy,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdp < CredentialsProviderConfiguration; end
+      class StripePrivy < CredentialsProviderConfiguration; end
+      class Unknown < CredentialsProviderConfiguration; end
+    end
+
     # Defines the name of a custom claim field and rules for finding matches
     # to authenticate its value.
     #
@@ -3780,9 +4138,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::PrivateEndpoint]
     #
     # @!attribute [rw] private_endpoint_overrides
-    #   A list of private endpoint overrides for the JWT authorizer. Each
-    #   override maps a specific domain to a private endpoint, enabling
-    #   secure connectivity through VPC Lattice resource configurations.
+    #   The private endpoint overrides for the custom JWT authorizer
+    #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CustomJWTAuthorizerConfiguration AWS API Documentation
@@ -3859,10 +4216,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::PrivateEndpoint]
     #
     # @!attribute [rw] private_endpoint_overrides
-    #   The list of private endpoint overrides for the custom OAuth2
-    #   provider. Each override maps a specific domain to a private
-    #   endpoint, enabling secure connectivity through VPC Lattice resource
-    #   configurations.
+    #   The private endpoint overrides for the custom OAuth2 provider
+    #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
     # @!attribute [rw] on_behalf_of_token_exchange_config
@@ -3907,10 +4262,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::PrivateEndpoint]
     #
     # @!attribute [rw] private_endpoint_overrides
-    #   The list of private endpoint overrides for the custom OAuth2
-    #   provider. Each override maps a specific domain to a private
-    #   endpoint, enabling secure connectivity through VPC Lattice resource
-    #   configurations.
+    #   The private endpoint overrides for the custom OAuth2 provider
+    #   configuration.
     #   @return [Array<Types::PrivateEndpointOverride>]
     #
     # @!attribute [rw] on_behalf_of_token_exchange_config
@@ -4576,6 +4929,125 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentConnectorRequest AWS API Documentation
+    #
+    class DeletePaymentConnectorRequest < Struct.new(
+      :payment_manager_id,
+      :payment_connector_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the payment connector, set to `DELETING` when
+    #   deletion is initiated. Possible values include `CREATING`, `READY`,
+    #   `UPDATING`, `DELETING`, `CREATE_FAILED`, `UPDATE_FAILED`, and
+    #   `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the deleted payment connector.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentConnectorResponse AWS API Documentation
+    #
+    class DeletePaymentConnectorResponse < Struct.new(
+      :status,
+      :payment_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the payment credential provider to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentCredentialProviderRequest AWS API Documentation
+    #
+    class DeletePaymentCredentialProviderRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentCredentialProviderResponse AWS API Documentation
+    #
+    class DeletePaymentCredentialProviderResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentManagerRequest AWS API Documentation
+    #
+    class DeletePaymentManagerRequest < Struct.new(
+      :payment_manager_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the payment manager, set to `DELETING` when
+    #   deletion is initiated. Possible values include `CREATING`, `READY`,
+    #   `UPDATING`, `DELETING`, `CREATE_FAILED`, `UPDATE_FAILED`, and
+    #   `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the deleted payment manager.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePaymentManagerResponse AWS API Documentation
+    #
+    class DeletePaymentManagerResponse < Struct.new(
+      :status,
+      :payment_manager_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] policy_engine_id
     #   The unique identifier of the policy engine to be deleted. This must
     #   be a valid policy engine ID that exists within the account.
@@ -4858,6 +5330,29 @@ module Aws::BedrockAgentCoreControl
       :a2a,
       :custom,
       :agent_skills)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for an Amazon EFS access point filesystem mounted into
+    # the AgentCore Runtime. EFS access points provide shared file storage
+    # accessible from your AgentCore Runtime sessions.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The ARN of the EFS access point to mount into the AgentCore Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The mount path for the EFS access point inside the AgentCore
+    #   Runtime. The path must be under `/mnt` with exactly one subdirectory
+    #   level (for example, `/mnt/data`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EfsAccessPointConfiguration AWS API Documentation
+    #
+    class EfsAccessPointConfiguration < Struct.new(
+      :access_point_arn,
+      :mount_path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5373,16 +5868,30 @@ module Aws::BedrockAgentCoreControl
     #   session invocations.
     #   @return [Types::SessionStorageConfiguration]
     #
+    # @!attribute [rw] s3_files_access_point
+    #   Configuration for an Amazon S3 Files access point to mount into the
+    #   AgentCore Runtime.
+    #   @return [Types::S3FilesAccessPointConfiguration]
+    #
+    # @!attribute [rw] efs_access_point
+    #   Configuration for an Amazon EFS access point to mount into the
+    #   AgentCore Runtime.
+    #   @return [Types::EfsAccessPointConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FilesystemConfiguration AWS API Documentation
     #
     class FilesystemConfiguration < Struct.new(
       :session_storage,
+      :s3_files_access_point,
+      :efs_access_point,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class SessionStorage < FilesystemConfiguration; end
+      class S3FilesAccessPoint < FilesystemConfiguration; end
+      class EfsAccessPoint < FilesystemConfiguration; end
       class Unknown < FilesystemConfiguration; end
     end
 
@@ -6947,7 +7456,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] failure_reason
-    #   The reason for the failure if the OAuth2 credential provider is in a
+    #   The reason for failure if the OAuth2 credential provider is in a
     #   failed state.
     #   @return [String]
     #
@@ -7063,6 +7572,217 @@ module Aws::BedrockAgentCoreControl
       :updated_at,
       :failure_reason)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnectorRequest AWS API Documentation
+    #
+    class GetPaymentConnectorRequest < Struct.new(
+      :payment_manager_id,
+      :payment_connector_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the payment connector, which determines the payment
+    #   provider integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_configurations
+    #   The credential provider configurations for the payment connector.
+    #   @return [Array<Types::CredentialsProviderConfiguration>]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment connector was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment connector was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment connector. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentConnectorResponse AWS API Documentation
+    #
+    class GetPaymentConnectorResponse < Struct.new(
+      :payment_connector_id,
+      :name,
+      :description,
+      :type,
+      :credential_provider_configurations,
+      :created_at,
+      :last_updated_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the payment credential provider to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentCredentialProviderRequest AWS API Documentation
+    #
+    class GetPaymentCredentialProviderRequest < Struct.new(
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration_output
+    #   Output configuration (contains secret ARNs, excludes actual secret
+    #   values)
+    #   @return [Types::PaymentProviderConfigurationOutput]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the payment credential provider was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the payment credential provider was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the payment credential provider.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentCredentialProviderResponse AWS API Documentation
+    #
+    class GetPaymentCredentialProviderResponse < Struct.new(
+      :name,
+      :credential_provider_arn,
+      :credential_provider_vendor,
+      :provider_configuration_output,
+      :created_time,
+      :last_updated_time,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentManagerRequest AWS API Documentation
+    #
+    class GetPaymentManagerRequest < Struct.new(
+      :payment_manager_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_arn
+    #   The Amazon Resource Name (ARN) of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The type of authorizer used by the payment manager.
+    #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM
+    #     credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_configuration
+    #   Represents inbound authorization configuration options used to
+    #   authenticate incoming requests.
+    #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_details
+    #   The information about the workload identity.
+    #   @return [Types::WorkloadIdentityDetails]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment manager was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment manager was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment manager. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the payment manager.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPaymentManagerResponse AWS API Documentation
+    #
+    class GetPaymentManagerResponse < Struct.new(
+      :payment_manager_arn,
+      :payment_manager_id,
+      :name,
+      :description,
+      :authorizer_type,
+      :authorizer_configuration,
+      :role_arn,
+      :workload_identity_details,
+      :created_at,
+      :last_updated_at,
+      :status,
+      :tags)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -9661,6 +10381,134 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager whose connectors to
+    #   list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentConnectorsRequest AWS API Documentation
+    #
+    class ListPaymentConnectorsRequest < Struct.new(
+      :payment_manager_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connectors
+    #   The list of payment connector summaries. For details about the
+    #   fields in each summary, see the `PaymentConnectorSummary` data type.
+    #   @return [Array<Types::PaymentConnectorSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentConnectorsResponse AWS API Documentation
+    #
+    class ListPaymentConnectorsResponse < Struct.new(
+      :payment_connectors,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   Pagination token.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentCredentialProvidersRequest AWS API Documentation
+    #
+    class ListPaymentCredentialProvidersRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] credential_providers
+    #   The list of payment credential providers.
+    #   @return [Array<Types::PaymentCredentialProviderItem>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentCredentialProvidersResponse AWS API Documentation
+    #
+    class ListPaymentCredentialProvidersResponse < Struct.new(
+      :credential_providers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in the response. If the
+    #   total number of results is greater than this value, use the token
+    #   returned in the response in the `nextToken` field when making
+    #   another request to return the next batch of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, enter the token returned in the
+    #   `nextToken` field in the response in this field to return the next
+    #   batch of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentManagersRequest AWS API Documentation
+    #
+    class ListPaymentManagersRequest < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_managers
+    #   The list of payment manager summaries. For details about the fields
+    #   in each summary, see the `PaymentManagerSummary` data type.
+    #   @return [Array<Types::PaymentManagerSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If the total number of results is greater than the `maxResults`
+    #   value provided in the request, use this token when making another
+    #   request in the `nextToken` field to return the next batch of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPaymentManagersResponse AWS API Documentation
+    #
+    class ListPaymentManagersResponse < Struct.new(
+      :payment_managers,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A pagination token returned from a previous [ListPolicies][1] call.
     #   Use this token to retrieve the next page of results when the
@@ -10141,12 +10989,24 @@ module Aws::BedrockAgentCoreControl
     #   specifies how the gateway handles search operations.
     #   @return [String]
     #
+    # @!attribute [rw] session_configuration
+    #   The session configuration for the MCP gateway. This configuration
+    #   controls session behavior, including session timeout settings.
+    #   @return [Types::SessionConfiguration]
+    #
+    # @!attribute [rw] streaming_configuration
+    #   The streaming configuration for the MCP gateway. This configuration
+    #   controls whether response streaming is enabled for the gateway.
+    #   @return [Types::StreamingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MCPGatewayConfiguration AWS API Documentation
     #
     class MCPGatewayConfiguration < Struct.new(
       :supported_versions,
       :instructions,
-      :search_type)
+      :search_type,
+      :session_configuration,
+      :streaming_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10204,9 +11064,12 @@ module Aws::BedrockAgentCoreControl
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] routing_domain
-    #   An intermediate publicly resolvable domain used as the VPC Lattice
-    #   resource configuration endpoint. Required when your private endpoint
-    #   uses a domain that is not publicly resolvable.
+    #   An intermediate domain to use as the resource configuration endpoint
+    #   instead of the actual target domain. Use this when you want to route
+    #   traffic through an intermediate component such as a VPC endpoint or
+    #   internal load balancer. For more information, see
+    #   xref:lattice-vpc-egress-routing-domain\[Route traffic through an
+    #   intermediate domain\].
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ManagedVpcResource AWS API Documentation
@@ -11391,14 +12254,14 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Oauth2ProviderConfigOutput; end
     end
 
-    # Configuration for on-behalf-of token exchange
+    # Configuration for on-behalf-of token exchange.
     #
     # @!attribute [rw] grant_type
     #   The grant type for the on-behalf-of token exchange.
     #   @return [String]
     #
     # @!attribute [rw] token_exchange_grant_type_config
-    #   Configuration specific to TOKEN\_EXCHANGE grant type (RFC 8693)
+    #   Configuration specific to the TOKEN\_EXCHANGE grant type (RFC 8693).
     #   @return [Types::TokenExchangeGrantTypeConfigType]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnBehalfOfTokenExchangeConfigType AWS API Documentation
@@ -11483,6 +12346,211 @@ module Aws::BedrockAgentCoreControl
       :cloud_watch_config)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Contains summary information about a payment connector.
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the payment connector, which determines the payment
+    #   provider integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment connector. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment connector was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentConnectorSummary AWS API Documentation
+    #
+    class PaymentConnectorSummary < Struct.new(
+      :payment_connector_id,
+      :name,
+      :type,
+      :status,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a payment credential provider that stores
+    # authentication credentials for a payment provider.
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the credential provider that
+    #   stores the authentication credentials for the payment provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentCredentialProviderConfiguration AWS API Documentation
+    #
+    class PaymentCredentialProviderConfiguration < Struct.new(
+      :credential_provider_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a payment credential provider.
+    #
+    # @!attribute [rw] name
+    #   The name of the payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the payment credential provider was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the payment credential provider was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentCredentialProviderItem AWS API Documentation
+    #
+    class PaymentCredentialProviderItem < Struct.new(
+      :name,
+      :credential_provider_vendor,
+      :credential_provider_arn,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a payment manager.
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The Amazon Resource Name (ARN) of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The type of authorizer used by the payment manager.
+    #
+    #   * `CUSTOM_JWT` - Authorize with a bearer token.
+    #
+    #   * `AWS_IAM` - Authorize with your Amazon Web Services IAM
+    #     credentials.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the payment manager. Possible values include
+    #   `CREATING`, `READY`, `UPDATING`, `DELETING`, `CREATE_FAILED`,
+    #   `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment manager was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment manager was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentManagerSummary AWS API Documentation
+    #
+    class PaymentManagerSummary < Struct.new(
+      :payment_manager_arn,
+      :payment_manager_id,
+      :name,
+      :description,
+      :authorizer_type,
+      :role_arn,
+      :status,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # PROVIDER CONFIGURATION INPUT - Contains secrets for creation/update
+    #
+    # @note PaymentProviderConfigurationInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] coinbase_cdp_configuration
+    #   Coinbase CDP configuration - credentials provided by Coinbase
+    #   Developer Platform
+    #   @return [Types::CoinbaseCdpConfigurationInput]
+    #
+    # @!attribute [rw] stripe_privy_configuration
+    #   StripePrivy configuration - credentials provided by Stripe + Privy
+    #   @return [Types::StripePrivyConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentProviderConfigurationInput AWS API Documentation
+    #
+    class PaymentProviderConfigurationInput < Struct.new(
+      :coinbase_cdp_configuration,
+      :stripe_privy_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdpConfiguration < PaymentProviderConfigurationInput; end
+      class StripePrivyConfiguration < PaymentProviderConfigurationInput; end
+      class Unknown < PaymentProviderConfigurationInput; end
+    end
+
+    # PROVIDER CONFIGURATION OUTPUT - No raw secrets, only ARNs
+    #
+    # @note PaymentProviderConfigurationOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentProviderConfigurationOutput corresponding to the set member.
+    #
+    # @!attribute [rw] coinbase_cdp_configuration
+    #   Coinbase CDP configuration output with secret ARNs
+    #   @return [Types::CoinbaseCdpConfigurationOutput]
+    #
+    # @!attribute [rw] stripe_privy_configuration
+    #   StripePrivy configuration output with secret ARNs
+    #   @return [Types::StripePrivyConfigurationOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentProviderConfigurationOutput AWS API Documentation
+    #
+    class PaymentProviderConfigurationOutput < Struct.new(
+      :coinbase_cdp_configuration,
+      :stripe_privy_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdpConfiguration < PaymentProviderConfigurationOutput; end
+      class StripePrivyConfiguration < PaymentProviderConfigurationOutput; end
+      class Unknown < PaymentProviderConfigurationOutput; end
     end
 
     # Represents a complete policy resource within the AgentCore Policy
@@ -12495,6 +13563,30 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # Configuration for an Amazon S3 Files access point filesystem mounted
+    # into the AgentCore Runtime. S3 Files access points provide shared file
+    # storage accessible from your AgentCore Runtime sessions.
+    #
+    # @!attribute [rw] access_point_arn
+    #   The ARN of the S3 Files access point to mount into the AgentCore
+    #   Runtime.
+    #   @return [String]
+    #
+    # @!attribute [rw] mount_path
+    #   The mount path for the S3 Files access point inside the AgentCore
+    #   Runtime. The path must be under `/mnt` with exactly one subdirectory
+    #   level (for example, `/mnt/data`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/S3FilesAccessPointConfiguration AWS API Documentation
+    #
+    class S3FilesAccessPointConfiguration < Struct.new(
+      :access_point_arn,
+      :mount_path)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The Amazon S3 location for storing data. This structure defines where
     # in Amazon S3 data is stored.
     #
@@ -12917,6 +14009,25 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The session configuration for an MCP gateway. This structure defines
+    # settings that control session behavior.
+    #
+    # @!attribute [rw] session_timeout_in_seconds
+    #   The session timeout in seconds. After this timeout, the session
+    #   expires and subsequent requests to this session will receive an
+    #   error. The minimum value is 900 seconds (15 minutes), the maximum
+    #   value is 28800 seconds (8 hours), and the default value is 3600
+    #   seconds (1 hour).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/SessionConfiguration AWS API Documentation
+    #
+    class SessionConfiguration < Struct.new(
+      :session_timeout_in_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for a session storage filesystem mounted into the
     # AgentCore Runtime. Session storage provides persistent storage that is
     # preserved across AgentCore Runtime session invocations.
@@ -13258,6 +14369,23 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The streaming configuration for an MCP gateway. This structure defines
+    # settings that control response streaming behavior.
+    #
+    # @!attribute [rw] enable_response_streaming
+    #   Indicates whether response streaming is enabled for the gateway.
+    #   When set to `true`, the gateway streams responses from targets back
+    #   to the client.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StreamingConfiguration AWS API Documentation
+    #
+    class StreamingConfiguration < Struct.new(
+      :enable_response_streaming)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Validation for STRINGLIST fields.
     #
     # @!attribute [rw] allowed_values
@@ -13287,6 +14415,64 @@ module Aws::BedrockAgentCoreControl
     #
     class StringValidation < Struct.new(
       :allowed_values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # StripePrivy configuration - credentials provided by Stripe + Privy
+    #
+    # @!attribute [rw] app_id
+    #   The app ID provided by Privy.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_secret
+    #   The app secret provided by Privy.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_private_key
+    #   The authorization private key for the Stripe Privy integration.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_id
+    #   The authorization ID for the Stripe Privy integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StripePrivyConfigurationInput AWS API Documentation
+    #
+    class StripePrivyConfigurationInput < Struct.new(
+      :app_id,
+      :app_secret,
+      :authorization_private_key,
+      :authorization_id)
+      SENSITIVE = [:app_secret, :authorization_private_key]
+      include Aws::Structure
+    end
+
+    # StripePrivy configuration output with secret ARNs
+    #
+    # @!attribute [rw] app_id
+    #   The app ID provided by Privy.
+    #   @return [String]
+    #
+    # @!attribute [rw] app_secret_arn
+    #   Contains information about a secret in AWS Secrets Manager.
+    #   @return [Types::Secret]
+    #
+    # @!attribute [rw] authorization_private_key_arn
+    #   Contains information about a secret in AWS Secrets Manager.
+    #   @return [Types::Secret]
+    #
+    # @!attribute [rw] authorization_id
+    #   The authorization ID for the Stripe Privy integration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StripePrivyConfigurationOutput AWS API Documentation
+    #
+    class StripePrivyConfigurationOutput < Struct.new(
+      :app_id,
+      :app_secret_arn,
+      :authorization_private_key_arn,
+      :authorization_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13707,14 +14893,15 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Configuration for RFC 8693 Token Exchange
+    # Configuration for RFC 8693 token exchange.
     #
     # @!attribute [rw] actor_token_content
     #   The content type for the actor token in the token exchange.
     #   @return [String]
     #
     # @!attribute [rw] actor_token_scopes
-    #   Only valid when actorTokenContent is M2M
+    #   The scopes for the actor token. Only valid when actorTokenContent is
+    #   M2M.
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/TokenExchangeGrantTypeConfigType AWS API Documentation
@@ -15092,7 +16279,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [Time]
     #
     # @!attribute [rw] status
-    #   The current status of the OAuth2 credential provider.
+    #   The current status of the updated OAuth2 credential provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdateOauth2CredentialProviderResponse AWS API Documentation
@@ -15213,6 +16400,264 @@ module Aws::BedrockAgentCoreControl
       :status,
       :execution_status,
       :failure_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the payment connector to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The updated type of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_configurations
+    #   The updated credential provider configurations for the payment
+    #   connector.
+    #   @return [Array<Types::CredentialsProviderConfiguration>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentConnectorRequest AWS API Documentation
+    #
+    class UpdatePaymentConnectorRequest < Struct.new(
+      :payment_manager_id,
+      :payment_connector_id,
+      :description,
+      :type,
+      :credential_provider_configurations,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_connector_id
+    #   The unique identifier of the updated payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the parent payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the updated payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_configurations
+    #   The credential provider configurations for the updated payment
+    #   connector.
+    #   @return [Array<Types::CredentialsProviderConfiguration>]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment connector was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated payment connector. Possible values
+    #   include `CREATING`, `READY`, `UPDATING`, `DELETING`,
+    #   `CREATE_FAILED`, `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentConnectorResponse AWS API Documentation
+    #
+    class UpdatePaymentConnectorResponse < Struct.new(
+      :payment_connector_id,
+      :payment_manager_id,
+      :name,
+      :type,
+      :credential_provider_configurations,
+      :last_updated_at,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the payment credential provider to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration_input
+    #   Configuration specific to the vendor, including API credentials
+    #   @return [Types::PaymentProviderConfigurationInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentCredentialProviderRequest AWS API Documentation
+    #
+    class UpdatePaymentCredentialProviderRequest < Struct.new(
+      :name,
+      :credential_provider_vendor,
+      :provider_configuration_input)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] name
+    #   The name of the updated payment credential provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_vendor
+    #   Supported vendor types for payment providers using non-standard auth
+    #   protocols
+    #   @return [String]
+    #
+    # @!attribute [rw] credential_provider_arn
+    #   The Amazon Resource Name (ARN) of the updated payment credential
+    #   provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] provider_configuration_output
+    #   Output configuration (contains secret ARNs, excludes actual secret
+    #   values)
+    #   @return [Types::PaymentProviderConfigurationOutput]
+    #
+    # @!attribute [rw] created_time
+    #   The timestamp when the payment credential provider was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_time
+    #   The timestamp when the payment credential provider was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentCredentialProviderResponse AWS API Documentation
+    #
+    class UpdatePaymentCredentialProviderResponse < Struct.new(
+      :name,
+      :credential_provider_vendor,
+      :credential_provider_arn,
+      :provider_configuration_output,
+      :created_time,
+      :last_updated_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the payment manager to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The updated authorizer type for the payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_configuration
+    #   The updated authorizer configuration for the payment manager.
+    #   @return [Types::AuthorizerConfiguration]
+    #
+    # @!attribute [rw] role_arn
+    #   The updated Amazon Resource Name (ARN) of the IAM role for the
+    #   payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure that the API request
+    #   completes no more than one time. If you don't specify this field, a
+    #   value is randomly generated for you. If this token matches a
+    #   previous request, the service ignores the request, but doesn't
+    #   return an error. For more information, see [Ensuring
+    #   idempotency][1].
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManagerRequest AWS API Documentation
+    #
+    class UpdatePaymentManagerRequest < Struct.new(
+      :payment_manager_id,
+      :description,
+      :authorizer_type,
+      :authorizer_configuration,
+      :role_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_manager_arn
+    #   The Amazon Resource Name (ARN) of the updated payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_id
+    #   The unique identifier of the updated payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the updated payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorizer_type
+    #   The type of authorizer for the updated payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role associated with the
+    #   updated payment manager.
+    #   @return [String]
+    #
+    # @!attribute [rw] workload_identity_details
+    #   The information about the workload identity.
+    #   @return [Types::WorkloadIdentityDetails]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The timestamp when the payment manager was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the updated payment manager. Possible values
+    #   include `CREATING`, `READY`, `UPDATING`, `DELETING`,
+    #   `CREATE_FAILED`, `UPDATE_FAILED`, and `DELETE_FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentManagerResponse AWS API Documentation
+    #
+    class UpdatePaymentManagerResponse < Struct.new(
+      :payment_manager_arn,
+      :payment_manager_id,
+      :name,
+      :authorizer_type,
+      :role_arn,
+      :workload_identity_details,
+      :last_updated_at,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -6168,6 +6168,7 @@ module Aws::QConnect
     #   resp.spans[0].start_timestamp #=> Time
     #   resp.spans[0].end_timestamp #=> Time
     #   resp.spans[0].status #=> String, one of "OK", "ERROR", "TIMEOUT"
+    #   resp.spans[0].status_description #=> String
     #   resp.spans[0].request_id #=> String
     #   resp.spans[0].origin_request_id #=> String
     #   resp.spans[0].attributes.operation_name #=> String
@@ -6214,6 +6215,7 @@ module Aws::QConnect
     #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.tool_use_id #=> String
     #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.values #=> Types::SpanMessageValueList
     #   resp.spans[0].attributes.input_messages[0].values[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.input_messages[0].values[0].reasoning.value #=> String
     #   resp.spans[0].attributes.output_messages #=> Array
     #   resp.spans[0].attributes.output_messages[0].message_id #=> String
     #   resp.spans[0].attributes.output_messages[0].participant #=> String, one of "CUSTOMER", "AGENT", "BOT"
@@ -6231,6 +6233,7 @@ module Aws::QConnect
     #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.tool_use_id #=> String
     #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.values #=> Types::SpanMessageValueList
     #   resp.spans[0].attributes.output_messages[0].values[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.output_messages[0].values[0].reasoning.value #=> String
     #   resp.spans[0].attributes.system_instructions #=> Array
     #   resp.spans[0].attributes.system_instructions[0].text.value #=> String
     #   resp.spans[0].attributes.system_instructions[0].text.citations #=> Array
@@ -6244,11 +6247,13 @@ module Aws::QConnect
     #   resp.spans[0].attributes.system_instructions[0].tool_result.tool_use_id #=> String
     #   resp.spans[0].attributes.system_instructions[0].tool_result.values #=> Types::SpanMessageValueList
     #   resp.spans[0].attributes.system_instructions[0].tool_result.error #=> String
+    #   resp.spans[0].attributes.system_instructions[0].reasoning.value #=> String
     #   resp.spans[0].attributes.prompt_arn #=> String
     #   resp.spans[0].attributes.prompt_id #=> String
     #   resp.spans[0].attributes.prompt_type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.spans[0].attributes.prompt_name #=> String
     #   resp.spans[0].attributes.prompt_version #=> Integer
+    #   resp.spans[0].attributes.time_to_first_token_ms #=> Integer
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListSpans AWS API Documentation
@@ -9459,7 +9464,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -138,7 +138,7 @@ module Aws
                                 },
                                 ?weekly_maintenance_window_start: ::String,
                                 ?tags: Hash[::String, ::String],
-                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE"),
                                 ?min_workers: ::Integer,
                                 ?schedulers: ::Integer,
                                 ?endpoint_management: ("CUSTOMER" | "SERVICE"),
@@ -317,7 +317,7 @@ module Aws
                                 ?source_bucket_arn: ::String,
                                 ?startup_script_s3_path: ::String,
                                 ?startup_script_s3_object_version: ::String,
-                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY"),
+                                ?webserver_access_mode: ("PRIVATE_ONLY" | "PUBLIC_ONLY" | "PUBLIC_AND_PRIVATE"),
                                 ?weekly_maintenance_window_start: ::String
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess

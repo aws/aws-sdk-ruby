@@ -2420,6 +2420,8 @@ module Aws::QuickSight
     #       extension: "DENY", # accepts DENY
     #       manage_shared_folders: "DENY", # accepts DENY
     #       generate_analyses: "DENY", # accepts DENY
+    #       story: "DENY", # accepts DENY
+    #       scenario: "DENY", # accepts DENY
     #     },
     #     tags: [
     #       {
@@ -3566,6 +3568,7 @@ module Aws::QuickSight
     #             vpc_connection_arn: "Arn", # required
     #           },
     #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #         },
     #       },
     #       spark_parameters: {
@@ -3612,6 +3615,7 @@ module Aws::QuickSight
     #             vpc_connection_arn: "Arn", # required
     #           },
     #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #         },
     #       },
     #       trino_parameters: {
@@ -3758,6 +3762,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             spark_parameters: {
@@ -3804,6 +3809,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             trino_parameters: {
@@ -4705,7 +4711,7 @@ module Aws::QuickSight
     #       typography: {
     #         font_families: [
     #           {
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #         ],
     #         axis_title_font_configuration: {
@@ -4719,7 +4725,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         axis_label_font_configuration: {
     #           font_size: {
@@ -4732,7 +4738,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         legend_title_font_configuration: {
     #           font_size: {
@@ -4745,7 +4751,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         legend_value_font_configuration: {
     #           font_size: {
@@ -4758,7 +4764,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         data_label_font_configuration: {
     #           font_size: {
@@ -4771,7 +4777,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         visual_title_font_configuration: {
     #           font_configuration: {
@@ -4785,7 +4791,7 @@ module Aws::QuickSight
     #               name: "NORMAL", # accepts NORMAL, BOLD
     #             },
     #             font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
@@ -4802,10 +4808,26 @@ module Aws::QuickSight
     #               name: "NORMAL", # accepts NORMAL, BOLD
     #             },
     #             font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         control_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "LimitedString",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #         },
     #       },
     #     },
@@ -7515,6 +7537,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.spark_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.sql_server_parameters.host #=> String
@@ -7541,6 +7564,7 @@ module Aws::QuickSight
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.override_parameters.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.host #=> String
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
     #   resp.override_parameters.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
@@ -8242,6 +8266,8 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.extension #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.manage_shared_folders #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.generate_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.story #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.scenario #=> String, one of "DENY"
     #   resp.request_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeCustomPermissions AWS API Documentation
@@ -9296,6 +9322,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.data_source_parameters.spark_parameters.host #=> String
     #   resp.data_source.data_source_parameters.spark_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.sql_server_parameters.host #=> String
@@ -9322,6 +9349,7 @@ module Aws::QuickSight
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.data_source_parameters.trino_parameters.host #=> String
     #   resp.data_source.data_source_parameters.trino_parameters.port #=> Integer
     #   resp.data_source.data_source_parameters.trino_parameters.catalog #=> String
@@ -9401,6 +9429,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.alternate_data_source_parameters[0].spark_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].spark_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].sql_server_parameters.host #=> String
@@ -9427,6 +9456,7 @@ module Aws::QuickSight
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_source.alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.host #=> String
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.port #=> Integer
     #   resp.data_source.alternate_data_source_parameters[0].trino_parameters.catalog #=> String
@@ -10636,6 +10666,14 @@ module Aws::QuickSight
     #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.font_configuration.font_family #=> String
     #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
     #   resp.theme.version.configuration.typography.visual_subtitle_font_configuration.text_transform #=> String, one of "CAPITALIZE"
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_size.relative #=> String, one of "EXTRA_SMALL", "SMALL", "MEDIUM", "LARGE", "EXTRA_LARGE"
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_size.absolute #=> String
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_decoration #=> String, one of "UNDERLINE", "NONE"
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_color #=> String
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_weight.name #=> String, one of "NORMAL", "BOLD"
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_style #=> String, one of "NORMAL", "ITALIC"
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.font_configuration.font_family #=> String
+    #   resp.theme.version.configuration.typography.control_title_font_configuration.text_alignment #=> String, one of "LEFT", "CENTER", "RIGHT", "AUTO"
     #   resp.theme.version.errors #=> Array
     #   resp.theme.version.errors[0].type #=> String, one of "INTERNAL_FAILURE"
     #   resp.theme.version.errors[0].message #=> String
@@ -12019,6 +12057,24 @@ module Aws::QuickSight
     # @option params [Time,DateTime,Date,Integer,String] :session_expires_at
     #   The timestamp at which the session will expire.
     #
+    # @option params [String] :context_region
+    #   The region in which the context is to be used. Use this parameter to
+    #   obtain an identity context for cross-region use.
+    #
+    #   The specified region must meet the following conditions:
+    #
+    #   * The region must be in the same Amazon Web Services partition as the
+    #     region you are calling from. Cross-partition requests are not
+    #     supported. For example, you cannot specify a region in the `aws-cn`
+    #     partition when calling from a region in the `aws` partition.
+    #
+    #   * It must be a valid Amazon QuickSight supported region.
+    #
+    #   * The calling customer account must be enabled in the specified
+    #     context region.
+    #
+    #   * This parameter is not supported when calling from an opt-in region.
+    #
     # @return [Types::GetIdentityContextResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetIdentityContextResponse#status #status} => Integer
@@ -12036,6 +12092,7 @@ module Aws::QuickSight
     #     },
     #     namespace: "Namespace",
     #     session_expires_at: Time.now,
+    #     context_region: "Region",
     #   })
     #
     # @example Response structure
@@ -12675,6 +12732,8 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.extension #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.manage_shared_folders #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.generate_analyses #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.story #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.scenario #=> String, one of "DENY"
     #   resp.next_token #=> String
     #   resp.request_id #=> String
     #
@@ -12964,6 +13023,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].data_source_parameters.snowflake_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].data_source_parameters.spark_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.spark_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.sql_server_parameters.host #=> String
@@ -12990,6 +13050,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].data_source_parameters.starburst_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].data_source_parameters.trino_parameters.host #=> String
     #   resp.data_sources[0].data_source_parameters.trino_parameters.port #=> Integer
     #   resp.data_sources[0].data_source_parameters.trino_parameters.catalog #=> String
@@ -13069,6 +13130,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].snowflake_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].spark_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].spark_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].sql_server_parameters.host #=> String
@@ -13095,6 +13157,7 @@ module Aws::QuickSight
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.o_auth_scope #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_vpc_connection_properties.vpc_connection_arn #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_resource_uri #=> String
+    #   resp.data_sources[0].alternate_data_source_parameters[0].starburst_parameters.o_auth_parameters.identity_provider_ca_certificates_bundle_s3_uri #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.host #=> String
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.port #=> Integer
     #   resp.data_sources[0].alternate_data_source_parameters[0].trino_parameters.catalog #=> String
@@ -16428,6 +16491,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             spark_parameters: {
@@ -16474,6 +16538,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             trino_parameters: {
@@ -18253,6 +18318,8 @@ module Aws::QuickSight
     #       extension: "DENY", # accepts DENY
     #       manage_shared_folders: "DENY", # accepts DENY
     #       generate_analyses: "DENY", # accepts DENY
+    #       story: "DENY", # accepts DENY
+    #       scenario: "DENY", # accepts DENY
     #     },
     #   })
     #
@@ -19587,6 +19654,7 @@ module Aws::QuickSight
     #             vpc_connection_arn: "Arn", # required
     #           },
     #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #         },
     #       },
     #       spark_parameters: {
@@ -19633,6 +19701,7 @@ module Aws::QuickSight
     #             vpc_connection_arn: "Arn", # required
     #           },
     #           identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #           identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #         },
     #       },
     #       trino_parameters: {
@@ -19779,6 +19848,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             spark_parameters: {
@@ -19825,6 +19895,7 @@ module Aws::QuickSight
     #                   vpc_connection_arn: "Arn", # required
     #                 },
     #                 identity_provider_resource_uri: "IdentityProviderResourceUri",
+    #                 identity_provider_ca_certificates_bundle_s3_uri: "CACertificatesBundleS3Uri",
     #               },
     #             },
     #             trino_parameters: {
@@ -21118,7 +21189,7 @@ module Aws::QuickSight
     #       typography: {
     #         font_families: [
     #           {
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #         ],
     #         axis_title_font_configuration: {
@@ -21132,7 +21203,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         axis_label_font_configuration: {
     #           font_size: {
@@ -21145,7 +21216,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         legend_title_font_configuration: {
     #           font_size: {
@@ -21158,7 +21229,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         legend_value_font_configuration: {
     #           font_size: {
@@ -21171,7 +21242,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         data_label_font_configuration: {
     #           font_size: {
@@ -21184,7 +21255,7 @@ module Aws::QuickSight
     #             name: "NORMAL", # accepts NORMAL, BOLD
     #           },
     #           font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #           font_family: "String",
+    #           font_family: "LimitedString",
     #         },
     #         visual_title_font_configuration: {
     #           font_configuration: {
@@ -21198,7 +21269,7 @@ module Aws::QuickSight
     #               name: "NORMAL", # accepts NORMAL, BOLD
     #             },
     #             font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
@@ -21215,10 +21286,26 @@ module Aws::QuickSight
     #               name: "NORMAL", # accepts NORMAL, BOLD
     #             },
     #             font_style: "NORMAL", # accepts NORMAL, ITALIC
-    #             font_family: "String",
+    #             font_family: "LimitedString",
     #           },
     #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #           text_transform: "CAPITALIZE", # accepts CAPITALIZE
+    #         },
+    #         control_title_font_configuration: {
+    #           font_configuration: {
+    #             font_size: {
+    #               relative: "EXTRA_SMALL", # accepts EXTRA_SMALL, SMALL, MEDIUM, LARGE, EXTRA_LARGE
+    #               absolute: "PixelLength",
+    #             },
+    #             font_decoration: "UNDERLINE", # accepts UNDERLINE, NONE
+    #             font_color: "HexColor",
+    #             font_weight: {
+    #               name: "NORMAL", # accepts NORMAL, BOLD
+    #             },
+    #             font_style: "NORMAL", # accepts NORMAL, ITALIC
+    #             font_family: "LimitedString",
+    #           },
+    #           text_alignment: "LEFT", # accepts LEFT, CENTER, RIGHT, AUTO
     #         },
     #       },
     #     },
@@ -22075,7 +22162,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.178.0'
+      context[:gem_version] = '1.179.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

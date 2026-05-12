@@ -245,7 +245,8 @@ module Aws
                                         month: ::Integer,
                                         year: ::Integer
                                       }?,
-                                      invoicing_entity: ::String?
+                                      invoicing_entity: ::String?,
+                                      receiver_role: ("SELLER" | "RESELLER" | "BUYER")?
                                     },
                                     ?next_token: ::String,
                                     ?max_results: ::Integer

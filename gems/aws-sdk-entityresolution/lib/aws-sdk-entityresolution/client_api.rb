@@ -160,6 +160,7 @@ module Aws::EntityResolution
     MatchPurpose = Shapes::StringShape.new(name: 'MatchPurpose')
     MatchedRecord = Shapes::StructureShape.new(name: 'MatchedRecord')
     MatchedRecordsList = Shapes::ListShape.new(name: 'MatchedRecordsList')
+    MatchingConfig = Shapes::StructureShape.new(name: 'MatchingConfig')
     MatchingWorkflowArn = Shapes::StringShape.new(name: 'MatchingWorkflowArn')
     MatchingWorkflowList = Shapes::ListShape.new(name: 'MatchingWorkflowList')
     MatchingWorkflowSummary = Shapes::StructureShape.new(name: 'MatchingWorkflowSummary')
@@ -770,6 +771,9 @@ module Aws::EntityResolution
 
     MatchedRecordsList.member = Shapes::ShapeRef.new(shape: MatchedRecord)
 
+    MatchingConfig.add_member(:enable_transitive_matching, Shapes::ShapeRef.new(shape: Boolean, location_name: "enableTransitiveMatching"))
+    MatchingConfig.struct_class = Types::MatchingConfig
+
     MatchingWorkflowList.member = Shapes::ShapeRef.new(shape: MatchingWorkflowSummary)
 
     MatchingWorkflowSummary.add_member(:workflow_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "workflowName"))
@@ -903,6 +907,7 @@ module Aws::EntityResolution
     RuleCondition.struct_class = Types::RuleCondition
 
     RuleConditionProperties.add_member(:rules, Shapes::ShapeRef.new(shape: RuleConditionPropertiesRulesList, required: true, location_name: "rules"))
+    RuleConditionProperties.add_member(:matching_config, Shapes::ShapeRef.new(shape: MatchingConfig, location_name: "matchingConfig"))
     RuleConditionProperties.struct_class = Types::RuleConditionProperties
 
     RuleConditionPropertiesRulesList.member = Shapes::ShapeRef.new(shape: RuleCondition)

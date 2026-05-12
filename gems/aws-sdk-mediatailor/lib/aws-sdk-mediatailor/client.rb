@@ -571,11 +571,12 @@ module Aws::MediaTailor
     #     playback_configuration_name: "__string", # required
     #     enabled_logging_strategies: ["VENDED_LOGS"], # accepts VENDED_LOGS, LEGACY_CLOUDWATCH
     #     ads_interaction_log: {
-    #       publish_opt_in_event_types: ["RAW_ADS_RESPONSE"], # accepts RAW_ADS_RESPONSE, RAW_ADS_REQUEST
-    #       exclude_event_types: ["AD_MARKER_FOUND"], # accepts AD_MARKER_FOUND, NON_AD_MARKER_FOUND, MAKING_ADS_REQUEST, MODIFIED_TARGET_URL, VAST_REDIRECT, EMPTY_VAST_RESPONSE, EMPTY_VMAP_RESPONSE, VAST_RESPONSE, REDIRECTED_VAST_RESPONSE, FILLED_AVAIL, FILLED_OVERLAY_AVAIL, BEACON_FIRED, WARNING_NO_ADVERTISEMENTS, WARNING_VPAID_AD_DROPPED, WARNING_URL_VARIABLE_SUBSTITUTION_FAILED, ERROR_UNKNOWN, ERROR_UNKNOWN_HOST, ERROR_DISALLOWED_HOST, ERROR_ADS_IO, ERROR_ADS_TIMEOUT, ERROR_ADS_RESPONSE_PARSE, ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT, ERROR_ADS_INVALID_RESPONSE, ERROR_VAST_REDIRECT_EMPTY_RESPONSE, ERROR_VAST_REDIRECT_MULTIPLE_VAST, ERROR_VAST_REDIRECT_FAILED, ERROR_VAST_MISSING_MEDIAFILES, ERROR_VAST_MISSING_CREATIVES, ERROR_VAST_MISSING_OVERLAYS, ERROR_VAST_MISSING_IMPRESSION, ERROR_VAST_INVALID_VAST_AD_TAG_URI, ERROR_VAST_MULTIPLE_TRACKING_EVENTS, ERROR_VAST_MULTIPLE_LINEAR, ERROR_VAST_INVALID_MEDIA_FILE, ERROR_FIRING_BEACON_FAILED, ERROR_PERSONALIZATION_DISABLED, VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET, VOD_TIME_BASED_AVAIL_PLAN_SUCCESS, VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS, INTERSTITIAL_VOD_SUCCESS, INTERSTITIAL_VOD_FAILURE
+    #       publish_opt_in_event_types: ["RAW_ADS_RESPONSE"], # accepts RAW_ADS_RESPONSE, RAW_ADS_REQUEST, PRE_ADS_REQUEST_HOOK_SUMMARY, PRE_ADS_REQUEST_FUNCTION_COMPLETED
+    #       exclude_event_types: ["AD_MARKER_FOUND"], # accepts AD_MARKER_FOUND, NON_AD_MARKER_FOUND, MAKING_ADS_REQUEST, MODIFIED_TARGET_URL, VAST_REDIRECT, EMPTY_VAST_RESPONSE, EMPTY_VMAP_RESPONSE, VAST_RESPONSE, REDIRECTED_VAST_RESPONSE, FILLED_AVAIL, FILLED_OVERLAY_AVAIL, BEACON_FIRED, WARNING_NO_ADVERTISEMENTS, WARNING_VPAID_AD_DROPPED, WARNING_URL_VARIABLE_SUBSTITUTION_FAILED, ERROR_UNKNOWN, ERROR_UNKNOWN_HOST, ERROR_DISALLOWED_HOST, ERROR_ADS_IO, ERROR_ADS_TIMEOUT, ERROR_ADS_RESPONSE_PARSE, ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT, ERROR_ADS_INVALID_RESPONSE, ERROR_VAST_REDIRECT_EMPTY_RESPONSE, ERROR_VAST_REDIRECT_MULTIPLE_VAST, ERROR_VAST_REDIRECT_FAILED, ERROR_VAST_MISSING_MEDIAFILES, ERROR_VAST_MISSING_CREATIVES, ERROR_VAST_MISSING_OVERLAYS, ERROR_VAST_MISSING_IMPRESSION, ERROR_VAST_INVALID_VAST_AD_TAG_URI, ERROR_VAST_MULTIPLE_TRACKING_EVENTS, ERROR_VAST_MULTIPLE_LINEAR, ERROR_VAST_INVALID_MEDIA_FILE, ERROR_FIRING_BEACON_FAILED, ERROR_PERSONALIZATION_DISABLED, VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET, VOD_TIME_BASED_AVAIL_PLAN_SUCCESS, VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS, INTERSTITIAL_VOD_SUCCESS, INTERSTITIAL_VOD_FAILURE, PRE_ADS_REQUEST_HOOK_ERROR, PRE_ADS_REQUEST_FUNCTION_ERROR
     #     },
     #     manifest_service_interaction_log: {
-    #       exclude_event_types: ["GENERATED_MANIFEST"], # accepts GENERATED_MANIFEST, ORIGIN_MANIFEST, SESSION_INITIALIZED, TRACKING_RESPONSE, CONFIG_SYNTAX_ERROR, CONFIG_SECURITY_ERROR, UNKNOWN_HOST, TIMEOUT_ERROR, CONNECTION_ERROR, IO_ERROR, UNKNOWN_ERROR, HOST_DISALLOWED, PARSING_ERROR, MANIFEST_ERROR, NO_MASTER_OR_MEDIA_PLAYLIST, NO_MASTER_PLAYLIST, NO_MEDIA_PLAYLIST, INCOMPATIBLE_HLS_VERSION, SCTE35_PARSING_ERROR, INVALID_SINGLE_PERIOD_DASH_MANIFEST, UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST, LAST_PERIOD_MISSING_AUDIO, LAST_PERIOD_MISSING_AUDIO_WARNING, ERROR_ORIGIN_PREFIX_INTERPOLATION, ERROR_ADS_INTERPOLATION, ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION, ERROR_CDN_AD_SEGMENT_INTERPOLATION, ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION, ERROR_SLATE_AD_URL_INTERPOLATION, ERROR_PROFILE_NAME_INTERPOLATION, ERROR_BUMPER_START_INTERPOLATION, ERROR_BUMPER_END_INTERPOLATION
+    #       publish_opt_in_event_types: ["PRE_SESSION_INIT_HOOK_SUMMARY"], # accepts PRE_SESSION_INIT_HOOK_SUMMARY, PRE_SESSION_INIT_FUNCTION_COMPLETED
+    #       exclude_event_types: ["GENERATED_MANIFEST"], # accepts GENERATED_MANIFEST, ORIGIN_MANIFEST, SESSION_INITIALIZED, TRACKING_RESPONSE, CONFIG_SYNTAX_ERROR, CONFIG_SECURITY_ERROR, UNKNOWN_HOST, TIMEOUT_ERROR, CONNECTION_ERROR, IO_ERROR, UNKNOWN_ERROR, HOST_DISALLOWED, PARSING_ERROR, MANIFEST_ERROR, NO_MASTER_OR_MEDIA_PLAYLIST, NO_MASTER_PLAYLIST, NO_MEDIA_PLAYLIST, INCOMPATIBLE_HLS_VERSION, SCTE35_PARSING_ERROR, INVALID_SINGLE_PERIOD_DASH_MANIFEST, UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST, LAST_PERIOD_MISSING_AUDIO, LAST_PERIOD_MISSING_AUDIO_WARNING, ERROR_ORIGIN_PREFIX_INTERPOLATION, ERROR_ADS_INTERPOLATION, ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION, ERROR_CDN_AD_SEGMENT_INTERPOLATION, ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION, ERROR_SLATE_AD_URL_INTERPOLATION, ERROR_PROFILE_NAME_INTERPOLATION, ERROR_BUMPER_START_INTERPOLATION, ERROR_BUMPER_END_INTERPOLATION, PRE_SESSION_INIT_HOOK_ERROR, PRE_SESSION_INIT_FUNCTION_ERROR
     #     },
     #   })
     #
@@ -586,11 +587,13 @@ module Aws::MediaTailor
     #   resp.enabled_logging_strategies #=> Array
     #   resp.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
+    #   resp.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST", "PRE_ADS_REQUEST_HOOK_SUMMARY", "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
     #   resp.ads_interaction_log.exclude_event_types #=> Array
-    #   resp.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
+    #   resp.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR"
+    #   resp.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
+    #   resp.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
     #   resp.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION"
+    #   resp.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ConfigureLogsForPlaybackConfiguration AWS API Documentation
     #
@@ -1466,6 +1469,36 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Deletes a function. MediaTailor prevents deletion of a function that
+    # is still referenced by a playback configuration or by another
+    # function. Remove all references before deleting. For more information
+    # about functions, see [Working with functions][1] in the *MediaTailor
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+    #
+    # @option params [required, String] :function_id
+    #   The identifier of the function to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_function({
+    #     function_id: "__string", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/DeleteFunction AWS API Documentation
+    #
+    # @overload delete_function(params = {})
+    # @param [Hash] params ({})
+    def delete_function(params = {}, options = {})
+      req = build_request(:delete_function, params)
+      req.send_request(options)
+    end
+
     # The live source to delete.
     #
     # @option params [required, String] :live_source_name
@@ -2087,6 +2120,71 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Retrieves the configuration and metadata for a function. For more
+    # information about functions, see [Working with functions][1] in the
+    # *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+    #
+    # @option params [required, String] :function_id
+    #   The identifier of the function.
+    #
+    # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFunctionResponse#function_id #function_id} => String
+    #   * {Types::GetFunctionResponse#function_type #function_type} => String
+    #   * {Types::GetFunctionResponse#description #description} => String
+    #   * {Types::GetFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
+    #   * {Types::GetFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
+    #   * {Types::GetFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
+    #   * {Types::GetFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::GetFunctionResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_function({
+    #     function_id: "__string", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_id #=> String
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.description #=> String
+    #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.http_request_configuration.output #=> Hash
+    #   resp.http_request_configuration.output["__string"] #=> String
+    #   resp.http_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.http_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.http_request_configuration.url #=> String
+    #   resp.http_request_configuration.body #=> String
+    #   resp.http_request_configuration.headers #=> Hash
+    #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.custom_output_configuration.output #=> Hash
+    #   resp.custom_output_configuration.output["__string"] #=> String
+    #   resp.sequential_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.sequential_executor_configuration.output #=> Hash
+    #   resp.sequential_executor_configuration.output["__string"] #=> String
+    #   resp.sequential_executor_configuration.function_list #=> Array
+    #   resp.sequential_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.sequential_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetFunction AWS API Documentation
+    #
+    # @overload get_function(params = {})
+    # @param [Hash] params ({})
+    def get_function(params = {}, options = {})
+      req = build_request(:get_function, params)
+      req.send_request(options)
+    end
+
     # Retrieves a playback configuration. For information about MediaTailor
     # configurations, see [Working with configurations in AWS Elemental
     # MediaTailor][1].
@@ -2122,6 +2220,7 @@ module Aws::MediaTailor
     #   * {Types::GetPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #   * {Types::GetPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
     #   * {Types::GetPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
+    #   * {Types::GetPlaybackConfigurationResponse#function_mapping #function_mapping} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -2153,11 +2252,13 @@ module Aws::MediaTailor
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
+    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST", "PRE_ADS_REQUEST_HOOK_SUMMARY", "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
+    #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR"
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION"
+    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -2175,6 +2276,8 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.function_mapping #=> Hash
+    #   resp.function_mapping["EventName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/GetPlaybackConfiguration AWS API Documentation
     #
@@ -2415,6 +2518,90 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Retrieves all functions associated with your AWS account in the
+    # current Region. For more information about functions, see [Working
+    # with functions][1] in the *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of functions that you want MediaTailor to return in
+    #   response to the current request. If there are more than `MaxResults`
+    #   functions, use the value of `NextToken` in the response to get the
+    #   next page of results.
+    #
+    #   The default value is 100. MediaTailor uses token-based pagination,
+    #   which means that a response might contain fewer than `MaxResults`
+    #   items, including 0 items, even when more results are available. To
+    #   retrieve all results, you must continue making requests using the
+    #   `NextToken` value from each response until the response no longer
+    #   includes a `NextToken` value.
+    #
+    # @option params [String] :next_token
+    #   Pagination token returned by the list request when results exceed the
+    #   maximum allowed. Use the token to fetch the next page of results.
+    #
+    #   For the first `ListFunctions` request, omit this value. For subsequent
+    #   requests, get the value of `NextToken` from the previous response and
+    #   specify that value for `NextToken` in the request. Continue making
+    #   requests until the response no longer includes a `NextToken` value,
+    #   which indicates that all results have been retrieved.
+    #
+    # @return [Types::ListFunctionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFunctionsResponse#items #items} => Array&lt;Types::Function&gt;
+    #   * {Types::ListFunctionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_functions({
+    #     max_results: 1,
+    #     next_token: "__string",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].function_id #=> String
+    #   resp.items[0].function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.items[0].description #=> String
+    #   resp.items[0].http_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].http_request_configuration.output #=> Hash
+    #   resp.items[0].http_request_configuration.output["__string"] #=> String
+    #   resp.items[0].http_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.items[0].http_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.items[0].http_request_configuration.url #=> String
+    #   resp.items[0].http_request_configuration.body #=> String
+    #   resp.items[0].http_request_configuration.headers #=> Hash
+    #   resp.items[0].http_request_configuration.headers["__string"] #=> String
+    #   resp.items[0].custom_output_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].custom_output_configuration.output #=> Hash
+    #   resp.items[0].custom_output_configuration.output["__string"] #=> String
+    #   resp.items[0].sequential_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.items[0].sequential_executor_configuration.output #=> Hash
+    #   resp.items[0].sequential_executor_configuration.output["__string"] #=> String
+    #   resp.items[0].sequential_executor_configuration.function_list #=> Array
+    #   resp.items[0].sequential_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.items[0].sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.items[0].sequential_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.items[0].tags #=> Hash
+    #   resp.items[0].tags["__string"] #=> String
+    #   resp.items[0].arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListFunctions AWS API Documentation
+    #
+    # @overload list_functions(params = {})
+    # @param [Hash] params ({})
+    def list_functions(params = {}, options = {})
+      req = build_request(:list_functions, params)
+      req.send_request(options)
+    end
+
     # Lists the live sources contained in a source location. A source
     # represents a piece of content.
     #
@@ -2557,11 +2744,13 @@ module Aws::MediaTailor
     #   resp.items[0].log_configuration.enabled_logging_strategies #=> Array
     #   resp.items[0].log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
+    #   resp.items[0].log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST", "PRE_ADS_REQUEST_HOOK_SUMMARY", "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
     #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types #=> Array
-    #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
+    #   resp.items[0].log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR"
+    #   resp.items[0].log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
+    #   resp.items[0].log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
     #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION"
+    #   resp.items[0].log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
     #   resp.items[0].manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.items[0].name #=> String
     #   resp.items[0].personalization_threshold_seconds #=> Integer
@@ -2579,6 +2768,8 @@ module Aws::MediaTailor
     #   resp.items[0].ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.items[0].ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.items[0].ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.items[0].function_mapping #=> Hash
+    #   resp.items[0].function_mapping["EventName"] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/ListPlaybackConfigurations AWS API Documentation
@@ -2898,6 +3089,153 @@ module Aws::MediaTailor
       req.send_request(options)
     end
 
+    # Creates or updates a function. A function defines reusable logic that
+    # MediaTailor executes at lifecycle hooks during ad insertion. For more
+    # information about functions, see [Working with functions][1] in the
+    # *MediaTailor User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions.html
+    #
+    # @option params [required, String] :function_id
+    #   The identifier of the function. The identifier must be unique within
+    #   your account.
+    #
+    # @option params [required, String] :function_type
+    #   The type of the function. The function type determines what the
+    #   function can do at runtime. Valid values: `CUSTOM_OUTPUT` evaluates
+    #   expressions and produces output bindings with no external calls.
+    #   `HTTP_REQUEST` makes an HTTP call to an external service and evaluates
+    #   output expressions that can reference the response.
+    #   `SEQUENTIAL_EXECUTOR` runs a sequence of child functions in order,
+    #   passing data between steps through temporary data. For more
+    #   information, see [Function types and composition][1] in the
+    #   *MediaTailor User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-types.html
+    #
+    # @option params [String] :description
+    #   A description of the function.
+    #
+    # @option params [Types::HttpRequestConfiguration] :http_request_configuration
+    #   The configuration for an `HTTP_REQUEST` function. Specifies the HTTP
+    #   method, URL, headers, body, timeout, and output expressions. Required
+    #   when `FunctionType` is `HTTP_REQUEST`.
+    #
+    # @option params [Types::CustomOutputConfiguration] :custom_output_configuration
+    #   The configuration for a `CUSTOM_OUTPUT` function. Specifies the
+    #   runtime and output expressions. Required when `FunctionType` is
+    #   `CUSTOM_OUTPUT`.
+    #
+    # @option params [Types::SequentialExecutorConfiguration] :sequential_executor_configuration
+    #   The configuration for a `SEQUENTIAL_EXECUTOR` function. Specifies the
+    #   ordered list of child functions to execute, an optional output block,
+    #   and a timeout. Required when `FunctionType` is `SEQUENTIAL_EXECUTOR`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to assign to the function. Tags are key-value pairs that you
+    #   can associate with Amazon resources to help with organization, access
+    #   control, and cost tracking. For more information, see [Tagging AWS
+    #   Elemental MediaTailor Resources][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+    #
+    # @return [Types::PutFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::PutFunctionResponse#function_id #function_id} => String
+    #   * {Types::PutFunctionResponse#function_type #function_type} => String
+    #   * {Types::PutFunctionResponse#description #description} => String
+    #   * {Types::PutFunctionResponse#http_request_configuration #http_request_configuration} => Types::HttpRequestConfiguration
+    #   * {Types::PutFunctionResponse#custom_output_configuration #custom_output_configuration} => Types::CustomOutputConfiguration
+    #   * {Types::PutFunctionResponse#sequential_executor_configuration #sequential_executor_configuration} => Types::SequentialExecutorConfiguration
+    #   * {Types::PutFunctionResponse#tags #tags} => Hash&lt;String,String&gt;
+    #   * {Types::PutFunctionResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.put_function({
+    #     function_id: "__string", # required
+    #     function_type: "HTTP_REQUEST", # required, accepts HTTP_REQUEST, CUSTOM_OUTPUT, SEQUENTIAL_EXECUTOR
+    #     description: "__string",
+    #     http_request_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: {
+    #         "__string" => "__string",
+    #       },
+    #       method_type: "GET", # required, accepts GET, POST
+    #       request_timeout_milliseconds: 1, # required
+    #       url: "__string", # required
+    #       body: "__string",
+    #       headers: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     custom_output_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: {
+    #         "__string" => "__string",
+    #       },
+    #     },
+    #     sequential_executor_configuration: {
+    #       runtime: "JSONATA", # required, accepts JSONATA
+    #       output: {
+    #         "__string" => "__string",
+    #       },
+    #       function_list: [ # required
+    #         {
+    #           run_condition: "__string",
+    #           function_id: "__string",
+    #         },
+    #       ],
+    #       timeout_milliseconds: 1, # required
+    #     },
+    #     tags: {
+    #       "__string" => "__string",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.function_id #=> String
+    #   resp.function_type #=> String, one of "HTTP_REQUEST", "CUSTOM_OUTPUT", "SEQUENTIAL_EXECUTOR"
+    #   resp.description #=> String
+    #   resp.http_request_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.http_request_configuration.output #=> Hash
+    #   resp.http_request_configuration.output["__string"] #=> String
+    #   resp.http_request_configuration.method_type #=> String, one of "GET", "POST"
+    #   resp.http_request_configuration.request_timeout_milliseconds #=> Integer
+    #   resp.http_request_configuration.url #=> String
+    #   resp.http_request_configuration.body #=> String
+    #   resp.http_request_configuration.headers #=> Hash
+    #   resp.http_request_configuration.headers["__string"] #=> String
+    #   resp.custom_output_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.custom_output_configuration.output #=> Hash
+    #   resp.custom_output_configuration.output["__string"] #=> String
+    #   resp.sequential_executor_configuration.runtime #=> String, one of "JSONATA"
+    #   resp.sequential_executor_configuration.output #=> Hash
+    #   resp.sequential_executor_configuration.output["__string"] #=> String
+    #   resp.sequential_executor_configuration.function_list #=> Array
+    #   resp.sequential_executor_configuration.function_list[0].run_condition #=> String
+    #   resp.sequential_executor_configuration.function_list[0].function_id #=> String
+    #   resp.sequential_executor_configuration.timeout_milliseconds #=> Integer
+    #   resp.tags #=> Hash
+    #   resp.tags["__string"] #=> String
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutFunction AWS API Documentation
+    #
+    # @overload put_function(params = {})
+    # @param [Hash] params ({})
+    def put_function(params = {}, options = {})
+      req = build_request(:put_function, params)
+      req.send_request(options)
+    end
+
     # Creates a playback configuration. For information about MediaTailor
     # configurations, see [Working with configurations in AWS Elemental
     # MediaTailor][1].
@@ -3019,6 +3357,18 @@ module Aws::MediaTailor
     #   server (ADS). This includes settings for request method, headers, body
     #   content, and compression options.
     #
+    # @option params [Hash<String,String>] :function_mapping
+    #   A map of lifecycle hook event names to function identifiers. The
+    #   function mapping specifies which function MediaTailor executes at each
+    #   lifecycle hook during ad insertion. Valid keys are
+    #   `PRE_SESSION_INITIALIZATION` and `PRE_ADS_REQUEST`. For more
+    #   information, see [Functions lifecycle hooks][1] in the *MediaTailor
+    #   User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+    #
     # @return [Types::PutPlaybackConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_url #ad_decision_server_url} => String
@@ -3043,6 +3393,7 @@ module Aws::MediaTailor
     #   * {Types::PutPlaybackConfigurationResponse#video_content_source_url #video_content_source_url} => String
     #   * {Types::PutPlaybackConfigurationResponse#ad_conditioning_configuration #ad_conditioning_configuration} => Types::AdConditioningConfiguration
     #   * {Types::PutPlaybackConfigurationResponse#ad_decision_server_configuration #ad_decision_server_configuration} => Types::AdDecisionServerConfiguration
+    #   * {Types::PutPlaybackConfigurationResponse#function_mapping #function_mapping} => Hash&lt;String,String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3101,6 +3452,9 @@ module Aws::MediaTailor
     #         compress_request: "NONE", # accepts NONE, GZIP
     #       },
     #     },
+    #     function_mapping: {
+    #       "PRE_SESSION_INITIALIZATION" => "__string",
+    #     },
     #   })
     #
     # @example Response structure
@@ -3127,11 +3481,13 @@ module Aws::MediaTailor
     #   resp.log_configuration.enabled_logging_strategies #=> Array
     #   resp.log_configuration.enabled_logging_strategies[0] #=> String, one of "VENDED_LOGS", "LEGACY_CLOUDWATCH"
     #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST"
+    #   resp.log_configuration.ads_interaction_log.publish_opt_in_event_types[0] #=> String, one of "RAW_ADS_RESPONSE", "RAW_ADS_REQUEST", "PRE_ADS_REQUEST_HOOK_SUMMARY", "PRE_ADS_REQUEST_FUNCTION_COMPLETED"
     #   resp.log_configuration.ads_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE"
+    #   resp.log_configuration.ads_interaction_log.exclude_event_types[0] #=> String, one of "AD_MARKER_FOUND", "NON_AD_MARKER_FOUND", "MAKING_ADS_REQUEST", "MODIFIED_TARGET_URL", "VAST_REDIRECT", "EMPTY_VAST_RESPONSE", "EMPTY_VMAP_RESPONSE", "VAST_RESPONSE", "REDIRECTED_VAST_RESPONSE", "FILLED_AVAIL", "FILLED_OVERLAY_AVAIL", "BEACON_FIRED", "WARNING_NO_ADVERTISEMENTS", "WARNING_VPAID_AD_DROPPED", "WARNING_URL_VARIABLE_SUBSTITUTION_FAILED", "ERROR_UNKNOWN", "ERROR_UNKNOWN_HOST", "ERROR_DISALLOWED_HOST", "ERROR_ADS_IO", "ERROR_ADS_TIMEOUT", "ERROR_ADS_RESPONSE_PARSE", "ERROR_ADS_RESPONSE_UNKNOWN_ROOT_ELEMENT", "ERROR_ADS_INVALID_RESPONSE", "ERROR_VAST_REDIRECT_EMPTY_RESPONSE", "ERROR_VAST_REDIRECT_MULTIPLE_VAST", "ERROR_VAST_REDIRECT_FAILED", "ERROR_VAST_MISSING_MEDIAFILES", "ERROR_VAST_MISSING_CREATIVES", "ERROR_VAST_MISSING_OVERLAYS", "ERROR_VAST_MISSING_IMPRESSION", "ERROR_VAST_INVALID_VAST_AD_TAG_URI", "ERROR_VAST_MULTIPLE_TRACKING_EVENTS", "ERROR_VAST_MULTIPLE_LINEAR", "ERROR_VAST_INVALID_MEDIA_FILE", "ERROR_FIRING_BEACON_FAILED", "ERROR_PERSONALIZATION_DISABLED", "VOD_TIME_BASED_AVAIL_PLAN_VAST_RESPONSE_FOR_OFFSET", "VOD_TIME_BASED_AVAIL_PLAN_SUCCESS", "VOD_TIME_BASED_AVAIL_PLAN_WARNING_NO_ADVERTISEMENTS", "INTERSTITIAL_VOD_SUCCESS", "INTERSTITIAL_VOD_FAILURE", "PRE_ADS_REQUEST_HOOK_ERROR", "PRE_ADS_REQUEST_FUNCTION_ERROR"
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types #=> Array
+    #   resp.log_configuration.manifest_service_interaction_log.publish_opt_in_event_types[0] #=> String, one of "PRE_SESSION_INIT_HOOK_SUMMARY", "PRE_SESSION_INIT_FUNCTION_COMPLETED"
     #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types #=> Array
-    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION"
+    #   resp.log_configuration.manifest_service_interaction_log.exclude_event_types[0] #=> String, one of "GENERATED_MANIFEST", "ORIGIN_MANIFEST", "SESSION_INITIALIZED", "TRACKING_RESPONSE", "CONFIG_SYNTAX_ERROR", "CONFIG_SECURITY_ERROR", "UNKNOWN_HOST", "TIMEOUT_ERROR", "CONNECTION_ERROR", "IO_ERROR", "UNKNOWN_ERROR", "HOST_DISALLOWED", "PARSING_ERROR", "MANIFEST_ERROR", "NO_MASTER_OR_MEDIA_PLAYLIST", "NO_MASTER_PLAYLIST", "NO_MEDIA_PLAYLIST", "INCOMPATIBLE_HLS_VERSION", "SCTE35_PARSING_ERROR", "INVALID_SINGLE_PERIOD_DASH_MANIFEST", "UNSUPPORTED_SINGLE_PERIOD_DASH_MANIFEST", "LAST_PERIOD_MISSING_AUDIO", "LAST_PERIOD_MISSING_AUDIO_WARNING", "ERROR_ORIGIN_PREFIX_INTERPOLATION", "ERROR_ADS_INTERPOLATION", "ERROR_LIVE_PRE_ROLL_ADS_INTERPOLATION", "ERROR_CDN_AD_SEGMENT_INTERPOLATION", "ERROR_CDN_CONTENT_SEGMENT_INTERPOLATION", "ERROR_SLATE_AD_URL_INTERPOLATION", "ERROR_PROFILE_NAME_INTERPOLATION", "ERROR_BUMPER_START_INTERPOLATION", "ERROR_BUMPER_END_INTERPOLATION", "PRE_SESSION_INIT_HOOK_ERROR", "PRE_SESSION_INIT_FUNCTION_ERROR"
     #   resp.manifest_processing_rules.ad_marker_passthrough.enabled #=> Boolean
     #   resp.name #=> String
     #   resp.personalization_threshold_seconds #=> Integer
@@ -3149,6 +3505,8 @@ module Aws::MediaTailor
     #   resp.ad_decision_server_configuration.http_request.headers #=> Hash
     #   resp.ad_decision_server_configuration.http_request.headers["__string"] #=> String
     #   resp.ad_decision_server_configuration.http_request.compress_request #=> String, one of "NONE", "GZIP"
+    #   resp.function_mapping #=> Hash
+    #   resp.function_mapping["EventName"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediatailor-2018-04-23/PutPlaybackConfiguration AWS API Documentation
     #
@@ -3832,7 +4190,7 @@ module Aws::MediaTailor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediatailor'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.118.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

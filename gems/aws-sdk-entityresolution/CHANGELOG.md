@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2026-05-01)
+------------------
+
+* Feature - Add support for transitive matching in AWS Entity Resolution rule-based matching workflows. When enabled, records that match through different rules are grouped together into the same match group, allowing related records to be connected across rule levels.
+
 1.45.0 (2026-03-18)
 ------------------
 

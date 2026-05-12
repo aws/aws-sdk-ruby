@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-05-01)
+------------------
+
+* Feature - Added guidance for CreateOpenIDConnectProvider to include multiple thumbprints when OIDC discovery and JWKS endpoints use different hosts or certificates
+
 1.142.0 (2026-03-18)
 ------------------
 

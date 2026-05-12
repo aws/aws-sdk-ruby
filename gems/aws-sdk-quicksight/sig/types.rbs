@@ -1406,6 +1406,8 @@ module Aws::QuickSight
       attr_accessor extension: ("DENY")
       attr_accessor manage_shared_folders: ("DENY")
       attr_accessor generate_analyses: ("DENY")
+      attr_accessor story: ("DENY")
+      attr_accessor scenario: ("DENY")
       SENSITIVE: []
     end
 
@@ -1844,6 +1846,18 @@ module Aws::QuickSight
     class ControlSortConfiguration
       attr_accessor selectable_values_sort: Types::SelectableValuesSort
       attr_accessor control_column_sort: Types::AggregationSortConfiguration
+      SENSITIVE: []
+    end
+
+    class ControlTitleFontConfiguration
+      attr_accessor font_configuration: Types::FontConfiguration
+      attr_accessor text_alignment: ("LEFT" | "CENTER" | "RIGHT" | "AUTO")
+      SENSITIVE: []
+    end
+
+    class ControlTitleFormatText
+      attr_accessor plain_text: ::String
+      attr_accessor rich_text: ::String
       SENSITIVE: []
     end
 
@@ -3242,6 +3256,7 @@ module Aws::QuickSight
     class DefaultFilterControlConfiguration
       attr_accessor title: ::String
       attr_accessor control_options: Types::DefaultFilterControlOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -4954,6 +4969,7 @@ module Aws::QuickSight
       attr_accessor display_options: Types::DateTimePickerControlDisplayOptions
       attr_accessor type: ("SINGLE_VALUED" | "DATE_RANGE")
       attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -4967,6 +4983,7 @@ module Aws::QuickSight
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
       attr_accessor commit_mode: ("AUTO" | "MANUAL")
       attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -4996,6 +5013,7 @@ module Aws::QuickSight
       attr_accessor selectable_values: Types::FilterSelectableValues
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
       attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5025,6 +5043,7 @@ module Aws::QuickSight
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::RelativeDateTimeControlDisplayOptions
       attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5048,6 +5067,7 @@ module Aws::QuickSight
       attr_accessor maximum_value: ::Float
       attr_accessor minimum_value: ::Float
       attr_accessor step_size: ::Float
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5057,6 +5077,7 @@ module Aws::QuickSight
       attr_accessor source_filter_id: ::String
       attr_accessor delimiter: ::String
       attr_accessor display_options: Types::TextAreaControlDisplayOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5065,6 +5086,7 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_filter_id: ::String
       attr_accessor display_options: Types::TextFieldControlDisplayOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5778,6 +5800,7 @@ module Aws::QuickSight
       attr_accessor user_identifier: Types::UserIdentifier
       attr_accessor namespace: ::String
       attr_accessor session_expires_at: ::Time
+      attr_accessor context_region: ::String
       SENSITIVE: []
     end
 
@@ -7496,6 +7519,7 @@ module Aws::QuickSight
       attr_accessor o_auth_scope: ::String
       attr_accessor identity_provider_vpc_connection_properties: Types::VpcConnectionProperties
       attr_accessor identity_provider_resource_uri: ::String
+      attr_accessor identity_provider_ca_certificates_bundle_s3_uri: ::String
       SENSITIVE: []
     end
 
@@ -7576,6 +7600,7 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_parameter_name: ::String
       attr_accessor display_options: Types::DateTimePickerControlDisplayOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -7597,6 +7622,7 @@ module Aws::QuickSight
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
       attr_accessor commit_mode: ("AUTO" | "MANUAL")
       attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -7609,6 +7635,7 @@ module Aws::QuickSight
       attr_accessor selectable_values: Types::ParameterSelectableValues
       attr_accessor cascading_control_configuration: Types::CascadingControlConfiguration
       attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -7626,6 +7653,7 @@ module Aws::QuickSight
       attr_accessor maximum_value: ::Float
       attr_accessor minimum_value: ::Float
       attr_accessor step_size: ::Float
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -7635,6 +7663,7 @@ module Aws::QuickSight
       attr_accessor source_parameter_name: ::String
       attr_accessor delimiter: ::String
       attr_accessor display_options: Types::TextAreaControlDisplayOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -7643,6 +7672,7 @@ module Aws::QuickSight
       attr_accessor title: ::String
       attr_accessor source_parameter_name: ::String
       attr_accessor display_options: Types::TextFieldControlDisplayOptions
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -10605,6 +10635,7 @@ module Aws::QuickSight
       attr_accessor data_label_font_configuration: Types::FontConfiguration
       attr_accessor visual_title_font_configuration: Types::VisualTitleFontConfiguration
       attr_accessor visual_subtitle_font_configuration: Types::VisualSubtitleFontConfiguration
+      attr_accessor control_title_font_configuration: Types::ControlTitleFontConfiguration
       SENSITIVE: []
     end
 

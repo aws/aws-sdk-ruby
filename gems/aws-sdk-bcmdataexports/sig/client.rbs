@@ -100,7 +100,7 @@ module Aws
                                  s3_prefix: ::String,
                                  s3_region: ::String,
                                  s3_output_configurations: {
-                                   output_type: ("CUSTOM"),
+                                   output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
                                    format: ("TEXT_OR_CSV" | "PARQUET"),
                                    compression: ("GZIP" | "PARQUET"),
                                    overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
@@ -265,7 +265,7 @@ module Aws
                                  s3_prefix: ::String,
                                  s3_region: ::String,
                                  s3_output_configurations: {
-                                   output_type: ("CUSTOM"),
+                                   output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
                                    format: ("TEXT_OR_CSV" | "PARQUET"),
                                    compression: ("GZIP" | "PARQUET"),
                                    overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")

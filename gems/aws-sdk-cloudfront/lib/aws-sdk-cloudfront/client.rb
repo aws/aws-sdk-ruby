@@ -2772,6 +2772,9 @@ module Aws::CloudFront
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
     #
+    # @option params [Types::Tags] :tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #
     # @return [Types::CreateFunctionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateFunctionResult#function_summary #function_summary} => Types::FunctionSummary
@@ -2845,6 +2848,14 @@ module Aws::CloudFront
     #       },
     #     },
     #     function_code: "data", # required
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
+    #     },
     #   })
     #
     # @example Response structure
@@ -3048,6 +3059,9 @@ module Aws::CloudFront
     #   The S3 bucket that provides the source for the import. The source must
     #   be in a valid JSON format.
     #
+    # @option params [Types::Tags] :tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #
     # @return [Types::CreateKeyValueStoreResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateKeyValueStoreResult#key_value_store #key_value_store} => Types::KeyValueStore
@@ -3090,6 +3104,14 @@ module Aws::CloudFront
     #     import_source: {
     #       source_type: "S3", # required, accepts S3
     #       source_arn: "string", # required
+    #     },
+    #     tags: {
+    #       items: [
+    #         {
+    #           key: "TagKey", # required
+    #           value: "TagValue",
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -13782,7 +13804,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

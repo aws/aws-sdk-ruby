@@ -26654,6 +26654,12 @@ module Aws::EC2
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] include_unsupported_in_region
+    #   If `true`, the response includes instance types that are not
+    #   supported in the current Region, in addition to the supported types.
+    #   Default: `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeInstanceTypesRequest AWS API Documentation
     #
     class DescribeInstanceTypesRequest < Struct.new(
@@ -26661,7 +26667,8 @@ module Aws::EC2
       :instance_types,
       :filters,
       :max_results,
-      :next_token)
+      :next_token,
+      :include_unsupported_in_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -53671,6 +53678,11 @@ module Aws::EC2
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/schedevents_actions_reboot.html#reboot-migration
     #   @return [String]
     #
+    # @!attribute [rw] supported_in_region
+    #   Indicates whether the instance type is supported in the current
+    #   Region.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceTypeInfo AWS API Documentation
     #
     class InstanceTypeInfo < Struct.new(
@@ -53704,7 +53716,8 @@ module Aws::EC2
       :media_accelerator_info,
       :neuron_info,
       :phc_support,
-      :reboot_migration_support)
+      :reboot_migration_support,
+      :supported_in_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65661,6 +65674,14 @@ module Aws::EC2
     #   Default: `::/0`
     #   @return [String]
     #
+    # @!attribute [rw] tunnel_bandwidth
+    #   The desired bandwidth specification for the VPN connection.
+    #   `standard` supports up to 1.25 Gbps per tunnel, while `large`
+    #   supports up to 5 Gbps per tunnel. Large bandwidth is only available
+    #   for VPN connections attached to a transit gateway or to Cloud WAN.
+    #   The default value is `standard`.
+    #   @return [String]
+    #
     # @!attribute [rw] dry_run
     #   Checks whether you have the required permissions for the action,
     #   without actually making the request, and provides an error response.
@@ -65676,6 +65697,7 @@ module Aws::EC2
       :remote_ipv_4_network_cidr,
       :local_ipv_6_network_cidr,
       :remote_ipv_6_network_cidr,
+      :tunnel_bandwidth,
       :dry_run)
       SENSITIVE = []
       include Aws::Structure

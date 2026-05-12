@@ -233,6 +233,25 @@ module Aws::BedrockAgentCore
       class Unknown < AgentTracesConfig; end
     end
 
+    # Money amount with currency
+    #
+    # @!attribute [rw] value
+    #   The numeric value of the amount.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency
+    #   The currency code for this amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Amount AWS API Documentation
+    #
+    class Amount < Struct.new(
+      :value,
+      :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration for a stream that enables programmatic control of a
     # browser session in Amazon Bedrock AgentCore. This stream provides a
     # bidirectional communication channel for sending commands to the
@@ -270,6 +289,25 @@ module Aws::BedrockAgentCore
     #
     class AutomationStreamUpdate < Struct.new(
       :stream_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Available session limits. Currently only budget is supported.
+    #
+    # @!attribute [rw] available_spend_amount
+    #   The available spend amount for this session.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the available limits were last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/AvailableLimits AWS API Documentation
+    #
+    class AvailableLimits < Struct.new(
+      :available_spend_amount,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,6 +1084,60 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Coinbase CDP token request parameters
+    #
+    # @!attribute [rw] request_method
+    #   The HTTP method for the payment API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_host
+    #   Optional - defaults to "api.cdp.coinbase.com"
+    #   @return [String]
+    #
+    # @!attribute [rw] request_path
+    #   The path of the payment API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] include_wallet_auth_token
+    #   Set to true for wallet write operations (requires walletSecret
+    #   configured)
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] request_body
+    #   Request body JSON - used to generate wallet auth JWT
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CoinbaseCdpTokenRequestInput AWS API Documentation
+    #
+    class CoinbaseCdpTokenRequestInput < Struct.new(
+      :request_method,
+      :request_host,
+      :request_path,
+      :include_wallet_auth_token,
+      :request_body)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Coinbase CDP token response
+    #
+    # @!attribute [rw] bearer_token
+    #   Bearer Token for Authorization header
+    #   @return [String]
+    #
+    # @!attribute [rw] wallet_auth_token
+    #   Wallet Auth Token for X-Wallet-Auth header
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CoinbaseCdpTokenResponseOutput AWS API Documentation
+    #
+    class CoinbaseCdpTokenResponseOutput < Struct.new(
+      :bearer_token,
+      :wallet_auth_token)
+      SENSITIVE = [:bearer_token, :wallet_auth_token]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] user_identifier
     #   The OAuth2.0 token or user ID that was used to generate the workload
     #   access token used for initiating the user authorization flow to
@@ -1527,6 +1619,162 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Request structure for creating a payment instrument
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector to use for this instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_type
+    #   The type of payment instrument being created.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_details
+    #   The details of the payment instrument.
+    #   @return [Types::PaymentInstrumentDetails]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentInstrumentRequest AWS API Documentation
+    #
+    class CreatePaymentInstrumentRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :payment_instrument_type,
+      :payment_instrument_details,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for creating a payment instrument
+    #
+    # @!attribute [rw] payment_instrument
+    #   Represents a payment instrument
+    #   @return [Types::PaymentInstrument]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentInstrumentResponse AWS API Documentation
+    #
+    class CreatePaymentInstrumentResponse < Struct.new(
+      :payment_instrument)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for creating a payment session
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   The spending limits for this payment session.
+    #   @return [Types::SessionLimits]
+    #
+    # @!attribute [rw] expiry_time_in_minutes
+    #   The session expiry time in minutes. Must be between 15 and 480
+    #   minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentSessionRequest AWS API Documentation
+    #
+    class CreatePaymentSessionRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :limits,
+      :expiry_time_in_minutes,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for creating a payment session
+    #
+    # @!attribute [rw] payment_session
+    #   Payment manager session
+    #   @return [Types::PaymentSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentSessionResponse AWS API Documentation
+    #
+    class CreatePaymentSessionResponse < Struct.new(
+      :payment_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # X402 payment requirement input
+    #
+    # @!attribute [rw] version
+    #   The X402 protocol version (e.g., "v1", "v2")
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   This can hold any JSON-like object
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CryptoX402PaymentInput AWS API Documentation
+    #
+    class CryptoX402PaymentInput < Struct.new(
+      :version,
+      :payload)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
+    # X402 payment requirement output
+    #
+    # @!attribute [rw] version
+    #   The X402 protocol version (e.g., "1", "2")
+    #   @return [String]
+    #
+    # @!attribute [rw] payload
+    #   This can hold any JSON-like object
+    #   @return [Hash,Array,String,Numeric,Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CryptoX402PaymentOutput AWS API Documentation
+    #
+    class CryptoX402PaymentOutput < Struct.new(
+      :version,
+      :payload)
+      SENSITIVE = [:payload]
+      include Aws::Structure
+    end
+
     # A custom descriptor configuration for a registry record.
     #
     # @!attribute [rw] inline_content
@@ -1702,6 +1950,106 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Request structure for deleting a payment instrument
+    #
+    # All fields are required and must match the instrument owner's
+    # identifiers for authorization to succeed.
+    #
+    # @!attribute [rw] user_id
+    #   The user ID making the delete request. Must match the instrument's
+    #   userId.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The payment manager ARN. Must match the instrument's
+    #   paymentManagerArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The payment connector ID. Must match the instrument's
+    #   paymentConnectorId.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The payment instrument ID to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentInstrumentRequest AWS API Documentation
+    #
+    class DeletePaymentInstrumentRequest < Struct.new(
+      :user_id,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :payment_instrument_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for deleting a payment instrument
+    #
+    # Returns the deletion status with HTTP 200 OK status code on successful
+    # soft deletion.
+    #
+    # @!attribute [rw] status
+    #   The status of the instrument after deletion. Always DELETED for
+    #   successful soft delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentInstrumentResponse AWS API Documentation
+    #
+    class DeletePaymentInstrumentResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for deleting a payment session
+    #
+    # All fields are required and must match the session owner's
+    # identifiers for authorization to succeed.
+    #
+    # @!attribute [rw] user_id
+    #   The user ID making the delete request. Must match the session's
+    #   userId.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The payment manager ARN. Must match the session's
+    #   paymentManagerArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_session_id
+    #   The payment session ID to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentSessionRequest AWS API Documentation
+    #
+    class DeletePaymentSessionRequest < Struct.new(
+      :user_id,
+      :payment_manager_arn,
+      :payment_session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for deleting a payment session
+    #
+    # Returns the deletion status with HTTP 200 status code on successful
+    # deletion.
+    #
+    # @!attribute [rw] status
+    #   The status of the deletion. Always DELETED for successful hard
+    #   delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/DeletePaymentSessionResponse AWS API Documentation
+    #
+    class DeletePaymentSessionResponse < Struct.new(
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] recommendation_id
     #   The unique identifier of the recommendation to delete.
     #   @return [String]
@@ -1776,6 +2124,40 @@ module Aws::BedrockAgentCore
     class DuplicateIdException < Struct.new(
       :message)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Embedded Crypto wallet instrument details
+    #
+    # @!attribute [rw] network
+    #   The blockchain network for this embedded crypto wallet. Supported
+    #   networks: ETHEREUM, SOLANA
+    #   @return [String]
+    #
+    # @!attribute [rw] linked_accounts
+    #   List of linkedAccounts linked to this wallet. Each linkedAccount
+    #   represents a way the end user can authenticate to this wallet. Can
+    #   be empty when adding a new linkedAccount to an existing wallet.
+    #   @return [Array<Types::LinkedAccount>]
+    #
+    # @!attribute [rw] wallet_address
+    #   The wallet address on the specified blockchain network.
+    #   @return [String]
+    #
+    # @!attribute [rw] redirect_url
+    #   URL for the end user to complete a provider-specific action (e.g.,
+    #   wallet linking, onboarding). Returned by the payment connector
+    #   during instrument creation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EmbeddedCryptoWallet AWS API Documentation
+    #
+    class EmbeddedCryptoWallet < Struct.new(
+      :network,
+      :linked_accounts,
+      :wallet_address,
+      :redirect_url)
+      SENSITIVE = [:linked_accounts]
       include Aws::Structure
     end
 
@@ -3006,6 +3388,163 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Request structure for getting payment instrument balance
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector associated with this instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The ID of the payment instrument to query balance for.
+    #   @return [String]
+    #
+    # @!attribute [rw] chain
+    #   The specific blockchain chain to query balance on. Required because
+    #   balances are chain-specific — the same wallet address may hold
+    #   different token balances on different chains.
+    #   @return [String]
+    #
+    # @!attribute [rw] token
+    #   The token to query balance for. Required to specify which supported
+    #   token's balance to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentBalanceRequest AWS API Documentation
+    #
+    class GetPaymentInstrumentBalanceRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :payment_instrument_id,
+      :chain,
+      :token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for getting payment instrument balance
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The ID of the payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_balance
+    #   The balance of the supported token on the requested chain.
+    #   @return [Types::TokenBalance]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentBalanceResponse AWS API Documentation
+    #
+    class GetPaymentInstrumentBalanceResponse < Struct.new(
+      :payment_instrument_id,
+      :token_balance)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for getting a payment instrument
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The ID of the payment instrument to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentRequest AWS API Documentation
+    #
+    class GetPaymentInstrumentRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :payment_instrument_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for getting a payment instrument
+    #
+    # @!attribute [rw] payment_instrument
+    #   Represents a payment instrument
+    #   @return [Types::PaymentInstrument]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentResponse AWS API Documentation
+    #
+    class GetPaymentInstrumentResponse < Struct.new(
+      :payment_instrument)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for getting a payment session
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_session_id
+    #   The ID of the payment session to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentSessionRequest AWS API Documentation
+    #
+    class GetPaymentSessionRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_session_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for getting a payment session
+    #
+    # @!attribute [rw] payment_session
+    #   Payment manager session
+    #   @return [Types::PaymentSession]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentSessionResponse AWS API Documentation
+    #
+    class GetPaymentSessionResponse < Struct.new(
+      :payment_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] recommendation_id
     #   The unique identifier of the recommendation to retrieve.
     #   @return [String]
@@ -3215,6 +3754,43 @@ module Aws::BedrockAgentCore
       :session_uri,
       :session_status)
       SENSITIVE = [:authorization_url, :access_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] workload_identity_token
+    #   Workload access token for authorization. Named workloadIdentityToken
+    #   for consistency with APIKey and OAuth2CredentialProvider.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_credential_provider_name
+    #   Name of the payment credential provider to use
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_token_request
+    #   Vendor-specific token request input Contains all request parameters
+    #   in a type-safe, vendor-specific structure
+    #   @return [Types::PaymentTokenRequestInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourcePaymentTokenRequest AWS API Documentation
+    #
+    class GetResourcePaymentTokenRequest < Struct.new(
+      :workload_identity_token,
+      :resource_credential_provider_name,
+      :payment_token_request)
+      SENSITIVE = [:workload_identity_token]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] payment_token_response
+    #   Vendor-specific token response output Contains all response data in
+    #   a type-safe, vendor-specific structure
+    #   @return [Types::PaymentTokenResponseOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourcePaymentTokenResponse AWS API Documentation
+    #
+    class GetResourcePaymentTokenResponse < Struct.new(
+      :payment_token_response)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -5003,6 +5579,149 @@ module Aws::BedrockAgentCore
       class Unknown < LeftExpression; end
     end
 
+    # Represents different linkedAccounts that can be linked to an embedded
+    # wallet. This union supports multiple linkedAccount approaches: email,
+    # SMS, JWT, and OAuth2.
+    #
+    # @note LinkedAccount is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LinkedAccount is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LinkedAccount corresponding to the set member.
+    #
+    # @!attribute [rw] email
+    #   Email-based linkedAccount
+    #   @return [Types::LinkedAccountEmail]
+    #
+    # @!attribute [rw] sms
+    #   SMS-based linkedAccount using phone number
+    #   @return [Types::LinkedAccountSms]
+    #
+    # @!attribute [rw] developer_jwt
+    #   Developer JWT linkedAccount with key ID and subject
+    #   @return [Types::LinkedAccountDeveloperJwt]
+    #
+    # @!attribute [rw] o_auth_2
+    #   OAuth2 provider linkedAccount (Google, Apple, X, Telegram, GitHub)
+    #   @return [Types::LinkedAccountOAuth2]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccount AWS API Documentation
+    #
+    class LinkedAccount < Struct.new(
+      :email,
+      :sms,
+      :developer_jwt,
+      :o_auth_2,
+      :unknown)
+      SENSITIVE = [:email, :sms]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Email < LinkedAccount; end
+      class Sms < LinkedAccount; end
+      class DeveloperJwt < LinkedAccount; end
+      class OAuth2 < LinkedAccount; end
+      class Unknown < LinkedAccount; end
+    end
+
+    # Authentication method using JWT with key ID and subject claims.
+    #
+    # @!attribute [rw] kid
+    #   The key ID (kid) from the JWT header. Identifies which key was used
+    #   to sign the JWT.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub
+    #   The subject (sub) claim from the JWT payload. Identifies the
+    #   principal that is the subject of the JWT.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountDeveloperJwt AWS API Documentation
+    #
+    class LinkedAccountDeveloperJwt < Struct.new(
+      :kid,
+      :sub)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # LinkedAccount using an email address.
+    #
+    # @!attribute [rw] email_address
+    #   The email address used for linkedAccount. Must be a valid email
+    #   format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountEmail AWS API Documentation
+    #
+    class LinkedAccountEmail < Struct.new(
+      :email_address)
+      SENSITIVE = [:email_address]
+      include Aws::Structure
+    end
+
+    # Authentication method using OAuth2 providers. Supports Google, Apple,
+    # X, Telegram, and GitHub providers.
+    #
+    # @note LinkedAccountOAuth2 is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note LinkedAccountOAuth2 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LinkedAccountOAuth2 corresponding to the set member.
+    #
+    # @!attribute [rw] google
+    #   Google OAuth2 authentication
+    #   @return [Types::OAuth2Authentication]
+    #
+    # @!attribute [rw] apple
+    #   Apple OAuth2 authentication
+    #   @return [Types::OAuth2Authentication]
+    #
+    # @!attribute [rw] x
+    #   X (formerly Twitter) OAuth2 authentication
+    #   @return [Types::OAuth2Authentication]
+    #
+    # @!attribute [rw] telegram
+    #   Telegram OAuth2 authentication
+    #   @return [Types::OAuth2Authentication]
+    #
+    # @!attribute [rw] github
+    #   GitHub OAuth2 authentication
+    #   @return [Types::OAuth2Authentication]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountOAuth2 AWS API Documentation
+    #
+    class LinkedAccountOAuth2 < Struct.new(
+      :google,
+      :apple,
+      :x,
+      :telegram,
+      :github,
+      :unknown)
+      SENSITIVE = [:google, :apple, :x, :telegram, :github]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Google < LinkedAccountOAuth2; end
+      class Apple < LinkedAccountOAuth2; end
+      class X < LinkedAccountOAuth2; end
+      class Telegram < LinkedAccountOAuth2; end
+      class Github < LinkedAccountOAuth2; end
+      class Unknown < LinkedAccountOAuth2; end
+    end
+
+    # LinkedAccount using a phone number in E.164 format.
+    #
+    # @!attribute [rw] phone_number
+    #   The phone number in E.164 format (e.g., +1234567890). Must be a
+    #   valid E.164 formatted phone number starting with + and containing
+    #   1-15 digits.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountSms AWS API Documentation
+    #
+    class LinkedAccountSms < Struct.new(
+      :phone_number)
+      SENSITIVE = [:phone_number]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response. If the
     #   total number of results is greater than this value, use the token
@@ -5423,6 +6142,117 @@ module Aws::BedrockAgentCore
     #
     class ListMemoryRecordsOutput < Struct.new(
       :memory_record_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for listing payment instruments
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with the payment instruments.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns the payment instruments.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector to filter by.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentInstrumentsRequest AWS API Documentation
+    #
+    class ListPaymentInstrumentsRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for listing payment instruments
+    #
+    # @!attribute [rw] payment_instruments
+    #   List of payment instrument summaries matching the request criteria.
+    #   @return [Array<Types::PaymentInstrumentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentInstrumentsResponse AWS API Documentation
+    #
+    class ListPaymentInstrumentsResponse < Struct.new(
+      :payment_instruments,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for listing payment sessions
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with the payment sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns the sessions.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return in a single response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentSessionsRequest AWS API Documentation
+    #
+    class ListPaymentSessionsRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for listing payment sessions
+    #
+    # @!attribute [rw] payment_sessions
+    #   List of payment session summaries matching the request criteria.
+    #   @return [Array<Types::PaymentSessionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Token for pagination to retrieve the next set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ListPaymentSessionsResponse AWS API Documentation
+    #
+    class ListPaymentSessionsResponse < Struct.new(
+      :payment_sessions,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -6157,6 +6987,37 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # OAuth2 authentication information for third-party providers. Supports
+    # Google, Apple, X, Telegram, and GitHub providers.
+    #
+    # @!attribute [rw] sub
+    #   The subject (sub) claim from the OAuth2 provider. Uniquely
+    #   identifies the user at the provider.
+    #   @return [String]
+    #
+    # @!attribute [rw] email_address
+    #   The email address from the OAuth2 provider (optional).
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user's name from the OAuth2 provider (optional).
+    #   @return [String]
+    #
+    # @!attribute [rw] username
+    #   The username from the OAuth2 provider (optional).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/OAuth2Authentication AWS API Documentation
+    #
+    class OAuth2Authentication < Struct.new(
+      :sub,
+      :email_address,
+      :name,
+      :username)
+      SENSITIVE = [:email_address]
+      include Aws::Structure
+    end
+
     # Configuration for an OAuth 2.0 credential provider used to
     # authenticate tool calls.
     #
@@ -6243,6 +7104,319 @@ module Aws::BedrockAgentCore
       class Unknown < PayloadType; end
     end
 
+    # Payment request details union
+    #
+    # @note PaymentInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] crypto_x402
+    #   X402 payment requirement input
+    #   @return [Types::CryptoX402PaymentInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInput AWS API Documentation
+    #
+    class PaymentInput < Struct.new(
+      :crypto_x402,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CryptoX402 < PaymentInput; end
+      class Unknown < PaymentInput; end
+    end
+
+    # Represents a payment instrument
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The unique identifier for this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector associated with this instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_type
+    #   The type of payment instrument (e.g., EMBEDDED\_CRYPTO\_WALLET).
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_details
+    #   The details specific to the payment instrument type.
+    #   @return [Types::PaymentInstrumentDetails]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this payment instrument was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this payment instrument was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInstrument AWS API Documentation
+    #
+    class PaymentInstrument < Struct.new(
+      :payment_instrument_id,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :user_id,
+      :payment_instrument_type,
+      :payment_instrument_details,
+      :created_at,
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details specific to the instrument type
+    #
+    # @note PaymentInstrumentDetails is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note PaymentInstrumentDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentInstrumentDetails corresponding to the set member.
+    #
+    # @!attribute [rw] embedded_crypto_wallet
+    #   Embedded crypto wallet managed directly by end user
+    #   @return [Types::EmbeddedCryptoWallet]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInstrumentDetails AWS API Documentation
+    #
+    class PaymentInstrumentDetails < Struct.new(
+      :embedded_crypto_wallet,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class EmbeddedCryptoWallet < PaymentInstrumentDetails; end
+      class Unknown < PaymentInstrumentDetails; end
+    end
+
+    # Summary of a payment instrument for list operations
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The unique identifier for this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_connector_id
+    #   The ID of the payment connector associated with this instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_type
+    #   The type of payment instrument (e.g., EMBEDDED\_CRYPTO\_WALLET).
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of this payment instrument.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this payment instrument was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this payment instrument was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInstrumentSummary AWS API Documentation
+    #
+    class PaymentInstrumentSummary < Struct.new(
+      :payment_instrument_id,
+      :payment_manager_arn,
+      :payment_connector_id,
+      :user_id,
+      :payment_instrument_type,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Payment response payload union. We will support versioning by
+    # introducing other model in this union
+    #
+    # @note PaymentOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentOutput corresponding to the set member.
+    #
+    # @!attribute [rw] crypto_x402
+    #   X402 payment requirement output
+    #   @return [Types::CryptoX402PaymentOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentOutput AWS API Documentation
+    #
+    class PaymentOutput < Struct.new(
+      :crypto_x402,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CryptoX402 < PaymentOutput; end
+      class Unknown < PaymentOutput; end
+    end
+
+    # Payment manager session
+    #
+    # @!attribute [rw] payment_session_id
+    #   The unique identifier for this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #   @return [String]
+    #
+    # @!attribute [rw] limits
+    #   The spending limits for this session.
+    #   @return [Types::SessionLimits]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time_in_minutes
+    #   The session expiry time in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this payment session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] available_limits
+    #   The available limits for this session after accounting for processed
+    #   payments.
+    #   @return [Types::AvailableLimits]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this payment session was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentSession AWS API Documentation
+    #
+    class PaymentSession < Struct.new(
+      :payment_session_id,
+      :payment_manager_arn,
+      :limits,
+      :user_id,
+      :expiry_time_in_minutes,
+      :created_at,
+      :available_limits,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of a payment session for list operations
+    #
+    # @!attribute [rw] payment_session_id
+    #   The unique identifier for this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that owns this session.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment session.
+    #   @return [String]
+    #
+    # @!attribute [rw] expiry_time_in_minutes
+    #   The session expiry time in minutes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this payment session was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this payment session was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentSessionSummary AWS API Documentation
+    #
+    class PaymentSessionSummary < Struct.new(
+      :payment_session_id,
+      :payment_manager_arn,
+      :user_id,
+      :expiry_time_in_minutes,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # VENDOR-SPECIFIC TOKEN REQUEST CONFIGURATION - Input
+    #
+    # @note PaymentTokenRequestInput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] coinbase_cdp_token_request
+    #   Coinbase CDP token request parameters
+    #   @return [Types::CoinbaseCdpTokenRequestInput]
+    #
+    # @!attribute [rw] stripe_privy_token_request
+    #   StripePrivy token request parameters
+    #   @return [Types::StripePrivyTokenRequestInput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentTokenRequestInput AWS API Documentation
+    #
+    class PaymentTokenRequestInput < Struct.new(
+      :coinbase_cdp_token_request,
+      :stripe_privy_token_request,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdpTokenRequest < PaymentTokenRequestInput; end
+      class StripePrivyTokenRequest < PaymentTokenRequestInput; end
+      class Unknown < PaymentTokenRequestInput; end
+    end
+
+    # VENDOR-SPECIFIC TOKEN RESPONSE CONFIGURATION - Output
+    #
+    # @note PaymentTokenResponseOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentTokenResponseOutput corresponding to the set member.
+    #
+    # @!attribute [rw] coinbase_cdp_token_response
+    #   Coinbase CDP token response
+    #   @return [Types::CoinbaseCdpTokenResponseOutput]
+    #
+    # @!attribute [rw] stripe_privy_token_response
+    #   StripePrivy token response containing appId, basicAuthToken, and
+    #   optionally authorizationSignature
+    #   @return [Types::StripePrivyTokenResponseOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentTokenResponseOutput AWS API Documentation
+    #
+    class PaymentTokenResponseOutput < Struct.new(
+      :coinbase_cdp_token_response,
+      :stripe_privy_token_response,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CoinbaseCdpTokenResponse < PaymentTokenResponseOutput; end
+      class StripePrivyTokenResponse < PaymentTokenResponseOutput; end
+      class Unknown < PaymentTokenResponseOutput; end
+    end
+
     # An online evaluation configuration associated with a specific A/B test
     # variant.
     #
@@ -6260,6 +7434,112 @@ module Aws::BedrockAgentCore
     class PerVariantOnlineEvaluationConfig < Struct.new(
       :name,
       :online_evaluation_config_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Request structure for processing a payment
+    #
+    # @!attribute [rw] user_id
+    #   The user ID associated with this payment.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_name
+    #   The agent name associated with this request, used for observability.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager handling this payment.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_session_id
+    #   The ID of the payment session for this transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The ID of the payment instrument to use for this transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_type
+    #   The type of payment being processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_input
+    #   The payment input details specific to the payment type.
+    #   @return [Types::PaymentInput]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token to ensure request uniqueness.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProcessPaymentRequest AWS API Documentation
+    #
+    class ProcessPaymentRequest < Struct.new(
+      :user_id,
+      :agent_name,
+      :payment_manager_arn,
+      :payment_session_id,
+      :payment_instrument_id,
+      :payment_type,
+      :payment_input,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Response structure for processing a payment
+    #
+    # @!attribute [rw] process_payment_id
+    #   The unique ID of the processed payment transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_manager_arn
+    #   The ARN of the payment manager that processed this payment.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_session_id
+    #   The ID of the payment session for this transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_instrument_id
+    #   The ID of the payment instrument used for this transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_type
+    #   The type of payment that was processed.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the payment transaction.
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_output
+    #   The payment output details specific to the payment type.
+    #   @return [Types::PaymentOutput]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the payment was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the payment was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/ProcessPaymentResponse AWS API Documentation
+    #
+    class ProcessPaymentResponse < Struct.new(
+      :process_payment_id,
+      :payment_manager_arn,
+      :payment_session_id,
+      :payment_instrument_id,
+      :payment_type,
+      :status,
+      :payment_output,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7128,6 +8408,20 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Session spending limits
+    #
+    # @!attribute [rw] max_spend_amount
+    #   The maximum amount that can be spent in this session.
+    #   @return [Types::Amount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionLimits AWS API Documentation
+    #
+    class SessionLimits < Struct.new(
+      :max_spend_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Metadata for a specific session in a batch evaluation, including
     # ground truth data and test scenario identifiers.
     #
@@ -7912,6 +9206,68 @@ module Aws::BedrockAgentCore
       class Unknown < StreamUpdate; end
     end
 
+    # StripePrivy token request parameters
+    #
+    # @!attribute [rw] request_host
+    #   Optional - defaults to "api.privy.io"
+    #   @return [String]
+    #
+    # @!attribute [rw] request_path
+    #   The path of the Stripe Privy API request.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_body
+    #   Request body JSON for the Privy API call
+    #   @return [String]
+    #
+    # @!attribute [rw] include_authorization_signature
+    #   Set to true to generate privy-authorization-signature
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StripePrivyTokenRequestInput AWS API Documentation
+    #
+    class StripePrivyTokenRequestInput < Struct.new(
+      :request_host,
+      :request_path,
+      :request_body,
+      :include_authorization_signature)
+      SENSITIVE = [:request_body]
+      include Aws::Structure
+    end
+
+    # StripePrivy token response containing appId, basicAuthToken, and
+    # optionally authorizationSignature
+    #
+    # @!attribute [rw] authorization_signature
+    #   Base64-encoded ECDSA P-256 authorization signature (only present
+    #   when includeAuthorizationSignature is true)
+    #   @return [String]
+    #
+    # @!attribute [rw] request_expiry
+    #   Unix timestamp in milliseconds when the authorization signature
+    #   expires. Set as privy-request-expiry header.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] app_id
+    #   The Privy app ID for the privy-app-id header
+    #   @return [String]
+    #
+    # @!attribute [rw] basic_auth_token
+    #   Base64-encoded Basic Auth token (appId:appSecret) for the
+    #   Authorization header
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StripePrivyTokenResponseOutput AWS API Documentation
+    #
+    class StripePrivyTokenResponseOutput < Struct.new(
+      :authorization_signature,
+      :request_expiry,
+      :app_id,
+      :basic_auth_token)
+      SENSITIVE = [:authorization_signature, :basic_auth_token]
+      include Aws::Structure
+    end
+
     # The system prompt input, either as inline text or from a configuration
     # bundle.
     #
@@ -8065,6 +9421,41 @@ module Aws::BedrockAgentCore
     class ThrottlingException < Struct.new(
       :message,
       :event_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single token balance entry
+    #
+    # @!attribute [rw] amount
+    #   Raw balance in the smallest denomination (e.g., USDC base units
+    #   where 1 USDC = 1000000).
+    #   @return [String]
+    #
+    # @!attribute [rw] decimals
+    #   Number of decimal places for the token (e.g., 6 for USDC).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] token
+    #   The supported token for this balance.
+    #   @return [String]
+    #
+    # @!attribute [rw] network
+    #   The blockchain network family (ETHEREUM or SOLANA).
+    #   @return [String]
+    #
+    # @!attribute [rw] chain
+    #   The specific blockchain chain.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/TokenBalance AWS API Documentation
+    #
+    class TokenBalance < Struct.new(
+      :amount,
+      :decimals,
+      :token,
+      :network,
+      :chain)
       SENSITIVE = []
       include Aws::Structure
     end

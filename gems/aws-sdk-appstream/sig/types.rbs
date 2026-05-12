@@ -25,6 +25,30 @@ module Aws::AppStream
       SENSITIVE: []
     end
 
+    class AgentAccessConfig
+      attr_accessor settings: ::Array[Types::AgentAccessSetting]
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor screenshots_upload_enabled: bool
+      attr_accessor screen_resolution: ("W_1280xH_720")
+      attr_accessor screen_image_format: ("PNG" | "JPEG")
+      SENSITIVE: []
+    end
+
+    class AgentAccessConfigForUpdate
+      attr_accessor settings: ::Array[Types::AgentAccessSetting]
+      attr_accessor s3_bucket_arn: ::String
+      attr_accessor screenshots_upload_enabled: bool
+      attr_accessor screen_resolution: ("W_1280xH_720")
+      attr_accessor screen_image_format: ("PNG" | "JPEG")
+      SENSITIVE: []
+    end
+
+    class AgentAccessSetting
+      attr_accessor agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT")
+      attr_accessor permission: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class AppBlock
       attr_accessor name: ::String
       attr_accessor arn: ::String
@@ -454,6 +478,7 @@ module Aws::AppStream
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor agent_access_config: Types::AgentAccessConfig
       SENSITIVE: []
     end
 
@@ -1374,6 +1399,7 @@ module Aws::AppStream
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor agent_access_config: Types::AgentAccessConfig
       SENSITIVE: []
     end
 
@@ -1614,13 +1640,14 @@ module Aws::AppStream
       attr_accessor delete_storage_connectors: bool
       attr_accessor redirect_url: ::String
       attr_accessor feedback_url: ::String
-      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION")]
+      attr_accessor attributes_to_delete: ::Array[("STORAGE_CONNECTORS" | "STORAGE_CONNECTOR_HOMEFOLDERS" | "STORAGE_CONNECTOR_GOOGLE_DRIVE" | "STORAGE_CONNECTOR_ONE_DRIVE" | "REDIRECT_URL" | "FEEDBACK_URL" | "THEME_NAME" | "USER_SETTINGS" | "EMBED_HOST_DOMAINS" | "IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "STREAMING_EXPERIENCE_SETTINGS" | "CONTENT_REDIRECTION" | "AGENT_ACCESS_CONFIG")]
       attr_accessor user_settings: ::Array[Types::UserSetting]
       attr_accessor application_settings: Types::ApplicationSettings
       attr_accessor access_endpoints: ::Array[Types::AccessEndpoint]
       attr_accessor embed_host_domains: ::Array[::String]
       attr_accessor streaming_experience_settings: Types::StreamingExperienceSettings
       attr_accessor content_redirection: Types::ContentRedirection
+      attr_accessor agent_access_config: Types::AgentAccessConfigForUpdate
       SENSITIVE: []
     end
 
