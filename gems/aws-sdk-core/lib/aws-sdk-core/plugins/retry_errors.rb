@@ -114,12 +114,12 @@ module Aws
         docstring: <<~DOCS) do |cfg|
           Specifies which retry algorithm to use. Values are:
 
-          * `legacy` - The pre-existing retry behavior.
+          * `legacy` - The pre-existing retry behavior. This is the default
+            value if no retry mode is provided.
 
           * `standard` - A standardized set of retry rules across the AWS SDKs.
             This includes support for retry quotas, which limit the number of
-            unsuccessful retries a client can make. This is default value if
-            no retry mode is provided.
+            unsuccessful retries a client can make.
 
           * `adaptive` - A retry mode that includes all the functionality of
             `standard` mode along with automatic client side throttling.
