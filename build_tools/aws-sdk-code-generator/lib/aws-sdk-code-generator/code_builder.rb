@@ -114,8 +114,17 @@ module AwsSdkCodeGenerator
         prefix = options.fetch(:prefix, '')
         codegenerated_plugins = codegen_plugins(prefix)
         unless @service.h2_required_setting?
-          client_class = client_class_rbs(codegenerated_plugins)
+          collector = RBS::InputTypeAliasCollector.new(api: @service.api)
+          aliased_shapes = collector.shapes_to_alias
+          client_class = client_class_rbs(codegenerated_plugins, aliased_shapes)
           y.yield("#{prefix}/client.rbs", client_class.render)
+          if aliased_shapes.any?
+            y.yield("#{prefix}/params.rbs", Views::RBS::Params.new(
+              service_name: @service.name,
+              api: @service.api,
+              aliased_shapes: aliased_shapes
+            ).render)
+          end
           y.yield("#{prefix}/resource.rbs", Views::RBS::RootResourceClass.new(
             service_name: @service.name,
             client_class: client_class,
@@ -197,7 +206,7 @@ module AwsSdkCodeGenerator
       ).render
     end
 
-    def client_class_rbs(codegenerated_plugins)
+    def client_class_rbs(codegenerated_plugins, aliased_shapes)
       Views::RBS::ClientClass.new(
         service_name: @service.name,
         codegenerated_plugins: codegenerated_plugins,
@@ -209,7 +218,8 @@ module AwsSdkCodeGenerator
         protocol: @service.protocol,
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
-        protocol_settings: @service.protocol_settings
+        protocol_settings: @service.protocol_settings,
+        aliased_shapes: aliased_shapes
       )
     end
 

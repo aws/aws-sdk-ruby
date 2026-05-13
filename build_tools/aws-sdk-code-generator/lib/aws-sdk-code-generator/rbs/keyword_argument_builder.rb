@@ -8,11 +8,13 @@ module AwsSdkCodeGenerator
 
       attr_reader :newline
 
-      def initialize(api:, shape:, newline:, options: {})
+      def initialize(api:, shape:, newline:, options: {}, aliased_shapes: Set.new, alias_namespace: nil)
         @api = api
         @shape = shape
         @newline = newline
         @options = options
+        @aliased_shapes = aliased_shapes
+        @alias_namespace = alias_namespace
       end
 
       def format(indent: '')
@@ -69,9 +71,15 @@ module AwsSdkCodeGenerator
       def ref_value(ref, i, visited)
         if visited.include?(ref['shape'])
           return "untyped"
-        else
-          visited  = visited + [ref['shape']]
         end
+
+        # If this shape should be aliased, emit the alias reference
+        if @aliased_shapes.include?(ref['shape'])
+          alias_name = Underscore.underscore(ref['shape'])
+          return @alias_namespace ? "#{@alias_namespace}::#{alias_name}" : alias_name
+        end
+
+        visited  = visited + [ref['shape']]
 
         s = shape(ref)
         case s['type']
@@ -115,7 +123,7 @@ module AwsSdkCodeGenerator
 
       def complex_list(member_ref, i, visited)
         newline_indent = newline ? "\n#{i}" : ""
-        "Array[#{newline_indent}#{more_indent}#{ref_value(member_ref, i + more_indent, visited)},#{newline_indent}]"
+        "Array[#{newline_indent}#{more_indent}#{ref_value(member_ref, i + more_indent, visited)}#{newline_indent}]"
       end
 
       def complex?(ref)

@@ -24,6 +24,7 @@ module AwsSdkCodeGenerator
           @codegenerated_plugins = options.fetch(:codegenerated_plugins)
           @waiters = AwsSdkCodeGenerator::RBS::Waiter.build_list(api: @api, waiters:options.fetch(:waiters))
           @protocol_settings = options.fetch(:protocol_settings, {})
+          @aliased_shapes = options.fetch(:aliased_shapes, Set.new).to_set
         end
 
         # @return [String|nil]
@@ -60,6 +61,8 @@ module AwsSdkCodeGenerator
                 api: @api,
                 shape: input_shape,
                 newline: true,
+                aliased_shapes: @aliased_shapes,
+                alias_namespace: 'Params',
               )
               arguments = builder.format(indent: indent)
               include_required = input_shape["required"]&.empty?&.!
