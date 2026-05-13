@@ -70,7 +70,7 @@ def apply_expectations(test_case)
   if expected[:retries]
     expect(resp.context.retries).to eq(expected[:retries]) if expected[:retries]
     expect(resp.context.http_request.headers['amz-sdk-request'])
-      .to include("attempt=#{expected[:retries]}")
+      .to include("attempt=#{expected[:retries] + 1}")
     expect(resp.context.http_request.headers['amz-sdk-request'])
       .to include("max=#{resp.context.config.max_attempts}")
   end

@@ -422,7 +422,7 @@ module Aws
 
         def add_retry_headers(context)
           request_pairs = {
-            'attempt' => context.retries,
+            'attempt' => context.retries + 1,
             'max' => context.config.max_attempts
           }
           if (ttl = compute_request_ttl(context))
