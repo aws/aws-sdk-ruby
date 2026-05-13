@@ -11,10 +11,14 @@ module AwsSdkCodeGenerator
         @errors = @api['shapes'].inject([]) do |es, (name, shape)|
           if error_struct?(shape)
             members = shape["members"].map do |member_name, member_body|
-              MethodSignature.new(
-                method_name: Underscore.underscore(member_name),
-                overloads: ["() -> #{Docstring.ucfirst(member_body['type'] ||'::String')}"]
-              )
+              method_name = Underscore.underscore(member_name)
+              return_type = Docstring.ucfirst(member_body['type'] || '::String')
+              overload = if method_name == 'detailed_message'
+                           "(?highlight: bool) -> #{return_type}"
+                         else
+                           "() -> #{return_type}"
+                         end
+              MethodSignature.new(method_name: method_name, overloads: [overload])
             end
             es << {
               name: name,
