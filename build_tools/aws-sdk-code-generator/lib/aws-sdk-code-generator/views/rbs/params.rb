@@ -28,12 +28,11 @@ module AwsSdkCodeGenerator
               api: @api,
               shape: shape,
               newline: true,
-              aliased_shapes: aliased_set - [shape_name],
-              alias_namespace: 'Params',
+              options: { aliased_shapes: aliased_set - [shape_name] }
             )
             {
               'name' => Underscore.underscore(shape_name),
-              'definition' => builder.struct(shape, '      ', []),
+              'definition' => builder.format_as_alias(indent: '    '),
             }
           end
         end

@@ -8,13 +8,11 @@ module AwsSdkCodeGenerator
 
       attr_reader :newline
 
-      def initialize(api:, shape:, newline:, options: {}, aliased_shapes: Set.new, alias_namespace: nil)
+      def initialize(api:, shape:, newline:, options: {})
         @api = api
         @shape = shape
         @newline = newline
         @options = options
-        @aliased_shapes = aliased_shapes
-        @alias_namespace = alias_namespace
       end
 
       def format(indent: '')
@@ -25,6 +23,12 @@ module AwsSdkCodeGenerator
         result << indent if newline
         result.join(joint)
       end
+
+      def format_as_alias(indent: '')
+        struct(@shape, indent, [])
+      end
+
+      private
 
       def struct(struct_shape, i, visited)
         members_str = struct_members(struct_shape, i, visited, keyword: false)
@@ -69,14 +73,12 @@ module AwsSdkCodeGenerator
       end
 
       def ref_value(ref, i, visited)
-        if visited.include?(ref['shape'])
-          return "untyped"
-        end
+        return "untyped" if visited.include?(ref['shape'])
 
         # If this shape should be aliased, emit the alias reference
-        if @aliased_shapes.include?(ref['shape'])
+        if @options[:aliased_shapes]&.include?(ref['shape'])
           alias_name = Underscore.underscore(ref['shape'])
-          return @alias_namespace ? "#{@alias_namespace}::#{alias_name}" : alias_name
+          return "Params::#{alias_name}"
         end
 
         visited  = visited + [ref['shape']]

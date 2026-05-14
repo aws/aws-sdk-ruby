@@ -115,7 +115,6 @@ module AwsSdkCodeGenerator
         return 0 if visited.include?(shape_name)
 
         # Cache results to deduplicate calculation for nested structure types that get used multiple times in the model.
-        @size_cache ||= {}
         return @size_cache[shape_name] if @size_cache.key?(shape_name)
 
         visited += [shape_name]

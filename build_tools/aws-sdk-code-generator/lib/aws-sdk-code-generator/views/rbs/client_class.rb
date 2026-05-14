@@ -61,8 +61,7 @@ module AwsSdkCodeGenerator
                 api: @api,
                 shape: input_shape,
                 newline: true,
-                aliased_shapes: @aliased_shapes,
-                alias_namespace: 'Params',
+                options: { aliased_shapes: @aliased_shapes }
               )
               arguments = builder.format(indent: indent)
               include_required = input_shape["required"]&.empty?&.!
