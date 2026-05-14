@@ -152,6 +152,69 @@ module Aws::RTBFabric
       class Unknown < Action; end
     end
 
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate to associate.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AssociateCertificateRequest AWS API Documentation
+    #
+    class AssociateCertificateRequest < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AssociateCertificateResponse AWS API Documentation
+    #
+    class AssociateCertificateResponse < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration of an auto scaling group.
     #
     # @!attribute [rw] auto_scaling_group_names
@@ -173,6 +236,35 @@ module Aws::RTBFabric
       :auto_scaling_group_names,
       :role_arn,
       :health_check_config)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a summary of a certificate association.
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_at
+    #   The timestamp of when the certificate was associated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the certificate association was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CertificateAssociationSummary AWS API Documentation
+    #
+    class CertificateAssociationSummary < Struct.new(
+      :acm_certificate_arn,
+      :status,
+      :associated_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -365,6 +457,88 @@ module Aws::RTBFabric
       :connectivity_type,
       :link_id,
       :customer_provided_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry
+    #   the request without accidentally performing the same operation a
+    #   second time. Passing the same value to a later call to an operation
+    #   requires that you also pass the same value for all other parameters.
+    #   We recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates
+    #   a random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #   @return [String]
+    #
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the routing rule. Lower numbers are evaluated first.
+    #   Valid values are 1 to 1000. Priority must be unique among
+    #   non-deleted rules within a link.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions for the routing rule. All specified fields must match
+    #   for the rule to apply. At least one condition field must be set.
+    #   @return [Types::RuleCondition]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateLinkRoutingRuleRequest AWS API Documentation
+    #
+    class CreateLinkRoutingRuleRequest < Struct.new(
+      :client_token,
+      :gateway_id,
+      :link_id,
+      :priority,
+      :conditions,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the routing rule was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateLinkRoutingRuleResponse AWS API Documentation
+    #
+    class CreateLinkRoutingRuleResponse < Struct.new(
+      :rule_id,
+      :status,
+      :created_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -675,6 +849,45 @@ module Aws::RTBFabric
     #   The unique identifier of the link.
     #   @return [String]
     #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteLinkRoutingRuleRequest AWS API Documentation
+    #
+    class DeleteLinkRoutingRuleRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the routing rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteLinkRoutingRuleResponse AWS API Documentation
+    #
+    class DeleteLinkRoutingRuleResponse < Struct.new(
+      :rule_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteOutboundExternalLinkRequest AWS API Documentation
     #
     class DeleteOutboundExternalLinkRequest < Struct.new(
@@ -759,6 +972,46 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate to
+    #   disassociate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DisassociateCertificateRequest AWS API Documentation
+    #
+    class DisassociateCertificateRequest < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DisassociateCertificateResponse AWS API Documentation
+    #
+    class DisassociateCertificateResponse < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the configuration of an Amazon Elastic Kubernetes Service
     # endpoint.
     #
@@ -828,6 +1081,55 @@ module Aws::RTBFabric
     class FilterCriterion < Struct.new(
       :path,
       :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetCertificateAssociationRequest AWS API Documentation
+    #
+    class GetCertificateAssociationRequest < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the certificate association.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_at
+    #   The timestamp of when the certificate was associated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the certificate association was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetCertificateAssociationResponse AWS API Documentation
+    #
+    class GetCertificateAssociationResponse < Struct.new(
+      :gateway_id,
+      :acm_certificate_arn,
+      :status,
+      :associated_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1013,6 +1315,81 @@ module Aws::RTBFabric
       :tags,
       :http_responder_allowed,
       :timeout_in_millis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkRoutingRuleRequest AWS API Documentation
+    #
+    class GetLinkRoutingRuleRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :rule_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions for the routing rule.
+    #   @return [Types::RuleCondition]
+    #
+    # @!attribute [rw] status
+    #   The status of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the routing rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the routing rule was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] tags
+    #   A map of the key-value pairs for the tag or tags assigned to the
+    #   specified resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkRoutingRuleResponse AWS API Documentation
+    #
+    class GetLinkRoutingRuleResponse < Struct.new(
+      :gateway_id,
+      :link_id,
+      :rule_id,
+      :priority,
+      :conditions,
+      :status,
+      :created_at,
+      :updated_at,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1460,6 +1837,156 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # Summary of a routing rule for list responses
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The priority of the routing rule.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditions
+    #   The conditions for the routing rule.
+    #   @return [Types::RuleCondition]
+    #
+    # @!attribute [rw] status
+    #   The status of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the routing rule was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the routing rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/LinkRoutingRuleSummary AWS API Documentation
+    #
+    class LinkRoutingRuleSummary < Struct.new(
+      :rule_id,
+      :priority,
+      :conditions,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken error*.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned per call. You can
+    #   use `nextToken` to obtain further pages of results.
+    #
+    #   This is only an upper limit. The actual number of results returned
+    #   per call might be fewer than the specified maximum.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListCertificateAssociationsRequest AWS API Documentation
+    #
+    class ListCertificateAssociationsRequest < Struct.new(
+      :gateway_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] certificate_associations
+    #   The list of certificate associations for the gateway.
+    #   @return [Array<Types::CertificateAssociationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken error*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListCertificateAssociationsResponse AWS API Documentation
+    #
+    class ListCertificateAssociationsResponse < Struct.new(
+      :certificate_associations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken error*.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results that are returned per call. You can
+    #   use `nextToken` to obtain further pages of results.
+    #
+    #   This is only an upper limit. The actual number of results returned
+    #   per call might be fewer than the specified maximum.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinkRoutingRulesRequest AWS API Documentation
+    #
+    class ListLinkRoutingRulesRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rules
+    #   The list of routing rules for the link.
+    #   @return [Array<Types::LinkRoutingRuleSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page. Keep all other arguments unchanged. Each pagination token
+    #   expires after 24 hours. Using an expired pagination token will
+    #   return an *HTTP 400 InvalidToken error*.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinkRoutingRulesResponse AWS API Documentation
+    #
+    class ListLinkRoutingRulesResponse < Struct.new(
+      :rules,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] gateway_id
     #   The unique identifier of the gateway.
     #   @return [String]
@@ -1891,6 +2418,25 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
+    # Key-value pair for query string matching
+    #
+    # @!attribute [rw] key
+    #   RFC 3986 unreserved characters
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   RFC 3986 unreserved characters
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/QueryStringKeyValuePair AWS API Documentation
+    #
+    class QueryStringKeyValuePair < Struct.new(
+      :key,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the parameters of a rate limit.
     #
     # @!attribute [rw] tps
@@ -2028,6 +2574,49 @@ module Aws::RTBFabric
       :action,
       :logging_types,
       :response_logging_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Conditions bag for a routing rule. All non-null fields must match (AND
+    # logic). At least one field must be set (enforced by CP).
+    #
+    # @!attribute [rw] host_header
+    #   Exact host match — RFC 3986 unreserved characters
+    #   @return [String]
+    #
+    # @!attribute [rw] host_header_wildcard
+    #   Wildcard host pattern (e.g., *.example.com) — RFC 3986 unreserved
+    #   plus *
+    #   @return [String]
+    #
+    # @!attribute [rw] path_prefix
+    #   Path prefix matching — strict starts-with, no wildcard (preferred
+    #   for new rules). Must start with /; RFC 3986 unreserved plus /
+    #   @return [String]
+    #
+    # @!attribute [rw] path_exact
+    #   Exact path match — must start with /; RFC 3986 unreserved plus /
+    #   @return [String]
+    #
+    # @!attribute [rw] query_string_equals
+    #   Query string key=value pair match (single pair)
+    #   @return [Types::QueryStringKeyValuePair]
+    #
+    # @!attribute [rw] query_string_exists
+    #   Query string key presence check (any value accepted) — RFC 3986
+    #   unreserved characters
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RuleCondition AWS API Documentation
+    #
+    class RuleCondition < Struct.new(
+      :host_header,
+      :host_header_wildcard,
+      :path_prefix,
+      :path_exact,
+      :query_string_equals,
+      :query_string_exists)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2210,6 +2799,64 @@ module Aws::RTBFabric
     class UpdateLinkResponse < Struct.new(
       :link_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] gateway_id
+    #   The unique identifier of the gateway.
+    #   @return [String]
+    #
+    # @!attribute [rw] link_id
+    #   The unique identifier of the link.
+    #   @return [String]
+    #
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] priority
+    #   The updated priority of the routing rule. Lower numbers are
+    #   evaluated first. Valid values are 1 to 1000. Priority must be unique
+    #   among non-deleted rules within a link.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] conditions
+    #   The updated conditions for the routing rule. All specified fields
+    #   must match for the rule to apply. At least one condition field must
+    #   be set.
+    #   @return [Types::RuleCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRuleRequest AWS API Documentation
+    #
+    class UpdateLinkRoutingRuleRequest < Struct.new(
+      :gateway_id,
+      :link_id,
+      :rule_id,
+      :priority,
+      :conditions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rule_id
+    #   The unique identifier of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the routing rule.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the routing rule was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRuleResponse AWS API Documentation
+    #
+    class UpdateLinkRoutingRuleResponse < Struct.new(
+      :rule_id,
+      :status,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end

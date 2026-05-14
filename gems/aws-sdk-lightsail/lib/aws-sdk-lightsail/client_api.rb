@@ -528,6 +528,7 @@ module Aws::Lightsail
     OperationStatus = Shapes::StringShape.new(name: 'OperationStatus')
     OperationType = Shapes::StringShape.new(name: 'OperationType')
     Origin = Shapes::StructureShape.new(name: 'Origin')
+    OriginIpAddressTypeEnum = Shapes::StringShape.new(name: 'OriginIpAddressTypeEnum')
     OriginProtocolPolicyEnum = Shapes::StringShape.new(name: 'OriginProtocolPolicyEnum')
     PartnerIdList = Shapes::ListShape.new(name: 'PartnerIdList')
     PasswordData = Shapes::StructureShape.new(name: 'PasswordData')
@@ -2281,6 +2282,7 @@ module Aws::Lightsail
     InputOrigin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     InputOrigin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
     InputOrigin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
+    InputOrigin.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: OriginIpAddressTypeEnum, location_name: "ipAddressType"))
     InputOrigin.struct_class = Types::InputOrigin
 
     Instance.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
@@ -2625,6 +2627,7 @@ module Aws::Lightsail
     Origin.add_member(:region_name, Shapes::ShapeRef.new(shape: RegionName, location_name: "regionName"))
     Origin.add_member(:protocol_policy, Shapes::ShapeRef.new(shape: OriginProtocolPolicyEnum, location_name: "protocolPolicy"))
     Origin.add_member(:response_timeout, Shapes::ShapeRef.new(shape: integer, location_name: "responseTimeout"))
+    Origin.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: OriginIpAddressTypeEnum, location_name: "ipAddressType"))
     Origin.struct_class = Types::Origin
 
     PartnerIdList.member = Shapes::ShapeRef.new(shape: NonEmptyString)

@@ -85804,11 +85804,6 @@ module Aws::EC2
     #   The modification completion or failure time.
     #   @return [Time]
     #
-    # @!attribute [rw] operator
-    #   Describes whether the resource is managed by a service provider and,
-    #   if so, describes the service provider that manages it.
-    #   @return [Types::OperatorResponse]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeModification AWS API Documentation
     #
     class VolumeModification < Struct.new(
@@ -85827,8 +85822,7 @@ module Aws::EC2
       :original_multi_attach_enabled,
       :progress,
       :start_time,
-      :end_time,
-      :operator)
+      :end_time)
       SENSITIVE = []
       include Aws::Structure
     end

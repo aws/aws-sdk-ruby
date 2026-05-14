@@ -4656,6 +4656,27 @@ module Aws::QuickSight
     #   The ability to perform flow-related actions.
     #   @return [String]
     #
+    # @!attribute [rw] apps
+    #   The ability to perform apps-related actions.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_and_update_apps
+    #   The ability to create or update apps.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_apps
+    #   The ability to share apps with other users.
+    #   @return [String]
+    #
+    # @!attribute [rw] invoke_apps_ai_inference
+    #   The ability to add and invoke AI inference in new and existing apps.
+    #   @return [String]
+    #
+    # @!attribute [rw] access_apps_native_data_store
+    #   The ability to access the native data store for new and existing
+    #   apps.
+    #   @return [String]
+    #
     # @!attribute [rw] publish_without_approval
     #   The ability to enable approvals for flow share.
     #   @return [String]
@@ -5495,6 +5516,11 @@ module Aws::QuickSight
       :analysis,
       :automate,
       :flow,
+      :apps,
+      :create_and_update_apps,
+      :share_apps,
+      :invoke_apps_ai_inference,
+      :access_apps_native_data_store,
       :publish_without_approval,
       :use_bedrock_models,
       :perform_flow_ui_task,

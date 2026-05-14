@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.256.0 (2026-05-13)
+------------------
+
+* Feature - AWS Glue now defaults the job timeout to 480 minutes for Glue version 5.0 and later when no timeout value is specified. The default remains 2,880 minutes for Glue version 4.0 and earlier.
+
 1.255.0 (2026-05-06)
 ------------------
 

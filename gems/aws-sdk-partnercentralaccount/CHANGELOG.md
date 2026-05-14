@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.7.0 (2026-05-13)
+------------------
+
+* Feature - Added ServiceQuotaExceededExceptions for Profile operations
+
 1.6.0 (2026-03-30)
 ------------------
 

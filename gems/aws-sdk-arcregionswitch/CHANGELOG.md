@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.15.0 (2026-05-13)
+------------------
+
+* Feature - Adds support for enabling and disabling Lambda event source mappings in Region switch plans.
+
 1.14.0 (2026-03-18)
 ------------------
 

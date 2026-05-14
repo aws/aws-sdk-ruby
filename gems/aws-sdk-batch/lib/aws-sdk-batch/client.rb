@@ -610,9 +610,10 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out.
     #
     #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
-    #   billing charges. To prevent additional charges, turn off and then
-    #   delete the compute environment. For more information, see [State][1]
-    #   in the *Batch User Guide*.
+    #   billing charges, for example, if they have running instances due to
+    #   jobs that are still executing or a non-zero `minvCpus` setting. To
+    #   prevent additional charges, disable and delete the compute
+    #   environment.
     #
     #    </note>
     #
@@ -621,10 +622,6 @@ module Aws::Batch
     #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and a
     #   `desiredvCpus` value of `36`. This instance doesn't scale down to a
     #   `c5.large` instance.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs for an unmanaged compute environment. This
@@ -6076,9 +6073,10 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out.
     #
     #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
-    #   billing charges. To prevent additional charges, turn off and then
-    #   delete the compute environment. For more information, see [State][1]
-    #   in the *Batch User Guide*.
+    #   billing charges, for example, if they have running instances due to
+    #   jobs that are still executing or a non-zero `minvCpus` setting. To
+    #   prevent additional charges, disable and delete the compute
+    #   environment.
     #
     #    </note>
     #
@@ -6087,10 +6085,6 @@ module Aws::Batch
     #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and a
     #   `desiredvCpus` value of `36`. This instance doesn't scale down to a
     #   `c5.large` instance.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #
     # @option params [Integer] :unmanagedv_cpus
     #   The maximum number of vCPUs expected to be used for an unmanaged
@@ -6666,7 +6660,7 @@ module Aws::Batch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-batch'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

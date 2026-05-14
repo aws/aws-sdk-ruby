@@ -1011,6 +1011,92 @@ module Aws::OpenSearchService
       include Aws::Structure
     end
 
+    # Specifies the automated snapshot pause options for the domain. These
+    # options allow you to temporarily pause automated snapshots for a
+    # specified time period.
+    #
+    # @!attribute [rw] enabled
+    #   Whether automated snapshot pause is enabled for the domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the automated snapshot pause begins.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the automated snapshot pause ends.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   The current state of the automated snapshot pause. Valid values are
+    #   `Active`, `Completed`, `Scheduled`, and `Disabled`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutomatedSnapshotPauseOptions AWS API Documentation
+    #
+    class AutomatedSnapshotPauseOptions < Struct.new(
+      :enabled,
+      :start_time,
+      :end_time,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The status of automated snapshot pause options for the domain.
+    #
+    # @!attribute [rw] options
+    #   Automated snapshot pause options for the domain.
+    #   @return [Types::AutomatedSnapshotPauseOptions]
+    #
+    # @!attribute [rw] status
+    #   The current status of the automated snapshot pause options for the
+    #   domain.
+    #   @return [Types::OptionStatus]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutomatedSnapshotPauseOptionsStatus AWS API Documentation
+    #
+    class AutomatedSnapshotPauseOptionsStatus < Struct.new(
+      :options,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the automated snapshot pause request options for the domain.
+    #
+    # Suspending snapshots reduces data protection. You cannot restore your
+    # domain to points in time when snapshots are suspended. Use this
+    # feature only for short-term operational needs such as migrations or
+    # maintenance windows.
+    #
+    # Maximum suspension duration: 3 days.
+    #
+    # @!attribute [rw] enabled
+    #   Whether to enable or disable automated snapshot pause for the
+    #   domain.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] start_time
+    #   The timestamp at which the automated snapshot pause should begin.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The timestamp at which the automated snapshot pause should end. The
+    #   maximum allowed duration between `StartTime` and `EndTime` is 3
+    #   days.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AutomatedSnapshotPauseRequestOptions AWS API Documentation
+    #
+    class AutomatedSnapshotPauseRequestOptions < Struct.new(
+      :enabled,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about an Availability Zone on a domain.
     #
     # @!attribute [rw] availability_zone_name
@@ -1928,6 +2014,17 @@ module Aws::OpenSearchService
     #   Specifies the deployment strategy options for the domain.
     #   @return [Types::DeploymentStrategyOptions]
     #
+    # @!attribute [rw] automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore
+    #   your domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #   @return [Types::AutomatedSnapshotPauseRequestOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomainRequest AWS API Documentation
     #
     class CreateDomainRequest < Struct.new(
@@ -1952,7 +2049,8 @@ module Aws::OpenSearchService
       :off_peak_window_options,
       :software_update_options,
       :aiml_options,
-      :deployment_strategy_options)
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3649,6 +3747,10 @@ module Aws::OpenSearchService
     #   Specifies `DeploymentStrategyOptions` for the domain.
     #   @return [Types::DeploymentStrategyOptionsStatus]
     #
+    # @!attribute [rw] automated_snapshot_pause_options
+    #   Specifies `AutomatedSnapshotPauseOptions` for the domain.
+    #   @return [Types::AutomatedSnapshotPauseOptionsStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainConfig AWS API Documentation
     #
     class DomainConfig < Struct.new(
@@ -3673,7 +3775,8 @@ module Aws::OpenSearchService
       :software_update_options,
       :modifying_properties,
       :aiml_options,
-      :deployment_strategy_options)
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4133,6 +4236,11 @@ module Aws::OpenSearchService
     #   The current status of the domain's deployment strategy options.
     #   @return [Types::DeploymentStrategyOptions]
     #
+    # @!attribute [rw] automated_snapshot_pause_options
+    #   The current status of the domain's automated snapshot pause
+    #   options.
+    #   @return [Types::AutomatedSnapshotPauseOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DomainStatus AWS API Documentation
     #
     class DomainStatus < Struct.new(
@@ -4170,7 +4278,8 @@ module Aws::OpenSearchService
       :domain_processing_status,
       :modifying_properties,
       :aiml_options,
-      :deployment_strategy_options)
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8538,6 +8647,17 @@ module Aws::OpenSearchService
     #   Specifies the deployment strategy options for the domain.
     #   @return [Types::DeploymentStrategyOptions]
     #
+    # @!attribute [rw] automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore
+    #   your domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #   @return [Types::AutomatedSnapshotPauseRequestOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateDomainConfigRequest AWS API Documentation
     #
     class UpdateDomainConfigRequest < Struct.new(
@@ -8562,7 +8682,8 @@ module Aws::OpenSearchService
       :off_peak_window_options,
       :software_update_options,
       :aiml_options,
-      :deployment_strategy_options)
+      :deployment_strategy_options,
+      :automated_snapshot_pause_options)
       SENSITIVE = []
       include Aws::Structure
     end

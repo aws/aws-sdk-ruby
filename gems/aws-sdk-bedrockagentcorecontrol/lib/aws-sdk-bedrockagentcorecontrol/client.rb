@@ -562,6 +562,7 @@ module Aws::BedrockAgentCoreControl
     #       network_mode_config: {
     #         security_groups: ["SecurityGroupId"], # required
     #         subnets: ["SubnetId"], # required
+    #         require_service_s3_endpoint: false,
     #       },
     #     },
     #     client_token: "ClientToken",
@@ -851,6 +852,7 @@ module Aws::BedrockAgentCoreControl
     #       vpc_config: {
     #         security_groups: ["SecurityGroupId"], # required
     #         subnets: ["SubnetId"], # required
+    #         require_service_s3_endpoint: false,
     #       },
     #     },
     #     recording: {
@@ -1021,6 +1023,7 @@ module Aws::BedrockAgentCoreControl
     #       vpc_config: {
     #         security_groups: ["SecurityGroupId"], # required
     #         subnets: ["SubnetId"], # required
+    #         require_service_s3_endpoint: false,
     #       },
     #     },
     #     certificates: [
@@ -2137,6 +2140,7 @@ module Aws::BedrockAgentCoreControl
     #           network_mode_config: {
     #             security_groups: ["SecurityGroupId"], # required
     #             subnets: ["SubnetId"], # required
+    #             require_service_s3_endpoint: false,
     #           },
     #         },
     #         filesystem_configurations: [
@@ -2394,6 +2398,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
@@ -3431,16 +3436,17 @@ module Aws::BedrockAgentCoreControl
     # payment providers.
     #
     # @option params [required, String] :name
-    #   Unique name for the payment credential provider
+    #   Unique name for the payment credential provider.
     #
     # @option params [required, String] :credential_provider_vendor
-    #   The vendor type (e.g., CoinbaseCDP)
+    #   The vendor type for the payment credential provider (e.g.,
+    #   CoinbaseCDP, StripePrivy).
     #
     # @option params [required, Types::PaymentProviderConfigurationInput] :provider_configuration_input
-    #   Configuration specific to the vendor, including API credentials
+    #   Configuration specific to the vendor, including API credentials.
     #
     # @option params [Hash<String,String>] :tags
-    #   Optional tags for resource organization
+    #   Optional tags for resource organization.
     #
     # @return [Types::CreatePaymentCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3748,12 +3754,12 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::CreatePolicyResponse#policy_id #policy_id} => String
     #   * {Types::CreatePolicyResponse#name #name} => String
     #   * {Types::CreatePolicyResponse#policy_engine_id #policy_engine_id} => String
-    #   * {Types::CreatePolicyResponse#definition #definition} => Types::PolicyDefinition
-    #   * {Types::CreatePolicyResponse#description #description} => String
     #   * {Types::CreatePolicyResponse#created_at #created_at} => Time
     #   * {Types::CreatePolicyResponse#updated_at #updated_at} => Time
     #   * {Types::CreatePolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::CreatePolicyResponse#status #status} => String
+    #   * {Types::CreatePolicyResponse#definition #definition} => Types::PolicyDefinition
+    #   * {Types::CreatePolicyResponse#description #description} => String
     #   * {Types::CreatePolicyResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -3780,14 +3786,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_id #=> String
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
-    #   resp.definition.cedar.statement #=> String
-    #   resp.definition.policy_generation.policy_generation_id #=> String
-    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -3849,13 +3855,13 @@ module Aws::BedrockAgentCoreControl
     #
     #   * {Types::CreatePolicyEngineResponse#policy_engine_id #policy_engine_id} => String
     #   * {Types::CreatePolicyEngineResponse#name #name} => String
-    #   * {Types::CreatePolicyEngineResponse#description #description} => String
     #   * {Types::CreatePolicyEngineResponse#created_at #created_at} => Time
     #   * {Types::CreatePolicyEngineResponse#updated_at #updated_at} => Time
     #   * {Types::CreatePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::CreatePolicyEngineResponse#status #status} => String
-    #   * {Types::CreatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::CreatePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::CreatePolicyEngineResponse#description #description} => String
+    #   * {Types::CreatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -3873,14 +3879,14 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.policy_engine_id #=> String
     #   resp.name #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_engine_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.encryption_key_arn #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyEngine AWS API Documentation
     #
@@ -4712,6 +4718,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
@@ -5012,12 +5019,12 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::DeletePolicyResponse#policy_id #policy_id} => String
     #   * {Types::DeletePolicyResponse#name #name} => String
     #   * {Types::DeletePolicyResponse#policy_engine_id #policy_engine_id} => String
-    #   * {Types::DeletePolicyResponse#definition #definition} => Types::PolicyDefinition
-    #   * {Types::DeletePolicyResponse#description #description} => String
     #   * {Types::DeletePolicyResponse#created_at #created_at} => Time
     #   * {Types::DeletePolicyResponse#updated_at #updated_at} => Time
     #   * {Types::DeletePolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::DeletePolicyResponse#status #status} => String
+    #   * {Types::DeletePolicyResponse#definition #definition} => Types::PolicyDefinition
+    #   * {Types::DeletePolicyResponse#description #description} => String
     #   * {Types::DeletePolicyResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -5032,14 +5039,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_id #=> String
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
-    #   resp.definition.cedar.statement #=> String
-    #   resp.definition.policy_generation.policy_generation_id #=> String
-    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -5067,13 +5074,13 @@ module Aws::BedrockAgentCoreControl
     #
     #   * {Types::DeletePolicyEngineResponse#policy_engine_id #policy_engine_id} => String
     #   * {Types::DeletePolicyEngineResponse#name #name} => String
-    #   * {Types::DeletePolicyEngineResponse#description #description} => String
     #   * {Types::DeletePolicyEngineResponse#created_at #created_at} => Time
     #   * {Types::DeletePolicyEngineResponse#updated_at #updated_at} => Time
     #   * {Types::DeletePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::DeletePolicyEngineResponse#status #status} => String
-    #   * {Types::DeletePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::DeletePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::DeletePolicyEngineResponse#description #description} => String
+    #   * {Types::DeletePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -5085,14 +5092,14 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.policy_engine_id #=> String
     #   resp.name #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_engine_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.encryption_key_arn #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyEngine AWS API Documentation
     #
@@ -5265,6 +5272,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.network_configuration.network_mode_config.subnets #=> Array
     #   resp.network_configuration.network_mode_config.subnets[0] #=> String
+    #   resp.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "UPDATING", "UPDATE_FAILED", "READY", "DELETING"
     #   resp.lifecycle_configuration.idle_runtime_session_timeout #=> Integer
     #   resp.lifecycle_configuration.max_lifetime #=> Integer
@@ -5465,6 +5473,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.vpc_config.security_groups[0] #=> String
     #   resp.network_configuration.vpc_config.subnets #=> Array
     #   resp.network_configuration.vpc_config.subnets[0] #=> String
+    #   resp.network_configuration.vpc_config.require_service_s3_endpoint #=> Boolean
     #   resp.recording.enabled #=> Boolean
     #   resp.recording.s3_location.bucket #=> String
     #   resp.recording.s3_location.prefix #=> String
@@ -5574,6 +5583,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.network_configuration.vpc_config.security_groups[0] #=> String
     #   resp.network_configuration.vpc_config.subnets #=> Array
     #   resp.network_configuration.vpc_config.subnets[0] #=> String
+    #   resp.network_configuration.vpc_config.require_service_s3_endpoint #=> Boolean
     #   resp.status #=> String, one of "CREATING", "CREATE_FAILED", "READY", "DELETING", "DELETE_FAILED", "DELETED"
     #   resp.certificates #=> Array
     #   resp.certificates[0].location.secrets_manager.secret_arn #=> String
@@ -6176,6 +6186,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
@@ -6797,12 +6808,12 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPolicyResponse#policy_id #policy_id} => String
     #   * {Types::GetPolicyResponse#name #name} => String
     #   * {Types::GetPolicyResponse#policy_engine_id #policy_engine_id} => String
-    #   * {Types::GetPolicyResponse#definition #definition} => Types::PolicyDefinition
-    #   * {Types::GetPolicyResponse#description #description} => String
     #   * {Types::GetPolicyResponse#created_at #created_at} => Time
     #   * {Types::GetPolicyResponse#updated_at #updated_at} => Time
     #   * {Types::GetPolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::GetPolicyResponse#status #status} => String
+    #   * {Types::GetPolicyResponse#definition #definition} => Types::PolicyDefinition
+    #   * {Types::GetPolicyResponse#description #description} => String
     #   * {Types::GetPolicyResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -6817,14 +6828,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_id #=> String
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
-    #   resp.definition.cedar.statement #=> String
-    #   resp.definition.policy_generation.policy_generation_id #=> String
-    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -6856,13 +6867,13 @@ module Aws::BedrockAgentCoreControl
     #
     #   * {Types::GetPolicyEngineResponse#policy_engine_id #policy_engine_id} => String
     #   * {Types::GetPolicyEngineResponse#name #name} => String
-    #   * {Types::GetPolicyEngineResponse#description #description} => String
     #   * {Types::GetPolicyEngineResponse#created_at #created_at} => Time
     #   * {Types::GetPolicyEngineResponse#updated_at #updated_at} => Time
     #   * {Types::GetPolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::GetPolicyEngineResponse#status #status} => String
-    #   * {Types::GetPolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::GetPolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::GetPolicyEngineResponse#description #description} => String
+    #   * {Types::GetPolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6874,14 +6885,14 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.policy_engine_id #=> String
     #   resp.name #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_engine_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.encryption_key_arn #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.encryption_key_arn #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6895,6 +6906,54 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_policy_engine(params = {}, options = {})
       req = build_request(:get_policy_engine, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a metadata-only summary of a specific policy engine without
+    # decrypting customer content. This lightweight read operation returns
+    # resource identifiers, status, timestamps, and the encryption key ARN,
+    # but does not include the description or status reasons. Because this
+    # operation does not require access to the customer's KMS key, it is
+    # suitable for resource discovery, inventory, and integration scenarios
+    # where only metadata is needed.
+    #
+    # @option params [required, String] :policy_engine_id
+    #   The unique identifier of the policy engine to retrieve the summary
+    #   for. This must be a valid policy engine ID that exists within the
+    #   account.
+    #
+    # @return [Types::GetPolicyEngineSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyEngineSummaryResponse#policy_engine_id #policy_engine_id} => String
+    #   * {Types::GetPolicyEngineSummaryResponse#name #name} => String
+    #   * {Types::GetPolicyEngineSummaryResponse#created_at #created_at} => Time
+    #   * {Types::GetPolicyEngineSummaryResponse#updated_at #updated_at} => Time
+    #   * {Types::GetPolicyEngineSummaryResponse#policy_engine_arn #policy_engine_arn} => String
+    #   * {Types::GetPolicyEngineSummaryResponse#status #status} => String
+    #   * {Types::GetPolicyEngineSummaryResponse#encryption_key_arn #encryption_key_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy_engine_summary({
+    #     policy_engine_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_engine_id #=> String
+    #   resp.name #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.policy_engine_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.encryption_key_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineSummary AWS API Documentation
+    #
+    # @overload get_policy_engine_summary(params = {})
+    # @param [Hash] params ({})
+    def get_policy_engine_summary(params = {}, options = {})
+      req = build_request(:get_policy_engine_summary, params)
       req.send_request(options)
     end
 
@@ -6927,8 +6986,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetPolicyGenerationResponse#created_at #created_at} => Time
     #   * {Types::GetPolicyGenerationResponse#updated_at #updated_at} => Time
     #   * {Types::GetPolicyGenerationResponse#status #status} => String
-    #   * {Types::GetPolicyGenerationResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::GetPolicyGenerationResponse#findings #findings} => String
+    #   * {Types::GetPolicyGenerationResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -6947,9 +7006,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status #=> String, one of "GENERATING", "GENERATED", "GENERATE_FAILED", "DELETE_FAILED"
+    #   resp.findings #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.findings #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6962,6 +7021,115 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def get_policy_generation(params = {}, options = {})
       req = build_request(:get_policy_generation, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a metadata-only summary of a specific policy generation
+    # request without decrypting customer content. This lightweight read
+    # operation returns resource identifiers, status, timestamps, and
+    # findings, but does not include status reasons. Because this operation
+    # does not require access to the customer's KMS key, it is suitable for
+    # resource discovery, inventory, and integration scenarios where only
+    # metadata is needed.
+    #
+    # @option params [required, String] :policy_generation_id
+    #   The unique identifier of the policy generation request to retrieve the
+    #   summary for.
+    #
+    # @option params [required, String] :policy_engine_id
+    #   The identifier of the policy engine associated with the policy
+    #   generation request.
+    #
+    # @return [Types::GetPolicyGenerationSummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicyGenerationSummaryResponse#policy_engine_id #policy_engine_id} => String
+    #   * {Types::GetPolicyGenerationSummaryResponse#policy_generation_id #policy_generation_id} => String
+    #   * {Types::GetPolicyGenerationSummaryResponse#name #name} => String
+    #   * {Types::GetPolicyGenerationSummaryResponse#policy_generation_arn #policy_generation_arn} => String
+    #   * {Types::GetPolicyGenerationSummaryResponse#resource #resource} => Types::Resource
+    #   * {Types::GetPolicyGenerationSummaryResponse#created_at #created_at} => Time
+    #   * {Types::GetPolicyGenerationSummaryResponse#updated_at #updated_at} => Time
+    #   * {Types::GetPolicyGenerationSummaryResponse#status #status} => String
+    #   * {Types::GetPolicyGenerationSummaryResponse#findings #findings} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy_generation_summary({
+    #     policy_generation_id: "ResourceId", # required
+    #     policy_engine_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_engine_id #=> String
+    #   resp.policy_generation_id #=> String
+    #   resp.name #=> String
+    #   resp.policy_generation_arn #=> String
+    #   resp.resource.arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.status #=> String, one of "GENERATING", "GENERATED", "GENERATE_FAILED", "DELETE_FAILED"
+    #   resp.findings #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationSummary AWS API Documentation
+    #
+    # @overload get_policy_generation_summary(params = {})
+    # @param [Hash] params ({})
+    def get_policy_generation_summary(params = {}, options = {})
+      req = build_request(:get_policy_generation_summary, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a metadata-only summary of a specific policy without
+    # decrypting customer content. This lightweight read operation returns
+    # resource identifiers, status, and timestamps, but does not include the
+    # policy definition, description, or status reasons. Because this
+    # operation does not require access to the customer's KMS key, it is
+    # suitable for resource discovery, inventory, and integration scenarios
+    # where only metadata is needed.
+    #
+    # @option params [required, String] :policy_engine_id
+    #   The identifier of the policy engine that manages the policy to
+    #   retrieve the summary for.
+    #
+    # @option params [required, String] :policy_id
+    #   The unique identifier of the policy to retrieve the summary for. This
+    #   must be a valid policy ID that exists within the specified policy
+    #   engine.
+    #
+    # @return [Types::GetPolicySummaryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetPolicySummaryResponse#policy_id #policy_id} => String
+    #   * {Types::GetPolicySummaryResponse#name #name} => String
+    #   * {Types::GetPolicySummaryResponse#policy_engine_id #policy_engine_id} => String
+    #   * {Types::GetPolicySummaryResponse#created_at #created_at} => Time
+    #   * {Types::GetPolicySummaryResponse#updated_at #updated_at} => Time
+    #   * {Types::GetPolicySummaryResponse#policy_arn #policy_arn} => String
+    #   * {Types::GetPolicySummaryResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_policy_summary({
+    #     policy_engine_id: "ResourceId", # required
+    #     policy_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_id #=> String
+    #   resp.name #=> String
+    #   resp.policy_engine_id #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.policy_arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicySummary AWS API Documentation
+    #
+    # @overload get_policy_summary(params = {})
+    # @param [Hash] params ({})
+    def get_policy_summary(params = {}, options = {})
+      req = build_request(:get_policy_summary, params)
       req.send_request(options)
     end
 
@@ -8272,14 +8440,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policies[0].policy_id #=> String
     #   resp.policies[0].name #=> String
     #   resp.policies[0].policy_engine_id #=> String
-    #   resp.policies[0].definition.cedar.statement #=> String
-    #   resp.policies[0].definition.policy_generation.policy_generation_id #=> String
-    #   resp.policies[0].definition.policy_generation.policy_generation_asset_id #=> String
-    #   resp.policies[0].description #=> String
     #   resp.policies[0].created_at #=> Time
     #   resp.policies[0].updated_at #=> Time
     #   resp.policies[0].policy_arn #=> String
     #   resp.policies[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.policies[0].definition.cedar.statement #=> String
+    #   resp.policies[0].definition.policy_generation.policy_generation_id #=> String
+    #   resp.policies[0].definition.policy_generation.policy_generation_asset_id #=> String
+    #   resp.policies[0].description #=> String
     #   resp.policies[0].status_reasons #=> Array
     #   resp.policies[0].status_reasons[0] #=> String
     #   resp.next_token #=> String
@@ -8290,6 +8458,62 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def list_policies(params = {}, options = {})
       req = build_request(:list_policies, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a paginated list of metadata-only policy engine summaries
+    # without decrypting customer content. This lightweight read operation
+    # returns resource identifiers, status, and timestamps for each policy
+    # engine, but does not include descriptions or status reasons. Because
+    # this operation does not require access to the customer's KMS key, it
+    # is suitable for resource discovery, inventory, and integration
+    # scenarios where only metadata is needed.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous
+    #   [ListPolicyEngineSummaries][1] call. Use this token to retrieve the
+    #   next page of results when the response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of policy engine summaries to return in a single
+    #   response.
+    #
+    # @return [Types::ListPolicyEngineSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicyEngineSummariesResponse#policy_engines #policy_engines} => Array&lt;Types::PolicyEngineSummary&gt;
+    #   * {Types::ListPolicyEngineSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_engine_summaries({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_engines #=> Array
+    #   resp.policy_engines[0].policy_engine_id #=> String
+    #   resp.policy_engines[0].name #=> String
+    #   resp.policy_engines[0].created_at #=> Time
+    #   resp.policy_engines[0].updated_at #=> Time
+    #   resp.policy_engines[0].policy_engine_arn #=> String
+    #   resp.policy_engines[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.policy_engines[0].encryption_key_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEngineSummaries AWS API Documentation
+    #
+    # @overload list_policy_engine_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_policy_engine_summaries(params = {}, options = {})
+      req = build_request(:list_policy_engine_summaries, params)
       req.send_request(options)
     end
 
@@ -8331,14 +8555,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_engines #=> Array
     #   resp.policy_engines[0].policy_engine_id #=> String
     #   resp.policy_engines[0].name #=> String
-    #   resp.policy_engines[0].description #=> String
     #   resp.policy_engines[0].created_at #=> Time
     #   resp.policy_engines[0].updated_at #=> Time
     #   resp.policy_engines[0].policy_engine_arn #=> String
     #   resp.policy_engines[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.policy_engines[0].encryption_key_arn #=> String
+    #   resp.policy_engines[0].description #=> String
     #   resp.policy_engines[0].status_reasons #=> Array
     #   resp.policy_engines[0].status_reasons[0] #=> String
-    #   resp.policy_engines[0].encryption_key_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEngines AWS API Documentation
@@ -8426,6 +8650,69 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of metadata-only policy generation
+    # summaries within a policy engine without decrypting customer content.
+    # This lightweight read operation returns resource identifiers, status,
+    # timestamps, and findings for each policy generation, but does not
+    # include status reasons. Because this operation does not require access
+    # to the customer's KMS key, it is suitable for resource discovery,
+    # inventory, and integration scenarios where only metadata is needed.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous
+    #   [ListPolicyGenerationSummaries][1] call. Use this token to retrieve
+    #   the next page of results when the response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationSummaries.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of policy generation summaries to return in a
+    #   single response.
+    #
+    # @option params [required, String] :policy_engine_id
+    #   The identifier of the policy engine whose policy generation summaries
+    #   to retrieve.
+    #
+    # @return [Types::ListPolicyGenerationSummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicyGenerationSummariesResponse#policy_generations #policy_generations} => Array&lt;Types::PolicyGenerationSummary&gt;
+    #   * {Types::ListPolicyGenerationSummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_generation_summaries({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     policy_engine_id: "ResourceId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policy_generations #=> Array
+    #   resp.policy_generations[0].policy_engine_id #=> String
+    #   resp.policy_generations[0].policy_generation_id #=> String
+    #   resp.policy_generations[0].name #=> String
+    #   resp.policy_generations[0].policy_generation_arn #=> String
+    #   resp.policy_generations[0].resource.arn #=> String
+    #   resp.policy_generations[0].created_at #=> Time
+    #   resp.policy_generations[0].updated_at #=> Time
+    #   resp.policy_generations[0].status #=> String, one of "GENERATING", "GENERATED", "GENERATE_FAILED", "DELETE_FAILED"
+    #   resp.policy_generations[0].findings #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationSummaries AWS API Documentation
+    #
+    # @overload list_policy_generation_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_policy_generation_summaries(params = {}, options = {})
+      req = build_request(:list_policy_generation_summaries, params)
+      req.send_request(options)
+    end
+
     # Retrieves a list of policy generation requests within the AgentCore
     # Policy system. This operation supports pagination and filtering to
     # help track and manage AI-powered policy generation operations.
@@ -8468,9 +8755,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_generations[0].created_at #=> Time
     #   resp.policy_generations[0].updated_at #=> Time
     #   resp.policy_generations[0].status #=> String, one of "GENERATING", "GENERATED", "GENERATE_FAILED", "DELETE_FAILED"
+    #   resp.policy_generations[0].findings #=> String
     #   resp.policy_generations[0].status_reasons #=> Array
     #   resp.policy_generations[0].status_reasons[0] #=> String
-    #   resp.policy_generations[0].findings #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerations AWS API Documentation
@@ -8482,8 +8769,77 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Retrieves a paginated list of metadata-only policy summaries within a
+    # policy engine without decrypting customer content. This lightweight
+    # read operation returns resource identifiers, status, and timestamps
+    # for each policy, but does not include policy definitions,
+    # descriptions, or status reasons. Because this operation does not
+    # require access to the customer's KMS key, it is suitable for resource
+    # discovery, inventory, and integration scenarios where only metadata is
+    # needed.
+    #
+    # @option params [String] :next_token
+    #   A pagination token returned from a previous [ListPolicySummaries][1]
+    #   call. Use this token to retrieve the next page of results when the
+    #   response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicySummaries.html
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of policy summaries to return in a single response.
+    #
+    # @option params [required, String] :policy_engine_id
+    #   The identifier of the policy engine whose policy summaries to
+    #   retrieve.
+    #
+    # @option params [String] :target_resource_scope
+    #   Optional filter to list policy summaries that apply to a specific
+    #   resource scope or resource type. This helps narrow down results to
+    #   those relevant for particular Amazon Web Services resources, agent
+    #   tools, or operational contexts within the policy engine ecosystem.
+    #
+    # @return [Types::ListPolicySummariesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListPolicySummariesResponse#policies #policies} => Array&lt;Types::PolicySummary&gt;
+    #   * {Types::ListPolicySummariesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_policy_summaries({
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #     policy_engine_id: "ResourceId", # required
+    #     target_resource_scope: "BedrockAgentcoreResourceArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.policies #=> Array
+    #   resp.policies[0].policy_id #=> String
+    #   resp.policies[0].name #=> String
+    #   resp.policies[0].policy_engine_id #=> String
+    #   resp.policies[0].created_at #=> Time
+    #   resp.policies[0].updated_at #=> Time
+    #   resp.policies[0].policy_arn #=> String
+    #   resp.policies[0].status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicySummaries AWS API Documentation
+    #
+    # @overload list_policy_summaries(params = {})
+    # @param [Hash] params ({})
+    def list_policy_summaries(params = {}, options = {})
+      req = build_request(:list_policy_summaries, params)
+      req.send_request(options)
+    end
+
     # Lists all registries in the account. You can optionally filter results
-    # by status using the `status` parameter.
+    # by status using the `status` parameter, or by authorizer type using
+    # the `authorizerType` parameter.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return in the response. If the total
@@ -8502,6 +8858,11 @@ module Aws::BedrockAgentCoreControl
     #   `CREATING`, `READY`, `UPDATING`, `CREATE_FAILED`, `UPDATE_FAILED`,
     #   `DELETING`, and `DELETE_FAILED`.
     #
+    # @option params [String] :authorizer_type
+    #   Filter registries by their authorizer type. Possible values are
+    #   `CUSTOM_JWT` and `AWS_IAM`. For more information about authorizer
+    #   types, see the `RegistryAuthorizerType` enum.
+    #
     # @return [Types::ListRegistriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListRegistriesResponse#registries #registries} => Array&lt;Types::RegistrySummary&gt;
@@ -8515,6 +8876,7 @@ module Aws::BedrockAgentCoreControl
     #     max_results: 1,
     #     next_token: "NextToken",
     #     status: "CREATING", # accepts CREATING, READY, UPDATING, CREATE_FAILED, UPDATE_FAILED, DELETING, DELETE_FAILED
+    #     authorizer_type: "CUSTOM_JWT", # accepts CUSTOM_JWT, AWS_IAM
     #   })
     #
     # @example Response structure
@@ -8825,8 +9187,8 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::StartPolicyGenerationResponse#created_at #created_at} => Time
     #   * {Types::StartPolicyGenerationResponse#updated_at #updated_at} => Time
     #   * {Types::StartPolicyGenerationResponse#status #status} => String
-    #   * {Types::StartPolicyGenerationResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::StartPolicyGenerationResponse#findings #findings} => String
+    #   * {Types::StartPolicyGenerationResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -8852,9 +9214,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.status #=> String, one of "GENERATING", "GENERATED", "GENERATE_FAILED", "DELETE_FAILED"
+    #   resp.findings #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.findings #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StartPolicyGeneration AWS API Documentation
     #
@@ -9198,6 +9560,7 @@ module Aws::BedrockAgentCoreControl
     #       network_mode_config: {
     #         security_groups: ["SecurityGroupId"], # required
     #         subnets: ["SubnetId"], # required
+    #         require_service_s3_endpoint: false,
     #       },
     #     },
     #     description: "Description",
@@ -10435,6 +10798,7 @@ module Aws::BedrockAgentCoreControl
     #           network_mode_config: {
     #             security_groups: ["SecurityGroupId"], # required
     #             subnets: ["SubnetId"], # required
+    #             require_service_s3_endpoint: false,
     #           },
     #         },
     #         filesystem_configurations: [
@@ -10695,6 +11059,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.security_groups[0] #=> String
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.subnets[0] #=> String
+    #   resp.harness.environment.agent_core_runtime_environment.network_configuration.network_mode_config.require_service_s3_endpoint #=> Boolean
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations #=> Array
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].session_storage.mount_path #=> String
     #   resp.harness.environment.agent_core_runtime_environment.filesystem_configurations[0].s3_files_access_point.access_point_arn #=> String
@@ -11855,11 +12220,11 @@ module Aws::BedrockAgentCoreControl
     #   The name of the payment credential provider to update.
     #
     # @option params [required, String] :credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the payment credential provider (e.g.,
+    #   CoinbaseCDP, StripePrivy).
     #
     # @option params [required, Types::PaymentProviderConfigurationInput] :provider_configuration_input
-    #   Configuration specific to the vendor, including API credentials
+    #   Configuration specific to the vendor, including API credentials.
     #
     # @return [Types::UpdatePaymentCredentialProviderResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12085,12 +12450,12 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::UpdatePolicyResponse#policy_id #policy_id} => String
     #   * {Types::UpdatePolicyResponse#name #name} => String
     #   * {Types::UpdatePolicyResponse#policy_engine_id #policy_engine_id} => String
-    #   * {Types::UpdatePolicyResponse#definition #definition} => Types::PolicyDefinition
-    #   * {Types::UpdatePolicyResponse#description #description} => String
     #   * {Types::UpdatePolicyResponse#created_at #created_at} => Time
     #   * {Types::UpdatePolicyResponse#updated_at #updated_at} => Time
     #   * {Types::UpdatePolicyResponse#policy_arn #policy_arn} => String
     #   * {Types::UpdatePolicyResponse#status #status} => String
+    #   * {Types::UpdatePolicyResponse#definition #definition} => Types::PolicyDefinition
+    #   * {Types::UpdatePolicyResponse#description #description} => String
     #   * {Types::UpdatePolicyResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
@@ -12118,14 +12483,14 @@ module Aws::BedrockAgentCoreControl
     #   resp.policy_id #=> String
     #   resp.name #=> String
     #   resp.policy_engine_id #=> String
-    #   resp.definition.cedar.statement #=> String
-    #   resp.definition.policy_generation.policy_generation_id #=> String
-    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.definition.cedar.statement #=> String
+    #   resp.definition.policy_generation.policy_generation_id #=> String
+    #   resp.definition.policy_generation.policy_generation_asset_id #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
     #
@@ -12154,13 +12519,13 @@ module Aws::BedrockAgentCoreControl
     #
     #   * {Types::UpdatePolicyEngineResponse#policy_engine_id #policy_engine_id} => String
     #   * {Types::UpdatePolicyEngineResponse#name #name} => String
-    #   * {Types::UpdatePolicyEngineResponse#description #description} => String
     #   * {Types::UpdatePolicyEngineResponse#created_at #created_at} => Time
     #   * {Types::UpdatePolicyEngineResponse#updated_at #updated_at} => Time
     #   * {Types::UpdatePolicyEngineResponse#policy_engine_arn #policy_engine_arn} => String
     #   * {Types::UpdatePolicyEngineResponse#status #status} => String
-    #   * {Types::UpdatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #   * {Types::UpdatePolicyEngineResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::UpdatePolicyEngineResponse#description #description} => String
+    #   * {Types::UpdatePolicyEngineResponse#status_reasons #status_reasons} => Array&lt;String&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -12175,14 +12540,14 @@ module Aws::BedrockAgentCoreControl
     #
     #   resp.policy_engine_id #=> String
     #   resp.name #=> String
-    #   resp.description #=> String
     #   resp.created_at #=> Time
     #   resp.updated_at #=> Time
     #   resp.policy_engine_arn #=> String
     #   resp.status #=> String, one of "CREATING", "ACTIVE", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED"
+    #   resp.encryption_key_arn #=> String
+    #   resp.description #=> String
     #   resp.status_reasons #=> Array
     #   resp.status_reasons[0] #=> String
-    #   resp.encryption_key_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyEngine AWS API Documentation
     #
@@ -12680,7 +13045,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

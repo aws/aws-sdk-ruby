@@ -806,8 +806,8 @@ module Aws::EC2
     #     ],
     #     snapshot_location: "regional", # accepts regional, local
     #     dry_run: false,
-    #     name: "String", # required
-    #     description: "String",
+    #     name: "ImageNameRequest", # required
+    #     description: "ImageDescriptionRequest",
     #     no_reboot: false,
     #     block_device_mappings: [
     #       {

@@ -422,10 +422,16 @@ module Aws::BedrockAgentCoreControl
     GetPaymentManagerResponse = Shapes::StructureShape.new(name: 'GetPaymentManagerResponse')
     GetPolicyEngineRequest = Shapes::StructureShape.new(name: 'GetPolicyEngineRequest')
     GetPolicyEngineResponse = Shapes::StructureShape.new(name: 'GetPolicyEngineResponse')
+    GetPolicyEngineSummaryRequest = Shapes::StructureShape.new(name: 'GetPolicyEngineSummaryRequest')
+    GetPolicyEngineSummaryResponse = Shapes::StructureShape.new(name: 'GetPolicyEngineSummaryResponse')
     GetPolicyGenerationRequest = Shapes::StructureShape.new(name: 'GetPolicyGenerationRequest')
     GetPolicyGenerationResponse = Shapes::StructureShape.new(name: 'GetPolicyGenerationResponse')
+    GetPolicyGenerationSummaryRequest = Shapes::StructureShape.new(name: 'GetPolicyGenerationSummaryRequest')
+    GetPolicyGenerationSummaryResponse = Shapes::StructureShape.new(name: 'GetPolicyGenerationSummaryResponse')
     GetPolicyRequest = Shapes::StructureShape.new(name: 'GetPolicyRequest')
     GetPolicyResponse = Shapes::StructureShape.new(name: 'GetPolicyResponse')
+    GetPolicySummaryRequest = Shapes::StructureShape.new(name: 'GetPolicySummaryRequest')
+    GetPolicySummaryResponse = Shapes::StructureShape.new(name: 'GetPolicySummaryResponse')
     GetRegistryRecordRequest = Shapes::StructureShape.new(name: 'GetRegistryRecordRequest')
     GetRegistryRecordResponse = Shapes::StructureShape.new(name: 'GetRegistryRecordResponse')
     GetRegistryRequest = Shapes::StructureShape.new(name: 'GetRegistryRequest')
@@ -586,12 +592,18 @@ module Aws::BedrockAgentCoreControl
     ListPaymentManagersResponse = Shapes::StructureShape.new(name: 'ListPaymentManagersResponse')
     ListPoliciesRequest = Shapes::StructureShape.new(name: 'ListPoliciesRequest')
     ListPoliciesResponse = Shapes::StructureShape.new(name: 'ListPoliciesResponse')
+    ListPolicyEngineSummariesRequest = Shapes::StructureShape.new(name: 'ListPolicyEngineSummariesRequest')
+    ListPolicyEngineSummariesResponse = Shapes::StructureShape.new(name: 'ListPolicyEngineSummariesResponse')
     ListPolicyEnginesRequest = Shapes::StructureShape.new(name: 'ListPolicyEnginesRequest')
     ListPolicyEnginesResponse = Shapes::StructureShape.new(name: 'ListPolicyEnginesResponse')
     ListPolicyGenerationAssetsRequest = Shapes::StructureShape.new(name: 'ListPolicyGenerationAssetsRequest')
     ListPolicyGenerationAssetsResponse = Shapes::StructureShape.new(name: 'ListPolicyGenerationAssetsResponse')
+    ListPolicyGenerationSummariesRequest = Shapes::StructureShape.new(name: 'ListPolicyGenerationSummariesRequest')
+    ListPolicyGenerationSummariesResponse = Shapes::StructureShape.new(name: 'ListPolicyGenerationSummariesResponse')
     ListPolicyGenerationsRequest = Shapes::StructureShape.new(name: 'ListPolicyGenerationsRequest')
     ListPolicyGenerationsResponse = Shapes::StructureShape.new(name: 'ListPolicyGenerationsResponse')
+    ListPolicySummariesRequest = Shapes::StructureShape.new(name: 'ListPolicySummariesRequest')
+    ListPolicySummariesResponse = Shapes::StructureShape.new(name: 'ListPolicySummariesResponse')
     ListRegistriesRequest = Shapes::StructureShape.new(name: 'ListRegistriesRequest')
     ListRegistriesResponse = Shapes::StructureShape.new(name: 'ListRegistriesResponse')
     ListRegistryRecordsRequest = Shapes::StructureShape.new(name: 'ListRegistryRecordsRequest')
@@ -740,6 +752,8 @@ module Aws::BedrockAgentCoreControl
     PolicyEngineArn = Shapes::StringShape.new(name: 'PolicyEngineArn')
     PolicyEngineName = Shapes::StringShape.new(name: 'PolicyEngineName')
     PolicyEngineStatus = Shapes::StringShape.new(name: 'PolicyEngineStatus')
+    PolicyEngineSummary = Shapes::StructureShape.new(name: 'PolicyEngineSummary')
+    PolicyEngineSummaryList = Shapes::ListShape.new(name: 'PolicyEngineSummaryList')
     PolicyEngines = Shapes::ListShape.new(name: 'PolicyEngines')
     PolicyGeneration = Shapes::StructureShape.new(name: 'PolicyGeneration')
     PolicyGenerationArn = Shapes::StringShape.new(name: 'PolicyGenerationArn')
@@ -748,10 +762,14 @@ module Aws::BedrockAgentCoreControl
     PolicyGenerationDetails = Shapes::StructureShape.new(name: 'PolicyGenerationDetails')
     PolicyGenerationName = Shapes::StringShape.new(name: 'PolicyGenerationName')
     PolicyGenerationStatus = Shapes::StringShape.new(name: 'PolicyGenerationStatus')
+    PolicyGenerationSummary = Shapes::StructureShape.new(name: 'PolicyGenerationSummary')
+    PolicyGenerationSummaryList = Shapes::ListShape.new(name: 'PolicyGenerationSummaryList')
     PolicyGenerations = Shapes::ListShape.new(name: 'PolicyGenerations')
     PolicyName = Shapes::StringShape.new(name: 'PolicyName')
     PolicyStatus = Shapes::StringShape.new(name: 'PolicyStatus')
     PolicyStatusReasons = Shapes::ListShape.new(name: 'PolicyStatusReasons')
+    PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
+    PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyValidationMode = Shapes::StringShape.new(name: 'PolicyValidationMode')
     PrincipalMatchOperator = Shapes::StringShape.new(name: 'PrincipalMatchOperator')
     PrivateEndpoint = Shapes::UnionShape.new(name: 'PrivateEndpoint')
@@ -1752,13 +1770,13 @@ module Aws::BedrockAgentCoreControl
 
     CreatePolicyEngineResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
     CreatePolicyEngineResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
-    CreatePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePolicyEngineResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CreatePolicyEngineResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     CreatePolicyEngineResponse.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
     CreatePolicyEngineResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
-    CreatePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     CreatePolicyEngineResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    CreatePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreatePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     CreatePolicyEngineResponse.struct_class = Types::CreatePolicyEngineResponse
 
     CreatePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
@@ -1772,12 +1790,12 @@ module Aws::BedrockAgentCoreControl
     CreatePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
     CreatePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     CreatePolicyResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
-    CreatePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
-    CreatePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     CreatePolicyResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     CreatePolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
     CreatePolicyResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    CreatePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    CreatePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     CreatePolicyResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     CreatePolicyResponse.struct_class = Types::CreatePolicyResponse
 
@@ -2122,13 +2140,13 @@ module Aws::BedrockAgentCoreControl
 
     DeletePolicyEngineResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
     DeletePolicyEngineResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
-    DeletePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     DeletePolicyEngineResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     DeletePolicyEngineResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     DeletePolicyEngineResponse.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
     DeletePolicyEngineResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
-    DeletePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     DeletePolicyEngineResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    DeletePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    DeletePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     DeletePolicyEngineResponse.struct_class = Types::DeletePolicyEngineResponse
 
     DeletePolicyRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
@@ -2138,12 +2156,12 @@ module Aws::BedrockAgentCoreControl
     DeletePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
     DeletePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     DeletePolicyResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
-    DeletePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
-    DeletePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     DeletePolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     DeletePolicyResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     DeletePolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
     DeletePolicyResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    DeletePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    DeletePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     DeletePolicyResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     DeletePolicyResponse.struct_class = Types::DeletePolicyResponse
 
@@ -2698,14 +2716,26 @@ module Aws::BedrockAgentCoreControl
 
     GetPolicyEngineResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
     GetPolicyEngineResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
-    GetPolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetPolicyEngineResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPolicyEngineResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     GetPolicyEngineResponse.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
     GetPolicyEngineResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
-    GetPolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     GetPolicyEngineResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    GetPolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetPolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     GetPolicyEngineResponse.struct_class = Types::GetPolicyEngineResponse
+
+    GetPolicyEngineSummaryRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
+    GetPolicyEngineSummaryRequest.struct_class = Types::GetPolicyEngineSummaryRequest
+
+    GetPolicyEngineSummaryResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    GetPolicyEngineSummaryResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
+    GetPolicyEngineSummaryResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetPolicyEngineSummaryResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    GetPolicyEngineSummaryResponse.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
+    GetPolicyEngineSummaryResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
+    GetPolicyEngineSummaryResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    GetPolicyEngineSummaryResponse.struct_class = Types::GetPolicyEngineSummaryResponse
 
     GetPolicyGenerationRequest.add_member(:policy_generation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyGenerationId"))
     GetPolicyGenerationRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
@@ -2719,9 +2749,24 @@ module Aws::BedrockAgentCoreControl
     GetPolicyGenerationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPolicyGenerationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     GetPolicyGenerationResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyGenerationStatus, required: true, location_name: "status"))
-    GetPolicyGenerationResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     GetPolicyGenerationResponse.add_member(:findings, Shapes::ShapeRef.new(shape: String, location_name: "findings"))
+    GetPolicyGenerationResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     GetPolicyGenerationResponse.struct_class = Types::GetPolicyGenerationResponse
+
+    GetPolicyGenerationSummaryRequest.add_member(:policy_generation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyGenerationId"))
+    GetPolicyGenerationSummaryRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
+    GetPolicyGenerationSummaryRequest.struct_class = Types::GetPolicyGenerationSummaryRequest
+
+    GetPolicyGenerationSummaryResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    GetPolicyGenerationSummaryResponse.add_member(:policy_generation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyGenerationId"))
+    GetPolicyGenerationSummaryResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyGenerationName, required: true, location_name: "name"))
+    GetPolicyGenerationSummaryResponse.add_member(:policy_generation_arn, Shapes::ShapeRef.new(shape: PolicyGenerationArn, required: true, location_name: "policyGenerationArn"))
+    GetPolicyGenerationSummaryResponse.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    GetPolicyGenerationSummaryResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetPolicyGenerationSummaryResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    GetPolicyGenerationSummaryResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyGenerationStatus, required: true, location_name: "status"))
+    GetPolicyGenerationSummaryResponse.add_member(:findings, Shapes::ShapeRef.new(shape: String, location_name: "findings"))
+    GetPolicyGenerationSummaryResponse.struct_class = Types::GetPolicyGenerationSummaryResponse
 
     GetPolicyRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
     GetPolicyRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyId"))
@@ -2730,14 +2775,27 @@ module Aws::BedrockAgentCoreControl
     GetPolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
     GetPolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     GetPolicyResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
-    GetPolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
-    GetPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetPolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPolicyResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     GetPolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
     GetPolicyResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    GetPolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    GetPolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     GetPolicyResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     GetPolicyResponse.struct_class = Types::GetPolicyResponse
+
+    GetPolicySummaryRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
+    GetPolicySummaryRequest.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyId"))
+    GetPolicySummaryRequest.struct_class = Types::GetPolicySummaryRequest
+
+    GetPolicySummaryResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
+    GetPolicySummaryResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
+    GetPolicySummaryResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    GetPolicySummaryResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    GetPolicySummaryResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    GetPolicySummaryResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
+    GetPolicySummaryResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    GetPolicySummaryResponse.struct_class = Types::GetPolicySummaryResponse
 
     GetRegistryRecordRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryIdentifier, required: true, location: "uri", location_name: "registryId"))
     GetRegistryRecordRequest.add_member(:record_id, Shapes::ShapeRef.new(shape: RecordIdentifier, required: true, location: "uri", location_name: "recordId"))
@@ -3289,6 +3347,14 @@ module Aws::BedrockAgentCoreControl
     ListPoliciesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPoliciesResponse.struct_class = Types::ListPoliciesResponse
 
+    ListPolicyEngineSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPolicyEngineSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPolicyEngineSummariesRequest.struct_class = Types::ListPolicyEngineSummariesRequest
+
+    ListPolicyEngineSummariesResponse.add_member(:policy_engines, Shapes::ShapeRef.new(shape: PolicyEngineSummaryList, required: true, location_name: "policyEngines"))
+    ListPolicyEngineSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicyEngineSummariesResponse.struct_class = Types::ListPolicyEngineSummariesResponse
+
     ListPolicyEnginesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPolicyEnginesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPolicyEnginesRequest.struct_class = Types::ListPolicyEnginesRequest
@@ -3307,6 +3373,15 @@ module Aws::BedrockAgentCoreControl
     ListPolicyGenerationAssetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPolicyGenerationAssetsResponse.struct_class = Types::ListPolicyGenerationAssetsResponse
 
+    ListPolicyGenerationSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPolicyGenerationSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPolicyGenerationSummariesRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
+    ListPolicyGenerationSummariesRequest.struct_class = Types::ListPolicyGenerationSummariesRequest
+
+    ListPolicyGenerationSummariesResponse.add_member(:policy_generations, Shapes::ShapeRef.new(shape: PolicyGenerationSummaryList, required: true, location_name: "policyGenerations"))
+    ListPolicyGenerationSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicyGenerationSummariesResponse.struct_class = Types::ListPolicyGenerationSummariesResponse
+
     ListPolicyGenerationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListPolicyGenerationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListPolicyGenerationsRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
@@ -3316,9 +3391,20 @@ module Aws::BedrockAgentCoreControl
     ListPolicyGenerationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPolicyGenerationsResponse.struct_class = Types::ListPolicyGenerationsResponse
 
+    ListPolicySummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListPolicySummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListPolicySummariesRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
+    ListPolicySummariesRequest.add_member(:target_resource_scope, Shapes::ShapeRef.new(shape: BedrockAgentcoreResourceArn, location: "querystring", location_name: "targetResourceScope"))
+    ListPolicySummariesRequest.struct_class = Types::ListPolicySummariesRequest
+
+    ListPolicySummariesResponse.add_member(:policies, Shapes::ShapeRef.new(shape: PolicySummaryList, required: true, location_name: "policies"))
+    ListPolicySummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListPolicySummariesResponse.struct_class = Types::ListPolicySummariesResponse
+
     ListRegistriesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListRegistriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
     ListRegistriesRequest.add_member(:status, Shapes::ShapeRef.new(shape: RegistryStatus, location: "querystring", location_name: "status"))
+    ListRegistriesRequest.add_member(:authorizer_type, Shapes::ShapeRef.new(shape: RegistryAuthorizerType, location: "querystring", location_name: "authorizerType"))
     ListRegistriesRequest.struct_class = Types::ListRegistriesRequest
 
     ListRegistriesResponse.add_member(:registries, Shapes::ShapeRef.new(shape: RegistrySummaryList, required: true, location_name: "registries"))
@@ -3749,12 +3835,12 @@ module Aws::BedrockAgentCoreControl
     Policy.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
     Policy.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     Policy.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
-    Policy.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
-    Policy.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Policy.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     Policy.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     Policy.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
     Policy.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    Policy.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    Policy.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     Policy.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     Policy.struct_class = Types::Policy
 
@@ -3768,14 +3854,25 @@ module Aws::BedrockAgentCoreControl
 
     PolicyEngine.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
     PolicyEngine.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
-    PolicyEngine.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     PolicyEngine.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     PolicyEngine.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     PolicyEngine.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
     PolicyEngine.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
-    PolicyEngine.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     PolicyEngine.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    PolicyEngine.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    PolicyEngine.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     PolicyEngine.struct_class = Types::PolicyEngine
+
+    PolicyEngineSummary.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    PolicyEngineSummary.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
+    PolicyEngineSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    PolicyEngineSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    PolicyEngineSummary.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
+    PolicyEngineSummary.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
+    PolicyEngineSummary.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    PolicyEngineSummary.struct_class = Types::PolicyEngineSummary
+
+    PolicyEngineSummaryList.member = Shapes::ShapeRef.new(shape: PolicyEngineSummary)
 
     PolicyEngines.member = Shapes::ShapeRef.new(shape: PolicyEngine)
 
@@ -3787,8 +3884,8 @@ module Aws::BedrockAgentCoreControl
     PolicyGeneration.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     PolicyGeneration.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     PolicyGeneration.add_member(:status, Shapes::ShapeRef.new(shape: PolicyGenerationStatus, required: true, location_name: "status"))
-    PolicyGeneration.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     PolicyGeneration.add_member(:findings, Shapes::ShapeRef.new(shape: String, location_name: "findings"))
+    PolicyGeneration.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     PolicyGeneration.struct_class = Types::PolicyGeneration
 
     PolicyGenerationAsset.add_member(:policy_generation_asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyGenerationAssetId"))
@@ -3803,9 +3900,33 @@ module Aws::BedrockAgentCoreControl
     PolicyGenerationDetails.add_member(:policy_generation_asset_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyGenerationAssetId"))
     PolicyGenerationDetails.struct_class = Types::PolicyGenerationDetails
 
+    PolicyGenerationSummary.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    PolicyGenerationSummary.add_member(:policy_generation_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyGenerationId"))
+    PolicyGenerationSummary.add_member(:name, Shapes::ShapeRef.new(shape: PolicyGenerationName, required: true, location_name: "name"))
+    PolicyGenerationSummary.add_member(:policy_generation_arn, Shapes::ShapeRef.new(shape: PolicyGenerationArn, required: true, location_name: "policyGenerationArn"))
+    PolicyGenerationSummary.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
+    PolicyGenerationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    PolicyGenerationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    PolicyGenerationSummary.add_member(:status, Shapes::ShapeRef.new(shape: PolicyGenerationStatus, required: true, location_name: "status"))
+    PolicyGenerationSummary.add_member(:findings, Shapes::ShapeRef.new(shape: String, location_name: "findings"))
+    PolicyGenerationSummary.struct_class = Types::PolicyGenerationSummary
+
+    PolicyGenerationSummaryList.member = Shapes::ShapeRef.new(shape: PolicyGenerationSummary)
+
     PolicyGenerations.member = Shapes::ShapeRef.new(shape: PolicyGeneration)
 
     PolicyStatusReasons.member = Shapes::ShapeRef.new(shape: String)
+
+    PolicySummary.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
+    PolicySummary.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
+    PolicySummary.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
+    PolicySummary.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
+    PolicySummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
+    PolicySummary.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
+    PolicySummary.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    PolicySummary.struct_class = Types::PolicySummary
+
+    PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)
 
     PrivateEndpoint.add_member(:self_managed_lattice_resource, Shapes::ShapeRef.new(shape: SelfManagedLatticeResource, location_name: "selfManagedLatticeResource"))
     PrivateEndpoint.add_member(:managed_vpc_resource, Shapes::ShapeRef.new(shape: ManagedVpcResource, location_name: "managedVpcResource"))
@@ -4108,8 +4229,8 @@ module Aws::BedrockAgentCoreControl
     StartPolicyGenerationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     StartPolicyGenerationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     StartPolicyGenerationResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyGenerationStatus, required: true, location_name: "status"))
-    StartPolicyGenerationResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     StartPolicyGenerationResponse.add_member(:findings, Shapes::ShapeRef.new(shape: String, location_name: "findings"))
+    StartPolicyGenerationResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     StartPolicyGenerationResponse.struct_class = Types::StartPolicyGenerationResponse
 
     StaticOverride.add_member(:bundle_arn, Shapes::ShapeRef.new(shape: GatewayConfigurationBundleArn, required: true, location_name: "bundleArn"))
@@ -4627,13 +4748,13 @@ module Aws::BedrockAgentCoreControl
 
     UpdatePolicyEngineResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
     UpdatePolicyEngineResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyEngineName, required: true, location_name: "name"))
-    UpdatePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdatePolicyEngineResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     UpdatePolicyEngineResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     UpdatePolicyEngineResponse.add_member(:policy_engine_arn, Shapes::ShapeRef.new(shape: PolicyEngineArn, required: true, location_name: "policyEngineArn"))
     UpdatePolicyEngineResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyEngineStatus, required: true, location_name: "status"))
-    UpdatePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     UpdatePolicyEngineResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    UpdatePolicyEngineResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdatePolicyEngineResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     UpdatePolicyEngineResponse.struct_class = Types::UpdatePolicyEngineResponse
 
     UpdatePolicyRequest.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "policyEngineId"))
@@ -4646,12 +4767,12 @@ module Aws::BedrockAgentCoreControl
     UpdatePolicyResponse.add_member(:policy_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyId"))
     UpdatePolicyResponse.add_member(:name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "name"))
     UpdatePolicyResponse.add_member(:policy_engine_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "policyEngineId"))
-    UpdatePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
-    UpdatePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdatePolicyResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     UpdatePolicyResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "updatedAt"))
     UpdatePolicyResponse.add_member(:policy_arn, Shapes::ShapeRef.new(shape: PolicyArn, required: true, location_name: "policyArn"))
     UpdatePolicyResponse.add_member(:status, Shapes::ShapeRef.new(shape: PolicyStatus, required: true, location_name: "status"))
+    UpdatePolicyResponse.add_member(:definition, Shapes::ShapeRef.new(shape: PolicyDefinition, required: true, location_name: "definition"))
+    UpdatePolicyResponse.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     UpdatePolicyResponse.add_member(:status_reasons, Shapes::ShapeRef.new(shape: PolicyStatusReasons, required: true, location_name: "statusReasons"))
     UpdatePolicyResponse.struct_class = Types::UpdatePolicyResponse
 
@@ -4855,6 +4976,7 @@ module Aws::BedrockAgentCoreControl
 
     VpcConfig.add_member(:security_groups, Shapes::ShapeRef.new(shape: SecurityGroups, required: true, location_name: "securityGroups"))
     VpcConfig.add_member(:subnets, Shapes::ShapeRef.new(shape: Subnets, required: true, location_name: "subnets"))
+    VpcConfig.add_member(:require_service_s3_endpoint, Shapes::ShapeRef.new(shape: Boolean, location_name: "requireServiceS3Endpoint"))
     VpcConfig.struct_class = Types::VpcConfig
 
     WeightedOverride.add_member(:traffic_split, Shapes::ShapeRef.new(shape: TrafficSplitEntries, required: true, location_name: "trafficSplit"))
@@ -5848,12 +5970,51 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_policy_engine_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicyEngineSummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engine-summaries/{policyEngineId}"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyEngineSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyEngineSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_policy_generation, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetPolicyGeneration"
         o.http_method = "GET"
         o.http_request_uri = "/policy-engines/{policyEngineId}/policy-generations/{policyGenerationId}"
         o.input = Shapes::ShapeRef.new(shape: GetPolicyGenerationRequest)
         o.output = Shapes::ShapeRef.new(shape: GetPolicyGenerationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_policy_generation_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicyGenerationSummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engines/{policyEngineId}/policy-generation-summaries/{policyGenerationId}"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicyGenerationSummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicyGenerationSummaryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_policy_summary, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetPolicySummary"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engines/{policyEngineId}/policy-summaries/{policyId}"
+        o.input = Shapes::ShapeRef.new(shape: GetPolicySummaryRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetPolicySummaryResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -6318,6 +6479,24 @@ module Aws::BedrockAgentCoreControl
         )
       end)
 
+      api.add_operation(:list_policy_engine_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicyEngineSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engine-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicyEngineSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicyEngineSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_policy_engines, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPolicyEngines"
         o.http_method = "GET"
@@ -6355,12 +6534,50 @@ module Aws::BedrockAgentCoreControl
         )
       end)
 
+      api.add_operation(:list_policy_generation_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicyGenerationSummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engines/{policyEngineId}/policy-generation-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicyGenerationSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicyGenerationSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_policy_generations, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListPolicyGenerations"
         o.http_method = "GET"
         o.http_request_uri = "/policy-engines/{policyEngineId}/policy-generations"
         o.input = Shapes::ShapeRef.new(shape: ListPolicyGenerationsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListPolicyGenerationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_policy_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListPolicySummaries"
+        o.http_method = "GET"
+        o.http_request_uri = "/policy-engines/{policyEngineId}/policy-summaries"
+        o.input = Shapes::ShapeRef.new(shape: ListPolicySummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListPolicySummariesResponse)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

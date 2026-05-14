@@ -109,6 +109,18 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class BatchDeleteCodeReviewsInput
+      attr_accessor code_review_ids: ::Array[::String]
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchDeleteCodeReviewsOutput
+      attr_accessor deleted: ::Array[::String]
+      attr_accessor failed: ::Array[Types::DeleteCodeReviewFailure]
+      SENSITIVE: []
+    end
+
     class BatchDeletePentestsInput
       attr_accessor pentest_ids: ::Array[::String]
       attr_accessor agent_space_id: ::String
@@ -140,6 +152,42 @@ module Aws::SecurityAgent
 
     class BatchGetArtifactMetadataOutput
       attr_accessor artifact_metadata_list: ::Array[Types::ArtifactMetadataItem]
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewJobTasksInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor code_review_job_task_ids: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewJobTasksOutput
+      attr_accessor code_review_job_tasks: ::Array[Types::CodeReviewJobTask]
+      attr_accessor not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewJobsInput
+      attr_accessor code_review_job_ids: ::Array[::String]
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewJobsOutput
+      attr_accessor code_review_jobs: ::Array[Types::CodeReviewJob]
+      attr_accessor not_found: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewsInput
+      attr_accessor code_review_ids: ::Array[::String]
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class BatchGetCodeReviewsOutput
+      attr_accessor code_reviews: ::Array[Types::CodeReview]
+      attr_accessor not_found: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -214,6 +262,14 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class CodeLocation
+      attr_accessor file_path: ::String
+      attr_accessor line_start: ::Integer
+      attr_accessor line_end: ::Integer
+      attr_accessor label: ::String
+      SENSITIVE: []
+    end
+
     class CodeRemediationTask
       attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor status_reason: ::String
@@ -228,9 +284,90 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class CodeReview
+      attr_accessor code_review_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor title: ::String
+      attr_accessor assets: Types::Assets
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeReviewJob
+      attr_accessor code_review_job_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor title: ::String
+      attr_accessor overview: ::String
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor documents: ::Array[Types::DocumentInfo]
+      attr_accessor source_code: ::Array[Types::SourceCodeRepository]
+      attr_accessor steps: ::Array[Types::Step]
+      attr_accessor execution_context: ::Array[Types::ExecutionContext]
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor error_information: Types::ErrorInformation
+      attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeReviewJobSummary
+      attr_accessor code_review_job_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor title: ::String
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeReviewJobTask
+      attr_accessor task_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor title: ::String
+      attr_accessor description: ::String
+      attr_accessor categories: ::Array[Types::Category]
+      attr_accessor risk_type: ("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")
+      attr_accessor execution_status: ("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")
+      attr_accessor logs_location: Types::LogLocation
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class CodeReviewJobTaskSummary
+      attr_accessor task_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor title: ::String
+      attr_accessor risk_type: ("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")
+      attr_accessor execution_status: ("IN_PROGRESS" | "ABORTED" | "COMPLETED" | "INTERNAL_ERROR" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
     class CodeReviewSettings
       attr_accessor controls_scanning: bool
       attr_accessor general_purpose_scanning: bool
+      SENSITIVE: []
+    end
+
+    class CodeReviewSummary
+      attr_accessor code_review_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor title: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -273,6 +410,29 @@ module Aws::SecurityAgent
 
     class CreateApplicationResponse
       attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateCodeReviewInput
+      attr_accessor title: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor assets: Types::Assets
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class CreateCodeReviewOutput
+      attr_accessor code_review_id: ::String
+      attr_accessor title: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor assets: Types::Assets
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor agent_space_id: ::String
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       SENSITIVE: []
     end
 
@@ -376,6 +536,12 @@ module Aws::SecurityAgent
     class DeleteArtifactOutput < Aws::EmptyStructure
     end
 
+    class DeleteCodeReviewFailure
+      attr_accessor code_review_id: ::String
+      attr_accessor reason: ::String
+      SENSITIVE: []
+    end
+
     class DeleteIntegrationInput
       attr_accessor integration_id: ::String
       SENSITIVE: []
@@ -458,6 +624,8 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_id: ::String
       attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor code_review_job_id: ::String
       attr_accessor task_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -470,6 +638,7 @@ module Aws::SecurityAgent
       attr_accessor attack_script: ::String
       attr_accessor code_remediation_task: Types::CodeRemediationTask
       attr_accessor last_updated_by: ::String
+      attr_accessor code_locations: ::Array[Types::CodeLocation]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -480,6 +649,8 @@ module Aws::SecurityAgent
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_id: ::String
       attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_id: ::String
+      attr_accessor code_review_job_id: ::String
       attr_accessor name: ::String
       attr_accessor status: ("ACTIVE" | "RESOLVED" | "ACCEPTED" | "FALSE_POSITIVE")
       attr_accessor risk_type: ::String
@@ -691,6 +862,49 @@ module Aws::SecurityAgent
       SENSITIVE: []
     end
 
+    class ListCodeReviewJobTasksInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor code_review_job_id: ::String
+      attr_accessor step_name: ("PREFLIGHT" | "STATIC_ANALYSIS" | "PENTEST" | "FINALIZING")
+      attr_accessor category_name: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewJobTasksOutput
+      attr_accessor code_review_job_task_summaries: ::Array[Types::CodeReviewJobTaskSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewJobsForCodeReviewInput
+      attr_accessor max_results: ::Integer
+      attr_accessor code_review_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewJobsForCodeReviewOutput
+      attr_accessor code_review_job_summaries: ::Array[Types::CodeReviewJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListCodeReviewsOutput
+      attr_accessor code_review_summaries: ::Array[Types::CodeReviewSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListDiscoveredEndpointsInput
       attr_accessor max_results: ::Integer
       attr_accessor pentest_job_id: ::String
@@ -709,6 +923,7 @@ module Aws::SecurityAgent
     class ListFindingsInput
       attr_accessor max_results: ::Integer
       attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor next_token: ::String
       attr_accessor risk_type: ::String
@@ -985,11 +1200,29 @@ module Aws::SecurityAgent
     class StartCodeRemediationInput
       attr_accessor agent_space_id: ::String
       attr_accessor pentest_job_id: ::String
+      attr_accessor code_review_job_id: ::String
       attr_accessor finding_ids: ::Array[::String]
       SENSITIVE: []
     end
 
     class StartCodeRemediationOutput < Aws::EmptyStructure
+    end
+
+    class StartCodeReviewJobInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor code_review_id: ::String
+      SENSITIVE: []
+    end
+
+    class StartCodeReviewJobOutput
+      attr_accessor title: ::String
+      attr_accessor status: ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor code_review_id: ::String
+      attr_accessor code_review_job_id: ::String
+      attr_accessor agent_space_id: ::String
+      SENSITIVE: []
     end
 
     class StartPentestJobInput
@@ -1015,6 +1248,15 @@ module Aws::SecurityAgent
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
+    end
+
+    class StopCodeReviewJobInput
+      attr_accessor agent_space_id: ::String
+      attr_accessor code_review_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopCodeReviewJobOutput < Aws::EmptyStructure
     end
 
     class StopPentestJobInput
@@ -1130,6 +1372,30 @@ module Aws::SecurityAgent
 
     class UpdateApplicationResponse
       attr_accessor application_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateCodeReviewInput
+      attr_accessor code_review_id: ::String
+      attr_accessor agent_space_id: ::String
+      attr_accessor title: ::String
+      attr_accessor assets: Types::Assets
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+      SENSITIVE: []
+    end
+
+    class UpdateCodeReviewOutput
+      attr_accessor code_review_id: ::String
+      attr_accessor title: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor assets: Types::Assets
+      attr_accessor service_role: ::String
+      attr_accessor log_config: Types::CloudWatchLog
+      attr_accessor agent_space_id: ::String
+      attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       SENSITIVE: []
     end
 

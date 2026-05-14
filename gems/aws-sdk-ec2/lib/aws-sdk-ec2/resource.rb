@@ -2019,7 +2019,7 @@ module Aws::EC2
     #     billing_products: ["String"],
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #     tpm_support: "v2.0", # accepts v2.0
-    #     uefi_data: "StringType",
+    #     uefi_data: "ImageUefiDataRequest",
     #     imds_support: "v2.0", # accepts v2.0
     #     tag_specifications: [
     #       {
@@ -2033,8 +2033,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     name: "String", # required
-    #     description: "String",
+    #     name: "ImageNameRequest", # required
+    #     description: "ImageDescriptionRequest",
     #     architecture: "i386", # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
     #     kernel_id: "KernelId",
     #     ramdisk_id: "RamdiskId",

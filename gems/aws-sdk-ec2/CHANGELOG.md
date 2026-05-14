@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.616.0 (2026-05-13)
+------------------
+
+* Feature - Include length limits in the SDK and documentation for text fields in Image (AMI) APIs such as the image name and description
+
 1.615.0 (2026-05-07)
 ------------------
 

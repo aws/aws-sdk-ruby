@@ -55,7 +55,7 @@ module Aws::RTBFabric
   autoload :EndpointProvider, 'aws-sdk-rtbfabric/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-rtbfabric/endpoints'
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end
 

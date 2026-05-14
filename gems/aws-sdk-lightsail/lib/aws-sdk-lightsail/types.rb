@@ -9984,13 +9984,22 @@ module Aws::Lightsail
     #   you don't specify otherwise) is 30 seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that the distribution uses when connecting to
+    #   the origin.
+    #
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InputOrigin AWS API Documentation
     #
     class InputOrigin < Struct.new(
       :name,
       :region_name,
       :protocol_policy,
-      :response_timeout)
+      :response_timeout,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12180,6 +12189,14 @@ module Aws::Lightsail
     #   you don't specify otherwise) is 30 seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] ip_address_type
+    #   The IP address type that the distribution uses when connecting to
+    #   the origin.
+    #
+    #   The possible values are `ipv4` for IPv4 only, `ipv6` for IPv6 only,
+    #   and `dualstack` for IPv4 and IPv6.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Origin AWS API Documentation
     #
     class Origin < Struct.new(
@@ -12187,7 +12204,8 @@ module Aws::Lightsail
       :resource_type,
       :region_name,
       :protocol_policy,
-      :response_timeout)
+      :response_timeout,
+      :ip_address_type)
       SENSITIVE = []
       include Aws::Structure
     end

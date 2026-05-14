@@ -6078,6 +6078,11 @@ module Aws::SageMaker
     #   A human-readable description of the event.
     #   @return [String]
     #
+    # @!attribute [rw] event_level
+    #   The severity level of the event. Valid values are `Info`, `Warn`,
+    #   and `Error`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventDetail AWS API Documentation
     #
     class ClusterEventDetail < Struct.new(
@@ -6089,7 +6094,8 @@ module Aws::SageMaker
       :resource_type,
       :event_time,
       :event_details,
-      :description)
+      :description,
+      :event_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6132,6 +6138,11 @@ module Aws::SageMaker
     #   A brief, human-readable description of the event.
     #   @return [String]
     #
+    # @!attribute [rw] event_level
+    #   The severity level of the event. Valid values are `Info`, `Warn`,
+    #   and `Error`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ClusterEventSummary AWS API Documentation
     #
     class ClusterEventSummary < Struct.new(
@@ -6142,7 +6153,8 @@ module Aws::SageMaker
       :instance_id,
       :resource_type,
       :event_time,
-      :description)
+      :description,
+      :event_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12199,12 +12211,17 @@ module Aws::SageMaker
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] managed_configuration
+    #   The managed configuration of the model package group.
+    #   @return [Types::ManagedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageGroupInput AWS API Documentation
     #
     class CreateModelPackageGroupInput < Struct.new(
       :model_package_group_name,
       :model_package_group_description,
-      :tags)
+      :tags,
+      :managed_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12407,6 +12424,10 @@ module Aws::SageMaker
     #   cycle.
     #   @return [Types::ModelLifeCycle]
     #
+    # @!attribute [rw] managed_storage_type
+    #   The storage type of the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/CreateModelPackageInput AWS API Documentation
     #
     class CreateModelPackageInput < Struct.new(
@@ -12433,7 +12454,8 @@ module Aws::SageMaker
       :source_uri,
       :security_config,
       :model_card,
-      :model_life_cycle)
+      :model_life_cycle,
+      :managed_storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21273,6 +21295,10 @@ module Aws::SageMaker
     #   The status of the model group.
     #   @return [String]
     #
+    # @!attribute [rw] managed_configuration
+    #   The managed configuration of the model package group.
+    #   @return [Types::ManagedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageGroupOutput AWS API Documentation
     #
     class DescribeModelPackageGroupOutput < Struct.new(
@@ -21281,7 +21307,8 @@ module Aws::SageMaker
       :model_package_group_description,
       :creation_time,
       :created_by,
-      :model_package_group_status)
+      :model_package_group_status,
+      :managed_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21466,6 +21493,10 @@ module Aws::SageMaker
     #   cycle.
     #   @return [Types::ModelLifeCycle]
     #
+    # @!attribute [rw] managed_storage_type
+    #   The storage type of the model package.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/DescribeModelPackageOutput AWS API Documentation
     #
     class DescribeModelPackageOutput < Struct.new(
@@ -21499,7 +21530,8 @@ module Aws::SageMaker
       :source_uri,
       :security_config,
       :model_card,
-      :model_life_cycle)
+      :model_life_cycle,
+      :managed_storage_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23500,7 +23532,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod, SageMaker Endpoints) that can use this training plan.
+    #   HyperPod, SageMaker Endpoints, Studio apps) that can use this
+    #   training plan.
     #
     #   Training plans are specific to their target resource.
     #
@@ -23513,6 +23546,9 @@ module Aws::SageMaker
     #   * A training plan for SageMaker endpoints can be used exclusively to
     #     provide compute resources to SageMaker endpoints for model
     #     deployment.
+    #
+    #   * A training plan for Studio apps can be used to launch JupyterLab
+    #     and Code Editor apps on reserved training plan capacity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] reserved_capacity_summaries
@@ -31577,6 +31613,12 @@ module Aws::SageMaker
     #   associated with the instance.
     #   @return [Types::AdditionalEnis]
     #
+    # @!attribute [rw] instance_requirements_eni_configurations
+    #   The ENI configurations for the instance types in the instance
+    #   requirements, grouped by network interface category (for example,
+    #   ENI-only or EFA with ENIs). At most one configuration per category.
+    #   @return [Array<Types::InstanceRequirementsEniConfiguration>]
+    #
     # @!attribute [rw] capacity_reservation
     #   Information about the Capacity Reservation used by the instance.
     #   @return [Types::CapacityReservation]
@@ -31600,6 +31642,7 @@ module Aws::SageMaker
     class InstanceMetadata < Struct.new(
       :customer_eni,
       :additional_enis,
+      :instance_requirements_eni_configurations,
       :capacity_reservation,
       :failure_message,
       :lcs_execution_state,
@@ -31701,6 +31744,28 @@ module Aws::SageMaker
     class InstancePoolSummary < Struct.new(
       :instance_type,
       :current_instance_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The customer ENI and additional ENIs associated with a network
+    # interface category.
+    #
+    # @!attribute [rw] customer_eni
+    #   The ID of the customer-managed Elastic Network Interface (ENI)
+    #   associated with the instance type category.
+    #   @return [String]
+    #
+    # @!attribute [rw] additional_enis
+    #   Information about additional Elastic Network Interfaces (ENIs)
+    #   associated with the instance type category.
+    #   @return [Types::AdditionalEnis]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/InstanceRequirementsEniConfiguration AWS API Documentation
+    #
+    class InstanceRequirementsEniConfiguration < Struct.new(
+      :customer_eni,
+      :additional_enis)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -39086,6 +39151,20 @@ module Aws::SageMaker
       include Aws::Structure
     end
 
+    # The managed configuration of a model package group.
+    #
+    # @!attribute [rw] managed_storage_type
+    #   The storage type of the model package.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ManagedConfiguration AWS API Documentation
+    #
+    class ManagedConfiguration < Struct.new(
+      :managed_storage_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines an Amazon Cognito or your own OIDC IdP user group that is part
     # of a work team.
     #
@@ -41048,6 +41127,10 @@ module Aws::SageMaker
     #   The status of the model group.
     #   @return [String]
     #
+    # @!attribute [rw] managed_configuration
+    #   The managed configuration of the model package group.
+    #   @return [Types::ManagedConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ModelPackageGroupSummary AWS API Documentation
     #
     class ModelPackageGroupSummary < Struct.new(
@@ -41055,7 +41138,8 @@ module Aws::SageMaker
       :model_package_group_arn,
       :model_package_group_description,
       :creation_time,
-      :model_package_group_status)
+      :model_package_group_status,
+      :managed_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -48289,6 +48373,21 @@ module Aws::SageMaker
     #   attached to the Resource.
     #   @return [String]
     #
+    # @!attribute [rw] training_plan_arn
+    #   The ARN of the SageMaker AI Training Plan to use for this app. When
+    #   you specify a training plan, the app launches on reserved GPU
+    #   capacity. This field is supported for JupyterLab and CodeEditor app
+    #   types.
+    #
+    #   For more information about how to reserve GPU capacity with
+    #   SageMaker AI Training Plans, see [Using training plans in Studio
+    #   applications][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/sagemaker/latest/dg/training-plan-utilization-for-studio-apps.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/ResourceSpec AWS API Documentation
     #
     class ResourceSpec < Struct.new(
@@ -48296,7 +48395,8 @@ module Aws::SageMaker
       :sage_maker_image_version_arn,
       :sage_maker_image_version_alias,
       :instance_type,
-      :lifecycle_config_arn)
+      :lifecycle_config_arn,
+      :training_plan_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49355,7 +49455,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod, SageMaker Endpoints) to search for in the offerings.
+    #   HyperPod, SageMaker Endpoints, Studio apps) to search for in the
+    #   offerings.
     #
     #   Training plans are specific to their target resource.
     #
@@ -49368,6 +49469,9 @@ module Aws::SageMaker
     #   * A training plan for SageMaker endpoints can be used exclusively to
     #     provide compute resources to SageMaker endpoints for model
     #     deployment.
+    #
+    #   * A training plan for Studio apps can be used to launch JupyterLab
+    #     and Code Editor apps on reserved training plan capacity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] training_plan_arn
@@ -51096,13 +51200,24 @@ module Aws::SageMaker
     #   The version aliases you are hiding from the Studio user interface.
     #   @return [Array<Types::HiddenSageMakerImage>]
     #
+    # @!attribute [rw] execution_role_session_name_mode
+    #   The execution role session name mode. If this value is set to
+    #   `USER_IDENTITY`, the session name of the execution role corresponds
+    #   to the user's identity. For IAM domains, the session name is the
+    #   IAM session name used to generate the presigned URL. For IAM
+    #   Identity Center domains, the session name is the username of the
+    #   associated IAM Identity Center user. If this value is set to
+    #   `STATIC` or is not set, the session name defaults to `SageMaker`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sagemaker-2017-07-24/StudioWebPortalSettings AWS API Documentation
     #
     class StudioWebPortalSettings < Struct.new(
       :hidden_ml_tools,
       :hidden_app_types,
       :hidden_instance_types,
-      :hidden_sage_maker_image_version_aliases)
+      :hidden_sage_maker_image_version_aliases,
+      :execution_role_session_name_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52310,6 +52425,10 @@ module Aws::SageMaker
     #   that are configured for model training.
     #   @return [Types::ResourceConfig]
     #
+    # @!attribute [rw] warm_pool_status
+    #   The status of the warm pool associated with the training job.
+    #   @return [Types::WarmPoolStatus]
+    #
     # @!attribute [rw] vpc_config
     #   A [VpcConfig][1] object that specifies the VPC that this training
     #   job has access to. For more information, see [Protect Training Jobs
@@ -52503,6 +52622,7 @@ module Aws::SageMaker
       :input_data_config,
       :output_data_config,
       :resource_config,
+      :warm_pool_status,
       :vpc_config,
       :stopping_condition,
       :creation_time,
@@ -52889,7 +53009,8 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., SageMaker Training Jobs, SageMaker
-    #   HyperPod, SageMaker Endpoints) for this training plan offering.
+    #   HyperPod, SageMaker Endpoints, Studio apps) for this training plan
+    #   offering.
     #
     #   Training plans are specific to their target resource.
     #
@@ -52902,6 +53023,9 @@ module Aws::SageMaker
     #   * A training plan for SageMaker endpoints can be used exclusively to
     #     provide compute resources to SageMaker endpoints for model
     #     deployment.
+    #
+    #   * A training plan for Studio apps can be used to launch JupyterLab
+    #     and Code Editor apps on reserved training plan capacity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] requested_start_time_after
@@ -53024,7 +53148,7 @@ module Aws::SageMaker
     #
     # @!attribute [rw] target_resources
     #   The target resources (e.g., training jobs, HyperPod clusters,
-    #   Endpoints) that can use this training plan.
+    #   Endpoints, Studio apps) that can use this training plan.
     #
     #   Training plans are specific to their target resource.
     #
@@ -53037,6 +53161,9 @@ module Aws::SageMaker
     #   * A training plan for SageMaker endpoints can be used exclusively to
     #     provide compute resources to SageMaker endpoints for model
     #     deployment.
+    #
+    #   * A training plan for Studio apps can be used to launch JupyterLab
+    #     and Code Editor apps on reserved training plan capacity.
     #   @return [Array<String>]
     #
     # @!attribute [rw] reserved_capacity_summaries

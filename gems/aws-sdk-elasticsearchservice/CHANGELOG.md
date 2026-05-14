@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2026-05-13)
+------------------
+
+* Feature - Adds support for AutomatedSnapshotPauseOptions.
+
 1.118.0 (2026-04-01)
 ------------------
 

@@ -154,6 +154,7 @@ module Aws::SocialMessaging
     WhatsAppBusinessAccountEventDestinations = Shapes::ListShape.new(name: 'WhatsAppBusinessAccountEventDestinations')
     WhatsAppBusinessAccountId = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountId')
     WhatsAppBusinessAccountLinkDate = Shapes::TimestampShape.new(name: 'WhatsAppBusinessAccountLinkDate')
+    WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountMarketingMessagesOnboardingStatus')
     WhatsAppBusinessAccountName = Shapes::StringShape.new(name: 'WhatsAppBusinessAccountName')
     WhatsAppDisplayPhoneNumber = Shapes::StringShape.new(name: 'WhatsAppDisplayPhoneNumber')
     WhatsAppMediaId = Shapes::StringShape.new(name: 'WhatsAppMediaId')
@@ -185,6 +186,7 @@ module Aws::SocialMessaging
 
     AssociateWhatsAppBusinessAccountOutput.add_member(:signup_callback_result, Shapes::ShapeRef.new(shape: WhatsAppSignupCallbackResult, location_name: "signupCallbackResult"))
     AssociateWhatsAppBusinessAccountOutput.add_member(:status_code, Shapes::ShapeRef.new(shape: Integer, location_name: "statusCode"))
+    AssociateWhatsAppBusinessAccountOutput.add_member(:linked_whats_app_business_account_id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, location_name: "linkedWhatsAppBusinessAccountId"))
     AssociateWhatsAppBusinessAccountOutput.struct_class = Types::AssociateWhatsAppBusinessAccountOutput
 
     CreateWhatsAppMessageTemplateFromLibraryInput.add_member(:meta_library_template, Shapes::ShapeRef.new(shape: MetaLibraryTemplate, required: true, location_name: "metaLibraryTemplate"))
@@ -262,8 +264,10 @@ module Aws::SocialMessaging
     GetWhatsAppMessageMediaOutput.add_member(:file_size, Shapes::ShapeRef.new(shape: Long, location_name: "fileSize"))
     GetWhatsAppMessageMediaOutput.struct_class = Types::GetWhatsAppMessageMediaOutput
 
-    GetWhatsAppMessageTemplateInput.add_member(:meta_template_id, Shapes::ShapeRef.new(shape: MetaTemplateId, required: true, location: "querystring", location_name: "metaTemplateId"))
+    GetWhatsAppMessageTemplateInput.add_member(:meta_template_id, Shapes::ShapeRef.new(shape: MetaTemplateId, location: "querystring", location_name: "metaTemplateId"))
     GetWhatsAppMessageTemplateInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location: "querystring", location_name: "id"))
+    GetWhatsAppMessageTemplateInput.add_member(:template_name, Shapes::ShapeRef.new(shape: MetaTemplateName, location: "querystring", location_name: "templateName"))
+    GetWhatsAppMessageTemplateInput.add_member(:template_language_code, Shapes::ShapeRef.new(shape: MetaTemplateLanguage, location: "querystring", location_name: "templateLanguageCode"))
     GetWhatsAppMessageTemplateInput.struct_class = Types::GetWhatsAppMessageTemplateInput
 
     GetWhatsAppMessageTemplateOutput.add_member(:template, Shapes::ShapeRef.new(shape: MetaTemplate, location_name: "template"))
@@ -315,6 +319,7 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccount.add_member(:link_date, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountLinkDate, required: true, location_name: "linkDate"))
     LinkedWhatsAppBusinessAccount.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccount.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
+    LinkedWhatsAppBusinessAccount.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
     LinkedWhatsAppBusinessAccount.add_member(:phone_numbers, Shapes::ShapeRef.new(shape: WhatsAppPhoneNumberSummaryList, required: true, location_name: "phoneNumbers"))
     LinkedWhatsAppBusinessAccount.struct_class = Types::LinkedWhatsAppBusinessAccount
 
@@ -331,6 +336,7 @@ module Aws::SocialMessaging
     LinkedWhatsAppBusinessAccountSummary.add_member(:link_date, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountLinkDate, required: true, location_name: "linkDate"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:waba_name, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountName, required: true, location_name: "wabaName"))
     LinkedWhatsAppBusinessAccountSummary.add_member(:event_destinations, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountEventDestinations, required: true, location_name: "eventDestinations"))
+    LinkedWhatsAppBusinessAccountSummary.add_member(:marketing_messages_onboarding_status, Shapes::ShapeRef.new(shape: WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, location_name: "marketingMessagesOnboardingStatus"))
     LinkedWhatsAppBusinessAccountSummary.struct_class = Types::LinkedWhatsAppBusinessAccountSummary
 
     LinkedWhatsAppBusinessAccountSummaryList.member = Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountSummary)
@@ -477,7 +483,9 @@ module Aws::SocialMessaging
     UntagResourceOutput.struct_class = Types::UntagResourceOutput
 
     UpdateWhatsAppMessageTemplateInput.add_member(:id, Shapes::ShapeRef.new(shape: LinkedWhatsAppBusinessAccountId, required: true, location_name: "id"))
-    UpdateWhatsAppMessageTemplateInput.add_member(:meta_template_id, Shapes::ShapeRef.new(shape: MetaTemplateId, required: true, location_name: "metaTemplateId"))
+    UpdateWhatsAppMessageTemplateInput.add_member(:meta_template_id, Shapes::ShapeRef.new(shape: MetaTemplateId, location_name: "metaTemplateId"))
+    UpdateWhatsAppMessageTemplateInput.add_member(:template_name, Shapes::ShapeRef.new(shape: MetaTemplateName, location_name: "templateName"))
+    UpdateWhatsAppMessageTemplateInput.add_member(:template_language_code, Shapes::ShapeRef.new(shape: MetaTemplateLanguage, location_name: "templateLanguageCode"))
     UpdateWhatsAppMessageTemplateInput.add_member(:parameter_format, Shapes::ShapeRef.new(shape: MetaParameterFormat, location_name: "parameterFormat"))
     UpdateWhatsAppMessageTemplateInput.add_member(:template_category, Shapes::ShapeRef.new(shape: MetaTemplateCategory, location_name: "templateCategory"))
     UpdateWhatsAppMessageTemplateInput.add_member(:template_components, Shapes::ShapeRef.new(shape: MetaTemplateComponents, location_name: "templateComponents"))

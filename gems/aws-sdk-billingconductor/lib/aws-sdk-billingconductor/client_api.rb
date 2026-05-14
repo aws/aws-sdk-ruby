@@ -1402,6 +1402,7 @@ module Aws::BillingConductor
         o.http_request_uri = "/update-custom-line-item"
         o.input = Shapes::ShapeRef.new(shape: UpdateCustomLineItemInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateCustomLineItemOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

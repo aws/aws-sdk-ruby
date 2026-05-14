@@ -865,13 +865,13 @@ module Aws::BedrockAgentCoreControl
     class CreatePolicyEngineResponse
       attr_accessor policy_engine_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_engine_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
 
@@ -889,12 +889,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor policy_engine_id: ::String
-      attr_accessor definition: Types::PolicyDefinition
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor definition: Types::PolicyDefinition
+      attr_accessor description: ::String
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
@@ -1398,13 +1398,13 @@ module Aws::BedrockAgentCoreControl
     class DeletePolicyEngineResponse
       attr_accessor policy_engine_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_engine_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
 
@@ -1418,12 +1418,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor policy_engine_id: ::String
-      attr_accessor definition: Types::PolicyDefinition
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor definition: Types::PolicyDefinition
+      attr_accessor description: ::String
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
@@ -2137,14 +2137,30 @@ module Aws::BedrockAgentCoreControl
     class GetPolicyEngineResponse
       attr_accessor policy_engine_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_engine_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
+    end
+
+    class GetPolicyEngineSummaryRequest
+      attr_accessor policy_engine_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyEngineSummaryResponse
+      attr_accessor policy_engine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor policy_engine_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
     end
 
     class GetPolicyGenerationRequest
@@ -2162,7 +2178,26 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
+      attr_accessor findings: ::String
       attr_accessor status_reasons: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetPolicyGenerationSummaryRequest
+      attr_accessor policy_generation_id: ::String
+      attr_accessor policy_engine_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicyGenerationSummaryResponse
+      attr_accessor policy_engine_id: ::String
+      attr_accessor policy_generation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy_generation_arn: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
       attr_accessor findings: ::String
       SENSITIVE: []
     end
@@ -2177,14 +2212,31 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor policy_engine_id: ::String
-      attr_accessor definition: Types::PolicyDefinition
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor definition: Types::PolicyDefinition
+      attr_accessor description: ::String
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
+    end
+
+    class GetPolicySummaryRequest
+      attr_accessor policy_engine_id: ::String
+      attr_accessor policy_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetPolicySummaryResponse
+      attr_accessor policy_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy_engine_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor policy_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
     end
 
     class GetRegistryRecordRequest
@@ -2966,6 +3018,18 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListPolicyEngineSummariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListPolicyEngineSummariesResponse
+      attr_accessor policy_engines: ::Array[Types::PolicyEngineSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPolicyEnginesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -2992,6 +3056,19 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListPolicyGenerationSummariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor policy_engine_id: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicyGenerationSummariesResponse
+      attr_accessor policy_generations: ::Array[Types::PolicyGenerationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListPolicyGenerationsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -3005,10 +3082,25 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class ListPolicySummariesRequest
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor policy_engine_id: ::String
+      attr_accessor target_resource_scope: ::String
+      SENSITIVE: []
+    end
+
+    class ListPolicySummariesResponse
+      attr_accessor policies: ::Array[Types::PolicySummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListRegistriesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+      attr_accessor authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
       SENSITIVE: []
     end
 
@@ -3583,12 +3675,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor policy_engine_id: ::String
-      attr_accessor definition: Types::PolicyDefinition
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor definition: Types::PolicyDefinition
+      attr_accessor description: ::String
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
@@ -3610,14 +3702,25 @@ module Aws::BedrockAgentCoreControl
     class PolicyEngine
       attr_accessor policy_engine_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_engine_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
+    end
+
+    class PolicyEngineSummary
+      attr_accessor policy_engine_id: ::String
+      attr_accessor name: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor policy_engine_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor encryption_key_arn: ::String
+      SENSITIVE: []
     end
 
     class PolicyGeneration
@@ -3629,8 +3732,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor findings: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -3645,6 +3748,30 @@ module Aws::BedrockAgentCoreControl
     class PolicyGenerationDetails
       attr_accessor policy_generation_id: ::String
       attr_accessor policy_generation_asset_id: ::String
+      SENSITIVE: []
+    end
+
+    class PolicyGenerationSummary
+      attr_accessor policy_engine_id: ::String
+      attr_accessor policy_generation_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy_generation_arn: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor status: ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
+      attr_accessor findings: ::String
+      SENSITIVE: []
+    end
+
+    class PolicySummary
+      attr_accessor policy_id: ::String
+      attr_accessor name: ::String
+      attr_accessor policy_engine_id: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor policy_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
       SENSITIVE: []
     end
 
@@ -4059,8 +4186,8 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor status: ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor findings: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -4712,13 +4839,13 @@ module Aws::BedrockAgentCoreControl
     class UpdatePolicyEngineResponse
       attr_accessor policy_engine_id: ::String
       attr_accessor name: ::String
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_engine_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-      attr_accessor status_reasons: ::Array[::String]
       attr_accessor encryption_key_arn: ::String
+      attr_accessor description: ::String
+      attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
 
@@ -4735,12 +4862,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor policy_id: ::String
       attr_accessor name: ::String
       attr_accessor policy_engine_id: ::String
-      attr_accessor definition: Types::PolicyDefinition
-      attr_accessor description: ::String
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor policy_arn: ::String
       attr_accessor status: ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      attr_accessor definition: Types::PolicyDefinition
+      attr_accessor description: ::String
       attr_accessor status_reasons: ::Array[::String]
       SENSITIVE: [:description]
     end
@@ -5027,6 +5154,7 @@ module Aws::BedrockAgentCoreControl
     class VpcConfig
       attr_accessor security_groups: ::Array[::String]
       attr_accessor subnets: ::Array[::String]
+      attr_accessor require_service_s3_endpoint: bool
       SENSITIVE: []
     end
 

@@ -789,6 +789,16 @@ module Aws::ElasticsearchService
     # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
     #   Specifies the deployment strategy options.
     #
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore your
+    #   domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #
     # @return [Types::CreateElasticsearchDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateElasticsearchDomainResponse#domain_status #domain_status} => Types::ElasticsearchDomainStatus
@@ -903,6 +913,11 @@ module Aws::ElasticsearchService
     #     deployment_strategy_options: {
     #       deployment_strategy: "Default", # required, accepts Default, CapacityOptimized
     #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -993,6 +1008,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @overload create_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1263,6 +1282,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @overload delete_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1627,6 +1650,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status.modifying_properties[0].pending_value #=> String
     #   resp.domain_status.modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @overload describe_elasticsearch_domain(params = {})
     # @param [Hash] params ({})
@@ -1802,6 +1829,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.deployment_strategy_options.status.update_version #=> Integer
     #   resp.domain_config.deployment_strategy_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.deployment_strategy_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.enabled #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.start_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.end_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_config.automated_snapshot_pause_options.status.creation_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
+    #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
     #
     # @overload describe_elasticsearch_domain_config(params = {})
     # @param [Hash] params ({})
@@ -1916,6 +1952,10 @@ module Aws::ElasticsearchService
     #   resp.domain_status_list[0].modifying_properties[0].pending_value #=> String
     #   resp.domain_status_list[0].modifying_properties[0].value_type #=> String, one of "PLAIN_TEXT", "STRINGIFIED_JSON"
     #   resp.domain_status_list[0].deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @overload describe_elasticsearch_domains(params = {})
     # @param [Hash] params ({})
@@ -3106,6 +3146,16 @@ module Aws::ElasticsearchService
     # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
     #   Specifies the deployment strategy options.
     #
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore your
+    #   domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #
     # @return [Types::UpdateElasticsearchDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateElasticsearchDomainConfigResponse#domain_config #domain_config} => Types::ElasticsearchDomainConfig
@@ -3215,6 +3265,11 @@ module Aws::ElasticsearchService
     #     dry_run: false,
     #     deployment_strategy_options: {
     #       deployment_strategy: "Default", # required, accepts Default, CapacityOptimized
+    #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now,
     #     },
     #   })
     #
@@ -3368,6 +3423,15 @@ module Aws::ElasticsearchService
     #   resp.domain_config.deployment_strategy_options.status.update_version #=> Integer
     #   resp.domain_config.deployment_strategy_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.deployment_strategy_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.enabled #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.start_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.end_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_config.automated_snapshot_pause_options.status.creation_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
+    #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -3543,7 +3607,7 @@ module Aws::ElasticsearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticsearchservice'
-      context[:gem_version] = '1.118.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

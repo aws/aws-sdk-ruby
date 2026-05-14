@@ -18548,7 +18548,6 @@ module Aws::EC2
       attr_accessor progress: ::Integer
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
-      attr_accessor operator: Types::OperatorResponse
       SENSITIVE: []
     end
 

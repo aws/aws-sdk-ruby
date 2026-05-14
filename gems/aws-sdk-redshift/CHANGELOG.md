@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.158.0 (2026-05-13)
+------------------
+
+* Feature - Added rg.xlarge and rg.4xlarge to valid NodeType values and updated documentation for CreateCluster, ModifyCluster, ResizeCluster, and RestoreFromClusterSnapshot APIs to reflect RG node type support.
+
 1.157.0 (2026-03-18)
 ------------------
 

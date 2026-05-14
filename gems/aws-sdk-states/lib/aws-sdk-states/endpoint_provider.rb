@@ -21,22 +21,25 @@ module Aws::States
       end
       if Aws::Endpoints::Matchers.set?(parameters.region)
         if (partition_result = Aws::Endpoints::Matchers.aws_partition(parameters.region))
+          if Aws::Endpoints::Matchers.string_equals?(parameters.region, "us-gov-west-1") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
+            return Aws::Endpoints::Endpoint.new(url: "https://states.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov") && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+            return Aws::Endpoints::Endpoint.new(url: "https://states-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
           if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS")) && Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://states-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, false)
             if Aws::Endpoints::Matchers.boolean_equals?(Aws::Endpoints::Matchers.attr(partition_result, "supportsFIPS"), true)
-              if Aws::Endpoints::Matchers.string_equals?(parameters.region, "us-gov-west-1")
-                return Aws::Endpoints::Endpoint.new(url: "https://states.us-gov-west-1.amazonaws.com", headers: {}, properties: {})
-              end
               return Aws::Endpoints::Endpoint.new(url: "https://states-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
+          if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, false) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
             if Aws::Endpoints::Matchers.boolean_equals?(true, Aws::Endpoints::Matchers.attr(partition_result, "supportsDualStack"))
               return Aws::Endpoints::Endpoint.new(url: "https://states.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end

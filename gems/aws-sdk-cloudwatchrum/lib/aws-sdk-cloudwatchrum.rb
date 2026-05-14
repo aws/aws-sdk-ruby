@@ -55,7 +55,7 @@ module Aws::CloudWatchRUM
   autoload :EndpointProvider, 'aws-sdk-cloudwatchrum/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchrum/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

@@ -126,11 +126,13 @@ module AwsSdkCodeGenerator
         end
         y.yield("#{prefix}/async_client.rbs", async_client_class_rbs(codegenerated_plugins).render) if @service.h2_setting?
         y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(service: @service).render)
-        y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(
-          service_name: @service.name,
-          api: @service.api,
-          waiters: @service.waiters,
-        ).render)
+        if @waiters
+          y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(
+            service_name: @service.name,
+            api: @service.api,
+            waiters: @service.waiters,
+          ).render)
+        end
         y.yield("#{prefix}/types.rbs", Views::RBS::TypesModule.new(
           service: @service
         ).render)

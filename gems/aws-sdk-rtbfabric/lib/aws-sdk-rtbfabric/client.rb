@@ -634,6 +634,83 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
+    # Associates an ACM certificate with a responder gateway.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate to associate.
+    #
+    # @option params [required, String] :client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #
+    # @return [Types::AssociateCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AssociateCertificateResponse#gateway_id #gateway_id} => String
+    #   * {Types::AssociateCertificateResponse#acm_certificate_arn #acm_certificate_arn} => String
+    #   * {Types::AssociateCertificateResponse#status #status} => String
+    #
+    #
+    # @example Example: Associate a certificate with a responder gateway
+    #
+    #   # Associate an ACM certificate with a responder gateway
+    #
+    #   resp = client.associate_certificate({
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     client_token: "550e8400-e29b-41d4-a716-446655440000", 
+    #     gateway_id: "rtb-gw-12345678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     status: "PENDING_ASSOCIATION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.associate_certificate({
+    #     gateway_id: "GatewayId", # required
+    #     acm_certificate_arn: "AcmCertificateArn", # required
+    #     client_token: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_id #=> String
+    #   resp.acm_certificate_arn #=> String
+    #   resp.status #=> String, one of "PENDING_ASSOCIATION", "ASSOCIATED", "PENDING_DISASSOCIATION", "DISASSOCIATED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/AssociateCertificate AWS API Documentation
+    #
+    # @overload associate_certificate(params = {})
+    # @param [Hash] params ({})
+    def associate_certificate(params = {}, options = {})
+      req = build_request(:associate_certificate, params)
+      req.send_request(options)
+    end
+
     # Creates an inbound external link.
     #
     # @option params [required, String] :client_token
@@ -900,6 +977,120 @@ module Aws::RTBFabric
     # @param [Hash] params ({})
     def create_link(params = {}, options = {})
       req = build_request(:create_link, params)
+      req.send_request(options)
+    end
+
+    # Creates a routing rule for a link.
+    #
+    # Routing rules use priority-based evaluation where lower priority
+    # numbers are evaluated first. Each rule specifies conditions that must
+    # all match for the rule to apply.
+    #
+    # @option params [required, String] :client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [required, Integer] :priority
+    #   The priority of the routing rule. Lower numbers are evaluated first.
+    #   Valid values are 1 to 1000. Priority must be unique among non-deleted
+    #   rules within a link.
+    #
+    # @option params [required, Types::RuleCondition] :conditions
+    #   The conditions for the routing rule. All specified fields must match
+    #   for the rule to apply. At least one condition field must be set.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of the key-value pairs of the tag or tags to assign to the
+    #   resource.
+    #
+    # @return [Types::CreateLinkRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateLinkRoutingRuleResponse#rule_id #rule_id} => String
+    #   * {Types::CreateLinkRoutingRuleResponse#status #status} => String
+    #   * {Types::CreateLinkRoutingRuleResponse#created_at #created_at} => Time
+    #
+    #
+    # @example Example: Create a link routing rule
+    #
+    #   # Create a routing rule with host header and path prefix conditions
+    #
+    #   resp = client.create_link_routing_rule({
+    #     client_token: "550e8400-e29b-41d4-a716-446655440000", 
+    #     conditions: {
+    #       host_header: "api.customer.com", 
+    #       path_prefix: "/openrtb/", 
+    #     }, 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     priority: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     created_at: Time.parse("2024-01-01T12:00:00Z"), 
+    #     rule_id: "rule-abc123def456", 
+    #     status: "CREATION_IN_PROGRESS", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_link_routing_rule({
+    #     client_token: "String", # required
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     priority: 1, # required
+    #     conditions: { # required
+    #       host_header: "RuleConditionHostHeaderString",
+    #       host_header_wildcard: "RuleConditionHostHeaderWildcardString",
+    #       path_prefix: "RuleConditionPathPrefixString",
+    #       path_exact: "RuleConditionPathExactString",
+    #       query_string_equals: {
+    #         key: "QueryStringKeyValuePairKeyString", # required
+    #         value: "QueryStringKeyValuePairValueString", # required
+    #       },
+    #       query_string_exists: "RuleConditionQueryStringExistsString",
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_id #=> String
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.created_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/CreateLinkRoutingRule AWS API Documentation
+    #
+    # @overload create_link_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def create_link_routing_rule(params = {}, options = {})
+      req = build_request(:create_link_routing_rule, params)
       req.send_request(options)
     end
 
@@ -1335,6 +1526,61 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
+    # Deletes a routing rule from a link.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier of the routing rule.
+    #
+    # @return [Types::DeleteLinkRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteLinkRoutingRuleResponse#rule_id #rule_id} => String
+    #   * {Types::DeleteLinkRoutingRuleResponse#status #status} => String
+    #
+    #
+    # @example Example: Delete a link routing rule
+    #
+    #   # Delete a link routing rule
+    #
+    #   resp = client.delete_link_routing_rule({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     rule_id: "rule-abc123def456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rule_id: "rule-abc123def456", 
+    #     status: "DELETION_IN_PROGRESS", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_link_routing_rule({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     rule_id: "RuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_id #=> String
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DeleteLinkRoutingRule AWS API Documentation
+    #
+    # @overload delete_link_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def delete_link_routing_rule(params = {}, options = {})
+      req = build_request(:delete_link_routing_rule, params)
+      req.send_request(options)
+    end
+
     # Deletes an outbound external link.
     #
     # @option params [required, String] :gateway_id
@@ -1472,6 +1718,125 @@ module Aws::RTBFabric
     # @param [Hash] params ({})
     def delete_responder_gateway(params = {}, options = {})
       req = build_request(:delete_responder_gateway, params)
+      req.send_request(options)
+    end
+
+    # Removes a certificate association from a responder gateway.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate to disassociate.
+    #
+    # @return [Types::DisassociateCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisassociateCertificateResponse#gateway_id #gateway_id} => String
+    #   * {Types::DisassociateCertificateResponse#acm_certificate_arn #acm_certificate_arn} => String
+    #   * {Types::DisassociateCertificateResponse#status #status} => String
+    #
+    #
+    # @example Example: Disassociate a certificate from a responder gateway
+    #
+    #   # Remove an ACM certificate association from a responder gateway
+    #
+    #   resp = client.disassociate_certificate({
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     gateway_id: "rtb-gw-12345678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     status: "PENDING_DISASSOCIATION", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disassociate_certificate({
+    #     gateway_id: "GatewayId", # required
+    #     acm_certificate_arn: "AcmCertificateArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_id #=> String
+    #   resp.acm_certificate_arn #=> String
+    #   resp.status #=> String, one of "PENDING_ASSOCIATION", "ASSOCIATED", "PENDING_DISASSOCIATION", "DISASSOCIATED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/DisassociateCertificate AWS API Documentation
+    #
+    # @overload disassociate_certificate(params = {})
+    # @param [Hash] params ({})
+    def disassociate_certificate(params = {}, options = {})
+      req = build_request(:disassociate_certificate, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a certificate association with a responder
+    # gateway.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :acm_certificate_arn
+    #   The Amazon Resource Name (ARN) of the ACM certificate.
+    #
+    # @return [Types::GetCertificateAssociationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCertificateAssociationResponse#gateway_id #gateway_id} => String
+    #   * {Types::GetCertificateAssociationResponse#acm_certificate_arn #acm_certificate_arn} => String
+    #   * {Types::GetCertificateAssociationResponse#status #status} => String
+    #   * {Types::GetCertificateAssociationResponse#associated_at #associated_at} => Time
+    #   * {Types::GetCertificateAssociationResponse#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Get certificate association details from a responder gateway
+    #
+    #   # Retrieve details of an ACM certificate association with a responder gateway
+    #
+    #   resp = client.get_certificate_association({
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     gateway_id: "rtb-gw-12345678", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #     associated_at: Time.parse(1704067200), 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     status: "ASSOCIATED", 
+    #     updated_at: Time.parse(1704067200), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_certificate_association({
+    #     gateway_id: "GatewayId", # required
+    #     acm_certificate_arn: "AcmCertificateArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_id #=> String
+    #   resp.acm_certificate_arn #=> String
+    #   resp.status #=> String, one of "PENDING_ASSOCIATION", "ASSOCIATED", "PENDING_DISASSOCIATION", "DISASSOCIATED", "FAILED"
+    #   resp.associated_at #=> Time
+    #   resp.updated_at #=> Time
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * certificate_associated
+    #   * certificate_disassociated
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetCertificateAssociation AWS API Documentation
+    #
+    # @overload get_certificate_association(params = {})
+    # @param [Hash] params ({})
+    def get_certificate_association(params = {}, options = {})
+      req = build_request(:get_certificate_association, params)
       req.send_request(options)
     end
 
@@ -1730,6 +2095,97 @@ module Aws::RTBFabric
     # @param [Hash] params ({})
     def get_link(params = {}, options = {})
       req = build_request(:get_link, params)
+      req.send_request(options)
+    end
+
+    # Retrieves the details of a routing rule for a link.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier of the routing rule.
+    #
+    # @return [Types::GetLinkRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetLinkRoutingRuleResponse#gateway_id #gateway_id} => String
+    #   * {Types::GetLinkRoutingRuleResponse#link_id #link_id} => String
+    #   * {Types::GetLinkRoutingRuleResponse#rule_id #rule_id} => String
+    #   * {Types::GetLinkRoutingRuleResponse#priority #priority} => Integer
+    #   * {Types::GetLinkRoutingRuleResponse#conditions #conditions} => Types::RuleCondition
+    #   * {Types::GetLinkRoutingRuleResponse#status #status} => String
+    #   * {Types::GetLinkRoutingRuleResponse#created_at #created_at} => Time
+    #   * {Types::GetLinkRoutingRuleResponse#updated_at #updated_at} => Time
+    #   * {Types::GetLinkRoutingRuleResponse#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: Get link routing rule details
+    #
+    #   # Get details of a link routing rule
+    #
+    #   resp = client.get_link_routing_rule({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     rule_id: "rule-abc123def456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     conditions: {
+    #       host_header: "api.customer.com", 
+    #       path_prefix: "/openrtb/", 
+    #     }, 
+    #     created_at: Time.parse("2024-01-01T12:00:00Z"), 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     priority: 10, 
+    #     rule_id: "rule-abc123def456", 
+    #     status: "ACTIVE", 
+    #     updated_at: Time.parse("2024-01-01T12:00:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_link_routing_rule({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     rule_id: "RuleId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.gateway_id #=> String
+    #   resp.link_id #=> String
+    #   resp.rule_id #=> String
+    #   resp.priority #=> Integer
+    #   resp.conditions.host_header #=> String
+    #   resp.conditions.host_header_wildcard #=> String
+    #   resp.conditions.path_prefix #=> String
+    #   resp.conditions.path_exact #=> String
+    #   resp.conditions.query_string_equals.key #=> String
+    #   resp.conditions.query_string_equals.value #=> String
+    #   resp.conditions.query_string_exists #=> String
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * link_routing_rule_active
+    #   * link_routing_rule_deleted
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/GetLinkRoutingRule AWS API Documentation
+    #
+    # @overload get_link_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def get_link_routing_rule(params = {}, options = {})
+      req = build_request(:get_link_routing_rule, params)
       req.send_request(options)
     end
 
@@ -2066,6 +2522,175 @@ module Aws::RTBFabric
     # @param [Hash] params ({})
     def get_responder_gateway(params = {}, options = {})
       req = build_request(:get_responder_gateway, params)
+      req.send_request(options)
+    end
+
+    # Lists the certificate associations for a responder gateway.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken error*.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results.
+    #
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
+    #
+    # @return [Types::ListCertificateAssociationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCertificateAssociationsResponse#certificate_associations #certificate_associations} => Array&lt;Types::CertificateAssociationSummary&gt;
+    #   * {Types::ListCertificateAssociationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List certificate associations for a responder gateway
+    #
+    #   # Retrieve all certificate associations for a responder gateway
+    #
+    #   resp = client.list_certificate_associations({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     max_results: 5, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     certificate_associations: [
+    #       {
+    #         acm_certificate_arn: "arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012", 
+    #         associated_at: Time.parse(1704067200), 
+    #         status: "ASSOCIATED", 
+    #         updated_at: Time.parse(1704067200), 
+    #       }, 
+    #     ], 
+    #     next_token: "token123", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_certificate_associations({
+    #     gateway_id: "GatewayId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.certificate_associations #=> Array
+    #   resp.certificate_associations[0].acm_certificate_arn #=> String
+    #   resp.certificate_associations[0].status #=> String, one of "PENDING_ASSOCIATION", "ASSOCIATED", "PENDING_DISASSOCIATION", "DISASSOCIATED", "FAILED"
+    #   resp.certificate_associations[0].associated_at #=> Time
+    #   resp.certificate_associations[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListCertificateAssociations AWS API Documentation
+    #
+    # @overload list_certificate_associations(params = {})
+    # @param [Hash] params ({})
+    def list_certificate_associations(params = {}, options = {})
+      req = build_request(:list_certificate_associations, params)
+      req.send_request(options)
+    end
+
+    # Lists the routing rules for a link.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [String] :next_token
+    #   If `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page. Make
+    #   the call again using the returned token to retrieve the next page.
+    #   Keep all other arguments unchanged. Each pagination token expires
+    #   after 24 hours. Using an expired pagination token will return an *HTTP
+    #   400 InvalidToken error*.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results that are returned per call. You can use
+    #   `nextToken` to obtain further pages of results.
+    #
+    #   This is only an upper limit. The actual number of results returned per
+    #   call might be fewer than the specified maximum.
+    #
+    # @return [Types::ListLinkRoutingRulesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListLinkRoutingRulesResponse#rules #rules} => Array&lt;Types::LinkRoutingRuleSummary&gt;
+    #   * {Types::ListLinkRoutingRulesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: List link routing rules
+    #
+    #   # List all routing rules for a link
+    #
+    #   resp = client.list_link_routing_rules({
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     max_results: 10, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     next_token: "token123", 
+    #     rules: [
+    #       {
+    #         conditions: {
+    #           host_header: "api.customer.com", 
+    #         }, 
+    #         created_at: Time.parse("2024-01-01T12:00:00Z"), 
+    #         priority: 10, 
+    #         rule_id: "rule-abc123def456", 
+    #         status: "ACTIVE", 
+    #         updated_at: Time.parse("2024-01-01T12:00:00Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_link_routing_rules({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     next_token: "String",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rules #=> Array
+    #   resp.rules[0].rule_id #=> String
+    #   resp.rules[0].priority #=> Integer
+    #   resp.rules[0].conditions.host_header #=> String
+    #   resp.rules[0].conditions.host_header_wildcard #=> String
+    #   resp.rules[0].conditions.path_prefix #=> String
+    #   resp.rules[0].conditions.path_exact #=> String
+    #   resp.rules[0].conditions.query_string_equals.key #=> String
+    #   resp.rules[0].conditions.query_string_equals.value #=> String
+    #   resp.rules[0].conditions.query_string_exists #=> String
+    #   resp.rules[0].status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.rules[0].created_at #=> Time
+    #   resp.rules[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/ListLinkRoutingRules AWS API Documentation
+    #
+    # @overload list_link_routing_rules(params = {})
+    # @param [Hash] params ({})
+    def list_link_routing_rules(params = {}, options = {})
+      req = build_request(:list_link_routing_rules, params)
       req.send_request(options)
     end
 
@@ -2816,6 +3441,90 @@ module Aws::RTBFabric
       req.send_request(options)
     end
 
+    # Updates a routing rule for a link.
+    #
+    # @option params [required, String] :gateway_id
+    #   The unique identifier of the gateway.
+    #
+    # @option params [required, String] :link_id
+    #   The unique identifier of the link.
+    #
+    # @option params [required, String] :rule_id
+    #   The unique identifier of the routing rule.
+    #
+    # @option params [required, Integer] :priority
+    #   The updated priority of the routing rule. Lower numbers are evaluated
+    #   first. Valid values are 1 to 1000. Priority must be unique among
+    #   non-deleted rules within a link.
+    #
+    # @option params [required, Types::RuleCondition] :conditions
+    #   The updated conditions for the routing rule. All specified fields must
+    #   match for the rule to apply. At least one condition field must be set.
+    #
+    # @return [Types::UpdateLinkRoutingRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateLinkRoutingRuleResponse#rule_id #rule_id} => String
+    #   * {Types::UpdateLinkRoutingRuleResponse#status #status} => String
+    #   * {Types::UpdateLinkRoutingRuleResponse#updated_at #updated_at} => Time
+    #
+    #
+    # @example Example: Update a link routing rule
+    #
+    #   # Update the conditions of a routing rule
+    #
+    #   resp = client.update_link_routing_rule({
+    #     conditions: {
+    #       host_header: "api.customer.com", 
+    #       path_prefix: "/openrtb/", 
+    #     }, 
+    #     gateway_id: "rtb-gw-12345678", 
+    #     link_id: "link-87654321", 
+    #     priority: 20, 
+    #     rule_id: "rule-abc123def456", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     rule_id: "rule-abc123def456", 
+    #     status: "UPDATE_IN_PROGRESS", 
+    #     updated_at: Time.parse("2024-01-01T12:30:00Z"), 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_link_routing_rule({
+    #     gateway_id: "GatewayId", # required
+    #     link_id: "LinkId", # required
+    #     rule_id: "RuleId", # required
+    #     priority: 1, # required
+    #     conditions: { # required
+    #       host_header: "RuleConditionHostHeaderString",
+    #       host_header_wildcard: "RuleConditionHostHeaderWildcardString",
+    #       path_prefix: "RuleConditionPathPrefixString",
+    #       path_exact: "RuleConditionPathExactString",
+    #       query_string_equals: {
+    #         key: "QueryStringKeyValuePairKeyString", # required
+    #         value: "QueryStringKeyValuePairValueString", # required
+    #       },
+    #       query_string_exists: "RuleConditionQueryStringExistsString",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.rule_id #=> String
+    #   resp.status #=> String, one of "CREATION_IN_PROGRESS", "ACTIVE", "UPDATE_IN_PROGRESS", "DELETION_IN_PROGRESS", "DELETED", "FAILED"
+    #   resp.updated_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/UpdateLinkRoutingRule AWS API Documentation
+    #
+    # @overload update_link_routing_rule(params = {})
+    # @param [Hash] params ({})
+    def update_link_routing_rule(params = {}, options = {})
+      req = build_request(:update_link_routing_rule, params)
+      req.send_request(options)
+    end
+
     # Updates a requester gateway.
     #
     # @option params [required, String] :client_token
@@ -3003,7 +3712,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.10.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -3069,19 +3778,23 @@ module Aws::RTBFabric
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                    | params                              | :delay   | :max_attempts |
-    # | ------------------------------ | ----------------------------------- | -------- | ------------- |
-    # | inbound_external_link_active   | {Client#get_inbound_external_link}  | 30       | 5             |
-    # | inbound_external_link_deleted  | {Client#get_inbound_external_link}  | 30       | 5             |
-    # | link_accepted                  | {Client#get_link}                   | 30       | 5             |
-    # | link_active                    | {Client#get_link}                   | 30       | 5             |
-    # | link_deleted                   | {Client#get_link}                   | 30       | 5             |
-    # | outbound_external_link_active  | {Client#get_outbound_external_link} | 30       | 5             |
-    # | outbound_external_link_deleted | {Client#get_outbound_external_link} | 30       | 5             |
-    # | requester_gateway_active       | {Client#get_requester_gateway}      | 30       | 5             |
-    # | requester_gateway_deleted      | {Client#get_requester_gateway}      | 30       | 5             |
-    # | responder_gateway_active       | {Client#get_responder_gateway}      | 30       | 5             |
-    # | responder_gateway_deleted      | {Client#get_responder_gateway}      | 30       | 5             |
+    # | waiter_name                    | params                               | :delay   | :max_attempts |
+    # | ------------------------------ | ------------------------------------ | -------- | ------------- |
+    # | certificate_associated         | {Client#get_certificate_association} | 15       | 8             |
+    # | certificate_disassociated      | {Client#get_certificate_association} | 15       | 8             |
+    # | inbound_external_link_active   | {Client#get_inbound_external_link}   | 30       | 5             |
+    # | inbound_external_link_deleted  | {Client#get_inbound_external_link}   | 30       | 5             |
+    # | link_accepted                  | {Client#get_link}                    | 30       | 5             |
+    # | link_active                    | {Client#get_link}                    | 30       | 5             |
+    # | link_deleted                   | {Client#get_link}                    | 30       | 5             |
+    # | link_routing_rule_active       | {Client#get_link_routing_rule}       | 5        | 24            |
+    # | link_routing_rule_deleted      | {Client#get_link_routing_rule}       | 5        | 24            |
+    # | outbound_external_link_active  | {Client#get_outbound_external_link}  | 30       | 5             |
+    # | outbound_external_link_deleted | {Client#get_outbound_external_link}  | 30       | 5             |
+    # | requester_gateway_active       | {Client#get_requester_gateway}       | 30       | 5             |
+    # | requester_gateway_deleted      | {Client#get_requester_gateway}       | 30       | 5             |
+    # | responder_gateway_active       | {Client#get_responder_gateway}       | 30       | 5             |
+    # | responder_gateway_deleted      | {Client#get_responder_gateway}       | 30       | 5             |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -3132,11 +3845,15 @@ module Aws::RTBFabric
 
     def waiters
       {
+        certificate_associated: Waiters::CertificateAssociated,
+        certificate_disassociated: Waiters::CertificateDisassociated,
         inbound_external_link_active: Waiters::InboundExternalLinkActive,
         inbound_external_link_deleted: Waiters::InboundExternalLinkDeleted,
         link_accepted: Waiters::LinkAccepted,
         link_active: Waiters::LinkActive,
         link_deleted: Waiters::LinkDeleted,
+        link_routing_rule_active: Waiters::LinkRoutingRuleActive,
+        link_routing_rule_deleted: Waiters::LinkRoutingRuleDeleted,
         outbound_external_link_active: Waiters::OutboundExternalLinkActive,
         outbound_external_link_deleted: Waiters::OutboundExternalLinkDeleted,
         requester_gateway_active: Waiters::RequesterGatewayActive,

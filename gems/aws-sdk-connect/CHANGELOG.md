@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2026-05-13)
+------------------
+
+* Feature - This change added three new EventSourceName for schedule notification feature
+
 1.254.0 (2026-04-24)
 ------------------
 

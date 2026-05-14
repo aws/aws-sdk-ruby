@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-05-13)
+------------------
+
+* Feature - Adds parameters to call the GetWhatsAppMessageTemplate and UpdateWhatsAppMessageTemplate APIs with a template name and language code in place of the template ID. Linked WhatsApp accounts also describe whether the WABA is onboarded to Meta's Marketing Messages API.
+
 1.22.0 (2026-03-18)
 ------------------
 

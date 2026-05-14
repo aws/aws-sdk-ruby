@@ -67,21 +67,141 @@ module Aws::RTBFabric
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                    | params                              | :delay   | :max_attempts |
-  # | ------------------------------ | ----------------------------------- | -------- | ------------- |
-  # | inbound_external_link_active   | {Client#get_inbound_external_link}  | 30       | 5             |
-  # | inbound_external_link_deleted  | {Client#get_inbound_external_link}  | 30       | 5             |
-  # | link_accepted                  | {Client#get_link}                   | 30       | 5             |
-  # | link_active                    | {Client#get_link}                   | 30       | 5             |
-  # | link_deleted                   | {Client#get_link}                   | 30       | 5             |
-  # | outbound_external_link_active  | {Client#get_outbound_external_link} | 30       | 5             |
-  # | outbound_external_link_deleted | {Client#get_outbound_external_link} | 30       | 5             |
-  # | requester_gateway_active       | {Client#get_requester_gateway}      | 30       | 5             |
-  # | requester_gateway_deleted      | {Client#get_requester_gateway}      | 30       | 5             |
-  # | responder_gateway_active       | {Client#get_responder_gateway}      | 30       | 5             |
-  # | responder_gateway_deleted      | {Client#get_responder_gateway}      | 30       | 5             |
+  # | waiter_name                    | params                               | :delay   | :max_attempts |
+  # | ------------------------------ | ------------------------------------ | -------- | ------------- |
+  # | certificate_associated         | {Client#get_certificate_association} | 15       | 8             |
+  # | certificate_disassociated      | {Client#get_certificate_association} | 15       | 8             |
+  # | inbound_external_link_active   | {Client#get_inbound_external_link}   | 30       | 5             |
+  # | inbound_external_link_deleted  | {Client#get_inbound_external_link}   | 30       | 5             |
+  # | link_accepted                  | {Client#get_link}                    | 30       | 5             |
+  # | link_active                    | {Client#get_link}                    | 30       | 5             |
+  # | link_deleted                   | {Client#get_link}                    | 30       | 5             |
+  # | link_routing_rule_active       | {Client#get_link_routing_rule}       | 5        | 24            |
+  # | link_routing_rule_deleted      | {Client#get_link_routing_rule}       | 5        | 24            |
+  # | outbound_external_link_active  | {Client#get_outbound_external_link}  | 30       | 5             |
+  # | outbound_external_link_deleted | {Client#get_outbound_external_link}  | 30       | 5             |
+  # | requester_gateway_active       | {Client#get_requester_gateway}       | 30       | 5             |
+  # | requester_gateway_deleted      | {Client#get_requester_gateway}       | 30       | 5             |
+  # | responder_gateway_active       | {Client#get_responder_gateway}       | 30       | 5             |
+  # | responder_gateway_deleted      | {Client#get_responder_gateway}       | 30       | 5             |
   #
   module Waiters
+
+    class CertificateAssociated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_certificate_association,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "ASSOCIATED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "failure",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DISASSOCIATED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "PENDING_DISASSOCIATION"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_certificate_association)
+      # @return (see Client#get_certificate_association)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class CertificateDisassociated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (8)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 8,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_certificate_association,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DISASSOCIATED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "PENDING_ASSOCIATION"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_certificate_association)
+      # @return (see Client#get_certificate_association)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     class InboundExternalLinkActive
 
@@ -348,6 +468,105 @@ module Aws::RTBFabric
 
       # @option (see Client#get_link)
       # @return (see Client#get_link)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class LinkRoutingRuleActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (24)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 24,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_link_routing_rule,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "ACTIVE"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "DELETED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_link_routing_rule)
+      # @return (see Client#get_link_routing_rule)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class LinkRoutingRuleDeleted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (24)
+      # @option options [Integer] :delay (5)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 24,
+          delay: 5,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_link_routing_rule,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "success",
+                "expected" => "DELETED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "ResourceNotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "status",
+                "state" => "failure",
+                "expected" => "FAILED"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_link_routing_rule)
+      # @return (see Client#get_link_routing_rule)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

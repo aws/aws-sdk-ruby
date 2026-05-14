@@ -52,10 +52,32 @@ module Aws::RTBFabric
       end
     end
 
+    class AssociateCertificateRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateCertificateResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class AutoScalingGroupsConfiguration
       attr_accessor auto_scaling_group_names: ::Array[::String]
       attr_accessor role_arn: ::String
       attr_accessor health_check_config: Types::HealthCheckConfig
+      SENSITIVE: []
+    end
+
+    class CertificateAssociationSummary
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      attr_accessor associated_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -106,6 +128,23 @@ module Aws::RTBFabric
       attr_accessor connectivity_type: ("DEFAULT" | "PUBLIC_INGRESS" | "PUBLIC_EGRESS" | "EXTERNAL_INBOUND")
       attr_accessor link_id: ::String
       attr_accessor customer_provided_id: ::String
+      SENSITIVE: []
+    end
+
+    class CreateLinkRoutingRuleRequest
+      attr_accessor client_token: ::String
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor conditions: Types::RuleCondition
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class CreateLinkRoutingRuleResponse
+      attr_accessor rule_id: ::String
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor created_at: ::Time
       SENSITIVE: []
     end
 
@@ -192,6 +231,19 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class DeleteLinkRoutingRuleRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteLinkRoutingRuleResponse
+      attr_accessor rule_id: ::String
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class DeleteOutboundExternalLinkRequest
       attr_accessor gateway_id: ::String
       attr_accessor link_id: ::String
@@ -226,6 +278,19 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class DisassociateCertificateRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateCertificateResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class EksEndpointsConfiguration
       attr_accessor endpoints_resource_name: ::String
       attr_accessor endpoints_resource_namespace: ::String
@@ -244,6 +309,21 @@ module Aws::RTBFabric
     class FilterCriterion
       attr_accessor path: ::String
       attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GetCertificateAssociationRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetCertificateAssociationResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor status: ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      attr_accessor associated_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -291,6 +371,26 @@ module Aws::RTBFabric
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor http_responder_allowed: bool
       attr_accessor timeout_in_millis: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetLinkRoutingRuleRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetLinkRoutingRuleResponse
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor conditions: Types::RuleCondition
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -408,6 +508,43 @@ module Aws::RTBFabric
 
     class LinkLogSettings
       attr_accessor application_logs: Types::LinkApplicationLogConfiguration
+      SENSITIVE: []
+    end
+
+    class LinkRoutingRuleSummary
+      attr_accessor rule_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor conditions: Types::RuleCondition
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ListCertificateAssociationsRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListCertificateAssociationsResponse
+      attr_accessor certificate_associations: ::Array[Types::CertificateAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListLinkRoutingRulesRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListLinkRoutingRulesResponse
+      attr_accessor rules: ::Array[Types::LinkRoutingRuleSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -540,6 +677,12 @@ module Aws::RTBFabric
       SENSITIVE: []
     end
 
+    class QueryStringKeyValuePair
+      attr_accessor key: ::String
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class RateLimiterModuleParameters
       attr_accessor tps: ::Float
       SENSITIVE: []
@@ -577,6 +720,16 @@ module Aws::RTBFabric
       attr_accessor action: ("NO_BID" | "PASSTHROUGH")
       attr_accessor logging_types: ::Array[("NONE" | "METRIC" | "RESPONSE")]
       attr_accessor response_logging_percentage: ::Float
+      SENSITIVE: []
+    end
+
+    class RuleCondition
+      attr_accessor host_header: ::String
+      attr_accessor host_header_wildcard: ::String
+      attr_accessor path_prefix: ::String
+      attr_accessor path_exact: ::String
+      attr_accessor query_string_equals: Types::QueryStringKeyValuePair
+      attr_accessor query_string_exists: ::String
       SENSITIVE: []
     end
 
@@ -639,6 +792,22 @@ module Aws::RTBFabric
     class UpdateLinkResponse
       attr_accessor link_id: ::String
       attr_accessor status: ("PENDING_CREATION" | "PENDING_REQUEST" | "REQUESTED" | "ACCEPTED" | "ACTIVE" | "REJECTED" | "FAILED" | "PENDING_DELETION" | "DELETED" | "PENDING_UPDATE" | "PENDING_ISOLATION" | "ISOLATED" | "PENDING_RESTORATION")
+      SENSITIVE: []
+    end
+
+    class UpdateLinkRoutingRuleRequest
+      attr_accessor gateway_id: ::String
+      attr_accessor link_id: ::String
+      attr_accessor rule_id: ::String
+      attr_accessor priority: ::Integer
+      attr_accessor conditions: Types::RuleCondition
+      SENSITIVE: []
+    end
+
+    class UpdateLinkRoutingRuleResponse
+      attr_accessor rule_id: ::String
+      attr_accessor status: ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 

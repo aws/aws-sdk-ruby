@@ -570,6 +570,7 @@ module Aws::ARCRegionswitch
     #
     # @!attribute [rw] target_percent
     #   The target percentage that you specify for EC2 Auto Scaling groups.
+    #   The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] capacity_monitoring_approach
@@ -620,7 +621,8 @@ module Aws::ARCRegionswitch
     #   @return [Types::EcsUngraceful]
     #
     # @!attribute [rw] target_percent
-    #   The target percentage specified for the configuration.
+    #   The target percentage specified for the configuration. The default
+    #   is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] capacity_monitoring_approach
@@ -702,7 +704,7 @@ module Aws::ARCRegionswitch
     #   @return [Types::EksResourceScalingUngraceful]
     #
     # @!attribute [rw] target_percent
-    #   The target percentage for the configuration.
+    #   The target percentage for the configuration. The default is 100.
     #   @return [Integer]
     #
     # @!attribute [rw] capacity_monitoring_approach
@@ -734,6 +736,31 @@ module Aws::ARCRegionswitch
     #
     class EksResourceScalingUngraceful < Struct.new(
       :minimum_success_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Web Services Lambda event source mapping configuration,
+    # containing the resource ARN and optional cross-account configuration.
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the Lambda event source mapping.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/EventSourceMapping AWS API Documentation
+    #
+    class EventSourceMapping < Struct.new(
+      :cross_account_role,
+      :external_id,
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -820,6 +847,10 @@ module Aws::ARCRegionswitch
     #   An Amazon RDS create cross-Region replica execution block.
     #   @return [Types::RdsCreateCrossRegionReplicaConfiguration]
     #
+    # @!attribute [rw] lambda_event_source_mapping_config
+    #   A Lambda event source mapping execution block.
+    #   @return [Types::LambdaEventSourceMappingConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -836,6 +867,7 @@ module Aws::ARCRegionswitch
       :document_db_config,
       :rds_promote_read_replica_config,
       :rds_create_cross_region_read_replica_config,
+      :lambda_event_source_mapping_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -854,6 +886,7 @@ module Aws::ARCRegionswitch
       class DocumentDbConfig < ExecutionBlockConfiguration; end
       class RdsPromoteReadReplicaConfig < ExecutionBlockConfiguration; end
       class RdsCreateCrossRegionReadReplicaConfig < ExecutionBlockConfiguration; end
+      class LambdaEventSourceMappingConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -1356,6 +1389,54 @@ module Aws::ARCRegionswitch
       :namespace,
       :name,
       :hpa_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for Amazon Web Services Lambda event source mappings
+    # used in a Region switch plan.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action to take - whether to `enable` or `disable` an event
+    #   source mapping.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_event_source_mappings
+    #   Per-region configuration for which Lambda event source mapping to
+    #   enable or disable when activating or deactivating a region.
+    #   @return [Hash<String,Types::EventSourceMapping>]
+    #
+    # @!attribute [rw] ungraceful
+    #   The settings for ungraceful execution.
+    #   @return [Types::LambdaEventSourceMappingUngraceful]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/LambdaEventSourceMappingConfiguration AWS API Documentation
+    #
+    class LambdaEventSourceMappingConfiguration < Struct.new(
+      :timeout_minutes,
+      :action,
+      :region_event_source_mappings,
+      :ungraceful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies whether to skip enabling or disabling an event source
+    # mapping during an ungraceful execution.
+    #
+    # @!attribute [rw] behavior
+    #   Set to `skip` to skip executing this event source mapping step
+    #   during an ungraceful execution.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/LambdaEventSourceMappingUngraceful AWS API Documentation
+    #
+    class LambdaEventSourceMappingUngraceful < Struct.new(
+      :behavior)
       SENSITIVE = []
       include Aws::Structure
     end

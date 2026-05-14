@@ -1489,11 +1489,16 @@ module Aws::ConnectCampaignsV2
     #   Local TimeZone Detection method list
     #   @return [Array<String>]
     #
+    # @!attribute [rw] local_time_zone_detection_scope
+    #   Local TimeZone Detection scope.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcampaignsv2-2024-04-23/LocalTimeZoneConfig AWS API Documentation
     #
     class LocalTimeZoneConfig < Struct.new(
       :default_time_zone,
-      :local_time_zone_detection)
+      :local_time_zone_detection,
+      :local_time_zone_detection_scope)
       SENSITIVE = []
       include Aws::Structure
     end

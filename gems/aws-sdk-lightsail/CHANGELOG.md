@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.129.0 (2026-05-13)
+------------------
+
+* Feature - Added OriginIpAddressTypeEnum (ipv4, ipv6, dualstack) and ipAddressType field to Origin and InputOrigin structures for Lightsail CDN distributions. Allows customers to specify how the distribution connects to origins, using IPv4, IPv6, or dualstack networking
+
 1.128.0 (2026-04-06)
 ------------------
 

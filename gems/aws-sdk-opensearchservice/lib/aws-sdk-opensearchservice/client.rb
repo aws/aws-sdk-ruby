@@ -1199,6 +1199,16 @@ module Aws::OpenSearchService
     # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
     #   Specifies the deployment strategy options for the domain.
     #
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore your
+    #   domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #
     # @return [Types::CreateDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDomainResponse#domain_status #domain_status} => Types::DomainStatus
@@ -1370,6 +1380,11 @@ module Aws::OpenSearchService
     #     deployment_strategy_options: {
     #       deployment_strategy: "Default", # required, accepts Default, CapacityOptimized
     #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now,
+    #     },
     #   })
     #
     # @example Response structure
@@ -1495,6 +1510,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CreateDomain AWS API Documentation
     #
@@ -2030,6 +2049,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DeleteDomain AWS API Documentation
     #
@@ -2430,6 +2453,10 @@ module Aws::OpenSearchService
     #   resp.domain_status.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_status.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_status.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomain AWS API Documentation
     #
@@ -2774,6 +2801,15 @@ module Aws::OpenSearchService
     #   resp.domain_config.deployment_strategy_options.status.update_version #=> Integer
     #   resp.domain_config.deployment_strategy_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.deployment_strategy_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.enabled #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.start_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.end_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_config.automated_snapshot_pause_options.status.creation_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
+    #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainConfig AWS API Documentation
     #
@@ -3024,6 +3060,10 @@ module Aws::OpenSearchService
     #   resp.domain_status_list[0].aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.domain_status_list[0].aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.domain_status_list[0].deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.start_time #=> Time
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.end_time #=> Time
+    #   resp.domain_status_list[0].automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomains AWS API Documentation
     #
@@ -3197,6 +3237,10 @@ module Aws::OpenSearchService
     #   resp.dry_run_config.aiml_options.s3_vectors_engine.enabled #=> Boolean
     #   resp.dry_run_config.aiml_options.serverless_vector_acceleration.enabled #=> Boolean
     #   resp.dry_run_config.deployment_strategy_options.deployment_strategy #=> String, one of "Default", "CapacityOptimized"
+    #   resp.dry_run_config.automated_snapshot_pause_options.enabled #=> Boolean
+    #   resp.dry_run_config.automated_snapshot_pause_options.start_time #=> Time
+    #   resp.dry_run_config.automated_snapshot_pause_options.end_time #=> Time
+    #   resp.dry_run_config.automated_snapshot_pause_options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #
@@ -5729,6 +5773,16 @@ module Aws::OpenSearchService
     # @option params [Types::DeploymentStrategyOptions] :deployment_strategy_options
     #   Specifies the deployment strategy options for the domain.
     #
+    # @option params [Types::AutomatedSnapshotPauseRequestOptions] :automated_snapshot_pause_options
+    #   Specifies the automated snapshot pause options for the domain.
+    #
+    #   Suspending snapshots reduces data protection. You cannot restore your
+    #   domain to points in time when snapshots are suspended. Use this
+    #   feature only for short-term operational needs such as migrations or
+    #   maintenance windows.
+    #
+    #   Maximum suspension duration: 3 days.
+    #
     # @return [Types::UpdateDomainConfigResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDomainConfigResponse#domain_config #domain_config} => Types::DomainConfig
@@ -5897,6 +5951,11 @@ module Aws::OpenSearchService
     #     },
     #     deployment_strategy_options: {
     #       deployment_strategy: "Default", # required, accepts Default, CapacityOptimized
+    #     },
+    #     automated_snapshot_pause_options: {
+    #       enabled: false, # required
+    #       start_time: Time.now,
+    #       end_time: Time.now,
     #     },
     #   })
     #
@@ -6108,6 +6167,15 @@ module Aws::OpenSearchService
     #   resp.domain_config.deployment_strategy_options.status.update_version #=> Integer
     #   resp.domain_config.deployment_strategy_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
     #   resp.domain_config.deployment_strategy_options.status.pending_deletion #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.enabled #=> Boolean
+    #   resp.domain_config.automated_snapshot_pause_options.options.start_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.end_time #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.options.state #=> String, one of "Active", "Completed", "Scheduled", "Disabled"
+    #   resp.domain_config.automated_snapshot_pause_options.status.creation_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_date #=> Time
+    #   resp.domain_config.automated_snapshot_pause_options.status.update_version #=> Integer
+    #   resp.domain_config.automated_snapshot_pause_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
+    #   resp.domain_config.automated_snapshot_pause_options.status.pending_deletion #=> Boolean
     #   resp.dry_run_results.deployment_type #=> String
     #   resp.dry_run_results.message #=> String
     #   resp.dry_run_progress_status.dry_run_id #=> String
@@ -6525,7 +6593,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.98.0'
+      context[:gem_version] = '1.99.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

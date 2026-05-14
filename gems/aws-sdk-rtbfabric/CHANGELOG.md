@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2026-05-13)
+------------------
+
+* Feature - Customers can now configure custom domain names for their RTB Fabric gateways. This enables partners to use their own branded domain for RTB traffic instead of the default rtbfabric endpoint
+
 1.10.0 (2026-04-10)
 ------------------
 

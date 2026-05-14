@@ -429,6 +429,7 @@ module Aws::SageMaker
     ClusterEbsVolumeConfig = Shapes::StructureShape.new(name: 'ClusterEbsVolumeConfig')
     ClusterEbsVolumeSizeInGB = Shapes::IntegerShape.new(name: 'ClusterEbsVolumeSizeInGB')
     ClusterEventDetail = Shapes::StructureShape.new(name: 'ClusterEventDetail')
+    ClusterEventLevel = Shapes::StringShape.new(name: 'ClusterEventLevel')
     ClusterEventMaxResults = Shapes::IntegerShape.new(name: 'ClusterEventMaxResults')
     ClusterEventResourceType = Shapes::StringShape.new(name: 'ClusterEventResourceType')
     ClusterEventSummaries = Shapes::ListShape.new(name: 'ClusterEventSummaries')
@@ -1179,6 +1180,7 @@ module Aws::SageMaker
     ExcludeFeaturesAttribute = Shapes::StringShape.new(name: 'ExcludeFeaturesAttribute')
     ExecutionRoleArns = Shapes::ListShape.new(name: 'ExecutionRoleArns')
     ExecutionRoleIdentityConfig = Shapes::StringShape.new(name: 'ExecutionRoleIdentityConfig')
+    ExecutionRoleSessionNameMode = Shapes::StringShape.new(name: 'ExecutionRoleSessionNameMode')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExitMessage = Shapes::StringShape.new(name: 'ExitMessage')
     ExpectedPerformanceList = Shapes::ListShape.new(name: 'ExpectedPerformanceList')
@@ -1508,6 +1510,8 @@ module Aws::SageMaker
     InstancePoolPriority = Shapes::IntegerShape.new(name: 'InstancePoolPriority')
     InstancePoolSummary = Shapes::StructureShape.new(name: 'InstancePoolSummary')
     InstancePoolSummaryList = Shapes::ListShape.new(name: 'InstancePoolSummaryList')
+    InstanceRequirementsEniConfiguration = Shapes::StructureShape.new(name: 'InstanceRequirementsEniConfiguration')
+    InstanceRequirementsEniConfigurations = Shapes::ListShape.new(name: 'InstanceRequirementsEniConfigurations')
     InstanceType = Shapes::StringShape.new(name: 'InstanceType')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerParameterRange = Shapes::StructureShape.new(name: 'IntegerParameterRange')
@@ -1779,12 +1783,14 @@ module Aws::SageMaker
     MLflowConfiguration = Shapes::StructureShape.new(name: 'MLflowConfiguration')
     MaintenanceStatus = Shapes::StringShape.new(name: 'MaintenanceStatus')
     MajorMinorVersion = Shapes::StringShape.new(name: 'MajorMinorVersion')
+    ManagedConfiguration = Shapes::StructureShape.new(name: 'ManagedConfiguration')
     ManagedInstanceScalingCooldownInMinutes = Shapes::IntegerShape.new(name: 'ManagedInstanceScalingCooldownInMinutes')
     ManagedInstanceScalingMaxInstanceCount = Shapes::IntegerShape.new(name: 'ManagedInstanceScalingMaxInstanceCount')
     ManagedInstanceScalingMaximumStepSize = Shapes::IntegerShape.new(name: 'ManagedInstanceScalingMaximumStepSize')
     ManagedInstanceScalingMinInstanceCount = Shapes::IntegerShape.new(name: 'ManagedInstanceScalingMinInstanceCount')
     ManagedInstanceScalingScaleInStrategy = Shapes::StringShape.new(name: 'ManagedInstanceScalingScaleInStrategy')
     ManagedInstanceScalingStatus = Shapes::StringShape.new(name: 'ManagedInstanceScalingStatus')
+    ManagedStorageType = Shapes::StringShape.new(name: 'ManagedStorageType')
     MapString2048 = Shapes::MapShape.new(name: 'MapString2048')
     MaxAutoMLJobRuntimeInSeconds = Shapes::IntegerShape.new(name: 'MaxAutoMLJobRuntimeInSeconds')
     MaxCandidates = Shapes::IntegerShape.new(name: 'MaxCandidates')
@@ -2603,6 +2609,7 @@ module Aws::SageMaker
     StudioLifecycleConfigName = Shapes::StringShape.new(name: 'StudioLifecycleConfigName')
     StudioLifecycleConfigSortKey = Shapes::StringShape.new(name: 'StudioLifecycleConfigSortKey')
     StudioLifecycleConfigsList = Shapes::ListShape.new(name: 'StudioLifecycleConfigsList')
+    StudioResourceSpecTrainingPlanArn = Shapes::StringShape.new(name: 'StudioResourceSpecTrainingPlanArn')
     StudioWebPortal = Shapes::StringShape.new(name: 'StudioWebPortal')
     StudioWebPortalSettings = Shapes::StructureShape.new(name: 'StudioWebPortalSettings')
     SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -3983,6 +3990,7 @@ module Aws::SageMaker
     ClusterEventDetail.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EventTime"))
     ClusterEventDetail.add_member(:event_details, Shapes::ShapeRef.new(shape: EventDetails, location_name: "EventDetails"))
     ClusterEventDetail.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ClusterEventDetail.add_member(:event_level, Shapes::ShapeRef.new(shape: ClusterEventLevel, location_name: "EventLevel"))
     ClusterEventDetail.struct_class = Types::ClusterEventDetail
 
     ClusterEventSummaries.member = Shapes::ShapeRef.new(shape: ClusterEventSummary)
@@ -3995,6 +4003,7 @@ module Aws::SageMaker
     ClusterEventSummary.add_member(:resource_type, Shapes::ShapeRef.new(shape: ClusterEventResourceType, required: true, location_name: "ResourceType"))
     ClusterEventSummary.add_member(:event_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EventTime"))
     ClusterEventSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ClusterEventSummary.add_member(:event_level, Shapes::ShapeRef.new(shape: ClusterEventLevel, location_name: "EventLevel"))
     ClusterEventSummary.struct_class = Types::ClusterEventSummary
 
     ClusterFsxLustreConfig.add_member(:dns_name, Shapes::ShapeRef.new(shape: ClusterDnsName, required: true, location_name: "DnsName"))
@@ -4985,6 +4994,7 @@ module Aws::SageMaker
     CreateModelPackageGroupInput.add_member(:model_package_group_name, Shapes::ShapeRef.new(shape: EntityName, required: true, location_name: "ModelPackageGroupName"))
     CreateModelPackageGroupInput.add_member(:model_package_group_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ModelPackageGroupDescription"))
     CreateModelPackageGroupInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateModelPackageGroupInput.add_member(:managed_configuration, Shapes::ShapeRef.new(shape: ManagedConfiguration, location_name: "ManagedConfiguration"))
     CreateModelPackageGroupInput.struct_class = Types::CreateModelPackageGroupInput
 
     CreateModelPackageGroupOutput.add_member(:model_package_group_arn, Shapes::ShapeRef.new(shape: ModelPackageGroupArn, required: true, location_name: "ModelPackageGroupArn"))
@@ -5014,6 +5024,7 @@ module Aws::SageMaker
     CreateModelPackageInput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
     CreateModelPackageInput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     CreateModelPackageInput.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
+    CreateModelPackageInput.add_member(:managed_storage_type, Shapes::ShapeRef.new(shape: ManagedStorageType, location_name: "ManagedStorageType"))
     CreateModelPackageInput.struct_class = Types::CreateModelPackageInput
 
     CreateModelPackageOutput.add_member(:model_package_arn, Shapes::ShapeRef.new(shape: ModelPackageArn, required: true, location_name: "ModelPackageArn"))
@@ -6677,6 +6688,7 @@ module Aws::SageMaker
     DescribeModelPackageGroupOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     DescribeModelPackageGroupOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: UserContext, required: true, location_name: "CreatedBy"))
     DescribeModelPackageGroupOutput.add_member(:model_package_group_status, Shapes::ShapeRef.new(shape: ModelPackageGroupStatus, required: true, location_name: "ModelPackageGroupStatus"))
+    DescribeModelPackageGroupOutput.add_member(:managed_configuration, Shapes::ShapeRef.new(shape: ManagedConfiguration, location_name: "ManagedConfiguration"))
     DescribeModelPackageGroupOutput.struct_class = Types::DescribeModelPackageGroupOutput
 
     DescribeModelPackageInput.add_member(:model_package_name, Shapes::ShapeRef.new(shape: VersionedArnOrName, required: true, location_name: "ModelPackageName"))
@@ -6713,6 +6725,7 @@ module Aws::SageMaker
     DescribeModelPackageOutput.add_member(:security_config, Shapes::ShapeRef.new(shape: ModelPackageSecurityConfig, location_name: "SecurityConfig"))
     DescribeModelPackageOutput.add_member(:model_card, Shapes::ShapeRef.new(shape: ModelPackageModelCard, location_name: "ModelCard"))
     DescribeModelPackageOutput.add_member(:model_life_cycle, Shapes::ShapeRef.new(shape: ModelLifeCycle, location_name: "ModelLifeCycle"))
+    DescribeModelPackageOutput.add_member(:managed_storage_type, Shapes::ShapeRef.new(shape: ManagedStorageType, location_name: "ManagedStorageType"))
     DescribeModelPackageOutput.struct_class = Types::DescribeModelPackageOutput
 
     DescribeModelQualityJobDefinitionRequest.add_member(:job_definition_name, Shapes::ShapeRef.new(shape: MonitoringJobDefinitionName, required: true, location_name: "JobDefinitionName"))
@@ -8356,6 +8369,7 @@ module Aws::SageMaker
 
     InstanceMetadata.add_member(:customer_eni, Shapes::ShapeRef.new(shape: String, location_name: "CustomerEni"))
     InstanceMetadata.add_member(:additional_enis, Shapes::ShapeRef.new(shape: AdditionalEnis, location_name: "AdditionalEnis"))
+    InstanceMetadata.add_member(:instance_requirements_eni_configurations, Shapes::ShapeRef.new(shape: InstanceRequirementsEniConfigurations, location_name: "InstanceRequirementsEniConfigurations"))
     InstanceMetadata.add_member(:capacity_reservation, Shapes::ShapeRef.new(shape: CapacityReservation, location_name: "CapacityReservation"))
     InstanceMetadata.add_member(:failure_message, Shapes::ShapeRef.new(shape: String, location_name: "FailureMessage"))
     InstanceMetadata.add_member(:lcs_execution_state, Shapes::ShapeRef.new(shape: String, location_name: "LcsExecutionState"))
@@ -8381,6 +8395,12 @@ module Aws::SageMaker
     InstancePoolSummary.struct_class = Types::InstancePoolSummary
 
     InstancePoolSummaryList.member = Shapes::ShapeRef.new(shape: InstancePoolSummary)
+
+    InstanceRequirementsEniConfiguration.add_member(:customer_eni, Shapes::ShapeRef.new(shape: String, location_name: "CustomerEni"))
+    InstanceRequirementsEniConfiguration.add_member(:additional_enis, Shapes::ShapeRef.new(shape: AdditionalEnis, location_name: "AdditionalEnis"))
+    InstanceRequirementsEniConfiguration.struct_class = Types::InstanceRequirementsEniConfiguration
+
+    InstanceRequirementsEniConfigurations.member = Shapes::ShapeRef.new(shape: InstanceRequirementsEniConfiguration)
 
     IntegerParameterRange.add_member(:name, Shapes::ShapeRef.new(shape: ParameterKey, required: true, location_name: "Name"))
     IntegerParameterRange.add_member(:min_value, Shapes::ShapeRef.new(shape: ParameterValue, required: true, location_name: "MinValue"))
@@ -9769,6 +9789,9 @@ module Aws::SageMaker
     MLflowConfiguration.add_member(:mlflow_experiment_name, Shapes::ShapeRef.new(shape: MlflowExperimentEntityName, location_name: "MlflowExperimentName"))
     MLflowConfiguration.struct_class = Types::MLflowConfiguration
 
+    ManagedConfiguration.add_member(:managed_storage_type, Shapes::ShapeRef.new(shape: ManagedStorageType, location_name: "ManagedStorageType"))
+    ManagedConfiguration.struct_class = Types::ManagedConfiguration
+
     MapString2048.key = Shapes::ShapeRef.new(shape: String2048)
     MapString2048.value = Shapes::ShapeRef.new(shape: String2048)
 
@@ -10135,6 +10158,7 @@ module Aws::SageMaker
     ModelPackageGroupSummary.add_member(:model_package_group_description, Shapes::ShapeRef.new(shape: EntityDescription, location_name: "ModelPackageGroupDescription"))
     ModelPackageGroupSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
     ModelPackageGroupSummary.add_member(:model_package_group_status, Shapes::ShapeRef.new(shape: ModelPackageGroupStatus, required: true, location_name: "ModelPackageGroupStatus"))
+    ModelPackageGroupSummary.add_member(:managed_configuration, Shapes::ShapeRef.new(shape: ManagedConfiguration, location_name: "ManagedConfiguration"))
     ModelPackageGroupSummary.struct_class = Types::ModelPackageGroupSummary
 
     ModelPackageGroupSummaryList.member = Shapes::ShapeRef.new(shape: ModelPackageGroupSummary)
@@ -11180,7 +11204,7 @@ module Aws::SageMaker
     RStudioServerProDomainSettingsForUpdate.add_member(:r_studio_package_manager_url, Shapes::ShapeRef.new(shape: String, location_name: "RStudioPackageManagerUrl"))
     RStudioServerProDomainSettingsForUpdate.struct_class = Types::RStudioServerProDomainSettingsForUpdate
 
-    RealTimeInferenceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, required: true, location_name: "InstanceType"))
+    RealTimeInferenceConfig.add_member(:instance_type, Shapes::ShapeRef.new(shape: ProductionVariantInstanceType, required: true, location_name: "InstanceType"))
     RealTimeInferenceConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: TaskCount, required: true, location_name: "InstanceCount"))
     RealTimeInferenceConfig.struct_class = Types::RealTimeInferenceConfig
 
@@ -11400,6 +11424,7 @@ module Aws::SageMaker
     ResourceSpec.add_member(:sage_maker_image_version_alias, Shapes::ShapeRef.new(shape: ImageVersionAlias, location_name: "SageMakerImageVersionAlias"))
     ResourceSpec.add_member(:instance_type, Shapes::ShapeRef.new(shape: AppInstanceType, location_name: "InstanceType"))
     ResourceSpec.add_member(:lifecycle_config_arn, Shapes::ShapeRef.new(shape: StudioLifecycleConfigArn, location_name: "LifecycleConfigArn"))
+    ResourceSpec.add_member(:training_plan_arn, Shapes::ShapeRef.new(shape: StudioResourceSpecTrainingPlanArn, location_name: "TrainingPlanArn"))
     ResourceSpec.struct_class = Types::ResourceSpec
 
     ResponseMIMETypes.member = Shapes::ShapeRef.new(shape: ResponseMIMEType)
@@ -11864,6 +11889,7 @@ module Aws::SageMaker
     StudioWebPortalSettings.add_member(:hidden_app_types, Shapes::ShapeRef.new(shape: HiddenAppTypesList, location_name: "HiddenAppTypes"))
     StudioWebPortalSettings.add_member(:hidden_instance_types, Shapes::ShapeRef.new(shape: HiddenInstanceTypesList, location_name: "HiddenInstanceTypes"))
     StudioWebPortalSettings.add_member(:hidden_sage_maker_image_version_aliases, Shapes::ShapeRef.new(shape: HiddenSageMakerImageVersionAliasesList, location_name: "HiddenSageMakerImageVersionAliases"))
+    StudioWebPortalSettings.add_member(:execution_role_session_name_mode, Shapes::ShapeRef.new(shape: ExecutionRoleSessionNameMode, location_name: "ExecutionRoleSessionNameMode"))
     StudioWebPortalSettings.struct_class = Types::StudioWebPortalSettings
 
     Subnets.member = Shapes::ShapeRef.new(shape: SubnetId)
@@ -12035,6 +12061,7 @@ module Aws::SageMaker
     TrainingJob.add_member(:input_data_config, Shapes::ShapeRef.new(shape: InputDataConfig, location_name: "InputDataConfig"))
     TrainingJob.add_member(:output_data_config, Shapes::ShapeRef.new(shape: OutputDataConfig, location_name: "OutputDataConfig"))
     TrainingJob.add_member(:resource_config, Shapes::ShapeRef.new(shape: ResourceConfig, location_name: "ResourceConfig"))
+    TrainingJob.add_member(:warm_pool_status, Shapes::ShapeRef.new(shape: WarmPoolStatus, location_name: "WarmPoolStatus"))
     TrainingJob.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
     TrainingJob.add_member(:stopping_condition, Shapes::ShapeRef.new(shape: StoppingCondition, location_name: "StoppingCondition"))
     TrainingJob.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))

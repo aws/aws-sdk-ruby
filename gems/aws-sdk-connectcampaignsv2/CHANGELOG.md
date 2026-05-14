@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.25.0 (2026-05-13)
+------------------
+
+* Feature - This release added support for Outbound Campaign timezone detection using all available contact methods
+
 1.24.0 (2026-04-17)
 ------------------
 

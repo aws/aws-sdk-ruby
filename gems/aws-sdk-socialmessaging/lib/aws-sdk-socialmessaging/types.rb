@@ -62,11 +62,17 @@ module Aws::SocialMessaging
     #   The status code for the response.
     #   @return [Integer]
     #
+    # @!attribute [rw] linked_whats_app_business_account_id
+    #   The ID of the WhatsApp Business Account that was linked to your
+    #   Amazon Web Services account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/AssociateWhatsAppBusinessAccountOutput AWS API Documentation
     #
     class AssociateWhatsAppBusinessAccountOutput < Struct.new(
       :signup_callback_result,
-      :status_code)
+      :status_code,
+      :linked_whats_app_business_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -428,11 +434,25 @@ module Aws::SocialMessaging
     #   template.
     #   @return [String]
     #
+    # @!attribute [rw] template_name
+    #   The name of the message template. Use together with
+    #   `templateLanguageCode` as an alternative to `metaTemplateId` to
+    #   identify a template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_language_code
+    #   The language code of the message template (for example, `en` or
+    #   `en_US`). Use together with `templateName` as an alternative to
+    #   `metaTemplateId` to identify a template.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/GetWhatsAppMessageTemplateInput AWS API Documentation
     #
     class GetWhatsAppMessageTemplateInput < Struct.new(
       :meta_template_id,
-      :id)
+      :id,
+      :template_name,
+      :template_language_code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -641,6 +661,12 @@ module Aws::SocialMessaging
     #   The event destinations for the linked WhatsApp Business Account.
     #   @return [Array<Types::WhatsAppBusinessAccountEventDestination>]
     #
+    # @!attribute [rw] marketing_messages_onboarding_status
+    #   The onboarding status for the Marketing Messages API. This value is
+    #   fetched from Meta and indicates whether the WhatsApp Business
+    #   Account is onboarded for Meta's Marketing Messages API.
+    #   @return [String]
+    #
     # @!attribute [rw] phone_numbers
     #   The phone numbers associated with the Linked WhatsApp Business
     #   Account.
@@ -656,6 +682,7 @@ module Aws::SocialMessaging
       :link_date,
       :waba_name,
       :event_destinations,
+      :marketing_messages_onboarding_status,
       :phone_numbers)
       SENSITIVE = []
       include Aws::Structure
@@ -722,6 +749,12 @@ module Aws::SocialMessaging
     #   The event destinations for the linked WhatsApp Business Account.
     #   @return [Array<Types::WhatsAppBusinessAccountEventDestination>]
     #
+    # @!attribute [rw] marketing_messages_onboarding_status
+    #   The onboarding status for the Marketing Messages API. This value is
+    #   fetched from Meta and indicates whether the WhatsApp Business
+    #   Account is onboarded for Meta's Marketing Messages API.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/LinkedWhatsAppBusinessAccountSummary AWS API Documentation
     #
     class LinkedWhatsAppBusinessAccountSummary < Struct.new(
@@ -731,7 +764,8 @@ module Aws::SocialMessaging
       :registration_status,
       :link_date,
       :waba_name,
-      :event_destinations)
+      :event_destinations,
+      :marketing_messages_onboarding_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1330,6 +1364,18 @@ module Aws::SocialMessaging
     #   The numeric ID of the template assigned by Meta.
     #   @return [String]
     #
+    # @!attribute [rw] template_name
+    #   The name of the message template. Use together with
+    #   `templateLanguageCode` as an alternative to `metaTemplateId` to
+    #   identify a template.
+    #   @return [String]
+    #
+    # @!attribute [rw] template_language_code
+    #   The language code of the message template (for example, `en` or
+    #   `en_US`). Use together with `templateName` as an alternative to
+    #   `metaTemplateId` to identify a template.
+    #   @return [String]
+    #
     # @!attribute [rw] parameter_format
     #   The format specification for parameters in the template, this can be
     #   either 'named' or 'positional'.
@@ -1355,6 +1401,8 @@ module Aws::SocialMessaging
     class UpdateWhatsAppMessageTemplateInput < Struct.new(
       :id,
       :meta_template_id,
+      :template_name,
+      :template_language_code,
       :parameter_format,
       :template_category,
       :template_components,

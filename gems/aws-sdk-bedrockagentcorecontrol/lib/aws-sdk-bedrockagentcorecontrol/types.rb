@@ -639,7 +639,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   VpcConfig for the Agent.
+    #   The VPC configuration for the browser. This configuration is
+    #   required when the network mode is set to `VPC`.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/BrowserNetworkConfiguration AWS API Documentation
@@ -1039,7 +1040,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] vpc_config
-    #   VpcConfig for the Agent.
+    #   The VPC configuration for the code interpreter. This configuration
+    #   is required when the network mode is set to `VPC`.
     #   @return [Types::VpcConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CodeInterpreterNetworkConfiguration AWS API Documentation
@@ -1096,8 +1098,8 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Coinbase CDP configuration - credentials provided by Coinbase
-    # Developer Platform
+    # Coinbase CDP configuration — credentials provided by Coinbase
+    # Developer Platform.
     #
     # @!attribute [rw] api_key_id
     #   The API key identifier provided by Coinbase Developer Platform.
@@ -1121,7 +1123,7 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # Coinbase CDP configuration output with secret ARNs
+    # Coinbase CDP configuration output with secret ARNs.
     #
     # @!attribute [rw] api_key_id
     #   The API key identifier provided by Coinbase Developer Platform.
@@ -3106,19 +3108,20 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] name
-    #   Unique name for the payment credential provider
+    #   Unique name for the payment credential provider.
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   The vendor type (e.g., CoinbaseCDP)
+    #   The vendor type for the payment credential provider (e.g.,
+    #   CoinbaseCDP, StripePrivy).
     #   @return [String]
     #
     # @!attribute [rw] provider_configuration_input
-    #   Configuration specific to the vendor, including API credentials
+    #   Configuration specific to the vendor, including API credentials.
     #   @return [Types::PaymentProviderConfigurationInput]
     #
     # @!attribute [rw] tags
-    #   Optional tags for resource organization
+    #   Optional tags for resource organization.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentCredentialProviderRequest AWS API Documentation
@@ -3137,8 +3140,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the created payment credential provider.
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_arn
@@ -3148,7 +3150,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @!attribute [rw] provider_configuration_output
     #   Output configuration (contains secret ARNs, excludes actual secret
-    #   values)
+    #   values).
     #   @return [Types::PaymentProviderConfigurationOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePaymentCredentialProviderResponse AWS API Documentation
@@ -3345,10 +3347,6 @@ module Aws::BedrockAgentCoreControl
     #   human-readable identifier.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A human-readable description of the policy engine's purpose.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy engine was created. This is
     #   automatically set by the service and used for auditing and lifecycle
@@ -3371,29 +3369,33 @@ module Aws::BedrockAgentCoreControl
     #   indicates the policy engine is ready for use.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy engine's purpose.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy engine status. This provides
     #   details about any failures or the current state of the policy engine
     #   creation process.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] encryption_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
-    #   policy engine data.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreatePolicyEngineResponse AWS API Documentation
     #
     class CreatePolicyEngineResponse < Struct.new(
       :policy_engine_id,
       :name,
-      :description,
       :created_at,
       :updated_at,
       :policy_engine_arn,
       :status,
-      :status_reasons,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :description,
+      :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -3484,18 +3486,6 @@ module Aws::BedrockAgentCoreControl
     #   evaluation routing.
     #   @return [String]
     #
-    # @!attribute [rw] definition
-    #   The Cedar policy statement that was created. This is the validated
-    #   policy definition that will be used for agent behavior control and
-    #   access decisions.
-    #   @return [Types::PolicyDefinition]
-    #
-    # @!attribute [rw] description
-    #   The human-readable description of the policy's purpose and
-    #   functionality. This helps administrators understand and manage the
-    #   policy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy was created. This is automatically set
     #   by the service and used for auditing and lifecycle management.
@@ -3517,6 +3507,18 @@ module Aws::BedrockAgentCoreControl
     #   policy is ready for use.
     #   @return [String]
     #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that was created. This is the validated
+    #   policy definition that will be used for agent behavior control and
+    #   access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy's purpose and
+    #   functionality. This helps administrators understand and manage the
+    #   policy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy status. This provides
     #   details about any failures or the current state of the policy
@@ -3529,12 +3531,12 @@ module Aws::BedrockAgentCoreControl
       :policy_id,
       :name,
       :policy_engine_id,
-      :definition,
-      :description,
       :created_at,
       :updated_at,
       :policy_arn,
       :status,
+      :definition,
+      :description,
       :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -4167,7 +4169,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces associated with the custom memory strategy.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   associated with the custom memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -5070,10 +5073,6 @@ module Aws::BedrockAgentCoreControl
     #   The customer-assigned name of the deleted policy engine.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The human-readable description of the deleted policy engine.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the deleted policy engine was originally created.
     #   @return [Time]
@@ -5095,29 +5094,33 @@ module Aws::BedrockAgentCoreControl
     #   status about any issues that occurred during the deletion process.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the deleted policy engine.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the deletion status. This provides
     #   details about the deletion process or any issues that may have
     #   occurred.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] encryption_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
-    #   policy engine data.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DeletePolicyEngineResponse AWS API Documentation
     #
     class DeletePolicyEngineResponse < Struct.new(
       :policy_engine_id,
       :name,
-      :description,
       :created_at,
       :updated_at,
       :policy_engine_arn,
       :status,
-      :status_reasons,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :description,
+      :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -5159,17 +5162,6 @@ module Aws::BedrockAgentCoreControl
     #   operation.
     #   @return [String]
     #
-    # @!attribute [rw] definition
-    #   Represents the definition structure for policies within the
-    #   AgentCore Policy system. This structure encapsulates different
-    #   policy formats and languages that can be used to define access
-    #   control rules.
-    #   @return [Types::PolicyDefinition]
-    #
-    # @!attribute [rw] description
-    #   The human-readable description of the deleted policy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the deleted policy was originally created.
     #   @return [Time]
@@ -5192,6 +5184,17 @@ module Aws::BedrockAgentCoreControl
     #   process.
     #   @return [String]
     #
+    # @!attribute [rw] definition
+    #   Represents the definition structure for policies within the
+    #   AgentCore Policy system. This structure encapsulates different
+    #   policy formats and languages that can be used to define access
+    #   control rules.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the deleted policy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the deletion status. This provides
     #   details about the deletion process or any issues that may have
@@ -5204,12 +5207,12 @@ module Aws::BedrockAgentCoreControl
       :policy_id,
       :name,
       :policy_engine_id,
-      :definition,
-      :description,
       :created_at,
       :updated_at,
       :policy_arn,
       :status,
+      :definition,
+      :description,
       :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -5425,7 +5428,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces for which to create episodes.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   for which to create episodes.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -5539,8 +5543,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces to use for episodic reflection. Can be less nested
-    #   than the episodic namespaces.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   to use for episodic reflection. Can be less nested than the episodic
+    #   namespaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -5569,8 +5574,9 @@ module Aws::BedrockAgentCoreControl
     # strategy.
     #
     # @!attribute [rw] namespaces
-    #   The namespaces for which to create reflections. Can be less nested
-    #   than the episodic namespaces.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   for which to create reflections. Can be less nested than the
+    #   episodic namespaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -5595,8 +5601,9 @@ module Aws::BedrockAgentCoreControl
     # An episodic reflection configuration input.
     #
     # @!attribute [rw] namespaces
-    #   The namespaces over which to create reflections. Can be less nested
-    #   than episode namespaces.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   over which to create reflections. Can be less nested than episode
+    #   namespaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -5632,8 +5639,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces over which reflections were created. Can be less
-    #   nested than the episodic namespaces.
+    #   This is a legacy parameter. The namespaces over which reflections
+    #   were created. Can be less nested than the episodic namespaces.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -7663,13 +7670,12 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the payment credential provider.
     #   @return [String]
     #
     # @!attribute [rw] provider_configuration_output
     #   Output configuration (contains secret ARNs, excludes actual secret
-    #   values)
+    #   values).
     #   @return [Types::PaymentProviderConfigurationOutput]
     #
     # @!attribute [rw] created_time
@@ -7811,12 +7817,6 @@ module Aws::BedrockAgentCoreControl
     #   was created.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The human-readable description of the policy engine's purpose and
-    #   scope. This helps administrators understand the policy engine's
-    #   role in governance.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy engine was originally created.
     #   @return [Time]
@@ -7836,30 +7836,93 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the policy engine.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy engine's purpose and
+    #   scope. This helps administrators understand the policy engine's
+    #   role in governance.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy engine status. This provides
     #   details about any failures or the current state of the policy
     #   engine.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] encryption_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
-    #   policy engine data.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineResponse AWS API Documentation
     #
     class GetPolicyEngineResponse < Struct.new(
       :policy_engine_id,
       :name,
-      :description,
       :created_at,
       :updated_at,
       :policy_engine_arn,
       :status,
-      :status_reasons,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :description,
+      :status_reasons)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine to retrieve the summary
+    #   for. This must be a valid policy engine ID that exists within the
+    #   account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineSummaryRequest AWS API Documentation
+    #
+    class GetPolicyEngineSummaryRequest < Struct.new(
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy engine was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyEngineSummaryResponse AWS API Documentation
+    #
+    class GetPolicyEngineSummaryResponse < Struct.new(
+      :policy_engine_id,
+      :name,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :encryption_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -7936,17 +7999,17 @@ module Aws::BedrockAgentCoreControl
     #   during processing.
     #   @return [String]
     #
-    # @!attribute [rw] status_reasons
-    #   Additional information about the generation status. This provides
-    #   details about any failures, warnings, or the current state of the
-    #   generation process.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] findings
     #   The findings and results from the policy generation process. This
     #   includes any issues, recommendations, validation results, or
     #   insights from the generated policies.
     #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status. This provides
+    #   details about any failures, warnings, or the current state of the
+    #   generation process.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationResponse AWS API Documentation
     #
@@ -7959,7 +8022,79 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :updated_at,
       :status,
-      :status_reasons,
+      :findings,
+      :status_reasons)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier of the policy generation request to retrieve
+    #   the summary for.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with the policy
+    #   generation request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationSummaryRequest AWS API Documentation
+    #
+    class GetPolicyGenerationSummaryRequest < Struct.new(
+      :policy_generation_id,
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with this policy
+    #   generation.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier of the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name for the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_arn
+    #   The Amazon Resource Name (ARN) of the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information associated with the policy generation.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy generation request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy generation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings
+    #   The findings from the policy generation process, if available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicyGenerationSummaryResponse AWS API Documentation
+    #
+    class GetPolicyGenerationSummaryResponse < Struct.new(
+      :policy_engine_id,
+      :policy_generation_id,
+      :name,
+      :policy_generation_arn,
+      :resource,
+      :created_at,
+      :updated_at,
+      :status,
       :findings)
       SENSITIVE = []
       include Aws::Structure
@@ -8000,18 +8135,6 @@ module Aws::BedrockAgentCoreControl
     #   confirms the policy engine context for the retrieved policy.
     #   @return [String]
     #
-    # @!attribute [rw] definition
-    #   The Cedar policy statement that defines the access control rules.
-    #   This contains the actual policy logic used for agent behavior
-    #   control and access decisions.
-    #   @return [Types::PolicyDefinition]
-    #
-    # @!attribute [rw] description
-    #   The human-readable description of the policy's purpose and
-    #   functionality. This helps administrators understand and manage the
-    #   policy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy was originally created.
     #   @return [Time]
@@ -8031,6 +8154,18 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the policy.
     #   @return [String]
     #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that defines the access control rules.
+    #   This contains the actual policy logic used for agent behavior
+    #   control and access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The human-readable description of the policy's purpose and
+    #   functionality. This helps administrators understand and manage the
+    #   policy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy status. This provides
     #   details about any failures or the current state of the policy.
@@ -8042,14 +8177,76 @@ module Aws::BedrockAgentCoreControl
       :policy_id,
       :name,
       :policy_engine_id,
-      :definition,
-      :description,
       :created_at,
       :updated_at,
       :policy_arn,
       :status,
+      :definition,
+      :description,
       :status_reasons)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages the policy to
+    #   retrieve the summary for.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy to retrieve the summary for.
+    #   This must be a valid policy ID that exists within the specified
+    #   policy engine.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicySummaryRequest AWS API Documentation
+    #
+    class GetPolicySummaryRequest < Struct.new(
+      :policy_engine_id,
+      :policy_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_id
+    #   The unique identifier of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetPolicySummaryResponse AWS API Documentation
+    #
+    class GetPolicySummaryResponse < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -10569,6 +10766,55 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] next_token
+    #   A pagination token returned from a previous
+    #   [ListPolicyEngineSummaries][1] call. Use this token to retrieve the
+    #   next page of results when the response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy engine summaries to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEngineSummariesRequest AWS API Documentation
+    #
+    class ListPolicyEngineSummariesRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_engines
+    #   An array of policy engine summary objects that exist in the account.
+    #   Each summary contains resource identifiers, status, and timestamps
+    #   without customer-encrypted content.
+    #   @return [Array<Types::PolicyEngineSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent
+    #   [ListPolicyEngineSummaries][1] calls to retrieve additional results.
+    #   This token is only present when there are more results available.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyEngineSummaries.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyEngineSummariesResponse AWS API Documentation
+    #
+    class ListPolicyEngineSummariesResponse < Struct.new(
+      :policy_engines,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
     #   A pagination token returned from a previous [ListPolicyEngines][1]
     #   call. Use this token to retrieve the next page of results when the
     #   response is paginated.
@@ -10694,6 +10940,62 @@ module Aws::BedrockAgentCoreControl
     end
 
     # @!attribute [rw] next_token
+    #   A pagination token returned from a previous
+    #   [ListPolicyGenerationSummaries][1] call. Use this token to retrieve
+    #   the next page of results when the response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationSummaries.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy generation summaries to return in a
+    #   single response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine whose policy generation
+    #   summaries to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationSummariesRequest AWS API Documentation
+    #
+    class ListPolicyGenerationSummariesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :policy_engine_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policy_generations
+    #   An array of policy generation summary objects that match the
+    #   specified criteria. Each summary contains resource identifiers,
+    #   status, timestamps, and findings without customer-encrypted content.
+    #   @return [Array<Types::PolicyGenerationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent
+    #   [ListPolicyGenerationSummaries][1] calls to retrieve additional
+    #   results. This token is only present when there are more results
+    #   available.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationSummaries.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicyGenerationSummariesResponse AWS API Documentation
+    #
+    class ListPolicyGenerationSummariesResponse < Struct.new(
+      :policy_generations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
     #   A pagination token for retrieving additional policy generations when
     #   results are paginated.
     #   @return [String]
@@ -10737,6 +11039,69 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   A pagination token returned from a previous [ListPolicySummaries][1]
+    #   call. Use this token to retrieve the next page of results when the
+    #   response is paginated.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicySummaries.html
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of policy summaries to return in a single
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine whose policy summaries to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_resource_scope
+    #   Optional filter to list policy summaries that apply to a specific
+    #   resource scope or resource type. This helps narrow down results to
+    #   those relevant for particular Amazon Web Services resources, agent
+    #   tools, or operational contexts within the policy engine ecosystem.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicySummariesRequest AWS API Documentation
+    #
+    class ListPolicySummariesRequest < Struct.new(
+      :next_token,
+      :max_results,
+      :policy_engine_id,
+      :target_resource_scope)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] policies
+    #   An array of policy summary objects that match the specified
+    #   criteria. Each summary contains resource identifiers, status, and
+    #   timestamps without customer-encrypted content.
+    #   @return [Array<Types::PolicySummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that can be used in subsequent
+    #   [ListPolicySummaries][1] calls to retrieve additional results. This
+    #   token is only present when there are more results available.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicySummaries.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListPolicySummariesResponse AWS API Documentation
+    #
+    class ListPolicySummariesResponse < Struct.new(
+      :policies,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   The maximum number of results to return in the response. If the
     #   total number of results is greater than this value, use the token
@@ -10757,12 +11122,19 @@ module Aws::BedrockAgentCoreControl
     #   `DELETING`, and `DELETE_FAILED`.
     #   @return [String]
     #
+    # @!attribute [rw] authorizer_type
+    #   Filter registries by their authorizer type. Possible values are
+    #   `CUSTOM_JWT` and `AWS_IAM`. For more information about authorizer
+    #   types, see the `RegistryAuthorizerType` enum.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ListRegistriesRequest AWS API Documentation
     #
     class ListRegistriesRequest < Struct.new(
       :max_results,
       :next_token,
-      :status)
+      :status,
+      :authorizer_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11101,8 +11473,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Union for principal matching. Currently supports IAM principal ARN
-    # glob matching. Extensible for future principal types (e.g., OAuth
-    # client ID).
+    # glob matching.
     #
     # @note MatchPrincipalEntry is a union - when making an API calls you must set exactly one of the members.
     #
@@ -11427,7 +11798,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces associated with the memory strategy.
+    #   This is a legacy parameter. The namespaces associated with the
+    #   memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -11770,7 +12142,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The updated namespaces for the memory strategy.
+    #   This is a legacy parameter, use `namespaceTemplates`. The updated
+    #   namespaces for the memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -11993,6 +12366,10 @@ module Aws::BedrockAgentCoreControl
     #
     #   * `AUTHORIZATION_CODE` - Authorization with a token that is specific
     #     to an individual end user.
+    #
+    #   * `TOKEN_EXCHANGE` - Authorization using on-behalf-of token
+    #     exchange. An inbound user token is exchanged for a downstream
+    #     access token scoped to the target audience.
     #   @return [String]
     #
     # @!attribute [rw] default_return_url
@@ -12408,8 +12785,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the payment credential provider.
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_arn
@@ -12498,17 +12874,17 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # PROVIDER CONFIGURATION INPUT - Contains secrets for creation/update
+    # Provider configuration input — contains secrets for creation and
+    # update. Varies by vendor type.
     #
     # @note PaymentProviderConfigurationInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] coinbase_cdp_configuration
-    #   Coinbase CDP configuration - credentials provided by Coinbase
-    #   Developer Platform
+    #   The Coinbase CDP configuration.
     #   @return [Types::CoinbaseCdpConfigurationInput]
     #
     # @!attribute [rw] stripe_privy_configuration
-    #   StripePrivy configuration - credentials provided by Stripe + Privy
+    #   The Stripe Privy configuration.
     #   @return [Types::StripePrivyConfigurationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentProviderConfigurationInput AWS API Documentation
@@ -12526,16 +12902,17 @@ module Aws::BedrockAgentCoreControl
       class Unknown < PaymentProviderConfigurationInput; end
     end
 
-    # PROVIDER CONFIGURATION OUTPUT - No raw secrets, only ARNs
+    # Provider configuration output — no raw secrets, only ARNs. Varies by
+    # vendor type.
     #
     # @note PaymentProviderConfigurationOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentProviderConfigurationOutput corresponding to the set member.
     #
     # @!attribute [rw] coinbase_cdp_configuration
-    #   Coinbase CDP configuration output with secret ARNs
+    #   The Coinbase CDP configuration.
     #   @return [Types::CoinbaseCdpConfigurationOutput]
     #
     # @!attribute [rw] stripe_privy_configuration
-    #   StripePrivy configuration output with secret ARNs
+    #   The Stripe Privy configuration.
     #   @return [Types::StripePrivyConfigurationOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PaymentProviderConfigurationOutput AWS API Documentation
@@ -12584,18 +12961,6 @@ module Aws::BedrockAgentCoreControl
     #   management.
     #   @return [String]
     #
-    # @!attribute [rw] definition
-    #   The Cedar policy statement that defines the access control rules.
-    #   This contains the actual policy logic used for agent behavior
-    #   control and access decisions.
-    #   @return [Types::PolicyDefinition]
-    #
-    # @!attribute [rw] description
-    #   A human-readable description of the policy's purpose and
-    #   functionality. Limited to 4,096 characters, this helps
-    #   administrators understand and manage the policy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy was originally created. This is
     #   automatically set by the service and used for auditing and lifecycle
@@ -12617,6 +12982,18 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the policy.
     #   @return [String]
     #
+    # @!attribute [rw] definition
+    #   The Cedar policy statement that defines the access control rules.
+    #   This contains the actual policy logic used for agent behavior
+    #   control and access decisions.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy's purpose and
+    #   functionality. Limited to 4,096 characters, this helps
+    #   administrators understand and manage the policy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy status. This provides
     #   details about any failures or the current state of the policy
@@ -12629,12 +13006,12 @@ module Aws::BedrockAgentCoreControl
       :policy_id,
       :name,
       :policy_engine_id,
-      :definition,
-      :description,
       :created_at,
       :updated_at,
       :policy_arn,
       :status,
+      :definition,
+      :description,
       :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -12713,13 +13090,6 @@ module Aws::BedrockAgentCoreControl
     #   cannot exceed 48 characters.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   A human-readable description of the policy engine's purpose and
-    #   scope. Limited to 4,096 characters, this helps administrators
-    #   understand the policy engine's role in the overall governance
-    #   strategy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The timestamp when the policy engine was originally created. This is
     #   automatically set by the service and used for auditing and lifecycle
@@ -12742,30 +13112,86 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the policy engine.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the policy engine's purpose and
+    #   scope. Limited to 4,096 characters, this helps administrators
+    #   understand the policy engine's role in the overall governance
+    #   strategy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the policy engine status. This provides
     #   details about any failures or the current state of the policy engine
     #   lifecycle.
     #   @return [Array<String>]
     #
-    # @!attribute [rw] encryption_key_arn
-    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
-    #   policy engine data.
-    #   @return [String]
-    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyEngine AWS API Documentation
     #
     class PolicyEngine < Struct.new(
       :policy_engine_id,
       :name,
-      :description,
       :created_at,
       :updated_at,
       :policy_engine_arn,
       :status,
-      :status_reasons,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :description,
+      :status_reasons)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Represents a metadata-only summary of a policy engine resource. This
+    # structure contains resource identifiers, status, and timestamps
+    # without customer-encrypted fields such as description or status
+    # reasons. Policy engine summaries are returned by operations that do
+    # not require access to the customer's KMS key.
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The unique identifier for the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy engine was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy engine was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_engine_arn
+    #   The Amazon Resource Name (ARN) of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   policy engine data.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyEngineSummary AWS API Documentation
+    #
+    class PolicyEngineSummary < Struct.new(
+      :policy_engine_id,
+      :name,
+      :created_at,
+      :updated_at,
+      :policy_engine_arn,
+      :status,
+      :encryption_key_arn)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -12815,13 +13241,13 @@ module Aws::BedrockAgentCoreControl
     #   The current status of this policy generation request.
     #   @return [String]
     #
-    # @!attribute [rw] status_reasons
-    #   Additional information about the generation status.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] findings
     #   Findings and insights from this policy generation process.
     #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyGeneration AWS API Documentation
     #
@@ -12834,8 +13260,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :updated_at,
       :status,
-      :status_reasons,
-      :findings)
+      :findings,
+      :status_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12912,6 +13338,113 @@ module Aws::BedrockAgentCoreControl
     class PolicyGenerationDetails < Struct.new(
       :policy_generation_id,
       :policy_generation_asset_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a metadata-only summary of a policy generation resource.
+    # This structure contains resource identifiers, status, timestamps, and
+    # findings without customer-encrypted fields such as status reasons.
+    # Policy generation summaries are returned by operations that do not
+    # require access to the customer's KMS key.
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine associated with this generation
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_id
+    #   The unique identifier for this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name for this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_generation_arn
+    #   The ARN of this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The resource information associated with this policy generation.
+    #   @return [Types::Resource]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when this policy generation request was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when this policy generation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of this policy generation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] findings
+    #   Findings and insights from this policy generation process.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicyGenerationSummary AWS API Documentation
+    #
+    class PolicyGenerationSummary < Struct.new(
+      :policy_engine_id,
+      :policy_generation_id,
+      :name,
+      :policy_generation_arn,
+      :resource,
+      :created_at,
+      :updated_at,
+      :status,
+      :findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a metadata-only summary of a policy resource. This
+    # structure contains resource identifiers, status, and timestamps
+    # without customer-encrypted fields such as definition, description, or
+    # status reasons. Policy summaries are returned by operations that do
+    # not require access to the customer's KMS key.
+    #
+    # @!attribute [rw] policy_id
+    #   The unique identifier for the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The customer-assigned name of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy_engine_id
+    #   The identifier of the policy engine that manages this policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the policy was originally created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the policy was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] policy_arn
+    #   The Amazon Resource Name (ARN) of the policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the policy.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PolicySummary AWS API Documentation
+    #
+    class PolicySummary < Struct.new(
+      :policy_id,
+      :name,
+      :policy_engine_id,
+      :created_at,
+      :updated_at,
+      :policy_arn,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13861,7 +14394,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces associated with the semantic memory strategy.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   associated with the semantic memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -14240,13 +14774,13 @@ module Aws::BedrockAgentCoreControl
     #   The initial status of the policy generation request.
     #   @return [String]
     #
-    # @!attribute [rw] status_reasons
-    #   Additional information about the generation status.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] findings
     #   Initial findings from the policy generation process.
     #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the generation status.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StartPolicyGenerationResponse AWS API Documentation
     #
@@ -14259,8 +14793,8 @@ module Aws::BedrockAgentCoreControl
       :created_at,
       :updated_at,
       :status,
-      :status_reasons,
-      :findings)
+      :findings,
+      :status_reasons)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14419,7 +14953,7 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # StripePrivy configuration - credentials provided by Stripe + Privy
+    # Stripe Privy configuration — credentials provided by Stripe and Privy.
     #
     # @!attribute [rw] app_id
     #   The app ID provided by Privy.
@@ -14448,7 +14982,7 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
-    # StripePrivy configuration output with secret ARNs
+    # Stripe Privy configuration output with secret ARNs.
     #
     # @!attribute [rw] app_id
     #   The app ID provided by Privy.
@@ -14561,7 +15095,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces associated with the summary memory strategy.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   associated with the summary memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -16504,12 +17039,12 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the payment credential provider (e.g.,
+    #   CoinbaseCDP, StripePrivy).
     #   @return [String]
     #
     # @!attribute [rw] provider_configuration_input
-    #   Configuration specific to the vendor, including API credentials
+    #   Configuration specific to the vendor, including API credentials.
     #   @return [Types::PaymentProviderConfigurationInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePaymentCredentialProviderRequest AWS API Documentation
@@ -16527,8 +17062,7 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_vendor
-    #   Supported vendor types for payment providers using non-standard auth
-    #   protocols
+    #   The vendor type for the updated payment credential provider.
     #   @return [String]
     #
     # @!attribute [rw] credential_provider_arn
@@ -16538,7 +17072,7 @@ module Aws::BedrockAgentCoreControl
     #
     # @!attribute [rw] provider_configuration_output
     #   Output configuration (contains secret ARNs, excludes actual secret
-    #   values)
+    #   values).
     #   @return [Types::PaymentProviderConfigurationOutput]
     #
     # @!attribute [rw] created_time
@@ -16687,10 +17221,6 @@ module Aws::BedrockAgentCoreControl
     #   The name of the updated policy engine.
     #   @return [String]
     #
-    # @!attribute [rw] description
-    #   The updated description of the policy engine.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The original creation timestamp of the policy engine.
     #   @return [Time]
@@ -16707,27 +17237,31 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the updated policy engine.
     #   @return [String]
     #
-    # @!attribute [rw] status_reasons
-    #   Additional information about the update status.
-    #   @return [Array<String>]
-    #
     # @!attribute [rw] encryption_key_arn
     #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
     #   policy engine data.
     #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the policy engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reasons
+    #   Additional information about the update status.
+    #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/UpdatePolicyEngineResponse AWS API Documentation
     #
     class UpdatePolicyEngineResponse < Struct.new(
       :policy_engine_id,
       :name,
-      :description,
       :created_at,
       :updated_at,
       :policy_engine_arn,
       :status,
-      :status_reasons,
-      :encryption_key_arn)
+      :encryption_key_arn,
+      :description,
+      :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -16790,14 +17324,6 @@ module Aws::BedrockAgentCoreControl
     #   The identifier of the policy engine managing the updated policy.
     #   @return [String]
     #
-    # @!attribute [rw] definition
-    #   The updated Cedar policy statement.
-    #   @return [Types::PolicyDefinition]
-    #
-    # @!attribute [rw] description
-    #   The updated description of the policy.
-    #   @return [String]
-    #
     # @!attribute [rw] created_at
     #   The original creation timestamp of the policy.
     #   @return [Time]
@@ -16814,6 +17340,14 @@ module Aws::BedrockAgentCoreControl
     #   The current status of the updated policy.
     #   @return [String]
     #
+    # @!attribute [rw] definition
+    #   The updated Cedar policy statement.
+    #   @return [Types::PolicyDefinition]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the policy.
+    #   @return [String]
+    #
     # @!attribute [rw] status_reasons
     #   Additional information about the update status.
     #   @return [Array<String>]
@@ -16824,12 +17358,12 @@ module Aws::BedrockAgentCoreControl
       :policy_id,
       :name,
       :policy_engine_id,
-      :definition,
-      :description,
       :created_at,
       :updated_at,
       :policy_arn,
       :status,
+      :definition,
+      :description,
       :status_reasons)
       SENSITIVE = [:description]
       include Aws::Structure
@@ -17608,7 +18142,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [String]
     #
     # @!attribute [rw] namespaces
-    #   The namespaces associated with the user preference memory strategy.
+    #   This is a legacy parameter, use `namespaceTemplates`. The namespaces
+    #   associated with the user preference memory strategy.
     #   @return [Array<String>]
     #
     # @!attribute [rw] namespace_templates
@@ -17859,11 +18394,47 @@ module Aws::BedrockAgentCoreControl
     #   The subnets associated with the VPC configuration.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] require_service_s3_endpoint
+    #   <note markdown="1"> This field applies only to Agent Runtimes. It is
+    #   not applicable to
+    #   Browsers or Code Interpreters.
+    #
+    #    </note>
+    #
+    #    Controls whether a service-managed Amazon S3 gateway endpoint is
+    #   provisioned in the VPC network topology for the agent runtime. This
+    #   gateway is used by Amazon Bedrock AgentCore Runtime to download code
+    #   and container images during agent startup.
+    #
+    #    Starting May 5, 2026, Amazon Bedrock AgentCore Runtime is gradually
+    #   rolling out a change to how network isolation is configured for VPC
+    #   mode agents. Agent runtimes created on or after this rollout will no
+    #   longer include the service-managed Amazon S3 gateway. Instead, all
+    #   network access, including to Amazon S3, is governed exclusively by
+    #   your VPC configuration. This field cannot be set on agent runtimes
+    #   created after the rollout. Passing this field in an
+    #   `UpdateAgentRuntime` request for these agent runtimes returns a
+    #   `ValidationException`.
+    #
+    #    Agent runtimes created before the rollout are not affected and
+    #   continue to operate with the service-managed Amazon S3 gateway. To
+    #   enforce full VPC network isolation on these existing agent runtimes,
+    #   set this field to `false` via the `UpdateAgentRuntime` API. Before
+    #   opting out, ensure your VPC provides the Amazon S3 access required
+    #   for agent startup. If this field is not specified or is set to
+    #   `true`, the service-managed Amazon S3 gateway remains provisioned.
+    #
+    #    This field is only supported in the `UpdateAgentRuntime` API for
+    #   pre-rollout agent runtimes. Passing this field in a
+    #   `CreateAgentRuntime` request returns a `ValidationException`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/VpcConfig AWS API Documentation
     #
     class VpcConfig < Struct.new(
       :security_groups,
-      :subnets)
+      :subnets,
+      :require_service_s3_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -74,6 +74,9 @@ module Aws::OpenSearchService
     AutoTuneState = Shapes::StringShape.new(name: 'AutoTuneState')
     AutoTuneStatus = Shapes::StructureShape.new(name: 'AutoTuneStatus')
     AutoTuneType = Shapes::StringShape.new(name: 'AutoTuneType')
+    AutomatedSnapshotPauseOptions = Shapes::StructureShape.new(name: 'AutomatedSnapshotPauseOptions')
+    AutomatedSnapshotPauseOptionsStatus = Shapes::StructureShape.new(name: 'AutomatedSnapshotPauseOptionsStatus')
+    AutomatedSnapshotPauseRequestOptions = Shapes::StructureShape.new(name: 'AutomatedSnapshotPauseRequestOptions')
     AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
     AvailabilityZoneInfo = Shapes::StructureShape.new(name: 'AvailabilityZoneInfo')
     AvailabilityZoneInfoList = Shapes::ListShape.new(name: 'AvailabilityZoneInfoList')
@@ -456,6 +459,7 @@ module Aws::OpenSearchService
     PackageVersionHistory = Shapes::StructureShape.new(name: 'PackageVersionHistory')
     PackageVersionHistoryList = Shapes::ListShape.new(name: 'PackageVersionHistoryList')
     Password = Shapes::StringShape.new(name: 'Password')
+    PauseState = Shapes::StringShape.new(name: 'PauseState')
     PluginClassName = Shapes::StringShape.new(name: 'PluginClassName')
     PluginDescription = Shapes::StringShape.new(name: 'PluginDescription')
     PluginName = Shapes::StringShape.new(name: 'PluginName')
@@ -800,6 +804,21 @@ module Aws::OpenSearchService
     AutoTuneStatus.add_member(:pending_deletion, Shapes::ShapeRef.new(shape: Boolean, location_name: "PendingDeletion"))
     AutoTuneStatus.struct_class = Types::AutoTuneStatus
 
+    AutomatedSnapshotPauseOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    AutomatedSnapshotPauseOptions.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    AutomatedSnapshotPauseOptions.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    AutomatedSnapshotPauseOptions.add_member(:state, Shapes::ShapeRef.new(shape: PauseState, location_name: "State"))
+    AutomatedSnapshotPauseOptions.struct_class = Types::AutomatedSnapshotPauseOptions
+
+    AutomatedSnapshotPauseOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptions, required: true, location_name: "Options"))
+    AutomatedSnapshotPauseOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
+    AutomatedSnapshotPauseOptionsStatus.struct_class = Types::AutomatedSnapshotPauseOptionsStatus
+
+    AutomatedSnapshotPauseRequestOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
+    AutomatedSnapshotPauseRequestOptions.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartTime"))
+    AutomatedSnapshotPauseRequestOptions.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndTime"))
+    AutomatedSnapshotPauseRequestOptions.struct_class = Types::AutomatedSnapshotPauseRequestOptions
+
     AvailabilityZoneInfo.add_member(:availability_zone_name, Shapes::ShapeRef.new(shape: AvailabilityZone, location_name: "AvailabilityZoneName"))
     AvailabilityZoneInfo.add_member(:zone_status, Shapes::ShapeRef.new(shape: ZoneStatus, location_name: "ZoneStatus"))
     AvailabilityZoneInfo.add_member(:configured_data_node_count, Shapes::ShapeRef.new(shape: NumberOfNodes, location_name: "ConfiguredDataNodeCount"))
@@ -978,6 +997,7 @@ module Aws::OpenSearchService
     CreateDomainRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     CreateDomainRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     CreateDomainRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
+    CreateDomainRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
     CreateDomainRequest.struct_class = Types::CreateDomainRequest
 
     CreateDomainResponse.add_member(:domain_status, Shapes::ShapeRef.new(shape: DomainStatus, location_name: "DomainStatus"))
@@ -1324,6 +1344,7 @@ module Aws::OpenSearchService
     DomainConfig.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     DomainConfig.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsStatus, location_name: "AIMLOptions"))
     DomainConfig.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptionsStatus, location_name: "DeploymentStrategyOptions"))
+    DomainConfig.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptionsStatus, location_name: "AutomatedSnapshotPauseOptions"))
     DomainConfig.struct_class = Types::DomainConfig
 
     DomainEndpointOptions.add_member(:enforce_https, Shapes::ShapeRef.new(shape: Boolean, location_name: "EnforceHTTPS"))
@@ -1422,6 +1443,7 @@ module Aws::OpenSearchService
     DomainStatus.add_member(:modifying_properties, Shapes::ShapeRef.new(shape: ModifyingPropertiesList, location_name: "ModifyingProperties"))
     DomainStatus.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsOutput, location_name: "AIMLOptions"))
     DomainStatus.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
+    DomainStatus.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseOptions, location_name: "AutomatedSnapshotPauseOptions"))
     DomainStatus.struct_class = Types::DomainStatus
 
     DomainStatusList.member = Shapes::ShapeRef.new(shape: DomainStatus)
@@ -2289,6 +2311,7 @@ module Aws::OpenSearchService
     UpdateDomainConfigRequest.add_member(:software_update_options, Shapes::ShapeRef.new(shape: SoftwareUpdateOptions, location_name: "SoftwareUpdateOptions"))
     UpdateDomainConfigRequest.add_member(:aiml_options, Shapes::ShapeRef.new(shape: AIMLOptionsInput, location_name: "AIMLOptions"))
     UpdateDomainConfigRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, location_name: "DeploymentStrategyOptions"))
+    UpdateDomainConfigRequest.add_member(:automated_snapshot_pause_options, Shapes::ShapeRef.new(shape: AutomatedSnapshotPauseRequestOptions, location_name: "AutomatedSnapshotPauseOptions"))
     UpdateDomainConfigRequest.struct_class = Types::UpdateDomainConfigRequest
 
     UpdateDomainConfigResponse.add_member(:domain_config, Shapes::ShapeRef.new(shape: DomainConfig, required: true, location_name: "DomainConfig"))

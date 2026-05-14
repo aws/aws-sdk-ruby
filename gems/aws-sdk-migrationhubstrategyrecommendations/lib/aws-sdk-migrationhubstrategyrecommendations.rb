@@ -54,7 +54,7 @@ module Aws::MigrationHubStrategyRecommendations
   autoload :EndpointProvider, 'aws-sdk-migrationhubstrategyrecommendations/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhubstrategyrecommendations/endpoints'
 
-  GEM_VERSION = '1.51.0'
+  GEM_VERSION = '1.52.0'
 
 end
 

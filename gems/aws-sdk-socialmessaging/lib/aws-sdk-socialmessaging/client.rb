@@ -491,6 +491,7 @@ module Aws::SocialMessaging
     #
     #   * {Types::AssociateWhatsAppBusinessAccountOutput#signup_callback_result #signup_callback_result} => Types::WhatsAppSignupCallbackResult
     #   * {Types::AssociateWhatsAppBusinessAccountOutput#status_code #status_code} => Integer
+    #   * {Types::AssociateWhatsAppBusinessAccountOutput#linked_whats_app_business_account_id #linked_whats_app_business_account_id} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -550,6 +551,7 @@ module Aws::SocialMessaging
     #   resp.signup_callback_result.linked_accounts_with_incomplete_setup["WhatsAppBusinessAccountId"].unregistered_whats_app_phone_numbers[0].data_localization_region #=> String
     #   resp.signup_callback_result.linked_accounts_with_incomplete_setup["WhatsAppBusinessAccountId"].waba_id #=> String
     #   resp.status_code #=> Integer
+    #   resp.linked_whats_app_business_account_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/AssociateWhatsAppBusinessAccount AWS API Documentation
     #
@@ -848,6 +850,7 @@ module Aws::SocialMessaging
     #   resp.account.event_destinations #=> Array
     #   resp.account.event_destinations[0].event_destination_arn #=> String
     #   resp.account.event_destinations[0].role_arn #=> String
+    #   resp.account.marketing_messages_onboarding_status #=> String
     #   resp.account.phone_numbers #=> Array
     #   resp.account.phone_numbers[0].arn #=> String
     #   resp.account.phone_numbers[0].phone_number #=> String
@@ -979,11 +982,21 @@ module Aws::SocialMessaging
 
     # Retrieves a specific WhatsApp message template.
     #
-    # @option params [required, String] :meta_template_id
+    # @option params [String] :meta_template_id
     #   The numeric ID of the template assigned by Meta.
     #
     # @option params [required, String] :id
     #   The ID of the WhatsApp Business Account associated with this template.
+    #
+    # @option params [String] :template_name
+    #   The name of the message template. Use together with
+    #   `templateLanguageCode` as an alternative to `metaTemplateId` to
+    #   identify a template.
+    #
+    # @option params [String] :template_language_code
+    #   The language code of the message template (for example, `en` or
+    #   `en_US`). Use together with `templateName` as an alternative to
+    #   `metaTemplateId` to identify a template.
     #
     # @return [Types::GetWhatsAppMessageTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -992,8 +1005,10 @@ module Aws::SocialMessaging
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_whats_app_message_template({
-    #     meta_template_id: "MetaTemplateId", # required
+    #     meta_template_id: "MetaTemplateId",
     #     id: "LinkedWhatsAppBusinessAccountId", # required
+    #     template_name: "MetaTemplateName",
+    #     template_language_code: "MetaTemplateLanguage",
     #   })
     #
     # @example Response structure
@@ -1044,6 +1059,7 @@ module Aws::SocialMessaging
     #   resp.linked_accounts[0].event_destinations #=> Array
     #   resp.linked_accounts[0].event_destinations[0].event_destination_arn #=> String
     #   resp.linked_accounts[0].event_destinations[0].role_arn #=> String
+    #   resp.linked_accounts[0].marketing_messages_onboarding_status #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/ListLinkedWhatsAppBusinessAccounts AWS API Documentation
@@ -1446,8 +1462,18 @@ module Aws::SocialMessaging
     # @option params [required, String] :id
     #   The ID of the WhatsApp Business Account associated with this template.
     #
-    # @option params [required, String] :meta_template_id
+    # @option params [String] :meta_template_id
     #   The numeric ID of the template assigned by Meta.
+    #
+    # @option params [String] :template_name
+    #   The name of the message template. Use together with
+    #   `templateLanguageCode` as an alternative to `metaTemplateId` to
+    #   identify a template.
+    #
+    # @option params [String] :template_language_code
+    #   The language code of the message template (for example, `en` or
+    #   `en_US`). Use together with `templateName` as an alternative to
+    #   `metaTemplateId` to identify a template.
     #
     # @option params [String] :parameter_format
     #   The format specification for parameters in the template, this can be
@@ -1470,7 +1496,9 @@ module Aws::SocialMessaging
     #
     #   resp = client.update_whats_app_message_template({
     #     id: "LinkedWhatsAppBusinessAccountId", # required
-    #     meta_template_id: "MetaTemplateId", # required
+    #     meta_template_id: "MetaTemplateId",
+    #     template_name: "MetaTemplateName",
+    #     template_language_code: "MetaTemplateLanguage",
     #     parameter_format: "MetaParameterFormat",
     #     template_category: "MetaTemplateCategory",
     #     template_components: "data",
@@ -1504,7 +1532,7 @@ module Aws::SocialMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-socialmessaging'
-      context[:gem_version] = '1.22.0'
+      context[:gem_version] = '1.23.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -387,6 +387,47 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Input for deleting multiple code reviews.
+    #
+    # @!attribute [rw] code_review_ids
+    #   The list of code review identifiers to delete.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   reviews to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDeleteCodeReviewsInput AWS API Documentation
+    #
+    class BatchDeleteCodeReviewsInput < Struct.new(
+      :code_review_ids,
+      :agent_space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the BatchDeleteCodeReviews operation.
+    #
+    # @!attribute [rw] deleted
+    #   The list of identifiers of the code reviews that were successfully
+    #   deleted.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] failed
+    #   The list of code reviews that failed to delete, including the reason
+    #   for each failure.
+    #   @return [Array<Types::DeleteCodeReviewFailure>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDeleteCodeReviewsOutput AWS API Documentation
+    #
+    class BatchDeleteCodeReviewsOutput < Struct.new(
+      :deleted,
+      :failed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for deleting multiple pentests.
     #
     # @!attribute [rw] pentest_ids
@@ -486,6 +527,122 @@ module Aws::SecurityAgent
     #
     class BatchGetArtifactMetadataOutput < Struct.new(
       :artifact_metadata_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for retrieving multiple tasks associated with a code review job.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the tasks.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_task_ids
+    #   The list of task identifiers to retrieve.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobTasksInput AWS API Documentation
+    #
+    class BatchGetCodeReviewJobTasksInput < Struct.new(
+      :agent_space_id,
+      :code_review_job_task_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the BatchGetCodeReviewJobTasks operation.
+    #
+    # @!attribute [rw] code_review_job_tasks
+    #   The list of code review job tasks that were found.
+    #   @return [Array<Types::CodeReviewJobTask>]
+    #
+    # @!attribute [rw] not_found
+    #   The list of task identifiers that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobTasksOutput AWS API Documentation
+    #
+    class BatchGetCodeReviewJobTasksOutput < Struct.new(
+      :code_review_job_tasks,
+      :not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for BatchGetCodeReviewJobs operation.
+    #
+    # @!attribute [rw] code_review_job_ids
+    #   The list of code review job identifiers to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review jobs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobsInput AWS API Documentation
+    #
+    class BatchGetCodeReviewJobsInput < Struct.new(
+      :code_review_job_ids,
+      :agent_space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the BatchGetCodeReviewJobs operation.
+    #
+    # @!attribute [rw] code_review_jobs
+    #   The list of code review jobs that were found.
+    #   @return [Array<Types::CodeReviewJob>]
+    #
+    # @!attribute [rw] not_found
+    #   The list of code review job identifiers that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobsOutput AWS API Documentation
+    #
+    class BatchGetCodeReviewJobsOutput < Struct.new(
+      :code_review_jobs,
+      :not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for retrieving multiple code reviews by their IDs.
+    #
+    # @!attribute [rw] code_review_ids
+    #   The list of code review identifiers to retrieve.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   reviews.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewsInput AWS API Documentation
+    #
+    class BatchGetCodeReviewsInput < Struct.new(
+      :code_review_ids,
+      :agent_space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the BatchGetCodeReviews operation.
+    #
+    # @!attribute [rw] code_reviews
+    #   The list of code reviews that were found.
+    #   @return [Array<Types::CodeReview>]
+    #
+    # @!attribute [rw] not_found
+    #   The list of code review identifiers that were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewsOutput AWS API Documentation
+    #
+    class BatchGetCodeReviewsOutput < Struct.new(
+      :code_reviews,
+      :not_found)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -714,6 +871,37 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Represents a location in source code associated with a security
+    # finding.
+    #
+    # @!attribute [rw] file_path
+    #   The absolute path to the file containing the code location.
+    #   @return [String]
+    #
+    # @!attribute [rw] line_start
+    #   The starting line number of the code location.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] line_end
+    #   The ending line number of the code location.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] label
+    #   The role of this location in the vulnerability, such as source or
+    #   sink.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeLocation AWS API Documentation
+    #
+    class CodeLocation < Struct.new(
+      :file_path,
+      :line_start,
+      :line_end,
+      :label)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents a code remediation task that was initiated to fix a
     # security finding.
     #
@@ -765,6 +953,321 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Represents a code review configuration that defines the parameters for
+    # automated security-focused code analysis, including target assets and
+    # logging configuration.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] assets
+    #   The assets included in the code review.
+    #   @return [Types::Assets]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM service role used for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the code review.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The code remediation strategy for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReview AWS API Documentation
+    #
+    class CodeReview < Struct.new(
+      :code_review_id,
+      :agent_space_id,
+      :title,
+      :assets,
+      :service_role,
+      :log_config,
+      :code_remediation_strategy,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a code review job, which is an execution instance of a code
+    # review. A code review job progresses through preflight, static
+    # analysis, and finalizing steps.
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] overview
+    #   An overview of the code review job results.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] documents
+    #   The list of documents providing context for the code review job.
+    #   @return [Array<Types::DocumentInfo>]
+    #
+    # @!attribute [rw] source_code
+    #   The list of source code repositories analyzed during the code review
+    #   job.
+    #   @return [Array<Types::SourceCodeRepository>]
+    #
+    # @!attribute [rw] steps
+    #   The list of steps in the code review job execution.
+    #   @return [Array<Types::Step>]
+    #
+    # @!attribute [rw] execution_context
+    #   The execution context messages for the code review job.
+    #   @return [Array<Types::ExecutionContext>]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM service role used for the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the code review job.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] error_information
+    #   Error information if the code review job encountered an error.
+    #   @return [Types::ErrorInformation]
+    #
+    # @!attribute [rw] integrated_repositories
+    #   The list of integrated repositories associated with the code review
+    #   job.
+    #   @return [Array<Types::IntegratedRepository>]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The code remediation strategy for the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review job was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review job was last updated, in UTC
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewJob AWS API Documentation
+    #
+    class CodeReviewJob < Struct.new(
+      :code_review_job_id,
+      :code_review_id,
+      :title,
+      :overview,
+      :status,
+      :documents,
+      :source_code,
+      :steps,
+      :execution_context,
+      :service_role,
+      :log_config,
+      :error_information,
+      :integrated_repositories,
+      :code_remediation_strategy,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a code review job.
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review job was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review job was last updated, in UTC
+    #   format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewJobSummary AWS API Documentation
+    #
+    class CodeReviewJobSummary < Struct.new(
+      :code_review_job_id,
+      :code_review_id,
+      :title,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents an individual security test task within a code review job.
+    # Each task targets a specific risk type and executes independently.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job that contains the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] categories
+    #   The list of categories assigned to the task.
+    #   @return [Array<Types::Category>]
+    #
+    # @!attribute [rw] risk_type
+    #   The type of security risk the task is testing for.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The current execution status of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] logs_location
+    #   The location of the task execution logs.
+    #   @return [Types::LogLocation]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the task was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the task was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewJobTask AWS API Documentation
+    #
+    class CodeReviewJobTask < Struct.new(
+      :task_id,
+      :code_review_id,
+      :code_review_job_id,
+      :agent_space_id,
+      :title,
+      :description,
+      :categories,
+      :risk_type,
+      :execution_status,
+      :logs_location,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a code review job task.
+    #
+    # @!attribute [rw] task_id
+    #   The unique identifier of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job that contains the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_type
+    #   The type of security risk the task is testing for.
+    #   @return [String]
+    #
+    # @!attribute [rw] execution_status
+    #   The current execution status of the task.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the task was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the task was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewJobTaskSummary AWS API Documentation
+    #
+    class CodeReviewJobTaskSummary < Struct.new(
+      :task_id,
+      :code_review_id,
+      :code_review_job_id,
+      :agent_space_id,
+      :title,
+      :risk_type,
+      :execution_status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The code review settings for an agent space, controlling which types
     # of scanning are enabled.
     #
@@ -782,6 +1285,41 @@ module Aws::SecurityAgent
     class CodeReviewSettings < Struct.new(
       :controls_scanning,
       :general_purpose_scanning)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a code review.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CodeReviewSummary AWS API Documentation
+    #
+    class CodeReviewSummary < Struct.new(
+      :code_review_id,
+      :agent_space_id,
+      :title,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -941,6 +1479,103 @@ module Aws::SecurityAgent
     #
     class CreateApplicationResponse < Struct.new(
       :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for creating a new code review.
+    #
+    # @!attribute [rw] title
+    #   The title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space to create the code review
+    #   in.
+    #   @return [String]
+    #
+    # @!attribute [rw] assets
+    #   The assets to include in the code review, such as documents and
+    #   source code.
+    #   @return [Types::Assets]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM service role to use for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the code review.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The code remediation strategy for the code review. Valid values are
+    #   AUTOMATIC and DISABLED.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReviewInput AWS API Documentation
+    #
+    class CreateCodeReviewInput < Struct.new(
+      :title,
+      :agent_space_id,
+      :assets,
+      :service_role,
+      :log_config,
+      :code_remediation_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the CreateCodeReview operation.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the created code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] assets
+    #   The assets included in the code review.
+    #   @return [Types::Assets]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM service role used for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the code review.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The code remediation strategy for the code review.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReviewOutput AWS API Documentation
+    #
+    class CreateCodeReviewOutput < Struct.new(
+      :code_review_id,
+      :title,
+      :created_at,
+      :updated_at,
+      :assets,
+      :service_role,
+      :log_config,
+      :agent_space_id,
+      :code_remediation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1293,6 +1928,25 @@ module Aws::SecurityAgent
     #
     class DeleteArtifactOutput < Aws::EmptyStructure; end
 
+    # Contains information about a code review that failed to delete.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review that failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the code review failed to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteCodeReviewFailure AWS API Documentation
+    #
+    class DeleteCodeReviewFailure < Struct.new(
+      :code_review_id,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] integration_id
     #   The unique identifier of the integration to delete.
     #   @return [String]
@@ -1564,6 +2218,16 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest job that produced the finding.
     #   @return [String]
     #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job that produced the
+    #   finding.
+    #   @return [String]
+    #
     # @!attribute [rw] task_id
     #   The unique identifier of the task that produced the finding.
     #   @return [String]
@@ -1617,6 +2281,11 @@ module Aws::SecurityAgent
     #   The identifier of the entity that last updated the finding.
     #   @return [String]
     #
+    # @!attribute [rw] code_locations
+    #   The file locations involved in the vulnerability, as reported by the
+    #   code scanner.
+    #   @return [Array<Types::CodeLocation>]
+    #
     # @!attribute [rw] created_at
     #   The date and time the finding was created, in UTC format.
     #   @return [Time]
@@ -1632,6 +2301,8 @@ module Aws::SecurityAgent
       :agent_space_id,
       :pentest_id,
       :pentest_job_id,
+      :code_review_id,
+      :code_review_job_id,
       :task_id,
       :name,
       :description,
@@ -1644,6 +2315,7 @@ module Aws::SecurityAgent
       :attack_script,
       :code_remediation_task,
       :last_updated_by,
+      :code_locations,
       :created_at,
       :updated_at)
       SENSITIVE = []
@@ -1667,6 +2339,16 @@ module Aws::SecurityAgent
     #
     # @!attribute [rw] pentest_job_id
     #   The unique identifier of the pentest job that produced the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review associated with the
+    #   finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job that produced the
+    #   finding.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -1704,6 +2386,8 @@ module Aws::SecurityAgent
       :agent_space_id,
       :pentest_id,
       :pentest_job_id,
+      :code_review_id,
+      :code_review_job_id,
       :name,
       :status,
       :risk_type,
@@ -2348,6 +3032,173 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Input for listing tasks associated with a code review job.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job to list tasks for.
+    #   @return [String]
+    #
+    # @!attribute [rw] step_name
+    #   Filter tasks by step name.
+    #   @return [String]
+    #
+    # @!attribute [rw] category_name
+    #   Filter tasks by category name.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobTasksInput AWS API Documentation
+    #
+    class ListCodeReviewJobTasksInput < Struct.new(
+      :agent_space_id,
+      :max_results,
+      :code_review_job_id,
+      :step_name,
+      :category_name,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the ListCodeReviewJobTasks operation.
+    #
+    # @!attribute [rw] code_review_job_task_summaries
+    #   The list of code review job task summaries.
+    #   @return [Array<Types::CodeReviewJobTaskSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobTasksOutput AWS API Documentation
+    #
+    class ListCodeReviewJobTasksOutput < Struct.new(
+      :code_review_job_task_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for ListCodeReviewJobsForCodeReview operation.
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review to list jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobsForCodeReviewInput AWS API Documentation
+    #
+    class ListCodeReviewJobsForCodeReviewInput < Struct.new(
+      :max_results,
+      :code_review_id,
+      :agent_space_id,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the ListCodeReviewJobsForCodeReview operation.
+    #
+    # @!attribute [rw] code_review_job_summaries
+    #   The list of code review job summaries.
+    #   @return [Array<Types::CodeReviewJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobsForCodeReviewOutput AWS API Documentation
+    #
+    class ListCodeReviewJobsForCodeReviewOutput < Struct.new(
+      :code_review_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for listing code reviews with optional filtering.
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space to list code reviews for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewsInput AWS API Documentation
+    #
+    class ListCodeReviewsInput < Struct.new(
+      :max_results,
+      :next_token,
+      :agent_space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the ListCodeReviews operation.
+    #
+    # @!attribute [rw] code_review_summaries
+    #   The list of code review summaries.
+    #   @return [Array<Types::CodeReviewSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewsOutput AWS API Documentation
+    #
+    class ListCodeReviewsOutput < Struct.new(
+      :code_review_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Input for ListDiscoveredEndpoints operation.
     #
     # @!attribute [rw] max_results
@@ -2418,6 +3269,11 @@ module Aws::SecurityAgent
     #   The unique identifier of the pentest job to list findings for.
     #   @return [String]
     #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job to list findings for.
+    #   Mutually exclusive with pentestJobId.
+    #   @return [String]
+    #
     # @!attribute [rw] agent_space_id
     #   The unique identifier of the agent space.
     #   @return [String]
@@ -2454,6 +3310,7 @@ module Aws::SecurityAgent
     class ListFindingsInput < Struct.new(
       :max_results,
       :pentest_job_id,
+      :code_review_job_id,
       :agent_space_id,
       :next_token,
       :risk_type,
@@ -3418,6 +4275,12 @@ module Aws::SecurityAgent
     #
     # @!attribute [rw] pentest_job_id
     #   The unique identifier of the pentest job that produced the findings.
+    #   Mutually exclusive with `codeReviewJobId`.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job that produced the
+    #   findings. Mutually exclusive with `pentestJobId`.
     #   @return [String]
     #
     # @!attribute [rw] finding_ids
@@ -3429,6 +4292,7 @@ module Aws::SecurityAgent
     class StartCodeRemediationInput < Struct.new(
       :agent_space_id,
       :pentest_job_id,
+      :code_review_job_id,
       :finding_ids)
       SENSITIVE = []
       include Aws::Structure
@@ -3439,6 +4303,70 @@ module Aws::SecurityAgent
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeRemediationOutput AWS API Documentation
     #
     class StartCodeRemediationOutput < Aws::EmptyStructure; end
+
+    # Input for starting the execution of a code review.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review to start a job for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeReviewJobInput AWS API Documentation
+    #
+    class StartCodeReviewJobInput < Struct.new(
+      :agent_space_id,
+      :code_review_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the StartCodeReviewJob operation.
+    #
+    # @!attribute [rw] title
+    #   The title of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review job was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review job was last updated, in UTC
+    #   format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the started code review job.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeReviewJobOutput AWS API Documentation
+    #
+    class StartCodeReviewJobOutput < Struct.new(
+      :title,
+      :status,
+      :created_at,
+      :updated_at,
+      :code_review_id,
+      :code_review_job_id,
+      :agent_space_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Input for starting the execution of a pentest.
     #
@@ -3533,6 +4461,31 @@ module Aws::SecurityAgent
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Input for stopping the execution of a code review job.
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_review_job_id
+    #   The unique identifier of the code review job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopCodeReviewJobInput AWS API Documentation
+    #
+    class StopCodeReviewJobInput < Struct.new(
+      :agent_space_id,
+      :code_review_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the StopCodeReviewJob operation.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopCodeReviewJobOutput AWS API Documentation
+    #
+    class StopCodeReviewJobOutput < Aws::EmptyStructure; end
 
     # Input for stopping the execution of a pentest.
     #
@@ -3955,6 +4908,106 @@ module Aws::SecurityAgent
     #
     class UpdateApplicationResponse < Struct.new(
       :application_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Input for updating an existing code review.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The updated title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] assets
+    #   The updated assets for the code review.
+    #   @return [Types::Assets]
+    #
+    # @!attribute [rw] service_role
+    #   The updated IAM service role for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The updated CloudWatch Logs configuration for the code review.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The updated code remediation strategy for the code review.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReviewInput AWS API Documentation
+    #
+    class UpdateCodeReviewInput < Struct.new(
+      :code_review_id,
+      :agent_space_id,
+      :title,
+      :assets,
+      :service_role,
+      :log_config,
+      :code_remediation_strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output for the UpdateCodeReview operation.
+    #
+    # @!attribute [rw] code_review_id
+    #   The unique identifier of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the code review was created, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time the code review was last updated, in UTC format.
+    #   @return [Time]
+    #
+    # @!attribute [rw] assets
+    #   The assets included in the code review.
+    #   @return [Types::Assets]
+    #
+    # @!attribute [rw] service_role
+    #   The IAM service role used for the code review.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_config
+    #   The CloudWatch Logs configuration for the code review.
+    #   @return [Types::CloudWatchLog]
+    #
+    # @!attribute [rw] agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #   @return [String]
+    #
+    # @!attribute [rw] code_remediation_strategy
+    #   The code remediation strategy for the code review.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReviewOutput AWS API Documentation
+    #
+    class UpdateCodeReviewOutput < Struct.new(
+      :code_review_id,
+      :title,
+      :created_at,
+      :updated_at,
+      :assets,
+      :service_role,
+      :log_config,
+      :agent_space_id,
+      :code_remediation_strategy)
       SENSITIVE = []
       include Aws::Structure
     end

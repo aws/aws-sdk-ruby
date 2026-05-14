@@ -2109,6 +2109,7 @@ module Aws::Lightsail
       attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-north-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-southeast-3" | "ap-southeast-5")
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
+      attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
       SENSITIVE: []
     end
 
@@ -2481,6 +2482,7 @@ module Aws::Lightsail
       attr_accessor region_name: ("us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-central-1" | "eu-north-1" | "ca-central-1" | "ap-south-1" | "ap-southeast-1" | "ap-southeast-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-southeast-3" | "ap-southeast-5")
       attr_accessor protocol_policy: ("http-only" | "https-only")
       attr_accessor response_timeout: ::Integer
+      attr_accessor ip_address_type: ("ipv4" | "ipv6" | "dualstack")
       SENSITIVE: []
     end
 

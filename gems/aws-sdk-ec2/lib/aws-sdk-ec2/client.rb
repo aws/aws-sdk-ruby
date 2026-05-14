@@ -5223,11 +5223,11 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.copy_image({
-    #     client_token: "String",
-    #     description: "String",
+    #     client_token: "CopyImageClientToken",
+    #     description: "ImageDescriptionRequest",
     #     encrypted: false,
     #     kms_key_id: "KmsKeyId",
-    #     name: "String", # required
+    #     name: "ImageNameRequest", # required
     #     source_image_id: "String", # required
     #     source_region: "String", # required
     #     destination_outpost_arn: "String",
@@ -8510,8 +8510,8 @@ module Aws::EC2
     #     snapshot_location: "regional", # accepts regional, local
     #     dry_run: false,
     #     instance_id: "InstanceId", # required
-    #     name: "String", # required
-    #     description: "String",
+    #     name: "ImageNameRequest", # required
+    #     description: "ImageDescriptionRequest",
     #     no_reboot: false,
     #     block_device_mappings: [
     #       {
@@ -8617,7 +8617,7 @@ module Aws::EC2
     #       },
     #     ],
     #     account_ids: ["String"],
-    #     client_token: "String",
+    #     client_token: "CreateImageUsageReportClientToken",
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator
@@ -13793,7 +13793,7 @@ module Aws::EC2
     #   resp = client.create_restore_image_task({
     #     bucket: "String", # required
     #     object_key: "String", # required
-    #     name: "String",
+    #     name: "ImageNameRequest",
     #     tag_specifications: [
     #       {
     #         resource_type: "capacity-reservation", # accepts capacity-reservation, client-vpn-endpoint, customer-gateway, carrier-gateway, coip-pool, declarative-policies-report, dedicated-host, dhcp-options, egress-only-internet-gateway, elastic-ip, elastic-gpu, export-image-task, export-instance-task, fleet, fpga-image, host-reservation, image, image-usage-report, import-image-task, import-snapshot-task, instance, instance-event-window, internet-gateway, ipam, ipam-pool, ipam-scope, ipv4pool-ec2, ipv6pool-ec2, key-pair, launch-template, local-gateway, local-gateway-route-table, local-gateway-virtual-interface, local-gateway-virtual-interface-group, local-gateway-route-table-vpc-association, local-gateway-route-table-virtual-interface-group-association, natgateway, network-acl, network-interface, network-insights-analysis, network-insights-path, network-insights-access-scope, network-insights-access-scope-analysis, outpost-lag, placement-group, prefix-list, replace-root-volume-task, reserved-instances, route-table, security-group, security-group-rule, service-link-virtual-interface, snapshot, spot-fleet-request, spot-instances-request, subnet, subnet-cidr-reservation, traffic-mirror-filter, traffic-mirror-session, traffic-mirror-target, transit-gateway, transit-gateway-attachment, transit-gateway-connect-peer, transit-gateway-multicast-domain, transit-gateway-policy-table, transit-gateway-metering-policy, transit-gateway-route-table, transit-gateway-route-table-announcement, volume, vpc, vpc-endpoint, vpc-endpoint-connection, vpc-endpoint-service, vpc-endpoint-service-permission, vpc-peering-connection, vpn-connection, vpn-gateway, vpc-flow-log, capacity-reservation-fleet, traffic-mirror-filter-rule, vpc-endpoint-connection-device-type, verified-access-instance, verified-access-group, verified-access-endpoint, verified-access-policy, verified-access-trust-provider, vpn-connection-device-type, vpc-block-public-access-exclusion, vpc-encryption-control, route-server, route-server-endpoint, route-server-peer, ipam-resource-discovery, ipam-resource-discovery-association, instance-connect-endpoint, verified-access-endpoint-target, ipam-external-resource-verification-token, capacity-block, mac-modification-task, ipam-prefix-list-resolver, ipam-policy, ipam-prefix-list-resolver-target, secondary-interface, secondary-network, secondary-subnet, capacity-manager-data-export, vpn-concentrator
@@ -45434,9 +45434,6 @@ module Aws::EC2
     #   resp.volumes_modifications[0].progress #=> Integer
     #   resp.volumes_modifications[0].start_time #=> Time
     #   resp.volumes_modifications[0].end_time #=> Time
-    #   resp.volumes_modifications[0].operator.managed #=> Boolean
-    #   resp.volumes_modifications[0].operator.principal #=> String
-    #   resp.volumes_modifications[0].operator.hidden_by_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeVolumesModifications AWS API Documentation
     #
@@ -63554,9 +63551,6 @@ module Aws::EC2
     #   resp.volume_modification.progress #=> Integer
     #   resp.volume_modification.start_time #=> Time
     #   resp.volume_modification.end_time #=> Time
-    #   resp.volume_modification.operator.managed #=> Boolean
-    #   resp.volume_modification.operator.principal #=> String
-    #   resp.volume_modification.operator.hidden_by_default #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyVolume AWS API Documentation
     #
@@ -66433,7 +66427,7 @@ module Aws::EC2
     #     billing_products: ["String"],
     #     boot_mode: "legacy-bios", # accepts legacy-bios, uefi, uefi-preferred
     #     tpm_support: "v2.0", # accepts v2.0
-    #     uefi_data: "StringType",
+    #     uefi_data: "ImageUefiDataRequest",
     #     imds_support: "v2.0", # accepts v2.0
     #     tag_specifications: [
     #       {
@@ -66447,8 +66441,8 @@ module Aws::EC2
     #       },
     #     ],
     #     dry_run: false,
-    #     name: "String", # required
-    #     description: "String",
+    #     name: "ImageNameRequest", # required
+    #     description: "ImageDescriptionRequest",
     #     architecture: "i386", # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
     #     kernel_id: "KernelId",
     #     ramdisk_id: "RamdiskId",
@@ -67248,7 +67242,7 @@ module Aws::EC2
     #       {
     #         image_providers: ["ImageProviderRequest"],
     #         marketplace_product_codes: ["MarketplaceProductCodeRequest"],
-    #         image_names: ["ImageNameRequest"],
+    #         image_names: ["ImageNameCriteriaRequest"],
     #         deprecation_time_condition: {
     #           maximum_days_since_deprecated: 1,
     #         },
@@ -73563,7 +73557,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.615.0'
+      context[:gem_version] = '1.616.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

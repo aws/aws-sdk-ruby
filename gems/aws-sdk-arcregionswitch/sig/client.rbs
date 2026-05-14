@@ -258,9 +258,21 @@ module Aws
                                      cross_account_role: ::String?,
                                      external_id: ::String?,
                                      db_instance_arn_map: Hash[::String, ::String]
+                                   }?,
+                                   lambda_event_source_mapping_config: {
+                                     timeout_minutes: ::Integer?,
+                                     action: ("enable" | "disable"),
+                                     region_event_source_mappings: Hash[::String, {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String
+                                       }],
+                                     ungraceful: {
+                                       behavior: ("skip")?
+                                     }?
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping")
                                },
                              ]?,
                              workflow_target_action: ("activate" | "deactivate" | "postRecovery"),
@@ -673,9 +685,21 @@ module Aws
                                      cross_account_role: ::String?,
                                      external_id: ::String?,
                                      db_instance_arn_map: Hash[::String, ::String]
+                                   }?,
+                                   lambda_event_source_mapping_config: {
+                                     timeout_minutes: ::Integer?,
+                                     action: ("enable" | "disable"),
+                                     region_event_source_mappings: Hash[::String, {
+                                         cross_account_role: ::String?,
+                                         external_id: ::String?,
+                                         arn: ::String
+                                       }],
+                                     ungraceful: {
+                                       behavior: ("skip")?
+                                     }?
                                    }?
                                  },
-                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
+                                 execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping")
                                },
                              ]?,
                              workflow_target_action: ("activate" | "deactivate" | "postRecovery"),

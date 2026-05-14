@@ -17,13 +17,19 @@ module Aws::RTBFabric
     AcceptLinkRequest = Shapes::StructureShape.new(name: 'AcceptLinkRequest')
     AcceptLinkResponse = Shapes::StructureShape.new(name: 'AcceptLinkResponse')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AcmCertificateArn = Shapes::StringShape.new(name: 'AcmCertificateArn')
     Action = Shapes::UnionShape.new(name: 'Action')
+    AssociateCertificateRequest = Shapes::StructureShape.new(name: 'AssociateCertificateRequest')
+    AssociateCertificateResponse = Shapes::StructureShape.new(name: 'AssociateCertificateResponse')
     AutoScalingGroupName = Shapes::StringShape.new(name: 'AutoScalingGroupName')
     AutoScalingGroupNameList = Shapes::ListShape.new(name: 'AutoScalingGroupNameList')
     AutoScalingGroupsConfiguration = Shapes::StructureShape.new(name: 'AutoScalingGroupsConfiguration')
     AutoScalingGroupsConfigurationRoleArnString = Shapes::StringShape.new(name: 'AutoScalingGroupsConfigurationRoleArnString')
     Base64EncodedCertificateChain = Shapes::StringShape.new(name: 'Base64EncodedCertificateChain')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    CertificateAssociationStatus = Shapes::StringShape.new(name: 'CertificateAssociationStatus')
+    CertificateAssociationSummary = Shapes::StructureShape.new(name: 'CertificateAssociationSummary')
+    CertificateAssociationSummaryList = Shapes::ListShape.new(name: 'CertificateAssociationSummaryList')
     CertificateAuthorityCertificates = Shapes::ListShape.new(name: 'CertificateAuthorityCertificates')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectivityType = Shapes::StringShape.new(name: 'ConnectivityType')
@@ -32,6 +38,8 @@ module Aws::RTBFabric
     CreateLinkRequest = Shapes::StructureShape.new(name: 'CreateLinkRequest')
     CreateLinkResponse = Shapes::StructureShape.new(name: 'CreateLinkResponse')
     CreateLinkResponseCustomerProvidedIdString = Shapes::StringShape.new(name: 'CreateLinkResponseCustomerProvidedIdString')
+    CreateLinkRoutingRuleRequest = Shapes::StructureShape.new(name: 'CreateLinkRoutingRuleRequest')
+    CreateLinkRoutingRuleResponse = Shapes::StructureShape.new(name: 'CreateLinkRoutingRuleResponse')
     CreateOutboundExternalLinkRequest = Shapes::StructureShape.new(name: 'CreateOutboundExternalLinkRequest')
     CreateOutboundExternalLinkResponse = Shapes::StructureShape.new(name: 'CreateOutboundExternalLinkResponse')
     CreateRequesterGatewayRequest = Shapes::StructureShape.new(name: 'CreateRequesterGatewayRequest')
@@ -50,12 +58,16 @@ module Aws::RTBFabric
     DeleteInboundExternalLinkResponse = Shapes::StructureShape.new(name: 'DeleteInboundExternalLinkResponse')
     DeleteLinkRequest = Shapes::StructureShape.new(name: 'DeleteLinkRequest')
     DeleteLinkResponse = Shapes::StructureShape.new(name: 'DeleteLinkResponse')
+    DeleteLinkRoutingRuleRequest = Shapes::StructureShape.new(name: 'DeleteLinkRoutingRuleRequest')
+    DeleteLinkRoutingRuleResponse = Shapes::StructureShape.new(name: 'DeleteLinkRoutingRuleResponse')
     DeleteOutboundExternalLinkRequest = Shapes::StructureShape.new(name: 'DeleteOutboundExternalLinkRequest')
     DeleteOutboundExternalLinkResponse = Shapes::StructureShape.new(name: 'DeleteOutboundExternalLinkResponse')
     DeleteRequesterGatewayRequest = Shapes::StructureShape.new(name: 'DeleteRequesterGatewayRequest')
     DeleteRequesterGatewayResponse = Shapes::StructureShape.new(name: 'DeleteRequesterGatewayResponse')
     DeleteResponderGatewayRequest = Shapes::StructureShape.new(name: 'DeleteResponderGatewayRequest')
     DeleteResponderGatewayResponse = Shapes::StructureShape.new(name: 'DeleteResponderGatewayResponse')
+    DisassociateCertificateRequest = Shapes::StructureShape.new(name: 'DisassociateCertificateRequest')
+    DisassociateCertificateResponse = Shapes::StructureShape.new(name: 'DisassociateCertificateResponse')
     DomainName = Shapes::StringShape.new(name: 'DomainName')
     EksEndpointsConfiguration = Shapes::StructureShape.new(name: 'EksEndpointsConfiguration')
     EksEndpointsConfigurationRoleArnString = Shapes::StringShape.new(name: 'EksEndpointsConfigurationRoleArnString')
@@ -71,10 +83,14 @@ module Aws::RTBFabric
     GatewayId = Shapes::StringShape.new(name: 'GatewayId')
     GatewayIdList = Shapes::ListShape.new(name: 'GatewayIdList')
     GatewayType = Shapes::StringShape.new(name: 'GatewayType')
+    GetCertificateAssociationRequest = Shapes::StructureShape.new(name: 'GetCertificateAssociationRequest')
+    GetCertificateAssociationResponse = Shapes::StructureShape.new(name: 'GetCertificateAssociationResponse')
     GetInboundExternalLinkRequest = Shapes::StructureShape.new(name: 'GetInboundExternalLinkRequest')
     GetInboundExternalLinkResponse = Shapes::StructureShape.new(name: 'GetInboundExternalLinkResponse')
     GetLinkRequest = Shapes::StructureShape.new(name: 'GetLinkRequest')
     GetLinkResponse = Shapes::StructureShape.new(name: 'GetLinkResponse')
+    GetLinkRoutingRuleRequest = Shapes::StructureShape.new(name: 'GetLinkRoutingRuleRequest')
+    GetLinkRoutingRuleResponse = Shapes::StructureShape.new(name: 'GetLinkRoutingRuleResponse')
     GetOutboundExternalLinkRequest = Shapes::StructureShape.new(name: 'GetOutboundExternalLinkRequest')
     GetOutboundExternalLinkResponse = Shapes::StructureShape.new(name: 'GetOutboundExternalLinkResponse')
     GetRequesterGatewayRequest = Shapes::StructureShape.new(name: 'GetRequesterGatewayRequest')
@@ -110,8 +126,16 @@ module Aws::RTBFabric
     LinkId = Shapes::StringShape.new(name: 'LinkId')
     LinkList = Shapes::ListShape.new(name: 'LinkList')
     LinkLogSettings = Shapes::StructureShape.new(name: 'LinkLogSettings')
+    LinkRoutingRuleList = Shapes::ListShape.new(name: 'LinkRoutingRuleList')
+    LinkRoutingRuleSummary = Shapes::StructureShape.new(name: 'LinkRoutingRuleSummary')
     LinkStatus = Shapes::StringShape.new(name: 'LinkStatus')
     LinkTimeoutInMillis = Shapes::IntegerShape.new(name: 'LinkTimeoutInMillis')
+    ListCertificateAssociationsRequest = Shapes::StructureShape.new(name: 'ListCertificateAssociationsRequest')
+    ListCertificateAssociationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListCertificateAssociationsRequestMaxResultsInteger')
+    ListCertificateAssociationsResponse = Shapes::StructureShape.new(name: 'ListCertificateAssociationsResponse')
+    ListLinkRoutingRulesRequest = Shapes::StructureShape.new(name: 'ListLinkRoutingRulesRequest')
+    ListLinkRoutingRulesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListLinkRoutingRulesRequestMaxResultsInteger')
+    ListLinkRoutingRulesResponse = Shapes::StructureShape.new(name: 'ListLinkRoutingRulesResponse')
     ListLinksRequest = Shapes::StructureShape.new(name: 'ListLinksRequest')
     ListLinksResponse = Shapes::StructureShape.new(name: 'ListLinksResponse')
     ListLinksResponseStructure = Shapes::StructureShape.new(name: 'ListLinksResponseStructure')
@@ -138,6 +162,9 @@ module Aws::RTBFabric
     OpenRtbAttributeModuleParametersHoldbackPercentageFloat = Shapes::FloatShape.new(name: 'OpenRtbAttributeModuleParametersHoldbackPercentageFloat')
     Protocol = Shapes::StringShape.new(name: 'Protocol')
     ProtocolList = Shapes::ListShape.new(name: 'ProtocolList')
+    QueryStringKeyValuePair = Shapes::StructureShape.new(name: 'QueryStringKeyValuePair')
+    QueryStringKeyValuePairKeyString = Shapes::StringShape.new(name: 'QueryStringKeyValuePairKeyString')
+    QueryStringKeyValuePairValueString = Shapes::StringShape.new(name: 'QueryStringKeyValuePairValueString')
     RateLimiterModuleParameters = Shapes::StructureShape.new(name: 'RateLimiterModuleParameters')
     RejectLinkRequest = Shapes::StructureShape.new(name: 'RejectLinkRequest')
     RejectLinkResponse = Shapes::StructureShape.new(name: 'RejectLinkResponse')
@@ -152,6 +179,15 @@ module Aws::RTBFabric
     ResponderErrorMaskingLoggingTypes = Shapes::ListShape.new(name: 'ResponderErrorMaskingLoggingTypes')
     ResponderGatewayStatus = Shapes::StringShape.new(name: 'ResponderGatewayStatus')
     RtbTaggableResourceArn = Shapes::StringShape.new(name: 'RtbTaggableResourceArn')
+    RuleCondition = Shapes::StructureShape.new(name: 'RuleCondition')
+    RuleConditionHostHeaderString = Shapes::StringShape.new(name: 'RuleConditionHostHeaderString')
+    RuleConditionHostHeaderWildcardString = Shapes::StringShape.new(name: 'RuleConditionHostHeaderWildcardString')
+    RuleConditionPathExactString = Shapes::StringShape.new(name: 'RuleConditionPathExactString')
+    RuleConditionPathPrefixString = Shapes::StringShape.new(name: 'RuleConditionPathPrefixString')
+    RuleConditionQueryStringExistsString = Shapes::StringShape.new(name: 'RuleConditionQueryStringExistsString')
+    RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RulePriority = Shapes::IntegerShape.new(name: 'RulePriority')
+    RuleStatus = Shapes::StringShape.new(name: 'RuleStatus')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
     StatusCodeMatcher = Shapes::StringShape.new(name: 'StatusCodeMatcher')
@@ -174,6 +210,8 @@ module Aws::RTBFabric
     UpdateLinkModuleFlowResponse = Shapes::StructureShape.new(name: 'UpdateLinkModuleFlowResponse')
     UpdateLinkRequest = Shapes::StructureShape.new(name: 'UpdateLinkRequest')
     UpdateLinkResponse = Shapes::StructureShape.new(name: 'UpdateLinkResponse')
+    UpdateLinkRoutingRuleRequest = Shapes::StructureShape.new(name: 'UpdateLinkRoutingRuleRequest')
+    UpdateLinkRoutingRuleResponse = Shapes::StructureShape.new(name: 'UpdateLinkRoutingRuleResponse')
     UpdateRequesterGatewayRequest = Shapes::StructureShape.new(name: 'UpdateRequesterGatewayRequest')
     UpdateRequesterGatewayRequestDescriptionString = Shapes::StringShape.new(name: 'UpdateRequesterGatewayRequestDescriptionString')
     UpdateRequesterGatewayResponse = Shapes::StructureShape.new(name: 'UpdateRequesterGatewayResponse')
@@ -217,12 +255,30 @@ module Aws::RTBFabric
     Action.add_member_subclass(:unknown, Types::Action::Unknown)
     Action.struct_class = Types::Action
 
+    AssociateCertificateRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    AssociateCertificateRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
+    AssociateCertificateRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    AssociateCertificateRequest.struct_class = Types::AssociateCertificateRequest
+
+    AssociateCertificateResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
+    AssociateCertificateResponse.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
+    AssociateCertificateResponse.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
+    AssociateCertificateResponse.struct_class = Types::AssociateCertificateResponse
+
     AutoScalingGroupNameList.member = Shapes::ShapeRef.new(shape: AutoScalingGroupName)
 
     AutoScalingGroupsConfiguration.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, required: true, location_name: "autoScalingGroupNames"))
     AutoScalingGroupsConfiguration.add_member(:role_arn, Shapes::ShapeRef.new(shape: AutoScalingGroupsConfigurationRoleArnString, required: true, location_name: "roleArn"))
     AutoScalingGroupsConfiguration.add_member(:health_check_config, Shapes::ShapeRef.new(shape: HealthCheckConfig, location_name: "healthCheckConfig"))
     AutoScalingGroupsConfiguration.struct_class = Types::AutoScalingGroupsConfiguration
+
+    CertificateAssociationSummary.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
+    CertificateAssociationSummary.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
+    CertificateAssociationSummary.add_member(:associated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associatedAt"))
+    CertificateAssociationSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    CertificateAssociationSummary.struct_class = Types::CertificateAssociationSummary
+
+    CertificateAssociationSummaryList.member = Shapes::ShapeRef.new(shape: CertificateAssociationSummary)
 
     CertificateAuthorityCertificates.member = Shapes::ShapeRef.new(shape: Base64EncodedCertificateChain)
 
@@ -265,6 +321,19 @@ module Aws::RTBFabric
     CreateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     CreateLinkResponse.add_member(:customer_provided_id, Shapes::ShapeRef.new(shape: CreateLinkResponseCustomerProvidedIdString, location_name: "customerProvidedId"))
     CreateLinkResponse.struct_class = Types::CreateLinkResponse
+
+    CreateLinkRoutingRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    CreateLinkRoutingRuleRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    CreateLinkRoutingRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
+    CreateLinkRoutingRuleRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    CreateLinkRoutingRuleRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    CreateLinkRoutingRuleRequest.struct_class = Types::CreateLinkRoutingRuleRequest
+
+    CreateLinkRoutingRuleResponse.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    CreateLinkRoutingRuleResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
+    CreateLinkRoutingRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    CreateLinkRoutingRuleResponse.struct_class = Types::CreateLinkRoutingRuleResponse
 
     CreateOutboundExternalLinkRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateOutboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -337,6 +406,15 @@ module Aws::RTBFabric
     DeleteLinkResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
     DeleteLinkResponse.struct_class = Types::DeleteLinkResponse
 
+    DeleteLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    DeleteLinkRoutingRuleRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    DeleteLinkRoutingRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "ruleId"))
+    DeleteLinkRoutingRuleRequest.struct_class = Types::DeleteLinkRoutingRuleRequest
+
+    DeleteLinkRoutingRuleResponse.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    DeleteLinkRoutingRuleResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
+    DeleteLinkRoutingRuleResponse.struct_class = Types::DeleteLinkRoutingRuleResponse
+
     DeleteOutboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     DeleteOutboundExternalLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
     DeleteOutboundExternalLinkRequest.struct_class = Types::DeleteOutboundExternalLinkRequest
@@ -358,6 +436,15 @@ module Aws::RTBFabric
     DeleteResponderGatewayResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
     DeleteResponderGatewayResponse.add_member(:status, Shapes::ShapeRef.new(shape: ResponderGatewayStatus, required: true, location_name: "status"))
     DeleteResponderGatewayResponse.struct_class = Types::DeleteResponderGatewayResponse
+
+    DisassociateCertificateRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    DisassociateCertificateRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location: "querystring", location_name: "acmCertificateArn"))
+    DisassociateCertificateRequest.struct_class = Types::DisassociateCertificateRequest
+
+    DisassociateCertificateResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
+    DisassociateCertificateResponse.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
+    DisassociateCertificateResponse.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
+    DisassociateCertificateResponse.struct_class = Types::DisassociateCertificateResponse
 
     EksEndpointsConfiguration.add_member(:endpoints_resource_name, Shapes::ShapeRef.new(shape: KubernetesEndpointsResourceName, required: true, location_name: "endpointsResourceName"))
     EksEndpointsConfiguration.add_member(:endpoints_resource_namespace, Shapes::ShapeRef.new(shape: KubernetesNamespace, required: true, location_name: "endpointsResourceNamespace"))
@@ -383,6 +470,17 @@ module Aws::RTBFabric
     FlowModuleNameList.member = Shapes::ShapeRef.new(shape: FlowModuleName)
 
     GatewayIdList.member = Shapes::ShapeRef.new(shape: GatewayId)
+
+    GetCertificateAssociationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    GetCertificateAssociationRequest.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location: "querystring", location_name: "acmCertificateArn"))
+    GetCertificateAssociationRequest.struct_class = Types::GetCertificateAssociationRequest
+
+    GetCertificateAssociationResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
+    GetCertificateAssociationResponse.add_member(:acm_certificate_arn, Shapes::ShapeRef.new(shape: AcmCertificateArn, required: true, location_name: "acmCertificateArn"))
+    GetCertificateAssociationResponse.add_member(:status, Shapes::ShapeRef.new(shape: CertificateAssociationStatus, required: true, location_name: "status"))
+    GetCertificateAssociationResponse.add_member(:associated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "associatedAt"))
+    GetCertificateAssociationResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
+    GetCertificateAssociationResponse.struct_class = Types::GetCertificateAssociationResponse
 
     GetInboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     GetInboundExternalLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
@@ -422,6 +520,22 @@ module Aws::RTBFabric
     GetLinkResponse.add_member(:http_responder_allowed, Shapes::ShapeRef.new(shape: Boolean, location_name: "httpResponderAllowed"))
     GetLinkResponse.add_member(:timeout_in_millis, Shapes::ShapeRef.new(shape: LinkTimeoutInMillis, location_name: "timeoutInMillis"))
     GetLinkResponse.struct_class = Types::GetLinkResponse
+
+    GetLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    GetLinkRoutingRuleRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    GetLinkRoutingRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "ruleId"))
+    GetLinkRoutingRuleRequest.struct_class = Types::GetLinkRoutingRuleRequest
+
+    GetLinkRoutingRuleResponse.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location_name: "gatewayId"))
+    GetLinkRoutingRuleResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
+    GetLinkRoutingRuleResponse.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    GetLinkRoutingRuleResponse.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
+    GetLinkRoutingRuleResponse.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    GetLinkRoutingRuleResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
+    GetLinkRoutingRuleResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    GetLinkRoutingRuleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    GetLinkRoutingRuleResponse.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
+    GetLinkRoutingRuleResponse.struct_class = Types::GetLinkRoutingRuleResponse
 
     GetOutboundExternalLinkRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     GetOutboundExternalLinkRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
@@ -524,6 +638,35 @@ module Aws::RTBFabric
     LinkLogSettings.add_member(:application_logs, Shapes::ShapeRef.new(shape: LinkApplicationLogConfiguration, required: true, location_name: "applicationLogs"))
     LinkLogSettings.struct_class = Types::LinkLogSettings
 
+    LinkRoutingRuleList.member = Shapes::ShapeRef.new(shape: LinkRoutingRuleSummary)
+
+    LinkRoutingRuleSummary.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    LinkRoutingRuleSummary.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
+    LinkRoutingRuleSummary.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    LinkRoutingRuleSummary.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
+    LinkRoutingRuleSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
+    LinkRoutingRuleSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    LinkRoutingRuleSummary.struct_class = Types::LinkRoutingRuleSummary
+
+    ListCertificateAssociationsRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    ListCertificateAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListCertificateAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListCertificateAssociationsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListCertificateAssociationsRequest.struct_class = Types::ListCertificateAssociationsRequest
+
+    ListCertificateAssociationsResponse.add_member(:certificate_associations, Shapes::ShapeRef.new(shape: CertificateAssociationSummaryList, required: true, location_name: "certificateAssociations"))
+    ListCertificateAssociationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListCertificateAssociationsResponse.struct_class = Types::ListCertificateAssociationsResponse
+
+    ListLinkRoutingRulesRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    ListLinkRoutingRulesRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    ListLinkRoutingRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListLinkRoutingRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLinkRoutingRulesRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListLinkRoutingRulesRequest.struct_class = Types::ListLinkRoutingRulesRequest
+
+    ListLinkRoutingRulesResponse.add_member(:rules, Shapes::ShapeRef.new(shape: LinkRoutingRuleList, location_name: "rules"))
+    ListLinkRoutingRulesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListLinkRoutingRulesResponse.struct_class = Types::ListLinkRoutingRulesResponse
+
     ListLinksRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
     ListLinksRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
     ListLinksRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
@@ -616,6 +759,10 @@ module Aws::RTBFabric
 
     ProtocolList.member = Shapes::ShapeRef.new(shape: Protocol)
 
+    QueryStringKeyValuePair.add_member(:key, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairKeyString, required: true, location_name: "key"))
+    QueryStringKeyValuePair.add_member(:value, Shapes::ShapeRef.new(shape: QueryStringKeyValuePairValueString, required: true, location_name: "value"))
+    QueryStringKeyValuePair.struct_class = Types::QueryStringKeyValuePair
+
     RateLimiterModuleParameters.add_member(:tps, Shapes::ShapeRef.new(shape: Float, location_name: "tps"))
     RateLimiterModuleParameters.struct_class = Types::RateLimiterModuleParameters
 
@@ -649,6 +796,14 @@ module Aws::RTBFabric
     ResponderErrorMaskingForHttpCode.struct_class = Types::ResponderErrorMaskingForHttpCode
 
     ResponderErrorMaskingLoggingTypes.member = Shapes::ShapeRef.new(shape: ResponderErrorMaskingLoggingType)
+
+    RuleCondition.add_member(:host_header, Shapes::ShapeRef.new(shape: RuleConditionHostHeaderString, location_name: "hostHeader"))
+    RuleCondition.add_member(:host_header_wildcard, Shapes::ShapeRef.new(shape: RuleConditionHostHeaderWildcardString, location_name: "hostHeaderWildcard"))
+    RuleCondition.add_member(:path_prefix, Shapes::ShapeRef.new(shape: RuleConditionPathPrefixString, location_name: "pathPrefix"))
+    RuleCondition.add_member(:path_exact, Shapes::ShapeRef.new(shape: RuleConditionPathExactString, location_name: "pathExact"))
+    RuleCondition.add_member(:query_string_equals, Shapes::ShapeRef.new(shape: QueryStringKeyValuePair, location_name: "queryStringEquals"))
+    RuleCondition.add_member(:query_string_exists, Shapes::ShapeRef.new(shape: RuleConditionQueryStringExistsString, location_name: "queryStringExists"))
+    RuleCondition.struct_class = Types::RuleCondition
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
@@ -696,6 +851,18 @@ module Aws::RTBFabric
     UpdateLinkResponse.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location_name: "linkId"))
     UpdateLinkResponse.add_member(:status, Shapes::ShapeRef.new(shape: LinkStatus, required: true, location_name: "status"))
     UpdateLinkResponse.struct_class = Types::UpdateLinkResponse
+
+    UpdateLinkRoutingRuleRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
+    UpdateLinkRoutingRuleRequest.add_member(:link_id, Shapes::ShapeRef.new(shape: LinkId, required: true, location: "uri", location_name: "linkId"))
+    UpdateLinkRoutingRuleRequest.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location: "uri", location_name: "ruleId"))
+    UpdateLinkRoutingRuleRequest.add_member(:priority, Shapes::ShapeRef.new(shape: RulePriority, required: true, location_name: "priority"))
+    UpdateLinkRoutingRuleRequest.add_member(:conditions, Shapes::ShapeRef.new(shape: RuleCondition, required: true, location_name: "conditions"))
+    UpdateLinkRoutingRuleRequest.struct_class = Types::UpdateLinkRoutingRuleRequest
+
+    UpdateLinkRoutingRuleResponse.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId, required: true, location_name: "ruleId"))
+    UpdateLinkRoutingRuleResponse.add_member(:status, Shapes::ShapeRef.new(shape: RuleStatus, required: true, location_name: "status"))
+    UpdateLinkRoutingRuleResponse.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    UpdateLinkRoutingRuleResponse.struct_class = Types::UpdateLinkRoutingRuleResponse
 
     UpdateRequesterGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, required: true, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateRequesterGatewayRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: GatewayId, required: true, location: "uri", location_name: "gatewayId"))
@@ -759,6 +926,21 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:associate_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateCertificate"
+        o.http_method = "POST"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/certificate"
+        o.input = Shapes::ShapeRef.new(shape: AssociateCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_inbound_external_link, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateInboundExternalLink"
         o.http_method = "POST"
@@ -789,6 +971,21 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:create_link_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateLinkRoutingRule"
+        o.http_method = "POST"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule"
+        o.input = Shapes::ShapeRef.new(shape: CreateLinkRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateLinkRoutingRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:create_outbound_external_link, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateOutboundExternalLink"
         o.http_method = "POST"
@@ -799,6 +996,7 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -859,6 +1057,20 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:delete_link_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteLinkRoutingRule"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteLinkRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteLinkRoutingRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:delete_outbound_external_link, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteOutboundExternalLink"
         o.http_method = "DELETE"
@@ -882,6 +1094,7 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -892,6 +1105,35 @@ module Aws::RTBFabric
         o.http_request_uri = "/responder-gateway/{gatewayId}"
         o.input = Shapes::ShapeRef.new(shape: DeleteResponderGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: DeleteResponderGatewayResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:disassociate_certificate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateCertificate"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/certificate"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateCertificateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateCertificateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_certificate_association, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCertificateAssociation"
+        o.http_method = "GET"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/certificate"
+        o.input = Shapes::ShapeRef.new(shape: GetCertificateAssociationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCertificateAssociationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -922,6 +1164,19 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_link_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetLinkRoutingRule"
+        o.http_method = "GET"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+        o.input = Shapes::ShapeRef.new(shape: GetLinkRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetLinkRoutingRuleResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -963,6 +1218,44 @@ module Aws::RTBFabric
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:list_certificate_associations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCertificateAssociations"
+        o.http_method = "GET"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/certificates"
+        o.input = Shapes::ShapeRef.new(shape: ListCertificateAssociationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListCertificateAssociationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_link_routing_rules, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListLinkRoutingRules"
+        o.http_method = "GET"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/link/{linkId}/routing-rules"
+        o.input = Shapes::ShapeRef.new(shape: ListLinkRoutingRulesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListLinkRoutingRulesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_links, Seahorse::Model::Operation.new.tap do |o|
@@ -1090,6 +1383,20 @@ module Aws::RTBFabric
         o.input = Shapes::ShapeRef.new(shape: UpdateLinkModuleFlowRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateLinkModuleFlowResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:update_link_routing_rule, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateLinkRoutingRule"
+        o.http_method = "PUT"
+        o.http_request_uri = "/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateLinkRoutingRuleRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateLinkRoutingRuleResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

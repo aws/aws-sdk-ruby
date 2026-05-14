@@ -54,7 +54,7 @@ module Aws::ChimeSDKMediaPipelines
   autoload :EndpointProvider, 'aws-sdk-chimesdkmediapipelines/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-chimesdkmediapipelines/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

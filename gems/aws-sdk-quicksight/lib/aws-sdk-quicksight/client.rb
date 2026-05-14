@@ -2226,6 +2226,11 @@ module Aws::QuickSight
     #       analysis: "DENY", # accepts DENY
     #       automate: "DENY", # accepts DENY
     #       flow: "DENY", # accepts DENY
+    #       apps: "DENY", # accepts DENY
+    #       create_and_update_apps: "DENY", # accepts DENY
+    #       share_apps: "DENY", # accepts DENY
+    #       invoke_apps_ai_inference: "DENY", # accepts DENY
+    #       access_apps_native_data_store: "DENY", # accepts DENY
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
@@ -8072,6 +8077,11 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.analysis #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.automate #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.flow #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.invoke_apps_ai_inference #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.access_apps_native_data_store #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.perform_flow_ui_task #=> String, one of "DENY"
@@ -12538,6 +12548,11 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.analysis #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.automate #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.flow #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.invoke_apps_ai_inference #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.access_apps_native_data_store #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.perform_flow_ui_task #=> String, one of "DENY"
@@ -18124,6 +18139,11 @@ module Aws::QuickSight
     #       analysis: "DENY", # accepts DENY
     #       automate: "DENY", # accepts DENY
     #       flow: "DENY", # accepts DENY
+    #       apps: "DENY", # accepts DENY
+    #       create_and_update_apps: "DENY", # accepts DENY
+    #       share_apps: "DENY", # accepts DENY
+    #       invoke_apps_ai_inference: "DENY", # accepts DENY
+    #       access_apps_native_data_store: "DENY", # accepts DENY
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
@@ -22162,7 +22182,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.179.0'
+      context[:gem_version] = '1.180.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -637,6 +637,111 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Creates a new change data capture (CDC) stream for a cluster. The
+    # stream captures database changes and delivers them to the specified
+    # target destination.
+    #
+    # **Required permissions**
+    #
+    # dsql:CreateStream
+    #
+    # : Permission to create a new stream.
+    #
+    #   Resources: `arn:aws:dsql:region:account-id:cluster/cluster-id`
+    #
+    # iam:PassRole
+    #
+    # : Permission to pass the IAM role specified in the target definition
+    #   to the service.
+    #
+    #   Resources: ARN of the IAM role specified in
+    #   `targetDefinition.kinesis.roleArn`
+    #
+    # kms:Decrypt
+    #
+    # : Required when the cluster uses a customer managed KMS key (CMK).
+    #   Permission to decrypt data using the cluster's CMK.
+    #
+    #   Resources: ARN of the KMS key used by the cluster
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The ID of the cluster for which to create the stream.
+    #
+    # @option params [required, Types::TargetDefinition] :target_definition
+    #   The target destination configuration for the stream. Contains Kinesis
+    #   stream configuration including stream ARN and IAM role ARN.
+    #
+    # @option params [required, String] :ordering
+    #   The ordering mode for the stream. Determines how change events are
+    #   ordered when delivered to the target.
+    #
+    # @option params [required, String] :format
+    #   The format of the stream records.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   A map of key and value pairs to use to tag your stream.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you don't specify a client token, the Amazon Web Services SDK
+    #   automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateStreamOutput#cluster_identifier #cluster_identifier} => String
+    #   * {Types::CreateStreamOutput#stream_identifier #stream_identifier} => String
+    #   * {Types::CreateStreamOutput#arn #arn} => String
+    #   * {Types::CreateStreamOutput#status #status} => String
+    #   * {Types::CreateStreamOutput#creation_time #creation_time} => Time
+    #   * {Types::CreateStreamOutput#ordering #ordering} => String
+    #   * {Types::CreateStreamOutput#format #format} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_stream({
+    #     cluster_identifier: "ClusterId", # required
+    #     target_definition: { # required
+    #       kinesis: {
+    #         stream_arn: "KinesisStreamArn", # required
+    #         role_arn: "RoleArn", # required
+    #       },
+    #     },
+    #     ordering: "UNORDERED", # required, accepts UNORDERED
+    #     format: "JSON", # required, accepts JSON
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.stream_identifier #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED", "IMPAIRED"
+    #   resp.creation_time #=> Time
+    #   resp.ordering #=> String, one of "UNORDERED"
+    #   resp.format #=> String, one of "JSON"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateStream AWS API Documentation
+    #
+    # @overload create_stream(params = {})
+    # @param [Hash] params ({})
+    def create_stream(params = {}, options = {})
+      req = build_request(:create_stream, params)
+      req.send_request(options)
+    end
+
     # Deletes a cluster in Amazon Aurora DSQL.
     #
     # @option params [required, String] :identifier
@@ -736,6 +841,61 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Deletes a stream from a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The ID of the cluster containing the stream to delete.
+    #
+    # @option params [required, String] :stream_identifier
+    #   The ID of the stream to delete.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you don't specify a client token, the Amazon Web Services SDK
+    #   automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::DeleteStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteStreamOutput#cluster_identifier #cluster_identifier} => String
+    #   * {Types::DeleteStreamOutput#stream_identifier #stream_identifier} => String
+    #   * {Types::DeleteStreamOutput#arn #arn} => String
+    #   * {Types::DeleteStreamOutput#status #status} => String
+    #   * {Types::DeleteStreamOutput#creation_time #creation_time} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_stream({
+    #     cluster_identifier: "ClusterId", # required
+    #     stream_identifier: "StreamId", # required
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.stream_identifier #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED", "IMPAIRED"
+    #   resp.creation_time #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteStream AWS API Documentation
+    #
+    # @overload delete_stream(params = {})
+    # @param [Hash] params ({})
+    def delete_stream(params = {}, options = {})
+      req = build_request(:delete_stream, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a cluster.
     #
     # @option params [required, String] :identifier
@@ -830,6 +990,65 @@ module Aws::DSQL
       req.send_request(options)
     end
 
+    # Retrieves information about a stream.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The ID of the cluster containing the stream to retrieve.
+    #
+    # @option params [required, String] :stream_identifier
+    #   The ID of the stream to retrieve.
+    #
+    # @return [Types::GetStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStreamOutput#cluster_identifier #cluster_identifier} => String
+    #   * {Types::GetStreamOutput#stream_identifier #stream_identifier} => String
+    #   * {Types::GetStreamOutput#arn #arn} => String
+    #   * {Types::GetStreamOutput#status #status} => String
+    #   * {Types::GetStreamOutput#creation_time #creation_time} => Time
+    #   * {Types::GetStreamOutput#ordering #ordering} => String
+    #   * {Types::GetStreamOutput#format #format} => String
+    #   * {Types::GetStreamOutput#target_definition #target_definition} => Types::TargetDefinition
+    #   * {Types::GetStreamOutput#status_reason #status_reason} => Types::StatusReason
+    #   * {Types::GetStreamOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_stream({
+    #     cluster_identifier: "ClusterId", # required
+    #     stream_identifier: "StreamId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.cluster_identifier #=> String
+    #   resp.stream_identifier #=> String
+    #   resp.arn #=> String
+    #   resp.status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED", "IMPAIRED"
+    #   resp.creation_time #=> Time
+    #   resp.ordering #=> String, one of "UNORDERED"
+    #   resp.format #=> String, one of "JSON"
+    #   resp.target_definition.kinesis.stream_arn #=> String
+    #   resp.target_definition.kinesis.role_arn #=> String
+    #   resp.status_reason.error #=> String, one of "KINESIS_THROUGHPUT_EXCEEDED", "KINESIS_STREAM_NOT_FOUND", "ROLE_ACCESS_DENIED", "KINESIS_ACCESS_DENIED", "KINESIS_KMS_ACCESS_DENIED", "KINESIS_OVERSIZE_RECORD", "CLUSTER_CMK_INACCESSIBLE", "INTERNAL_ERROR"
+    #   resp.status_reason.updated_at #=> Time
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * stream_active
+    #   * stream_not_exists
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetStream AWS API Documentation
+    #
+    # @overload get_stream(params = {})
+    # @param [Hash] params ({})
+    def get_stream(params = {}, options = {})
+      req = build_request(:get_stream, params)
+      req.send_request(options)
+    end
+
     # Retrieves the VPC endpoint service name.
     #
     # @option params [required, String] :identifier
@@ -912,6 +1131,55 @@ module Aws::DSQL
     # @param [Hash] params ({})
     def list_clusters(params = {}, options = {})
       req = build_request(:list_clusters, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a list of streams for a cluster.
+    #
+    # @option params [required, String] :cluster_identifier
+    #   The ID of the cluster for which to list streams.
+    #
+    # @option params [Integer] :max_results
+    #   An optional parameter that specifies the maximum number of results to
+    #   return. You can use nextToken to display the next page of results.
+    #   Default: 10.
+    #
+    # @option params [String] :next_token
+    #   If your initial ListStreams operation returns a nextToken, you can
+    #   include the returned nextToken in following ListStreams operations,
+    #   which returns results in the next page.
+    #
+    # @return [Types::ListStreamsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListStreamsOutput#next_token #next_token} => String
+    #   * {Types::ListStreamsOutput#streams #streams} => Array&lt;Types::StreamSummary&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_streams({
+    #     cluster_identifier: "ClusterId", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.next_token #=> String
+    #   resp.streams #=> Array
+    #   resp.streams[0].cluster_identifier #=> String
+    #   resp.streams[0].stream_identifier #=> String
+    #   resp.streams[0].arn #=> String
+    #   resp.streams[0].creation_time #=> Time
+    #   resp.streams[0].status #=> String, one of "CREATING", "ACTIVE", "DELETING", "DELETED", "FAILED", "IMPAIRED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ListStreams AWS API Documentation
+    #
+    # @overload list_streams(params = {})
+    # @param [Hash] params ({})
+    def list_streams(params = {}, options = {})
+      req = build_request(:list_streams, params)
       req.send_request(options)
     end
 
@@ -1247,7 +1515,7 @@ module Aws::DSQL
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dsql'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -1317,6 +1585,8 @@ module Aws::DSQL
     # | ------------------ | -------------------- | -------- | ------------- |
     # | cluster_active     | {Client#get_cluster} | 2        | 60            |
     # | cluster_not_exists | {Client#get_cluster} | 2        | 60            |
+    # | stream_active      | {Client#get_stream}  | 2        | 60            |
+    # | stream_not_exists  | {Client#get_stream}  | 2        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -1368,7 +1638,9 @@ module Aws::DSQL
     def waiters
       {
         cluster_active: Waiters::ClusterActive,
-        cluster_not_exists: Waiters::ClusterNotExists
+        cluster_not_exists: Waiters::ClusterNotExists,
+        stream_active: Waiters::StreamActive,
+        stream_not_exists: Waiters::StreamNotExists
       }
     end
 

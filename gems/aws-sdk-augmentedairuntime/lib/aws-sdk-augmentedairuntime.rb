@@ -54,7 +54,7 @@ module Aws::AugmentedAIRuntime
   autoload :EndpointProvider, 'aws-sdk-augmentedairuntime/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-augmentedairuntime/endpoints'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

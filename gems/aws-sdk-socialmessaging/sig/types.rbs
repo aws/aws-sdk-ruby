@@ -27,6 +27,7 @@ module Aws::SocialMessaging
     class AssociateWhatsAppBusinessAccountOutput
       attr_accessor signup_callback_result: Types::WhatsAppSignupCallbackResult
       attr_accessor status_code: ::Integer
+      attr_accessor linked_whats_app_business_account_id: ::String
       SENSITIVE: []
     end
 
@@ -141,6 +142,8 @@ module Aws::SocialMessaging
     class GetWhatsAppMessageTemplateInput
       attr_accessor meta_template_id: ::String
       attr_accessor id: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_language_code: ::String
       SENSITIVE: []
     end
 
@@ -202,6 +205,7 @@ module Aws::SocialMessaging
       attr_accessor link_date: ::Time
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
+      attr_accessor marketing_messages_onboarding_status: ::String
       attr_accessor phone_numbers: ::Array[Types::WhatsAppPhoneNumberSummary]
       SENSITIVE: []
     end
@@ -222,6 +226,7 @@ module Aws::SocialMessaging
       attr_accessor link_date: ::Time
       attr_accessor waba_name: ::String
       attr_accessor event_destinations: ::Array[Types::WhatsAppBusinessAccountEventDestination]
+      attr_accessor marketing_messages_onboarding_status: ::String
       SENSITIVE: []
     end
 
@@ -396,6 +401,8 @@ module Aws::SocialMessaging
     class UpdateWhatsAppMessageTemplateInput
       attr_accessor id: ::String
       attr_accessor meta_template_id: ::String
+      attr_accessor template_name: ::String
+      attr_accessor template_language_code: ::String
       attr_accessor parameter_format: ::String
       attr_accessor template_category: ::String
       attr_accessor template_components: ::String

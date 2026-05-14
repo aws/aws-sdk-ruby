@@ -1,9 +1,14 @@
 Unreleased Changes
 ------------------
 
-* Feature - Add YJIT & ZJIT tracking to user agent.
-* Issue - Fix error messaging in SSO OIDC.
 * Feature - Add `AWS_NEW_RETRIES_2026` environment variable to opt-in to updated `standard` retry mode with reduced backoff intervals.
+
+3.247.0 (2026-05-13)
+------------------
+
+* Feature - Add YJIT & ZJIT tracking to user agent.
+
+* Issue - Fix error messaging in SSO OIDC.
 
 3.246.0 (2026-04-23)
 ------------------

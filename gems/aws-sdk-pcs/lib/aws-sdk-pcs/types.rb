@@ -451,18 +451,25 @@ module Aws::PCS
     #
     # @!attribute [rw] purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS
-    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   supports On-Demand Instances, Spot Instances, Interruptible Capacity
+    #   Reservations, On-Demand Capacity Reservations, and Amazon EC2
     #   Capacity Blocks for ML. For more information, see [Amazon EC2
     #   billing and purchasing options][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*. For more information about PCS support for
     #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
-    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
-    #   it defaults to On-Demand.
+    #   PCS][2] in the *PCS User Guide*. For more information about PCS
+    #   support for interruptible capacity reservations, see [Using I-ODCRs
+    #   with PCS][3] in the *PCS User Guide*. Choose On-Demand if you plan
+    #   to use an On-Demand Capacity Reservation (ODCR). For more
+    #   information, see [Using ODCRs with PCS][4]. If you don't provide
+    #   this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+    #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
+    #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
@@ -768,18 +775,25 @@ module Aws::PCS
     #
     # @!attribute [rw] purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS
-    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   supports On-Demand Instances, Spot Instances, Interruptible Capacity
+    #   Reservations, On-Demand Capacity Reservations, and Amazon EC2
     #   Capacity Blocks for ML. For more information, see [Amazon EC2
     #   billing and purchasing options][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*. For more information about PCS support for
     #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
-    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
-    #   it defaults to On-Demand.
+    #   PCS][2] in the *PCS User Guide*. For more information about PCS
+    #   support for interruptible capacity reservations, see [Using I-ODCRs
+    #   with PCS][3] in the *PCS User Guide*. Choose On-Demand if you plan
+    #   to use an On-Demand Capacity Reservation (ODCR). For more
+    #   information, see [Using ODCRs with PCS][4]. If you don't provide
+    #   this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+    #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
+    #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
     # @!attribute [rw] custom_launch_template
@@ -2273,18 +2287,25 @@ module Aws::PCS
     #
     # @!attribute [rw] purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS
-    #   supports On-Demand Instances, Spot Instances, and Amazon EC2
+    #   supports On-Demand Instances, Spot Instances, Interruptible Capacity
+    #   Reservations, On-Demand Capacity Reservations, and Amazon EC2
     #   Capacity Blocks for ML. For more information, see [Amazon EC2
     #   billing and purchasing options][1] in the *Amazon Elastic Compute
     #   Cloud User Guide*. For more information about PCS support for
     #   Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with
-    #   PCS][2] in the *PCS User Guide*. If you don't provide this option,
-    #   it defaults to On-Demand.
+    #   PCS][2] in the *PCS User Guide*. For more information about PCS
+    #   support for interruptible capacity reservations, see [Using I-ODCRs
+    #   with PCS][3] in the *PCS User Guide*. Choose On-Demand if you plan
+    #   to use an On-Demand Capacity Reservation (ODCR). For more
+    #   information, see [Using ODCRs with PCS][4]. If you don't provide
+    #   this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+    #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
+    #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #   @return [String]
     #
     # @!attribute [rw] spot_options

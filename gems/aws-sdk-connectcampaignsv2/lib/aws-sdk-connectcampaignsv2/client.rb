@@ -610,6 +610,7 @@ module Aws::ConnectCampaignsV2
     #       local_time_zone_config: { # required
     #         default_time_zone: "TimeZone",
     #         local_time_zone_detection: ["ZIP_CODE"], # accepts ZIP_CODE, AREA_CODE
+    #         local_time_zone_detection_scope: "PRIMARY_ONLY", # accepts PRIMARY_ONLY, ALL_AVAILABLE
     #       },
     #       telephony: {
     #         open_hours: { # required
@@ -997,6 +998,7 @@ module Aws::ConnectCampaignsV2
     #   resp.campaign.communication_time_config.local_time_zone_config.default_time_zone #=> String
     #   resp.campaign.communication_time_config.local_time_zone_config.local_time_zone_detection #=> Array
     #   resp.campaign.communication_time_config.local_time_zone_config.local_time_zone_detection[0] #=> String, one of "ZIP_CODE", "AREA_CODE"
+    #   resp.campaign.communication_time_config.local_time_zone_config.local_time_zone_detection_scope #=> String, one of "PRIMARY_ONLY", "ALL_AVAILABLE"
     #   resp.campaign.communication_time_config.telephony.open_hours.daily_hours #=> Hash
     #   resp.campaign.communication_time_config.telephony.open_hours.daily_hours["DayOfWeek"] #=> Array
     #   resp.campaign.communication_time_config.telephony.open_hours.daily_hours["DayOfWeek"][0].start_time #=> String
@@ -1872,6 +1874,7 @@ module Aws::ConnectCampaignsV2
     #       local_time_zone_config: { # required
     #         default_time_zone: "TimeZone",
     #         local_time_zone_detection: ["ZIP_CODE"], # accepts ZIP_CODE, AREA_CODE
+    #         local_time_zone_detection_scope: "PRIMARY_ONLY", # accepts PRIMARY_ONLY, ALL_AVAILABLE
     #       },
     #       telephony: {
     #         open_hours: { # required
@@ -2131,7 +2134,7 @@ module Aws::ConnectCampaignsV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignsv2'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.25.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

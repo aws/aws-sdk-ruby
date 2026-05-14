@@ -76,6 +76,9 @@ module Aws::ARCRegionswitch
     EksResourceScalingUngraceful = Shapes::StructureShape.new(name: 'EksResourceScalingUngraceful')
     EksResourceScalingUngracefulMinimumSuccessPercentageInteger = Shapes::IntegerShape.new(name: 'EksResourceScalingUngracefulMinimumSuccessPercentageInteger')
     EvaluationStatus = Shapes::StringShape.new(name: 'EvaluationStatus')
+    EventSourceMapping = Shapes::StructureShape.new(name: 'EventSourceMapping')
+    EventSourceMappingAction = Shapes::StringShape.new(name: 'EventSourceMappingAction')
+    EventSourceMappingArn = Shapes::StringShape.new(name: 'EventSourceMappingArn')
     ExecutionAction = Shapes::StringShape.new(name: 'ExecutionAction')
     ExecutionApprovalConfiguration = Shapes::StructureShape.new(name: 'ExecutionApprovalConfiguration')
     ExecutionApprovalConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'ExecutionApprovalConfigurationTimeoutMinutesInteger')
@@ -119,6 +122,10 @@ module Aws::ARCRegionswitch
     KubernetesScalingApps = Shapes::ListShape.new(name: 'KubernetesScalingApps')
     KubernetesScalingResource = Shapes::StructureShape.new(name: 'KubernetesScalingResource')
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
+    LambdaEventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'LambdaEventSourceMappingConfiguration')
+    LambdaEventSourceMappingConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'LambdaEventSourceMappingConfigurationTimeoutMinutesInteger')
+    LambdaEventSourceMappingUngraceful = Shapes::StructureShape.new(name: 'LambdaEventSourceMappingUngraceful')
+    LambdaEventSourceMappingUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaEventSourceMappingUngracefulBehavior')
     LambdaList = Shapes::ListShape.new(name: 'LambdaList')
     LambdaUngraceful = Shapes::StructureShape.new(name: 'LambdaUngraceful')
     LambdaUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaUngracefulBehavior')
@@ -161,6 +168,7 @@ module Aws::ARCRegionswitch
     RecoveryExecutionId = Shapes::StringShape.new(name: 'RecoveryExecutionId')
     Region = Shapes::StringShape.new(name: 'Region')
     RegionAndRoutingControls = Shapes::MapShape.new(name: 'RegionAndRoutingControls')
+    RegionEventSourceMappingMap = Shapes::MapShape.new(name: 'RegionEventSourceMappingMap')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionSwitchPlanConfiguration = Shapes::StructureShape.new(name: 'RegionSwitchPlanConfiguration')
     RegionToRunIn = Shapes::StringShape.new(name: 'RegionToRunIn')
@@ -390,6 +398,11 @@ module Aws::ARCRegionswitch
     EksResourceScalingUngraceful.add_member(:minimum_success_percentage, Shapes::ShapeRef.new(shape: EksResourceScalingUngracefulMinimumSuccessPercentageInteger, required: true, location_name: "minimumSuccessPercentage"))
     EksResourceScalingUngraceful.struct_class = Types::EksResourceScalingUngraceful
 
+    EventSourceMapping.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    EventSourceMapping.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    EventSourceMapping.add_member(:arn, Shapes::ShapeRef.new(shape: EventSourceMappingArn, required: true, location_name: "arn"))
+    EventSourceMapping.struct_class = Types::EventSourceMapping
+
     ExecutionApprovalConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: ExecutionApprovalConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
     ExecutionApprovalConfiguration.add_member(:approval_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "approvalRole"))
     ExecutionApprovalConfiguration.struct_class = Types::ExecutionApprovalConfiguration
@@ -407,6 +420,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:document_db_config, Shapes::ShapeRef.new(shape: DocumentDbConfiguration, location_name: "documentDbConfig"))
     ExecutionBlockConfiguration.add_member(:rds_promote_read_replica_config, Shapes::ShapeRef.new(shape: RdsPromoteReadReplicaConfiguration, location_name: "rdsPromoteReadReplicaConfig"))
     ExecutionBlockConfiguration.add_member(:rds_create_cross_region_read_replica_config, Shapes::ShapeRef.new(shape: RdsCreateCrossRegionReplicaConfiguration, location_name: "rdsCreateCrossRegionReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:lambda_event_source_mapping_config, Shapes::ShapeRef.new(shape: LambdaEventSourceMappingConfiguration, location_name: "lambdaEventSourceMappingConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -421,6 +435,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:document_db_config, Types::ExecutionBlockConfiguration::DocumentDbConfig)
     ExecutionBlockConfiguration.add_member_subclass(:rds_promote_read_replica_config, Types::ExecutionBlockConfiguration::RdsPromoteReadReplicaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:rds_create_cross_region_read_replica_config, Types::ExecutionBlockConfiguration::RdsCreateCrossRegionReadReplicaConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:lambda_event_source_mapping_config, Types::ExecutionBlockConfiguration::LambdaEventSourceMappingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -532,6 +547,15 @@ module Aws::ARCRegionswitch
     KubernetesScalingResource.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     KubernetesScalingResource.add_member(:hpa_name, Shapes::ShapeRef.new(shape: String, location_name: "hpaName"))
     KubernetesScalingResource.struct_class = Types::KubernetesScalingResource
+
+    LambdaEventSourceMappingConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: LambdaEventSourceMappingConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    LambdaEventSourceMappingConfiguration.add_member(:action, Shapes::ShapeRef.new(shape: EventSourceMappingAction, required: true, location_name: "action"))
+    LambdaEventSourceMappingConfiguration.add_member(:region_event_source_mappings, Shapes::ShapeRef.new(shape: RegionEventSourceMappingMap, required: true, location_name: "regionEventSourceMappings"))
+    LambdaEventSourceMappingConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: LambdaEventSourceMappingUngraceful, location_name: "ungraceful"))
+    LambdaEventSourceMappingConfiguration.struct_class = Types::LambdaEventSourceMappingConfiguration
+
+    LambdaEventSourceMappingUngraceful.add_member(:behavior, Shapes::ShapeRef.new(shape: LambdaEventSourceMappingUngracefulBehavior, location_name: "behavior"))
+    LambdaEventSourceMappingUngraceful.struct_class = Types::LambdaEventSourceMappingUngraceful
 
     LambdaList.member = Shapes::ShapeRef.new(shape: Lambdas)
 
@@ -653,6 +677,9 @@ module Aws::ARCRegionswitch
 
     RegionAndRoutingControls.key = Shapes::ShapeRef.new(shape: String)
     RegionAndRoutingControls.value = Shapes::ShapeRef.new(shape: ArcRoutingControlStates)
+
+    RegionEventSourceMappingMap.key = Shapes::ShapeRef.new(shape: Region)
+    RegionEventSourceMappingMap.value = Shapes::ShapeRef.new(shape: EventSourceMapping)
 
     RegionList.member = Shapes::ShapeRef.new(shape: Region)
 
