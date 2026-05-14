@@ -119,7 +119,7 @@ module AwsSdkCodeGenerator
           y.yield("#{prefix}/params.rbs", Views::RBS::Params.new(
             service_name: @service.name,
             api: @service.api,
-            options: { aliased_shapes: aliased_shapes }
+            aliased_shapes: aliased_shapes
           ).render)
         end
         unless @service.h2_required_setting?

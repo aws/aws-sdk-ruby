@@ -77,7 +77,7 @@ module AwsSdkCodeGenerator
 
         # If this shape should be aliased, emit the alias reference
         if @options[:aliased_shapes]&.include?(ref['shape'])
-          alias_name = Underscore.underscore(ref['shape'])
+          alias_name = underscore(ref['shape'])
           return "Params::#{alias_name}"
         end
 

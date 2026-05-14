@@ -31,7 +31,7 @@ module AwsSdkCodeGenerator
               options: { aliased_shapes: aliased_set - [shape_name] }
             )
             {
-              'name' => Underscore.underscore(shape_name),
+              'name' => underscore(shape_name),
               'definition' => builder.format_as_alias(indent: '    '),
             }
           end
