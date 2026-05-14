@@ -19,7 +19,7 @@ module Aws
           private_constant :ENCODINGS_TO_FIX
 
           # A regular expression to match detect errors in the response body
-          ERROR_PATTERN = /<\?xml\s[^>]*\?>\s*<Error>/.freeze
+          ERROR_PATTERN = /\A\s*(<\?xml[^>]*\?>\s*)?<Error>/.freeze
           private_constant :ERROR_PATTERN
 
           # A regular expression to match an error message in the response body
