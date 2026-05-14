@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix name collision between modeled `detailed_message` error member and Ruby 3.2+ `Exception#detailed_message`. Error objects now properly render `full_message` on Ruby 3.2+.
+
 1.42.0 (2026-05-13)
 ------------------
 
