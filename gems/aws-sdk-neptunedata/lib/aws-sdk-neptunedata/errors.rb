@@ -78,14 +78,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -109,14 +103,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -140,14 +128,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -175,14 +157,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -206,14 +182,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -241,14 +211,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -276,14 +240,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -311,14 +269,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -342,14 +294,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -377,14 +323,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -408,14 +348,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -439,14 +373,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -470,14 +398,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -501,14 +423,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -532,14 +448,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -563,14 +473,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -594,14 +498,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -625,14 +523,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -660,14 +552,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -691,14 +577,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -722,14 +602,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -753,14 +627,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -784,14 +652,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -819,14 +681,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -850,14 +706,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -881,14 +731,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -912,14 +756,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -947,14 +785,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -978,14 +810,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -1009,14 +835,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -1040,14 +860,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -1075,14 +889,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -1110,14 +918,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
@@ -1145,14 +947,8 @@ module Aws::Neptunedata
       end
 
       # @return [String]
-      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
-      #   Use `error.data.detailed_message` to access the API member directly.
-      def detailed_message(**kwargs)
-        if kwargs.empty?
-          @data[:detailed_message]
-        else
-          super
-        end
+      def detailed_message
+        @data[:detailed_message]
       end
 
       # @return [String]
