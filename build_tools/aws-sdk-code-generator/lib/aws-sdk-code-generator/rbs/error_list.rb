@@ -11,9 +11,18 @@ module AwsSdkCodeGenerator
         @errors = @api['shapes'].inject([]) do |es, (name, shape)|
           if error_struct?(shape)
             members = shape["members"].map do |member_name, member_body|
+              underscored = Underscore.underscore(member_name)
+              overloads = if AwsSdkCodeGenerator::ErrorList::EXCEPTION_KWARGS_METHODS.include?(underscored)
+                [
+                  "() -> #{Docstring.ucfirst(member_body['type'] || '::String')}",
+                  "(**untyped) -> String"
+                ]
+              else
+                ["() -> #{Docstring.ucfirst(member_body['type'] ||'::String')}"]
+              end
               MethodSignature.new(
-                method_name: Underscore.underscore(member_name),
-                overloads: ["() -> #{Docstring.ucfirst(member_body['type'] ||'::String')}"]
+                method_name: underscored,
+                overloads: overloads
               )
             end
             es << {

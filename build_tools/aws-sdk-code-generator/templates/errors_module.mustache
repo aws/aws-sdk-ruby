@@ -58,9 +58,22 @@ module {{module_name}}
       {{#members}}
 
       # @return [{{type}}]
+      {{#exception_method}}
+      # @note This member shadows Exception#{{name}} on Ruby 3.2+.
+      #   Use `error.data.{{name}}` to access the API member directly.
+      def {{name}}(**kwargs)
+        if kwargs.empty?
+          @data[:{{name}}]
+        else
+          super
+        end
+      end
+      {{/exception_method}}
+      {{^exception_method}}
       def {{name}}
         {{#shared}}@{{name}} || {{/shared}}@data[:{{name}}]
       end
+      {{/exception_method}}
       {{/members}}
       {{#retryable}}
 
