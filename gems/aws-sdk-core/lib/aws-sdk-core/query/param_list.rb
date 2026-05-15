@@ -52,7 +52,7 @@ module Aws
 
         # @return [String]
         def to_s
-          to_a.map(&:to_s).join('&')
+          to_a.join('&')
         end
 
         # @return [#read, #rewind, #size]

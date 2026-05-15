@@ -5,27 +5,24 @@ module Aws
     module Plugins
       # @api private
       class RecursionDetection < Smithy::Client::Plugin
-
         # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-
-            unless context.http_request.headers.key?('x-amzn-trace-id')
-              if ENV['AWS_LAMBDA_FUNCTION_NAME'] &&
-                 (trace_id = validate_header(ENV['_X_AMZN_TRACE_ID']))
-                context.http_request.headers['x-amzn-trace-id'] = trace_id
-              end
+            if !context.http_request.headers.key?('x-amzn-trace-id') &&
+               (trace_id = validate_header(ENV.fetch('_X_AMZN_TRACE_ID', nil)))
+              context.http_request.headers['x-amzn-trace-id'] = trace_id
             end
             @handler.call(context)
           end
 
           private
+
           def validate_header(header_value)
             return unless header_value
 
-            if (header_value.chars & (0..31).map(&:chr)).any?
-              raise ArgumentError, 'Invalid _X_AMZN_TRACE_ID value: '\
-                'contains ASCII control characters'
+            if header_value.chars.intersect?((0..31).map(&:chr))
+              raise ArgumentError, 'Invalid _X_AMZN_TRACE_ID value: ' \
+                                   'contains ASCII control characters'
             end
             header_value
           end
