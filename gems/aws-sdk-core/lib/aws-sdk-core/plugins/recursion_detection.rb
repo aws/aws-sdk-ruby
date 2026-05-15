@@ -8,7 +8,7 @@ module Aws
         # @api private
         class Handler < Smithy::Client::Handler
           def call(context)
-            if !context.http_request.headers.key?('x-amzn-trace-id') &&
+            if !context.http_request.headers.key?('x-amzn-trace-id') && ENV.fetch('AWS_LAMBDA_FUNCTION_NAME', nil) &&
                (trace_id = validate_header(ENV.fetch('_X_AMZN_TRACE_ID', nil)))
               context.http_request.headers['x-amzn-trace-id'] = trace_id
             end
