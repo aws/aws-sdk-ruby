@@ -252,6 +252,7 @@ module Aws
         # Max backoff (in seconds)
         MAX_BACKOFF = 20
 
+        # TODO: remove once longPoll trait is added to models
         # Hard-coded combination of services and operations as having the
         # longPoll trait. To be removed when trait is enabled.
         LONG_POLLING_OPERATIONS = {
@@ -395,13 +396,13 @@ module Aws
 
         def parse_retry_after(context)
           retry_after = context.http_response.headers['x-amz-retry-after']
-          return nil unless retry_after
+          return unless retry_after
 
           unless retry_after.match?(/\A\d+\z/)
             context.config.logger&.debug(
               "Failed to parse x-amz-retry-after header value: #{retry_after.inspect}"
             )
-            return nil
+            return
           end
 
           retry_after.to_i / 1000.0

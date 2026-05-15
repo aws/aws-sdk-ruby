@@ -8,7 +8,11 @@ module Aws
       def call(context)
         build_request(context)
         response = with_metric { @handler.call(context) }
-        response.on(200..299) { |resp| resp.data = parse_body(context) }
+        response.on(200..299) do |resp|
+          resp.data = parse_body(context)
+        rescue Cbor::Error => e
+          resp.error = Seahorse::Client::NetworkingError.new(e)
+        end
         response.on(200..599) { |_resp| apply_request_id(context) }
         response
       end

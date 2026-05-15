@@ -8,7 +8,11 @@ module Aws
       def call(context)
         Rest::Request::Builder.new.apply(context)
         response = @handler.call(context)
-        response.on(200..299) { |resp| Response::Parser.new.apply(resp) }
+        response.on(200..299) do |resp|
+          Response::Parser.new.apply(resp)
+        rescue Xml::Parser::ParsingError, Json::ParseError => e
+          resp.error = Seahorse::Client::NetworkingError.new(e)
+        end
         response.on(200..599) { |_resp| apply_request_id(context) }
       end
 
