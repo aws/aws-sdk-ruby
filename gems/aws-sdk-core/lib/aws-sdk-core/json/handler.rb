@@ -35,9 +35,6 @@ module Aws
 
       def parse_response(response)
         response.data = parse_body(response.context)
-      rescue Json::ParseError => e
-        # make JSON parsing errors on 200-range responses retryable
-        response.error = Seahorse::Client::NetworkingError.new(e)
       end
 
       def parse_body(context)
