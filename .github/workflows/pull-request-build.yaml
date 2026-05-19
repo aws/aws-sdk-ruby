@@ -29,7 +29,7 @@ jobs:
       contents: read
     steps:
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@main
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         with:
           role-to-assume: ${{ env.IAM_ROLE_ARN }}
           role-session-name: PullRequestBuildGitHubAction
@@ -37,7 +37,9 @@ jobs:
           aws-region: us-west-2
       - name: Checkout
         if: github.event_name == 'workflow_dispatch'
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+        with:
+          persist-credentials: false
       - name: Download Build Script
         run: |
           aws s3 cp s3://aws-sdk-builds-github-assets-prod-us-west-2/$SCRIPT_LOCATION ./$DOWNLOAD_FOLDER/$SCRIPT_LOCATION --no-progress
@@ -46,7 +48,7 @@ jobs:
         id: pr
         if: github.event_name == 'workflow_dispatch'
         run: |
-          PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --state all --head "${{ github.ref_name }}" --json number --jq '.[0].number // ""')
+          PR_NUMBER=$(gh pr list --repo "${{ github.repository }}" --state all --head "${GITHUB_REF_NAME}" --json number --jq '.[0].number // ""')
           echo "number=${PR_NUMBER:-}" >> $GITHUB_OUTPUT
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
