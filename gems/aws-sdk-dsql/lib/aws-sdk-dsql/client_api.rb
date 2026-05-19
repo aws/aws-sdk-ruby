@@ -29,10 +29,14 @@ module Aws::DSQL
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateClusterInput = Shapes::StructureShape.new(name: 'CreateClusterInput')
     CreateClusterOutput = Shapes::StructureShape.new(name: 'CreateClusterOutput')
+    CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
+    CreateStreamOutput = Shapes::StructureShape.new(name: 'CreateStreamOutput')
     DeleteClusterInput = Shapes::StructureShape.new(name: 'DeleteClusterInput')
     DeleteClusterOutput = Shapes::StructureShape.new(name: 'DeleteClusterOutput')
     DeleteClusterPolicyInput = Shapes::StructureShape.new(name: 'DeleteClusterPolicyInput')
     DeleteClusterPolicyOutput = Shapes::StructureShape.new(name: 'DeleteClusterPolicyOutput')
+    DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
+    DeleteStreamOutput = Shapes::StructureShape.new(name: 'DeleteStreamOutput')
     DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     EncryptionDetails = Shapes::StructureShape.new(name: 'EncryptionDetails')
     EncryptionStatus = Shapes::StringShape.new(name: 'EncryptionStatus')
@@ -42,14 +46,20 @@ module Aws::DSQL
     GetClusterOutput = Shapes::StructureShape.new(name: 'GetClusterOutput')
     GetClusterPolicyInput = Shapes::StructureShape.new(name: 'GetClusterPolicyInput')
     GetClusterPolicyOutput = Shapes::StructureShape.new(name: 'GetClusterPolicyOutput')
+    GetStreamInput = Shapes::StructureShape.new(name: 'GetStreamInput')
+    GetStreamOutput = Shapes::StructureShape.new(name: 'GetStreamOutput')
     GetVpcEndpointServiceNameInput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameInput')
     GetVpcEndpointServiceNameOutput = Shapes::StructureShape.new(name: 'GetVpcEndpointServiceNameOutput')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KinesisStreamArn = Shapes::StringShape.new(name: 'KinesisStreamArn')
+    KinesisTargetDefinition = Shapes::StructureShape.new(name: 'KinesisTargetDefinition')
     KmsEncryptionKey = Shapes::StringShape.new(name: 'KmsEncryptionKey')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListClustersInput = Shapes::StructureShape.new(name: 'ListClustersInput')
     ListClustersOutput = Shapes::StructureShape.new(name: 'ListClustersOutput')
+    ListStreamsInput = Shapes::StructureShape.new(name: 'ListStreamsInput')
+    ListStreamsOutput = Shapes::StructureShape.new(name: 'ListStreamsOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
     ListTagsForResourceOutput = Shapes::StructureShape.new(name: 'ListTagsForResourceOutput')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -61,15 +71,28 @@ module Aws::DSQL
     PutClusterPolicyOutput = Shapes::StructureShape.new(name: 'PutClusterPolicyOutput')
     Region = Shapes::StringShape.new(name: 'Region')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    StatusReason = Shapes::StructureShape.new(name: 'StatusReason')
+    StreamArn = Shapes::StringShape.new(name: 'StreamArn')
+    StreamCreationTime = Shapes::TimestampShape.new(name: 'StreamCreationTime')
+    StreamFailureErrorCode = Shapes::StringShape.new(name: 'StreamFailureErrorCode')
+    StreamFormat = Shapes::StringShape.new(name: 'StreamFormat')
+    StreamId = Shapes::StringShape.new(name: 'StreamId')
+    StreamList = Shapes::ListShape.new(name: 'StreamList')
+    StreamOrdering = Shapes::StringShape.new(name: 'StreamOrdering')
+    StreamStatus = Shapes::StringShape.new(name: 'StreamStatus')
+    StreamSummary = Shapes::StructureShape.new(name: 'StreamSummary')
     String = Shapes::StringShape.new(name: 'String')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
     TagResourceInput = Shapes::StructureShape.new(name: 'TagResourceInput')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
+    TargetDefinition = Shapes::UnionShape.new(name: 'TargetDefinition')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     UntagResourceInput = Shapes::StructureShape.new(name: 'UntagResourceInput')
     UpdateClusterInput = Shapes::StructureShape.new(name: 'UpdateClusterInput')
     UpdateClusterOutput = Shapes::StructureShape.new(name: 'UpdateClusterOutput')
@@ -113,6 +136,23 @@ module Aws::DSQL
     CreateClusterOutput.add_member(:endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "endpoint"))
     CreateClusterOutput.struct_class = Types::CreateClusterOutput
 
+    CreateStreamInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "clusterIdentifier"))
+    CreateStreamInput.add_member(:target_definition, Shapes::ShapeRef.new(shape: TargetDefinition, required: true, location_name: "targetDefinition"))
+    CreateStreamInput.add_member(:ordering, Shapes::ShapeRef.new(shape: StreamOrdering, required: true, location_name: "ordering"))
+    CreateStreamInput.add_member(:format, Shapes::ShapeRef.new(shape: StreamFormat, required: true, location_name: "format"))
+    CreateStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    CreateStreamInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateStreamInput.struct_class = Types::CreateStreamInput
+
+    CreateStreamOutput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "clusterIdentifier"))
+    CreateStreamOutput.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location_name: "streamIdentifier"))
+    CreateStreamOutput.add_member(:arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "arn"))
+    CreateStreamOutput.add_member(:status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "status"))
+    CreateStreamOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: StreamCreationTime, required: true, location_name: "creationTime"))
+    CreateStreamOutput.add_member(:ordering, Shapes::ShapeRef.new(shape: StreamOrdering, required: true, location_name: "ordering"))
+    CreateStreamOutput.add_member(:format, Shapes::ShapeRef.new(shape: StreamFormat, required: true, location_name: "format"))
+    CreateStreamOutput.struct_class = Types::CreateStreamOutput
+
     DeleteClusterInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     DeleteClusterInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken" => true}))
     DeleteClusterInput.struct_class = Types::DeleteClusterInput
@@ -130,6 +170,18 @@ module Aws::DSQL
 
     DeleteClusterPolicyOutput.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
     DeleteClusterPolicyOutput.struct_class = Types::DeleteClusterPolicyOutput
+
+    DeleteStreamInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "clusterIdentifier"))
+    DeleteStreamInput.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location: "uri", location_name: "streamIdentifier"))
+    DeleteStreamInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location: "querystring", location_name: "client-token", metadata: {"idempotencyToken" => true}))
+    DeleteStreamInput.struct_class = Types::DeleteStreamInput
+
+    DeleteStreamOutput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "clusterIdentifier"))
+    DeleteStreamOutput.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location_name: "streamIdentifier"))
+    DeleteStreamOutput.add_member(:arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "arn"))
+    DeleteStreamOutput.add_member(:status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "status"))
+    DeleteStreamOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: StreamCreationTime, required: true, location_name: "creationTime"))
+    DeleteStreamOutput.struct_class = Types::DeleteStreamOutput
 
     EncryptionDetails.add_member(:encryption_type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "encryptionType"))
     EncryptionDetails.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
@@ -157,6 +209,22 @@ module Aws::DSQL
     GetClusterPolicyOutput.add_member(:policy_version, Shapes::ShapeRef.new(shape: PolicyVersion, required: true, location_name: "policyVersion"))
     GetClusterPolicyOutput.struct_class = Types::GetClusterPolicyOutput
 
+    GetStreamInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "clusterIdentifier"))
+    GetStreamInput.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location: "uri", location_name: "streamIdentifier"))
+    GetStreamInput.struct_class = Types::GetStreamInput
+
+    GetStreamOutput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "clusterIdentifier"))
+    GetStreamOutput.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location_name: "streamIdentifier"))
+    GetStreamOutput.add_member(:arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "arn"))
+    GetStreamOutput.add_member(:status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "status"))
+    GetStreamOutput.add_member(:creation_time, Shapes::ShapeRef.new(shape: StreamCreationTime, required: true, location_name: "creationTime"))
+    GetStreamOutput.add_member(:ordering, Shapes::ShapeRef.new(shape: StreamOrdering, required: true, location_name: "ordering"))
+    GetStreamOutput.add_member(:format, Shapes::ShapeRef.new(shape: StreamFormat, required: true, location_name: "format"))
+    GetStreamOutput.add_member(:target_definition, Shapes::ShapeRef.new(shape: TargetDefinition, location_name: "targetDefinition"))
+    GetStreamOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
+    GetStreamOutput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    GetStreamOutput.struct_class = Types::GetStreamOutput
+
     GetVpcEndpointServiceNameInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "identifier"))
     GetVpcEndpointServiceNameInput.struct_class = Types::GetVpcEndpointServiceNameInput
 
@@ -168,6 +236,10 @@ module Aws::DSQL
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    KinesisTargetDefinition.add_member(:stream_arn, Shapes::ShapeRef.new(shape: KinesisStreamArn, required: true, location_name: "streamArn"))
+    KinesisTargetDefinition.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    KinesisTargetDefinition.struct_class = Types::KinesisTargetDefinition
+
     ListClustersInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
     ListClustersInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
     ListClustersInput.struct_class = Types::ListClustersInput
@@ -175,6 +247,15 @@ module Aws::DSQL
     ListClustersOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListClustersOutput.add_member(:clusters, Shapes::ShapeRef.new(shape: ClusterList, required: true, location_name: "clusters"))
     ListClustersOutput.struct_class = Types::ListClustersOutput
+
+    ListStreamsInput.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location: "uri", location_name: "clusterIdentifier"))
+    ListStreamsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "max-results"))
+    ListStreamsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "next-token"))
+    ListStreamsInput.struct_class = Types::ListStreamsInput
+
+    ListStreamsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListStreamsOutput.add_member(:streams, Shapes::ShapeRef.new(shape: StreamList, required: true, location_name: "streams"))
+    ListStreamsOutput.struct_class = Types::ListStreamsOutput
 
     ListTagsForResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceInput.struct_class = Types::ListTagsForResourceInput
@@ -208,6 +289,19 @@ module Aws::DSQL
     ServiceQuotaExceededException.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "quotaCode"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    StatusReason.add_member(:error, Shapes::ShapeRef.new(shape: StreamFailureErrorCode, required: true, location_name: "error"))
+    StatusReason.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    StatusReason.struct_class = Types::StatusReason
+
+    StreamList.member = Shapes::ShapeRef.new(shape: StreamSummary)
+
+    StreamSummary.add_member(:cluster_identifier, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "clusterIdentifier"))
+    StreamSummary.add_member(:stream_identifier, Shapes::ShapeRef.new(shape: StreamId, required: true, location_name: "streamIdentifier"))
+    StreamSummary.add_member(:arn, Shapes::ShapeRef.new(shape: StreamArn, required: true, location_name: "arn"))
+    StreamSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: StreamCreationTime, required: true, location_name: "creationTime"))
+    StreamSummary.add_member(:status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "status"))
+    StreamSummary.struct_class = Types::StreamSummary
+
     TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
 
     TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
@@ -216,6 +310,12 @@ module Aws::DSQL
     TagResourceInput.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     TagResourceInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "tags"))
     TagResourceInput.struct_class = Types::TagResourceInput
+
+    TargetDefinition.add_member(:kinesis, Shapes::ShapeRef.new(shape: KinesisTargetDefinition, location_name: "kinesis"))
+    TargetDefinition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    TargetDefinition.add_member_subclass(:kinesis, Types::TargetDefinition::Kinesis)
+    TargetDefinition.add_member_subclass(:unknown, Types::TargetDefinition::Unknown)
+    TargetDefinition.struct_class = Types::TargetDefinition
 
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ThrottlingException.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
@@ -284,6 +384,21 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
+      api.add_operation(:create_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateStream"
+        o.http_method = "POST"
+        o.http_request_uri = "/stream/{clusterIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: CreateStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
       api.add_operation(:delete_cluster, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteCluster"
         o.http_method = "DELETE"
@@ -307,6 +422,20 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteStream"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/stream/{clusterIdentifier}/{streamIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -338,6 +467,19 @@ module Aws::DSQL
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:get_stream, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStream"
+        o.http_method = "GET"
+        o.http_request_uri = "/stream/{clusterIdentifier}/{streamIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetStreamInput)
+        o.output = Shapes::ShapeRef.new(shape: GetStreamOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
       api.add_operation(:get_vpc_endpoint_service_name, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetVpcEndpointServiceName"
         o.http_method = "GET"
@@ -357,6 +499,25 @@ module Aws::DSQL
         o.http_request_uri = "/cluster"
         o.input = Shapes::ShapeRef.new(shape: ListClustersInput)
         o.output = Shapes::ShapeRef.new(shape: ListClustersOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_streams, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListStreams"
+        o.http_method = "GET"
+        o.http_request_uri = "/stream/{clusterIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: ListStreamsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListStreamsOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

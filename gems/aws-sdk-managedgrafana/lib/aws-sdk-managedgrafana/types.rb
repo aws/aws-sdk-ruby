@@ -410,6 +410,16 @@ module Aws::ManagedGrafana
     #   operation.
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies whether the workspace supports IPv4 only, or IPv4 and
+    #   IPv6. Valid values are `IPv4` and `DualStack`. For more information
+    #   about IP address types, see [Network access control][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   The ID or ARN of the Key Management Service key to use for
     #   encrypting workspace data.
@@ -435,6 +445,7 @@ module Aws::ManagedGrafana
       :configuration,
       :network_access_control,
       :grafana_version,
+      :ip_address_type,
       :kms_key_id)
       SENSITIVE = [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
       include Aws::Structure
@@ -1857,6 +1868,16 @@ module Aws::ManagedGrafana
     #   authentication and authorization will still be required.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ip_address_type
+    #   Specifies whether the workspace supports IPv4 only, or IPv4 and
+    #   IPv6. Valid values are `IPv4` and `DualStack`. For more information
+    #   about IP address types, see [Network access control][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspaceRequest AWS API Documentation
     #
     class UpdateWorkspaceRequest < Struct.new(
@@ -1874,7 +1895,8 @@ module Aws::ManagedGrafana
       :vpc_configuration,
       :remove_vpc_configuration,
       :network_access_control,
-      :remove_network_access_configuration)
+      :remove_network_access_configuration,
+      :ip_address_type)
       SENSITIVE = [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
       include Aws::Structure
     end
@@ -2164,6 +2186,11 @@ module Aws::ManagedGrafana
     #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
     #   @return [String]
     #
+    # @!attribute [rw] ip_address_type
+    #   The type of IP addresses supported for connection to the workspace.
+    #   Valid values are `IPv4` and `DualStack`.
+    #   @return [String]
+    #
     # @!attribute [rw] kms_key_id
     #   The ID or ARN of the Key Management Service key used for encrypting
     #   workspace data.
@@ -2197,6 +2224,7 @@ module Aws::ManagedGrafana
       :vpc_configuration,
       :network_access_control,
       :grafana_token,
+      :ip_address_type,
       :kms_key_id)
       SENSITIVE = [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
       include Aws::Structure

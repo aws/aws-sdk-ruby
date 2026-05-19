@@ -1115,6 +1115,7 @@ module Aws::PartnerCentralAccount
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:reject_connection_invitation, Seahorse::Model::Operation.new.tap do |o|
@@ -1156,6 +1157,7 @@ module Aws::PartnerCentralAccount
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:start_verification, Seahorse::Model::Operation.new.tap do |o|

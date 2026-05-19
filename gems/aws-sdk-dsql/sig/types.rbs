@@ -49,6 +49,27 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class CreateStreamInput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor target_definition: Types::TargetDefinition
+      attr_accessor ordering: ("UNORDERED")
+      attr_accessor format: ("JSON")
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateStreamOutput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+      attr_accessor creation_time: ::Time
+      attr_accessor ordering: ("UNORDERED")
+      attr_accessor format: ("JSON")
+      SENSITIVE: []
+    end
+
     class DeleteClusterInput
       attr_accessor identifier: ::String
       attr_accessor client_token: ::String
@@ -72,6 +93,22 @@ module Aws::DSQL
 
     class DeleteClusterPolicyOutput
       attr_accessor policy_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamInput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteStreamOutput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+      attr_accessor creation_time: ::Time
       SENSITIVE: []
     end
 
@@ -111,6 +148,26 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class GetStreamInput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetStreamOutput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      attr_accessor arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+      attr_accessor creation_time: ::Time
+      attr_accessor ordering: ("UNORDERED")
+      attr_accessor format: ("JSON")
+      attr_accessor target_definition: Types::TargetDefinition
+      attr_accessor status_reason: Types::StatusReason
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class GetVpcEndpointServiceNameInput
       attr_accessor identifier: ::String
       SENSITIVE: []
@@ -128,6 +185,12 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class KinesisTargetDefinition
+      attr_accessor stream_arn: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
     class ListClustersInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
@@ -137,6 +200,19 @@ module Aws::DSQL
     class ListClustersOutput
       attr_accessor next_token: ::String
       attr_accessor clusters: ::Array[Types::ClusterSummary]
+      SENSITIVE: []
+    end
+
+    class ListStreamsInput
+      attr_accessor cluster_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListStreamsOutput
+      attr_accessor next_token: ::String
+      attr_accessor streams: ::Array[Types::StreamSummary]
       SENSITIVE: []
     end
 
@@ -186,10 +262,36 @@ module Aws::DSQL
       SENSITIVE: []
     end
 
+    class StatusReason
+      attr_accessor error: ("KINESIS_THROUGHPUT_EXCEEDED" | "KINESIS_STREAM_NOT_FOUND" | "ROLE_ACCESS_DENIED" | "KINESIS_ACCESS_DENIED" | "KINESIS_KMS_ACCESS_DENIED" | "KINESIS_OVERSIZE_RECORD" | "CLUSTER_CMK_INACCESSIBLE" | "INTERNAL_ERROR")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StreamSummary
+      attr_accessor cluster_identifier: ::String
+      attr_accessor stream_identifier: ::String
+      attr_accessor arn: ::String
+      attr_accessor creation_time: ::Time
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+      SENSITIVE: []
+    end
+
     class TagResourceInput
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class TargetDefinition
+      attr_accessor kinesis: Types::KinesisTargetDefinition
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Kinesis < TargetDefinition
+      end
+      class Unknown < TargetDefinition
+      end
     end
 
     class ThrottlingException

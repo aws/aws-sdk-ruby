@@ -635,6 +635,11 @@ module Aws::ConnectCases
     #
     # @!attribute [rw] conditions
     #   The list of conditions to combine using the logical operator.
+    #
+    #   <note markdown="1"> For API users: A case rule can have a maximum of 5 conditions,
+    #   spread across a maximum of 2 levels of nesting.
+    #
+    #    </note>
     #   @return [Array<Types::BooleanCondition>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CompoundCondition AWS API Documentation

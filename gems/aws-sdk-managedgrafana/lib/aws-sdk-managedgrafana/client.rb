@@ -557,6 +557,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/AssociateLicense AWS API Documentation
@@ -713,6 +714,15 @@ module Aws::ManagedGrafana
     #
     #   To get a list of supported versions, use the `ListVersions` operation.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6.
+    #   Valid values are `IPv4` and `DualStack`. For more information about IP
+    #   address types, see [Network access control][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+    #
     # @option params [String] :kms_key_id
     #   The ID or ARN of the Key Management Service key to use for encrypting
     #   workspace data.
@@ -749,6 +759,7 @@ module Aws::ManagedGrafana
     #       vpce_ids: ["VpceId"], # required
     #     },
     #     grafana_version: "GrafanaVersion",
+    #     ip_address_type: "IPv4", # accepts IPv4, DualStack
     #     kms_key_id: "KmsKeyId",
     #   })
     #
@@ -791,6 +802,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/CreateWorkspace AWS API Documentation
@@ -1054,6 +1066,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DeleteWorkspace AWS API Documentation
@@ -1247,6 +1260,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DescribeWorkspace AWS API Documentation
@@ -1393,6 +1407,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/DisassociateLicense AWS API Documentation
@@ -1962,6 +1977,15 @@ module Aws::ManagedGrafana
     #   IP addresses and VPC endpoints will be allowed. Standard Grafana
     #   authentication and authorization will still be required.
     #
+    # @option params [String] :ip_address_type
+    #   Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6.
+    #   Valid values are `IPv4` and `DualStack`. For more information about IP
+    #   address types, see [Network access control][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+    #
     # @return [Types::UpdateWorkspaceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateWorkspaceResponse#workspace #workspace} => Types::WorkspaceDescription
@@ -1990,6 +2014,7 @@ module Aws::ManagedGrafana
     #       vpce_ids: ["VpceId"], # required
     #     },
     #     remove_network_access_configuration: false,
+    #     ip_address_type: "IPv4", # accepts IPv4, DualStack
     #   })
     #
     # @example Response structure
@@ -2031,6 +2056,7 @@ module Aws::ManagedGrafana
     #   resp.workspace.network_access_control.vpce_ids #=> Array
     #   resp.workspace.network_access_control.vpce_ids[0] #=> String
     #   resp.workspace.grafana_token #=> String
+    #   resp.workspace.ip_address_type #=> String, one of "IPv4", "DualStack"
     #   resp.workspace.kms_key_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/grafana-2020-08-18/UpdateWorkspace AWS API Documentation
@@ -2203,7 +2229,7 @@ module Aws::ManagedGrafana
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

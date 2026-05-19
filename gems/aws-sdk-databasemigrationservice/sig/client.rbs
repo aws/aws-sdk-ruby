@@ -2897,6 +2897,114 @@ module Aws
                     ?marker: ::String
                   ) -> Client::_DescribeEndpointsResponseSuccess
                     | (:endpoint_deleted waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeEndpointsResponseSuccess
+                    | (:extension_pack_associated waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeExtensionPackAssociationsResponseSuccess
+                    | (:extension_pack_associated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeExtensionPackAssociationsResponseSuccess
+                    | (:metadata_model_assessed waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelAssessmentsResponseSuccess
+                    | (:metadata_model_assessed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelAssessmentsResponseSuccess
+                    | (:metadata_model_conversion_cancelled waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                    | (:metadata_model_conversion_cancelled waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                    | (:metadata_model_converted waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                    | (:metadata_model_converted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                    | (:metadata_model_created waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer,
+                    migration_project_identifier: ::String
+                  ) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                    | (:metadata_model_created waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                    | (:metadata_model_creation_cancelled waiter_name, 
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer,
+                    migration_project_identifier: ::String
+                  ) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                    | (:metadata_model_creation_cancelled waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                    | (:metadata_model_exported_as_script waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelExportsAsScriptResponseSuccess
+                    | (:metadata_model_exported_as_script waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelExportsAsScriptResponseSuccess
+                    | (:metadata_model_exported_to_target waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelExportsToTargetResponseSuccess
+                    | (:metadata_model_exported_to_target waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelExportsToTargetResponseSuccess
+                    | (:metadata_model_imported waiter_name, 
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelImportsResponseSuccess
+                    | (:metadata_model_imported waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeMetadataModelImportsResponseSuccess
                     | (:replication_instance_available waiter_name, 
                     ?filters: Array[
                       {

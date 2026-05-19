@@ -347,6 +347,18 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class ContinueServiceDeploymentRequest
+      attr_accessor service_deployment_arn: ::String
+      attr_accessor hook_id: ::String
+      attr_accessor action: ("ROLLBACK" | "CONTINUE")
+      SENSITIVE: []
+    end
+
+    class ContinueServiceDeploymentResponse
+      attr_accessor service_deployment_arn: ::String
+      SENSITIVE: []
+    end
+
     class CreateCapacityProviderRequest
       attr_accessor name: ::String
       attr_accessor cluster: ::String
@@ -884,10 +896,28 @@ module Aws::ECS
     end
 
     class DeploymentLifecycleHook
+      attr_accessor target_type: ("AWS_LAMBDA" | "PAUSE")
       attr_accessor hook_target_arn: ::String
       attr_accessor role_arn: ::String
-      attr_accessor lifecycle_stages: ::Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]
+      attr_accessor lifecycle_stages: ::Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRE_PRODUCTION_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]
       attr_accessor hook_details: untyped
+      attr_accessor timeout_configuration: Types::DeploymentLifecycleHookTimeoutConfiguration
+      SENSITIVE: []
+    end
+
+    class DeploymentLifecycleHookDetail
+      attr_accessor hook_id: ::String
+      attr_accessor target_type: ("AWS_LAMBDA" | "PAUSE")
+      attr_accessor target_arn: ::String
+      attr_accessor status: ("AWAITING_ACTION" | "IN_PROGRESS" | "SUCCEEDED" | "FAILED" | "TIMED_OUT")
+      attr_accessor expires_at: ::Time
+      attr_accessor timeout_action: ("ROLLBACK" | "CONTINUE")
+      SENSITIVE: []
+    end
+
+    class DeploymentLifecycleHookTimeoutConfiguration
+      attr_accessor timeout_in_minutes: ::Integer
+      attr_accessor action: ("ROLLBACK" | "CONTINUE")
       SENSITIVE: []
     end
 
@@ -2292,6 +2322,7 @@ module Aws::ECS
       attr_accessor status: ("PENDING" | "SUCCESSFUL" | "STOPPED" | "STOP_REQUESTED" | "IN_PROGRESS" | "ROLLBACK_REQUESTED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_SUCCESSFUL" | "ROLLBACK_FAILED")
       attr_accessor status_reason: ::String
       attr_accessor lifecycle_stage: ("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT" | "BAKE_TIME" | "CLEAN_UP")
+      attr_accessor lifecycle_hook_details: ::Array[Types::DeploymentLifecycleHookDetail]
       attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor rollback: Types::Rollback
       attr_accessor deployment_circuit_breaker: Types::ServiceDeploymentCircuitBreaker

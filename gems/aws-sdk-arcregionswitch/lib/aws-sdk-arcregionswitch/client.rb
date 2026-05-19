@@ -784,8 +784,22 @@ module Aws::ARCRegionswitch
     #                   "Region" => "RdsDbInstanceArn",
     #                 },
     #               },
+    #               lambda_event_source_mapping_config: {
+    #                 timeout_minutes: 1,
+    #                 action: "enable", # required, accepts enable, disable
+    #                 region_event_source_mappings: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     arn: "EventSourceMappingArn", # required
+    #                   },
+    #                 },
+    #                 ungraceful: {
+    #                   behavior: "skip", # accepts skip
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -932,7 +946,14 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.action #=> String, one of "enable", "disable"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1109,7 +1130,14 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.action #=> String, one of "enable", "disable"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1384,7 +1412,14 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.action #=> String, one of "enable", "disable"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1549,7 +1584,14 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.action #=> String, one of "enable", "disable"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -1634,7 +1676,7 @@ module Aws::ARCRegionswitch
     #   resp.items[0].timestamp #=> Time
     #   resp.items[0].type #=> String, one of "unknown", "executionPending", "executionStarted", "executionSucceeded", "executionFailed", "executionPausing", "executionPaused", "executionCanceling", "executionCanceled", "executionPendingApproval", "executionBehaviorChangedToUngraceful", "executionBehaviorChangedToGraceful", "executionPendingChildPlanManualApproval", "executionSuccessMonitoringApplicationHealth", "stepStarted", "stepUpdate", "stepSucceeded", "stepFailed", "stepSkipped", "stepPausedByError", "stepPausedByOperator", "stepCanceled", "stepPendingApproval", "stepExecutionBehaviorChangedToUngraceful", "stepPendingApplicationHealthMonitor", "planEvaluationWarning"
     #   resp.items[0].step_name #=> String
-    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.items[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0] #=> String
     #   resp.items[0].error #=> String
@@ -2330,8 +2372,22 @@ module Aws::ARCRegionswitch
     #                   "Region" => "RdsDbInstanceArn",
     #                 },
     #               },
+    #               lambda_event_source_mapping_config: {
+    #                 timeout_minutes: 1,
+    #                 action: "enable", # required, accepts enable, disable
+    #                 region_event_source_mappings: { # required
+    #                   "Region" => {
+    #                     cross_account_role: "IamRoleArn",
+    #                     external_id: "String",
+    #                     arn: "EventSourceMappingArn", # required
+    #                   },
+    #                 },
+    #                 ungraceful: {
+    #                   behavior: "skip", # accepts skip
+    #                 },
+    #               },
     #             },
-    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica
+    #             execution_block_type: "CustomActionLambda", # required, accepts CustomActionLambda, ManualApproval, AuroraGlobalDatabase, EC2AutoScaling, ARCRoutingControl, ARCRegionSwitchPlan, Parallel, ECSServiceScaling, EKSResourceScaling, Route53HealthCheck, DocumentDb, RdsPromoteReadReplica, RdsCreateCrossRegionReplica, LambdaEventSourceMapping
     #           },
     #         ],
     #         workflow_target_action: "activate", # required, accepts activate, deactivate, postRecovery
@@ -2471,7 +2527,14 @@ module Aws::ARCRegionswitch
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.external_id #=> String
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map #=> Hash
     #   resp.plan.workflows[0].steps[0].execution_block_configuration.rds_create_cross_region_read_replica_config.db_instance_arn_map["Region"] #=> String
-    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.timeout_minutes #=> Integer
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.action #=> String, one of "enable", "disable"
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings #=> Hash
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].cross_account_role #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].external_id #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.region_event_source_mappings["Region"].arn #=> String
+    #   resp.plan.workflows[0].steps[0].execution_block_configuration.lambda_event_source_mapping_config.ungraceful.behavior #=> String, one of "skip"
+    #   resp.plan.workflows[0].steps[0].execution_block_type #=> String, one of "CustomActionLambda", "ManualApproval", "AuroraGlobalDatabase", "EC2AutoScaling", "ARCRoutingControl", "ARCRegionSwitchPlan", "Parallel", "ECSServiceScaling", "EKSResourceScaling", "Route53HealthCheck", "DocumentDb", "RdsPromoteReadReplica", "RdsCreateCrossRegionReplica", "LambdaEventSourceMapping"
     #   resp.plan.workflows[0].workflow_target_action #=> String, one of "activate", "deactivate", "postRecovery"
     #   resp.plan.workflows[0].workflow_target_region #=> String
     #   resp.plan.workflows[0].workflow_description #=> String
@@ -2609,7 +2672,7 @@ module Aws::ARCRegionswitch
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-arcregionswitch'
-      context[:gem_version] = '1.14.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

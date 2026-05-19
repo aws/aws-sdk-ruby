@@ -1320,6 +1320,40 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class CreateNotebookInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name, :description, :parameters]
+    end
+
+    class CreateNotebookOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor locked_by: ::String
+      attr_accessor locked_at: ::Time
+      attr_accessor lock_expires_at: ::Time
+      attr_accessor compute_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor environment_configuration: Types::EnvironmentConfig
+      attr_accessor error: Types::NotebookError
+      SENSITIVE: [:name, :description, :parameters]
+    end
+
     class CreateProjectFromProjectProfilePolicyGrantDetail
       attr_accessor include_child_domain_units: bool
       attr_accessor project_profiles: ::Array[::String]
@@ -1912,6 +1946,15 @@ module Aws::DataZone
     end
 
     class DeleteListingOutput < Aws::EmptyStructure
+    end
+
+    class DeleteNotebookInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteNotebookOutput < Aws::EmptyStructure
     end
 
     class DeleteProjectInput
@@ -2954,6 +2997,56 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class GetNotebookExportInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotebookExportOutput
+      attr_accessor id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor notebook_id: ::String
+      attr_accessor file_format: ("PDF" | "IPYNB")
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor output_location: Types::OutputLocation
+      attr_accessor error: Types::NotebookExportError
+      attr_accessor completed_at: ::Time
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotebookInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetNotebookOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor locked_by: ::String
+      attr_accessor locked_at: ::Time
+      attr_accessor lock_expires_at: ::Time
+      attr_accessor compute_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor environment_configuration: Types::EnvironmentConfig
+      attr_accessor error: Types::NotebookError
+      SENSITIVE: [:name, :description, :parameters]
+    end
+
     class GetNotebookRunInput
       attr_accessor domain_identifier: ::String
       attr_accessor identifier: ::String
@@ -3964,6 +4057,23 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class ListNotebooksInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      attr_accessor sort_by: ("CREATED_AT" | "UPDATED_AT")
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListNotebooksOutput
+      attr_accessor items: ::Array[Types::NotebookSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListNotificationsInput
       attr_accessor domain_identifier: ::String
       attr_accessor type: ("TASK" | "EVENT")
@@ -4388,6 +4498,16 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class NotebookError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class NotebookExportError
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class NotebookRunError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -4408,6 +4528,20 @@ module Aws::DataZone
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
       SENSITIVE: []
+    end
+
+    class NotebookSummary
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      SENSITIVE: [:name, :description]
     end
 
     class NotificationOutput
@@ -4455,6 +4589,17 @@ module Aws::DataZone
       attr_accessor inputs: ::Array[Types::NameIdentifier]
       attr_accessor outputs: ::Array[Types::NameIdentifier]
       SENSITIVE: []
+    end
+
+    class OutputLocation
+      attr_accessor s3: Types::S3Destination
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < OutputLocation
+      end
+      class Unknown < OutputLocation
+      end
     end
 
     class OverrideDomainUnitOwnersPolicyGrantDetail
@@ -5233,6 +5378,11 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class S3Destination
+      attr_accessor uri: ::String
+      SENSITIVE: [:uri]
+    end
+
     class S3PropertiesInput
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
@@ -5462,6 +5612,17 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class SourceLocation
+      attr_accessor s3: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: [:s3]
+
+      class S3 < SourceLocation
+      end
+      class Unknown < SourceLocation
+      end
+    end
+
     class SparkEmrPropertiesInput
       attr_accessor compute_arn: ::String
       attr_accessor instance_profile_arn: ::String
@@ -5586,6 +5747,50 @@ module Aws::DataZone
       attr_accessor created_by: ::String
       attr_accessor owning_project_id: ::String
       SENSITIVE: []
+    end
+
+    class StartNotebookExportInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor notebook_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor file_format: ("PDF" | "IPYNB")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartNotebookExportOutput
+      attr_accessor id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor notebook_id: ::String
+      attr_accessor file_format: ("PDF" | "IPYNB")
+      attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: []
+    end
+
+    class StartNotebookImportInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor owning_project_identifier: ::String
+      attr_accessor source_location: Types::SourceLocation
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class StartNotebookImportOutput
+      attr_accessor notebook_id: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor domain_id: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor source_location: Types::SourceLocation
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      SENSITIVE: [:name, :description]
     end
 
     class StartNotebookRunInput
@@ -6296,6 +6501,43 @@ module Aws::DataZone
       attr_accessor role_principal_arn: ::String
       attr_accessor role_principal_id: ::String
       SENSITIVE: [:group_name]
+    end
+
+    class UpdateNotebookInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor description: ::String
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor name: ::String
+      attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor environment_configuration: Types::EnvironmentConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description, :name, :parameters]
+    end
+
+    class UpdateNotebookOutput
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor owning_project_id: ::String
+      attr_accessor domain_id: ::String
+      attr_accessor cell_order: ::Array[Types::CellInformation]
+      attr_accessor status: ("ACTIVE" | "ARCHIVED")
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor created_by: ::String
+      attr_accessor updated_at: ::Time
+      attr_accessor updated_by: ::String
+      attr_accessor locked_by: ::String
+      attr_accessor locked_at: ::Time
+      attr_accessor lock_expires_at: ::Time
+      attr_accessor compute_id: ::String
+      attr_accessor metadata: ::Hash[::String, ::String]
+      attr_accessor parameters: ::Hash[::String, ::String]
+      attr_accessor environment_configuration: Types::EnvironmentConfig
+      attr_accessor error: Types::NotebookError
+      SENSITIVE: [:name, :description, :parameters]
     end
 
     class UpdateProjectInput

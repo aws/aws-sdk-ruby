@@ -44,12 +44,20 @@ module Aws::SecurityAgent
     AuthCode = Shapes::StringShape.new(name: 'AuthCode')
     Authentication = Shapes::StructureShape.new(name: 'Authentication')
     AuthenticationProviderType = Shapes::StringShape.new(name: 'AuthenticationProviderType')
+    BatchDeleteCodeReviewsInput = Shapes::StructureShape.new(name: 'BatchDeleteCodeReviewsInput')
+    BatchDeleteCodeReviewsOutput = Shapes::StructureShape.new(name: 'BatchDeleteCodeReviewsOutput')
     BatchDeletePentestsInput = Shapes::StructureShape.new(name: 'BatchDeletePentestsInput')
     BatchDeletePentestsOutput = Shapes::StructureShape.new(name: 'BatchDeletePentestsOutput')
     BatchGetAgentSpacesInput = Shapes::StructureShape.new(name: 'BatchGetAgentSpacesInput')
     BatchGetAgentSpacesOutput = Shapes::StructureShape.new(name: 'BatchGetAgentSpacesOutput')
     BatchGetArtifactMetadataInput = Shapes::StructureShape.new(name: 'BatchGetArtifactMetadataInput')
     BatchGetArtifactMetadataOutput = Shapes::StructureShape.new(name: 'BatchGetArtifactMetadataOutput')
+    BatchGetCodeReviewJobTasksInput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewJobTasksInput')
+    BatchGetCodeReviewJobTasksOutput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewJobTasksOutput')
+    BatchGetCodeReviewJobsInput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewJobsInput')
+    BatchGetCodeReviewJobsOutput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewJobsOutput')
+    BatchGetCodeReviewsInput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewsInput')
+    BatchGetCodeReviewsOutput = Shapes::StructureShape.new(name: 'BatchGetCodeReviewsOutput')
     BatchGetFindingsInput = Shapes::StructureShape.new(name: 'BatchGetFindingsInput')
     BatchGetFindingsOutput = Shapes::StructureShape.new(name: 'BatchGetFindingsOutput')
     BatchGetPentestJobTasksInput = Shapes::StructureShape.new(name: 'BatchGetPentestJobTasksInput')
@@ -65,12 +73,28 @@ module Aws::SecurityAgent
     Category = Shapes::StructureShape.new(name: 'Category')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     CloudWatchLog = Shapes::StructureShape.new(name: 'CloudWatchLog')
+    CodeLocation = Shapes::StructureShape.new(name: 'CodeLocation')
+    CodeLocationList = Shapes::ListShape.new(name: 'CodeLocationList')
     CodeRemediationStrategy = Shapes::StringShape.new(name: 'CodeRemediationStrategy')
     CodeRemediationTask = Shapes::StructureShape.new(name: 'CodeRemediationTask')
     CodeRemediationTaskDetails = Shapes::StructureShape.new(name: 'CodeRemediationTaskDetails')
     CodeRemediationTaskDetailsList = Shapes::ListShape.new(name: 'CodeRemediationTaskDetailsList')
     CodeRemediationTaskStatus = Shapes::StringShape.new(name: 'CodeRemediationTaskStatus')
+    CodeReview = Shapes::StructureShape.new(name: 'CodeReview')
+    CodeReviewIdList = Shapes::ListShape.new(name: 'CodeReviewIdList')
+    CodeReviewJob = Shapes::StructureShape.new(name: 'CodeReviewJob')
+    CodeReviewJobIdList = Shapes::ListShape.new(name: 'CodeReviewJobIdList')
+    CodeReviewJobList = Shapes::ListShape.new(name: 'CodeReviewJobList')
+    CodeReviewJobSummary = Shapes::StructureShape.new(name: 'CodeReviewJobSummary')
+    CodeReviewJobSummaryList = Shapes::ListShape.new(name: 'CodeReviewJobSummaryList')
+    CodeReviewJobTask = Shapes::StructureShape.new(name: 'CodeReviewJobTask')
+    CodeReviewJobTaskList = Shapes::ListShape.new(name: 'CodeReviewJobTaskList')
+    CodeReviewJobTaskSummary = Shapes::StructureShape.new(name: 'CodeReviewJobTaskSummary')
+    CodeReviewJobTaskSummaryList = Shapes::ListShape.new(name: 'CodeReviewJobTaskSummaryList')
+    CodeReviewList = Shapes::ListShape.new(name: 'CodeReviewList')
     CodeReviewSettings = Shapes::StructureShape.new(name: 'CodeReviewSettings')
+    CodeReviewSummary = Shapes::StructureShape.new(name: 'CodeReviewSummary')
+    CodeReviewSummaryList = Shapes::ListShape.new(name: 'CodeReviewSummaryList')
     ConfidenceLevel = Shapes::StringShape.new(name: 'ConfidenceLevel')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContextType = Shapes::StringShape.new(name: 'ContextType')
@@ -78,6 +102,8 @@ module Aws::SecurityAgent
     CreateAgentSpaceOutput = Shapes::StructureShape.new(name: 'CreateAgentSpaceOutput')
     CreateApplicationRequest = Shapes::StructureShape.new(name: 'CreateApplicationRequest')
     CreateApplicationResponse = Shapes::StructureShape.new(name: 'CreateApplicationResponse')
+    CreateCodeReviewInput = Shapes::StructureShape.new(name: 'CreateCodeReviewInput')
+    CreateCodeReviewOutput = Shapes::StructureShape.new(name: 'CreateCodeReviewOutput')
     CreateIntegrationInput = Shapes::StructureShape.new(name: 'CreateIntegrationInput')
     CreateIntegrationOutput = Shapes::StructureShape.new(name: 'CreateIntegrationOutput')
     CreateMembershipRequest = Shapes::StructureShape.new(name: 'CreateMembershipRequest')
@@ -96,6 +122,8 @@ module Aws::SecurityAgent
     DeleteApplicationRequest = Shapes::StructureShape.new(name: 'DeleteApplicationRequest')
     DeleteArtifactInput = Shapes::StructureShape.new(name: 'DeleteArtifactInput')
     DeleteArtifactOutput = Shapes::StructureShape.new(name: 'DeleteArtifactOutput')
+    DeleteCodeReviewFailure = Shapes::StructureShape.new(name: 'DeleteCodeReviewFailure')
+    DeleteCodeReviewFailureList = Shapes::ListShape.new(name: 'DeleteCodeReviewFailureList')
     DeleteIntegrationInput = Shapes::StructureShape.new(name: 'DeleteIntegrationInput')
     DeleteIntegrationOutput = Shapes::StructureShape.new(name: 'DeleteIntegrationOutput')
     DeleteMembershipRequest = Shapes::StructureShape.new(name: 'DeleteMembershipRequest')
@@ -140,6 +168,7 @@ module Aws::SecurityAgent
     IdCInstanceArn = Shapes::StringShape.new(name: 'IdCInstanceArn')
     InitiateProviderRegistrationInput = Shapes::StructureShape.new(name: 'InitiateProviderRegistrationInput')
     InitiateProviderRegistrationOutput = Shapes::StructureShape.new(name: 'InitiateProviderRegistrationOutput')
+    Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegratedRepository = Shapes::StructureShape.new(name: 'IntegratedRepository')
     IntegratedRepositoryList = Shapes::ListShape.new(name: 'IntegratedRepositoryList')
     IntegratedResource = Shapes::UnionShape.new(name: 'IntegratedResource')
@@ -163,6 +192,12 @@ module Aws::SecurityAgent
     ListApplicationsResponse = Shapes::StructureShape.new(name: 'ListApplicationsResponse')
     ListArtifactsInput = Shapes::StructureShape.new(name: 'ListArtifactsInput')
     ListArtifactsOutput = Shapes::StructureShape.new(name: 'ListArtifactsOutput')
+    ListCodeReviewJobTasksInput = Shapes::StructureShape.new(name: 'ListCodeReviewJobTasksInput')
+    ListCodeReviewJobTasksOutput = Shapes::StructureShape.new(name: 'ListCodeReviewJobTasksOutput')
+    ListCodeReviewJobsForCodeReviewInput = Shapes::StructureShape.new(name: 'ListCodeReviewJobsForCodeReviewInput')
+    ListCodeReviewJobsForCodeReviewOutput = Shapes::StructureShape.new(name: 'ListCodeReviewJobsForCodeReviewOutput')
+    ListCodeReviewsInput = Shapes::StructureShape.new(name: 'ListCodeReviewsInput')
+    ListCodeReviewsOutput = Shapes::StructureShape.new(name: 'ListCodeReviewsOutput')
     ListDiscoveredEndpointsInput = Shapes::StructureShape.new(name: 'ListDiscoveredEndpointsInput')
     ListDiscoveredEndpointsOutput = Shapes::StructureShape.new(name: 'ListDiscoveredEndpointsOutput')
     ListFindingsInput = Shapes::StructureShape.new(name: 'ListFindingsInput')
@@ -237,12 +272,16 @@ module Aws::SecurityAgent
     SourceCodeRepositoryList = Shapes::ListShape.new(name: 'SourceCodeRepositoryList')
     StartCodeRemediationInput = Shapes::StructureShape.new(name: 'StartCodeRemediationInput')
     StartCodeRemediationOutput = Shapes::StructureShape.new(name: 'StartCodeRemediationOutput')
+    StartCodeReviewJobInput = Shapes::StructureShape.new(name: 'StartCodeReviewJobInput')
+    StartCodeReviewJobOutput = Shapes::StructureShape.new(name: 'StartCodeReviewJobOutput')
     StartPentestJobInput = Shapes::StructureShape.new(name: 'StartPentestJobInput')
     StartPentestJobOutput = Shapes::StructureShape.new(name: 'StartPentestJobOutput')
     Step = Shapes::StructureShape.new(name: 'Step')
     StepList = Shapes::ListShape.new(name: 'StepList')
     StepName = Shapes::StringShape.new(name: 'StepName')
     StepStatus = Shapes::StringShape.new(name: 'StepStatus')
+    StopCodeReviewJobInput = Shapes::StructureShape.new(name: 'StopCodeReviewJobInput')
+    StopCodeReviewJobOutput = Shapes::StructureShape.new(name: 'StopCodeReviewJobOutput')
     StopPentestJobInput = Shapes::StructureShape.new(name: 'StopPentestJobInput')
     StopPentestJobOutput = Shapes::StructureShape.new(name: 'StopPentestJobOutput')
     String = Shapes::StringShape.new(name: 'String')
@@ -275,6 +314,8 @@ module Aws::SecurityAgent
     UpdateAgentSpaceOutput = Shapes::StructureShape.new(name: 'UpdateAgentSpaceOutput')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    UpdateCodeReviewInput = Shapes::StructureShape.new(name: 'UpdateCodeReviewInput')
+    UpdateCodeReviewOutput = Shapes::StructureShape.new(name: 'UpdateCodeReviewOutput')
     UpdateFindingInput = Shapes::StructureShape.new(name: 'UpdateFindingInput')
     UpdateFindingOutput = Shapes::StructureShape.new(name: 'UpdateFindingOutput')
     UpdateIntegratedResourcesInput = Shapes::StructureShape.new(name: 'UpdateIntegratedResourcesInput')
@@ -388,6 +429,14 @@ module Aws::SecurityAgent
     Authentication.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     Authentication.struct_class = Types::Authentication
 
+    BatchDeleteCodeReviewsInput.add_member(:code_review_ids, Shapes::ShapeRef.new(shape: CodeReviewIdList, required: true, location_name: "codeReviewIds"))
+    BatchDeleteCodeReviewsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchDeleteCodeReviewsInput.struct_class = Types::BatchDeleteCodeReviewsInput
+
+    BatchDeleteCodeReviewsOutput.add_member(:deleted, Shapes::ShapeRef.new(shape: CodeReviewIdList, location_name: "deleted"))
+    BatchDeleteCodeReviewsOutput.add_member(:failed, Shapes::ShapeRef.new(shape: DeleteCodeReviewFailureList, location_name: "failed"))
+    BatchDeleteCodeReviewsOutput.struct_class = Types::BatchDeleteCodeReviewsOutput
+
     BatchDeletePentestsInput.add_member(:pentest_ids, Shapes::ShapeRef.new(shape: PentestIdList, required: true, location_name: "pentestIds"))
     BatchDeletePentestsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     BatchDeletePentestsInput.struct_class = Types::BatchDeletePentestsInput
@@ -409,6 +458,30 @@ module Aws::SecurityAgent
 
     BatchGetArtifactMetadataOutput.add_member(:artifact_metadata_list, Shapes::ShapeRef.new(shape: ArtifactMetadataList, required: true, location_name: "artifactMetadataList"))
     BatchGetArtifactMetadataOutput.struct_class = Types::BatchGetArtifactMetadataOutput
+
+    BatchGetCodeReviewJobTasksInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchGetCodeReviewJobTasksInput.add_member(:code_review_job_task_ids, Shapes::ShapeRef.new(shape: TaskIdList, required: true, location_name: "codeReviewJobTaskIds"))
+    BatchGetCodeReviewJobTasksInput.struct_class = Types::BatchGetCodeReviewJobTasksInput
+
+    BatchGetCodeReviewJobTasksOutput.add_member(:code_review_job_tasks, Shapes::ShapeRef.new(shape: CodeReviewJobTaskList, location_name: "codeReviewJobTasks"))
+    BatchGetCodeReviewJobTasksOutput.add_member(:not_found, Shapes::ShapeRef.new(shape: TaskIdList, location_name: "notFound"))
+    BatchGetCodeReviewJobTasksOutput.struct_class = Types::BatchGetCodeReviewJobTasksOutput
+
+    BatchGetCodeReviewJobsInput.add_member(:code_review_job_ids, Shapes::ShapeRef.new(shape: CodeReviewJobIdList, required: true, location_name: "codeReviewJobIds"))
+    BatchGetCodeReviewJobsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchGetCodeReviewJobsInput.struct_class = Types::BatchGetCodeReviewJobsInput
+
+    BatchGetCodeReviewJobsOutput.add_member(:code_review_jobs, Shapes::ShapeRef.new(shape: CodeReviewJobList, location_name: "codeReviewJobs"))
+    BatchGetCodeReviewJobsOutput.add_member(:not_found, Shapes::ShapeRef.new(shape: CodeReviewJobIdList, location_name: "notFound"))
+    BatchGetCodeReviewJobsOutput.struct_class = Types::BatchGetCodeReviewJobsOutput
+
+    BatchGetCodeReviewsInput.add_member(:code_review_ids, Shapes::ShapeRef.new(shape: CodeReviewIdList, required: true, location_name: "codeReviewIds"))
+    BatchGetCodeReviewsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    BatchGetCodeReviewsInput.struct_class = Types::BatchGetCodeReviewsInput
+
+    BatchGetCodeReviewsOutput.add_member(:code_reviews, Shapes::ShapeRef.new(shape: CodeReviewList, location_name: "codeReviews"))
+    BatchGetCodeReviewsOutput.add_member(:not_found, Shapes::ShapeRef.new(shape: CodeReviewIdList, location_name: "notFound"))
+    BatchGetCodeReviewsOutput.struct_class = Types::BatchGetCodeReviewsOutput
 
     BatchGetFindingsInput.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIdList, required: true, location_name: "findingIds"))
     BatchGetFindingsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
@@ -459,6 +532,14 @@ module Aws::SecurityAgent
     CloudWatchLog.add_member(:log_stream, Shapes::ShapeRef.new(shape: String, location_name: "logStream"))
     CloudWatchLog.struct_class = Types::CloudWatchLog
 
+    CodeLocation.add_member(:file_path, Shapes::ShapeRef.new(shape: String, required: true, location_name: "filePath"))
+    CodeLocation.add_member(:line_start, Shapes::ShapeRef.new(shape: Integer, location_name: "lineStart"))
+    CodeLocation.add_member(:line_end, Shapes::ShapeRef.new(shape: Integer, location_name: "lineEnd"))
+    CodeLocation.add_member(:label, Shapes::ShapeRef.new(shape: String, location_name: "label"))
+    CodeLocation.struct_class = Types::CodeLocation
+
+    CodeLocationList.member = Shapes::ShapeRef.new(shape: CodeLocation)
+
     CodeRemediationTask.add_member(:status, Shapes::ShapeRef.new(shape: CodeRemediationTaskStatus, required: true, location_name: "status"))
     CodeRemediationTask.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     CodeRemediationTask.add_member(:task_details, Shapes::ShapeRef.new(shape: CodeRemediationTaskDetailsList, location_name: "taskDetails"))
@@ -471,9 +552,94 @@ module Aws::SecurityAgent
 
     CodeRemediationTaskDetailsList.member = Shapes::ShapeRef.new(shape: CodeRemediationTaskDetails)
 
+    CodeReview.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    CodeReview.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    CodeReview.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    CodeReview.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, required: true, location_name: "assets"))
+    CodeReview.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    CodeReview.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    CodeReview.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    CodeReview.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReview.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReview.struct_class = Types::CodeReview
+
+    CodeReviewIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    CodeReviewJob.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    CodeReviewJob.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    CodeReviewJob.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CodeReviewJob.add_member(:overview, Shapes::ShapeRef.new(shape: String, location_name: "overview"))
+    CodeReviewJob.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    CodeReviewJob.add_member(:documents, Shapes::ShapeRef.new(shape: DocumentList, location_name: "documents"))
+    CodeReviewJob.add_member(:source_code, Shapes::ShapeRef.new(shape: SourceCodeRepositoryList, location_name: "sourceCode"))
+    CodeReviewJob.add_member(:steps, Shapes::ShapeRef.new(shape: StepList, location_name: "steps"))
+    CodeReviewJob.add_member(:execution_context, Shapes::ShapeRef.new(shape: ExecutionContextList, location_name: "executionContext"))
+    CodeReviewJob.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    CodeReviewJob.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    CodeReviewJob.add_member(:error_information, Shapes::ShapeRef.new(shape: ErrorInformation, location_name: "errorInformation"))
+    CodeReviewJob.add_member(:integrated_repositories, Shapes::ShapeRef.new(shape: IntegratedRepositoryList, location_name: "integratedRepositories"))
+    CodeReviewJob.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    CodeReviewJob.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReviewJob.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReviewJob.struct_class = Types::CodeReviewJob
+
+    CodeReviewJobIdList.member = Shapes::ShapeRef.new(shape: String)
+
+    CodeReviewJobList.member = Shapes::ShapeRef.new(shape: CodeReviewJob)
+
+    CodeReviewJobSummary.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewJobId"))
+    CodeReviewJobSummary.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    CodeReviewJobSummary.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CodeReviewJobSummary.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    CodeReviewJobSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReviewJobSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReviewJobSummary.struct_class = Types::CodeReviewJobSummary
+
+    CodeReviewJobSummaryList.member = Shapes::ShapeRef.new(shape: CodeReviewJobSummary)
+
+    CodeReviewJobTask.add_member(:task_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskId"))
+    CodeReviewJobTask.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    CodeReviewJobTask.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    CodeReviewJobTask.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    CodeReviewJobTask.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CodeReviewJobTask.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CodeReviewJobTask.add_member(:categories, Shapes::ShapeRef.new(shape: CategoryList, location_name: "categories"))
+    CodeReviewJobTask.add_member(:risk_type, Shapes::ShapeRef.new(shape: RiskType, location_name: "riskType"))
+    CodeReviewJobTask.add_member(:execution_status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "executionStatus"))
+    CodeReviewJobTask.add_member(:logs_location, Shapes::ShapeRef.new(shape: LogLocation, location_name: "logsLocation"))
+    CodeReviewJobTask.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReviewJobTask.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReviewJobTask.struct_class = Types::CodeReviewJobTask
+
+    CodeReviewJobTaskList.member = Shapes::ShapeRef.new(shape: CodeReviewJobTask)
+
+    CodeReviewJobTaskSummary.add_member(:task_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "taskId"))
+    CodeReviewJobTaskSummary.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    CodeReviewJobTaskSummary.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    CodeReviewJobTaskSummary.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    CodeReviewJobTaskSummary.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CodeReviewJobTaskSummary.add_member(:risk_type, Shapes::ShapeRef.new(shape: RiskType, location_name: "riskType"))
+    CodeReviewJobTaskSummary.add_member(:execution_status, Shapes::ShapeRef.new(shape: TaskExecutionStatus, location_name: "executionStatus"))
+    CodeReviewJobTaskSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReviewJobTaskSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReviewJobTaskSummary.struct_class = Types::CodeReviewJobTaskSummary
+
+    CodeReviewJobTaskSummaryList.member = Shapes::ShapeRef.new(shape: CodeReviewJobTaskSummary)
+
+    CodeReviewList.member = Shapes::ShapeRef.new(shape: CodeReview)
+
     CodeReviewSettings.add_member(:controls_scanning, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "controlsScanning"))
     CodeReviewSettings.add_member(:general_purpose_scanning, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "generalPurposeScanning"))
     CodeReviewSettings.struct_class = Types::CodeReviewSettings
+
+    CodeReviewSummary.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    CodeReviewSummary.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    CodeReviewSummary.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    CodeReviewSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CodeReviewSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CodeReviewSummary.struct_class = Types::CodeReviewSummary
+
+    CodeReviewSummaryList.member = Shapes::ShapeRef.new(shape: CodeReviewSummary)
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -506,6 +672,25 @@ module Aws::SecurityAgent
 
     CreateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
     CreateApplicationResponse.struct_class = Types::CreateApplicationResponse
+
+    CreateCodeReviewInput.add_member(:title, Shapes::ShapeRef.new(shape: String, required: true, location_name: "title"))
+    CreateCodeReviewInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    CreateCodeReviewInput.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, required: true, location_name: "assets"))
+    CreateCodeReviewInput.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    CreateCodeReviewInput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    CreateCodeReviewInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    CreateCodeReviewInput.struct_class = Types::CreateCodeReviewInput
+
+    CreateCodeReviewOutput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    CreateCodeReviewOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    CreateCodeReviewOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    CreateCodeReviewOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    CreateCodeReviewOutput.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "assets"))
+    CreateCodeReviewOutput.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    CreateCodeReviewOutput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    CreateCodeReviewOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    CreateCodeReviewOutput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    CreateCodeReviewOutput.struct_class = Types::CreateCodeReviewOutput
 
     CreateIntegrationInput.add_member(:provider, Shapes::ShapeRef.new(shape: Provider, required: true, location_name: "provider"))
     CreateIntegrationInput.add_member(:input, Shapes::ShapeRef.new(shape: ProviderInput, required: true, location_name: "input"))
@@ -583,6 +768,12 @@ module Aws::SecurityAgent
 
     DeleteArtifactOutput.struct_class = Types::DeleteArtifactOutput
 
+    DeleteCodeReviewFailure.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    DeleteCodeReviewFailure.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "reason"))
+    DeleteCodeReviewFailure.struct_class = Types::DeleteCodeReviewFailure
+
+    DeleteCodeReviewFailureList.member = Shapes::ShapeRef.new(shape: DeleteCodeReviewFailure)
+
     DeleteIntegrationInput.add_member(:integration_id, Shapes::ShapeRef.new(shape: IntegrationId, required: true, location_name: "integrationId"))
     DeleteIntegrationInput.struct_class = Types::DeleteIntegrationInput
 
@@ -650,6 +841,8 @@ module Aws::SecurityAgent
     Finding.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     Finding.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
     Finding.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    Finding.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    Finding.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
     Finding.add_member(:task_id, Shapes::ShapeRef.new(shape: String, location_name: "taskId"))
     Finding.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     Finding.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
@@ -662,6 +855,7 @@ module Aws::SecurityAgent
     Finding.add_member(:attack_script, Shapes::ShapeRef.new(shape: String, location_name: "attackScript"))
     Finding.add_member(:code_remediation_task, Shapes::ShapeRef.new(shape: CodeRemediationTask, location_name: "codeRemediationTask"))
     Finding.add_member(:last_updated_by, Shapes::ShapeRef.new(shape: String, location_name: "lastUpdatedBy"))
+    Finding.add_member(:code_locations, Shapes::ShapeRef.new(shape: CodeLocationList, location_name: "codeLocations"))
     Finding.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     Finding.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     Finding.struct_class = Types::Finding
@@ -674,6 +868,8 @@ module Aws::SecurityAgent
     FindingSummary.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     FindingSummary.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestId"))
     FindingSummary.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    FindingSummary.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewId"))
+    FindingSummary.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
     FindingSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     FindingSummary.add_member(:status, Shapes::ShapeRef.new(shape: FindingStatus, location_name: "status"))
     FindingSummary.add_member(:risk_type, Shapes::ShapeRef.new(shape: String, location_name: "riskType"))
@@ -832,6 +1028,37 @@ module Aws::SecurityAgent
     ListArtifactsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListArtifactsOutput.struct_class = Types::ListArtifactsOutput
 
+    ListCodeReviewJobTasksInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    ListCodeReviewJobTasksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListCodeReviewJobTasksInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
+    ListCodeReviewJobTasksInput.add_member(:step_name, Shapes::ShapeRef.new(shape: StepName, location_name: "stepName"))
+    ListCodeReviewJobTasksInput.add_member(:category_name, Shapes::ShapeRef.new(shape: String, location_name: "categoryName"))
+    ListCodeReviewJobTasksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewJobTasksInput.struct_class = Types::ListCodeReviewJobTasksInput
+
+    ListCodeReviewJobTasksOutput.add_member(:code_review_job_task_summaries, Shapes::ShapeRef.new(shape: CodeReviewJobTaskSummaryList, location_name: "codeReviewJobTaskSummaries"))
+    ListCodeReviewJobTasksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewJobTasksOutput.struct_class = Types::ListCodeReviewJobTasksOutput
+
+    ListCodeReviewJobsForCodeReviewInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListCodeReviewJobsForCodeReviewInput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    ListCodeReviewJobsForCodeReviewInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    ListCodeReviewJobsForCodeReviewInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewJobsForCodeReviewInput.struct_class = Types::ListCodeReviewJobsForCodeReviewInput
+
+    ListCodeReviewJobsForCodeReviewOutput.add_member(:code_review_job_summaries, Shapes::ShapeRef.new(shape: CodeReviewJobSummaryList, location_name: "codeReviewJobSummaries"))
+    ListCodeReviewJobsForCodeReviewOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewJobsForCodeReviewOutput.struct_class = Types::ListCodeReviewJobsForCodeReviewOutput
+
+    ListCodeReviewsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListCodeReviewsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    ListCodeReviewsInput.struct_class = Types::ListCodeReviewsInput
+
+    ListCodeReviewsOutput.add_member(:code_review_summaries, Shapes::ShapeRef.new(shape: CodeReviewSummaryList, location_name: "codeReviewSummaries"))
+    ListCodeReviewsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListCodeReviewsOutput.struct_class = Types::ListCodeReviewsOutput
+
     ListDiscoveredEndpointsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListDiscoveredEndpointsInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestJobId"))
     ListDiscoveredEndpointsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
@@ -844,7 +1071,8 @@ module Aws::SecurityAgent
     ListDiscoveredEndpointsOutput.struct_class = Types::ListDiscoveredEndpointsOutput
 
     ListFindingsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
-    ListFindingsInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestJobId"))
+    ListFindingsInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    ListFindingsInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
     ListFindingsInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     ListFindingsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListFindingsInput.add_member(:risk_type, Shapes::ShapeRef.new(shape: String, location_name: "riskType"))
@@ -1072,11 +1300,25 @@ module Aws::SecurityAgent
     SourceCodeRepositoryList.member = Shapes::ShapeRef.new(shape: SourceCodeRepository)
 
     StartCodeRemediationInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
-    StartCodeRemediationInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestJobId"))
+    StartCodeRemediationInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, location_name: "pentestJobId"))
+    StartCodeRemediationInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, location_name: "codeReviewJobId"))
     StartCodeRemediationInput.add_member(:finding_ids, Shapes::ShapeRef.new(shape: FindingIdList, required: true, location_name: "findingIds"))
     StartCodeRemediationInput.struct_class = Types::StartCodeRemediationInput
 
     StartCodeRemediationOutput.struct_class = Types::StartCodeRemediationOutput
+
+    StartCodeReviewJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    StartCodeReviewJobInput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    StartCodeReviewJobInput.struct_class = Types::StartCodeReviewJobInput
+
+    StartCodeReviewJobOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    StartCodeReviewJobOutput.add_member(:status, Shapes::ShapeRef.new(shape: JobStatus, location_name: "status"))
+    StartCodeReviewJobOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    StartCodeReviewJobOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    StartCodeReviewJobOutput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    StartCodeReviewJobOutput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewJobId"))
+    StartCodeReviewJobOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    StartCodeReviewJobOutput.struct_class = Types::StartCodeReviewJobOutput
 
     StartPentestJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     StartPentestJobInput.add_member(:pentest_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestId"))
@@ -1098,6 +1340,12 @@ module Aws::SecurityAgent
     Step.struct_class = Types::Step
 
     StepList.member = Shapes::ShapeRef.new(shape: Step)
+
+    StopCodeReviewJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    StopCodeReviewJobInput.add_member(:code_review_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewJobId"))
+    StopCodeReviewJobInput.struct_class = Types::StopCodeReviewJobInput
+
+    StopCodeReviewJobOutput.struct_class = Types::StopCodeReviewJobOutput
 
     StopPentestJobInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
     StopPentestJobInput.add_member(:pentest_job_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "pentestJobId"))
@@ -1206,6 +1454,26 @@ module Aws::SecurityAgent
 
     UpdateApplicationResponse.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location_name: "applicationId"))
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
+    UpdateCodeReviewInput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    UpdateCodeReviewInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
+    UpdateCodeReviewInput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    UpdateCodeReviewInput.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "assets"))
+    UpdateCodeReviewInput.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    UpdateCodeReviewInput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    UpdateCodeReviewInput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    UpdateCodeReviewInput.struct_class = Types::UpdateCodeReviewInput
+
+    UpdateCodeReviewOutput.add_member(:code_review_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "codeReviewId"))
+    UpdateCodeReviewOutput.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    UpdateCodeReviewOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
+    UpdateCodeReviewOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
+    UpdateCodeReviewOutput.add_member(:assets, Shapes::ShapeRef.new(shape: Assets, location_name: "assets"))
+    UpdateCodeReviewOutput.add_member(:service_role, Shapes::ShapeRef.new(shape: ServiceRole, location_name: "serviceRole"))
+    UpdateCodeReviewOutput.add_member(:log_config, Shapes::ShapeRef.new(shape: CloudWatchLog, location_name: "logConfig"))
+    UpdateCodeReviewOutput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, location_name: "agentSpaceId"))
+    UpdateCodeReviewOutput.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
+    UpdateCodeReviewOutput.struct_class = Types::UpdateCodeReviewOutput
 
     UpdateFindingInput.add_member(:finding_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "findingId"))
     UpdateFindingInput.add_member(:agent_space_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "agentSpaceId"))
@@ -1333,6 +1601,14 @@ module Aws::SecurityAgent
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:batch_delete_code_reviews, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteCodeReviews"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchDeleteCodeReviews"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteCodeReviewsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteCodeReviewsOutput)
+      end)
+
       api.add_operation(:batch_delete_pentests, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeletePentests"
         o.http_method = "POST"
@@ -1360,6 +1636,30 @@ module Aws::SecurityAgent
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:batch_get_code_review_job_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCodeReviewJobTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchGetCodeReviewJobTasks"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCodeReviewJobTasksInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCodeReviewJobTasksOutput)
+      end)
+
+      api.add_operation(:batch_get_code_review_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCodeReviewJobs"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchGetCodeReviewJobs"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCodeReviewJobsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCodeReviewJobsOutput)
+      end)
+
+      api.add_operation(:batch_get_code_reviews, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchGetCodeReviews"
+        o.http_method = "POST"
+        o.http_request_uri = "/BatchGetCodeReviews"
+        o.input = Shapes::ShapeRef.new(shape: BatchGetCodeReviewsInput)
+        o.output = Shapes::ShapeRef.new(shape: BatchGetCodeReviewsOutput)
       end)
 
       api.add_operation(:batch_get_findings, Seahorse::Model::Operation.new.tap do |o|
@@ -1416,6 +1716,14 @@ module Aws::SecurityAgent
         o.http_request_uri = "/CreateApplication"
         o.input = Shapes::ShapeRef.new(shape: CreateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateApplicationResponse)
+      end)
+
+      api.add_operation(:create_code_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateCodeReview"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateCodeReview"
+        o.input = Shapes::ShapeRef.new(shape: CreateCodeReviewInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateCodeReviewOutput)
       end)
 
       api.add_operation(:create_integration, Seahorse::Model::Operation.new.tap do |o|
@@ -1610,6 +1918,48 @@ module Aws::SecurityAgent
         )
       end)
 
+      api.add_operation(:list_code_review_job_tasks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeReviewJobTasks"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListCodeReviewJobTasks"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeReviewJobTasksInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeReviewJobTasksOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_code_review_jobs_for_code_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeReviewJobsForCodeReview"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListCodeReviewJobsForCodeReview"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeReviewJobsForCodeReviewInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeReviewJobsForCodeReviewOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_code_reviews, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListCodeReviews"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListCodeReviews"
+        o.input = Shapes::ShapeRef.new(shape: ListCodeReviewsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListCodeReviewsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_discovered_endpoints, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListDiscoveredEndpoints"
         o.http_method = "POST"
@@ -1762,12 +2112,28 @@ module Aws::SecurityAgent
         o.output = Shapes::ShapeRef.new(shape: StartCodeRemediationOutput)
       end)
 
+      api.add_operation(:start_code_review_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartCodeReviewJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/StartCodeReviewJob"
+        o.input = Shapes::ShapeRef.new(shape: StartCodeReviewJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StartCodeReviewJobOutput)
+      end)
+
       api.add_operation(:start_pentest_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartPentestJob"
         o.http_method = "POST"
         o.http_request_uri = "/StartPentestJob"
         o.input = Shapes::ShapeRef.new(shape: StartPentestJobInput)
         o.output = Shapes::ShapeRef.new(shape: StartPentestJobOutput)
+      end)
+
+      api.add_operation(:stop_code_review_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopCodeReviewJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/StopCodeReviewJob"
+        o.input = Shapes::ShapeRef.new(shape: StopCodeReviewJobInput)
+        o.output = Shapes::ShapeRef.new(shape: StopCodeReviewJobOutput)
       end)
 
       api.add_operation(:stop_pentest_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1808,6 +2174,14 @@ module Aws::SecurityAgent
         o.http_request_uri = "/UpdateApplication"
         o.input = Shapes::ShapeRef.new(shape: UpdateApplicationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateApplicationResponse)
+      end)
+
+      api.add_operation(:update_code_review, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateCodeReview"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateCodeReview"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCodeReviewInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCodeReviewOutput)
       end)
 
       api.add_operation(:update_finding, Seahorse::Model::Operation.new.tap do |o|

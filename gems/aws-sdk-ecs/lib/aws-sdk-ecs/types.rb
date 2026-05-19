@@ -2733,6 +2733,53 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # @!attribute [rw] service_deployment_arn
+    #   The ARN of the service deployment to continue or roll back.
+    #   @return [String]
+    #
+    # @!attribute [rw] hook_id
+    #   The ID of the paused lifecycle hook to act on. You can find the
+    #   `hookId` by calling [DescribeServiceDeployments][1] and inspecting
+    #   the `lifecycleHookDetails` field of the service deployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to take on the paused lifecycle hook. Valid values are:
+    #
+    #   * `CONTINUE` - Proceeds the deployment to the next lifecycle stage.
+    #
+    #   * `ROLLBACK` - Rolls back the deployment to the previous service
+    #     revision.
+    #
+    #   If no value is specified, the default action is `CONTINUE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContinueServiceDeploymentRequest AWS API Documentation
+    #
+    class ContinueServiceDeploymentRequest < Struct.new(
+      :service_deployment_arn,
+      :hook_id,
+      :action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_deployment_arn
+    #   The ARN of the service deployment that was continued or rolled back.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContinueServiceDeploymentResponse AWS API Documentation
+    #
+    class ContinueServiceDeploymentResponse < Struct.new(
+      :service_deployment_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the capacity provider. Up to 255 characters are allowed.
     #   They include letters (both upper and lowercase letters), numbers,
@@ -3813,6 +3860,15 @@ module Aws::ECS
     #   `deploymentController`, `taskSets` and `deployments` parameters will
     #   be returned, however the `deployments` parameter will be an empty
     #   list.
+    #
+    #   The response includes a `lifecycleHookDetails` field, which is an
+    #   empty array when the service is created or updated. The values are
+    #   populated when a lifecycle hook executes and are available as part
+    #   of the service deployment details ([DescribeServiceDeployments][1]).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/CreateServiceResponse AWS API Documentation
@@ -6002,6 +6058,20 @@ module Aws::ECS
     #
     # [1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-lifecycle-hooks.html
     #
+    # @!attribute [rw] target_type
+    #   The type of action the lifecycle hook performs. Valid values are:
+    #
+    #   * `AWS_LAMBDA` - Invokes a Lambda function at the specified
+    #     lifecycle stage. This is the default value.
+    #
+    #   * `PAUSE` - Pauses the deployment at the specified lifecycle stage
+    #     until you call `ContinueServiceDeployment` to continue or roll
+    #     back.
+    #
+    #   This field is optional. If not specified, the default value is
+    #   `AWS_LAMBDA`.
+    #   @return [String]
+    #
     # @!attribute [rw] hook_target_arn
     #   The Amazon Resource Name (ARN) of the hook target. Currently, only
     #   Lambda function ARNs are supported.
@@ -6089,13 +6159,110 @@ module Aws::ECS
     #   pass to your hook target invocations (such as a Lambda function).
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] timeout_configuration
+    #   The timeout configuration for the lifecycle hook. This specifies how
+    #   long Amazon ECS waits before taking the timeout action if the hook
+    #   is not resolved.
+    #   @return [Types::DeploymentLifecycleHookTimeoutConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHook AWS API Documentation
     #
     class DeploymentLifecycleHook < Struct.new(
+      :target_type,
       :hook_target_arn,
       :role_arn,
       :lifecycle_stages,
-      :hook_details)
+      :hook_details,
+      :timeout_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a deployment lifecycle hook that is active during a
+    # service deployment.
+    #
+    # You can view lifecycle hook details by calling
+    # [DescribeServiceDeployments][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+    #
+    # @!attribute [rw] hook_id
+    #   The ID of the lifecycle hook. Use this value when calling
+    #   `ContinueServiceDeployment` to continue or roll back a paused
+    #   deployment.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of action the lifecycle hook performs, such as `AWS_LAMBDA`
+    #   or `PAUSE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_arn
+    #   The Amazon Resource Name (ARN) of the hook target. For `AWS_LAMBDA`
+    #   hooks, this is the Lambda function ARN. For `PAUSE` hooks, this
+    #   field is not set.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the lifecycle hook. Valid values depend on the hook
+    #   type:
+    #
+    #   * For `AWS_LAMBDA` hooks: `IN_PROGRESS`, `SUCCEEDED`, `FAILED`, and
+    #     `TIMED_OUT`.
+    #
+    #   * For `PAUSE` hooks: `AWAITING_ACTION`, `SUCCEEDED`, `FAILED`, and
+    #     `TIMED_OUT`.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_at
+    #   The time when the lifecycle hook times out. If the hook has not been
+    #   completed by this time, Amazon ECS takes the timeout action.
+    #   @return [Time]
+    #
+    # @!attribute [rw] timeout_action
+    #   The action Amazon ECS takes when the lifecycle hook times out. Valid
+    #   values are `CONTINUE` and `ROLLBACK`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHookDetail AWS API Documentation
+    #
+    class DeploymentLifecycleHookDetail < Struct.new(
+      :hook_id,
+      :target_type,
+      :target_arn,
+      :status,
+      :expires_at,
+      :timeout_action)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The timeout configuration for a deployment lifecycle hook. This
+    # determines how long Amazon ECS waits for the hook to complete before
+    # taking the specified timeout action.
+    #
+    # @!attribute [rw] timeout_in_minutes
+    #   The number of minutes Amazon ECS waits for the lifecycle hook to
+    #   complete before taking the timeout action.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action Amazon ECS takes when the lifecycle hook times out. Valid
+    #   values are:
+    #
+    #   * `CONTINUE` - Proceeds the deployment to the next lifecycle stage.
+    #
+    #   * `ROLLBACK` - Rolls back the deployment to the previous service
+    #     revision.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeploymentLifecycleHookTimeoutConfiguration AWS API Documentation
+    #
+    class DeploymentLifecycleHookTimeoutConfiguration < Struct.new(
+      :timeout_in_minutes,
+      :action)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13783,8 +13950,8 @@ module Aws::ECS
     # volumes][1] in the *Amazon Elastic Container Service Developer Guide*.
     #
     # Your task definition must include a Task IAM Role. See [ IAM role for
-    # attaching your file system to AWS compute resources][2] for required
-    # permissions.
+    # attaching your file system to Amazon Web Services compute
+    # resources][2] for required permissions.
     #
     #
     #
@@ -14905,6 +15072,11 @@ module Aws::ECS
     #     production service revision after this stage.
     #   @return [String]
     #
+    # @!attribute [rw] lifecycle_hook_details
+    #   The details of the lifecycle hooks for the current service
+    #   deployment.
+    #   @return [Array<Types::DeploymentLifecycleHookDetail>]
+    #
     # @!attribute [rw] deployment_configuration
     #   Optional deployment parameters that control how many tasks run
     #   during a deployment and the ordering of stopping and starting tasks.
@@ -14941,6 +15113,7 @@ module Aws::ECS
       :status,
       :status_reason,
       :lifecycle_stage,
+      :lifecycle_hook_details,
       :deployment_configuration,
       :rollback,
       :deployment_circuit_breaker,
@@ -18908,6 +19081,15 @@ module Aws::ECS
     #
     # @!attribute [rw] service
     #   The full description of your service following the update call.
+    #
+    #   The response includes a `lifecycleHookDetails` field, which is an
+    #   empty array when the service is created or updated. The values are
+    #   populated when a lifecycle hook executes and are available as part
+    #   of the service deployment details ([DescribeServiceDeployments][1]).
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
     #   @return [Types::Service]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateServiceResponse AWS API Documentation

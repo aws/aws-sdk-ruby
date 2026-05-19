@@ -111,7 +111,8 @@ module Aws
                                     network_mode: ("PUBLIC" | "VPC"),
                                     network_mode_config: {
                                       security_groups: Array[::String],
-                                      subnets: Array[::String]
+                                      subnets: Array[::String],
+                                      require_service_s3_endpoint: bool?
                                     }?
                                   },
                                   ?client_token: ::String,
@@ -249,7 +250,8 @@ module Aws
                               network_mode: ("PUBLIC" | "VPC"),
                               vpc_config: {
                                 security_groups: Array[::String],
-                                subnets: Array[::String]
+                                subnets: Array[::String],
+                                require_service_s3_endpoint: bool?
                               }?
                             },
                             ?recording: {
@@ -321,7 +323,8 @@ module Aws
                                        network_mode: ("PUBLIC" | "SANDBOX" | "VPC"),
                                        vpc_config: {
                                          security_groups: Array[::String],
-                                         subnets: Array[::String]
+                                         subnets: Array[::String],
+                                         require_service_s3_endpoint: bool?
                                        }?
                                      },
                                      ?certificates: Array[
@@ -791,7 +794,8 @@ module Aws
                                   network_mode: ("PUBLIC" | "VPC"),
                                   network_mode_config: {
                                     security_groups: Array[::String],
-                                    subnets: Array[::String]
+                                    subnets: Array[::String],
+                                    require_service_s3_endpoint: bool?
                                   }?
                                 }?,
                                 filesystem_configurations: Array[
@@ -1600,12 +1604,12 @@ module Aws
         def policy_id: () -> ::String
         def name: () -> ::String
         def policy_engine_id: () -> ::String
-        def definition: () -> Types::PolicyDefinition
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def definition: () -> Types::PolicyDefinition
+        def description: () -> ::String
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_policy-instance_method
@@ -1631,13 +1635,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePolicyEngineResponse]
         def policy_engine_id: () -> ::String
         def name: () -> ::String
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_engine_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def encryption_key_arn: () -> ::String
+        def description: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_policy_engine-instance_method
       def create_policy_engine: (
@@ -2021,12 +2025,12 @@ module Aws
         def policy_id: () -> ::String
         def name: () -> ::String
         def policy_engine_id: () -> ::String
-        def definition: () -> Types::PolicyDefinition
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def definition: () -> Types::PolicyDefinition
+        def description: () -> ::String
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_policy-instance_method
@@ -2040,13 +2044,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePolicyEngineResponse]
         def policy_engine_id: () -> ::String
         def name: () -> ::String
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_engine_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def encryption_key_arn: () -> ::String
+        def description: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#delete_policy_engine-instance_method
       def delete_policy_engine: (
@@ -2475,12 +2479,12 @@ module Aws
         def policy_id: () -> ::String
         def name: () -> ::String
         def policy_engine_id: () -> ::String
-        def definition: () -> Types::PolicyDefinition
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def definition: () -> Types::PolicyDefinition
+        def description: () -> ::String
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy-instance_method
@@ -2494,19 +2498,35 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyEngineResponse]
         def policy_engine_id: () -> ::String
         def name: () -> ::String
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_engine_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def encryption_key_arn: () -> ::String
+        def description: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy_engine-instance_method
       def get_policy_engine: (
                                policy_engine_id: ::String
                              ) -> _GetPolicyEngineResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyEngineResponseSuccess
+
+      interface _GetPolicyEngineSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyEngineSummaryResponse]
+        def policy_engine_id: () -> ::String
+        def name: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def policy_engine_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def encryption_key_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy_engine_summary-instance_method
+      def get_policy_engine_summary: (
+                                       policy_engine_id: ::String
+                                     ) -> _GetPolicyEngineSummaryResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyEngineSummaryResponseSuccess
 
       interface _GetPolicyGenerationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyGenerationResponse]
@@ -2518,8 +2538,8 @@ module Aws
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status: () -> ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def findings: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy_generation-instance_method
       def get_policy_generation: (
@@ -2527,6 +2547,42 @@ module Aws
                                    policy_engine_id: ::String
                                  ) -> _GetPolicyGenerationResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyGenerationResponseSuccess
+
+      interface _GetPolicyGenerationSummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicyGenerationSummaryResponse]
+        def policy_engine_id: () -> ::String
+        def policy_generation_id: () -> ::String
+        def name: () -> ::String
+        def policy_generation_arn: () -> ::String
+        def resource: () -> Types::Resource
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def status: () -> ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
+        def findings: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy_generation_summary-instance_method
+      def get_policy_generation_summary: (
+                                           policy_generation_id: ::String,
+                                           policy_engine_id: ::String
+                                         ) -> _GetPolicyGenerationSummaryResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicyGenerationSummaryResponseSuccess
+
+      interface _GetPolicySummaryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetPolicySummaryResponse]
+        def policy_id: () -> ::String
+        def name: () -> ::String
+        def policy_engine_id: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def policy_arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_policy_summary-instance_method
+      def get_policy_summary: (
+                                policy_engine_id: ::String,
+                                policy_id: ::String
+                              ) -> _GetPolicySummaryResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetPolicySummaryResponseSuccess
 
       interface _GetRegistryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRegistryResponse]
@@ -2876,6 +2932,18 @@ module Aws
                          ) -> _ListPoliciesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPoliciesResponseSuccess
 
+      interface _ListPolicyEngineSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyEngineSummariesResponse]
+        def policy_engines: () -> ::Array[Types::PolicyEngineSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_policy_engine_summaries-instance_method
+      def list_policy_engine_summaries: (
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListPolicyEngineSummariesResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyEngineSummariesResponseSuccess
+
       interface _ListPolicyEnginesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyEnginesResponse]
         def policy_engines: () -> ::Array[Types::PolicyEngine]
@@ -2902,6 +2970,19 @@ module Aws
                                          ) -> _ListPolicyGenerationAssetsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyGenerationAssetsResponseSuccess
 
+      interface _ListPolicyGenerationSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyGenerationSummariesResponse]
+        def policy_generations: () -> ::Array[Types::PolicyGenerationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_policy_generation_summaries-instance_method
+      def list_policy_generation_summaries: (
+                                              ?next_token: ::String,
+                                              ?max_results: ::Integer,
+                                              policy_engine_id: ::String
+                                            ) -> _ListPolicyGenerationSummariesResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyGenerationSummariesResponseSuccess
+
       interface _ListPolicyGenerationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicyGenerationsResponse]
         def policy_generations: () -> ::Array[Types::PolicyGeneration]
@@ -2915,6 +2996,20 @@ module Aws
                                    ) -> _ListPolicyGenerationsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicyGenerationsResponseSuccess
 
+      interface _ListPolicySummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListPolicySummariesResponse]
+        def policies: () -> ::Array[Types::PolicySummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#list_policy_summaries-instance_method
+      def list_policy_summaries: (
+                                   ?next_token: ::String,
+                                   ?max_results: ::Integer,
+                                   policy_engine_id: ::String,
+                                   ?target_resource_scope: ::String
+                                 ) -> _ListPolicySummariesResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPolicySummariesResponseSuccess
+
       interface _ListRegistriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRegistriesResponse]
         def registries: () -> ::Array[Types::RegistrySummary]
@@ -2924,7 +3019,8 @@ module Aws
       def list_registries: (
                              ?max_results: ::Integer,
                              ?next_token: ::String,
-                             ?status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
+                             ?status: ("CREATING" | "READY" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED"),
+                             ?authorizer_type: ("CUSTOM_JWT" | "AWS_IAM")
                            ) -> _ListRegistriesResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRegistriesResponseSuccess
 
@@ -3003,8 +3099,8 @@ module Aws
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def status: () -> ("GENERATING" | "GENERATED" | "GENERATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def findings: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#start_policy_generation-instance_method
       def start_policy_generation: (
@@ -3100,7 +3196,8 @@ module Aws
                                     network_mode: ("PUBLIC" | "VPC"),
                                     network_mode_config: {
                                       security_groups: Array[::String],
-                                      subnets: Array[::String]
+                                      subnets: Array[::String],
+                                      require_service_s3_endpoint: bool?
                                     }?
                                   },
                                   ?description: ::String,
@@ -3677,7 +3774,8 @@ module Aws
                                   network_mode: ("PUBLIC" | "VPC"),
                                   network_mode_config: {
                                     security_groups: Array[::String],
-                                    subnets: Array[::String]
+                                    subnets: Array[::String],
+                                    require_service_s3_endpoint: bool?
                                   }?
                                 }?,
                                 filesystem_configurations: Array[
@@ -4655,12 +4753,12 @@ module Aws
         def policy_id: () -> ::String
         def name: () -> ::String
         def policy_engine_id: () -> ::String
-        def definition: () -> Types::PolicyDefinition
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
+        def definition: () -> Types::PolicyDefinition
+        def description: () -> ::String
         def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_policy-instance_method
@@ -4687,13 +4785,13 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePolicyEngineResponse]
         def policy_engine_id: () -> ::String
         def name: () -> ::String
-        def description: () -> ::String
         def created_at: () -> ::Time
         def updated_at: () -> ::Time
         def policy_engine_arn: () -> ::String
         def status: () -> ("CREATING" | "ACTIVE" | "UPDATING" | "DELETING" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED")
-        def status_reasons: () -> ::Array[::String]
         def encryption_key_arn: () -> ::String
+        def description: () -> ::String
+        def status_reasons: () -> ::Array[::String]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_policy_engine-instance_method
       def update_policy_engine: (

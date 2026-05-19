@@ -119,6 +119,7 @@ module Aws
                                 vpce_ids: Array[::String]
                               },
                               ?grafana_version: ::String,
+                              ?ip_address_type: ("IPv4" | "DualStack"),
                               ?kms_key_id: ::String
                             ) -> _CreateWorkspaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceResponseSuccess
@@ -407,7 +408,8 @@ module Aws
                                 prefix_list_ids: Array[::String],
                                 vpce_ids: Array[::String]
                               },
-                              ?remove_network_access_configuration: bool
+                              ?remove_network_access_configuration: bool,
+                              ?ip_address_type: ("IPv4" | "DualStack")
                             ) -> _UpdateWorkspaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceResponseSuccess
 

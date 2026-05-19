@@ -601,7 +601,7 @@ module Aws
                                    }?,
                                    connection_mode: ("direct" | "tenant-only")?,
                                    viewer_mtls_config: {
-                                     mode: ("required" | "optional")?,
+                                     mode: ("required" | "optional" | "passthrough")?,
                                      trust_store_config: {
                                        trust_store_id: ::String,
                                        advertise_trust_store_ca_names: bool?,
@@ -968,7 +968,7 @@ module Aws
                                                }?,
                                                connection_mode: ("direct" | "tenant-only")?,
                                                viewer_mtls_config: {
-                                                 mode: ("required" | "optional")?,
+                                                 mode: ("required" | "optional" | "passthrough")?,
                                                  trust_store_config: {
                                                    trust_store_id: ::String,
                                                    advertise_trust_store_ca_names: bool?,
@@ -1463,6 +1463,7 @@ module Aws
                                     version: ::String?
                                   }?
                                 },
+                                ?use_client_certificate_ocsp_endpoint: bool,
                                 ?tags: {
                                   items: Array[
                                     {
@@ -3165,7 +3166,7 @@ module Aws
                                    }?,
                                    connection_mode: ("direct" | "tenant-only")?,
                                    viewer_mtls_config: {
-                                     mode: ("required" | "optional")?,
+                                     mode: ("required" | "optional" | "passthrough")?,
                                      trust_store_config: {
                                        trust_store_id: ::String,
                                        advertise_trust_store_ca_names: bool?,
@@ -3612,7 +3613,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFront/Client.html#update_trust_store-instance_method
       def update_trust_store: (
                                 id: ::String,
-                                ca_certificates_bundle_source: {
+                                ?ca_certificates_bundle_source: {
                                   ca_certificates_bundle_s3_location: {
                                     bucket: ::String,
                                     key: ::String,
@@ -3620,6 +3621,7 @@ module Aws
                                     version: ::String?
                                   }?
                                 },
+                                ?use_client_certificate_ocsp_endpoint: bool,
                                 if_match: ::String
                               ) -> _UpdateTrustStoreResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustStoreResponseSuccess

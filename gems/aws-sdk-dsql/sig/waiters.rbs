@@ -28,6 +28,28 @@ module Aws
                   ) -> Client::_GetClusterResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetClusterResponseSuccess
       end
+
+      class StreamActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_identifier: ::String,
+                    stream_identifier: ::String
+                  ) -> Client::_GetStreamResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamResponseSuccess
+      end
+
+      class StreamNotExists
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    cluster_identifier: ::String,
+                    stream_identifier: ::String
+                  ) -> Client::_GetStreamResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetStreamResponseSuccess
+      end
     end
   end
 end

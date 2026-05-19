@@ -433,6 +433,12 @@ module Aws::PartnerCentralSelling
       SENSITIVE: [:created_by, :modified_by]
     end
 
+    class ExpectedContractDuration
+      attr_accessor term: ("Months")
+      attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
     class ExpectedCustomerSpend
       attr_accessor amount: ::String
       attr_accessor currency_code: ("USD" | "EUR" | "GBP" | "AUD" | "CAD" | "CNY" | "NZD" | "INR" | "JPY" | "CHF" | "SEK" | "AED" | "AFN" | "ALL" | "AMD" | "ANG" | "AOA" | "ARS" | "AWG" | "AZN" | "BAM" | "BBD" | "BDT" | "BGN" | "BHD" | "BIF" | "BMD" | "BND" | "BOB" | "BOV" | "BRL" | "BSD" | "BTN" | "BWP" | "BYN" | "BZD" | "CDF" | "CHE" | "CHW" | "CLF" | "CLP" | "COP" | "COU" | "CRC" | "CUC" | "CUP" | "CVE" | "CZK" | "DJF" | "DKK" | "DOP" | "DZD" | "EGP" | "ERN" | "ETB" | "FJD" | "FKP" | "GEL" | "GHS" | "GIP" | "GMD" | "GNF" | "GTQ" | "GYD" | "HKD" | "HNL" | "HRK" | "HTG" | "HUF" | "IDR" | "ILS" | "IQD" | "IRR" | "ISK" | "JMD" | "JOD" | "KES" | "KGS" | "KHR" | "KMF" | "KPW" | "KRW" | "KWD" | "KYD" | "KZT" | "LAK" | "LBP" | "LKR" | "LRD" | "LSL" | "LYD" | "MAD" | "MDL" | "MGA" | "MKD" | "MMK" | "MNT" | "MOP" | "MRU" | "MUR" | "MVR" | "MWK" | "MXN" | "MXV" | "MYR" | "MZN" | "NAD" | "NGN" | "NIO" | "NOK" | "NPR" | "OMR" | "PAB" | "PEN" | "PGK" | "PHP" | "PKR" | "PLN" | "PYG" | "QAR" | "RON" | "RSD" | "RUB" | "RWF" | "SAR" | "SBD" | "SCR" | "SDG" | "SGD" | "SHP" | "SLL" | "SOS" | "SRD" | "SSP" | "STN" | "SVC" | "SYP" | "SZL" | "THB" | "TJS" | "TMT" | "TND" | "TOP" | "TRY" | "TTD" | "TWD" | "TZS" | "UAH" | "UGX" | "USN" | "UYI" | "UYU" | "UZS" | "VEF" | "VND" | "VUV" | "WST" | "XAF" | "XCD" | "XDR" | "XOF" | "XPF" | "XSU" | "XUA" | "YER" | "ZAR" | "ZMW" | "ZWL")
@@ -1049,6 +1055,7 @@ module Aws::PartnerCentralSelling
     class Project
       attr_accessor delivery_models: ::Array[("SaaS or PaaS" | "BYOL or AMI" | "Managed Services" | "Professional Services" | "Resell" | "Other")]
       attr_accessor expected_customer_spend: ::Array[Types::ExpectedCustomerSpend]
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration
       attr_accessor title: ::String
       attr_accessor apn_programs: ::Array[::String]
       attr_accessor customer_business_problem: ::String
@@ -1074,12 +1081,14 @@ module Aws::PartnerCentralSelling
     class ProjectSummary
       attr_accessor delivery_models: ::Array[("SaaS or PaaS" | "BYOL or AMI" | "Managed Services" | "Professional Services" | "Resell" | "Other")]
       attr_accessor expected_customer_spend: ::Array[Types::ExpectedCustomerSpend]
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration
       SENSITIVE: []
     end
 
     class ProjectView
       attr_accessor delivery_models: ::Array[("SaaS or PaaS" | "BYOL or AMI" | "Managed Services" | "Professional Services" | "Resell" | "Other")]
       attr_accessor expected_customer_spend: ::Array[Types::ExpectedCustomerSpend]
+      attr_accessor expected_contract_duration: Types::ExpectedContractDuration
       attr_accessor customer_use_case: ::String
       attr_accessor sales_activities: ::Array[("Initialized discussions with customer" | "Customer has shown interest in solution" | "Conducted POC / Demo" | "In evaluation / planning stage" | "Agreed on solution to Business Problem" | "Completed Action Plan" | "Finalized Deployment Need" | "SOW Signed")]
       attr_accessor other_solution_description: ::String

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-05-13)
+------------------
+
+* Feature - Add support for Amazon EC2 Interruptible-ODCR
+
 1.44.0 (2026-04-23)
 ------------------
 

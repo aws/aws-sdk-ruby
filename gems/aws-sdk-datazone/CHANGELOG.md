@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.77.0 (2026-05-14)
+------------------
+
+* Feature - Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+
+1.76.0 (2026-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.75.0 (2026-04-30)
 ------------------
 

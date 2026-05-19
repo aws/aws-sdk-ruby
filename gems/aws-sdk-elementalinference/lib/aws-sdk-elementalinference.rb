@@ -55,7 +55,7 @@ module Aws::ElementalInference
   autoload :EndpointProvider, 'aws-sdk-elementalinference/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elementalinference/endpoints'
 
-  GEM_VERSION = '1.1.0'
+  GEM_VERSION = '1.2.0'
 
 end
 

@@ -202,6 +202,13 @@ module Aws::ARCRegionswitch
       SENSITIVE: []
     end
 
+    class EventSourceMapping
+      attr_accessor cross_account_role: ::String
+      attr_accessor external_id: ::String
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class ExecutionApprovalConfiguration
       attr_accessor timeout_minutes: ::Integer
       attr_accessor approval_role: ::String
@@ -222,6 +229,7 @@ module Aws::ARCRegionswitch
       attr_accessor document_db_config: Types::DocumentDbConfiguration
       attr_accessor rds_promote_read_replica_config: Types::RdsPromoteReadReplicaConfiguration
       attr_accessor rds_create_cross_region_read_replica_config: Types::RdsCreateCrossRegionReplicaConfiguration
+      attr_accessor lambda_event_source_mapping_config: Types::LambdaEventSourceMappingConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -251,6 +259,8 @@ module Aws::ARCRegionswitch
       end
       class RdsCreateCrossRegionReadReplicaConfig < ExecutionBlockConfiguration
       end
+      class LambdaEventSourceMappingConfig < ExecutionBlockConfiguration
+      end
       class Unknown < ExecutionBlockConfiguration
       end
     end
@@ -259,7 +269,7 @@ module Aws::ARCRegionswitch
       attr_accessor timestamp: ::Time
       attr_accessor type: ("unknown" | "executionPending" | "executionStarted" | "executionSucceeded" | "executionFailed" | "executionPausing" | "executionPaused" | "executionCanceling" | "executionCanceled" | "executionPendingApproval" | "executionBehaviorChangedToUngraceful" | "executionBehaviorChangedToGraceful" | "executionPendingChildPlanManualApproval" | "executionSuccessMonitoringApplicationHealth" | "stepStarted" | "stepUpdate" | "stepSucceeded" | "stepFailed" | "stepSkipped" | "stepPausedByError" | "stepPausedByOperator" | "stepCanceled" | "stepPendingApproval" | "stepExecutionBehaviorChangedToUngraceful" | "stepPendingApplicationHealthMonitor" | "planEvaluationWarning")
       attr_accessor step_name: ::String
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping")
       attr_accessor resources: ::Array[::String]
       attr_accessor error: ::String
       attr_accessor description: ::String
@@ -388,6 +398,19 @@ module Aws::ARCRegionswitch
       attr_accessor namespace: ::String
       attr_accessor name: ::String
       attr_accessor hpa_name: ::String
+      SENSITIVE: []
+    end
+
+    class LambdaEventSourceMappingConfiguration
+      attr_accessor timeout_minutes: ::Integer
+      attr_accessor action: ("enable" | "disable")
+      attr_accessor region_event_source_mappings: ::Hash[::String, Types::EventSourceMapping]
+      attr_accessor ungraceful: Types::LambdaEventSourceMappingUngraceful
+      SENSITIVE: []
+    end
+
+    class LambdaEventSourceMappingUngraceful
+      attr_accessor behavior: ("skip")
       SENSITIVE: []
     end
 
@@ -663,7 +686,7 @@ module Aws::ARCRegionswitch
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor execution_block_configuration: Types::ExecutionBlockConfiguration
-      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica")
+      attr_accessor execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping")
       SENSITIVE: []
     end
 

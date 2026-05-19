@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-05-15)
+------------------
+
+* Feature - Updating the max limit for start query api parameter.
+
+1.150.0 (2026-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.149.0 (2026-05-04)
 ------------------
 

@@ -3464,6 +3464,8 @@ module Aws::Mgn
     #   resp.items[0].artifacts[0].checksum.encryption_algorithm #=> String, one of "SHA256"
     #   resp.items[0].artifacts[0].checksum.hash #=> String
     #   resp.items[0].artifacts[0].created_at #=> Time
+    #   resp.items[0].referenced_segments #=> Array
+    #   resp.items[0].referenced_segments[0] #=> String
     #   resp.items[0].created_at #=> Time
     #   resp.next_token #=> String
     #
@@ -5674,7 +5676,7 @@ module Aws::Mgn
     #   resp = client.start_network_migration_mapping({
     #     network_migration_execution_id: "NetworkMigrationExecutionID", # required
     #     network_migration_definition_id: "NetworkMigrationDefinitionID", # required
-    #     security_group_mapping_strategy: "MAP", # accepts MAP, SKIP
+    #     security_group_mapping_strategy: "MAP", # accepts MAP, SKIP, MAP_DHCP
     #   })
     #
     # @example Response structure
@@ -7649,7 +7651,7 @@ module Aws::Mgn
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mgn'
-      context[:gem_version] = '1.65.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

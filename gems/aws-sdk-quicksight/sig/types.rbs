@@ -99,6 +99,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class AdditionalNotes
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
     class AggFunction
       attr_accessor aggregation: ("SUM" | "MIN" | "MAX" | "COUNT" | "AVERAGE" | "DISTINCT_COUNT" | "STDEV" | "STDEVP" | "VAR" | "VARP" | "PERCENTILE" | "MEDIAN" | "PTD_SUM" | "PTD_MIN" | "PTD_MAX" | "PTD_COUNT" | "PTD_DISTINCT_COUNT" | "PTD_AVERAGE" | "COLUMN" | "CUSTOM")
       attr_accessor aggregation_function_parameters: ::Hash[::String, ::String]
@@ -1212,6 +1217,11 @@ module Aws::QuickSight
       attr_accessor analysis: ("DENY")
       attr_accessor automate: ("DENY")
       attr_accessor flow: ("DENY")
+      attr_accessor apps: ("DENY")
+      attr_accessor create_and_update_apps: ("DENY")
+      attr_accessor share_apps: ("DENY")
+      attr_accessor invoke_apps_ai_inference: ("DENY")
+      attr_accessor access_apps_native_data_store: ("DENY")
       attr_accessor publish_without_approval: ("DENY")
       attr_accessor use_bedrock_models: ("DENY")
       attr_accessor perform_flow_ui_task: ("DENY")
@@ -1605,6 +1615,18 @@ module Aws::QuickSight
       attr_accessor name: ::String
       attr_accessor data_type: ::String
       attr_accessor geographic_role: ::String
+      SENSITIVE: []
+    end
+
+    class ColumnSemanticProperty
+      attr_accessor description: Types::ColumnDescription
+      attr_accessor additional_notes: Types::AdditionalNotes
+      attr_accessor semantic_type: Types::ColumnSemanticType
+      SENSITIVE: []
+    end
+
+    class ColumnSemanticType
+      attr_accessor geographical_role: ("COUNTRY" | "STATE" | "COUNTY" | "CITY" | "POSTCODE" | "LONGITUDE" | "LATITUDE")
       SENSITIVE: []
     end
 
@@ -2469,6 +2491,11 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class CustomInstruction
+      attr_accessor inline_custom_instruction: Types::InlineCustomInstruction
+      SENSITIVE: []
+    end
+
     class CustomInstructions
       attr_accessor custom_instructions_string: ::String
       SENSITIVE: [:custom_instructions_string]
@@ -2924,6 +2951,17 @@ module Aws::QuickSight
       attr_accessor operator: ("StringEquals" | "StringLike")
       attr_accessor name: ("QUICKSIGHT_VIEWER_OR_OWNER" | "QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER" | "DIRECT_QUICKSIGHT_OWNER" | "DIRECT_QUICKSIGHT_SOLE_OWNER" | "DATASET_NAME")
       attr_accessor value: ::String
+      SENSITIVE: []
+    end
+
+    class DataSetSemanticDescription
+      attr_accessor text: ::String
+      SENSITIVE: [:text]
+    end
+
+    class DataSetSemanticMetadata
+      attr_accessor description: Types::DataSetSemanticDescription
+      attr_accessor custom_instructions: ::Array[Types::CustomInstruction]
       SENSITIVE: []
     end
 
@@ -6165,6 +6203,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class InlineCustomInstruction
+      attr_accessor instruction_text: ::String
+      attr_accessor uploaded_document_metadata: Types::UploadedDocumentMetadata
+      SENSITIVE: [:instruction_text]
+    end
+
     class InnerFilter
       attr_accessor category_inner_filter: Types::CategoryInnerFilter
       SENSITIVE: []
@@ -9059,6 +9103,7 @@ module Aws::QuickSight
 
     class SemanticModelConfiguration
       attr_accessor table_map: ::Hash[::String, Types::SemanticTable]
+      attr_accessor semantic_metadata: ::Array[Types::DataSetSemanticMetadata]
       SENSITIVE: []
     end
 
@@ -9066,6 +9111,7 @@ module Aws::QuickSight
       attr_accessor alias: ::String
       attr_accessor destination_table_id: ::String
       attr_accessor row_level_permission_configuration: Types::RowLevelPermissionConfiguration
+      attr_accessor semantic_metadata: Types::TableSemanticMetadata
       SENSITIVE: []
     end
 
@@ -9111,6 +9157,12 @@ module Aws::QuickSight
 
     class ShapeConditionalFormat
       attr_accessor background_color: Types::ConditionalFormattingColor
+      SENSITIVE: []
+    end
+
+    class SharedColumnSemanticMetadata
+      attr_accessor column_names: ::Array[::String]
+      attr_accessor column_properties: ::Array[Types::ColumnSemanticProperty]
       SENSITIVE: []
     end
 
@@ -9809,6 +9861,11 @@ module Aws::QuickSight
     class TableRowConditionalFormatting
       attr_accessor background_color: Types::ConditionalFormattingColor
       attr_accessor text_color: Types::ConditionalFormattingColor
+      SENSITIVE: []
+    end
+
+    class TableSemanticMetadata
+      attr_accessor column_metadata: ::Array[Types::SharedColumnSemanticMetadata]
       SENSITIVE: []
     end
 
@@ -11536,6 +11593,11 @@ module Aws::QuickSight
       attr_accessor text_qualifier: ("DOUBLE_QUOTE" | "SINGLE_QUOTE")
       attr_accessor delimiter: ::String
       attr_accessor custom_cell_address_range: ::String
+      SENSITIVE: []
+    end
+
+    class UploadedDocumentMetadata
+      attr_accessor name: ::String
       SENSITIVE: []
     end
 

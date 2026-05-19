@@ -55,7 +55,7 @@ module Aws::S3Files
   autoload :EndpointProvider, 'aws-sdk-s3files/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3files/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

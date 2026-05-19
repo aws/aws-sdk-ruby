@@ -435,6 +435,11 @@ module Aws
                            },
                            ?deployment_strategy_options: {
                              deployment_strategy: ("Default" | "CapacityOptimized")
+                           },
+                           ?automated_snapshot_pause_options: {
+                             enabled: bool,
+                             start_time: ::Time?,
+                             end_time: ::Time?
                            }
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
@@ -1557,6 +1562,11 @@ module Aws
                                   },
                                   ?deployment_strategy_options: {
                                     deployment_strategy: ("Default" | "CapacityOptimized")
+                                  },
+                                  ?automated_snapshot_pause_options: {
+                                    enabled: bool,
+                                    start_time: ::Time?,
+                                    end_time: ::Time?
                                   }
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess

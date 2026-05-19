@@ -29,13 +29,14 @@ jobs:
 
     steps:
       - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@97ecb7b512899eb71ab1bf2310a624c6f1589ac6 # v1
         with:
           ruby-version: ${{ matrix.ruby }}
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with:
           submodules: recursive
+          persist-credentials: false
 
       - name: Install gems
         run: |
@@ -51,7 +52,7 @@ jobs:
         run: bundle exec rake benchmark:run
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v6
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         continue-on-error: true
         with:
           role-to-assume: arn:aws:iam::373952703873:role/BenchmarkReporter
@@ -73,7 +74,7 @@ jobs:
 
       - name: Comment on PR
         if: ${{ github.event_name == 'pull_request' && steps.regressions.outputs.message }}
-        uses: thollander/actions-comment-pull-request@main
+        uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1
         with:
           message: ${{ steps.regressions.outputs.message }}
           comment-tag: performance-regression

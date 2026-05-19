@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:ecs)
 # structure.
 #
 #     ecs = Aws::ECS::Client.new
-#     resp = ecs.create_capacity_provider(params)
+#     resp = ecs.continue_service_deployment(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::ECS
   autoload :EndpointProvider, 'aws-sdk-ecs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ecs/endpoints'
 
-  GEM_VERSION = '1.229.0'
+  GEM_VERSION = '1.231.0'
 
 end
 

@@ -2226,6 +2226,11 @@ module Aws::QuickSight
     #       analysis: "DENY", # accepts DENY
     #       automate: "DENY", # accepts DENY
     #       flow: "DENY", # accepts DENY
+    #       apps: "DENY", # accepts DENY
+    #       create_and_update_apps: "DENY", # accepts DENY
+    #       share_apps: "DENY", # accepts DENY
+    #       invoke_apps_ai_inference: "DENY", # accepts DENY
+    #       access_apps_native_data_store: "DENY", # accepts DENY
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
@@ -3380,8 +3385,45 @@ module Aws::QuickSight
     #               status: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #           },
+    #           semantic_metadata: {
+    #             column_metadata: [
+    #               {
+    #                 column_names: ["ColumnName"],
+    #                 column_properties: [ # required
+    #                   {
+    #                     description: {
+    #                       text: "ColumnDescriptiveText",
+    #                     },
+    #                     additional_notes: {
+    #                       text: "AdditionalNotesText",
+    #                     },
+    #                     semantic_type: {
+    #                       geographical_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
+    #       semantic_metadata: [
+    #         {
+    #           description: {
+    #             text: "DataSetDescriptiveText", # required
+    #           },
+    #           custom_instructions: [
+    #             {
+    #               inline_custom_instruction: {
+    #                 instruction_text: "InlineCustomInstructionText", # required
+    #                 uploaded_document_metadata: {
+    #                   name: "UploadedDocumentName",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -8072,6 +8114,11 @@ module Aws::QuickSight
     #   resp.custom_permissions.capabilities.analysis #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.automate #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.flow #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.create_and_update_apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.share_apps #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.invoke_apps_ai_inference #=> String, one of "DENY"
+    #   resp.custom_permissions.capabilities.access_apps_native_data_store #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions.capabilities.perform_flow_ui_task #=> String, one of "DENY"
@@ -9135,6 +9182,18 @@ module Aws::QuickSight
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_names #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_names[0] #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].description.text #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].additional_notes.text #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].semantic_type.geographical_role #=> String, one of "COUNTRY", "STATE", "COUNTY", "CITY", "POSTCODE", "LONGITUDE", "LATITUDE"
+    #   resp.data_set.semantic_model_configuration.semantic_metadata #=> Array
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].description.text #=> String
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions #=> Array
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.instruction_text #=> String
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.uploaded_document_metadata.name #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -12538,6 +12597,11 @@ module Aws::QuickSight
     #   resp.custom_permissions_list[0].capabilities.analysis #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.automate #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.flow #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.create_and_update_apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.share_apps #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.invoke_apps_ai_inference #=> String, one of "DENY"
+    #   resp.custom_permissions_list[0].capabilities.access_apps_native_data_store #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.publish_without_approval #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.use_bedrock_models #=> String, one of "DENY"
     #   resp.custom_permissions_list[0].capabilities.perform_flow_ui_task #=> String, one of "DENY"
@@ -18124,6 +18188,11 @@ module Aws::QuickSight
     #       analysis: "DENY", # accepts DENY
     #       automate: "DENY", # accepts DENY
     #       flow: "DENY", # accepts DENY
+    #       apps: "DENY", # accepts DENY
+    #       create_and_update_apps: "DENY", # accepts DENY
+    #       share_apps: "DENY", # accepts DENY
+    #       invoke_apps_ai_inference: "DENY", # accepts DENY
+    #       access_apps_native_data_store: "DENY", # accepts DENY
     #       publish_without_approval: "DENY", # accepts DENY
     #       use_bedrock_models: "DENY", # accepts DENY
     #       perform_flow_ui_task: "DENY", # accepts DENY
@@ -19423,8 +19492,45 @@ module Aws::QuickSight
     #               status: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #           },
+    #           semantic_metadata: {
+    #             column_metadata: [
+    #               {
+    #                 column_names: ["ColumnName"],
+    #                 column_properties: [ # required
+    #                   {
+    #                     description: {
+    #                       text: "ColumnDescriptiveText",
+    #                     },
+    #                     additional_notes: {
+    #                       text: "AdditionalNotesText",
+    #                     },
+    #                     semantic_type: {
+    #                       geographical_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
+    #       semantic_metadata: [
+    #         {
+    #           description: {
+    #             text: "DataSetDescriptiveText", # required
+    #           },
+    #           custom_instructions: [
+    #             {
+    #               inline_custom_instruction: {
+    #                 instruction_text: "InlineCustomInstructionText", # required
+    #                 uploaded_document_metadata: {
+    #                   name: "UploadedDocumentName",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -22162,7 +22268,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.179.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

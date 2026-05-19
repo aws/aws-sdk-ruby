@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.106.0 (2026-05-13)
+------------------
+
+* Feature - Updated default SDK endpoints for AWS Step Functions in AWS GovCloud (US) regions. The default Dual-Stack endpoints now resolve to "states-fips" prefixed hostnames. There are no changes to service behavior. No customer action is required.
+
 1.105.0 (2026-03-18)
 ------------------
 

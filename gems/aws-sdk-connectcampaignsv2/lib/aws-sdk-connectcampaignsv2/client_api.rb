@@ -136,6 +136,7 @@ module Aws::ConnectCampaignsV2
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     LocalTimeZoneConfig = Shapes::StructureShape.new(name: 'LocalTimeZoneConfig')
     LocalTimeZoneDetection = Shapes::ListShape.new(name: 'LocalTimeZoneDetection')
+    LocalTimeZoneDetectionScope = Shapes::StringShape.new(name: 'LocalTimeZoneDetectionScope')
     LocalTimeZoneDetectionType = Shapes::StringShape.new(name: 'LocalTimeZoneDetectionType')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
@@ -568,6 +569,7 @@ module Aws::ConnectCampaignsV2
 
     LocalTimeZoneConfig.add_member(:default_time_zone, Shapes::ShapeRef.new(shape: TimeZone, location_name: "defaultTimeZone"))
     LocalTimeZoneConfig.add_member(:local_time_zone_detection, Shapes::ShapeRef.new(shape: LocalTimeZoneDetection, location_name: "localTimeZoneDetection"))
+    LocalTimeZoneConfig.add_member(:local_time_zone_detection_scope, Shapes::ShapeRef.new(shape: LocalTimeZoneDetectionScope, location_name: "localTimeZoneDetectionScope"))
     LocalTimeZoneConfig.struct_class = Types::LocalTimeZoneConfig
 
     LocalTimeZoneDetection.member = Shapes::ShapeRef.new(shape: LocalTimeZoneDetectionType)

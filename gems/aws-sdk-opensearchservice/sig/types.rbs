@@ -248,6 +248,27 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class AutomatedSnapshotPauseOptions
+      attr_accessor enabled: bool
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor state: ("Active" | "Completed" | "Scheduled" | "Disabled")
+      SENSITIVE: []
+    end
+
+    class AutomatedSnapshotPauseOptionsStatus
+      attr_accessor options: Types::AutomatedSnapshotPauseOptions
+      attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class AutomatedSnapshotPauseRequestOptions
+      attr_accessor enabled: bool
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
     class AvailabilityZoneInfo
       attr_accessor availability_zone_name: ::String
       attr_accessor zone_status: ("Active" | "StandBy" | "NotAvailable")
@@ -473,6 +494,7 @@ module Aws::OpenSearchService
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
       attr_accessor aiml_options: Types::AIMLOptionsInput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
       SENSITIVE: []
     end
 
@@ -964,6 +986,7 @@ module Aws::OpenSearchService
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor aiml_options: Types::AIMLOptionsStatus
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptionsStatus
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptionsStatus
       SENSITIVE: []
     end
 
@@ -1068,6 +1091,7 @@ module Aws::OpenSearchService
       attr_accessor modifying_properties: ::Array[Types::ModifyingProperties]
       attr_accessor aiml_options: Types::AIMLOptionsOutput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseOptions
       SENSITIVE: []
     end
 
@@ -2186,6 +2210,7 @@ module Aws::OpenSearchService
       attr_accessor software_update_options: Types::SoftwareUpdateOptions
       attr_accessor aiml_options: Types::AIMLOptionsInput
       attr_accessor deployment_strategy_options: Types::DeploymentStrategyOptions
+      attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
       SENSITIVE: []
     end
 

@@ -120,6 +120,20 @@ module Aws
                        ) -> _AcceptLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptLinkResponseSuccess
 
+      interface _AssociateCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCertificateResponse]
+        def gateway_id: () -> ::String
+        def acm_certificate_arn: () -> ::String
+        def status: () -> ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#associate_certificate-instance_method
+      def associate_certificate: (
+                                   gateway_id: ::String,
+                                   acm_certificate_arn: ::String,
+                                   client_token: ::String
+                                 ) -> _AssociateCertificateResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCertificateResponseSuccess
+
       interface _CreateInboundExternalLinkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateInboundExternalLinkResponse]
         def gateway_id: () -> ::String
@@ -198,6 +212,33 @@ module Aws
                          ?timeout_in_millis: ::Integer
                        ) -> _CreateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
+
+      interface _CreateLinkRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateLinkRoutingRuleResponse]
+        def rule_id: () -> ::String
+        def status: () -> ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#create_link_routing_rule-instance_method
+      def create_link_routing_rule: (
+                                      client_token: ::String,
+                                      gateway_id: ::String,
+                                      link_id: ::String,
+                                      priority: ::Integer,
+                                      conditions: {
+                                        host_header: ::String?,
+                                        host_header_wildcard: ::String?,
+                                        path_prefix: ::String?,
+                                        path_exact: ::String?,
+                                        query_string_equals: {
+                                          key: ::String,
+                                          value: ::String
+                                        }?,
+                                        query_string_exists: ::String?
+                                      },
+                                      ?tags: Hash[::String, ::String]
+                                    ) -> _CreateLinkRoutingRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkRoutingRuleResponseSuccess
 
       interface _CreateOutboundExternalLinkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateOutboundExternalLinkResponse]
@@ -326,6 +367,19 @@ module Aws
                        ) -> _DeleteLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLinkResponseSuccess
 
+      interface _DeleteLinkRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLinkRoutingRuleResponse]
+        def rule_id: () -> ::String
+        def status: () -> ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#delete_link_routing_rule-instance_method
+      def delete_link_routing_rule: (
+                                      gateway_id: ::String,
+                                      link_id: ::String,
+                                      rule_id: ::String
+                                    ) -> _DeleteLinkRoutingRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteLinkRoutingRuleResponseSuccess
+
       interface _DeleteOutboundExternalLinkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteOutboundExternalLinkResponse]
         def link_id: () -> ::String
@@ -359,6 +413,34 @@ module Aws
                                       gateway_id: ::String
                                     ) -> _DeleteResponderGatewayResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResponderGatewayResponseSuccess
+
+      interface _DisassociateCertificateResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateCertificateResponse]
+        def gateway_id: () -> ::String
+        def acm_certificate_arn: () -> ::String
+        def status: () -> ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#disassociate_certificate-instance_method
+      def disassociate_certificate: (
+                                      gateway_id: ::String,
+                                      acm_certificate_arn: ::String
+                                    ) -> _DisassociateCertificateResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateCertificateResponseSuccess
+
+      interface _GetCertificateAssociationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCertificateAssociationResponse]
+        def gateway_id: () -> ::String
+        def acm_certificate_arn: () -> ::String
+        def status: () -> ("PENDING_ASSOCIATION" | "ASSOCIATED" | "PENDING_DISASSOCIATION" | "DISASSOCIATED" | "FAILED")
+        def associated_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_certificate_association-instance_method
+      def get_certificate_association: (
+                                         gateway_id: ::String,
+                                         acm_certificate_arn: ::String
+                                       ) -> _GetCertificateAssociationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCertificateAssociationResponseSuccess
 
       interface _GetInboundExternalLinkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInboundExternalLinkResponse]
@@ -406,6 +488,26 @@ module Aws
                       link_id: ::String
                     ) -> _GetLinkResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkResponseSuccess
+
+      interface _GetLinkRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetLinkRoutingRuleResponse]
+        def gateway_id: () -> ::String
+        def link_id: () -> ::String
+        def rule_id: () -> ::String
+        def priority: () -> ::Integer
+        def conditions: () -> Types::RuleCondition
+        def status: () -> ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#get_link_routing_rule-instance_method
+      def get_link_routing_rule: (
+                                   gateway_id: ::String,
+                                   link_id: ::String,
+                                   rule_id: ::String
+                                 ) -> _GetLinkRoutingRuleResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetLinkRoutingRuleResponseSuccess
 
       interface _GetOutboundExternalLinkResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetOutboundExternalLinkResponse]
@@ -478,6 +580,33 @@ module Aws
                                    gateway_id: ::String
                                  ) -> _GetResponderGatewayResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResponderGatewayResponseSuccess
+
+      interface _ListCertificateAssociationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCertificateAssociationsResponse]
+        def certificate_associations: () -> ::Array[Types::CertificateAssociationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_certificate_associations-instance_method
+      def list_certificate_associations: (
+                                           gateway_id: ::String,
+                                           ?next_token: ::String,
+                                           ?max_results: ::Integer
+                                         ) -> _ListCertificateAssociationsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCertificateAssociationsResponseSuccess
+
+      interface _ListLinkRoutingRulesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListLinkRoutingRulesResponse]
+        def rules: () -> ::Array[Types::LinkRoutingRuleSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#list_link_routing_rules-instance_method
+      def list_link_routing_rules: (
+                                     gateway_id: ::String,
+                                     link_id: ::String,
+                                     ?next_token: ::String,
+                                     ?max_results: ::Integer
+                                   ) -> _ListLinkRoutingRulesResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLinkRoutingRulesResponseSuccess
 
       interface _ListLinksResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLinksResponse]
@@ -643,6 +772,32 @@ module Aws
                                    ) -> _UpdateLinkModuleFlowResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkModuleFlowResponseSuccess
 
+      interface _UpdateLinkRoutingRuleResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateLinkRoutingRuleResponse]
+        def rule_id: () -> ::String
+        def status: () -> ("CREATION_IN_PROGRESS" | "ACTIVE" | "UPDATE_IN_PROGRESS" | "DELETION_IN_PROGRESS" | "DELETED" | "FAILED")
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#update_link_routing_rule-instance_method
+      def update_link_routing_rule: (
+                                      gateway_id: ::String,
+                                      link_id: ::String,
+                                      rule_id: ::String,
+                                      priority: ::Integer,
+                                      conditions: {
+                                        host_header: ::String?,
+                                        host_header_wildcard: ::String?,
+                                        path_prefix: ::String?,
+                                        path_exact: ::String?,
+                                        query_string_equals: {
+                                          key: ::String,
+                                          value: ::String
+                                        }?,
+                                        query_string_exists: ::String?
+                                      }
+                                    ) -> _UpdateLinkRoutingRuleResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkRoutingRuleResponseSuccess
+
       interface _UpdateRequesterGatewayResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRequesterGatewayResponse]
         def gateway_id: () -> ::String
@@ -703,7 +858,17 @@ module Aws
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponderGatewayResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RTBFabric/Client.html#wait_until-instance_method
-      def wait_until: (:inbound_external_link_active waiter_name, 
+      def wait_until: (:certificate_associated waiter_name, 
+                    gateway_id: ::String,
+                    acm_certificate_arn: ::String
+                  ) -> Client::_GetCertificateAssociationResponseSuccess
+                    | (:certificate_associated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCertificateAssociationResponseSuccess
+                    | (:certificate_disassociated waiter_name, 
+                    gateway_id: ::String,
+                    acm_certificate_arn: ::String
+                  ) -> Client::_GetCertificateAssociationResponseSuccess
+                    | (:certificate_disassociated waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCertificateAssociationResponseSuccess
+                    | (:inbound_external_link_active waiter_name, 
                     gateway_id: ::String,
                     link_id: ::String
                   ) -> Client::_GetInboundExternalLinkResponseSuccess
@@ -728,6 +893,18 @@ module Aws
                     link_id: ::String
                   ) -> Client::_GetLinkResponseSuccess
                     | (:link_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkResponseSuccess
+                    | (:link_routing_rule_active waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String,
+                    rule_id: ::String
+                  ) -> Client::_GetLinkRoutingRuleResponseSuccess
+                    | (:link_routing_rule_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkRoutingRuleResponseSuccess
+                    | (:link_routing_rule_deleted waiter_name, 
+                    gateway_id: ::String,
+                    link_id: ::String,
+                    rule_id: ::String
+                  ) -> Client::_GetLinkRoutingRuleResponseSuccess
+                    | (:link_routing_rule_deleted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetLinkRoutingRuleResponseSuccess
                     | (:outbound_external_link_active waiter_name, 
                     gateway_id: ::String,
                     link_id: ::String

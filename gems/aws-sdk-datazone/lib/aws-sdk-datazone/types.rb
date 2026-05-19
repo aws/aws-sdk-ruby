@@ -1901,7 +1901,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The information about a cell in a notebook run in Amazon DataZone.
+    # The information about a cell in a notebook run in Amazon SageMaker
+    # Unified Studio.
+    #
+    # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CellInformation AWS API Documentation
     #
@@ -1936,7 +1939,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The compute configuration for a notebook run in Amazon DataZone.
+    # The compute configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
     #
     # @!attribute [rw] instance_type
     #   The instance type for the notebook run compute.
@@ -4843,6 +4847,160 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to create the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook. The name must be between 1 and 256
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata for the notebook, specified as key-value pairs. You can
+    #   specify up to 50 entries, with keys up to 128 characters and values
+    #   up to 1024 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   The sensitive parameters for the notebook, specified as key-value
+    #   pairs. You can specify up to 50 entries, with keys up to 128
+    #   characters and values up to 1024 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateNotebookInput AWS API Documentation
+    #
+    class CreateNotebookInput < Struct.new(
+      :domain_identifier,
+      :owning_project_identifier,
+      :name,
+      :description,
+      :metadata,
+      :parameters,
+      :client_token)
+      SENSITIVE = [:name, :description, :metadata, :parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_order
+    #   The ordered list of cells in the notebook.
+    #   @return [Array<Types::CellInformation>]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who created the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the notebook was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user who last updated the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_by
+    #   The identifier of the user who locked the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_at
+    #   The timestamp of when the notebook was locked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_at
+    #   The timestamp of when the notebook lock expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compute_id
+    #   The identifier of the compute associated with the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   The sensitive parameters of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment_configuration
+    #   The environment configuration of the notebook.
+    #   @return [Types::EnvironmentConfig]
+    #
+    # @!attribute [rw] error
+    #   The error details if the notebook creation failed.
+    #   @return [Types::NotebookError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateNotebookOutput AWS API Documentation
+    #
+    class CreateNotebookOutput < Struct.new(
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error)
+      SENSITIVE = [:name, :description, :metadata, :parameters]
+      include Aws::Structure
+    end
+
     # Specifies whether to create a project from project profile policy
     # grant details.
     #
@@ -7019,6 +7177,28 @@ module Aws::DataZone
     class DeleteListingOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the notebook to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteNotebookInput AWS API Documentation
+    #
+    class DeleteNotebookInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteNotebookOutput AWS API Documentation
+    #
+    class DeleteNotebookOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] domain_identifier
     #   The ID of the Amazon DataZone domain in which the project is
     #   deleted.
     #   @return [String]
@@ -7859,7 +8039,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The environment configuration for a notebook run in Amazon DataZone.
+    # The environment configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
     #
     # @!attribute [rw] image_version
     #   The image version for the notebook run environment.
@@ -10888,8 +11069,209 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook
-    #   run exists.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook export exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the notebook export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookExportInput AWS API Documentation
+    #
+    class GetNotebookExportInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_format
+    #   The file format of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_location
+    #   The output location of the exported notebook in Amazon Simple
+    #   Storage Service.
+    #   @return [Types::OutputLocation]
+    #
+    # @!attribute [rw] error
+    #   The error details if the notebook export failed.
+    #   @return [Types::NotebookExportError]
+    #
+    # @!attribute [rw] completed_at
+    #   The timestamp of when the notebook export completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook export was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who started the notebook export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookExportOutput AWS API Documentation
+    #
+    class GetNotebookExportOutput < Struct.new(
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :file_format,
+      :status,
+      :output_location,
+      :error,
+      :completed_at,
+      :created_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookInput AWS API Documentation
+    #
+    class GetNotebookInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_order
+    #   The ordered list of cells in the notebook.
+    #   @return [Array<Types::CellInformation>]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who created the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the notebook was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user who last updated the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_by
+    #   The identifier of the user who locked the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_at
+    #   The timestamp of when the notebook was locked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_at
+    #   The timestamp of when the notebook lock expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compute_id
+    #   The identifier of the compute associated with the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   The sensitive parameters of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment_configuration
+    #   The environment configuration of the notebook.
+    #   @return [Types::EnvironmentConfig]
+    #
+    # @!attribute [rw] error
+    #   The error details if the notebook is in a failed state.
+    #   @return [Types::NotebookError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookOutput AWS API Documentation
+    #
+    class GetNotebookOutput < Struct.new(
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error)
+      SENSITIVE = [:name, :description, :metadata, :parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook run exists.
     #   @return [String]
     #
     # @!attribute [rw] identifier
@@ -10910,7 +11292,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the Amazon DataZone domain.
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_id
@@ -14782,8 +15164,8 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
-    #   The identifier of the Amazon DataZone domain in which to list
-    #   notebook runs.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to list notebook runs.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_identifier
@@ -14852,6 +15234,78 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListNotebookRunsOutput AWS API Documentation
     #
     class ListNotebookRunsOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to list notebooks.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The identifier of the project that owns the notebooks.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of notebooks to return in a single call. When the
+    #   number of notebooks exceeds the value of `MaxResults`, the response
+    #   contains a `NextToken` value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sort_order
+    #   The sort order for the results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort the results by.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status to filter notebooks by.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of notebooks is greater than the default value for
+    #   the `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of notebooks, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListNotebooks` to list
+    #   the next set of notebooks.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListNotebooksInput AWS API Documentation
+    #
+    class ListNotebooksInput < Struct.new(
+      :domain_identifier,
+      :owning_project_identifier,
+      :max_results,
+      :sort_order,
+      :sort_by,
+      :status,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The results of the `ListNotebooks` action.
+    #   @return [Array<Types::NotebookSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When the number of notebooks is greater than the default value for
+    #   the `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of notebooks, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListNotebooks` to list
+    #   the next set of notebooks.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListNotebooksOutput AWS API Documentation
+    #
+    class ListNotebooksOutput < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -16318,7 +16772,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The network configuration for a notebook run in Amazon DataZone.
+    # The network configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
     #
     # @!attribute [rw] network_access_type
     #   The network access type for the notebook run. Valid values are
@@ -16408,7 +16863,37 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The error details of a failed notebook run in Amazon DataZone.
+    # The error details of a notebook in Amazon SageMaker Unified Studio.
+    #
+    # @!attribute [rw] message
+    #   The error message. The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotebookError AWS API Documentation
+    #
+    class NotebookError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error details of a failed notebook export in Amazon SageMaker
+    # Unified Studio.
+    #
+    # @!attribute [rw] message
+    #   The error message. The maximum length is 256 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotebookExportError AWS API Documentation
+    #
+    class NotebookExportError < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The error details of a failed notebook run in Amazon SageMaker Unified
+    # Studio.
     #
     # @!attribute [rw] message
     #   The error message. The maximum length is 1024 characters.
@@ -16422,14 +16907,14 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The summary of a notebook run in Amazon DataZone.
+    # The summary of a notebook run in Amazon SageMaker Unified Studio.
     #
     # @!attribute [rw] id
     #   The identifier of the notebook run.
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the Amazon DataZone domain.
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_id
@@ -16493,6 +16978,65 @@ module Aws::DataZone
       :started_at,
       :completed_at)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The summary of a notebook in Amazon SageMaker Unified Studio.
+    #
+    # @!attribute [rw] id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who created the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the notebook was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user who last updated the notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotebookSummary AWS API Documentation
+    #
+    class NotebookSummary < Struct.new(
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :status,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by)
+      SENSITIVE = [:name, :description]
       include Aws::Structure
     end
 
@@ -16679,6 +17223,29 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The output location for a notebook export in Amazon SageMaker Unified
+    # Studio.
+    #
+    # @note OutputLocation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputLocation corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon Simple Storage Service destination for the notebook
+    #   export.
+    #   @return [Types::S3Destination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OutputLocation AWS API Documentation
+    #
+    class OutputLocation < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < OutputLocation; end
+      class Unknown < OutputLocation; end
+    end
+
     # The grant details of the override domain unit owners policy.
     #
     # @!attribute [rw] include_child_domain_units
@@ -16818,7 +17385,7 @@ module Aws::DataZone
     end
 
     # The package configuration for a notebook run environment in Amazon
-    # DataZone.
+    # SageMaker Unified Studio.
     #
     # @!attribute [rw] package_manager
     #   The package manager for the notebook run environment. The default
@@ -19087,6 +19654,21 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The Amazon Simple Storage Service destination for a notebook export in
+    # Amazon SageMaker Unified Studio.
+    #
+    # @!attribute [rw] uri
+    #   The Amazon Simple Storage Service URI of the exported notebook.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3Destination AWS API Documentation
+    #
+    class S3Destination < Struct.new(
+      :uri)
+      SENSITIVE = [:uri]
+      include Aws::Structure
+    end
+
     # The Amazon S3 properties of a connection.
     #
     # @!attribute [rw] s3_uri
@@ -19864,6 +20446,30 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The source location for a notebook import in Amazon SageMaker Unified
+    # Studio.
+    #
+    # @note SourceLocation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceLocation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceLocation corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon Simple Storage Service URI of the notebook source file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SourceLocation AWS API Documentation
+    #
+    class SourceLocation < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = [:s3]
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < SourceLocation; end
+      class Unknown < SourceLocation; end
+    end
+
     # The Spark EMR properties.
     #
     # @!attribute [rw] compute_arn
@@ -20397,8 +21003,189 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook
-    #   run is started.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to export the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_identifier
+    #   The identifier of the notebook to export.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_format
+    #   The file format for the notebook export. Valid values are `PDF` and
+    #   `IPYNB`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookExportInput AWS API Documentation
+    #
+    class StartNotebookExportInput < Struct.new(
+      :domain_identifier,
+      :notebook_identifier,
+      :owning_project_identifier,
+      :file_format,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] notebook_id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_format
+    #   The file format of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook export.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook export was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who started the notebook export.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookExportOutput AWS API Documentation
+    #
+    class StartNotebookExportOutput < Struct.new(
+      :id,
+      :domain_id,
+      :owning_project_id,
+      :notebook_id,
+      :file_format,
+      :status,
+      :created_at,
+      :created_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which to import the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_identifier
+    #   The identifier of the project that will own the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The source location of the notebook to import. This specifies the
+    #   Amazon Simple Storage Service URI of the notebook file.
+    #   @return [Types::SourceLocation]
+    #
+    # @!attribute [rw] name
+    #   The name of the imported notebook. The name must be between 1 and
+    #   256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookImportInput AWS API Documentation
+    #
+    class StartNotebookImportInput < Struct.new(
+      :domain_identifier,
+      :owning_project_identifier,
+      :source_location,
+      :name,
+      :description,
+      :client_token)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] notebook_id
+    #   The identifier of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook import.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_location
+    #   The source location from which the notebook was imported.
+    #   @return [Types::SourceLocation]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook import was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who started the notebook import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookImportOutput AWS API Documentation
+    #
+    class StartNotebookImportOutput < Struct.new(
+      :notebook_id,
+      :status,
+      :domain_id,
+      :owning_project_id,
+      :name,
+      :description,
+      :source_location,
+      :created_at,
+      :created_by)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook run is started.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_identifier
@@ -20476,7 +21263,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the Amazon DataZone domain.
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_id
@@ -20591,8 +21378,8 @@ module Aws::DataZone
     end
 
     # @!attribute [rw] domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook
-    #   run is stopped.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook run is stopped.
     #   @return [String]
     #
     # @!attribute [rw] identifier
@@ -20622,7 +21409,7 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] domain_id
-    #   The identifier of the Amazon DataZone domain.
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
     #   @return [String]
     #
     # @!attribute [rw] owning_project_id
@@ -20644,7 +21431,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The storage configuration for a notebook run in Amazon DataZone.
+    # The storage configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
     #
     # @!attribute [rw] project_s3_path
     #   The Amazon Simple Storage Service path for the project storage.
@@ -21627,7 +22415,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The timeout configuration for a notebook run in Amazon DataZone.
+    # The timeout configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
     #
     # @!attribute [rw] run_timeout_in_minutes
     #   The timeout for the notebook run, in minutes. The minimum value is
@@ -21667,7 +22456,8 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # The source that triggered a notebook run in Amazon DataZone.
+    # The source that triggered a notebook run in Amazon SageMaker Unified
+    # Studio.
     #
     # @!attribute [rw] type
     #   The type of the trigger source. Valid values are `MANUAL`,
@@ -23156,6 +23946,171 @@ module Aws::DataZone
       :role_principal_arn,
       :role_principal_id)
       SENSITIVE = [:group_name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in
+    #   which the notebook exists.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The identifier of the notebook to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The updated status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_order
+    #   The updated ordered list of cells in the notebook.
+    #   @return [Array<Types::CellInformation>]
+    #
+    # @!attribute [rw] metadata
+    #   The updated metadata for the notebook, specified as key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   The updated sensitive parameters for the notebook, specified as
+    #   key-value pairs.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment_configuration
+    #   The updated environment configuration for the notebook.
+    #   @return [Types::EnvironmentConfig]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateNotebookInput AWS API Documentation
+    #
+    class UpdateNotebookInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :description,
+      :status,
+      :name,
+      :cell_order,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :client_token)
+      SENSITIVE = [:description, :name, :metadata, :parameters]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The identifier of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] owning_project_id
+    #   The identifier of the project that owns the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon SageMaker Unified Studio domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] cell_order
+    #   The ordered list of cells in the notebook.
+    #   @return [Array<Types::CellInformation>]
+    #
+    # @!attribute [rw] status
+    #   The status of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp of when the notebook was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the user who created the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp of when the notebook was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_by
+    #   The identifier of the user who last updated the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_by
+    #   The identifier of the user who locked the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] locked_at
+    #   The timestamp of when the notebook was locked.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lock_expires_at
+    #   The timestamp of when the notebook lock expires.
+    #   @return [Time]
+    #
+    # @!attribute [rw] compute_id
+    #   The identifier of the compute associated with the notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] parameters
+    #   The sensitive parameters of the notebook.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] environment_configuration
+    #   The environment configuration of the notebook.
+    #   @return [Types::EnvironmentConfig]
+    #
+    # @!attribute [rw] error
+    #   The error details if the notebook is in a failed state.
+    #   @return [Types::NotebookError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateNotebookOutput AWS API Documentation
+    #
+    class UpdateNotebookOutput < Struct.new(
+      :id,
+      :name,
+      :owning_project_id,
+      :domain_id,
+      :cell_order,
+      :status,
+      :description,
+      :created_at,
+      :created_by,
+      :updated_at,
+      :updated_by,
+      :locked_by,
+      :locked_at,
+      :lock_expires_at,
+      :compute_id,
+      :metadata,
+      :parameters,
+      :environment_configuration,
+      :error)
+      SENSITIVE = [:name, :description, :metadata, :parameters]
       include Aws::Structure
     end
 

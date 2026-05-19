@@ -1406,7 +1406,7 @@ module Aws
       def start_network_migration_mapping: (
                                              network_migration_execution_id: ::String,
                                              network_migration_definition_id: ::String,
-                                             ?security_group_mapping_strategy: ("MAP" | "SKIP")
+                                             ?security_group_mapping_strategy: ("MAP" | "SKIP" | "MAP_DHCP")
                                            ) -> _StartNetworkMigrationMappingResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingResponseSuccess
 

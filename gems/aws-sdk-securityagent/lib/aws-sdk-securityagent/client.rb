@@ -519,6 +519,44 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Deletes one or more code reviews from an agent space.
+    #
+    # @option params [required, Array<String>] :code_review_ids
+    #   The list of code review identifiers to delete.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   reviews to delete.
+    #
+    # @return [Types::BatchDeleteCodeReviewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteCodeReviewsOutput#deleted #deleted} => Array&lt;String&gt;
+    #   * {Types::BatchDeleteCodeReviewsOutput#failed #failed} => Array&lt;Types::DeleteCodeReviewFailure&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_code_reviews({
+    #     code_review_ids: ["String"], # required
+    #     agent_space_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.deleted #=> Array
+    #   resp.deleted[0] #=> String
+    #   resp.failed #=> Array
+    #   resp.failed[0].code_review_id #=> String
+    #   resp.failed[0].reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchDeleteCodeReviews AWS API Documentation
+    #
+    # @overload batch_delete_code_reviews(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_code_reviews(params = {}, options = {})
+      req = build_request(:batch_delete_code_reviews, params)
+      req.send_request(options)
+    end
+
     # Deletes one or more pentests from an agent space.
     #
     # @option params [required, Array<String>] :pentest_ids
@@ -689,6 +727,188 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Retrieves information about one or more tasks within a code review
+    # job.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the tasks.
+    #
+    # @option params [required, Array<String>] :code_review_job_task_ids
+    #   The list of task identifiers to retrieve.
+    #
+    # @return [Types::BatchGetCodeReviewJobTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCodeReviewJobTasksOutput#code_review_job_tasks #code_review_job_tasks} => Array&lt;Types::CodeReviewJobTask&gt;
+    #   * {Types::BatchGetCodeReviewJobTasksOutput#not_found #not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_code_review_job_tasks({
+    #     agent_space_id: "String", # required
+    #     code_review_job_task_ids: ["String"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_job_tasks #=> Array
+    #   resp.code_review_job_tasks[0].task_id #=> String
+    #   resp.code_review_job_tasks[0].code_review_id #=> String
+    #   resp.code_review_job_tasks[0].code_review_job_id #=> String
+    #   resp.code_review_job_tasks[0].agent_space_id #=> String
+    #   resp.code_review_job_tasks[0].title #=> String
+    #   resp.code_review_job_tasks[0].description #=> String
+    #   resp.code_review_job_tasks[0].categories #=> Array
+    #   resp.code_review_job_tasks[0].categories[0].name #=> String
+    #   resp.code_review_job_tasks[0].categories[0].is_primary #=> Boolean
+    #   resp.code_review_job_tasks[0].risk_type #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.code_review_job_tasks[0].execution_status #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.code_review_job_tasks[0].logs_location.log_type #=> String, one of "CLOUDWATCH"
+    #   resp.code_review_job_tasks[0].logs_location.cloud_watch_log.log_group #=> String
+    #   resp.code_review_job_tasks[0].logs_location.cloud_watch_log.log_stream #=> String
+    #   resp.code_review_job_tasks[0].created_at #=> Time
+    #   resp.code_review_job_tasks[0].updated_at #=> Time
+    #   resp.not_found #=> Array
+    #   resp.not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobTasks AWS API Documentation
+    #
+    # @overload batch_get_code_review_job_tasks(params = {})
+    # @param [Hash] params ({})
+    def batch_get_code_review_job_tasks(params = {}, options = {})
+      req = build_request(:batch_get_code_review_job_tasks, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about one or more code review jobs in an agent
+    # space.
+    #
+    # @option params [required, Array<String>] :code_review_job_ids
+    #   The list of code review job identifiers to retrieve.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the code review
+    #   jobs.
+    #
+    # @return [Types::BatchGetCodeReviewJobsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCodeReviewJobsOutput#code_review_jobs #code_review_jobs} => Array&lt;Types::CodeReviewJob&gt;
+    #   * {Types::BatchGetCodeReviewJobsOutput#not_found #not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_code_review_jobs({
+    #     code_review_job_ids: ["String"], # required
+    #     agent_space_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_jobs #=> Array
+    #   resp.code_review_jobs[0].code_review_job_id #=> String
+    #   resp.code_review_jobs[0].code_review_id #=> String
+    #   resp.code_review_jobs[0].title #=> String
+    #   resp.code_review_jobs[0].overview #=> String
+    #   resp.code_review_jobs[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_jobs[0].documents #=> Array
+    #   resp.code_review_jobs[0].documents[0].s3_location #=> String
+    #   resp.code_review_jobs[0].documents[0].artifact_id #=> String
+    #   resp.code_review_jobs[0].source_code #=> Array
+    #   resp.code_review_jobs[0].source_code[0].s3_location #=> String
+    #   resp.code_review_jobs[0].steps #=> Array
+    #   resp.code_review_jobs[0].steps[0].name #=> String, one of "PREFLIGHT", "STATIC_ANALYSIS", "PENTEST", "FINALIZING"
+    #   resp.code_review_jobs[0].steps[0].status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "COMPLETED", "FAILED", "STOPPED"
+    #   resp.code_review_jobs[0].steps[0].created_at #=> Time
+    #   resp.code_review_jobs[0].steps[0].updated_at #=> Time
+    #   resp.code_review_jobs[0].execution_context #=> Array
+    #   resp.code_review_jobs[0].execution_context[0].context_type #=> String, one of "ERROR", "CLIENT_ERROR", "WARNING", "INFO"
+    #   resp.code_review_jobs[0].execution_context[0].context #=> String
+    #   resp.code_review_jobs[0].execution_context[0].timestamp #=> Time
+    #   resp.code_review_jobs[0].service_role #=> String
+    #   resp.code_review_jobs[0].log_config.log_group #=> String
+    #   resp.code_review_jobs[0].log_config.log_stream #=> String
+    #   resp.code_review_jobs[0].error_information.code #=> String, one of "CLIENT_ERROR", "INTERNAL_ERROR", "STOPPED_BY_USER"
+    #   resp.code_review_jobs[0].error_information.message #=> String
+    #   resp.code_review_jobs[0].integrated_repositories #=> Array
+    #   resp.code_review_jobs[0].integrated_repositories[0].integration_id #=> String
+    #   resp.code_review_jobs[0].integrated_repositories[0].provider_resource_id #=> String
+    #   resp.code_review_jobs[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
+    #   resp.code_review_jobs[0].created_at #=> Time
+    #   resp.code_review_jobs[0].updated_at #=> Time
+    #   resp.not_found #=> Array
+    #   resp.not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviewJobs AWS API Documentation
+    #
+    # @overload batch_get_code_review_jobs(params = {})
+    # @param [Hash] params ({})
+    def batch_get_code_review_jobs(params = {}, options = {})
+      req = build_request(:batch_get_code_review_jobs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about one or more code reviews in an agent
+    # space.
+    #
+    # @option params [required, Array<String>] :code_review_ids
+    #   The list of code review identifiers to retrieve.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   reviews.
+    #
+    # @return [Types::BatchGetCodeReviewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetCodeReviewsOutput#code_reviews #code_reviews} => Array&lt;Types::CodeReview&gt;
+    #   * {Types::BatchGetCodeReviewsOutput#not_found #not_found} => Array&lt;String&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_code_reviews({
+    #     code_review_ids: ["String"], # required
+    #     agent_space_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_reviews #=> Array
+    #   resp.code_reviews[0].code_review_id #=> String
+    #   resp.code_reviews[0].agent_space_id #=> String
+    #   resp.code_reviews[0].title #=> String
+    #   resp.code_reviews[0].assets.endpoints #=> Array
+    #   resp.code_reviews[0].assets.endpoints[0].uri #=> String
+    #   resp.code_reviews[0].assets.actors #=> Array
+    #   resp.code_reviews[0].assets.actors[0].identifier #=> String
+    #   resp.code_reviews[0].assets.actors[0].uris #=> Array
+    #   resp.code_reviews[0].assets.actors[0].uris[0] #=> String
+    #   resp.code_reviews[0].assets.actors[0].authentication.provider_type #=> String, one of "SECRETS_MANAGER", "AWS_LAMBDA", "AWS_IAM_ROLE", "AWS_INTERNAL"
+    #   resp.code_reviews[0].assets.actors[0].authentication.value #=> String
+    #   resp.code_reviews[0].assets.actors[0].description #=> String
+    #   resp.code_reviews[0].assets.documents #=> Array
+    #   resp.code_reviews[0].assets.documents[0].s3_location #=> String
+    #   resp.code_reviews[0].assets.documents[0].artifact_id #=> String
+    #   resp.code_reviews[0].assets.source_code #=> Array
+    #   resp.code_reviews[0].assets.source_code[0].s3_location #=> String
+    #   resp.code_reviews[0].assets.integrated_repositories #=> Array
+    #   resp.code_reviews[0].assets.integrated_repositories[0].integration_id #=> String
+    #   resp.code_reviews[0].assets.integrated_repositories[0].provider_resource_id #=> String
+    #   resp.code_reviews[0].service_role #=> String
+    #   resp.code_reviews[0].log_config.log_group #=> String
+    #   resp.code_reviews[0].log_config.log_stream #=> String
+    #   resp.code_reviews[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
+    #   resp.code_reviews[0].created_at #=> Time
+    #   resp.code_reviews[0].updated_at #=> Time
+    #   resp.not_found #=> Array
+    #   resp.not_found[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/BatchGetCodeReviews AWS API Documentation
+    #
+    # @overload batch_get_code_reviews(params = {})
+    # @param [Hash] params ({})
+    def batch_get_code_reviews(params = {}, options = {})
+      req = build_request(:batch_get_code_reviews, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about one or more security findings in an agent
     # space.
     #
@@ -717,6 +937,8 @@ module Aws::SecurityAgent
     #   resp.findings[0].agent_space_id #=> String
     #   resp.findings[0].pentest_id #=> String
     #   resp.findings[0].pentest_job_id #=> String
+    #   resp.findings[0].code_review_id #=> String
+    #   resp.findings[0].code_review_job_id #=> String
     #   resp.findings[0].task_id #=> String
     #   resp.findings[0].name #=> String
     #   resp.findings[0].description #=> String
@@ -734,6 +956,11 @@ module Aws::SecurityAgent
     #   resp.findings[0].code_remediation_task.task_details[0].code_diff_link #=> String
     #   resp.findings[0].code_remediation_task.task_details[0].pull_request_link #=> String
     #   resp.findings[0].last_updated_by #=> String
+    #   resp.findings[0].code_locations #=> Array
+    #   resp.findings[0].code_locations[0].file_path #=> String
+    #   resp.findings[0].code_locations[0].line_start #=> Integer
+    #   resp.findings[0].code_locations[0].line_end #=> Integer
+    #   resp.findings[0].code_locations[0].label #=> String
     #   resp.findings[0].created_at #=> Time
     #   resp.findings[0].updated_at #=> Time
     #   resp.not_found #=> Array
@@ -1161,6 +1388,128 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def create_application(params = {}, options = {})
       req = build_request(:create_application, params)
+      req.send_request(options)
+    end
+
+    # Creates a new code review configuration in an agent space. A code
+    # review defines the parameters for automated security-focused code
+    # analysis.
+    #
+    # @option params [required, String] :title
+    #   The title of the code review.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space to create the code review in.
+    #
+    # @option params [required, Types::Assets] :assets
+    #   The assets to include in the code review, such as documents and source
+    #   code.
+    #
+    # @option params [String] :service_role
+    #   The IAM service role to use for the code review.
+    #
+    # @option params [Types::CloudWatchLog] :log_config
+    #   The CloudWatch Logs configuration for the code review.
+    #
+    # @option params [String] :code_remediation_strategy
+    #   The code remediation strategy for the code review. Valid values are
+    #   AUTOMATIC and DISABLED.
+    #
+    # @return [Types::CreateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateCodeReviewOutput#code_review_id #code_review_id} => String
+    #   * {Types::CreateCodeReviewOutput#title #title} => String
+    #   * {Types::CreateCodeReviewOutput#created_at #created_at} => Time
+    #   * {Types::CreateCodeReviewOutput#updated_at #updated_at} => Time
+    #   * {Types::CreateCodeReviewOutput#assets #assets} => Types::Assets
+    #   * {Types::CreateCodeReviewOutput#service_role #service_role} => String
+    #   * {Types::CreateCodeReviewOutput#log_config #log_config} => Types::CloudWatchLog
+    #   * {Types::CreateCodeReviewOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::CreateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_code_review({
+    #     title: "String", # required
+    #     agent_space_id: "String", # required
+    #     assets: { # required
+    #       endpoints: [
+    #         {
+    #           uri: "String",
+    #         },
+    #       ],
+    #       actors: [
+    #         {
+    #           identifier: "String",
+    #           uris: ["String"],
+    #           authentication: {
+    #             provider_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AWS_LAMBDA, AWS_IAM_ROLE, AWS_INTERNAL
+    #             value: "String",
+    #           },
+    #           description: "String",
+    #         },
+    #       ],
+    #       documents: [
+    #         {
+    #           s3_location: "String",
+    #           artifact_id: "String",
+    #         },
+    #       ],
+    #       source_code: [
+    #         {
+    #           s3_location: "String",
+    #         },
+    #       ],
+    #       integrated_repositories: [
+    #         {
+    #           integration_id: "String", # required
+    #           provider_resource_id: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     service_role: "ServiceRole",
+    #     log_config: {
+    #       log_group: "String",
+    #       log_stream: "String",
+    #     },
+    #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_id #=> String
+    #   resp.title #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.assets.endpoints #=> Array
+    #   resp.assets.endpoints[0].uri #=> String
+    #   resp.assets.actors #=> Array
+    #   resp.assets.actors[0].identifier #=> String
+    #   resp.assets.actors[0].uris #=> Array
+    #   resp.assets.actors[0].uris[0] #=> String
+    #   resp.assets.actors[0].authentication.provider_type #=> String, one of "SECRETS_MANAGER", "AWS_LAMBDA", "AWS_IAM_ROLE", "AWS_INTERNAL"
+    #   resp.assets.actors[0].authentication.value #=> String
+    #   resp.assets.actors[0].description #=> String
+    #   resp.assets.documents #=> Array
+    #   resp.assets.documents[0].s3_location #=> String
+    #   resp.assets.documents[0].artifact_id #=> String
+    #   resp.assets.source_code #=> Array
+    #   resp.assets.source_code[0].s3_location #=> String
+    #   resp.assets.integrated_repositories #=> Array
+    #   resp.assets.integrated_repositories[0].integration_id #=> String
+    #   resp.assets.integrated_repositories[0].provider_resource_id #=> String
+    #   resp.service_role #=> String
+    #   resp.log_config.log_group #=> String
+    #   resp.log_config.log_stream #=> String
+    #   resp.agent_space_id #=> String
+    #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/CreateCodeReview AWS API Documentation
+    #
+    # @overload create_code_review(params = {})
+    # @param [Hash] params ({})
+    def create_code_review(params = {}, options = {})
+      req = build_request(:create_code_review, params)
       req.send_request(options)
     end
 
@@ -1922,6 +2271,174 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
+    # Returns a paginated list of task summaries for the specified code
+    # review job, optionally filtered by step name or category.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :code_review_job_id
+    #   The unique identifier of the code review job to list tasks for.
+    #
+    # @option params [String] :step_name
+    #   Filter tasks by step name.
+    #
+    # @option params [String] :category_name
+    #   Filter tasks by category name.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #
+    # @return [Types::ListCodeReviewJobTasksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeReviewJobTasksOutput#code_review_job_task_summaries #code_review_job_task_summaries} => Array&lt;Types::CodeReviewJobTaskSummary&gt;
+    #   * {Types::ListCodeReviewJobTasksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_review_job_tasks({
+    #     agent_space_id: "String", # required
+    #     max_results: 1,
+    #     code_review_job_id: "String",
+    #     step_name: "PREFLIGHT", # accepts PREFLIGHT, STATIC_ANALYSIS, PENTEST, FINALIZING
+    #     category_name: "String",
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_job_task_summaries #=> Array
+    #   resp.code_review_job_task_summaries[0].task_id #=> String
+    #   resp.code_review_job_task_summaries[0].code_review_id #=> String
+    #   resp.code_review_job_task_summaries[0].code_review_job_id #=> String
+    #   resp.code_review_job_task_summaries[0].agent_space_id #=> String
+    #   resp.code_review_job_task_summaries[0].title #=> String
+    #   resp.code_review_job_task_summaries[0].risk_type #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
+    #   resp.code_review_job_task_summaries[0].execution_status #=> String, one of "IN_PROGRESS", "ABORTED", "COMPLETED", "INTERNAL_ERROR", "FAILED"
+    #   resp.code_review_job_task_summaries[0].created_at #=> Time
+    #   resp.code_review_job_task_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobTasks AWS API Documentation
+    #
+    # @overload list_code_review_job_tasks(params = {})
+    # @param [Hash] params ({})
+    def list_code_review_job_tasks(params = {}, options = {})
+      req = build_request(:list_code_review_job_tasks, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of code review job summaries for the
+    # specified code review configuration.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [required, String] :code_review_id
+    #   The unique identifier of the code review to list jobs for.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #
+    # @return [Types::ListCodeReviewJobsForCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeReviewJobsForCodeReviewOutput#code_review_job_summaries #code_review_job_summaries} => Array&lt;Types::CodeReviewJobSummary&gt;
+    #   * {Types::ListCodeReviewJobsForCodeReviewOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_review_jobs_for_code_review({
+    #     max_results: 1,
+    #     code_review_id: "String", # required
+    #     agent_space_id: "String", # required
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_job_summaries #=> Array
+    #   resp.code_review_job_summaries[0].code_review_job_id #=> String
+    #   resp.code_review_job_summaries[0].code_review_id #=> String
+    #   resp.code_review_job_summaries[0].title #=> String
+    #   resp.code_review_job_summaries[0].status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.code_review_job_summaries[0].created_at #=> Time
+    #   resp.code_review_job_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviewJobsForCodeReview AWS API Documentation
+    #
+    # @overload list_code_review_jobs_for_code_review(params = {})
+    # @param [Hash] params ({})
+    def list_code_review_jobs_for_code_review(params = {}, options = {})
+      req = build_request(:list_code_review_jobs_for_code_review, params)
+      req.send_request(options)
+    end
+
+    # Returns a paginated list of code review summaries for the specified
+    # agent space.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single call.
+    #
+    # @option params [String] :next_token
+    #   A token to use for paginating results that are returned in the
+    #   response. Set the value of this parameter to null for the first
+    #   request. For subsequent calls, use the nextToken value returned from
+    #   the previous request.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space to list code reviews for.
+    #
+    # @return [Types::ListCodeReviewsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListCodeReviewsOutput#code_review_summaries #code_review_summaries} => Array&lt;Types::CodeReviewSummary&gt;
+    #   * {Types::ListCodeReviewsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_code_reviews({
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     agent_space_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_summaries #=> Array
+    #   resp.code_review_summaries[0].code_review_id #=> String
+    #   resp.code_review_summaries[0].agent_space_id #=> String
+    #   resp.code_review_summaries[0].title #=> String
+    #   resp.code_review_summaries[0].created_at #=> Time
+    #   resp.code_review_summaries[0].updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ListCodeReviews AWS API Documentation
+    #
+    # @overload list_code_reviews(params = {})
+    # @param [Hash] params ({})
+    def list_code_reviews(params = {}, options = {})
+      req = build_request(:list_code_reviews, params)
+      req.send_request(options)
+    end
+
     # Returns a paginated list of endpoints discovered during a pentest job
     # execution.
     #
@@ -1987,8 +2504,12 @@ module Aws::SecurityAgent
     # @option params [Integer] :max_results
     #   The maximum number of results to return in a single call.
     #
-    # @option params [required, String] :pentest_job_id
+    # @option params [String] :pentest_job_id
     #   The unique identifier of the pentest job to list findings for.
+    #
+    # @option params [String] :code_review_job_id
+    #   The unique identifier of the code review job to list findings for.
+    #   Mutually exclusive with pentestJobId.
     #
     # @option params [required, String] :agent_space_id
     #   The unique identifier of the agent space.
@@ -2025,7 +2546,8 @@ module Aws::SecurityAgent
     #
     #   resp = client.list_findings({
     #     max_results: 1,
-    #     pentest_job_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
     #     agent_space_id: "String", # required
     #     next_token: "NextToken",
     #     risk_type: "String",
@@ -2042,6 +2564,8 @@ module Aws::SecurityAgent
     #   resp.findings_summaries[0].agent_space_id #=> String
     #   resp.findings_summaries[0].pentest_id #=> String
     #   resp.findings_summaries[0].pentest_job_id #=> String
+    #   resp.findings_summaries[0].code_review_id #=> String
+    #   resp.findings_summaries[0].code_review_job_id #=> String
     #   resp.findings_summaries[0].name #=> String
     #   resp.findings_summaries[0].status #=> String, one of "ACTIVE", "RESOLVED", "ACCEPTED", "FALSE_POSITIVE"
     #   resp.findings_summaries[0].risk_type #=> String
@@ -2483,8 +3007,13 @@ module Aws::SecurityAgent
     # @option params [required, String] :agent_space_id
     #   The unique identifier of the agent space.
     #
-    # @option params [required, String] :pentest_job_id
+    # @option params [String] :pentest_job_id
     #   The unique identifier of the pentest job that produced the findings.
+    #   Mutually exclusive with `codeReviewJobId`.
+    #
+    # @option params [String] :code_review_job_id
+    #   The unique identifier of the code review job that produced the
+    #   findings. Mutually exclusive with `pentestJobId`.
     #
     # @option params [required, Array<String>] :finding_ids
     #   The list of finding identifiers to initiate code remediation for.
@@ -2495,7 +3024,8 @@ module Aws::SecurityAgent
     #
     #   resp = client.start_code_remediation({
     #     agent_space_id: "String", # required
-    #     pentest_job_id: "String", # required
+    #     pentest_job_id: "String",
+    #     code_review_job_id: "String",
     #     finding_ids: ["String"], # required
     #   })
     #
@@ -2505,6 +3035,52 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def start_code_remediation(params = {}, options = {})
       req = build_request(:start_code_remediation, params)
+      req.send_request(options)
+    end
+
+    # Starts a new code review job for a code review configuration. The job
+    # executes the security-focused code analysis defined in the code
+    # review.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [required, String] :code_review_id
+    #   The unique identifier of the code review to start a job for.
+    #
+    # @return [Types::StartCodeReviewJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartCodeReviewJobOutput#title #title} => String
+    #   * {Types::StartCodeReviewJobOutput#status #status} => String
+    #   * {Types::StartCodeReviewJobOutput#created_at #created_at} => Time
+    #   * {Types::StartCodeReviewJobOutput#updated_at #updated_at} => Time
+    #   * {Types::StartCodeReviewJobOutput#code_review_id #code_review_id} => String
+    #   * {Types::StartCodeReviewJobOutput#code_review_job_id #code_review_job_id} => String
+    #   * {Types::StartCodeReviewJobOutput#agent_space_id #agent_space_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_code_review_job({
+    #     agent_space_id: "String", # required
+    #     code_review_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.title #=> String
+    #   resp.status #=> String, one of "IN_PROGRESS", "STOPPING", "STOPPED", "FAILED", "COMPLETED"
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.code_review_id #=> String
+    #   resp.code_review_job_id #=> String
+    #   resp.agent_space_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StartCodeReviewJob AWS API Documentation
+    #
+    # @overload start_code_review_job(params = {})
+    # @param [Hash] params ({})
+    def start_code_review_job(params = {}, options = {})
+      req = build_request(:start_code_review_job, params)
       req.send_request(options)
     end
 
@@ -2550,6 +3126,33 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def start_pentest_job(params = {}, options = {})
       req = build_request(:start_pentest_job, params)
+      req.send_request(options)
+    end
+
+    # Stops a running code review job. The job transitions to a stopping
+    # state and then to stopped after cleanup completes.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space.
+    #
+    # @option params [required, String] :code_review_job_id
+    #   The unique identifier of the code review job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_code_review_job({
+    #     agent_space_id: "String", # required
+    #     code_review_job_id: "String", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/StopCodeReviewJob AWS API Documentation
+    #
+    # @overload stop_code_review_job(params = {})
+    # @param [Hash] params ({})
+    def stop_code_review_job(params = {}, options = {})
+      req = build_request(:stop_code_review_job, params)
       req.send_request(options)
     end
 
@@ -2767,6 +3370,129 @@ module Aws::SecurityAgent
     # @param [Hash] params ({})
     def update_application(params = {}, options = {})
       req = build_request(:update_application, params)
+      req.send_request(options)
+    end
+
+    # Updates an existing code review configuration.
+    #
+    # @option params [required, String] :code_review_id
+    #   The unique identifier of the code review to update.
+    #
+    # @option params [required, String] :agent_space_id
+    #   The unique identifier of the agent space that contains the code
+    #   review.
+    #
+    # @option params [String] :title
+    #   The updated title of the code review.
+    #
+    # @option params [Types::Assets] :assets
+    #   The updated assets for the code review.
+    #
+    # @option params [String] :service_role
+    #   The updated IAM service role for the code review.
+    #
+    # @option params [Types::CloudWatchLog] :log_config
+    #   The updated CloudWatch Logs configuration for the code review.
+    #
+    # @option params [String] :code_remediation_strategy
+    #   The updated code remediation strategy for the code review.
+    #
+    # @return [Types::UpdateCodeReviewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCodeReviewOutput#code_review_id #code_review_id} => String
+    #   * {Types::UpdateCodeReviewOutput#title #title} => String
+    #   * {Types::UpdateCodeReviewOutput#created_at #created_at} => Time
+    #   * {Types::UpdateCodeReviewOutput#updated_at #updated_at} => Time
+    #   * {Types::UpdateCodeReviewOutput#assets #assets} => Types::Assets
+    #   * {Types::UpdateCodeReviewOutput#service_role #service_role} => String
+    #   * {Types::UpdateCodeReviewOutput#log_config #log_config} => Types::CloudWatchLog
+    #   * {Types::UpdateCodeReviewOutput#agent_space_id #agent_space_id} => String
+    #   * {Types::UpdateCodeReviewOutput#code_remediation_strategy #code_remediation_strategy} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_code_review({
+    #     code_review_id: "String", # required
+    #     agent_space_id: "String", # required
+    #     title: "String",
+    #     assets: {
+    #       endpoints: [
+    #         {
+    #           uri: "String",
+    #         },
+    #       ],
+    #       actors: [
+    #         {
+    #           identifier: "String",
+    #           uris: ["String"],
+    #           authentication: {
+    #             provider_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AWS_LAMBDA, AWS_IAM_ROLE, AWS_INTERNAL
+    #             value: "String",
+    #           },
+    #           description: "String",
+    #         },
+    #       ],
+    #       documents: [
+    #         {
+    #           s3_location: "String",
+    #           artifact_id: "String",
+    #         },
+    #       ],
+    #       source_code: [
+    #         {
+    #           s3_location: "String",
+    #         },
+    #       ],
+    #       integrated_repositories: [
+    #         {
+    #           integration_id: "String", # required
+    #           provider_resource_id: "String", # required
+    #         },
+    #       ],
+    #     },
+    #     service_role: "ServiceRole",
+    #     log_config: {
+    #       log_group: "String",
+    #       log_stream: "String",
+    #     },
+    #     code_remediation_strategy: "AUTOMATIC", # accepts AUTOMATIC, DISABLED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.code_review_id #=> String
+    #   resp.title #=> String
+    #   resp.created_at #=> Time
+    #   resp.updated_at #=> Time
+    #   resp.assets.endpoints #=> Array
+    #   resp.assets.endpoints[0].uri #=> String
+    #   resp.assets.actors #=> Array
+    #   resp.assets.actors[0].identifier #=> String
+    #   resp.assets.actors[0].uris #=> Array
+    #   resp.assets.actors[0].uris[0] #=> String
+    #   resp.assets.actors[0].authentication.provider_type #=> String, one of "SECRETS_MANAGER", "AWS_LAMBDA", "AWS_IAM_ROLE", "AWS_INTERNAL"
+    #   resp.assets.actors[0].authentication.value #=> String
+    #   resp.assets.actors[0].description #=> String
+    #   resp.assets.documents #=> Array
+    #   resp.assets.documents[0].s3_location #=> String
+    #   resp.assets.documents[0].artifact_id #=> String
+    #   resp.assets.source_code #=> Array
+    #   resp.assets.source_code[0].s3_location #=> String
+    #   resp.assets.integrated_repositories #=> Array
+    #   resp.assets.integrated_repositories[0].integration_id #=> String
+    #   resp.assets.integrated_repositories[0].provider_resource_id #=> String
+    #   resp.service_role #=> String
+    #   resp.log_config.log_group #=> String
+    #   resp.log_config.log_stream #=> String
+    #   resp.agent_space_id #=> String
+    #   resp.code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/UpdateCodeReview AWS API Documentation
+    #
+    # @overload update_code_review(params = {})
+    # @param [Hash] params ({})
+    def update_code_review(params = {}, options = {})
+      req = build_request(:update_code_review, params)
       req.send_request(options)
     end
 
@@ -3111,7 +3837,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.1.0'
+      context[:gem_version] = '1.2.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

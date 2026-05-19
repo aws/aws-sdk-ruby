@@ -25,6 +25,16 @@ module Aws::Bedrock
     AdditionalModelRequestFields = Shapes::MapShape.new(name: 'AdditionalModelRequestFields')
     AdditionalModelRequestFieldsKey = Shapes::StringShape.new(name: 'AdditionalModelRequestFieldsKey')
     AdditionalModelRequestFieldsValue = Shapes::DocumentShape.new(name: 'AdditionalModelRequestFieldsValue', document: true)
+    AdvancedPromptOptimizationInputConfig = Shapes::StructureShape.new(name: 'AdvancedPromptOptimizationInputConfig')
+    AdvancedPromptOptimizationJobArn = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobArn')
+    AdvancedPromptOptimizationJobDescription = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobDescription')
+    AdvancedPromptOptimizationJobIdentifier = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobIdentifier')
+    AdvancedPromptOptimizationJobIdentifiers = Shapes::ListShape.new(name: 'AdvancedPromptOptimizationJobIdentifiers')
+    AdvancedPromptOptimizationJobName = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobName')
+    AdvancedPromptOptimizationJobStatus = Shapes::StringShape.new(name: 'AdvancedPromptOptimizationJobStatus')
+    AdvancedPromptOptimizationJobSummaries = Shapes::ListShape.new(name: 'AdvancedPromptOptimizationJobSummaries')
+    AdvancedPromptOptimizationJobSummary = Shapes::StructureShape.new(name: 'AdvancedPromptOptimizationJobSummary')
+    AdvancedPromptOptimizationOutputConfig = Shapes::StructureShape.new(name: 'AdvancedPromptOptimizationOutputConfig')
     AgreementAvailability = Shapes::StructureShape.new(name: 'AgreementAvailability')
     AgreementStatus = Shapes::StringShape.new(name: 'AgreementStatus')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
@@ -215,6 +225,12 @@ module Aws::Bedrock
     AutomatedReasoningPolicyVersion = Shapes::StringShape.new(name: 'AutomatedReasoningPolicyVersion')
     AutomatedReasoningPolicyWorkflowTypeContent = Shapes::UnionShape.new(name: 'AutomatedReasoningPolicyWorkflowTypeContent')
     BaseModelIdentifier = Shapes::StringShape.new(name: 'BaseModelIdentifier')
+    BatchDeleteAdvancedPromptOptimizationJobError = Shapes::StructureShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobError')
+    BatchDeleteAdvancedPromptOptimizationJobErrors = Shapes::ListShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobErrors')
+    BatchDeleteAdvancedPromptOptimizationJobItem = Shapes::StructureShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobItem')
+    BatchDeleteAdvancedPromptOptimizationJobItems = Shapes::ListShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobItems')
+    BatchDeleteAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobRequest')
+    BatchDeleteAdvancedPromptOptimizationJobResponse = Shapes::StructureShape.new(name: 'BatchDeleteAdvancedPromptOptimizationJobResponse')
     BatchDeleteEvaluationJobError = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobError')
     BatchDeleteEvaluationJobErrors = Shapes::ListShape.new(name: 'BatchDeleteEvaluationJobErrors')
     BatchDeleteEvaluationJobItem = Shapes::StructureShape.new(name: 'BatchDeleteEvaluationJobItem')
@@ -238,6 +254,8 @@ module Aws::Bedrock
     ConfigurationOwner = Shapes::StringShape.new(name: 'ConfigurationOwner')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
+    CreateAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'CreateAdvancedPromptOptimizationJobRequest')
+    CreateAdvancedPromptOptimizationJobResponse = Shapes::StructureShape.new(name: 'CreateAdvancedPromptOptimizationJobResponse')
     CreateAutomatedReasoningPolicyRequest = Shapes::StructureShape.new(name: 'CreateAutomatedReasoningPolicyRequest')
     CreateAutomatedReasoningPolicyResponse = Shapes::StructureShape.new(name: 'CreateAutomatedReasoningPolicyResponse')
     CreateAutomatedReasoningPolicyTestCaseRequest = Shapes::StructureShape.new(name: 'CreateAutomatedReasoningPolicyTestCaseRequest')
@@ -402,6 +420,8 @@ module Aws::Bedrock
     FoundationModelSummary = Shapes::StructureShape.new(name: 'FoundationModelSummary')
     FoundationModelSummaryList = Shapes::ListShape.new(name: 'FoundationModelSummaryList')
     GenerationConfiguration = Shapes::StructureShape.new(name: 'GenerationConfiguration')
+    GetAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'GetAdvancedPromptOptimizationJobRequest')
+    GetAdvancedPromptOptimizationJobResponse = Shapes::StructureShape.new(name: 'GetAdvancedPromptOptimizationJobResponse')
     GetAutomatedReasoningPolicyAnnotationsRequest = Shapes::StructureShape.new(name: 'GetAutomatedReasoningPolicyAnnotationsRequest')
     GetAutomatedReasoningPolicyAnnotationsResponse = Shapes::StructureShape.new(name: 'GetAutomatedReasoningPolicyAnnotationsResponse')
     GetAutomatedReasoningPolicyBuildWorkflowRequest = Shapes::StructureShape.new(name: 'GetAutomatedReasoningPolicyBuildWorkflowRequest')
@@ -568,6 +588,12 @@ module Aws::Bedrock
     ImportedModelSummaryList = Shapes::ListShape.new(name: 'ImportedModelSummaryList')
     IncludedModelId = Shapes::StringShape.new(name: 'IncludedModelId')
     IncludedModelsList = Shapes::ListShape.new(name: 'IncludedModelsList')
+    InferenceConfiguration = Shapes::StructureShape.new(name: 'InferenceConfiguration')
+    InferenceConfigurationMaxTokensInteger = Shapes::IntegerShape.new(name: 'InferenceConfigurationMaxTokensInteger')
+    InferenceConfigurationStopSequencesList = Shapes::ListShape.new(name: 'InferenceConfigurationStopSequencesList')
+    InferenceConfigurationStopSequencesListMemberString = Shapes::StringShape.new(name: 'InferenceConfigurationStopSequencesListMemberString')
+    InferenceConfigurationTemperatureFloat = Shapes::FloatShape.new(name: 'InferenceConfigurationTemperatureFloat')
+    InferenceConfigurationTopPFloat = Shapes::FloatShape.new(name: 'InferenceConfigurationTopPFloat')
     InferenceProfileArn = Shapes::StringShape.new(name: 'InferenceProfileArn')
     InferenceProfileDescription = Shapes::StringShape.new(name: 'InferenceProfileDescription')
     InferenceProfileId = Shapes::StringShape.new(name: 'InferenceProfileId')
@@ -606,6 +632,8 @@ module Aws::Bedrock
     LambdaArn = Shapes::StringShape.new(name: 'LambdaArn')
     LambdaGraderConfig = Shapes::StructureShape.new(name: 'LambdaGraderConfig')
     LegalTerm = Shapes::StructureShape.new(name: 'LegalTerm')
+    ListAdvancedPromptOptimizationJobsRequest = Shapes::StructureShape.new(name: 'ListAdvancedPromptOptimizationJobsRequest')
+    ListAdvancedPromptOptimizationJobsResponse = Shapes::StructureShape.new(name: 'ListAdvancedPromptOptimizationJobsResponse')
     ListAutomatedReasoningPoliciesRequest = Shapes::StructureShape.new(name: 'ListAutomatedReasoningPoliciesRequest')
     ListAutomatedReasoningPoliciesResponse = Shapes::StructureShape.new(name: 'ListAutomatedReasoningPoliciesResponse')
     ListAutomatedReasoningPolicyBuildWorkflowsRequest = Shapes::StructureShape.new(name: 'ListAutomatedReasoningPolicyBuildWorkflowsRequest')
@@ -665,6 +693,8 @@ module Aws::Bedrock
     MetricName = Shapes::StringShape.new(name: 'MetricName')
     ModelArchitecture = Shapes::StringShape.new(name: 'ModelArchitecture')
     ModelArn = Shapes::StringShape.new(name: 'ModelArn')
+    ModelConfiguration = Shapes::StructureShape.new(name: 'ModelConfiguration')
+    ModelConfigurations = Shapes::ListShape.new(name: 'ModelConfigurations')
     ModelCopyJobArn = Shapes::StringShape.new(name: 'ModelCopyJobArn')
     ModelCopyJobStatus = Shapes::StringShape.new(name: 'ModelCopyJobStatus')
     ModelCopyJobSummaries = Shapes::ListShape.new(name: 'ModelCopyJobSummaries')
@@ -794,6 +824,7 @@ module Aws::Bedrock
     S3InputFormat = Shapes::StringShape.new(name: 'S3InputFormat')
     S3ObjectDoc = Shapes::StructureShape.new(name: 'S3ObjectDoc')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    S3UriFolder = Shapes::StringShape.new(name: 'S3UriFolder')
     SageMakerEndpoint = Shapes::StructureShape.new(name: 'SageMakerEndpoint')
     SageMakerFlowDefinitionArn = Shapes::StringShape.new(name: 'SageMakerFlowDefinitionArn')
     SearchType = Shapes::StringShape.new(name: 'SearchType')
@@ -813,6 +844,8 @@ module Aws::Bedrock
     StartAutomatedReasoningPolicyTestWorkflowResponse = Shapes::StructureShape.new(name: 'StartAutomatedReasoningPolicyTestWorkflowResponse')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusDetails = Shapes::StructureShape.new(name: 'StatusDetails')
+    StopAdvancedPromptOptimizationJobRequest = Shapes::StructureShape.new(name: 'StopAdvancedPromptOptimizationJobRequest')
+    StopAdvancedPromptOptimizationJobResponse = Shapes::StructureShape.new(name: 'StopAdvancedPromptOptimizationJobResponse')
     StopEvaluationJobRequest = Shapes::StructureShape.new(name: 'StopEvaluationJobRequest')
     StopEvaluationJobResponse = Shapes::StructureShape.new(name: 'StopEvaluationJobResponse')
     StopModelCustomizationJobRequest = Shapes::StructureShape.new(name: 'StopModelCustomizationJobRequest')
@@ -904,6 +937,23 @@ module Aws::Bedrock
 
     AdditionalModelRequestFields.key = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsKey)
     AdditionalModelRequestFields.value = Shapes::ShapeRef.new(shape: AdditionalModelRequestFieldsValue)
+
+    AdvancedPromptOptimizationInputConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3Uri, required: true, location_name: "s3Uri"))
+    AdvancedPromptOptimizationInputConfig.struct_class = Types::AdvancedPromptOptimizationInputConfig
+
+    AdvancedPromptOptimizationJobIdentifiers.member = Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier)
+
+    AdvancedPromptOptimizationJobSummaries.member = Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobSummary)
+
+    AdvancedPromptOptimizationJobSummary.add_member(:job_arn, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobArn, required: true, location_name: "jobArn"))
+    AdvancedPromptOptimizationJobSummary.add_member(:job_name, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobName, required: true, location_name: "jobName"))
+    AdvancedPromptOptimizationJobSummary.add_member(:job_status, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobStatus, required: true, location_name: "jobStatus"))
+    AdvancedPromptOptimizationJobSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    AdvancedPromptOptimizationJobSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AdvancedPromptOptimizationJobSummary.struct_class = Types::AdvancedPromptOptimizationJobSummary
+
+    AdvancedPromptOptimizationOutputConfig.add_member(:s3_uri, Shapes::ShapeRef.new(shape: S3UriFolder, required: true, location_name: "s3Uri"))
+    AdvancedPromptOptimizationOutputConfig.struct_class = Types::AdvancedPromptOptimizationOutputConfig
 
     AgreementAvailability.add_member(:status, Shapes::ShapeRef.new(shape: AgreementStatus, required: true, location_name: "status"))
     AgreementAvailability.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
@@ -1492,6 +1542,26 @@ module Aws::Bedrock
     AutomatedReasoningPolicyWorkflowTypeContent.add_member_subclass(:unknown, Types::AutomatedReasoningPolicyWorkflowTypeContent::Unknown)
     AutomatedReasoningPolicyWorkflowTypeContent.struct_class = Types::AutomatedReasoningPolicyWorkflowTypeContent
 
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:job_identifier, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier, required: true, location_name: "jobIdentifier"))
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    BatchDeleteAdvancedPromptOptimizationJobError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    BatchDeleteAdvancedPromptOptimizationJobError.struct_class = Types::BatchDeleteAdvancedPromptOptimizationJobError
+
+    BatchDeleteAdvancedPromptOptimizationJobErrors.member = Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobError)
+
+    BatchDeleteAdvancedPromptOptimizationJobItem.add_member(:job_identifier, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier, required: true, location_name: "jobIdentifier"))
+    BatchDeleteAdvancedPromptOptimizationJobItem.add_member(:job_status, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobStatus, required: true, location_name: "jobStatus"))
+    BatchDeleteAdvancedPromptOptimizationJobItem.struct_class = Types::BatchDeleteAdvancedPromptOptimizationJobItem
+
+    BatchDeleteAdvancedPromptOptimizationJobItems.member = Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobItem)
+
+    BatchDeleteAdvancedPromptOptimizationJobRequest.add_member(:job_identifiers, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifiers, required: true, location_name: "jobIdentifiers"))
+    BatchDeleteAdvancedPromptOptimizationJobRequest.struct_class = Types::BatchDeleteAdvancedPromptOptimizationJobRequest
+
+    BatchDeleteAdvancedPromptOptimizationJobResponse.add_member(:errors, Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobErrors, required: true, location_name: "errors"))
+    BatchDeleteAdvancedPromptOptimizationJobResponse.add_member(:advanced_prompt_optimization_jobs, Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobItems, required: true, location_name: "advancedPromptOptimizationJobs"))
+    BatchDeleteAdvancedPromptOptimizationJobResponse.struct_class = Types::BatchDeleteAdvancedPromptOptimizationJobResponse
+
     BatchDeleteEvaluationJobError.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location_name: "jobIdentifier"))
     BatchDeleteEvaluationJobError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     BatchDeleteEvaluationJobError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -1535,6 +1605,19 @@ module Aws::Bedrock
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: NonBlankString, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
+
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobName, required: true, location_name: "jobName"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:job_description, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobDescription, location_name: "jobDescription"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:input_config, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationInputConfig, required: true, location_name: "inputConfig"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:output_config, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationOutputConfig, required: true, location_name: "outputConfig"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    CreateAdvancedPromptOptimizationJobRequest.add_member(:model_configurations, Shapes::ShapeRef.new(shape: ModelConfigurations, required: true, location_name: "modelConfigurations"))
+    CreateAdvancedPromptOptimizationJobRequest.struct_class = Types::CreateAdvancedPromptOptimizationJobRequest
+
+    CreateAdvancedPromptOptimizationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobArn, required: true, location_name: "jobArn"))
+    CreateAdvancedPromptOptimizationJobResponse.struct_class = Types::CreateAdvancedPromptOptimizationJobResponse
 
     CreateAutomatedReasoningPolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyName, required: true, location_name: "name"))
     CreateAutomatedReasoningPolicyRequest.add_member(:description, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyDescription, location_name: "description"))
@@ -2109,6 +2192,22 @@ module Aws::Bedrock
     GenerationConfiguration.add_member(:kb_inference_config, Shapes::ShapeRef.new(shape: KbInferenceConfig, location_name: "kbInferenceConfig"))
     GenerationConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
     GenerationConfiguration.struct_class = Types::GenerationConfiguration
+
+    GetAdvancedPromptOptimizationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
+    GetAdvancedPromptOptimizationJobRequest.struct_class = Types::GetAdvancedPromptOptimizationJobRequest
+
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_arn, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobArn, required: true, location_name: "jobArn"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobName, required: true, location_name: "jobName"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_description, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobDescription, location_name: "jobDescription"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:job_status, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobStatus, required: true, location_name: "jobStatus"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:input_config, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationInputConfig, required: true, location_name: "inputConfig"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:output_config, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationOutputConfig, required: true, location_name: "outputConfig"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "encryptionKeyArn"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "creationTime"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:failure_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "failureMessage"))
+    GetAdvancedPromptOptimizationJobResponse.add_member(:model_configurations, Shapes::ShapeRef.new(shape: ModelConfigurations, required: true, location_name: "modelConfigurations"))
+    GetAdvancedPromptOptimizationJobResponse.struct_class = Types::GetAdvancedPromptOptimizationJobResponse
 
     GetAutomatedReasoningPolicyAnnotationsRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyArn, required: true, location: "uri", location_name: "policyArn"))
     GetAutomatedReasoningPolicyAnnotationsRequest.add_member(:build_workflow_id, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyBuildWorkflowId, required: true, location: "uri", location_name: "buildWorkflowId"))
@@ -2731,6 +2830,14 @@ module Aws::Bedrock
 
     IncludedModelsList.member = Shapes::ShapeRef.new(shape: IncludedModelId)
 
+    InferenceConfiguration.add_member(:max_tokens, Shapes::ShapeRef.new(shape: InferenceConfigurationMaxTokensInteger, location_name: "maxTokens"))
+    InferenceConfiguration.add_member(:temperature, Shapes::ShapeRef.new(shape: InferenceConfigurationTemperatureFloat, location_name: "temperature"))
+    InferenceConfiguration.add_member(:top_p, Shapes::ShapeRef.new(shape: InferenceConfigurationTopPFloat, location_name: "topP"))
+    InferenceConfiguration.add_member(:stop_sequences, Shapes::ShapeRef.new(shape: InferenceConfigurationStopSequencesList, location_name: "stopSequences"))
+    InferenceConfiguration.struct_class = Types::InferenceConfiguration
+
+    InferenceConfigurationStopSequencesList.member = Shapes::ShapeRef.new(shape: InferenceConfigurationStopSequencesListMemberString)
+
     InferenceProfileModel.add_member(:model_arn, Shapes::ShapeRef.new(shape: FoundationModelArn, location_name: "modelArn"))
     InferenceProfileModel.struct_class = Types::InferenceProfileModel
 
@@ -2804,6 +2911,16 @@ module Aws::Bedrock
 
     LegalTerm.add_member(:url, Shapes::ShapeRef.new(shape: String, location_name: "url"))
     LegalTerm.struct_class = Types::LegalTerm
+
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortJobsBy, location: "querystring", location_name: "sortBy"))
+    ListAdvancedPromptOptimizationJobsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListAdvancedPromptOptimizationJobsRequest.struct_class = Types::ListAdvancedPromptOptimizationJobsRequest
+
+    ListAdvancedPromptOptimizationJobsResponse.add_member(:job_summaries, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobSummaries, location_name: "jobSummaries"))
+    ListAdvancedPromptOptimizationJobsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListAdvancedPromptOptimizationJobsResponse.struct_class = Types::ListAdvancedPromptOptimizationJobsResponse
 
     ListAutomatedReasoningPoliciesRequest.add_member(:policy_arn, Shapes::ShapeRef.new(shape: AutomatedReasoningPolicyArn, location: "querystring", location_name: "policyArn"))
     ListAutomatedReasoningPoliciesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
@@ -3081,6 +3198,13 @@ module Aws::Bedrock
     MetadataConfigurationForReranking.add_member(:selection_mode, Shapes::ShapeRef.new(shape: RerankingMetadataSelectionMode, required: true, location_name: "selectionMode"))
     MetadataConfigurationForReranking.add_member(:selective_mode_configuration, Shapes::ShapeRef.new(shape: RerankingMetadataSelectiveModeConfiguration, location_name: "selectiveModeConfiguration"))
     MetadataConfigurationForReranking.struct_class = Types::MetadataConfigurationForReranking
+
+    ModelConfiguration.add_member(:model_id, Shapes::ShapeRef.new(shape: BedrockModelId, required: true, location_name: "modelId"))
+    ModelConfiguration.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfiguration, location_name: "inferenceConfig"))
+    ModelConfiguration.add_member(:additional_model_request_fields, Shapes::ShapeRef.new(shape: AdditionalModelRequestFields, location_name: "additionalModelRequestFields"))
+    ModelConfiguration.struct_class = Types::ModelConfiguration
+
+    ModelConfigurations.member = Shapes::ShapeRef.new(shape: ModelConfiguration)
 
     ModelCopyJobSummaries.member = Shapes::ShapeRef.new(shape: ModelCopyJobSummary)
 
@@ -3456,6 +3580,11 @@ module Aws::Bedrock
     StatusDetails.add_member(:training_details, Shapes::ShapeRef.new(shape: TrainingDetails, location_name: "trainingDetails"))
     StatusDetails.struct_class = Types::StatusDetails
 
+    StopAdvancedPromptOptimizationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: AdvancedPromptOptimizationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
+    StopAdvancedPromptOptimizationJobRequest.struct_class = Types::StopAdvancedPromptOptimizationJobRequest
+
+    StopAdvancedPromptOptimizationJobResponse.struct_class = Types::StopAdvancedPromptOptimizationJobResponse
+
     StopEvaluationJobRequest.add_member(:job_identifier, Shapes::ShapeRef.new(shape: EvaluationJobIdentifier, required: true, location: "uri", location_name: "jobIdentifier"))
     StopEvaluationJobRequest.struct_class = Types::StopEvaluationJobRequest
 
@@ -3672,6 +3801,18 @@ module Aws::Bedrock
         "uid" => "bedrock-2023-04-20",
       }
 
+      api.add_operation(:batch_delete_advanced_prompt_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchDeleteAdvancedPromptOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/advanced-prompt-optimization-job/batch-delete"
+        o.input = Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchDeleteAdvancedPromptOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:batch_delete_evaluation_job, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchDeleteEvaluationJob"
         o.http_method = "POST"
@@ -3696,6 +3837,22 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:create_advanced_prompt_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateAdvancedPromptOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/advanced-prompt-optimization-jobs"
+        o.input = Shapes::ShapeRef.new(shape: CreateAdvancedPromptOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateAdvancedPromptOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -4192,6 +4349,19 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
+      api.add_operation(:get_advanced_prompt_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetAdvancedPromptOptimizationJob"
+        o.http_method = "GET"
+        o.http_request_uri = "/advanced-prompt-optimization-jobs/{jobIdentifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetAdvancedPromptOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetAdvancedPromptOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:get_automated_reasoning_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetAutomatedReasoningPolicy"
         o.http_method = "GET"
@@ -4512,6 +4682,24 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:list_advanced_prompt_optimization_jobs, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAdvancedPromptOptimizationJobs"
+        o.http_method = "GET"
+        o.http_request_uri = "/advanced-prompt-optimization-jobs"
+        o.input = Shapes::ShapeRef.new(shape: ListAdvancedPromptOptimizationJobsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAdvancedPromptOptimizationJobsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_automated_reasoning_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -4976,6 +5164,20 @@ module Aws::Bedrock
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:stop_advanced_prompt_optimization_job, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopAdvancedPromptOptimizationJob"
+        o.http_method = "POST"
+        o.http_request_uri = "/advanced-prompt-optimization-jobs/{jobIdentifier}/stop"
+        o.input = Shapes::ShapeRef.new(shape: StopAdvancedPromptOptimizationJobRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopAdvancedPromptOptimizationJobResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 

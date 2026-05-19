@@ -3304,8 +3304,9 @@ module Aws::Glue
     #   Jobs must have timeout values less than 7 days or 10080 minutes.
     #   Otherwise, the jobs will throw an exception.
     #
-    #   When the value is left blank, the timeout is defaulted to 2880
-    #   minutes.
+    #   When the value is left blank, the timeout is defaulted to 2,880
+    #   minutes for Glue version 4.0 and earlier, or 480 minutes for Glue
+    #   version 5.0 and later.
     #
     #   Any existing Glue jobs that had a timeout value greater than 7 days
     #   will be defaulted to 7 days. For instance if you have specified a
@@ -6766,6 +6767,13 @@ module Aws::Glue
     #   When the `ParentCatalogId` is not equal to null, and this attribute is
     #   passed as `false` or `true`, an `InvalidInputException` is thrown.
     #
+    # @option params [Boolean] :has_databases
+    #   When `true`, the response only includes catalogs that can contain
+    #   databases. Some catalogs are organizational containers that hold only
+    #   other catalogs, not databases. When this parameter is set to `true`,
+    #   those container-only catalogs are excluded, and only catalogs capable
+    #   of containing databases are returned. Defaults to `false`.
+    #
     # @return [Types::GetCatalogsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetCatalogsResponse#catalog_list #catalog_list} => Array&lt;Types::Catalog&gt;
@@ -6779,6 +6787,7 @@ module Aws::Glue
     #     max_results: 1,
     #     recursive: false,
     #     include_root: false,
+    #     has_databases: false,
     #   })
     #
     # @example Response structure
@@ -16159,8 +16168,9 @@ module Aws::Glue
     #   Jobs must have timeout values less than 7 days or 10080 minutes.
     #   Otherwise, the jobs will throw an exception.
     #
-    #   When the value is left blank, the timeout is defaulted to 2880
-    #   minutes.
+    #   When the value is left blank, the timeout is defaulted to 2,880
+    #   minutes for Glue version 4.0 and earlier, or 480 minutes for Glue
+    #   version 5.0 and later.
     #
     #   Any existing Glue jobs that had a timeout value greater than 7 days
     #   will be defaulted to 7 days. For instance if you have specified a
@@ -19053,7 +19063,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.255.0'
+      context[:gem_version] = '1.257.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

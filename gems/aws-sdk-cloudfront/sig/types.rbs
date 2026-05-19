@@ -791,6 +791,7 @@ module Aws::CloudFront
     class CreateTrustStoreRequest
       attr_accessor name: ::String
       attr_accessor ca_certificates_bundle_source: Types::CaCertificatesBundleSource
+      attr_accessor use_client_certificate_ocsp_endpoint: bool
       attr_accessor tags: Types::Tags
       SENSITIVE: []
     end
@@ -3815,6 +3816,7 @@ module Aws::CloudFront
       attr_accessor number_of_ca_certificates: ::Integer
       attr_accessor last_modified_time: ::Time
       attr_accessor reason: ::String
+      attr_accessor use_client_certificate_ocsp_endpoint: bool
       SENSITIVE: []
     end
 
@@ -4161,6 +4163,7 @@ module Aws::CloudFront
     class UpdateTrustStoreRequest
       attr_accessor id: ::String
       attr_accessor ca_certificates_bundle_source: Types::CaCertificatesBundleSource
+      attr_accessor use_client_certificate_ocsp_endpoint: bool
       attr_accessor if_match: ::String
       SENSITIVE: []
     end
@@ -4214,7 +4217,7 @@ module Aws::CloudFront
     end
 
     class ViewerMtlsConfig
-      attr_accessor mode: ("required" | "optional")
+      attr_accessor mode: ("required" | "optional" | "passthrough")
       attr_accessor trust_store_config: Types::TrustStoreConfig
       SENSITIVE: []
     end

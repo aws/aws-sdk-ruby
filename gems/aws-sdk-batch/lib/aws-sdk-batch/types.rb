@@ -381,9 +381,10 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out.
     #
     #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
-    #   billing charges. To prevent additional charges, turn off and then
-    #   delete the compute environment. For more information, see [State][1]
-    #   in the *Batch User Guide*.
+    #   billing charges, for example, if they have running instances due to
+    #   jobs that are still executing or a non-zero `minvCpus` setting. To
+    #   prevent additional charges, disable and delete the compute
+    #   environment.
     #
     #    </note>
     #
@@ -392,10 +393,6 @@ module Aws::Batch
     #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
     #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
     #   a `c5.large` instance.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] status
@@ -1508,6 +1505,11 @@ module Aws::Batch
     #   Valid Range: Minimum value of 20. Maximum value of 10080. Use 0 to
     #   unset and disable the scale down delay.
     #
+    #   <note markdown="1"> Idle instances retained during the scale-down delay period are
+    #   billable at standard EC2 pricing.
+    #
+    #    </note>
+    #
     #   <note markdown="1"> The scale down delay does not apply to:
     #
     #    * Instances being replaced during infrastructure updates
@@ -2408,9 +2410,10 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out.
     #
     #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
-    #   billing charges. To prevent additional charges, turn off and then
-    #   delete the compute environment. For more information, see [State][1]
-    #   in the *Batch User Guide*.
+    #   billing charges, for example, if they have running instances due to
+    #   jobs that are still executing or a non-zero `minvCpus` setting. To
+    #   prevent additional charges, disable and delete the compute
+    #   environment.
     #
     #    </note>
     #
@@ -2419,10 +2422,6 @@ module Aws::Batch
     #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
     #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
     #   a `c5.large` instance.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] unmanagedv_cpus
@@ -10972,9 +10971,10 @@ module Aws::Batch
     #   environments in the `DISABLED` state don't scale out.
     #
     #   <note markdown="1"> Compute environments in a `DISABLED` state may continue to incur
-    #   billing charges. To prevent additional charges, turn off and then
-    #   delete the compute environment. For more information, see [State][1]
-    #   in the *Batch User Guide*.
+    #   billing charges, for example, if they have running instances due to
+    #   jobs that are still executing or a non-zero `minvCpus` setting. To
+    #   prevent additional charges, disable and delete the compute
+    #   environment.
     #
     #    </note>
     #
@@ -10983,10 +10983,6 @@ module Aws::Batch
     #   consider a `c5.8xlarge` instance with a `minvCpus` value of `4` and
     #   a `desiredvCpus` value of `36`. This instance doesn't scale down to
     #   a `c5.large` instance.
-    #
-    #
-    #
-    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/compute_environment_parameters.html#compute_environment_state
     #   @return [String]
     #
     # @!attribute [rw] unmanagedv_cpus

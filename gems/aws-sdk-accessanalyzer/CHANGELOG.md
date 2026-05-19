@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.90.0 (2026-05-18)
+------------------
+
+* Feature - Services manage service-linked analyzers through dedicated APIs - CreateServiceLinkedAnalyzer and DeleteServiceLinkedAnalyzer that separate service-linked specific operations from customer-managed operations. It also shows up in ListAnalyzers and GetAnalyzer responses.
+
+1.89.0 (2026-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.88.0 (2026-04-07)
 ------------------
 

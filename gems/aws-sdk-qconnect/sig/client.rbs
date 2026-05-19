@@ -1529,6 +1529,21 @@ module Aws
                          ) -> _ListMessagesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessagesResponseSuccess
 
+      interface _ListModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelsResponse]
+        def model_summaries: () -> ::Array[Types::ModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_models-instance_method
+      def list_models: (
+                         assistant_id: ::String,
+                         ?ai_prompt_type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"),
+                         ?model_lifecycle: ("ACTIVE" | "LEGACY"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListModelsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelsResponseSuccess
+
       interface _ListQuickResponsesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQuickResponsesResponse]
         def quick_response_summaries: () -> ::Array[Types::QuickResponseSummary]

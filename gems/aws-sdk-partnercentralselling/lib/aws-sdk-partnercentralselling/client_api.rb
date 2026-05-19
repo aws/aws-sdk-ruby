@@ -161,6 +161,8 @@ module Aws::PartnerCentralSelling
     EngagementTitle = Shapes::StringShape.new(name: 'EngagementTitle')
     EngagementUseCase = Shapes::StringShape.new(name: 'EngagementUseCase')
     EstimationUrl = Shapes::StringShape.new(name: 'EstimationUrl')
+    ExpectedContractDuration = Shapes::StructureShape.new(name: 'ExpectedContractDuration')
+    ExpectedContractDurationTerm = Shapes::StringShape.new(name: 'ExpectedContractDurationTerm')
     ExpectedCustomerSpend = Shapes::StructureShape.new(name: 'ExpectedCustomerSpend')
     ExpectedCustomerSpendList = Shapes::ListShape.new(name: 'ExpectedCustomerSpendList')
     ExpectedCustomerSpendTargetCompanyString = Shapes::StringShape.new(name: 'ExpectedCustomerSpendTargetCompanyString')
@@ -764,6 +766,10 @@ module Aws::PartnerCentralSelling
 
     EngagementSummaryList.member = Shapes::ShapeRef.new(shape: EngagementSummary)
 
+    ExpectedContractDuration.add_member(:term, Shapes::ShapeRef.new(shape: ExpectedContractDurationTerm, required: true, location_name: "Term"))
+    ExpectedContractDuration.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Value"))
+    ExpectedContractDuration.struct_class = Types::ExpectedContractDuration
+
     ExpectedCustomerSpend.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, location_name: "Amount"))
     ExpectedCustomerSpend.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "CurrencyCode"))
     ExpectedCustomerSpend.add_member(:frequency, Shapes::ShapeRef.new(shape: PaymentFrequency, required: true, location_name: "Frequency"))
@@ -1279,6 +1285,7 @@ module Aws::PartnerCentralSelling
 
     Project.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     Project.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
+    Project.add_member(:expected_contract_duration, Shapes::ShapeRef.new(shape: ExpectedContractDuration, location_name: "ExpectedContractDuration"))
     Project.add_member(:title, Shapes::ShapeRef.new(shape: ProjectTitleString, location_name: "Title"))
     Project.add_member(:apn_programs, Shapes::ShapeRef.new(shape: ApnPrograms, location_name: "ApnPrograms"))
     Project.add_member(:customer_business_problem, Shapes::ShapeRef.new(shape: ProjectCustomerBusinessProblemString, location_name: "CustomerBusinessProblem"))
@@ -1300,10 +1307,12 @@ module Aws::PartnerCentralSelling
 
     ProjectSummary.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     ProjectSummary.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
+    ProjectSummary.add_member(:expected_contract_duration, Shapes::ShapeRef.new(shape: ExpectedContractDuration, location_name: "ExpectedContractDuration"))
     ProjectSummary.struct_class = Types::ProjectSummary
 
     ProjectView.add_member(:delivery_models, Shapes::ShapeRef.new(shape: DeliveryModels, location_name: "DeliveryModels"))
     ProjectView.add_member(:expected_customer_spend, Shapes::ShapeRef.new(shape: ExpectedCustomerSpendList, location_name: "ExpectedCustomerSpend"))
+    ProjectView.add_member(:expected_contract_duration, Shapes::ShapeRef.new(shape: ExpectedContractDuration, location_name: "ExpectedContractDuration"))
     ProjectView.add_member(:customer_use_case, Shapes::ShapeRef.new(shape: String, location_name: "CustomerUseCase"))
     ProjectView.add_member(:sales_activities, Shapes::ShapeRef.new(shape: SalesActivities, location_name: "SalesActivities"))
     ProjectView.add_member(:other_solution_description, Shapes::ShapeRef.new(shape: ProjectViewOtherSolutionDescriptionString, location_name: "OtherSolutionDescription"))

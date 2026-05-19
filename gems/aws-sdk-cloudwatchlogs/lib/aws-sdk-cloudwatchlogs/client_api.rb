@@ -228,6 +228,7 @@ module Aws::CloudWatchLogs
     EventNumber = Shapes::IntegerShape.new(name: 'EventNumber')
     EventSource = Shapes::StringShape.new(name: 'EventSource')
     EventsLimit = Shapes::IntegerShape.new(name: 'EventsLimit')
+    EventsLimitStartQuery = Shapes::IntegerShape.new(name: 'EventsLimitStartQuery')
     ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
     ExecutionStatusList = Shapes::ListShape.new(name: 'ExecutionStatusList')
     ExpectedRevisionId = Shapes::StringShape.new(name: 'ExpectedRevisionId')
@@ -2395,7 +2396,7 @@ module Aws::CloudWatchLogs
     StartQueryRequest.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startTime"))
     StartQueryRequest.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endTime"))
     StartQueryRequest.add_member(:query_string, Shapes::ShapeRef.new(shape: QueryString, required: true, location_name: "queryString"))
-    StartQueryRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventsLimit, location_name: "limit"))
+    StartQueryRequest.add_member(:limit, Shapes::ShapeRef.new(shape: EventsLimitStartQuery, location_name: "limit"))
     StartQueryRequest.struct_class = Types::StartQueryRequest
 
     StartQueryResponse.add_member(:query_id, Shapes::ShapeRef.new(shape: QueryId, location_name: "queryId"))

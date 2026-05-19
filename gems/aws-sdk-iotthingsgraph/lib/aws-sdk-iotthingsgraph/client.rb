@@ -2049,7 +2049,7 @@ module Aws::IoTThingsGraph
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotthingsgraph'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.69.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

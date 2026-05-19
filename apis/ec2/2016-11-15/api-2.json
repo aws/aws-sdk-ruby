@@ -3049,6 +3049,15 @@
       "input":{"shape":"DescribeIpamPoliciesRequest"},
       "output":{"shape":"DescribeIpamPoliciesResult"}
     },
+    "DescribeIpamPoolAllocations":{
+      "name":"DescribeIpamPoolAllocations",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeIpamPoolAllocationsRequest"},
+      "output":{"shape":"DescribeIpamPoolAllocationsResult"}
+    },
     "DescribeIpamPools":{
       "name":"DescribeIpamPools",
       "http":{
@@ -5674,6 +5683,15 @@
       "input":{"shape":"ModifyIpamPoolRequest"},
       "output":{"shape":"ModifyIpamPoolResult"}
     },
+    "ModifyIpamPoolAllocation":{
+      "name":"ModifyIpamPoolAllocation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyIpamPoolAllocationRequest"},
+      "output":{"shape":"ModifyIpamPoolAllocationResult"}
+    },
     "ModifyIpamPrefixListResolver":{
       "name":"ModifyIpamPrefixListResolver",
       "http":{
@@ -7741,6 +7759,10 @@
         "DisallowedCidrs":{
           "shape":"IpamPoolAllocationDisallowedCidrs",
           "locationName":"DisallowedCidr"
+        },
+        "TagSpecifications":{
+          "shape":"TagSpecificationList",
+          "locationName":"TagSpecification"
         }
       }
     },
@@ -12635,6 +12657,11 @@
         }
       }
     },
+    "CopyImageClientToken":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
     "CopyImageRequest":{
       "type":"structure",
       "required":[
@@ -12644,10 +12671,10 @@
       ],
       "members":{
         "ClientToken":{
-          "shape":"String",
+          "shape":"CopyImageClientToken",
           "idempotencyToken":true
         },
-        "Description":{"shape":"String"},
+        "Description":{"shape":"ImageDescriptionRequest"},
         "Encrypted":{
           "shape":"Boolean",
           "locationName":"encrypted"
@@ -12656,7 +12683,7 @@
           "shape":"KmsKeyId",
           "locationName":"kmsKeyId"
         },
-        "Name":{"shape":"String"},
+        "Name":{"shape":"ImageNameRequest"},
         "SourceImageId":{"shape":"String"},
         "SourceRegion":{"shape":"String"},
         "DestinationOutpostArn":{"shape":"String"},
@@ -13534,11 +13561,11 @@
           "locationName":"instanceId"
         },
         "Name":{
-          "shape":"String",
+          "shape":"ImageNameRequest",
           "locationName":"name"
         },
         "Description":{
-          "shape":"String",
+          "shape":"ImageDescriptionRequest",
           "locationName":"description"
         },
         "NoReboot":{
@@ -13560,6 +13587,11 @@
         }
       }
     },
+    "CreateImageUsageReportClientToken":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
     "CreateImageUsageReportRequest":{
       "type":"structure",
       "required":[
@@ -13578,7 +13610,7 @@
           "locationName":"AccountId"
         },
         "ClientToken":{
-          "shape":"String",
+          "shape":"CreateImageUsageReportClientToken",
           "idempotencyToken":true
         },
         "TagSpecifications":{
@@ -14736,7 +14768,7 @@
       "members":{
         "Bucket":{"shape":"String"},
         "ObjectKey":{"shape":"String"},
-        "Name":{"shape":"String"},
+        "Name":{"shape":"ImageNameRequest"},
         "TagSpecifications":{
           "shape":"TagSpecificationList",
           "locationName":"TagSpecification"
@@ -21052,6 +21084,40 @@
         "IpamPolicies":{
           "shape":"IpamPolicySet",
           "locationName":"ipamPolicySet"
+        }
+      }
+    },
+    "DescribeIpamPoolAllocationsMaxResults":{
+      "type":"integer",
+      "max":100000,
+      "min":1000
+    },
+    "DescribeIpamPoolAllocationsRequest":{
+      "type":"structure",
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamPoolAllocationIds":{
+          "shape":"ValueStringList",
+          "locationName":"IpamPoolAllocationId"
+        },
+        "Filters":{
+          "shape":"FilterList",
+          "locationName":"Filter"
+        },
+        "MaxResults":{"shape":"DescribeIpamPoolAllocationsMaxResults"},
+        "NextToken":{"shape":"NextToken"}
+      }
+    },
+    "DescribeIpamPoolAllocationsResult":{
+      "type":"structure",
+      "members":{
+        "IpamPoolAllocations":{
+          "shape":"IpamPoolAllocationSet",
+          "locationName":"ipamPoolAllocationSet"
+        },
+        "NextToken":{
+          "shape":"NextToken",
+          "locationName":"nextToken"
         }
       }
     },
@@ -31959,7 +32025,7 @@
           "locationName":"MarketplaceProductCode"
         },
         "ImageNames":{
-          "shape":"ImageNameRequestList",
+          "shape":"ImageNameCriteriaRequestList",
           "locationName":"ImageName"
         },
         "DeprecationTimeCondition":{"shape":"DeprecationTimeConditionRequest"},
@@ -31972,6 +32038,11 @@
         "shape":"ImageCriterionRequest",
         "locationName":"ImageCriterion"
       }
+    },
+    "ImageDescriptionRequest":{
+      "type":"string",
+      "max":255,
+      "min":0
     },
     "ImageDiskContainer":{
       "type":"structure",
@@ -32055,6 +32126,18 @@
       }
     },
     "ImageName":{"type":"string"},
+    "ImageNameCriteriaRequest":{
+      "type":"string",
+      "max":128,
+      "min":0
+    },
+    "ImageNameCriteriaRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"ImageNameCriteriaRequest",
+        "locationName":"item"
+      }
+    },
     "ImageNameList":{
       "type":"list",
       "member":{
@@ -32062,13 +32145,10 @@
         "locationName":"item"
       }
     },
-    "ImageNameRequest":{"type":"string"},
-    "ImageNameRequestList":{
-      "type":"list",
-      "member":{
-        "shape":"ImageNameRequest",
-        "locationName":"item"
-      }
+    "ImageNameRequest":{
+      "type":"string",
+      "max":128,
+      "min":3
     },
     "ImageProvider":{"type":"string"},
     "ImageProviderList":{
@@ -32179,6 +32259,11 @@
         "kernel",
         "ramdisk"
       ]
+    },
+    "ImageUefiDataRequest":{
+      "type":"string",
+      "max":64000,
+      "min":0
     },
     "ImageUsageReport":{
       "type":"structure",
@@ -37513,6 +37598,10 @@
         "ResourceOwner":{
           "shape":"String",
           "locationName":"resourceOwner"
+        },
+        "Tags":{
+          "shape":"TagList",
+          "locationName":"tagSet"
         }
       }
     },
@@ -41992,6 +42081,24 @@
         "IpamPolicyDocument":{
           "shape":"IpamPolicyDocument",
           "locationName":"ipamPolicyDocument"
+        }
+      }
+    },
+    "ModifyIpamPoolAllocationRequest":{
+      "type":"structure",
+      "required":["IpamPoolAllocationId"],
+      "members":{
+        "DryRun":{"shape":"Boolean"},
+        "IpamPoolAllocationId":{"shape":"IpamPoolAllocationId"},
+        "Description":{"shape":"String"}
+      }
+    },
+    "ModifyIpamPoolAllocationResult":{
+      "type":"structure",
+      "members":{
+        "IpamPoolAllocation":{
+          "shape":"IpamPoolAllocation",
+          "locationName":"ipamPoolAllocation"
         }
       }
     },
@@ -47103,7 +47210,7 @@
         },
         "BootMode":{"shape":"BootModeValues"},
         "TpmSupport":{"shape":"TpmSupportValues"},
-        "UefiData":{"shape":"StringType"},
+        "UefiData":{"shape":"ImageUefiDataRequest"},
         "ImdsSupport":{"shape":"ImdsSupportValues"},
         "TagSpecifications":{
           "shape":"TagSpecificationList",
@@ -47114,11 +47221,11 @@
           "locationName":"dryRun"
         },
         "Name":{
-          "shape":"String",
+          "shape":"ImageNameRequest",
           "locationName":"name"
         },
         "Description":{
-          "shape":"String",
+          "shape":"ImageDescriptionRequest",
           "locationName":"description"
         },
         "Architecture":{
@@ -49004,7 +49111,8 @@
         "secondary-network",
         "secondary-subnet",
         "capacity-manager-data-export",
-        "vpn-concentrator"
+        "vpn-concentrator",
+        "ipam-pool-allocation"
       ]
     },
     "ResourceTypeOption":{
@@ -53441,11 +53549,6 @@
         "shape":"String",
         "locationName":"item"
       }
-    },
-    "StringType":{
-      "type":"string",
-      "max":64000,
-      "min":0
     },
     "Subnet":{
       "type":"structure",

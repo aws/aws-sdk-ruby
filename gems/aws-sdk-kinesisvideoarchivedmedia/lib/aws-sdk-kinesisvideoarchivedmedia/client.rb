@@ -1616,7 +1616,7 @@ module Aws::KinesisVideoArchivedMedia
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kinesisvideoarchivedmedia'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.90.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

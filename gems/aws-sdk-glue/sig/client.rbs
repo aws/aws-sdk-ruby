@@ -3617,7 +3617,8 @@ module Aws
                           ?next_token: ::String,
                           ?max_results: ::Integer,
                           ?recursive: bool,
-                          ?include_root: bool
+                          ?include_root: bool,
+                          ?has_databases: bool
                         ) -> _GetCatalogsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCatalogsResponseSuccess
 

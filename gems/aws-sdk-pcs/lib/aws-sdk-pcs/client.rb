@@ -674,17 +674,24 @@ module Aws::PCS
     #
     # @option params [String] :purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS supports
-    #   On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks
-    #   for ML. For more information, see [Amazon EC2 billing and purchasing
-    #   options][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
-    #   information about PCS support for Capacity Blocks, see [Using Amazon
-    #   EC2 Capacity Blocks for ML with PCS][2] in the *PCS User Guide*. If
-    #   you don't provide this option, it defaults to On-Demand.
+    #   On-Demand Instances, Spot Instances, Interruptible Capacity
+    #   Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity
+    #   Blocks for ML. For more information, see [Amazon EC2 billing and
+    #   purchasing options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*. For more information about PCS support for Capacity Blocks,
+    #   see [Using Amazon EC2 Capacity Blocks for ML with PCS][2] in the *PCS
+    #   User Guide*. For more information about PCS support for interruptible
+    #   capacity reservations, see [Using I-ODCRs with PCS][3] in the *PCS
+    #   User Guide*. Choose On-Demand if you plan to use an On-Demand Capacity
+    #   Reservation (ODCR). For more information, see [Using ODCRs with
+    #   PCS][4]. If you don't provide this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+    #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
+    #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #
     # @option params [required, Types::CustomLaunchTemplate] :custom_launch_template
     #   An Amazon EC2 launch template PCS uses to launch compute nodes.
@@ -743,7 +750,7 @@ module Aws::PCS
     #     compute_node_group_name: "ComputeNodeGroupName", # required
     #     ami_id: "AmiId",
     #     subnet_ids: ["String"], # required
-    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK
+    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK, INTERRUPTIBLE_CAPACITY_RESERVATION
     #     custom_launch_template: { # required
     #       id: "String", # required
     #       version: "String", # required
@@ -787,7 +794,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1120,7 +1127,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1631,17 +1638,24 @@ module Aws::PCS
     #
     # @option params [String] :purchase_option
     #   Specifies how EC2 instances are purchased on your behalf. PCS supports
-    #   On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks
-    #   for ML. For more information, see [Amazon EC2 billing and purchasing
-    #   options][1] in the *Amazon Elastic Compute Cloud User Guide*. For more
-    #   information about PCS support for Capacity Blocks, see [Using Amazon
-    #   EC2 Capacity Blocks for ML with PCS][2] in the *PCS User Guide*. If
-    #   you don't provide this option, it defaults to On-Demand.
+    #   On-Demand Instances, Spot Instances, Interruptible Capacity
+    #   Reservations, On-Demand Capacity Reservations, and Amazon EC2 Capacity
+    #   Blocks for ML. For more information, see [Amazon EC2 billing and
+    #   purchasing options][1] in the *Amazon Elastic Compute Cloud User
+    #   Guide*. For more information about PCS support for Capacity Blocks,
+    #   see [Using Amazon EC2 Capacity Blocks for ML with PCS][2] in the *PCS
+    #   User Guide*. For more information about PCS support for interruptible
+    #   capacity reservations, see [Using I-ODCRs with PCS][3] in the *PCS
+    #   User Guide*. Choose On-Demand if you plan to use an On-Demand Capacity
+    #   Reservation (ODCR). For more information, see [Using ODCRs with
+    #   PCS][4]. If you don't provide this option, it defaults to On-Demand.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
     #   [2]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+    #   [3]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
+    #   [4]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
     #
     # @option params [Types::SpotOptions] :spot_options
     #   Additional configuration when you specify `SPOT` as the
@@ -1693,7 +1707,7 @@ module Aws::PCS
     #       id: "String", # required
     #       version: "String", # required
     #     },
-    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK
+    #     purchase_option: "ONDEMAND", # accepts ONDEMAND, SPOT, CAPACITY_BLOCK, INTERRUPTIBLE_CAPACITY_RESERVATION
     #     spot_options: {
     #       allocation_strategy: "lowest-price", # accepts lowest-price, capacity-optimized, price-capacity-optimized
     #     },
@@ -1725,7 +1739,7 @@ module Aws::PCS
     #   resp.compute_node_group.ami_id #=> String
     #   resp.compute_node_group.subnet_ids #=> Array
     #   resp.compute_node_group.subnet_ids[0] #=> String
-    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK"
+    #   resp.compute_node_group.purchase_option #=> String, one of "ONDEMAND", "SPOT", "CAPACITY_BLOCK", "INTERRUPTIBLE_CAPACITY_RESERVATION"
     #   resp.compute_node_group.custom_launch_template.id #=> String
     #   resp.compute_node_group.custom_launch_template.version #=> String
     #   resp.compute_node_group.iam_instance_profile_arn #=> String
@@ -1848,7 +1862,7 @@ module Aws::PCS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-pcs'
-      context[:gem_version] = '1.44.0'
+      context[:gem_version] = '1.45.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

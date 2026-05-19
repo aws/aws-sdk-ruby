@@ -3443,6 +3443,11 @@ module Aws::CloudFront
     #   The CA certificates bundle source for the trust store.
     #   @return [Types::CaCertificatesBundleSource]
     #
+    # @!attribute [rw] use_client_certificate_ocsp_endpoint
+    #   A Boolean that determines whether to use the CA certificate's OCSP
+    #   endpoint to check certificate revocation status.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   A complex type that contains zero or more `Tag` elements.
     #   @return [Types::Tags]
@@ -3452,6 +3457,7 @@ module Aws::CloudFront
     class CreateTrustStoreRequest < Struct.new(
       :name,
       :ca_certificates_bundle_source,
+      :use_client_certificate_ocsp_endpoint,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -15724,6 +15730,11 @@ module Aws::CloudFront
     #   The trust store's reason.
     #   @return [String]
     #
+    # @!attribute [rw] use_client_certificate_ocsp_endpoint
+    #   A Boolean that determines whether the trust store uses the CA
+    #   certificate's OCSP endpoint to check certificate revocation status.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/TrustStore AWS API Documentation
     #
     class TrustStore < Struct.new(
@@ -15733,7 +15744,8 @@ module Aws::CloudFront
       :status,
       :number_of_ca_certificates,
       :last_modified_time,
-      :reason)
+      :reason,
+      :use_client_certificate_ocsp_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16929,6 +16941,11 @@ module Aws::CloudFront
     #   The CA certificates bundle source.
     #   @return [Types::CaCertificatesBundleSource]
     #
+    # @!attribute [rw] use_client_certificate_ocsp_endpoint
+    #   A Boolean that determines whether to use the CA certificate's OCSP
+    #   endpoint to check certificate revocation status.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] if_match
     #   The current version (`ETag` value) of the trust store you are
     #   updating.
@@ -16939,6 +16956,7 @@ module Aws::CloudFront
     class UpdateTrustStoreRequest < Struct.new(
       :id,
       :ca_certificates_bundle_source,
+      :use_client_certificate_ocsp_endpoint,
       :if_match)
       SENSITIVE = []
       include Aws::Structure
@@ -17183,8 +17201,8 @@ module Aws::CloudFront
     #   * `static-ip` - Do not specify this value unless your distribution
     #     has been enabled for this feature by the CloudFront team. If you
     #     have a use case that requires static IP addresses for a
-    #     distribution, contact CloudFront through the [Amazon Web
-    #     ServicesSupport Center][2].
+    #     distribution, contact CloudFront through the [Amazon Web Services
+    #     Support Center][2].
     #
     #   If the distribution uses the CloudFront domain name such as
     #   `d111111abcdef8.cloudfront.net`, don't set a value for this field.

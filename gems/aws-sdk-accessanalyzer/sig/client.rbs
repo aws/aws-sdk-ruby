@@ -318,6 +318,54 @@ module Aws
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _CreateServiceLinkedAnalyzerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateServiceLinkedAnalyzerResponse]
+        def arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#create_service_linked_analyzer-instance_method
+      def create_service_linked_analyzer: (
+                                            type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS" | "ACCOUNT_INTERNAL_ACCESS" | "ORGANIZATION_INTERNAL_ACCESS"),
+                                            ?archive_rules: Array[
+                                              {
+                                                rule_name: ::String,
+                                                filter: Hash[::String, {
+                                                    eq: Array[::String]?,
+                                                    neq: Array[::String]?,
+                                                    contains: Array[::String]?,
+                                                    exists: bool?
+                                                  }]
+                                              },
+                                            ],
+                                            ?client_token: ::String,
+                                            ?configuration: {
+                                              unused_access: {
+                                                unused_access_age: ::Integer?,
+                                                analysis_rule: {
+                                                  exclusions: Array[
+                                                    {
+                                                      account_ids: Array[::String]?,
+                                                      resource_tags: Array[
+                                                        Hash[::String, ::String],
+                                                      ]?
+                                                    },
+                                                  ]?
+                                                }?
+                                              }?,
+                                              internal_access: {
+                                                analysis_rule: {
+                                                  inclusions: Array[
+                                                    {
+                                                      account_ids: Array[::String]?,
+                                                      resource_types: Array[("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")]?,
+                                                      resource_arns: Array[::String]?
+                                                    },
+                                                  ]?
+                                                }?
+                                              }?
+                                            }
+                                          ) -> _CreateServiceLinkedAnalyzerResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceLinkedAnalyzerResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#delete_analyzer-instance_method
       def delete_analyzer: (
                              analyzer_name: ::String,
@@ -332,6 +380,13 @@ module Aws
                                  ?client_token: ::String
                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#delete_service_linked_analyzer-instance_method
+      def delete_service_linked_analyzer: (
+                                            analyzer_name: ::String,
+                                            ?client_token: ::String
+                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AccessAnalyzer/Client.html#generate_finding_recommendation-instance_method
       def generate_finding_recommendation: (

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2026-05-18)
+------------------
+
+* Feature - Support for dataset enrichment and geo spatial in new data preparation experience
+
+1.180.0 (2026-05-13)
+------------------
+
+* Feature - Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.
+
 1.179.0 (2026-05-01)
 ------------------
 

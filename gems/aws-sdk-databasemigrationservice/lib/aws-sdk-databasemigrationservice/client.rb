@@ -6451,6 +6451,11 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * extension_pack_associated
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeExtensionPackAssociations AWS API Documentation
     #
     # @overload describe_extension_pack_associations(params = {})
@@ -7133,6 +7138,11 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_assessed
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelAssessments AWS API Documentation
     #
     # @overload describe_metadata_model_assessments(params = {})
@@ -7303,6 +7313,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_conversion_cancelled
+    #   * metadata_model_converted
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelConversions AWS API Documentation
     #
     # @overload describe_metadata_model_conversions(params = {})
@@ -7372,6 +7388,12 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.name #=> String
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_created
+    #   * metadata_model_creation_cancelled
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelCreations AWS API Documentation
     #
@@ -7477,6 +7499,11 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_exported_as_script
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsAsScript AWS API Documentation
     #
     # @overload describe_metadata_model_exports_as_script(params = {})
@@ -7581,6 +7608,11 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
     #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_exported_to_target
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelExportsToTarget AWS API Documentation
     #
     # @overload describe_metadata_model_exports_to_target(params = {})
@@ -7681,6 +7713,11 @@ module Aws::DatabaseMigrationService
     #   resp.requests[0].progress.processed_object.name #=> String
     #   resp.requests[0].progress.processed_object.type #=> String
     #   resp.requests[0].progress.processed_object.endpoint_type #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * metadata_model_imported
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dms-2016-01-01/DescribeMetadataModelImports AWS API Documentation
     #
@@ -13686,7 +13723,7 @@ module Aws::DatabaseMigrationService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-databasemigrationservice'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -13752,16 +13789,25 @@ module Aws::DatabaseMigrationService
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name                    | params                                  | :delay   | :max_attempts |
-    # | ------------------------------ | --------------------------------------- | -------- | ------------- |
-    # | endpoint_deleted               | {Client#describe_endpoints}             | 5        | 60            |
-    # | replication_instance_available | {Client#describe_replication_instances} | 60       | 60            |
-    # | replication_instance_deleted   | {Client#describe_replication_instances} | 15       | 60            |
-    # | replication_task_deleted       | {Client#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_ready         | {Client#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_running       | {Client#describe_replication_tasks}     | 15       | 60            |
-    # | replication_task_stopped       | {Client#describe_replication_tasks}     | 15       | 60            |
-    # | test_connection_succeeds       | {Client#describe_connections}           | 5        | 60            |
+    # | waiter_name                         | params                                             | :delay   | :max_attempts |
+    # | ----------------------------------- | -------------------------------------------------- | -------- | ------------- |
+    # | endpoint_deleted                    | {Client#describe_endpoints}                        | 5        | 60            |
+    # | extension_pack_associated           | {Client#describe_extension_pack_associations}      | 10       | 60            |
+    # | metadata_model_assessed             | {Client#describe_metadata_model_assessments}       | 30       | 360           |
+    # | metadata_model_conversion_cancelled | {Client#describe_metadata_model_conversions}       | 10       | 180           |
+    # | metadata_model_converted            | {Client#describe_metadata_model_conversions}       | 30       | 240           |
+    # | metadata_model_created              | {Client#describe_metadata_model_creations}         | 15       | 40            |
+    # | metadata_model_creation_cancelled   | {Client#describe_metadata_model_creations}         | 10       | 180           |
+    # | metadata_model_exported_as_script   | {Client#describe_metadata_model_exports_as_script} | 20       | 90            |
+    # | metadata_model_exported_to_target   | {Client#describe_metadata_model_exports_to_target} | 20       | 90            |
+    # | metadata_model_imported             | {Client#describe_metadata_model_imports}           | 60       | 30            |
+    # | replication_instance_available      | {Client#describe_replication_instances}            | 60       | 60            |
+    # | replication_instance_deleted        | {Client#describe_replication_instances}            | 15       | 60            |
+    # | replication_task_deleted            | {Client#describe_replication_tasks}                | 15       | 60            |
+    # | replication_task_ready              | {Client#describe_replication_tasks}                | 15       | 60            |
+    # | replication_task_running            | {Client#describe_replication_tasks}                | 15       | 60            |
+    # | replication_task_stopped            | {Client#describe_replication_tasks}                | 15       | 60            |
+    # | test_connection_succeeds            | {Client#describe_connections}                      | 5        | 60            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -13813,6 +13859,15 @@ module Aws::DatabaseMigrationService
     def waiters
       {
         endpoint_deleted: Waiters::EndpointDeleted,
+        extension_pack_associated: Waiters::ExtensionPackAssociated,
+        metadata_model_assessed: Waiters::MetadataModelAssessed,
+        metadata_model_conversion_cancelled: Waiters::MetadataModelConversionCancelled,
+        metadata_model_converted: Waiters::MetadataModelConverted,
+        metadata_model_created: Waiters::MetadataModelCreated,
+        metadata_model_creation_cancelled: Waiters::MetadataModelCreationCancelled,
+        metadata_model_exported_as_script: Waiters::MetadataModelExportedAsScript,
+        metadata_model_exported_to_target: Waiters::MetadataModelExportedToTarget,
+        metadata_model_imported: Waiters::MetadataModelImported,
         replication_instance_available: Waiters::ReplicationInstanceAvailable,
         replication_instance_deleted: Waiters::ReplicationInstanceDeleted,
         replication_task_deleted: Waiters::ReplicationTaskDeleted,

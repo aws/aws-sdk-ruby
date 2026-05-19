@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.27.0 (2026-05-13)
+------------------
+
+* Feature - Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.
+
 1.26.0 (2026-03-18)
 ------------------
 

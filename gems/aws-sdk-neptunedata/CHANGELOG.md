@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+1.43.0 (2026-05-15)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Fix name collision between modeled `detailed_message` error member and Ruby 3.2+ `Exception#detailed_message`. Error objects now properly render `full_message` on Ruby 3.2+.
+
+1.42.0 (2026-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.41.0 (2026-03-27)
 ------------------
 

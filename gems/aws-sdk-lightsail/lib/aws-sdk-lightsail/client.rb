@@ -2419,6 +2419,7 @@ module Aws::Lightsail
     #       region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-north-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-southeast-3, ap-southeast-5
     #       protocol_policy: "http-only", # accepts http-only, https-only
     #       response_timeout: 1,
+    #       ip_address_type: "ipv4", # accepts ipv4, ipv6, dualstack
     #     },
     #     default_cache_behavior: { # required
     #       behavior: "dont-cache", # accepts dont-cache, cache
@@ -2481,6 +2482,7 @@ module Aws::Lightsail
     #   resp.distribution.origin.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-north-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-southeast-3", "ap-southeast-5"
     #   resp.distribution.origin.protocol_policy #=> String, one of "http-only", "https-only"
     #   resp.distribution.origin.response_timeout #=> Integer
+    #   resp.distribution.origin.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distribution.origin_public_dns #=> String
     #   resp.distribution.default_cache_behavior.behavior #=> String, one of "dont-cache", "cache"
     #   resp.distribution.cache_behavior_settings.default_ttl #=> Integer
@@ -7397,6 +7399,7 @@ module Aws::Lightsail
     #   resp.distributions[0].origin.region_name #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-west-2", "eu-west-3", "eu-central-1", "eu-north-1", "ca-central-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-southeast-3", "ap-southeast-5"
     #   resp.distributions[0].origin.protocol_policy #=> String, one of "http-only", "https-only"
     #   resp.distributions[0].origin.response_timeout #=> Integer
+    #   resp.distributions[0].origin.ip_address_type #=> String, one of "ipv4", "ipv6", "dualstack"
     #   resp.distributions[0].origin_public_dns #=> String
     #   resp.distributions[0].default_cache_behavior.behavior #=> String, one of "dont-cache", "cache"
     #   resp.distributions[0].cache_behavior_settings.default_ttl #=> Integer
@@ -11968,6 +11971,7 @@ module Aws::Lightsail
     #       region_name: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-west-2, eu-west-3, eu-central-1, eu-north-1, ca-central-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, ap-southeast-3, ap-southeast-5
     #       protocol_policy: "http-only", # accepts http-only, https-only
     #       response_timeout: 1,
+    #       ip_address_type: "ipv4", # accepts ipv4, ipv6, dualstack
     #     },
     #     default_cache_behavior: {
     #       behavior: "dont-cache", # accepts dont-cache, cache
@@ -12600,7 +12604,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.128.0'
+      context[:gem_version] = '1.129.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

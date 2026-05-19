@@ -79,6 +79,18 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _ContinueServiceDeploymentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ContinueServiceDeploymentResponse]
+        def service_deployment_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECS/Client.html#continue_service_deployment-instance_method
+      def continue_service_deployment: (
+                                         service_deployment_arn: ::String,
+                                         hook_id: ::String,
+                                         ?action: ("ROLLBACK" | "CONTINUE")
+                                       ) -> _ContinueServiceDeploymentResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ContinueServiceDeploymentResponseSuccess
+
       interface _CreateCapacityProviderResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCapacityProviderResponse]
         def capacity_provider: () -> Types::CapacityProvider
@@ -393,10 +405,15 @@ module Aws
                               bake_time_in_minutes: ::Integer?,
                               lifecycle_hooks: Array[
                                 {
+                                  target_type: ("AWS_LAMBDA" | "PAUSE")?,
                                   hook_target_arn: ::String?,
                                   role_arn: ::String?,
-                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRE_PRODUCTION_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
                                   hook_details: {
+                                  }?,
+                                  timeout_configuration: {
+                                    timeout_in_minutes: ::Integer?,
+                                    action: ("ROLLBACK" | "CONTINUE")?
                                   }?
                                 },
                               ]?,
@@ -2323,10 +2340,15 @@ module Aws
                               bake_time_in_minutes: ::Integer?,
                               lifecycle_hooks: Array[
                                 {
+                                  target_type: ("AWS_LAMBDA" | "PAUSE")?,
                                   hook_target_arn: ::String?,
                                   role_arn: ::String?,
-                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
+                                  lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRE_PRODUCTION_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
                                   hook_details: {
+                                  }?,
+                                  timeout_configuration: {
+                                    timeout_in_minutes: ::Integer?,
+                                    action: ("ROLLBACK" | "CONTINUE")?
                                   }?
                                 },
                               ]?,

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.142.0 (2026-05-13)
+------------------
+
+* Feature - Adds a billing callout to docs regarding using the CE Scale Down Delay feature
+
 1.141.0 (2026-04-22)
 ------------------
 

@@ -55,7 +55,7 @@ module Aws::Interconnect
   autoload :EndpointProvider, 'aws-sdk-interconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-interconnect/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.1.0'
 
 end
 

@@ -10258,15 +10258,19 @@
         "endpoints" : {
           "af-south-1" : { },
           "ap-east-1" : { },
+          "ap-east-2" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-northeast-3" : { },
           "ap-south-1" : { },
+          "ap-south-2" : { },
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
           "ap-southeast-4" : { },
           "ap-southeast-5" : { },
+          "ap-southeast-6" : { },
+          "ap-southeast-7" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "emr-serverless-fips.ca-central-1.amazonaws.com",
@@ -10320,6 +10324,7 @@
           "il-central-1" : { },
           "me-central-1" : { },
           "me-south-1" : { },
+          "mx-central-1" : { },
           "sa-east-1" : { },
           "us-east-1" : {
             "variants" : [ {
@@ -12898,6 +12903,7 @@
         "endpoints" : {
           "af-south-1" : { },
           "ap-east-1" : { },
+          "ap-east-2" : { },
           "ap-northeast-1" : { },
           "ap-northeast-2" : { },
           "ap-northeast-3" : { },
@@ -36621,6 +36627,12 @@
           "us-iso-west-1" : { }
         }
       },
+      "acm-pca" : {
+        "endpoints" : {
+          "us-iso-east-1" : { },
+          "us-iso-west-1" : { }
+        }
+      },
       "agreement-marketplace" : {
         "endpoints" : {
           "fips-us-iso-east-1" : {
@@ -39274,6 +39286,11 @@
           "eu-isoe-west-1" : { }
         }
       },
+      "rekognition" : {
+        "endpoints" : {
+          "eu-isoe-west-1" : { }
+        }
+      },
       "resource-groups" : {
         "endpoints" : {
           "eu-isoe-west-1" : { }
@@ -40678,6 +40695,11 @@
         }
       },
       "pi" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
+      "polly" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
         }

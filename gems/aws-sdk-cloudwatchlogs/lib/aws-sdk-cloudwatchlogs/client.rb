@@ -4650,6 +4650,11 @@ module Aws::CloudWatchLogs
     # queries use `GetQueryResults` internally to retrieve query results for
     # processing and delivery to configured destinations.
     #
+    # You can retrieve up to 100,000 log event results from a query, if
+    # available, by using pagination. Use the `nextToken` returned in the
+    # response to request additional pages of results, with each page
+    # returning up to 10,000 log events.
+    #
     # If you are using CloudWatch cross-account observability, you can use
     # this operation in a monitoring account to start queries in linked
     # source accounts. For more information, see [CloudWatch cross-account
@@ -4671,7 +4676,9 @@ module Aws::CloudWatchLogs
     #
     # @option params [Integer] :max_items
     #   The maximum number of log events to return in the response. The
-    #   maximum is 10,000 log events.
+    #   maximum is 10,000 log events per request. You can retrieve up to
+    #   100,000 log event results from a query by paginating with the
+    #   `nextToken`.
     #
     # @return [Types::GetQueryResultsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8438,6 +8445,8 @@ module Aws::CloudWatchLogs
     #   string uses the `fields` command, only the specified fields and their
     #   values are returned. The default is 10,000.
     #
+    #   The maximum value is 100,000.
+    #
     # @return [Types::StartQueryResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartQueryResponse#query_id #query_id} => String
@@ -9290,7 +9299,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.149.0'
+      context[:gem_version] = '1.151.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

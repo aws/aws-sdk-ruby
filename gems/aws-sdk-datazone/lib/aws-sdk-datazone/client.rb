@@ -3676,6 +3676,118 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Creates a [notebook][1] in Amazon SageMaker Unified Studio. A notebook
+    # is a collaborative document within a project that contains code cells
+    # for interactive computing.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to create the notebook.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The identifier of the project that owns the notebook.
+    #
+    # @option params [required, String] :name
+    #   The name of the notebook. The name must be between 1 and 256
+    #   characters.
+    #
+    # @option params [String] :description
+    #   The description of the notebook.
+    #
+    # @option params [Hash<String,String>] :metadata
+    #   The metadata for the notebook, specified as key-value pairs. You can
+    #   specify up to 50 entries, with keys up to 128 characters and values up
+    #   to 1024 characters.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   The sensitive parameters for the notebook, specified as key-value
+    #   pairs. You can specify up to 50 entries, with keys up to 128
+    #   characters and values up to 1024 characters.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::CreateNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateNotebookOutput#id #id} => String
+    #   * {Types::CreateNotebookOutput#name #name} => String
+    #   * {Types::CreateNotebookOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::CreateNotebookOutput#domain_id #domain_id} => String
+    #   * {Types::CreateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
+    #   * {Types::CreateNotebookOutput#status #status} => String
+    #   * {Types::CreateNotebookOutput#description #description} => String
+    #   * {Types::CreateNotebookOutput#created_at #created_at} => Time
+    #   * {Types::CreateNotebookOutput#created_by #created_by} => String
+    #   * {Types::CreateNotebookOutput#updated_at #updated_at} => Time
+    #   * {Types::CreateNotebookOutput#updated_by #updated_by} => String
+    #   * {Types::CreateNotebookOutput#locked_by #locked_by} => String
+    #   * {Types::CreateNotebookOutput#locked_at #locked_at} => Time
+    #   * {Types::CreateNotebookOutput#lock_expires_at #lock_expires_at} => Time
+    #   * {Types::CreateNotebookOutput#compute_id #compute_id} => String
+    #   * {Types::CreateNotebookOutput#metadata #metadata} => Hash&lt;String,String&gt;
+    #   * {Types::CreateNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::CreateNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
+    #   * {Types::CreateNotebookOutput#error #error} => Types::NotebookError
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_notebook({
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     name: "NotebookName", # required
+    #     description: "Description",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue",
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.domain_id #=> String
+    #   resp.cell_order #=> Array
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #   resp.locked_by #=> String
+    #   resp.locked_at #=> Time
+    #   resp.lock_expires_at #=> Time
+    #   resp.compute_id #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["MetadataKey"] #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["ParameterKey"] #=> String
+    #   resp.environment_configuration.image_version #=> String
+    #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
+    #   resp.environment_configuration.package_config.package_specification #=> String
+    #   resp.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateNotebook AWS API Documentation
+    #
+    # @overload create_notebook(params = {})
+    # @param [Hash] params ({})
+    def create_notebook(params = {}, options = {})
+      req = build_request(:create_notebook, params)
+      req.send_request(options)
+    end
+
     # Creates an Amazon DataZone project.
     #
     # @option params [required, String] :domain_identifier
@@ -5307,6 +5419,37 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def delete_listing(params = {}, options = {})
       req = build_request(:delete_listing, params)
+      req.send_request(options)
+    end
+
+    # Deletes a [notebook][1] in Amazon SageMaker Unified Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook exists.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the notebook to delete.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_notebook({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteNotebook AWS API Documentation
+    #
+    # @overload delete_notebook(params = {})
+    # @param [Hash] params ({})
+    def delete_notebook(params = {}, options = {})
+      req = build_request(:delete_notebook, params)
       req.send_request(options)
     end
 
@@ -7621,11 +7764,148 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Gets the details of a notebook run in an Amazon DataZone domain.
+    # Gets the details of a [notebook][1] in Amazon SageMaker Unified
+    # Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
     #
     # @option params [required, String] :domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook run
-    #   exists.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook exists.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the notebook.
+    #
+    # @return [Types::GetNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNotebookOutput#id #id} => String
+    #   * {Types::GetNotebookOutput#name #name} => String
+    #   * {Types::GetNotebookOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::GetNotebookOutput#domain_id #domain_id} => String
+    #   * {Types::GetNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
+    #   * {Types::GetNotebookOutput#status #status} => String
+    #   * {Types::GetNotebookOutput#description #description} => String
+    #   * {Types::GetNotebookOutput#created_at #created_at} => Time
+    #   * {Types::GetNotebookOutput#created_by #created_by} => String
+    #   * {Types::GetNotebookOutput#updated_at #updated_at} => Time
+    #   * {Types::GetNotebookOutput#updated_by #updated_by} => String
+    #   * {Types::GetNotebookOutput#locked_by #locked_by} => String
+    #   * {Types::GetNotebookOutput#locked_at #locked_at} => Time
+    #   * {Types::GetNotebookOutput#lock_expires_at #lock_expires_at} => Time
+    #   * {Types::GetNotebookOutput#compute_id #compute_id} => String
+    #   * {Types::GetNotebookOutput#metadata #metadata} => Hash&lt;String,String&gt;
+    #   * {Types::GetNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::GetNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
+    #   * {Types::GetNotebookOutput#error #error} => Types::NotebookError
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_notebook({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.domain_id #=> String
+    #   resp.cell_order #=> Array
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #   resp.locked_by #=> String
+    #   resp.locked_at #=> Time
+    #   resp.lock_expires_at #=> Time
+    #   resp.compute_id #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["MetadataKey"] #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["ParameterKey"] #=> String
+    #   resp.environment_configuration.image_version #=> String
+    #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
+    #   resp.environment_configuration.package_config.package_specification #=> String
+    #   resp.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebook AWS API Documentation
+    #
+    # @overload get_notebook(params = {})
+    # @param [Hash] params ({})
+    def get_notebook(params = {}, options = {})
+      req = build_request(:get_notebook, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a notebook export in Amazon SageMaker Unified
+    # Studio.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook export exists.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the notebook export.
+    #
+    # @return [Types::GetNotebookExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetNotebookExportOutput#id #id} => String
+    #   * {Types::GetNotebookExportOutput#domain_id #domain_id} => String
+    #   * {Types::GetNotebookExportOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::GetNotebookExportOutput#notebook_id #notebook_id} => String
+    #   * {Types::GetNotebookExportOutput#file_format #file_format} => String
+    #   * {Types::GetNotebookExportOutput#status #status} => String
+    #   * {Types::GetNotebookExportOutput#output_location #output_location} => Types::OutputLocation
+    #   * {Types::GetNotebookExportOutput#error #error} => Types::NotebookExportError
+    #   * {Types::GetNotebookExportOutput#completed_at #completed_at} => Time
+    #   * {Types::GetNotebookExportOutput#created_at #created_at} => Time
+    #   * {Types::GetNotebookExportOutput#created_by #created_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_notebook_export({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "ExportId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.domain_id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.notebook_id #=> String
+    #   resp.file_format #=> String, one of "PDF", "IPYNB"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.output_location.s3.uri #=> String
+    #   resp.error.message #=> String
+    #   resp.completed_at #=> Time
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetNotebookExport AWS API Documentation
+    #
+    # @overload get_notebook_export(params = {})
+    # @param [Hash] params ({})
+    def get_notebook_export(params = {}, options = {})
+      req = build_request(:get_notebook_export, params)
+      req.send_request(options)
+    end
+
+    # Gets the details of a [notebook run][1] in Amazon SageMaker Unified
+    # Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook run exists.
     #
     # @option params [required, String] :identifier
     #   The identifier of the notebook run.
@@ -10066,11 +10346,15 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Lists notebook runs in an Amazon DataZone domain.
+    # Lists [notebook runs][1] in Amazon SageMaker Unified Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
     #
     # @option params [required, String] :domain_identifier
-    #   The identifier of the Amazon DataZone domain in which to list notebook
-    #   runs.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to list notebook runs.
     #
     # @option params [required, String] :owning_project_identifier
     #   The identifier of the project that owns the notebook runs.
@@ -10145,6 +10429,84 @@ module Aws::DataZone
     # @param [Hash] params ({})
     def list_notebook_runs(params = {}, options = {})
       req = build_request(:list_notebook_runs, params)
+      req.send_request(options)
+    end
+
+    # Lists [notebooks][1] in Amazon SageMaker Unified Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to list notebooks.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The identifier of the project that owns the notebooks.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of notebooks to return in a single call. When the
+    #   number of notebooks exceeds the value of `MaxResults`, the response
+    #   contains a `NextToken` value.
+    #
+    # @option params [String] :sort_order
+    #   The sort order for the results.
+    #
+    # @option params [String] :sort_by
+    #   The field to sort the results by.
+    #
+    # @option params [String] :status
+    #   The status to filter notebooks by.
+    #
+    # @option params [String] :next_token
+    #   When the number of notebooks is greater than the default value for the
+    #   `MaxResults` parameter, or if you explicitly specify a value for
+    #   `MaxResults` that is less than the number of notebooks, the response
+    #   includes a pagination token named `NextToken`. You can specify this
+    #   `NextToken` value in a subsequent call to `ListNotebooks` to list the
+    #   next set of notebooks.
+    #
+    # @return [Types::ListNotebooksOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListNotebooksOutput#items #items} => Array&lt;Types::NotebookSummary&gt;
+    #   * {Types::ListNotebooksOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_notebooks({
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     max_results: 1,
+    #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #     sort_by: "CREATED_AT", # accepts CREATED_AT, UPDATED_AT
+    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     next_token: "PaginationToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].id #=> String
+    #   resp.items[0].name #=> String
+    #   resp.items[0].owning_project_id #=> String
+    #   resp.items[0].domain_id #=> String
+    #   resp.items[0].status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.items[0].description #=> String
+    #   resp.items[0].created_at #=> Time
+    #   resp.items[0].created_by #=> String
+    #   resp.items[0].updated_at #=> Time
+    #   resp.items[0].updated_by #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListNotebooks AWS API Documentation
+    #
+    # @overload list_notebooks(params = {})
+    # @param [Hash] params ({})
+    def list_notebooks(params = {}, options = {})
+      req = build_request(:list_notebooks, params)
       req.send_request(options)
     end
 
@@ -12986,14 +13348,159 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Starts a notebook run in an Amazon DataZone domain. A notebook run
-    # represents the execution of a Amazon DataZone notebook within a
-    # project. You can configure compute, network, timeout, and environment
-    # settings for the run.
+    # Starts a notebook export in Amazon SageMaker Unified Studio. This
+    # operation exports a notebook to a specified file format and stores the
+    # output in Amazon Simple Storage Service.
     #
     # @option params [required, String] :domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook run
-    #   is started.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to export the notebook.
+    #
+    # @option params [required, String] :notebook_identifier
+    #   The identifier of the notebook to export.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The identifier of the project that owns the notebook.
+    #
+    # @option params [required, String] :file_format
+    #   The file format for the notebook export. Valid values are `PDF` and
+    #   `IPYNB`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartNotebookExportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNotebookExportOutput#id #id} => String
+    #   * {Types::StartNotebookExportOutput#domain_id #domain_id} => String
+    #   * {Types::StartNotebookExportOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::StartNotebookExportOutput#notebook_id #notebook_id} => String
+    #   * {Types::StartNotebookExportOutput#file_format #file_format} => String
+    #   * {Types::StartNotebookExportOutput#status #status} => String
+    #   * {Types::StartNotebookExportOutput#created_at #created_at} => Time
+    #   * {Types::StartNotebookExportOutput#created_by #created_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_notebook_export({
+    #     domain_identifier: "DomainId", # required
+    #     notebook_identifier: "NotebookId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     file_format: "PDF", # required, accepts PDF, IPYNB
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.domain_id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.notebook_id #=> String
+    #   resp.file_format #=> String, one of "PDF", "IPYNB"
+    #   resp.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookExport AWS API Documentation
+    #
+    # @overload start_notebook_export(params = {})
+    # @param [Hash] params ({})
+    def start_notebook_export(params = {}, options = {})
+      req = build_request(:start_notebook_export, params)
+      req.send_request(options)
+    end
+
+    # Starts a notebook import in Amazon SageMaker Unified Studio. This
+    # operation imports a notebook from an Amazon Simple Storage Service
+    # location into a project.
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   to import the notebook.
+    #
+    # @option params [required, String] :owning_project_identifier
+    #   The identifier of the project that will own the imported notebook.
+    #
+    # @option params [required, Types::SourceLocation] :source_location
+    #   The source location of the notebook to import. This specifies the
+    #   Amazon Simple Storage Service URI of the notebook file.
+    #
+    # @option params [required, String] :name
+    #   The name of the imported notebook. The name must be between 1 and 256
+    #   characters.
+    #
+    # @option params [String] :description
+    #   The description of the imported notebook.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartNotebookImportOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartNotebookImportOutput#notebook_id #notebook_id} => String
+    #   * {Types::StartNotebookImportOutput#status #status} => String
+    #   * {Types::StartNotebookImportOutput#domain_id #domain_id} => String
+    #   * {Types::StartNotebookImportOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::StartNotebookImportOutput#name #name} => String
+    #   * {Types::StartNotebookImportOutput#description #description} => String
+    #   * {Types::StartNotebookImportOutput#source_location #source_location} => Types::SourceLocation
+    #   * {Types::StartNotebookImportOutput#created_at #created_at} => Time
+    #   * {Types::StartNotebookImportOutput#created_by #created_by} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_notebook_import({
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     source_location: { # required
+    #       s3: "S3SourceLocation",
+    #     },
+    #     name: "NotebookName", # required
+    #     description: "Description",
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.notebook_id #=> String
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.domain_id #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.name #=> String
+    #   resp.description #=> String
+    #   resp.source_location.s3 #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/StartNotebookImport AWS API Documentation
+    #
+    # @overload start_notebook_import(params = {})
+    # @param [Hash] params ({})
+    def start_notebook_import(params = {}, options = {})
+      req = build_request(:start_notebook_import, params)
+      req.send_request(options)
+    end
+
+    # Starts a notebook run in Amazon SageMaker Unified Studio. A notebook
+    # run represents the execution of an [Amazon SageMaker notebook][1]
+    # within a project. You can configure compute, network, timeout, and
+    # environment settings for the run.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook run is started.
     #
     # @option params [required, String] :owning_project_identifier
     #   The identifier of the project that owns the notebook run.
@@ -13140,11 +13647,15 @@ module Aws::DataZone
       req.send_request(options)
     end
 
-    # Stops a running notebook run in an Amazon DataZone domain.
+    # Stops a running [notebook run][1] in Amazon SageMaker Unified Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
     #
     # @option params [required, String] :domain_identifier
-    #   The identifier of the Amazon DataZone domain in which the notebook run
-    #   is stopped.
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook run is stopped.
     #
     # @option params [required, String] :identifier
     #   The identifier of the notebook run to stop.
@@ -14731,6 +15242,133 @@ module Aws::DataZone
       req.send_request(options)
     end
 
+    # Updates a [notebook][1] in Amazon SageMaker Unified Studio.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html
+    #
+    # @option params [required, String] :domain_identifier
+    #   The identifier of the Amazon SageMaker Unified Studio domain in which
+    #   the notebook exists.
+    #
+    # @option params [required, String] :identifier
+    #   The identifier of the notebook to update.
+    #
+    # @option params [String] :description
+    #   The updated description of the notebook.
+    #
+    # @option params [String] :status
+    #   The updated status of the notebook.
+    #
+    # @option params [String] :name
+    #   The updated name of the notebook.
+    #
+    # @option params [Array<Types::CellInformation>] :cell_order
+    #   The updated ordered list of cells in the notebook.
+    #
+    # @option params [Hash<String,String>] :metadata
+    #   The updated metadata for the notebook, specified as key-value pairs.
+    #
+    # @option params [Hash<String,String>] :parameters
+    #   The updated sensitive parameters for the notebook, specified as
+    #   key-value pairs.
+    #
+    # @option params [Types::EnvironmentConfig] :environment_configuration
+    #   The updated environment configuration for the notebook.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier to ensure idempotency of the
+    #   request. This field is automatically populated if not provided.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateNotebookOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateNotebookOutput#id #id} => String
+    #   * {Types::UpdateNotebookOutput#name #name} => String
+    #   * {Types::UpdateNotebookOutput#owning_project_id #owning_project_id} => String
+    #   * {Types::UpdateNotebookOutput#domain_id #domain_id} => String
+    #   * {Types::UpdateNotebookOutput#cell_order #cell_order} => Array&lt;Types::CellInformation&gt;
+    #   * {Types::UpdateNotebookOutput#status #status} => String
+    #   * {Types::UpdateNotebookOutput#description #description} => String
+    #   * {Types::UpdateNotebookOutput#created_at #created_at} => Time
+    #   * {Types::UpdateNotebookOutput#created_by #created_by} => String
+    #   * {Types::UpdateNotebookOutput#updated_at #updated_at} => Time
+    #   * {Types::UpdateNotebookOutput#updated_by #updated_by} => String
+    #   * {Types::UpdateNotebookOutput#locked_by #locked_by} => String
+    #   * {Types::UpdateNotebookOutput#locked_at #locked_at} => Time
+    #   * {Types::UpdateNotebookOutput#lock_expires_at #lock_expires_at} => Time
+    #   * {Types::UpdateNotebookOutput#compute_id #compute_id} => String
+    #   * {Types::UpdateNotebookOutput#metadata #metadata} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateNotebookOutput#parameters #parameters} => Hash&lt;String,String&gt;
+    #   * {Types::UpdateNotebookOutput#environment_configuration #environment_configuration} => Types::EnvironmentConfig
+    #   * {Types::UpdateNotebookOutput#error #error} => Types::NotebookError
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_notebook({
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #     description: "Description",
+    #     status: "ACTIVE", # accepts ACTIVE, ARCHIVED
+    #     name: "NotebookName",
+    #     cell_order: [
+    #       {
+    #       },
+    #     ],
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue",
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue",
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV", # required, accepts UV
+    #         package_specification: "PackageConfigPackageSpecificationString",
+    #       },
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.id #=> String
+    #   resp.name #=> String
+    #   resp.owning_project_id #=> String
+    #   resp.domain_id #=> String
+    #   resp.cell_order #=> Array
+    #   resp.status #=> String, one of "ACTIVE", "ARCHIVED"
+    #   resp.description #=> String
+    #   resp.created_at #=> Time
+    #   resp.created_by #=> String
+    #   resp.updated_at #=> Time
+    #   resp.updated_by #=> String
+    #   resp.locked_by #=> String
+    #   resp.locked_at #=> Time
+    #   resp.lock_expires_at #=> Time
+    #   resp.compute_id #=> String
+    #   resp.metadata #=> Hash
+    #   resp.metadata["MetadataKey"] #=> String
+    #   resp.parameters #=> Hash
+    #   resp.parameters["ParameterKey"] #=> String
+    #   resp.environment_configuration.image_version #=> String
+    #   resp.environment_configuration.package_config.package_manager #=> String, one of "UV"
+    #   resp.environment_configuration.package_config.package_specification #=> String
+    #   resp.error.message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateNotebook AWS API Documentation
+    #
+    # @overload update_notebook(params = {})
+    # @param [Hash] params ({})
+    def update_notebook(params = {}, options = {})
+      req = build_request(:update_notebook, params)
+      req.send_request(options)
+    end
+
     # Updates the specified project in Amazon DataZone.
     #
     # @option params [required, String] :domain_identifier
@@ -15579,7 +16217,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

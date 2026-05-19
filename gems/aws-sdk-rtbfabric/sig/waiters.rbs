@@ -9,6 +9,28 @@ module Aws
   module RTBFabric
     module Waiters
 
+      class CertificateAssociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    acm_certificate_arn: ::String
+                  ) -> Client::_GetCertificateAssociationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetCertificateAssociationResponseSuccess
+      end
+
+      class CertificateDisassociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    acm_certificate_arn: ::String
+                  ) -> Client::_GetCertificateAssociationResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetCertificateAssociationResponseSuccess
+      end
+
       class InboundExternalLinkActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
@@ -62,6 +84,30 @@ module Aws
                     link_id: ::String
                   ) -> Client::_GetLinkResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetLinkResponseSuccess
+      end
+
+      class LinkRoutingRuleActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String,
+                    rule_id: ::String
+                  ) -> Client::_GetLinkRoutingRuleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLinkRoutingRuleResponseSuccess
+      end
+
+      class LinkRoutingRuleDeleted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    gateway_id: ::String,
+                    link_id: ::String,
+                    rule_id: ::String
+                  ) -> Client::_GetLinkRoutingRuleResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetLinkRoutingRuleResponseSuccess
       end
 
       class OutboundExternalLinkActive

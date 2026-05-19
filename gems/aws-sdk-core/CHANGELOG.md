@@ -1,5 +1,8 @@
 Unreleased Changes
 ------------------
+
+3.247.0 (2026-05-13)
+------------------
 * Feature - Add YJIT & ZJIT tracking to user agent.
 * Issue - Fix error messaging in SSO OIDC.
 

@@ -2014,8 +2014,9 @@ module Aws::Redshift
     #   about node types, go to [ Working with Clusters][1] in the *Amazon
     #   Redshift Cluster Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
-    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
+    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -2152,8 +2153,8 @@ module Aws::Redshift
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
     #
-    #   You can't disable automated snapshots for RA3 node types. Set the
-    #   automated retention period from 1-35 days.
+    #   You can't disable automated snapshots for RG or RA3 node types. Set
+    #   the automated retention period from 1-35 days.
     #
     #   Default: `1`
     #
@@ -2179,10 +2180,10 @@ module Aws::Redshift
     #
     #   Valid Values:
     #
-    #   * For clusters with ra3 nodes - Select a port within the ranges
-    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
-    #     ra3 nodes, it isn't required that you change the port to these
-    #     ranges.)
+    #   * For clusters with RG or RA3 nodes - Select a port within the
+    #     ranges `5431-5455` or `8191-8215`. (If you have an existing
+    #     cluster with RG or RA3 nodes, it isn't required that you change
+    #     the port to these ranges.)
     #
     #   * For clusters with dc2 nodes - Select a port within the range
     #     `1150-65535`.
@@ -8373,8 +8374,9 @@ module Aws::Redshift
     #   Clusters in Amazon Redshift][1] in the *Amazon Redshift Cluster
     #   Management Guide*.
     #
-    #   Valid Values: `dc2.large` \| `dc2.8xlarge` \| `ra3.large` \|
-    #   `ra3.xlplus` \| `ra3.4xlarge` \| `ra3.16xlarge`
+    #   Valid Values: `dc2.large` \| `dc2.8xlarge`\| `rg.xlarge` \|
+    #   `rg.4xlarge` \| `ra3.large` \| `ra3.xlplus` \| `ra3.4xlarge` \|
+    #   `ra3.16xlarge`
     #
     #
     #
@@ -8471,8 +8473,8 @@ module Aws::Redshift
     #   current value, existing automated snapshots that fall outside of the
     #   new retention period will be immediately deleted.
     #
-    #   You can't disable automated snapshots for RA3 node types. Set the
-    #   automated retention period from 1-35 days.
+    #   You can't disable automated snapshots for RG or RA3 node types. Set
+    #   the automated retention period from 1-35 days.
     #
     #   Default: Uses existing setting.
     #
@@ -8642,10 +8644,10 @@ module Aws::Redshift
     #
     #   Valid Values:
     #
-    #   * For clusters with ra3 nodes - Select a port within the ranges
-    #     `5431-5455` or `8191-8215`. (If you have an existing cluster with
-    #     ra3 nodes, it isn't required that you change the port to these
-    #     ranges.)
+    #   * For clusters with RG or RA3 nodes - Select a port within the
+    #     ranges `5431-5455` or `8191-8215`. (If you have an existing
+    #     cluster with RG or RA3 nodes, it isn't required that you change
+    #     the port to these ranges.)
     #
     #   * For clusters with dc2 nodes - Select a port within the range
     #     `1150-65535`.
@@ -10876,8 +10878,8 @@ module Aws::Redshift
     #   Default: The same port as the original cluster.
     #
     #   Valid values: For clusters with DC2 nodes, must be within the range
-    #   `1150`-`65535`. For clusters with ra3 nodes, must be within the
-    #   ranges `5431`-`5455` or `8191`-`8215`.
+    #   `1150`-`65535`. For clusters with RG or RA3 nodes, must be within
+    #   the ranges `5431`-`5455` or `8191`-`8215`.
     #   @return [Integer]
     #
     # @!attribute [rw] availability_zone
@@ -10997,8 +10999,8 @@ module Aws::Redshift
     #   snapshots are disabled, you can still create manual snapshots when
     #   you want with CreateClusterSnapshot.
     #
-    #   You can't disable automated snapshots for RA3 node types. Set the
-    #   automated retention period from 1-35 days.
+    #   You can't disable automated snapshots for RG or RA3 node types. Set
+    #   the automated retention period from 1-35 days.
     #
     #   Default: The value selected for the cluster from which the snapshot
     #   was taken.

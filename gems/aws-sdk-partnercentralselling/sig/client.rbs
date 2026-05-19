@@ -366,6 +366,10 @@ module Aws
                                       estimation_url: ::String?
                                     },
                                   ]?,
+                                  expected_contract_duration: {
+                                    term: ("Months"),
+                                    value: ::String
+                                  }?,
                                   title: ::String?,
                                   apn_programs: Array[::String]?,
                                   customer_business_problem: ::String?,
@@ -1141,6 +1145,10 @@ module Aws
                                       estimation_url: ::String?
                                     },
                                   ]?,
+                                  expected_contract_duration: {
+                                    term: ("Months"),
+                                    value: ::String
+                                  }?,
                                   title: ::String?,
                                   apn_programs: Array[::String]?,
                                   customer_business_problem: ::String?,

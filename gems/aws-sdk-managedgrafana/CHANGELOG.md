@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-05-14)
+------------------
+
+* Feature - Adds support for dual-stack (IPv4 and IPv6) connectivity to Amazon Managed Grafana workspaces. Customers can configure the ipAddressType parameter when creating or updating a workspace to choose between IPv4-only or dual-stack (IPv4 and IPv6) access.
+
+1.61.0 (2026-05-13)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.60.0 (2026-03-18)
 ------------------
 

@@ -377,7 +377,10 @@ module Aws
                                             ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
                                           }?
                                         }?,
-                                        uri_path_type: ("LEAF" | "ROOT")?
+                                        uri_path_type: ("LEAF" | "ROOT")?,
+                                        availability_start_time_configuration: {
+                                          fixed_availability_start_time: ::Time?
+                                        }?
                                       },
                                     ],
                                     ?mss_manifests: Array[
@@ -941,7 +944,10 @@ module Aws
                                             ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
                                           }?
                                         }?,
-                                        uri_path_type: ("LEAF" | "ROOT")?
+                                        uri_path_type: ("LEAF" | "ROOT")?,
+                                        availability_start_time_configuration: {
+                                          fixed_availability_start_time: ::Time?
+                                        }?
                                       },
                                     ],
                                     ?mss_manifests: Array[

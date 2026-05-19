@@ -93,6 +93,7 @@ module Aws::ManagedGrafana
       attr_accessor configuration: ::String
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor grafana_version: ::String
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       attr_accessor kms_key_id: ::String
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
@@ -485,6 +486,7 @@ module Aws::ManagedGrafana
       attr_accessor remove_vpc_configuration: bool
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor remove_network_access_configuration: bool
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
 
@@ -544,6 +546,7 @@ module Aws::ManagedGrafana
       attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor grafana_token: ::String
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       attr_accessor kms_key_id: ::String
       SENSITIVE: [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
     end

@@ -55,7 +55,7 @@ module Aws::TrustedAdvisor
   autoload :EndpointProvider, 'aws-sdk-trustedadvisor/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-trustedadvisor/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

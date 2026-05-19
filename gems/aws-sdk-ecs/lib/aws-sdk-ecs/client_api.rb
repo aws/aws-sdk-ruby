@@ -108,6 +108,8 @@ module Aws::ECS
     ContainerStateChange = Shapes::StructureShape.new(name: 'ContainerStateChange')
     ContainerStateChanges = Shapes::ListShape.new(name: 'ContainerStateChanges')
     Containers = Shapes::ListShape.new(name: 'Containers')
+    ContinueServiceDeploymentRequest = Shapes::StructureShape.new(name: 'ContinueServiceDeploymentRequest')
+    ContinueServiceDeploymentResponse = Shapes::StructureShape.new(name: 'ContinueServiceDeploymentResponse')
     CpuManufacturer = Shapes::StringShape.new(name: 'CpuManufacturer')
     CpuManufacturerSet = Shapes::ListShape.new(name: 'CpuManufacturerSet')
     CreateCapacityProviderRequest = Shapes::StructureShape.new(name: 'CreateCapacityProviderRequest')
@@ -195,9 +197,16 @@ module Aws::ECS
     DeploymentControllerType = Shapes::StringShape.new(name: 'DeploymentControllerType')
     DeploymentEphemeralStorage = Shapes::StructureShape.new(name: 'DeploymentEphemeralStorage')
     DeploymentLifecycleHook = Shapes::StructureShape.new(name: 'DeploymentLifecycleHook')
+    DeploymentLifecycleHookAction = Shapes::StringShape.new(name: 'DeploymentLifecycleHookAction')
+    DeploymentLifecycleHookDetail = Shapes::StructureShape.new(name: 'DeploymentLifecycleHookDetail')
+    DeploymentLifecycleHookDetailList = Shapes::ListShape.new(name: 'DeploymentLifecycleHookDetailList')
+    DeploymentLifecycleHookDuration = Shapes::IntegerShape.new(name: 'DeploymentLifecycleHookDuration')
     DeploymentLifecycleHookList = Shapes::ListShape.new(name: 'DeploymentLifecycleHookList')
     DeploymentLifecycleHookStage = Shapes::StringShape.new(name: 'DeploymentLifecycleHookStage')
     DeploymentLifecycleHookStageList = Shapes::ListShape.new(name: 'DeploymentLifecycleHookStageList')
+    DeploymentLifecycleHookStatus = Shapes::StringShape.new(name: 'DeploymentLifecycleHookStatus')
+    DeploymentLifecycleHookTargetType = Shapes::StringShape.new(name: 'DeploymentLifecycleHookTargetType')
+    DeploymentLifecycleHookTimeoutConfiguration = Shapes::StructureShape.new(name: 'DeploymentLifecycleHookTimeoutConfiguration')
     DeploymentRolloutState = Shapes::StringShape.new(name: 'DeploymentRolloutState')
     DeploymentStrategy = Shapes::StringShape.new(name: 'DeploymentStrategy')
     Deployments = Shapes::ListShape.new(name: 'Deployments')
@@ -939,6 +948,14 @@ module Aws::ECS
 
     Containers.member = Shapes::ShapeRef.new(shape: Container)
 
+    ContinueServiceDeploymentRequest.add_member(:service_deployment_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "serviceDeploymentArn"))
+    ContinueServiceDeploymentRequest.add_member(:hook_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "hookId"))
+    ContinueServiceDeploymentRequest.add_member(:action, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookAction, location_name: "action"))
+    ContinueServiceDeploymentRequest.struct_class = Types::ContinueServiceDeploymentRequest
+
+    ContinueServiceDeploymentResponse.add_member(:service_deployment_arn, Shapes::ShapeRef.new(shape: String, location_name: "serviceDeploymentArn"))
+    ContinueServiceDeploymentResponse.struct_class = Types::ContinueServiceDeploymentResponse
+
     CpuManufacturerSet.member = Shapes::ShapeRef.new(shape: CpuManufacturer)
 
     CreateCapacityProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
@@ -1379,15 +1396,31 @@ module Aws::ECS
     DeploymentEphemeralStorage.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "kmsKeyId"))
     DeploymentEphemeralStorage.struct_class = Types::DeploymentEphemeralStorage
 
+    DeploymentLifecycleHook.add_member(:target_type, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookTargetType, location_name: "targetType"))
     DeploymentLifecycleHook.add_member(:hook_target_arn, Shapes::ShapeRef.new(shape: String, location_name: "hookTargetArn"))
     DeploymentLifecycleHook.add_member(:role_arn, Shapes::ShapeRef.new(shape: IAMRoleArn, location_name: "roleArn"))
     DeploymentLifecycleHook.add_member(:lifecycle_stages, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStageList, location_name: "lifecycleStages"))
     DeploymentLifecycleHook.add_member(:hook_details, Shapes::ShapeRef.new(shape: HookDetails, location_name: "hookDetails"))
+    DeploymentLifecycleHook.add_member(:timeout_configuration, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookTimeoutConfiguration, location_name: "timeoutConfiguration"))
     DeploymentLifecycleHook.struct_class = Types::DeploymentLifecycleHook
+
+    DeploymentLifecycleHookDetail.add_member(:hook_id, Shapes::ShapeRef.new(shape: String, location_name: "hookId"))
+    DeploymentLifecycleHookDetail.add_member(:target_type, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookTargetType, location_name: "targetType"))
+    DeploymentLifecycleHookDetail.add_member(:target_arn, Shapes::ShapeRef.new(shape: String, location_name: "targetArn"))
+    DeploymentLifecycleHookDetail.add_member(:status, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStatus, location_name: "status"))
+    DeploymentLifecycleHookDetail.add_member(:expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "expiresAt"))
+    DeploymentLifecycleHookDetail.add_member(:timeout_action, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookAction, location_name: "timeoutAction"))
+    DeploymentLifecycleHookDetail.struct_class = Types::DeploymentLifecycleHookDetail
+
+    DeploymentLifecycleHookDetailList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHookDetail)
 
     DeploymentLifecycleHookList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHook)
 
     DeploymentLifecycleHookStageList.member = Shapes::ShapeRef.new(shape: DeploymentLifecycleHookStage)
+
+    DeploymentLifecycleHookTimeoutConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookDuration, location_name: "timeoutInMinutes"))
+    DeploymentLifecycleHookTimeoutConfiguration.add_member(:action, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookAction, location_name: "action"))
+    DeploymentLifecycleHookTimeoutConfiguration.struct_class = Types::DeploymentLifecycleHookTimeoutConfiguration
 
     Deployments.member = Shapes::ShapeRef.new(shape: Deployment)
 
@@ -2518,6 +2551,7 @@ module Aws::ECS
     ServiceDeployment.add_member(:status, Shapes::ShapeRef.new(shape: ServiceDeploymentStatus, location_name: "status"))
     ServiceDeployment.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ServiceDeployment.add_member(:lifecycle_stage, Shapes::ShapeRef.new(shape: ServiceDeploymentLifecycleStage, location_name: "lifecycleStage"))
+    ServiceDeployment.add_member(:lifecycle_hook_details, Shapes::ShapeRef.new(shape: DeploymentLifecycleHookDetailList, location_name: "lifecycleHookDetails"))
     ServiceDeployment.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     ServiceDeployment.add_member(:rollback, Shapes::ShapeRef.new(shape: Rollback, location_name: "rollback"))
     ServiceDeployment.add_member(:deployment_circuit_breaker, Shapes::ShapeRef.new(shape: ServiceDeploymentCircuitBreaker, location_name: "deploymentCircuitBreaker"))
@@ -3133,6 +3167,20 @@ module Aws::ECS
         "targetPrefix" => "AmazonEC2ContainerServiceV20141113",
         "uid" => "ecs-2014-11-13",
       }
+
+      api.add_operation(:continue_service_deployment, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ContinueServiceDeployment"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ContinueServiceDeploymentRequest)
+        o.output = Shapes::ShapeRef.new(shape: ContinueServiceDeploymentResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceDeploymentNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedFeatureException)
+      end)
 
       api.add_operation(:create_capacity_provider, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateCapacityProvider"

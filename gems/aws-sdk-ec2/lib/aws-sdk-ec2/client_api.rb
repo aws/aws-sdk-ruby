@@ -481,6 +481,7 @@ module Aws::EC2
     CoolOffPeriodResponseHours = Shapes::IntegerShape.new(name: 'CoolOffPeriodResponseHours')
     CopyFpgaImageRequest = Shapes::StructureShape.new(name: 'CopyFpgaImageRequest')
     CopyFpgaImageResult = Shapes::StructureShape.new(name: 'CopyFpgaImageResult')
+    CopyImageClientToken = Shapes::StringShape.new(name: 'CopyImageClientToken')
     CopyImageRequest = Shapes::StructureShape.new(name: 'CopyImageRequest')
     CopyImageResult = Shapes::StructureShape.new(name: 'CopyImageResult')
     CopySnapshotRequest = Shapes::StructureShape.new(name: 'CopySnapshotRequest')
@@ -541,6 +542,7 @@ module Aws::EC2
     CreateFpgaImageResult = Shapes::StructureShape.new(name: 'CreateFpgaImageResult')
     CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
     CreateImageResult = Shapes::StructureShape.new(name: 'CreateImageResult')
+    CreateImageUsageReportClientToken = Shapes::StringShape.new(name: 'CreateImageUsageReportClientToken')
     CreateImageUsageReportRequest = Shapes::StructureShape.new(name: 'CreateImageUsageReportRequest')
     CreateImageUsageReportResult = Shapes::StructureShape.new(name: 'CreateImageUsageReportResult')
     CreateInstanceConnectEndpointRequest = Shapes::StructureShape.new(name: 'CreateInstanceConnectEndpointRequest')
@@ -1156,6 +1158,9 @@ module Aws::EC2
     DescribeIpamExternalResourceVerificationTokensResult = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensResult')
     DescribeIpamPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesRequest')
     DescribeIpamPoliciesResult = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesResult')
+    DescribeIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeIpamPoolAllocationsMaxResults')
+    DescribeIpamPoolAllocationsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolAllocationsRequest')
+    DescribeIpamPoolAllocationsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolAllocationsResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
     DescribeIpamPrefixListResolverTargetsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPrefixListResolverTargetsRequest')
@@ -2003,6 +2008,7 @@ module Aws::EC2
     ImageCriterionList = Shapes::ListShape.new(name: 'ImageCriterionList')
     ImageCriterionRequest = Shapes::StructureShape.new(name: 'ImageCriterionRequest')
     ImageCriterionRequestList = Shapes::ListShape.new(name: 'ImageCriterionRequestList')
+    ImageDescriptionRequest = Shapes::StringShape.new(name: 'ImageDescriptionRequest')
     ImageDiskContainer = Shapes::StructureShape.new(name: 'ImageDiskContainer')
     ImageDiskContainerList = Shapes::ListShape.new(name: 'ImageDiskContainerList')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
@@ -2011,9 +2017,10 @@ module Aws::EC2
     ImageList = Shapes::ListShape.new(name: 'ImageList')
     ImageMetadata = Shapes::StructureShape.new(name: 'ImageMetadata')
     ImageName = Shapes::StringShape.new(name: 'ImageName')
+    ImageNameCriteriaRequest = Shapes::StringShape.new(name: 'ImageNameCriteriaRequest')
+    ImageNameCriteriaRequestList = Shapes::ListShape.new(name: 'ImageNameCriteriaRequestList')
     ImageNameList = Shapes::ListShape.new(name: 'ImageNameList')
     ImageNameRequest = Shapes::StringShape.new(name: 'ImageNameRequest')
-    ImageNameRequestList = Shapes::ListShape.new(name: 'ImageNameRequestList')
     ImageProvider = Shapes::StringShape.new(name: 'ImageProvider')
     ImageProviderList = Shapes::ListShape.new(name: 'ImageProviderList')
     ImageProviderRequest = Shapes::StringShape.new(name: 'ImageProviderRequest')
@@ -2026,6 +2033,7 @@ module Aws::EC2
     ImageReferenceResourceType = Shapes::StringShape.new(name: 'ImageReferenceResourceType')
     ImageState = Shapes::StringShape.new(name: 'ImageState')
     ImageTypeValues = Shapes::StringShape.new(name: 'ImageTypeValues')
+    ImageUefiDataRequest = Shapes::StringShape.new(name: 'ImageUefiDataRequest')
     ImageUsageReport = Shapes::StructureShape.new(name: 'ImageUsageReport')
     ImageUsageReportEntry = Shapes::StructureShape.new(name: 'ImageUsageReportEntry')
     ImageUsageReportEntryList = Shapes::ListShape.new(name: 'ImageUsageReportEntryList')
@@ -2686,6 +2694,8 @@ module Aws::EC2
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
     ModifyIpamPolicyAllocationRulesRequest = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesRequest')
     ModifyIpamPolicyAllocationRulesResult = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesResult')
+    ModifyIpamPoolAllocationRequest = Shapes::StructureShape.new(name: 'ModifyIpamPoolAllocationRequest')
+    ModifyIpamPoolAllocationResult = Shapes::StructureShape.new(name: 'ModifyIpamPoolAllocationResult')
     ModifyIpamPoolRequest = Shapes::StructureShape.new(name: 'ModifyIpamPoolRequest')
     ModifyIpamPoolResult = Shapes::StructureShape.new(name: 'ModifyIpamPoolResult')
     ModifyIpamPrefixListResolverRequest = Shapes::StructureShape.new(name: 'ModifyIpamPrefixListResolverRequest')
@@ -3543,7 +3553,6 @@ module Aws::EC2
     StoreImageTaskResultSet = Shapes::ListShape.new(name: 'StoreImageTaskResultSet')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
-    StringType = Shapes::StringShape.new(name: 'StringType')
     Subnet = Shapes::StructureShape.new(name: 'Subnet')
     SubnetAssociation = Shapes::StructureShape.new(name: 'SubnetAssociation')
     SubnetAssociationList = Shapes::ListShape.new(name: 'SubnetAssociationList')
@@ -4293,6 +4302,7 @@ module Aws::EC2
     AllocateIpamPoolCidrRequest.add_member(:preview_next_cidr, Shapes::ShapeRef.new(shape: Boolean, location_name: "PreviewNextCidr"))
     AllocateIpamPoolCidrRequest.add_member(:allowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationAllowedCidrs, location_name: "AllowedCidr"))
     AllocateIpamPoolCidrRequest.add_member(:disallowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationDisallowedCidrs, location_name: "DisallowedCidr"))
+    AllocateIpamPoolCidrRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateIpamPoolCidrRequest.struct_class = Types::AllocateIpamPoolCidrRequest
 
     AllocateIpamPoolCidrResult.add_member(:ipam_pool_allocation, Shapes::ShapeRef.new(shape: IpamPoolAllocation, location_name: "ipamPoolAllocation"))
@@ -5615,11 +5625,11 @@ module Aws::EC2
     CopyFpgaImageResult.add_member(:fpga_image_id, Shapes::ShapeRef.new(shape: String, location_name: "fpgaImageId"))
     CopyFpgaImageResult.struct_class = Types::CopyFpgaImageResult
 
-    CopyImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
-    CopyImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    CopyImageRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CopyImageClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CopyImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescriptionRequest, location_name: "Description"))
     CopyImageRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "encrypted"))
     CopyImageRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    CopyImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+    CopyImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, required: true, location_name: "Name"))
     CopyImageRequest.add_member(:source_image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceImageId"))
     CopyImageRequest.add_member(:source_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceRegion"))
     CopyImageRequest.add_member(:destination_outpost_arn, Shapes::ShapeRef.new(shape: String, location_name: "DestinationOutpostArn"))
@@ -5960,8 +5970,8 @@ module Aws::EC2
     CreateImageRequest.add_member(:snapshot_location, Shapes::ShapeRef.new(shape: SnapshotLocationEnum, location_name: "SnapshotLocation"))
     CreateImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
     CreateImageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "instanceId"))
-    CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    CreateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    CreateImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, required: true, location_name: "name"))
+    CreateImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescriptionRequest, location_name: "description"))
     CreateImageRequest.add_member(:no_reboot, Shapes::ShapeRef.new(shape: Boolean, location_name: "noReboot"))
     CreateImageRequest.add_member(:block_device_mappings, Shapes::ShapeRef.new(shape: BlockDeviceMappingRequestList, location_name: "blockDeviceMapping"))
     CreateImageRequest.struct_class = Types::CreateImageRequest
@@ -5973,7 +5983,7 @@ module Aws::EC2
     CreateImageUsageReportRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateImageUsageReportRequest.add_member(:resource_types, Shapes::ShapeRef.new(shape: ImageUsageResourceTypeRequestList, required: true, location_name: "ResourceType"))
     CreateImageUsageReportRequest.add_member(:account_ids, Shapes::ShapeRef.new(shape: ImageUsageReportUserIdStringList, location_name: "AccountId"))
-    CreateImageUsageReportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateImageUsageReportRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateImageUsageReportClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateImageUsageReportRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateImageUsageReportRequest.struct_class = Types::CreateImageUsageReportRequest
 
@@ -6400,7 +6410,7 @@ module Aws::EC2
 
     CreateRestoreImageTaskRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Bucket"))
     CreateRestoreImageTaskRequest.add_member(:object_key, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ObjectKey"))
-    CreateRestoreImageTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
+    CreateRestoreImageTaskRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, location_name: "Name"))
     CreateRestoreImageTaskRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     CreateRestoreImageTaskRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     CreateRestoreImageTaskRequest.struct_class = Types::CreateRestoreImageTaskRequest
@@ -8717,6 +8727,17 @@ module Aws::EC2
     DescribeIpamPoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeIpamPoliciesResult.add_member(:ipam_policies, Shapes::ShapeRef.new(shape: IpamPolicySet, location_name: "ipamPolicySet"))
     DescribeIpamPoliciesResult.struct_class = Types::DescribeIpamPoliciesResult
+
+    DescribeIpamPoolAllocationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamPoolAllocationsRequest.add_member(:ipam_pool_allocation_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamPoolAllocationId"))
+    DescribeIpamPoolAllocationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamPoolAllocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsMaxResults, location_name: "MaxResults"))
+    DescribeIpamPoolAllocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamPoolAllocationsRequest.struct_class = Types::DescribeIpamPoolAllocationsRequest
+
+    DescribeIpamPoolAllocationsResult.add_member(:ipam_pool_allocations, Shapes::ShapeRef.new(shape: IpamPoolAllocationSet, location_name: "ipamPoolAllocationSet"))
+    DescribeIpamPoolAllocationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamPoolAllocationsResult.struct_class = Types::DescribeIpamPoolAllocationsResult
 
     DescribeIpamPoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamPoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -12235,7 +12256,7 @@ module Aws::EC2
 
     ImageCriterionRequest.add_member(:image_providers, Shapes::ShapeRef.new(shape: ImageProviderRequestList, location_name: "ImageProvider"))
     ImageCriterionRequest.add_member(:marketplace_product_codes, Shapes::ShapeRef.new(shape: MarketplaceProductCodeRequestList, location_name: "MarketplaceProductCode"))
-    ImageCriterionRequest.add_member(:image_names, Shapes::ShapeRef.new(shape: ImageNameRequestList, location_name: "ImageName"))
+    ImageCriterionRequest.add_member(:image_names, Shapes::ShapeRef.new(shape: ImageNameCriteriaRequestList, location_name: "ImageName"))
     ImageCriterionRequest.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeConditionRequest, location_name: "DeprecationTimeCondition"))
     ImageCriterionRequest.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateConditionRequest, location_name: "CreationDateCondition"))
     ImageCriterionRequest.struct_class = Types::ImageCriterionRequest
@@ -12269,9 +12290,9 @@ module Aws::EC2
     ImageMetadata.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
     ImageMetadata.struct_class = Types::ImageMetadata
 
-    ImageNameList.member = Shapes::ShapeRef.new(shape: ImageName, location_name: "item")
+    ImageNameCriteriaRequestList.member = Shapes::ShapeRef.new(shape: ImageNameCriteriaRequest, location_name: "item")
 
-    ImageNameRequestList.member = Shapes::ShapeRef.new(shape: ImageNameRequest, location_name: "item")
+    ImageNameList.member = Shapes::ShapeRef.new(shape: ImageName, location_name: "item")
 
     ImageProviderList.member = Shapes::ShapeRef.new(shape: ImageProvider, location_name: "item")
 
@@ -13388,6 +13409,7 @@ module Aws::EC2
     IpamPoolAllocation.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPoolAllocationResourceType, location_name: "resourceType"))
     IpamPoolAllocation.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
     IpamPoolAllocation.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwner"))
+    IpamPoolAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     IpamPoolAllocation.struct_class = Types::IpamPoolAllocation
 
     IpamPoolAllocationAllowedCidrs.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -14665,6 +14687,14 @@ module Aws::EC2
 
     ModifyIpamPolicyAllocationRulesResult.add_member(:ipam_policy_document, Shapes::ShapeRef.new(shape: IpamPolicyDocument, location_name: "ipamPolicyDocument"))
     ModifyIpamPolicyAllocationRulesResult.struct_class = Types::ModifyIpamPolicyAllocationRulesResult
+
+    ModifyIpamPoolAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyIpamPoolAllocationRequest.add_member(:ipam_pool_allocation_id, Shapes::ShapeRef.new(shape: IpamPoolAllocationId, required: true, location_name: "IpamPoolAllocationId"))
+    ModifyIpamPoolAllocationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyIpamPoolAllocationRequest.struct_class = Types::ModifyIpamPoolAllocationRequest
+
+    ModifyIpamPoolAllocationResult.add_member(:ipam_pool_allocation, Shapes::ShapeRef.new(shape: IpamPoolAllocation, location_name: "ipamPoolAllocation"))
+    ModifyIpamPoolAllocationResult.struct_class = Types::ModifyIpamPoolAllocationResult
 
     ModifyIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -16294,12 +16324,12 @@ module Aws::EC2
     RegisterImageRequest.add_member(:billing_products, Shapes::ShapeRef.new(shape: BillingProductList, location_name: "BillingProduct"))
     RegisterImageRequest.add_member(:boot_mode, Shapes::ShapeRef.new(shape: BootModeValues, location_name: "BootMode"))
     RegisterImageRequest.add_member(:tpm_support, Shapes::ShapeRef.new(shape: TpmSupportValues, location_name: "TpmSupport"))
-    RegisterImageRequest.add_member(:uefi_data, Shapes::ShapeRef.new(shape: StringType, location_name: "UefiData"))
+    RegisterImageRequest.add_member(:uefi_data, Shapes::ShapeRef.new(shape: ImageUefiDataRequest, location_name: "UefiData"))
     RegisterImageRequest.add_member(:imds_support, Shapes::ShapeRef.new(shape: ImdsSupportValues, location_name: "ImdsSupport"))
     RegisterImageRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     RegisterImageRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-    RegisterImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
-    RegisterImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    RegisterImageRequest.add_member(:name, Shapes::ShapeRef.new(shape: ImageNameRequest, required: true, location_name: "name"))
+    RegisterImageRequest.add_member(:description, Shapes::ShapeRef.new(shape: ImageDescriptionRequest, location_name: "description"))
     RegisterImageRequest.add_member(:architecture, Shapes::ShapeRef.new(shape: ArchitectureValues, location_name: "architecture"))
     RegisterImageRequest.add_member(:kernel_id, Shapes::ShapeRef.new(shape: KernelId, location_name: "kernelId"))
     RegisterImageRequest.add_member(:ramdisk_id, Shapes::ShapeRef.new(shape: RamdiskId, location_name: "ramdiskId"))
@@ -22740,6 +22770,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoliciesResult)
       end)
 
+      api.add_operation(:describe_ipam_pool_allocations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamPoolAllocations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_ipam_pools, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIpamPools"
         o.http_method = "POST"
@@ -25777,6 +25821,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyIpamPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyIpamPoolResult)
+      end)
+
+      api.add_operation(:modify_ipam_pool_allocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyIpamPoolAllocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyIpamPoolAllocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyIpamPoolAllocationResult)
       end)
 
       api.add_operation(:modify_ipam_prefix_list_resolver, Seahorse::Model::Operation.new.tap do |o|

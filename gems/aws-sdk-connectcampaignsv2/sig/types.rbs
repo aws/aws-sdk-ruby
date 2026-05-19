@@ -490,6 +490,7 @@ module Aws::ConnectCampaignsV2
     class LocalTimeZoneConfig
       attr_accessor default_time_zone: ::String
       attr_accessor local_time_zone_detection: ::Array[("ZIP_CODE" | "AREA_CODE")]
+      attr_accessor local_time_zone_detection_scope: ("PRIMARY_ONLY" | "ALL_AVAILABLE")
       SENSITIVE: []
     end
 

@@ -104,6 +104,32 @@ module Aws
                           ) -> _CreateClusterResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterResponseSuccess
 
+      interface _CreateStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateStreamOutput]
+        def cluster_identifier: () -> ::String
+        def stream_identifier: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+        def creation_time: () -> ::Time
+        def ordering: () -> ("UNORDERED")
+        def format: () -> ("JSON")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#create_stream-instance_method
+      def create_stream: (
+                           cluster_identifier: ::String,
+                           target_definition: {
+                             kinesis: {
+                               stream_arn: ::String,
+                               role_arn: ::String
+                             }?
+                           },
+                           ordering: ("UNORDERED"),
+                           format: ("JSON"),
+                           ?tags: Hash[::String, ::String],
+                           ?client_token: ::String
+                         ) -> _CreateStreamResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamResponseSuccess
+
       interface _DeleteClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteClusterOutput]
         def identifier: () -> ::String
@@ -129,6 +155,22 @@ module Aws
                                    ?client_token: ::String
                                  ) -> _DeleteClusterPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteClusterPolicyResponseSuccess
+
+      interface _DeleteStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteStreamOutput]
+        def cluster_identifier: () -> ::String
+        def stream_identifier: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+        def creation_time: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#delete_stream-instance_method
+      def delete_stream: (
+                           cluster_identifier: ::String,
+                           stream_identifier: ::String,
+                           ?client_token: ::String
+                         ) -> _DeleteStreamResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteStreamResponseSuccess
 
       interface _GetClusterResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetClusterOutput]
@@ -159,6 +201,26 @@ module Aws
                               ) -> _GetClusterPolicyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetClusterPolicyResponseSuccess
 
+      interface _GetStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStreamOutput]
+        def cluster_identifier: () -> ::String
+        def stream_identifier: () -> ::String
+        def arn: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "FAILED" | "IMPAIRED")
+        def creation_time: () -> ::Time
+        def ordering: () -> ("UNORDERED")
+        def format: () -> ("JSON")
+        def target_definition: () -> Types::TargetDefinition
+        def status_reason: () -> Types::StatusReason
+        def tags: () -> ::Hash[::String, ::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#get_stream-instance_method
+      def get_stream: (
+                        cluster_identifier: ::String,
+                        stream_identifier: ::String
+                      ) -> _GetStreamResponseSuccess
+                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStreamResponseSuccess
+
       interface _GetVpcEndpointServiceNameResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetVpcEndpointServiceNameOutput]
         def service_name: () -> ::String
@@ -181,6 +243,19 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListClustersResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListClustersResponseSuccess
+
+      interface _ListStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListStreamsOutput]
+        def next_token: () -> ::String
+        def streams: () -> ::Array[Types::StreamSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DSQL/Client.html#list_streams-instance_method
+      def list_streams: (
+                          cluster_identifier: ::String,
+                          ?max_results: ::Integer,
+                          ?next_token: ::String
+                        ) -> _ListStreamsResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStreamsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceOutput]
@@ -249,6 +324,16 @@ module Aws
                     identifier: ::String
                   ) -> Client::_GetClusterResponseSuccess
                     | (:cluster_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetClusterResponseSuccess
+                    | (:stream_active waiter_name, 
+                    cluster_identifier: ::String,
+                    stream_identifier: ::String
+                  ) -> Client::_GetStreamResponseSuccess
+                    | (:stream_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamResponseSuccess
+                    | (:stream_not_exists waiter_name, 
+                    cluster_identifier: ::String,
+                    stream_identifier: ::String
+                  ) -> Client::_GetStreamResponseSuccess
+                    | (:stream_not_exists waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetStreamResponseSuccess
     end
   end
 end

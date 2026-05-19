@@ -174,7 +174,8 @@ module Aws
                              ?communication_time_config: {
                                local_time_zone_config: {
                                  default_time_zone: ::String?,
-                                 local_time_zone_detection: Array[("ZIP_CODE" | "AREA_CODE")]?
+                                 local_time_zone_detection: Array[("ZIP_CODE" | "AREA_CODE")]?,
+                                 local_time_zone_detection_scope: ("PRIMARY_ONLY" | "ALL_AVAILABLE")?
                                },
                                telephony: {
                                  open_hours: {
@@ -683,7 +684,8 @@ module Aws
                                                 communication_time_config: {
                                                   local_time_zone_config: {
                                                     default_time_zone: ::String?,
-                                                    local_time_zone_detection: Array[("ZIP_CODE" | "AREA_CODE")]?
+                                                    local_time_zone_detection: Array[("ZIP_CODE" | "AREA_CODE")]?,
+                                                    local_time_zone_detection_scope: ("PRIMARY_ONLY" | "ALL_AVAILABLE")?
                                                   },
                                                   telephony: {
                                                     open_hours: {

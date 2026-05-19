@@ -135,6 +135,7 @@ module Aws::AccessAnalyzer
       attr_accessor status: ("ACTIVE" | "CREATING" | "DISABLED" | "FAILED")
       attr_accessor status_reason: Types::StatusReason
       attr_accessor configuration: Types::AnalyzerConfiguration
+      attr_accessor managed_by: ::String
       SENSITIVE: []
     end
 
@@ -309,6 +310,19 @@ module Aws::AccessAnalyzer
       SENSITIVE: []
     end
 
+    class CreateServiceLinkedAnalyzerRequest
+      attr_accessor type: ("ACCOUNT" | "ORGANIZATION" | "ACCOUNT_UNUSED_ACCESS" | "ORGANIZATION_UNUSED_ACCESS" | "ACCOUNT_INTERNAL_ACCESS" | "ORGANIZATION_INTERNAL_ACCESS")
+      attr_accessor archive_rules: ::Array[Types::InlineArchiveRule]
+      attr_accessor client_token: ::String
+      attr_accessor configuration: Types::AnalyzerConfiguration
+      SENSITIVE: []
+    end
+
+    class CreateServiceLinkedAnalyzerResponse
+      attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
     class Criterion
       attr_accessor eq: ::Array[::String]
       attr_accessor neq: ::Array[::String]
@@ -326,6 +340,12 @@ module Aws::AccessAnalyzer
     class DeleteArchiveRuleRequest
       attr_accessor analyzer_name: ::String
       attr_accessor rule_name: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteServiceLinkedAnalyzerRequest
+      attr_accessor analyzer_name: ::String
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

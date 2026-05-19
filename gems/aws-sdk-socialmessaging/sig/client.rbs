@@ -82,6 +82,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateWhatsAppBusinessAccountOutput]
         def signup_callback_result: () -> Types::WhatsAppSignupCallbackResult
         def status_code: () -> ::Integer
+        def linked_whats_app_business_account_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#associate_whats_app_business_account-instance_method
       def associate_whats_app_business_account: (
@@ -268,8 +269,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#get_whats_app_message_template-instance_method
       def get_whats_app_message_template: (
-                                            meta_template_id: ::String,
-                                            id: ::String
+                                            ?meta_template_id: ::String,
+                                            id: ::String,
+                                            ?template_name: ::String,
+                                            ?template_language_code: ::String
                                           ) -> _GetWhatsAppMessageTemplateResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetWhatsAppMessageTemplateResponseSuccess
 
@@ -401,7 +404,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SocialMessaging/Client.html#update_whats_app_message_template-instance_method
       def update_whats_app_message_template: (
                                                id: ::String,
-                                               meta_template_id: ::String,
+                                               ?meta_template_id: ::String,
+                                               ?template_name: ::String,
+                                               ?template_language_code: ::String,
                                                ?parameter_format: ::String,
                                                ?template_category: ::String,
                                                ?template_components: ::String,

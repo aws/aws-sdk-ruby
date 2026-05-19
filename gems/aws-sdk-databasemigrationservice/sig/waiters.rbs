@@ -26,6 +26,168 @@ module Aws
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeEndpointsResponseSuccess
       end
 
+      class ExtensionPackAssociated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeExtensionPackAssociationsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeExtensionPackAssociationsResponseSuccess
+      end
+
+      class MetadataModelAssessed
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelAssessmentsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelAssessmentsResponseSuccess
+      end
+
+      class MetadataModelConversionCancelled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+      end
+
+      class MetadataModelConverted
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelConversionsResponseSuccess
+      end
+
+      class MetadataModelCreated
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer,
+                    migration_project_identifier: ::String
+                  ) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+      end
+
+      class MetadataModelCreationCancelled
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer,
+                    migration_project_identifier: ::String
+                  ) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelCreationsResponseSuccess
+      end
+
+      class MetadataModelExportedAsScript
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelExportsAsScriptResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelExportsAsScriptResponseSuccess
+      end
+
+      class MetadataModelExportedToTarget
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelExportsToTargetResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelExportsToTargetResponseSuccess
+      end
+
+      class MetadataModelImported
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    migration_project_identifier: ::String,
+                    ?filters: Array[
+                      {
+                        name: ::String,
+                        values: Array[::String]
+                      },
+                    ],
+                    ?marker: ::String,
+                    ?max_records: ::Integer
+                  ) -> Client::_DescribeMetadataModelImportsResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_DescribeMetadataModelImportsResponseSuccess
+      end
+
       class ReplicationInstanceAvailable
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void

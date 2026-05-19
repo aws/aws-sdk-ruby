@@ -1231,6 +1231,10 @@ module Aws::PartnerCentralSelling
     #           estimation_url: "EstimationUrl",
     #         },
     #       ],
+    #       expected_contract_duration: {
+    #         term: "Months", # required, accepts Months
+    #         value: "String", # required
+    #       },
     #       title: "ProjectTitleString",
     #       apn_programs: ["String"],
     #       customer_business_problem: "ProjectCustomerBusinessProblemString",
@@ -1949,6 +1953,8 @@ module Aws::PartnerCentralSelling
     #   resp.project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
     #   resp.project.expected_customer_spend[0].target_company #=> String
     #   resp.project.expected_customer_spend[0].estimation_url #=> String
+    #   resp.project.expected_contract_duration.term #=> String, one of "Months"
+    #   resp.project.expected_contract_duration.value #=> String
     #   resp.project.title #=> String
     #   resp.project.apn_programs #=> Array
     #   resp.project.apn_programs[0] #=> String
@@ -2122,6 +2128,8 @@ module Aws::PartnerCentralSelling
     #   resp.payload.opportunity_summary.project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
     #   resp.payload.opportunity_summary.project.expected_customer_spend[0].target_company #=> String
     #   resp.payload.opportunity_summary.project.expected_customer_spend[0].estimation_url #=> String
+    #   resp.payload.opportunity_summary.project.expected_contract_duration.term #=> String, one of "Months"
+    #   resp.payload.opportunity_summary.project.expected_contract_duration.value #=> String
     #   resp.payload.opportunity_summary.project.customer_use_case #=> String
     #   resp.payload.opportunity_summary.project.sales_activities #=> Array
     #   resp.payload.opportunity_summary.project.sales_activities[0] #=> String, one of "Initialized discussions with customer", "Customer has shown interest in solution", "Conducted POC / Demo", "In evaluation / planning stage", "Agreed on solution to Business Problem", "Completed Action Plan", "Finalized Deployment Need", "SOW Signed"
@@ -2960,6 +2968,8 @@ module Aws::PartnerCentralSelling
     #   resp.opportunity_summaries[0].project.expected_customer_spend[0].frequency #=> String, one of "Monthly"
     #   resp.opportunity_summaries[0].project.expected_customer_spend[0].target_company #=> String
     #   resp.opportunity_summaries[0].project.expected_customer_spend[0].estimation_url #=> String
+    #   resp.opportunity_summaries[0].project.expected_contract_duration.term #=> String, one of "Months"
+    #   resp.opportunity_summaries[0].project.expected_contract_duration.value #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ListOpportunities AWS API Documentation
@@ -4121,6 +4131,10 @@ module Aws::PartnerCentralSelling
     #           estimation_url: "EstimationUrl",
     #         },
     #       ],
+    #       expected_contract_duration: {
+    #         term: "Months", # required, accepts Months
+    #         value: "String", # required
+    #       },
     #       title: "ProjectTitleString",
     #       apn_programs: ["String"],
     #       customer_business_problem: "ProjectCustomerBusinessProblemString",
@@ -4201,7 +4215,7 @@ module Aws::PartnerCentralSelling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-partnercentralselling'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

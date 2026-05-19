@@ -1255,6 +1255,39 @@ module Aws
                                      ) -> _CreateListingChangeSetResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListingChangeSetResponseSuccess
 
+      interface _CreateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_notebook-instance_method
+      def create_notebook: (
+                             domain_identifier: ::String,
+                             owning_project_identifier: ::String,
+                             name: ::String,
+                             ?description: ::String,
+                             ?metadata: Hash[::String, ::String],
+                             ?parameters: Hash[::String, ::String],
+                             ?client_token: ::String
+                           ) -> _CreateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotebookResponseSuccess
+
       interface _CreateProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectOutput]
         def domain_id: () -> ::String
@@ -1818,6 +1851,16 @@ module Aws
                             identifier: ::String
                           ) -> _DeleteListingResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListingResponseSuccess
+
+      interface _DeleteNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotebookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_notebook-instance_method
+      def delete_notebook: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _DeleteNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotebookResponseSuccess
 
       interface _DeleteProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectOutput]
@@ -2526,6 +2569,54 @@ module Aws
                                        ) -> _GetMetadataGenerationRunResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataGenerationRunResponseSuccess
 
+      interface _GetNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_notebook-instance_method
+      def get_notebook: (
+                          domain_identifier: ::String,
+                          identifier: ::String
+                        ) -> _GetNotebookResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotebookResponseSuccess
+
+      interface _GetNotebookExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookExportOutput]
+        def id: () -> ::String
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def notebook_id: () -> ::String
+        def file_format: () -> ("PDF" | "IPYNB")
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def output_location: () -> Types::OutputLocation
+        def completed_at: () -> ::Time
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_notebook_export-instance_method
+      def get_notebook_export: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _GetNotebookExportResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotebookExportResponseSuccess
+
       interface _GetNotebookRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookRunOutput]
         def id: () -> ::String
@@ -3109,6 +3200,23 @@ module Aws
                                 ?next_token: ::String
                               ) -> _ListNotebookRunsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookRunsResponseSuccess
+
+      interface _ListNotebooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotebooksOutput]
+        def items: () -> ::Array[Types::NotebookSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_notebooks-instance_method
+      def list_notebooks: (
+                            domain_identifier: ::String,
+                            owning_project_identifier: ::String,
+                            ?max_results: ::Integer,
+                            ?sort_order: ("ASCENDING" | "DESCENDING"),
+                            ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                            ?status: ("ACTIVE" | "ARCHIVED"),
+                            ?next_token: ::String
+                          ) -> _ListNotebooksResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebooksResponseSuccess
 
       interface _ListNotificationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsOutput]
@@ -3797,6 +3905,52 @@ module Aws
                                          ) -> _StartMetadataGenerationRunResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataGenerationRunResponseSuccess
 
+      interface _StartNotebookExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookExportOutput]
+        def id: () -> ::String
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def notebook_id: () -> ::String
+        def file_format: () -> ("PDF" | "IPYNB")
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_notebook_export-instance_method
+      def start_notebook_export: (
+                                   domain_identifier: ::String,
+                                   notebook_identifier: ::String,
+                                   owning_project_identifier: ::String,
+                                   file_format: ("PDF" | "IPYNB"),
+                                   ?client_token: ::String
+                                 ) -> _StartNotebookExportResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookExportResponseSuccess
+
+      interface _StartNotebookImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookImportOutput]
+        def notebook_id: () -> ::String
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def source_location: () -> Types::SourceLocation
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_notebook_import-instance_method
+      def start_notebook_import: (
+                                   domain_identifier: ::String,
+                                   owning_project_identifier: ::String,
+                                   source_location: {
+                                     s3: ::String?
+                                   },
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?client_token: ::String
+                                 ) -> _StartNotebookImportResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookImportResponseSuccess
+
       interface _StartNotebookRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookRunOutput]
         def id: () -> ::String
@@ -4466,6 +4620,51 @@ module Aws
                                   status: ("ASSIGNED" | "NOT_ASSIGNED")
                                 ) -> _UpdateGroupProfileResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupProfileResponseSuccess
+
+      interface _UpdateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_notebook-instance_method
+      def update_notebook: (
+                             domain_identifier: ::String,
+                             identifier: ::String,
+                             ?description: ::String,
+                             ?status: ("ACTIVE" | "ARCHIVED"),
+                             ?name: ::String,
+                             ?cell_order: Array[
+                               {
+                               },
+                             ],
+                             ?metadata: Hash[::String, ::String],
+                             ?parameters: Hash[::String, ::String],
+                             ?environment_configuration: {
+                               image_version: ::String?,
+                               package_config: {
+                                 package_manager: ("UV"),
+                                 package_specification: ::String?
+                               }?
+                             },
+                             ?client_token: ::String
+                           ) -> _UpdateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotebookResponseSuccess
 
       interface _UpdateProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectOutput]

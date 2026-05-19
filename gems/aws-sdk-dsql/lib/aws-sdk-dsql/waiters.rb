@@ -71,6 +71,8 @@ module Aws::DSQL
   # | ------------------ | -------------------- | -------- | ------------- |
   # | cluster_active     | {Client#get_cluster} | 2        | 60            |
   # | cluster_not_exists | {Client#get_cluster} | 2        | 60            |
+  # | stream_active      | {Client#get_stream}  | 2        | 60            |
+  # | stream_not_exists  | {Client#get_stream}  | 2        | 60            |
   #
   module Waiters
 
@@ -138,6 +140,79 @@ module Aws::DSQL
 
       # @option (see Client#get_cluster)
       # @return (see Client#get_cluster)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a Stream is ACTIVE
+    class StreamActive
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_stream,
+            acceptors: [{
+              "matcher" => "path",
+              "argument" => "status",
+              "state" => "success",
+              "expected" => "ACTIVE"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_stream)
+      # @return (see Client#get_stream)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until a Stream is gone
+    class StreamNotExists
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (2)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 2,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_stream,
+            acceptors: [{
+              "matcher" => "error",
+              "state" => "success",
+              "expected" => "ResourceNotFoundException"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_stream)
+      # @return (see Client#get_stream)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

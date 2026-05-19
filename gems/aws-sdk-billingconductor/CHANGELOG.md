@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.56.0 (2026-05-13)
+------------------
+
+* Feature - Add ConflictException to UpdateCustomLineItem operation.
+
 1.55.0 (2026-04-27)
 ------------------
 

@@ -91,6 +91,18 @@ module Aws
                         ) -> _AddArtifactResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddArtifactResponseSuccess
 
+      interface _BatchDeleteCodeReviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteCodeReviewsOutput]
+        def deleted: () -> ::Array[::String]
+        def failed: () -> ::Array[Types::DeleteCodeReviewFailure]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_delete_code_reviews-instance_method
+      def batch_delete_code_reviews: (
+                                       code_review_ids: Array[::String],
+                                       agent_space_id: ::String
+                                     ) -> _BatchDeleteCodeReviewsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteCodeReviewsResponseSuccess
+
       interface _BatchDeletePentestsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeletePentestsOutput]
         def deleted: () -> ::Array[Types::Pentest]
@@ -124,6 +136,42 @@ module Aws
                                          artifact_ids: Array[::String]
                                        ) -> _BatchGetArtifactMetadataResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetArtifactMetadataResponseSuccess
+
+      interface _BatchGetCodeReviewJobTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCodeReviewJobTasksOutput]
+        def code_review_job_tasks: () -> ::Array[Types::CodeReviewJobTask]
+        def not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_get_code_review_job_tasks-instance_method
+      def batch_get_code_review_job_tasks: (
+                                             agent_space_id: ::String,
+                                             code_review_job_task_ids: Array[::String]
+                                           ) -> _BatchGetCodeReviewJobTasksResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCodeReviewJobTasksResponseSuccess
+
+      interface _BatchGetCodeReviewJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCodeReviewJobsOutput]
+        def code_review_jobs: () -> ::Array[Types::CodeReviewJob]
+        def not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_get_code_review_jobs-instance_method
+      def batch_get_code_review_jobs: (
+                                        code_review_job_ids: Array[::String],
+                                        agent_space_id: ::String
+                                      ) -> _BatchGetCodeReviewJobsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCodeReviewJobsResponseSuccess
+
+      interface _BatchGetCodeReviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCodeReviewsOutput]
+        def code_reviews: () -> ::Array[Types::CodeReview]
+        def not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#batch_get_code_reviews-instance_method
+      def batch_get_code_reviews: (
+                                    code_review_ids: Array[::String],
+                                    agent_space_id: ::String
+                                  ) -> _BatchGetCodeReviewsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetCodeReviewsResponseSuccess
 
       interface _BatchGetFindingsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetFindingsOutput]
@@ -236,6 +284,66 @@ module Aws
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateApplicationResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
+
+      interface _CreateCodeReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeReviewOutput]
+        def code_review_id: () -> ::String
+        def title: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def assets: () -> Types::Assets
+        def service_role: () -> ::String
+        def log_config: () -> Types::CloudWatchLog
+        def agent_space_id: () -> ::String
+        def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#create_code_review-instance_method
+      def create_code_review: (
+                                title: ::String,
+                                agent_space_id: ::String,
+                                assets: {
+                                  endpoints: Array[
+                                    {
+                                      uri: ::String?
+                                    },
+                                  ]?,
+                                  actors: Array[
+                                    {
+                                      identifier: ::String?,
+                                      uris: Array[::String]?,
+                                      authentication: {
+                                        provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
+                                        value: ::String?
+                                      }?,
+                                      description: ::String?
+                                    },
+                                  ]?,
+                                  documents: Array[
+                                    {
+                                      s3_location: ::String?,
+                                      artifact_id: ::String?
+                                    },
+                                  ]?,
+                                  source_code: Array[
+                                    {
+                                      s3_location: ::String?
+                                    },
+                                  ]?,
+                                  integrated_repositories: Array[
+                                    {
+                                      integration_id: ::String,
+                                      provider_resource_id: ::String
+                                    },
+                                  ]?
+                                },
+                                ?service_role: ::String,
+                                ?log_config: {
+                                  log_group: ::String?,
+                                  log_stream: ::String?
+                                },
+                                ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+                              ) -> _CreateCodeReviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeReviewResponseSuccess
 
       interface _CreateIntegrationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationOutput]
@@ -523,6 +631,49 @@ module Aws
                           ) -> _ListArtifactsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListArtifactsResponseSuccess
 
+      interface _ListCodeReviewJobTasksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeReviewJobTasksOutput]
+        def code_review_job_task_summaries: () -> ::Array[Types::CodeReviewJobTaskSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_code_review_job_tasks-instance_method
+      def list_code_review_job_tasks: (
+                                        agent_space_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?code_review_job_id: ::String,
+                                        ?step_name: ("PREFLIGHT" | "STATIC_ANALYSIS" | "PENTEST" | "FINALIZING"),
+                                        ?category_name: ::String,
+                                        ?next_token: ::String
+                                      ) -> _ListCodeReviewJobTasksResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeReviewJobTasksResponseSuccess
+
+      interface _ListCodeReviewJobsForCodeReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeReviewJobsForCodeReviewOutput]
+        def code_review_job_summaries: () -> ::Array[Types::CodeReviewJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_code_review_jobs_for_code_review-instance_method
+      def list_code_review_jobs_for_code_review: (
+                                                   ?max_results: ::Integer,
+                                                   code_review_id: ::String,
+                                                   agent_space_id: ::String,
+                                                   ?next_token: ::String
+                                                 ) -> _ListCodeReviewJobsForCodeReviewResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeReviewJobsForCodeReviewResponseSuccess
+
+      interface _ListCodeReviewsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeReviewsOutput]
+        def code_review_summaries: () -> ::Array[Types::CodeReviewSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_code_reviews-instance_method
+      def list_code_reviews: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String,
+                               agent_space_id: ::String
+                             ) -> _ListCodeReviewsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeReviewsResponseSuccess
+
       interface _ListDiscoveredEndpointsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDiscoveredEndpointsOutput]
         def discovered_endpoints: () -> ::Array[Types::DiscoveredEndpoint]
@@ -546,7 +697,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#list_findings-instance_method
       def list_findings: (
                            ?max_results: ::Integer,
-                           pentest_job_id: ::String,
+                           ?pentest_job_id: ::String,
+                           ?code_review_job_id: ::String,
                            agent_space_id: ::String,
                            ?next_token: ::String,
                            ?risk_type: ::String,
@@ -674,10 +826,28 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#start_code_remediation-instance_method
       def start_code_remediation: (
                                     agent_space_id: ::String,
-                                    pentest_job_id: ::String,
+                                    ?pentest_job_id: ::String,
+                                    ?code_review_job_id: ::String,
                                     finding_ids: Array[::String]
                                   ) -> _StartCodeRemediationResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeRemediationResponseSuccess
+
+      interface _StartCodeReviewJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartCodeReviewJobOutput]
+        def title: () -> ::String
+        def status: () -> ("IN_PROGRESS" | "STOPPING" | "STOPPED" | "FAILED" | "COMPLETED")
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def code_review_id: () -> ::String
+        def code_review_job_id: () -> ::String
+        def agent_space_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#start_code_review_job-instance_method
+      def start_code_review_job: (
+                                   agent_space_id: ::String,
+                                   code_review_id: ::String
+                                 ) -> _StartCodeReviewJobResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeReviewJobResponseSuccess
 
       interface _StartPentestJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartPentestJobOutput]
@@ -695,6 +865,16 @@ module Aws
                                pentest_id: ::String
                              ) -> _StartPentestJobResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPentestJobResponseSuccess
+
+      interface _StopCodeReviewJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopCodeReviewJobOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#stop_code_review_job-instance_method
+      def stop_code_review_job: (
+                                  agent_space_id: ::String,
+                                  code_review_job_id: ::String
+                                ) -> _StopCodeReviewJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCodeReviewJobResponseSuccess
 
       interface _StopPentestJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopPentestJobOutput]
@@ -775,6 +955,67 @@ module Aws
                                 ?default_kms_key_id: ::String
                               ) -> _UpdateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResponseSuccess
+
+      interface _UpdateCodeReviewResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCodeReviewOutput]
+        def code_review_id: () -> ::String
+        def title: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def assets: () -> Types::Assets
+        def service_role: () -> ::String
+        def log_config: () -> Types::CloudWatchLog
+        def agent_space_id: () -> ::String
+        def code_remediation_strategy: () -> ("AUTOMATIC" | "DISABLED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityAgent/Client.html#update_code_review-instance_method
+      def update_code_review: (
+                                code_review_id: ::String,
+                                agent_space_id: ::String,
+                                ?title: ::String,
+                                ?assets: {
+                                  endpoints: Array[
+                                    {
+                                      uri: ::String?
+                                    },
+                                  ]?,
+                                  actors: Array[
+                                    {
+                                      identifier: ::String?,
+                                      uris: Array[::String]?,
+                                      authentication: {
+                                        provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
+                                        value: ::String?
+                                      }?,
+                                      description: ::String?
+                                    },
+                                  ]?,
+                                  documents: Array[
+                                    {
+                                      s3_location: ::String?,
+                                      artifact_id: ::String?
+                                    },
+                                  ]?,
+                                  source_code: Array[
+                                    {
+                                      s3_location: ::String?
+                                    },
+                                  ]?,
+                                  integrated_repositories: Array[
+                                    {
+                                      integration_id: ::String,
+                                      provider_resource_id: ::String
+                                    },
+                                  ]?
+                                },
+                                ?service_role: ::String,
+                                ?log_config: {
+                                  log_group: ::String?,
+                                  log_stream: ::String?
+                                },
+                                ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
+                              ) -> _UpdateCodeReviewResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCodeReviewResponseSuccess
 
       interface _UpdateFindingResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFindingOutput]

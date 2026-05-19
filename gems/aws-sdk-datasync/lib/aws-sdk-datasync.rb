@@ -54,7 +54,7 @@ module Aws::DataSync
   autoload :EndpointProvider, 'aws-sdk-datasync/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-datasync/endpoints'
 
-  GEM_VERSION = '1.122.0'
+  GEM_VERSION = '1.123.0'
 
 end
 

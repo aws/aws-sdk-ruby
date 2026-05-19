@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.366.0 (2026-05-13)
+------------------
+
+* Feature - Adds execution role session name mode to reflect user identity in Studio. Adds Flexible Training Plans on Studio apps. Adds restricted model packages to control access to proprietary model artifacts via IAM. Fixed instance type parity between inference endpoints and managed shadow tests.
+
 1.365.0 (2026-05-06)
 ------------------
 

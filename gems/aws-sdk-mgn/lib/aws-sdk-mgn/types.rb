@@ -4311,6 +4311,10 @@ module Aws::Mgn
     #   A list of artifacts generated for this segment.
     #   @return [Array<Types::NetworkMigrationCodeGenerationArtifact>]
     #
+    # @!attribute [rw] referenced_segments
+    #   A list of other segments that this segment depends on or references.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] created_at
     #   The timestamp when the segment was created.
     #   @return [Time]
@@ -4326,6 +4330,7 @@ module Aws::Mgn
       :logical_id,
       :mapper_segment_id,
       :artifacts,
+      :referenced_segments,
       :created_at)
       SENSITIVE = []
       include Aws::Structure

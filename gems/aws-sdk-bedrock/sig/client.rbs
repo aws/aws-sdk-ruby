@@ -78,6 +78,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteAdvancedPromptOptimizationJobResponse]
+        def errors: () -> ::Array[Types::BatchDeleteAdvancedPromptOptimizationJobError]
+        def advanced_prompt_optimization_jobs: () -> ::Array[Types::BatchDeleteAdvancedPromptOptimizationJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#batch_delete_advanced_prompt_optimization_job-instance_method
+      def batch_delete_advanced_prompt_optimization_job: (
+                                                           job_identifiers: Array[::String]
+                                                         ) -> _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+
       interface _BatchDeleteEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteEvaluationJobResponse]
         def errors: () -> ::Array[Types::BatchDeleteEvaluationJobError]
@@ -98,6 +109,44 @@ module Aws
                                                               build_workflow_id: ::String
                                                             ) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponseSuccess
                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponseSuccess
+
+      interface _CreateAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAdvancedPromptOptimizationJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_advanced_prompt_optimization_job-instance_method
+      def create_advanced_prompt_optimization_job: (
+                                                     job_name: ::String,
+                                                     ?job_description: ::String,
+                                                     ?client_token: ::String,
+                                                     input_config: {
+                                                       s3_uri: ::String
+                                                     },
+                                                     output_config: {
+                                                       s3_uri: ::String
+                                                     },
+                                                     ?encryption_key_arn: ::String,
+                                                     ?tags: Array[
+                                                       {
+                                                         key: ::String,
+                                                         value: ::String
+                                                       },
+                                                     ],
+                                                     model_configurations: Array[
+                                                       {
+                                                         model_id: ::String,
+                                                         inference_config: {
+                                                           max_tokens: ::Integer?,
+                                                           temperature: ::Float?,
+                                                           top_p: ::Float?,
+                                                           stop_sequences: Array[::String]?
+                                                         }?,
+                                                         additional_model_request_fields: Hash[::String, {
+                                                           }]?
+                                                       },
+                                                     ]
+                                                   ) -> _CreateAdvancedPromptOptimizationJobResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdvancedPromptOptimizationJobResponseSuccess
 
       interface _CreateAutomatedReasoningPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAutomatedReasoningPolicyResponse]
@@ -1233,6 +1282,26 @@ module Aws
                                                      ) -> _ExportAutomatedReasoningPolicyVersionResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportAutomatedReasoningPolicyVersionResponseSuccess
 
+      interface _GetAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdvancedPromptOptimizationJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def job_description: () -> ::String
+        def job_status: () -> ("InProgress" | "Completed" | "Failed" | "PartiallyCompleted" | "Stopping" | "Stopped" | "Deleting")
+        def input_config: () -> Types::AdvancedPromptOptimizationInputConfig
+        def output_config: () -> Types::AdvancedPromptOptimizationOutputConfig
+        def encryption_key_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def failure_message: () -> ::String
+        def model_configurations: () -> ::Array[Types::ModelConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_advanced_prompt_optimization_job-instance_method
+      def get_advanced_prompt_optimization_job: (
+                                                  job_identifier: ::String
+                                                ) -> _GetAdvancedPromptOptimizationJobResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdvancedPromptOptimizationJobResponseSuccess
+
       interface _GetAutomatedReasoningPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomatedReasoningPolicyResponse]
         def policy_arn: () -> ::String
@@ -1676,6 +1745,20 @@ module Aws
       def get_use_case_for_model_access: (
                                          ) -> _GetUseCaseForModelAccessResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUseCaseForModelAccessResponseSuccess
+
+      interface _ListAdvancedPromptOptimizationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdvancedPromptOptimizationJobsResponse]
+        def job_summaries: () -> ::Array[Types::AdvancedPromptOptimizationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_advanced_prompt_optimization_jobs-instance_method
+      def list_advanced_prompt_optimization_jobs: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?sort_by: ("CreationTime"),
+                                                    ?sort_order: ("Ascending" | "Descending")
+                                                  ) -> _ListAdvancedPromptOptimizationJobsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdvancedPromptOptimizationJobsResponseSuccess
 
       interface _ListAutomatedReasoningPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomatedReasoningPoliciesResponse]
@@ -2233,6 +2316,15 @@ module Aws
                                                             ?client_request_token: ::String
                                                           ) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
+
+      interface _StopAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAdvancedPromptOptimizationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#stop_advanced_prompt_optimization_job-instance_method
+      def stop_advanced_prompt_optimization_job: (
+                                                   job_identifier: ::String
+                                                 ) -> _StopAdvancedPromptOptimizationJobResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAdvancedPromptOptimizationJobResponseSuccess
 
       interface _StopEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopEvaluationJobResponse]

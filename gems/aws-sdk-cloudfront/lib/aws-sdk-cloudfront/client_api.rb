@@ -1512,6 +1512,7 @@ module Aws::CloudFront
 
     CreateTrustStoreRequest.add_member(:name, Shapes::ShapeRef.new(shape: string, required: true, location_name: "Name"))
     CreateTrustStoreRequest.add_member(:ca_certificates_bundle_source, Shapes::ShapeRef.new(shape: CaCertificatesBundleSource, required: true, location_name: "CaCertificatesBundleSource"))
+    CreateTrustStoreRequest.add_member(:use_client_certificate_ocsp_endpoint, Shapes::ShapeRef.new(shape: boolean, location_name: "UseClientCertificateOCSPEndpoint"))
     CreateTrustStoreRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateTrustStoreRequest.struct_class = Types::CreateTrustStoreRequest
 
@@ -3823,6 +3824,7 @@ module Aws::CloudFront
     TrustStore.add_member(:number_of_ca_certificates, Shapes::ShapeRef.new(shape: integer, location_name: "NumberOfCaCertificates"))
     TrustStore.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: timestamp, location_name: "LastModifiedTime"))
     TrustStore.add_member(:reason, Shapes::ShapeRef.new(shape: string, location_name: "Reason"))
+    TrustStore.add_member(:use_client_certificate_ocsp_endpoint, Shapes::ShapeRef.new(shape: boolean, location_name: "UseClientCertificateOCSPEndpoint"))
     TrustStore.struct_class = Types::TrustStore
 
     TrustStoreConfig.add_member(:trust_store_id, Shapes::ShapeRef.new(shape: string, required: true, location_name: "TrustStoreId"))
@@ -4134,7 +4136,8 @@ module Aws::CloudFront
     UpdateStreamingDistributionResult[:payload_member] = UpdateStreamingDistributionResult.member(:streaming_distribution)
 
     UpdateTrustStoreRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
-    UpdateTrustStoreRequest.add_member(:ca_certificates_bundle_source, Shapes::ShapeRef.new(shape: CaCertificatesBundleSource, required: true, location_name: "CaCertificatesBundleSource", metadata: {"xmlNamespace" => {"uri" => "http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateTrustStoreRequest.add_member(:ca_certificates_bundle_source, Shapes::ShapeRef.new(shape: CaCertificatesBundleSource, location_name: "CaCertificatesBundleSource", metadata: {"xmlNamespace" => {"uri" => "http://cloudfront.amazonaws.com/doc/2020-05-31/"}}))
+    UpdateTrustStoreRequest.add_member(:use_client_certificate_ocsp_endpoint, Shapes::ShapeRef.new(shape: boolean, location: "header", location_name: "UseClientCertificateOCSPEndpoint"))
     UpdateTrustStoreRequest.add_member(:if_match, Shapes::ShapeRef.new(shape: string, required: true, location: "header", location_name: "If-Match"))
     UpdateTrustStoreRequest.struct_class = Types::UpdateTrustStoreRequest
     UpdateTrustStoreRequest[:payload] = :ca_certificates_bundle_source

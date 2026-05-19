@@ -342,6 +342,7 @@
     "DescribeIpamByoasn": "<p>Describes your Autonomous System Numbers (ASNs), their provisioning statuses, and the BYOIP CIDRs with which they are associated. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html\">Tutorial: Bring your ASN to IPAM</a> in the <i>Amazon VPC IPAM guide</i>.</p>",
     "DescribeIpamExternalResourceVerificationTokens": "<p>Describe verification tokens.</p> <p>A verification token is an Amazon Web Services-generated random value that you can use to prove ownership of an external resource. For example, you can use a verification token to validate that you control a public IP address range when you bring an IP address range to Amazon Web Services (BYOIP). </p>",
     "DescribeIpamPolicies": "<p>Describes one or more IPAM policies.</p> <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p>",
+    "DescribeIpamPoolAllocations": "<p>Describes IPAM pool allocations. You can describe all allocations owned by you across all pools, or you can describe specific allocations by ID.</p> <p>If you specify <code>IpamPoolAllocationIds</code>, the results include only the specified allocations. If you do not specify <code>IpamPoolAllocationIds</code>, the results include all allocations owned by you. You can use <code>Filters</code> to narrow the results.</p> <note> <p>This action returns only allocations directly owned by you. To view all allocations in a pool you own or that has been shared with you, including allocations owned by other accounts, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetIpamPoolAllocations.html\">GetIpamPoolAllocations</a>.</p> </note>",
     "DescribeIpamPools": "<p>Get information about your IPAM pools.</p>",
     "DescribeIpamPrefixListResolverTargets": "<p>Describes one or more IPAM prefix list resolver Targets. Use this operation to view the configuration and status of resolver targets.</p>",
     "DescribeIpamPrefixListResolvers": "<p>Describes one or more IPAM prefix list resolvers. Use this operation to view the configuration, status, and properties of your resolvers.</p>",
@@ -635,6 +636,7 @@
     "ModifyIpam": "<p>Modify the configurations of an IPAM. </p>",
     "ModifyIpamPolicyAllocationRules": "<p>Modifies the allocation rules in an IPAM policy.</p> <p>An IPAM policy is a set of rules that define how public IPv4 addresses from IPAM pools are allocated to Amazon Web Services resources. Each rule maps an Amazon Web Services service to IPAM pools that the service will use to get IP addresses. A single policy can have multiple rules and be applied to multiple Amazon Web Services Regions. If the IPAM pool run out of addresses then the services fallback to Amazon-provided IP addresses. A policy can be applied to an individual Amazon Web Services account or an entity within Amazon Web Services Organizations.</p> <p>Allocation rules are optional configurations within an IPAM policy that map Amazon Web Services resource types to specific IPAM pools. If no rules are defined, the resource types default to using Amazon-provided IP addresses.</p>",
     "ModifyIpamPool": "<p>Modify the configurations of an IPAM pool.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/mod-pool-ipam.html\">Modify a pool</a> in the <i>Amazon VPC IPAM User Guide</i>. </p>",
+    "ModifyIpamPoolAllocation": "<p>Modifies the description of an IPAM pool allocation. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/modify-alloc-ipam.html\">Modify an IPAM pool allocation</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>",
     "ModifyIpamPrefixListResolver": "<p>Modifies an IPAM prefix list resolver. You can update the description and CIDR selection rules. Changes to rules will trigger re-evaluation and potential updates to associated prefix lists.</p>",
     "ModifyIpamPrefixListResolverTarget": "<p>Modifies an IPAM prefix list resolver target. You can update version tracking settings and the desired version of the target prefix list.</p>",
     "ModifyIpamResourceCidr": "<p>Modify a resource CIDR. You can use this action to transfer resource CIDRs between scopes and ignore resource CIDRs that you do not want to manage. If set to false, the resource will not be tracked for overlap, it cannot be auto-imported into a pool, and it will be removed from any pool it has an allocation in.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/move-resource-ipam.html\">Move resource CIDRs between scopes</a> and <a href=\"https://docs.aws.amazon.com/vpc/latest/ipam/change-monitoring-state-ipam.html\">Change the monitoring state of resource CIDRs</a> in the <i>Amazon VPC IPAM User Guide</i>.</p>",
@@ -2807,6 +2809,7 @@
         "DescribeIpamByoasnRequest$DryRun": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "DescribeIpamExternalResourceVerificationTokensRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "DescribeIpamPoliciesRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+        "DescribeIpamPoolAllocationsRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "DescribeIpamPoolsRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "DescribeIpamPrefixListResolverTargetsRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "DescribeIpamPrefixListResolversRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
@@ -3249,6 +3252,7 @@
         "ModifyInstanceNetworkPerformanceRequest$DryRun": "<p>Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "ModifyInstancePlacementResult$Return": "<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
         "ModifyIpamPolicyAllocationRulesRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
+        "ModifyIpamPoolAllocationRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "ModifyIpamPoolRequest$DryRun": "<p>A check for whether you have the required permissions for the action without actually making the request and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
         "ModifyIpamPoolRequest$AutoImport": "<p>If true, IPAM will continuously look for resources within the CIDR range of this pool and automatically import them as allocations into your IPAM. The CIDRs that will be allocated for these resources must not already be allocated to other resources in order for the import to succeed. IPAM will import a CIDR regardless of its compliance with the pool's allocation rules, so a resource might be imported and subsequently marked as noncompliant. If IPAM discovers multiple CIDRs that overlap, IPAM will import the largest CIDR only. If IPAM discovers multiple CIDRs with matching CIDRs, IPAM will randomly import one of them only. </p> <p>A locale must be set on the pool for this feature to work.</p>",
         "ModifyIpamPoolRequest$ClearAllocationDefaultNetmaskLength": "<p>Clear the default netmask length allocation rule for this pool.</p>",
@@ -5024,6 +5028,12 @@
       "refs": {
       }
     },
+    "CopyImageClientToken": {
+      "base": null,
+      "refs": {
+        "CopyImageRequest$ClientToken": "<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a> in the <i>Amazon EC2 API Reference</i>.</p>"
+      }
+    },
     "CopyImageRequest": {
       "base": "<p>Contains the parameters for CopyImage.</p>",
       "refs": {
@@ -5342,6 +5352,12 @@
     "CreateImageResult": {
       "base": null,
       "refs": {
+      }
+    },
+    "CreateImageUsageReportClientToken": {
+      "base": null,
+      "refs": {
+        "CreateImageUsageReportRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>"
       }
     },
     "CreateImageUsageReportRequest": {
@@ -8678,6 +8694,22 @@
       "refs": {
       }
     },
+    "DescribeIpamPoolAllocationsMaxResults": {
+      "base": null,
+      "refs": {
+        "DescribeIpamPoolAllocationsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+      }
+    },
+    "DescribeIpamPoolAllocationsRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "DescribeIpamPoolAllocationsResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "DescribeIpamPoolsRequest": {
       "base": null,
       "refs": {
@@ -11846,6 +11878,7 @@
         "DescribeInternetGatewaysRequest$Filters": "<p>The filters.</p> <ul> <li> <p> <code>attachment.state</code> - The current state of the attachment between the gateway and the VPC (<code>available</code>). Present only if a VPC is attached.</p> </li> <li> <p> <code>attachment.vpc-id</code> - The ID of an attached VPC.</p> </li> <li> <p> <code>internet-gateway-id</code> - The ID of the Internet gateway.</p> </li> <li> <p> <code>owner-id</code> - The ID of the Amazon Web Services account that owns the internet gateway.</p> </li> <li> <p> <code>tag</code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
         "DescribeIpamExternalResourceVerificationTokensRequest$Filters": "<p>One or more filters for the request. For more information about filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Filtering CLI output</a>.</p> <p>Available filters:</p> <ul> <li> <p> <code>ipam-arn</code> </p> </li> <li> <p> <code>ipam-external-resource-verification-token-arn</code> </p> </li> <li> <p> <code>ipam-external-resource-verification-token-id</code> </p> </li> <li> <p> <code>ipam-id</code> </p> </li> <li> <p> <code>ipam-region</code> </p> </li> <li> <p> <code>state</code> </p> </li> <li> <p> <code>status</code> </p> </li> <li> <p> <code>token-name</code> </p> </li> <li> <p> <code>token-value</code> </p> </li> </ul>",
         "DescribeIpamPoliciesRequest$Filters": "<p>One or more filters for the IPAM policy description.</p>",
+        "DescribeIpamPoolAllocationsRequest$Filters": "<p>One or more filters for the request. For more information about filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Filtering CLI output</a>.</p>",
         "DescribeIpamPoolsRequest$Filters": "<p>One or more filters for the request. For more information about filtering, see <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html\">Filtering CLI output</a>.</p>",
         "DescribeIpamPrefixListResolverTargetsRequest$Filters": "<p>One or more filters to limit the results.</p>",
         "DescribeIpamPrefixListResolversRequest$Filters": "<p>One or more filters to limit the results.</p>",
@@ -13641,6 +13674,14 @@
         "ReplaceImageCriteriaInAllowedImagesSettingsRequest$ImageCriteria": "<p>The list of criteria that are evaluated to determine whether AMIs are discoverable and usable in the account in the specified Amazon Web Services Region.</p>"
       }
     },
+    "ImageDescriptionRequest": {
+      "base": null,
+      "refs": {
+        "CopyImageRequest$Description": "<p>A description for the new AMI.</p>",
+        "CreateImageRequest$Description": "<p>A description for the new image.</p>",
+        "RegisterImageRequest$Description": "<p>A description for your AMI.</p>"
+      }
+    },
     "ImageDiskContainer": {
       "base": "<p>Describes the disk container object for an import image task.</p>",
       "refs": {
@@ -13729,6 +13770,18 @@
         "ImageNameList$member": null
       }
     },
+    "ImageNameCriteriaRequest": {
+      "base": null,
+      "refs": {
+        "ImageNameCriteriaRequestList$member": null
+      }
+    },
+    "ImageNameCriteriaRequestList": {
+      "base": null,
+      "refs": {
+        "ImageCriterionRequest$ImageNames": "<p>The names of allowed images. Names can include wildcards (<code>?</code> and <code>*</code>).</p> <p>Length: 1–128 characters. With <code>?</code>, the minimum is 3 characters.</p> <p>Valid characters:</p> <ul> <li> <p>Letters: <code>A–Z, a–z</code> </p> </li> <li> <p>Numbers: <code>0–9</code> </p> </li> <li> <p>Special characters: <code>( ) [ ] . / - ' @ _ * ?</code> </p> </li> <li> <p>Spaces</p> </li> </ul> <p>Maximum: 50 values</p>"
+      }
+    },
     "ImageNameList": {
       "base": null,
       "refs": {
@@ -13738,13 +13791,10 @@
     "ImageNameRequest": {
       "base": null,
       "refs": {
-        "ImageNameRequestList$member": null
-      }
-    },
-    "ImageNameRequestList": {
-      "base": null,
-      "refs": {
-        "ImageCriterionRequest$ImageNames": "<p>The names of allowed images. Names can include wildcards (<code>?</code> and <code>*</code>).</p> <p>Length: 1–128 characters. With <code>?</code>, the minimum is 3 characters.</p> <p>Valid characters:</p> <ul> <li> <p>Letters: <code>A–Z, a–z</code> </p> </li> <li> <p>Numbers: <code>0–9</code> </p> </li> <li> <p>Special characters: <code>( ) [ ] . / - ' @ _ * ?</code> </p> </li> <li> <p>Spaces</p> </li> </ul> <p>Maximum: 50 values</p>"
+        "CopyImageRequest$Name": "<p>The name of the new AMI.</p>",
+        "CreateImageRequest$Name": "<p>A name for the new image.</p> <p>Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)</p>",
+        "CreateRestoreImageTaskRequest$Name": "<p>The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.</p>",
+        "RegisterImageRequest$Name": "<p>A name for your AMI.</p> <p>Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)</p>"
       }
     },
     "ImageProvider": {
@@ -13819,6 +13869,12 @@
       "base": null,
       "refs": {
         "Image$ImageType": "<p>The type of image.</p>"
+      }
+    },
+    "ImageUefiDataRequest": {
+      "base": null,
+      "refs": {
+        "RegisterImageRequest$UefiData": "<p>Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData\">GetInstanceUefiData</a> command. You can inspect and modify the UEFI data by using the <a href=\"https://github.com/awslabs/python-uefivars\">python-uefivars tool</a> on GitHub. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html\">UEFI Secure Boot for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
       }
     },
     "ImageUsageReport": {
@@ -16010,23 +16066,23 @@
       "refs": {
         "DescribeIpamExternalResourceVerificationTokensRequest$MaxResults": "<p>The maximum number of tokens to return in one page of results.</p>",
         "DescribeIpamPoliciesRequest$MaxResults": "<p>The maximum number of results to return in a single call.</p>",
-        "DescribeIpamPoolsRequest$MaxResults": "<p>The maximum number of results to return in the request.</p>",
+        "DescribeIpamPoolsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "DescribeIpamPrefixListResolverTargetsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "DescribeIpamPrefixListResolversRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "DescribeIpamResourceDiscoveriesRequest$MaxResults": "<p>The maximum number of resource discoveries to return in one page of results.</p>",
         "DescribeIpamResourceDiscoveryAssociationsRequest$MaxResults": "<p>The maximum number of resource discovery associations to return in one page of results.</p>",
-        "DescribeIpamScopesRequest$MaxResults": "<p>The maximum number of results to return in the request.</p>",
-        "DescribeIpamsRequest$MaxResults": "<p>The maximum number of results to return in the request.</p>",
+        "DescribeIpamScopesRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
+        "DescribeIpamsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "GetIpamDiscoveredAccountsRequest$MaxResults": "<p>The maximum number of discovered accounts to return in one page of results.</p>",
         "GetIpamDiscoveredPublicAddressesRequest$MaxResults": "<p>The maximum number of IPAM discovered public addresses to return in one page of results.</p>",
         "GetIpamDiscoveredResourceCidrsRequest$MaxResults": "<p>The maximum number of discovered resource CIDRs to return in one page of results.</p>",
         "GetIpamPolicyAllocationRulesRequest$MaxResults": "<p>The maximum number of results to return in a single call.</p>",
         "GetIpamPolicyOrganizationTargetsRequest$MaxResults": "<p>The maximum number of results to return in a single call.</p>",
-        "GetIpamPoolCidrsRequest$MaxResults": "<p>The maximum number of results to return in the request.</p>",
+        "GetIpamPoolCidrsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "GetIpamPrefixListResolverRulesRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "GetIpamPrefixListResolverVersionEntriesRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
         "GetIpamPrefixListResolverVersionsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>",
-        "GetIpamResourceCidrsRequest$MaxResults": "<p>The maximum number of results to return in the request.</p>"
+        "GetIpamResourceCidrsRequest$MaxResults": "<p>The maximum number of items to return for this request. To get the next page of items, make another request with the token returned in the output. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
       }
     },
     "IpamMeteredAccount": {
@@ -16200,7 +16256,8 @@
       "base": "<p>In IPAM, an allocation is a CIDR assignment from an IPAM pool to another IPAM pool or to a resource.</p>",
       "refs": {
         "AllocateIpamPoolCidrResult$IpamPoolAllocation": "<p>Information about the allocation created.</p>",
-        "IpamPoolAllocationSet$member": null
+        "IpamPoolAllocationSet$member": null,
+        "ModifyIpamPoolAllocationResult$IpamPoolAllocation": "<p>The modified IPAM pool allocation.</p>"
       }
     },
     "IpamPoolAllocationAllowedCidrs": {
@@ -16220,6 +16277,7 @@
       "refs": {
         "GetIpamPoolAllocationsRequest$IpamPoolAllocationId": "<p>The ID of the allocation.</p>",
         "IpamPoolAllocation$IpamPoolAllocationId": "<p>The ID of an allocation.</p>",
+        "ModifyIpamPoolAllocationRequest$IpamPoolAllocationId": "<p>The ID of the IPAM pool allocation you want to modify.</p>",
         "ReleaseIpamPoolAllocationRequest$IpamPoolAllocationId": "<p>The ID of the allocation.</p>"
       }
     },
@@ -16232,6 +16290,7 @@
     "IpamPoolAllocationSet": {
       "base": null,
       "refs": {
+        "DescribeIpamPoolAllocationsResult$IpamPoolAllocations": "<p>Information about the IPAM pool allocations.</p>",
         "GetIpamPoolAllocationsResult$IpamPoolAllocations": "<p>The IPAM pool allocations you want information on.</p>"
       }
     },
@@ -18937,6 +18996,16 @@
       "refs": {
       }
     },
+    "ModifyIpamPoolAllocationRequest": {
+      "base": null,
+      "refs": {
+      }
+    },
+    "ModifyIpamPoolAllocationResult": {
+      "base": null,
+      "refs": {
+      }
+    },
     "ModifyIpamPoolRequest": {
       "base": null,
       "refs": {
@@ -20276,6 +20345,8 @@
         "DescribeIpamExternalResourceVerificationTokensResult$NextToken": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
         "DescribeIpamPoliciesRequest$NextToken": "<p>The token for the next page of results.</p>",
         "DescribeIpamPoliciesResult$NextToken": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+        "DescribeIpamPoolAllocationsRequest$NextToken": "<p>The token for the next page of results.</p>",
+        "DescribeIpamPoolAllocationsResult$NextToken": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
         "DescribeIpamPoolsRequest$NextToken": "<p>The token for the next page of results.</p>",
         "DescribeIpamPoolsResult$NextToken": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
         "DescribeIpamPrefixListResolverTargetsRequest$NextToken": "<p>The token for the next page of results.</p>",
@@ -24897,9 +24968,6 @@
         "CopyFpgaImageRequest$SourceRegion": "<p>The Region that contains the source AFI.</p>",
         "CopyFpgaImageRequest$ClientToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency</a>.</p>",
         "CopyFpgaImageResult$FpgaImageId": "<p>The ID of the new AFI.</p>",
-        "CopyImageRequest$ClientToken": "<p>Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency in Amazon EC2 API requests</a> in the <i>Amazon EC2 API Reference</i>.</p>",
-        "CopyImageRequest$Description": "<p>A description for the new AMI.</p>",
-        "CopyImageRequest$Name": "<p>The name of the new AMI.</p>",
         "CopyImageRequest$SourceImageId": "<p>The ID of the AMI to copy.</p>",
         "CopyImageRequest$SourceRegion": "<p>The name of the Region that contains the AMI to copy.</p>",
         "CopyImageRequest$DestinationOutpostArn": "<p>The Amazon Resource Name (ARN) of the Outpost for the new AMI.</p> <p>Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the Region of the destination Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/ebs/latest/userguide/snapshots-outposts.html#copy-amis\">Copy AMIs from an Amazon Web Services Region to an Outpost</a> in the <i>Amazon EBS User Guide</i>.</p> <p>Only one of <code>DestinationAvailabilityZone</code>, <code>DestinationAvailabilityZoneId</code>, or <code>DestinationOutpostArn</code> can be specified.</p>",
@@ -24957,10 +25025,7 @@
         "CreateFpgaImageRequest$ClientToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring Idempotency</a>.</p>",
         "CreateFpgaImageResult$FpgaImageId": "<p>The FPGA image identifier (AFI ID).</p>",
         "CreateFpgaImageResult$FpgaImageGlobalId": "<p>The global FPGA image identifier (AGFI ID).</p>",
-        "CreateImageRequest$Name": "<p>A name for the new image.</p> <p>Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)</p>",
-        "CreateImageRequest$Description": "<p>A description for the new image.</p>",
         "CreateImageResult$ImageId": "<p>The ID of the new AMI.</p>",
-        "CreateImageUsageReportRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure idempotency of the request.</p>",
         "CreateInstanceConnectEndpointRequest$ClientToken": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
         "CreateInstanceConnectEndpointResult$ClientToken": "<p>Unique, case-sensitive idempotency token provided by the client in the the request.</p>",
         "CreateInstanceEventWindowRequest$Name": "<p>The name of the event window.</p>",
@@ -25015,7 +25080,6 @@
         "CreateReservedInstancesListingRequest$ClientToken": "<p>Unique, case-sensitive identifier you provide to ensure idempotency of your listings. This helps avoid duplicate listings. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
         "CreateRestoreImageTaskRequest$Bucket": "<p>The name of the Amazon S3 bucket that contains the stored AMI object.</p>",
         "CreateRestoreImageTaskRequest$ObjectKey": "<p>The name of the stored AMI object in the bucket.</p>",
-        "CreateRestoreImageTaskRequest$Name": "<p>The name for the restored AMI. The name must be unique for AMIs in the Region for this account. If you do not provide a name, the new AMI gets the same name as the original AMI.</p>",
         "CreateRestoreImageTaskResult$ImageId": "<p>The AMI ID.</p>",
         "CreateRouteRequest$DestinationCidrBlock": "<p>The IPv4 CIDR address block used for the destination match. Routing decisions are based on the most specific match. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
         "CreateRouteRequest$DestinationIpv6CidrBlock": "<p>The IPv6 CIDR block used for the destination match. Routing decisions are based on the most specific match.</p>",
@@ -26182,6 +26246,7 @@
         "ModifyInstanceMetadataOptionsResult$InstanceId": "<p>The ID of the instance.</p>",
         "ModifyInstancePlacementRequest$HostResourceGroupArn": "<p>The ARN of the host resource group in which to place the instance. The instance must have a tenancy of <code>host</code> to specify this parameter.</p>",
         "ModifyIpamPolicyAllocationRulesRequest$Locale": "<p>The locale for which to modify the allocation rules.</p>",
+        "ModifyIpamPoolAllocationRequest$Description": "<p>The new description for the IPAM pool allocation. If you submit a <code>null</code> value, the description is removed from the allocation.</p>",
         "ModifyIpamPoolRequest$Description": "<p>The description of the IPAM pool you want to modify.</p>",
         "ModifyIpamPrefixListResolverRequest$Description": "<p>A new description for the IPAM prefix list resolver.</p>",
         "ModifyIpamPrefixListResolverTargetRequest$ClientToken": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html\">Ensuring idempotency</a>.</p>",
@@ -26444,8 +26509,6 @@
         "RegionNames$member": null,
         "RegionalSummary$RegionName": "<p>The Amazon Web Services Region.</p>",
         "RegisterImageRequest$ImageLocation": "<p>The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the <code>aws-exec-read</code> canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 Service Developer Guide</i>.</p>",
-        "RegisterImageRequest$Name": "<p>A name for your AMI.</p> <p>Constraints: 3-128 alphanumeric characters, parentheses (()), square brackets ([]), spaces ( ), periods (.), slashes (/), dashes (-), single quotes ('), at-signs (@), or underscores(_)</p>",
-        "RegisterImageRequest$Description": "<p>A description for your AMI.</p>",
         "RegisterImageRequest$RootDeviceName": "<p>The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>",
         "RegisterImageRequest$VirtualizationType": "<p>The type of virtualization (<code>hvm</code> | <code>paravirtual</code>).</p> <p>Default: <code>paravirtual</code> </p>",
         "RegisterImageRequest$SriovNetSupport": "<p>Set to <code>simple</code> to enable enhanced networking with the Intel 82599 Virtual Function interface for the AMI and any instances that you launch from the AMI.</p> <p>There is no way to disable <code>sriovNetSupport</code> at this time.</p> <p>This option is supported only for HVM AMIs. Specifying this option with a PV AMI can make instances launched from the AMI unreachable.</p>",
@@ -27157,12 +27220,6 @@
         "RuleOption$Settings": "<p>The settings for the keyword.</p>"
       }
     },
-    "StringType": {
-      "base": null,
-      "refs": {
-        "RegisterImageRequest$UefiData": "<p>Base64 representation of the non-volatile UEFI variable store. To retrieve the UEFI data, use the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetInstanceUefiData\">GetInstanceUefiData</a> command. You can inspect and modify the UEFI data by using the <a href=\"https://github.com/awslabs/python-uefivars\">python-uefivars tool</a> on GitHub. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html\">UEFI Secure Boot for Amazon EC2 instances</a> in the <i>Amazon EC2 User Guide</i>.</p>"
-      }
-    },
     "Subnet": {
       "base": "<p>Describes a subnet.</p>",
       "refs": {
@@ -27488,6 +27545,7 @@
         "IpamExternalResourceVerificationToken$Tags": "<p>Token tags.</p>",
         "IpamPolicy$Tags": "<p>The tags assigned to the IPAM policy.</p>",
         "IpamPool$Tags": "<p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>",
+        "IpamPoolAllocation$Tags": "<p>The tags for the IPAM pool allocation.</p>",
         "IpamPrefixListResolver$Tags": "<p>The tags assigned to the IPAM prefix list resolver.</p>",
         "IpamPrefixListResolverTarget$Tags": "<p>The tags assigned to the IPAM prefix list resolver target.</p>",
         "IpamResourceDiscovery$Tags": "<p>A tag is a label that you assign to an Amazon Web Services resource. Each tag consists of a key and an optional value. You can use tags to search and filter your resources or track your Amazon Web Services costs.</p>",
@@ -27589,6 +27647,7 @@
         "AcceptAddressTransferRequest$TagSpecifications": "<p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>",
         "AllocateAddressRequest$TagSpecifications": "<p>The tags to assign to the Elastic IP address.</p>",
         "AllocateHostsRequest$TagSpecifications": "<p>The tags to apply to the Dedicated Host during creation.</p>",
+        "AllocateIpamPoolCidrRequest$TagSpecifications": "<p>The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> <p>If you specify tags, the request is authorized against the allocation resource in addition to the pool resource.</p>",
         "AssociateIpamResourceDiscoveryRequest$TagSpecifications": "<p>Tag specifications.</p>",
         "AuthorizeSecurityGroupEgressRequest$TagSpecifications": "<p>The tags applied to the security group rule.</p>",
         "AuthorizeSecurityGroupIngressRequest$TagSpecifications": "<p>The tags applied to the security group rule.</p>",
@@ -29398,6 +29457,7 @@
         "DescribeInstanceConnectEndpointsRequest$InstanceConnectEndpointIds": "<p>One or more EC2 Instance Connect Endpoint IDs.</p>",
         "DescribeIpamExternalResourceVerificationTokensRequest$IpamExternalResourceVerificationTokenIds": "<p>Verification token IDs.</p>",
         "DescribeIpamPoliciesRequest$IpamPolicyIds": "<p>The IDs of the IPAM policies to describe.</p>",
+        "DescribeIpamPoolAllocationsRequest$IpamPoolAllocationIds": "<p>The IDs of the IPAM pool allocations you want to describe.</p>",
         "DescribeIpamPoolsRequest$IpamPoolIds": "<p>The IDs of the IPAM pools you would like information on.</p>",
         "DescribeIpamPrefixListResolverTargetsRequest$IpamPrefixListResolverTargetIds": "<p>The IDs of the IPAM prefix list resolver Targets to describe. If not specified, all targets in your account are described.</p>",
         "DescribeIpamPrefixListResolversRequest$IpamPrefixListResolverIds": "<p>The IDs of the IPAM prefix list resolvers to describe. If not specified, all resolvers in your account are described.</p>",

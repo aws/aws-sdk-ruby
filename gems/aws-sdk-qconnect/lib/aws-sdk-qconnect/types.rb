@@ -7010,6 +7010,62 @@ module Aws::QConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either
+    #   the ID or the ARN. URLs cannot contain the ARN. The assistant's
+    #   region determines which models are available.
+    #   @return [String]
+    #
+    # @!attribute [rw] ai_prompt_type
+    #   The type of the AI Prompt to filter models by. When specified, only
+    #   models that support the given AI Prompt type are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_lifecycle
+    #   The lifecycle status of models to filter by. When specified, only
+    #   models with the given lifecycle status are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return per page.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListModelsRequest AWS API Documentation
+    #
+    class ListModelsRequest < Struct.new(
+      :assistant_id,
+      :ai_prompt_type,
+      :model_lifecycle,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] model_summaries
+    #   The summaries of the models available to the assistant.
+    #   @return [Array<Types::ModelSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If there are additional results, this is the token for the next set
+    #   of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListModelsResponse AWS API Documentation
+    #
+    class ListModelsResponse < Struct.new(
+      :model_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   The token for the next set of results. Use the value returned in the
     #   previous response in the next request to retrieve the next set of
@@ -7984,6 +8040,63 @@ module Aws::QConnect
       :is_active,
       :version_number)
       SENSITIVE = [:channel]
+      include Aws::Structure
+    end
+
+    # The summary of a model available to an Amazon Q in Connect assistant.
+    #
+    # @!attribute [rw] model_id
+    #   The identifier of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the model.
+    #   @return [String]
+    #
+    # @!attribute [rw] cross_region_status
+    #   The cross-region availability status of the model. `NONE` indicates
+    #   the model is only available in a single region, `REGIONAL` indicates
+    #   the model is available through regional inference, and `GLOBAL`
+    #   indicates the model is available through global cross-region
+    #   inference.
+    #   @return [String]
+    #
+    # @!attribute [rw] supports_prompt_caching
+    #   Whether the model supports prompt caching.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] supported_ai_prompt_types
+    #   The list of AI Prompt types that the model supports.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] model_lifecycle
+    #   The current lifecycle of the model. `ACTIVE` indicates the model is
+    #   recommended for use and `LEGACY` indicates the model is still usable
+    #   but is deprecated.
+    #   @return [String]
+    #
+    # @!attribute [rw] legacy_timestamp
+    #   The timestamp when the model lifecycle will transition from `ACTIVE`
+    #   to `LEGACY`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_of_life_timestamp
+    #   The timestamp when the model will reach end of life and no longer be
+    #   available for use.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ModelSummary AWS API Documentation
+    #
+    class ModelSummary < Struct.new(
+      :model_id,
+      :display_name,
+      :cross_region_status,
+      :supports_prompt_caching,
+      :supported_ai_prompt_types,
+      :model_lifecycle,
+      :legacy_timestamp,
+      :end_of_life_timestamp)
+      SENSITIVE = []
       include Aws::Structure
     end
 

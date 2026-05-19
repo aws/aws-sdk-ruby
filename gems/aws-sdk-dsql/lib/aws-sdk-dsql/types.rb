@@ -178,6 +178,100 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster for which to create the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_definition
+    #   The target destination configuration for the stream. Contains
+    #   Kinesis stream configuration including stream ARN and IAM role ARN.
+    #   @return [Types::TargetDefinition]
+    #
+    # @!attribute [rw] ordering
+    #   The ordering mode for the stream. Determines how change events are
+    #   ordered when delivered to the target.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the stream records.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A map of key and value pairs to use to tag your stream.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you don't specify a client token, the Amazon Web Services SDK
+    #   automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateStreamInput AWS API Documentation
+    #
+    class CreateStreamInput < Struct.new(
+      :cluster_identifier,
+      :target_definition,
+      :ordering,
+      :format,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output of a created stream.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster for the created stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the created stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the created stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the created stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when created the stream.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ordering
+    #   The ordering mode of the created stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the created stream records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/CreateStreamOutput AWS API Documentation
+    #
+    class CreateStreamOutput < Struct.new(
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :status,
+      :creation_time,
+      :ordering,
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The ID of the cluster to delete.
     #   @return [String]
@@ -270,6 +364,73 @@ module Aws::DSQL
     #
     class DeleteClusterPolicyOutput < Struct.new(
       :policy_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster containing the stream to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the stream to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. Idempotency ensures that an API request
+    #   completes only once. With an idempotent request, if the original
+    #   request completes successfully, the subsequent retries with the same
+    #   client token return the result from the original successful request
+    #   and they have no additional effect.
+    #
+    #   If you don't specify a client token, the Amazon Web Services SDK
+    #   automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteStreamInput AWS API Documentation
+    #
+    class DeleteStreamInput < Struct.new(
+      :cluster_identifier,
+      :stream_identifier,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output from a deleted stream.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster for the deleted stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the deleted stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the deleted stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the stream was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/DeleteStreamOutput AWS API Documentation
+    #
+    class DeleteStreamOutput < Struct.new(
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :status,
+      :creation_time)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -397,6 +558,82 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster containing the stream to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the stream to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetStreamInput AWS API Documentation
+    #
+    class GetStreamInput < Struct.new(
+      :cluster_identifier,
+      :stream_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The output of a retrieved stream.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster for the retrieved stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the retrieved stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the retrieved stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the retrieved stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The time when the stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ordering
+    #   The ordering mode of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] format
+    #   The format of the stream records.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_definition
+    #   The target definition for the stream destination.
+    #   @return [Types::TargetDefinition]
+    #
+    # @!attribute [rw] status_reason
+    #   Stream status reason with error code and timestamp (if applicable).
+    #   @return [Types::StatusReason]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags associated with the stream.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/GetStreamOutput AWS API Documentation
+    #
+    class GetStreamOutput < Struct.new(
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :status,
+      :creation_time,
+      :ordering,
+      :format,
+      :target_definition,
+      :status_reason,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The ID of the cluster to retrieve.
     #   @return [String]
@@ -445,6 +682,29 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # Kinesis stream target configuration.
+    #
+    # @!attribute [rw] stream_arn
+    #   The ARN of the Kinesis stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role that grants permission to write to the
+    #   Kinesis stream. This can be a standard role
+    #   (`arn:aws:iam::account-id:role/role-name`) or a role with a path
+    #   prefix (`arn:aws:iam::account-id:role/service-role/role-name`), such
+    #   as roles auto-created by the console.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/KinesisTargetDefinition AWS API Documentation
+    #
+    class KinesisTargetDefinition < Struct.new(
+      :stream_arn,
+      :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] max_results
     #   An optional parameter that specifies the maximum number of results
     #   to return. You can use nextToken to display the next page of
@@ -482,6 +742,52 @@ module Aws::DSQL
     class ListClustersOutput < Struct.new(
       :next_token,
       :clusters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster for which to list streams.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   An optional parameter that specifies the maximum number of results
+    #   to return. You can use nextToken to display the next page of
+    #   results. Default: 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial ListStreams operation returns a nextToken, you can
+    #   include the returned nextToken in following ListStreams operations,
+    #   which returns results in the next page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ListStreamsInput AWS API Documentation
+    #
+    class ListStreamsInput < Struct.new(
+      :cluster_identifier,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   If nextToken is returned, there are more results available. The
+    #   value of nextToken is a unique pagination token for each page. To
+    #   retrieve the next page, make the call again using the returned
+    #   token.
+    #   @return [String]
+    #
+    # @!attribute [rw] streams
+    #   An array of the returned streams.
+    #   @return [Array<Types::StreamSummary>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/ListStreamsOutput AWS API Documentation
+    #
+    class ListStreamsOutput < Struct.new(
+      :next_token,
+      :streams)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -644,6 +950,59 @@ module Aws::DSQL
       include Aws::Structure
     end
 
+    # Stream status reason with error and timestamp.
+    #
+    # @!attribute [rw] error
+    #   The error code for the stream failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The timestamp when the status was updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/StatusReason AWS API Documentation
+    #
+    class StatusReason < Struct.new(
+      :error,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about a stream.
+    #
+    # @!attribute [rw] cluster_identifier
+    #   The ID of the cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_identifier
+    #   The ID of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   The timestamp when the stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The current status of the stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/StreamSummary AWS API Documentation
+    #
+    class StreamSummary < Struct.new(
+      :cluster_identifier,
+      :stream_identifier,
+      :arn,
+      :creation_time,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource that you want to tag.
     #   @return [String]
@@ -659,6 +1018,29 @@ module Aws::DSQL
       :tags)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Target definition for stream destination.
+    #
+    # @note TargetDefinition is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TargetDefinition is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TargetDefinition corresponding to the set member.
+    #
+    # @!attribute [rw] kinesis
+    #   Kinesis stream target configuration.
+    #   @return [Types::KinesisTargetDefinition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dsql-2018-05-10/TargetDefinition AWS API Documentation
+    #
+    class TargetDefinition < Struct.new(
+      :kinesis,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Kinesis < TargetDefinition; end
+      class Unknown < TargetDefinition; end
     end
 
     # The request was denied due to request throttling.
