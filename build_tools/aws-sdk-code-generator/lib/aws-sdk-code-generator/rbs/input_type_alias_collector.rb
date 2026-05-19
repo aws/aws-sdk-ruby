@@ -4,11 +4,14 @@ module AwsSdkCodeGenerator
   module RBS
     # Collects structure shapes referenced more than once in input shape.
     class InputTypeAliasCollector
+      MIN_LINES_THRESHOLD_FOR_ALIAS = 5
+
       def initialize(api:)
         @api = api
         @shape_usage_count = Hash.new(0)
         @size_cache = {}
       end
+
       # Returns a topologically sorted array of shape names to render as type aliases.
       # Leaf dependencies come first so aliases can reference each other.
       # params.rbs uses aliases in this list to define RBS type aliases.
@@ -19,7 +22,7 @@ module AwsSdkCodeGenerator
           shape = @api['shapes'][shape_name]
           shape['type'] == 'structure' &&
             count > 1 &&
-            rendered_rbs_line_count_heuristic(shape_name) > 5
+            rendered_rbs_line_count_heuristic(shape_name) > MIN_LINES_THRESHOLD_FOR_ALIAS
         end.keys.to_set
         topological_sort(aliased)
       end
