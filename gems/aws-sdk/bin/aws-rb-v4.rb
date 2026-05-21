@@ -145,7 +145,7 @@ unless options[:execute].empty?
   exit
 end
 
-class PryNotAvailable < StandardError; end
+class PryNotAvailable < StandardError; end # rubocop:disable Style/OneClassPerFile
 
 def run_with_pry
   begin

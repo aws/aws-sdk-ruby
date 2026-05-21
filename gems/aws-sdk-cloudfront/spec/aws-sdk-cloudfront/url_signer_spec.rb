@@ -82,10 +82,12 @@ module Aws
         it 'generates signed urls with a custom policy' do
           policy = {
             'Statement' => [
-              'Resource' => 'images/image.jpg',
-              'Condition' => {
-                'IpAddress' => { 'AWS:SourceIp' => '10.52.176.0/24' },
-                'DateLessThan' => { 'AWS:EpochTime' => expires }
+              {
+                'Resource' => 'images/image.jpg',
+                'Condition' => {
+                  'IpAddress' => { 'AWS:SourceIp' => '10.52.176.0/24' },
+                  'DateLessThan' => { 'AWS:EpochTime' => expires }
+                }
               }
             ]
           }

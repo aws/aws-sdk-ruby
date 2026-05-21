@@ -118,8 +118,10 @@ module Aws
         JSON.dump(
           {
             'Statement' => [
-              'Resource' => resource,
-              'Condition' => { 'DateLessThan' => { 'AWS:EpochTime' => expires } }
+              {
+                'Resource' => resource,
+                'Condition' => { 'DateLessThan' => { 'AWS:EpochTime' => expires } }
+              }
             ]
           }
         )
