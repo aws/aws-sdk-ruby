@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative '../../../../gems/aws-sdk-ec2/lib/aws-sdk-ec2/plugins/copy_encrypted_snapshot'
+require_relative '../../../../gems/aws-sdk-ec2/lib/aws-sdk-ec2/plugins/region_validation'
 
 module BuildTools
   module Welds
@@ -24,7 +25,8 @@ module BuildTools
 
         def add_plugins
           {
-            Aws::EC2::Plugins::CopyEncryptedSnapshot => { require_path: 'aws-sdk-ec2/plugins/copy_encrypted_snapshot' }
+            Aws::EC2::Plugins::CopyEncryptedSnapshot => { require_path: 'aws-sdk-ec2/plugins/copy_encrypted_snapshot' },
+            Aws::EC2::Plugins::RegionValidation => { require_path: 'aws-sdk-ec2/plugins/region_validation' }
           }
         end
       end
