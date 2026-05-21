@@ -34,7 +34,7 @@ module BuildTools
           Aws::Core::Plugins::GlobalConfiguration => { require_path: 'aws-sdk-core/plugins/global_configuration' },
           Aws::Core::Plugins::SharedConfig => { require_path: 'aws-sdk-core/plugins/shared_config' },
           Aws::Core::Plugins::UserAgent => { require_path: 'aws-sdk-core/plugins/user_agent' },
-          Aws::Core::Plugins::InvocationId => { require_path: 'aws-sdk-core/plugins/invocation_id' }
+          Aws::Core::Plugins::InvocationId => { require_path: 'aws-sdk-core/plugins/invocation_id' },
           Aws::Core::Plugins::RecursionDetection => { require_path: 'aws-sdk-core/plugins/recursion_detection' }
         }
       end
