@@ -1,0 +1,23 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFormation
+    module Params
+      type stack_set_operation_preferences = {
+      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
+      region_order: Array[::String]?,
+      failure_tolerance_count: ::Integer?,
+      failure_tolerance_percentage: ::Integer?,
+      max_concurrent_count: ::Integer?,
+      max_concurrent_percentage: ::Integer?,
+      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
+    }
+
+    end
+  end
+end

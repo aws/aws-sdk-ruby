@@ -112,15 +112,7 @@ module Aws
       def create_app_authorization: (
                                       app_bundle_identifier: ::String,
                                       app: ::String,
-                                      credential: {
-                                        oauth2_credential: {
-                                          client_id: ::String,
-                                          client_secret: ::String
-                                        }?,
-                                        api_key_credential: {
-                                          api_key: ::String
-                                        }?
-                                      },
+                                      credential: Params::credential,
                                       tenant: {
                                         tenant_identifier: ::String,
                                         tenant_display_name: ::String
@@ -131,7 +123,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateAppAuthorizationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppAuthorizationResponseSuccess
@@ -148,7 +140,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _CreateAppBundleResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBundleResponseSuccess
@@ -168,7 +160,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateIngestionResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionResponseSuccess
@@ -187,25 +179,13 @@ module Aws
                                               format: ("json" | "parquet")
                                             }?
                                           },
-                                          destination_configuration: {
-                                            audit_log: {
-                                              destination: {
-                                                s3_bucket: {
-                                                  bucket_name: ::String,
-                                                  prefix: ::String?
-                                                }?,
-                                                firehose_stream: {
-                                                  stream_name: ::String
-                                                }?
-                                              }
-                                            }?
-                                          },
+                                          destination_configuration: Params::destination_configuration,
                                           ?client_token: ::String,
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateIngestionDestinationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionDestinationResponseSuccess
@@ -397,7 +377,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -420,15 +400,7 @@ module Aws
       def update_app_authorization: (
                                       app_bundle_identifier: ::String,
                                       app_authorization_identifier: ::String,
-                                      ?credential: {
-                                        oauth2_credential: {
-                                          client_id: ::String,
-                                          client_secret: ::String
-                                        }?,
-                                        api_key_credential: {
-                                          api_key: ::String
-                                        }?
-                                      },
+                                      ?credential: Params::credential,
                                       ?tenant: {
                                         tenant_identifier: ::String,
                                         tenant_display_name: ::String
@@ -445,19 +417,7 @@ module Aws
                                           app_bundle_identifier: ::String,
                                           ingestion_identifier: ::String,
                                           ingestion_destination_identifier: ::String,
-                                          destination_configuration: {
-                                            audit_log: {
-                                              destination: {
-                                                s3_bucket: {
-                                                  bucket_name: ::String,
-                                                  prefix: ::String?
-                                                }?,
-                                                firehose_stream: {
-                                                  stream_name: ::String
-                                                }?
-                                              }
-                                            }?
-                                          }
+                                          destination_configuration: Params::destination_configuration
                                         ) -> _UpdateIngestionDestinationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngestionDestinationResponseSuccess
     end

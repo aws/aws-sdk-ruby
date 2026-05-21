@@ -103,7 +103,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateGatewayResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayResponseSuccess
@@ -206,7 +206,7 @@ module Aws
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _ImportHypervisorConfigurationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHypervisorConfigurationResponseSuccess
@@ -274,7 +274,7 @@ module Aws
                                                    start_minute_of_hour: ::Integer,
                                                    end_minute_of_hour: ::Integer,
                                                    days_of_week: Array[::Integer]
-                                                 },
+                                                 }
                                                ]
                                              ) -> _PutBandwidthRateLimitScheduleResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBandwidthRateLimitScheduleResponseSuccess
@@ -292,7 +292,7 @@ module Aws
                                                   vmware_tag_name: ::String,
                                                   aws_tag_key: ::String,
                                                   aws_tag_value: ::String
-                                                },
+                                                }
                                               ],
                                               iam_role_arn: ::String
                                             ) -> _PutHypervisorPropertyMappingsResponseSuccess
@@ -333,7 +333,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

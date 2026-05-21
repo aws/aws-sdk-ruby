@@ -3385,8 +3385,45 @@ module Aws::QuickSight
     #               status: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #           },
+    #           semantic_metadata: {
+    #             column_metadata: [
+    #               {
+    #                 column_names: ["ColumnName"],
+    #                 column_properties: [ # required
+    #                   {
+    #                     description: {
+    #                       text: "ColumnDescriptiveText",
+    #                     },
+    #                     additional_notes: {
+    #                       text: "AdditionalNotesText",
+    #                     },
+    #                     semantic_type: {
+    #                       geographical_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
+    #       semantic_metadata: [
+    #         {
+    #           description: {
+    #             text: "DataSetDescriptiveText", # required
+    #           },
+    #           custom_instructions: [
+    #             {
+    #               inline_custom_instruction: {
+    #                 instruction_text: "InlineCustomInstructionText", # required
+    #                 uploaded_document_metadata: {
+    #                   name: "UploadedDocumentName",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -9145,6 +9182,18 @@ module Aws::QuickSight
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.permission_policy #=> String, one of "GRANT_ACCESS", "DENY_ACCESS"
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.format_version #=> String, one of "VERSION_1", "VERSION_2"
     #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].row_level_permission_configuration.row_level_permission_data_set.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_names #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_names[0] #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties #=> Array
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].description.text #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].additional_notes.text #=> String
+    #   resp.data_set.semantic_model_configuration.table_map["DataSetEntityResourceId"].semantic_metadata.column_metadata[0].column_properties[0].semantic_type.geographical_role #=> String, one of "COUNTRY", "STATE", "COUNTY", "CITY", "POSTCODE", "LONGITUDE", "LATITUDE"
+    #   resp.data_set.semantic_model_configuration.semantic_metadata #=> Array
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].description.text #=> String
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions #=> Array
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.instruction_text #=> String
+    #   resp.data_set.semantic_model_configuration.semantic_metadata[0].custom_instructions[0].inline_custom_instruction.uploaded_document_metadata.name #=> String
     #   resp.request_id #=> String
     #   resp.status #=> Integer
     #
@@ -19443,8 +19492,45 @@ module Aws::QuickSight
     #               status: "ENABLED", # accepts ENABLED, DISABLED
     #             },
     #           },
+    #           semantic_metadata: {
+    #             column_metadata: [
+    #               {
+    #                 column_names: ["ColumnName"],
+    #                 column_properties: [ # required
+    #                   {
+    #                     description: {
+    #                       text: "ColumnDescriptiveText",
+    #                     },
+    #                     additional_notes: {
+    #                       text: "AdditionalNotesText",
+    #                     },
+    #                     semantic_type: {
+    #                       geographical_role: "COUNTRY", # accepts COUNTRY, STATE, COUNTY, CITY, POSTCODE, LONGITUDE, LATITUDE
+    #                     },
+    #                   },
+    #                 ],
+    #               },
+    #             ],
+    #           },
     #         },
     #       },
+    #       semantic_metadata: [
+    #         {
+    #           description: {
+    #             text: "DataSetDescriptiveText", # required
+    #           },
+    #           custom_instructions: [
+    #             {
+    #               inline_custom_instruction: {
+    #                 instruction_text: "InlineCustomInstructionText", # required
+    #                 uploaded_document_metadata: {
+    #                   name: "UploadedDocumentName",
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -22182,7 +22268,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.182.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

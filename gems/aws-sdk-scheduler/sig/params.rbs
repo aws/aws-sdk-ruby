@@ -1,0 +1,86 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Scheduler
+    module Params
+      type ecs_parameters = {
+      capacity_provider_strategy: Array[
+        {
+          base: ::Integer?,
+          capacity_provider: ::String,
+          weight: ::Integer?
+        }
+      ]?,
+      enable_ecs_managed_tags: bool?,
+      enable_execute_command: bool?,
+      group: ::String?,
+      launch_type: ("EC2" | "FARGATE" | "EXTERNAL")?,
+      network_configuration: {
+        awsvpc_configuration: {
+          assign_public_ip: ("ENABLED" | "DISABLED")?,
+          security_groups: Array[::String]?,
+          subnets: Array[::String]
+        }?
+      }?,
+      placement_constraints: Array[
+        {
+          expression: ::String?,
+          type: ("distinctInstance" | "memberOf")?
+        }
+      ]?,
+      placement_strategy: Array[
+        {
+          field: ::String?,
+          type: ("random" | "spread" | "binpack")?
+        }
+      ]?,
+      platform_version: ::String?,
+      propagate_tags: ("TASK_DEFINITION")?,
+      reference_id: ::String?,
+      tags: Array[
+        Hash[::String, ::String]
+      ]?,
+      task_count: ::Integer?,
+      task_definition_arn: ::String
+    }
+
+      type target = {
+      arn: ::String,
+      dead_letter_config: {
+        arn: ::String?
+      }?,
+      ecs_parameters: Params::ecs_parameters?,
+      event_bridge_parameters: {
+        detail_type: ::String,
+        source: ::String
+      }?,
+      input: ::String?,
+      kinesis_parameters: {
+        partition_key: ::String
+      }?,
+      retry_policy: {
+        maximum_event_age_in_seconds: ::Integer?,
+        maximum_retry_attempts: ::Integer?
+      }?,
+      role_arn: ::String,
+      sage_maker_pipeline_parameters: {
+        pipeline_parameter_list: Array[
+          {
+            name: ::String,
+            value: ::String
+          }
+        ]?
+      }?,
+      sqs_parameters: {
+        message_group_id: ::String?
+      }?
+    }
+
+    end
+  end
+end

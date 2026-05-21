@@ -1,0 +1,50 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TimestreamWrite
+    module Params
+      type magnetic_store_rejected_data_location = {
+      s3_configuration: {
+        bucket_name: ::String?,
+        object_key_prefix: ::String?,
+        encryption_option: ("SSE_S3" | "SSE_KMS")?,
+        kms_key_id: ::String?
+      }?
+    }
+
+      type magnetic_store_write_properties = {
+      enable_magnetic_store_writes: bool,
+      magnetic_store_rejected_data_location: Params::magnetic_store_rejected_data_location?
+    }
+
+      type record = {
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String,
+          dimension_value_type: ("VARCHAR")?
+        }
+      ]?,
+      measure_name: ::String?,
+      measure_value: ::String?,
+      measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")?,
+      time: ::String?,
+      time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")?,
+      version: ::Integer?,
+      measure_values: Array[
+        {
+          name: ::String,
+          value: ::String,
+          type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
+        }
+      ]?
+    }
+
+    end
+  end
+end

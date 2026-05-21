@@ -1,0 +1,1448 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SecurityHub
+    module Params
+      type network_header = {
+      protocol: ::String?,
+      destination: {
+        address: Array[::String]?,
+        port_ranges: Array[
+          {
+            begin: ::Integer?,
+            end: ::Integer?
+          }
+        ]?
+      }?,
+      source: {
+        address: Array[::String]?,
+        port_ranges: Array[
+          {
+            begin: ::Integer?,
+            end: ::Integer?
+          }
+        ]?
+      }?
+    }
+
+      type occurrences = {
+      line_ranges: Array[
+        {
+          start: ::Integer?,
+          end: ::Integer?,
+          start_column: ::Integer?
+        }
+      ]?,
+      offset_ranges: Array[
+        {
+          start: ::Integer?,
+          end: ::Integer?,
+          start_column: ::Integer?
+        }
+      ]?,
+      pages: Array[
+        Params::page
+      ]?,
+      records: Array[
+        {
+          json_path: ::String?,
+          record_index: ::Integer?
+        }
+      ]?,
+      cells: Array[
+        {
+          column: ::Integer?,
+          row: ::Integer?,
+          column_name: ::String?,
+          cell_reference: ::String?
+        }
+      ]?
+    }
+
+      type page = {
+      page_number: ::Integer?,
+      line_range: {
+        start: ::Integer?,
+        end: ::Integer?,
+        start_column: ::Integer?
+      }?,
+      offset_range: {
+        start: ::Integer?,
+        end: ::Integer?,
+        start_column: ::Integer?
+      }?
+    }
+
+      type aws_code_build_project_artifacts_details = {
+      artifact_identifier: ::String?,
+      encryption_disabled: bool?,
+      location: ::String?,
+      name: ::String?,
+      namespace_type: ::String?,
+      override_artifact_name: bool?,
+      packaging: ::String?,
+      path: ::String?,
+      type: ::String?
+    }
+
+      type aws_ec2_security_group_ip_permission = {
+      ip_protocol: ::String?,
+      from_port: ::Integer?,
+      to_port: ::Integer?,
+      user_id_group_pairs: Array[
+        Params::aws_ec2_security_group_user_id_group_pair
+      ]?,
+      ip_ranges: Array[
+        {
+          cidr_ip: ::String?
+        }
+      ]?,
+      ipv_6_ranges: Array[
+        {
+          cidr_ipv_6: ::String?
+        }
+      ]?,
+      prefix_list_ids: Array[
+        {
+          prefix_list_id: ::String?
+        }
+      ]?
+    }
+
+      type aws_ec2_security_group_user_id_group_pair = {
+      group_id: ::String?,
+      group_name: ::String?,
+      peering_status: ::String?,
+      user_id: ::String?,
+      vpc_id: ::String?,
+      vpc_peering_connection_id: ::String?
+    }
+
+      type aws_certificate_manager_certificate_domain_validation_option = {
+      domain_name: ::String?,
+      resource_record: {
+        name: ::String?,
+        type: ::String?,
+        value: ::String?
+      }?,
+      validation_domain: ::String?,
+      validation_emails: Array[::String]?,
+      validation_method: ::String?,
+      validation_status: ::String?
+    }
+
+      type aws_ecs_container_details = {
+      name: ::String?,
+      image: ::String?,
+      mount_points: Array[
+        {
+          source_volume: ::String?,
+          container_path: ::String?
+        }
+      ]?,
+      privileged: bool?
+    }
+
+      type aws_ec2_vpc_peering_connection_vpc_info_details = {
+      cidr_block: ::String?,
+      cidr_block_set: Array[
+        {
+          cidr_block: ::String?
+        }
+      ]?,
+      ipv_6_cidr_block_set: Array[
+        {
+          ipv_6_cidr_block: ::String?
+        }
+      ]?,
+      owner_id: ::String?,
+      peering_options: {
+        allow_dns_resolution_from_remote_vpc: bool?,
+        allow_egress_from_local_classic_link_to_remote_vpc: bool?,
+        allow_egress_from_local_vpc_to_remote_classic_link: bool?
+      }?,
+      region: ::String?,
+      vpc_id: ::String?
+    }
+
+      type aws_wafv_2_action_allow_details = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type aws_wafv_2_custom_response_details = {
+      custom_response_body_key: ::String?,
+      response_code: ::Integer?,
+      response_headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?
+    }
+
+      type aws_wafv_2_action_block_details = {
+      custom_response: Params::aws_wafv_2_custom_response_details?
+    }
+
+      type aws_wafv_2_rules_action_captcha_details = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type aws_wafv_2_rules_action_count_details = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type aws_wafv_2_rules_action_details = {
+      allow: Params::aws_wafv_2_action_allow_details?,
+      block: Params::aws_wafv_2_action_block_details?,
+      captcha: Params::aws_wafv_2_rules_action_captcha_details?,
+      count: Params::aws_wafv_2_rules_action_count_details?
+    }
+
+      type aws_wafv_2_rules_details = {
+      action: Params::aws_wafv_2_rules_action_details?,
+      name: ::String?,
+      override_action: ::String?,
+      priority: ::Integer?,
+      visibility_config: {
+        cloud_watch_metrics_enabled: bool?,
+        metric_name: ::String?,
+        sampled_requests_enabled: bool?
+      }?
+    }
+
+      type action_remote_ip_details = {
+      ip_address_v4: ::String?,
+      organization: {
+        asn: ::Integer?,
+        asn_org: ::String?,
+        isp: ::String?,
+        org: ::String?
+      }?,
+      country: {
+        country_code: ::String?,
+        country_name: ::String?
+      }?,
+      city: {
+        city_name: ::String?
+      }?,
+      geo_location: {
+        lon: ::Float?,
+        lat: ::Float?
+      }?
+    }
+
+      type automation_rules_finding_filters = {
+      product_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      aws_account_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      generator_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      first_observed_at: Array[
+        Params::date_filter
+      ]?,
+      last_observed_at: Array[
+        Params::date_filter
+      ]?,
+      created_at: Array[
+        Params::date_filter
+      ]?,
+      updated_at: Array[
+        Params::date_filter
+      ]?,
+      confidence: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      criticality: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      title: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      description: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      source_url: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      product_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      company_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      severity_label: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_partition: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_region: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_tags: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      resource_details_other: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      compliance_status: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      compliance_security_control_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      compliance_associated_standards_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      verification_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      workflow_status: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      record_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      related_findings_product_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      related_findings_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      note_text: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      note_updated_at: Array[
+        Params::date_filter
+      ]?,
+      note_updated_by: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      user_defined_fields: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      resource_application_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_application_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      aws_account_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?
+    }
+
+      type date_filter = {
+      start: ::String?,
+      end: ::String?,
+      date_range: {
+        value: ::Integer?,
+        unit: ("DAYS")?,
+        comparison: ("WITHIN" | "OLDER_THAN")?
+      }?
+    }
+
+      type automation_rules_finding_fields_update = {
+      note: {
+        text: ::String,
+        updated_by: ::String
+      }?,
+      severity: {
+        normalized: ::Integer?,
+        product: ::Float?,
+        label: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL")?
+      }?,
+      verification_state: ("UNKNOWN" | "TRUE_POSITIVE" | "FALSE_POSITIVE" | "BENIGN_POSITIVE")?,
+      confidence: ::Integer?,
+      criticality: ::Integer?,
+      types: Array[::String]?,
+      user_defined_fields: Hash[::String, ::String]?,
+      workflow: {
+        status: ("NEW" | "NOTIFIED" | "RESOLVED" | "SUPPRESSED")?
+      }?,
+      related_findings: Array[
+        {
+          product_arn: ::String,
+          id: ::String
+        }
+      ]?
+    }
+
+      type automation_rules_action = {
+      type: ("FINDING_FIELDS_UPDATE")?,
+      finding_fields_update: Params::automation_rules_finding_fields_update?
+    }
+
+      type ocsf_finding_filters = {
+      composite_filters: Array[
+        Params::composite_filter
+      ]?,
+      composite_operator: ("AND" | "OR")?
+    }
+
+      type criteria = {
+      ocsf_finding_criteria: Params::ocsf_finding_filters?
+    }
+
+      type composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      date_filters: Array[
+        Params::ocsf_date_filter
+      ]?,
+      boolean_filters: Array[
+        {
+          field_name: ("compliance.assessments.meets_criteria" | "vulnerabilities.is_exploit_available" | "vulnerabilities.is_fix_available")?,
+          filter: {
+            value: bool?
+          }?
+        }
+      ]?,
+      number_filters: Array[
+        Params::ocsf_number_filter
+      ]?,
+      map_filters: Array[
+        Params::ocsf_map_filter
+      ]?,
+      ip_filters: Array[
+        {
+          field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+          filter: {
+            cidr: ::String?
+          }?
+        }
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("metadata.uid" | "activity_name" | "cloud.account.uid" | "cloud.provider" | "cloud.region" | "compliance.assessments.category" | "compliance.assessments.name" | "compliance.control" | "compliance.status" | "compliance.standards" | "finding_info.desc" | "finding_info.src_url" | "finding_info.title" | "finding_info.types" | "finding_info.uid" | "finding_info.related_events.traits.category" | "finding_info.related_events.uid" | "finding_info.related_events.product.uid" | "finding_info.related_events.title" | "metadata.product.name" | "metadata.product.uid" | "metadata.product.vendor_name" | "remediation.desc" | "remediation.references" | "resources.cloud_partition" | "resources.region" | "resources.type" | "resources.uid" | "severity" | "status" | "comment" | "vulnerabilities.fix_coverage" | "class_name" | "databucket.encryption_details.algorithm" | "databucket.encryption_details.key_uid" | "databucket.file.data_classifications.classifier_details.type" | "evidences.actor.user.account.uid" | "evidences.api.operation" | "evidences.api.response.error_message" | "evidences.api.service.name" | "evidences.connection_info.direction" | "evidences.connection_info.protocol_name" | "evidences.dst_endpoint.autonomous_system.name" | "evidences.dst_endpoint.location.city" | "evidences.dst_endpoint.location.country" | "evidences.src_endpoint.autonomous_system.name" | "evidences.src_endpoint.hostname" | "evidences.src_endpoint.location.city" | "evidences.src_endpoint.location.country" | "finding_info.analytic.name" | "malware.name" | "malware_scan_info.uid" | "malware.severity" | "resources.cloud_function.layers.uid_alt" | "resources.cloud_function.runtime" | "resources.cloud_function.user.uid" | "resources.device.encryption_details.key_uid" | "resources.device.image.uid" | "resources.image.architecture" | "resources.image.registry_uid" | "resources.image.repository_name" | "resources.image.uid" | "resources.subnet_info.uid" | "resources.vpc_uid" | "vulnerabilities.affected_code.file.path" | "vulnerabilities.affected_packages.name" | "vulnerabilities.cve.epss.score" | "vulnerabilities.cve.uid" | "vulnerabilities.related_vulnerabilities" | "cloud.account.name" | "vendor_attributes.severity")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          date_filters: Array[
+            Params::ocsf_date_filter
+          ]?,
+          boolean_filters: Array[
+            {
+              field_name: ("compliance.assessments.meets_criteria" | "vulnerabilities.is_exploit_available" | "vulnerabilities.is_fix_available")?,
+              filter: {
+                value: bool?
+              }?
+            }
+          ]?,
+          number_filters: Array[
+            Params::ocsf_number_filter
+          ]?,
+          map_filters: Array[
+            Params::ocsf_map_filter
+          ]?,
+          ip_filters: Array[
+            {
+              field_name: ("evidences.dst_endpoint.ip" | "evidences.src_endpoint.ip")?,
+              filter: {
+                cidr: ::String?
+              }?
+            }
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
+      type ocsf_date_filter = {
+      field_name: ("finding_info.created_time_dt" | "finding_info.first_seen_time_dt" | "finding_info.last_seen_time_dt" | "finding_info.modified_time_dt" | "resources.image.created_time_dt" | "resources.image.last_used_time_dt" | "resources.modified_time_dt")?,
+      filter: Params::date_filter?
+    }
+
+      type ocsf_number_filter = {
+      field_name: ("activity_id" | "compliance.status_id" | "confidence_score" | "severity_id" | "status_id" | "finding_info.related_events_count" | "evidences.api.response.code" | "evidences.dst_endpoint.autonomous_system.number" | "evidences.dst_endpoint.port" | "evidences.src_endpoint.autonomous_system.number" | "evidences.src_endpoint.port" | "resources.image.in_use_count" | "vulnerabilities.cve.cvss.base_score" | "vendor_attributes.severity_id")?,
+      filter: {
+        gte: ::Float?,
+        lte: ::Float?,
+        eq: ::Float?,
+        gt: ::Float?,
+        lt: ::Float?
+      }?
+    }
+
+      type ocsf_map_filter = {
+      field_name: ("resources.tags" | "compliance.control_parameters" | "databucket.tags" | "finding_info.tags")?,
+      filter: {
+        key: ::String?,
+        value: ::String?,
+        comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+      }?
+    }
+
+      type automation_rules_action_v2 = {
+      type: ("FINDING_FIELDS_UPDATE" | "EXTERNAL_INTEGRATION"),
+      finding_fields_update: {
+        severity_id: ::Integer?,
+        comment: ::String?,
+        status_id: ::Integer?
+      }?,
+      external_integration_configuration: {
+        connector_arn: ::String?
+      }?
+    }
+
+      type security_controls_configuration = {
+      enabled_security_control_identifiers: Array[::String]?,
+      disabled_security_control_identifiers: Array[::String]?,
+      security_control_custom_parameters: Array[
+        Params::security_control_custom_parameter
+      ]?
+    }
+
+      type security_hub_policy = {
+      service_enabled: bool?,
+      enabled_standard_identifiers: Array[::String]?,
+      security_controls_configuration: Params::security_controls_configuration?
+    }
+
+      type policy = {
+      security_hub: Params::security_hub_policy?
+    }
+
+      type security_control_custom_parameter = {
+      security_control_id: ::String?,
+      parameters: Hash[::String, Params::parameter_configuration]?
+    }
+
+      type parameter_value = {
+      integer: ::Integer?,
+      integer_list: Array[::Integer]?,
+      double: ::Float?,
+      string: ::String?,
+      string_list: Array[::String]?,
+      boolean: bool?,
+      enum: ::String?,
+      enum_list: Array[::String]?
+    }
+
+      type parameter_configuration = {
+      value_type: ("DEFAULT" | "CUSTOM"),
+      value: Params::parameter_value?
+    }
+
+      type aws_security_finding_filters = {
+      product_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      aws_account_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      generator_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      region: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      first_observed_at: Array[
+        Params::date_filter
+      ]?,
+      last_observed_at: Array[
+        Params::date_filter
+      ]?,
+      created_at: Array[
+        Params::date_filter
+      ]?,
+      updated_at: Array[
+        Params::date_filter
+      ]?,
+      severity_product: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      severity_normalized: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      severity_label: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      confidence: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      criticality: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      title: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      description: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      recommendation_text: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      source_url: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      product_fields: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      product_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      company_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      user_defined_fields: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      malware_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      malware_type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      malware_path: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      malware_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      network_direction: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      network_protocol: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      network_source_ip_v4: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      network_source_ip_v6: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      network_source_port: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      network_source_domain: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      network_source_mac: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      network_destination_ip_v4: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      network_destination_ip_v6: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      network_destination_port: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      network_destination_domain: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      process_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      process_path: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      process_pid: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      process_parent_pid: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      process_launched_at: Array[
+        Params::date_filter
+      ]?,
+      process_terminated_at: Array[
+        Params::date_filter
+      ]?,
+      threat_intel_indicator_type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      threat_intel_indicator_value: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      threat_intel_indicator_category: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      threat_intel_indicator_last_observed_at: Array[
+        Params::date_filter
+      ]?,
+      threat_intel_indicator_source: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      threat_intel_indicator_source_url: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_partition: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_region: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_tags: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      resource_aws_ec2_instance_type: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_image_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_ip_v4_addresses: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      resource_aws_ec2_instance_ip_v6_addresses: Array[
+        {
+          cidr: ::String?
+        }
+      ]?,
+      resource_aws_ec2_instance_key_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_iam_instance_profile_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_vpc_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_subnet_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_ec2_instance_launched_at: Array[
+        Params::date_filter
+      ]?,
+      resource_aws_s3_bucket_owner_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_s3_bucket_owner_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_iam_access_key_user_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_iam_access_key_principal_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_iam_access_key_status: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_aws_iam_access_key_created_at: Array[
+        Params::date_filter
+      ]?,
+      resource_aws_iam_user_user_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_container_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_container_image_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_container_image_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_container_launched_at: Array[
+        Params::date_filter
+      ]?,
+      resource_details_other: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+        }
+      ]?,
+      compliance_status: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      verification_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      workflow_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      workflow_status: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      record_state: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      related_findings_product_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      related_findings_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      note_text: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      note_updated_at: Array[
+        Params::date_filter
+      ]?,
+      note_updated_by: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      keyword: Array[
+        {
+          value: ::String?
+        }
+      ]?,
+      finding_provider_fields_confidence: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      finding_provider_fields_criticality: Array[
+        {
+          gte: ::Float?,
+          lte: ::Float?,
+          eq: ::Float?,
+          gt: ::Float?,
+          lt: ::Float?
+        }
+      ]?,
+      finding_provider_fields_related_findings_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      finding_provider_fields_related_findings_product_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      finding_provider_fields_severity_label: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      finding_provider_fields_severity_original: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      finding_provider_fields_types: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      sample: Array[
+        {
+          value: bool?
+        }
+      ]?,
+      compliance_security_control_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      compliance_associated_standards_id: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      vulnerabilities_exploit_available: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      vulnerabilities_fix_available: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      compliance_security_control_parameters_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      compliance_security_control_parameters_value: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      aws_account_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_application_name: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?,
+      resource_application_arn: Array[
+        {
+          value: ::String?,
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+        }
+      ]?
+    }
+
+      type findings_trends_composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("account_id" | "region" | "finding_types" | "finding_status" | "finding_cve_ids" | "finding_compliance_status" | "finding_control_id" | "finding_class_name" | "finding_provider" | "finding_activity_name")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
+      type resources_filters = {
+      composite_filters: Array[
+        Params::resources_composite_filter
+      ]?,
+      composite_operator: ("AND" | "OR")?
+    }
+
+      type resources_composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      date_filters: Array[
+        Params::resources_date_filter
+      ]?,
+      number_filters: Array[
+        Params::resources_number_filter
+      ]?,
+      map_filters: Array[
+        Params::resources_map_filter
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("ResourceGuid" | "ResourceId" | "AccountId" | "Region" | "ResourceCategory" | "ResourceType" | "ResourceName" | "FindingsSummary.FindingType" | "FindingsSummary.ProductName")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          date_filters: Array[
+            Params::resources_date_filter
+          ]?,
+          number_filters: Array[
+            Params::resources_number_filter
+          ]?,
+          map_filters: Array[
+            Params::resources_map_filter
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
+      type resources_date_filter = {
+      field_name: ("ResourceDetailCaptureTime" | "ResourceCreationTime")?,
+      filter: Params::date_filter?
+    }
+
+      type resources_number_filter = {
+      field_name: ("FindingsSummary.TotalFindings" | "FindingsSummary.Severities.Other" | "FindingsSummary.Severities.Fatal" | "FindingsSummary.Severities.Critical" | "FindingsSummary.Severities.High" | "FindingsSummary.Severities.Medium" | "FindingsSummary.Severities.Low" | "FindingsSummary.Severities.Informational" | "FindingsSummary.Severities.Unknown")?,
+      filter: {
+        gte: ::Float?,
+        lte: ::Float?,
+        eq: ::Float?,
+        gt: ::Float?,
+        lt: ::Float?
+      }?
+    }
+
+      type resources_map_filter = {
+      field_name: ("ResourceTags")?,
+      filter: {
+        key: ::String?,
+        value: ::String?,
+        comparison: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS")?
+      }?
+    }
+
+      type resources_trends_composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("account_id" | "region" | "resource_type" | "resource_category")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("account_id" | "region" | "resource_type" | "resource_category")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
+    end
+  end
+end

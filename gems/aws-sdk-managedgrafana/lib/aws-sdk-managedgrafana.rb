@@ -55,7 +55,7 @@ module Aws::ManagedGrafana
   autoload :EndpointProvider, 'aws-sdk-managedgrafana/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedgrafana/endpoints'
 
-  GEM_VERSION = '1.61.0'
+  GEM_VERSION = '1.63.0'
 
 end
 

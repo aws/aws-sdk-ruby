@@ -108,10 +108,10 @@ module Aws
                                             {
                                               from: ::Time?,
                                               to: ::Time?
-                                            },
+                                            }
                                           ]?,
                                           tags: Array[
-                                            Hash[::String, ::String],
+                                            Hash[::String, ::String]
                                           ]?,
                                           status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
                                         },
@@ -133,7 +133,7 @@ module Aws
                                                            {
                                                              event_arn: ::String,
                                                              aws_account_id: ::String?
-                                                           },
+                                                           }
                                                          ],
                                                          ?locale: ::String,
                                                          ?next_token: ::String,
@@ -143,7 +143,7 @@ module Aws
                                                              event_arn: ::String,
                                                              aws_account_id: ::String?,
                                                              status_codes: Array[("IMPAIRED" | "UNIMPAIRED" | "UNKNOWN" | "PENDING" | "RESOLVED")]?
-                                                           },
+                                                           }
                                                          ]
                                                        ) -> _DescribeAffectedEntitiesForOrganizationResponseSuccess
                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAffectedEntitiesForOrganizationResponseSuccess
@@ -176,40 +176,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_event_aggregates-instance_method
       def describe_event_aggregates: (
-                                       ?filter: {
-                                         actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
-                                         event_arns: Array[::String]?,
-                                         event_type_codes: Array[::String]?,
-                                         services: Array[::String]?,
-                                         regions: Array[::String]?,
-                                         availability_zones: Array[::String]?,
-                                         start_times: Array[
-                                           {
-                                             from: ::Time?,
-                                             to: ::Time?
-                                           },
-                                         ]?,
-                                         end_times: Array[
-                                           {
-                                             from: ::Time?,
-                                             to: ::Time?
-                                           },
-                                         ]?,
-                                         last_updated_times: Array[
-                                           {
-                                             from: ::Time?,
-                                             to: ::Time?
-                                           },
-                                         ]?,
-                                         entity_arns: Array[::String]?,
-                                         entity_values: Array[::String]?,
-                                         event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
-                                         tags: Array[
-                                           Hash[::String, ::String],
-                                         ]?,
-                                         event_status_codes: Array[("open" | "closed" | "upcoming")]?,
-                                         personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
-                                       },
+                                       ?filter: Params::event_filter,
                                        aggregate_field: ("eventTypeCategory"),
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
@@ -239,7 +206,7 @@ module Aws
                                                        {
                                                          event_arn: ::String,
                                                          aws_account_id: ::String?
-                                                       },
+                                                       }
                                                      ],
                                                      ?locale: ::String
                                                    ) -> _DescribeEventDetailsForOrganizationResponseSuccess
@@ -272,40 +239,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Health/Client.html#describe_events-instance_method
       def describe_events: (
-                             ?filter: {
-                               actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
-                               event_arns: Array[::String]?,
-                               event_type_codes: Array[::String]?,
-                               services: Array[::String]?,
-                               regions: Array[::String]?,
-                               availability_zones: Array[::String]?,
-                               start_times: Array[
-                                 {
-                                   from: ::Time?,
-                                   to: ::Time?
-                                 },
-                               ]?,
-                               end_times: Array[
-                                 {
-                                   from: ::Time?,
-                                   to: ::Time?
-                                 },
-                               ]?,
-                               last_updated_times: Array[
-                                 {
-                                   from: ::Time?,
-                                   to: ::Time?
-                                 },
-                               ]?,
-                               entity_arns: Array[::String]?,
-                               entity_values: Array[::String]?,
-                               event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
-                               tags: Array[
-                                 Hash[::String, ::String],
-                               ]?,
-                               event_status_codes: Array[("open" | "closed" | "upcoming")]?,
-                               personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
-                             },
+                             ?filter: Params::event_filter,
                              ?next_token: ::String,
                              ?max_results: ::Integer,
                              ?locale: ::String

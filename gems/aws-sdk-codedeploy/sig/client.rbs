@@ -85,7 +85,7 @@ module Aws
                                                  {
                                                    key: ::String?,
                                                    value: ::String?
-                                                 },
+                                                 }
                                                ],
                                                instance_names: Array[::String]
                                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -101,28 +101,7 @@ module Aws
       def batch_get_application_revisions: (
                                              application_name: ::String,
                                              revisions: Array[
-                                               {
-                                                 revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
-                                                 s3_location: {
-                                                   bucket: ::String?,
-                                                   key: ::String?,
-                                                   bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
-                                                   version: ::String?,
-                                                   e_tag: ::String?
-                                                 }?,
-                                                 git_hub_location: {
-                                                   repository: ::String?,
-                                                   commit_id: ::String?
-                                                 }?,
-                                                 string: {
-                                                   content: ::String?,
-                                                   sha256: ::String?
-                                                 }?,
-                                                 app_spec_content: {
-                                                   content: ::String?,
-                                                   sha256: ::String?
-                                                 }?
-                                               },
+                                               Params::revision_location
                                              ]
                                            ) -> _BatchGetApplicationRevisionsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetApplicationRevisionsResponseSuccess
@@ -211,7 +190,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -224,28 +203,7 @@ module Aws
       def create_deployment: (
                                application_name: ::String,
                                ?deployment_group_name: ::String,
-                               ?revision: {
-                                 revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
-                                 s3_location: {
-                                   bucket: ::String?,
-                                   key: ::String?,
-                                   bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
-                                   version: ::String?,
-                                   e_tag: ::String?
-                                 }?,
-                                 git_hub_location: {
-                                   repository: ::String?,
-                                   commit_id: ::String?
-                                 }?,
-                                 string: {
-                                   content: ::String?,
-                                   sha256: ::String?
-                                 }?,
-                                 app_spec_content: {
-                                   content: ::String?,
-                                   sha256: ::String?
-                                 }?
-                               },
+                               ?revision: Params::revision_location,
                                ?deployment_config_name: ::String,
                                ?description: ::String,
                                ?ignore_application_stop_failures: bool,
@@ -255,7 +213,7 @@ module Aws
                                      key: ::String?,
                                      value: ::String?,
                                      type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                   },
+                                   }
                                  ]?,
                                  auto_scaling_groups: Array[::String]?,
                                  ec2_tag_set: {
@@ -265,8 +223,8 @@ module Aws
                                          key: ::String?,
                                          value: ::String?,
                                          type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                       },
-                                     ],
+                                       }
+                                     ]
                                    ]?
                                  }?
                                },
@@ -282,7 +240,7 @@ module Aws
                                  alarms: Array[
                                    {
                                      name: ::String?
-                                   },
+                                   }
                                  ]?
                                }
                              ) -> _CreateDeploymentResponseSuccess
@@ -336,14 +294,14 @@ module Aws
                                          key: ::String?,
                                          value: ::String?,
                                          type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                       },
+                                       }
                                      ],
                                      ?on_premises_instance_tag_filters: Array[
                                        {
                                          key: ::String?,
                                          value: ::String?,
                                          type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                       },
+                                       }
                                      ],
                                      ?auto_scaling_groups: Array[::String],
                                      service_role_arn: ::String,
@@ -352,7 +310,7 @@ module Aws
                                          trigger_name: ::String?,
                                          trigger_target_arn: ::String?,
                                          trigger_events: Array[("DeploymentStart" | "DeploymentSuccess" | "DeploymentFailure" | "DeploymentStop" | "DeploymentRollback" | "DeploymentReady" | "InstanceStart" | "InstanceSuccess" | "InstanceFailure" | "InstanceReady")]?
-                                       },
+                                       }
                                      ],
                                      ?alarm_configuration: {
                                        enabled: bool?,
@@ -360,7 +318,7 @@ module Aws
                                        alarms: Array[
                                          {
                                            name: ::String?
-                                         },
+                                         }
                                        ]?
                                      },
                                      ?auto_rollback_configuration: {
@@ -372,46 +330,8 @@ module Aws
                                        deployment_type: ("IN_PLACE" | "BLUE_GREEN")?,
                                        deployment_option: ("WITH_TRAFFIC_CONTROL" | "WITHOUT_TRAFFIC_CONTROL")?
                                      },
-                                     ?blue_green_deployment_configuration: {
-                                       terminate_blue_instances_on_deployment_success: {
-                                         action: ("TERMINATE" | "KEEP_ALIVE")?,
-                                         termination_wait_time_in_minutes: ::Integer?
-                                       }?,
-                                       deployment_ready_option: {
-                                         action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")?,
-                                         wait_time_in_minutes: ::Integer?
-                                       }?,
-                                       green_fleet_provisioning_option: {
-                                         action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")?
-                                       }?
-                                     },
-                                     ?load_balancer_info: {
-                                       elb_info_list: Array[
-                                         {
-                                           name: ::String?
-                                         },
-                                       ]?,
-                                       target_group_info_list: Array[
-                                         {
-                                           name: ::String?
-                                         },
-                                       ]?,
-                                       target_group_pair_info_list: Array[
-                                         {
-                                           target_groups: Array[
-                                             {
-                                               name: ::String?
-                                             },
-                                           ]?,
-                                           prod_traffic_route: {
-                                             listener_arns: Array[::String]?
-                                           }?,
-                                           test_traffic_route: {
-                                             listener_arns: Array[::String]?
-                                           }?
-                                         },
-                                       ]?
-                                     },
+                                     ?blue_green_deployment_configuration: Params::blue_green_deployment_configuration,
+                                     ?load_balancer_info: Params::load_balancer_info,
                                      ?ec2_tag_set: {
                                        ec2_tag_set_list: Array[
                                          Array[
@@ -419,15 +339,15 @@ module Aws
                                              key: ::String?,
                                              value: ::String?,
                                              type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                           },
-                                         ],
+                                           }
+                                         ]
                                        ]?
                                      },
                                      ?ecs_services: Array[
                                        {
                                          service_name: ::String?,
                                          cluster_name: ::String?
-                                       },
+                                       }
                                      ],
                                      ?on_premises_tag_set: {
                                        on_premises_tag_set_list: Array[
@@ -436,15 +356,15 @@ module Aws
                                              key: ::String?,
                                              value: ::String?,
                                              type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                           },
-                                         ],
+                                           }
+                                         ]
                                        ]?
                                      },
                                      ?tags: Array[
                                        {
                                          key: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      ?termination_hook_enabled: bool
                                    ) -> _CreateDeploymentGroupResponseSuccess
@@ -517,28 +437,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodeDeploy/Client.html#get_application_revision-instance_method
       def get_application_revision: (
                                       application_name: ::String,
-                                      revision: {
-                                        revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
-                                        s3_location: {
-                                          bucket: ::String?,
-                                          key: ::String?,
-                                          bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
-                                          version: ::String?,
-                                          e_tag: ::String?
-                                        }?,
-                                        git_hub_location: {
-                                          repository: ::String?,
-                                          commit_id: ::String?
-                                        }?,
-                                        string: {
-                                          content: ::String?,
-                                          sha256: ::String?
-                                        }?,
-                                        app_spec_content: {
-                                          content: ::String?,
-                                          sha256: ::String?
-                                        }?
-                                      }
+                                      revision: Params::revision_location
                                     ) -> _GetApplicationRevisionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetApplicationRevisionResponseSuccess
 
@@ -727,7 +626,7 @@ module Aws
                                             key: ::String?,
                                             value: ::String?,
                                             type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                          },
+                                          }
                                         ],
                                         ?next_token: ::String
                                       ) -> _ListOnPremisesInstancesResponseSuccess
@@ -761,28 +660,7 @@ module Aws
       def register_application_revision: (
                                            application_name: ::String,
                                            ?description: ::String,
-                                           revision: {
-                                             revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
-                                             s3_location: {
-                                               bucket: ::String?,
-                                               key: ::String?,
-                                               bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
-                                               version: ::String?,
-                                               e_tag: ::String?
-                                             }?,
-                                             git_hub_location: {
-                                               repository: ::String?,
-                                               commit_id: ::String?
-                                             }?,
-                                             string: {
-                                               content: ::String?,
-                                               sha256: ::String?
-                                             }?,
-                                             app_spec_content: {
-                                               content: ::String?,
-                                               sha256: ::String?
-                                             }?
-                                           }
+                                           revision: Params::revision_location
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -800,7 +678,7 @@ module Aws
                                                       {
                                                         key: ::String?,
                                                         value: ::String?
-                                                      },
+                                                      }
                                                     ],
                                                     instance_names: Array[::String]
                                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -834,7 +712,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -871,14 +749,14 @@ module Aws
                                          key: ::String?,
                                          value: ::String?,
                                          type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                       },
+                                       }
                                      ],
                                      ?on_premises_instance_tag_filters: Array[
                                        {
                                          key: ::String?,
                                          value: ::String?,
                                          type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                       },
+                                       }
                                      ],
                                      ?auto_scaling_groups: Array[::String],
                                      ?service_role_arn: ::String,
@@ -887,7 +765,7 @@ module Aws
                                          trigger_name: ::String?,
                                          trigger_target_arn: ::String?,
                                          trigger_events: Array[("DeploymentStart" | "DeploymentSuccess" | "DeploymentFailure" | "DeploymentStop" | "DeploymentRollback" | "DeploymentReady" | "InstanceStart" | "InstanceSuccess" | "InstanceFailure" | "InstanceReady")]?
-                                       },
+                                       }
                                      ],
                                      ?alarm_configuration: {
                                        enabled: bool?,
@@ -895,7 +773,7 @@ module Aws
                                        alarms: Array[
                                          {
                                            name: ::String?
-                                         },
+                                         }
                                        ]?
                                      },
                                      ?auto_rollback_configuration: {
@@ -907,46 +785,8 @@ module Aws
                                        deployment_type: ("IN_PLACE" | "BLUE_GREEN")?,
                                        deployment_option: ("WITH_TRAFFIC_CONTROL" | "WITHOUT_TRAFFIC_CONTROL")?
                                      },
-                                     ?blue_green_deployment_configuration: {
-                                       terminate_blue_instances_on_deployment_success: {
-                                         action: ("TERMINATE" | "KEEP_ALIVE")?,
-                                         termination_wait_time_in_minutes: ::Integer?
-                                       }?,
-                                       deployment_ready_option: {
-                                         action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")?,
-                                         wait_time_in_minutes: ::Integer?
-                                       }?,
-                                       green_fleet_provisioning_option: {
-                                         action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")?
-                                       }?
-                                     },
-                                     ?load_balancer_info: {
-                                       elb_info_list: Array[
-                                         {
-                                           name: ::String?
-                                         },
-                                       ]?,
-                                       target_group_info_list: Array[
-                                         {
-                                           name: ::String?
-                                         },
-                                       ]?,
-                                       target_group_pair_info_list: Array[
-                                         {
-                                           target_groups: Array[
-                                             {
-                                               name: ::String?
-                                             },
-                                           ]?,
-                                           prod_traffic_route: {
-                                             listener_arns: Array[::String]?
-                                           }?,
-                                           test_traffic_route: {
-                                             listener_arns: Array[::String]?
-                                           }?
-                                         },
-                                       ]?
-                                     },
+                                     ?blue_green_deployment_configuration: Params::blue_green_deployment_configuration,
+                                     ?load_balancer_info: Params::load_balancer_info,
                                      ?ec2_tag_set: {
                                        ec2_tag_set_list: Array[
                                          Array[
@@ -954,15 +794,15 @@ module Aws
                                              key: ::String?,
                                              value: ::String?,
                                              type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                           },
-                                         ],
+                                           }
+                                         ]
                                        ]?
                                      },
                                      ?ecs_services: Array[
                                        {
                                          service_name: ::String?,
                                          cluster_name: ::String?
-                                       },
+                                       }
                                      ],
                                      ?on_premises_tag_set: {
                                        on_premises_tag_set_list: Array[
@@ -971,8 +811,8 @@ module Aws
                                              key: ::String?,
                                              value: ::String?,
                                              type: ("KEY_ONLY" | "VALUE_ONLY" | "KEY_AND_VALUE")?
-                                           },
-                                         ],
+                                           }
+                                         ]
                                        ]?
                                      },
                                      ?termination_hook_enabled: bool

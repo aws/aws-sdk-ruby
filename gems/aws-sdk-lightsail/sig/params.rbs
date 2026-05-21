@@ -1,0 +1,77 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lightsail
+    module Params
+      type port_info = {
+      from_port: ::Integer?,
+      to_port: ::Integer?,
+      protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
+      cidrs: Array[::String]?,
+      ipv6_cidrs: Array[::String]?,
+      cidr_list_aliases: Array[::String]?
+    }
+
+      type container_service_health_check_config = {
+      healthy_threshold: ::Integer?,
+      unhealthy_threshold: ::Integer?,
+      timeout_seconds: ::Integer?,
+      interval_seconds: ::Integer?,
+      path: ::String?,
+      success_codes: ::String?
+    }
+
+      type endpoint_request = {
+      container_name: ::String,
+      container_port: ::Integer,
+      health_check: Params::container_service_health_check_config?
+    }
+
+      type add_on_request = {
+      add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
+      auto_snapshot_add_on_request: {
+        snapshot_time_of_day: ::String?
+      }?,
+      stop_instance_on_idle_request: {
+        threshold: ::String?,
+        duration: ::String?
+      }?
+    }
+
+      type cache_settings = {
+      default_ttl: ::Integer?,
+      minimum_ttl: ::Integer?,
+      maximum_ttl: ::Integer?,
+      allowed_http_methods: ::String?,
+      cached_http_methods: ::String?,
+      forwarded_cookies: {
+        option: ("none" | "allow-list" | "all")?,
+        cookies_allow_list: Array[::String]?
+      }?,
+      forwarded_headers: {
+        option: ("none" | "allow-list" | "all")?,
+        headers_allow_list: Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]?
+      }?,
+      forwarded_query_strings: {
+        option: bool?,
+        query_strings_allow_list: Array[::String]?
+      }?
+    }
+
+      type domain_entry = {
+      id: ::String?,
+      name: ::String?,
+      target: ::String?,
+      is_alias: bool?,
+      type: ::String?,
+      options: Hash[::String, ::String]?
+    }
+
+    end
+  end
+end

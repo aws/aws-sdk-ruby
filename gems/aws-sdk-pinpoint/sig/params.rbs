@@ -1,0 +1,811 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Pinpoint
+    module Params
+      type message = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      image_icon_url: ::String?,
+      image_small_icon_url: ::String?,
+      image_url: ::String?,
+      json_body: ::String?,
+      media_url: ::String?,
+      raw_content: ::String?,
+      silent_push: bool?,
+      time_to_live: ::Integer?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type campaign_email_message = {
+      body: ::String?,
+      from_address: ::String?,
+      headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?,
+      html_body: ::String?,
+      title: ::String?
+    }
+
+      type campaign_sms_message = {
+      body: ::String?,
+      message_type: ("TRANSACTIONAL" | "PROMOTIONAL")?,
+      origination_number: ::String?,
+      sender_id: ::String?,
+      entity_id: ::String?,
+      template_id: ::String?
+    }
+
+      type campaign_in_app_message = {
+      body: ::String?,
+      content: Array[
+        Params::in_app_message_content
+      ]?,
+      custom_config: Hash[::String, ::String]?,
+      layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")?
+    }
+
+      type message_configuration = {
+      adm_message: Params::message?,
+      apns_message: Params::message?,
+      baidu_message: Params::message?,
+      custom_message: {
+        data: ::String?
+      }?,
+      default_message: Params::message?,
+      email_message: Params::campaign_email_message?,
+      gcm_message: Params::message?,
+      sms_message: Params::campaign_sms_message?,
+      in_app_message: Params::campaign_in_app_message?
+    }
+
+      type event_dimensions = {
+      attributes: Hash[::String, {
+          attribute_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEFORE" | "AFTER" | "BETWEEN" | "ON")?,
+          values: Array[::String]
+        }]?,
+      event_type: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      metrics: Hash[::String, {
+          comparison_operator: ::String,
+          value: ::Float
+        }]?
+    }
+
+      type campaign_event_filter = {
+      dimensions: Params::event_dimensions,
+      filter_type: ("SYSTEM" | "ENDPOINT")
+    }
+
+      type schedule = {
+      end_time: ::String?,
+      event_filter: Params::campaign_event_filter?,
+      frequency: ("ONCE" | "HOURLY" | "DAILY" | "WEEKLY" | "MONTHLY" | "EVENT" | "IN_APP_EVENT")?,
+      is_local_time: bool?,
+      quiet_time: {
+        end: ::String?,
+        start: ::String?
+      }?,
+      start_time: ::String,
+      timezone: ::String?
+    }
+
+      type template_configuration = {
+      email_template: {
+        name: ::String?,
+        version: ::String?
+      }?,
+      push_template: {
+        name: ::String?,
+        version: ::String?
+      }?,
+      sms_template: {
+        name: ::String?,
+        version: ::String?
+      }?,
+      voice_template: {
+        name: ::String?,
+        version: ::String?
+      }?,
+      in_app_template: {
+        name: ::String?,
+        version: ::String?
+      }?
+    }
+
+      type write_campaign_request = {
+      additional_treatments: Array[
+        Params::write_treatment_resource
+      ]?,
+      custom_delivery_configuration: {
+        delivery_uri: ::String,
+        endpoint_types: Array[("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")]?
+      }?,
+      description: ::String?,
+      holdout_percent: ::Integer?,
+      hook: {
+        lambda_function_name: ::String?,
+        mode: ("DELIVERY" | "FILTER")?,
+        web_url: ::String?
+      }?,
+      is_paused: bool?,
+      limits: {
+        daily: ::Integer?,
+        maximum_duration: ::Integer?,
+        messages_per_second: ::Integer?,
+        total: ::Integer?,
+        session: ::Integer?
+      }?,
+      message_configuration: Params::message_configuration?,
+      name: ::String?,
+      schedule: Params::schedule?,
+      segment_id: ::String?,
+      segment_version: ::Integer?,
+      tags: Hash[::String, ::String]?,
+      template_configuration: Params::template_configuration?,
+      treatment_description: ::String?,
+      treatment_name: ::String?,
+      priority: ::Integer?
+    }
+
+      type write_treatment_resource = {
+      custom_delivery_configuration: {
+        delivery_uri: ::String,
+        endpoint_types: Array[("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")]?
+      }?,
+      message_configuration: Params::message_configuration?,
+      schedule: Params::schedule?,
+      size_percent: ::Integer,
+      template_configuration: Params::template_configuration?,
+      treatment_description: ::String?,
+      treatment_name: ::String?
+    }
+
+      type default_button_configuration = {
+      background_color: ::String?,
+      border_radius: ::Integer?,
+      button_action: ("LINK" | "DEEP_LINK" | "CLOSE"),
+      link: ::String?,
+      text: ::String,
+      text_color: ::String?
+    }
+
+      type in_app_message_button = {
+      android: {
+        button_action: ("LINK" | "DEEP_LINK" | "CLOSE"),
+        link: ::String?
+      }?,
+      default_config: Params::default_button_configuration?,
+      ios: {
+        button_action: ("LINK" | "DEEP_LINK" | "CLOSE"),
+        link: ::String?
+      }?,
+      web: {
+        button_action: ("LINK" | "DEEP_LINK" | "CLOSE"),
+        link: ::String?
+      }?
+    }
+
+      type in_app_message_content = {
+      background_color: ::String?,
+      body_config: {
+        alignment: ("LEFT" | "CENTER" | "RIGHT"),
+        body: ::String,
+        text_color: ::String
+      }?,
+      header_config: {
+        alignment: ("LEFT" | "CENTER" | "RIGHT"),
+        header: ::String,
+        text_color: ::String
+      }?,
+      image_url: ::String?,
+      primary_btn: Params::in_app_message_button?,
+      secondary_btn: Params::in_app_message_button?
+    }
+
+      type email_template_request = {
+      default_substitutions: ::String?,
+      html_part: ::String?,
+      recommender_id: ::String?,
+      subject: ::String?,
+      headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?,
+      tags: Hash[::String, ::String]?,
+      template_description: ::String?,
+      text_part: ::String?
+    }
+
+      type in_app_template_request = {
+      content: Array[
+        Params::in_app_message_content
+      ]?,
+      custom_config: Hash[::String, ::String]?,
+      layout: ("BOTTOM_BANNER" | "TOP_BANNER" | "OVERLAYS" | "MOBILE_FEED" | "MIDDLE_BANNER" | "CAROUSEL")?,
+      tags: Hash[::String, ::String]?,
+      template_description: ::String?
+    }
+
+      type journey_limits = {
+      daily_cap: ::Integer?,
+      endpoint_reentry_cap: ::Integer?,
+      messages_per_second: ::Integer?,
+      endpoint_reentry_interval: ::String?,
+      timeframe_cap: {
+        cap: ::Integer?,
+        days: ::Integer?
+      }?,
+      total_cap: ::Integer?
+    }
+
+      type event_filter = {
+      dimensions: Params::event_dimensions,
+      filter_type: ("SYSTEM" | "ENDPOINT")
+    }
+
+      type event_start_condition = {
+      event_filter: Params::event_filter?,
+      segment_id: ::String?
+    }
+
+      type start_condition = {
+      description: ::String?,
+      event_start_condition: Params::event_start_condition?,
+      segment_start_condition: {
+        segment_id: ::String
+      }?
+    }
+
+      type closed_days = {
+      email: Array[
+        {
+          name: ::String?,
+          start_date_time: ::String?,
+          end_date_time: ::String?
+        }
+      ]?,
+      sms: Array[
+        {
+          name: ::String?,
+          start_date_time: ::String?,
+          end_date_time: ::String?
+        }
+      ]?,
+      push: Array[
+        {
+          name: ::String?,
+          start_date_time: ::String?,
+          end_date_time: ::String?
+        }
+      ]?,
+      voice: Array[
+        {
+          name: ::String?,
+          start_date_time: ::String?,
+          end_date_time: ::String?
+        }
+      ]?,
+      custom: Array[
+        {
+          name: ::String?,
+          start_date_time: ::String?,
+          end_date_time: ::String?
+        }
+      ]?
+    }
+
+      type write_journey_request = {
+      activities: Hash[::String, Params::activity]?,
+      creation_date: ::String?,
+      last_modified_date: ::String?,
+      limits: Params::journey_limits?,
+      local_time: bool?,
+      name: ::String,
+      quiet_time: {
+        end: ::String?,
+        start: ::String?
+      }?,
+      refresh_frequency: ::String?,
+      schedule: {
+        end_time: ::Time?,
+        start_time: ::Time?,
+        timezone: ::String?
+      }?,
+      start_activity: ::String?,
+      start_condition: Params::start_condition?,
+      state: ("DRAFT" | "ACTIVE" | "COMPLETED" | "CANCELLED" | "CLOSED" | "PAUSED")?,
+      wait_for_quiet_time: bool?,
+      refresh_on_segment_update: bool?,
+      journey_channel_settings: {
+        connect_campaign_arn: ::String?,
+        connect_campaign_execution_role_arn: ::String?
+      }?,
+      sending_schedule: bool?,
+      open_hours: {
+        email: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String?,
+              end_time: ::String?
+            }
+          ]]?,
+        sms: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String?,
+              end_time: ::String?
+            }
+          ]]?,
+        push: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String?,
+              end_time: ::String?
+            }
+          ]]?,
+        voice: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String?,
+              end_time: ::String?
+            }
+          ]]?,
+        custom: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String?,
+              end_time: ::String?
+            }
+          ]]?
+      }?,
+      closed_days: Params::closed_days?,
+      timezone_estimation_methods: Array[("PHONE_NUMBER" | "POSTAL_CODE")]?
+    }
+
+      type custom_message_activity = {
+      delivery_uri: ::String?,
+      endpoint_types: Array[("PUSH" | "GCM" | "APNS" | "APNS_SANDBOX" | "APNS_VOIP" | "APNS_VOIP_SANDBOX" | "ADM" | "SMS" | "VOICE" | "EMAIL" | "BAIDU" | "CUSTOM" | "IN_APP")]?,
+      message_config: {
+        data: ::String?
+      }?,
+      next_activity: ::String?,
+      template_name: ::String?,
+      template_version: ::String?
+    }
+
+      type condition = {
+      conditions: Array[
+        Params::simple_condition
+      ]?,
+      operator: ("ALL" | "ANY")?
+    }
+
+      type conditional_split_activity = {
+      condition: Params::condition?,
+      evaluation_wait_time: {
+        wait_for: ::String?,
+        wait_until: ::String?
+      }?,
+      false_activity: ::String?,
+      true_activity: ::String?
+    }
+
+      type email_message_activity = {
+      message_config: {
+        from_address: ::String?
+      }?,
+      next_activity: ::String?,
+      template_name: ::String?,
+      template_version: ::String?
+    }
+
+      type multi_conditional_split_activity = {
+      branches: Array[
+        Params::multi_conditional_branch
+      ]?,
+      default_activity: ::String?,
+      evaluation_wait_time: {
+        wait_for: ::String?,
+        wait_until: ::String?
+      }?
+    }
+
+      type push_message_activity = {
+      message_config: {
+        time_to_live: ::String?
+      }?,
+      next_activity: ::String?,
+      template_name: ::String?,
+      template_version: ::String?
+    }
+
+      type sms_message_activity = {
+      message_config: {
+        message_type: ("TRANSACTIONAL" | "PROMOTIONAL")?,
+        origination_number: ::String?,
+        sender_id: ::String?,
+        entity_id: ::String?,
+        template_id: ::String?
+      }?,
+      next_activity: ::String?,
+      template_name: ::String?,
+      template_version: ::String?
+    }
+
+      type activity = {
+      custom: Params::custom_message_activity?,
+      conditional_split: Params::conditional_split_activity?,
+      description: ::String?,
+      email: Params::email_message_activity?,
+      holdout: {
+        next_activity: ::String?,
+        percentage: ::Integer
+      }?,
+      multi_condition: Params::multi_conditional_split_activity?,
+      push: Params::push_message_activity?,
+      random_split: {
+        branches: Array[
+          {
+            next_activity: ::String?,
+            percentage: ::Integer?
+          }
+        ]?
+      }?,
+      sms: Params::sms_message_activity?,
+      wait: {
+        next_activity: ::String?,
+        wait_time: {
+          wait_for: ::String?,
+          wait_until: ::String?
+        }?
+      }?,
+      contact_center: {
+        next_activity: ::String?
+      }?
+    }
+
+      type event_condition = {
+      dimensions: Params::event_dimensions?,
+      message_activity: ::String?
+    }
+
+      type segment_demographics = {
+      app_version: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      channel: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      device_type: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      make: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      model: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      platform: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?
+    }
+
+      type segment_location = {
+      country: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE")?,
+        values: Array[::String]
+      }?,
+      gps_point: {
+        coordinates: {
+          latitude: ::Float,
+          longitude: ::Float
+        },
+        range_in_kilometers: ::Float?
+      }?
+    }
+
+      type segment_dimensions = {
+      attributes: Hash[::String, {
+          attribute_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEFORE" | "AFTER" | "BETWEEN" | "ON")?,
+          values: Array[::String]
+        }]?,
+      behavior: {
+        recency: {
+          duration: ("HR_24" | "DAY_7" | "DAY_14" | "DAY_30"),
+          recency_type: ("ACTIVE" | "INACTIVE")
+        }?
+      }?,
+      demographic: Params::segment_demographics?,
+      location: Params::segment_location?,
+      metrics: Hash[::String, {
+          comparison_operator: ::String,
+          value: ::Float
+        }]?,
+      user_attributes: Hash[::String, {
+          attribute_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEFORE" | "AFTER" | "BETWEEN" | "ON")?,
+          values: Array[::String]
+        }]?
+    }
+
+      type simple_condition = {
+      event_condition: Params::event_condition?,
+      segment_condition: {
+        segment_id: ::String
+      }?,
+      segment_dimensions: Params::segment_dimensions?
+    }
+
+      type multi_conditional_branch = {
+      condition: Params::simple_condition?,
+      next_activity: ::String?
+    }
+
+      type android_push_notification_template = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      image_icon_url: ::String?,
+      image_url: ::String?,
+      raw_content: ::String?,
+      small_image_icon_url: ::String?,
+      sound: ::String?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type apns_push_notification_template = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      media_url: ::String?,
+      raw_content: ::String?,
+      sound: ::String?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type push_notification_template_request = {
+      adm: Params::android_push_notification_template?,
+      apns: Params::apns_push_notification_template?,
+      baidu: Params::android_push_notification_template?,
+      default: {
+        action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+        body: ::String?,
+        sound: ::String?,
+        title: ::String?,
+        url: ::String?
+      }?,
+      default_substitutions: ::String?,
+      gcm: Params::android_push_notification_template?,
+      recommender_id: ::String?,
+      tags: Hash[::String, ::String]?,
+      template_description: ::String?
+    }
+
+      type segment_group_list = {
+      groups: Array[
+        Params::segment_group
+      ]?,
+      include: ("ALL" | "ANY" | "NONE")?
+    }
+
+      type write_segment_request = {
+      dimensions: Params::segment_dimensions?,
+      name: ::String?,
+      segment_groups: Params::segment_group_list?,
+      tags: Hash[::String, ::String]?
+    }
+
+      type segment_group = {
+      dimensions: Array[
+        Params::segment_dimensions
+      ]?,
+      source_segments: Array[
+        {
+          id: ::String,
+          version: ::Integer?
+        }
+      ]?,
+      source_type: ("ALL" | "ANY" | "NONE")?,
+      type: ("ALL" | "ANY" | "NONE")?
+    }
+
+      type voice_template_request = {
+      body: ::String?,
+      default_substitutions: ::String?,
+      language_code: ::String?,
+      tags: Hash[::String, ::String]?,
+      template_description: ::String?,
+      voice_id: ::String?
+    }
+
+      type endpoint_demographic = {
+      app_version: ::String?,
+      locale: ::String?,
+      make: ::String?,
+      model: ::String?,
+      model_version: ::String?,
+      platform: ::String?,
+      platform_version: ::String?,
+      timezone: ::String?
+    }
+
+      type endpoint_location = {
+      city: ::String?,
+      country: ::String?,
+      latitude: ::Float?,
+      longitude: ::Float?,
+      postal_code: ::String?,
+      region: ::String?
+    }
+
+      type adm_message = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      consolidation_key: ::String?,
+      data: Hash[::String, ::String]?,
+      expires_after: ::String?,
+      icon_reference: ::String?,
+      image_icon_url: ::String?,
+      image_url: ::String?,
+      md5: ::String?,
+      raw_content: ::String?,
+      silent_push: bool?,
+      small_image_icon_url: ::String?,
+      sound: ::String?,
+      substitutions: Hash[::String, Array[::String]]?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type apns_message = {
+      apns_push_type: ::String?,
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      badge: ::Integer?,
+      body: ::String?,
+      category: ::String?,
+      collapse_id: ::String?,
+      data: Hash[::String, ::String]?,
+      media_url: ::String?,
+      preferred_authentication_method: ::String?,
+      priority: ::String?,
+      raw_content: ::String?,
+      silent_push: bool?,
+      sound: ::String?,
+      substitutions: Hash[::String, Array[::String]]?,
+      thread_id: ::String?,
+      time_to_live: ::Integer?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type baidu_message = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      data: Hash[::String, ::String]?,
+      icon_reference: ::String?,
+      image_icon_url: ::String?,
+      image_url: ::String?,
+      raw_content: ::String?,
+      silent_push: bool?,
+      small_image_icon_url: ::String?,
+      sound: ::String?,
+      substitutions: Hash[::String, Array[::String]]?,
+      time_to_live: ::Integer?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type default_push_notification_message = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      data: Hash[::String, ::String]?,
+      silent_push: bool?,
+      substitutions: Hash[::String, Array[::String]]?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type simple_email = {
+      html_part: {
+        charset: ::String?,
+        data: ::String?
+      }?,
+      subject: {
+        charset: ::String?,
+        data: ::String?
+      }?,
+      text_part: {
+        charset: ::String?,
+        data: ::String?
+      }?,
+      headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?
+    }
+
+      type email_message = {
+      body: ::String?,
+      feedback_forwarding_address: ::String?,
+      from_address: ::String?,
+      raw_email: {
+        data: ::String?
+      }?,
+      reply_to_addresses: Array[::String]?,
+      simple_email: Params::simple_email?,
+      substitutions: Hash[::String, Array[::String]]?
+    }
+
+      type gcm_message = {
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      body: ::String?,
+      collapse_key: ::String?,
+      data: Hash[::String, ::String]?,
+      icon_reference: ::String?,
+      image_icon_url: ::String?,
+      image_url: ::String?,
+      preferred_authentication_method: ::String?,
+      priority: ::String?,
+      raw_content: ::String?,
+      restricted_package_name: ::String?,
+      silent_push: bool?,
+      small_image_icon_url: ::String?,
+      sound: ::String?,
+      substitutions: Hash[::String, Array[::String]]?,
+      time_to_live: ::Integer?,
+      title: ::String?,
+      url: ::String?
+    }
+
+      type sms_message = {
+      body: ::String?,
+      keyword: ::String?,
+      media_url: ::String?,
+      message_type: ("TRANSACTIONAL" | "PROMOTIONAL")?,
+      origination_number: ::String?,
+      sender_id: ::String?,
+      substitutions: Hash[::String, Array[::String]]?,
+      entity_id: ::String?,
+      template_id: ::String?
+    }
+
+      type direct_message_configuration = {
+      adm_message: Params::adm_message?,
+      apns_message: Params::apns_message?,
+      baidu_message: Params::baidu_message?,
+      default_message: {
+        body: ::String?,
+        substitutions: Hash[::String, Array[::String]]?
+      }?,
+      default_push_notification_message: Params::default_push_notification_message?,
+      email_message: Params::email_message?,
+      gcm_message: Params::gcm_message?,
+      sms_message: Params::sms_message?,
+      voice_message: {
+        body: ::String?,
+        language_code: ::String?,
+        origination_number: ::String?,
+        substitutions: Hash[::String, Array[::String]]?,
+        voice_id: ::String?
+      }?
+    }
+
+    end
+  end
+end

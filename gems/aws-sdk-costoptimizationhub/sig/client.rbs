@@ -170,24 +170,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_recommendation_summaries-instance_method
       def list_recommendation_summaries: (
-                                           ?filter: {
-                                             restart_needed: bool?,
-                                             rollback_possible: bool?,
-                                             implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
-                                             account_ids: Array[::String]?,
-                                             regions: Array[::String]?,
-                                             resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")]?,
-                                             action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")]?,
-                                             tags: Array[
-                                               {
-                                                 key: ::String?,
-                                                 value: ::String?
-                                               },
-                                             ]?,
-                                             resource_ids: Array[::String]?,
-                                             resource_arns: Array[::String]?,
-                                             recommendation_ids: Array[::String]?
-                                           },
+                                           ?filter: Params::filter,
                                            group_by: ::String,
                                            ?max_results: ::Integer,
                                            ?metrics: Array[("SavingsPercentage")],
@@ -202,24 +185,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CostOptimizationHub/Client.html#list_recommendations-instance_method
       def list_recommendations: (
-                                  ?filter: {
-                                    restart_needed: bool?,
-                                    rollback_possible: bool?,
-                                    implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
-                                    account_ids: Array[::String]?,
-                                    regions: Array[::String]?,
-                                    resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")]?,
-                                    action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")]?,
-                                    tags: Array[
-                                      {
-                                        key: ::String?,
-                                        value: ::String?
-                                      },
-                                    ]?,
-                                    resource_ids: Array[::String]?,
-                                    resource_arns: Array[::String]?,
-                                    recommendation_ids: Array[::String]?
-                                  },
+                                  ?filter: Params::filter,
                                   ?order_by: {
                                     dimension: ::String?,
                                     order: ("Asc" | "Desc")?

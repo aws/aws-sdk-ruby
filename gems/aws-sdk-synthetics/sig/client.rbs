@@ -95,20 +95,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#create_canary-instance_method
       def create_canary: (
                            name: ::String,
-                           code: {
-                             s3_bucket: ::String?,
-                             s3_key: ::String?,
-                             s3_version: ::String?,
-                             zip_file: ::String?,
-                             handler: ::String?,
-                             blueprint_types: Array[::String]?,
-                             dependencies: Array[
-                               {
-                                 type: ("LambdaLayer")?,
-                                 reference: ::String
-                               },
-                             ]?
-                           },
+                           code: Params::canary_code_input,
                            artifact_s3_location: ::String,
                            execution_role_arn: ::String,
                            schedule: {
@@ -138,7 +125,7 @@ module Aws
                            ?browser_configs: Array[
                              {
                                browser_type: ("CHROME" | "FIREFOX")?
-                             },
+                             }
                            ],
                            ?tags: Hash[::String, ::String],
                            ?artifact_config: {
@@ -329,20 +316,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#start_canary_dry_run-instance_method
       def start_canary_dry_run: (
                                   name: ::String,
-                                  ?code: {
-                                    s3_bucket: ::String?,
-                                    s3_key: ::String?,
-                                    s3_version: ::String?,
-                                    zip_file: ::String?,
-                                    handler: ::String?,
-                                    blueprint_types: Array[::String]?,
-                                    dependencies: Array[
-                                      {
-                                        type: ("LambdaLayer")?,
-                                        reference: ::String
-                                      },
-                                    ]?
-                                  },
+                                  ?code: Params::canary_code_input,
                                   ?runtime_version: ::String,
                                   ?run_config: {
                                     timeout_in_seconds: ::Integer?,
@@ -359,16 +333,7 @@ module Aws
                                   ?execution_role_arn: ::String,
                                   ?success_retention_period_in_days: ::Integer,
                                   ?failure_retention_period_in_days: ::Integer,
-                                  ?visual_reference: {
-                                    base_screenshots: Array[
-                                      {
-                                        screenshot_name: ::String,
-                                        ignore_coordinates: Array[::String]?
-                                      },
-                                    ]?,
-                                    base_canary_run_id: ::String,
-                                    browser_type: ("CHROME" | "FIREFOX")?
-                                  },
+                                  ?visual_reference: Params::visual_reference_input,
                                   ?artifact_s3_location: ::String,
                                   ?artifact_config: {
                                     s3_encryption: {
@@ -380,19 +345,10 @@ module Aws
                                   ?browser_configs: Array[
                                     {
                                       browser_type: ("CHROME" | "FIREFOX")?
-                                    },
+                                    }
                                   ],
                                   ?visual_references: Array[
-                                    {
-                                      base_screenshots: Array[
-                                        {
-                                          screenshot_name: ::String,
-                                          ignore_coordinates: Array[::String]?
-                                        },
-                                      ]?,
-                                      base_canary_run_id: ::String,
-                                      browser_type: ("CHROME" | "FIREFOX")?
-                                    },
+                                    Params::visual_reference_input
                                   ]
                                 ) -> _StartCanaryDryRunResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCanaryDryRunResponseSuccess
@@ -432,20 +388,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Synthetics/Client.html#update_canary-instance_method
       def update_canary: (
                            name: ::String,
-                           ?code: {
-                             s3_bucket: ::String?,
-                             s3_key: ::String?,
-                             s3_version: ::String?,
-                             zip_file: ::String?,
-                             handler: ::String?,
-                             blueprint_types: Array[::String]?,
-                             dependencies: Array[
-                               {
-                                 type: ("LambdaLayer")?,
-                                 reference: ::String
-                               },
-                             ]?
-                           },
+                           ?code: Params::canary_code_input,
                            ?execution_role_arn: ::String,
                            ?runtime_version: ::String,
                            ?schedule: {
@@ -469,16 +412,7 @@ module Aws
                              security_group_ids: Array[::String]?,
                              ipv_6_allowed_for_dual_stack: bool?
                            },
-                           ?visual_reference: {
-                             base_screenshots: Array[
-                               {
-                                 screenshot_name: ::String,
-                                 ignore_coordinates: Array[::String]?
-                               },
-                             ]?,
-                             base_canary_run_id: ::String,
-                             browser_type: ("CHROME" | "FIREFOX")?
-                           },
+                           ?visual_reference: Params::visual_reference_input,
                            ?artifact_s3_location: ::String,
                            ?artifact_config: {
                              s3_encryption: {
@@ -489,21 +423,12 @@ module Aws
                            ?provisioned_resource_cleanup: ("AUTOMATIC" | "OFF"),
                            ?dry_run_id: ::String,
                            ?visual_references: Array[
-                             {
-                               base_screenshots: Array[
-                                 {
-                                   screenshot_name: ::String,
-                                   ignore_coordinates: Array[::String]?
-                                 },
-                               ]?,
-                               base_canary_run_id: ::String,
-                               browser_type: ("CHROME" | "FIREFOX")?
-                             },
+                             Params::visual_reference_input
                            ],
                            ?browser_configs: Array[
                              {
                                browser_type: ("CHROME" | "FIREFOX")?
-                             },
+                             }
                            ]
                          ) -> _UpdateCanaryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCanaryResponseSuccess

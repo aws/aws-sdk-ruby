@@ -1,0 +1,45 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RDSDataService
+    module Params
+      type array_value = {
+      boolean_values: Array[bool]?,
+      long_values: Array[::Integer]?,
+      double_values: Array[::Float]?,
+      string_values: Array[::String]?,
+      array_values: Array[
+        {
+          boolean_values: Array[bool]?,
+          long_values: Array[::Integer]?,
+          double_values: Array[::Float]?,
+          string_values: Array[::String]?,
+          array_values: untyped?
+        }
+      ]?
+    }
+
+      type field = {
+      is_null: bool?,
+      boolean_value: bool?,
+      long_value: ::Integer?,
+      double_value: ::Float?,
+      string_value: ::String?,
+      blob_value: ::String?,
+      array_value: Params::array_value?
+    }
+
+      type sql_parameter = {
+      name: ::String?,
+      value: Params::field?,
+      type_hint: ("JSON" | "UUID" | "TIMESTAMP" | "DATE" | "TIME" | "DECIMAL")?
+    }
+
+    end
+  end
+end

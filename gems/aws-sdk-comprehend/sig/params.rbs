@@ -1,0 +1,32 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Comprehend
+    module Params
+      type augmented_manifests_list_item = {
+      s3_uri: ::String,
+      split: ("TRAIN" | "TEST")?,
+      attribute_names: Array[::String],
+      annotation_data_s3_uri: ::String?,
+      source_documents_s3_uri: ::String?,
+      document_type: ("PLAIN_TEXT_DOCUMENT" | "SEMI_STRUCTURED_DOCUMENT")?
+    }
+
+      type input_data_config = {
+      s3_uri: ::String,
+      input_format: ("ONE_DOC_PER_FILE" | "ONE_DOC_PER_LINE")?,
+      document_reader_config: {
+        document_read_action: ("TEXTRACT_DETECT_DOCUMENT_TEXT" | "TEXTRACT_ANALYZE_DOCUMENT"),
+        document_read_mode: ("SERVICE_DEFAULT" | "FORCE_DOCUMENT_READ_ACTION")?,
+        feature_types: Array[("TABLES" | "FORMS")]?
+      }?
+    }
+
+    end
+  end
+end

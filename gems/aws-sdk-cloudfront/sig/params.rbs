@@ -1,0 +1,617 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudFront
+    module Params
+      type parameters_in_cache_key_and_forwarded_to_origin = {
+      enable_accept_encoding_gzip: bool,
+      enable_accept_encoding_brotli: bool?,
+      headers_config: {
+        header_behavior: ("none" | "whitelist"),
+        headers: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      },
+      cookies_config: {
+        cookie_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+        cookies: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      },
+      query_strings_config: {
+        query_string_behavior: ("none" | "whitelist" | "allExcept" | "all"),
+        query_strings: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      }
+    }
+
+      type cache_policy_config = {
+      comment: ::String?,
+      name: ::String,
+      default_ttl: ::Integer?,
+      max_ttl: ::Integer?,
+      min_ttl: ::Integer,
+      parameters_in_cache_key_and_forwarded_to_origin: Params::parameters_in_cache_key_and_forwarded_to_origin?
+    }
+
+      type function_config = {
+      comment: ::String,
+      runtime: ("cloudfront-js-1.0" | "cloudfront-js-2.0"),
+      key_value_store_associations: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            key_value_store_arn: ::String
+          }
+        ]?
+      }?
+    }
+
+      type traffic_config = {
+      single_weight_config: {
+        weight: ::Float,
+        session_stickiness_config: {
+          idle_ttl: ::Integer,
+          maximum_ttl: ::Integer
+        }?
+      }?,
+      single_header_config: {
+        header: ::String,
+        value: ::String
+      }?,
+      type: ("SingleWeight" | "SingleHeader")
+    }
+
+      type continuous_deployment_policy_config = {
+      staging_distribution_dns_names: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      },
+      enabled: bool,
+      traffic_config: Params::traffic_config?
+    }
+
+      type origins = {
+      quantity: ::Integer,
+      items: Array[
+        Params::origin
+      ]
+    }
+
+      type origin_groups = {
+      quantity: ::Integer,
+      items: Array[
+        Params::origin_group
+      ]?
+    }
+
+      type allowed_methods = {
+      quantity: ::Integer,
+      items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")],
+      cached_methods: {
+        quantity: ::Integer,
+        items: Array[("GET" | "HEAD" | "POST" | "PUT" | "PATCH" | "OPTIONS" | "DELETE")]
+      }?
+    }
+
+      type lambda_function_associations = {
+      quantity: ::Integer,
+      items: Array[
+        {
+          lambda_function_arn: ::String,
+          event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response"),
+          include_body: bool?
+        }
+      ]?
+    }
+
+      type forwarded_values = {
+      query_string: bool,
+      cookies: {
+        forward: ("none" | "whitelist" | "all"),
+        whitelisted_names: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      },
+      headers: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      query_string_cache_keys: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?
+    }
+
+      type default_cache_behavior = {
+      target_origin_id: ::String,
+      trusted_signers: {
+        enabled: bool,
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      trusted_key_groups: {
+        enabled: bool,
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+      allowed_methods: Params::allowed_methods?,
+      smooth_streaming: bool?,
+      compress: bool?,
+      lambda_function_associations: Params::lambda_function_associations?,
+      function_associations: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            function_arn: ::String,
+            event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+          }
+        ]?
+      }?,
+      field_level_encryption_id: ::String?,
+      realtime_log_config_arn: ::String?,
+      cache_policy_id: ::String?,
+      origin_request_policy_id: ::String?,
+      response_headers_policy_id: ::String?,
+      grpc_config: {
+        enabled: bool
+      }?,
+      forwarded_values: Params::forwarded_values?,
+      min_ttl: ::Integer?,
+      default_ttl: ::Integer?,
+      max_ttl: ::Integer?
+    }
+
+      type cache_behaviors = {
+      quantity: ::Integer,
+      items: Array[
+        Params::cache_behavior
+      ]?
+    }
+
+      type custom_error_responses = {
+      quantity: ::Integer,
+      items: Array[
+        {
+          error_code: ::Integer,
+          response_page_path: ::String?,
+          response_code: ::String?,
+          error_caching_min_ttl: ::Integer?
+        }
+      ]?
+    }
+
+      type viewer_certificate = {
+      cloud_front_default_certificate: bool?,
+      iam_certificate_id: ::String?,
+      acm_certificate_arn: ::String?,
+      ssl_support_method: ("sni-only" | "vip" | "static-ip")?,
+      minimum_protocol_version: ("SSLv3" | "TLSv1" | "TLSv1_2016" | "TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021" | "TLSv1.3_2025" | "TLSv1.2_2025")?,
+      certificate: ::String?,
+      certificate_source: ("cloudfront" | "iam" | "acm")?
+    }
+
+      type tenant_config = {
+      parameter_definitions: Array[
+        Params::parameter_definition
+      ]?
+    }
+
+      type viewer_mtls_config = {
+      mode: ("required" | "optional" | "passthrough")?,
+      trust_store_config: {
+        trust_store_id: ::String,
+        advertise_trust_store_ca_names: bool?,
+        ignore_certificate_expiry: bool?
+      }?
+    }
+
+      type distribution_config = {
+      caller_reference: ::String,
+      aliases: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      default_root_object: ::String?,
+      origins: Params::origins,
+      origin_groups: Params::origin_groups?,
+      default_cache_behavior: Params::default_cache_behavior,
+      cache_behaviors: Params::cache_behaviors?,
+      custom_error_responses: Params::custom_error_responses?,
+      comment: ::String,
+      logging: {
+        enabled: bool?,
+        include_cookies: bool?,
+        bucket: ::String?,
+        prefix: ::String?
+      }?,
+      price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
+      enabled: bool,
+      viewer_certificate: Params::viewer_certificate?,
+      restrictions: {
+        geo_restriction: {
+          restriction_type: ("blacklist" | "whitelist" | "none"),
+          quantity: ::Integer,
+          items: Array[::String]?
+        }
+      }?,
+      web_acl_id: ::String?,
+      http_version: ("http1.1" | "http2" | "http3" | "http2and3")?,
+      is_ipv6_enabled: bool?,
+      continuous_deployment_policy_id: ::String?,
+      staging: bool?,
+      anycast_ip_list_id: ::String?,
+      tenant_config: Params::tenant_config?,
+      connection_mode: ("direct" | "tenant-only")?,
+      viewer_mtls_config: Params::viewer_mtls_config?,
+      connection_function_association: {
+        id: ::String
+      }?,
+      cache_tag_config: {
+        header_name: ::String
+      }?
+    }
+
+      type custom_origin_config = {
+      http_port: ::Integer,
+      https_port: ::Integer,
+      origin_protocol_policy: ("http-only" | "match-viewer" | "https-only"),
+      origin_ssl_protocols: {
+        quantity: ::Integer,
+        items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+      }?,
+      origin_read_timeout: ::Integer?,
+      origin_keepalive_timeout: ::Integer?,
+      ip_address_type: ("ipv4" | "ipv6" | "dualstack")?,
+      origin_mtls_config: {
+        client_certificate_arn: ::String
+      }?
+    }
+
+      type origin = {
+      id: ::String,
+      domain_name: ::String,
+      origin_path: ::String?,
+      custom_headers: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            header_name: ::String,
+            header_value: ::String
+          }
+        ]?
+      }?,
+      s3_origin_config: {
+        origin_access_identity: ::String,
+        origin_read_timeout: ::Integer?
+      }?,
+      custom_origin_config: Params::custom_origin_config?,
+      vpc_origin_config: {
+        vpc_origin_id: ::String,
+        owner_account_id: ::String?,
+        origin_read_timeout: ::Integer?,
+        origin_keepalive_timeout: ::Integer?
+      }?,
+      connection_attempts: ::Integer?,
+      connection_timeout: ::Integer?,
+      response_completion_timeout: ::Integer?,
+      origin_shield: {
+        enabled: bool,
+        origin_shield_region: ::String?
+      }?,
+      origin_access_control_id: ::String?
+    }
+
+      type origin_group = {
+      id: ::String,
+      failover_criteria: {
+        status_codes: {
+          quantity: ::Integer,
+          items: Array[::Integer]
+        }
+      },
+      members: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            origin_id: ::String
+          }
+        ]
+      },
+      selection_criteria: ("default" | "media-quality-based")?
+    }
+
+      type cache_behavior = {
+      path_pattern: ::String,
+      target_origin_id: ::String,
+      trusted_signers: {
+        enabled: bool,
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      trusted_key_groups: {
+        enabled: bool,
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      viewer_protocol_policy: ("allow-all" | "https-only" | "redirect-to-https"),
+      allowed_methods: Params::allowed_methods?,
+      smooth_streaming: bool?,
+      compress: bool?,
+      lambda_function_associations: Params::lambda_function_associations?,
+      function_associations: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            function_arn: ::String,
+            event_type: ("viewer-request" | "viewer-response" | "origin-request" | "origin-response")
+          }
+        ]?
+      }?,
+      field_level_encryption_id: ::String?,
+      realtime_log_config_arn: ::String?,
+      cache_policy_id: ::String?,
+      origin_request_policy_id: ::String?,
+      response_headers_policy_id: ::String?,
+      grpc_config: {
+        enabled: bool
+      }?,
+      forwarded_values: Params::forwarded_values?,
+      min_ttl: ::Integer?,
+      default_ttl: ::Integer?,
+      max_ttl: ::Integer?
+    }
+
+      type parameter_definition = {
+      name: ::String,
+      definition: {
+        string_schema: {
+          comment: ::String?,
+          default_value: ::String?,
+          required: bool
+        }?
+      }
+    }
+
+      type customizations = {
+      web_acl: {
+        action: ("override" | "disable"),
+        arn: ::String?
+      }?,
+      certificate: {
+        arn: ::String
+      }?,
+      geo_restrictions: {
+        restriction_type: ("blacklist" | "whitelist" | "none"),
+        locations: Array[::String]?
+      }?
+    }
+
+      type query_arg_profile_config = {
+      forward_when_query_arg_profile_is_unknown: bool,
+      query_arg_profiles: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            query_arg: ::String,
+            profile_id: ::String
+          }
+        ]?
+      }?
+    }
+
+      type content_type_profiles = {
+      quantity: ::Integer,
+      items: Array[
+        {
+          format: ("URLEncoded"),
+          profile_id: ::String?,
+          content_type: ::String
+        }
+      ]?
+    }
+
+      type content_type_profile_config = {
+      forward_when_content_type_is_unknown: bool,
+      content_type_profiles: Params::content_type_profiles?
+    }
+
+      type field_level_encryption_config = {
+      caller_reference: ::String,
+      comment: ::String?,
+      query_arg_profile_config: Params::query_arg_profile_config?,
+      content_type_profile_config: Params::content_type_profile_config?
+    }
+
+      type encryption_entities = {
+      quantity: ::Integer,
+      items: Array[
+        Params::encryption_entity
+      ]?
+    }
+
+      type field_level_encryption_profile_config = {
+      name: ::String,
+      caller_reference: ::String,
+      comment: ::String?,
+      encryption_entities: Params::encryption_entities
+    }
+
+      type encryption_entity = {
+      public_key_id: ::String,
+      provider_id: ::String,
+      field_patterns: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }
+    }
+
+      type origin_request_policy_config = {
+      comment: ::String?,
+      name: ::String,
+      headers_config: {
+        header_behavior: ("none" | "whitelist" | "allViewer" | "allViewerAndWhitelistCloudFront" | "allExcept"),
+        headers: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      },
+      cookies_config: {
+        cookie_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+        cookies: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      },
+      query_strings_config: {
+        query_string_behavior: ("none" | "whitelist" | "all" | "allExcept"),
+        query_strings: {
+          quantity: ::Integer,
+          items: Array[::String]?
+        }?
+      }
+    }
+
+      type response_headers_policy_cors_config = {
+      access_control_allow_origins: {
+        quantity: ::Integer,
+        items: Array[::String]
+      },
+      access_control_allow_headers: {
+        quantity: ::Integer,
+        items: Array[::String]
+      },
+      access_control_allow_methods: {
+        quantity: ::Integer,
+        items: Array[("GET" | "POST" | "OPTIONS" | "PUT" | "DELETE" | "PATCH" | "HEAD" | "ALL")]
+      },
+      access_control_allow_credentials: bool,
+      access_control_expose_headers: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      access_control_max_age_sec: ::Integer?,
+      origin_override: bool
+    }
+
+      type response_headers_policy_security_headers_config = {
+      xss_protection: {
+        override: bool,
+        protection: bool,
+        mode_block: bool?,
+        report_uri: ::String?
+      }?,
+      frame_options: {
+        override: bool,
+        frame_option: ("DENY" | "SAMEORIGIN")
+      }?,
+      referrer_policy: {
+        override: bool,
+        referrer_policy: ("no-referrer" | "no-referrer-when-downgrade" | "origin" | "origin-when-cross-origin" | "same-origin" | "strict-origin" | "strict-origin-when-cross-origin" | "unsafe-url")
+      }?,
+      content_security_policy: {
+        override: bool,
+        content_security_policy: ::String
+      }?,
+      content_type_options: {
+        override: bool
+      }?,
+      strict_transport_security: {
+        override: bool,
+        include_subdomains: bool?,
+        preload: bool?,
+        access_control_max_age_sec: ::Integer
+      }?
+    }
+
+      type response_headers_policy_custom_headers_config = {
+      quantity: ::Integer,
+      items: Array[
+        {
+          header: ::String,
+          value: ::String,
+          override: bool
+        }
+      ]?
+    }
+
+      type response_headers_policy_config = {
+      comment: ::String?,
+      name: ::String,
+      cors_config: Params::response_headers_policy_cors_config?,
+      security_headers_config: Params::response_headers_policy_security_headers_config?,
+      server_timing_headers_config: {
+        enabled: bool,
+        sampling_rate: ::Float?
+      }?,
+      custom_headers_config: Params::response_headers_policy_custom_headers_config?,
+      remove_headers_config: {
+        quantity: ::Integer,
+        items: Array[
+          {
+            header: ::String
+          }
+        ]?
+      }?
+    }
+
+      type streaming_distribution_config = {
+      caller_reference: ::String,
+      s3_origin: {
+        domain_name: ::String,
+        origin_access_identity: ::String
+      },
+      aliases: {
+        quantity: ::Integer,
+        items: Array[::String]?
+      }?,
+      comment: ::String,
+      logging: {
+        enabled: bool,
+        bucket: ::String,
+        prefix: ::String
+      }?,
+      trusted_signers: {
+        enabled: bool,
+        quantity: ::Integer,
+        items: Array[::String]?
+      },
+      price_class: ("PriceClass_100" | "PriceClass_200" | "PriceClass_All" | "None")?,
+      enabled: bool
+    }
+
+      type ca_certificates_bundle_source = {
+      ca_certificates_bundle_s3_location: {
+        bucket: ::String,
+        key: ::String,
+        region: ::String,
+        version: ::String?
+      }?
+    }
+
+      type vpc_origin_endpoint_config = {
+      name: ::String,
+      arn: ::String,
+      http_port: ::Integer,
+      https_port: ::Integer,
+      origin_protocol_policy: ("http-only" | "match-viewer" | "https-only"),
+      origin_ssl_protocols: {
+        quantity: ::Integer,
+        items: Array[("SSLv3" | "TLSv1" | "TLSv1.1" | "TLSv1.2")]
+      }?
+    }
+
+    end
+  end
+end

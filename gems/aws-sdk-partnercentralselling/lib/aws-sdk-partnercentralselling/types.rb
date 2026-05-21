@@ -2029,6 +2029,30 @@ module Aws::PartnerCentralSelling
       include Aws::Structure
     end
 
+    # The expected duration of a partner's contract with the customer. Used
+    # to convert Total Contract Value (TCV) to Monthly Recurring Revenue
+    # (MRR) for opportunity dealsizing calculations.
+    #
+    # @!attribute [rw] term
+    #   The unit of measurement for the contract duration value. Currently
+    #   accepts only `Months`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A String representation of the contract duration as an integer,
+    #   expressed in the unit defined by `Term`. Valid values range from `1`
+    #   to `144`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ExpectedContractDuration AWS API Documentation
+    #
+    class ExpectedContractDuration < Struct.new(
+      :term,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Provides an estimate of the revenue that the partner is expected to
     # generate from the opportunity. This information helps partners assess
     # the financial value of the project.
@@ -2040,8 +2064,11 @@ module Aws::PartnerCentralSelling
     #   @return [String]
     #
     # @!attribute [rw] currency_code
-    #   Currency code for the expected customer spend. Supported currencies:
-    #   USD, EUR
+    #   Indicates the currency in which the revenue estimate is provided.
+    #   This helps in understanding the financial impact across different
+    #   markets. Accepted values are `USD` (US Dollars) and `EUR` (Euros).
+    #   If the AWS Partition is `aws-eusc` (AWS European Sovereign Cloud),
+    #   the currency code must be `EUR`.
     #   @return [String]
     #
     # @!attribute [rw] frequency
@@ -5189,6 +5216,13 @@ module Aws::PartnerCentralSelling
     #   evaluating the potential financial value of the opportunity for AWS.
     #   @return [Array<Types::ExpectedCustomerSpend>]
     #
+    # @!attribute [rw] expected_contract_duration
+    #   Optional. The expected duration of the contract associated with this
+    #   opportunity. Partners use this value alongside expected customer
+    #   spend to convert Total Contract Value (TCV) into Monthly Recurring
+    #   Revenue (MRR).
+    #   @return [Types::ExpectedContractDuration]
+    #
     # @!attribute [rw] title
     #   Specifies the `Opportunity`'s title or name.
     #   @return [String]
@@ -5316,6 +5350,7 @@ module Aws::PartnerCentralSelling
     class Project < Struct.new(
       :delivery_models,
       :expected_customer_spend,
+      :expected_contract_duration,
       :title,
       :apn_programs,
       :customer_business_problem,
@@ -5402,11 +5437,18 @@ module Aws::PartnerCentralSelling
     #   offering a high-level view of the potential financial impact.
     #   @return [Array<Types::ExpectedCustomerSpend>]
     #
+    # @!attribute [rw] expected_contract_duration
+    #   Optional. The expected contract duration for this opportunity,
+    #   representing the anticipated length of the contract in the unit
+    #   specified by `Term`.
+    #   @return [Types::ExpectedContractDuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/partnercentral-selling-2022-07-26/ProjectSummary AWS API Documentation
     #
     class ProjectSummary < Struct.new(
       :delivery_models,
-      :expected_customer_spend)
+      :expected_customer_spend,
+      :expected_contract_duration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5425,6 +5467,12 @@ module Aws::PartnerCentralSelling
     #   this project. This may include details such as amount, frequency,
     #   and currency of expected expenditure.
     #   @return [Array<Types::ExpectedCustomerSpend>]
+    #
+    # @!attribute [rw] expected_contract_duration
+    #   Optional. The expected contract duration for this opportunity,
+    #   representing the anticipated length of the contract in the unit
+    #   specified by `Term`.
+    #   @return [Types::ExpectedContractDuration]
     #
     # @!attribute [rw] customer_use_case
     #   Specifies the proposed solution focus or type of workload for the
@@ -5449,6 +5497,7 @@ module Aws::PartnerCentralSelling
     class ProjectView < Struct.new(
       :delivery_models,
       :expected_customer_spend,
+      :expected_contract_duration,
       :customer_use_case,
       :sales_activities,
       :other_solution_description)

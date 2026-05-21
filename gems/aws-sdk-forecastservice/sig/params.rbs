@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ForecastService
+    module Params
+      type time_series_identifiers = {
+      data_source: {
+        s3_config: {
+          path: ::String,
+          role_arn: ::String,
+          kms_key_arn: ::String?
+        }
+      }?,
+      schema: {
+        attributes: Array[
+          {
+            attribute_name: ::String?,
+            attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
+          }
+        ]?
+      }?,
+      format: ::String?
+    }
+
+      type time_series_selector = {
+      time_series_identifiers: Params::time_series_identifiers?
+    }
+
+    end
+  end
+end

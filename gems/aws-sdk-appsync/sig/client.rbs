@@ -128,48 +128,7 @@ module Aws
                         name: ::String,
                         ?owner_contact: ::String,
                         ?tags: Hash[::String, ::String],
-                        event_config: {
-                          auth_providers: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
-                              cognito_config: {
-                                user_pool_id: ::String,
-                                aws_region: ::String,
-                                app_id_client_regex: ::String?
-                              }?,
-                              open_id_connect_config: {
-                                issuer: ::String,
-                                client_id: ::String?,
-                                iat_ttl: ::Integer?,
-                                auth_ttl: ::Integer?
-                              }?,
-                              lambda_authorizer_config: {
-                                authorizer_result_ttl_in_seconds: ::Integer?,
-                                authorizer_uri: ::String,
-                                identity_validation_expression: ::String?
-                              }?
-                            },
-                          ],
-                          connection_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          default_publish_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          default_subscribe_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          log_config: {
-                            log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
-                            cloud_watch_logs_role_arn: ::String
-                          }?
-                        }
+                        event_config: Params::event_config
                       ) -> _CreateApiResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApiResponseSuccess
 
@@ -212,35 +171,16 @@ module Aws
                                       ?subscribe_auth_modes: Array[
                                         {
                                           auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                                        },
+                                        }
                                       ],
                                       ?publish_auth_modes: Array[
                                         {
                                           auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                                        },
+                                        }
                                       ],
                                       ?code_handlers: ::String,
                                       ?tags: Hash[::String, ::String],
-                                      ?handler_configs: {
-                                        on_publish: {
-                                          behavior: ("CODE" | "DIRECT"),
-                                          integration: {
-                                            data_source_name: ::String,
-                                            lambda_config: {
-                                              invoke_type: ("REQUEST_RESPONSE" | "EVENT")?
-                                            }?
-                                          }
-                                        }?,
-                                        on_subscribe: {
-                                          behavior: ("CODE" | "DIRECT"),
-                                          integration: {
-                                            data_source_name: ::String,
-                                            lambda_config: {
-                                              invoke_type: ("REQUEST_RESPONSE" | "EVENT")?
-                                            }?
-                                          }
-                                        }?
-                                      }
+                                      ?handler_configs: Params::handler_configs
                                     ) -> _CreateChannelNamespaceResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelNamespaceResponseSuccess
 
@@ -255,17 +195,7 @@ module Aws
                                 ?description: ::String,
                                 type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE" | "AMAZON_BEDROCK_RUNTIME"),
                                 ?service_role_arn: ::String,
-                                ?dynamodb_config: {
-                                  table_name: ::String,
-                                  aws_region: ::String,
-                                  use_caller_credentials: bool?,
-                                  delta_sync_config: {
-                                    base_table_ttl: ::Integer?,
-                                    delta_sync_table_name: ::String?,
-                                    delta_sync_table_ttl: ::Integer?
-                                  }?,
-                                  versioned: bool?
-                                },
+                                ?dynamodb_config: Params::dynamodb_data_source_config,
                                 ?lambda_config: {
                                   lambda_function_arn: ::String
                                 },
@@ -277,26 +207,8 @@ module Aws
                                   endpoint: ::String,
                                   aws_region: ::String
                                 },
-                                ?http_config: {
-                                  endpoint: ::String?,
-                                  authorization_config: {
-                                    authorization_type: ("AWS_IAM"),
-                                    aws_iam_config: {
-                                      signing_region: ::String?,
-                                      signing_service_name: ::String?
-                                    }?
-                                  }?
-                                },
-                                ?relational_database_config: {
-                                  relational_database_source_type: ("RDS_HTTP_ENDPOINT")?,
-                                  rds_http_endpoint_config: {
-                                    aws_region: ::String?,
-                                    db_cluster_identifier: ::String?,
-                                    database_name: ::String?,
-                                    schema: ::String?,
-                                    aws_secret_store_arn: ::String?
-                                  }?
-                                },
+                                ?http_config: Params::http_data_source_config,
+                                ?relational_database_config: Params::relational_database_data_source_config,
                                 ?event_bridge_config: {
                                   event_bus_arn: ::String
                                 },
@@ -373,25 +285,7 @@ module Aws
                                 },
                                 ?tags: Hash[::String, ::String],
                                 ?additional_authentication_providers: Array[
-                                  {
-                                    authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")?,
-                                    open_id_connect_config: {
-                                      issuer: ::String,
-                                      client_id: ::String?,
-                                      iat_ttl: ::Integer?,
-                                      auth_ttl: ::Integer?
-                                    }?,
-                                    user_pool_config: {
-                                      user_pool_id: ::String,
-                                      aws_region: ::String,
-                                      app_id_client_regex: ::String?
-                                    }?,
-                                    lambda_authorizer_config: {
-                                      authorizer_result_ttl_in_seconds: ::Integer?,
-                                      authorizer_uri: ::String,
-                                      identity_validation_expression: ::String?
-                                    }?
-                                  },
+                                  Params::additional_authentication_provider
                                 ],
                                 ?xray_enabled: bool,
                                 ?lambda_authorizer_config: {
@@ -1048,48 +942,7 @@ module Aws
                         api_id: ::String,
                         name: ::String,
                         ?owner_contact: ::String,
-                        event_config: {
-                          auth_providers: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
-                              cognito_config: {
-                                user_pool_id: ::String,
-                                aws_region: ::String,
-                                app_id_client_regex: ::String?
-                              }?,
-                              open_id_connect_config: {
-                                issuer: ::String,
-                                client_id: ::String?,
-                                iat_ttl: ::Integer?,
-                                auth_ttl: ::Integer?
-                              }?,
-                              lambda_authorizer_config: {
-                                authorizer_result_ttl_in_seconds: ::Integer?,
-                                authorizer_uri: ::String,
-                                identity_validation_expression: ::String?
-                              }?
-                            },
-                          ],
-                          connection_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          default_publish_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          default_subscribe_auth_modes: Array[
-                            {
-                              auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                            },
-                          ],
-                          log_config: {
-                            log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
-                            cloud_watch_logs_role_arn: ::String
-                          }?
-                        }
+                        event_config: Params::event_config
                       ) -> _UpdateApiResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiResponseSuccess
 
@@ -1131,34 +984,15 @@ module Aws
                                       ?subscribe_auth_modes: Array[
                                         {
                                           auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                                        },
+                                        }
                                       ],
                                       ?publish_auth_modes: Array[
                                         {
                                           auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
-                                        },
+                                        }
                                       ],
                                       ?code_handlers: ::String,
-                                      ?handler_configs: {
-                                        on_publish: {
-                                          behavior: ("CODE" | "DIRECT"),
-                                          integration: {
-                                            data_source_name: ::String,
-                                            lambda_config: {
-                                              invoke_type: ("REQUEST_RESPONSE" | "EVENT")?
-                                            }?
-                                          }
-                                        }?,
-                                        on_subscribe: {
-                                          behavior: ("CODE" | "DIRECT"),
-                                          integration: {
-                                            data_source_name: ::String,
-                                            lambda_config: {
-                                              invoke_type: ("REQUEST_RESPONSE" | "EVENT")?
-                                            }?
-                                          }
-                                        }?
-                                      }
+                                      ?handler_configs: Params::handler_configs
                                     ) -> _UpdateChannelNamespaceResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelNamespaceResponseSuccess
 
@@ -1173,17 +1007,7 @@ module Aws
                                 ?description: ::String,
                                 type: ("AWS_LAMBDA" | "AMAZON_DYNAMODB" | "AMAZON_ELASTICSEARCH" | "NONE" | "HTTP" | "RELATIONAL_DATABASE" | "AMAZON_OPENSEARCH_SERVICE" | "AMAZON_EVENTBRIDGE" | "AMAZON_BEDROCK_RUNTIME"),
                                 ?service_role_arn: ::String,
-                                ?dynamodb_config: {
-                                  table_name: ::String,
-                                  aws_region: ::String,
-                                  use_caller_credentials: bool?,
-                                  delta_sync_config: {
-                                    base_table_ttl: ::Integer?,
-                                    delta_sync_table_name: ::String?,
-                                    delta_sync_table_ttl: ::Integer?
-                                  }?,
-                                  versioned: bool?
-                                },
+                                ?dynamodb_config: Params::dynamodb_data_source_config,
                                 ?lambda_config: {
                                   lambda_function_arn: ::String
                                 },
@@ -1195,26 +1019,8 @@ module Aws
                                   endpoint: ::String,
                                   aws_region: ::String
                                 },
-                                ?http_config: {
-                                  endpoint: ::String?,
-                                  authorization_config: {
-                                    authorization_type: ("AWS_IAM"),
-                                    aws_iam_config: {
-                                      signing_region: ::String?,
-                                      signing_service_name: ::String?
-                                    }?
-                                  }?
-                                },
-                                ?relational_database_config: {
-                                  relational_database_source_type: ("RDS_HTTP_ENDPOINT")?,
-                                  rds_http_endpoint_config: {
-                                    aws_region: ::String?,
-                                    db_cluster_identifier: ::String?,
-                                    database_name: ::String?,
-                                    schema: ::String?,
-                                    aws_secret_store_arn: ::String?
-                                  }?
-                                },
+                                ?http_config: Params::http_data_source_config,
+                                ?relational_database_config: Params::relational_database_data_source_config,
                                 ?event_bridge_config: {
                                   event_bus_arn: ::String
                                 },
@@ -1290,25 +1096,7 @@ module Aws
                                   auth_ttl: ::Integer?
                                 },
                                 ?additional_authentication_providers: Array[
-                                  {
-                                    authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")?,
-                                    open_id_connect_config: {
-                                      issuer: ::String,
-                                      client_id: ::String?,
-                                      iat_ttl: ::Integer?,
-                                      auth_ttl: ::Integer?
-                                    }?,
-                                    user_pool_config: {
-                                      user_pool_id: ::String,
-                                      aws_region: ::String,
-                                      app_id_client_regex: ::String?
-                                    }?,
-                                    lambda_authorizer_config: {
-                                      authorizer_result_ttl_in_seconds: ::Integer?,
-                                      authorizer_uri: ::String,
-                                      identity_validation_expression: ::String?
-                                    }?
-                                  },
+                                  Params::additional_authentication_provider
                                 ],
                                 ?xray_enabled: bool,
                                 ?lambda_authorizer_config: {

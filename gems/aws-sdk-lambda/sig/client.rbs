@@ -160,7 +160,7 @@ module Aws
                                                 function_name: ::String,
                                                 tenant_id: ::String?
                                               }?
-                                            },
+                                            }
                                           ],
                                           ?client_token: ::String
                                         ) -> _CheckpointDurableExecutionResponseSuccess
@@ -206,16 +206,7 @@ module Aws
                                         allowed_instance_types: Array[::String]?,
                                         excluded_instance_types: Array[::String]?
                                       },
-                                      ?capacity_provider_scaling_config: {
-                                        max_v_cpu_count: ::Integer?,
-                                        scaling_mode: ("Auto" | "Manual")?,
-                                        scaling_policies: Array[
-                                          {
-                                            predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
-                                            target_value: ::Float
-                                          },
-                                        ]?
-                                      },
+                                      ?capacity_provider_scaling_config: Params::capacity_provider_scaling_config,
                                       ?kms_key_arn: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateCapacityProviderResponseSuccess
@@ -284,21 +275,14 @@ module Aws
                                            filters: Array[
                                              {
                                                pattern: ::String?
-                                             },
+                                             }
                                            ]?
                                          },
                                          ?maximum_batching_window_in_seconds: ::Integer,
                                          ?parallelization_factor: ::Integer,
                                          ?starting_position: ("TRIM_HORIZON" | "LATEST" | "AT_TIMESTAMP"),
                                          ?starting_position_timestamp: ::Time,
-                                         ?destination_config: {
-                                           on_success: {
-                                             destination: ::String?
-                                           }?,
-                                           on_failure: {
-                                             destination: ::String?
-                                           }?
-                                         },
+                                         ?destination_config: Params::destination_config,
                                          ?maximum_record_age_in_seconds: ::Integer,
                                          ?bisect_batch_on_function_error: bool,
                                          ?maximum_retry_attempts: ::Integer,
@@ -310,48 +294,14 @@ module Aws
                                            {
                                              type: ("BASIC_AUTH" | "VPC_SUBNET" | "VPC_SECURITY_GROUP" | "SASL_SCRAM_512_AUTH" | "SASL_SCRAM_256_AUTH" | "VIRTUAL_HOST" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
                                              uri: ::String?
-                                           },
+                                           }
                                          ],
                                          ?self_managed_event_source: {
                                            endpoints: Hash[("KAFKA_BOOTSTRAP_SERVERS"), Array[::String]]?
                                          },
                                          ?function_response_types: Array[("ReportBatchItemFailures")],
-                                         ?amazon_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?,
-                                           schema_registry_config: {
-                                             schema_registry_uri: ::String?,
-                                             event_record_format: ("JSON" | "SOURCE")?,
-                                             access_configs: Array[
-                                               {
-                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
-                                                 uri: ::String?
-                                               },
-                                             ]?,
-                                             schema_validation_configs: Array[
-                                               {
-                                                 attribute: ("KEY" | "VALUE")?
-                                               },
-                                             ]?
-                                           }?
-                                         },
-                                         ?self_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?,
-                                           schema_registry_config: {
-                                             schema_registry_uri: ::String?,
-                                             event_record_format: ("JSON" | "SOURCE")?,
-                                             access_configs: Array[
-                                               {
-                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
-                                                 uri: ::String?
-                                               },
-                                             ]?,
-                                             schema_validation_configs: Array[
-                                               {
-                                                 attribute: ("KEY" | "VALUE")?
-                                               },
-                                             ]?
-                                           }?
-                                         },
+                                         ?amazon_managed_kafka_event_source_config: Params::amazon_managed_kafka_event_source_config,
+                                         ?self_managed_kafka_event_source_config: Params::self_managed_kafka_event_source_config,
                                          ?scaling_config: {
                                            maximum_concurrency: ::Integer?
                                          },
@@ -458,7 +408,7 @@ module Aws
                                {
                                  arn: ::String,
                                  local_mount_path: ::String
-                               },
+                               }
                              ],
                              ?image_config: {
                                entry_point: Array[::String]?,
@@ -511,14 +461,7 @@ module Aws
                                         function_name: ::String,
                                         ?qualifier: ::String,
                                         auth_type: ("NONE" | "AWS_IAM"),
-                                        ?cors: {
-                                          allow_credentials: bool?,
-                                          allow_headers: Array[::String]?,
-                                          allow_methods: Array[::String]?,
-                                          allow_origins: Array[::String]?,
-                                          expose_headers: Array[::String]?,
-                                          max_age: ::Integer?
-                                        },
+                                        ?cors: Params::cors,
                                         ?invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
                                       ) -> _CreateFunctionUrlConfigResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionUrlConfigResponseSuccess
@@ -1383,14 +1326,7 @@ module Aws
                                               ?qualifier: ::String,
                                               ?maximum_retry_attempts: ::Integer,
                                               ?maximum_event_age_in_seconds: ::Integer,
-                                              ?destination_config: {
-                                                on_success: {
-                                                  destination: ::String?
-                                                }?,
-                                                on_failure: {
-                                                  destination: ::String?
-                                                }?
-                                              }
+                                              ?destination_config: Params::destination_config
                                             ) -> _PutFunctionEventInvokeConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutFunctionEventInvokeConfigResponseSuccess
 
@@ -1563,16 +1499,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lambda/Client.html#update_capacity_provider-instance_method
       def update_capacity_provider: (
                                       capacity_provider_name: ::String,
-                                      ?capacity_provider_scaling_config: {
-                                        max_v_cpu_count: ::Integer?,
-                                        scaling_mode: ("Auto" | "Manual")?,
-                                        scaling_policies: Array[
-                                          {
-                                            predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
-                                            target_value: ::Float
-                                          },
-                                        ]?
-                                      }
+                                      ?capacity_provider_scaling_config: Params::capacity_provider_scaling_config
                                     ) -> _UpdateCapacityProviderResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCapacityProviderResponseSuccess
 
@@ -1639,18 +1566,11 @@ module Aws
                                            filters: Array[
                                              {
                                                pattern: ::String?
-                                             },
+                                             }
                                            ]?
                                          },
                                          ?maximum_batching_window_in_seconds: ::Integer,
-                                         ?destination_config: {
-                                           on_success: {
-                                             destination: ::String?
-                                           }?,
-                                           on_failure: {
-                                             destination: ::String?
-                                           }?
-                                         },
+                                         ?destination_config: Params::destination_config,
                                          ?maximum_record_age_in_seconds: ::Integer,
                                          ?bisect_batch_on_function_error: bool,
                                          ?maximum_retry_attempts: ::Integer,
@@ -1659,49 +1579,15 @@ module Aws
                                            {
                                              type: ("BASIC_AUTH" | "VPC_SUBNET" | "VPC_SECURITY_GROUP" | "SASL_SCRAM_512_AUTH" | "SASL_SCRAM_256_AUTH" | "VIRTUAL_HOST" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
                                              uri: ::String?
-                                           },
+                                           }
                                          ],
                                          ?tumbling_window_in_seconds: ::Integer,
                                          ?function_response_types: Array[("ReportBatchItemFailures")],
                                          ?scaling_config: {
                                            maximum_concurrency: ::Integer?
                                          },
-                                         ?amazon_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?,
-                                           schema_registry_config: {
-                                             schema_registry_uri: ::String?,
-                                             event_record_format: ("JSON" | "SOURCE")?,
-                                             access_configs: Array[
-                                               {
-                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
-                                                 uri: ::String?
-                                               },
-                                             ]?,
-                                             schema_validation_configs: Array[
-                                               {
-                                                 attribute: ("KEY" | "VALUE")?
-                                               },
-                                             ]?
-                                           }?
-                                         },
-                                         ?self_managed_kafka_event_source_config: {
-                                           consumer_group_id: ::String?,
-                                           schema_registry_config: {
-                                             schema_registry_uri: ::String?,
-                                             event_record_format: ("JSON" | "SOURCE")?,
-                                             access_configs: Array[
-                                               {
-                                                 type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
-                                                 uri: ::String?
-                                               },
-                                             ]?,
-                                             schema_validation_configs: Array[
-                                               {
-                                                 attribute: ("KEY" | "VALUE")?
-                                               },
-                                             ]?
-                                           }?
-                                         },
+                                         ?amazon_managed_kafka_event_source_config: Params::amazon_managed_kafka_event_source_config,
+                                         ?self_managed_kafka_event_source_config: Params::self_managed_kafka_event_source_config,
                                          ?document_db_event_source_config: {
                                            database_name: ::String?,
                                            collection_name: ::String?,
@@ -1855,7 +1741,7 @@ module Aws
                                              {
                                                arn: ::String,
                                                local_mount_path: ::String
-                                             },
+                                             }
                                            ],
                                            ?image_config: {
                                              entry_point: Array[::String]?,
@@ -1902,14 +1788,7 @@ module Aws
                                                  ?qualifier: ::String,
                                                  ?maximum_retry_attempts: ::Integer,
                                                  ?maximum_event_age_in_seconds: ::Integer,
-                                                 ?destination_config: {
-                                                   on_success: {
-                                                     destination: ::String?
-                                                   }?,
-                                                   on_failure: {
-                                                     destination: ::String?
-                                                   }?
-                                                 }
+                                                 ?destination_config: Params::destination_config
                                                ) -> _UpdateFunctionEventInvokeConfigResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionEventInvokeConfigResponseSuccess
 
@@ -1928,14 +1807,7 @@ module Aws
                                         function_name: ::String,
                                         ?qualifier: ::String,
                                         ?auth_type: ("NONE" | "AWS_IAM"),
-                                        ?cors: {
-                                          allow_credentials: bool?,
-                                          allow_headers: Array[::String]?,
-                                          allow_methods: Array[::String]?,
-                                          allow_origins: Array[::String]?,
-                                          expose_headers: Array[::String]?,
-                                          max_age: ::Integer?
-                                        },
+                                        ?cors: Params::cors,
                                         ?invoke_mode: ("BUFFERED" | "RESPONSE_STREAM")
                                       ) -> _UpdateFunctionUrlConfigResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFunctionUrlConfigResponseSuccess

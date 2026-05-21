@@ -89,20 +89,7 @@ module Aws
                                    facet_name: ::String?
                                  },
                                  ?object_attribute_list: Array[
-                                   {
-                                     key: {
-                                       schema_arn: ::String,
-                                       facet_name: ::String,
-                                       name: ::String
-                                     },
-                                     value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }
-                                   },
+                                   Params::attribute_key_and_value
                                  ],
                                  object_reference: {
                                    selector: ::String?
@@ -188,16 +175,7 @@ module Aws
                                  typed_link_name: ::String
                                },
                                attributes: Array[
-                                 {
-                                   attribute_name: ::String,
-                                   value: {
-                                     string_value: ::String?,
-                                     binary_value: ::String?,
-                                     boolean_value: bool?,
-                                     number_value: ::String?,
-                                     datetime_value: ::Time?
-                                   }
-                                 },
+                                 Params::attribute_name_and_value
                                ]
                              ) -> _AttachTypedLinkResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AttachTypedLinkResponseSuccess
@@ -288,31 +266,7 @@ module Aws
                             }?,
                             list_index: {
                               ranges_on_indexed_values: Array[
-                                {
-                                  attribute_key: {
-                                    schema_arn: ::String,
-                                    facet_name: ::String,
-                                    name: ::String
-                                  }?,
-                                  range: {
-                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    start_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?,
-                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    end_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?
-                                  }?
-                                },
+                                Params::object_attribute_range
                               ]?,
                               index_reference: {
                                 selector: ::String?
@@ -325,27 +279,7 @@ module Aws
                                 selector: ::String?
                               },
                               filter_attribute_ranges: Array[
-                                {
-                                  attribute_name: ::String?,
-                                  range: {
-                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    start_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?,
-                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    end_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?
-                                  }
-                                },
+                                Params::typed_link_attribute_range
                               ]?,
                               filter_typed_link: {
                                 schema_arn: ::String,
@@ -359,27 +293,7 @@ module Aws
                                 selector: ::String?
                               },
                               filter_attribute_ranges: Array[
-                                {
-                                  attribute_name: ::String?,
-                                  range: {
-                                    start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    start_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?,
-                                    end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                    end_value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }?
-                                  }
-                                },
+                                Params::typed_link_attribute_range
                               ]?,
                               filter_typed_link: {
                                 schema_arn: ::String,
@@ -389,33 +303,10 @@ module Aws
                               max_results: ::Integer?
                             }?,
                             get_link_attributes: {
-                              typed_link_specifier: {
-                                typed_link_facet: {
-                                  schema_arn: ::String,
-                                  typed_link_name: ::String
-                                },
-                                source_object_reference: {
-                                  selector: ::String?
-                                },
-                                target_object_reference: {
-                                  selector: ::String?
-                                },
-                                identity_attribute_values: Array[
-                                  {
-                                    attribute_name: ::String,
-                                    value: {
-                                      string_value: ::String?,
-                                      binary_value: ::String?,
-                                      boolean_value: bool?,
-                                      number_value: ::String?,
-                                      datetime_value: ::Time?
-                                    }
-                                  },
-                                ]
-                              },
+                              typed_link_specifier: Params::typed_link_specifier,
                               attribute_names: Array[::String]
                             }?
-                          },
+                          }
                         ],
                         ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
                       ) -> _BatchReadResponseSuccess
@@ -435,23 +326,10 @@ module Aws
                                  {
                                    schema_arn: ::String?,
                                    facet_name: ::String?
-                                 },
+                                 }
                                ],
                                object_attribute_list: Array[
-                                 {
-                                   key: {
-                                     schema_arn: ::String,
-                                     facet_name: ::String,
-                                     name: ::String
-                                   },
-                                   value: {
-                                     string_value: ::String?,
-                                     binary_value: ::String?,
-                                     boolean_value: bool?,
-                                     number_value: ::String?,
-                                     datetime_value: ::Time?
-                                   }
-                                 },
+                                 Params::attribute_key_and_value
                                ],
                                parent_reference: {
                                  selector: ::String?
@@ -480,23 +358,7 @@ module Aws
                                  selector: ::String?
                                },
                                attribute_updates: Array[
-                                 {
-                                   object_attribute_key: {
-                                     schema_arn: ::String,
-                                     facet_name: ::String,
-                                     name: ::String
-                                   }?,
-                                   object_attribute_action: {
-                                     object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
-                                     object_attribute_update_value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }?
-                                   }?
-                                 },
+                                 Params::object_attribute_update
                                ]
                              }?,
                              delete_object: {
@@ -510,20 +372,7 @@ module Aws
                                  facet_name: ::String?
                                },
                                object_attribute_list: Array[
-                                 {
-                                   key: {
-                                     schema_arn: ::String,
-                                     facet_name: ::String,
-                                     name: ::String
-                                   },
-                                   value: {
-                                     string_value: ::String?,
-                                     binary_value: ::String?,
-                                     boolean_value: bool?,
-                                     number_value: ::String?,
-                                     datetime_value: ::Time?
-                                   }
-                                 },
+                                 Params::attribute_key_and_value
                                ],
                                object_reference: {
                                  selector: ::String?
@@ -560,7 +409,7 @@ module Aws
                                    schema_arn: ::String,
                                    facet_name: ::String,
                                    name: ::String
-                                 },
+                                 }
                                ],
                                is_unique: bool,
                                parent_reference: {
@@ -597,90 +446,19 @@ module Aws
                                  typed_link_name: ::String
                                },
                                attributes: Array[
-                                 {
-                                   attribute_name: ::String,
-                                   value: {
-                                     string_value: ::String?,
-                                     binary_value: ::String?,
-                                     boolean_value: bool?,
-                                     number_value: ::String?,
-                                     datetime_value: ::Time?
-                                   }
-                                 },
+                                 Params::attribute_name_and_value
                                ]
                              }?,
                              detach_typed_link: {
-                               typed_link_specifier: {
-                                 typed_link_facet: {
-                                   schema_arn: ::String,
-                                   typed_link_name: ::String
-                                 },
-                                 source_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 target_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 identity_attribute_values: Array[
-                                   {
-                                     attribute_name: ::String,
-                                     value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }
-                                   },
-                                 ]
-                               }
+                               typed_link_specifier: Params::typed_link_specifier
                              }?,
                              update_link_attributes: {
-                               typed_link_specifier: {
-                                 typed_link_facet: {
-                                   schema_arn: ::String,
-                                   typed_link_name: ::String
-                                 },
-                                 source_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 target_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 identity_attribute_values: Array[
-                                   {
-                                     attribute_name: ::String,
-                                     value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }
-                                   },
-                                 ]
-                               },
+                               typed_link_specifier: Params::typed_link_specifier,
                                attribute_updates: Array[
-                                 {
-                                   attribute_key: {
-                                     schema_arn: ::String,
-                                     facet_name: ::String,
-                                     name: ::String
-                                   }?,
-                                   attribute_action: {
-                                     attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
-                                     attribute_update_value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }?
-                                   }?
-                                 },
+                                 Params::link_attribute_update
                                ]
                              }?
-                           },
+                           }
                          ]
                        ) -> _BatchWriteResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchWriteResponseSuccess
@@ -707,29 +485,7 @@ module Aws
                           schema_arn: ::String,
                           name: ::String,
                           ?attributes: Array[
-                            {
-                              name: ::String,
-                              attribute_definition: {
-                                type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
-                                default_value: {
-                                  string_value: ::String?,
-                                  binary_value: ::String?,
-                                  boolean_value: bool?,
-                                  number_value: ::String?,
-                                  datetime_value: ::Time?
-                                }?,
-                                is_immutable: bool?,
-                                rules: Hash[::String, {
-                                    type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
-                                    parameters: Hash[::String, ::String]?
-                                  }]?
-                              }?,
-                              attribute_reference: {
-                                target_facet_name: ::String,
-                                target_attribute_name: ::String
-                              }?,
-                              required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")?
-                            },
+                            Params::facet_attribute
                           ],
                           ?object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX"),
                           ?facet_style: ("STATIC" | "DYNAMIC")
@@ -748,7 +504,7 @@ module Aws
                               schema_arn: ::String,
                               facet_name: ::String,
                               name: ::String
-                            },
+                            }
                           ],
                           is_unique: bool,
                           ?parent_reference: {
@@ -769,23 +525,10 @@ module Aws
                              {
                                schema_arn: ::String?,
                                facet_name: ::String?
-                             },
+                             }
                            ],
                            ?object_attribute_list: Array[
-                             {
-                               key: {
-                                 schema_arn: ::String,
-                                 facet_name: ::String,
-                                 name: ::String
-                               },
-                               value: {
-                                 string_value: ::String?,
-                                 binary_value: ::String?,
-                                 boolean_value: bool?,
-                                 number_value: ::String?,
-                                 datetime_value: ::Time?
-                               }
-                             },
+                             Params::attribute_key_and_value
                            ],
                            ?parent_reference: {
                              selector: ::String?
@@ -813,23 +556,7 @@ module Aws
                                      facet: {
                                        name: ::String,
                                        attributes: Array[
-                                         {
-                                           name: ::String,
-                                           type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
-                                           default_value: {
-                                             string_value: ::String?,
-                                             binary_value: ::String?,
-                                             boolean_value: bool?,
-                                             number_value: ::String?,
-                                             datetime_value: ::Time?
-                                           }?,
-                                           is_immutable: bool?,
-                                           rules: Hash[::String, {
-                                               type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
-                                               parameters: Hash[::String, ::String]?
-                                             }]?,
-                                           required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
-                                         },
+                                         Params::typed_link_attribute_definition
                                        ],
                                        identity_attribute_order: Array[::String]
                                      }
@@ -936,30 +663,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#detach_typed_link-instance_method
       def detach_typed_link: (
                                directory_arn: ::String,
-                               typed_link_specifier: {
-                                 typed_link_facet: {
-                                   schema_arn: ::String,
-                                   typed_link_name: ::String
-                                 },
-                                 source_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 target_object_reference: {
-                                   selector: ::String?
-                                 },
-                                 identity_attribute_values: Array[
-                                   {
-                                     attribute_name: ::String,
-                                     value: {
-                                       string_value: ::String?,
-                                       binary_value: ::String?,
-                                       boolean_value: bool?,
-                                       number_value: ::String?,
-                                       datetime_value: ::Time?
-                                     }
-                                   },
-                                 ]
-                               }
+                               typed_link_specifier: Params::typed_link_specifier
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -1021,30 +725,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#get_link_attributes-instance_method
       def get_link_attributes: (
                                  directory_arn: ::String,
-                                 typed_link_specifier: {
-                                   typed_link_facet: {
-                                     schema_arn: ::String,
-                                     typed_link_name: ::String
-                                   },
-                                   source_object_reference: {
-                                     selector: ::String?
-                                   },
-                                   target_object_reference: {
-                                     selector: ::String?
-                                   },
-                                   identity_attribute_values: Array[
-                                     {
-                                       attribute_name: ::String,
-                                       value: {
-                                         string_value: ::String?,
-                                         binary_value: ::String?,
-                                         boolean_value: bool?,
-                                         number_value: ::String?,
-                                         datetime_value: ::Time?
-                                       }
-                                     },
-                                   ]
-                                 },
+                                 typed_link_specifier: Params::typed_link_specifier,
                                  attribute_names: Array[::String],
                                  ?consistency_level: ("SERIALIZABLE" | "EVENTUAL")
                                ) -> _GetLinkAttributesResponseSuccess
@@ -1201,27 +882,7 @@ module Aws
                                          selector: ::String?
                                        },
                                        ?filter_attribute_ranges: Array[
-                                         {
-                                           attribute_name: ::String?,
-                                           range: {
-                                             start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                             start_value: {
-                                               string_value: ::String?,
-                                               binary_value: ::String?,
-                                               boolean_value: bool?,
-                                               number_value: ::String?,
-                                               datetime_value: ::Time?
-                                             }?,
-                                             end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                             end_value: {
-                                               string_value: ::String?,
-                                               binary_value: ::String?,
-                                               boolean_value: bool?,
-                                               number_value: ::String?,
-                                               datetime_value: ::Time?
-                                             }?
-                                           }
-                                         },
+                                         Params::typed_link_attribute_range
                                        ],
                                        ?filter_typed_link: {
                                          schema_arn: ::String,
@@ -1242,31 +903,7 @@ module Aws
       def list_index: (
                         directory_arn: ::String,
                         ?ranges_on_indexed_values: Array[
-                          {
-                            attribute_key: {
-                              schema_arn: ::String,
-                              facet_name: ::String,
-                              name: ::String
-                            }?,
-                            range: {
-                              start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                              start_value: {
-                                string_value: ::String?,
-                                binary_value: ::String?,
-                                boolean_value: bool?,
-                                number_value: ::String?,
-                                datetime_value: ::Time?
-                              }?,
-                              end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                              end_value: {
-                                string_value: ::String?,
-                                binary_value: ::String?,
-                                boolean_value: bool?,
-                                number_value: ::String?,
-                                datetime_value: ::Time?
-                              }?
-                            }?
-                          },
+                          Params::object_attribute_range
                         ],
                         index_reference: {
                           selector: ::String?
@@ -1392,27 +1029,7 @@ module Aws
                                          selector: ::String?
                                        },
                                        ?filter_attribute_ranges: Array[
-                                         {
-                                           attribute_name: ::String?,
-                                           range: {
-                                             start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                             start_value: {
-                                               string_value: ::String?,
-                                               binary_value: ::String?,
-                                               boolean_value: bool?,
-                                               number_value: ::String?,
-                                               datetime_value: ::Time?
-                                             }?,
-                                             end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
-                                             end_value: {
-                                               string_value: ::String?,
-                                               binary_value: ::String?,
-                                               boolean_value: bool?,
-                                               number_value: ::String?,
-                                               datetime_value: ::Time?
-                                             }?
-                                           }
-                                         },
+                                         Params::typed_link_attribute_range
                                        ],
                                        ?filter_typed_link: {
                                          schema_arn: ::String,
@@ -1560,7 +1177,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1584,31 +1201,9 @@ module Aws
                           name: ::String,
                           ?attribute_updates: Array[
                             {
-                              attribute: {
-                                name: ::String,
-                                attribute_definition: {
-                                  type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
-                                  default_value: {
-                                    string_value: ::String?,
-                                    binary_value: ::String?,
-                                    boolean_value: bool?,
-                                    number_value: ::String?,
-                                    datetime_value: ::Time?
-                                  }?,
-                                  is_immutable: bool?,
-                                  rules: Hash[::String, {
-                                      type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
-                                      parameters: Hash[::String, ::String]?
-                                    }]?
-                                }?,
-                                attribute_reference: {
-                                  target_facet_name: ::String,
-                                  target_attribute_name: ::String
-                                }?,
-                                required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")?
-                              }?,
+                              attribute: Params::facet_attribute?,
                               action: ("CREATE_OR_UPDATE" | "DELETE")?
-                            },
+                            }
                           ],
                           ?object_type: ("NODE" | "LEAF_NODE" | "POLICY" | "INDEX")
                         ) -> _UpdateFacetResponseSuccess
@@ -1620,48 +1215,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudDirectory/Client.html#update_link_attributes-instance_method
       def update_link_attributes: (
                                     directory_arn: ::String,
-                                    typed_link_specifier: {
-                                      typed_link_facet: {
-                                        schema_arn: ::String,
-                                        typed_link_name: ::String
-                                      },
-                                      source_object_reference: {
-                                        selector: ::String?
-                                      },
-                                      target_object_reference: {
-                                        selector: ::String?
-                                      },
-                                      identity_attribute_values: Array[
-                                        {
-                                          attribute_name: ::String,
-                                          value: {
-                                            string_value: ::String?,
-                                            binary_value: ::String?,
-                                            boolean_value: bool?,
-                                            number_value: ::String?,
-                                            datetime_value: ::Time?
-                                          }
-                                        },
-                                      ]
-                                    },
+                                    typed_link_specifier: Params::typed_link_specifier,
                                     attribute_updates: Array[
-                                      {
-                                        attribute_key: {
-                                          schema_arn: ::String,
-                                          facet_name: ::String,
-                                          name: ::String
-                                        }?,
-                                        attribute_action: {
-                                          attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
-                                          attribute_update_value: {
-                                            string_value: ::String?,
-                                            binary_value: ::String?,
-                                            boolean_value: bool?,
-                                            number_value: ::String?,
-                                            datetime_value: ::Time?
-                                          }?
-                                        }?
-                                      },
+                                      Params::link_attribute_update
                                     ]
                                   ) -> _UpdateLinkAttributesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkAttributesResponseSuccess
@@ -1677,23 +1233,7 @@ module Aws
                                         selector: ::String?
                                       },
                                       attribute_updates: Array[
-                                        {
-                                          object_attribute_key: {
-                                            schema_arn: ::String,
-                                            facet_name: ::String,
-                                            name: ::String
-                                          }?,
-                                          object_attribute_action: {
-                                            object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
-                                            object_attribute_update_value: {
-                                              string_value: ::String?,
-                                              binary_value: ::String?,
-                                              boolean_value: bool?,
-                                              number_value: ::String?,
-                                              datetime_value: ::Time?
-                                            }?
-                                          }?
-                                        },
+                                        Params::object_attribute_update
                                       ]
                                     ) -> _UpdateObjectAttributesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateObjectAttributesResponseSuccess
@@ -1718,25 +1258,9 @@ module Aws
                                      name: ::String,
                                      attribute_updates: Array[
                                        {
-                                         attribute: {
-                                           name: ::String,
-                                           type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
-                                           default_value: {
-                                             string_value: ::String?,
-                                             binary_value: ::String?,
-                                             boolean_value: bool?,
-                                             number_value: ::String?,
-                                             datetime_value: ::Time?
-                                           }?,
-                                           is_immutable: bool?,
-                                           rules: Hash[::String, {
-                                               type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
-                                               parameters: Hash[::String, ::String]?
-                                             }]?,
-                                           required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
-                                         },
+                                         attribute: Params::typed_link_attribute_definition,
                                          action: ("CREATE_OR_UPDATE" | "DELETE")
-                                       },
+                                       }
                                      ],
                                      identity_attribute_order: Array[::String]
                                    ) -> _UpdateTypedLinkFacetResponseSuccess

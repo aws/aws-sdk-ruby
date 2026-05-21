@@ -127,7 +127,7 @@ module Aws
                                            queryable: bool?,
                                            description: ::String?,
                                            type: ("String" | "Number" | "Boolean")?
-                                         },
+                                         }
                                        ],
                                        input_artifact_details: {
                                          minimum_count: ::Integer,
@@ -141,7 +141,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateCustomActionTypeResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomActionTypeResponseSuccess
@@ -153,214 +153,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#create_pipeline-instance_method
       def create_pipeline: (
-                             pipeline: {
-                               name: ::String,
-                               role_arn: ::String,
-                               artifact_store: {
-                                 type: ("S3"),
-                                 location: ::String,
-                                 encryption_key: {
-                                   id: ::String,
-                                   type: ("KMS")
-                                 }?
-                               }?,
-                               artifact_stores: Hash[::String, {
-                                   type: ("S3"),
-                                   location: ::String,
-                                   encryption_key: {
-                                     id: ::String,
-                                     type: ("KMS")
-                                   }?
-                                 }]?,
-                               stages: Array[
-                                 {
-                                   name: ::String,
-                                   blockers: Array[
-                                     {
-                                       name: ::String,
-                                       type: ("Schedule")
-                                     },
-                                   ]?,
-                                   actions: Array[
-                                     {
-                                       name: ::String,
-                                       action_type_id: {
-                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
-                                         owner: ("AWS" | "ThirdParty" | "Custom"),
-                                         provider: ::String,
-                                         version: ::String
-                                       },
-                                       run_order: ::Integer?,
-                                       configuration: Hash[::String, ::String]?,
-                                       commands: Array[::String]?,
-                                       output_artifacts: Array[
-                                         {
-                                           name: ::String,
-                                           files: Array[::String]?
-                                         },
-                                       ]?,
-                                       input_artifacts: Array[
-                                         {
-                                           name: ::String
-                                         },
-                                       ]?,
-                                       output_variables: Array[::String]?,
-                                       role_arn: ::String?,
-                                       region: ::String?,
-                                       namespace: ::String?,
-                                       timeout_in_minutes: ::Integer?,
-                                       environment_variables: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String,
-                                           type: ("PLAINTEXT" | "SECRETS_MANAGER")?
-                                         },
-                                       ]?
-                                     },
-                                   ],
-                                   on_failure: {
-                                     result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                     retry_configuration: {
-                                       retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")?
-                                     }?,
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]?
-                                   }?,
-                                   on_success: {
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]
-                                   }?,
-                                   before_entry: {
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]
-                                   }?
-                                 },
-                               ],
-                               version: ::Integer?,
-                               execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")?,
-                               pipeline_type: ("V1" | "V2")?,
-                               variables: Array[
-                                 {
-                                   name: ::String,
-                                   default_value: ::String?,
-                                   description: ::String?
-                                 },
-                               ]?,
-                               triggers: Array[
-                                 {
-                                   provider_type: ("CodeStarSourceConnection"),
-                                   git_configuration: {
-                                     source_action_name: ::String,
-                                     push: Array[
-                                       {
-                                         tags: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         branches: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         file_paths: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?
-                                       },
-                                     ]?,
-                                     pull_request: Array[
-                                       {
-                                         events: Array[("OPEN" | "UPDATED" | "CLOSED")]?,
-                                         branches: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         file_paths: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?
-                                       },
-                                     ]?
-                                   }
-                                 },
-                               ]?
-                             },
+                             pipeline: Params::pipeline_declaration,
                              ?tags: Array[
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
@@ -531,7 +329,7 @@ module Aws
                                                     {
                                                       name: ("TARGET_STATUS")?,
                                                       values: Array[::String]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?max_results: ::Integer,
                                                   ?next_token: ::String
@@ -776,7 +574,7 @@ module Aws
                              {
                                json_path: ::String,
                                match_equals: ::String?
-                             },
+                             }
                            ],
                            authentication: ("GITHUB_HMAC" | "IP" | "UNAUTHENTICATED"),
                            authentication_configuration: {
@@ -788,7 +586,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _PutWebhookResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWebhookResponseSuccess
@@ -838,7 +636,7 @@ module Aws
                                         {
                                           name: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?client_request_token: ::String,
                                       ?source_revisions: Array[
@@ -846,7 +644,7 @@ module Aws
                                           action_name: ::String,
                                           revision_type: ("COMMIT_ID" | "IMAGE_DIGEST" | "S3_OBJECT_VERSION_ID" | "S3_OBJECT_KEY"),
                                           revision_value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _StartPipelineExecutionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartPipelineExecutionResponseSuccess
@@ -874,7 +672,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -932,7 +730,7 @@ module Aws
                                       no_echo: bool,
                                       queryable: bool?,
                                       description: ::String?
-                                    },
+                                    }
                                   ]?,
                                   urls: {
                                     configuration_url: ::String?,
@@ -950,209 +748,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CodePipeline/Client.html#update_pipeline-instance_method
       def update_pipeline: (
-                             pipeline: {
-                               name: ::String,
-                               role_arn: ::String,
-                               artifact_store: {
-                                 type: ("S3"),
-                                 location: ::String,
-                                 encryption_key: {
-                                   id: ::String,
-                                   type: ("KMS")
-                                 }?
-                               }?,
-                               artifact_stores: Hash[::String, {
-                                   type: ("S3"),
-                                   location: ::String,
-                                   encryption_key: {
-                                     id: ::String,
-                                     type: ("KMS")
-                                   }?
-                                 }]?,
-                               stages: Array[
-                                 {
-                                   name: ::String,
-                                   blockers: Array[
-                                     {
-                                       name: ::String,
-                                       type: ("Schedule")
-                                     },
-                                   ]?,
-                                   actions: Array[
-                                     {
-                                       name: ::String,
-                                       action_type_id: {
-                                         category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
-                                         owner: ("AWS" | "ThirdParty" | "Custom"),
-                                         provider: ::String,
-                                         version: ::String
-                                       },
-                                       run_order: ::Integer?,
-                                       configuration: Hash[::String, ::String]?,
-                                       commands: Array[::String]?,
-                                       output_artifacts: Array[
-                                         {
-                                           name: ::String,
-                                           files: Array[::String]?
-                                         },
-                                       ]?,
-                                       input_artifacts: Array[
-                                         {
-                                           name: ::String
-                                         },
-                                       ]?,
-                                       output_variables: Array[::String]?,
-                                       role_arn: ::String?,
-                                       region: ::String?,
-                                       namespace: ::String?,
-                                       timeout_in_minutes: ::Integer?,
-                                       environment_variables: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String,
-                                           type: ("PLAINTEXT" | "SECRETS_MANAGER")?
-                                         },
-                                       ]?
-                                     },
-                                   ],
-                                   on_failure: {
-                                     result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                     retry_configuration: {
-                                       retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")?
-                                     }?,
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]?
-                                   }?,
-                                   on_success: {
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]
-                                   }?,
-                                   before_entry: {
-                                     conditions: Array[
-                                       {
-                                         result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
-                                         rules: Array[
-                                           {
-                                             name: ::String,
-                                             rule_type_id: {
-                                               category: ("Rule"),
-                                               owner: ("AWS")?,
-                                               provider: ::String,
-                                               version: ::String?
-                                             },
-                                             configuration: Hash[::String, ::String]?,
-                                             commands: Array[::String]?,
-                                             input_artifacts: Array[
-                                               {
-                                                 name: ::String
-                                               },
-                                             ]?,
-                                             role_arn: ::String?,
-                                             region: ::String?,
-                                             timeout_in_minutes: ::Integer?
-                                           },
-                                         ]?
-                                       },
-                                     ]
-                                   }?
-                                 },
-                               ],
-                               version: ::Integer?,
-                               execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")?,
-                               pipeline_type: ("V1" | "V2")?,
-                               variables: Array[
-                                 {
-                                   name: ::String,
-                                   default_value: ::String?,
-                                   description: ::String?
-                                 },
-                               ]?,
-                               triggers: Array[
-                                 {
-                                   provider_type: ("CodeStarSourceConnection"),
-                                   git_configuration: {
-                                     source_action_name: ::String,
-                                     push: Array[
-                                       {
-                                         tags: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         branches: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         file_paths: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?
-                                       },
-                                     ]?,
-                                     pull_request: Array[
-                                       {
-                                         events: Array[("OPEN" | "UPDATED" | "CLOSED")]?,
-                                         branches: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?,
-                                         file_paths: {
-                                           includes: Array[::String]?,
-                                           excludes: Array[::String]?
-                                         }?
-                                       },
-                                     ]?
-                                   }
-                                 },
-                               ]?
-                             }
+                             pipeline: Params::pipeline_declaration
                            ) -> _UpdatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePipelineResponseSuccess
     end

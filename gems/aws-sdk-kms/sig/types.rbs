@@ -105,6 +105,8 @@ module Aws::KMS
       attr_accessor grant_tokens: ::Array[::String]
       attr_accessor name: ::String
       attr_accessor dry_run: bool
+      attr_accessor grantee_service_principal: ::String
+      attr_accessor retiring_service_principal: ::String
       SENSITIVE: []
     end
 
@@ -504,6 +506,7 @@ module Aws::KMS
     class GrantConstraints
       attr_accessor encryption_context_subset: ::Hash[::String, ::String]
       attr_accessor encryption_context_equals: ::Hash[::String, ::String]
+      attr_accessor source_arn: ::String
       SENSITIVE: []
     end
 
@@ -517,6 +520,8 @@ module Aws::KMS
       attr_accessor issuing_account: ::String
       attr_accessor operations: ::Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac" | "DeriveSharedSecret")]
       attr_accessor constraints: Types::GrantConstraints
+      attr_accessor grantee_service_principal: ::String
+      attr_accessor retiring_service_principal: ::String
       SENSITIVE: []
     end
 
@@ -687,6 +692,7 @@ module Aws::KMS
       attr_accessor key_id: ::String
       attr_accessor grant_id: ::String
       attr_accessor grantee_principal: ::String
+      attr_accessor grantee_service_principal: ::String
       SENSITIVE: []
     end
 
@@ -757,6 +763,7 @@ module Aws::KMS
       attr_accessor limit: ::Integer
       attr_accessor marker: ::String
       attr_accessor retiring_principal: ::String
+      attr_accessor retiring_service_principal: ::String
       SENSITIVE: []
     end
 

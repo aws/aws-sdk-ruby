@@ -139,26 +139,12 @@ module Aws
       def create_application: (
                                 application_name: ::String,
                                 ?description: ::String,
-                                ?resource_lifecycle_config: {
-                                  service_role: ::String?,
-                                  version_lifecycle_config: {
-                                    max_count_rule: {
-                                      enabled: bool,
-                                      max_count: ::Integer?,
-                                      delete_source_from_s3: bool?
-                                    }?,
-                                    max_age_rule: {
-                                      enabled: bool,
-                                      max_age_in_days: ::Integer?,
-                                      delete_source_from_s3: bool?
-                                    }?
-                                  }?
-                                },
+                                ?resource_lifecycle_config: Params::application_resource_lifecycle_config,
                                 ?tags: Array[
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateApplicationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationResponseSuccess
@@ -194,7 +180,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateApplicationVersionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateApplicationVersionResponseSuccess
@@ -230,13 +216,13 @@ module Aws
                                                namespace: ::String?,
                                                option_name: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ],
                                            ?tags: Array[
                                              {
                                                key: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _CreateConfigurationTemplateResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationTemplateResponseSuccess
@@ -281,7 +267,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?version_label: ::String,
                                 ?template_name: ::String,
@@ -293,14 +279,14 @@ module Aws
                                     namespace: ::String?,
                                     option_name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?options_to_remove: Array[
                                   {
                                     resource_name: ::String?,
                                     namespace: ::String?,
                                     option_name: ::String?
-                                  },
+                                  }
                                 ],
                                 ?operations_role: ::String
                               ) -> _CreateEnvironmentResponseSuccess
@@ -326,13 +312,13 @@ module Aws
                                          namespace: ::String?,
                                          option_name: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      ?tags: Array[
                                        {
                                          key: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _CreatePlatformVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePlatformVersionResponseSuccess
@@ -434,7 +420,7 @@ module Aws
                                                 resource_name: ::String?,
                                                 namespace: ::String?,
                                                 option_name: ::String?
-                                              },
+                                              }
                                             ]
                                           ) -> _DescribeConfigurationOptionsResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeConfigurationOptionsResponseSuccess
@@ -599,7 +585,7 @@ module Aws
                                         attribute: ::String?,
                                         operator: ::String?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ],
                                     ?max_records: ::Integer,
                                     ?next_token: ::String
@@ -618,7 +604,7 @@ module Aws
                                         type: ::String?,
                                         operator: ::String?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ],
                                     ?max_records: ::Integer,
                                     ?next_token: ::String
@@ -731,21 +717,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticBeanstalk/Client.html#update_application_resource_lifecycle-instance_method
       def update_application_resource_lifecycle: (
                                                    application_name: ::String,
-                                                   resource_lifecycle_config: {
-                                                     service_role: ::String?,
-                                                     version_lifecycle_config: {
-                                                       max_count_rule: {
-                                                         enabled: bool,
-                                                         max_count: ::Integer?,
-                                                         delete_source_from_s3: bool?
-                                                       }?,
-                                                       max_age_rule: {
-                                                         enabled: bool,
-                                                         max_age_in_days: ::Integer?,
-                                                         delete_source_from_s3: bool?
-                                                       }?
-                                                     }?
-                                                   }
+                                                   resource_lifecycle_config: Params::application_resource_lifecycle_config
                                                  ) -> _UpdateApplicationResourceLifecycleResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApplicationResourceLifecycleResponseSuccess
 
@@ -785,14 +757,14 @@ module Aws
                                                namespace: ::String?,
                                                option_name: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ],
                                            ?options_to_remove: Array[
                                              {
                                                resource_name: ::String?,
                                                namespace: ::String?,
                                                option_name: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _UpdateConfigurationTemplateResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationTemplateResponseSuccess
@@ -843,14 +815,14 @@ module Aws
                                     namespace: ::String?,
                                     option_name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?options_to_remove: Array[
                                   {
                                     resource_name: ::String?,
                                     namespace: ::String?,
                                     option_name: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
@@ -862,7 +834,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ],
                                       ?tags_to_remove: Array[::String]
                                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -883,7 +855,7 @@ module Aws
                                                  namespace: ::String?,
                                                  option_name: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]
                                            ) -> _ValidateConfigurationSettingsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateConfigurationSettingsResponseSuccess

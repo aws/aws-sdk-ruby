@@ -1,0 +1,67 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointEmail
+    module Params
+      type event_destination_definition = {
+      enabled: bool?,
+      matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]?,
+      kinesis_firehose_destination: {
+        iam_role_arn: ::String,
+        delivery_stream_arn: ::String
+      }?,
+      cloud_watch_destination: {
+        dimension_configurations: Array[
+          {
+            dimension_name: ::String,
+            dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+            default_dimension_value: ::String
+          }
+        ]
+      }?,
+      sns_destination: {
+        topic_arn: ::String
+      }?,
+      pinpoint_destination: {
+        application_arn: ::String?
+      }?
+    }
+
+      type body = {
+      text: {
+        data: ::String,
+        charset: ::String?
+      }?,
+      html: {
+        data: ::String,
+        charset: ::String?
+      }?
+    }
+
+      type message = {
+      subject: {
+        data: ::String,
+        charset: ::String?
+      },
+      body: Params::body
+    }
+
+      type email_content = {
+      simple: Params::message?,
+      raw: {
+        data: ::String
+      }?,
+      template: {
+        template_arn: ::String?,
+        template_data: ::String?
+      }?
+    }
+
+    end
+  end
+end

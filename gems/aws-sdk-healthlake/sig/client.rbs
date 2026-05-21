@@ -104,7 +104,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?identity_provider_configuration: {
                                      authorization_strategy: ("SMART_ON_FHIR_V1" | "SMART_ON_FHIR" | "AWS_AUTH"),
@@ -278,7 +278,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

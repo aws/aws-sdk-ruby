@@ -1,0 +1,41 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppFabric
+    module Params
+      type credential = {
+      oauth2_credential: {
+        client_id: ::String,
+        client_secret: ::String
+      }?,
+      api_key_credential: {
+        api_key: ::String
+      }?
+    }
+
+      type destination = {
+      s3_bucket: {
+        bucket_name: ::String,
+        prefix: ::String?
+      }?,
+      firehose_stream: {
+        stream_name: ::String
+      }?
+    }
+
+      type audit_log_destination_configuration = {
+      destination: Params::destination
+    }
+
+      type destination_configuration = {
+      audit_log: Params::audit_log_destination_configuration?
+    }
+
+    end
+  end
+end

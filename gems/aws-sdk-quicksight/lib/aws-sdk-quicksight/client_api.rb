@@ -44,6 +44,8 @@ module Aws::QuickSight
     ActiveIAMPolicyAssignmentList = Shapes::ListShape.new(name: 'ActiveIAMPolicyAssignmentList')
     AdHocFilteringOption = Shapes::StructureShape.new(name: 'AdHocFilteringOption')
     AdditionalDashboardIdList = Shapes::ListShape.new(name: 'AdditionalDashboardIdList')
+    AdditionalNotes = Shapes::StructureShape.new(name: 'AdditionalNotes')
+    AdditionalNotesText = Shapes::StringShape.new(name: 'AdditionalNotesText')
     AggFunction = Shapes::StructureShape.new(name: 'AggFunction')
     AggFunctionParamKey = Shapes::StringShape.new(name: 'AggFunctionParamKey')
     AggFunctionParamMap = Shapes::MapShape.new(name: 'AggFunctionParamMap')
@@ -392,10 +394,14 @@ module Aws::QuickSight
     ColumnLevelPermissionRuleList = Shapes::ListShape.new(name: 'ColumnLevelPermissionRuleList')
     ColumnList = Shapes::ListShape.new(name: 'ColumnList')
     ColumnName = Shapes::StringShape.new(name: 'ColumnName')
+    ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
     ColumnOrderingType = Shapes::StringShape.new(name: 'ColumnOrderingType')
     ColumnRole = Shapes::StringShape.new(name: 'ColumnRole')
     ColumnSchema = Shapes::StructureShape.new(name: 'ColumnSchema')
     ColumnSchemaList = Shapes::ListShape.new(name: 'ColumnSchemaList')
+    ColumnSemanticProperty = Shapes::StructureShape.new(name: 'ColumnSemanticProperty')
+    ColumnSemanticPropertyList = Shapes::ListShape.new(name: 'ColumnSemanticPropertyList')
+    ColumnSemanticType = Shapes::StructureShape.new(name: 'ColumnSemanticType')
     ColumnSort = Shapes::StructureShape.new(name: 'ColumnSort')
     ColumnTag = Shapes::StructureShape.new(name: 'ColumnTag')
     ColumnTagList = Shapes::ListShape.new(name: 'ColumnTagList')
@@ -529,6 +535,8 @@ module Aws::QuickSight
     CustomContentVisual = Shapes::StructureShape.new(name: 'CustomContentVisual')
     CustomFilterConfiguration = Shapes::StructureShape.new(name: 'CustomFilterConfiguration')
     CustomFilterListConfiguration = Shapes::StructureShape.new(name: 'CustomFilterListConfiguration')
+    CustomInstruction = Shapes::StructureShape.new(name: 'CustomInstruction')
+    CustomInstructionList = Shapes::ListShape.new(name: 'CustomInstructionList')
     CustomInstructions = Shapes::StructureShape.new(name: 'CustomInstructions')
     CustomInstructionsString = Shapes::StringShape.new(name: 'CustomInstructionsString')
     CustomLabel = Shapes::StringShape.new(name: 'CustomLabel')
@@ -609,6 +617,7 @@ module Aws::QuickSight
     DataSetDateFilterCondition = Shapes::StructureShape.new(name: 'DataSetDateFilterCondition')
     DataSetDateFilterValue = Shapes::StructureShape.new(name: 'DataSetDateFilterValue')
     DataSetDateRangeFilterCondition = Shapes::StructureShape.new(name: 'DataSetDateRangeFilterCondition')
+    DataSetDescriptiveText = Shapes::StringShape.new(name: 'DataSetDescriptiveText')
     DataSetEntityResourceId = Shapes::StringShape.new(name: 'DataSetEntityResourceId')
     DataSetFilterAttribute = Shapes::StringShape.new(name: 'DataSetFilterAttribute')
     DataSetIdentifier = Shapes::StringShape.new(name: 'DataSetIdentifier')
@@ -628,6 +637,9 @@ module Aws::QuickSight
     DataSetSchema = Shapes::StructureShape.new(name: 'DataSetSchema')
     DataSetSearchFilter = Shapes::StructureShape.new(name: 'DataSetSearchFilter')
     DataSetSearchFilterList = Shapes::ListShape.new(name: 'DataSetSearchFilterList')
+    DataSetSemanticDescription = Shapes::StructureShape.new(name: 'DataSetSemanticDescription')
+    DataSetSemanticMetadata = Shapes::StructureShape.new(name: 'DataSetSemanticMetadata')
+    DataSetSemanticMetadataList = Shapes::ListShape.new(name: 'DataSetSemanticMetadataList')
     DataSetStringComparisonFilterCondition = Shapes::StructureShape.new(name: 'DataSetStringComparisonFilterCondition')
     DataSetStringComparisonFilterOperator = Shapes::StringShape.new(name: 'DataSetStringComparisonFilterOperator')
     DataSetStringFilterCondition = Shapes::StructureShape.new(name: 'DataSetStringFilterCondition')
@@ -1251,6 +1263,8 @@ module Aws::QuickSight
     IngestionStatus = Shapes::StringShape.new(name: 'IngestionStatus')
     IngestionType = Shapes::StringShape.new(name: 'IngestionType')
     Ingestions = Shapes::ListShape.new(name: 'Ingestions')
+    InlineCustomInstruction = Shapes::StructureShape.new(name: 'InlineCustomInstruction')
+    InlineCustomInstructionText = Shapes::StringShape.new(name: 'InlineCustomInstructionText')
     InnerFilter = Shapes::StructureShape.new(name: 'InnerFilter')
     InputColumn = Shapes::StructureShape.new(name: 'InputColumn')
     InputColumnDataType = Shapes::StringShape.new(name: 'InputColumnDataType')
@@ -1894,6 +1908,8 @@ module Aws::QuickSight
     SetParameterValueConfiguration = Shapes::StructureShape.new(name: 'SetParameterValueConfiguration')
     SetParameterValueConfigurationList = Shapes::ListShape.new(name: 'SetParameterValueConfigurationList')
     ShapeConditionalFormat = Shapes::StructureShape.new(name: 'ShapeConditionalFormat')
+    SharedColumnSemanticMetadata = Shapes::StructureShape.new(name: 'SharedColumnSemanticMetadata')
+    SharedColumnSemanticMetadataList = Shapes::ListShape.new(name: 'SharedColumnSemanticMetadataList')
     SharedViewConfigurations = Shapes::StructureShape.new(name: 'SharedViewConfigurations')
     SharingModel = Shapes::StringShape.new(name: 'SharingModel')
     Sheet = Shapes::StructureShape.new(name: 'Sheet')
@@ -2081,6 +2097,7 @@ module Aws::QuickSight
     TablePathElementName = Shapes::StringShape.new(name: 'TablePathElementName')
     TablePinnedFieldOptions = Shapes::StructureShape.new(name: 'TablePinnedFieldOptions')
     TableRowConditionalFormatting = Shapes::StructureShape.new(name: 'TableRowConditionalFormatting')
+    TableSemanticMetadata = Shapes::StructureShape.new(name: 'TableSemanticMetadata')
     TableSideBorderOptions = Shapes::StructureShape.new(name: 'TableSideBorderOptions')
     TableSortConfiguration = Shapes::StructureShape.new(name: 'TableSortConfiguration')
     TableStyleTarget = Shapes::StructureShape.new(name: 'TableStyleTarget')
@@ -2379,6 +2396,8 @@ module Aws::QuickSight
     UpdateVPCConnectionRequest = Shapes::StructureShape.new(name: 'UpdateVPCConnectionRequest')
     UpdateVPCConnectionResponse = Shapes::StructureShape.new(name: 'UpdateVPCConnectionResponse')
     UploadSettings = Shapes::StructureShape.new(name: 'UploadSettings')
+    UploadedDocumentMetadata = Shapes::StructureShape.new(name: 'UploadedDocumentMetadata')
+    UploadedDocumentName = Shapes::StringShape.new(name: 'UploadedDocumentName')
     User = Shapes::StructureShape.new(name: 'User')
     UserIdentifier = Shapes::UnionShape.new(name: 'UserIdentifier')
     UserList = Shapes::ListShape.new(name: 'UserList')
@@ -2552,6 +2571,9 @@ module Aws::QuickSight
     AdHocFilteringOption.struct_class = Types::AdHocFilteringOption
 
     AdditionalDashboardIdList.member = Shapes::ShapeRef.new(shape: ShortRestrictiveResourceId)
+
+    AdditionalNotes.add_member(:text, Shapes::ShapeRef.new(shape: AdditionalNotesText, location_name: "Text"))
+    AdditionalNotes.struct_class = Types::AdditionalNotes
 
     AggFunction.add_member(:aggregation, Shapes::ShapeRef.new(shape: AggType, location_name: "Aggregation"))
     AggFunction.add_member(:aggregation_function_parameters, Shapes::ShapeRef.new(shape: AggFunctionParamMap, location_name: "AggregationFunctionParameters"))
@@ -3868,12 +3890,24 @@ module Aws::QuickSight
 
     ColumnList.member = Shapes::ShapeRef.new(shape: ColumnName)
 
+    ColumnNameList.member = Shapes::ShapeRef.new(shape: ColumnName)
+
     ColumnSchema.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
     ColumnSchema.add_member(:data_type, Shapes::ShapeRef.new(shape: String, location_name: "DataType"))
     ColumnSchema.add_member(:geographic_role, Shapes::ShapeRef.new(shape: String, location_name: "GeographicRole"))
     ColumnSchema.struct_class = Types::ColumnSchema
 
     ColumnSchemaList.member = Shapes::ShapeRef.new(shape: ColumnSchema)
+
+    ColumnSemanticProperty.add_member(:description, Shapes::ShapeRef.new(shape: ColumnDescription, location_name: "Description"))
+    ColumnSemanticProperty.add_member(:additional_notes, Shapes::ShapeRef.new(shape: AdditionalNotes, location_name: "AdditionalNotes"))
+    ColumnSemanticProperty.add_member(:semantic_type, Shapes::ShapeRef.new(shape: ColumnSemanticType, location_name: "SemanticType"))
+    ColumnSemanticProperty.struct_class = Types::ColumnSemanticProperty
+
+    ColumnSemanticPropertyList.member = Shapes::ShapeRef.new(shape: ColumnSemanticProperty)
+
+    ColumnSemanticType.add_member(:geographical_role, Shapes::ShapeRef.new(shape: GeoSpatialDataRole, location_name: "GeographicalRole"))
+    ColumnSemanticType.struct_class = Types::ColumnSemanticType
 
     ColumnSort.add_member(:sort_by, Shapes::ShapeRef.new(shape: ColumnIdentifier, required: true, location_name: "SortBy"))
     ColumnSort.add_member(:direction, Shapes::ShapeRef.new(shape: SortDirection, required: true, location_name: "Direction"))
@@ -4560,6 +4594,11 @@ module Aws::QuickSight
     CustomFilterListConfiguration.add_member(:null_option, Shapes::ShapeRef.new(shape: FilterNullOption, required: true, location_name: "NullOption"))
     CustomFilterListConfiguration.struct_class = Types::CustomFilterListConfiguration
 
+    CustomInstruction.add_member(:inline_custom_instruction, Shapes::ShapeRef.new(shape: InlineCustomInstruction, location_name: "InlineCustomInstruction"))
+    CustomInstruction.struct_class = Types::CustomInstruction
+
+    CustomInstructionList.member = Shapes::ShapeRef.new(shape: CustomInstruction)
+
     CustomInstructions.add_member(:custom_instructions_string, Shapes::ShapeRef.new(shape: CustomInstructionsString, required: true, location_name: "CustomInstructionsString"))
     CustomInstructions.struct_class = Types::CustomInstructions
 
@@ -4923,6 +4962,15 @@ module Aws::QuickSight
     DataSetSearchFilter.struct_class = Types::DataSetSearchFilter
 
     DataSetSearchFilterList.member = Shapes::ShapeRef.new(shape: DataSetSearchFilter)
+
+    DataSetSemanticDescription.add_member(:text, Shapes::ShapeRef.new(shape: DataSetDescriptiveText, required: true, location_name: "Text"))
+    DataSetSemanticDescription.struct_class = Types::DataSetSemanticDescription
+
+    DataSetSemanticMetadata.add_member(:description, Shapes::ShapeRef.new(shape: DataSetSemanticDescription, location_name: "Description"))
+    DataSetSemanticMetadata.add_member(:custom_instructions, Shapes::ShapeRef.new(shape: CustomInstructionList, location_name: "CustomInstructions"))
+    DataSetSemanticMetadata.struct_class = Types::DataSetSemanticMetadata
+
+    DataSetSemanticMetadataList.member = Shapes::ShapeRef.new(shape: DataSetSemanticMetadata)
 
     DataSetStringComparisonFilterCondition.add_member(:operator, Shapes::ShapeRef.new(shape: DataSetStringComparisonFilterOperator, required: true, location_name: "Operator"))
     DataSetStringComparisonFilterCondition.add_member(:value, Shapes::ShapeRef.new(shape: DataSetStringFilterValue, location_name: "Value"))
@@ -7435,6 +7483,10 @@ module Aws::QuickSight
 
     Ingestions.member = Shapes::ShapeRef.new(shape: Ingestion)
 
+    InlineCustomInstruction.add_member(:instruction_text, Shapes::ShapeRef.new(shape: InlineCustomInstructionText, required: true, location_name: "InstructionText"))
+    InlineCustomInstruction.add_member(:uploaded_document_metadata, Shapes::ShapeRef.new(shape: UploadedDocumentMetadata, location_name: "UploadedDocumentMetadata"))
+    InlineCustomInstruction.struct_class = Types::InlineCustomInstruction
+
     InnerFilter.add_member(:category_inner_filter, Shapes::ShapeRef.new(shape: CategoryInnerFilter, location_name: "CategoryInnerFilter"))
     InnerFilter.struct_class = Types::InnerFilter
 
@@ -9671,11 +9723,13 @@ module Aws::QuickSight
     SemanticEntityType.struct_class = Types::SemanticEntityType
 
     SemanticModelConfiguration.add_member(:table_map, Shapes::ShapeRef.new(shape: SemanticTableMap, location_name: "TableMap"))
+    SemanticModelConfiguration.add_member(:semantic_metadata, Shapes::ShapeRef.new(shape: DataSetSemanticMetadataList, location_name: "SemanticMetadata"))
     SemanticModelConfiguration.struct_class = Types::SemanticModelConfiguration
 
     SemanticTable.add_member(:alias, Shapes::ShapeRef.new(shape: SemanticTableAlias, required: true, location_name: "Alias"))
     SemanticTable.add_member(:destination_table_id, Shapes::ShapeRef.new(shape: DataSetEntityResourceId, required: true, location_name: "DestinationTableId"))
     SemanticTable.add_member(:row_level_permission_configuration, Shapes::ShapeRef.new(shape: RowLevelPermissionConfiguration, location_name: "RowLevelPermissionConfiguration"))
+    SemanticTable.add_member(:semantic_metadata, Shapes::ShapeRef.new(shape: TableSemanticMetadata, location_name: "SemanticMetadata"))
     SemanticTable.struct_class = Types::SemanticTable
 
     SemanticTableMap.key = Shapes::ShapeRef.new(shape: DataSetEntityResourceId)
@@ -9727,6 +9781,12 @@ module Aws::QuickSight
 
     ShapeConditionalFormat.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, required: true, location_name: "BackgroundColor"))
     ShapeConditionalFormat.struct_class = Types::ShapeConditionalFormat
+
+    SharedColumnSemanticMetadata.add_member(:column_names, Shapes::ShapeRef.new(shape: ColumnNameList, location_name: "ColumnNames"))
+    SharedColumnSemanticMetadata.add_member(:column_properties, Shapes::ShapeRef.new(shape: ColumnSemanticPropertyList, required: true, location_name: "ColumnProperties"))
+    SharedColumnSemanticMetadata.struct_class = Types::SharedColumnSemanticMetadata
+
+    SharedColumnSemanticMetadataList.member = Shapes::ShapeRef.new(shape: SharedColumnSemanticMetadata)
 
     SharedViewConfigurations.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     SharedViewConfigurations.struct_class = Types::SharedViewConfigurations
@@ -10292,6 +10352,9 @@ module Aws::QuickSight
     TableRowConditionalFormatting.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "BackgroundColor"))
     TableRowConditionalFormatting.add_member(:text_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, location_name: "TextColor"))
     TableRowConditionalFormatting.struct_class = Types::TableRowConditionalFormatting
+
+    TableSemanticMetadata.add_member(:column_metadata, Shapes::ShapeRef.new(shape: SharedColumnSemanticMetadataList, location_name: "ColumnMetadata"))
+    TableSemanticMetadata.struct_class = Types::TableSemanticMetadata
 
     TableSideBorderOptions.add_member(:inner_vertical, Shapes::ShapeRef.new(shape: TableBorderOptions, location_name: "InnerVertical"))
     TableSideBorderOptions.add_member(:inner_horizontal, Shapes::ShapeRef.new(shape: TableBorderOptions, location_name: "InnerHorizontal"))
@@ -11695,6 +11758,9 @@ module Aws::QuickSight
     UploadSettings.add_member(:delimiter, Shapes::ShapeRef.new(shape: Delimiter, location_name: "Delimiter"))
     UploadSettings.add_member(:custom_cell_address_range, Shapes::ShapeRef.new(shape: String, location_name: "CustomCellAddressRange"))
     UploadSettings.struct_class = Types::UploadSettings
+
+    UploadedDocumentMetadata.add_member(:name, Shapes::ShapeRef.new(shape: UploadedDocumentName, location_name: "Name"))
+    UploadedDocumentMetadata.struct_class = Types::UploadedDocumentMetadata
 
     User.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     User.add_member(:user_name, Shapes::ShapeRef.new(shape: UserName, location_name: "UserName"))

@@ -324,17 +324,7 @@ module Aws
                            event_class: ("INFRASTRUCTURE" | "DEPLOYMENT" | "SECURITY_CHANGE" | "CONFIG_CHANGE" | "SCHEMA_CHANGE")?,
                            event_source: ::String?,
                            data_source: ("AWS_CLOUD_TRAIL" | "AWS_CODE_DEPLOY")?,
-                           resource_collection: {
-                             cloud_formation: {
-                               stack_names: Array[::String]?
-                             }?,
-                             tags: Array[
-                               {
-                                 app_boundary_key: ::String,
-                                 tag_values: Array[::String]
-                               },
-                             ]?
-                           }?
+                           resource_collection: Params::resource_collection?
                          },
                          ?max_results: ::Integer,
                          ?next_token: ::String,
@@ -350,25 +340,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_insights-instance_method
       def list_insights: (
-                           status_filter: {
-                             ongoing: {
-                               type: ("REACTIVE" | "PROACTIVE")
-                             }?,
-                             closed: {
-                               type: ("REACTIVE" | "PROACTIVE"),
-                               end_time_range: {
-                                 from_time: ::Time?,
-                                 to_time: ::Time?
-                               }
-                             }?,
-                             any: {
-                               type: ("REACTIVE" | "PROACTIVE"),
-                               start_time_range: {
-                                 from_time: ::Time?,
-                                 to_time: ::Time?
-                               }
-                             }?
-                           },
+                           status_filter: Params::list_insights_status_filter,
                            ?max_results: ::Integer,
                            ?next_token: ::String
                          ) -> _ListInsightsResponseSuccess
@@ -409,25 +381,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsGuru/Client.html#list_organization_insights-instance_method
       def list_organization_insights: (
-                                        status_filter: {
-                                          ongoing: {
-                                            type: ("REACTIVE" | "PROACTIVE")
-                                          }?,
-                                          closed: {
-                                            type: ("REACTIVE" | "PROACTIVE"),
-                                            end_time_range: {
-                                              from_time: ::Time?,
-                                              to_time: ::Time?
-                                            }
-                                          }?,
-                                          any: {
-                                            type: ("REACTIVE" | "PROACTIVE"),
-                                            start_time_range: {
-                                              from_time: ::Time?,
-                                              to_time: ::Time?
-                                            }
-                                          }?
-                                        },
+                                        status_filter: Params::list_insights_status_filter,
                                         ?max_results: ::Integer,
                                         ?account_ids: Array[::String],
                                         ?organizational_unit_ids: Array[::String],
@@ -485,17 +439,7 @@ module Aws
                              ?filters: {
                                severities: Array[("LOW" | "MEDIUM" | "HIGH")]?,
                                statuses: Array[("ONGOING" | "CLOSED")]?,
-                               resource_collection: {
-                                 cloud_formation: {
-                                   stack_names: Array[::String]?
-                                 }?,
-                                 tags: Array[
-                                   {
-                                     app_boundary_key: ::String,
-                                     tag_values: Array[::String]
-                                   },
-                                 ]?
-                               }?,
+                               resource_collection: Params::resource_collection?,
                                service_collection: {
                                  service_names: Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]?
                                }?
@@ -522,17 +466,7 @@ module Aws
                                           ?filters: {
                                             severities: Array[("LOW" | "MEDIUM" | "HIGH")]?,
                                             statuses: Array[("ONGOING" | "CLOSED")]?,
-                                            resource_collection: {
-                                              cloud_formation: {
-                                                stack_names: Array[::String]?
-                                              }?,
-                                              tags: Array[
-                                                {
-                                                  app_boundary_key: ::String,
-                                                  tag_values: Array[::String]
-                                                },
-                                              ]?
-                                            }?,
+                                            resource_collection: Params::resource_collection?,
                                             service_collection: {
                                               service_names: Array[("API_GATEWAY" | "APPLICATION_ELB" | "AUTO_SCALING_GROUP" | "CLOUD_FRONT" | "DYNAMO_DB" | "EC2" | "ECS" | "EKS" | "ELASTIC_BEANSTALK" | "ELASTI_CACHE" | "ELB" | "ES" | "KINESIS" | "LAMBDA" | "NAT_GATEWAY" | "NETWORK_ELB" | "RDS" | "REDSHIFT" | "ROUTE_53" | "S3" | "SAGE_MAKER" | "SNS" | "SQS" | "STEP_FUNCTIONS" | "SWF")]?
                                             }?
@@ -556,7 +490,7 @@ module Aws
                                        {
                                          app_boundary_key: ::String,
                                          tag_values: Array[::String]
-                                       },
+                                       }
                                      ]?
                                    },
                                    ?client_token: ::String
@@ -590,7 +524,7 @@ module Aws
                                             {
                                               app_boundary_key: ::String,
                                               tag_values: Array[::String]
-                                            },
+                                            }
                                           ]?
                                         }
                                       ) -> _UpdateResourceCollectionResponseSuccess

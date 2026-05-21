@@ -224,7 +224,7 @@ module Aws
                                            {
                                              name: ("ExternalId" | "ExternalSourceType")?,
                                              value: ::String?
-                                           },
+                                           }
                                          ],
                                          ?max_results: ::Integer,
                                          ?next_token: ::String,
@@ -268,7 +268,7 @@ module Aws
                             {
                               name: ("ExternalId" | "ExternalSourceType")?,
                               value: ::String?
-                            },
+                            }
                           ],
                           ?max_results: ::Integer,
                           ?next_token: ::String,
@@ -333,7 +333,7 @@ module Aws
                                   condition: ("EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS"),
                                   name: ::String,
                                   values: Array[::String]
-                                },
+                                }
                               ],
                               ?s3bucket_for_analysis_data: ::String,
                               ?s3bucket_for_report_data: ::String
@@ -352,7 +352,7 @@ module Aws
                                       {
                                         name: ("ExternalId" | "ExternalSourceType")?,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     name: ::String,
                                     ?s3bucket_for_report_data: ::String,
@@ -370,7 +370,7 @@ module Aws
                                                       {
                                                         name: ("ExternalId" | "ExternalSourceType")?,
                                                         value: ::String?
-                                                      },
+                                                      }
                                                     ],
                                                     ?output_format: ("Excel" | "Json")
                                                   ) -> _StartRecommendationReportGenerationResponseSuccess
@@ -401,7 +401,7 @@ module Aws
                                                      project_name: ::String?,
                                                      source_version: ::String?,
                                                      version_control: ("GITHUB" | "GITHUB_ENTERPRISE" | "AZURE_DEVOPS_GIT")?
-                                                   },
+                                                   }
                                                  ],
                                                  ?strategy_option: {
                                                    is_preferred: bool?,

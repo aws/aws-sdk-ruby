@@ -78,6 +78,17 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteAdvancedPromptOptimizationJobResponse]
+        def errors: () -> ::Array[Types::BatchDeleteAdvancedPromptOptimizationJobError]
+        def advanced_prompt_optimization_jobs: () -> ::Array[Types::BatchDeleteAdvancedPromptOptimizationJobItem]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#batch_delete_advanced_prompt_optimization_job-instance_method
+      def batch_delete_advanced_prompt_optimization_job: (
+                                                           job_identifiers: Array[::String]
+                                                         ) -> _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteAdvancedPromptOptimizationJobResponseSuccess
+
       interface _BatchDeleteEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchDeleteEvaluationJobResponse]
         def errors: () -> ::Array[Types::BatchDeleteEvaluationJobError]
@@ -99,6 +110,44 @@ module Aws
                                                             ) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponseSuccess
                                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelAutomatedReasoningPolicyBuildWorkflowResponseSuccess
 
+      interface _CreateAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateAdvancedPromptOptimizationJobResponse]
+        def job_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_advanced_prompt_optimization_job-instance_method
+      def create_advanced_prompt_optimization_job: (
+                                                     job_name: ::String,
+                                                     ?job_description: ::String,
+                                                     ?client_token: ::String,
+                                                     input_config: {
+                                                       s3_uri: ::String
+                                                     },
+                                                     output_config: {
+                                                       s3_uri: ::String
+                                                     },
+                                                     ?encryption_key_arn: ::String,
+                                                     ?tags: Array[
+                                                       {
+                                                         key: ::String,
+                                                         value: ::String
+                                                       }
+                                                     ],
+                                                     model_configurations: Array[
+                                                       {
+                                                         model_id: ::String,
+                                                         inference_config: {
+                                                           max_tokens: ::Integer?,
+                                                           temperature: ::Float?,
+                                                           top_p: ::Float?,
+                                                           stop_sequences: Array[::String]?
+                                                         }?,
+                                                         additional_model_request_fields: Hash[::String, {
+                                                           }]?
+                                                       }
+                                                     ]
+                                                   ) -> _CreateAdvancedPromptOptimizationJobResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAdvancedPromptOptimizationJobResponseSuccess
+
       interface _CreateAutomatedReasoningPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAutomatedReasoningPolicyResponse]
         def policy_arn: () -> ::String
@@ -114,41 +163,13 @@ module Aws
                                                name: ::String,
                                                ?description: ::String,
                                                ?client_request_token: ::String,
-                                               ?policy_definition: {
-                                                 version: ::String?,
-                                                 types: Array[
-                                                   {
-                                                     name: ::String,
-                                                     description: ::String?,
-                                                     values: Array[
-                                                       {
-                                                         value: ::String,
-                                                         description: ::String?
-                                                       },
-                                                     ]
-                                                   },
-                                                 ]?,
-                                                 rules: Array[
-                                                   {
-                                                     id: ::String,
-                                                     expression: ::String,
-                                                     alternate_expression: ::String?
-                                                   },
-                                                 ]?,
-                                                 variables: Array[
-                                                   {
-                                                     name: ::String,
-                                                     type: ::String,
-                                                     description: ::String
-                                                   },
-                                                 ]?
-                                               },
+                                               ?policy_definition: Params::automated_reasoning_policy_definition,
                                                ?kms_key_id: ::String,
                                                ?tags: Array[
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateAutomatedReasoningPolicyResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutomatedReasoningPolicyResponseSuccess
@@ -187,7 +208,7 @@ module Aws
                                                          {
                                                            key: ::String,
                                                            value: ::String
-                                                         },
+                                                         }
                                                        ]
                                                      ) -> _CreateAutomatedReasoningPolicyVersionResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutomatedReasoningPolicyVersionResponseSuccess
@@ -210,7 +231,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?client_request_token: ::String
                                ) -> _CreateCustomModelResponseSuccess
@@ -229,7 +250,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?client_request_token: ::String
                                           ) -> _CreateCustomModelDeploymentResponseSuccess
@@ -250,28 +271,19 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?application_type: ("ModelEvaluation" | "RagEvaluation"),
                                    evaluation_config: {
                                      automated: {
                                        dataset_metric_configs: Array[
-                                         {
-                                           task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom"),
-                                           dataset: {
-                                             name: ::String,
-                                             dataset_location: {
-                                               s3_uri: ::String?
-                                             }?
-                                           },
-                                           metric_names: Array[::String]
-                                         },
+                                         Params::evaluation_dataset_metric_config
                                        ],
                                        evaluator_model_config: {
                                          bedrock_evaluator_models: Array[
                                            {
                                              model_identifier: ::String
-                                           },
+                                           }
                                          ]?
                                        }?,
                                        custom_metric_config: {
@@ -287,16 +299,16 @@ module Aws
                                                      string_value: ::String?,
                                                      float_value: ::Float?
                                                    }
-                                                 },
+                                                 }
                                                ]?
                                              }?
-                                           },
+                                           }
                                          ],
                                          evaluator_model_config: {
                                            bedrock_evaluator_models: Array[
                                              {
                                                model_identifier: ::String
-                                             },
+                                             }
                                            ]
                                          }
                                        }?
@@ -311,19 +323,10 @@ module Aws
                                            name: ::String,
                                            description: ::String?,
                                            rating_method: ::String
-                                         },
+                                         }
                                        ]?,
                                        dataset_metric_configs: Array[
-                                         {
-                                           task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom"),
-                                           dataset: {
-                                             name: ::String,
-                                             dataset_location: {
-                                               s3_uri: ::String?
-                                             }?
-                                           },
-                                           metric_names: Array[::String]
-                                         },
+                                         Params::evaluation_dataset_metric_config
                                        ]
                                      }?
                                    },
@@ -340,229 +343,21 @@ module Aws
                                          precomputed_inference_source: {
                                            inference_source_identifier: ::String
                                          }?
-                                       },
+                                       }
                                      ]?,
                                      rag_configs: Array[
                                        {
                                          knowledge_base_config: {
                                            retrieve_config: {
                                              knowledge_base_id: ::String,
-                                             knowledge_base_retrieval_configuration: {
-                                               vector_search_configuration: {
-                                                 number_of_results: ::Integer?,
-                                                 override_search_type: ("HYBRID" | "SEMANTIC")?,
-                                                 filter: {
-                                                   equals: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   not_equals: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   greater_than: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   greater_than_or_equals: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   less_than: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   less_than_or_equals: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   in: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   not_in: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   starts_with: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   list_contains: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   string_contains: {
-                                                     key: ::String,
-                                                     value: {
-                                                     }
-                                                   }?,
-                                                   and_all: Array[
-                                                     untyped,
-                                                   ]?,
-                                                   or_all: Array[
-                                                     untyped,
-                                                   ]?
-                                                 }?,
-                                                 implicit_filter_configuration: {
-                                                   metadata_attributes: Array[
-                                                     {
-                                                       key: ::String,
-                                                       type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST"),
-                                                       description: ::String
-                                                     },
-                                                   ],
-                                                   model_arn: ::String
-                                                 }?,
-                                                 reranking_configuration: {
-                                                   type: ("BEDROCK_RERANKING_MODEL"),
-                                                   bedrock_reranking_configuration: {
-                                                     model_configuration: {
-                                                       model_arn: ::String,
-                                                       additional_model_request_fields: Hash[::String, {
-                                                         }]?
-                                                     },
-                                                     number_of_reranked_results: ::Integer?,
-                                                     metadata_configuration: {
-                                                       selection_mode: ("SELECTIVE" | "ALL"),
-                                                       selective_mode_configuration: {
-                                                         fields_to_include: Array[
-                                                           {
-                                                             field_name: ::String
-                                                           },
-                                                         ]?,
-                                                         fields_to_exclude: Array[
-                                                           {
-                                                             field_name: ::String
-                                                           },
-                                                         ]?
-                                                       }?
-                                                     }?
-                                                   }?
-                                                 }?
-                                               }
-                                             }
+                                             knowledge_base_retrieval_configuration: Params::knowledge_base_retrieval_configuration
                                            }?,
                                            retrieve_and_generate_config: {
                                              type: ("KNOWLEDGE_BASE" | "EXTERNAL_SOURCES"),
                                              knowledge_base_configuration: {
                                                knowledge_base_id: ::String,
                                                model_arn: ::String,
-                                               retrieval_configuration: {
-                                                 vector_search_configuration: {
-                                                   number_of_results: ::Integer?,
-                                                   override_search_type: ("HYBRID" | "SEMANTIC")?,
-                                                   filter: {
-                                                     equals: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     not_equals: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     greater_than: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     greater_than_or_equals: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     less_than: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     less_than_or_equals: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     in: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     not_in: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     starts_with: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     list_contains: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     string_contains: {
-                                                       key: ::String,
-                                                       value: {
-                                                       }
-                                                     }?,
-                                                     and_all: Array[
-                                                       untyped,
-                                                     ]?,
-                                                     or_all: Array[
-                                                       untyped,
-                                                     ]?
-                                                   }?,
-                                                   implicit_filter_configuration: {
-                                                     metadata_attributes: Array[
-                                                       {
-                                                         key: ::String,
-                                                         type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST"),
-                                                         description: ::String
-                                                       },
-                                                     ],
-                                                     model_arn: ::String
-                                                   }?,
-                                                   reranking_configuration: {
-                                                     type: ("BEDROCK_RERANKING_MODEL"),
-                                                     bedrock_reranking_configuration: {
-                                                       model_configuration: {
-                                                         model_arn: ::String,
-                                                         additional_model_request_fields: Hash[::String, {
-                                                           }]?
-                                                       },
-                                                       number_of_reranked_results: ::Integer?,
-                                                       metadata_configuration: {
-                                                         selection_mode: ("SELECTIVE" | "ALL"),
-                                                         selective_mode_configuration: {
-                                                           fields_to_include: Array[
-                                                             {
-                                                               field_name: ::String
-                                                             },
-                                                           ]?,
-                                                           fields_to_exclude: Array[
-                                                             {
-                                                               field_name: ::String
-                                                             },
-                                                           ]?
-                                                         }?
-                                                       }?
-                                                     }?
-                                                   }?
-                                                 }
-                                               }?,
+                                               retrieval_configuration: Params::knowledge_base_retrieval_configuration?,
                                                generation_configuration: {
                                                  prompt_template: {
                                                    text_prompt_template: ::String?
@@ -571,14 +366,7 @@ module Aws
                                                    guardrail_id: ::String,
                                                    guardrail_version: ::String
                                                  }?,
-                                                 kb_inference_config: {
-                                                   text_inference_config: {
-                                                     temperature: ::Float?,
-                                                     top_p: ::Float?,
-                                                     max_tokens: ::Integer?,
-                                                     stop_sequences: Array[::String]?
-                                                   }?
-                                                 }?,
+                                                 kb_inference_config: Params::kb_inference_config?,
                                                  additional_model_request_fields: Hash[::String, {
                                                    }]?
                                                }?,
@@ -601,7 +389,7 @@ module Aws
                                                      content_type: ::String,
                                                      data: ::String
                                                    }?
-                                                 },
+                                                 }
                                                ],
                                                generation_configuration: {
                                                  prompt_template: {
@@ -611,14 +399,7 @@ module Aws
                                                    guardrail_id: ::String,
                                                    guardrail_version: ::String
                                                  }?,
-                                                 kb_inference_config: {
-                                                   text_inference_config: {
-                                                     temperature: ::Float?,
-                                                     top_p: ::Float?,
-                                                     max_tokens: ::Integer?,
-                                                     stop_sequences: Array[::String]?
-                                                   }?
-                                                 }?,
+                                                 kb_inference_config: Params::kb_inference_config?,
                                                  additional_model_request_fields: Hash[::String, {
                                                    }]?
                                                }?
@@ -633,7 +414,7 @@ module Aws
                                              rag_source_identifier: ::String
                                            }?
                                          }?
-                                       },
+                                       }
                                      ]?
                                    },
                                    output_data_config: {
@@ -664,95 +445,11 @@ module Aws
       def create_guardrail: (
                               name: ::String,
                               ?description: ::String,
-                              ?topic_policy_config: {
-                                topics_config: Array[
-                                  {
-                                    name: ::String,
-                                    definition: ::String,
-                                    examples: Array[::String]?,
-                                    type: ("DENY"),
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ],
-                                tier_config: {
-                                  tier_name: ("CLASSIC" | "STANDARD")
-                                }?
-                              },
-                              ?content_policy_config: {
-                                filters_config: Array[
-                                  {
-                                    type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
-                                    input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
-                                    output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
-                                    input_modalities: Array[("TEXT" | "IMAGE")]?,
-                                    output_modalities: Array[("TEXT" | "IMAGE")]?,
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ],
-                                tier_config: {
-                                  tier_name: ("CLASSIC" | "STANDARD")
-                                }?
-                              },
-                              ?word_policy_config: {
-                                words_config: Array[
-                                  {
-                                    text: ::String,
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?,
-                                managed_word_lists_config: Array[
-                                  {
-                                    type: ("PROFANITY"),
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?
-                              },
-                              ?sensitive_information_policy_config: {
-                                pii_entities_config: Array[
-                                  {
-                                    type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
-                                    action: ("BLOCK" | "ANONYMIZE" | "NONE"),
-                                    input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?,
-                                regexes_config: Array[
-                                  {
-                                    name: ::String,
-                                    description: ::String?,
-                                    pattern: ::String,
-                                    action: ("BLOCK" | "ANONYMIZE" | "NONE"),
-                                    input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?
-                              },
-                              ?contextual_grounding_policy_config: {
-                                filters_config: Array[
-                                  {
-                                    type: ("GROUNDING" | "RELEVANCE"),
-                                    threshold: ::Float,
-                                    action: ("BLOCK" | "NONE")?,
-                                    enabled: bool?
-                                  },
-                                ]
-                              },
+                              ?topic_policy_config: Params::guardrail_topic_policy_config,
+                              ?content_policy_config: Params::guardrail_content_policy_config,
+                              ?word_policy_config: Params::guardrail_word_policy_config,
+                              ?sensitive_information_policy_config: Params::guardrail_sensitive_information_policy_config,
+                              ?contextual_grounding_policy_config: Params::guardrail_contextual_grounding_policy_config,
                               ?automated_reasoning_policy_config: {
                                 policies: Array[::String],
                                 confidence_threshold: ::Float?
@@ -767,7 +464,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?client_request_token: ::String
                             ) -> _CreateGuardrailResponseSuccess
@@ -803,7 +500,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateInferenceProfileResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceProfileResponseSuccess
@@ -815,18 +512,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#create_marketplace_model_endpoint-instance_method
       def create_marketplace_model_endpoint: (
                                                model_source_identifier: ::String,
-                                               endpoint_config: {
-                                                 sage_maker: {
-                                                   initial_instance_count: ::Integer,
-                                                   instance_type: ::String,
-                                                   execution_role: ::String,
-                                                   kms_encryption_key: ::String?,
-                                                   vpc: {
-                                                     subnet_ids: Array[::String],
-                                                     security_group_ids: Array[::String]
-                                                   }?
-                                                 }?
-                                               },
+                                               endpoint_config: Params::endpoint_config,
                                                ?accept_eula: bool,
                                                endpoint_name: ::String,
                                                ?client_request_token: ::String,
@@ -834,7 +520,7 @@ module Aws
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateMarketplaceModelEndpointResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMarketplaceModelEndpointResponseSuccess
@@ -852,7 +538,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?client_request_token: ::String
                                  ) -> _CreateModelCopyJobResponseSuccess
@@ -875,13 +561,13 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?custom_model_tags: Array[
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             training_data_config: {
                                               s3_uri: ::String?,
@@ -897,13 +583,13 @@ module Aws
                                                     {
                                                       equals: Hash[::String, ::String]?,
                                                       not_equals: Hash[::String, ::String]?
-                                                    },
+                                                    }
                                                   ]?,
                                                   or_all: Array[
                                                     {
                                                       equals: Hash[::String, ::String]?,
                                                       not_equals: Hash[::String, ::String]?
-                                                    },
+                                                    }
                                                   ]?
                                                 }?
                                               }?
@@ -912,7 +598,7 @@ module Aws
                                               validators: Array[
                                                 {
                                                   s3_uri: ::String
-                                                },
+                                                }
                                               ]
                                             },
                                             output_data_config: {
@@ -969,13 +655,13 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?imported_model_tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?client_request_token: ::String,
                                      ?vpc_config: {
@@ -1019,7 +705,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ],
                                          ?model_invocation_type: ("InvokeModel" | "Converse")
                                        ) -> _CreateModelInvocationJobResponseSuccess
@@ -1036,7 +722,7 @@ module Aws
                                   models: Array[
                                     {
                                       model_arn: ::String
-                                    },
+                                    }
                                   ],
                                   ?description: ::String,
                                   routing_criteria: {
@@ -1049,7 +735,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreatePromptRouterResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePromptRouterResponseSuccess
@@ -1069,7 +755,7 @@ module Aws
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _CreateProvisionedModelThroughputResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisionedModelThroughputResponseSuccess
@@ -1232,6 +918,26 @@ module Aws
                                                        policy_arn: ::String
                                                      ) -> _ExportAutomatedReasoningPolicyVersionResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExportAutomatedReasoningPolicyVersionResponseSuccess
+
+      interface _GetAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetAdvancedPromptOptimizationJobResponse]
+        def job_arn: () -> ::String
+        def job_name: () -> ::String
+        def job_description: () -> ::String
+        def job_status: () -> ("InProgress" | "Completed" | "Failed" | "PartiallyCompleted" | "Stopping" | "Stopped" | "Deleting")
+        def input_config: () -> Types::AdvancedPromptOptimizationInputConfig
+        def output_config: () -> Types::AdvancedPromptOptimizationOutputConfig
+        def encryption_key_arn: () -> ::String
+        def creation_time: () -> ::Time
+        def last_modified_time: () -> ::Time
+        def failure_message: () -> ::String
+        def model_configurations: () -> ::Array[Types::ModelConfiguration]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#get_advanced_prompt_optimization_job-instance_method
+      def get_advanced_prompt_optimization_job: (
+                                                  job_identifier: ::String
+                                                ) -> _GetAdvancedPromptOptimizationJobResponseSuccess
+                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAdvancedPromptOptimizationJobResponseSuccess
 
       interface _GetAutomatedReasoningPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetAutomatedReasoningPolicyResponse]
@@ -1677,6 +1383,20 @@ module Aws
                                          ) -> _GetUseCaseForModelAccessResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUseCaseForModelAccessResponseSuccess
 
+      interface _ListAdvancedPromptOptimizationJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAdvancedPromptOptimizationJobsResponse]
+        def job_summaries: () -> ::Array[Types::AdvancedPromptOptimizationJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#list_advanced_prompt_optimization_jobs-instance_method
+      def list_advanced_prompt_optimization_jobs: (
+                                                    ?max_results: ::Integer,
+                                                    ?next_token: ::String,
+                                                    ?sort_by: ("CreationTime"),
+                                                    ?sort_order: ("Ascending" | "Descending")
+                                                  ) -> _ListAdvancedPromptOptimizationJobsResponseSuccess
+                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAdvancedPromptOptimizationJobsResponseSuccess
+
       interface _ListAutomatedReasoningPoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListAutomatedReasoningPoliciesResponse]
         def automated_reasoning_policy_summaries: () -> ::Array[Types::AutomatedReasoningPolicySummary]
@@ -2090,35 +1810,7 @@ module Aws
                                                              build_workflow_type: ("INGEST_CONTENT" | "REFINE_POLICY" | "IMPORT_POLICY" | "GENERATE_FIDELITY_REPORT" | "GENERATE_POLICY_SCENARIOS"),
                                                              ?client_request_token: ::String,
                                                              source_content: {
-                                                               policy_definition: {
-                                                                 version: ::String?,
-                                                                 types: Array[
-                                                                   {
-                                                                     name: ::String,
-                                                                     description: ::String?,
-                                                                     values: Array[
-                                                                       {
-                                                                         value: ::String,
-                                                                         description: ::String?
-                                                                       },
-                                                                     ]
-                                                                   },
-                                                                 ]?,
-                                                                 rules: Array[
-                                                                   {
-                                                                     id: ::String,
-                                                                     expression: ::String,
-                                                                     alternate_expression: ::String?
-                                                                   },
-                                                                 ]?,
-                                                                 variables: Array[
-                                                                   {
-                                                                     name: ::String,
-                                                                     type: ::String,
-                                                                     description: ::String
-                                                                   },
-                                                                 ]?
-                                                               }?,
+                                                               policy_definition: Params::automated_reasoning_policy_definition?,
                                                                workflow_content: {
                                                                  documents: Array[
                                                                    {
@@ -2126,84 +1818,11 @@ module Aws
                                                                      document_content_type: ("pdf" | "txt"),
                                                                      document_name: ::String,
                                                                      document_description: ::String?
-                                                                   },
+                                                                   }
                                                                  ]?,
                                                                  policy_repair_assets: {
                                                                    annotations: Array[
-                                                                     {
-                                                                       add_type: {
-                                                                         name: ::String,
-                                                                         description: ::String,
-                                                                         values: Array[
-                                                                           {
-                                                                             value: ::String,
-                                                                             description: ::String?
-                                                                           },
-                                                                         ]
-                                                                       }?,
-                                                                       update_type: {
-                                                                         name: ::String,
-                                                                         new_name: ::String?,
-                                                                         description: ::String?,
-                                                                         values: Array[
-                                                                           {
-                                                                             add_type_value: {
-                                                                               value: ::String,
-                                                                               description: ::String?
-                                                                             }?,
-                                                                             update_type_value: {
-                                                                               value: ::String,
-                                                                               new_value: ::String?,
-                                                                               description: ::String?
-                                                                             }?,
-                                                                             delete_type_value: {
-                                                                               value: ::String
-                                                                             }?
-                                                                           },
-                                                                         ]
-                                                                       }?,
-                                                                       delete_type: {
-                                                                         name: ::String
-                                                                       }?,
-                                                                       add_variable: {
-                                                                         name: ::String,
-                                                                         type: ::String,
-                                                                         description: ::String
-                                                                       }?,
-                                                                       update_variable: {
-                                                                         name: ::String,
-                                                                         new_name: ::String?,
-                                                                         description: ::String?
-                                                                       }?,
-                                                                       delete_variable: {
-                                                                         name: ::String
-                                                                       }?,
-                                                                       add_rule: {
-                                                                         expression: ::String
-                                                                       }?,
-                                                                       update_rule: {
-                                                                         rule_id: ::String,
-                                                                         expression: ::String
-                                                                       }?,
-                                                                       delete_rule: {
-                                                                         rule_id: ::String
-                                                                       }?,
-                                                                       add_rule_from_natural_language: {
-                                                                         natural_language: ::String
-                                                                       }?,
-                                                                       update_from_rules_feedback: {
-                                                                         rule_ids: Array[::String]?,
-                                                                         feedback: ::String
-                                                                       }?,
-                                                                       update_from_scenario_feedback: {
-                                                                         rule_ids: Array[::String]?,
-                                                                         scenario_expression: ::String,
-                                                                         feedback: ::String?
-                                                                       }?,
-                                                                       ingest_content: {
-                                                                         content: ::String
-                                                                       }?
-                                                                     },
+                                                                     Params::automated_reasoning_policy_annotation
                                                                    ]
                                                                  }?,
                                                                  generate_fidelity_report_content: {
@@ -2213,7 +1832,7 @@ module Aws
                                                                        document_content_type: ("pdf" | "txt"),
                                                                        document_name: ::String,
                                                                        document_description: ::String?
-                                                                     },
+                                                                     }
                                                                    ]?
                                                                  }?
                                                                }?
@@ -2233,6 +1852,15 @@ module Aws
                                                             ?client_request_token: ::String
                                                           ) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAutomatedReasoningPolicyTestWorkflowResponseSuccess
+
+      interface _StopAdvancedPromptOptimizationJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopAdvancedPromptOptimizationJobResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#stop_advanced_prompt_optimization_job-instance_method
+      def stop_advanced_prompt_optimization_job: (
+                                                   job_identifier: ::String
+                                                 ) -> _StopAdvancedPromptOptimizationJobResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopAdvancedPromptOptimizationJobResponseSuccess
 
       interface _StopEvaluationJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopEvaluationJobResponse]
@@ -2271,7 +1899,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -2296,35 +1924,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_automated_reasoning_policy-instance_method
       def update_automated_reasoning_policy: (
                                                policy_arn: ::String,
-                                               policy_definition: {
-                                                 version: ::String?,
-                                                 types: Array[
-                                                   {
-                                                     name: ::String,
-                                                     description: ::String?,
-                                                     values: Array[
-                                                       {
-                                                         value: ::String,
-                                                         description: ::String?
-                                                       },
-                                                     ]
-                                                   },
-                                                 ]?,
-                                                 rules: Array[
-                                                   {
-                                                     id: ::String,
-                                                     expression: ::String,
-                                                     alternate_expression: ::String?
-                                                   },
-                                                 ]?,
-                                                 variables: Array[
-                                                   {
-                                                     name: ::String,
-                                                     type: ::String,
-                                                     description: ::String
-                                                   },
-                                                 ]?
-                                               },
+                                               policy_definition: Params::automated_reasoning_policy_definition,
                                                ?name: ::String,
                                                ?description: ::String
                                              ) -> _UpdateAutomatedReasoningPolicyResponseSuccess
@@ -2342,80 +1942,7 @@ module Aws
                                                            policy_arn: ::String,
                                                            build_workflow_id: ::String,
                                                            annotations: Array[
-                                                             {
-                                                               add_type: {
-                                                                 name: ::String,
-                                                                 description: ::String,
-                                                                 values: Array[
-                                                                   {
-                                                                     value: ::String,
-                                                                     description: ::String?
-                                                                   },
-                                                                 ]
-                                                               }?,
-                                                               update_type: {
-                                                                 name: ::String,
-                                                                 new_name: ::String?,
-                                                                 description: ::String?,
-                                                                 values: Array[
-                                                                   {
-                                                                     add_type_value: {
-                                                                       value: ::String,
-                                                                       description: ::String?
-                                                                     }?,
-                                                                     update_type_value: {
-                                                                       value: ::String,
-                                                                       new_value: ::String?,
-                                                                       description: ::String?
-                                                                     }?,
-                                                                     delete_type_value: {
-                                                                       value: ::String
-                                                                     }?
-                                                                   },
-                                                                 ]
-                                                               }?,
-                                                               delete_type: {
-                                                                 name: ::String
-                                                               }?,
-                                                               add_variable: {
-                                                                 name: ::String,
-                                                                 type: ::String,
-                                                                 description: ::String
-                                                               }?,
-                                                               update_variable: {
-                                                                 name: ::String,
-                                                                 new_name: ::String?,
-                                                                 description: ::String?
-                                                               }?,
-                                                               delete_variable: {
-                                                                 name: ::String
-                                                               }?,
-                                                               add_rule: {
-                                                                 expression: ::String
-                                                               }?,
-                                                               update_rule: {
-                                                                 rule_id: ::String,
-                                                                 expression: ::String
-                                                               }?,
-                                                               delete_rule: {
-                                                                 rule_id: ::String
-                                                               }?,
-                                                               add_rule_from_natural_language: {
-                                                                 natural_language: ::String
-                                                               }?,
-                                                               update_from_rules_feedback: {
-                                                                 rule_ids: Array[::String]?,
-                                                                 feedback: ::String
-                                                               }?,
-                                                               update_from_scenario_feedback: {
-                                                                 rule_ids: Array[::String]?,
-                                                                 scenario_expression: ::String,
-                                                                 feedback: ::String?
-                                                               }?,
-                                                               ingest_content: {
-                                                                 content: ::String
-                                                               }?
-                                                             },
+                                                             Params::automated_reasoning_policy_annotation
                                                            ],
                                                            last_updated_annotation_set_hash: ::String
                                                          ) -> _UpdateAutomatedReasoningPolicyAnnotationsResponseSuccess
@@ -2462,95 +1989,11 @@ module Aws
                               guardrail_identifier: ::String,
                               name: ::String,
                               ?description: ::String,
-                              ?topic_policy_config: {
-                                topics_config: Array[
-                                  {
-                                    name: ::String,
-                                    definition: ::String,
-                                    examples: Array[::String]?,
-                                    type: ("DENY"),
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ],
-                                tier_config: {
-                                  tier_name: ("CLASSIC" | "STANDARD")
-                                }?
-                              },
-                              ?content_policy_config: {
-                                filters_config: Array[
-                                  {
-                                    type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
-                                    input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
-                                    output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
-                                    input_modalities: Array[("TEXT" | "IMAGE")]?,
-                                    output_modalities: Array[("TEXT" | "IMAGE")]?,
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ],
-                                tier_config: {
-                                  tier_name: ("CLASSIC" | "STANDARD")
-                                }?
-                              },
-                              ?word_policy_config: {
-                                words_config: Array[
-                                  {
-                                    text: ::String,
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?,
-                                managed_word_lists_config: Array[
-                                  {
-                                    type: ("PROFANITY"),
-                                    input_action: ("BLOCK" | "NONE")?,
-                                    output_action: ("BLOCK" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?
-                              },
-                              ?sensitive_information_policy_config: {
-                                pii_entities_config: Array[
-                                  {
-                                    type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
-                                    action: ("BLOCK" | "ANONYMIZE" | "NONE"),
-                                    input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?,
-                                regexes_config: Array[
-                                  {
-                                    name: ::String,
-                                    description: ::String?,
-                                    pattern: ::String,
-                                    action: ("BLOCK" | "ANONYMIZE" | "NONE"),
-                                    input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
-                                    input_enabled: bool?,
-                                    output_enabled: bool?
-                                  },
-                                ]?
-                              },
-                              ?contextual_grounding_policy_config: {
-                                filters_config: Array[
-                                  {
-                                    type: ("GROUNDING" | "RELEVANCE"),
-                                    threshold: ::Float,
-                                    action: ("BLOCK" | "NONE")?,
-                                    enabled: bool?
-                                  },
-                                ]
-                              },
+                              ?topic_policy_config: Params::guardrail_topic_policy_config,
+                              ?content_policy_config: Params::guardrail_content_policy_config,
+                              ?word_policy_config: Params::guardrail_word_policy_config,
+                              ?sensitive_information_policy_config: Params::guardrail_sensitive_information_policy_config,
+                              ?contextual_grounding_policy_config: Params::guardrail_contextual_grounding_policy_config,
                               ?automated_reasoning_policy_config: {
                                 policies: Array[::String],
                                 confidence_threshold: ::Float?
@@ -2571,18 +2014,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Bedrock/Client.html#update_marketplace_model_endpoint-instance_method
       def update_marketplace_model_endpoint: (
                                                endpoint_arn: ::String,
-                                               endpoint_config: {
-                                                 sage_maker: {
-                                                   initial_instance_count: ::Integer,
-                                                   instance_type: ::String,
-                                                   execution_role: ::String,
-                                                   kms_encryption_key: ::String?,
-                                                   vpc: {
-                                                     subnet_ids: Array[::String],
-                                                     security_group_ids: Array[::String]
-                                                   }?
-                                                 }?
-                                               },
+                                               endpoint_config: Params::endpoint_config,
                                                ?client_request_token: ::String
                                              ) -> _UpdateMarketplaceModelEndpointResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMarketplaceModelEndpointResponseSuccess

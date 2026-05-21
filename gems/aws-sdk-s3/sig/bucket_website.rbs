@@ -76,7 +76,7 @@ module Aws
                          replace_key_prefix_with: ::String?,
                          replace_key_with: ::String?
                        }
-                     },
+                     }
                    ]?
                  },
                  ?expected_bucket_owner: ::String

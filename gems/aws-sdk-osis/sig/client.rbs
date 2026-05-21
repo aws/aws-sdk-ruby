@@ -113,7 +113,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              ?pipeline_role_arn: ::String
                            ) -> _CreatePipelineResponseSuccess
@@ -314,7 +314,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

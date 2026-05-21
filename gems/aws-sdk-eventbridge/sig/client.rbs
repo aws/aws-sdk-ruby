@@ -157,57 +157,13 @@ module Aws
                                    },
                                    authorization_endpoint: ::String,
                                    http_method: ("GET" | "POST" | "PUT"),
-                                   o_auth_http_parameters: {
-                                     header_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?,
-                                     query_string_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?,
-                                     body_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?
-                                   }?
+                                   o_auth_http_parameters: Params::connection_http_parameters?
                                  }?,
                                  api_key_auth_parameters: {
                                    api_key_name: ::String,
                                    api_key_value: ::String
                                  }?,
-                                 invocation_http_parameters: {
-                                   header_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?,
-                                   query_string_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?,
-                                   body_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?
-                                 }?,
+                                 invocation_http_parameters: Params::connection_http_parameters?,
                                  connectivity_parameters: {
                                    resource_parameters: {
                                      resource_configuration_arn: ::String
@@ -237,23 +193,14 @@ module Aws
       def create_endpoint: (
                              name: ::String,
                              ?description: ::String,
-                             routing_config: {
-                               failover_config: {
-                                 primary: {
-                                   health_check: ::String
-                                 },
-                                 secondary: {
-                                   route: ::String
-                                 }
-                               }
-                             },
+                             routing_config: Params::routing_config,
                              ?replication_config: {
                                state: ("ENABLED" | "DISABLED")?
                              },
                              event_buses: Array[
                                {
                                  event_bus_arn: ::String
-                               },
+                               }
                              ],
                              ?role_arn: ::String
                            ) -> _CreateEndpointResponseSuccess
@@ -284,7 +231,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateEventBusResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventBusResponseSuccess
@@ -758,7 +705,7 @@ module Aws
                             detail: ::String?,
                             event_bus_name: ::String?,
                             trace_header: ::String?
-                          },
+                          }
                         ],
                         ?endpoint_id: ::String
                       ) -> _PutEventsResponseSuccess
@@ -778,7 +725,7 @@ module Aws
                                     resources: Array[::String]?,
                                     detail_type: ::String?,
                                     detail: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _PutPartnerEventsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPartnerEventsResponseSuccess
@@ -814,7 +761,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ],
                       ?event_bus_name: ::String
                     ) -> _PutRuleResponseSuccess
@@ -848,7 +795,7 @@ module Aws
                                  {
                                    key: ::String,
                                    values: Array[::String]
-                                 },
+                                 }
                                ]
                              }?,
                              ecs_parameters: {
@@ -869,7 +816,7 @@ module Aws
                                    capacity_provider: ::String,
                                    weight: ::Integer?,
                                    base: ::Integer?
-                                 },
+                                 }
                                ]?,
                                enable_ecs_managed_tags: bool?,
                                enable_execute_command: bool?,
@@ -877,13 +824,13 @@ module Aws
                                  {
                                    type: ("distinctInstance" | "memberOf")?,
                                    expression: ::String?
-                                 },
+                                 }
                                ]?,
                                placement_strategy: Array[
                                  {
                                    type: ("random" | "spread" | "binpack")?,
                                    field: ::String?
-                                 },
+                                 }
                                ]?,
                                propagate_tags: ("TASK_DEFINITION")?,
                                reference_id: ::String?,
@@ -891,7 +838,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]?
                              }?,
                              batch_parameters: {
@@ -926,7 +873,7 @@ module Aws
                                  {
                                    name: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]?
                              }?,
                              dead_letter_config: {
@@ -939,7 +886,7 @@ module Aws
                              app_sync_parameters: {
                                graph_ql_operation: ::String?
                              }?
-                           },
+                           }
                          ]
                        ) -> _PutTargetsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutTargetsResponseSuccess
@@ -997,7 +944,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1083,57 +1030,13 @@ module Aws
                                    }?,
                                    authorization_endpoint: ::String?,
                                    http_method: ("GET" | "POST" | "PUT")?,
-                                   o_auth_http_parameters: {
-                                     header_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?,
-                                     query_string_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?,
-                                     body_parameters: Array[
-                                       {
-                                         key: ::String?,
-                                         value: ::String?,
-                                         is_value_secret: bool?
-                                       },
-                                     ]?
-                                   }?
+                                   o_auth_http_parameters: Params::connection_http_parameters?
                                  }?,
                                  api_key_auth_parameters: {
                                    api_key_name: ::String?,
                                    api_key_value: ::String?
                                  }?,
-                                 invocation_http_parameters: {
-                                   header_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?,
-                                   query_string_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?,
-                                   body_parameters: Array[
-                                     {
-                                       key: ::String?,
-                                       value: ::String?,
-                                       is_value_secret: bool?
-                                     },
-                                   ]?
-                                 }?,
+                                 invocation_http_parameters: Params::connection_http_parameters?,
                                  connectivity_parameters: {
                                    resource_parameters: {
                                      resource_configuration_arn: ::String
@@ -1165,23 +1068,14 @@ module Aws
       def update_endpoint: (
                              name: ::String,
                              ?description: ::String,
-                             ?routing_config: {
-                               failover_config: {
-                                 primary: {
-                                   health_check: ::String
-                                 },
-                                 secondary: {
-                                   route: ::String
-                                 }
-                               }
-                             },
+                             ?routing_config: Params::routing_config,
                              ?replication_config: {
                                state: ("ENABLED" | "DISABLED")?
                              },
                              ?event_buses: Array[
                                {
                                  event_bus_arn: ::String
-                               },
+                               }
                              ],
                              ?role_arn: ::String
                            ) -> _UpdateEndpointResponseSuccess

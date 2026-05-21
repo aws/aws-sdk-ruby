@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppRunner
+    module Params
+      type code_configuration_values = {
+      runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18" | "NODEJS_22"),
+      build_command: ::String?,
+      start_command: ::String?,
+      port: ::String?,
+      runtime_environment_variables: Hash[::String, ::String]?,
+      runtime_environment_secrets: Hash[::String, ::String]?
+    }
+
+      type code_configuration = {
+      configuration_source: ("REPOSITORY" | "API"),
+      code_configuration_values: Params::code_configuration_values?
+    }
+
+      type code_repository = {
+      repository_url: ::String,
+      source_code_version: {
+        type: ("BRANCH"),
+        value: ::String
+      },
+      code_configuration: Params::code_configuration?,
+      source_directory: ::String?
+    }
+
+      type image_repository = {
+      image_identifier: ::String,
+      image_configuration: {
+        runtime_environment_variables: Hash[::String, ::String]?,
+        start_command: ::String?,
+        port: ::String?,
+        runtime_environment_secrets: Hash[::String, ::String]?
+      }?,
+      image_repository_type: ("ECR" | "ECR_PUBLIC")
+    }
+
+      type source_configuration = {
+      code_repository: Params::code_repository?,
+      image_repository: Params::image_repository?,
+      auto_deployments_enabled: bool?,
+      authentication_configuration: {
+        connection_arn: ::String?,
+        access_role_arn: ::String?
+      }?
+    }
+
+      type health_check_configuration = {
+      protocol: ("TCP" | "HTTP")?,
+      path: ::String?,
+      interval: ::Integer?,
+      timeout: ::Integer?,
+      healthy_threshold: ::Integer?,
+      unhealthy_threshold: ::Integer?
+    }
+
+      type network_configuration = {
+      egress_configuration: {
+        egress_type: ("DEFAULT" | "VPC")?,
+        vpc_connector_arn: ::String?
+      }?,
+      ingress_configuration: {
+        is_publicly_accessible: bool?
+      }?,
+      ip_address_type: ("IPV4" | "DUAL_STACK")?
+    }
+
+    end
+  end
+end

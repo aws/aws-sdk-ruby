@@ -1,0 +1,32 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CostOptimizationHub
+    module Params
+      type filter = {
+      restart_needed: bool?,
+      rollback_possible: bool?,
+      implementation_efforts: Array[("VeryLow" | "Low" | "Medium" | "High" | "VeryHigh")]?,
+      account_ids: Array[::String]?,
+      regions: Array[::String]?,
+      resource_types: Array[("Ec2Instance" | "LambdaFunction" | "EbsVolume" | "EcsService" | "Ec2AutoScalingGroup" | "Ec2InstanceSavingsPlans" | "ComputeSavingsPlans" | "SageMakerSavingsPlans" | "Ec2ReservedInstances" | "RdsReservedInstances" | "OpenSearchReservedInstances" | "RedshiftReservedInstances" | "ElastiCacheReservedInstances" | "RdsDbInstanceStorage" | "RdsDbInstance" | "AuroraDbClusterStorage" | "DynamoDbReservedCapacity" | "MemoryDbReservedInstances" | "NatGateway")]?,
+      action_types: Array[("Rightsize" | "Stop" | "Upgrade" | "PurchaseSavingsPlans" | "PurchaseReservedInstances" | "MigrateToGraviton" | "Delete" | "ScaleIn")]?,
+      tags: Array[
+        {
+          key: ::String?,
+          value: ::String?
+        }
+      ]?,
+      resource_ids: Array[::String]?,
+      resource_arns: Array[::String]?,
+      recommendation_ids: Array[::String]?
+    }
+
+    end
+  end
+end

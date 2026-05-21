@@ -55,7 +55,7 @@ module Aws::FreeTier
   autoload :EndpointProvider, 'aws-sdk-freetier/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-freetier/endpoints'
 
-  GEM_VERSION = '1.35.0'
+  GEM_VERSION = '1.36.0'
 
 end
 

@@ -1,0 +1,155 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Imagebuilder
+    module Params
+      type ebs_instance_block_device_specification = {
+      encrypted: bool?,
+      delete_on_termination: bool?,
+      iops: ::Integer?,
+      kms_key_id: ::String?,
+      snapshot_id: ::String?,
+      volume_size: ::Integer?,
+      volume_type: ("standard" | "io1" | "io2" | "gp2" | "gp3" | "sc1" | "st1")?,
+      throughput: ::Integer?
+    }
+
+      type instance_block_device_mapping = {
+      device_name: ::String?,
+      ebs: Params::ebs_instance_block_device_specification?,
+      virtual_name: ::String?,
+      no_device: ::String?
+    }
+
+      type ami_distribution_configuration = {
+      name: ::String?,
+      description: ::String?,
+      target_account_ids: Array[::String]?,
+      ami_tags: Hash[::String, ::String]?,
+      kms_key_id: ::String?,
+      launch_permission: {
+        user_ids: Array[::String]?,
+        user_groups: Array[::String]?,
+        organization_arns: Array[::String]?,
+        organizational_unit_arns: Array[::String]?
+      }?
+    }
+
+      type container_distribution_configuration = {
+      description: ::String?,
+      container_tags: Array[::String]?,
+      target_repository: {
+        service: ("ECR"),
+        repository_name: ::String
+      }
+    }
+
+      type distribution = {
+      region: ::String,
+      ami_distribution_configuration: Params::ami_distribution_configuration?,
+      container_distribution_configuration: Params::container_distribution_configuration?,
+      license_configuration_arns: Array[::String]?,
+      launch_template_configurations: Array[
+        {
+          launch_template_id: ::String,
+          account_id: ::String?,
+          set_default_version: bool?
+        }
+      ]?,
+      s3_export_configuration: {
+        role_name: ::String,
+        disk_image_format: ("VMDK" | "RAW" | "VHD"),
+        s3_bucket: ::String,
+        s3_prefix: ::String?
+      }?,
+      fast_launch_configurations: Array[
+        Params::fast_launch_configuration
+      ]?,
+      ssm_parameter_configurations: Array[
+        {
+          ami_account_id: ::String?,
+          parameter_name: ::String,
+          data_type: ("text" | "aws:ec2:image")?
+        }
+      ]?
+    }
+
+      type fast_launch_configuration = {
+      enabled: bool,
+      snapshot_configuration: {
+        target_resource_count: ::Integer?
+      }?,
+      max_parallel_launches: ::Integer?,
+      launch_template: {
+        launch_template_id: ::String?,
+        launch_template_name: ::String?,
+        launch_template_version: ::String?
+      }?,
+      account_id: ::String?
+    }
+
+      type workflow_configuration = {
+      workflow_arn: ::String,
+      parameters: Array[
+        {
+          name: ::String,
+          value: Array[::String]
+        }
+      ]?,
+      parallel_group: ::String?,
+      on_failure: ("CONTINUE" | "ABORT")?
+    }
+
+      type schedule = {
+      schedule_expression: ::String?,
+      timezone: ::String?,
+      pipeline_execution_start_condition: ("EXPRESSION_MATCH_ONLY" | "EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE")?,
+      auto_disable_policy: {
+        failure_count: ::Integer
+      }?
+    }
+
+      type lifecycle_policy_detail_action = {
+      type: ("DELETE" | "DEPRECATE" | "DISABLE"),
+      include_resources: {
+        amis: bool?,
+        snapshots: bool?,
+        containers: bool?
+      }?
+    }
+
+      type lifecycle_policy_detail_exclusion_rules_amis = {
+      is_public: bool?,
+      regions: Array[::String]?,
+      shared_accounts: Array[::String]?,
+      last_launched: {
+        value: ::Integer,
+        unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      }?,
+      tag_map: Hash[::String, ::String]?
+    }
+
+      type lifecycle_policy_detail_exclusion_rules = {
+      tag_map: Hash[::String, ::String]?,
+      amis: Params::lifecycle_policy_detail_exclusion_rules_amis?
+    }
+
+      type lifecycle_policy_detail = {
+      action: Params::lifecycle_policy_detail_action,
+      filter: {
+        type: ("AGE" | "COUNT"),
+        value: ::Integer,
+        unit: ("DAYS" | "WEEKS" | "MONTHS" | "YEARS")?,
+        retain_at_least: ::Integer?
+      },
+      exclusion_rules: Params::lifecycle_policy_detail_exclusion_rules?
+    }
+
+    end
+  end
+end

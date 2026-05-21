@@ -90,7 +90,7 @@ module Aws
                                          alarm_model_name: ::String,
                                          key_value: ::String?,
                                          note: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _BatchAcknowledgeAlarmResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAcknowledgeAlarmResponseSuccess
@@ -106,7 +106,7 @@ module Aws
                                        message_id: ::String,
                                        detector_model_name: ::String,
                                        key_value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _BatchDeleteDetectorResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDetectorResponseSuccess
@@ -123,7 +123,7 @@ module Aws
                                      alarm_model_name: ::String,
                                      key_value: ::String?,
                                      note: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _BatchDisableAlarmResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisableAlarmResponseSuccess
@@ -140,7 +140,7 @@ module Aws
                                     alarm_model_name: ::String,
                                     key_value: ::String?,
                                     note: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _BatchEnableAlarmResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchEnableAlarmResponseSuccess
@@ -159,7 +159,7 @@ module Aws
                                    timestamp: {
                                      time_in_millis: ::Integer?
                                    }?
-                                 },
+                                 }
                                ]
                              ) -> _BatchPutMessageResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutMessageResponseSuccess
@@ -176,7 +176,7 @@ module Aws
                                    alarm_model_name: ::String,
                                    key_value: ::String?,
                                    note: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _BatchResetAlarmResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchResetAlarmResponseSuccess
@@ -194,7 +194,7 @@ module Aws
                                     key_value: ::String?,
                                     note: ::String?,
                                     snooze_duration: ::Integer
-                                  },
+                                  }
                                 ]
                               ) -> _BatchSnoozeAlarmResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchSnoozeAlarmResponseSuccess
@@ -216,16 +216,16 @@ module Aws
                                            {
                                              name: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ],
                                          timers: Array[
                                            {
                                              name: ::String,
                                              seconds: ::Integer
-                                           },
+                                           }
                                          ]
                                        }
-                                     },
+                                     }
                                    ]
                                  ) -> _BatchUpdateDetectorResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDetectorResponseSuccess

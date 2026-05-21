@@ -119,7 +119,7 @@ module Aws
                              {
                                key: ::String?,
                                values: Array[::String]?
-                             },
+                             }
                            ],
                            ?resources_per_page: ::Integer,
                            ?tags_per_page: ::Integer,

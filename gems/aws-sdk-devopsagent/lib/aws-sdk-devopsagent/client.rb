@@ -587,6 +587,9 @@ module Aws::DevOpsAgent
     #         services: ["String"], # required
     #         customer_email: "EmailAddress", # required
     #       },
+    #       mcpserversigv4: {
+    #         tools: ["MCPToolsListMemberString"], # required
+    #       },
     #     },
     #   })
     #
@@ -640,6 +643,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
+    #   resp.association.configuration.mcpserversigv4.tools #=> Array
+    #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
     #   resp.webhook.webhook_url #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_type #=> String, one of "hmac", "apikey", "gitlab", "pagerduty"
@@ -1303,6 +1308,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
+    #   resp.association.configuration.mcpserversigv4.tools #=> Array
+    #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/GetAssociation AWS API Documentation
     #
@@ -1445,6 +1452,8 @@ module Aws::DevOpsAgent
     #   resp.recommendation.priority #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendation.goal_version #=> Integer
     #   resp.recommendation.additional_context #=> String
+    #   resp.recommendation.rank_position #=> Integer
+    #   resp.recommendation.ranked_at #=> Time
     #   resp.recommendation.created_at #=> Time
     #   resp.recommendation.updated_at #=> Time
     #   resp.recommendation.version #=> Integer
@@ -1477,7 +1486,7 @@ module Aws::DevOpsAgent
     # @example Response structure
     #
     #   resp.service.service_id #=> String
-    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity"
+    #   resp.service.service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4"
     #   resp.service.name #=> String
     #   resp.service.accessible_resources #=> Array
     #   resp.service.additional_service_details.github.owner #=> String
@@ -1517,6 +1526,14 @@ module Aws::DevOpsAgent
     #   resp.service.additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
     #   resp.service.additional_service_details.pagerduty.scopes #=> Array
     #   resp.service.additional_service_details.pagerduty.scopes[0] #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.name #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.endpoint #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.description #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.region #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.service #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.role_arn #=> String
+    #   resp.service.additional_service_details.mcpserversigv4.custom_headers #=> Hash
+    #   resp.service.additional_service_details.mcpserversigv4.custom_headers["CustomHeaderName"] #=> String
     #   resp.service.kms_key_arn #=> String
     #   resp.service.private_connection_name #=> String
     #   resp.tags #=> Hash
@@ -1657,6 +1674,8 @@ module Aws::DevOpsAgent
     #   resp.associations[0].configuration.pagerduty.services #=> Array
     #   resp.associations[0].configuration.pagerduty.services[0] #=> String
     #   resp.associations[0].configuration.pagerduty.customer_email #=> String
+    #   resp.associations[0].configuration.mcpserversigv4.tools #=> Array
+    #   resp.associations[0].configuration.mcpserversigv4.tools[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ListAssociations AWS API Documentation
     #
@@ -1674,15 +1693,11 @@ module Aws::DevOpsAgent
     #   The unique identifier for the agent space containing the tasks
     #
     # @option params [Types::TaskFilter] :filter
-    #   Filter criteria to apply when listing tasks
-    #
-    #   Filtering restrictions:
-    #
-    #   * Each filter field list is limited to a single value
-    #   * Filtering by Priority and Status at the same time when not filtering
-    #     by Type is not permitted
-    #   * Timestamp filters (createdAfter, createdBefore) can be combined with
-    #     other filters when not sorting by priority
+    #   Filter criteria to apply when listing tasks Filtering restrictions: -
+    #   Each filter field list is limited to a single value - Filtering by
+    #   Priority and Status at the same time when not filtering by Type is not
+    #   permitted - Timestamp filters (createdAfter, createdBefore) can be
+    #   combined with other filters when not sorting by priority
     #
     # @option params [Integer] :limit
     #   Maximum number of tasks to return in a single response (1-1000,
@@ -1692,14 +1707,10 @@ module Aws::DevOpsAgent
     #   Token for retrieving the next page of results
     #
     # @option params [String] :sort_field
-    #   Field to sort by
-    #
-    #       Sorting restrictions:
-    #
-    #   * Only sorting on createdAt is supported when using priority or status
-    #     filters alone.
-    #   * Sorting by priority is not supported when using Timestamp filters
-    #     (createdAfter, createdBefore)
+    #   Field to sort by Sorting restrictions: - Only sorting on createdAt is
+    #   supported when using priority or status filters alone. - Sorting by
+    #   priority is not supported when using Timestamp filters (createdAfter,
+    #   createdBefore)
     #
     # @option params [String] :order
     #   Sort order for the tasks based on sortField (default: DESC)
@@ -2115,6 +2126,8 @@ module Aws::DevOpsAgent
     #   resp.recommendations[0].priority #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendations[0].goal_version #=> Integer
     #   resp.recommendations[0].additional_context #=> String
+    #   resp.recommendations[0].rank_position #=> Integer
+    #   resp.recommendations[0].ranked_at #=> Time
     #   resp.recommendations[0].created_at #=> Time
     #   resp.recommendations[0].updated_at #=> Time
     #   resp.recommendations[0].version #=> Integer
@@ -2152,7 +2165,7 @@ module Aws::DevOpsAgent
     #   resp = client.list_services({
     #     max_results: 1,
     #     next_token: "NextToken",
-    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity
+    #     filter_service_type: "github", # accepts github, slack, azure, azuredevops, dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4
     #   })
     #
     # @example Response structure
@@ -2160,7 +2173,7 @@ module Aws::DevOpsAgent
     #   resp.next_token #=> String
     #   resp.services #=> Array
     #   resp.services[0].service_id #=> String
-    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity"
+    #   resp.services[0].service_type #=> String, one of "github", "slack", "azure", "azuredevops", "dynatrace", "servicenow", "pagerduty", "gitlab", "eventChannel", "mcpservernewrelic", "mcpservergrafana", "mcpserverdatadog", "mcpserver", "mcpserversplunk", "azureidentity", "mcpserversigv4"
     #   resp.services[0].name #=> String
     #   resp.services[0].accessible_resources #=> Array
     #   resp.services[0].additional_service_details.github.owner #=> String
@@ -2200,6 +2213,14 @@ module Aws::DevOpsAgent
     #   resp.services[0].additional_service_details.mcpservergrafana.authorization_method #=> String, one of "oauth-client-credentials", "oauth-3lo", "api-key", "bearer-token"
     #   resp.services[0].additional_service_details.pagerduty.scopes #=> Array
     #   resp.services[0].additional_service_details.pagerduty.scopes[0] #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.name #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.endpoint #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.description #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.region #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.service #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.role_arn #=> String
+    #   resp.services[0].additional_service_details.mcpserversigv4.custom_headers #=> Hash
+    #   resp.services[0].additional_service_details.mcpserversigv4.custom_headers["CustomHeaderName"] #=> String
     #   resp.services[0].kms_key_arn #=> String
     #   resp.services[0].private_connection_name #=> String
     #
@@ -2308,7 +2329,7 @@ module Aws::DevOpsAgent
     # @example Request syntax with placeholder values
     #
     #   resp = client.register_service({
-    #     service: "dynatrace", # required, accepts dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity
+    #     service: "dynatrace", # required, accepts dynatrace, servicenow, pagerduty, gitlab, eventChannel, mcpservernewrelic, mcpservergrafana, mcpserverdatadog, mcpserver, mcpserversplunk, azureidentity, mcpserversigv4
     #     service_details: { # required
     #       dynatrace: {
     #         account_urn: "DynatraceServiceDetailsAccountUrnString", # required
@@ -2514,6 +2535,19 @@ module Aws::DevOpsAgent
     #         client_id: "Guid", # required
     #         web_identity_role_arn: "RoleArn", # required
     #         web_identity_token_audiences: ["String"], # required
+    #       },
+    #       mcpserversigv4: {
+    #         name: "MCPServerSigV4ServiceDetailsNameString", # required
+    #         endpoint: "MCPServerSigV4ServiceDetailsEndpointString", # required
+    #         description: "MCPServerSigV4ServiceDetailsDescriptionString",
+    #         authorization_config: { # required
+    #           region: "SigV4Region", # required
+    #           service: "MCPServerSigV4AuthorizationConfigServiceString", # required
+    #           role_arn: "RoleArn", # required
+    #           custom_headers: {
+    #             "CustomHeaderName" => "CustomHeaderValue",
+    #           },
+    #         },
     #       },
     #     },
     #     kms_key_arn: "KmsKeyArn",
@@ -3020,6 +3054,9 @@ module Aws::DevOpsAgent
     #         services: ["String"], # required
     #         customer_email: "EmailAddress", # required
     #       },
+    #       mcpserversigv4: {
+    #         tools: ["MCPToolsListMemberString"], # required
+    #       },
     #     },
     #   })
     #
@@ -3073,6 +3110,8 @@ module Aws::DevOpsAgent
     #   resp.association.configuration.pagerduty.services #=> Array
     #   resp.association.configuration.pagerduty.services[0] #=> String
     #   resp.association.configuration.pagerduty.customer_email #=> String
+    #   resp.association.configuration.mcpserversigv4.tools #=> Array
+    #   resp.association.configuration.mcpserversigv4.tools[0] #=> String
     #   resp.webhook.webhook_url #=> String
     #   resp.webhook.webhook_id #=> String
     #   resp.webhook.webhook_type #=> String, one of "hmac", "apikey", "gitlab", "pagerduty"
@@ -3343,6 +3382,8 @@ module Aws::DevOpsAgent
     #   resp.recommendation.priority #=> String, one of "HIGH", "MEDIUM", "LOW"
     #   resp.recommendation.goal_version #=> Integer
     #   resp.recommendation.additional_context #=> String
+    #   resp.recommendation.rank_position #=> Integer
+    #   resp.recommendation.ranked_at #=> Time
     #   resp.recommendation.created_at #=> Time
     #   resp.recommendation.updated_at #=> Time
     #   resp.recommendation.version #=> Integer
@@ -3397,7 +3438,7 @@ module Aws::DevOpsAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-devopsagent'
-      context[:gem_version] = '1.4.0'
+      context[:gem_version] = '1.5.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

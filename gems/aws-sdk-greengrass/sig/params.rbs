@@ -1,0 +1,108 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Greengrass
+    module Params
+      type function_default_config = {
+      execution: {
+        isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+        run_as: {
+          gid: ::Integer?,
+          uid: ::Integer?
+        }?
+      }?
+    }
+
+      type function_configuration_environment = {
+      access_sysfs: bool?,
+      execution: {
+        isolation_mode: ("GreengrassContainer" | "NoContainer")?,
+        run_as: {
+          gid: ::Integer?,
+          uid: ::Integer?
+        }?
+      }?,
+      resource_access_policies: Array[
+        {
+          permission: ("ro" | "rw")?,
+          resource_id: ::String
+        }
+      ]?,
+      variables: Hash[::String, ::String]?
+    }
+
+      type function_configuration = {
+      encoding_type: ("binary" | "json")?,
+      environment: Params::function_configuration_environment?,
+      exec_args: ::String?,
+      executable: ::String?,
+      memory_size: ::Integer?,
+      pinned: bool?,
+      timeout: ::Integer?,
+      function_runtime_override: ::String?
+    }
+
+      type function = {
+      function_arn: ::String?,
+      function_configuration: Params::function_configuration?,
+      id: ::String
+    }
+
+      type local_volume_resource_data = {
+      destination_path: ::String?,
+      group_owner_setting: {
+        auto_add_group_owner: bool?,
+        group_owner: ::String?
+      }?,
+      source_path: ::String?
+    }
+
+      type s3_machine_learning_model_resource_data = {
+      destination_path: ::String?,
+      owner_setting: {
+        group_owner: ::String,
+        group_permission: ("ro" | "rw")
+      }?,
+      s3_uri: ::String?
+    }
+
+      type sage_maker_machine_learning_model_resource_data = {
+      destination_path: ::String?,
+      owner_setting: {
+        group_owner: ::String,
+        group_permission: ("ro" | "rw")
+      }?,
+      sage_maker_job_arn: ::String?
+    }
+
+      type resource_data_container = {
+      local_device_resource_data: {
+        group_owner_setting: {
+          auto_add_group_owner: bool?,
+          group_owner: ::String?
+        }?,
+        source_path: ::String?
+      }?,
+      local_volume_resource_data: Params::local_volume_resource_data?,
+      s3_machine_learning_model_resource_data: Params::s3_machine_learning_model_resource_data?,
+      sage_maker_machine_learning_model_resource_data: Params::sage_maker_machine_learning_model_resource_data?,
+      secrets_manager_secret_resource_data: {
+        arn: ::String?,
+        additional_staging_labels_to_download: Array[::String]?
+      }?
+    }
+
+      type resource = {
+      id: ::String,
+      name: ::String,
+      resource_data_container: Params::resource_data_container
+    }
+
+    end
+  end
+end

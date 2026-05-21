@@ -1,0 +1,343 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECS
+    module Params
+      type instance_requirements_request = {
+      v_cpu_count: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      memory_mi_b: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services")]?,
+      memory_gi_b_per_v_cpu: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      excluded_instance_types: Array[::String]?,
+      instance_generations: Array[("current" | "previous")]?,
+      spot_max_price_percentage_over_lowest_price: ::Integer?,
+      on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+      bare_metal: ("included" | "required" | "excluded")?,
+      burstable_performance: ("included" | "required" | "excluded")?,
+      require_hibernate_support: bool?,
+      network_interface_count: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      local_storage: ("included" | "required" | "excluded")?,
+      local_storage_types: Array[("hdd" | "ssd")]?,
+      total_local_storage_gb: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      baseline_ebs_bandwidth_mbps: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+      accelerator_count: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      accelerator_manufacturers: Array[("amazon-web-services" | "amd" | "nvidia" | "xilinx" | "habana")]?,
+      accelerator_names: Array[("a100" | "inferentia" | "k520" | "k80" | "m60" | "radeon-pro-v520" | "t4" | "vu9p" | "v100" | "a10g" | "h100" | "t4g")]?,
+      accelerator_total_memory_mi_b: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      network_bandwidth_gbps: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      allowed_instance_types: Array[::String]?,
+      max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?
+    }
+
+      type execute_command_configuration = {
+      kms_key_id: ::String?,
+      logging: ("NONE" | "DEFAULT" | "OVERRIDE")?,
+      log_configuration: {
+        cloud_watch_log_group_name: ::String?,
+        cloud_watch_encryption_enabled: bool?,
+        s3_bucket_name: ::String?,
+        s3_encryption_enabled: bool?,
+        s3_key_prefix: ::String?
+      }?
+    }
+
+      type cluster_configuration = {
+      execute_command_configuration: Params::execute_command_configuration?,
+      managed_storage_configuration: {
+        kms_key_id: ::String?,
+        fargate_ephemeral_storage_kms_key_id: ::String?
+      }?
+    }
+
+      type daemon_deployment_configuration = {
+      drain_percent: ::Float?,
+      alarms: {
+        alarm_names: Array[::String]?,
+        enable: bool?
+      }?,
+      bake_time_in_minutes: ::Integer?
+    }
+
+      type express_gateway_container = {
+      image: ::String,
+      container_port: ::Integer?,
+      aws_logs_configuration: {
+        log_group: ::String,
+        log_stream_prefix: ::String
+      }?,
+      repository_credentials: {
+        credentials_parameter: ::String?
+      }?,
+      command: Array[::String]?,
+      environment: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?,
+      secrets: Array[
+        {
+          name: ::String,
+          value_from: ::String
+        }
+      ]?
+    }
+
+      type load_balancer = {
+      target_group_arn: ::String?,
+      load_balancer_name: ::String?,
+      container_name: ::String?,
+      container_port: ::Integer?,
+      advanced_configuration: {
+        alternate_target_group_arn: ::String?,
+        production_listener_rule: ::String?,
+        test_listener_rule: ::String?,
+        role_arn: ::String?
+      }?
+    }
+
+      type deployment_configuration = {
+      deployment_circuit_breaker: {
+        enable: bool,
+        rollback: bool
+      }?,
+      maximum_percent: ::Integer?,
+      minimum_healthy_percent: ::Integer?,
+      alarms: {
+        alarm_names: Array[::String],
+        rollback: bool,
+        enable: bool
+      }?,
+      strategy: ("ROLLING" | "BLUE_GREEN" | "LINEAR" | "CANARY")?,
+      bake_time_in_minutes: ::Integer?,
+      lifecycle_hooks: Array[
+        Params::deployment_lifecycle_hook
+      ]?,
+      linear_configuration: {
+        step_percent: ::Float?,
+        step_bake_time_in_minutes: ::Integer?
+      }?,
+      canary_configuration: {
+        canary_percent: ::Float?,
+        canary_bake_time_in_minutes: ::Integer?
+      }?
+    }
+
+      type deployment_lifecycle_hook = {
+      target_type: ("AWS_LAMBDA" | "PAUSE")?,
+      hook_target_arn: ::String?,
+      role_arn: ::String?,
+      lifecycle_stages: Array[("RECONCILE_SERVICE" | "PRE_SCALE_UP" | "POST_SCALE_UP" | "TEST_TRAFFIC_SHIFT" | "POST_TEST_TRAFFIC_SHIFT" | "PRE_PRODUCTION_TRAFFIC_SHIFT" | "PRODUCTION_TRAFFIC_SHIFT" | "POST_PRODUCTION_TRAFFIC_SHIFT")]?,
+      hook_details: {
+      }?,
+      timeout_configuration: {
+        timeout_in_minutes: ::Integer?,
+        action: ("ROLLBACK" | "CONTINUE")?
+      }?
+    }
+
+      type log_configuration = {
+      log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
+      options: Hash[::String, ::String]?,
+      secret_options: Array[
+        {
+          name: ::String,
+          value_from: ::String
+        }
+      ]?
+    }
+
+      type service_connect_configuration = {
+      enabled: bool,
+      namespace: ::String?,
+      services: Array[
+        Params::service_connect_service
+      ]?,
+      log_configuration: Params::log_configuration?,
+      access_log_configuration: {
+        format: ("TEXT" | "JSON"),
+        include_query_parameters: ("DISABLED" | "ENABLED")?
+      }?
+    }
+
+      type service_connect_service = {
+      port_name: ::String,
+      discovery_name: ::String?,
+      client_aliases: Array[
+        Params::service_connect_client_alias
+      ]?,
+      ingress_port_override: ::Integer?,
+      timeout: {
+        idle_timeout_seconds: ::Integer?,
+        per_request_timeout_seconds: ::Integer?
+      }?,
+      tls: {
+        issuer_certificate_authority: {
+          aws_pca_authority_arn: ::String?
+        },
+        kms_key: ::String?,
+        role_arn: ::String?
+      }?
+    }
+
+      type service_connect_test_traffic_rules = {
+      header: {
+        name: ::String,
+        value: {
+          exact: ::String
+        }?
+      }
+    }
+
+      type service_connect_client_alias = {
+      port: ::Integer,
+      dns_name: ::String?,
+      test_traffic_rules: Params::service_connect_test_traffic_rules?
+    }
+
+      type service_managed_ebs_volume_configuration = {
+      encrypted: bool?,
+      kms_key_id: ::String?,
+      volume_type: ::String?,
+      size_in_gi_b: ::Integer?,
+      snapshot_id: ::String?,
+      volume_initialization_rate: ::Integer?,
+      iops: ::Integer?,
+      throughput: ::Integer?,
+      tag_specifications: Array[
+        Params::ebs_tag_specification
+      ]?,
+      role_arn: ::String,
+      filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
+    }
+
+      type service_volume_configuration = {
+      name: ::String,
+      managed_ebs_volume: Params::service_managed_ebs_volume_configuration?
+    }
+
+      type ebs_tag_specification = {
+      resource_type: ("volume"),
+      tags: Array[
+        {
+          key: ::String?,
+          value: ::String?
+        }
+      ]?,
+      propagate_tags: ("TASK_DEFINITION" | "SERVICE" | "NONE")?
+    }
+
+      type task_override = {
+      container_overrides: Array[
+        Params::container_override
+      ]?,
+      cpu: ::String?,
+      inference_accelerator_overrides: Array[
+        {
+          device_name: ::String?,
+          device_type: ::String?
+        }
+      ]?,
+      execution_role_arn: ::String?,
+      memory: ::String?,
+      task_role_arn: ::String?,
+      ephemeral_storage: {
+        size_in_gi_b: ::Integer
+      }?
+    }
+
+      type container_override = {
+      name: ::String?,
+      command: Array[::String]?,
+      environment: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?,
+      environment_files: Array[
+        {
+          value: ::String,
+          type: ("s3")
+        }
+      ]?,
+      cpu: ::Integer?,
+      memory: ::Integer?,
+      memory_reservation: ::Integer?,
+      resource_requirements: Array[
+        {
+          value: ::String,
+          type: ("GPU" | "InferenceAccelerator")
+        }
+      ]?
+    }
+
+      type task_managed_ebs_volume_configuration = {
+      encrypted: bool?,
+      kms_key_id: ::String?,
+      volume_type: ::String?,
+      size_in_gi_b: ::Integer?,
+      snapshot_id: ::String?,
+      volume_initialization_rate: ::Integer?,
+      iops: ::Integer?,
+      throughput: ::Integer?,
+      tag_specifications: Array[
+        Params::ebs_tag_specification
+      ]?,
+      role_arn: ::String,
+      termination_policy: {
+        delete_on_termination: bool
+      }?,
+      filesystem_type: ("ext3" | "ext4" | "xfs" | "ntfs")?
+    }
+
+      type task_volume_configuration = {
+      name: ::String,
+      managed_ebs_volume: Params::task_managed_ebs_volume_configuration?
+    }
+
+      type network_binding = {
+      bind_ip: ::String?,
+      container_port: ::Integer?,
+      host_port: ::Integer?,
+      protocol: ("tcp" | "udp")?,
+      container_port_range: ::String?,
+      host_port_range: ::String?
+    }
+
+    end
+  end
+end

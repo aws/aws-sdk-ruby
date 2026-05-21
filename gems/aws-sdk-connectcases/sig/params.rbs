@@ -1,0 +1,248 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectCases
+    module Params
+      type field_value_union = {
+      string_value: ::String?,
+      double_value: ::Float?,
+      boolean_value: bool?,
+      empty_value: {
+      }?,
+      user_arn_value: ::String?
+    }
+
+      type field_value = {
+      id: ::String,
+      value: Params::field_value_union
+    }
+
+      type required_case_rule = {
+      default_value: bool,
+      conditions: Array[
+        Params::boolean_condition
+      ]
+    }
+
+      type field_options_case_rule = {
+      parent_field_id: ::String?,
+      child_field_id: ::String?,
+      parent_child_field_options_mappings: Array[
+        {
+          parent_field_option_value: ::String,
+          child_field_option_values: Array[::String]
+        }
+      ]
+    }
+
+      type hidden_case_rule = {
+      default_value: bool,
+      conditions: Array[
+        Params::boolean_condition
+      ]
+    }
+
+      type case_rule_details = {
+      required: Params::required_case_rule?,
+      field_options: Params::field_options_case_rule?,
+      hidden: Params::hidden_case_rule?
+    }
+
+      type boolean_operands = {
+      operand_one: {
+        field_id: ::String?
+      },
+      operand_two: {
+        string_value: ::String?,
+        boolean_value: bool?,
+        double_value: ::Float?,
+        empty_value: {
+        }?
+      },
+      result: bool
+    }
+
+      type boolean_condition = {
+      equal_to: Params::boolean_operands?,
+      not_equal_to: Params::boolean_operands?,
+      and_all: {
+        conditions: Array[
+          {
+            equal_to: Params::boolean_operands?,
+            not_equal_to: Params::boolean_operands?,
+            and_all: untyped?,
+            or_all: untyped?
+          }
+        ]
+      }?,
+      or_all: {
+        conditions: Array[
+          {
+            equal_to: Params::boolean_operands?,
+            not_equal_to: Params::boolean_operands?,
+            and_all: untyped?,
+            or_all: untyped?
+          }
+        ]
+      }?
+    }
+
+      type layout_sections = {
+      sections: Array[
+        Params::section
+      ]?
+    }
+
+      type basic_layout = {
+      top_panel: Params::layout_sections?,
+      more_info: Params::layout_sections?
+    }
+
+      type layout_content = {
+      basic: Params::basic_layout?
+    }
+
+      type section = {
+      field_group: {
+        name: ::String?,
+        fields: Array[
+          {
+            id: ::String
+          }
+        ]
+      }?
+    }
+
+      type field_filter = {
+      equal_to: Params::field_value?,
+      contains: Params::field_value?,
+      greater_than: Params::field_value?,
+      greater_than_or_equal_to: Params::field_value?,
+      less_than: Params::field_value?,
+      less_than_or_equal_to: Params::field_value?
+    }
+
+      type custom_fields_filter = {
+      field: Params::field_filter?,
+      not: {
+        field: Params::field_filter?,
+        not: untyped?,
+        and_all: Array[
+          untyped
+        ]?,
+        or_all: Array[
+          untyped
+        ]?
+      }?,
+      and_all: Array[
+        {
+          field: Params::field_filter?,
+          not: untyped?,
+          and_all: untyped?,
+          or_all: Array[
+            untyped
+          ]?
+        }
+      ]?,
+      or_all: Array[
+        {
+          field: Params::field_filter?,
+          not: untyped?,
+          and_all: Array[
+            untyped
+          ]?,
+          or_all: untyped?
+        }
+      ]?
+    }
+
+      type custom_filter = {
+      fields: Params::custom_fields_filter?
+    }
+
+      type related_item_type_filter = {
+      contact: {
+        channel: Array[::String]?,
+        contact_arn: ::String?
+      }?,
+      comment: {
+      }?,
+      file: {
+        file_arn: ::String?
+      }?,
+      sla: {
+        name: ::String?,
+        status: ("Active" | "Overdue" | "Met" | "NotMet")?
+      }?,
+      connect_case: {
+        case_id: ::String?
+      }?,
+      custom: Params::custom_filter?
+    }
+
+      type case_filter = {
+      field: Params::field_filter?,
+      not: {
+        field: Params::field_filter?,
+        not: untyped?,
+        tag: {
+          equal_to: {
+            key: ::String?,
+            value: ::String?
+          }?
+        }?,
+        and_all: Array[
+          untyped
+        ]?,
+        or_all: Array[
+          untyped
+        ]?
+      }?,
+      tag: {
+        equal_to: {
+          key: ::String?,
+          value: ::String?
+        }?
+      }?,
+      and_all: Array[
+        {
+          field: Params::field_filter?,
+          not: untyped?,
+          tag: {
+            equal_to: {
+              key: ::String?,
+              value: ::String?
+            }?
+          }?,
+          and_all: untyped?,
+          or_all: Array[
+            untyped
+          ]?
+        }
+      ]?,
+      or_all: Array[
+        {
+          field: Params::field_filter?,
+          not: untyped?,
+          tag: {
+            equal_to: {
+              key: ::String?,
+              value: ::String?
+            }?
+          }?,
+          and_all: Array[
+            untyped
+          ]?,
+          or_all: untyped?
+        }
+      ]?
+    }
+
+    end
+  end
+end

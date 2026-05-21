@@ -66,7 +66,7 @@ module Aws
                         {
                           key: ::String?,
                           value: ::String?
-                        },
+                        }
                       ]
                     ) -> ReservedDBInstance
                   | (?Hash[Symbol, untyped]) -> ReservedDBInstance

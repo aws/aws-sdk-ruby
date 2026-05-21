@@ -120,7 +120,7 @@ module Aws
                                          name: ::String,
                                          value: ::String?,
                                          unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
-                                       },
+                                       }
                                      ],
                                      digital_signature_method: ("JWT_PS384"),
                                      ?node_id: ::String,
@@ -128,7 +128,7 @@ module Aws
                                        {
                                          name: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      client_token: ::String
                                    ) -> _CheckoutBorrowLicenseResponseSuccess
@@ -155,7 +155,7 @@ module Aws
                                   name: ::String,
                                   value: ::String?,
                                   unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second")
-                                },
+                                }
                               ],
                               client_token: ::String,
                               ?beneficiary: ::String,
@@ -181,7 +181,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _CreateGrantResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantResponseSuccess
@@ -228,38 +228,22 @@ module Aws
                               end: ::String?
                             },
                             entitlements: Array[
-                              {
-                                name: ::String,
-                                value: ::String?,
-                                max_count: ::Integer?,
-                                overage: bool?,
-                                unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second"),
-                                allow_check_in: bool?
-                              },
+                              Params::entitlement
                             ],
                             beneficiary: ::String,
-                            consumption_configuration: {
-                              renew_type: ("None" | "Weekly" | "Monthly")?,
-                              provisional_configuration: {
-                                max_time_to_live_in_minutes: ::Integer
-                              }?,
-                              borrow_configuration: {
-                                allow_early_check_in: bool,
-                                max_time_to_live_in_minutes: ::Integer
-                              }?
-                            },
+                            consumption_configuration: Params::consumption_configuration,
                             ?license_metadata: Array[
                               {
                                 name: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             client_token: ::String,
                             ?tags: Array[
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ]
                           ) -> _CreateLicenseResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseResponseSuccess
@@ -276,20 +260,20 @@ module Aws
                                         license_asset_group_configurations: Array[
                                           {
                                             usage_dimension: ::String?
-                                          },
+                                          }
                                         ],
                                         associated_license_asset_ruleset_arns: Array[::String],
                                         ?properties: Array[
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?tags: Array[
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         client_token: ::String
                                       ) -> _CreateLicenseAssetGroupResponseSuccess
@@ -304,131 +288,13 @@ module Aws
                                           name: ::String,
                                           ?description: ::String,
                                           rules: Array[
-                                            {
-                                              rule_statement: {
-                                                license_configuration_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?
-                                                }?,
-                                                license_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?
-                                                }?,
-                                                instance_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?,
-                                                  script_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    script: ::String
-                                                  }?
-                                                }?
-                                              }
-                                            },
+                                            Params::license_asset_rule
                                           ],
                                           ?tags: Array[
                                             {
                                               key: ::String?,
                                               value: ::String?
-                                            },
+                                            }
                                           ],
                                           client_token: ::String
                                         ) -> _CreateLicenseAssetRulesetResponseSuccess
@@ -450,20 +316,11 @@ module Aws
                                             {
                                               key: ::String?,
                                               value: ::String?
-                                            },
+                                            }
                                           ],
                                           ?disassociate_when_not_found: bool,
                                           ?product_information_list: Array[
-                                            {
-                                              resource_type: ::String,
-                                              product_information_filter_list: Array[
-                                                {
-                                                  product_information_filter_name: ::String,
-                                                  product_information_filter_value: Array[::String]?,
-                                                  product_information_filter_comparator: ::String
-                                                },
-                                              ]
-                                            },
+                                            Params::product_information
                                           ],
                                           ?license_expiry: ::Integer
                                         ) -> _CreateLicenseConfigurationResponseSuccess
@@ -482,7 +339,7 @@ module Aws
                                                              {
                                                                product_code_id: ::String,
                                                                product_code_type: ("marketplace")
-                                                             },
+                                                             }
                                                            ]?
                                                          },
                                                          destination_license_context: {
@@ -491,7 +348,7 @@ module Aws
                                                              {
                                                                product_code_id: ::String,
                                                                product_code_type: ("marketplace")
-                                                             },
+                                                             }
                                                            ]?
                                                          }
                                                        ) -> _CreateLicenseConversionTaskForResourceResponseSuccess
@@ -521,7 +378,7 @@ module Aws
                                                        {
                                                          key: ::String?,
                                                          value: ::String?
-                                                       },
+                                                       }
                                                      ]
                                                    ) -> _CreateLicenseManagerReportGeneratorResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLicenseManagerReportGeneratorResponseSuccess
@@ -550,28 +407,12 @@ module Aws
                                       {
                                         name: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     entitlements: Array[
-                                      {
-                                        name: ::String,
-                                        value: ::String?,
-                                        max_count: ::Integer?,
-                                        overage: bool?,
-                                        unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second"),
-                                        allow_check_in: bool?
-                                      },
+                                      Params::entitlement
                                     ],
-                                    consumption_configuration: {
-                                      renew_type: ("None" | "Weekly" | "Monthly")?,
-                                      provisional_configuration: {
-                                        max_time_to_live_in_minutes: ::Integer
-                                      }?,
-                                      borrow_configuration: {
-                                        allow_early_check_in: bool,
-                                        max_time_to_live_in_minutes: ::Integer
-                                      }?
-                                    },
+                                    consumption_configuration: Params::consumption_configuration,
                                     status: ("AVAILABLE" | "PENDING_AVAILABLE" | "DEACTIVATED" | "SUSPENDED" | "EXPIRED" | "PENDING_DELETE" | "DELETED"),
                                     client_token: ::String,
                                     ?source_version: ::String
@@ -851,7 +692,7 @@ module Aws
                                        {
                                          name: ::String?,
                                          values: Array[::String]?
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -882,7 +723,7 @@ module Aws
                                          {
                                            name: ::String?,
                                            values: Array[::String]?
-                                         },
+                                         }
                                        ],
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
@@ -900,7 +741,7 @@ module Aws
                                            {
                                              name: ::String?,
                                              values: Array[::String]?
-                                           },
+                                           }
                                          ],
                                          ?show_aws_managed_license_asset_rulesets: bool,
                                          ?max_results: ::Integer,
@@ -922,7 +763,7 @@ module Aws
                                            {
                                              name: ::String?,
                                              values: Array[::String]?
-                                           },
+                                           }
                                          ]
                                        ) -> _ListLicenseConfigurationsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConfigurationsResponseSuccess
@@ -941,7 +782,7 @@ module Aws
                                                             {
                                                               name: ::String?,
                                                               values: Array[::String]?
-                                                            },
+                                                            }
                                                           ]
                                                         ) -> _ListLicenseConfigurationsForOrganizationResponseSuccess
                                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConfigurationsForOrganizationResponseSuccess
@@ -959,7 +800,7 @@ module Aws
                                              {
                                                name: ::String?,
                                                values: Array[::String]?
-                                             },
+                                             }
                                            ]
                                          ) -> _ListLicenseConversionTasksResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLicenseConversionTasksResponseSuccess
@@ -975,7 +816,7 @@ module Aws
                                                       {
                                                         name: ::String?,
                                                         values: Array[::String]?
-                                                      },
+                                                      }
                                                     ],
                                                     ?next_token: ::String,
                                                     ?max_results: ::Integer
@@ -1020,7 +861,7 @@ module Aws
                              {
                                name: ::String?,
                                values: Array[::String]?
-                             },
+                             }
                            ],
                            ?next_token: ::String,
                            ?max_results: ::Integer
@@ -1039,7 +880,7 @@ module Aws
                                     {
                                       name: ::String?,
                                       values: Array[::String]?
-                                    },
+                                    }
                                   ],
                                   ?next_token: ::String,
                                   ?max_results: ::Integer
@@ -1058,7 +899,7 @@ module Aws
                                                      {
                                                        name: ::String?,
                                                        values: Array[::String]?
-                                                     },
+                                                     }
                                                    ],
                                                    ?next_token: ::String,
                                                    ?max_results: ::Integer
@@ -1077,7 +918,7 @@ module Aws
                                       {
                                         name: ::String?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer
@@ -1095,7 +936,7 @@ module Aws
                                                        {
                                                          name: ::String?,
                                                          values: Array[::String]?
-                                                       },
+                                                       }
                                                      ],
                                                      ?next_token: ::String,
                                                      ?max_results: ::Integer
@@ -1116,7 +957,7 @@ module Aws
                                          name: ::String,
                                          condition: ("EQUALS" | "NOT_EQUALS" | "BEGINS_WITH" | "CONTAINS"),
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _ListResourceInventoryResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResourceInventoryResponseSuccess
@@ -1143,7 +984,7 @@ module Aws
                            {
                              name: ::String?,
                              values: Array[::String]?
-                           },
+                           }
                          ],
                          ?next_token: ::String,
                          ?max_results: ::Integer
@@ -1164,7 +1005,7 @@ module Aws
                                                     {
                                                       name: ::String?,
                                                       values: Array[::String]?
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _ListUsageForLicenseConfigurationResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsageForLicenseConfigurationResponseSuccess
@@ -1191,7 +1032,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1218,14 +1059,14 @@ module Aws
                                         ?license_asset_group_configurations: Array[
                                           {
                                             usage_dimension: ::String?
-                                          },
+                                          }
                                         ],
                                         associated_license_asset_ruleset_arns: Array[::String],
                                         ?properties: Array[
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         license_asset_group_arn: ::String,
                                         ?status: ("ACTIVE" | "DISABLED" | "DELETED"),
@@ -1242,125 +1083,7 @@ module Aws
                                           ?name: ::String,
                                           ?description: ::String,
                                           rules: Array[
-                                            {
-                                              rule_statement: {
-                                                license_configuration_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?
-                                                }?,
-                                                license_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?
-                                                }?,
-                                                instance_rule_statement: {
-                                                  and_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  or_rule_statement: {
-                                                    matching_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        constraint: ::String,
-                                                        value_to_match: Array[::String]
-                                                      },
-                                                    ]?,
-                                                    script_rule_statements: Array[
-                                                      {
-                                                        key_to_match: ::String,
-                                                        script: ::String
-                                                      },
-                                                    ]?
-                                                  }?,
-                                                  matching_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    constraint: ::String,
-                                                    value_to_match: Array[::String]
-                                                  }?,
-                                                  script_rule_statement: {
-                                                    key_to_match: ::String,
-                                                    script: ::String
-                                                  }?
-                                                }?
-                                              }
-                                            },
+                                            Params::license_asset_rule
                                           ],
                                           license_asset_ruleset_arn: ::String,
                                           client_token: ::String
@@ -1380,16 +1103,7 @@ module Aws
                                           ?name: ::String,
                                           ?description: ::String,
                                           ?product_information_list: Array[
-                                            {
-                                              resource_type: ::String,
-                                              product_information_filter_list: Array[
-                                                {
-                                                  product_information_filter_name: ::String,
-                                                  product_information_filter_value: Array[::String]?,
-                                                  product_information_filter_comparator: ::String
-                                                },
-                                              ]
-                                            },
+                                            Params::product_information
                                           ],
                                           ?disassociate_when_not_found: bool,
                                           ?license_expiry: ::Integer
@@ -1429,13 +1143,13 @@ module Aws
                                                           {
                                                             license_configuration_arn: ::String,
                                                             ami_association_scope: ::String?
-                                                          },
+                                                          }
                                                         ],
                                                         ?remove_license_specifications: Array[
                                                           {
                                                             license_configuration_arn: ::String,
                                                             ami_association_scope: ::String?
-                                                          },
+                                                          }
                                                         ]
                                                       ) -> _UpdateLicenseSpecificationsForResourceResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLicenseSpecificationsForResourceResponseSuccess

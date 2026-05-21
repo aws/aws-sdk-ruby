@@ -108,7 +108,7 @@ module Aws
                             {
                               catalog_item_id: ::String?,
                               quantity: ::Integer?
-                            },
+                            }
                           ],
                           payment_option: ("ALL_UPFRONT" | "NO_UPFRONT" | "PARTIAL_UPFRONT"),
                           ?payment_term: ("THREE_YEARS" | "ONE_YEAR" | "FIVE_YEARS")
@@ -158,32 +158,8 @@ module Aws
                          ?description: ::String,
                          ?notes: ::String,
                          ?tags: Hash[::String, ::String],
-                         ?operating_address: {
-                           contact_name: ::String,
-                           contact_phone_number: ::String,
-                           address_line_1: ::String,
-                           address_line_2: ::String?,
-                           address_line_3: ::String?,
-                           city: ::String,
-                           state_or_region: ::String,
-                           district_or_county: ::String?,
-                           postal_code: ::String,
-                           country_code: ::String,
-                           municipality: ::String?
-                         },
-                         ?shipping_address: {
-                           contact_name: ::String,
-                           contact_phone_number: ::String,
-                           address_line_1: ::String,
-                           address_line_2: ::String?,
-                           address_line_3: ::String?,
-                           city: ::String,
-                           state_or_region: ::String,
-                           district_or_county: ::String?,
-                           postal_code: ::String,
-                           country_code: ::String,
-                           municipality: ::String?
-                         },
+                         ?operating_address: Params::address,
+                         ?shipping_address: Params::address,
                          ?rack_physical_properties: {
                            power_draw_kva: ("POWER_5_KVA" | "POWER_10_KVA" | "POWER_15_KVA" | "POWER_30_KVA")?,
                            power_phase: ("SINGLE_PHASE" | "THREE_PHASE")?,
@@ -514,7 +490,7 @@ module Aws
                                    {
                                      instance_type: ::String,
                                      count: ::Integer
-                                   },
+                                   }
                                  ],
                                  ?instances_to_exclude: {
                                    instances: Array[::String]?,
@@ -607,19 +583,7 @@ module Aws
       def update_site_address: (
                                  site_id: ::String,
                                  address_type: ("SHIPPING_ADDRESS" | "OPERATING_ADDRESS"),
-                                 address: {
-                                   contact_name: ::String,
-                                   contact_phone_number: ::String,
-                                   address_line_1: ::String,
-                                   address_line_2: ::String?,
-                                   address_line_3: ::String?,
-                                   city: ::String,
-                                   state_or_region: ::String,
-                                   district_or_county: ::String?,
-                                   postal_code: ::String,
-                                   country_code: ::String,
-                                   municipality: ::String?
-                                 }
+                                 address: Params::address
                                ) -> _UpdateSiteAddressResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSiteAddressResponseSuccess
 

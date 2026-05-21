@@ -107,9 +107,9 @@ module Aws
                                 {
                                   name: ::String,
                                   values: Array[::String]?
-                                },
+                                }
                               ]?
-                            },
+                            }
                           ],
                           ?criticality: ::Integer,
                           ?owner: ::String,
@@ -226,7 +226,7 @@ module Aws
                                     {
                                       name: ("resource-type"),
                                       values: Array[::String]
-                                    },
+                                    }
                                   ],
                                   ?max_results: ::Integer,
                                   ?next_token: ::String
@@ -247,7 +247,7 @@ module Aws
                                       {
                                         name: ("status" | "resource-arn"),
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String
                                   ) -> _ListGroupingStatusesResponseSuccess
@@ -265,7 +265,7 @@ module Aws
                            {
                              name: ("resource-type" | "configuration-type" | "owner" | "display-name" | "criticality"),
                              values: Array[::String]
-                           },
+                           }
                          ],
                          ?max_results: ::Integer,
                          ?next_token: ::String
@@ -283,7 +283,7 @@ module Aws
                                    {
                                      group_arn: ::String?,
                                      group_name: ::String?
-                                   },
+                                   }
                                  ],
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
@@ -303,9 +303,9 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]?
-                                           },
+                                           }
                                          ]?
-                                       },
+                                       }
                                      ]
                                    ) -> _PutGroupConfigurationResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupConfigurationResponseSuccess

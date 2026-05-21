@@ -119,20 +119,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FreeTier/Client.html#get_free_tier_usage-instance_method
       def get_free_tier_usage: (
-                                 ?filter: {
-                                   or: Array[
-                                     untyped,
-                                   ]?,
-                                   and: Array[
-                                     untyped,
-                                   ]?,
-                                   not: untyped?,
-                                   dimensions: {
-                                     key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
-                                     values: Array[::String],
-                                     match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
-                                   }?
-                                 },
+                                 ?filter: Params::expression,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
                                ) -> _GetFreeTierUsageResponseSuccess

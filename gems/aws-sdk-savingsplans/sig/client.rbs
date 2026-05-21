@@ -115,7 +115,7 @@ module Aws
                                            {
                                              name: ("region" | "instanceType" | "productDescription" | "tenancy" | "productType" | "serviceCode" | "usageType" | "operation")?,
                                              values: Array[::String]?
-                                           },
+                                           }
                                          ],
                                          ?next_token: ::String,
                                          ?max_results: ::Integer
@@ -138,7 +138,7 @@ module Aws
                                       {
                                         name: ("region" | "ec2-instance-family" | "commitment" | "upfront" | "term" | "savings-plan-type" | "payment-option" | "start" | "end" | "instance-family")?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ]
                                   ) -> _DescribeSavingsPlansResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSavingsPlansResponseSuccess
@@ -161,7 +161,7 @@ module Aws
                                                      {
                                                        name: ("region" | "instanceFamily" | "instanceType" | "productDescription" | "tenancy" | "productId")?,
                                                        values: Array[::String]?
-                                                     },
+                                                     }
                                                    ],
                                                    ?next_token: ::String,
                                                    ?max_results: ::Integer
@@ -189,7 +189,7 @@ module Aws
                                                 {
                                                   name: ("region" | "instanceFamily")?,
                                                   values: Array[::String]?
-                                                },
+                                                }
                                               ],
                                               ?next_token: ::String,
                                               ?max_results: ::Integer

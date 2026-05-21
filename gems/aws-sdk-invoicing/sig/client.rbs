@@ -107,7 +107,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _CreateInvoiceUnitResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvoiceUnitResponseSuccess
@@ -129,40 +129,21 @@ module Aws
                                                   },
                                                   ?procurement_portal_shared_secret: ::String,
                                                   ?procurement_portal_instance_endpoint: ::String,
-                                                  ?test_env_preference: {
-                                                    buyer_domain: ("NetworkID"),
-                                                    buyer_identifier: ::String,
-                                                    supplier_domain: ("NetworkID"),
-                                                    supplier_identifier: ::String,
-                                                    procurement_portal_shared_secret: ::String?,
-                                                    procurement_portal_instance_endpoint: ::String?
-                                                  },
+                                                  ?test_env_preference: Params::test_env_preference_input,
                                                   einvoice_delivery_enabled: bool,
-                                                  ?einvoice_delivery_preference: {
-                                                    einvoice_delivery_document_types: Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")],
-                                                    einvoice_delivery_attachment_types: Array[("INVOICE_PDF" | "RFP_PDF")]?,
-                                                    protocol: ("CXML"),
-                                                    purchase_order_data_sources: Array[
-                                                      {
-                                                        einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")?,
-                                                        purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")?
-                                                      },
-                                                    ],
-                                                    connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST"),
-                                                    einvoice_delivery_activation_date: ::Time
-                                                  },
+                                                  ?einvoice_delivery_preference: Params::einvoice_delivery_preference,
                                                   purchase_order_retrieval_enabled: bool,
                                                   contacts: Array[
                                                     {
                                                       name: ::String?,
                                                       email: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?resource_tags: Array[
                                                     {
                                                       key: ::String,
                                                       value: ::String
-                                                    },
+                                                    }
                                                   ],
                                                   ?client_token: ::String
                                                 ) -> _CreateProcurementPortalPreferenceResponseSuccess
@@ -307,34 +288,15 @@ module Aws
                                                },
                                                ?procurement_portal_shared_secret: ::String,
                                                ?procurement_portal_instance_endpoint: ::String,
-                                               ?test_env_preference: {
-                                                 buyer_domain: ("NetworkID"),
-                                                 buyer_identifier: ::String,
-                                                 supplier_domain: ("NetworkID"),
-                                                 supplier_identifier: ::String,
-                                                 procurement_portal_shared_secret: ::String?,
-                                                 procurement_portal_instance_endpoint: ::String?
-                                               },
+                                               ?test_env_preference: Params::test_env_preference_input,
                                                einvoice_delivery_enabled: bool,
-                                               ?einvoice_delivery_preference: {
-                                                 einvoice_delivery_document_types: Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")],
-                                                 einvoice_delivery_attachment_types: Array[("INVOICE_PDF" | "RFP_PDF")]?,
-                                                 protocol: ("CXML"),
-                                                 purchase_order_data_sources: Array[
-                                                   {
-                                                     einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")?,
-                                                     purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")?
-                                                   },
-                                                 ],
-                                                 connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST"),
-                                                 einvoice_delivery_activation_date: ::Time
-                                               },
+                                               ?einvoice_delivery_preference: Params::einvoice_delivery_preference,
                                                purchase_order_retrieval_enabled: bool,
                                                contacts: Array[
                                                  {
                                                    name: ::String?,
                                                    email: ::String?
-                                                 },
+                                                 }
                                                ]
                                              ) -> _PutProcurementPortalPreferenceResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProcurementPortalPreferenceResponseSuccess
@@ -349,7 +311,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

@@ -88,7 +88,7 @@ module Aws
       def batch_get_item: (
                             request_items: Hash[::String, {
                                 keys: Array[
-                                  Hash[::String, untyped],
+                                  Hash[::String, untyped]
                                 ],
                                 attributes_to_get: Array[::String]?,
                                 consistent_read: bool?,
@@ -109,7 +109,7 @@ module Aws
                                     delete_request: {
                                       key: Hash[::String, untyped]
                                     }?
-                                  },
+                                  }
                                 ]],
                               ?return_consumed_capacity: ("INDEXES" | "TOTAL" | "NONE"),
                               ?return_item_collection_metrics: ("SIZE" | "NONE")
@@ -122,14 +122,14 @@ module Aws
                             {
                               attribute_name: ::String,
                               attribute_type: ("S" | "N" | "B")
-                            },
+                            }
                           ],
                           table_name: ::String,
                           ?key_schema: Array[
                             {
                               attribute_name: ::String,
                               key_type: ("HASH" | "RANGE")
-                            },
+                            }
                           ],
                           ?local_secondary_indexes: Array[
                             {
@@ -138,13 +138,13 @@ module Aws
                                 {
                                   attribute_name: ::String,
                                   key_type: ("HASH" | "RANGE")
-                                },
+                                }
                               ],
                               projection: {
                                 projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
                                 non_key_attributes: Array[::String]?
                               }
-                            },
+                            }
                           ],
                           ?global_secondary_indexes: Array[
                             {
@@ -153,7 +153,7 @@ module Aws
                                 {
                                   attribute_name: ::String,
                                   key_type: ("HASH" | "RANGE")
-                                },
+                                }
                               ],
                               projection: {
                                 projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
@@ -171,7 +171,7 @@ module Aws
                                 read_units_per_second: ::Integer?,
                                 write_units_per_second: ::Integer?
                               }?
-                            },
+                            }
                           ],
                           ?billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
                           ?provisioned_throughput: {
@@ -191,7 +191,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                           ?deletion_protection_enabled: bool,

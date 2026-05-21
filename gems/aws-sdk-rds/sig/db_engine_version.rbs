@@ -148,7 +148,7 @@ module Aws
                                     {
                                       name: ::String,
                                       values: Array[::String]
-                                    },
+                                    }
                                   ]
                                 ) -> OptionGroupOption::Collection
                               | (?Hash[Symbol, untyped]) -> OptionGroupOption::Collection
@@ -160,7 +160,7 @@ module Aws
                              {
                                name: ::String,
                                values: Array[::String]
-                             },
+                             }
                            ]
                          ) -> OptionGroup::Collection
                        | (?Hash[Symbol, untyped]) -> OptionGroup::Collection

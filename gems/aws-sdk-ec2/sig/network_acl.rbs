@@ -76,7 +76,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> Tag::Collection
                      | (?Hash[Symbol, untyped]) -> Tag::Collection
@@ -88,7 +88,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> Tag::Collection
                      | (?Hash[Symbol, untyped]) -> Tag::Collection

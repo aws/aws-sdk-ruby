@@ -3338,6 +3338,10 @@ module Aws::BedrockRuntime
     #   Specifies the processing tier type used for serving the request.
     #   @return [String]
     #
+    # @!attribute [rw] request_metadata
+    #   Key-value pairs that you can use to filter invocation logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelRequest AWS API Documentation
     #
     class InvokeModelRequest < Struct.new(
@@ -3349,8 +3353,9 @@ module Aws::BedrockRuntime
       :guardrail_identifier,
       :guardrail_version,
       :performance_config_latency,
-      :service_tier)
-      SENSITIVE = [:body]
+      :service_tier,
+      :request_metadata)
+      SENSITIVE = [:body, :request_metadata]
       include Aws::Structure
     end
 
@@ -3547,6 +3552,10 @@ module Aws::BedrockRuntime
     #   Specifies the processing tier type used for serving the request.
     #   @return [String]
     #
+    # @!attribute [rw] request_metadata
+    #   Key-value pairs that you can use to filter invocation logs.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-runtime-2023-09-30/InvokeModelWithResponseStreamRequest AWS API Documentation
     #
     class InvokeModelWithResponseStreamRequest < Struct.new(
@@ -3558,8 +3567,9 @@ module Aws::BedrockRuntime
       :guardrail_identifier,
       :guardrail_version,
       :performance_config_latency,
-      :service_tier)
-      SENSITIVE = [:body]
+      :service_tier,
+      :request_metadata)
+      SENSITIVE = [:body, :request_metadata]
       include Aws::Structure
     end
 

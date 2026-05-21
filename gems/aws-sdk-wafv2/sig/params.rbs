@@ -1,0 +1,651 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WAFV2
+    module Params
+      type json_body = {
+      match_pattern: {
+        all: {
+        }?,
+        included_paths: Array[::String]?
+      },
+      match_scope: ("ALL" | "KEY" | "VALUE"),
+      invalid_fallback_behavior: ("MATCH" | "NO_MATCH" | "EVALUATE_AS_STRING")?,
+      oversize_handling: ("CONTINUE" | "MATCH" | "NO_MATCH")?
+    }
+
+      type headers = {
+      match_pattern: {
+        all: {
+        }?,
+        included_headers: Array[::String]?,
+        excluded_headers: Array[::String]?
+      },
+      match_scope: ("ALL" | "KEY" | "VALUE"),
+      oversize_handling: ("CONTINUE" | "MATCH" | "NO_MATCH")
+    }
+
+      type cookies = {
+      match_pattern: {
+        all: {
+        }?,
+        included_cookies: Array[::String]?,
+        excluded_cookies: Array[::String]?
+      },
+      match_scope: ("ALL" | "KEY" | "VALUE"),
+      oversize_handling: ("CONTINUE" | "MATCH" | "NO_MATCH")
+    }
+
+      type field_to_match = {
+      single_header: {
+        name: ::String
+      }?,
+      single_query_argument: {
+        name: ::String
+      }?,
+      all_query_arguments: {
+      }?,
+      uri_path: {
+      }?,
+      query_string: {
+      }?,
+      body: {
+        oversize_handling: ("CONTINUE" | "MATCH" | "NO_MATCH")?
+      }?,
+      method: {
+      }?,
+      json_body: Params::json_body?,
+      headers: Params::headers?,
+      cookies: Params::cookies?,
+      header_order: {
+        oversize_handling: ("CONTINUE" | "MATCH" | "NO_MATCH")
+      }?,
+      ja3_fingerprint: {
+        fallback_behavior: ("MATCH" | "NO_MATCH")
+      }?,
+      ja4_fingerprint: {
+        fallback_behavior: ("MATCH" | "NO_MATCH")
+      }?,
+      uri_fragment: {
+        fallback_behavior: ("MATCH" | "NO_MATCH")?
+      }?
+    }
+
+      type byte_match_statement = {
+      search_string: ::String,
+      field_to_match: Params::field_to_match,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ],
+      positional_constraint: ("EXACTLY" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CONTAINS_WORD")
+    }
+
+      type sqli_match_statement = {
+      field_to_match: Params::field_to_match,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ],
+      sensitivity_level: ("LOW" | "HIGH")?
+    }
+
+      type xss_match_statement = {
+      field_to_match: Params::field_to_match,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ]
+    }
+
+      type size_constraint_statement = {
+      field_to_match: Params::field_to_match,
+      comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT"),
+      size: ::Integer,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ]
+    }
+
+      type rule_group_reference_statement = {
+      arn: ::String,
+      excluded_rules: Array[
+        {
+          name: ::String
+        }
+      ]?,
+      rule_action_overrides: Array[
+        Params::rule_action_override
+      ]?
+    }
+
+      type ip_set_reference_statement = {
+      arn: ::String,
+      ip_set_forwarded_ip_config: {
+        header_name: ::String,
+        fallback_behavior: ("MATCH" | "NO_MATCH"),
+        position: ("FIRST" | "LAST" | "ANY")
+      }?
+    }
+
+      type regex_pattern_set_reference_statement = {
+      arn: ::String,
+      field_to_match: Params::field_to_match,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ]
+    }
+
+      type rate_based_statement = {
+      limit: ::Integer,
+      evaluation_window_sec: ::Integer?,
+      aggregate_key_type: ("IP" | "FORWARDED_IP" | "CUSTOM_KEYS" | "CONSTANT"),
+      scope_down_statement: Params::statement?,
+      forwarded_ip_config: {
+        header_name: ::String,
+        fallback_behavior: ("MATCH" | "NO_MATCH")
+      }?,
+      custom_keys: Array[
+        Params::rate_based_statement_custom_key
+      ]?
+    }
+
+      type managed_rule_group_statement = {
+      vendor_name: ::String,
+      name: ::String,
+      version: ::String?,
+      excluded_rules: Array[
+        {
+          name: ::String
+        }
+      ]?,
+      scope_down_statement: Params::statement?,
+      managed_rule_group_configs: Array[
+        Params::managed_rule_group_config
+      ]?,
+      rule_action_overrides: Array[
+        Params::rule_action_override
+      ]?
+    }
+
+      type regex_match_statement = {
+      regex_string: ::String,
+      field_to_match: Params::field_to_match,
+      text_transformations: Array[
+        {
+          priority: ::Integer,
+          type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+        }
+      ]
+    }
+
+      type statement = {
+      byte_match_statement: Params::byte_match_statement?,
+      sqli_match_statement: Params::sqli_match_statement?,
+      xss_match_statement: Params::xss_match_statement?,
+      size_constraint_statement: Params::size_constraint_statement?,
+      geo_match_statement: {
+        country_codes: Array[("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW" | "XK")]?,
+        forwarded_ip_config: {
+          header_name: ::String,
+          fallback_behavior: ("MATCH" | "NO_MATCH")
+        }?
+      }?,
+      rule_group_reference_statement: Params::rule_group_reference_statement?,
+      ip_set_reference_statement: Params::ip_set_reference_statement?,
+      regex_pattern_set_reference_statement: Params::regex_pattern_set_reference_statement?,
+      rate_based_statement: Params::rate_based_statement?,
+      and_statement: {
+        statements: Array[
+          {
+            byte_match_statement: Params::byte_match_statement?,
+            sqli_match_statement: Params::sqli_match_statement?,
+            xss_match_statement: Params::xss_match_statement?,
+            size_constraint_statement: Params::size_constraint_statement?,
+            geo_match_statement: {
+              country_codes: Array[("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW" | "XK")]?,
+              forwarded_ip_config: {
+                header_name: ::String,
+                fallback_behavior: ("MATCH" | "NO_MATCH")
+              }?
+            }?,
+            rule_group_reference_statement: Params::rule_group_reference_statement?,
+            ip_set_reference_statement: Params::ip_set_reference_statement?,
+            regex_pattern_set_reference_statement: Params::regex_pattern_set_reference_statement?,
+            rate_based_statement: Params::rate_based_statement?,
+            and_statement: untyped?,
+            or_statement: {
+              statements: untyped
+            }?,
+            not_statement: {
+              statement: untyped
+            }?,
+            managed_rule_group_statement: Params::managed_rule_group_statement?,
+            label_match_statement: {
+              scope: ("LABEL" | "NAMESPACE"),
+              key: ::String
+            }?,
+            regex_match_statement: Params::regex_match_statement?,
+            asn_match_statement: {
+              asn_list: Array[::Integer],
+              forwarded_ip_config: {
+                header_name: ::String,
+                fallback_behavior: ("MATCH" | "NO_MATCH")
+              }?
+            }?
+          }
+        ]
+      }?,
+      or_statement: {
+        statements: Array[
+          {
+            byte_match_statement: Params::byte_match_statement?,
+            sqli_match_statement: Params::sqli_match_statement?,
+            xss_match_statement: Params::xss_match_statement?,
+            size_constraint_statement: Params::size_constraint_statement?,
+            geo_match_statement: {
+              country_codes: Array[("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW" | "XK")]?,
+              forwarded_ip_config: {
+                header_name: ::String,
+                fallback_behavior: ("MATCH" | "NO_MATCH")
+              }?
+            }?,
+            rule_group_reference_statement: Params::rule_group_reference_statement?,
+            ip_set_reference_statement: Params::ip_set_reference_statement?,
+            regex_pattern_set_reference_statement: Params::regex_pattern_set_reference_statement?,
+            rate_based_statement: Params::rate_based_statement?,
+            and_statement: {
+              statements: untyped
+            }?,
+            or_statement: untyped?,
+            not_statement: {
+              statement: untyped
+            }?,
+            managed_rule_group_statement: Params::managed_rule_group_statement?,
+            label_match_statement: {
+              scope: ("LABEL" | "NAMESPACE"),
+              key: ::String
+            }?,
+            regex_match_statement: Params::regex_match_statement?,
+            asn_match_statement: {
+              asn_list: Array[::Integer],
+              forwarded_ip_config: {
+                header_name: ::String,
+                fallback_behavior: ("MATCH" | "NO_MATCH")
+              }?
+            }?
+          }
+        ]
+      }?,
+      not_statement: {
+        statement: {
+          byte_match_statement: Params::byte_match_statement?,
+          sqli_match_statement: Params::sqli_match_statement?,
+          xss_match_statement: Params::xss_match_statement?,
+          size_constraint_statement: Params::size_constraint_statement?,
+          geo_match_statement: {
+            country_codes: Array[("AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BQ" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CW" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KP" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SX" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "SS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW" | "XK")]?,
+            forwarded_ip_config: {
+              header_name: ::String,
+              fallback_behavior: ("MATCH" | "NO_MATCH")
+            }?
+          }?,
+          rule_group_reference_statement: Params::rule_group_reference_statement?,
+          ip_set_reference_statement: Params::ip_set_reference_statement?,
+          regex_pattern_set_reference_statement: Params::regex_pattern_set_reference_statement?,
+          rate_based_statement: Params::rate_based_statement?,
+          and_statement: {
+            statements: Array[
+              untyped
+            ]
+          }?,
+          or_statement: {
+            statements: Array[
+              untyped
+            ]
+          }?,
+          not_statement: untyped?,
+          managed_rule_group_statement: Params::managed_rule_group_statement?,
+          label_match_statement: {
+            scope: ("LABEL" | "NAMESPACE"),
+            key: ::String
+          }?,
+          regex_match_statement: Params::regex_match_statement?,
+          asn_match_statement: {
+            asn_list: Array[::Integer],
+            forwarded_ip_config: {
+              header_name: ::String,
+              fallback_behavior: ("MATCH" | "NO_MATCH")
+            }?
+          }?
+        }
+      }?,
+      managed_rule_group_statement: Params::managed_rule_group_statement?,
+      label_match_statement: {
+        scope: ("LABEL" | "NAMESPACE"),
+        key: ::String
+      }?,
+      regex_match_statement: Params::regex_match_statement?,
+      asn_match_statement: {
+        asn_list: Array[::Integer],
+        forwarded_ip_config: {
+          header_name: ::String,
+          fallback_behavior: ("MATCH" | "NO_MATCH")
+        }?
+      }?
+    }
+
+      type custom_response = {
+      response_code: ::Integer,
+      custom_response_body_key: ::String?,
+      response_headers: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type block_action = {
+      custom_response: Params::custom_response?
+    }
+
+      type allow_action = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String,
+            value: ::String
+          }
+        ]
+      }?
+    }
+
+      type count_action = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String,
+            value: ::String
+          }
+        ]
+      }?
+    }
+
+      type captcha_action = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String,
+            value: ::String
+          }
+        ]
+      }?
+    }
+
+      type challenge_action = {
+      custom_request_handling: {
+        insert_headers: Array[
+          {
+            name: ::String,
+            value: ::String
+          }
+        ]
+      }?
+    }
+
+      type rule_action = {
+      block: Params::block_action?,
+      allow: Params::allow_action?,
+      count: Params::count_action?,
+      captcha: Params::captcha_action?,
+      challenge: Params::challenge_action?
+    }
+
+      type override_action = {
+      count: Params::count_action?,
+      none: {
+      }?
+    }
+
+      type rule = {
+      name: ::String,
+      priority: ::Integer,
+      statement: Params::statement,
+      action: Params::rule_action?,
+      override_action: Params::override_action?,
+      rule_labels: Array[
+        {
+          name: ::String
+        }
+      ]?,
+      visibility_config: {
+        sampled_requests_enabled: bool,
+        cloud_watch_metrics_enabled: bool,
+        metric_name: ::String
+      },
+      captcha_config: {
+        immunity_time_property: {
+          immunity_time: ::Integer
+        }?
+      }?,
+      challenge_config: {
+        immunity_time_property: {
+          immunity_time: ::Integer
+        }?
+      }?
+    }
+
+      type rule_action_override = {
+      name: ::String,
+      action_to_use: Params::rule_action
+    }
+
+      type rate_based_statement_custom_key = {
+      header: {
+        name: ::String,
+        text_transformations: Array[
+          {
+            priority: ::Integer,
+            type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+          }
+        ]
+      }?,
+      cookie: {
+        name: ::String,
+        text_transformations: Array[
+          {
+            priority: ::Integer,
+            type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+          }
+        ]
+      }?,
+      query_argument: {
+        name: ::String,
+        text_transformations: Array[
+          {
+            priority: ::Integer,
+            type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+          }
+        ]
+      }?,
+      query_string: {
+        text_transformations: Array[
+          {
+            priority: ::Integer,
+            type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+          }
+        ]
+      }?,
+      http_method: {
+      }?,
+      forwarded_ip: {
+      }?,
+      ip: {
+      }?,
+      label_namespace: {
+        namespace: ::String
+      }?,
+      uri_path: {
+        text_transformations: Array[
+          {
+            priority: ::Integer,
+            type: ("NONE" | "COMPRESS_WHITE_SPACE" | "HTML_ENTITY_DECODE" | "LOWERCASE" | "CMD_LINE" | "URL_DECODE" | "BASE64_DECODE" | "HEX_DECODE" | "MD5" | "REPLACE_COMMENTS" | "ESCAPE_SEQ_DECODE" | "SQL_HEX_DECODE" | "CSS_DECODE" | "JS_DECODE" | "NORMALIZE_PATH" | "NORMALIZE_PATH_WIN" | "REMOVE_NULLS" | "REPLACE_NULLS" | "BASE64_DECODE_EXT" | "URL_DECODE_UNI" | "UTF8_TO_UNICODE")
+          }
+        ]
+      }?,
+      ja3_fingerprint: {
+        fallback_behavior: ("MATCH" | "NO_MATCH")
+      }?,
+      ja4_fingerprint: {
+        fallback_behavior: ("MATCH" | "NO_MATCH")
+      }?,
+      asn: {
+      }?
+    }
+
+      type request_inspection = {
+      payload_type: ("JSON" | "FORM_ENCODED"),
+      username_field: {
+        identifier: ::String
+      },
+      password_field: {
+        identifier: ::String
+      }
+    }
+
+      type response_inspection = {
+      status_code: {
+        success_codes: Array[::Integer],
+        failure_codes: Array[::Integer]
+      }?,
+      header: {
+        name: ::String,
+        success_values: Array[::String],
+        failure_values: Array[::String]
+      }?,
+      body_contains: {
+        success_strings: Array[::String],
+        failure_strings: Array[::String]
+      }?,
+      json: {
+        identifier: ::String,
+        success_values: Array[::String],
+        failure_values: Array[::String]
+      }?
+    }
+
+      type aws_managed_rules_atp_rule_set = {
+      login_path: ::String,
+      request_inspection: Params::request_inspection?,
+      response_inspection: Params::response_inspection?,
+      enable_regex_in_path: bool?
+    }
+
+      type request_inspection_acfp = {
+      payload_type: ("JSON" | "FORM_ENCODED"),
+      username_field: {
+        identifier: ::String
+      }?,
+      password_field: {
+        identifier: ::String
+      }?,
+      email_field: {
+        identifier: ::String
+      }?,
+      phone_number_fields: Array[
+        {
+          identifier: ::String
+        }
+      ]?,
+      address_fields: Array[
+        {
+          identifier: ::String
+        }
+      ]?
+    }
+
+      type aws_managed_rules_acfp_rule_set = {
+      creation_path: ::String,
+      registration_page_path: ::String,
+      request_inspection: Params::request_inspection_acfp,
+      response_inspection: Params::response_inspection?,
+      enable_regex_in_path: bool?
+    }
+
+      type client_side_action_config = {
+      challenge: {
+        usage_of_action: ("ENABLED" | "DISABLED"),
+        sensitivity: ("LOW" | "MEDIUM" | "HIGH")?,
+        exempt_uri_regular_expressions: Array[
+          {
+            regex_string: ::String?
+          }
+        ]?
+      }
+    }
+
+      type aws_managed_rules_anti_d_do_s_rule_set = {
+      client_side_action_config: Params::client_side_action_config,
+      sensitivity_to_block: ("LOW" | "MEDIUM" | "HIGH")?
+    }
+
+      type managed_rule_group_config = {
+      login_path: ::String?,
+      payload_type: ("JSON" | "FORM_ENCODED")?,
+      username_field: {
+        identifier: ::String
+      }?,
+      password_field: {
+        identifier: ::String
+      }?,
+      aws_managed_rules_bot_control_rule_set: {
+        inspection_level: ("COMMON" | "TARGETED"),
+        enable_machine_learning: bool?
+      }?,
+      aws_managed_rules_atp_rule_set: Params::aws_managed_rules_atp_rule_set?,
+      aws_managed_rules_acfp_rule_set: Params::aws_managed_rules_acfp_rule_set?,
+      aws_managed_rules_anti_d_do_s_rule_set: Params::aws_managed_rules_anti_d_do_s_rule_set?
+    }
+
+      type default_action = {
+      block: Params::block_action?,
+      allow: Params::allow_action?
+    }
+
+      type data_protection_config = {
+      data_protections: Array[
+        Params::data_protection
+      ]
+    }
+
+      type data_protection = {
+      field: {
+        field_type: ("SINGLE_HEADER" | "SINGLE_COOKIE" | "SINGLE_QUERY_ARGUMENT" | "QUERY_STRING" | "BODY"),
+        field_keys: Array[::String]?
+      },
+      action: ("SUBSTITUTION" | "HASH"),
+      exclude_rule_match_details: bool?,
+      exclude_rate_based_details: bool?
+    }
+
+    end
+  end
+end

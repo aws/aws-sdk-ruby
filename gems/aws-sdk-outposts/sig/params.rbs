@@ -1,0 +1,27 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Outposts
+    module Params
+      type address = {
+      contact_name: ::String,
+      contact_phone_number: ::String,
+      address_line_1: ::String,
+      address_line_2: ::String?,
+      address_line_3: ::String?,
+      city: ::String,
+      state_or_region: ::String,
+      district_or_county: ::String?,
+      postal_code: ::String,
+      country_code: ::String,
+      municipality: ::String?
+    }
+
+    end
+  end
+end

@@ -98,79 +98,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GroundStation/Client.html#create_config-instance_method
       def create_config: (
                            name: ::String,
-                           config_data: {
-                             antenna_downlink_config: {
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 bandwidth: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               }
-                             }?,
-                             tracking_config: {
-                               autotrack: ("REQUIRED" | "PREFERRED" | "REMOVED")
-                             }?,
-                             dataflow_endpoint_config: {
-                               dataflow_endpoint_name: ::String,
-                               dataflow_endpoint_region: ::String?
-                             }?,
-                             antenna_downlink_demod_decode_config: {
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 bandwidth: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               },
-                               demodulation_config: {
-                                 unvalidated_json: ::String
-                               },
-                               decode_config: {
-                                 unvalidated_json: ::String
-                               }
-                             }?,
-                             antenna_uplink_config: {
-                               transmit_disabled: bool?,
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               },
-                               target_eirp: {
-                                 value: ::Float,
-                                 units: ("dBW")
-                               }
-                             }?,
-                             uplink_echo_config: {
-                               enabled: bool,
-                               antenna_uplink_config_arn: ::String
-                             }?,
-                             s3_recording_config: {
-                               bucket_arn: ::String,
-                               role_arn: ::String,
-                               prefix: ::String?
-                             }?,
-                             telemetry_sink_config: {
-                               telemetry_sink_type: ("KINESIS_DATA_STREAM"),
-                               telemetry_sink_data: {
-                                 kinesis_data_stream_data: {
-                                   kinesis_role_arn: ::String,
-                                   kinesis_data_stream_arn: ::String
-                                 }?
-                               }
-                             }?
-                           },
+                           config_data: Params::config_type_data,
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateConfigResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigResponseSuccess
@@ -206,74 +134,25 @@ module Aws
                                                     },
                                                     mtu: ::Integer?
                                                   },
-                                                  ingress_address: {
-                                                    socket_address: {
-                                                      name: ::String,
-                                                      port_range: {
-                                                        minimum: ::Integer,
-                                                        maximum: ::Integer
-                                                      }
-                                                    },
-                                                    mtu: ::Integer?
-                                                  },
+                                                  ingress_address: Params::ranged_connection_details,
                                                   agent_status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")?,
                                                   audit_results: ("HEALTHY" | "UNHEALTHY")?
                                                 }?,
                                                 uplink_aws_ground_station_agent_endpoint: {
                                                   name: ::String,
-                                                  dataflow_details: {
-                                                    agent_connection_details: {
-                                                      ingress_address_and_port: {
-                                                        socket_address: {
-                                                          name: ::String,
-                                                          port: ::Integer
-                                                        },
-                                                        mtu: ::Integer?
-                                                      },
-                                                      agent_ip_and_port_address: {
-                                                        socket_address: {
-                                                          name: ::String,
-                                                          port_range: {
-                                                            minimum: ::Integer,
-                                                            maximum: ::Integer
-                                                          }
-                                                        },
-                                                        mtu: ::Integer?
-                                                      }
-                                                    }?
-                                                  },
+                                                  dataflow_details: Params::uplink_dataflow_details,
                                                   agent_status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")?,
                                                   audit_results: ("HEALTHY" | "UNHEALTHY")?
                                                 }?,
                                                 downlink_aws_ground_station_agent_endpoint: {
                                                   name: ::String,
-                                                  dataflow_details: {
-                                                    agent_connection_details: {
-                                                      agent_ip_and_port_address: {
-                                                        socket_address: {
-                                                          name: ::String,
-                                                          port_range: {
-                                                            minimum: ::Integer,
-                                                            maximum: ::Integer
-                                                          }
-                                                        },
-                                                        mtu: ::Integer?
-                                                      },
-                                                      egress_address_and_port: {
-                                                        socket_address: {
-                                                          name: ::String,
-                                                          port: ::Integer
-                                                        },
-                                                        mtu: ::Integer?
-                                                      }
-                                                    }?
-                                                  },
+                                                  dataflow_details: Params::downlink_dataflow_details,
                                                   agent_status: ("SUCCESS" | "FAILED" | "ACTIVE" | "INACTIVE")?,
                                                   audit_results: ("HEALTHY" | "UNHEALTHY")?
                                                 }?,
                                                 health_status: ("HEALTHY" | "UNHEALTHY")?,
                                                 health_reasons: Array[("NO_REGISTERED_AGENT" | "INVALID_IP_OWNERSHIP" | "NOT_AUTHORIZED_TO_CREATE_SLR" | "UNVERIFIED_IP_OWNERSHIP" | "INITIALIZING_DATAPLANE" | "DATAPLANE_FAILURE" | "HEALTHY")]?
-                                              },
+                                              }
                                             ],
                                             ?tags: Hash[::String, ::String],
                                             ?contact_pre_pass_duration_seconds: ::Integer,
@@ -291,53 +170,13 @@ module Aws
                                                  {
                                                    uplink_aws_ground_station_agent_endpoint: {
                                                      name: ::String,
-                                                     dataflow_details: {
-                                                       agent_connection_details: {
-                                                         ingress_address_and_port: {
-                                                           socket_address: {
-                                                             name: ::String,
-                                                             port: ::Integer
-                                                           },
-                                                           mtu: ::Integer?
-                                                         },
-                                                         agent_ip_and_port_address: {
-                                                           socket_address: {
-                                                             name: ::String,
-                                                             port_range: {
-                                                               minimum: ::Integer,
-                                                               maximum: ::Integer
-                                                             }
-                                                           },
-                                                           mtu: ::Integer?
-                                                         }
-                                                       }?
-                                                     }
+                                                     dataflow_details: Params::uplink_dataflow_details
                                                    }?,
                                                    downlink_aws_ground_station_agent_endpoint: {
                                                      name: ::String,
-                                                     dataflow_details: {
-                                                       agent_connection_details: {
-                                                         agent_ip_and_port_address: {
-                                                           socket_address: {
-                                                             name: ::String,
-                                                             port_range: {
-                                                               minimum: ::Integer,
-                                                               maximum: ::Integer
-                                                             }
-                                                           },
-                                                           mtu: ::Integer?
-                                                         },
-                                                         egress_address_and_port: {
-                                                           socket_address: {
-                                                             name: ::String,
-                                                             port: ::Integer
-                                                           },
-                                                           mtu: ::Integer?
-                                                         }
-                                                       }?
-                                                     }
+                                                     dataflow_details: Params::downlink_dataflow_details
                                                    }?
-                                                 },
+                                                 }
                                                ],
                                                ?contact_pre_pass_duration_seconds: ::Integer,
                                                ?contact_post_pass_duration_seconds: ::Integer,
@@ -372,7 +211,7 @@ module Aws
                                         start_time: ::Time,
                                         end_time: ::Time
                                       }
-                                    },
+                                    }
                                   ]?
                                 }?,
                                 oem: {
@@ -405,9 +244,9 @@ module Aws
                                               dt: ::Float,
                                               az: ::Float,
                                               el: ::Float
-                                            },
+                                            }
                                           ]
-                                        },
+                                        }
                                       ]
                                     }?
                                   }
@@ -428,7 +267,7 @@ module Aws
                                     ?contact_post_pass_duration_seconds: ::Integer,
                                     minimum_viable_contact_duration_seconds: ::Integer,
                                     dataflow_edges: Array[
-                                      Array[::String],
+                                      Array[::String]
                                     ],
                                     tracking_config_arn: ::String,
                                     ?telemetry_sink_config_arn: ::String,
@@ -842,7 +681,7 @@ module Aws
                                 {
                                   component_type: ::String,
                                   versions: Array[::String]
-                                },
+                                }
                               ]
                             },
                             ?tags: Hash[::String, ::String]
@@ -862,19 +701,7 @@ module Aws
                              end_time: ::Time,
                              ground_station: ::String,
                              ?tags: Hash[::String, ::String],
-                             ?tracking_overrides: {
-                               program_track_settings: {
-                                 az_el: {
-                                   ephemeris_id: ::String
-                                 }?,
-                                 oem: {
-                                   ephemeris_id: ::String
-                                 }?,
-                                 tle: {
-                                   ephemeris_id: ::String
-                                 }?
-                               }?
-                             }
+                             ?tracking_overrides: Params::tracking_overrides
                            ) -> _ReserveContactResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReserveContactResponseSuccess
 
@@ -919,7 +746,7 @@ module Aws
                                      bytes_received: ::Integer?,
                                      packets_dropped: ::Integer?,
                                      dataflow_id: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _UpdateAgentStatusResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentStatusResponseSuccess
@@ -935,79 +762,7 @@ module Aws
                            config_id: ::String,
                            name: ::String,
                            config_type: ("antenna-downlink" | "antenna-downlink-demod-decode" | "tracking" | "dataflow-endpoint" | "antenna-uplink" | "uplink-echo" | "s3-recording" | "telemetry-sink"),
-                           config_data: {
-                             antenna_downlink_config: {
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 bandwidth: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               }
-                             }?,
-                             tracking_config: {
-                               autotrack: ("REQUIRED" | "PREFERRED" | "REMOVED")
-                             }?,
-                             dataflow_endpoint_config: {
-                               dataflow_endpoint_name: ::String,
-                               dataflow_endpoint_region: ::String?
-                             }?,
-                             antenna_downlink_demod_decode_config: {
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 bandwidth: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               },
-                               demodulation_config: {
-                                 unvalidated_json: ::String
-                               },
-                               decode_config: {
-                                 unvalidated_json: ::String
-                               }
-                             }?,
-                             antenna_uplink_config: {
-                               transmit_disabled: bool?,
-                               spectrum_config: {
-                                 center_frequency: {
-                                   value: ::Float,
-                                   units: ("GHz" | "MHz" | "kHz")
-                                 },
-                                 polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
-                               },
-                               target_eirp: {
-                                 value: ::Float,
-                                 units: ("dBW")
-                               }
-                             }?,
-                             uplink_echo_config: {
-                               enabled: bool,
-                               antenna_uplink_config_arn: ::String
-                             }?,
-                             s3_recording_config: {
-                               bucket_arn: ::String,
-                               role_arn: ::String,
-                               prefix: ::String?
-                             }?,
-                             telemetry_sink_config: {
-                               telemetry_sink_type: ("KINESIS_DATA_STREAM"),
-                               telemetry_sink_data: {
-                                 kinesis_data_stream_data: {
-                                   kinesis_role_arn: ::String,
-                                   kinesis_data_stream_arn: ::String
-                                 }?
-                               }
-                             }?
-                           }
+                           config_data: Params::config_type_data
                          ) -> _UpdateConfigResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigResponseSuccess
 
@@ -1020,19 +775,7 @@ module Aws
       def update_contact: (
                             contact_id: ::String,
                             ?client_token: ::String,
-                            ?tracking_overrides: {
-                              program_track_settings: {
-                                az_el: {
-                                  ephemeris_id: ::String
-                                }?,
-                                oem: {
-                                  ephemeris_id: ::String
-                                }?,
-                                tle: {
-                                  ephemeris_id: ::String
-                                }?
-                              }?
-                            },
+                            ?tracking_overrides: Params::tracking_overrides,
                             ?satellite_arn: ::String
                           ) -> _UpdateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
@@ -1062,7 +805,7 @@ module Aws
                                     ?contact_post_pass_duration_seconds: ::Integer,
                                     ?minimum_viable_contact_duration_seconds: ::Integer,
                                     ?dataflow_edges: Array[
-                                      Array[::String],
+                                      Array[::String]
                                     ],
                                     ?tracking_config_arn: ::String,
                                     ?telemetry_sink_config_arn: ::String,

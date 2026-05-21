@@ -22,7 +22,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess
@@ -41,7 +41,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess
@@ -60,7 +60,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeAutoScalingGroupsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeAutoScalingGroupsResponseSuccess

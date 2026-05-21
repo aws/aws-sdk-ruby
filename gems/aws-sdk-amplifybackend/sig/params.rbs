@@ -1,0 +1,63 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AmplifyBackend
+    module Params
+      type backend_api_app_sync_auth_settings = {
+      cognito_user_pool_id: ::String?,
+      description: ::String?,
+      expiration_time: ::Float?,
+      open_id_auth_ttl: ::String?,
+      open_id_client_id: ::String?,
+      open_id_iat_ttl: ::String?,
+      open_id_issue_url: ::String?,
+      open_id_provider_name: ::String?
+    }
+
+      type backend_api_auth_type = {
+      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
+      settings: Params::backend_api_app_sync_auth_settings?
+    }
+
+      type backend_api_resource_config = {
+      additional_auth_types: Array[
+        Params::backend_api_auth_type
+      ]?,
+      api_name: ::String?,
+      conflict_resolution: {
+        resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
+      }?,
+      default_auth_type: Params::backend_api_auth_type?,
+      service: ::String?,
+      transform_schema: ::String?
+    }
+
+      type social_provider_settings = {
+      facebook: {
+        client_id: ::String?,
+        client_secret: ::String?
+      }?,
+      google: {
+        client_id: ::String?,
+        client_secret: ::String?
+      }?,
+      login_with_amazon: {
+        client_id: ::String?,
+        client_secret: ::String?
+      }?,
+      sign_in_with_apple: {
+        client_id: ::String?,
+        key_id: ::String?,
+        private_key: ::String?,
+        team_id: ::String?
+      }?
+    }
+
+    end
+  end
+end

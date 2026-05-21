@@ -92,7 +92,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?host_arn: ::String
                              ) -> _CreateConnectionResponseSuccess
@@ -118,7 +118,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateHostResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHostResponseSuccess
@@ -137,7 +137,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateRepositoryLinkResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryLinkResponseSuccess
@@ -361,7 +361,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

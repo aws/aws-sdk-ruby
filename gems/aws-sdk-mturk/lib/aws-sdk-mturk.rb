@@ -54,7 +54,7 @@ module Aws::MTurk
   autoload :EndpointProvider, 'aws-sdk-mturk/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mturk/endpoints'
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.86.0'
 
 end
 

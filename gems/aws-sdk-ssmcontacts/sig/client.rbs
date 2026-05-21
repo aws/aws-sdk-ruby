@@ -112,31 +112,12 @@ module Aws
                             alias: ::String,
                             ?display_name: ::String,
                             type: ("PERSONAL" | "ESCALATION" | "ONCALL_SCHEDULE"),
-                            plan: {
-                              stages: Array[
-                                {
-                                  duration_in_minutes: ::Integer,
-                                  targets: Array[
-                                    {
-                                      channel_target_info: {
-                                        contact_channel_id: ::String,
-                                        retry_interval_in_minutes: ::Integer?
-                                      }?,
-                                      contact_target_info: {
-                                        contact_id: ::String?,
-                                        is_essential: bool
-                                      }?
-                                    },
-                                  ]
-                                },
-                              ]?,
-                              rotation_ids: Array[::String]?
-                            },
+                            plan: Params::plan,
                             ?tags: Array[
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?idempotency_token: ::String
                           ) -> _CreateContactResponseSuccess
@@ -169,51 +150,12 @@ module Aws
                              contact_ids: Array[::String],
                              ?start_time: ::Time,
                              time_zone_id: ::String,
-                             recurrence: {
-                               monthly_settings: Array[
-                                 {
-                                   day_of_month: ::Integer,
-                                   hand_off_time: {
-                                     hour_of_day: ::Integer,
-                                     minute_of_hour: ::Integer
-                                   }
-                                 },
-                               ]?,
-                               weekly_settings: Array[
-                                 {
-                                   day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
-                                   hand_off_time: {
-                                     hour_of_day: ::Integer,
-                                     minute_of_hour: ::Integer
-                                   }
-                                 },
-                               ]?,
-                               daily_settings: Array[
-                                 {
-                                   hour_of_day: ::Integer,
-                                   minute_of_hour: ::Integer
-                                 },
-                               ]?,
-                               number_of_on_calls: ::Integer,
-                               shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
-                                   {
-                                     start: {
-                                       hour_of_day: ::Integer,
-                                       minute_of_hour: ::Integer
-                                     }?,
-                                     end: {
-                                       hour_of_day: ::Integer,
-                                       minute_of_hour: ::Integer
-                                     }?
-                                   },
-                                 ]]?,
-                               recurrence_multiplier: ::Integer
-                             },
+                             recurrence: Params::recurrence_settings,
                              ?tags: Array[
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ],
                              ?idempotency_token: ::String
                            ) -> _CreateRotationResponseSuccess
@@ -497,52 +439,13 @@ module Aws
                                           end_time: ::Time,
                                           members: Array[::String],
                                           time_zone_id: ::String,
-                                          recurrence: {
-                                            monthly_settings: Array[
-                                              {
-                                                day_of_month: ::Integer,
-                                                hand_off_time: {
-                                                  hour_of_day: ::Integer,
-                                                  minute_of_hour: ::Integer
-                                                }
-                                              },
-                                            ]?,
-                                            weekly_settings: Array[
-                                              {
-                                                day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
-                                                hand_off_time: {
-                                                  hour_of_day: ::Integer,
-                                                  minute_of_hour: ::Integer
-                                                }
-                                              },
-                                            ]?,
-                                            daily_settings: Array[
-                                              {
-                                                hour_of_day: ::Integer,
-                                                minute_of_hour: ::Integer
-                                              },
-                                            ]?,
-                                            number_of_on_calls: ::Integer,
-                                            shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
-                                                {
-                                                  start: {
-                                                    hour_of_day: ::Integer,
-                                                    minute_of_hour: ::Integer
-                                                  }?,
-                                                  end: {
-                                                    hour_of_day: ::Integer,
-                                                    minute_of_hour: ::Integer
-                                                  }?
-                                                },
-                                              ]]?,
-                                            recurrence_multiplier: ::Integer
-                                          },
+                                          recurrence: Params::recurrence_settings,
                                           ?overrides: Array[
                                             {
                                               new_members: Array[::String]?,
                                               start_time: ::Time?,
                                               end_time: ::Time?
-                                            },
+                                            }
                                           ],
                                           ?next_token: ::String,
                                           ?max_results: ::Integer
@@ -658,7 +561,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -680,26 +583,7 @@ module Aws
       def update_contact: (
                             contact_id: ::String,
                             ?display_name: ::String,
-                            ?plan: {
-                              stages: Array[
-                                {
-                                  duration_in_minutes: ::Integer,
-                                  targets: Array[
-                                    {
-                                      channel_target_info: {
-                                        contact_channel_id: ::String,
-                                        retry_interval_in_minutes: ::Integer?
-                                      }?,
-                                      contact_target_info: {
-                                        contact_id: ::String?,
-                                        is_essential: bool
-                                      }?
-                                    },
-                                  ]
-                                },
-                              ]?,
-                              rotation_ids: Array[::String]?
-                            }
+                            ?plan: Params::plan
                           ) -> _UpdateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
 
@@ -725,46 +609,7 @@ module Aws
                              ?contact_ids: Array[::String],
                              ?start_time: ::Time,
                              ?time_zone_id: ::String,
-                             recurrence: {
-                               monthly_settings: Array[
-                                 {
-                                   day_of_month: ::Integer,
-                                   hand_off_time: {
-                                     hour_of_day: ::Integer,
-                                     minute_of_hour: ::Integer
-                                   }
-                                 },
-                               ]?,
-                               weekly_settings: Array[
-                                 {
-                                   day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
-                                   hand_off_time: {
-                                     hour_of_day: ::Integer,
-                                     minute_of_hour: ::Integer
-                                   }
-                                 },
-                               ]?,
-                               daily_settings: Array[
-                                 {
-                                   hour_of_day: ::Integer,
-                                   minute_of_hour: ::Integer
-                                 },
-                               ]?,
-                               number_of_on_calls: ::Integer,
-                               shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
-                                   {
-                                     start: {
-                                       hour_of_day: ::Integer,
-                                       minute_of_hour: ::Integer
-                                     }?,
-                                     end: {
-                                       hour_of_day: ::Integer,
-                                       minute_of_hour: ::Integer
-                                     }?
-                                   },
-                                 ]]?,
-                               recurrence_multiplier: ::Integer
-                             }
+                             recurrence: Params::recurrence_settings
                            ) -> _UpdateRotationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRotationResponseSuccess
     end

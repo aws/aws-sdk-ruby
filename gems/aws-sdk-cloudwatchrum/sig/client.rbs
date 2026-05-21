@@ -89,14 +89,7 @@ module Aws
                                                  destination: ("CloudWatch" | "Evidently"),
                                                  ?destination_arn: ::String,
                                                  metric_definitions: Array[
-                                                   {
-                                                     name: ::String,
-                                                     value_key: ::String?,
-                                                     unit_label: ::String?,
-                                                     dimension_keys: Hash[::String, ::String]?,
-                                                     event_pattern: ::String?,
-                                                     namespace: ::String?
-                                                   },
+                                                   Params::metric_definition_request
                                                  ]
                                                ) -> _BatchCreateRumMetricDefinitionsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateRumMetricDefinitionsResponseSuccess
@@ -140,17 +133,7 @@ module Aws
                                 ?domain: ::String,
                                 ?domain_list: Array[::String],
                                 ?tags: Hash[::String, ::String],
-                                ?app_monitor_configuration: {
-                                  identity_pool_id: ::String?,
-                                  excluded_pages: Array[::String]?,
-                                  included_pages: Array[::String]?,
-                                  favorite_pages: Array[::String]?,
-                                  session_sample_rate: ::Float?,
-                                  guest_role_arn: ::String?,
-                                  allow_cookies: bool?,
-                                  telemetries: Array[("errors" | "performance" | "http")]?,
-                                  enable_x_ray: bool?
-                                },
+                                ?app_monitor_configuration: Params::app_monitor_configuration,
                                 ?cw_log_enabled: bool,
                                 ?custom_events: {
                                   status: ("ENABLED" | "DISABLED")?
@@ -222,7 +205,7 @@ module Aws
                                     {
                                       name: ::String?,
                                       values: Array[::String]?
-                                    },
+                                    }
                                   ],
                                   ?max_results: ::Integer,
                                   ?next_token: ::String
@@ -312,7 +295,7 @@ module Aws
                                 type: ::String,
                                 metadata: ::String?,
                                 details: ::String
-                              },
+                              }
                             ],
                             ?alias: ::String
                           ) -> _PutRumEventsResponseSuccess
@@ -358,17 +341,7 @@ module Aws
                                 name: ::String,
                                 ?domain: ::String,
                                 ?domain_list: Array[::String],
-                                ?app_monitor_configuration: {
-                                  identity_pool_id: ::String?,
-                                  excluded_pages: Array[::String]?,
-                                  included_pages: Array[::String]?,
-                                  favorite_pages: Array[::String]?,
-                                  session_sample_rate: ::Float?,
-                                  guest_role_arn: ::String?,
-                                  allow_cookies: bool?,
-                                  telemetries: Array[("errors" | "performance" | "http")]?,
-                                  enable_x_ray: bool?
-                                },
+                                ?app_monitor_configuration: Params::app_monitor_configuration,
                                 ?cw_log_enabled: bool,
                                 ?custom_events: {
                                   status: ("ENABLED" | "DISABLED")?
@@ -390,14 +363,7 @@ module Aws
                                           app_monitor_name: ::String,
                                           destination: ("CloudWatch" | "Evidently"),
                                           ?destination_arn: ::String,
-                                          metric_definition: {
-                                            name: ::String,
-                                            value_key: ::String?,
-                                            unit_label: ::String?,
-                                            dimension_keys: Hash[::String, ::String]?,
-                                            event_pattern: ::String?,
-                                            namespace: ::String?
-                                          },
+                                          metric_definition: Params::metric_definition_request,
                                           metric_definition_id: ::String
                                         ) -> _UpdateRumMetricDefinitionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRumMetricDefinitionResponseSuccess

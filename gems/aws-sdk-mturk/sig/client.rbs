@@ -140,57 +140,17 @@ module Aws
                         ?question: ::String,
                         ?requester_annotation: ::String,
                         ?qualification_requirements: Array[
-                          {
-                            qualification_type_id: ::String,
-                            comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn"),
-                            integer_values: Array[::Integer]?,
-                            locale_values: Array[
-                              {
-                                country: ::String,
-                                subdivision: ::String?
-                              },
-                            ]?,
-                            required_to_preview: bool?,
-                            actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")?
-                          },
+                          Params::qualification_requirement
                         ],
                         ?unique_request_token: ::String,
-                        ?assignment_review_policy: {
-                          policy_name: ::String,
-                          parameters: Array[
-                            {
-                              key: ::String?,
-                              values: Array[::String]?,
-                              map_entries: Array[
-                                {
-                                  key: ::String?,
-                                  values: Array[::String]?
-                                },
-                              ]?
-                            },
-                          ]?
-                        },
-                        ?hit_review_policy: {
-                          policy_name: ::String,
-                          parameters: Array[
-                            {
-                              key: ::String?,
-                              values: Array[::String]?,
-                              map_entries: Array[
-                                {
-                                  key: ::String?,
-                                  values: Array[::String]?
-                                },
-                              ]?
-                            },
-                          ]?
-                        },
+                        ?assignment_review_policy: Params::review_policy,
+                        ?hit_review_policy: Params::review_policy,
                         ?hit_layout_id: ::String,
                         ?hit_layout_parameters: Array[
                           {
                             name: ::String,
                             value: ::String
-                          },
+                          }
                         ]
                       ) -> _CreateHITResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITResponseSuccess
@@ -208,19 +168,7 @@ module Aws
                              ?keywords: ::String,
                              description: ::String,
                              ?qualification_requirements: Array[
-                               {
-                                 qualification_type_id: ::String,
-                                 comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn"),
-                                 integer_values: Array[::Integer]?,
-                                 locale_values: Array[
-                                   {
-                                     country: ::String,
-                                     subdivision: ::String?
-                                   },
-                                 ]?,
-                                 required_to_preview: bool?,
-                                 actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")?
-                               },
+                               Params::qualification_requirement
                              ]
                            ) -> _CreateHITTypeResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITTypeResponseSuccess
@@ -237,42 +185,14 @@ module Aws
                                       ?question: ::String,
                                       ?requester_annotation: ::String,
                                       ?unique_request_token: ::String,
-                                      ?assignment_review_policy: {
-                                        policy_name: ::String,
-                                        parameters: Array[
-                                          {
-                                            key: ::String?,
-                                            values: Array[::String]?,
-                                            map_entries: Array[
-                                              {
-                                                key: ::String?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      },
-                                      ?hit_review_policy: {
-                                        policy_name: ::String,
-                                        parameters: Array[
-                                          {
-                                            key: ::String?,
-                                            values: Array[::String]?,
-                                            map_entries: Array[
-                                              {
-                                                key: ::String?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      },
+                                      ?assignment_review_policy: Params::review_policy,
+                                      ?hit_review_policy: Params::review_policy,
                                       ?hit_layout_id: ::String,
                                       ?hit_layout_parameters: Array[
                                         {
                                           name: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateHITWithHITTypeResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHITWithHITTypeResponseSuccess

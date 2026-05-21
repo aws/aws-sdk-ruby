@@ -90,7 +90,7 @@ module Aws
                                        regions: Array[::String],
                                        source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF"),
                                        source_version: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateAwsLogSourceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAwsLogSourceResponseSuccess
@@ -123,34 +123,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_data_lake-instance_method
       def create_data_lake: (
                               configurations: Array[
-                                {
-                                  encryption_configuration: {
-                                    kms_key_id: ::String?
-                                  }?,
-                                  lifecycle_configuration: {
-                                    expiration: {
-                                      days: ::Integer?
-                                    }?,
-                                    transitions: Array[
-                                      {
-                                        days: ::Integer?,
-                                        storage_class: ::String?
-                                      },
-                                    ]?
-                                  }?,
-                                  region: ::String,
-                                  replication_configuration: {
-                                    regions: Array[::String]?,
-                                    role_arn: ::String?
-                                  }?
-                                },
+                                Params::data_lake_configuration
                               ],
                               meta_store_manager_role_arn: ::String,
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateDataLakeResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeResponseSuccess
@@ -178,9 +158,9 @@ module Aws
                                                                {
                                                                  source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                                                  source_version: ::String?
-                                                               },
+                                                               }
                                                              ]
-                                                           },
+                                                           }
                                                          ]
                                                        ) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataLakeOrganizationConfigurationResponseSuccess
@@ -193,25 +173,7 @@ module Aws
       def create_subscriber: (
                                ?access_types: Array[("LAKEFORMATION" | "S3")],
                                sources: Array[
-                                 {
-                                   aws_log_source: {
-                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
-                                     source_version: ::String?
-                                   }?,
-                                   custom_log_source: {
-                                     attributes: {
-                                       crawler_arn: ::String?,
-                                       database_arn: ::String?,
-                                       table_arn: ::String?
-                                     }?,
-                                     provider: {
-                                       location: ::String?,
-                                       role_arn: ::String?
-                                     }?,
-                                     source_name: ::String?,
-                                     source_version: ::String?
-                                   }?
-                                 },
+                                 Params::log_source_resource
                                ],
                                ?subscriber_description: ::String,
                                subscriber_identity: {
@@ -223,7 +185,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _CreateSubscriberResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberResponseSuccess
@@ -234,17 +196,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#create_subscriber_notification-instance_method
       def create_subscriber_notification: (
-                                            configuration: {
-                                              https_notification_configuration: {
-                                                authorization_api_key_name: ::String?,
-                                                authorization_api_key_value: ::String?,
-                                                endpoint: ::String,
-                                                http_method: ("POST" | "PUT")?,
-                                                target_role_arn: ::String
-                                              }?,
-                                              sqs_notification_configuration: {
-                                              }?
-                                            },
+                                            configuration: Params::notification_configuration,
                                             subscriber_id: ::String
                                           ) -> _CreateSubscriberNotificationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriberNotificationResponseSuccess
@@ -261,7 +213,7 @@ module Aws
                                        regions: Array[::String],
                                        source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF"),
                                        source_version: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _DeleteAwsLogSourceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAwsLogSourceResponseSuccess
@@ -305,9 +257,9 @@ module Aws
                                                                {
                                                                  source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
                                                                  source_version: ::String?
-                                                               },
+                                                               }
                                                              ]
-                                                           },
+                                                           }
                                                          ]
                                                        ) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
                                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataLakeOrganizationConfigurationResponseSuccess
@@ -417,25 +369,7 @@ module Aws
                               ?next_token: ::String,
                               ?regions: Array[::String],
                               ?sources: Array[
-                                {
-                                  aws_log_source: {
-                                    source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
-                                    source_version: ::String?
-                                  }?,
-                                  custom_log_source: {
-                                    attributes: {
-                                      crawler_arn: ::String?,
-                                      database_arn: ::String?,
-                                      table_arn: ::String?
-                                    }?,
-                                    provider: {
-                                      location: ::String?,
-                                      role_arn: ::String?
-                                    }?,
-                                    source_name: ::String?,
-                                    source_version: ::String?
-                                  }?
-                                },
+                                Params::log_source_resource
                               ]
                             ) -> _ListLogSourcesResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogSourcesResponseSuccess
@@ -481,7 +415,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -503,27 +437,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_data_lake-instance_method
       def update_data_lake: (
                               configurations: Array[
-                                {
-                                  encryption_configuration: {
-                                    kms_key_id: ::String?
-                                  }?,
-                                  lifecycle_configuration: {
-                                    expiration: {
-                                      days: ::Integer?
-                                    }?,
-                                    transitions: Array[
-                                      {
-                                        days: ::Integer?,
-                                        storage_class: ::String?
-                                      },
-                                    ]?
-                                  }?,
-                                  region: ::String,
-                                  replication_configuration: {
-                                    regions: Array[::String]?,
-                                    role_arn: ::String?
-                                  }?
-                                },
+                                Params::data_lake_configuration
                               ],
                               ?meta_store_manager_role_arn: ::String
                             ) -> _UpdateDataLakeResponseSuccess
@@ -547,25 +461,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_subscriber-instance_method
       def update_subscriber: (
                                ?sources: Array[
-                                 {
-                                   aws_log_source: {
-                                     source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
-                                     source_version: ::String?
-                                   }?,
-                                   custom_log_source: {
-                                     attributes: {
-                                       crawler_arn: ::String?,
-                                       database_arn: ::String?,
-                                       table_arn: ::String?
-                                     }?,
-                                     provider: {
-                                       location: ::String?,
-                                       role_arn: ::String?
-                                     }?,
-                                     source_name: ::String?,
-                                     source_version: ::String?
-                                   }?
-                                 },
+                                 Params::log_source_resource
                                ],
                                ?subscriber_description: ::String,
                                subscriber_id: ::String,
@@ -583,17 +479,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityLake/Client.html#update_subscriber_notification-instance_method
       def update_subscriber_notification: (
-                                            configuration: {
-                                              https_notification_configuration: {
-                                                authorization_api_key_name: ::String?,
-                                                authorization_api_key_value: ::String?,
-                                                endpoint: ::String,
-                                                http_method: ("POST" | "PUT")?,
-                                                target_role_arn: ::String
-                                              }?,
-                                              sqs_notification_configuration: {
-                                              }?
-                                            },
+                                            configuration: Params::notification_configuration,
                                             subscriber_id: ::String
                                           ) -> _UpdateSubscriberNotificationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSubscriberNotificationResponseSuccess

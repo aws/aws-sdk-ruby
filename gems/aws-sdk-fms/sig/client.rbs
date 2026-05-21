@@ -486,21 +486,21 @@ module Aws
                                  app_name: ::String,
                                  protocol: ::String,
                                  port: ::Integer
-                               },
+                               }
                              ],
                              previous_apps_list: Hash[::String, Array[
                                  {
                                    app_name: ::String,
                                    protocol: ::String,
                                    port: ::Integer
-                                 },
+                                 }
                                ]]?
                            },
                            ?tag_list: Array[
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _PutAppsListResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAppsListResponseSuccess
@@ -536,39 +536,11 @@ module Aws
                               network_acl_common_policy: {
                                 network_acl_entry_set: {
                                   first_entries: Array[
-                                    {
-                                      icmp_type_code: {
-                                        code: ::Integer?,
-                                        type: ::Integer?
-                                      }?,
-                                      protocol: ::String,
-                                      port_range: {
-                                        from: ::Integer?,
-                                        to: ::Integer?
-                                      }?,
-                                      cidr_block: ::String?,
-                                      ipv_6_cidr_block: ::String?,
-                                      rule_action: ("allow" | "deny"),
-                                      egress: bool
-                                    },
+                                    Params::network_acl_entry
                                   ]?,
                                   force_remediate_for_first_entries: bool,
                                   last_entries: Array[
-                                    {
-                                      icmp_type_code: {
-                                        code: ::Integer?,
-                                        type: ::Integer?
-                                      }?,
-                                      protocol: ::String,
-                                      port_range: {
-                                        from: ::Integer?,
-                                        to: ::Integer?
-                                      }?,
-                                      cidr_block: ::String?,
-                                      ipv_6_cidr_block: ::String?,
-                                      rule_action: ("allow" | "deny"),
-                                      egress: bool
-                                    },
+                                    Params::network_acl_entry
                                   ]?,
                                   force_remediate_for_last_entries: bool
                                 }
@@ -581,7 +553,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]?,
                           exclude_resource_tags: bool,
                           remediation_enabled: bool,
@@ -597,7 +569,7 @@ module Aws
                           {
                             key: ::String,
                             value: ::String
-                          },
+                          }
                         ]
                       ) -> _PutPolicyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPolicyResponseSuccess
@@ -622,7 +594,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _PutProtocolsListResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutProtocolsListResponseSuccess
@@ -647,7 +619,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _PutResourceSetResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourceSetResponseSuccess
@@ -662,7 +634,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

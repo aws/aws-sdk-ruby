@@ -1,0 +1,29 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PinpointSMSVoice
+    module Params
+      type event_destination_definition = {
+      cloud_watch_logs_destination: {
+        iam_role_arn: ::String?,
+        log_group_arn: ::String?
+      }?,
+      enabled: bool?,
+      kinesis_firehose_destination: {
+        delivery_stream_arn: ::String?,
+        iam_role_arn: ::String?
+      }?,
+      matching_event_types: Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]?,
+      sns_destination: {
+        topic_arn: ::String?
+      }?
+    }
+
+    end
+  end
+end

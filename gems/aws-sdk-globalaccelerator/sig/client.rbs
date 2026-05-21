@@ -90,7 +90,7 @@ module Aws
                                             {
                                               endpoint_id: ::String?,
                                               attachment_arn: ::String?
-                                            },
+                                            }
                                           ],
                                           endpoint_group_arn: ::String
                                         ) -> _AddCustomRoutingEndpointsResponseSuccess
@@ -109,7 +109,7 @@ module Aws
                                weight: ::Integer?,
                                client_ip_preservation_enabled: bool?,
                                attachment_arn: ::String?
-                             },
+                             }
                            ],
                            endpoint_group_arn: ::String
                          ) -> _AddEndpointsResponseSuccess
@@ -150,7 +150,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _CreateAcceleratorResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAcceleratorResponseSuccess
@@ -168,14 +168,14 @@ module Aws
                                                  endpoint_id: ::String?,
                                                  cidr: ::String?,
                                                  region: ::String?
-                                               },
+                                               }
                                              ],
                                              idempotency_token: ::String,
                                              ?tags: Array[
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _CreateCrossAccountAttachmentResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCrossAccountAttachmentResponseSuccess
@@ -195,7 +195,7 @@ module Aws
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateCustomRoutingAcceleratorResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomRoutingAcceleratorResponseSuccess
@@ -213,7 +213,7 @@ module Aws
                                                       from_port: ::Integer,
                                                       to_port: ::Integer,
                                                       protocols: Array[("TCP" | "UDP")]
-                                                    },
+                                                    }
                                                   ],
                                                   idempotency_token: ::String
                                                 ) -> _CreateCustomRoutingEndpointGroupResponseSuccess
@@ -230,7 +230,7 @@ module Aws
                                               {
                                                 from_port: ::Integer?,
                                                 to_port: ::Integer?
-                                              },
+                                              }
                                             ],
                                             idempotency_token: ::String
                                           ) -> _CreateCustomRoutingListenerResponseSuccess
@@ -250,7 +250,7 @@ module Aws
                                        weight: ::Integer?,
                                        client_ip_preservation_enabled: bool?,
                                        attachment_arn: ::String?
-                                     },
+                                     }
                                    ],
                                    ?traffic_dial_percentage: ::Float,
                                    ?health_check_port: ::Integer,
@@ -263,7 +263,7 @@ module Aws
                                      {
                                        listener_port: ::Integer?,
                                        endpoint_port: ::Integer?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateEndpointGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEndpointGroupResponseSuccess
@@ -279,7 +279,7 @@ module Aws
                                {
                                  from_port: ::Integer?,
                                  to_port: ::Integer?
-                               },
+                               }
                              ],
                              protocol: ("TCP" | "UDP"),
                              ?client_affinity: ("NONE" | "SOURCE_IP"),
@@ -627,7 +627,7 @@ module Aws
                                 {
                                   endpoint_id: ::String,
                                   client_ip_preservation_enabled: bool?
-                                },
+                                }
                               ],
                               endpoint_group_arn: ::String
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -643,7 +643,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -700,14 +700,14 @@ module Aws
                                                  endpoint_id: ::String?,
                                                  cidr: ::String?,
                                                  region: ::String?
-                                               },
+                                               }
                                              ],
                                              ?remove_resources: Array[
                                                {
                                                  endpoint_id: ::String?,
                                                  cidr: ::String?,
                                                  region: ::String?
-                                               },
+                                               }
                                              ]
                                            ) -> _UpdateCrossAccountAttachmentResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrossAccountAttachmentResponseSuccess
@@ -750,7 +750,7 @@ module Aws
                                               {
                                                 from_port: ::Integer?,
                                                 to_port: ::Integer?
-                                              },
+                                              }
                                             ]
                                           ) -> _UpdateCustomRoutingListenerResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCustomRoutingListenerResponseSuccess
@@ -768,7 +768,7 @@ module Aws
                                        weight: ::Integer?,
                                        client_ip_preservation_enabled: bool?,
                                        attachment_arn: ::String?
-                                     },
+                                     }
                                    ],
                                    ?traffic_dial_percentage: ::Float,
                                    ?health_check_port: ::Integer,
@@ -780,7 +780,7 @@ module Aws
                                      {
                                        listener_port: ::Integer?,
                                        endpoint_port: ::Integer?
-                                     },
+                                     }
                                    ]
                                  ) -> _UpdateEndpointGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEndpointGroupResponseSuccess
@@ -796,7 +796,7 @@ module Aws
                                {
                                  from_port: ::Integer?,
                                  to_port: ::Integer?
-                               },
+                               }
                              ],
                              ?protocol: ("TCP" | "UDP"),
                              ?client_affinity: ("NONE" | "SOURCE_IP")

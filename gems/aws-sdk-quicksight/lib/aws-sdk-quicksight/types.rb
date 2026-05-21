@@ -391,6 +391,20 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # Additional notes that provide supplementary context for a column.
+    #
+    # @!attribute [rw] text
+    #   The additional notes text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/AdditionalNotes AWS API Documentation
+    #
+    class AdditionalNotes < Struct.new(
+      :text)
+      SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
     # The definition of an Agg function.
     #
     # @!attribute [rw] aggregation
@@ -6412,6 +6426,46 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A semantic property for a column.
+    #
+    # @!attribute [rw] description
+    #   A description of the column.
+    #   @return [Types::ColumnDescription]
+    #
+    # @!attribute [rw] additional_notes
+    #   Additional notes for the column.
+    #   @return [Types::AdditionalNotes]
+    #
+    # @!attribute [rw] semantic_type
+    #   The semantic type of the column.
+    #   @return [Types::ColumnSemanticType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnSemanticProperty AWS API Documentation
+    #
+    class ColumnSemanticProperty < Struct.new(
+      :description,
+      :additional_notes,
+      :semantic_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The semantic type information for a column in the new data preparation
+    # experience.
+    #
+    # @!attribute [rw] geographical_role
+    #   The geographical role of the column in the new data preparation
+    #   experience.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/ColumnSemanticType AWS API Documentation
+    #
+    class ColumnSemanticType < Struct.new(
+      :geographical_role)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The sort configuration for a column that is not used in a field well.
     #
     # @!attribute [rw] sort_by
@@ -10065,6 +10119,22 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # A custom instruction that provides guidance on how the dataset should
+    # be consumed.
+    #
+    # @!attribute [rw] inline_custom_instruction
+    #   An inline custom instruction containing text and optional uploaded
+    #   document metadata.
+    #   @return [Types::InlineCustomInstruction]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/CustomInstruction AWS API Documentation
+    #
+    class CustomInstruction < Struct.new(
+      :inline_custom_instruction)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Instructions that provide additional guidance and context for response
     # generation.
     #
@@ -11909,6 +11979,41 @@ module Aws::QuickSight
       :operator,
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A description structure for dataset-level semantic metadata.
+    #
+    # @!attribute [rw] text
+    #   The descriptive text for the dataset.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSemanticDescription AWS API Documentation
+    #
+    class DataSetSemanticDescription < Struct.new(
+      :text)
+      SENSITIVE = [:text]
+      include Aws::Structure
+    end
+
+    # Semantic metadata for a dataset, including a description and custom
+    # instructions.
+    #
+    # @!attribute [rw] description
+    #   A description of the dataset.
+    #   @return [Types::DataSetSemanticDescription]
+    #
+    # @!attribute [rw] custom_instructions
+    #   A list of custom instructions that guide how the dataset should be
+    #   consumed.
+    #   @return [Array<Types::CustomInstruction>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DataSetSemanticMetadata AWS API Documentation
+    #
+    class DataSetSemanticMetadata < Struct.new(
+      :description,
+      :custom_instructions)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24138,6 +24243,27 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # An inline custom instruction with text content and optional file
+    # upload metadata.
+    #
+    # @!attribute [rw] instruction_text
+    #   The instruction text content.
+    #   @return [String]
+    #
+    # @!attribute [rw] uploaded_document_metadata
+    #   Metadata about an uploaded document associated with this
+    #   instruction.
+    #   @return [Types::UploadedDocumentMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/InlineCustomInstruction AWS API Documentation
+    #
+    class InlineCustomInstruction < Struct.new(
+      :instruction_text,
+      :uploaded_document_metadata)
+      SENSITIVE = [:instruction_text]
+      include Aws::Structure
+    end
+
     # The `InnerFilter` defines the subset of data to be used with the
     # `NestedFilter`.
     #
@@ -35284,10 +35410,16 @@ module Aws::QuickSight
     #   A map of semantic tables that define the analytical structure.
     #   @return [Hash<String,Types::SemanticTable>]
     #
+    # @!attribute [rw] semantic_metadata
+    #   The dataset-level semantic metadata, including a description and
+    #   custom instructions.
+    #   @return [Array<Types::DataSetSemanticMetadata>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticModelConfiguration AWS API Documentation
     #
     class SemanticModelConfiguration < Struct.new(
-      :table_map)
+      :table_map,
+      :semantic_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35309,12 +35441,17 @@ module Aws::QuickSight
     #   this semantic table.
     #   @return [Types::RowLevelPermissionConfiguration]
     #
+    # @!attribute [rw] semantic_metadata
+    #   The column-level semantic metadata for this semantic table.
+    #   @return [Types::TableSemanticMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SemanticTable AWS API Documentation
     #
     class SemanticTable < Struct.new(
       :alias,
       :destination_table_id,
-      :row_level_permission_configuration)
+      :row_level_permission_configuration,
+      :semantic_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -35471,6 +35608,25 @@ module Aws::QuickSight
     #
     class ShapeConditionalFormat < Struct.new(
       :background_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Semantic metadata shared across one or more columns.
+    #
+    # @!attribute [rw] column_names
+    #   The names of the columns this metadata applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] column_properties
+    #   The semantic properties for the specified columns.
+    #   @return [Array<Types::ColumnSemanticProperty>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/SharedColumnSemanticMetadata AWS API Documentation
+    #
+    class SharedColumnSemanticMetadata < Struct.new(
+      :column_names,
+      :column_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -38103,6 +38259,20 @@ module Aws::QuickSight
     class TableRowConditionalFormatting < Struct.new(
       :background_color,
       :text_color)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Column-level semantic metadata for a semantic table.
+    #
+    # @!attribute [rw] column_metadata
+    #   A list of column semantic metadata entries.
+    #   @return [Array<Types::SharedColumnSemanticMetadata>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/TableSemanticMetadata AWS API Documentation
+    #
+    class TableSemanticMetadata < Struct.new(
+      :column_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -44899,6 +45069,21 @@ module Aws::QuickSight
       :text_qualifier,
       :delimiter,
       :custom_cell_address_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Metadata for an uploaded document associated with a custom
+    # instruction.
+    #
+    # @!attribute [rw] name
+    #   The name of the uploaded document.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UploadedDocumentMetadata AWS API Documentation
+    #
+    class UploadedDocumentMetadata < Struct.new(
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end

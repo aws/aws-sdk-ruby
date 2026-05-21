@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppIntegrationsService
+    module Params
+      type execution_configuration = {
+      execution_mode: ("ON_DEMAND" | "SCHEDULED"),
+      on_demand_configuration: {
+        start_time: ::String,
+        end_time: ::String?
+      }?,
+      schedule_configuration: {
+        first_execution_from: ::String?,
+        object: ::String?,
+        schedule_expression: ::String
+      }?
+    }
+
+    end
+  end
+end

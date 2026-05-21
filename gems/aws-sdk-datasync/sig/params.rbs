@@ -1,0 +1,104 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataSync
+    module Params
+      type fsx_protocol_smb = {
+      domain: ::String?,
+      mount_options: {
+        version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
+      }?,
+      password: ::String?,
+      user: ::String,
+      managed_secret_config: {
+        secret_arn: ::String?
+      }?,
+      cmk_secret_config: {
+        secret_arn: ::String?,
+        kms_key_arn: ::String?
+      }?,
+      custom_secret_config: {
+        secret_arn: ::String?,
+        secret_access_role_arn: ::String?
+      }?
+    }
+
+      type fsx_protocol = {
+      nfs: {
+        mount_options: {
+          version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+        }?
+      }?,
+      smb: Params::fsx_protocol_smb?
+    }
+
+      type options = {
+      verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
+      overwrite_mode: ("ALWAYS" | "NEVER")?,
+      atime: ("NONE" | "BEST_EFFORT")?,
+      mtime: ("NONE" | "PRESERVE")?,
+      uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+      gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
+      preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
+      preserve_devices: ("NONE" | "PRESERVE")?,
+      posix_permissions: ("NONE" | "PRESERVE")?,
+      bytes_per_second: ::Integer?,
+      task_queueing: ("ENABLED" | "DISABLED")?,
+      log_level: ("OFF" | "BASIC" | "TRANSFER")?,
+      transfer_mode: ("CHANGED" | "ALL")?,
+      security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
+      object_tags: ("PRESERVE" | "NONE")?
+    }
+
+      type source_manifest_config = {
+      s3: {
+        manifest_object_path: ::String,
+        bucket_access_role_arn: ::String,
+        s3_bucket_arn: ::String,
+        manifest_object_version_id: ::String?
+      }
+    }
+
+      type manifest_config = {
+      action: ("TRANSFER")?,
+      format: ("CSV")?,
+      source: Params::source_manifest_config?
+    }
+
+      type report_overrides = {
+      transferred: {
+        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+      }?,
+      verified: {
+        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+      }?,
+      deleted: {
+        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+      }?,
+      skipped: {
+        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
+      }?
+    }
+
+      type task_report_config = {
+      destination: {
+        s3: {
+          subdirectory: ::String?,
+          s3_bucket_arn: ::String,
+          bucket_access_role_arn: ::String
+        }?
+      }?,
+      output_type: ("SUMMARY_ONLY" | "STANDARD")?,
+      report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
+      object_version_ids: ("INCLUDE" | "NONE")?,
+      overrides: Params::report_overrides?
+    }
+
+    end
+  end
+end

@@ -153,7 +153,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> Tag::Collection
                      | (?Hash[Symbol, untyped]) -> Tag::Collection
@@ -165,7 +165,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> Tag::Collection
                      | (?Hash[Symbol, untyped]) -> Tag::Collection
@@ -195,7 +195,7 @@ module Aws
                                     organizational_unit_arn: ::String?,
                                     user_id: ::String?,
                                     group: ("all")?
-                                  },
+                                  }
                                 ]?,
                                 remove: Array[
                                   {
@@ -203,7 +203,7 @@ module Aws
                                     organizational_unit_arn: ::String?,
                                     user_id: ::String?,
                                     group: ("all")?
-                                  },
+                                  }
                                 ]?
                               },
                               ?operation_type: ("add" | "remove"),

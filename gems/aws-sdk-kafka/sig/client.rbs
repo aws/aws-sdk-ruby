@@ -98,104 +98,19 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#create_cluster-instance_method
       def create_cluster: (
-                            broker_node_group_info: {
-                              broker_az_distribution: ("DEFAULT")?,
-                              client_subnets: Array[::String],
-                              instance_type: ::String,
-                              security_groups: Array[::String]?,
-                              storage_info: {
-                                ebs_storage_info: {
-                                  provisioned_throughput: {
-                                    enabled: bool?,
-                                    volume_throughput: ::Integer?
-                                  }?,
-                                  volume_size: ::Integer?
-                                }?
-                              }?,
-                              connectivity_info: {
-                                public_access: {
-                                  type: ::String?
-                                }?,
-                                vpc_connectivity: {
-                                  client_authentication: {
-                                    sasl: {
-                                      scram: {
-                                        enabled: bool?
-                                      }?,
-                                      iam: {
-                                        enabled: bool?
-                                      }?
-                                    }?,
-                                    tls: {
-                                      enabled: bool?
-                                    }?
-                                  }?
-                                }?,
-                                network_type: ("IPV4" | "DUAL")?
-                              }?,
-                              zone_ids: Array[::String]?
-                            },
-                            ?client_authentication: {
-                              sasl: {
-                                scram: {
-                                  enabled: bool?
-                                }?,
-                                iam: {
-                                  enabled: bool?
-                                }?
-                              }?,
-                              tls: {
-                                certificate_authority_arn_list: Array[::String]?,
-                                enabled: bool?
-                              }?,
-                              unauthenticated: {
-                                enabled: bool?
-                              }?
-                            },
+                            broker_node_group_info: Params::broker_node_group_info,
+                            ?client_authentication: Params::client_authentication,
                             cluster_name: ::String,
                             ?configuration_info: {
                               arn: ::String,
                               revision: ::Integer
                             },
-                            ?encryption_info: {
-                              encryption_at_rest: {
-                                data_volume_kms_key_id: ::String
-                              }?,
-                              encryption_in_transit: {
-                                client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
-                                in_cluster: bool?
-                              }?
-                            },
+                            ?encryption_info: Params::encryption_info,
                             ?enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION"),
                             kafka_version: ::String,
-                            ?logging_info: {
-                              broker_logs: {
-                                cloud_watch_logs: {
-                                  enabled: bool,
-                                  log_group: ::String?
-                                }?,
-                                firehose: {
-                                  delivery_stream: ::String?,
-                                  enabled: bool
-                                }?,
-                                s3: {
-                                  bucket: ::String?,
-                                  enabled: bool,
-                                  prefix: ::String?
-                                }?
-                              }
-                            },
+                            ?logging_info: Params::logging_info,
                             number_of_broker_nodes: ::Integer,
-                            ?open_monitoring: {
-                              prometheus: {
-                                jmx_exporter: {
-                                  enabled_in_broker: bool
-                                }?,
-                                node_exporter: {
-                                  enabled_in_broker: bool
-                                }?
-                              }
-                            },
+                            ?open_monitoring: Params::open_monitoring_info,
                             ?tags: Hash[::String, ::String],
                             ?rebalancing: {
                               status: ("PAUSED" | "ACTIVE")
@@ -216,102 +131,17 @@ module Aws
                                cluster_name: ::String,
                                ?tags: Hash[::String, ::String],
                                ?provisioned: {
-                                 broker_node_group_info: {
-                                   broker_az_distribution: ("DEFAULT")?,
-                                   client_subnets: Array[::String],
-                                   instance_type: ::String,
-                                   security_groups: Array[::String]?,
-                                   storage_info: {
-                                     ebs_storage_info: {
-                                       provisioned_throughput: {
-                                         enabled: bool?,
-                                         volume_throughput: ::Integer?
-                                       }?,
-                                       volume_size: ::Integer?
-                                     }?
-                                   }?,
-                                   connectivity_info: {
-                                     public_access: {
-                                       type: ::String?
-                                     }?,
-                                     vpc_connectivity: {
-                                       client_authentication: {
-                                         sasl: {
-                                           scram: {
-                                             enabled: bool?
-                                           }?,
-                                           iam: {
-                                             enabled: bool?
-                                           }?
-                                         }?,
-                                         tls: {
-                                           enabled: bool?
-                                         }?
-                                       }?
-                                     }?,
-                                     network_type: ("IPV4" | "DUAL")?
-                                   }?,
-                                   zone_ids: Array[::String]?
-                                 },
-                                 client_authentication: {
-                                   sasl: {
-                                     scram: {
-                                       enabled: bool?
-                                     }?,
-                                     iam: {
-                                       enabled: bool?
-                                     }?
-                                   }?,
-                                   tls: {
-                                     certificate_authority_arn_list: Array[::String]?,
-                                     enabled: bool?
-                                   }?,
-                                   unauthenticated: {
-                                     enabled: bool?
-                                   }?
-                                 }?,
+                                 broker_node_group_info: Params::broker_node_group_info,
+                                 client_authentication: Params::client_authentication?,
                                  configuration_info: {
                                    arn: ::String,
                                    revision: ::Integer
                                  }?,
-                                 encryption_info: {
-                                   encryption_at_rest: {
-                                     data_volume_kms_key_id: ::String
-                                   }?,
-                                   encryption_in_transit: {
-                                     client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
-                                     in_cluster: bool?
-                                   }?
-                                 }?,
+                                 encryption_info: Params::encryption_info?,
                                  enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")?,
-                                 open_monitoring: {
-                                   prometheus: {
-                                     jmx_exporter: {
-                                       enabled_in_broker: bool
-                                     }?,
-                                     node_exporter: {
-                                       enabled_in_broker: bool
-                                     }?
-                                   }
-                                 }?,
+                                 open_monitoring: Params::open_monitoring_info?,
                                  kafka_version: ::String,
-                                 logging_info: {
-                                   broker_logs: {
-                                     cloud_watch_logs: {
-                                       enabled: bool,
-                                       log_group: ::String?
-                                     }?,
-                                     firehose: {
-                                       delivery_stream: ::String?,
-                                       enabled: bool
-                                     }?,
-                                     s3: {
-                                       bucket: ::String?,
-                                       enabled: bool,
-                                       prefix: ::String?
-                                     }?
-                                   }
-                                 }?,
+                                 logging_info: Params::logging_info?,
                                  number_of_broker_nodes: ::Integer,
                                  storage_mode: ("LOCAL" | "TIERED")?,
                                  rebalancing: {
@@ -323,7 +153,7 @@ module Aws
                                    {
                                      subnet_ids: Array[::String],
                                      security_group_ids: Array[::String]?
-                                   },
+                                   }
                                  ],
                                  client_authentication: {
                                    sasl: {
@@ -385,25 +215,9 @@ module Aws
                                      encryption_type: ("TLS"),
                                      root_ca_certificate: ::String?
                                    }?
-                                 },
+                                 }
                                ],
-                               ?log_delivery: {
-                                 replicator_log_delivery: {
-                                   cloud_watch_logs: {
-                                     enabled: bool,
-                                     log_group: ::String?
-                                   }?,
-                                   firehose: {
-                                     delivery_stream: ::String?,
-                                     enabled: bool
-                                   }?,
-                                   s3: {
-                                     bucket: ::String?,
-                                     enabled: bool,
-                                     prefix: ::String?
-                                   }?
-                                 }?
-                               },
+                               ?log_delivery: Params::log_delivery,
                                replication_info_list: Array[
                                  {
                                    consumer_group_replication: {
@@ -431,7 +245,7 @@ module Aws
                                      topics_to_exclude: Array[::String]?,
                                      topics_to_replicate: Array[::String]
                                    }
-                                 },
+                                 }
                                ],
                                replicator_name: ::String,
                                service_execution_role_arn: ::String,
@@ -1012,7 +826,7 @@ module Aws
                                          volume_throughput: ::Integer?
                                        }?,
                                        volume_size_gb: ::Integer?
-                                     },
+                                     }
                                    ]
                                  ) -> _UpdateBrokerStorageResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBrokerStorageResponseSuccess
@@ -1071,27 +885,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_connectivity-instance_method
       def update_connectivity: (
                                  cluster_arn: ::String,
-                                 ?connectivity_info: {
-                                   public_access: {
-                                     type: ::String?
-                                   }?,
-                                   vpc_connectivity: {
-                                     client_authentication: {
-                                       sasl: {
-                                         scram: {
-                                           enabled: bool?
-                                         }?,
-                                         iam: {
-                                           enabled: bool?
-                                         }?
-                                       }?,
-                                       tls: {
-                                         enabled: bool?
-                                       }?
-                                     }?
-                                   }?,
-                                   network_type: ("IPV4" | "DUAL")?
-                                 },
+                                 ?connectivity_info: Params::connectivity_info,
                                  current_version: ::String,
                                  ?zookeeper_access: {
                                    enabled: bool?
@@ -1109,33 +903,8 @@ module Aws
                                cluster_arn: ::String,
                                current_version: ::String,
                                ?enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION"),
-                               ?open_monitoring: {
-                                 prometheus: {
-                                   jmx_exporter: {
-                                     enabled_in_broker: bool
-                                   }?,
-                                   node_exporter: {
-                                     enabled_in_broker: bool
-                                   }?
-                                 }
-                               },
-                               ?logging_info: {
-                                 broker_logs: {
-                                   cloud_watch_logs: {
-                                     enabled: bool,
-                                     log_group: ::String?
-                                   }?,
-                                   firehose: {
-                                     delivery_stream: ::String?,
-                                     enabled: bool
-                                   }?,
-                                   s3: {
-                                     bucket: ::String?,
-                                     enabled: bool,
-                                     prefix: ::String?
-                                   }?
-                                 }
-                               }
+                               ?open_monitoring: Params::open_monitoring_info,
+                               ?logging_info: Params::logging_info
                              ) -> _UpdateMonitoringResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMonitoringResponseSuccess
 
@@ -1168,23 +937,7 @@ module Aws
                                        synchronise_consumer_group_offsets: bool
                                      },
                                      current_version: ::String,
-                                     ?log_delivery: {
-                                       replicator_log_delivery: {
-                                         cloud_watch_logs: {
-                                           enabled: bool,
-                                           log_group: ::String?
-                                         }?,
-                                         firehose: {
-                                           delivery_stream: ::String?,
-                                           enabled: bool
-                                         }?,
-                                         s3: {
-                                           bucket: ::String?,
-                                           enabled: bool,
-                                           prefix: ::String?
-                                         }?
-                                       }?
-                                     },
+                                     ?log_delivery: Params::log_delivery,
                                      replicator_arn: ::String,
                                      ?source_kafka_cluster_arn: ::String,
                                      ?source_kafka_cluster_id: ::String,
@@ -1207,34 +960,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Kafka/Client.html#update_security-instance_method
       def update_security: (
-                             ?client_authentication: {
-                               sasl: {
-                                 scram: {
-                                   enabled: bool?
-                                 }?,
-                                 iam: {
-                                   enabled: bool?
-                                 }?
-                               }?,
-                               tls: {
-                                 certificate_authority_arn_list: Array[::String]?,
-                                 enabled: bool?
-                               }?,
-                               unauthenticated: {
-                                 enabled: bool?
-                               }?
-                             },
+                             ?client_authentication: Params::client_authentication,
                              cluster_arn: ::String,
                              current_version: ::String,
-                             ?encryption_info: {
-                               encryption_at_rest: {
-                                 data_volume_kms_key_id: ::String
-                               }?,
-                               encryption_in_transit: {
-                                 client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
-                                 in_cluster: bool?
-                               }?
-                             }
+                             ?encryption_info: Params::encryption_info
                            ) -> _UpdateSecurityResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSecurityResponseSuccess
 

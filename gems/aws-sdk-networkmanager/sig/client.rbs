@@ -156,7 +156,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ],
                                        ?client_token: ::String
                                      ) -> _CreateConnectAttachmentResponseSuccess
@@ -179,7 +179,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?client_token: ::String,
                                  ?subnet_arn: ::String
@@ -202,7 +202,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
@@ -219,7 +219,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?policy_document: ::String,
                                  ?client_token: ::String
@@ -267,7 +267,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _CreateDeviceResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceResponseSuccess
@@ -286,7 +286,7 @@ module Aws
                                                         {
                                                           key: ::String?,
                                                           value: ::String?
-                                                        },
+                                                        }
                                                       ],
                                                       ?client_token: ::String
                                                     ) -> _CreateDirectConnectGatewayAttachmentResponseSuccess
@@ -303,7 +303,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateGlobalNetworkResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalNetworkResponseSuccess
@@ -327,7 +327,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> _CreateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
@@ -349,7 +349,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> _CreateSiteResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSiteResponseSuccess
@@ -367,7 +367,7 @@ module Aws
                                                   {
                                                     key: ::String?,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ],
                                                 ?client_token: ::String
                                               ) -> _CreateSiteToSiteVpnAttachmentResponseSuccess
@@ -385,7 +385,7 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 value: ::String?
-                                              },
+                                              }
                                             ],
                                             ?client_token: ::String
                                           ) -> _CreateTransitGatewayPeeringResponseSuccess
@@ -404,7 +404,7 @@ module Aws
                                                              {
                                                                key: ::String?,
                                                                value: ::String?
-                                                             },
+                                                             }
                                                            ],
                                                            ?client_token: ::String
                                                          ) -> _CreateTransitGatewayRouteTableAttachmentResponseSuccess
@@ -430,7 +430,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ],
                                    ?client_token: ::String
                                  ) -> _CreateVpcAttachmentResponseSuccess
@@ -1285,7 +1285,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

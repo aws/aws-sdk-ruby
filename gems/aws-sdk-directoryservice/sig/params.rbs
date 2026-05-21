@@ -1,0 +1,25 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DirectoryService
+    module Params
+      type radius_settings = {
+      radius_servers: Array[::String]?,
+      radius_servers_ipv_6: Array[::String]?,
+      radius_port: ::Integer?,
+      radius_timeout: ::Integer?,
+      radius_retries: ::Integer?,
+      shared_secret: ::String?,
+      authentication_protocol: ("PAP" | "CHAP" | "MS-CHAPv1" | "MS-CHAPv2")?,
+      display_label: ::String?,
+      use_same_username: bool?
+    }
+
+    end
+  end
+end

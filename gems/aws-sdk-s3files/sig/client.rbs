@@ -98,7 +98,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  file_system_id: ::String,
                                  ?posix_user: {
@@ -144,7 +144,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 ?accept_bucket_warning: bool
                               ) -> _CreateFileSystemResponseSuccess
@@ -361,12 +361,12 @@ module Aws
                                                    prefix: ::String,
                                                    trigger: ("ON_DIRECTORY_FIRST_ACCESS" | "ON_FILE_ACCESS"),
                                                    size_less_than: ::Integer
-                                                 },
+                                                 }
                                                ],
                                                expiration_data_rules: Array[
                                                  {
                                                    days_after_last_access: ::Integer
-                                                 },
+                                                 }
                                                ]
                                              ) -> _PutSynchronizationConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSynchronizationConfigurationResponseSuccess
@@ -378,7 +378,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

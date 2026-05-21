@@ -88,45 +88,8 @@ module Aws
       def decrypt_data: (
                           key_identifier: ::String,
                           cipher_text: ::String,
-                          decryption_attributes: {
-                            symmetric: {
-                              mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
-                              initialization_vector: ::String?,
-                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                            }?,
-                            asymmetric: {
-                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                            }?,
-                            dukpt: {
-                              key_serial_number: ::String,
-                              mode: ("ECB" | "CBC")?,
-                              dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
-                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
-                              initialization_vector: ::String?
-                            }?,
-                            emv: {
-                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
-                              primary_account_number: ::String,
-                              pan_sequence_number: ::String,
-                              session_derivation_data: ::String,
-                              mode: ("ECB" | "CBC")?,
-                              initialization_vector: ::String?
-                            }?
-                          },
-                          ?wrapped_key: {
-                            wrapped_key_material: {
-                              tr_31_key_block: ::String?,
-                              diffie_hellman_symmetric_key: {
-                                certificate_authority_public_key_identifier: ::String,
-                                public_key_certificate: ::String,
-                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                shared_information: ::String
-                              }?
-                            },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                          }
+                          decryption_attributes: Params::encryption_decryption_attributes,
+                          ?wrapped_key: Params::wrapped_key
                         ) -> _DecryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DecryptDataResponseSuccess
 
@@ -140,45 +103,8 @@ module Aws
       def encrypt_data: (
                           key_identifier: ::String,
                           plain_text: ::String,
-                          encryption_attributes: {
-                            symmetric: {
-                              mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
-                              initialization_vector: ::String?,
-                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                            }?,
-                            asymmetric: {
-                              padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                            }?,
-                            dukpt: {
-                              key_serial_number: ::String,
-                              mode: ("ECB" | "CBC")?,
-                              dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
-                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
-                              initialization_vector: ::String?
-                            }?,
-                            emv: {
-                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
-                              primary_account_number: ::String,
-                              pan_sequence_number: ::String,
-                              session_derivation_data: ::String,
-                              mode: ("ECB" | "CBC")?,
-                              initialization_vector: ::String?
-                            }?
-                          },
-                          ?wrapped_key: {
-                            wrapped_key_material: {
-                              tr_31_key_block: ::String?,
-                              diffie_hellman_symmetric_key: {
-                                certificate_authority_public_key_identifier: ::String,
-                                public_key_certificate: ::String,
-                                key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                shared_information: ::String
-                              }?
-                            },
-                            key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                          }
+                          encryption_attributes: Params::encryption_decryption_attributes,
+                          ?wrapped_key: Params::wrapped_key
                         ) -> _EncryptDataResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EncryptDataResponseSuccess
 
@@ -194,7 +120,8 @@ module Aws
                                              key_identifier: ::String,
                                              kek_validation_type: {
                                                kek_validation_request: {
-                                                 derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
+                                                 derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
+                                                 random_key_max_length: ("BYTES_8" | "BYTES_16" | "BYTES_24")?
                                                }?,
                                                kek_validation_response: {
                                                  random_key_send: ::String
@@ -203,6 +130,21 @@ module Aws
                                              random_key_send_variant_mask: ("VARIANT_MASK_82C0" | "VARIANT_MASK_82")
                                            ) -> _GenerateAs2805KekValidationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateAs2805KekValidationResponseSuccess
+
+      interface _GenerateAuthRequestCryptogramResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GenerateAuthRequestCryptogramOutput]
+        def key_arn: () -> ::String
+        def key_check_value: () -> ::String
+        def auth_request_cryptogram: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PaymentCryptographyData/Client.html#generate_auth_request_cryptogram-instance_method
+      def generate_auth_request_cryptogram: (
+                                              key_identifier: ::String,
+                                              transaction_data: ::String,
+                                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+                                              session_key_derivation_attributes: Params::session_key_derivation
+                                            ) -> _GenerateAuthRequestCryptogramResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateAuthRequestCryptogramResponseSuccess
 
       interface _GenerateCardValidationDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GenerateCardValidationDataOutput]
@@ -261,34 +203,7 @@ module Aws
       def generate_mac: (
                           key_identifier: ::String,
                           message_data: ::String,
-                          generation_attributes: {
-                            algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")?,
-                            emv_mac: {
-                              major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
-                              primary_account_number: ::String,
-                              pan_sequence_number: ::String,
-                              session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
-                              session_key_derivation_value: {
-                                application_cryptogram: ::String?,
-                                application_transaction_counter: ::String?
-                              }
-                            }?,
-                            dukpt_iso_9797_algorithm_1: {
-                              key_serial_number: ::String,
-                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                            }?,
-                            dukpt_iso_9797_algorithm_3: {
-                              key_serial_number: ::String,
-                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                            }?,
-                            dukpt_cmac: {
-                              key_serial_number: ::String,
-                              dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                              dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                            }?
-                          },
+                          generation_attributes: Params::mac_attributes,
                           ?mac_length: ::Integer
                         ) -> _GenerateMacResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GenerateMacResponseSuccess
@@ -408,20 +323,7 @@ module Aws
                                ?pin_data_length: ::Integer,
                                ?primary_account_number: ::String,
                                pin_block_format: ("ISO_FORMAT_0" | "ISO_FORMAT_1" | "ISO_FORMAT_3" | "ISO_FORMAT_4"),
-                               ?encryption_wrapped_key: {
-                                 wrapped_key_material: {
-                                   tr_31_key_block: ::String?,
-                                   diffie_hellman_symmetric_key: {
-                                     certificate_authority_public_key_identifier: ::String,
-                                     public_key_certificate: ::String,
-                                     key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                     key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                     key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                     shared_information: ::String
-                                   }?
-                                 },
-                                 key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                               }
+                               ?encryption_wrapped_key: Params::wrapped_key
                              ) -> _GeneratePinDataResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GeneratePinDataResponseSuccess
 
@@ -436,62 +338,10 @@ module Aws
                              incoming_key_identifier: ::String,
                              outgoing_key_identifier: ::String,
                              cipher_text: ::String,
-                             incoming_encryption_attributes: {
-                               symmetric: {
-                                 mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
-                                 initialization_vector: ::String?,
-                                 padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                               }?,
-                               dukpt: {
-                                 key_serial_number: ::String,
-                                 mode: ("ECB" | "CBC")?,
-                                 dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
-                                 dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
-                                 initialization_vector: ::String?
-                               }?
-                             },
-                             outgoing_encryption_attributes: {
-                               symmetric: {
-                                 mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
-                                 initialization_vector: ::String?,
-                                 padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
-                               }?,
-                               dukpt: {
-                                 key_serial_number: ::String,
-                                 mode: ("ECB" | "CBC")?,
-                                 dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
-                                 dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
-                                 initialization_vector: ::String?
-                               }?
-                             },
-                             ?incoming_wrapped_key: {
-                               wrapped_key_material: {
-                                 tr_31_key_block: ::String?,
-                                 diffie_hellman_symmetric_key: {
-                                   certificate_authority_public_key_identifier: ::String,
-                                   public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                   shared_information: ::String
-                                 }?
-                               },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                             },
-                             ?outgoing_wrapped_key: {
-                               wrapped_key_material: {
-                                 tr_31_key_block: ::String?,
-                                 diffie_hellman_symmetric_key: {
-                                   certificate_authority_public_key_identifier: ::String,
-                                   public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                   shared_information: ::String
-                                 }?
-                               },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                             }
+                             incoming_encryption_attributes: Params::re_encryption_attributes,
+                             outgoing_encryption_attributes: Params::re_encryption_attributes,
+                             ?incoming_wrapped_key: Params::wrapped_key,
+                             ?outgoing_wrapped_key: Params::wrapped_key
                            ) -> _ReEncryptDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReEncryptDataResponseSuccess
 
@@ -534,38 +384,8 @@ module Aws
       def translate_pin_data: (
                                 incoming_key_identifier: ::String,
                                 outgoing_key_identifier: ::String,
-                                incoming_translation_attributes: {
-                                  iso_format_0: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  iso_format_1: {
-                                  }?,
-                                  iso_format_3: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  iso_format_4: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  as_2805_format_0: {
-                                    primary_account_number: ::String
-                                  }?
-                                },
-                                outgoing_translation_attributes: {
-                                  iso_format_0: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  iso_format_1: {
-                                  }?,
-                                  iso_format_3: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  iso_format_4: {
-                                    primary_account_number: ::String
-                                  }?,
-                                  as_2805_format_0: {
-                                    primary_account_number: ::String
-                                  }?
-                                },
+                                incoming_translation_attributes: Params::translation_iso_formats,
+                                outgoing_translation_attributes: Params::translation_iso_formats,
                                 encrypted_pin_block: ::String,
                                 ?incoming_dukpt_attributes: {
                                   key_serial_number: ::String,
@@ -577,34 +397,8 @@ module Aws
                                   dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
                                   dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?
                                 },
-                                ?incoming_wrapped_key: {
-                                  wrapped_key_material: {
-                                    tr_31_key_block: ::String?,
-                                    diffie_hellman_symmetric_key: {
-                                      certificate_authority_public_key_identifier: ::String,
-                                      public_key_certificate: ::String,
-                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                      shared_information: ::String
-                                    }?
-                                  },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                                },
-                                ?outgoing_wrapped_key: {
-                                  wrapped_key_material: {
-                                    tr_31_key_block: ::String?,
-                                    diffie_hellman_symmetric_key: {
-                                      certificate_authority_public_key_identifier: ::String,
-                                      public_key_certificate: ::String,
-                                      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                      shared_information: ::String
-                                    }?
-                                  },
-                                  key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                                },
+                                ?incoming_wrapped_key: Params::wrapped_key,
+                                ?outgoing_wrapped_key: Params::wrapped_key,
                                 ?incoming_as_2805_attributes: {
                                   system_trace_audit_number: ::String,
                                   transaction_amount: ::String
@@ -624,32 +418,7 @@ module Aws
                                             transaction_data: ::String,
                                             auth_request_cryptogram: ::String,
                                             major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
-                                            session_key_derivation_attributes: {
-                                              emv_common: {
-                                                primary_account_number: ::String,
-                                                pan_sequence_number: ::String,
-                                                application_transaction_counter: ::String
-                                              }?,
-                                              mastercard: {
-                                                primary_account_number: ::String,
-                                                pan_sequence_number: ::String,
-                                                application_transaction_counter: ::String,
-                                                unpredictable_number: ::String
-                                              }?,
-                                              emv_2000: {
-                                                primary_account_number: ::String,
-                                                pan_sequence_number: ::String,
-                                                application_transaction_counter: ::String
-                                              }?,
-                                              amex: {
-                                                primary_account_number: ::String,
-                                                pan_sequence_number: ::String
-                                              }?,
-                                              visa: {
-                                                primary_account_number: ::String,
-                                                pan_sequence_number: ::String
-                                              }?
-                                            },
+                                            session_key_derivation_attributes: Params::session_key_derivation,
                                             ?auth_response_attributes: {
                                               arpc_method_1: {
                                                 auth_response_code: ::String
@@ -723,34 +492,7 @@ module Aws
                         key_identifier: ::String,
                         message_data: ::String,
                         mac: ::String,
-                        verification_attributes: {
-                          algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")?,
-                          emv_mac: {
-                            major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
-                            primary_account_number: ::String,
-                            pan_sequence_number: ::String,
-                            session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
-                            session_key_derivation_value: {
-                              application_cryptogram: ::String?,
-                              application_transaction_counter: ::String?
-                            }
-                          }?,
-                          dukpt_iso_9797_algorithm_1: {
-                            key_serial_number: ::String,
-                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                          }?,
-                          dukpt_iso_9797_algorithm_3: {
-                            key_serial_number: ::String,
-                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                          }?,
-                          dukpt_cmac: {
-                            key_serial_number: ::String,
-                            dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
-                            dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
-                          }?
-                        },
+                        verification_attributes: Params::mac_attributes,
                         ?mac_length: ::Integer
                       ) -> _VerifyMacResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyMacResponseSuccess
@@ -786,20 +528,7 @@ module Aws
                                key_serial_number: ::String,
                                dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")
                              },
-                             ?encryption_wrapped_key: {
-                               wrapped_key_material: {
-                                 tr_31_key_block: ::String?,
-                                 diffie_hellman_symmetric_key: {
-                                   certificate_authority_public_key_identifier: ::String,
-                                   public_key_certificate: ::String,
-                                   key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
-                                   key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
-                                   key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
-                                   shared_information: ::String
-                                 }?
-                               },
-                               key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
-                             }
+                             ?encryption_wrapped_key: Params::wrapped_key
                            ) -> _VerifyPinDataResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _VerifyPinDataResponseSuccess
     end

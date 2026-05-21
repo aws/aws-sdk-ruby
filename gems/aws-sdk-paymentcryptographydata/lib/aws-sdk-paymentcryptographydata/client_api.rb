@@ -65,6 +65,8 @@ module Aws::PaymentCryptographyData
     EncryptionMode = Shapes::StringShape.new(name: 'EncryptionMode')
     GenerateAs2805KekValidationInput = Shapes::StructureShape.new(name: 'GenerateAs2805KekValidationInput')
     GenerateAs2805KekValidationOutput = Shapes::StructureShape.new(name: 'GenerateAs2805KekValidationOutput')
+    GenerateAuthRequestCryptogramInput = Shapes::StructureShape.new(name: 'GenerateAuthRequestCryptogramInput')
+    GenerateAuthRequestCryptogramOutput = Shapes::StructureShape.new(name: 'GenerateAuthRequestCryptogramOutput')
     GenerateCardValidationDataInput = Shapes::StructureShape.new(name: 'GenerateCardValidationDataInput')
     GenerateCardValidationDataOutput = Shapes::StructureShape.new(name: 'GenerateCardValidationDataOutput')
     GenerateMacEmvPinChangeInput = Shapes::StructureShape.new(name: 'GenerateMacEmvPinChangeInput')
@@ -91,7 +93,7 @@ module Aws::PaymentCryptographyData
     IntegerRangeBetween0And6 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween0And6')
     IntegerRangeBetween3And5Type = Shapes::IntegerShape.new(name: 'IntegerRangeBetween3And5Type')
     IntegerRangeBetween4And12 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And12')
-    IntegerRangeBetween4And16 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And16')
+    IntegerRangeBetween4And32 = Shapes::IntegerShape.new(name: 'IntegerRangeBetween4And32')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
     KekValidationRequest = Shapes::StructureShape.new(name: 'KekValidationRequest')
     KekValidationResponse = Shapes::StructureShape.new(name: 'KekValidationResponse')
@@ -130,6 +132,7 @@ module Aws::PaymentCryptographyData
     PlainTextType = Shapes::StringShape.new(name: 'PlainTextType')
     PrimaryAccountNumberType = Shapes::StringShape.new(name: 'PrimaryAccountNumberType')
     ProprietaryAuthenticationDataType = Shapes::StringShape.new(name: 'ProprietaryAuthenticationDataType')
+    RandomKeyMaxLength = Shapes::StringShape.new(name: 'RandomKeyMaxLength')
     RandomKeySendVariantMask = Shapes::StringShape.new(name: 'RandomKeySendVariantMask')
     ReEncryptDataInput = Shapes::StructureShape.new(name: 'ReEncryptDataInput')
     ReEncryptDataOutput = Shapes::StructureShape.new(name: 'ReEncryptDataOutput')
@@ -419,6 +422,17 @@ module Aws::PaymentCryptographyData
     GenerateAs2805KekValidationOutput.add_member(:random_key_receive, Shapes::ShapeRef.new(shape: As2805RandomKeyMaterial, required: true, location_name: "RandomKeyReceive"))
     GenerateAs2805KekValidationOutput.struct_class = Types::GenerateAs2805KekValidationOutput
 
+    GenerateAuthRequestCryptogramInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
+    GenerateAuthRequestCryptogramInput.add_member(:transaction_data, Shapes::ShapeRef.new(shape: TransactionDataType, required: true, location_name: "TransactionData"))
+    GenerateAuthRequestCryptogramInput.add_member(:major_key_derivation_mode, Shapes::ShapeRef.new(shape: MajorKeyDerivationMode, required: true, location_name: "MajorKeyDerivationMode"))
+    GenerateAuthRequestCryptogramInput.add_member(:session_key_derivation_attributes, Shapes::ShapeRef.new(shape: SessionKeyDerivation, required: true, location_name: "SessionKeyDerivationAttributes"))
+    GenerateAuthRequestCryptogramInput.struct_class = Types::GenerateAuthRequestCryptogramInput
+
+    GenerateAuthRequestCryptogramOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
+    GenerateAuthRequestCryptogramOutput.add_member(:key_check_value, Shapes::ShapeRef.new(shape: KeyCheckValue, required: true, location_name: "KeyCheckValue"))
+    GenerateAuthRequestCryptogramOutput.add_member(:auth_request_cryptogram, Shapes::ShapeRef.new(shape: AuthRequestCryptogramType, required: true, location_name: "AuthRequestCryptogram"))
+    GenerateAuthRequestCryptogramOutput.struct_class = Types::GenerateAuthRequestCryptogramOutput
+
     GenerateCardValidationDataInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GenerateCardValidationDataInput.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     GenerateCardValidationDataInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: CardGenerationAttributes, required: true, location_name: "GenerationAttributes"))
@@ -453,7 +467,7 @@ module Aws::PaymentCryptographyData
     GenerateMacInput.add_member(:key_identifier, Shapes::ShapeRef.new(shape: KeyArnOrKeyAliasType, required: true, location_name: "KeyIdentifier"))
     GenerateMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: MessageDataType, required: true, location_name: "MessageData"))
     GenerateMacInput.add_member(:generation_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "GenerationAttributes"))
-    GenerateMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
+    GenerateMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And32, location_name: "MacLength"))
     GenerateMacInput.struct_class = Types::GenerateMacInput
 
     GenerateMacOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -526,6 +540,7 @@ module Aws::PaymentCryptographyData
     InternalServerException.struct_class = Types::InternalServerException
 
     KekValidationRequest.add_member(:derive_key_algorithm, Shapes::ShapeRef.new(shape: SymmetricKeyAlgorithm, required: true, location_name: "DeriveKeyAlgorithm"))
+    KekValidationRequest.add_member(:random_key_max_length, Shapes::ShapeRef.new(shape: RandomKeyMaxLength, location_name: "RandomKeyMaxLength"))
     KekValidationRequest.struct_class = Types::KekValidationRequest
 
     KekValidationResponse.add_member(:random_key_send, Shapes::ShapeRef.new(shape: As2805RandomKeyMaterial, required: true, location_name: "RandomKeySend"))
@@ -668,7 +683,7 @@ module Aws::PaymentCryptographyData
     SessionKeyMastercard.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
     SessionKeyMastercard.add_member(:pan_sequence_number, Shapes::ShapeRef.new(shape: NumberLengthEquals2, required: true, location_name: "PanSequenceNumber"))
     SessionKeyMastercard.add_member(:application_transaction_counter, Shapes::ShapeRef.new(shape: HexLengthEquals4, required: true, location_name: "ApplicationTransactionCounter"))
-    SessionKeyMastercard.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthBetween2And8, required: true, location_name: "UnpredictableNumber"))
+    SessionKeyMastercard.add_member(:unpredictable_number, Shapes::ShapeRef.new(shape: HexLengthEquals8, required: true, location_name: "UnpredictableNumber"))
     SessionKeyMastercard.struct_class = Types::SessionKeyMastercard
 
     SessionKeyVisa.add_member(:primary_account_number, Shapes::ShapeRef.new(shape: PrimaryAccountNumberType, required: true, location_name: "PrimaryAccountNumber"))
@@ -771,7 +786,7 @@ module Aws::PaymentCryptographyData
     VerifyMacInput.add_member(:message_data, Shapes::ShapeRef.new(shape: MessageDataType, required: true, location_name: "MessageData"))
     VerifyMacInput.add_member(:mac, Shapes::ShapeRef.new(shape: MacType, required: true, location_name: "Mac"))
     VerifyMacInput.add_member(:verification_attributes, Shapes::ShapeRef.new(shape: MacAttributes, required: true, location_name: "VerificationAttributes"))
-    VerifyMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And16, location_name: "MacLength"))
+    VerifyMacInput.add_member(:mac_length, Shapes::ShapeRef.new(shape: IntegerRangeBetween4And32, location_name: "MacLength"))
     VerifyMacInput.struct_class = Types::VerifyMacInput
 
     VerifyMacOutput.add_member(:key_arn, Shapes::ShapeRef.new(shape: KeyArn, required: true, location_name: "KeyArn"))
@@ -888,6 +903,19 @@ module Aws::PaymentCryptographyData
         o.http_request_uri = "/as2805kekvalidation/generate"
         o.input = Shapes::ShapeRef.new(shape: GenerateAs2805KekValidationInput)
         o.output = Shapes::ShapeRef.new(shape: GenerateAs2805KekValidationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:generate_auth_request_cryptogram, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GenerateAuthRequestCryptogram"
+        o.http_method = "POST"
+        o.http_request_uri = "/cryptogram/generate"
+        o.input = Shapes::ShapeRef.new(shape: GenerateAuthRequestCryptogramInput)
+        o.output = Shapes::ShapeRef.new(shape: GenerateAuthRequestCryptogramOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)

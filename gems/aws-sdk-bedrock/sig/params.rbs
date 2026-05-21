@@ -1,0 +1,499 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Bedrock
+    module Params
+      type automated_reasoning_policy_definition = {
+      version: ::String?,
+      types: Array[
+        Params::automated_reasoning_policy_definition_type
+      ]?,
+      rules: Array[
+        {
+          id: ::String,
+          expression: ::String,
+          alternate_expression: ::String?
+        }
+      ]?,
+      variables: Array[
+        {
+          name: ::String,
+          type: ::String,
+          description: ::String
+        }
+      ]?
+    }
+
+      type automated_reasoning_policy_definition_type = {
+      name: ::String,
+      description: ::String?,
+      values: Array[
+        {
+          value: ::String,
+          description: ::String?
+        }
+      ]
+    }
+
+      type evaluation_dataset_metric_config = {
+      task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom"),
+      dataset: {
+        name: ::String,
+        dataset_location: {
+          s3_uri: ::String?
+        }?
+      },
+      metric_names: Array[::String]
+    }
+
+      type retrieval_filter = {
+      equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      not_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      greater_than: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      greater_than_or_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      less_than: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      less_than_or_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      in: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      not_in: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      starts_with: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      list_contains: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      string_contains: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      and_all: Array[
+        {
+          equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          starts_with: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          list_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          string_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          and_all: untyped?,
+          or_all: untyped?
+        }
+      ]?,
+      or_all: Array[
+        {
+          equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          starts_with: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          list_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          string_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          and_all: untyped?,
+          or_all: untyped?
+        }
+      ]?
+    }
+
+      type implicit_filter_configuration = {
+      metadata_attributes: Array[
+        {
+          key: ::String,
+          type: ("STRING" | "NUMBER" | "BOOLEAN" | "STRING_LIST"),
+          description: ::String
+        }
+      ],
+      model_arn: ::String
+    }
+
+      type reranking_metadata_selective_mode_configuration = {
+      fields_to_include: Array[
+        {
+          field_name: ::String
+        }
+      ]?,
+      fields_to_exclude: Array[
+        {
+          field_name: ::String
+        }
+      ]?
+    }
+
+      type metadata_configuration_for_reranking = {
+      selection_mode: ("SELECTIVE" | "ALL"),
+      selective_mode_configuration: Params::reranking_metadata_selective_mode_configuration?
+    }
+
+      type vector_search_bedrock_reranking_configuration = {
+      model_configuration: {
+        model_arn: ::String,
+        additional_model_request_fields: Hash[::String, {
+          }]?
+      },
+      number_of_reranked_results: ::Integer?,
+      metadata_configuration: Params::metadata_configuration_for_reranking?
+    }
+
+      type vector_search_reranking_configuration = {
+      type: ("BEDROCK_RERANKING_MODEL"),
+      bedrock_reranking_configuration: Params::vector_search_bedrock_reranking_configuration?
+    }
+
+      type knowledge_base_vector_search_configuration = {
+      number_of_results: ::Integer?,
+      override_search_type: ("HYBRID" | "SEMANTIC")?,
+      filter: Params::retrieval_filter?,
+      implicit_filter_configuration: Params::implicit_filter_configuration?,
+      reranking_configuration: Params::vector_search_reranking_configuration?
+    }
+
+      type knowledge_base_retrieval_configuration = {
+      vector_search_configuration: Params::knowledge_base_vector_search_configuration
+    }
+
+      type kb_inference_config = {
+      text_inference_config: {
+        temperature: ::Float?,
+        top_p: ::Float?,
+        max_tokens: ::Integer?,
+        stop_sequences: Array[::String]?
+      }?
+    }
+
+      type guardrail_topic_policy_config = {
+      topics_config: Array[
+        Params::guardrail_topic_config
+      ],
+      tier_config: {
+        tier_name: ("CLASSIC" | "STANDARD")
+      }?
+    }
+
+      type guardrail_topic_config = {
+      name: ::String,
+      definition: ::String,
+      examples: Array[::String]?,
+      type: ("DENY"),
+      input_action: ("BLOCK" | "NONE")?,
+      output_action: ("BLOCK" | "NONE")?,
+      input_enabled: bool?,
+      output_enabled: bool?
+    }
+
+      type guardrail_content_policy_config = {
+      filters_config: Array[
+        Params::guardrail_content_filter_config
+      ],
+      tier_config: {
+        tier_name: ("CLASSIC" | "STANDARD")
+      }?
+    }
+
+      type guardrail_content_filter_config = {
+      type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
+      input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
+      output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
+      input_modalities: Array[("TEXT" | "IMAGE")]?,
+      output_modalities: Array[("TEXT" | "IMAGE")]?,
+      input_action: ("BLOCK" | "NONE")?,
+      output_action: ("BLOCK" | "NONE")?,
+      input_enabled: bool?,
+      output_enabled: bool?
+    }
+
+      type guardrail_word_policy_config = {
+      words_config: Array[
+        {
+          text: ::String,
+          input_action: ("BLOCK" | "NONE")?,
+          output_action: ("BLOCK" | "NONE")?,
+          input_enabled: bool?,
+          output_enabled: bool?
+        }
+      ]?,
+      managed_word_lists_config: Array[
+        {
+          type: ("PROFANITY"),
+          input_action: ("BLOCK" | "NONE")?,
+          output_action: ("BLOCK" | "NONE")?,
+          input_enabled: bool?,
+          output_enabled: bool?
+        }
+      ]?
+    }
+
+      type guardrail_sensitive_information_policy_config = {
+      pii_entities_config: Array[
+        Params::guardrail_pii_entity_config
+      ]?,
+      regexes_config: Array[
+        Params::guardrail_regex_config
+      ]?
+    }
+
+      type guardrail_pii_entity_config = {
+      type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
+      action: ("BLOCK" | "ANONYMIZE" | "NONE"),
+      input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
+      output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
+      input_enabled: bool?,
+      output_enabled: bool?
+    }
+
+      type guardrail_regex_config = {
+      name: ::String,
+      description: ::String?,
+      pattern: ::String,
+      action: ("BLOCK" | "ANONYMIZE" | "NONE"),
+      input_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
+      output_action: ("BLOCK" | "ANONYMIZE" | "NONE")?,
+      input_enabled: bool?,
+      output_enabled: bool?
+    }
+
+      type guardrail_contextual_grounding_policy_config = {
+      filters_config: Array[
+        {
+          type: ("GROUNDING" | "RELEVANCE"),
+          threshold: ::Float,
+          action: ("BLOCK" | "NONE")?,
+          enabled: bool?
+        }
+      ]
+    }
+
+      type sage_maker_endpoint = {
+      initial_instance_count: ::Integer,
+      instance_type: ::String,
+      execution_role: ::String,
+      kms_encryption_key: ::String?,
+      vpc: {
+        subnet_ids: Array[::String],
+        security_group_ids: Array[::String]
+      }?
+    }
+
+      type endpoint_config = {
+      sage_maker: Params::sage_maker_endpoint?
+    }
+
+      type automated_reasoning_policy_add_type_annotation = {
+      name: ::String,
+      description: ::String,
+      values: Array[
+        {
+          value: ::String,
+          description: ::String?
+        }
+      ]
+    }
+
+      type automated_reasoning_policy_update_type_annotation = {
+      name: ::String,
+      new_name: ::String?,
+      description: ::String?,
+      values: Array[
+        Params::automated_reasoning_policy_type_value_annotation
+      ]
+    }
+
+      type automated_reasoning_policy_annotation = {
+      add_type: Params::automated_reasoning_policy_add_type_annotation?,
+      update_type: Params::automated_reasoning_policy_update_type_annotation?,
+      delete_type: {
+        name: ::String
+      }?,
+      add_variable: {
+        name: ::String,
+        type: ::String,
+        description: ::String
+      }?,
+      update_variable: {
+        name: ::String,
+        new_name: ::String?,
+        description: ::String?
+      }?,
+      delete_variable: {
+        name: ::String
+      }?,
+      add_rule: {
+        expression: ::String
+      }?,
+      update_rule: {
+        rule_id: ::String,
+        expression: ::String
+      }?,
+      delete_rule: {
+        rule_id: ::String
+      }?,
+      add_rule_from_natural_language: {
+        natural_language: ::String
+      }?,
+      update_from_rules_feedback: {
+        rule_ids: Array[::String]?,
+        feedback: ::String
+      }?,
+      update_from_scenario_feedback: {
+        rule_ids: Array[::String]?,
+        scenario_expression: ::String,
+        feedback: ::String?
+      }?,
+      ingest_content: {
+        content: ::String
+      }?
+    }
+
+      type automated_reasoning_policy_type_value_annotation = {
+      add_type_value: {
+        value: ::String,
+        description: ::String?
+      }?,
+      update_type_value: {
+        value: ::String,
+        new_value: ::String?,
+        description: ::String?
+      }?,
+      delete_type_value: {
+        value: ::String
+      }?
+    }
+
+    end
+  end
+end

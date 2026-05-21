@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MWAA
+    module Params
+      type logging_configuration_input = {
+      dag_processing_logs: {
+        enabled: bool,
+        log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      }?,
+      scheduler_logs: {
+        enabled: bool,
+        log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      }?,
+      webserver_logs: {
+        enabled: bool,
+        log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      }?,
+      worker_logs: {
+        enabled: bool,
+        log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      }?,
+      task_logs: {
+        enabled: bool,
+        log_level: ("CRITICAL" | "ERROR" | "WARNING" | "INFO" | "DEBUG")
+      }?
+    }
+
+    end
+  end
+end

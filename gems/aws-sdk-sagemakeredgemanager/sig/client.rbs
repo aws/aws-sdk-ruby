@@ -109,7 +109,7 @@ module Aws
                                 metric_name: ::String?,
                                 value: ::Float?,
                                 timestamp: ::Time?
-                              },
+                              }
                             ],
                             ?models: Array[
                               {
@@ -123,9 +123,9 @@ module Aws
                                     metric_name: ::String?,
                                     value: ::Float?,
                                     timestamp: ::Time?
-                                  },
+                                  }
                                 ]?
-                              },
+                              }
                             ],
                             agent_version: ::String,
                             device_name: ::String,
@@ -146,7 +146,7 @@ module Aws
                                   status: ("SUCCESS" | "FAIL")?,
                                   status_reason: ::String?,
                                   rollback_failure_reason: ::String?
-                                },
+                                }
                               ]?
                             }
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

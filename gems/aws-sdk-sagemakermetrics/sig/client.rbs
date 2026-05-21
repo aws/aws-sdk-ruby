@@ -93,7 +93,7 @@ module Aws
                                    x_axis_type: ("IterationNumber" | "Timestamp"),
                                    start: ::Integer?,
                                    end: ::Integer?
-                                 },
+                                 }
                                ]
                              ) -> _BatchGetMetricsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMetricsResponseSuccess
@@ -111,7 +111,7 @@ module Aws
                                    timestamp: ::Time,
                                    step: ::Integer?,
                                    value: ::Float
-                                 },
+                                 }
                                ]
                              ) -> _BatchPutMetricsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutMetricsResponseSuccess

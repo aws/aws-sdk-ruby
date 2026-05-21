@@ -147,26 +147,7 @@ module Aws
                                  resource_set_name: ::String,
                                  resource_set_type: ::String,
                                  resources: Array[
-                                   {
-                                     component_id: ::String?,
-                                     dns_target_resource: {
-                                       domain_name: ::String?,
-                                       hosted_zone_arn: ::String?,
-                                       record_set_id: ::String?,
-                                       record_type: ::String?,
-                                       target_resource: {
-                                         nlb_resource: {
-                                           arn: ::String?
-                                         }?,
-                                         r53_resource: {
-                                           domain_name: ::String?,
-                                           record_set_id: ::String?
-                                         }?
-                                       }?
-                                     }?,
-                                     readiness_scopes: Array[::String]?,
-                                     resource_arn: ::String?
-                                   },
+                                   Params::resource
                                  ],
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateResourceSetResponseSuccess
@@ -487,26 +468,7 @@ module Aws
                                  resource_set_name: ::String,
                                  resource_set_type: ::String,
                                  resources: Array[
-                                   {
-                                     component_id: ::String?,
-                                     dns_target_resource: {
-                                       domain_name: ::String?,
-                                       hosted_zone_arn: ::String?,
-                                       record_set_id: ::String?,
-                                       record_type: ::String?,
-                                       target_resource: {
-                                         nlb_resource: {
-                                           arn: ::String?
-                                         }?,
-                                         r53_resource: {
-                                           domain_name: ::String?,
-                                           record_set_id: ::String?
-                                         }?
-                                       }?
-                                     }?,
-                                     readiness_scopes: Array[::String]?,
-                                     resource_arn: ::String?
-                                   },
+                                   Params::resource
                                  ]
                                ) -> _UpdateResourceSetResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceSetResponseSuccess

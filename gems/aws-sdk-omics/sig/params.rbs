@@ -1,0 +1,40 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Omics
+    module Params
+      type container_registry_map = {
+      registry_mappings: Array[
+        {
+          upstream_registry_url: ::String?,
+          ecr_repository_prefix: ::String?,
+          upstream_repository_prefix: ::String?,
+          ecr_account_id: ::String?
+        }
+      ]?,
+      image_mappings: Array[
+        {
+          source_image: ::String?,
+          destination_image: ::String?
+        }
+      ]?
+    }
+
+      type definition_repository = {
+      connection_arn: ::String,
+      full_repository_id: ::String,
+      source_reference: {
+        type: ("BRANCH" | "TAG" | "COMMIT"),
+        value: ::String
+      }?,
+      exclude_file_patterns: Array[::String]?
+    }
+
+    end
+  end
+end

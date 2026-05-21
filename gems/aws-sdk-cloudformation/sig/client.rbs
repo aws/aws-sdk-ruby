@@ -123,7 +123,7 @@ module Aws
                                                     type_configuration_arn: ::String?,
                                                     type: ("RESOURCE" | "MODULE" | "HOOK")?,
                                                     type_name: ::String?
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _BatchDescribeTypeConfigurationsResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeTypeConfigurationsResponseSuccess
@@ -164,7 +164,7 @@ module Aws
                                    parameter_value: ::String?,
                                    use_previous_value: bool?,
                                    resolved_value: ::String?
-                                 },
+                                 }
                                ],
                                ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
                                ?resource_types: Array[::String],
@@ -174,7 +174,7 @@ module Aws
                                    {
                                      arn: ::String,
                                      type: ::String
-                                   },
+                                   }
                                  ]?,
                                  monitoring_time_in_minutes: ::Integer?
                                },
@@ -183,7 +183,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                change_set_name: ::String,
                                ?client_token: ::String,
@@ -194,7 +194,7 @@ module Aws
                                    resource_type: ::String,
                                    logical_resource_id: ::String,
                                    resource_identifier: Hash[::String, ::String]
-                                 },
+                                 }
                                ],
                                ?include_nested_stacks: bool,
                                ?on_stack_failure: ("DO_NOTHING" | "ROLLBACK" | "DELETE"),
@@ -214,7 +214,7 @@ module Aws
                                            resource_type: ::String,
                                            logical_resource_id: ::String?,
                                            resource_identifier: Hash[::String, ::String]
-                                         },
+                                         }
                                        ],
                                        generated_template_name: ::String,
                                        ?stack_name: ::String,
@@ -241,7 +241,7 @@ module Aws
                               parameter_value: ::String?,
                               use_previous_value: bool?,
                               resolved_value: ::String?
-                            },
+                            }
                           ],
                           ?disable_rollback: bool,
                           ?rollback_configuration: {
@@ -249,7 +249,7 @@ module Aws
                               {
                                 arn: ::String,
                                 type: ::String
-                              },
+                              }
                             ]?,
                             monitoring_time_in_minutes: ::Integer?
                           },
@@ -265,7 +265,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?client_request_token: ::String,
                           ?enable_termination_protection: bool,
@@ -294,17 +294,9 @@ module Aws
                                         parameter_value: ::String?,
                                         use_previous_value: bool?,
                                         resolved_value: ::String?
-                                      },
+                                      }
                                     ],
-                                    ?operation_preferences: {
-                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                      region_order: Array[::String]?,
-                                      failure_tolerance_count: ::Integer?,
-                                      failure_tolerance_percentage: ::Integer?,
-                                      max_concurrent_count: ::Integer?,
-                                      max_concurrent_percentage: ::Integer?,
-                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                                    },
+                                    ?operation_preferences: Params::stack_set_operation_preferences,
                                     ?operation_id: ::String,
                                     ?call_as: ("SELF" | "DELEGATED_ADMIN")
                                   ) -> _CreateStackInstancesResponseSuccess
@@ -328,14 +320,14 @@ module Aws
                                          stack_name: ::String,
                                          logical_resource_id: ::String
                                        }
-                                     },
+                                     }
                                    ],
                                    stack_definitions: Array[
                                      {
                                        stack_name: ::String?,
                                        template_body: ::String?,
                                        template_url: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateStackRefactorResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStackRefactorResponseSuccess
@@ -357,14 +349,14 @@ module Aws
                                   parameter_value: ::String?,
                                   use_previous_value: bool?,
                                   resolved_value: ::String?
-                                },
+                                }
                               ],
                               ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?administration_role_arn: ::String,
                               ?execution_role_name: ::String,
@@ -442,15 +434,7 @@ module Aws
                                       account_filter_type: ("NONE" | "INTERSECTION" | "DIFFERENCE" | "UNION")?
                                     },
                                     regions: Array[::String],
-                                    ?operation_preferences: {
-                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                      region_order: Array[::String]?,
-                                      failure_tolerance_count: ::Integer?,
-                                      failure_tolerance_percentage: ::Integer?,
-                                      max_concurrent_count: ::Integer?,
-                                      max_concurrent_percentage: ::Integer?,
-                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                                    },
+                                    ?operation_preferences: Params::stack_set_operation_preferences,
                                     retain_stacks: bool,
                                     ?operation_id: ::String,
                                     ?call_as: ("SELF" | "DELEGATED_ADMIN")
@@ -835,15 +819,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudFormation/Client.html#detect_stack_set_drift-instance_method
       def detect_stack_set_drift: (
                                     stack_set_name: ::String,
-                                    ?operation_preferences: {
-                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                      region_order: Array[::String]?,
-                                      failure_tolerance_count: ::Integer?,
-                                      failure_tolerance_percentage: ::Integer?,
-                                      max_concurrent_count: ::Integer?,
-                                      max_concurrent_percentage: ::Integer?,
-                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                                    },
+                                    ?operation_preferences: Params::stack_set_operation_preferences,
                                     ?operation_id: ::String,
                                     ?call_as: ("SELF" | "DELEGATED_ADMIN")
                                   ) -> _DetectStackSetDriftResponseSuccess
@@ -863,7 +839,7 @@ module Aws
                                         parameter_value: ::String?,
                                         use_previous_value: bool?,
                                         resolved_value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _EstimateTemplateCostResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EstimateTemplateCostResponseSuccess
@@ -980,15 +956,7 @@ module Aws
                                         ?stack_ids: Array[::String],
                                         ?stack_ids_url: ::String,
                                         ?organizational_unit_ids: Array[::String],
-                                        ?operation_preferences: {
-                                          region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                          region_order: Array[::String]?,
-                                          failure_tolerance_count: ::Integer?,
-                                          failure_tolerance_percentage: ::Integer?,
-                                          max_concurrent_count: ::Integer?,
-                                          max_concurrent_percentage: ::Integer?,
-                                          concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                                        },
+                                        ?operation_preferences: Params::stack_set_operation_preferences,
                                         ?operation_id: ::String,
                                         ?call_as: ("SELF" | "DELEGATED_ADMIN")
                                       ) -> _ImportStacksToStackSetResponseSuccess
@@ -1070,7 +1038,7 @@ module Aws
                                                     {
                                                       resource_type: ::String,
                                                       resource_identifier: Hash[::String, ::String]
-                                                    },
+                                                    }
                                                   ],
                                                   ?next_token: ::String,
                                                   ?max_results: ::Integer
@@ -1139,7 +1107,7 @@ module Aws
                                     {
                                       name: ("DETAILED_STATUS" | "LAST_OPERATION_ID" | "DRIFT_STATUS")?,
                                       values: ::String?
-                                    },
+                                    }
                                   ],
                                   ?stack_instance_account: ::String,
                                   ?stack_instance_region: ::String,
@@ -1215,7 +1183,7 @@ module Aws
                                                 {
                                                   name: ("OPERATION_RESULT_STATUS")?,
                                                   values: ::String?
-                                                },
+                                                }
                                               ]
                                             ) -> _ListStackSetOperationResultsResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListStackSetOperationResultsResponseSuccess
@@ -1438,7 +1406,7 @@ module Aws
                                  ?scan_filters: Array[
                                    {
                                      types: Array[::String]?
-                                   },
+                                   }
                                  ]
                                ) -> _StartResourceScanResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartResourceScanResponseSuccess
@@ -1481,7 +1449,7 @@ module Aws
                                            resource_type: ::String,
                                            logical_resource_id: ::String?,
                                            resource_identifier: Hash[::String, ::String]
-                                         },
+                                         }
                                        ],
                                        ?remove_resources: Array[::String],
                                        ?refresh_all_resources: bool,
@@ -1511,7 +1479,7 @@ module Aws
                               parameter_value: ::String?,
                               use_previous_value: bool?,
                               resolved_value: ::String?
-                            },
+                            }
                           ],
                           ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
                           ?resource_types: Array[::String],
@@ -1521,7 +1489,7 @@ module Aws
                               {
                                 arn: ::String,
                                 type: ::String
-                              },
+                              }
                             ]?,
                             monitoring_time_in_minutes: ::Integer?
                           },
@@ -1532,7 +1500,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?disable_rollback: bool,
                           ?client_request_token: ::String,
@@ -1561,17 +1529,9 @@ module Aws
                                         parameter_value: ::String?,
                                         use_previous_value: bool?,
                                         resolved_value: ::String?
-                                      },
+                                      }
                                     ],
-                                    ?operation_preferences: {
-                                      region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                      region_order: Array[::String]?,
-                                      failure_tolerance_count: ::Integer?,
-                                      failure_tolerance_percentage: ::Integer?,
-                                      max_concurrent_count: ::Integer?,
-                                      max_concurrent_percentage: ::Integer?,
-                                      concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                                    },
+                                    ?operation_preferences: Params::stack_set_operation_preferences,
                                     ?operation_id: ::String,
                                     ?call_as: ("SELF" | "DELEGATED_ADMIN")
                                   ) -> _UpdateStackInstancesResponseSuccess
@@ -1594,24 +1554,16 @@ module Aws
                                   parameter_value: ::String?,
                                   use_previous_value: bool?,
                                   resolved_value: ::String?
-                                },
+                                }
                               ],
                               ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
-                              ?operation_preferences: {
-                                region_concurrency_type: ("SEQUENTIAL" | "PARALLEL")?,
-                                region_order: Array[::String]?,
-                                failure_tolerance_count: ::Integer?,
-                                failure_tolerance_percentage: ::Integer?,
-                                max_concurrent_count: ::Integer?,
-                                max_concurrent_percentage: ::Integer?,
-                                concurrency_mode: ("STRICT_FAILURE_TOLERANCE" | "SOFT_FAILURE_TOLERANCE")?
-                              },
+                              ?operation_preferences: Params::stack_set_operation_preferences,
                               ?administration_role_arn: ::String,
                               ?execution_role_name: ::String,
                               ?deployment_targets: {

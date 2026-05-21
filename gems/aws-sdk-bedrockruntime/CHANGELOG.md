@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.78.0 (2026-05-20)
+------------------
+
+* Feature - Supporting Request Metadata for Invoke Model and Invoke Model with Response Stream
+
+1.77.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.76.0 (2026-05-13)
 ------------------
 

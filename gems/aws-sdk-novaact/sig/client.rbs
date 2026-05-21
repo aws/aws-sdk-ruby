@@ -97,7 +97,7 @@ module Aws
                               json: {
                               }?
                             }
-                          },
+                          }
                         ],
                         ?client_token: ::String
                       ) -> _CreateActResponseSuccess
@@ -219,9 +219,9 @@ module Aws
                                  content: Array[
                                    {
                                      text: ::String?
-                                   },
+                                   }
                                  ]
-                               },
+                               }
                              ],
                              ?previous_step_id: ::String
                            ) -> _InvokeActStepResponseSuccess

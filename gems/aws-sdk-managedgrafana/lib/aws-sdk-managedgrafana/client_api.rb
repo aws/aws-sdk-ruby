@@ -44,6 +44,7 @@ module Aws::ManagedGrafana
     CreateWorkspaceServiceAccountTokenResponse = Shapes::StructureShape.new(name: 'CreateWorkspaceServiceAccountTokenResponse')
     DataSourceType = Shapes::StringShape.new(name: 'DataSourceType')
     DataSourceTypesList = Shapes::ListShape.new(name: 'DataSourceTypesList')
+    DegradedWorkspaceReason = Shapes::StringShape.new(name: 'DegradedWorkspaceReason')
     DeleteWorkspaceApiKeyRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyRequest')
     DeleteWorkspaceApiKeyResponse = Shapes::StructureShape.new(name: 'DeleteWorkspaceApiKeyResponse')
     DeleteWorkspaceRequest = Shapes::StructureShape.new(name: 'DeleteWorkspaceRequest')
@@ -65,6 +66,7 @@ module Aws::ManagedGrafana
     GrafanaToken = Shapes::StringShape.new(name: 'GrafanaToken')
     GrafanaVersion = Shapes::StringShape.new(name: 'GrafanaVersion')
     GrafanaVersionList = Shapes::ListShape.new(name: 'GrafanaVersionList')
+    IPAddressType = Shapes::StringShape.new(name: 'IPAddressType')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdpMetadata = Shapes::UnionShape.new(name: 'IdpMetadata')
     IdpMetadataUrl = Shapes::StringShape.new(name: 'IdpMetadataUrl')
@@ -237,6 +239,7 @@ module Aws::ManagedGrafana
     CreateWorkspaceRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: OverridableConfigurationJson, location_name: "configuration", metadata: {"jsonvalue" => true}))
     CreateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     CreateWorkspaceRequest.add_member(:grafana_version, Shapes::ShapeRef.new(shape: GrafanaVersion, location_name: "grafanaVersion"))
+    CreateWorkspaceRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "ipAddressType"))
     CreateWorkspaceRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     CreateWorkspaceRequest.struct_class = Types::CreateWorkspaceRequest
 
@@ -541,6 +544,7 @@ module Aws::ManagedGrafana
     UpdateWorkspaceRequest.add_member(:remove_vpc_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeVpcConfiguration"))
     UpdateWorkspaceRequest.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     UpdateWorkspaceRequest.add_member(:remove_network_access_configuration, Shapes::ShapeRef.new(shape: Boolean, location_name: "removeNetworkAccessConfiguration"))
+    UpdateWorkspaceRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "ipAddressType"))
     UpdateWorkspaceRequest.struct_class = Types::UpdateWorkspaceRequest
 
     UpdateWorkspaceResponse.add_member(:workspace, Shapes::ShapeRef.new(shape: WorkspaceDescription, required: true, location_name: "workspace"))
@@ -594,7 +598,9 @@ module Aws::ManagedGrafana
     WorkspaceDescription.add_member(:vpc_configuration, Shapes::ShapeRef.new(shape: VpcConfiguration, location_name: "vpcConfiguration"))
     WorkspaceDescription.add_member(:network_access_control, Shapes::ShapeRef.new(shape: NetworkAccessConfiguration, location_name: "networkAccessControl"))
     WorkspaceDescription.add_member(:grafana_token, Shapes::ShapeRef.new(shape: GrafanaToken, location_name: "grafanaToken"))
+    WorkspaceDescription.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IPAddressType, location_name: "ipAddressType"))
     WorkspaceDescription.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
+    WorkspaceDescription.add_member(:degraded_workspace_reason, Shapes::ShapeRef.new(shape: DegradedWorkspaceReason, location_name: "degradedWorkspaceReason"))
     WorkspaceDescription.struct_class = Types::WorkspaceDescription
 
     WorkspaceList.member = Shapes::ShapeRef.new(shape: WorkspaceSummary)

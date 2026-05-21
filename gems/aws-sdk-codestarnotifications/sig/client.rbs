@@ -91,7 +91,7 @@ module Aws
                                         {
                                           target_type: ::String?,
                                           target_address: ::String?
-                                        },
+                                        }
                                       ],
                                       detail_type: ("BASIC" | "FULL"),
                                       ?client_request_token: ::String,
@@ -151,7 +151,7 @@ module Aws
                                 {
                                   name: ("RESOURCE_TYPE" | "SERVICE_NAME"),
                                   value: ::String
-                                },
+                                }
                               ],
                               ?next_token: ::String,
                               ?max_results: ::Integer
@@ -169,7 +169,7 @@ module Aws
                                        {
                                          name: ("EVENT_TYPE_ID" | "CREATED_BY" | "RESOURCE" | "TARGET_ADDRESS"),
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -197,7 +197,7 @@ module Aws
                             {
                               name: ("TARGET_TYPE" | "TARGET_ADDRESS" | "TARGET_STATUS"),
                               value: ::String
-                            },
+                            }
                           ],
                           ?next_token: ::String,
                           ?max_results: ::Integer
@@ -264,7 +264,7 @@ module Aws
                                         {
                                           target_type: ::String?,
                                           target_address: ::String?
-                                        },
+                                        }
                                       ],
                                       ?detail_type: ("BASIC" | "FULL")
                                     ) -> _UpdateNotificationRuleResponseSuccess

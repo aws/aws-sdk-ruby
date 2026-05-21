@@ -1,0 +1,110 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexRuntimeV2
+    module Params
+      type image_response_card = {
+      title: ::String,
+      subtitle: ::String?,
+      image_url: ::String?,
+      buttons: Array[
+        {
+          text: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type message = {
+      content: ::String?,
+      content_type: ("CustomPayload" | "ImageResponseCard" | "PlainText" | "SSML"),
+      image_response_card: Params::image_response_card?
+    }
+
+      type dialog_action = {
+      type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None"),
+      slot_to_elicit: ::String?,
+      slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")?,
+      sub_slot_to_elicit: {
+        name: ::String,
+        sub_slot_to_elicit: untyped?
+      }?
+    }
+
+      type intent = {
+      name: ::String,
+      slots: Hash[::String, Params::slot]?,
+      state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")?,
+      confirmation_state: ("Confirmed" | "Denied" | "None")?
+    }
+
+      type session_state = {
+      dialog_action: Params::dialog_action?,
+      intent: Params::intent?,
+      active_contexts: Array[
+        Params::active_context
+      ]?,
+      session_attributes: Hash[::String, ::String]?,
+      originating_request_id: ::String?,
+      runtime_hints: {
+        slot_hints: Hash[::String, Hash[::String, {
+              runtime_hint_values: Array[
+                {
+                  phrase: ::String
+                }
+              ]?,
+              sub_slot_hints: untyped?
+            }]]?
+      }?
+    }
+
+      type slot = {
+      value: {
+        original_value: ::String?,
+        interpreted_value: ::String,
+        resolved_values: Array[::String]?
+      }?,
+      shape: ("Scalar" | "List" | "Composite")?,
+      values: Array[
+        {
+          value: {
+            original_value: ::String?,
+            interpreted_value: ::String,
+            resolved_values: Array[::String]?
+          }?,
+          shape: ("Scalar" | "List" | "Composite")?,
+          values: untyped?,
+          sub_slots: Hash[::String, untyped]?
+        }
+      ]?,
+      sub_slots: Hash[::String, {
+          value: {
+            original_value: ::String?,
+            interpreted_value: ::String,
+            resolved_values: Array[::String]?
+          }?,
+          shape: ("Scalar" | "List" | "Composite")?,
+          values: Array[
+            untyped
+          ]?,
+          sub_slots: untyped?
+        }]?
+    }
+
+      type active_context = {
+      name: ::String,
+      time_to_live: {
+        time_to_live_in_seconds: ::Integer,
+        turns_to_live: ::Integer
+      },
+      context_attributes: Hash[::String, ::String]
+    }
+
+    end
+  end
+end

@@ -72,7 +72,7 @@ module Aws
                       {
                         attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
                         sort_order: ("ASC" | "DESC")?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeClusterSnapshotsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeClusterSnapshotsResponseSuccess

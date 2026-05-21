@@ -67,16 +67,25 @@ module Aws::DatabaseMigrationService
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name                    | params                                  | :delay   | :max_attempts |
-  # | ------------------------------ | --------------------------------------- | -------- | ------------- |
-  # | endpoint_deleted               | {Client#describe_endpoints}             | 5        | 60            |
-  # | replication_instance_available | {Client#describe_replication_instances} | 60       | 60            |
-  # | replication_instance_deleted   | {Client#describe_replication_instances} | 15       | 60            |
-  # | replication_task_deleted       | {Client#describe_replication_tasks}     | 15       | 60            |
-  # | replication_task_ready         | {Client#describe_replication_tasks}     | 15       | 60            |
-  # | replication_task_running       | {Client#describe_replication_tasks}     | 15       | 60            |
-  # | replication_task_stopped       | {Client#describe_replication_tasks}     | 15       | 60            |
-  # | test_connection_succeeds       | {Client#describe_connections}           | 5        | 60            |
+  # | waiter_name                         | params                                             | :delay   | :max_attempts |
+  # | ----------------------------------- | -------------------------------------------------- | -------- | ------------- |
+  # | endpoint_deleted                    | {Client#describe_endpoints}                        | 5        | 60            |
+  # | extension_pack_associated           | {Client#describe_extension_pack_associations}      | 10       | 60            |
+  # | metadata_model_assessed             | {Client#describe_metadata_model_assessments}       | 30       | 360           |
+  # | metadata_model_conversion_cancelled | {Client#describe_metadata_model_conversions}       | 10       | 180           |
+  # | metadata_model_converted            | {Client#describe_metadata_model_conversions}       | 30       | 240           |
+  # | metadata_model_created              | {Client#describe_metadata_model_creations}         | 15       | 40            |
+  # | metadata_model_creation_cancelled   | {Client#describe_metadata_model_creations}         | 10       | 180           |
+  # | metadata_model_exported_as_script   | {Client#describe_metadata_model_exports_as_script} | 20       | 90            |
+  # | metadata_model_exported_to_target   | {Client#describe_metadata_model_exports_to_target} | 20       | 90            |
+  # | metadata_model_imported             | {Client#describe_metadata_model_imports}           | 60       | 30            |
+  # | replication_instance_available      | {Client#describe_replication_instances}            | 60       | 60            |
+  # | replication_instance_deleted        | {Client#describe_replication_instances}            | 15       | 60            |
+  # | replication_task_deleted            | {Client#describe_replication_tasks}                | 15       | 60            |
+  # | replication_task_ready              | {Client#describe_replication_tasks}                | 15       | 60            |
+  # | replication_task_running            | {Client#describe_replication_tasks}                | 15       | 60            |
+  # | replication_task_stopped            | {Client#describe_replication_tasks}                | 15       | 60            |
+  # | test_connection_succeeds            | {Client#describe_connections}                      | 5        | 60            |
   #
   module Waiters
 
@@ -121,6 +130,411 @@ module Aws::DatabaseMigrationService
 
       # @option (see Client#describe_endpoints)
       # @return (see Client#describe_endpoints)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS extension pack is associated.
+    class ExtensionPackAssociated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (60)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 60,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_extension_pack_associations,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_extension_pack_associations)
+      # @return (see Client#describe_extension_pack_associations)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is assessed.
+    class MetadataModelAssessed
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (360)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 360,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_assessments,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_assessments)
+      # @return (see Client#describe_metadata_model_assessments)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model conversion is cancelled.
+    class MetadataModelConversionCancelled
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (180)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 180,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_conversions,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "CANCELED",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_conversions)
+      # @return (see Client#describe_metadata_model_conversions)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is converted.
+    class MetadataModelConverted
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (240)
+      # @option options [Integer] :delay (30)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 240,
+          delay: 30,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_conversions,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_conversions)
+      # @return (see Client#describe_metadata_model_conversions)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is created.
+    class MetadataModelCreated
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_creations,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_creations)
+      # @return (see Client#describe_metadata_model_creations)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model creation is cancelled.
+    class MetadataModelCreationCancelled
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (180)
+      # @option options [Integer] :delay (10)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 180,
+          delay: 10,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_creations,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "CANCELED",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_creations)
+      # @return (see Client#describe_metadata_model_creations)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is exported as script.
+    class MetadataModelExportedAsScript
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (90)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 90,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_exports_as_script,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_exports_as_script)
+      # @return (see Client#describe_metadata_model_exports_as_script)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is exported to target.
+    class MetadataModelExportedToTarget
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (90)
+      # @option options [Integer] :delay (20)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 90,
+          delay: 20,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_exports_to_target,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_exports_to_target)
+      # @return (see Client#describe_metadata_model_exports_to_target)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until DMS metadata model is imported.
+    class MetadataModelImported
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (30)
+      # @option options [Integer] :delay (60)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 30,
+          delay: 60,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_metadata_model_imports,
+            acceptors: [
+              {
+                "argument" => "requests[].status",
+                "expected" => "SUCCESS",
+                "matcher" => "pathAll",
+                "state" => "success"
+              },
+              {
+                "argument" => "requests[].status",
+                "expected" => "FAILED",
+                "matcher" => "pathAny",
+                "state" => "failure"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_metadata_model_imports)
+      # @return (see Client#describe_metadata_model_imports)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

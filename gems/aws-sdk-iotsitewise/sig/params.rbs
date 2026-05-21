@@ -1,0 +1,158 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTSiteWise
+    module Params
+      type identity = {
+      user: {
+        id: ::String
+      }?,
+      group: {
+        id: ::String
+      }?,
+      iam_user: {
+        arn: ::String
+      }?,
+      iam_role: {
+        arn: ::String
+      }?
+    }
+
+      type resource = {
+      portal: {
+        id: ::String
+      }?,
+      project: {
+        id: ::String
+      }?
+    }
+
+      type transform = {
+      expression: ::String,
+      variables: Array[
+        Params::expression_variable
+      ],
+      processing_config: {
+        compute_location: ("EDGE" | "CLOUD"),
+        forwarding_config: {
+          state: ("DISABLED" | "ENABLED")
+        }?
+      }?
+    }
+
+      type metric = {
+      expression: ::String?,
+      variables: Array[
+        Params::expression_variable
+      ]?,
+      window: {
+        tumbling: {
+          interval: ::String,
+          offset: ::String?
+        }?
+      },
+      processing_config: {
+        compute_location: ("EDGE" | "CLOUD")
+      }?
+    }
+
+      type property_type = {
+      attribute: {
+        default_value: ::String?
+      }?,
+      measurement: {
+        processing_config: {
+          forwarding_config: {
+            state: ("DISABLED" | "ENABLED")
+          }
+        }?
+      }?,
+      transform: Params::transform?,
+      metric: Params::metric?
+    }
+
+      type asset_model_property_definition = {
+      id: ::String?,
+      external_id: ::String?,
+      name: ::String,
+      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+      data_type_spec: ::String?,
+      unit: ::String?,
+      type: Params::property_type
+    }
+
+      type variable_value = {
+      property_id: ::String?,
+      hierarchy_id: ::String?,
+      property_path: Array[
+        {
+          id: ::String?,
+          name: ::String?
+        }
+      ]?
+    }
+
+      type expression_variable = {
+      name: ::String,
+      value: Params::variable_value
+    }
+
+      type computation_model_data_binding_value = {
+      asset_model_property: {
+        asset_model_id: ::String,
+        property_id: ::String
+      }?,
+      asset_property: {
+        asset_id: ::String,
+        property_id: ::String
+      }?,
+      list: Array[
+        {
+          asset_model_property: {
+            asset_model_id: ::String,
+            property_id: ::String
+          }?,
+          asset_property: {
+            asset_id: ::String,
+            property_id: ::String
+          }?,
+          list: untyped?
+        }
+      ]?
+    }
+
+      type dataset_source = {
+      source_type: ("KENDRA"),
+      source_format: ("KNOWLEDGE_BASE"),
+      source_detail: {
+        kendra: {
+          knowledge_base_arn: ::String,
+          role_arn: ::String
+        }?
+      }?
+    }
+
+      type asset_model_property = {
+      id: ::String?,
+      external_id: ::String?,
+      name: ::String,
+      data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
+      data_type_spec: ::String?,
+      unit: ::String?,
+      type: Params::property_type,
+      path: Array[
+        {
+          id: ::String?,
+          name: ::String?
+        }
+      ]?
+    }
+
+    end
+  end
+end

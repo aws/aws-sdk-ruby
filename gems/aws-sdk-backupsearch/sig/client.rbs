@@ -208,33 +208,33 @@ module Aws
                                       {
                                         value: ::String,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "CONTAINS" | "DOES_NOT_CONTAIN" | "BEGINS_WITH" | "ENDS_WITH" | "DOES_NOT_BEGIN_WITH" | "DOES_NOT_END_WITH")?
-                                      },
+                                      }
                                     ]?,
                                     sizes: Array[
                                       {
                                         value: ::Integer,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "LESS_THAN_EQUAL_TO" | "GREATER_THAN_EQUAL_TO")?
-                                      },
+                                      }
                                     ]?,
                                     creation_times: Array[
                                       {
                                         value: ::Time,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "LESS_THAN_EQUAL_TO" | "GREATER_THAN_EQUAL_TO")?
-                                      },
+                                      }
                                     ]?,
                                     version_ids: Array[
                                       {
                                         value: ::String,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "CONTAINS" | "DOES_NOT_CONTAIN" | "BEGINS_WITH" | "ENDS_WITH" | "DOES_NOT_BEGIN_WITH" | "DOES_NOT_END_WITH")?
-                                      },
+                                      }
                                     ]?,
                                     etags: Array[
                                       {
                                         value: ::String,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "CONTAINS" | "DOES_NOT_CONTAIN" | "BEGINS_WITH" | "ENDS_WITH" | "DOES_NOT_BEGIN_WITH" | "DOES_NOT_END_WITH")?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ]?,
                                 ebs_item_filters: Array[
                                   {
@@ -242,27 +242,27 @@ module Aws
                                       {
                                         value: ::String,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "CONTAINS" | "DOES_NOT_CONTAIN" | "BEGINS_WITH" | "ENDS_WITH" | "DOES_NOT_BEGIN_WITH" | "DOES_NOT_END_WITH")?
-                                      },
+                                      }
                                     ]?,
                                     sizes: Array[
                                       {
                                         value: ::Integer,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "LESS_THAN_EQUAL_TO" | "GREATER_THAN_EQUAL_TO")?
-                                      },
+                                      }
                                     ]?,
                                     creation_times: Array[
                                       {
                                         value: ::Time,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "LESS_THAN_EQUAL_TO" | "GREATER_THAN_EQUAL_TO")?
-                                      },
+                                      }
                                     ]?,
                                     last_modification_times: Array[
                                       {
                                         value: ::Time,
                                         operator: ("EQUALS_TO" | "NOT_EQUALS_TO" | "LESS_THAN_EQUAL_TO" | "GREATER_THAN_EQUAL_TO")?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ]?
                               }
                             ) -> _StartSearchJobResponseSuccess

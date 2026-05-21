@@ -1,0 +1,32 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Billing
+    module Params
+      type expression = {
+      dimensions: {
+        key: ("LINKED_ACCOUNT"),
+        values: Array[::String]
+      }?,
+      tags: {
+        key: ::String,
+        values: Array[::String]
+      }?,
+      cost_categories: {
+        key: ::String,
+        values: Array[::String]
+      }?,
+      time_range: {
+        begin_date_inclusive: ::Time?,
+        end_date_inclusive: ::Time?
+      }?
+    }
+
+    end
+  end
+end

@@ -101,7 +101,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateParallelDataResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParallelDataResponseSuccess
@@ -182,7 +182,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _ImportTerminologyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportTerminologyResponseSuccess
@@ -307,7 +307,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

@@ -248,20 +248,7 @@ module Aws
       def create_agent_space: (
                                 name: ::String,
                                 ?description: ::String,
-                                ?aws_resources: {
-                                  vpcs: Array[
-                                    {
-                                      vpc_arn: ::String?,
-                                      security_group_arns: Array[::String]?,
-                                      subnet_arns: Array[::String]?
-                                    },
-                                  ]?,
-                                  log_groups: Array[::String]?,
-                                  s3_buckets: Array[::String]?,
-                                  secret_arns: Array[::String]?,
-                                  lambda_function_arns: Array[::String]?,
-                                  iam_roles: Array[::String]?
-                                },
+                                ?aws_resources: Params::aws_resources,
                                 ?target_domain_ids: Array[::String],
                                 ?code_review_settings: {
                                   controls_scanning: bool,
@@ -301,41 +288,7 @@ module Aws
       def create_code_review: (
                                 title: ::String,
                                 agent_space_id: ::String,
-                                assets: {
-                                  endpoints: Array[
-                                    {
-                                      uri: ::String?
-                                    },
-                                  ]?,
-                                  actors: Array[
-                                    {
-                                      identifier: ::String?,
-                                      uris: Array[::String]?,
-                                      authentication: {
-                                        provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
-                                        value: ::String?
-                                      }?,
-                                      description: ::String?
-                                    },
-                                  ]?,
-                                  documents: Array[
-                                    {
-                                      s3_location: ::String?,
-                                      artifact_id: ::String?
-                                    },
-                                  ]?,
-                                  source_code: Array[
-                                    {
-                                      s3_location: ::String?
-                                    },
-                                  ]?,
-                                  integrated_repositories: Array[
-                                    {
-                                      integration_id: ::String,
-                                      provider_resource_id: ::String
-                                    },
-                                  ]?
-                                },
+                                assets: Params::assets,
                                 ?service_role: ::String,
                                 ?log_config: {
                                   log_group: ::String?,
@@ -398,41 +351,7 @@ module Aws
       def create_pentest: (
                             title: ::String,
                             agent_space_id: ::String,
-                            ?assets: {
-                              endpoints: Array[
-                                {
-                                  uri: ::String?
-                                },
-                              ]?,
-                              actors: Array[
-                                {
-                                  identifier: ::String?,
-                                  uris: Array[::String]?,
-                                  authentication: {
-                                    provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
-                                    value: ::String?
-                                  }?,
-                                  description: ::String?
-                                },
-                              ]?,
-                              documents: Array[
-                                {
-                                  s3_location: ::String?,
-                                  artifact_id: ::String?
-                                },
-                              ]?,
-                              source_code: Array[
-                                {
-                                  s3_location: ::String?
-                                },
-                              ]?,
-                              integrated_repositories: Array[
-                                {
-                                  integration_id: ::String,
-                                  provider_resource_id: ::String
-                                },
-                              ]?
-                            },
+                            ?assets: Params::assets,
                             ?exclude_risk_types: Array[("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")],
                             ?service_role: ::String,
                             ?log_config: {
@@ -444,21 +363,7 @@ module Aws
                               security_group_arns: Array[::String]?,
                               subnet_arns: Array[::String]?
                             },
-                            ?network_traffic_config: {
-                              rules: Array[
-                                {
-                                  effect: ("ALLOW" | "DENY")?,
-                                  pattern: ::String?,
-                                  network_traffic_rule_type: ("URL")?
-                                },
-                              ]?,
-                              custom_headers: Array[
-                                {
-                                  name: ::String?,
-                                  value: ::String?
-                                },
-                              ]?
-                            },
+                            ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
                           ) -> _CreatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePentestResponseSuccess
@@ -922,20 +827,7 @@ module Aws
                                 agent_space_id: ::String,
                                 ?name: ::String,
                                 ?description: ::String,
-                                ?aws_resources: {
-                                  vpcs: Array[
-                                    {
-                                      vpc_arn: ::String?,
-                                      security_group_arns: Array[::String]?,
-                                      subnet_arns: Array[::String]?
-                                    },
-                                  ]?,
-                                  log_groups: Array[::String]?,
-                                  s3_buckets: Array[::String]?,
-                                  secret_arns: Array[::String]?,
-                                  lambda_function_arns: Array[::String]?,
-                                  iam_roles: Array[::String]?
-                                },
+                                ?aws_resources: Params::aws_resources,
                                 ?target_domain_ids: Array[::String],
                                 ?code_review_settings: {
                                   controls_scanning: bool,
@@ -973,41 +865,7 @@ module Aws
                                 code_review_id: ::String,
                                 agent_space_id: ::String,
                                 ?title: ::String,
-                                ?assets: {
-                                  endpoints: Array[
-                                    {
-                                      uri: ::String?
-                                    },
-                                  ]?,
-                                  actors: Array[
-                                    {
-                                      identifier: ::String?,
-                                      uris: Array[::String]?,
-                                      authentication: {
-                                        provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
-                                        value: ::String?
-                                      }?,
-                                      description: ::String?
-                                    },
-                                  ]?,
-                                  documents: Array[
-                                    {
-                                      s3_location: ::String?,
-                                      artifact_id: ::String?
-                                    },
-                                  ]?,
-                                  source_code: Array[
-                                    {
-                                      s3_location: ::String?
-                                    },
-                                  ]?,
-                                  integrated_repositories: Array[
-                                    {
-                                      integration_id: ::String,
-                                      provider_resource_id: ::String
-                                    },
-                                  ]?
-                                },
+                                ?assets: Params::assets,
                                 ?service_role: ::String,
                                 ?log_config: {
                                   log_group: ::String?,
@@ -1050,7 +908,7 @@ module Aws
                                                  remediate_code: bool?
                                                }?
                                              }?
-                                           },
+                                           }
                                          ]
                                        ) -> _UpdateIntegratedResourcesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegratedResourcesResponseSuccess
@@ -1072,41 +930,7 @@ module Aws
                             pentest_id: ::String,
                             agent_space_id: ::String,
                             ?title: ::String,
-                            ?assets: {
-                              endpoints: Array[
-                                {
-                                  uri: ::String?
-                                },
-                              ]?,
-                              actors: Array[
-                                {
-                                  identifier: ::String?,
-                                  uris: Array[::String]?,
-                                  authentication: {
-                                    provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
-                                    value: ::String?
-                                  }?,
-                                  description: ::String?
-                                },
-                              ]?,
-                              documents: Array[
-                                {
-                                  s3_location: ::String?,
-                                  artifact_id: ::String?
-                                },
-                              ]?,
-                              source_code: Array[
-                                {
-                                  s3_location: ::String?
-                                },
-                              ]?,
-                              integrated_repositories: Array[
-                                {
-                                  integration_id: ::String,
-                                  provider_resource_id: ::String
-                                },
-                              ]?
-                            },
+                            ?assets: Params::assets,
                             ?exclude_risk_types: Array[("CROSS_SITE_SCRIPTING" | "DEFAULT_CREDENTIALS" | "INSECURE_DIRECT_OBJECT_REFERENCE" | "PRIVILEGE_ESCALATION" | "SERVER_SIDE_TEMPLATE_INJECTION" | "COMMAND_INJECTION" | "CODE_INJECTION" | "SQL_INJECTION" | "ARBITRARY_FILE_UPLOAD" | "INSECURE_DESERIALIZATION" | "LOCAL_FILE_INCLUSION" | "INFORMATION_DISCLOSURE" | "PATH_TRAVERSAL" | "SERVER_SIDE_REQUEST_FORGERY" | "JSON_WEB_TOKEN_VULNERABILITIES" | "XML_EXTERNAL_ENTITY" | "FILE_DELETION" | "OTHER" | "GRAPHQL_VULNERABILITIES" | "BUSINESS_LOGIC_VULNERABILITIES" | "CRYPTOGRAPHIC_VULNERABILITIES" | "DENIAL_OF_SERVICE" | "FILE_ACCESS" | "FILE_CREATION" | "DATABASE_MODIFICATION" | "DATABASE_ACCESS" | "OUTBOUND_SERVICE_REQUEST" | "UNKNOWN")],
                             ?service_role: ::String,
                             ?log_config: {
@@ -1118,21 +942,7 @@ module Aws
                               security_group_arns: Array[::String]?,
                               subnet_arns: Array[::String]?
                             },
-                            ?network_traffic_config: {
-                              rules: Array[
-                                {
-                                  effect: ("ALLOW" | "DENY")?,
-                                  pattern: ::String?,
-                                  network_traffic_rule_type: ("URL")?
-                                },
-                              ]?,
-                              custom_headers: Array[
-                                {
-                                  name: ::String?,
-                                  value: ::String?
-                                },
-                              ]?
-                            },
+                            ?network_traffic_config: Params::network_traffic_config,
                             ?code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
                           ) -> _UpdatePentestResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePentestResponseSuccess

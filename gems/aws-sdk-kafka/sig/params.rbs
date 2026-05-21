@@ -1,0 +1,144 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Kafka
+    module Params
+      type storage_info = {
+      ebs_storage_info: {
+        provisioned_throughput: {
+          enabled: bool?,
+          volume_throughput: ::Integer?
+        }?,
+        volume_size: ::Integer?
+      }?
+    }
+
+      type vpc_connectivity_sasl = {
+      scram: {
+        enabled: bool?
+      }?,
+      iam: {
+        enabled: bool?
+      }?
+    }
+
+      type vpc_connectivity_client_authentication = {
+      sasl: Params::vpc_connectivity_sasl?,
+      tls: {
+        enabled: bool?
+      }?
+    }
+
+      type vpc_connectivity = {
+      client_authentication: Params::vpc_connectivity_client_authentication?
+    }
+
+      type connectivity_info = {
+      public_access: {
+        type: ::String?
+      }?,
+      vpc_connectivity: Params::vpc_connectivity?,
+      network_type: ("IPV4" | "DUAL")?
+    }
+
+      type broker_node_group_info = {
+      broker_az_distribution: ("DEFAULT")?,
+      client_subnets: Array[::String],
+      instance_type: ::String,
+      security_groups: Array[::String]?,
+      storage_info: Params::storage_info?,
+      connectivity_info: Params::connectivity_info?,
+      zone_ids: Array[::String]?
+    }
+
+      type sasl = {
+      scram: {
+        enabled: bool?
+      }?,
+      iam: {
+        enabled: bool?
+      }?
+    }
+
+      type client_authentication = {
+      sasl: Params::sasl?,
+      tls: {
+        certificate_authority_arn_list: Array[::String]?,
+        enabled: bool?
+      }?,
+      unauthenticated: {
+        enabled: bool?
+      }?
+    }
+
+      type encryption_info = {
+      encryption_at_rest: {
+        data_volume_kms_key_id: ::String
+      }?,
+      encryption_in_transit: {
+        client_broker: ("TLS" | "TLS_PLAINTEXT" | "PLAINTEXT")?,
+        in_cluster: bool?
+      }?
+    }
+
+      type broker_logs = {
+      cloud_watch_logs: {
+        enabled: bool,
+        log_group: ::String?
+      }?,
+      firehose: {
+        delivery_stream: ::String?,
+        enabled: bool
+      }?,
+      s3: {
+        bucket: ::String?,
+        enabled: bool,
+        prefix: ::String?
+      }?
+    }
+
+      type logging_info = {
+      broker_logs: Params::broker_logs
+    }
+
+      type prometheus_info = {
+      jmx_exporter: {
+        enabled_in_broker: bool
+      }?,
+      node_exporter: {
+        enabled_in_broker: bool
+      }?
+    }
+
+      type open_monitoring_info = {
+      prometheus: Params::prometheus_info
+    }
+
+      type replicator_log_delivery = {
+      cloud_watch_logs: {
+        enabled: bool,
+        log_group: ::String?
+      }?,
+      firehose: {
+        delivery_stream: ::String?,
+        enabled: bool
+      }?,
+      s3: {
+        bucket: ::String?,
+        enabled: bool,
+        prefix: ::String?
+      }?
+    }
+
+      type log_delivery = {
+      replicator_log_delivery: Params::replicator_log_delivery?
+    }
+
+    end
+  end
+end

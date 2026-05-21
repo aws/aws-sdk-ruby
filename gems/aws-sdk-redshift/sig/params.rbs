@@ -1,0 +1,79 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Redshift
+    module Params
+      type service_integrations_union = {
+      lake_formation: Array[
+        {
+          lake_formation_query: {
+            authorization: ("Enabled" | "Disabled")
+          }?
+        }
+      ]?,
+      s3_access_grants: Array[
+        {
+          read_write_access: {
+            authorization: ("Enabled" | "Disabled")
+          }?
+        }
+      ]?,
+      redshift: Array[
+        {
+          connect: {
+            authorization: ("Enabled" | "Disabled")
+          }?
+        }
+      ]?
+    }
+
+      type resize_cluster_message = {
+      cluster_identifier: ::String,
+      cluster_type: ::String?,
+      node_type: ::String?,
+      number_of_nodes: ::Integer?,
+      classic: bool?,
+      reserved_node_id: ::String?,
+      target_reserved_node_offering_id: ::String?
+    }
+
+      type scheduled_action_type = {
+      resize_cluster: Params::resize_cluster_message?,
+      pause_cluster: {
+        cluster_identifier: ::String
+      }?,
+      resume_cluster: {
+        cluster_identifier: ::String
+      }?
+    }
+
+      type namespace_identifier_union = {
+      serverless_identifier: {
+        namespace_identifier: ::String,
+        workgroup_identifier: ::String
+      }?,
+      provisioned_identifier: {
+        cluster_identifier: ::String
+      }?
+    }
+
+      type parameter = {
+      parameter_name: ::String?,
+      parameter_value: ::String?,
+      description: ::String?,
+      source: ::String?,
+      data_type: ::String?,
+      allowed_values: ::String?,
+      apply_type: ("static" | "dynamic")?,
+      is_modifiable: bool?,
+      minimum_engine_version: ::String?
+    }
+
+    end
+  end
+end

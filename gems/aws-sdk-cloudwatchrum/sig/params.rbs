@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchRUM
+    module Params
+      type metric_definition_request = {
+      name: ::String,
+      value_key: ::String?,
+      unit_label: ::String?,
+      dimension_keys: Hash[::String, ::String]?,
+      event_pattern: ::String?,
+      namespace: ::String?
+    }
+
+      type app_monitor_configuration = {
+      identity_pool_id: ::String?,
+      excluded_pages: Array[::String]?,
+      included_pages: Array[::String]?,
+      favorite_pages: Array[::String]?,
+      session_sample_rate: ::Float?,
+      guest_role_arn: ::String?,
+      allow_cookies: bool?,
+      telemetries: Array[("errors" | "performance" | "http")]?,
+      enable_x_ray: bool?
+    }
+
+    end
+  end
+end

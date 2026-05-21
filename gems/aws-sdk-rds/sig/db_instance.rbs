@@ -332,7 +332,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ],
                     ?db_cluster_identifier: ::String,
                     ?storage_type: ::String,
@@ -361,7 +361,7 @@ module Aws
                       {
                         name: ::String?,
                         value: ::String?
-                      },
+                      }
                     ],
                     ?deletion_protection: bool,
                     ?max_allocated_storage: ::Integer,
@@ -384,7 +384,7 @@ module Aws
                         max_allocated_storage: ::Integer?,
                         storage_throughput: ::Integer?,
                         storage_type: ::String?
-                      },
+                      }
                     ],
                     ?tag_specifications: Array[
                       {
@@ -393,9 +393,9 @@ module Aws
                           {
                             key: ::String?,
                             value: ::String?
-                          },
+                          }
                         ]?
-                      },
+                      }
                     ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
@@ -418,7 +418,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?db_subnet_group_name: ::String,
                                  ?vpc_security_group_ids: Array[::String],
@@ -438,7 +438,7 @@ module Aws
                                    {
                                      name: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?use_default_processor_features: bool,
                                  ?deletion_protection: bool,
@@ -467,7 +467,7 @@ module Aws
                                      max_allocated_storage: ::Integer?,
                                      storage_throughput: ::Integer?,
                                      storage_type: ::String?
-                                   },
+                                   }
                                  ],
                                  ?tag_specifications: Array[
                                    {
@@ -476,9 +476,9 @@ module Aws
                                        {
                                          key: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ]?
-                                   },
+                                   }
                                  ],
                                  ?source_region: ::String
                                ) -> DBInstance
@@ -491,7 +491,7 @@ module Aws
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ]
                            ) -> DBSnapshot
                          | (?Hash[Symbol, untyped]) -> DBSnapshot
@@ -556,7 +556,7 @@ module Aws
                       {
                         name: ::String?,
                         value: ::String?
-                      },
+                      }
                     ],
                     ?use_default_processor_features: bool,
                     ?deletion_protection: bool,
@@ -583,7 +583,7 @@ module Aws
                         storage_throughput: ::Integer?,
                         storage_type: ::String?,
                         set_for_delete: bool?
-                      },
+                      }
                     ],
                     ?tag_specifications: Array[
                       {
@@ -592,9 +592,9 @@ module Aws
                           {
                             key: ::String?,
                             value: ::String?
-                          },
+                          }
                         ]?
-                      },
+                      }
                     ],
                     ?master_user_authentication_type: ("password" | "iam-db-auth")
                   ) -> DBInstance
@@ -611,9 +611,9 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]?
-                       },
+                       }
                      ]
                    ) -> DBInstance
                  | (?Hash[Symbol, untyped]) -> DBInstance
@@ -647,7 +647,7 @@ module Aws
                        {
                          key: ::String?,
                          value: ::String?
-                       },
+                       }
                      ],
                      ?storage_type: ::String,
                      ?tde_credential_arn: ::String,
@@ -665,7 +665,7 @@ module Aws
                        {
                          name: ::String?,
                          value: ::String?
-                       },
+                       }
                      ],
                      ?use_default_processor_features: bool,
                      ?db_parameter_group_name: ::String,
@@ -691,7 +691,7 @@ module Aws
                          max_allocated_storage: ::Integer?,
                          storage_throughput: ::Integer?,
                          storage_type: ::String?
-                       },
+                       }
                      ],
                      ?tag_specifications: Array[
                        {
@@ -700,9 +700,9 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]?
-                       },
+                       }
                      ],
                      ?manage_master_user_password: bool,
                      ?master_user_secret_kms_key_id: ::String
@@ -737,7 +737,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ]
                   ) -> Event::Collection
                 | (?Hash[Symbol, untyped]) -> Event::Collection
@@ -751,7 +751,7 @@ module Aws
                          {
                            name: ::String,
                            values: Array[::String]
-                         },
+                         }
                        ]
                      ) -> DBLogFile::Collection
                    | (?Hash[Symbol, untyped]) -> DBLogFile::Collection
@@ -769,7 +769,7 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ]
                                        ) -> PendingMaintenanceAction::Collection
                                      | (?Hash[Symbol, untyped]) -> PendingMaintenanceAction::Collection
@@ -788,7 +788,7 @@ module Aws
                          {
                            name: ::String,
                            values: Array[::String]
-                         },
+                         }
                        ],
                        ?include_shared: bool,
                        ?include_public: bool,

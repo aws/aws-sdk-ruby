@@ -1,0 +1,86 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ACMPCA
+    module Params
+      type asn1_subject = {
+      country: ::String?,
+      organization: ::String?,
+      organizational_unit: ::String?,
+      distinguished_name_qualifier: ::String?,
+      state: ::String?,
+      common_name: ::String?,
+      serial_number: ::String?,
+      locality: ::String?,
+      title: ::String?,
+      surname: ::String?,
+      given_name: ::String?,
+      initials: ::String?,
+      pseudonym: ::String?,
+      generation_qualifier: ::String?,
+      custom_attributes: Array[
+        {
+          object_identifier: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type key_usage = {
+      digital_signature: bool?,
+      non_repudiation: bool?,
+      key_encipherment: bool?,
+      data_encipherment: bool?,
+      key_agreement: bool?,
+      key_cert_sign: bool?,
+      crl_sign: bool?,
+      encipher_only: bool?,
+      decipher_only: bool?
+    }
+
+      type general_name = {
+      other_name: {
+        type_id: ::String,
+        value: ::String
+      }?,
+      rfc_822_name: ::String?,
+      dns_name: ::String?,
+      directory_name: Params::asn1_subject?,
+      edi_party_name: {
+        party_name: ::String,
+        name_assigner: ::String?
+      }?,
+      uniform_resource_identifier: ::String?,
+      ip_address: ::String?,
+      registered_id: ::String?
+    }
+
+      type crl_configuration = {
+      enabled: bool,
+      expiration_in_days: ::Integer?,
+      custom_cname: ::String?,
+      s3_bucket_name: ::String?,
+      s3_object_acl: ("PUBLIC_READ" | "BUCKET_OWNER_FULL_CONTROL")?,
+      crl_distribution_point_extension_configuration: {
+        omit_extension: bool
+      }?,
+      crl_type: ("COMPLETE" | "PARTITIONED")?,
+      custom_path: ::String?
+    }
+
+      type revocation_configuration = {
+      crl_configuration: Params::crl_configuration?,
+      ocsp_configuration: {
+        enabled: bool,
+        ocsp_custom_cname: ::String?
+      }?
+    }
+
+    end
+  end
+end

@@ -289,6 +289,7 @@ module Aws::BedrockRuntime
     ReasoningContentBlockDelta = Shapes::UnionShape.new(name: 'ReasoningContentBlockDelta')
     ReasoningTextBlock = Shapes::StructureShape.new(name: 'ReasoningTextBlock')
     RequestMetadata = Shapes::MapShape.new(name: 'RequestMetadata')
+    RequestMetadataJson = Shapes::StringShape.new(name: 'RequestMetadataJson')
     RequestMetadataKeyString = Shapes::StringShape.new(name: 'RequestMetadataKeyString')
     RequestMetadataValueString = Shapes::StringShape.new(name: 'RequestMetadataValueString')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -1064,6 +1065,7 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
     InvokeModelRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
+    InvokeModelRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadataJson, location: "header", location_name: "X-Amzn-Bedrock-Request-Metadata"))
     InvokeModelRequest.struct_class = Types::InvokeModelRequest
     InvokeModelRequest[:payload] = :body
     InvokeModelRequest[:payload_member] = InvokeModelRequest.member(:body)
@@ -1111,6 +1113,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: GuardrailVersion, location: "header", location_name: "X-Amzn-Bedrock-GuardrailVersion"))
     InvokeModelWithResponseStreamRequest.add_member(:performance_config_latency, Shapes::ShapeRef.new(shape: PerformanceConfigLatency, location: "header", location_name: "X-Amzn-Bedrock-PerformanceConfig-Latency"))
     InvokeModelWithResponseStreamRequest.add_member(:service_tier, Shapes::ShapeRef.new(shape: ServiceTierType, location: "header", location_name: "X-Amzn-Bedrock-Service-Tier"))
+    InvokeModelWithResponseStreamRequest.add_member(:request_metadata, Shapes::ShapeRef.new(shape: RequestMetadataJson, location: "header", location_name: "X-Amzn-Bedrock-Request-Metadata"))
     InvokeModelWithResponseStreamRequest.struct_class = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamRequest[:payload] = :body
     InvokeModelWithResponseStreamRequest[:payload_member] = InvokeModelWithResponseStreamRequest.member(:body)

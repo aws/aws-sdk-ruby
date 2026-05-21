@@ -1247,6 +1247,12 @@ module Aws::KMS
     # temporary permissions because you can create one, use its permissions,
     # and delete it without changing your key policies or IAM policies.
     #
+    # You can create a grant for an Amazon Web Services principal (IAM user,
+    # IAM role, or Amazon Web Services account) by specifying the
+    # `GranteePrincipal` parameter. You can also create a grant for an
+    # Amazon Web Services service principal by specifying the
+    # `GranteeServicePrincipal` parameter.
+    #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][1] in the <i> <i>Key Management Service Developer
     # Guide</i> </i>. For examples of creating grants in several programming
@@ -1320,7 +1326,7 @@ module Aws::KMS
     #   To get the key ID and key ARN for a KMS key, use ListKeys or
     #   DescribeKey.
     #
-    # @option params [required, String] :grantee_principal
+    # @option params [String] :grantee_principal
     #   The identity that gets the permissions specified in the grant.
     #
     #   To specify the grantee principal, use the Amazon Resource Name (ARN)
@@ -1329,6 +1335,9 @@ module Aws::KMS
     #   assumed role users. For help with the ARN syntax for a principal, see
     #   [IAM ARNs][1] in the <i> <i>Identity and Access Management User
     #   Guide</i> </i>.
+    #
+    #   You must specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
     #
     #
     #
@@ -1349,6 +1358,9 @@ module Aws::KMS
     #   have permission to retire the grant or revoke the grant. For details,
     #   see RevokeGrant and [Retiring and revoking grants][3] in the *Key
     #   Management Service Developer Guide*.
+    #
+    #   You can specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
     #
     #
     #
@@ -1378,39 +1390,52 @@ module Aws::KMS
     #   This field may be displayed in plaintext in CloudTrail logs and other
     #   output.
     #
-    #   KMS supports the `EncryptionContextEquals` and
-    #   `EncryptionContextSubset` grant constraints, which allow the
-    #   permissions in the grant only when the encryption context in the
-    #   request matches (`EncryptionContextEquals`) or includes
-    #   (`EncryptionContextSubset`) the encryption context specified in the
-    #   constraint.
+    #   KMS supports the following grant constraints.
     #
-    #   The encryption context grant constraints are supported only on [grant
-    #   operations][1] that include an `EncryptionContext` parameter, such as
-    #   cryptographic operations on symmetric encryption KMS keys. Grants with
-    #   grant constraints can include the DescribeKey and RetireGrant
-    #   operations, but the constraint doesn't apply to these operations. If
-    #   a grant with a grant constraint includes the `CreateGrant` operation,
-    #   the constraint requires that any grants created with the `CreateGrant`
-    #   permission have an equally strict or stricter encryption context
-    #   constraint.
+    #   * `EncryptionContextEquals` and `EncryptionContextSubset` — These
+    #     encryption context grant constraints allow the permissions in the
+    #     grant only when the encryption context in the request matches
+    #     (`EncryptionContextEquals`) or includes (`EncryptionContextSubset`)
+    #     the encryption context specified in the constraint.
     #
-    #   You cannot use an encryption context grant constraint for
-    #   cryptographic operations with asymmetric KMS keys or HMAC KMS keys.
-    #   Operations with these keys don't support an encryption context.
+    #     Encryption context grant constraints are supported only on [grant
+    #     operations][1] that include an `EncryptionContext` parameter, such
+    #     as cryptographic operations on symmetric encryption KMS keys. You
+    #     cannot use an encryption context grant constraint for cryptographic
+    #     operations with asymmetric KMS keys or HMAC KMS keys. Operations
+    #     with these keys don't support an encryption context. Grants with
+    #     encryption context grant constraints can include the DescribeKey and
+    #     RetireGrant operations, but the constraint doesn't apply to these
+    #     operations. If a grant with an encryption context grant constraint
+    #     includes the `CreateGrant` operation, the constraint requires that
+    #     any grants created with the `CreateGrant` permission have an equally
+    #     strict or stricter encryption context constraint.
     #
-    #   Each constraint value can include up to 8 encryption context pairs.
-    #   The encryption context value in each constraint cannot exceed 384
-    #   characters. For information about grant constraints, see [Using grant
-    #   constraints][2] in the *Key Management Service Developer Guide*. For
-    #   more information about encryption context, see [Encryption context][3]
-    #   in the <i> <i>Key Management Service Developer Guide</i> </i>.
+    #     Each constraint value can include up to 8 encryption context pairs.
+    #     The encryption context value in each constraint cannot exceed 384
+    #     characters. For more information about encryption context, see
+    #     [Encryption context][2] in the <i> <i>Key Management Service
+    #     Developer Guide</i> </i>.
+    #
+    #   * `SourceArn` — This grant constraint allows the permissions in the
+    #     grant only when the request is made on behalf of a specific Amazon
+    #     Web Services resource, identified by its [Amazon Resource Name
+    #     (ARN)][3]. This is effectively the same as having the
+    #     [aws:SourceArn][4] global condition key in the grant. The SourceArn
+    #     constraint is supported on grants for all types of KMS keys and can
+    #     also be applied to the DescribeKey operation when specified in the
+    #     request. However, it does not apply to RetireGrant operation.
+    #
+    #   For information about grant constraints, see [Using grant
+    #   constraints][5] in the *Key Management Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -1456,6 +1481,32 @@ module Aws::KMS
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #
+    # @option params [String] :grantee_service_principal
+    #   The Amazon Web Services [service principal][1] that gets the
+    #   permissions specified in the grant.
+    #
+    #   When you specify a `GranteeServicePrincipal`, you must also specify a
+    #   `SourceArn` grant constraint. In addition, you must specify either a
+    #   `RetiringPrincipal` or a `RetiringServicePrincipal`.
+    #
+    #   You must specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #
+    # @option params [String] :retiring_service_principal
+    #   The Amazon Web Services [service principal][1] that has permission to
+    #   use the RetireGrant operation to retire the grant.
+    #
+    #   You can specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #
     # @return [Types::CreateGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGrantResponse#grant_token #grant_token} => String
@@ -1481,11 +1532,38 @@ module Aws::KMS
     #     grant_token: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA", # The grant token.
     #   }
     #
+    # @example Example: To create a grant for a service principal
+    #
+    #   # The following example creates a grant that allows the specified AWS service principal to encrypt and decrypt data with
+    #   # the specified KMS key. The grant includes a SourceArn constraint that restricts the grant permissions to requests
+    #   # associated with the specified DynamoDB table.
+    #
+    #   resp = client.create_grant({
+    #     constraints: {
+    #       source_arn: "arn:aws:dynamodb:us-east-2:444455556666:table/ExampleTable", 
+    #     }, # The SourceArn grant constraint restricts the grant permissions to requests associated with the specified AWS resource.
+    #     grantee_service_principal: "service-name.amazonaws.com", # The AWS service principal that is given permission to perform the operations specified in the grant.
+    #     key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key to which the grant applies. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
+    #     operations: [
+    #       "Encrypt", 
+    #       "Decrypt", 
+    #       "GenerateDataKey", 
+    #       "DescribeKey", 
+    #     ], # A list of operations that the grant allows.
+    #     retiring_service_principal: "service-name.amazonaws.com", # The AWS service principal that can retire the grant.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grant_id: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", # The unique identifier of the grant.
+    #     grant_token: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW...", # The grant token.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_grant({
     #     key_id: "KeyIdType", # required
-    #     grantee_principal: "PrincipalIdType", # required
+    #     grantee_principal: "PrincipalIdType",
     #     retiring_principal: "PrincipalIdType",
     #     operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac, DeriveSharedSecret
     #     constraints: {
@@ -1495,10 +1573,13 @@ module Aws::KMS
     #       encryption_context_equals: {
     #         "EncryptionContextKey" => "EncryptionContextValue",
     #       },
+    #       source_arn: "GrantConstraintSourceArnType",
     #     },
     #     grant_tokens: ["GrantTokenType"],
     #     name: "GrantNameType",
     #     dry_run: false,
+    #     grantee_service_principal: "ServicePrincipalType",
+    #     retiring_service_principal: "ServicePrincipalType",
     #   })
     #
     # @example Response structure
@@ -7456,7 +7537,7 @@ module Aws::KMS
     # Gets a list of all grants for the specified KMS key.
     #
     # You must specify the KMS key in all requests. You can filter the grant
-    # list by grant ID or grantee principal.
+    # list by grant ID, grantee principal, or grantee service principal.
     #
     # For detailed information about grants, including grant terminology,
     # see [Grants in KMS][1] in the <i> <i>Key Management Service Developer
@@ -7464,12 +7545,18 @@ module Aws::KMS
     # languages, see [Use CreateGrant with an Amazon Web Services SDK or
     # CLI][2].
     #
-    # <note markdown="1"> The `GranteePrincipal` field in the `ListGrants` response usually
-    # contains the user or role designated as the grantee principal in the
-    # grant. However, when the grantee principal in the grant is an Amazon
-    # Web Services service, the `GranteePrincipal` field contains the
-    # [service principal][3], which might represent several different
-    # grantee principals.
+    # <note markdown="1"> When a grant is created with the `GranteePrincipal` field, the
+    # `ListGrants` response usually contains the user or role designated as
+    # the grantee principal in the grant. However, if the grantee principal
+    # is an Amazon Web Services service, the `GranteePrincipal` field
+    # contains an Amazon Web Services [service principal][3], which might
+    # correspond to several different grantee principals, such as an IAM
+    # user, IAM role, or Amazon Web Services account.
+    #
+    #  When a grant is created with the `GranteeServicePrincipal` field, the
+    # `ListGrants` response always includes a `GranteeServicePrincipal` that
+    # indicates the grantee is actually an Amazon Web Services [service
+    # principal][3].
     #
     #  </note>
     #
@@ -7537,6 +7624,17 @@ module Aws::KMS
     # @option params [String] :grantee_principal
     #   Returns only grants where the specified principal is the grantee
     #   principal for the grant.
+    #
+    #   You can specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
+    #
+    # @option params [String] :grantee_service_principal
+    #   Returns only grants where the specified Amazon Web Services service
+    #   principal is the grantee service principal for the grant. This filter
+    #   is only usable by callers in a service principal.
+    #
+    #   You can specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
     #
     # @return [Types::ListGrantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -7613,6 +7711,40 @@ module Aws::KMS
     #     truncated: true, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
     #   }
     #
+    # @example Example: To list grants for a grantee service principal
+    #
+    #   # The following example lists grants for the specified KMS key that were created with a GranteeServicePrincipal. The
+    #   # response includes the GranteeServicePrincipal, RetiringServicePrincipal, and SourceArn constraint fields.
+    #
+    #   resp = client.list_grants({
+    #     grantee_service_principal: "service-name.amazonaws.com", # Returns only grants where the specified AWS service principal is the grantee service principal.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The identifier of the KMS key whose grants you want to list. You can use the key ID or the Amazon Resource Name (ARN) of the KMS key.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grants: [
+    #       {
+    #         constraints: {
+    #           source_arn: "arn:aws:dynamodb:us-east-2:111122223333:table/ExampleTable", 
+    #         }, 
+    #         creation_date: Time.parse("2026-03-06T10:15:00-08:00"), 
+    #         grant_id: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", 
+    #         grantee_service_principal: "service-name.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::111122223333:root", 
+    #         key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Encrypt", 
+    #           "Decrypt", 
+    #           "GenerateDataKey", 
+    #           "DescribeKey", 
+    #         ], 
+    #         retiring_service_principal: "service-name.amazonaws.com", 
+    #       }, 
+    #     ], # A list of grants.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_grants({
@@ -7621,6 +7753,7 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     grant_id: "GrantIdType",
     #     grantee_principal: "PrincipalIdType",
+    #     grantee_service_principal: "ServicePrincipalType",
     #   })
     #
     # @example Response structure
@@ -7639,6 +7772,9 @@ module Aws::KMS
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
     #   resp.grants[0].constraints.encryption_context_equals["EncryptionContextKey"] #=> String
+    #   resp.grants[0].constraints.source_arn #=> String
+    #   resp.grants[0].grantee_service_principal #=> String
+    #   resp.grants[0].retiring_service_principal #=> String
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
     #
@@ -8141,7 +8277,8 @@ module Aws::KMS
     end
 
     # Returns information about all grants in the Amazon Web Services
-    # account and Region that have the specified retiring principal.
+    # account and Region that have the specified retiring principal or
+    # retiring service principal.
     #
     # You can specify any principal in your Amazon Web Services account. The
     # grants that are returned include grants for KMS keys in your Amazon
@@ -8166,12 +8303,16 @@ module Aws::KMS
     # **Required permissions**: [kms:ListRetirableGrants][3] (IAM policy) in
     # your Amazon Web Services account.
     #
-    # <note markdown="1"> KMS authorizes `ListRetirableGrants` requests by evaluating the caller
-    # account's kms:ListRetirableGrants permissions. The authorized
-    # resource in `ListRetirableGrants` calls is the retiring principal
-    # specified in the request. KMS does not evaluate the caller's
-    # permissions to verify their access to any KMS keys or grants that
-    # might be returned by the `ListRetirableGrants` call.
+    # <note markdown="1"> When listing retirable grants by `RetiringPrincipal`, KMS authorizes
+    # `ListRetirableGrants` requests by evaluating the caller account's
+    # kms:ListRetirableGrants permissions. The authorized resource in
+    # `ListRetirableGrants` calls is the retiring principal specified in the
+    # request. KMS does not evaluate the caller's permissions to verify
+    # their access to any KMS keys or grants that might be returned by the
+    # `ListRetirableGrants` call.
+    #
+    #  The `RetiringServicePrincipal` filter is only usable by callers in a
+    # service principal.
     #
     #  </note>
     #
@@ -8208,7 +8349,7 @@ module Aws::KMS
     #   response with truncated results. Set it to the value of `NextMarker`
     #   from the truncated response you just received.
     #
-    # @option params [required, String] :retiring_principal
+    # @option params [String] :retiring_principal
     #   The retiring principal for which to list grants. Enter a principal in
     #   your Amazon Web Services account.
     #
@@ -8219,10 +8360,20 @@ module Aws::KMS
     #   principal, see [IAM ARNs][2] in the <i> <i>Identity and Access
     #   Management User Guide</i> </i>.
     #
+    #   You must specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #
+    # @option params [String] :retiring_service_principal
+    #   The retiring service principal for which to list grants. This filter
+    #   is only usable by callers in a service principal.
+    #
+    #   You must specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
     #
     # @return [Types::ListGrantsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8260,12 +8411,45 @@ module Aws::KMS
     #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
     #   }
     #
+    # @example Example: To list grants that the specified service principal can retire
+    #
+    #   # The following example lists the grants that the specified AWS service principal can retire.
+    #
+    #   resp = client.list_retirable_grants({
+    #     retiring_service_principal: "service-name.amazonaws.com", # The retiring service principal whose grants you want to list. Use the AWS service principal name of the service (for example, service-name.amazonaws.com).
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     grants: [
+    #       {
+    #         constraints: {
+    #           source_arn: "arn:aws:dynamodb:us-east-2:444455556666:table/ExampleTable", 
+    #         }, 
+    #         creation_date: Time.parse("2026-03-06T10:15:00-08:00"), 
+    #         grant_id: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2", 
+    #         grantee_service_principal: "service-name.amazonaws.com", 
+    #         issuing_account: "arn:aws:iam::444455556666:root", 
+    #         key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab", 
+    #         operations: [
+    #           "Encrypt", 
+    #           "Decrypt", 
+    #           "GenerateDataKey", 
+    #           "DescribeKey", 
+    #         ], 
+    #         retiring_service_principal: "service-name.amazonaws.com", 
+    #       }, 
+    #     ], # A list of grants that the specified service principal can retire.
+    #     truncated: false, # A boolean that indicates whether there are more items in the list. Returns true when there are more items, or false when there are not.
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_retirable_grants({
     #     limit: 1,
     #     marker: "MarkerType",
-    #     retiring_principal: "PrincipalIdType", # required
+    #     retiring_principal: "PrincipalIdType",
+    #     retiring_service_principal: "ServicePrincipalType",
     #   })
     #
     # @example Response structure
@@ -8284,6 +8468,9 @@ module Aws::KMS
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
     #   resp.grants[0].constraints.encryption_context_equals["EncryptionContextKey"] #=> String
+    #   resp.grants[0].constraints.source_arn #=> String
+    #   resp.grants[0].grantee_service_principal #=> String
+    #   resp.grants[0].retiring_service_principal #=> String
     #   resp.next_marker #=> String
     #   resp.truncated #=> Boolean
     #
@@ -8517,6 +8704,13 @@ module Aws::KMS
     # The KMS key that you use for this operation must be in a compatible
     # key state. For details, see [Key states of KMS keys][6] in the *Key
     # Management Service Developer Guide*.
+    #
+    # <note markdown="1"> When using grants with `SourceArn` constraints for `ReEncrypt`
+    # operations, the grants on both the source KMS key (for
+    # `ReEncryptFrom`) and the destination KMS key (for `ReEncryptTo`) must
+    # specify the same `SourceArn` value.
+    #
+    #  </note>
     #
     # **Cross-account use**: Yes. The source KMS key and destination KMS key
     # can be in different Amazon Web Services accounts. Either or both KMS
@@ -11363,7 +11557,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.125.0'
+      context[:gem_version] = '1.127.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2281,6 +2281,7 @@ module Aws::CustomerProfiles
       attr_accessor training_frequency: ::Integer
       attr_accessor inference_config: Types::InferenceConfig
       attr_accessor included_columns: ::Hash[::String, ::Array[::String]]
+      attr_accessor excluded_columns: ::Hash[::String, ::Array[::String]]
       SENSITIVE: []
     end
 

@@ -116,7 +116,7 @@ module Aws
                                             {
                                               type: ("JSON_SCHEMA" | "LAMBDA"),
                                               content: ::String
-                                            },
+                                            }
                                           ],
                                           ?tags: Hash[::String, ::String],
                                           ?type: ::String,
@@ -166,7 +166,7 @@ module Aws
                                   {
                                     alarm_arn: ::String,
                                     alarm_role_arn: ::String?
-                                  },
+                                  }
                                 ],
                                 ?tags: Hash[::String, ::String]
                               ) -> _CreateEnvironmentResponseSuccess
@@ -192,7 +192,7 @@ module Aws
                                     description: ::String?,
                                     uri: ::String?,
                                     role_arn: ::String?
-                                  },
+                                  }
                                 ]],
                               ?parameters: Hash[::String, {
                                   description: ::String?,
@@ -724,7 +724,7 @@ module Aws
                                             {
                                               type: ("JSON_SCHEMA" | "LAMBDA"),
                                               content: ::String
-                                            },
+                                            }
                                           ],
                                           ?kms_key_identifier: ::String
                                         ) -> _UpdateConfigurationProfileResponseSuccess
@@ -771,7 +771,7 @@ module Aws
                                   {
                                     alarm_arn: ::String,
                                     alarm_role_arn: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
@@ -796,7 +796,7 @@ module Aws
                                     description: ::String?,
                                     uri: ::String?,
                                     role_arn: ::String?
-                                  },
+                                  }
                                 ]],
                               ?parameters: Hash[::String, {
                                   description: ::String?,

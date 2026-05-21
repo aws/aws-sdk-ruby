@@ -126,7 +126,7 @@ module Aws
                                              {
                                                resource_type: ("PACKAGE"),
                                                tags: Hash[::String, ::String]
-                                             },
+                                             }
                                            ],
                                            ?node_description: ::String,
                                            node_name: ::String,
@@ -170,7 +170,7 @@ module Aws
                                          {
                                            resource_type: ("PACKAGE"),
                                            tags: Hash[::String, ::String]
-                                         },
+                                         }
                                        ],
                                        job_type: ("NODE_PACKAGE_VERSION" | "MARKETPLACE_NODE_PACKAGE_VERSION"),
                                        output_config: {
@@ -553,24 +553,8 @@ module Aws
                               ?description: ::String,
                               name: ::String,
                               ?networking_configuration: {
-                                ethernet_0: {
-                                  connection_type: ("STATIC_IP" | "DHCP"),
-                                  static_ip_connection_info: {
-                                    default_gateway: ::String,
-                                    dns: Array[::String],
-                                    ip_address: ::String,
-                                    mask: ::String
-                                  }?
-                                }?,
-                                ethernet_1: {
-                                  connection_type: ("STATIC_IP" | "DHCP"),
-                                  static_ip_connection_info: {
-                                    default_gateway: ::String,
-                                    dns: Array[::String],
-                                    ip_address: ::String,
-                                    mask: ::String
-                                  }?
-                                }?,
+                                ethernet_0: Params::ethernet_payload?,
+                                ethernet_1: Params::ethernet_payload?,
                                 ntp: {
                                   ntp_servers: Array[::String]
                                 }?
@@ -612,7 +596,7 @@ module Aws
                                                           {
                                                             node_instance_id: ::String,
                                                             signal: ("PAUSE" | "RESUME")
-                                                          },
+                                                          }
                                                         ]
                                                       ) -> _SignalApplicationInstanceNodeInstancesResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SignalApplicationInstanceNodeInstancesResponseSuccess

@@ -90,7 +90,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _AddTagsToResourceResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
@@ -144,13 +144,13 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?registration_metadata: Array[
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _CreateActivationResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateActivationResponseSuccess
@@ -169,7 +169,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     values: Array[::String]?
-                                  },
+                                  }
                                 ],
                                 ?schedule_expression: ::String,
                                 ?output_location: {
@@ -188,49 +188,25 @@ module Aws
                                 ?apply_only_at_cron_interval: bool,
                                 ?calendar_names: Array[::String],
                                 ?target_locations: Array[
-                                  {
-                                    accounts: Array[::String]?,
-                                    regions: Array[::String]?,
-                                    target_location_max_concurrency: ::String?,
-                                    target_location_max_errors: ::String?,
-                                    execution_role_name: ::String?,
-                                    target_location_alarm_configuration: {
-                                      ignore_poll_alarm_failure: bool?,
-                                      alarms: Array[
-                                        {
-                                          name: ::String
-                                        },
-                                      ]
-                                    }?,
-                                    include_child_organization_units: bool?,
-                                    exclude_accounts: Array[::String]?,
-                                    targets: Array[
-                                      {
-                                        key: ::String?,
-                                        values: Array[::String]?
-                                      },
-                                    ]?,
-                                    targets_max_concurrency: ::String?,
-                                    targets_max_errors: ::String?
-                                  },
+                                  Params::target_location
                                 ],
                                 ?schedule_offset: ::Integer,
                                 ?duration: ::Integer,
                                 ?target_maps: Array[
-                                  Hash[::String, Array[::String]],
+                                  Hash[::String, Array[::String]]
                                 ],
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 ?alarm_configuration: {
                                   ignore_poll_alarm_failure: bool?,
                                   alarms: Array[
                                     {
                                       name: ::String
-                                    },
+                                    }
                                   ]
                                 },
                                 ?association_dispatch_assume_role: ::String
@@ -255,7 +231,7 @@ module Aws
                                             {
                                               key: ::String?,
                                               values: Array[::String]?
-                                            },
+                                            }
                                           ]?,
                                           schedule_expression: ::String?,
                                           output_location: {
@@ -273,46 +249,22 @@ module Aws
                                           apply_only_at_cron_interval: bool?,
                                           calendar_names: Array[::String]?,
                                           target_locations: Array[
-                                            {
-                                              accounts: Array[::String]?,
-                                              regions: Array[::String]?,
-                                              target_location_max_concurrency: ::String?,
-                                              target_location_max_errors: ::String?,
-                                              execution_role_name: ::String?,
-                                              target_location_alarm_configuration: {
-                                                ignore_poll_alarm_failure: bool?,
-                                                alarms: Array[
-                                                  {
-                                                    name: ::String
-                                                  },
-                                                ]
-                                              }?,
-                                              include_child_organization_units: bool?,
-                                              exclude_accounts: Array[::String]?,
-                                              targets: Array[
-                                                {
-                                                  key: ::String?,
-                                                  values: Array[::String]?
-                                                },
-                                              ]?,
-                                              targets_max_concurrency: ::String?,
-                                              targets_max_errors: ::String?
-                                            },
+                                            Params::target_location
                                           ]?,
                                           schedule_offset: ::Integer?,
                                           duration: ::Integer?,
                                           target_maps: Array[
-                                            Hash[::String, Array[::String]],
+                                            Hash[::String, Array[::String]]
                                           ]?,
                                           alarm_configuration: {
                                             ignore_poll_alarm_failure: bool?,
                                             alarms: Array[
                                               {
                                                 name: ::String
-                                              },
+                                              }
                                             ]
                                           }?
-                                        },
+                                        }
                                       ],
                                       ?association_dispatch_assume_role: ::String
                                     ) -> _CreateAssociationBatchResponseSuccess
@@ -331,14 +283,14 @@ module Aws
                                  version: ::String?,
                                  require_type: ::String?,
                                  version_name: ::String?
-                               },
+                               }
                              ],
                              ?attachments: Array[
                                {
                                  key: ("SourceUrl" | "S3FileUrl" | "AttachmentReference")?,
                                  values: Array[::String]?,
                                  name: ::String?
-                               },
+                               }
                              ],
                              name: ::String,
                              ?display_name: ::String,
@@ -350,7 +302,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateDocumentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDocumentResponseSuccess
@@ -376,7 +328,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateMaintenanceWindowResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMaintenanceWindowResponseSuccess
@@ -397,13 +349,13 @@ module Aws
                              ?notifications: Array[
                                {
                                  arn: ::String?
-                               },
+                               }
                              ],
                              ?priority: ::Integer,
                              ?related_ops_items: Array[
                                {
                                  ops_item_id: ::String
-                               },
+                               }
                              ],
                              source: ::String,
                              title: ::String,
@@ -411,7 +363,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              ?category: ::String,
                              ?severity: ::String,
@@ -437,7 +389,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _CreateOpsMetadataResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpsMetadataResponseSuccess
@@ -455,27 +407,10 @@ module Aws
                                        {
                                          key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
                                          values: Array[::String]
-                                       },
+                                       }
                                      ]
                                    },
-                                   ?approval_rules: {
-                                     patch_rules: Array[
-                                       {
-                                         patch_filter_group: {
-                                           patch_filters: Array[
-                                             {
-                                               key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
-                                               values: Array[::String]
-                                             },
-                                           ]
-                                         },
-                                         compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
-                                         approve_after_days: ::Integer?,
-                                         approve_until_date: ::String?,
-                                         enable_non_security: bool?
-                                       },
-                                     ]
-                                   },
+                                   ?approval_rules: Params::patch_rule_group,
                                    ?approved_patches: Array[::String],
                                    ?approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
                                    ?approved_patches_enable_non_security: bool,
@@ -487,7 +422,7 @@ module Aws
                                        name: ::String,
                                        products: Array[::String],
                                        configuration: ::String
-                                     },
+                                     }
                                    ],
                                    ?available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT"),
                                    ?client_token: ::String,
@@ -495,7 +430,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreatePatchBaselineResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePatchBaselineResponseSuccess
@@ -517,20 +452,7 @@ module Aws
                                          }?
                                        },
                                        ?sync_type: ::String,
-                                       ?sync_source: {
-                                         source_type: ::String,
-                                         aws_organizations_source: {
-                                           organization_source_type: ::String,
-                                           organizational_units: Array[
-                                             {
-                                               organizational_unit_id: ::String?
-                                             },
-                                           ]?
-                                         }?,
-                                         source_regions: Array[::String],
-                                         include_future_regions: bool?,
-                                         enable_all_ops_data_sources: bool?
-                                       }
+                                       ?sync_source: Params::resource_data_sync_source
                                      ) -> _CreateResourceDataSyncResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceDataSyncResponseSuccess
 
@@ -717,7 +639,7 @@ module Aws
                                     {
                                       filter_key: ("ActivationIds" | "DefaultInstanceName" | "IamRole")?,
                                       filter_values: Array[::String]?
-                                    },
+                                    }
                                   ],
                                   ?max_results: ::Integer,
                                   ?next_token: ::String
@@ -750,7 +672,7 @@ module Aws
                                                       {
                                                         key: ("Status" | "ResourceId" | "ResourceType"),
                                                         value: ::String
-                                                      },
+                                                      }
                                                     ],
                                                     ?max_results: ::Integer,
                                                     ?next_token: ::String
@@ -770,7 +692,7 @@ module Aws
                                                  key: ("ExecutionId" | "Status" | "CreatedTime"),
                                                  value: ::String,
                                                  type: ("EQUAL" | "LESS_THAN" | "GREATER_THAN")
-                                               },
+                                               }
                                              ],
                                              ?max_results: ::Integer,
                                              ?next_token: ::String
@@ -788,7 +710,7 @@ module Aws
                                               {
                                                 key: ("DocumentNamePrefix" | "ExecutionStatus" | "ExecutionId" | "ParentExecutionId" | "CurrentAction" | "StartTimeBefore" | "StartTimeAfter" | "AutomationType" | "TagKey" | "TargetResourceGroup" | "AutomationSubtype" | "OpsItemId"),
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?max_results: ::Integer,
                                             ?next_token: ::String
@@ -807,7 +729,7 @@ module Aws
                                                    {
                                                      key: ("StartTimeBefore" | "StartTimeAfter" | "StepExecutionStatus" | "StepExecutionId" | "StepName" | "Action" | "ParentStepExecutionId" | "ParentStepIteration" | "ParentStepIteratorValue"),
                                                      values: Array[::String]
-                                                   },
+                                                   }
                                                  ],
                                                  ?next_token: ::String,
                                                  ?max_results: ::Integer,
@@ -826,7 +748,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             values: Array[::String]?
-                                          },
+                                          }
                                         ],
                                         ?max_results: ::Integer,
                                         ?next_token: ::String
@@ -910,13 +832,13 @@ module Aws
                                              {
                                                key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus"),
                                                value_set: Array[::String]
-                                             },
+                                             }
                                            ],
                                            ?filters: Array[
                                              {
                                                key: ::String,
                                                values: Array[::String]
-                                             },
+                                             }
                                            ],
                                            ?max_results: ::Integer,
                                            ?next_token: ::String
@@ -949,7 +871,7 @@ module Aws
                                                                 key: ::String,
                                                                 values: Array[::String],
                                                                 type: ("Equal" | "NotEqual" | "LessThan" | "GreaterThan")
-                                                              },
+                                                              }
                                                             ],
                                                             ?next_token: ::String,
                                                             ?max_results: ::Integer
@@ -968,7 +890,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            values: Array[::String]?
-                                         },
+                                         }
                                        ],
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
@@ -986,14 +908,14 @@ module Aws
                                             {
                                               key: ("InstanceIds" | "AgentVersion" | "PingStatus" | "PlatformTypes" | "DocumentName" | "ActivationIds" | "IamRole" | "ResourceType" | "AssociationStatus"),
                                               value_set: Array[::String]
-                                            },
+                                            }
                                           ],
                                           ?filters_with_operator: Array[
                                             {
                                               key: ::String,
                                               values: Array[::String],
                                               operator: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan")?
-                                            },
+                                            }
                                           ],
                                           ?max_results: ::Integer,
                                           ?next_token: ::String
@@ -1026,7 +948,7 @@ module Aws
                                                                       {
                                                                         key: ::String?,
                                                                         values: Array[::String]?
-                                                                      },
+                                                                      }
                                                                     ],
                                                                     ?max_results: ::Integer,
                                                                     ?next_token: ::String
@@ -1045,7 +967,7 @@ module Aws
                                                            {
                                                              key: ::String?,
                                                              values: Array[::String]?
-                                                           },
+                                                           }
                                                          ],
                                                          ?max_results: ::Integer,
                                                          ?next_token: ::String
@@ -1064,7 +986,7 @@ module Aws
                                                       {
                                                         key: ::String?,
                                                         values: Array[::String]?
-                                                      },
+                                                      }
                                                     ],
                                                     ?max_results: ::Integer,
                                                     ?next_token: ::String
@@ -1083,14 +1005,14 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       values: Array[::String]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?resource_type: ("INSTANCE" | "RESOURCE_GROUP"),
                                                   ?filters: Array[
                                                     {
                                                       key: ::String?,
                                                       values: Array[::String]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?max_results: ::Integer,
                                                   ?next_token: ::String
@@ -1109,7 +1031,7 @@ module Aws
                                                    {
                                                      key: ::String?,
                                                      values: Array[::String]?
-                                                   },
+                                                   }
                                                  ],
                                                  ?max_results: ::Integer,
                                                  ?next_token: ::String
@@ -1128,7 +1050,7 @@ module Aws
                                                  {
                                                    key: ::String?,
                                                    values: Array[::String]?
-                                                 },
+                                                 }
                                                ],
                                                ?max_results: ::Integer,
                                                ?next_token: ::String
@@ -1146,7 +1068,7 @@ module Aws
                                             {
                                               key: ::String?,
                                               values: Array[::String]?
-                                            },
+                                            }
                                           ],
                                           ?max_results: ::Integer,
                                           ?next_token: ::String
@@ -1164,7 +1086,7 @@ module Aws
                                                        {
                                                          key: ::String?,
                                                          values: Array[::String]?
-                                                       },
+                                                       }
                                                      ],
                                                      resource_type: ("INSTANCE" | "RESOURCE_GROUP"),
                                                      ?max_results: ::Integer,
@@ -1184,7 +1106,7 @@ module Aws
                                     key: ("Status" | "CreatedBy" | "Source" | "Priority" | "Title" | "OpsItemId" | "CreatedTime" | "LastModifiedTime" | "ActualStartTime" | "ActualEndTime" | "PlannedStartTime" | "PlannedEndTime" | "OperationalData" | "OperationalDataKey" | "OperationalDataValue" | "ResourceId" | "AutomationId" | "Category" | "Severity" | "OpsItemType" | "AccessRequestByRequesterArn" | "AccessRequestByRequesterId" | "AccessRequestByApproverArn" | "AccessRequestByApproverId" | "AccessRequestBySourceAccountId" | "AccessRequestBySourceOpsItemId" | "AccessRequestBySourceRegion" | "AccessRequestByIsReplica" | "AccessRequestByTargetResourceId" | "ChangeRequestByRequesterArn" | "ChangeRequestByRequesterName" | "ChangeRequestByApproverArn" | "ChangeRequestByApproverName" | "ChangeRequestByTemplate" | "ChangeRequestByTargetsResourceGroup" | "InsightByType" | "AccountId"),
                                     values: Array[::String],
                                     operator: ("Equal" | "Contains" | "GreaterThan" | "LessThan")
-                                  },
+                                  }
                                 ],
                                 ?max_results: ::Integer,
                                 ?next_token: ::String
@@ -1202,14 +1124,14 @@ module Aws
                                    {
                                      key: ("Name" | "Type" | "KeyId"),
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  ?parameter_filters: Array[
                                    {
                                      key: ::String,
                                      option: ::String?,
                                      values: Array[::String]?
-                                   },
+                                   }
                                  ],
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
@@ -1228,7 +1150,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           values: Array[::String]?
-                                        },
+                                        }
                                       ],
                                       ?max_results: ::Integer,
                                       ?next_token: ::String
@@ -1269,7 +1191,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        values: Array[::String]?
-                                     },
+                                     }
                                    ],
                                    ?next_token: ::String
                                  ) -> _DescribePatchGroupsResponseSuccess
@@ -1304,7 +1226,7 @@ module Aws
                                  {
                                    key: ("InvokedAfter" | "InvokedBefore" | "Target" | "Owner" | "Status" | "SessionId" | "AccessType"),
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _DescribeSessionsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSessionsResponseSuccess
@@ -1421,27 +1343,10 @@ module Aws
                                                               {
                                                                 key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
                                                                 values: Array[::String]
-                                                              },
+                                                              }
                                                             ]
                                                           }?,
-                                                          approval_rules: {
-                                                            patch_rules: Array[
-                                                              {
-                                                                patch_filter_group: {
-                                                                  patch_filters: Array[
-                                                                    {
-                                                                      key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
-                                                                      values: Array[::String]
-                                                                    },
-                                                                  ]
-                                                                },
-                                                                compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
-                                                                approve_after_days: ::Integer?,
-                                                                approve_until_date: ::String?,
-                                                                enable_non_security: bool?
-                                                              },
-                                                            ]
-                                                          }?,
+                                                          approval_rules: Params::patch_rule_group?,
                                                           approved_patches: Array[::String]?,
                                                           approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
                                                           rejected_patches: Array[::String]?,
@@ -1452,7 +1357,7 @@ module Aws
                                                               name: ::String,
                                                               products: Array[::String],
                                                               configuration: ::String
-                                                            },
+                                                            }
                                                           ]?,
                                                           available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT")?
                                                         },
@@ -1511,30 +1416,15 @@ module Aws
                                key: ::String,
                                values: Array[::String],
                                type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
-                             },
+                             }
                            ],
                            ?aggregators: Array[
-                             {
-                               expression: ::String?,
-                               aggregators: untyped?,
-                               groups: Array[
-                                 {
-                                   name: ::String,
-                                   filters: Array[
-                                     {
-                                       key: ::String,
-                                       values: Array[::String],
-                                       type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
-                                     },
-                                   ]
-                                 },
-                               ]?
-                             },
+                             Params::inventory_aggregator
                            ],
                            ?result_attributes: Array[
                              {
                                type_name: ::String
-                             },
+                             }
                            ],
                            ?next_token: ::String,
                            ?max_results: ::Integer
@@ -1707,28 +1597,15 @@ module Aws
                                  key: ::String,
                                  values: Array[::String],
                                  type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
-                               },
+                               }
                              ],
                              ?aggregators: Array[
-                               {
-                                 aggregator_type: ::String?,
-                                 type_name: ::String?,
-                                 attribute_name: ::String?,
-                                 values: Hash[::String, ::String]?,
-                                 filters: Array[
-                                   {
-                                     key: ::String,
-                                     values: Array[::String],
-                                     type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
-                                   },
-                                 ]?,
-                                 aggregators: untyped?
-                               },
+                               Params::ops_aggregator
                              ],
                              ?result_attributes: Array[
                                {
                                  type_name: ::String
-                               },
+                               }
                              ],
                              ?next_token: ::String,
                              ?max_results: ::Integer
@@ -1786,7 +1663,7 @@ module Aws
                                         key: ::String,
                                         option: ::String?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ],
                                     ?with_decryption: bool,
                                     ?max_results: ::Integer,
@@ -1892,7 +1769,7 @@ module Aws
                                  {
                                    key: ("InstanceId" | "Name" | "AssociationId" | "AssociationStatusName" | "LastExecutedBefore" | "LastExecutedAfter" | "AssociationName" | "ResourceGroupName"),
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?max_results: ::Integer,
                                ?next_token: ::String
@@ -1914,7 +1791,7 @@ module Aws
                                         {
                                           key: ("InvokedAfter" | "InvokedBefore" | "Status" | "ExecutionStage" | "DocumentName"),
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?details: bool
                                     ) -> _ListCommandInvocationsResponseSuccess
@@ -1935,7 +1812,7 @@ module Aws
                              {
                                key: ("InvokedAfter" | "InvokedBefore" | "Status" | "ExecutionStage" | "DocumentName"),
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _ListCommandsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCommandsResponseSuccess
@@ -1952,7 +1829,7 @@ module Aws
                                        key: ::String?,
                                        values: Array[::String]?,
                                        type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
-                                     },
+                                     }
                                    ],
                                    ?resource_ids: Array[::String],
                                    ?resource_types: Array[::String],
@@ -1973,7 +1850,7 @@ module Aws
                                            key: ::String?,
                                            values: Array[::String]?,
                                            type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
-                                         },
+                                         }
                                        ],
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
@@ -2022,13 +1899,13 @@ module Aws
                               {
                                 key: ("Name" | "Owner" | "PlatformTypes" | "DocumentType"),
                                 value: ::String
-                              },
+                              }
                             ],
                             ?filters: Array[
                               {
                                 key: ::String?,
                                 values: Array[::String]?
-                              },
+                              }
                             ],
                             ?max_results: ::Integer,
                             ?next_token: ::String
@@ -2053,7 +1930,7 @@ module Aws
                                         key: ::String,
                                         values: Array[::String],
                                         type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer
@@ -2073,7 +1950,7 @@ module Aws
                             key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId"),
                             values: Array[::String],
                             type: ("Equal" | "NotEqual" | "BeginWith")?
-                          },
+                          }
                         ],
                         ?next_token: ::String,
                         ?max_results: ::Integer
@@ -2093,7 +1970,7 @@ module Aws
                                     key: ("AgentType" | "AgentVersion" | "ComputerName" | "InstanceId" | "InstanceStatus" | "IpAddress" | "ManagedStatus" | "PlatformName" | "PlatformType" | "PlatformVersion" | "ResourceType" | "OrganizationalUnitId" | "OrganizationalUnitPath" | "Region" | "AccountId"),
                                     values: Array[::String],
                                     type: ("Equal" | "NotEqual" | "BeginWith")?
-                                  },
+                                  }
                                 ],
                                 aggregators: Array[
                                   {
@@ -2101,7 +1978,7 @@ module Aws
                                     type_name: ("Instance"),
                                     attribute_name: ("AgentVersion" | "PlatformName" | "PlatformType" | "PlatformVersion" | "Region" | "ResourceType"),
                                     aggregators: untyped?
-                                  },
+                                  }
                                 ],
                                 ?next_token: ::String,
                                 ?max_results: ::Integer
@@ -2120,7 +1997,7 @@ module Aws
                                       key: ("OpsItemId"),
                                       values: Array[::String],
                                       operator: ("Equal")
-                                    },
+                                    }
                                   ],
                                   ?max_results: ::Integer,
                                   ?next_token: ::String
@@ -2140,7 +2017,7 @@ module Aws
                                              key: ("ResourceType" | "AssociationId" | "ResourceUri"),
                                              values: Array[::String],
                                              operator: ("Equal")
-                                           },
+                                           }
                                          ],
                                          ?max_results: ::Integer,
                                          ?next_token: ::String
@@ -2158,7 +2035,7 @@ module Aws
                                  {
                                    key: ::String,
                                    values: Array[::String]
-                                 },
+                                 }
                                ],
                                ?max_results: ::Integer,
                                ?next_token: ::String
@@ -2177,7 +2054,7 @@ module Aws
                                                     key: ::String?,
                                                     values: Array[::String]?,
                                                     type: ("EQUAL" | "NOT_EQUAL" | "BEGIN_WITH" | "LESS_THAN" | "GREATER_THAN")?
-                                                  },
+                                                  }
                                                 ],
                                                 ?next_token: ::String,
                                                 ?max_results: ::Integer
@@ -2241,7 +2118,7 @@ module Aws
                                       severity: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
                                       status: ("COMPLIANT" | "NON_COMPLIANT"),
                                       details: Hash[::String, ::String]?
-                                    },
+                                    }
                                   ],
                                   ?item_content_hash: ::String,
                                   ?upload_type: ("COMPLETE" | "PARTIAL")
@@ -2262,10 +2139,10 @@ module Aws
                                capture_time: ::String,
                                content_hash: ::String?,
                                content: Array[
-                                 Hash[::String, ::String],
+                                 Hash[::String, ::String]
                                ]?,
                                context: Hash[::String, ::String]?
-                             },
+                             }
                            ]
                          ) -> _PutInventoryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutInventoryResponseSuccess
@@ -2288,7 +2165,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
                            ?tier: ("Standard" | "Advanced" | "Intelligent-Tiering"),
                            ?policies: ::String,
@@ -2344,7 +2221,7 @@ module Aws
                                                        {
                                                          key: ::String?,
                                                          values: Array[::String]?
-                                                       },
+                                                       }
                                                      ],
                                                      ?owner_information: ::String,
                                                      ?name: ::String,
@@ -2364,7 +2241,7 @@ module Aws
                                                      {
                                                        key: ::String?,
                                                        values: Array[::String]?
-                                                     },
+                                                     }
                                                    ],
                                                    task_arn: ::String,
                                                    ?service_role_arn: ::String,
@@ -2372,41 +2249,7 @@ module Aws
                                                    ?task_parameters: Hash[::String, {
                                                        values: Array[::String]?
                                                      }],
-                                                   ?task_invocation_parameters: {
-                                                     run_command: {
-                                                       comment: ::String?,
-                                                       cloud_watch_output_config: {
-                                                         cloud_watch_log_group_name: ::String?,
-                                                         cloud_watch_output_enabled: bool?
-                                                       }?,
-                                                       document_hash: ::String?,
-                                                       document_hash_type: ("Sha256" | "Sha1")?,
-                                                       document_version: ::String?,
-                                                       notification_config: {
-                                                         notification_arn: ::String?,
-                                                         notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
-                                                         notification_type: ("Command" | "Invocation")?
-                                                       }?,
-                                                       output_s3_bucket_name: ::String?,
-                                                       output_s3_key_prefix: ::String?,
-                                                       parameters: Hash[::String, Array[::String]]?,
-                                                       service_role_arn: ::String?,
-                                                       timeout_seconds: ::Integer?
-                                                     }?,
-                                                     automation: {
-                                                       document_version: ::String?,
-                                                       parameters: Hash[::String, Array[::String]]?
-                                                     }?,
-                                                     step_functions: {
-                                                       input: ::String?,
-                                                       name: ::String?
-                                                     }?,
-                                                     lambda: {
-                                                       client_context: ::String?,
-                                                       qualifier: ::String?,
-                                                       payload: ::String?
-                                                     }?
-                                                   },
+                                                   ?task_invocation_parameters: Params::maintenance_window_task_invocation_parameters,
                                                    ?priority: ::Integer,
                                                    ?max_concurrency: ::String,
                                                    ?max_errors: ::String,
@@ -2424,7 +2267,7 @@ module Aws
                                                      alarms: Array[
                                                        {
                                                          name: ::String
-                                                       },
+                                                       }
                                                      ]
                                                    }
                                                  ) -> _RegisterTaskWithMaintenanceWindowResponseSuccess
@@ -2485,7 +2328,7 @@ module Aws
                             {
                               key: ::String?,
                               values: Array[::String]?
-                            },
+                            }
                           ],
                           document_name: ::String,
                           ?document_version: ::String,
@@ -2514,7 +2357,7 @@ module Aws
                             alarms: Array[
                               {
                                 name: ::String
-                              },
+                              }
                             ]
                           }
                         ) -> _SendCommandResponseSuccess
@@ -2531,13 +2374,13 @@ module Aws
                                     {
                                       key: ::String?,
                                       values: Array[::String]?
-                                    },
+                                    }
                                   ],
                                   ?tags: Array[
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _StartAccessRequestResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAccessRequestResponseSuccess
@@ -2567,52 +2410,28 @@ module Aws
                                           {
                                             key: ::String?,
                                             values: Array[::String]?
-                                          },
+                                          }
                                         ],
                                         ?target_maps: Array[
-                                          Hash[::String, Array[::String]],
+                                          Hash[::String, Array[::String]]
                                         ],
                                         ?max_concurrency: ::String,
                                         ?max_errors: ::String,
                                         ?target_locations: Array[
-                                          {
-                                            accounts: Array[::String]?,
-                                            regions: Array[::String]?,
-                                            target_location_max_concurrency: ::String?,
-                                            target_location_max_errors: ::String?,
-                                            execution_role_name: ::String?,
-                                            target_location_alarm_configuration: {
-                                              ignore_poll_alarm_failure: bool?,
-                                              alarms: Array[
-                                                {
-                                                  name: ::String
-                                                },
-                                              ]
-                                            }?,
-                                            include_child_organization_units: bool?,
-                                            exclude_accounts: Array[::String]?,
-                                            targets: Array[
-                                              {
-                                                key: ::String?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?,
-                                            targets_max_concurrency: ::String?,
-                                            targets_max_errors: ::String?
-                                          },
+                                          Params::target_location
                                         ],
                                         ?tags: Array[
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?alarm_configuration: {
                                           ignore_poll_alarm_failure: bool?,
                                           alarms: Array[
                                             {
                                               name: ::String
-                                            },
+                                            }
                                           ]
                                         },
                                         ?target_locations_url: ::String
@@ -2642,47 +2461,23 @@ module Aws
                                                   {
                                                     key: ::String?,
                                                     values: Array[::String]?
-                                                  },
+                                                  }
                                                 ]?,
                                                 target_maps: Array[
-                                                  Hash[::String, Array[::String]],
+                                                  Hash[::String, Array[::String]]
                                                 ]?,
                                                 max_concurrency: ::String?,
                                                 max_errors: ::String?,
                                                 target_locations: Array[
-                                                  {
-                                                    accounts: Array[::String]?,
-                                                    regions: Array[::String]?,
-                                                    target_location_max_concurrency: ::String?,
-                                                    target_location_max_errors: ::String?,
-                                                    execution_role_name: ::String?,
-                                                    target_location_alarm_configuration: {
-                                                      ignore_poll_alarm_failure: bool?,
-                                                      alarms: Array[
-                                                        {
-                                                          name: ::String
-                                                        },
-                                                      ]
-                                                    }?,
-                                                    include_child_organization_units: bool?,
-                                                    exclude_accounts: Array[::String]?,
-                                                    targets: Array[
-                                                      {
-                                                        key: ::String?,
-                                                        values: Array[::String]?
-                                                      },
-                                                    ]?,
-                                                    targets_max_concurrency: ::String?,
-                                                    targets_max_errors: ::String?
-                                                  },
+                                                  Params::target_location
                                                 ]?
-                                              },
+                                              }
                                             ],
                                             ?tags: Array[
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?scheduled_end_time: ::Time,
                                             ?change_details: ::String
@@ -2705,37 +2500,13 @@ module Aws
                                            {
                                              key: ::String?,
                                              values: Array[::String]?
-                                           },
+                                           }
                                          ]?,
                                          target_maps: Array[
-                                           Hash[::String, Array[::String]],
+                                           Hash[::String, Array[::String]]
                                          ]?,
                                          target_locations: Array[
-                                           {
-                                             accounts: Array[::String]?,
-                                             regions: Array[::String]?,
-                                             target_location_max_concurrency: ::String?,
-                                             target_location_max_errors: ::String?,
-                                             execution_role_name: ::String?,
-                                             target_location_alarm_configuration: {
-                                               ignore_poll_alarm_failure: bool?,
-                                               alarms: Array[
-                                                 {
-                                                   name: ::String
-                                                 },
-                                               ]
-                                             }?,
-                                             include_child_organization_units: bool?,
-                                             exclude_accounts: Array[::String]?,
-                                             targets: Array[
-                                               {
-                                                 key: ::String?,
-                                                 values: Array[::String]?
-                                               },
-                                             ]?,
-                                             targets_max_concurrency: ::String?,
-                                             targets_max_errors: ::String?
-                                           },
+                                           Params::target_location
                                          ]?,
                                          target_locations_url: ::String?
                                        }?
@@ -2813,7 +2584,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     values: Array[::String]?
-                                  },
+                                  }
                                 ],
                                 ?association_name: ::String,
                                 ?association_version: ::String,
@@ -2825,43 +2596,19 @@ module Aws
                                 ?apply_only_at_cron_interval: bool,
                                 ?calendar_names: Array[::String],
                                 ?target_locations: Array[
-                                  {
-                                    accounts: Array[::String]?,
-                                    regions: Array[::String]?,
-                                    target_location_max_concurrency: ::String?,
-                                    target_location_max_errors: ::String?,
-                                    execution_role_name: ::String?,
-                                    target_location_alarm_configuration: {
-                                      ignore_poll_alarm_failure: bool?,
-                                      alarms: Array[
-                                        {
-                                          name: ::String
-                                        },
-                                      ]
-                                    }?,
-                                    include_child_organization_units: bool?,
-                                    exclude_accounts: Array[::String]?,
-                                    targets: Array[
-                                      {
-                                        key: ::String?,
-                                        values: Array[::String]?
-                                      },
-                                    ]?,
-                                    targets_max_concurrency: ::String?,
-                                    targets_max_errors: ::String?
-                                  },
+                                  Params::target_location
                                 ],
                                 ?schedule_offset: ::Integer,
                                 ?duration: ::Integer,
                                 ?target_maps: Array[
-                                  Hash[::String, Array[::String]],
+                                  Hash[::String, Array[::String]]
                                 ],
                                 ?alarm_configuration: {
                                   ignore_poll_alarm_failure: bool?,
                                   alarms: Array[
                                     {
                                       name: ::String
-                                    },
+                                    }
                                   ]
                                 },
                                 ?association_dispatch_assume_role: ::String
@@ -2897,7 +2644,7 @@ module Aws
                                  key: ("SourceUrl" | "S3FileUrl" | "AttachmentReference")?,
                                  values: Array[::String]?,
                                  name: ::String?
-                               },
+                               }
                              ],
                              name: ::String,
                              ?display_name: ::String,
@@ -2932,7 +2679,7 @@ module Aws
                                           {
                                             type: ("Comment")?,
                                             content: ::String?
-                                          },
+                                          }
                                         ]?
                                       }
                                     ) -> _UpdateDocumentMetadataResponseSuccess
@@ -2988,7 +2735,7 @@ module Aws
                                                 {
                                                   key: ::String?,
                                                   values: Array[::String]?
-                                                },
+                                                }
                                               ],
                                               ?owner_information: ::String,
                                               ?name: ::String,
@@ -3023,48 +2770,14 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 values: Array[::String]?
-                                              },
+                                              }
                                             ],
                                             ?task_arn: ::String,
                                             ?service_role_arn: ::String,
                                             ?task_parameters: Hash[::String, {
                                                 values: Array[::String]?
                                               }],
-                                            ?task_invocation_parameters: {
-                                              run_command: {
-                                                comment: ::String?,
-                                                cloud_watch_output_config: {
-                                                  cloud_watch_log_group_name: ::String?,
-                                                  cloud_watch_output_enabled: bool?
-                                                }?,
-                                                document_hash: ::String?,
-                                                document_hash_type: ("Sha256" | "Sha1")?,
-                                                document_version: ::String?,
-                                                notification_config: {
-                                                  notification_arn: ::String?,
-                                                  notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
-                                                  notification_type: ("Command" | "Invocation")?
-                                                }?,
-                                                output_s3_bucket_name: ::String?,
-                                                output_s3_key_prefix: ::String?,
-                                                parameters: Hash[::String, Array[::String]]?,
-                                                service_role_arn: ::String?,
-                                                timeout_seconds: ::Integer?
-                                              }?,
-                                              automation: {
-                                                document_version: ::String?,
-                                                parameters: Hash[::String, Array[::String]]?
-                                              }?,
-                                              step_functions: {
-                                                input: ::String?,
-                                                name: ::String?
-                                              }?,
-                                              lambda: {
-                                                client_context: ::String?,
-                                                qualifier: ::String?,
-                                                payload: ::String?
-                                              }?
-                                            },
+                                            ?task_invocation_parameters: Params::maintenance_window_task_invocation_parameters,
                                             ?priority: ::Integer,
                                             ?max_concurrency: ::String,
                                             ?max_errors: ::String,
@@ -3082,7 +2795,7 @@ module Aws
                                               alarms: Array[
                                                 {
                                                   name: ::String
-                                                },
+                                                }
                                               ]
                                             }
                                           ) -> _UpdateMaintenanceWindowTaskResponseSuccess
@@ -3112,13 +2825,13 @@ module Aws
                              ?notifications: Array[
                                {
                                  arn: ::String?
-                               },
+                               }
                              ],
                              ?priority: ::Integer,
                              ?related_ops_items: Array[
                                {
                                  ops_item_id: ::String
-                               },
+                               }
                              ],
                              ?status: ("Open" | "InProgress" | "Resolved" | "Pending" | "TimedOut" | "Cancelling" | "Cancelled" | "Failed" | "CompletedWithSuccess" | "CompletedWithFailure" | "Scheduled" | "RunbookInProgress" | "PendingChangeCalendarOverride" | "ChangeCalendarOverrideApproved" | "ChangeCalendarOverrideRejected" | "PendingApproval" | "Approved" | "Revoked" | "Rejected" | "Closed"),
                              ops_item_id: ::String,
@@ -3174,27 +2887,10 @@ module Aws
                                        {
                                          key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
                                          values: Array[::String]
-                                       },
+                                       }
                                      ]
                                    },
-                                   ?approval_rules: {
-                                     patch_rules: Array[
-                                       {
-                                         patch_filter_group: {
-                                           patch_filters: Array[
-                                             {
-                                               key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
-                                               values: Array[::String]
-                                             },
-                                           ]
-                                         },
-                                         compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
-                                         approve_after_days: ::Integer?,
-                                         approve_until_date: ::String?,
-                                         enable_non_security: bool?
-                                       },
-                                     ]
-                                   },
+                                   ?approval_rules: Params::patch_rule_group,
                                    ?approved_patches: Array[::String],
                                    ?approved_patches_compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED"),
                                    ?approved_patches_enable_non_security: bool,
@@ -3206,7 +2902,7 @@ module Aws
                                        name: ::String,
                                        products: Array[::String],
                                        configuration: ::String
-                                     },
+                                     }
                                    ],
                                    ?available_security_updates_compliance_status: ("COMPLIANT" | "NON_COMPLIANT"),
                                    ?replace: bool
@@ -3220,20 +2916,7 @@ module Aws
       def update_resource_data_sync: (
                                        sync_name: ::String,
                                        sync_type: ::String,
-                                       sync_source: {
-                                         source_type: ::String,
-                                         aws_organizations_source: {
-                                           organization_source_type: ::String,
-                                           organizational_units: Array[
-                                             {
-                                               organizational_unit_id: ::String?
-                                             },
-                                           ]?
-                                         }?,
-                                         source_regions: Array[::String],
-                                         include_future_regions: bool?,
-                                         enable_all_ops_data_sources: bool?
-                                       }
+                                       sync_source: Params::resource_data_sync_source
                                      ) -> _UpdateResourceDataSyncResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceDataSyncResponseSuccess
 

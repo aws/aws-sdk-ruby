@@ -111,7 +111,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 ?auto_config_enabled: bool,
                                 ?auto_create: bool,
@@ -435,7 +435,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

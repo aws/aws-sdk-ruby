@@ -1,0 +1,177 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSM
+    module Params
+      type target_location = {
+      accounts: Array[::String]?,
+      regions: Array[::String]?,
+      target_location_max_concurrency: ::String?,
+      target_location_max_errors: ::String?,
+      execution_role_name: ::String?,
+      target_location_alarm_configuration: {
+        ignore_poll_alarm_failure: bool?,
+        alarms: Array[
+          {
+            name: ::String
+          }
+        ]
+      }?,
+      include_child_organization_units: bool?,
+      exclude_accounts: Array[::String]?,
+      targets: Array[
+        {
+          key: ::String?,
+          values: Array[::String]?
+        }
+      ]?,
+      targets_max_concurrency: ::String?,
+      targets_max_errors: ::String?
+    }
+
+      type patch_rule_group = {
+      patch_rules: Array[
+        Params::patch_rule
+      ]
+    }
+
+      type patch_rule = {
+      patch_filter_group: {
+        patch_filters: Array[
+          {
+            key: ("ARCH" | "ADVISORY_ID" | "BUGZILLA_ID" | "PATCH_SET" | "PRODUCT" | "PRODUCT_FAMILY" | "CLASSIFICATION" | "CVE_ID" | "EPOCH" | "MSRC_SEVERITY" | "NAME" | "PATCH_ID" | "SECTION" | "PRIORITY" | "REPOSITORY" | "RELEASE" | "SEVERITY" | "SECURITY" | "VERSION"),
+            values: Array[::String]
+          }
+        ]
+      },
+      compliance_level: ("CRITICAL" | "HIGH" | "MEDIUM" | "LOW" | "INFORMATIONAL" | "UNSPECIFIED")?,
+      approve_after_days: ::Integer?,
+      approve_until_date: ::String?,
+      enable_non_security: bool?
+    }
+
+      type resource_data_sync_source = {
+      source_type: ::String,
+      aws_organizations_source: {
+        organization_source_type: ::String,
+        organizational_units: Array[
+          {
+            organizational_unit_id: ::String?
+          }
+        ]?
+      }?,
+      source_regions: Array[::String],
+      include_future_regions: bool?,
+      enable_all_ops_data_sources: bool?
+    }
+
+      type inventory_aggregator = {
+      expression: ::String?,
+      aggregators: Array[
+        {
+          expression: ::String?,
+          aggregators: untyped?,
+          groups: Array[
+            {
+              name: ::String,
+              filters: Array[
+                {
+                  key: ::String,
+                  values: Array[::String],
+                  type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+                }
+              ]
+            }
+          ]?
+        }
+      ]?,
+      groups: Array[
+        {
+          name: ::String,
+          filters: Array[
+            {
+              key: ::String,
+              values: Array[::String],
+              type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+            }
+          ]
+        }
+      ]?
+    }
+
+      type ops_aggregator = {
+      aggregator_type: ::String?,
+      type_name: ::String?,
+      attribute_name: ::String?,
+      values: Hash[::String, ::String]?,
+      filters: Array[
+        {
+          key: ::String,
+          values: Array[::String],
+          type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+        }
+      ]?,
+      aggregators: Array[
+        {
+          aggregator_type: ::String?,
+          type_name: ::String?,
+          attribute_name: ::String?,
+          values: Hash[::String, ::String]?,
+          filters: Array[
+            {
+              key: ::String,
+              values: Array[::String],
+              type: ("Equal" | "NotEqual" | "BeginWith" | "LessThan" | "GreaterThan" | "Exists")?
+            }
+          ]?,
+          aggregators: untyped?
+        }
+      ]?
+    }
+
+      type maintenance_window_run_command_parameters = {
+      comment: ::String?,
+      cloud_watch_output_config: {
+        cloud_watch_log_group_name: ::String?,
+        cloud_watch_output_enabled: bool?
+      }?,
+      document_hash: ::String?,
+      document_hash_type: ("Sha256" | "Sha1")?,
+      document_version: ::String?,
+      notification_config: {
+        notification_arn: ::String?,
+        notification_events: Array[("All" | "InProgress" | "Success" | "TimedOut" | "Cancelled" | "Failed")]?,
+        notification_type: ("Command" | "Invocation")?
+      }?,
+      output_s3_bucket_name: ::String?,
+      output_s3_key_prefix: ::String?,
+      parameters: Hash[::String, Array[::String]]?,
+      service_role_arn: ::String?,
+      timeout_seconds: ::Integer?
+    }
+
+      type maintenance_window_task_invocation_parameters = {
+      run_command: Params::maintenance_window_run_command_parameters?,
+      automation: {
+        document_version: ::String?,
+        parameters: Hash[::String, Array[::String]]?
+      }?,
+      step_functions: {
+        input: ::String?,
+        name: ::String?
+      }?,
+      lambda: {
+        client_context: ::String?,
+        qualifier: ::String?,
+        payload: ::String?
+      }?
+    }
+
+    end
+  end
+end

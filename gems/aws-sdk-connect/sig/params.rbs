@@ -1,0 +1,1612 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Connect
+    module Params
+      type s3_config = {
+      bucket_name: ::String,
+      bucket_prefix: ::String,
+      encryption_config: {
+        encryption_type: ("KMS"),
+        key_id: ::String
+      }?
+    }
+
+      type kinesis_video_stream_config = {
+      prefix: ::String,
+      retention_period_hours: ::Integer,
+      encryption_config: {
+        encryption_type: ("KMS"),
+        key_id: ::String
+      }
+    }
+
+      type instance_storage_config = {
+      association_id: ::String?,
+      storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE"),
+      s3_config: Params::s3_config?,
+      kinesis_video_stream_config: Params::kinesis_video_stream_config?,
+      kinesis_stream_config: {
+        stream_arn: ::String
+      }?,
+      kinesis_firehose_config: {
+        firehose_arn: ::String
+      }?
+    }
+
+      type routing_profile_queue_config = {
+      queue_reference: {
+        queue_id: ::String,
+        channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
+      },
+      priority: ::Integer,
+      delay: ::Integer
+    }
+
+      type data_table_value = {
+      primary_values: Array[
+        {
+          attribute_name: ::String,
+          value: ::String
+        }
+      ]?,
+      attribute_name: ::String,
+      value: ::String,
+      lock_version: {
+        data_table: ::String?,
+        attribute: ::String?,
+        primary_values: ::String?,
+        value: ::String?
+      }?,
+      last_modified_time: ::Time?,
+      last_modified_region: ::String?
+    }
+
+      type agent_first = {
+      preview: {
+        post_accept_timeout_config: {
+          duration_in_seconds: ::Integer
+        },
+        allowed_user_actions: Array[("CALL" | "DISCARD")]
+      }?
+    }
+
+      type outbound_strategy_config = {
+      agent_first: Params::agent_first?
+    }
+
+      type outbound_strategy = {
+      type: ("AGENT_FIRST"),
+      config: Params::outbound_strategy_config?
+    }
+
+      type segment_attribute_value = {
+      value_string: ::String?,
+      value_map: Hash[::String, {
+          value_string: ::String?,
+          value_map: untyped?,
+          value_integer: ::Integer?,
+          value_list: Array[
+            untyped
+          ]?,
+          value_arn: ::String?
+        }]?,
+      value_integer: ::Integer?,
+      value_list: Array[
+        {
+          value_string: ::String?,
+          value_map: Hash[::String, untyped]?,
+          value_integer: ::Integer?,
+          value_list: untyped?,
+          value_arn: ::String?
+        }
+      ]?,
+      value_arn: ::String?
+    }
+
+      type validation = {
+      min_length: ::Integer?,
+      max_length: ::Integer?,
+      min_values: ::Integer?,
+      max_values: ::Integer?,
+      ignore_case: bool?,
+      minimum: ::Float?,
+      maximum: ::Float?,
+      exclusive_minimum: ::Float?,
+      exclusive_maximum: ::Float?,
+      multiple_of: ::Float?,
+      enum: {
+        strict: bool?,
+        values: Array[::String]?
+      }?
+    }
+
+      type evaluation_form_section = {
+      title: ::String,
+      ref_id: ::String,
+      instructions: ::String?,
+      items: Array[
+        Params::evaluation_form_item
+      ],
+      weight: ::Float?
+    }
+
+      type evaluation_form_numeric_question_automation = {
+      property_value: {
+        label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
+      }?,
+      answer_source: {
+        source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+      }?
+    }
+
+      type evaluation_form_numeric_question_properties = {
+      min_value: ::Integer,
+      max_value: ::Integer,
+      options: Array[
+        Params::evaluation_form_numeric_question_option
+      ]?,
+      automation: Params::evaluation_form_numeric_question_automation?
+    }
+
+      type evaluation_form_single_select_question_automation = {
+      options: Array[
+        {
+          rule_category: {
+            category: ::String,
+            condition: ("PRESENT" | "NOT_PRESENT"),
+            option_ref_id: ::String
+          }?
+        }
+      ]?,
+      default_option_ref_id: ::String?,
+      answer_source: {
+        source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+      }?
+    }
+
+      type evaluation_form_single_select_question_properties = {
+      options: Array[
+        Params::evaluation_form_single_select_question_option
+      ],
+      display_as: ("DROPDOWN" | "RADIO")?,
+      automation: Params::evaluation_form_single_select_question_automation?
+    }
+
+      type evaluation_form_multi_select_question_automation = {
+      options: Array[
+        {
+          rule_category: {
+            category: ::String,
+            condition: ("PRESENT" | "NOT_PRESENT"),
+            option_ref_ids: Array[::String]
+          }?
+        }
+      ]?,
+      default_option_ref_ids: Array[::String]?,
+      answer_source: {
+        source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+      }?
+    }
+
+      type evaluation_form_multi_select_question_properties = {
+      options: Array[
+        {
+          ref_id: ::String,
+          text: ::String
+        }
+      ],
+      display_as: ("DROPDOWN" | "CHECKBOX")?,
+      automation: Params::evaluation_form_multi_select_question_automation?
+    }
+
+      type evaluation_form_question_type_properties = {
+      numeric: Params::evaluation_form_numeric_question_properties?,
+      single_select: Params::evaluation_form_single_select_question_properties?,
+      text: {
+        automation: {
+          answer_source: {
+            source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
+          }?
+        }?
+      }?,
+      multi_select: Params::evaluation_form_multi_select_question_properties?
+    }
+
+      type evaluation_form_item_enablement_condition = {
+      operands: Array[
+        Params::evaluation_form_item_enablement_condition_operand
+      ],
+      operator: ("OR" | "AND")?
+    }
+
+      type evaluation_form_item_enablement_configuration = {
+      condition: Params::evaluation_form_item_enablement_condition,
+      action: ("DISABLE" | "ENABLE"),
+      default_action: ("DISABLE" | "ENABLE")?
+    }
+
+      type evaluation_form_question = {
+      title: ::String,
+      instructions: ::String?,
+      ref_id: ::String,
+      not_applicable_enabled: bool?,
+      question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME"),
+      question_type_properties: Params::evaluation_form_question_type_properties?,
+      enablement: Params::evaluation_form_item_enablement_configuration?,
+      weight: ::Float?
+    }
+
+      type evaluation_form_item = {
+      section: Params::evaluation_form_section?,
+      question: Params::evaluation_form_question?
+    }
+
+      type evaluation_form_numeric_question_option = {
+      min_value: ::Integer,
+      max_value: ::Integer,
+      score: ::Integer?,
+      automatic_fail: bool?,
+      automatic_fail_configuration: {
+        target_section: ::String?
+      }?
+    }
+
+      type evaluation_form_single_select_question_option = {
+      ref_id: ::String,
+      text: ::String,
+      score: ::Integer?,
+      automatic_fail: bool?,
+      automatic_fail_configuration: {
+        target_section: ::String?
+      }?
+    }
+
+      type evaluation_form_item_enablement_expression = {
+      source: {
+        type: ("QUESTION_REF_ID"),
+        ref_id: ::String?
+      },
+      values: Array[
+        {
+          type: ("OPTION_REF_ID"),
+          ref_id: ::String?
+        }
+      ],
+      comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
+    }
+
+      type evaluation_form_item_enablement_condition_operand = {
+      expression: Params::evaluation_form_item_enablement_expression?,
+      condition: Params::evaluation_form_item_enablement_condition?
+    }
+
+      type evaluation_review_configuration = {
+      review_notification_recipients: Array[
+        {
+          type: ("USER_ID"),
+          value: {
+            user_id: ::String?
+          }
+        }
+      ],
+      eligibility_days: ::Integer?
+    }
+
+      type hours_of_operation_config = {
+      day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
+      start_time: {
+        hours: ::Integer,
+        minutes: ::Integer
+      },
+      end_time: {
+        hours: ::Integer,
+        minutes: ::Integer
+      }
+    }
+
+      type hours_of_operation_override_config = {
+      day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
+      start_time: {
+        hours: ::Integer,
+        minutes: ::Integer
+      }?,
+      end_time: {
+        hours: ::Integer,
+        minutes: ::Integer
+      }?
+    }
+
+      type recurrence_config = {
+      recurrence_pattern: {
+        frequency: ("WEEKLY" | "MONTHLY" | "YEARLY"),
+        interval: ::Integer,
+        by_month: Array[::Integer]?,
+        by_month_day: Array[::Integer]?,
+        by_weekday_occurrence: Array[::Integer]?
+      }
+    }
+
+      type quick_connect_config = {
+      quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
+      user_config: {
+        user_id: ::String,
+        contact_flow_id: ::String
+      }?,
+      queue_config: {
+        queue_id: ::String,
+        contact_flow_id: ::String
+      }?,
+      phone_config: {
+        phone_number: ::String
+      }?,
+      flow_config: {
+        contact_flow_id: ::String
+      }?
+    }
+
+      type task_action_definition = {
+      name: ::String,
+      description: ::String?,
+      contact_flow_id: ::String,
+      references: Hash[::String, {
+          value: ::String?,
+          type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
+          status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+          arn: ::String?,
+          status_reason: ::String?
+        }]?
+    }
+
+      type send_notification_action_definition = {
+      delivery_method: ("EMAIL"),
+      subject: ::String?,
+      content: ::String,
+      content_type: ("PLAIN_TEXT"),
+      recipient: {
+        user_tags: Hash[::String, ::String]?,
+        user_ids: Array[::String]?
+      },
+      exclusion: {
+        user_tags: Hash[::String, ::String]?,
+        user_ids: Array[::String]?
+      }?
+    }
+
+      type create_case_action_definition = {
+      fields: Array[
+        Params::field_value
+      ],
+      template_id: ::String
+    }
+
+      type update_case_action_definition = {
+      fields: Array[
+        Params::field_value
+      ]
+    }
+
+      type case_sla_configuration = {
+      name: ::String,
+      type: ("CaseField"),
+      field_id: ::String?,
+      target_field_values: Array[
+        {
+          boolean_value: bool?,
+          double_value: ::Float?,
+          empty_value: {
+          }?,
+          string_value: ::String?
+        }
+      ]?,
+      target_sla_minutes: ::Integer
+    }
+
+      type assign_sla_action_definition = {
+      sla_assignment_type: ("CASES"),
+      case_sla_configuration: Params::case_sla_configuration?
+    }
+
+      type rule_action = {
+      action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
+      task_action: Params::task_action_definition?,
+      event_bridge_action: {
+        name: ::String
+      }?,
+      assign_contact_category_action: {
+      }?,
+      send_notification_action: Params::send_notification_action_definition?,
+      create_case_action: Params::create_case_action_definition?,
+      update_case_action: Params::update_case_action_definition?,
+      assign_sla_action: Params::assign_sla_action_definition?,
+      end_associated_tasks_action: {
+      }?,
+      submit_auto_evaluation_action: {
+        evaluation_form_id: ::String
+      }?
+    }
+
+      type field_value = {
+      id: ::String,
+      value: {
+        boolean_value: bool?,
+        double_value: ::Float?,
+        empty_value: {
+        }?,
+        string_value: ::String?
+      }
+    }
+
+      type data_table_access_control_configuration = {
+      primary_attribute_access_control_configuration: {
+        primary_attribute_values: Array[
+          {
+            access_type: ("ALLOW")?,
+            attribute_name: ::String?,
+            values: Array[::String]?
+          }
+        ]?
+      }?
+    }
+
+      type granular_access_control_configuration = {
+      data_table_access_control_configuration: Params::data_table_access_control_configuration?
+    }
+
+      type task_template_constraints = {
+      required_fields: Array[
+        {
+          id: {
+            name: ::String?
+          }?
+        }
+      ]?,
+      read_only_fields: Array[
+        {
+          id: {
+            name: ::String?
+          }?
+        }
+      ]?,
+      invisible_fields: Array[
+        {
+          id: {
+            name: ::String?
+          }?
+        }
+      ]?
+    }
+
+      type task_template_defaults = {
+      default_field_values: Array[
+        {
+          id: {
+            name: ::String?
+          }?,
+          default_value: ::String?
+        }
+      ]?
+    }
+
+      type task_template_field = {
+      id: {
+        name: ::String?
+      },
+      description: ::String?,
+      type: ("NAME" | "DESCRIPTION" | "SCHEDULED_TIME" | "QUICK_CONNECT" | "URL" | "NUMBER" | "TEXT" | "TEXT_AREA" | "DATE_TIME" | "BOOLEAN" | "SINGLE_SELECT" | "EMAIL" | "SELF_ASSIGN" | "EXPIRY_DURATION")?,
+      single_select_options: Array[::String]?
+    }
+
+      type test_case_entry_point = {
+      type: ("VOICE_CALL" | "CHAT")?,
+      voice_call_entry_point_parameters: {
+        source_phone_number: ::String?,
+        destination_phone_number: ::String?,
+        flow_id: ::String?
+      }?,
+      chat_entry_point_parameters: {
+        flow_id: ::String?
+      }?
+    }
+
+      type after_contact_work_config_per_channel = {
+      channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
+      after_contact_work_config: {
+        after_contact_work_time_limit: ::Integer?
+      },
+      agent_first_callback_after_contact_work_config: {
+        after_contact_work_time_limit: ::Integer?
+      }?
+    }
+
+      type palette_navigation = {
+      background: ::String?,
+      text_background_hover: ::String?,
+      text_background_active: ::String?,
+      text: ::String?,
+      text_hover: ::String?,
+      text_active: ::String?,
+      invert_actions_colors: bool?
+    }
+
+      type workspace_theme_palette = {
+      header: {
+        background: ::String?,
+        text: ::String?,
+        text_hover: ::String?,
+        invert_actions_colors: bool?
+      }?,
+      navigation: Params::palette_navigation?,
+      canvas: {
+        container_background: ::String?,
+        page_background: ::String?,
+        active_background: ::String?
+      }?,
+      primary: {
+        default: ::String?,
+        active: ::String?,
+        contrast_text: ::String?
+      }?
+    }
+
+      type workspace_theme_config = {
+      palette: Params::workspace_theme_palette?,
+      images: {
+        logo: {
+          default: ::String?,
+          favicon: ::String?
+        }?
+      }?,
+      typography: {
+        font_family: {
+          default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
+        }?
+      }?
+    }
+
+      type workspace_theme = {
+      light: Params::workspace_theme_config?,
+      dark: Params::workspace_theme_config?
+    }
+
+      type filters = {
+      queues: Array[::String]?,
+      channels: Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]?,
+      routing_profiles: Array[::String]?,
+      routing_step_expressions: Array[::String]?,
+      agent_statuses: Array[::String]?,
+      subtypes: Array[::String]?,
+      validation_test_types: Array[::String]?
+    }
+
+      type control_plane_attribute_filter = {
+      or_conditions: Array[
+        {
+          tag_conditions: Array[
+            {
+              tag_key: ::String?,
+              tag_value: ::String?
+            }
+          ]?
+        }
+      ]?,
+      and_condition: {
+        tag_conditions: Array[
+          {
+            tag_key: ::String?,
+            tag_value: ::String?
+          }
+        ]?
+      }?,
+      tag_condition: {
+        tag_key: ::String?,
+        tag_value: ::String?
+      }?
+    }
+
+      type agent_status_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type evaluation_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          number_condition: {
+            field_name: ::String?,
+            min_value: ::Integer?,
+            max_value: ::Integer?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?,
+          date_time_condition: {
+            field_name: ::String?,
+            min_value: ::String?,
+            max_value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+          }?,
+          decimal_condition: {
+            field_name: ::String?,
+            min_value: ::Float?,
+            max_value: ::Float?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          number_condition: {
+            field_name: ::String?,
+            min_value: ::Integer?,
+            max_value: ::Integer?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?,
+          date_time_condition: {
+            field_name: ::String?,
+            min_value: ::String?,
+            max_value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+          }?,
+          decimal_condition: {
+            field_name: ::String?,
+            min_value: ::Float?,
+            max_value: ::Float?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      number_condition: {
+        field_name: ::String?,
+        min_value: ::Integer?,
+        max_value: ::Integer?,
+        comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+      }?,
+      boolean_condition: {
+        field_name: ::String?,
+        comparison_type: ("IS_TRUE" | "IS_FALSE")?
+      }?,
+      date_time_condition: {
+        field_name: ::String?,
+        min_value: ::String?,
+        max_value: ::String?,
+        comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+      }?,
+      decimal_condition: {
+        field_name: ::String?,
+        min_value: ::Float?,
+        max_value: ::Float?,
+        comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+      }?
+    }
+
+      type control_plane_tag_filter = {
+      or_conditions: Array[
+        Array[
+          {
+            tag_key: ::String?,
+            tag_value: ::String?
+          }
+        ]
+      ]?,
+      and_conditions: Array[
+        {
+          tag_key: ::String?,
+          tag_value: ::String?
+        }
+      ]?,
+      tag_condition: {
+        tag_key: ::String?,
+        tag_value: ::String?
+      }?
+    }
+
+      type contact_flow_module_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          state_condition: ("ACTIVE" | "ARCHIVED")?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          state_condition: ("ACTIVE" | "ARCHIVED")?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      state_condition: ("ACTIVE" | "ARCHIVED")?,
+      status_condition: ("PUBLISHED" | "SAVED")?
+    }
+
+      type contact_flow_attribute_and_condition = {
+      tag_conditions: Array[
+        {
+          tag_key: ::String?,
+          tag_value: ::String?
+        }
+      ]?,
+      contact_flow_type_condition: {
+        contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
+      }?
+    }
+
+      type contact_flow_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?,
+          state_condition: ("ACTIVE" | "ARCHIVED")?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?,
+          state_condition: ("ACTIVE" | "ARCHIVED")?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?,
+      state_condition: ("ACTIVE" | "ARCHIVED")?,
+      status_condition: ("PUBLISHED" | "SAVED")?
+    }
+
+      type data_table_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type email_address_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type evaluation_form_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          number_condition: {
+            field_name: ::String?,
+            min_value: ::Integer?,
+            max_value: ::Integer?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?,
+          date_time_condition: {
+            field_name: ::String?,
+            min_value: ::String?,
+            max_value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          number_condition: {
+            field_name: ::String?,
+            min_value: ::Integer?,
+            max_value: ::Integer?,
+            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+          }?,
+          boolean_condition: {
+            field_name: ::String?,
+            comparison_type: ("IS_TRUE" | "IS_FALSE")?
+          }?,
+          date_time_condition: {
+            field_name: ::String?,
+            min_value: ::String?,
+            max_value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      number_condition: {
+        field_name: ::String?,
+        min_value: ::Integer?,
+        max_value: ::Integer?,
+        comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+      }?,
+      boolean_condition: {
+        field_name: ::String?,
+        comparison_type: ("IS_TRUE" | "IS_FALSE")?
+      }?,
+      date_time_condition: {
+        field_name: ::String?,
+        min_value: ::String?,
+        max_value: ::String?,
+        comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
+      }?
+    }
+
+      type hours_of_operation_search_filter = {
+      tag_filter: Params::control_plane_tag_filter?
+    }
+
+      type hours_of_operation_override_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          date_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          date_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      date_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO")?
+      }?
+    }
+
+      type hours_of_operation_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type notification_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type predefined_attribute_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type prompt_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type queue_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          queue_type_condition: ("STANDARD")?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          queue_type_condition: ("STANDARD")?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      queue_type_condition: ("STANDARD")?
+    }
+
+      type quick_connect_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type routing_profile_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type security_profile_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type test_case_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      status_condition: ("PUBLISHED" | "SAVED")?
+    }
+
+      type user_hierarchy_group_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type attribute_and_condition = {
+      tag_conditions: Array[
+        {
+          tag_key: ::String?,
+          tag_value: ::String?
+        }
+      ]?,
+      hierarchy_group_condition: {
+        value: ::String?,
+        hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+      }?
+    }
+
+      type user_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          list_condition: {
+            target_list_type: ("PROFICIENCIES")?,
+            conditions: Array[
+              {
+                string_condition: {
+                  field_name: ::String?,
+                  value: ::String?,
+                  comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                }?,
+                number_condition: {
+                  field_name: ::String?,
+                  min_value: ::Integer?,
+                  max_value: ::Integer?,
+                  comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+                }?
+              }
+            ]?
+          }?,
+          hierarchy_group_condition: {
+            value: ::String?,
+            hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          list_condition: {
+            target_list_type: ("PROFICIENCIES")?,
+            conditions: Array[
+              {
+                string_condition: {
+                  field_name: ::String?,
+                  value: ::String?,
+                  comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+                }?,
+                number_condition: {
+                  field_name: ::String?,
+                  min_value: ::Integer?,
+                  max_value: ::Integer?,
+                  comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+                }?
+              }
+            ]?
+          }?,
+          hierarchy_group_condition: {
+            value: ::String?,
+            hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      list_condition: {
+        target_list_type: ("PROFICIENCIES")?,
+        conditions: Array[
+          {
+            string_condition: {
+              field_name: ::String?,
+              value: ::String?,
+              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+            }?,
+            number_condition: {
+              field_name: ::String?,
+              min_value: ::Integer?,
+              max_value: ::Integer?,
+              comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
+            }?
+          }
+        ]?
+      }?,
+      hierarchy_group_condition: {
+        value: ::String?,
+        hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
+      }?
+    }
+
+      type view_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")?,
+          view_status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?,
+          view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")?,
+          view_status_condition: ("PUBLISHED" | "SAVED")?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?,
+      view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")?,
+      view_status_condition: ("PUBLISHED" | "SAVED")?
+    }
+
+      type workspace_association_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type workspace_search_criteria = {
+      or_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      and_conditions: Array[
+        {
+          or_conditions: untyped?,
+          and_conditions: untyped?,
+          string_condition: {
+            field_name: ::String?,
+            value: ::String?,
+            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+          }?
+        }
+      ]?,
+      string_condition: {
+        field_name: ::String?,
+        value: ::String?,
+        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
+      }?
+    }
+
+      type templated_message_config = {
+      knowledge_base_id: ::String,
+      message_template_id: ::String,
+      template_attributes: {
+        custom_attributes: Hash[::String, ::String]?,
+        customer_profile_attributes: ::String?
+      }
+    }
+
+      type outbound_email_content = {
+      message_source_type: ("TEMPLATE" | "RAW"),
+      templated_message_config: Params::templated_message_config?,
+      raw_message: {
+        subject: ::String,
+        body: ::String,
+        content_type: ::String
+      }?
+    }
+
+      type evaluation_answer_input = {
+      value: {
+        string_value: ::String?,
+        numeric_value: ::Float?,
+        string_values: Array[::String]?,
+        date_time_value: ::String?,
+        not_applicable: bool?
+      }?
+    }
+
+      type attribute_condition = {
+      name: ::String?,
+      value: ::String?,
+      proficiency_level: ::Float?,
+      range: {
+        min_proficiency_level: ::Float?,
+        max_proficiency_level: ::Float?
+      }?,
+      match_criteria: {
+        agents_criteria: {
+          agent_ids: Array[::String]?
+        }?
+      }?,
+      comparison_operator: ::String?
+    }
+
+      type expression = {
+      attribute_condition: Params::attribute_condition?,
+      and_expression: Array[
+        {
+          attribute_condition: Params::attribute_condition?,
+          and_expression: untyped?,
+          or_expression: untyped?,
+          not_attribute_condition: Params::attribute_condition?
+        }
+      ]?,
+      or_expression: Array[
+        {
+          attribute_condition: Params::attribute_condition?,
+          and_expression: untyped?,
+          or_expression: untyped?,
+          not_attribute_condition: Params::attribute_condition?
+        }
+      ]?,
+      not_attribute_condition: Params::attribute_condition?
+    }
+
+    end
+  end
+end

@@ -145,7 +145,7 @@ module Aws
                                                   version_id: ::String
                                                 },
                                                 auth_material_name: ::String
-                                              },
+                                              }
                                             ]?
                                           },
                                           ?secrets_manager: {
@@ -221,35 +221,9 @@ module Aws
                                   ?brand: ::String,
                                   ?model: ::String,
                                   ?name: ::String,
-                                  ?capability_report: {
-                                    version: ::String,
-                                    node_id: ::String?,
-                                    endpoints: Array[
-                                      {
-                                        id: ::String,
-                                        device_types: Array[::String],
-                                        capabilities: Array[
-                                          {
-                                            id: ::String,
-                                            name: ::String,
-                                            version: ::String,
-                                            properties: Array[::String],
-                                            actions: Array[::String],
-                                            events: Array[::String]
-                                          },
-                                        ]
-                                      },
-                                    ]
-                                  },
+                                  ?capability_report: Params::capability_report,
                                   ?capability_schemas: Array[
-                                    {
-                                      format: ("AWS" | "ZCL" | "CONNECTOR"),
-                                      capability_id: ::String,
-                                      extrinsic_id: ::String,
-                                      extrinsic_version: ::Integer,
-                                      schema: {
-                                      }
-                                    },
+                                    Params::capability_schema_item
                                   ],
                                   ?capabilities: ::String,
                                   ?client_token: ::String,
@@ -296,7 +270,7 @@ module Aws
                                  {
                                    duration_in_minutes: ::Integer?,
                                    start_time: ::String?
-                                 },
+                                 }
                                ]?,
                                start_time: ::String?
                              },
@@ -305,7 +279,7 @@ module Aws
                                  {
                                    failure_type: ("FAILED" | "TIMED_OUT" | "ALL")?,
                                    min_number_of_retries: ::Integer?
-                                 },
+                                 }
                                ]?
                              },
                              ?tags: Hash[::String, ::String]
@@ -328,7 +302,7 @@ module Aws
                                                    failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL")?,
                                                    min_number_of_executed_things: ::Integer?,
                                                    threshold_percentage: ::Float?
-                                                 },
+                                                 }
                                                ]?
                                              }?,
                                              rollout_config: {
@@ -1129,34 +1103,27 @@ module Aws
                                                     name: ::String?,
                                                     value: {
                                                     }?
-                                                  },
+                                                  }
                                                 ]?,
                                                 commands: Array[::String]?,
                                                 events: Array[::String]?,
                                                 feature_map: ::Integer?,
                                                 generated_commands: Array[::String]?,
                                                 fabric_index: ::Integer?
-                                              },
+                                              }
                                             ],
                                             parts: Array[::String]?,
                                             semantic_tags: Array[::String]?,
                                             client_clusters: Array[::String]?
-                                          },
+                                          }
                                         ]
                                       },
                                       capability_schemas: Array[
-                                        {
-                                          format: ("AWS" | "ZCL" | "CONNECTOR"),
-                                          capability_id: ::String,
-                                          extrinsic_id: ::String,
-                                          extrinsic_version: ::Integer,
-                                          schema: {
-                                          }
-                                        },
+                                        Params::capability_schema_item
                                       ]?,
                                       device_metadata: {
                                       }?
-                                    },
+                                    }
                                   ],
                                   ?matter_endpoint: {
                                     id: ::String?,
@@ -1169,7 +1136,7 @@ module Aws
                                           }]?,
                                         events: Hash[::String, {
                                           }]?
-                                      },
+                                      }
                                     ]?
                                   }
                                 ) -> _SendConnectorEventResponseSuccess
@@ -1197,11 +1164,11 @@ module Aws
                                                     action_trace_id: ::String?,
                                                     parameters: {
                                                     }?
-                                                  },
+                                                  }
                                                 ]
-                                              },
+                                              }
                                             ]
-                                          },
+                                          }
                                         ],
                                         ?connector_association_id: ::String,
                                         ?account_association_id: ::String
@@ -1298,7 +1265,7 @@ module Aws
                                                     version_id: ::String
                                                   },
                                                   auth_material_name: ::String
-                                                },
+                                                }
                                               ]?,
                                               auth_materials_to_update: Array[
                                                 {
@@ -1307,7 +1274,7 @@ module Aws
                                                     version_id: ::String
                                                   },
                                                   auth_material_name: ::String
-                                                },
+                                                }
                                               ]?
                                             }?
                                           },
@@ -1349,35 +1316,9 @@ module Aws
                                   ?brand: ::String,
                                   ?model: ::String,
                                   ?name: ::String,
-                                  ?capability_report: {
-                                    version: ::String,
-                                    node_id: ::String?,
-                                    endpoints: Array[
-                                      {
-                                        id: ::String,
-                                        device_types: Array[::String],
-                                        capabilities: Array[
-                                          {
-                                            id: ::String,
-                                            name: ::String,
-                                            version: ::String,
-                                            properties: Array[::String],
-                                            actions: Array[::String],
-                                            events: Array[::String]
-                                          },
-                                        ]
-                                      },
-                                    ]
-                                  },
+                                  ?capability_report: Params::capability_report,
                                   ?capability_schemas: Array[
-                                    {
-                                      format: ("AWS" | "ZCL" | "CONNECTOR"),
-                                      capability_id: ::String,
-                                      extrinsic_id: ::String,
-                                      extrinsic_version: ::Integer,
-                                      schema: {
-                                      }
-                                    },
+                                    Params::capability_schema_item
                                   ],
                                   ?capabilities: ::String,
                                   ?classification: ::String,

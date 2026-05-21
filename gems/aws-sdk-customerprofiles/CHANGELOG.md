@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-05-20)
+------------------
+
+* Feature - Amazon Connect Customer Profiles adds support for item catalog columns in RecommenderSchema, ExcludedColumns in Create and Update Recommender to specify columns to exclude from training, and the ability to disable automatic retraining by setting TrainingFrequency to 0.
+
+1.86.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.85.0 (2026-05-13)
 ------------------
 

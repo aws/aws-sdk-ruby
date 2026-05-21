@@ -131,7 +131,7 @@ module Aws
                                      percent_promoted_items: ::Integer?,
                                      filter_arn: ::String?,
                                      filter_values: Hash[::String, ::String]?
-                                   },
+                                   }
                                  ],
                                  ?metadata_columns: Hash[::String, Array[::String]]
                                ) -> _GetRecommendationsResponseSuccess

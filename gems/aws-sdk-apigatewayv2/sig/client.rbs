@@ -101,14 +101,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_api-instance_method
       def create_api: (
                         ?api_key_selection_expression: ::String,
-                        ?cors_configuration: {
-                          allow_credentials: bool?,
-                          allow_headers: Array[::String]?,
-                          allow_methods: Array[::String]?,
-                          allow_origins: Array[::String]?,
-                          expose_headers: Array[::String]?,
-                          max_age: ::Integer?
-                        },
+                        ?cors_configuration: Params::cors,
                         ?credentials_arn: ::String,
                         ?description: ::String,
                         ?disable_schema_validation: bool,
@@ -204,19 +197,7 @@ module Aws
       def create_domain_name: (
                                 domain_name: ::String,
                                 ?domain_name_configurations: Array[
-                                  {
-                                    api_gateway_domain_name: ::String?,
-                                    certificate_arn: ::String?,
-                                    certificate_name: ::String?,
-                                    certificate_upload_date: ::Time?,
-                                    domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")?,
-                                    domain_name_status_message: ::String?,
-                                    endpoint_type: ("REGIONAL" | "EDGE")?,
-                                    hosted_zone_id: ::String?,
-                                    ip_address_type: ("ipv4" | "dualstack")?,
-                                    security_policy: ("TLS_1_0" | "TLS_1_2")?,
-                                    ownership_verification_certificate_arn: ::String?
-                                  },
+                                  Params::domain_name_configuration
                                 ],
                                 ?mutual_tls_authentication: {
                                   truststore_uri: ::String?,
@@ -332,40 +313,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_portal-instance_method
       def create_portal: (
-                           authorization: {
-                             cognito_config: {
-                               app_client_id: ::String,
-                               user_pool_arn: ::String,
-                               user_pool_domain: ::String
-                             }?,
-                             none: {
-                             }?
-                           },
-                           endpoint_configuration: {
-                             acm_managed: {
-                               certificate_arn: ::String,
-                               domain_name: ::String
-                             }?,
-                             none: {
-                             }?
-                           },
+                           authorization: Params::authorization,
+                           endpoint_configuration: Params::endpoint_configuration_request,
                            ?included_portal_product_arns: Array[::String],
                            ?logo_uri: ::String,
-                           portal_content: {
-                             description: ::String?,
-                             display_name: ::String,
-                             theme: {
-                               custom_colors: {
-                                 accent_color: ::String,
-                                 background_color: ::String,
-                                 error_validation_color: ::String,
-                                 header_color: ::String,
-                                 navigation_color: ::String,
-                                 text_color: ::String
-                               },
-                               logo_last_uploaded: ::Time?
-                             }
-                           },
+                           portal_content: Params::portal_content,
                            ?rum_app_monitor_name: ::String,
                            ?tags: Hash[::String, ::String]
                          ) -> _CreatePortalResponseSuccess
@@ -419,15 +371,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#create_product_rest_endpoint_page-instance_method
       def create_product_rest_endpoint_page: (
-                                               ?display_content: {
-                                                 none: {
-                                                 }?,
-                                                 overrides: {
-                                                   body: ::String?,
-                                                   endpoint: ::String?,
-                                                   operation_name: ::String?
-                                                 }?
-                                               },
+                                               ?display_content: Params::endpoint_display_content,
                                                portal_product_id: ::String,
                                                rest_endpoint_identifier: {
                                                  identifier_parts: {
@@ -514,22 +458,10 @@ module Aws
                                        stage: ::String,
                                        strip_base_path: bool?
                                      }
-                                   },
+                                   }
                                  ],
                                  conditions: Array[
-                                   {
-                                     match_base_paths: {
-                                       any_of: Array[::String]
-                                     }?,
-                                     match_headers: {
-                                       any_of: Array[
-                                         {
-                                           header: ::String,
-                                           value_glob: ::String
-                                         },
-                                       ]
-                                     }?
-                                   },
+                                   Params::routing_rule_condition
                                  ],
                                  domain_name: ::String,
                                  ?domain_name_id: ::String,
@@ -1445,22 +1377,10 @@ module Aws
                                     stage: ::String,
                                     strip_base_path: bool?
                                   }
-                                },
+                                }
                               ],
                               conditions: Array[
-                                {
-                                  match_base_paths: {
-                                    any_of: Array[::String]
-                                  }?,
-                                  match_headers: {
-                                    any_of: Array[
-                                      {
-                                        header: ::String,
-                                        value_glob: ::String
-                                      },
-                                    ]
-                                  }?
-                                },
+                                Params::routing_rule_condition
                               ],
                               domain_name: ::String,
                               ?domain_name_id: ::String,
@@ -1539,14 +1459,7 @@ module Aws
       def update_api: (
                         api_id: ::String,
                         ?api_key_selection_expression: ::String,
-                        ?cors_configuration: {
-                          allow_credentials: bool?,
-                          allow_headers: Array[::String]?,
-                          allow_methods: Array[::String]?,
-                          allow_origins: Array[::String]?,
-                          expose_headers: Array[::String]?,
-                          max_age: ::Integer?
-                        },
+                        ?cors_configuration: Params::cors,
                         ?credentials_arn: ::String,
                         ?description: ::String,
                         ?disable_schema_validation: bool,
@@ -1642,19 +1555,7 @@ module Aws
       def update_domain_name: (
                                 domain_name: ::String,
                                 ?domain_name_configurations: Array[
-                                  {
-                                    api_gateway_domain_name: ::String?,
-                                    certificate_arn: ::String?,
-                                    certificate_name: ::String?,
-                                    certificate_upload_date: ::Time?,
-                                    domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")?,
-                                    domain_name_status_message: ::String?,
-                                    endpoint_type: ("REGIONAL" | "EDGE")?,
-                                    hosted_zone_id: ::String?,
-                                    ip_address_type: ("ipv4" | "dualstack")?,
-                                    security_policy: ("TLS_1_0" | "TLS_1_2")?,
-                                    ownership_verification_certificate_arn: ::String?
-                                  },
+                                  Params::domain_name_configuration
                                 ],
                                 ?mutual_tls_authentication: {
                                   truststore_uri: ::String?,
@@ -1773,40 +1674,11 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_portal-instance_method
       def update_portal: (
-                           ?authorization: {
-                             cognito_config: {
-                               app_client_id: ::String,
-                               user_pool_arn: ::String,
-                               user_pool_domain: ::String
-                             }?,
-                             none: {
-                             }?
-                           },
-                           ?endpoint_configuration: {
-                             acm_managed: {
-                               certificate_arn: ::String,
-                               domain_name: ::String
-                             }?,
-                             none: {
-                             }?
-                           },
+                           ?authorization: Params::authorization,
+                           ?endpoint_configuration: Params::endpoint_configuration_request,
                            ?included_portal_product_arns: Array[::String],
                            ?logo_uri: ::String,
-                           ?portal_content: {
-                             description: ::String?,
-                             display_name: ::String,
-                             theme: {
-                               custom_colors: {
-                                 accent_color: ::String,
-                                 background_color: ::String,
-                                 error_validation_color: ::String,
-                                 header_color: ::String,
-                                 navigation_color: ::String,
-                                 text_color: ::String
-                               },
-                               logo_last_uploaded: ::Time?
-                             }
-                           },
+                           ?portal_content: Params::portal_content,
                            portal_id: ::String,
                            ?rum_app_monitor_name: ::String
                          ) -> _UpdatePortalResponseSuccess
@@ -1831,7 +1703,7 @@ module Aws
                                        {
                                          product_rest_endpoint_page_arns: Array[::String],
                                          section_name: ::String
-                                       },
+                                       }
                                      ]?,
                                      overview_page_arn: ::String?,
                                      product_page_arns: Array[::String]?
@@ -1871,15 +1743,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ApiGatewayV2/Client.html#update_product_rest_endpoint_page-instance_method
       def update_product_rest_endpoint_page: (
-                                               ?display_content: {
-                                                 none: {
-                                                 }?,
-                                                 overrides: {
-                                                   body: ::String?,
-                                                   endpoint: ::String?,
-                                                   operation_name: ::String?
-                                                 }?
-                                               },
+                                               ?display_content: Params::endpoint_display_content,
                                                portal_product_id: ::String,
                                                product_rest_endpoint_page_id: ::String,
                                                ?try_it_state: ("ENABLED" | "DISABLED")

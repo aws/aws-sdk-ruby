@@ -1,0 +1,48 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Mgn
+    module Params
+      type post_launch_actions = {
+      deployment: ("TEST_AND_CUTOVER" | "CUTOVER_ONLY" | "TEST_ONLY")?,
+      s3_log_bucket: ::String?,
+      s3_output_key_prefix: ::String?,
+      cloud_watch_log_group_name: ::String?,
+      ssm_documents: Array[
+        Params::ssm_document
+      ]?
+    }
+
+      type ssm_document = {
+      action_name: ::String,
+      ssm_document_name: ::String,
+      timeout_seconds: ::Integer?,
+      must_succeed_for_cutover: bool?,
+      parameters: Hash[::String, Array[
+          {
+            parameter_type: ("STRING" | "SECURE_STRING"),
+            parameter_name: ::String
+          }
+        ]]?,
+      external_parameters: Hash[::String, {
+          dynamic_path: ::String?
+        }]?
+    }
+
+      type source_configuration = {
+      source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT"),
+      source_s3_configuration: {
+        s3_bucket: ::String,
+        s3_bucket_owner: ::String,
+        s3_key: ::String
+      }
+    }
+
+    end
+  end
+end

@@ -89,7 +89,7 @@ module Aws
                                        {
                                          catalog: ::String,
                                          entity_id: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _BatchDescribeEntitiesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeEntitiesResponseSuccess
@@ -173,7 +173,7 @@ module Aws
                                 {
                                   name: ::String?,
                                   value_list: Array[::String]?
-                                },
+                                }
                               ],
                               ?sort: {
                                 sort_by: ::String?,
@@ -197,7 +197,7 @@ module Aws
                              {
                                name: ::String?,
                                value_list: Array[::String]?
-                             },
+                             }
                            ],
                            ?sort: {
                              sort_by: ::String?,
@@ -508,13 +508,13 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]?,
                                   details: ::String?,
                                   details_document: {
                                   }?,
                                   change_name: ::String?
-                                },
+                                }
                               ],
                               ?change_set_name: ::String,
                               ?client_request_token: ::String,
@@ -522,7 +522,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?intent: ("VALIDATE" | "APPLY")
                             ) -> _StartChangeSetResponseSuccess
@@ -538,7 +538,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

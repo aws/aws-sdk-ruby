@@ -1,0 +1,68 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Lambda
+    module Params
+      type capacity_provider_scaling_config = {
+      max_v_cpu_count: ::Integer?,
+      scaling_mode: ("Auto" | "Manual")?,
+      scaling_policies: Array[
+        {
+          predefined_metric_type: ("LambdaCapacityProviderAverageCPUUtilization"),
+          target_value: ::Float
+        }
+      ]?
+    }
+
+      type destination_config = {
+      on_success: {
+        destination: ::String?
+      }?,
+      on_failure: {
+        destination: ::String?
+      }?
+    }
+
+      type kafka_schema_registry_config = {
+      schema_registry_uri: ::String?,
+      event_record_format: ("JSON" | "SOURCE")?,
+      access_configs: Array[
+        {
+          type: ("BASIC_AUTH" | "CLIENT_CERTIFICATE_TLS_AUTH" | "SERVER_ROOT_CA_CERTIFICATE")?,
+          uri: ::String?
+        }
+      ]?,
+      schema_validation_configs: Array[
+        {
+          attribute: ("KEY" | "VALUE")?
+        }
+      ]?
+    }
+
+      type amazon_managed_kafka_event_source_config = {
+      consumer_group_id: ::String?,
+      schema_registry_config: Params::kafka_schema_registry_config?
+    }
+
+      type self_managed_kafka_event_source_config = {
+      consumer_group_id: ::String?,
+      schema_registry_config: Params::kafka_schema_registry_config?
+    }
+
+      type cors = {
+      allow_credentials: bool?,
+      allow_headers: Array[::String]?,
+      allow_methods: Array[::String]?,
+      allow_origins: Array[::String]?,
+      expose_headers: Array[::String]?,
+      max_age: ::Integer?
+    }
+
+    end
+  end
+end

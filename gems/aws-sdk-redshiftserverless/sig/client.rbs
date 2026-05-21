@@ -92,7 +92,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _ConvertRecoveryPointToSnapshotResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConvertRecoveryPointToSnapshotResponseSuccess
@@ -147,7 +147,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateNamespaceResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNamespaceResponseSuccess
@@ -181,19 +181,7 @@ module Aws
                                      ?scheduled_action_description: ::String,
                                      scheduled_action_name: ::String,
                                      ?start_time: ::Time,
-                                     target_action: {
-                                       create_snapshot: {
-                                         namespace_name: ::String,
-                                         retention_period: ::Integer?,
-                                         snapshot_name_prefix: ::String,
-                                         tags: Array[
-                                           {
-                                             key: ::String,
-                                             value: ::String
-                                           },
-                                         ]?
-                                       }?
-                                     }
+                                     target_action: Params::target_action
                                    ) -> _CreateScheduledActionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledActionResponseSuccess
 
@@ -210,7 +198,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
@@ -253,7 +241,7 @@ module Aws
                                 {
                                   parameter_key: ::String?,
                                   parameter_value: ::String?
-                                },
+                                }
                               ],
                               ?enhanced_vpc_routing: bool,
                               ?extra_compute_for_automatic_optimization: bool,
@@ -272,7 +260,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?track_name: ::String,
                               workgroup_name: ::String
@@ -823,7 +811,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -916,19 +904,7 @@ module Aws
                                      ?scheduled_action_description: ::String,
                                      scheduled_action_name: ::String,
                                      ?start_time: ::Time,
-                                     ?target_action: {
-                                       create_snapshot: {
-                                         namespace_name: ::String,
-                                         retention_period: ::Integer?,
-                                         snapshot_name_prefix: ::String,
-                                         tags: Array[
-                                           {
-                                             key: ::String,
-                                             value: ::String
-                                           },
-                                         ]?
-                                       }?
-                                     }
+                                     ?target_action: Params::target_action
                                    ) -> _UpdateScheduledActionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScheduledActionResponseSuccess
 
@@ -977,7 +953,7 @@ module Aws
                                 {
                                   parameter_key: ::String?,
                                   parameter_value: ::String?
-                                },
+                                }
                               ],
                               ?enhanced_vpc_routing: bool,
                               ?extra_compute_for_automatic_optimization: bool,

@@ -1,0 +1,66 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SupplyChain
+    module Params
+      type data_integration_flow_dedupe_strategy = {
+      type: ("FIELD_PRIORITY"),
+      field_priority: {
+        fields: Array[
+          {
+            name: ::String,
+            sort_order: ("ASC" | "DESC")
+          }
+        ]
+      }?
+    }
+
+      type data_integration_flow_dataset_options = {
+      load_type: ("INCREMENTAL" | "REPLACE")?,
+      dedupe_records: bool?,
+      dedupe_strategy: Params::data_integration_flow_dedupe_strategy?
+    }
+
+      type data_integration_flow_dataset_source_configuration = {
+      dataset_identifier: ::String,
+      options: Params::data_integration_flow_dataset_options?
+    }
+
+      type data_integration_flow_source = {
+      source_type: ("S3" | "DATASET"),
+      source_name: ::String,
+      s3_source: {
+        bucket_name: ::String,
+        prefix: ::String,
+        options: {
+          file_type: ("CSV" | "PARQUET" | "JSON")?
+        }?
+      }?,
+      dataset_source: Params::data_integration_flow_dataset_source_configuration?
+    }
+
+      type data_integration_flow_dataset_target_configuration = {
+      dataset_identifier: ::String,
+      options: Params::data_integration_flow_dataset_options?
+    }
+
+      type data_integration_flow_target = {
+      target_type: ("S3" | "DATASET"),
+      s3_target: {
+        bucket_name: ::String,
+        prefix: ::String,
+        options: {
+          file_type: ("CSV" | "PARQUET" | "JSON")?
+        }?
+      }?,
+      dataset_target: Params::data_integration_flow_dataset_target_configuration?
+    }
+
+    end
+  end
+end

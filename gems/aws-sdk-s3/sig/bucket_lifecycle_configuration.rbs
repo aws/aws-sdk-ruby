@@ -69,7 +69,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]?,
                            object_size_greater_than: ::Integer?,
                            object_size_less_than: ::Integer?
@@ -81,14 +81,14 @@ module Aws
                            date: ::Time?,
                            days: ::Integer?,
                            storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")?
-                         },
+                         }
                        ]?,
                        noncurrent_version_transitions: Array[
                          {
                            noncurrent_days: ::Integer?,
                            storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")?,
                            newer_noncurrent_versions: ::Integer?
-                         },
+                         }
                        ]?,
                        noncurrent_version_expiration: {
                          noncurrent_days: ::Integer?,
@@ -97,7 +97,7 @@ module Aws
                        abort_incomplete_multipart_upload: {
                          days_after_initiation: ::Integer?
                        }?
-                     },
+                     }
                    ]
                  },
                  ?expected_bucket_owner: ::String,

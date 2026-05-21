@@ -135,7 +135,7 @@ module Aws
                          ?included_properties: Array[
                            {
                              name: ::String
-                           },
+                           }
                          ],
                          ?scope: ::String,
                          ?filters: {
@@ -454,7 +454,7 @@ module Aws
                          ?included_properties: Array[
                            {
                              name: ::String
-                           },
+                           }
                          ],
                          ?filters: {
                            filter_string: ::String

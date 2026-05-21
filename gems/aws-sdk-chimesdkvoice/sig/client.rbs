@@ -124,7 +124,7 @@ module Aws
                                            product_type: ("VoiceConnector" | "SipMediaApplicationDialIn")?,
                                            calling_name: ::String?,
                                            name: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _BatchUpdatePhoneNumberResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdatePhoneNumberResponseSuccess
@@ -172,13 +172,13 @@ module Aws
                                           endpoints: Array[
                                             {
                                               lambda_arn: ::String?
-                                            },
+                                            }
                                           ],
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateSipMediaApplicationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSipMediaApplicationResponseSuccess
@@ -212,7 +212,7 @@ module Aws
                                  sip_media_application_id: ::String?,
                                  priority: ::Integer?,
                                  aws_region: ::String?
-                               },
+                               }
                              ]
                            ) -> _CreateSipRuleResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSipRuleResponseSuccess
@@ -230,7 +230,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?integration_type: ("CONNECT_CALL_TRANSFER_CONNECTOR" | "CONNECT_ANALYTICS_CONNECTOR"),
                                     ?network_type: ("IPV4_ONLY" | "DUAL_STACK")
@@ -248,7 +248,7 @@ module Aws
                                             {
                                               voice_connector_id: ::String,
                                               priority: ::Integer
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateVoiceConnectorGroupResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceConnectorGroupResponseSuccess
@@ -279,7 +279,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateVoiceProfileDomainResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVoiceProfileDomainResponseSuccess
@@ -823,7 +823,7 @@ module Aws
                                                                        emergency_phone_number: ::String,
                                                                        test_phone_number: ::String?,
                                                                        calling_country: ::String
-                                                                     },
+                                                                     }
                                                                    ]?
                                                                  }
                                                                ) -> _PutVoiceConnectorEmergencyCallingConfigurationResponseSuccess
@@ -870,7 +870,7 @@ module Aws
                                                    protocol: ("TCP" | "UDP")?,
                                                    priority: ::Integer?,
                                                    weight: ::Integer?
-                                                 },
+                                                 }
                                                ]?,
                                                disabled: bool?
                                              }
@@ -904,7 +904,7 @@ module Aws
                                                            streaming_notification_targets: Array[
                                                              {
                                                                notification_target: ("EventBridge" | "SNS" | "SQS")?
-                                                             },
+                                                             }
                                                            ]?,
                                                            media_insights_configuration: {
                                                              disabled: bool?,
@@ -938,7 +938,7 @@ module Aws
                                                            {
                                                              username: ::String?,
                                                              password: ::String?
-                                                           },
+                                                           }
                                                          ]
                                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1019,7 +1019,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1082,7 +1082,7 @@ module Aws
                                           ?endpoints: Array[
                                             {
                                               lambda_arn: ::String?
-                                            },
+                                            }
                                           ]
                                         ) -> _UpdateSipMediaApplicationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSipMediaApplicationResponseSuccess
@@ -1113,7 +1113,7 @@ module Aws
                                  sip_media_application_id: ::String?,
                                  priority: ::Integer?,
                                  aws_region: ::String?
-                               },
+                               }
                              ]
                            ) -> _UpdateSipRuleResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSipRuleResponseSuccess
@@ -1142,7 +1142,7 @@ module Aws
                                             {
                                               voice_connector_id: ::String,
                                               priority: ::Integer
-                                            },
+                                            }
                                           ]
                                         ) -> _UpdateVoiceConnectorGroupResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVoiceConnectorGroupResponseSuccess

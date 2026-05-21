@@ -1,0 +1,54 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AccessAnalyzer
+    module Params
+      type inline_archive_rule = {
+      rule_name: ::String,
+      filter: Hash[::String, {
+          eq: Array[::String]?,
+          neq: Array[::String]?,
+          contains: Array[::String]?,
+          exists: bool?
+        }]
+    }
+
+      type unused_access_configuration = {
+      unused_access_age: ::Integer?,
+      analysis_rule: {
+        exclusions: Array[
+          {
+            account_ids: Array[::String]?,
+            resource_tags: Array[
+              Hash[::String, ::String]
+            ]?
+          }
+        ]?
+      }?
+    }
+
+      type internal_access_configuration = {
+      analysis_rule: {
+        inclusions: Array[
+          {
+            account_ids: Array[::String]?,
+            resource_types: Array[("AWS::S3::Bucket" | "AWS::IAM::Role" | "AWS::SQS::Queue" | "AWS::Lambda::Function" | "AWS::Lambda::LayerVersion" | "AWS::KMS::Key" | "AWS::SecretsManager::Secret" | "AWS::EFS::FileSystem" | "AWS::EC2::Snapshot" | "AWS::ECR::Repository" | "AWS::RDS::DBSnapshot" | "AWS::RDS::DBClusterSnapshot" | "AWS::SNS::Topic" | "AWS::S3Express::DirectoryBucket" | "AWS::DynamoDB::Table" | "AWS::DynamoDB::Stream" | "AWS::IAM::User")]?,
+            resource_arns: Array[::String]?
+          }
+        ]?
+      }?
+    }
+
+      type analyzer_configuration = {
+      unused_access: Params::unused_access_configuration?,
+      internal_access: Params::internal_access_configuration?
+    }
+
+    end
+  end
+end

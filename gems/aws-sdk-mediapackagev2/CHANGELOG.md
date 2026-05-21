@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.63.0 (2026-05-15)
+------------------
+
+* Feature - This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests
+
 1.62.0 (2026-05-13)
 ------------------
 

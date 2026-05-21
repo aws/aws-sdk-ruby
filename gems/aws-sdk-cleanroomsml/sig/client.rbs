@@ -117,14 +117,7 @@ module Aws
       def create_configured_audience_model: (
                                               name: ::String,
                                               audience_model_arn: ::String,
-                                              output_config: {
-                                                destination: {
-                                                  s3_destination: {
-                                                    s3_uri: ::String
-                                                  }
-                                                },
-                                                role_arn: ::String
-                                              },
+                                              output_config: Params::configured_audience_model_output_config,
                                               ?description: ::String,
                                               shared_audience_metrics: Array[("ALL" | "NONE")],
                                               ?min_matching_seed_size: ::Integer,
@@ -154,7 +147,7 @@ module Aws
                                                    {
                                                      name: ::String,
                                                      regex: ::String
-                                                   },
+                                                   }
                                                  ]?
                                                },
                                                ?inference_container_config: {
@@ -179,17 +172,7 @@ module Aws
                                                              policies: {
                                                                trained_models: {
                                                                  container_logs: Array[
-                                                                   {
-                                                                     allowed_account_ids: Array[::String],
-                                                                     filter_pattern: ::String?,
-                                                                     log_type: ("ALL" | "ERROR_SUMMARY")?,
-                                                                     log_redaction_configuration: {
-                                                                       entities_to_redact: Array[("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" | "NUMBERS" | "CUSTOM")],
-                                                                       custom_entity_config: {
-                                                                         custom_data_identifiers: Array[::String]
-                                                                       }?
-                                                                     }?
-                                                                   },
+                                                                   Params::logs_configuration_policy
                                                                  ]?,
                                                                  container_metrics: {
                                                                    noise_level: ("HIGH" | "MEDIUM" | "LOW" | "NONE")
@@ -208,17 +191,7 @@ module Aws
                                                                }?,
                                                                trained_model_inference_jobs: {
                                                                  container_logs: Array[
-                                                                   {
-                                                                     allowed_account_ids: Array[::String],
-                                                                     filter_pattern: ::String?,
-                                                                     log_type: ("ALL" | "ERROR_SUMMARY")?,
-                                                                     log_redaction_configuration: {
-                                                                       entities_to_redact: Array[("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" | "NUMBERS" | "CUSTOM")],
-                                                                       custom_entity_config: {
-                                                                         custom_data_identifiers: Array[::String]
-                                                                       }?
-                                                                     }?
-                                                                   },
+                                                                   Params::logs_configuration_policy
                                                                  ]?,
                                                                  max_output_size: {
                                                                    unit: ("GB"),
@@ -247,15 +220,7 @@ module Aws
                                              analysis_template_arn: ::String?,
                                              parameters: Hash[::String, ::String]?
                                            },
-                                           compute_configuration: {
-                                             worker: {
-                                               type: ("CR.1X" | "CR.4X")?,
-                                               number: ::Integer?,
-                                               properties: {
-                                                 spark: Hash[::String, ::String]?
-                                               }?
-                                             }?
-                                           }?,
+                                           compute_configuration: Params::compute_configuration?,
                                            result_format: ("CSV" | "PARQUET")?
                                          }?
                                        },
@@ -294,14 +259,14 @@ module Aws
                                       trained_model_arn: ::String,
                                       version_identifier: ::String?,
                                       channel_name: ::String
-                                    },
+                                    }
                                   ],
                                   data_channels: Array[
                                     {
                                       ml_input_channel_arn: ::String,
                                       channel_name: ::String,
                                       s3_data_distribution_type: ("FullyReplicated" | "ShardedByS3Key")?
-                                    },
+                                    }
                                   ],
                                   ?training_input_mode: ("File" | "FastFile" | "Pipe"),
                                   ?description: ::String,
@@ -326,7 +291,7 @@ module Aws
                                              {
                                                column_name: ::String,
                                                column_types: Array[("USER_ID" | "ITEM_ID" | "TIMESTAMP" | "CATEGORICAL_FEATURE" | "NUMERICAL_FEATURE")]
-                                             },
+                                             }
                                            ],
                                            data_source: {
                                              glue_data_source: {
@@ -336,7 +301,7 @@ module Aws
                                              }
                                            }
                                          }
-                                       },
+                                       }
                                      ],
                                      ?tags: Hash[::String, ::String],
                                      ?description: ::String
@@ -1013,15 +978,7 @@ module Aws
                                                analysis_template_arn: ::String?,
                                                parameters: Hash[::String, ::String]?
                                              }?,
-                                             sql_compute_configuration: {
-                                               worker: {
-                                                 type: ("CR.1X" | "CR.4X")?,
-                                                 number: ::Integer?,
-                                                 properties: {
-                                                   spark: Hash[::String, ::String]?
-                                                 }?
-                                               }?
-                                             }?
+                                             sql_compute_configuration: Params::compute_configuration?
                                            },
                                            ?include_seed_in_output: bool,
                                            ?collaboration_id: ::String,
@@ -1040,7 +997,7 @@ module Aws
                                               members: Array[
                                                 {
                                                   account_id: ::String
-                                                },
+                                                }
                                               ]
                                             },
                                             ?description: ::String
@@ -1067,7 +1024,7 @@ module Aws
                                                  members: Array[
                                                    {
                                                      account_id: ::String
-                                                   },
+                                                   }
                                                  ]
                                                },
                                                data_source: {
@@ -1110,14 +1067,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CleanRoomsML/Client.html#update_configured_audience_model-instance_method
       def update_configured_audience_model: (
                                               configured_audience_model_arn: ::String,
-                                              ?output_config: {
-                                                destination: {
-                                                  s3_destination: {
-                                                    s3_uri: ::String
-                                                  }
-                                                },
-                                                role_arn: ::String
-                                              },
+                                              ?output_config: Params::configured_audience_model_output_config,
                                               ?audience_model_arn: ::String,
                                               ?shared_audience_metrics: Array[("ALL" | "NONE")],
                                               ?min_matching_seed_size: ::Integer,

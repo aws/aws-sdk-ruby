@@ -103,15 +103,7 @@ module Aws
                                 release_label: ::String,
                                 type: ::String,
                                 client_token: ::String,
-                                ?initial_capacity: Hash[::String, {
-                                    worker_count: ::Integer,
-                                    worker_configuration: {
-                                      cpu: ::String,
-                                      memory: ::String,
-                                      disk: ::String?,
-                                      disk_type: ::String?
-                                    }?
-                                  }],
+                                ?initial_capacity: Hash[::String, Params::initial_capacity_config],
                                 ?maximum_capacity: {
                                   cpu: ::String,
                                   memory: ::String,
@@ -143,28 +135,9 @@ module Aws
                                     classification: ::String,
                                     properties: Hash[::String, ::String]?,
                                     configurations: untyped?
-                                  },
+                                  }
                                 ],
-                                ?monitoring_configuration: {
-                                  s3_monitoring_configuration: {
-                                    log_uri: ::String?,
-                                    encryption_key_arn: ::String?
-                                  }?,
-                                  managed_persistence_monitoring_configuration: {
-                                    enabled: bool?,
-                                    encryption_key_arn: ::String?
-                                  }?,
-                                  cloud_watch_logging_configuration: {
-                                    enabled: bool,
-                                    log_group_name: ::String?,
-                                    log_stream_name_prefix: ::String?,
-                                    encryption_key_arn: ::String?,
-                                    log_types: Hash[::String, Array[::String]]?
-                                  }?,
-                                  prometheus_monitoring_configuration: {
-                                    remote_write_url: ::String?
-                                  }?
-                                },
+                                ?monitoring_configuration: Params::monitoring_configuration,
                                 ?disk_encryption_configuration: {
                                   encryption_context: Hash[::String, ::String]?,
                                   encryption_key_arn: ::String?
@@ -382,28 +355,9 @@ module Aws
                                  classification: ::String,
                                  properties: Hash[::String, ::String]?,
                                  configurations: untyped?
-                               },
+                               }
                              ]?,
-                             monitoring_configuration: {
-                               s3_monitoring_configuration: {
-                                 log_uri: ::String?,
-                                 encryption_key_arn: ::String?
-                               }?,
-                               managed_persistence_monitoring_configuration: {
-                                 enabled: bool?,
-                                 encryption_key_arn: ::String?
-                               }?,
-                               cloud_watch_logging_configuration: {
-                                 enabled: bool,
-                                 log_group_name: ::String?,
-                                 log_stream_name_prefix: ::String?,
-                                 encryption_key_arn: ::String?,
-                                 log_types: Hash[::String, Array[::String]]?
-                               }?,
-                               prometheus_monitoring_configuration: {
-                                 remote_write_url: ::String?
-                               }?
-                             }?,
+                             monitoring_configuration: Params::monitoring_configuration?,
                              disk_encryption_configuration: {
                                encryption_context: Hash[::String, ::String]?,
                                encryption_key_arn: ::String?
@@ -437,7 +391,7 @@ module Aws
                                  classification: ::String,
                                  properties: Hash[::String, ::String]?,
                                  configurations: untyped?
-                               },
+                               }
                              ]?
                            },
                            ?tags: Hash[::String, ::String],
@@ -495,15 +449,7 @@ module Aws
       def update_application: (
                                 application_id: ::String,
                                 client_token: ::String,
-                                ?initial_capacity: Hash[::String, {
-                                    worker_count: ::Integer,
-                                    worker_configuration: {
-                                      cpu: ::String,
-                                      memory: ::String,
-                                      disk: ::String?,
-                                      disk_type: ::String?
-                                    }?
-                                  }],
+                                ?initial_capacity: Hash[::String, Params::initial_capacity_config],
                                 ?maximum_capacity: {
                                   cpu: ::String,
                                   memory: ::String,
@@ -540,28 +486,9 @@ module Aws
                                     classification: ::String,
                                     properties: Hash[::String, ::String]?,
                                     configurations: untyped?
-                                  },
+                                  }
                                 ],
-                                ?monitoring_configuration: {
-                                  s3_monitoring_configuration: {
-                                    log_uri: ::String?,
-                                    encryption_key_arn: ::String?
-                                  }?,
-                                  managed_persistence_monitoring_configuration: {
-                                    enabled: bool?,
-                                    encryption_key_arn: ::String?
-                                  }?,
-                                  cloud_watch_logging_configuration: {
-                                    enabled: bool,
-                                    log_group_name: ::String?,
-                                    log_stream_name_prefix: ::String?,
-                                    encryption_key_arn: ::String?,
-                                    log_types: Hash[::String, Array[::String]]?
-                                  }?,
-                                  prometheus_monitoring_configuration: {
-                                    remote_write_url: ::String?
-                                  }?
-                                },
+                                ?monitoring_configuration: Params::monitoring_configuration,
                                 ?disk_encryption_configuration: {
                                   encryption_context: Hash[::String, ::String]?,
                                   encryption_key_arn: ::String?

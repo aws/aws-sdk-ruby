@@ -24,6 +24,12 @@ module AwsSdkCodeGenerator
         result.join(joint)
       end
 
+      def format_as_alias(indent: '')
+        struct(@shape, indent, [])
+      end
+
+      private
+
       def struct(struct_shape, i, visited)
         members_str = struct_members(struct_shape, i, visited, keyword: false)
         result = ["{"]
@@ -67,11 +73,15 @@ module AwsSdkCodeGenerator
       end
 
       def ref_value(ref, i, visited)
-        if visited.include?(ref['shape'])
-          return "untyped"
-        else
-          visited  = visited + [ref['shape']]
+        return "untyped" if visited.include?(ref['shape'])
+
+        # If this shape should be aliased, emit the alias reference
+        if @options[:aliased_shapes]&.include?(ref['shape'])
+          alias_name = underscore(ref['shape'])
+          return "Params::#{alias_name}"
         end
+
+        visited  = visited + [ref['shape']]
 
         s = shape(ref)
         case s['type']
@@ -115,7 +125,7 @@ module AwsSdkCodeGenerator
 
       def complex_list(member_ref, i, visited)
         newline_indent = newline ? "\n#{i}" : ""
-        "Array[#{newline_indent}#{more_indent}#{ref_value(member_ref, i + more_indent, visited)},#{newline_indent}]"
+        "Array[#{newline_indent}#{more_indent}#{ref_value(member_ref, i + more_indent, visited)}#{newline_indent}]"
       end
 
       def complex?(ref)

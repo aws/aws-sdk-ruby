@@ -98,7 +98,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  file_system_id: ::String,
                                  ?posix_user: {
@@ -152,7 +152,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _CreateFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
@@ -202,7 +202,7 @@ module Aws
                                                   kms_key_id: ::String?,
                                                   file_system_id: ::String?,
                                                   role_arn: ::String?
-                                                },
+                                                }
                                               ]
                                             ) -> _CreateReplicationConfigurationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReplicationConfigurationResponseSuccess
@@ -214,7 +214,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -450,7 +450,7 @@ module Aws
                                              transition_to_ia: ("AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_1_DAY" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")?,
                                              transition_to_primary_storage_class: ("AFTER_1_ACCESS")?,
                                              transition_to_archive: ("AFTER_1_DAY" | "AFTER_7_DAYS" | "AFTER_14_DAYS" | "AFTER_30_DAYS" | "AFTER_60_DAYS" | "AFTER_90_DAYS" | "AFTER_180_DAYS" | "AFTER_270_DAYS" | "AFTER_365_DAYS")?
-                                           },
+                                           }
                                          ]
                                        ) -> _PutLifecycleConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLifecycleConfigurationResponseSuccess
@@ -462,7 +462,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

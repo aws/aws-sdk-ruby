@@ -56,11 +56,11 @@ module Aws
                              {
                                name: ("prefix" | "suffix")?,
                                value: ::String?
-                             },
+                             }
                            ]?
                          }?
                        }?
-                     },
+                     }
                    ]?,
                    queue_configurations: Array[
                      {
@@ -73,11 +73,11 @@ module Aws
                              {
                                name: ("prefix" | "suffix")?,
                                value: ::String?
-                             },
+                             }
                            ]?
                          }?
                        }?
-                     },
+                     }
                    ]?,
                    lambda_function_configurations: Array[
                      {
@@ -90,11 +90,11 @@ module Aws
                              {
                                name: ("prefix" | "suffix")?,
                                value: ::String?
-                             },
+                             }
                            ]?
                          }?
                        }?
-                     },
+                     }
                    ]?,
                    event_bridge_configuration: {
                    }?

@@ -50,7 +50,7 @@ module Aws
                        allowed_origins: Array[::String],
                        expose_headers: Array[::String]?,
                        max_age_seconds: ::Integer?
-                     },
+                     }
                    ]
                  },
                  ?content_md5: ::String,

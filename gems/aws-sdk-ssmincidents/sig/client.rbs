@@ -111,18 +111,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#create_response_plan-instance_method
       def create_response_plan: (
                                   ?actions: Array[
-                                    {
-                                      ssm_automation: {
-                                        document_name: ::String,
-                                        document_version: ::String?,
-                                        dynamic_parameters: Hash[::String, {
-                                            variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")?
-                                          }]?,
-                                        parameters: Hash[::String, Array[::String]]?,
-                                        role_arn: ::String,
-                                        target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")?
-                                      }?
-                                    },
+                                    Params::action
                                   ],
                                   ?chat_channel: {
                                     chatbot_sns: Array[::String]?,
@@ -139,21 +128,13 @@ module Aws
                                     notification_targets: Array[
                                       {
                                         sns_topic_arn: ::String?
-                                      },
+                                      }
                                     ]?,
                                     summary: ::String?,
                                     title: ::String
                                   },
                                   ?integrations: Array[
-                                    {
-                                      pager_duty_configuration: {
-                                        name: ::String,
-                                        pager_duty_incident_configuration: {
-                                          service_id: ::String
-                                        },
-                                        secret_id: ::String
-                                      }?
-                                    },
+                                    Params::integration
                                   ],
                                   name: ::String,
                                   ?tags: Hash[::String, ::String]
@@ -173,7 +154,7 @@ module Aws
                                      {
                                        related_item_id: ::String?,
                                        resource: ::String?
-                                     },
+                                     }
                                    ],
                                    event_time: ::Time,
                                    event_type: ::String,
@@ -310,17 +291,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_incident_records-instance_method
       def list_incident_records: (
                                    ?filters: Array[
-                                     {
-                                       condition: {
-                                         after: ::Time?,
-                                         before: ::Time?,
-                                         equals: {
-                                           integer_values: Array[::Integer]?,
-                                           string_values: Array[::String]?
-                                         }?
-                                       },
-                                       key: ::String
-                                     },
+                                     Params::filter
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -382,17 +353,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#list_timeline_events-instance_method
       def list_timeline_events: (
                                   ?filters: Array[
-                                    {
-                                      condition: {
-                                        after: ::Time?,
-                                        before: ::Time?,
-                                        equals: {
-                                          integer_values: Array[::Integer]?,
-                                          string_values: Array[::String]?
-                                        }?
-                                      },
-                                      key: ::String
-                                    },
+                                    Params::filter
                                   ],
                                   incident_record_arn: ::String,
                                   ?max_results: ::Integer,
@@ -422,23 +383,7 @@ module Aws
                             ?client_token: ::String,
                             ?impact: ::Integer,
                             ?related_items: Array[
-                              {
-                                generated_id: ::String?,
-                                identifier: {
-                                  type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
-                                  value: {
-                                    arn: ::String?,
-                                    metric_definition: ::String?,
-                                    pager_duty_incident_detail: {
-                                      auto_resolve: bool?,
-                                      id: ::String,
-                                      secret_id: ::String?
-                                    }?,
-                                    url: ::String?
-                                  }
-                                },
-                                title: ::String?
-                              },
+                              Params::related_item
                             ],
                             response_plan_arn: ::String,
                             ?title: ::String,
@@ -498,7 +443,7 @@ module Aws
                                     ?notification_targets: Array[
                                       {
                                         sns_topic_arn: ::String?
-                                      },
+                                      }
                                     ],
                                     ?status: ("OPEN" | "RESOLVED"),
                                     ?summary: ::String,
@@ -514,36 +459,8 @@ module Aws
                                   ?client_token: ::String,
                                   incident_record_arn: ::String,
                                   related_items_update: {
-                                    item_to_add: {
-                                      generated_id: ::String?,
-                                      identifier: {
-                                        type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
-                                        value: {
-                                          arn: ::String?,
-                                          metric_definition: ::String?,
-                                          pager_duty_incident_detail: {
-                                            auto_resolve: bool?,
-                                            id: ::String,
-                                            secret_id: ::String?
-                                          }?,
-                                          url: ::String?
-                                        }
-                                      },
-                                      title: ::String?
-                                    }?,
-                                    item_to_remove: {
-                                      type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
-                                      value: {
-                                        arn: ::String?,
-                                        metric_definition: ::String?,
-                                        pager_duty_incident_detail: {
-                                          auto_resolve: bool?,
-                                          id: ::String,
-                                          secret_id: ::String?
-                                        }?,
-                                        url: ::String?
-                                      }
-                                    }?
+                                    item_to_add: Params::related_item?,
+                                    item_to_remove: Params::item_identifier?
                                   }
                                 ) -> _UpdateRelatedItemsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelatedItemsResponseSuccess
@@ -562,7 +479,7 @@ module Aws
                                         delete_region_action: {
                                           region_name: ::String
                                         }?
-                                      },
+                                      }
                                     ],
                                     arn: ::String,
                                     ?client_token: ::String
@@ -575,18 +492,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSMIncidents/Client.html#update_response_plan-instance_method
       def update_response_plan: (
                                   ?actions: Array[
-                                    {
-                                      ssm_automation: {
-                                        document_name: ::String,
-                                        document_version: ::String?,
-                                        dynamic_parameters: Hash[::String, {
-                                            variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")?
-                                          }]?,
-                                        parameters: Hash[::String, Array[::String]]?,
-                                        role_arn: ::String,
-                                        target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")?
-                                      }?
-                                    },
+                                    Params::action
                                   ],
                                   arn: ::String,
                                   ?chat_channel: {
@@ -602,21 +508,13 @@ module Aws
                                   ?incident_template_notification_targets: Array[
                                     {
                                       sns_topic_arn: ::String?
-                                    },
+                                    }
                                   ],
                                   ?incident_template_summary: ::String,
                                   ?incident_template_tags: Hash[::String, ::String],
                                   ?incident_template_title: ::String,
                                   ?integrations: Array[
-                                    {
-                                      pager_duty_configuration: {
-                                        name: ::String,
-                                        pager_duty_incident_configuration: {
-                                          service_id: ::String
-                                        },
-                                        secret_id: ::String
-                                      }?
-                                    },
+                                    Params::integration
                                   ]
                                 ) -> _UpdateResponsePlanResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResponsePlanResponseSuccess
@@ -633,7 +531,7 @@ module Aws
                                      {
                                        related_item_id: ::String?,
                                        resource: ::String?
-                                     },
+                                     }
                                    ],
                                    ?event_time: ::Time,
                                    ?event_type: ::String,

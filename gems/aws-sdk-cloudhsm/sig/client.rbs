@@ -90,7 +90,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _AddTagsToResourceResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess

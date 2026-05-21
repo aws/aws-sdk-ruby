@@ -151,27 +151,11 @@ module Aws
                                                       attributes: Array[
                                                         {
                                                           name: ::String
-                                                        },
+                                                        }
                                                       ],
                                                       expression: ::String
                                                     },
-                                                    ?conditions: {
-                                                      range: {
-                                                        value: ::Integer?,
-                                                        unit: ("DAYS")?,
-                                                        value_range: {
-                                                          start: ::Integer,
-                                                          end: ::Integer
-                                                        }?,
-                                                        timestamp_source: ::String?,
-                                                        timestamp_format: ::String?
-                                                      }?,
-                                                      object_count: ::Integer?,
-                                                      threshold: {
-                                                        value: ::String,
-                                                        operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
-                                                      }?
-                                                    },
+                                                    ?conditions: Params::conditions,
                                                     ?filter: {
                                                       include: ("ALL" | "ANY" | "NONE"),
                                                       groups: Array[
@@ -183,9 +167,9 @@ module Aws
                                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
                                                                   values: Array[::String]
                                                                 }]
-                                                            },
+                                                            }
                                                           ]
-                                                        },
+                                                        }
                                                       ]
                                                     },
                                                     statistic: ("FIRST_OCCURRENCE" | "LAST_OCCURRENCE" | "COUNT" | "SUM" | "MINIMUM" | "MAXIMUM" | "AVERAGE" | "MAX_OCCURRENCE"),
@@ -213,58 +197,8 @@ module Aws
                            default_expiration_days: ::Integer,
                            ?default_encryption_key: ::String,
                            ?dead_letter_queue_url: ::String,
-                           ?matching: {
-                             enabled: bool,
-                             job_schedule: {
-                               day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
-                               time: ::String
-                             }?,
-                             auto_merging: {
-                               enabled: bool,
-                               consolidation: {
-                                 matching_attributes_list: Array[
-                                   Array[::String],
-                                 ]
-                               }?,
-                               conflict_resolution: {
-                                 conflict_resolving_model: ("RECENCY" | "SOURCE"),
-                                 source_name: ::String?
-                               }?,
-                               min_allowed_confidence_score_for_merging: ::Float?
-                             }?,
-                             exporting_config: {
-                               s3_exporting: {
-                                 s3_bucket_name: ::String,
-                                 s3_key_name: ::String?
-                               }?
-                             }?
-                           },
-                           ?rule_based_matching: {
-                             enabled: bool,
-                             matching_rules: Array[
-                               {
-                                 rule: Array[::String]
-                               },
-                             ]?,
-                             max_allowed_rule_level_for_merging: ::Integer?,
-                             max_allowed_rule_level_for_matching: ::Integer?,
-                             attribute_types_selector: {
-                               attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                               address: Array[::String]?,
-                               phone_number: Array[::String]?,
-                               email_address: Array[::String]?
-                             }?,
-                             conflict_resolution: {
-                               conflict_resolving_model: ("RECENCY" | "SOURCE"),
-                               source_name: ::String?
-                             }?,
-                             exporting_config: {
-                               s3_exporting: {
-                                 s3_bucket_name: ::String,
-                                 s3_key_name: ::String?
-                               }?
-                             }?
-                           },
+                           ?matching: Params::matching_request,
+                           ?rule_based_matching: Params::rule_based_matching_request,
                            ?data_store: {
                              enabled: bool?
                            },
@@ -331,34 +265,10 @@ module Aws
                                   object_type_name: ::String,
                                   ?description: ::String,
                                   event_trigger_conditions: Array[
-                                    {
-                                      event_trigger_dimensions: Array[
-                                        {
-                                          object_attributes: Array[
-                                            {
-                                              source: ::String?,
-                                              field_name: ::String?,
-                                              comparison_operator: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL" | "BEFORE" | "AFTER" | "ON" | "BETWEEN" | "NOT_BETWEEN"),
-                                              values: Array[::String]
-                                            },
-                                          ]
-                                        },
-                                      ],
-                                      logical_operator: ("ANY" | "ALL" | "NONE")
-                                    },
+                                    Params::event_trigger_condition
                                   ],
                                   ?segment_filter: ::String,
-                                  ?event_trigger_limits: {
-                                    event_expiration: ::Integer?,
-                                    periods: Array[
-                                      {
-                                        unit: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS"),
-                                        value: ::Integer,
-                                        max_invocations_per_profile: ::Integer?,
-                                        unlimited: bool?
-                                      },
-                                    ]?
-                                  },
+                                  ?event_trigger_limits: Params::event_trigger_limits,
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateEventTriggerResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventTriggerResponseSuccess
@@ -374,72 +284,12 @@ module Aws
                                          workflow_type: ("APPFLOW_INTEGRATION"),
                                          integration_config: {
                                            appflow_integration: {
-                                             flow_definition: {
-                                               description: ::String?,
-                                               flow_name: ::String,
-                                               kms_arn: ::String,
-                                               source_flow_config: {
-                                                 connector_profile_name: ::String?,
-                                                 connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3"),
-                                                 incremental_pull_config: {
-                                                   datetime_type_field_name: ::String?
-                                                 }?,
-                                                 source_connector_properties: {
-                                                   marketo: {
-                                                     object: ::String
-                                                   }?,
-                                                   s3: {
-                                                     bucket_name: ::String,
-                                                     bucket_prefix: ::String?
-                                                   }?,
-                                                   salesforce: {
-                                                     object: ::String,
-                                                     enable_dynamic_field_update: bool?,
-                                                     include_deleted_records: bool?
-                                                   }?,
-                                                   service_now: {
-                                                     object: ::String
-                                                   }?,
-                                                   zendesk: {
-                                                     object: ::String
-                                                   }?
-                                                 }
-                                               },
-                                               tasks: Array[
-                                                 {
-                                                   connector_operator: {
-                                                     marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                                     s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                                     salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                                     service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                                     zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?
-                                                   }?,
-                                                   destination_field: ::String?,
-                                                   source_fields: Array[::String],
-                                                   task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]?,
-                                                   task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
-                                                 },
-                                               ],
-                                               trigger_config: {
-                                                 trigger_type: ("Scheduled" | "Event" | "OnDemand"),
-                                                 trigger_properties: {
-                                                   scheduled: {
-                                                     schedule_expression: ::String,
-                                                     data_pull_mode: ("Incremental" | "Complete")?,
-                                                     schedule_start_time: ::Time?,
-                                                     schedule_end_time: ::Time?,
-                                                     timezone: ::String?,
-                                                     schedule_offset: ::Integer?,
-                                                     first_execution_from: ::Time?
-                                                   }?
-                                                 }?
-                                               }
-                                             },
+                                             flow_definition: Params::flow_definition,
                                              batches: Array[
                                                {
                                                  start_time: ::Time,
                                                  end_time: ::Time
-                                               },
+                                               }
                                              ]?
                                            }?
                                          },
@@ -472,76 +322,15 @@ module Aws
                             ?email_address: ::String,
                             ?personal_email_address: ::String,
                             ?business_email_address: ::String,
-                            ?address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?shipping_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?mailing_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?billing_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
+                            ?address: Params::address,
+                            ?shipping_address: Params::address,
+                            ?mailing_address: Params::address,
+                            ?billing_address: Params::address,
                             ?attributes: Hash[::String, ::String],
                             ?party_type_string: ::String,
                             ?gender_string: ::String,
                             ?profile_type: ("ACCOUNT_PROFILE" | "PROFILE"),
-                            ?engagement_preferences: {
-                              phone: Array[
-                                {
-                                  key_name: ::String?,
-                                  key_value: ::String?,
-                                  profile_id: ::String?,
-                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
-                                },
-                              ]?,
-                              email: Array[
-                                {
-                                  key_name: ::String?,
-                                  key_value: ::String?,
-                                  profile_id: ::String?,
-                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
-                                },
-                              ]?
-                            }
+                            ?engagement_preferences: Params::engagement_preferences
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
 
@@ -555,22 +344,7 @@ module Aws
                                 domain_name: ::String,
                                 recommender_name: ::String,
                                 recommender_recipe_name: ("recommended-for-you" | "similar-items" | "frequently-paired-items" | "popular-items" | "trending-now" | "personalized-ranking"),
-                                ?recommender_config: {
-                                  events_config: {
-                                    event_parameters_list: Array[
-                                      {
-                                        event_type: ::String,
-                                        event_value_threshold: ::Float?,
-                                        event_weight: ::Float?
-                                      },
-                                    ]
-                                  }?,
-                                  training_frequency: ::Integer?,
-                                  inference_config: {
-                                    min_provisioned_tps: ::Integer?
-                                  }?,
-                                  included_columns: Hash[::String, Array[::String]]?
-                                },
+                                ?recommender_config: Params::recommender_config,
                                 ?description: ::String,
                                 ?recommender_schema_name: ::String,
                                 ?tags: Hash[::String, ::String]
@@ -611,7 +385,7 @@ module Aws
                                              target_field_name: ::String,
                                              content_type: ("STRING" | "NUMBER")?,
                                              feature_type: ("TEXTUAL" | "CATEGORICAL")?
-                                           },
+                                           }
                                          ]],
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateRecommenderSchemaResponseSuccess
@@ -634,208 +408,7 @@ module Aws
                                        ?description: ::String,
                                        ?segment_groups: {
                                          groups: Array[
-                                           {
-                                             dimensions: Array[
-                                               {
-                                                 profile_attributes: {
-                                                   account_number: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   additional_information: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   first_name: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   last_name: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   middle_name: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   gender_string: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   party_type_string: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   birth_date: {
-                                                     dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   phone_number: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   business_name: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   business_phone_number: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   home_phone_number: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   mobile_phone_number: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   email_address: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   personal_email_address: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   business_email_address: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   address: {
-                                                     city: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     country: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     county: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     postal_code: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     province: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     state: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?
-                                                   }?,
-                                                   shipping_address: {
-                                                     city: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     country: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     county: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     postal_code: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     province: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     state: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?
-                                                   }?,
-                                                   mailing_address: {
-                                                     city: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     country: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     county: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     postal_code: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     province: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     state: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?
-                                                   }?,
-                                                   billing_address: {
-                                                     city: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     country: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     county: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     postal_code: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     province: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?,
-                                                     state: {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                       values: Array[::String]
-                                                     }?
-                                                   }?,
-                                                   attributes: Hash[::String, {
-                                                       dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
-                                                       values: Array[::String]
-                                                     }]?,
-                                                   profile_type: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE"),
-                                                     values: Array[("ACCOUNT_PROFILE" | "PROFILE")]
-                                                   }?
-                                                 }?,
-                                                 calculated_attributes: Hash[::String, {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
-                                                     values: Array[::String],
-                                                     condition_overrides: {
-                                                       range: {
-                                                         start: ::Integer,
-                                                         end: ::Integer?,
-                                                         unit: ("DAYS")
-                                                       }?
-                                                     }?
-                                                   }]?
-                                               },
-                                             ]?,
-                                             source_segments: Array[
-                                               {
-                                                 segment_definition_name: ::String?
-                                               },
-                                             ]?,
-                                             source_type: ("ALL" | "ANY" | "NONE")?,
-                                             type: ("ALL" | "ANY" | "NONE")?
-                                           },
+                                           Params::group
                                          ]?,
                                          include: ("ALL" | "ANY" | "NONE")?
                                        },
@@ -847,7 +420,7 @@ module Aws
                                              data_type: ("STRING" | "NUMBER" | "DATE")?,
                                              order: ("ASC" | "DESC"),
                                              type: ("PROFILE" | "CALCULATED")?
-                                           },
+                                           }
                                          ]
                                        },
                                        ?tags: Hash[::String, ::String]
@@ -865,208 +438,7 @@ module Aws
                                      domain_name: ::String,
                                      ?segment_query: {
                                        groups: Array[
-                                         {
-                                           dimensions: Array[
-                                             {
-                                               profile_attributes: {
-                                                 account_number: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 additional_information: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 first_name: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 last_name: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 middle_name: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 gender_string: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 party_type_string: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 birth_date: {
-                                                   dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 phone_number: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 business_name: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 business_phone_number: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 home_phone_number: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 mobile_phone_number: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 email_address: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 personal_email_address: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 business_email_address: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                   values: Array[::String]
-                                                 }?,
-                                                 address: {
-                                                   city: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   country: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   county: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   postal_code: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   province: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   state: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?
-                                                 }?,
-                                                 shipping_address: {
-                                                   city: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   country: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   county: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   postal_code: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   province: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   state: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?
-                                                 }?,
-                                                 mailing_address: {
-                                                   city: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   country: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   county: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   postal_code: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   province: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   state: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?
-                                                 }?,
-                                                 billing_address: {
-                                                   city: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   country: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   county: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   postal_code: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   province: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?,
-                                                   state: {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
-                                                     values: Array[::String]
-                                                   }?
-                                                 }?,
-                                                 attributes: Hash[::String, {
-                                                     dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
-                                                     values: Array[::String]
-                                                   }]?,
-                                                 profile_type: {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE"),
-                                                   values: Array[("ACCOUNT_PROFILE" | "PROFILE")]
-                                                 }?
-                                               }?,
-                                               calculated_attributes: Hash[::String, {
-                                                   dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
-                                                   values: Array[::String],
-                                                   condition_overrides: {
-                                                     range: {
-                                                       start: ::Integer,
-                                                       end: ::Integer?,
-                                                       unit: ("DAYS")
-                                                     }?
-                                                   }?
-                                                 }]?
-                                             },
-                                           ]?,
-                                           source_segments: Array[
-                                             {
-                                               segment_definition_name: ::String?
-                                             },
-                                           ]?,
-                                           source_type: ("ALL" | "ANY" | "NONE")?,
-                                           type: ("ALL" | "ANY" | "NONE")?
-                                         },
+                                         Params::group
                                        ]?,
                                        include: ("ALL" | "ANY" | "NONE")?
                                      },
@@ -1303,7 +675,7 @@ module Aws
                                       domain_name: ::String,
                                       consolidation: {
                                         matching_attributes_list: Array[
-                                          Array[::String],
+                                          Array[::String]
                                         ]
                                       },
                                       conflict_resolution: {
@@ -1591,7 +963,7 @@ module Aws
                                            {
                                              name: ::String?,
                                              values: Hash[::String, ::String]?
-                                           },
+                                           }
                                          ],
                                          ?recommender_promotional_filters: Array[
                                            {
@@ -1599,7 +971,7 @@ module Aws
                                              values: Hash[::String, ::String]?,
                                              promotion_name: ::String?,
                                              percent_promoted_items: ::Integer?
-                                           },
+                                           }
                                          ],
                                          ?candidate_ids: Array[::String],
                                          ?max_results: ::Integer,
@@ -2258,67 +1630,7 @@ module Aws
                              ?object_type_name: ::String,
                              ?object_type_names: Hash[::String, ::String],
                              ?tags: Hash[::String, ::String],
-                             ?flow_definition: {
-                               description: ::String?,
-                               flow_name: ::String,
-                               kms_arn: ::String,
-                               source_flow_config: {
-                                 connector_profile_name: ::String?,
-                                 connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3"),
-                                 incremental_pull_config: {
-                                   datetime_type_field_name: ::String?
-                                 }?,
-                                 source_connector_properties: {
-                                   marketo: {
-                                     object: ::String
-                                   }?,
-                                   s3: {
-                                     bucket_name: ::String,
-                                     bucket_prefix: ::String?
-                                   }?,
-                                   salesforce: {
-                                     object: ::String,
-                                     enable_dynamic_field_update: bool?,
-                                     include_deleted_records: bool?
-                                   }?,
-                                   service_now: {
-                                     object: ::String
-                                   }?,
-                                   zendesk: {
-                                     object: ::String
-                                   }?
-                                 }
-                               },
-                               tasks: Array[
-                                 {
-                                   connector_operator: {
-                                     marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                     s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                     salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                     service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
-                                     zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?
-                                   }?,
-                                   destination_field: ::String?,
-                                   source_fields: Array[::String],
-                                   task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]?,
-                                   task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
-                                 },
-                               ],
-                               trigger_config: {
-                                 trigger_type: ("Scheduled" | "Event" | "OnDemand"),
-                                 trigger_properties: {
-                                   scheduled: {
-                                     schedule_expression: ::String,
-                                     data_pull_mode: ("Incremental" | "Complete")?,
-                                     schedule_start_time: ::Time?,
-                                     schedule_end_time: ::Time?,
-                                     timezone: ::String?,
-                                     schedule_offset: ::Integer?,
-                                     first_execution_from: ::Time?
-                                   }?
-                                 }?
-                               }
-                             },
+                             ?flow_definition: Params::flow_definition,
                              ?role_arn: ::String,
                              ?event_trigger_names: Array[::String],
                              ?scope: ("PROFILE" | "DOMAIN")
@@ -2376,7 +1688,7 @@ module Aws
                                          {
                                            standard_identifiers: Array[("PROFILE" | "ASSET" | "CASE" | "DEVICE" | "WEB_ANALYTICS" | "ORDER" | "COMMUNICATION_RECORD" | "AIR_PREFERENCE" | "HOTEL_PREFERENCE" | "AIR_BOOKING" | "AIR_SEGMENT" | "HOTEL_RESERVATION" | "HOTEL_STAY_REVENUE" | "LOYALTY" | "LOYALTY_TRANSACTION" | "LOYALTY_PROMOTION" | "UNIQUE" | "SECONDARY" | "LOOKUP_ONLY" | "NEW_ONLY")]?,
                                            field_names: Array[::String]?
-                                         },
+                                         }
                                        ]],
                                      ?tags: Hash[::String, ::String]
                                    ) -> _PutProfileObjectTypeResponseSuccess
@@ -2398,7 +1710,7 @@ module Aws
                                {
                                  key_name: ::String,
                                  values: Array[::String]
-                               },
+                               }
                              ],
                              ?logical_operator: ("AND" | "OR")
                            ) -> _SearchProfilesResponseSuccess
@@ -2485,23 +1797,7 @@ module Aws
                                                     calculated_attribute_name: ::String,
                                                     ?display_name: ::String,
                                                     ?description: ::String,
-                                                    ?conditions: {
-                                                      range: {
-                                                        value: ::Integer?,
-                                                        unit: ("DAYS")?,
-                                                        value_range: {
-                                                          start: ::Integer,
-                                                          end: ::Integer
-                                                        }?,
-                                                        timestamp_source: ::String?,
-                                                        timestamp_format: ::String?
-                                                      }?,
-                                                      object_count: ::Integer?,
-                                                      threshold: {
-                                                        value: ::String,
-                                                        operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
-                                                      }?
-                                                    }
+                                                    ?conditions: Params::conditions
                                                   ) -> _UpdateCalculatedAttributeDefinitionResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCalculatedAttributeDefinitionResponseSuccess
 
@@ -2524,58 +1820,8 @@ module Aws
                            ?default_expiration_days: ::Integer,
                            ?default_encryption_key: ::String,
                            ?dead_letter_queue_url: ::String,
-                           ?matching: {
-                             enabled: bool,
-                             job_schedule: {
-                               day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
-                               time: ::String
-                             }?,
-                             auto_merging: {
-                               enabled: bool,
-                               consolidation: {
-                                 matching_attributes_list: Array[
-                                   Array[::String],
-                                 ]
-                               }?,
-                               conflict_resolution: {
-                                 conflict_resolving_model: ("RECENCY" | "SOURCE"),
-                                 source_name: ::String?
-                               }?,
-                               min_allowed_confidence_score_for_merging: ::Float?
-                             }?,
-                             exporting_config: {
-                               s3_exporting: {
-                                 s3_bucket_name: ::String,
-                                 s3_key_name: ::String?
-                               }?
-                             }?
-                           },
-                           ?rule_based_matching: {
-                             enabled: bool,
-                             matching_rules: Array[
-                               {
-                                 rule: Array[::String]
-                               },
-                             ]?,
-                             max_allowed_rule_level_for_merging: ::Integer?,
-                             max_allowed_rule_level_for_matching: ::Integer?,
-                             attribute_types_selector: {
-                               attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                               address: Array[::String]?,
-                               phone_number: Array[::String]?,
-                               email_address: Array[::String]?
-                             }?,
-                             conflict_resolution: {
-                               conflict_resolving_model: ("RECENCY" | "SOURCE"),
-                               source_name: ::String?
-                             }?,
-                             exporting_config: {
-                               s3_exporting: {
-                                 s3_bucket_name: ::String,
-                                 s3_key_name: ::String?
-                               }?
-                             }?
-                           },
+                           ?matching: Params::matching_request,
+                           ?rule_based_matching: Params::rule_based_matching_request,
                            ?data_store: {
                              enabled: bool?
                            },
@@ -2627,34 +1873,10 @@ module Aws
                                   ?object_type_name: ::String,
                                   ?description: ::String,
                                   ?event_trigger_conditions: Array[
-                                    {
-                                      event_trigger_dimensions: Array[
-                                        {
-                                          object_attributes: Array[
-                                            {
-                                              source: ::String?,
-                                              field_name: ::String?,
-                                              comparison_operator: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL" | "BEFORE" | "AFTER" | "ON" | "BETWEEN" | "NOT_BETWEEN"),
-                                              values: Array[::String]
-                                            },
-                                          ]
-                                        },
-                                      ],
-                                      logical_operator: ("ANY" | "ALL" | "NONE")
-                                    },
+                                    Params::event_trigger_condition
                                   ],
                                   ?segment_filter: ::String,
-                                  ?event_trigger_limits: {
-                                    event_expiration: ::Integer?,
-                                    periods: Array[
-                                      {
-                                        unit: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS"),
-                                        value: ::Integer,
-                                        max_invocations_per_profile: ::Integer?,
-                                        unlimited: bool?
-                                      },
-                                    ]?
-                                  }
+                                  ?event_trigger_limits: Params::event_trigger_limits
                                 ) -> _UpdateEventTriggerResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventTriggerResponseSuccess
 
@@ -2682,76 +1904,15 @@ module Aws
                             ?email_address: ::String,
                             ?personal_email_address: ::String,
                             ?business_email_address: ::String,
-                            ?address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?shipping_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?mailing_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
-                            ?billing_address: {
-                              address_1: ::String?,
-                              address_2: ::String?,
-                              address_3: ::String?,
-                              address_4: ::String?,
-                              city: ::String?,
-                              county: ::String?,
-                              state: ::String?,
-                              province: ::String?,
-                              country: ::String?,
-                              postal_code: ::String?
-                            },
+                            ?address: Params::update_address,
+                            ?shipping_address: Params::update_address,
+                            ?mailing_address: Params::update_address,
+                            ?billing_address: Params::update_address,
                             ?attributes: Hash[::String, ::String],
                             ?party_type_string: ::String,
                             ?gender_string: ::String,
                             ?profile_type: ("ACCOUNT_PROFILE" | "PROFILE"),
-                            ?engagement_preferences: {
-                              phone: Array[
-                                {
-                                  key_name: ::String?,
-                                  key_value: ::String?,
-                                  profile_id: ::String?,
-                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
-                                },
-                              ]?,
-                              email: Array[
-                                {
-                                  key_name: ::String?,
-                                  key_value: ::String?,
-                                  profile_id: ::String?,
-                                  contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
-                                },
-                              ]?
-                            }
+                            ?engagement_preferences: Params::engagement_preferences
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess
 
@@ -2764,22 +1925,7 @@ module Aws
                                 domain_name: ::String,
                                 recommender_name: ::String,
                                 ?description: ::String,
-                                ?recommender_config: {
-                                  events_config: {
-                                    event_parameters_list: Array[
-                                      {
-                                        event_type: ::String,
-                                        event_value_threshold: ::Float?,
-                                        event_weight: ::Float?
-                                      },
-                                    ]
-                                  }?,
-                                  training_frequency: ::Integer?,
-                                  inference_config: {
-                                    min_provisioned_tps: ::Integer?
-                                  }?,
-                                  included_columns: Hash[::String, Array[::String]]?
-                                }
+                                ?recommender_config: Params::recommender_config
                               ) -> _UpdateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
     end

@@ -2174,7 +2174,7 @@ module Aws::AmplifyBackend
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-amplifybackend'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

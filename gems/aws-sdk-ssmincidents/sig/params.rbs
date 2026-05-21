@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSMIncidents
+    module Params
+      type ssm_automation = {
+      document_name: ::String,
+      document_version: ::String?,
+      dynamic_parameters: Hash[::String, {
+          variable: ("INCIDENT_RECORD_ARN" | "INVOLVED_RESOURCES")?
+        }]?,
+      parameters: Hash[::String, Array[::String]]?,
+      role_arn: ::String,
+      target_account: ("RESPONSE_PLAN_OWNER_ACCOUNT" | "IMPACTED_ACCOUNT")?
+    }
+
+      type action = {
+      ssm_automation: Params::ssm_automation?
+    }
+
+      type integration = {
+      pager_duty_configuration: {
+        name: ::String,
+        pager_duty_incident_configuration: {
+          service_id: ::String
+        },
+        secret_id: ::String
+      }?
+    }
+
+      type condition = {
+      after: ::Time?,
+      before: ::Time?,
+      equals: {
+        integer_values: Array[::Integer]?,
+        string_values: Array[::String]?
+      }?
+    }
+
+      type filter = {
+      condition: Params::condition,
+      key: ::String
+    }
+
+      type item_value = {
+      arn: ::String?,
+      metric_definition: ::String?,
+      pager_duty_incident_detail: {
+        auto_resolve: bool?,
+        id: ::String,
+        secret_id: ::String?
+      }?,
+      url: ::String?
+    }
+
+      type item_identifier = {
+      type: ("ANALYSIS" | "INCIDENT" | "METRIC" | "PARENT" | "ATTACHMENT" | "OTHER" | "AUTOMATION" | "INVOLVED_RESOURCE" | "TASK"),
+      value: Params::item_value
+    }
+
+      type related_item = {
+      generated_id: ::String?,
+      identifier: Params::item_identifier,
+      title: ::String?
+    }
+
+    end
+  end
+end

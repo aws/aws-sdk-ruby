@@ -91,7 +91,7 @@ module Aws
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ],
                              ?encryption_configuration: {
                                kms_key_id: ::String?,
@@ -113,22 +113,12 @@ module Aws
                                   definition: ::String,
                                   role_arn: ::String,
                                   ?type: ("STANDARD" | "EXPRESS"),
-                                  ?logging_configuration: {
-                                    level: ("ALL" | "ERROR" | "FATAL" | "OFF")?,
-                                    include_execution_data: bool?,
-                                    destinations: Array[
-                                      {
-                                        cloud_watch_logs_log_group: {
-                                          log_group_arn: ::String?
-                                        }?
-                                      },
-                                    ]?
-                                  },
+                                  ?logging_configuration: Params::logging_configuration,
                                   ?tags: Array[
                                     {
                                       key: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   ?tracing_configuration: {
                                     enabled: bool?
@@ -156,7 +146,7 @@ module Aws
                                           {
                                             state_machine_version_arn: ::String,
                                             weight: ::Integer
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateStateMachineAliasResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStateMachineAliasResponseSuccess
@@ -553,7 +543,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -626,17 +616,7 @@ module Aws
                                   state_machine_arn: ::String,
                                   ?definition: ::String,
                                   ?role_arn: ::String,
-                                  ?logging_configuration: {
-                                    level: ("ALL" | "ERROR" | "FATAL" | "OFF")?,
-                                    include_execution_data: bool?,
-                                    destinations: Array[
-                                      {
-                                        cloud_watch_logs_log_group: {
-                                          log_group_arn: ::String?
-                                        }?
-                                      },
-                                    ]?
-                                  },
+                                  ?logging_configuration: Params::logging_configuration,
                                   ?tracing_configuration: {
                                     enabled: bool?
                                   },
@@ -662,7 +642,7 @@ module Aws
                                           {
                                             state_machine_version_arn: ::String,
                                             weight: ::Integer
-                                          },
+                                          }
                                         ]
                                       ) -> _UpdateStateMachineAliasResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStateMachineAliasResponseSuccess

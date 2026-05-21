@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Feature - When `AWS_NEW_RETRIES_2026` is enabled, DynamoDB clients default to 4 max attempts with a 25ms backoff scalar in `standard` and `adaptive` retry modes.
 
+1.167.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.166.0 (2026-05-13)
 ------------------
 

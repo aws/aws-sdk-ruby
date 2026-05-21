@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Amplify
+    module Params
+      type auto_branch_creation_config = {
+      stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")?,
+      framework: ::String?,
+      enable_auto_build: bool?,
+      environment_variables: Hash[::String, ::String]?,
+      basic_auth_credentials: ::String?,
+      enable_basic_auth: bool?,
+      enable_performance_mode: bool?,
+      build_spec: ::String?,
+      enable_pull_request_preview: bool?,
+      pull_request_environment_name: ::String?
+    }
+
+    end
+  end
+end

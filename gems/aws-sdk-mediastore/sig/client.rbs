@@ -90,7 +90,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String?
-                                },
+                                }
                               ]
                             ) -> _CreateContainerResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerResponseSuccess
@@ -235,7 +235,7 @@ module Aws
                                  allowed_headers: Array[::String],
                                  max_age_seconds: ::Integer?,
                                  expose_headers: Array[::String]?
-                               },
+                               }
                              ]
                            ) -> _PutCorsPolicyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCorsPolicyResponseSuccess
@@ -262,7 +262,7 @@ module Aws
                                    {
                                      object_group: ::String,
                                      object_group_name: ::String
-                                   },
+                                   }
                                  ]?
                                }
                              ) -> _PutMetricPolicyResponseSuccess
@@ -296,7 +296,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

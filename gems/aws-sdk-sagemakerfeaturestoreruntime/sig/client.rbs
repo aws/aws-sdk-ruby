@@ -91,7 +91,7 @@ module Aws
                                   feature_group_name: ::String,
                                   record_identifiers_value_as_string: Array[::String],
                                   feature_names: Array[::String]?
-                                },
+                                }
                               ],
                               ?expiration_time_response: ("Enabled" | "Disabled")
                             ) -> _BatchGetRecordResponseSuccess
@@ -129,7 +129,7 @@ module Aws
                             feature_name: ::String,
                             value_as_string: ::String?,
                             value_as_string_list: Array[::String]?
-                          },
+                          }
                         ],
                         ?target_stores: Array[("OnlineStore" | "OfflineStore")],
                         ?ttl_duration: {

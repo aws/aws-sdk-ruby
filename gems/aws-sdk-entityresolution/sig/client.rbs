@@ -130,36 +130,15 @@ module Aws
                                             input_source_arn: ::String,
                                             schema_name: ::String?,
                                             type: ("SOURCE" | "TARGET")?
-                                          },
+                                          }
                                         ],
                                         ?output_source_config: Array[
                                           {
                                             kms_arn: ::String?,
                                             output_s3_path: ::String
-                                          },
+                                          }
                                         ],
-                                        id_mapping_techniques: {
-                                          id_mapping_type: ("PROVIDER" | "RULE_BASED"),
-                                          rule_based_properties: {
-                                            rules: Array[
-                                              {
-                                                rule_name: ::String,
-                                                matching_keys: Array[::String]
-                                              },
-                                            ]?,
-                                            rule_definition_type: ("SOURCE" | "TARGET"),
-                                            attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                                            record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")
-                                          }?,
-                                          provider_properties: {
-                                            provider_service_arn: ::String,
-                                            provider_configuration: {
-                                            }?,
-                                            intermediate_source_configuration: {
-                                              intermediate_s3_path: ::String
-                                            }?
-                                          }?
-                                        },
+                                        id_mapping_techniques: Params::id_mapping_techniques,
                                         ?incremental_run_config: {
                                           incremental_run_type: ("ON_DEMAND")?
                                         },
@@ -189,28 +168,10 @@ module Aws
                                    {
                                      input_source_arn: ::String,
                                      schema_name: ::String?
-                                   },
+                                   }
                                  ],
                                  ?id_mapping_workflow_properties: Array[
-                                   {
-                                     id_mapping_type: ("PROVIDER" | "RULE_BASED"),
-                                     rule_based_properties: {
-                                       rules: Array[
-                                         {
-                                           rule_name: ::String,
-                                           matching_keys: Array[::String]
-                                         },
-                                       ]?,
-                                       rule_definition_types: Array[("SOURCE" | "TARGET")]?,
-                                       attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")?,
-                                       record_matching_models: Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]?
-                                     }?,
-                                     provider_properties: {
-                                       provider_service_arn: ::String,
-                                       provider_configuration: {
-                                       }?
-                                     }?
-                                   },
+                                   Params::id_namespace_id_mapping_workflow_properties
                                  ],
                                  type: ("SOURCE" | "TARGET"),
                                  ?role_arn: ::String,
@@ -238,57 +199,12 @@ module Aws
                                           input_source_arn: ::String,
                                           schema_name: ::String,
                                           apply_normalization: bool?
-                                        },
+                                        }
                                       ],
                                       output_source_config: Array[
-                                        {
-                                          kms_arn: ::String?,
-                                          output_s3_path: ::String?,
-                                          output: Array[
-                                            {
-                                              name: ::String,
-                                              hashed: bool?
-                                            },
-                                          ],
-                                          apply_normalization: bool?,
-                                          customer_profiles_integration_config: {
-                                            domain_arn: ::String,
-                                            object_type_arn: ::String
-                                          }?
-                                        },
+                                        Params::output_source
                                       ],
-                                      resolution_techniques: {
-                                        resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
-                                        rule_based_properties: {
-                                          rules: Array[
-                                            {
-                                              rule_name: ::String,
-                                              matching_keys: Array[::String]
-                                            },
-                                          ],
-                                          attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                                          match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?
-                                        }?,
-                                        rule_condition_properties: {
-                                          rules: Array[
-                                            {
-                                              rule_name: ::String,
-                                              condition: ::String
-                                            },
-                                          ],
-                                          matching_config: {
-                                            enable_transitive_matching: bool?
-                                          }?
-                                        }?,
-                                        provider_properties: {
-                                          provider_service_arn: ::String,
-                                          provider_configuration: {
-                                          }?,
-                                          intermediate_source_configuration: {
-                                            intermediate_s3_path: ::String
-                                          }?
-                                        }?
-                                      },
+                                      resolution_techniques: Params::resolution_techniques,
                                       ?incremental_run_config: {
                                         incremental_run_type: ("IMMEDIATE")?
                                       },
@@ -309,14 +225,7 @@ module Aws
                                    schema_name: ::String,
                                    ?description: ::String,
                                    mapped_input_fields: Array[
-                                     {
-                                       field_name: ::String,
-                                       type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID" | "IPV4" | "IPV6" | "MAID"),
-                                       group_name: ::String?,
-                                       match_key: ::String?,
-                                       sub_type: ::String?,
-                                       hashed: bool?
-                                     },
+                                     Params::schema_input_attribute
                                    ],
                                    ?tags: Hash[::String, ::String]
                                  ) -> _CreateSchemaMappingResponseSuccess
@@ -388,7 +297,7 @@ module Aws
                                    input_source_arn: ::String,
                                    unique_id: ::String,
                                    record_attribute_map: Hash[::String, ::String]
-                                 },
+                                 }
                                ],
                                ?processing_type: ("CONSISTENT" | "EVENTUAL" | "EVENTUAL_NO_LOOKUP")
                              ) -> _GenerateMatchIdResponseSuccess
@@ -678,7 +587,7 @@ module Aws
                                       role_arn: ::String,
                                       output_s3_path: ::String,
                                       kms_arn: ::String?
-                                    },
+                                    }
                                   ],
                                   ?job_type: ("BATCH" | "INCREMENTAL" | "DELETE_ONLY")
                                 ) -> _StartIdMappingJobResponseSuccess
@@ -734,36 +643,15 @@ module Aws
                                             input_source_arn: ::String,
                                             schema_name: ::String?,
                                             type: ("SOURCE" | "TARGET")?
-                                          },
+                                          }
                                         ],
                                         ?output_source_config: Array[
                                           {
                                             kms_arn: ::String?,
                                             output_s3_path: ::String
-                                          },
+                                          }
                                         ],
-                                        id_mapping_techniques: {
-                                          id_mapping_type: ("PROVIDER" | "RULE_BASED"),
-                                          rule_based_properties: {
-                                            rules: Array[
-                                              {
-                                                rule_name: ::String,
-                                                matching_keys: Array[::String]
-                                              },
-                                            ]?,
-                                            rule_definition_type: ("SOURCE" | "TARGET"),
-                                            attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                                            record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")
-                                          }?,
-                                          provider_properties: {
-                                            provider_service_arn: ::String,
-                                            provider_configuration: {
-                                            }?,
-                                            intermediate_source_configuration: {
-                                              intermediate_s3_path: ::String
-                                            }?
-                                          }?
-                                        },
+                                        id_mapping_techniques: Params::id_mapping_techniques,
                                         ?incremental_run_config: {
                                           incremental_run_type: ("ON_DEMAND")?
                                         },
@@ -791,28 +679,10 @@ module Aws
                                    {
                                      input_source_arn: ::String,
                                      schema_name: ::String?
-                                   },
+                                   }
                                  ],
                                  ?id_mapping_workflow_properties: Array[
-                                   {
-                                     id_mapping_type: ("PROVIDER" | "RULE_BASED"),
-                                     rule_based_properties: {
-                                       rules: Array[
-                                         {
-                                           rule_name: ::String,
-                                           matching_keys: Array[::String]
-                                         },
-                                       ]?,
-                                       rule_definition_types: Array[("SOURCE" | "TARGET")]?,
-                                       attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")?,
-                                       record_matching_models: Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]?
-                                     }?,
-                                     provider_properties: {
-                                       provider_service_arn: ::String,
-                                       provider_configuration: {
-                                       }?
-                                     }?
-                                   },
+                                   Params::id_namespace_id_mapping_workflow_properties
                                  ],
                                  ?role_arn: ::String
                                ) -> _UpdateIdNamespaceResponseSuccess
@@ -837,57 +707,12 @@ module Aws
                                           input_source_arn: ::String,
                                           schema_name: ::String,
                                           apply_normalization: bool?
-                                        },
+                                        }
                                       ],
                                       output_source_config: Array[
-                                        {
-                                          kms_arn: ::String?,
-                                          output_s3_path: ::String?,
-                                          output: Array[
-                                            {
-                                              name: ::String,
-                                              hashed: bool?
-                                            },
-                                          ],
-                                          apply_normalization: bool?,
-                                          customer_profiles_integration_config: {
-                                            domain_arn: ::String,
-                                            object_type_arn: ::String
-                                          }?
-                                        },
+                                        Params::output_source
                                       ],
-                                      resolution_techniques: {
-                                        resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
-                                        rule_based_properties: {
-                                          rules: Array[
-                                            {
-                                              rule_name: ::String,
-                                              matching_keys: Array[::String]
-                                            },
-                                          ],
-                                          attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
-                                          match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?
-                                        }?,
-                                        rule_condition_properties: {
-                                          rules: Array[
-                                            {
-                                              rule_name: ::String,
-                                              condition: ::String
-                                            },
-                                          ],
-                                          matching_config: {
-                                            enable_transitive_matching: bool?
-                                          }?
-                                        }?,
-                                        provider_properties: {
-                                          provider_service_arn: ::String,
-                                          provider_configuration: {
-                                          }?,
-                                          intermediate_source_configuration: {
-                                            intermediate_s3_path: ::String
-                                          }?
-                                        }?
-                                      },
+                                      resolution_techniques: Params::resolution_techniques,
                                       ?incremental_run_config: {
                                         incremental_run_type: ("IMMEDIATE")?
                                       },
@@ -907,14 +732,7 @@ module Aws
                                    schema_name: ::String,
                                    ?description: ::String,
                                    mapped_input_fields: Array[
-                                     {
-                                       field_name: ::String,
-                                       type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID" | "IPV4" | "IPV6" | "MAID"),
-                                       group_name: ::String?,
-                                       match_key: ::String?,
-                                       sub_type: ::String?,
-                                       hashed: bool?
-                                     },
+                                     Params::schema_input_attribute
                                    ]
                                  ) -> _UpdateSchemaMappingResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchemaMappingResponseSuccess

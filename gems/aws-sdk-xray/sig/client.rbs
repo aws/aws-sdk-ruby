@@ -116,7 +116,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGroupResponseSuccess
@@ -150,7 +150,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateSamplingRuleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSamplingRuleResponseSuccess
@@ -339,7 +339,7 @@ module Aws
                                       request_count: ::Integer,
                                       sampled_count: ::Integer,
                                       borrow_count: ::Integer?
-                                    },
+                                    }
                                   ],
                                   ?sampling_boost_statistics_documents: Array[
                                     {
@@ -349,7 +349,7 @@ module Aws
                                       anomaly_count: ::Integer,
                                       total_count: ::Integer,
                                       sampled_anomaly_count: ::Integer
-                                    },
+                                    }
                                   ]
                                 ) -> _GetSamplingTargetsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSamplingTargetsResponseSuccess
@@ -517,7 +517,7 @@ module Aws
                                          unknown_host_count: ::Integer?,
                                          other_count: ::Integer?
                                        }?
-                                     },
+                                     }
                                    ],
                                    ?ec2_instance_id: ::String,
                                    ?hostname: ::String,
@@ -557,7 +557,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

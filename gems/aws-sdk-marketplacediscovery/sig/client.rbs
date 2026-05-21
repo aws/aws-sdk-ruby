@@ -205,7 +205,7 @@ module Aws
                                      {
                                        filter_type: ("PRODUCT_ID" | "SELLER_OF_RECORD_PROFILE_ID" | "PURCHASE_OPTION_TYPE" | "VISIBILITY_SCOPE" | "AVAILABILITY_STATUS"),
                                        filter_values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -225,7 +225,7 @@ module Aws
                              {
                                filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
                                filter_values: Array[::String]
-                             },
+                             }
                            ],
                            ?facet_types: Array[("AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS")],
                            ?next_token: ::String
@@ -245,7 +245,7 @@ module Aws
                                {
                                  filter_type: ("MIN_AVERAGE_CUSTOMER_RATING" | "MAX_AVERAGE_CUSTOMER_RATING" | "CATEGORY" | "PUBLISHER" | "FULFILLMENT_OPTION_TYPE" | "PRICING_MODEL" | "PRICING_UNIT" | "DEPLOYED_ON_AWS" | "NUMBER_OF_PRODUCTS"),
                                  filter_values: Array[::String]
-                               },
+                               }
                              ],
                              ?max_results: ::Integer,
                              ?sort_by: ("RELEVANCE" | "AVERAGE_CUSTOMER_RATING"),

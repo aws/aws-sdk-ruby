@@ -1,0 +1,135 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TaxSettings
+    module Params
+      type additional_info_request = {
+      canada_additional_info: {
+        canada_quebec_sales_tax_number: ::String?,
+        canada_retail_sales_tax_number: ::String?,
+        is_reseller_account: bool?,
+        provincial_sales_tax_id: ::String?
+      }?,
+      egypt_additional_info: {
+        unique_identification_number: ::String?,
+        unique_identification_number_expiration_date: ::String?
+      }?,
+      estonia_additional_info: {
+        registry_commercial_code: ::String
+      }?,
+      georgia_additional_info: {
+        person_type: ("Legal Person" | "Physical Person" | "Business")
+      }?,
+      greece_additional_info: {
+        contracting_authority_code: ::String?
+      }?,
+      indonesia_additional_info: {
+        decision_number: ::String?,
+        ppn_exception_designation_code: ::String?,
+        tax_registration_number_type: ("NIK" | "PassportNumber" | "NPWP" | "NITKU")?
+      }?,
+      israel_additional_info: {
+        customer_type: ("Business" | "Individual"),
+        dealer_type: ("Authorized" | "Non-authorized")
+      }?,
+      italy_additional_info: {
+        cig_number: ::String?,
+        cup_number: ::String?,
+        sdi_account_id: ::String?,
+        tax_code: ::String?
+      }?,
+      kenya_additional_info: {
+        person_type: ("Legal Person" | "Physical Person" | "Business")
+      }?,
+      malaysia_additional_info: {
+        business_registration_number: ::String?,
+        service_tax_codes: Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]?,
+        tax_information_number: ::String?
+      }?,
+      poland_additional_info: {
+        individual_registration_number: ::String?,
+        is_group_vat_enabled: bool?
+      }?,
+      romania_additional_info: {
+        tax_registration_number_type: ("TaxRegistrationNumber" | "LocalRegistrationNumber")
+      }?,
+      saudi_arabia_additional_info: {
+        tax_registration_number_type: ("TaxRegistrationNumber" | "TaxIdentificationNumber" | "CommercialRegistrationNumber")?
+      }?,
+      south_korea_additional_info: {
+        business_representative_name: ::String,
+        item_of_business: ::String,
+        line_of_business: ::String
+      }?,
+      spain_additional_info: {
+        registration_type: ("Intra-EU" | "Local")
+      }?,
+      turkey_additional_info: {
+        industries: ("CirculatingOrg" | "ProfessionalOrg" | "Banks" | "Insurance" | "PensionAndBenefitFunds" | "DevelopmentAgencies")?,
+        kep_email_id: ::String?,
+        secondary_tax_id: ::String?,
+        tax_office: ::String?
+      }?,
+      ukraine_additional_info: {
+        ukraine_trn_type: ("Business" | "Individual")
+      }?,
+      uzbekistan_additional_info: {
+        tax_registration_number_type: ("Business" | "Individual")?,
+        vat_registration_number: ::String?
+      }?,
+      vietnam_additional_info: {
+        electronic_transaction_code_number: ::String?,
+        enterprise_identification_number: ::String?,
+        payment_voucher_number: ::String?,
+        payment_voucher_number_date: ::String?
+      }?
+    }
+
+      type address = {
+      address_line_1: ::String,
+      address_line_2: ::String?,
+      address_line_3: ::String?,
+      city: ::String,
+      country_code: ::String,
+      district_or_county: ::String?,
+      postal_code: ::String,
+      state_or_region: ::String?
+    }
+
+      type verification_details = {
+      date_of_birth: ::String?,
+      tax_registration_documents: Array[
+        Params::tax_registration_document
+      ]?
+    }
+
+      type tax_registration_entry = {
+      additional_tax_information: Params::additional_info_request?,
+      certified_email_id: ::String?,
+      legal_address: Params::address?,
+      legal_name: ::String?,
+      registration_id: ::String,
+      registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC"),
+      sector: ("Business" | "Individual" | "Government")?,
+      verification_details: Params::verification_details?
+    }
+
+      type tax_registration_document = {
+      file: {
+        file_content: ::String,
+        file_name: ::String
+      }?,
+      s3_location: {
+        bucket: ::String,
+        key: ::String
+      }?
+    }
+
+    end
+  end
+end

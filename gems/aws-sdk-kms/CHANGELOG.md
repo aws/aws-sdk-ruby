@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.127.0 (2026-05-20)
+------------------
+
+* Feature - AWS KMS now supports creating grants for AWS service principals using new GranteeServicePrincipal and RetiringServicePrincipal parameters. This release adds SourceArn grant constraint and three condition keys for controlling CreateGrant access. For more information, see Grants in AWS KMS.
+
+1.126.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.125.0 (2026-05-13)
 ------------------
 

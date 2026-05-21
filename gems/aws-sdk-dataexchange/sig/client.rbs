@@ -171,18 +171,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#create_event_action-instance_method
       def create_event_action: (
-                                 action: {
-                                   export_revision_to_s3: {
-                                     encryption: {
-                                       kms_key_arn: ::String?,
-                                       type: ("aws:kms" | "AES256")
-                                     }?,
-                                     revision_destination: {
-                                       bucket: ::String,
-                                       key_pattern: ::String?
-                                     }
-                                   }?
-                                 },
+                                 action: Params::action,
                                  event: {
                                    revision_published: {
                                      data_set_id: ::String
@@ -211,7 +200,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]?
                         },
                         details: {
@@ -226,7 +215,7 @@ module Aws
                                 asset_id: ::String,
                                 bucket: ::String,
                                 key: ::String?
-                              },
+                              }
                             ],
                             data_set_id: ::String,
                             encryption: {
@@ -246,7 +235,7 @@ module Aws
                                 bucket: ::String,
                                 key_pattern: ::String?,
                                 revision_id: ::String
-                              },
+                              }
                             ]
                           }?,
                           import_asset_from_signed_url: {
@@ -260,7 +249,7 @@ module Aws
                               {
                                 bucket: ::String,
                                 key: ::String
-                              },
+                              }
                             ],
                             data_set_id: ::String,
                             revision_id: ::String
@@ -269,7 +258,7 @@ module Aws
                             asset_sources: Array[
                               {
                                 data_share_arn: ::String
-                              },
+                              }
                             ],
                             data_set_id: ::String,
                             revision_id: ::String
@@ -293,7 +282,7 @@ module Aws
                               kms_keys_to_grant: Array[
                                 {
                                   kms_key_arn: ::String
-                                },
+                                }
                               ]?
                             },
                             data_set_id: ::String,
@@ -306,7 +295,7 @@ module Aws
                                 {
                                   tag_key: ::String,
                                   tag_values: Array[::String]
-                                },
+                                }
                               ],
                               permissions: Array[("DESCRIBE")]
                             }?,
@@ -315,7 +304,7 @@ module Aws
                                 {
                                   tag_key: ::String,
                                   tag_values: Array[::String]
-                                },
+                                }
                               ],
                               permissions: Array[("DESCRIBE" | "SELECT")]
                             }?,
@@ -680,7 +669,7 @@ module Aws
                                             {
                                               database: ::String?,
                                               table: ::String?
-                                            },
+                                            }
                                           ]?,
                                           redshift_data_shares: Array[
                                             {
@@ -690,13 +679,13 @@ module Aws
                                               table: ::String?,
                                               schema: ::String?,
                                               view: ::String?
-                                            },
+                                            }
                                           ]?,
                                           s3_data_accesses: Array[
                                             {
                                               key_prefixes: Array[::String]?,
                                               keys: Array[::String]?
-                                            },
+                                            }
                                           ]?
                                         },
                                         ?client_token: ::String,
@@ -715,7 +704,7 @@ module Aws
                                                 name: ::String,
                                                 type: ("ADD" | "REMOVE" | "MODIFY"),
                                                 description: ::String?
-                                              },
+                                              }
                                             ]?,
                                             schema_change_at: ::Time
                                           }?
@@ -801,18 +790,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataExchange/Client.html#update_event_action-instance_method
       def update_event_action: (
-                                 ?action: {
-                                   export_revision_to_s3: {
-                                     encryption: {
-                                       kms_key_arn: ::String?,
-                                       type: ("aws:kms" | "AES256")
-                                     }?,
-                                     revision_destination: {
-                                       bucket: ::String,
-                                       key_pattern: ::String?
-                                     }
-                                   }?
-                                 },
+                                 ?action: Params::action,
                                  event_action_id: ::String
                                ) -> _UpdateEventActionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEventActionResponseSuccess

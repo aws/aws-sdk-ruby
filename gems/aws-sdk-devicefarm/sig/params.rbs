@@ -1,0 +1,48 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DeviceFarm
+    module Params
+      type schedule_run_configuration = {
+      extra_data_package_arn: ::String?,
+      network_profile_arn: ::String?,
+      locale: ::String?,
+      location: {
+        latitude: ::Float,
+        longitude: ::Float
+      }?,
+      vpce_configuration_arns: Array[::String]?,
+      device_proxy: {
+        host: ::String,
+        port: ::Integer
+      }?,
+      customer_artifact_paths: {
+        ios_paths: Array[::String]?,
+        android_paths: Array[::String]?,
+        device_host_paths: Array[::String]?
+      }?,
+      radios: {
+        wifi: bool?,
+        bluetooth: bool?,
+        nfc: bool?,
+        gps: bool?
+      }?,
+      auxiliary_apps: Array[::String]?,
+      billing_method: ("METERED" | "UNMETERED")?,
+      environment_variables: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      execution_role_arn: ::String?
+    }
+
+    end
+  end
+end

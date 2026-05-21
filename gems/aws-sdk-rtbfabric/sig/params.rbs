@@ -1,0 +1,77 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module RTBFabric
+    module Params
+      type link_attributes = {
+      responder_error_masking: Array[
+        {
+          http_code: ::String,
+          action: ("NO_BID" | "PASSTHROUGH"),
+          logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
+          response_logging_percentage: ::Float?
+        }
+      ]?,
+      customer_provided_id: ::String?
+    }
+
+      type link_log_settings = {
+      application_logs: {
+        sampling: {
+          error_log: ::Float,
+          filter_log: ::Float
+        }
+      }
+    }
+
+      type rule_condition = {
+      host_header: ::String?,
+      host_header_wildcard: ::String?,
+      path_prefix: ::String?,
+      path_exact: ::String?,
+      query_string_equals: {
+        key: ::String,
+        value: ::String
+      }?,
+      query_string_exists: ::String?
+    }
+
+      type health_check_config = {
+      port: ::Integer,
+      path: ::String,
+      protocol: ("HTTP" | "HTTPS")?,
+      timeout_ms: ::Integer?,
+      interval_seconds: ::Integer?,
+      status_code_matcher: ::String?,
+      healthy_threshold_count: ::Integer?,
+      unhealthy_threshold_count: ::Integer?
+    }
+
+      type auto_scaling_groups_configuration = {
+      auto_scaling_group_names: Array[::String],
+      role_arn: ::String,
+      health_check_config: Params::health_check_config?
+    }
+
+      type eks_endpoints_configuration = {
+      endpoints_resource_name: ::String,
+      endpoints_resource_namespace: ::String,
+      cluster_api_server_endpoint_uri: ::String,
+      cluster_api_server_ca_certificate_chain: ::String,
+      cluster_name: ::String,
+      role_arn: ::String
+    }
+
+      type managed_endpoint_configuration = {
+      auto_scaling_groups: Params::auto_scaling_groups_configuration?,
+      eks_endpoints: Params::eks_endpoints_configuration?
+    }
+
+    end
+  end
+end

@@ -140,23 +140,10 @@ module Aws
                               user_id: ::String?,
                               attributes: Hash[::String, ::String]?,
                               capabilities: Array[("PUBLISH" | "SUBSCRIBE")]?
-                            },
+                            }
                           ],
                           ?tags: Hash[::String, ::String],
-                          ?auto_participant_recording_configuration: {
-                            storage_configuration_arn: ::String,
-                            media_types: Array[("AUDIO_VIDEO" | "AUDIO_ONLY" | "NONE")]?,
-                            thumbnail_configuration: {
-                              target_interval_seconds: ::Integer?,
-                              storage: Array[("SEQUENTIAL" | "LATEST")]?,
-                              recording_mode: ("INTERVAL" | "DISABLED")?
-                            }?,
-                            recording_reconnect_window_seconds: ::Integer?,
-                            hls_configuration: {
-                              target_segment_duration_seconds: ::Integer?
-                            }?,
-                            record_participant_replicas: bool?
-                          }
+                          ?auto_participant_recording_configuration: Params::auto_participant_recording_configuration
                         ) -> _CreateStageResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStageResponseSuccess
 
@@ -523,10 +510,10 @@ module Aws
                                        {
                                          target_interval_seconds: ::Integer?,
                                          storage: Array[("SEQUENTIAL" | "LATEST")]?
-                                       },
+                                       }
                                      ]?
                                    }?
-                                 },
+                                 }
                                ],
                                ?tags: Hash[::String, ::String]
                              ) -> _StartCompositionResponseSuccess
@@ -619,20 +606,7 @@ module Aws
       def update_stage: (
                           arn: ::String,
                           ?name: ::String,
-                          ?auto_participant_recording_configuration: {
-                            storage_configuration_arn: ::String,
-                            media_types: Array[("AUDIO_VIDEO" | "AUDIO_ONLY" | "NONE")]?,
-                            thumbnail_configuration: {
-                              target_interval_seconds: ::Integer?,
-                              storage: Array[("SEQUENTIAL" | "LATEST")]?,
-                              recording_mode: ("INTERVAL" | "DISABLED")?
-                            }?,
-                            recording_reconnect_window_seconds: ::Integer?,
-                            hls_configuration: {
-                              target_segment_duration_seconds: ::Integer?
-                            }?,
-                            record_participant_replicas: bool?
-                          }
+                          ?auto_participant_recording_configuration: Params::auto_participant_recording_configuration
                         ) -> _UpdateStageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess
     end

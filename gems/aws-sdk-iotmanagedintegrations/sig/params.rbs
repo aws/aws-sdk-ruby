@@ -1,0 +1,47 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTManagedIntegrations
+    module Params
+      type capability_report = {
+      version: ::String,
+      node_id: ::String?,
+      endpoints: Array[
+        Params::capability_report_endpoint
+      ]
+    }
+
+      type capability_report_endpoint = {
+      id: ::String,
+      device_types: Array[::String],
+      capabilities: Array[
+        Params::capability_report_capability
+      ]
+    }
+
+      type capability_report_capability = {
+      id: ::String,
+      name: ::String,
+      version: ::String,
+      properties: Array[::String],
+      actions: Array[::String],
+      events: Array[::String]
+    }
+
+      type capability_schema_item = {
+      format: ("AWS" | "ZCL" | "CONNECTOR"),
+      capability_id: ::String,
+      extrinsic_id: ::String,
+      extrinsic_version: ::Integer,
+      schema: {
+      }
+    }
+
+    end
+  end
+end

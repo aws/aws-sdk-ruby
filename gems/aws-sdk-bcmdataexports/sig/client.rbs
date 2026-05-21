@@ -85,37 +85,12 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#create_export-instance_method
       def create_export: (
-                           export: {
-                             export_arn: ::String?,
-                             name: ::String,
-                             description: ::String?,
-                             data_query: {
-                               query_statement: ::String,
-                               table_configurations: Hash[::String, Hash[::String, ::String]]?
-                             },
-                             destination_configurations: {
-                               s3_destination: {
-                                 s3_bucket: ::String,
-                                 s3_bucket_owner: ::String?,
-                                 s3_prefix: ::String,
-                                 s3_region: ::String,
-                                 s3_output_configurations: {
-                                   output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
-                                   format: ("TEXT_OR_CSV" | "PARQUET"),
-                                   compression: ("GZIP" | "PARQUET"),
-                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
-                                 }
-                               }
-                             },
-                             refresh_cadence: {
-                               frequency: ("SYNCHRONOUS")
-                             }
-                           },
+                           export: Params::export,
                            ?resource_tags: Array[
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreateExportResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExportResponseSuccess
@@ -228,7 +203,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -250,32 +225,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BCMDataExports/Client.html#update_export-instance_method
       def update_export: (
                            export_arn: ::String,
-                           export: {
-                             export_arn: ::String?,
-                             name: ::String,
-                             description: ::String?,
-                             data_query: {
-                               query_statement: ::String,
-                               table_configurations: Hash[::String, Hash[::String, ::String]]?
-                             },
-                             destination_configurations: {
-                               s3_destination: {
-                                 s3_bucket: ::String,
-                                 s3_bucket_owner: ::String?,
-                                 s3_prefix: ::String,
-                                 s3_region: ::String,
-                                 s3_output_configurations: {
-                                   output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
-                                   format: ("TEXT_OR_CSV" | "PARQUET"),
-                                   compression: ("GZIP" | "PARQUET"),
-                                   overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
-                                 }
-                               }
-                             },
-                             refresh_cadence: {
-                               frequency: ("SYNCHRONOUS")
-                             }
-                           }
+                           export: Params::export
                          ) -> _UpdateExportResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExportResponseSuccess
     end

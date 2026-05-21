@@ -1,0 +1,144 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GroundStation
+    module Params
+      type spectrum_config = {
+      center_frequency: {
+        value: ::Float,
+        units: ("GHz" | "MHz" | "kHz")
+      },
+      bandwidth: {
+        value: ::Float,
+        units: ("GHz" | "MHz" | "kHz")
+      },
+      polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
+    }
+
+      type antenna_downlink_config = {
+      spectrum_config: Params::spectrum_config
+    }
+
+      type antenna_downlink_demod_decode_config = {
+      spectrum_config: Params::spectrum_config,
+      demodulation_config: {
+        unvalidated_json: ::String
+      },
+      decode_config: {
+        unvalidated_json: ::String
+      }
+    }
+
+      type antenna_uplink_config = {
+      transmit_disabled: bool?,
+      spectrum_config: {
+        center_frequency: {
+          value: ::Float,
+          units: ("GHz" | "MHz" | "kHz")
+        },
+        polarization: ("RIGHT_HAND" | "LEFT_HAND" | "NONE")?
+      },
+      target_eirp: {
+        value: ::Float,
+        units: ("dBW")
+      }
+    }
+
+      type telemetry_sink_config = {
+      telemetry_sink_type: ("KINESIS_DATA_STREAM"),
+      telemetry_sink_data: {
+        kinesis_data_stream_data: {
+          kinesis_role_arn: ::String,
+          kinesis_data_stream_arn: ::String
+        }?
+      }
+    }
+
+      type config_type_data = {
+      antenna_downlink_config: Params::antenna_downlink_config?,
+      tracking_config: {
+        autotrack: ("REQUIRED" | "PREFERRED" | "REMOVED")
+      }?,
+      dataflow_endpoint_config: {
+        dataflow_endpoint_name: ::String,
+        dataflow_endpoint_region: ::String?
+      }?,
+      antenna_downlink_demod_decode_config: Params::antenna_downlink_demod_decode_config?,
+      antenna_uplink_config: Params::antenna_uplink_config?,
+      uplink_echo_config: {
+        enabled: bool,
+        antenna_uplink_config_arn: ::String
+      }?,
+      s3_recording_config: {
+        bucket_arn: ::String,
+        role_arn: ::String,
+        prefix: ::String?
+      }?,
+      telemetry_sink_config: Params::telemetry_sink_config?
+    }
+
+      type ranged_connection_details = {
+      socket_address: {
+        name: ::String,
+        port_range: {
+          minimum: ::Integer,
+          maximum: ::Integer
+        }
+      },
+      mtu: ::Integer?
+    }
+
+      type uplink_connection_details = {
+      ingress_address_and_port: {
+        socket_address: {
+          name: ::String,
+          port: ::Integer
+        },
+        mtu: ::Integer?
+      },
+      agent_ip_and_port_address: Params::ranged_connection_details
+    }
+
+      type uplink_dataflow_details = {
+      agent_connection_details: Params::uplink_connection_details?
+    }
+
+      type downlink_connection_details = {
+      agent_ip_and_port_address: Params::ranged_connection_details,
+      egress_address_and_port: {
+        socket_address: {
+          name: ::String,
+          port: ::Integer
+        },
+        mtu: ::Integer?
+      }
+    }
+
+      type downlink_dataflow_details = {
+      agent_connection_details: Params::downlink_connection_details?
+    }
+
+      type program_track_settings = {
+      az_el: {
+        ephemeris_id: ::String
+      }?,
+      oem: {
+        ephemeris_id: ::String
+      }?,
+      tle: {
+        ephemeris_id: ::String
+      }?
+    }
+
+      type tracking_overrides = {
+      program_track_settings: Params::program_track_settings?
+    }
+
+    end
+  end
+end

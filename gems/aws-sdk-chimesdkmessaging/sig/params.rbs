@@ -1,0 +1,25 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMessaging
+    module Params
+      type processor = {
+      name: ::String,
+      configuration: {
+        lambda: {
+          resource_arn: ::String,
+          invocation_type: ("ASYNC")
+        }
+      },
+      execution_order: ::Integer,
+      fallback_action: ("CONTINUE" | "ABORT")
+    }
+
+    end
+  end
+end

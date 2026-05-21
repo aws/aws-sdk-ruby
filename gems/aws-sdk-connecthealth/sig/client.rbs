@@ -291,7 +291,7 @@ module Aws
                                           s3_sources: Array[
                                             {
                                               uri: ::String
-                                            },
+                                            }
                                           ]?
                                         },
                                         output_data_config: {

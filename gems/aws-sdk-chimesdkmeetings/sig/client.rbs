@@ -87,14 +87,7 @@ module Aws
       def batch_create_attendee: (
                                    meeting_id: ::String,
                                    attendees: Array[
-                                     {
-                                       external_user_id: ::String,
-                                       capabilities: {
-                                         audio: ("SendReceive" | "Send" | "Receive" | "None"),
-                                         video: ("SendReceive" | "Send" | "Receive" | "None"),
-                                         content: ("SendReceive" | "Send" | "Receive" | "None")
-                                       }?
-                                     },
+                                     Params::create_attendee_request_item
                                    ]
                                  ) -> _BatchCreateAttendeeResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateAttendeeResponseSuccess
@@ -105,7 +98,7 @@ module Aws
                                                        excluded_attendee_ids: Array[
                                                          {
                                                            attendee_id: ::String
-                                                         },
+                                                         }
                                                        ],
                                                        capabilities: {
                                                          audio: ("SendReceive" | "Send" | "Receive" | "None"),
@@ -146,27 +139,14 @@ module Aws
                               sns_topic_arn: ::String?,
                               sqs_queue_arn: ::String?
                             },
-                            ?meeting_features: {
-                              audio: {
-                                echo_reduction: ("AVAILABLE" | "UNAVAILABLE")?
-                              }?,
-                              video: {
-                                max_resolution: ("None" | "HD" | "FHD")?
-                              }?,
-                              content: {
-                                max_resolution: ("None" | "FHD" | "UHD")?
-                              }?,
-                              attendee: {
-                                max_count: ::Integer?
-                              }?
-                            },
+                            ?meeting_features: Params::meeting_features_configuration,
                             ?primary_meeting_id: ::String,
                             ?tenant_ids: Array[::String],
                             ?tags: Array[
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?media_placement_network_type: ("Ipv4Only" | "DualStack")
                           ) -> _CreateMeetingResponseSuccess
@@ -184,34 +164,14 @@ module Aws
                                            media_region: ::String,
                                            ?meeting_host_id: ::String,
                                            external_meeting_id: ::String,
-                                           ?meeting_features: {
-                                             audio: {
-                                               echo_reduction: ("AVAILABLE" | "UNAVAILABLE")?
-                                             }?,
-                                             video: {
-                                               max_resolution: ("None" | "HD" | "FHD")?
-                                             }?,
-                                             content: {
-                                               max_resolution: ("None" | "FHD" | "UHD")?
-                                             }?,
-                                             attendee: {
-                                               max_count: ::Integer?
-                                             }?
-                                           },
+                                           ?meeting_features: Params::meeting_features_configuration,
                                            ?notifications_configuration: {
                                              lambda_function_arn: ::String?,
                                              sns_topic_arn: ::String?,
                                              sqs_queue_arn: ::String?
                                            },
                                            attendees: Array[
-                                             {
-                                               external_user_id: ::String,
-                                               capabilities: {
-                                                 audio: ("SendReceive" | "Send" | "Receive" | "None"),
-                                                 video: ("SendReceive" | "Send" | "Receive" | "None"),
-                                                 content: ("SendReceive" | "Send" | "Receive" | "None")
-                                               }?
-                                             },
+                                             Params::create_attendee_request_item
                                            ],
                                            ?primary_meeting_id: ::String,
                                            ?tenant_ids: Array[::String],
@@ -219,7 +179,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ],
                                            ?media_placement_network_type: ("Ipv4Only" | "DualStack")
                                          ) -> _CreateMeetingWithAttendeesResponseSuccess
@@ -332,7 +292,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

@@ -107,63 +107,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#create_backup_plan-instance_method
       def create_backup_plan: (
-                                backup_plan: {
-                                  backup_plan_name: ::String,
-                                  rules: Array[
-                                    {
-                                      rule_name: ::String,
-                                      target_backup_vault_name: ::String,
-                                      target_logically_air_gapped_backup_vault_arn: ::String?,
-                                      schedule_expression: ::String?,
-                                      start_window_minutes: ::Integer?,
-                                      completion_window_minutes: ::Integer?,
-                                      lifecycle: {
-                                        move_to_cold_storage_after_days: ::Integer?,
-                                        delete_after_days: ::Integer?,
-                                        opt_in_to_archive_for_supported_resources: bool?,
-                                        delete_after_event: ("DELETE_AFTER_COPY")?
-                                      }?,
-                                      recovery_point_tags: Hash[::String, ::String]?,
-                                      copy_actions: Array[
-                                        {
-                                          lifecycle: {
-                                            move_to_cold_storage_after_days: ::Integer?,
-                                            delete_after_days: ::Integer?,
-                                            opt_in_to_archive_for_supported_resources: bool?,
-                                            delete_after_event: ("DELETE_AFTER_COPY")?
-                                          }?,
-                                          destination_backup_vault_arn: ::String
-                                        },
-                                      ]?,
-                                      enable_continuous_backup: bool?,
-                                      schedule_expression_timezone: ::String?,
-                                      index_actions: Array[
-                                        {
-                                          resource_types: Array[::String]?
-                                        },
-                                      ]?,
-                                      scan_actions: Array[
-                                        {
-                                          malware_scanner: ("GUARDDUTY")?,
-                                          scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")?
-                                        },
-                                      ]?
-                                    },
-                                  ],
-                                  advanced_backup_settings: Array[
-                                    {
-                                      resource_type: ::String?,
-                                      backup_options: Hash[::String, ::String]?
-                                    },
-                                  ]?,
-                                  scan_settings: Array[
-                                    {
-                                      malware_scanner: ("GUARDDUTY")?,
-                                      resource_types: Array[::String]?,
-                                      scanner_role_arn: ::String?
-                                    },
-                                  ]?
-                                },
+                                backup_plan: Params::backup_plan_input,
                                 ?backup_plan_tags: Hash[::String, ::String],
                                 ?creator_request_id: ::String
                               ) -> _CreateBackupPlanResponseSuccess
@@ -187,7 +131,7 @@ module Aws
                                            condition_type: ("STRINGEQUALS"),
                                            condition_key: ::String,
                                            condition_value: ::String
-                                         },
+                                         }
                                        ]?,
                                        not_resources: Array[::String]?,
                                        conditions: {
@@ -195,25 +139,25 @@ module Aws
                                            {
                                              condition_key: ::String?,
                                              condition_value: ::String?
-                                           },
+                                           }
                                          ]?,
                                          string_not_equals: Array[
                                            {
                                              condition_key: ::String?,
                                              condition_value: ::String?
-                                           },
+                                           }
                                          ]?,
                                          string_like: Array[
                                            {
                                              condition_key: ::String?,
                                              condition_value: ::String?
-                                           },
+                                           }
                                          ]?,
                                          string_not_like: Array[
                                            {
                                              condition_key: ::String?,
                                              condition_value: ::String?
-                                           },
+                                           }
                                          ]?
                                        }?
                                      },
@@ -246,20 +190,7 @@ module Aws
                               framework_name: ::String,
                               ?framework_description: ::String,
                               framework_controls: Array[
-                                {
-                                  control_name: ::String,
-                                  control_input_parameters: Array[
-                                    {
-                                      parameter_name: ::String?,
-                                      parameter_value: ::String?
-                                    },
-                                  ]?,
-                                  control_scope: {
-                                    compliance_resource_ids: Array[::String]?,
-                                    compliance_resource_types: Array[::String]?,
-                                    tags: Hash[::String, ::String]?
-                                  }?
-                                },
+                                Params::framework_control
                               ],
                               ?idempotency_token: ::String,
                               ?framework_tags: Hash[::String, ::String]
@@ -326,14 +257,7 @@ module Aws
                                   s3_key_prefix: ::String?,
                                   formats: Array[::String]?
                                 },
-                                report_setting: {
-                                  report_template: ::String,
-                                  framework_arns: Array[::String]?,
-                                  number_of_frameworks: ::Integer?,
-                                  accounts: Array[::String]?,
-                                  organization_units: Array[::String]?,
-                                  regions: Array[::String]?
-                                },
+                                report_setting: Params::report_setting,
                                 ?report_plan_tags: Hash[::String, ::String],
                                 ?idempotency_token: ::String
                               ) -> _CreateReportPlanResponseSuccess
@@ -396,20 +320,7 @@ module Aws
                                               restore_testing_selection: {
                                                 iam_role_arn: ::String,
                                                 protected_resource_arns: Array[::String]?,
-                                                protected_resource_conditions: {
-                                                  string_equals: Array[
-                                                    {
-                                                      key: ::String,
-                                                      value: ::String
-                                                    },
-                                                  ]?,
-                                                  string_not_equals: Array[
-                                                    {
-                                                      key: ::String,
-                                                      value: ::String
-                                                    },
-                                                  ]?
-                                                }?,
+                                                protected_resource_conditions: Params::protected_resource_conditions?,
                                                 protected_resource_type: ::String,
                                                 restore_metadata_overrides: Hash[::String, ::String]?,
                                                 restore_testing_selection_name: ::String,
@@ -434,7 +345,7 @@ module Aws
                                                 resources: Array[::String],
                                                 tiering_down_settings_in_days: ::Integer,
                                                 resource_type: ::String
-                                              },
+                                              }
                                             ]
                                           },
                                           ?tiering_configuration_tags: Hash[::String, ::String],
@@ -1622,63 +1533,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Backup/Client.html#update_backup_plan-instance_method
       def update_backup_plan: (
                                 backup_plan_id: ::String,
-                                backup_plan: {
-                                  backup_plan_name: ::String,
-                                  rules: Array[
-                                    {
-                                      rule_name: ::String,
-                                      target_backup_vault_name: ::String,
-                                      target_logically_air_gapped_backup_vault_arn: ::String?,
-                                      schedule_expression: ::String?,
-                                      start_window_minutes: ::Integer?,
-                                      completion_window_minutes: ::Integer?,
-                                      lifecycle: {
-                                        move_to_cold_storage_after_days: ::Integer?,
-                                        delete_after_days: ::Integer?,
-                                        opt_in_to_archive_for_supported_resources: bool?,
-                                        delete_after_event: ("DELETE_AFTER_COPY")?
-                                      }?,
-                                      recovery_point_tags: Hash[::String, ::String]?,
-                                      copy_actions: Array[
-                                        {
-                                          lifecycle: {
-                                            move_to_cold_storage_after_days: ::Integer?,
-                                            delete_after_days: ::Integer?,
-                                            opt_in_to_archive_for_supported_resources: bool?,
-                                            delete_after_event: ("DELETE_AFTER_COPY")?
-                                          }?,
-                                          destination_backup_vault_arn: ::String
-                                        },
-                                      ]?,
-                                      enable_continuous_backup: bool?,
-                                      schedule_expression_timezone: ::String?,
-                                      index_actions: Array[
-                                        {
-                                          resource_types: Array[::String]?
-                                        },
-                                      ]?,
-                                      scan_actions: Array[
-                                        {
-                                          malware_scanner: ("GUARDDUTY")?,
-                                          scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")?
-                                        },
-                                      ]?
-                                    },
-                                  ],
-                                  advanced_backup_settings: Array[
-                                    {
-                                      resource_type: ::String?,
-                                      backup_options: Hash[::String, ::String]?
-                                    },
-                                  ]?,
-                                  scan_settings: Array[
-                                    {
-                                      malware_scanner: ("GUARDDUTY")?,
-                                      resource_types: Array[::String]?,
-                                      scanner_role_arn: ::String?
-                                    },
-                                  ]?
-                                }
+                                backup_plan: Params::backup_plan_input
                               ) -> _UpdateBackupPlanResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackupPlanResponseSuccess
 
@@ -1693,20 +1548,7 @@ module Aws
                               framework_name: ::String,
                               ?framework_description: ::String,
                               ?framework_controls: Array[
-                                {
-                                  control_name: ::String,
-                                  control_input_parameters: Array[
-                                    {
-                                      parameter_name: ::String?,
-                                      parameter_value: ::String?
-                                    },
-                                  ]?,
-                                  control_scope: {
-                                    compliance_resource_ids: Array[::String]?,
-                                    compliance_resource_types: Array[::String]?,
-                                    tags: Hash[::String, ::String]?
-                                  }?
-                                },
+                                Params::framework_control
                               ],
                               ?idempotency_token: ::String
                             ) -> _UpdateFrameworkResponseSuccess
@@ -1776,14 +1618,7 @@ module Aws
                                   s3_key_prefix: ::String?,
                                   formats: Array[::String]?
                                 },
-                                ?report_setting: {
-                                  report_template: ::String,
-                                  framework_arns: Array[::String]?,
-                                  number_of_frameworks: ::Integer?,
-                                  accounts: Array[::String]?,
-                                  organization_units: Array[::String]?,
-                                  regions: Array[::String]?
-                                },
+                                ?report_setting: Params::report_setting,
                                 ?idempotency_token: ::String
                               ) -> _UpdateReportPlanResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReportPlanResponseSuccess
@@ -1827,20 +1662,7 @@ module Aws
                                               restore_testing_selection: {
                                                 iam_role_arn: ::String?,
                                                 protected_resource_arns: Array[::String]?,
-                                                protected_resource_conditions: {
-                                                  string_equals: Array[
-                                                    {
-                                                      key: ::String,
-                                                      value: ::String
-                                                    },
-                                                  ]?,
-                                                  string_not_equals: Array[
-                                                    {
-                                                      key: ::String,
-                                                      value: ::String
-                                                    },
-                                                  ]?
-                                                }?,
+                                                protected_resource_conditions: Params::protected_resource_conditions?,
                                                 restore_metadata_overrides: Hash[::String, ::String]?,
                                                 validation_window_hours: ::Integer?
                                               },
@@ -1864,7 +1686,7 @@ module Aws
                                                 resources: Array[::String],
                                                 tiering_down_settings_in_days: ::Integer,
                                                 resource_type: ::String
-                                              },
+                                              }
                                             ],
                                             backup_vault_name: ::String
                                           }

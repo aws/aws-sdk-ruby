@@ -1,0 +1,57 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Athena
+    module Params
+      type result_configuration = {
+      output_location: ::String?,
+      encryption_configuration: {
+        encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
+        kms_key: ::String?
+      }?,
+      expected_bucket_owner: ::String?,
+      acl_configuration: {
+        s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
+      }?
+    }
+
+      type monitoring_configuration = {
+      cloud_watch_logging_configuration: {
+        enabled: bool,
+        log_group: ::String?,
+        log_stream_name_prefix: ::String?,
+        log_types: Hash[::String, Array[::String]]?
+      }?,
+      managed_logging_configuration: {
+        enabled: bool,
+        kms_key: ::String?
+      }?,
+      s3_logging_configuration: {
+        enabled: bool,
+        kms_key: ::String?,
+        log_location: ::String?
+      }?
+    }
+
+      type engine_configuration = {
+      coordinator_dpu_size: ::Integer?,
+      max_concurrent_dpus: ::Integer?,
+      default_executor_dpu_size: ::Integer?,
+      additional_configs: Hash[::String, ::String]?,
+      spark_properties: Hash[::String, ::String]?,
+      classifications: Array[
+        {
+          name: ::String?,
+          properties: Hash[::String, ::String]?
+        }
+      ]?
+    }
+
+    end
+  end
+end

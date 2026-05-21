@@ -184,7 +184,7 @@ module Aws
                                            parent_hours_of_operation_configs: Array[
                                              {
                                                hours_of_operation_id: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -197,32 +197,7 @@ module Aws
       def associate_instance_storage_config: (
                                                instance_id: ::String,
                                                resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS" | "EMAIL_MESSAGES"),
-                                               storage_config: {
-                                                 association_id: ::String?,
-                                                 storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE"),
-                                                 s3_config: {
-                                                   bucket_name: ::String,
-                                                   bucket_prefix: ::String,
-                                                   encryption_config: {
-                                                     encryption_type: ("KMS"),
-                                                     key_id: ::String
-                                                   }?
-                                                 }?,
-                                                 kinesis_video_stream_config: {
-                                                   prefix: ::String,
-                                                   retention_period_hours: ::Integer,
-                                                   encryption_config: {
-                                                     encryption_type: ("KMS"),
-                                                     key_id: ::String
-                                                   }
-                                                 }?,
-                                                 kinesis_stream_config: {
-                                                   stream_arn: ::String
-                                                 }?,
-                                                 kinesis_firehose_config: {
-                                                   firehose_arn: ::String
-                                                 }?
-                                               },
+                                               storage_config: Params::instance_storage_config,
                                                ?client_token: ::String
                                              ) -> _AssociateInstanceStorageConfigResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateInstanceStorageConfigResponseSuccess
@@ -261,7 +236,7 @@ module Aws
                                              email_addresses_config: Array[
                                                {
                                                  email_address_id: ::String
-                                               },
+                                               }
                                              ],
                                              ?client_token: ::String
                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -280,14 +255,7 @@ module Aws
                                               instance_id: ::String,
                                               routing_profile_id: ::String,
                                               ?queue_configs: Array[
-                                                {
-                                                  queue_reference: {
-                                                    queue_id: ::String,
-                                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
-                                                  },
-                                                  priority: ::Integer,
-                                                  delay: ::Integer
-                                                },
+                                                Params::routing_profile_queue_config
                                               ],
                                               ?manual_assignment_queue_configs: Array[
                                                 {
@@ -295,7 +263,7 @@ module Aws
                                                     queue_id: ::String,
                                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
                                                   }
-                                                },
+                                                }
                                               ]
                                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -318,7 +286,7 @@ module Aws
                                          security_profiles: Array[
                                            {
                                              id: ::String?
-                                           },
+                                           }
                                          ],
                                          entity_type: ("USER" | "AI_AGENT"),
                                          entity_arn: ::String
@@ -345,7 +313,7 @@ module Aws
                                               attribute_name: ::String,
                                               attribute_value: ::String,
                                               level: ::Float
-                                            },
+                                            }
                                           ]
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -386,24 +354,7 @@ module Aws
                                            instance_id: ::String,
                                            data_table_id: ::String,
                                            values: Array[
-                                             {
-                                               primary_values: Array[
-                                                 {
-                                                   attribute_name: ::String,
-                                                   value: ::String
-                                                 },
-                                               ]?,
-                                               attribute_name: ::String,
-                                               value: ::String,
-                                               lock_version: {
-                                                 data_table: ::String?,
-                                                 attribute: ::String?,
-                                                 primary_values: ::String?,
-                                                 value: ::String?
-                                               }?,
-                                               last_modified_time: ::Time?,
-                                               last_modified_region: ::String?
-                                             },
+                                             Params::data_table_value
                                            ]
                                          ) -> _BatchCreateDataTableValueResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateDataTableValueResponseSuccess
@@ -423,7 +374,7 @@ module Aws
                                                  {
                                                    attribute_name: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]?,
                                                attribute_name: ::String,
                                                lock_version: {
@@ -432,7 +383,7 @@ module Aws
                                                  primary_values: ::String?,
                                                  value: ::String?
                                                }
-                                             },
+                                             }
                                            ]
                                          ) -> _BatchDeleteDataTableValueResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteDataTableValueResponseSuccess
@@ -452,10 +403,10 @@ module Aws
                                                    {
                                                      attribute_name: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ]?,
                                                  attribute_name: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _BatchDescribeDataTableValueResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDescribeDataTableValueResponseSuccess
@@ -523,20 +474,8 @@ module Aws
                                    campaign: {
                                      campaign_id: ::String?
                                    }?,
-                                   outbound_strategy: {
-                                     type: ("AGENT_FIRST"),
-                                     config: {
-                                       agent_first: {
-                                         preview: {
-                                           post_accept_timeout_config: {
-                                             duration_in_seconds: ::Integer
-                                           },
-                                           allowed_user_actions: Array[("CALL" | "DISCARD")]
-                                         }?
-                                       }?
-                                     }?
-                                   }?
-                                 },
+                                   outbound_strategy: Params::outbound_strategy?
+                                 }
                                ]
                              ) -> _BatchPutContactResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutContactResponseSuccess
@@ -551,24 +490,7 @@ module Aws
                                            instance_id: ::String,
                                            data_table_id: ::String,
                                            values: Array[
-                                             {
-                                               primary_values: Array[
-                                                 {
-                                                   attribute_name: ::String,
-                                                   value: ::String
-                                                 },
-                                               ]?,
-                                               attribute_name: ::String,
-                                               value: ::String,
-                                               lock_version: {
-                                                 data_table: ::String?,
-                                                 attribute: ::String?,
-                                                 primary_values: ::String?,
-                                                 value: ::String?
-                                               }?,
-                                               last_modified_time: ::Time?,
-                                               last_modified_region: ::String?
-                                             },
+                                             Params::data_table_value
                                            ]
                                          ) -> _BatchUpdateDataTableValueResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDataTableValueResponseSuccess
@@ -643,15 +565,7 @@ module Aws
                             ?initiate_as: ("CONNECTED_TO_USER" | "COMPLETED"),
                             ?name: ::String,
                             ?description: ::String,
-                            ?segment_attributes: Hash[::String, {
-                                value_string: ::String?,
-                                value_map: Hash[::String, untyped]?,
-                                value_integer: ::Integer?,
-                                value_list: Array[
-                                  untyped,
-                                ]?,
-                                value_arn: ::String?
-                              }],
+                            ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                             ?previous_contact_id: ::String
                           ) -> _CreateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactResponseSuccess
@@ -772,22 +686,7 @@ module Aws
                                          value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST"),
                                          ?description: ::String,
                                          ?primary: bool,
-                                         ?validation: {
-                                           min_length: ::Integer?,
-                                           max_length: ::Integer?,
-                                           min_values: ::Integer?,
-                                           max_values: ::Integer?,
-                                           ignore_case: bool?,
-                                           minimum: ::Float?,
-                                           maximum: ::Float?,
-                                           exclusive_minimum: ::Float?,
-                                           exclusive_maximum: ::Float?,
-                                           multiple_of: ::Float?,
-                                           enum: {
-                                             strict: bool?,
-                                             values: Array[::String]?
-                                           }?
-                                         }
+                                         ?validation: Params::validation
                                        ) -> _CreateDataTableAttributeResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataTableAttributeResponseSuccess
 
@@ -818,133 +717,7 @@ module Aws
                                     title: ::String,
                                     ?description: ::String,
                                     items: Array[
-                                      {
-                                        section: {
-                                          title: ::String,
-                                          ref_id: ::String,
-                                          instructions: ::String?,
-                                          items: untyped,
-                                          weight: ::Float?
-                                        }?,
-                                        question: {
-                                          title: ::String,
-                                          instructions: ::String?,
-                                          ref_id: ::String,
-                                          not_applicable_enabled: bool?,
-                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME"),
-                                          question_type_properties: {
-                                            numeric: {
-                                              min_value: ::Integer,
-                                              max_value: ::Integer,
-                                              options: Array[
-                                                {
-                                                  min_value: ::Integer,
-                                                  max_value: ::Integer,
-                                                  score: ::Integer?,
-                                                  automatic_fail: bool?,
-                                                  automatic_fail_configuration: {
-                                                    target_section: ::String?
-                                                  }?
-                                                },
-                                              ]?,
-                                              automation: {
-                                                property_value: {
-                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
-                                                }?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            single_select: {
-                                              options: Array[
-                                                {
-                                                  ref_id: ::String,
-                                                  text: ::String,
-                                                  score: ::Integer?,
-                                                  automatic_fail: bool?,
-                                                  automatic_fail_configuration: {
-                                                    target_section: ::String?
-                                                  }?
-                                                },
-                                              ],
-                                              display_as: ("DROPDOWN" | "RADIO")?,
-                                              automation: {
-                                                options: Array[
-                                                  {
-                                                    rule_category: {
-                                                      category: ::String,
-                                                      condition: ("PRESENT" | "NOT_PRESENT"),
-                                                      option_ref_id: ::String
-                                                    }?
-                                                  },
-                                                ]?,
-                                                default_option_ref_id: ::String?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            text: {
-                                              automation: {
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            multi_select: {
-                                              options: Array[
-                                                {
-                                                  ref_id: ::String,
-                                                  text: ::String
-                                                },
-                                              ],
-                                              display_as: ("DROPDOWN" | "CHECKBOX")?,
-                                              automation: {
-                                                options: Array[
-                                                  {
-                                                    rule_category: {
-                                                      category: ::String,
-                                                      condition: ("PRESENT" | "NOT_PRESENT"),
-                                                      option_ref_ids: Array[::String]
-                                                    }?
-                                                  },
-                                                ]?,
-                                                default_option_ref_ids: Array[::String]?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?
-                                          }?,
-                                          enablement: {
-                                            condition: {
-                                              operands: Array[
-                                                {
-                                                  expression: {
-                                                    source: {
-                                                      type: ("QUESTION_REF_ID"),
-                                                      ref_id: ::String?
-                                                    },
-                                                    values: Array[
-                                                      {
-                                                        type: ("OPTION_REF_ID"),
-                                                        ref_id: ::String?
-                                                      },
-                                                    ],
-                                                    comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
-                                                  }?,
-                                                  condition: untyped?
-                                                },
-                                              ],
-                                              operator: ("OR" | "AND")?
-                                            },
-                                            action: ("DISABLE" | "ENABLE"),
-                                            default_action: ("DISABLE" | "ENABLE")?
-                                          }?,
-                                          weight: ::Float?
-                                        }?
-                                      },
+                                      Params::evaluation_form_item
                                     ],
                                     ?scoring_strategy: {
                                       mode: ("QUESTION_ONLY" | "SECTION_ONLY"),
@@ -956,17 +729,7 @@ module Aws
                                     ?client_token: ::String,
                                     ?as_draft: bool,
                                     ?tags: Hash[::String, ::String],
-                                    ?review_configuration: {
-                                      review_notification_recipients: Array[
-                                        {
-                                          type: ("USER_ID"),
-                                          value: {
-                                            user_id: ::String?
-                                          }
-                                        },
-                                      ],
-                                      eligibility_days: ::Integer?
-                                    },
+                                    ?review_configuration: Params::evaluation_review_configuration,
                                     ?target_configuration: {
                                       contact_interaction_type: ("AGENT" | "AUTOMATED" | "CUSTOMER")
                                     },
@@ -988,22 +751,12 @@ module Aws
                                        ?description: ::String,
                                        time_zone: ::String,
                                        config: Array[
-                                         {
-                                           day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
-                                           start_time: {
-                                             hours: ::Integer,
-                                             minutes: ::Integer
-                                           },
-                                           end_time: {
-                                             hours: ::Integer,
-                                             minutes: ::Integer
-                                           }
-                                         },
+                                         Params::hours_of_operation_config
                                        ],
                                        ?parent_hours_of_operation_configs: Array[
                                          {
                                            hours_of_operation_id: ::String?
-                                         },
+                                         }
                                        ],
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateHoursOfOperationResponseSuccess
@@ -1020,29 +773,11 @@ module Aws
                                                 name: ::String,
                                                 ?description: ::String,
                                                 config: Array[
-                                                  {
-                                                    day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
-                                                    start_time: {
-                                                      hours: ::Integer,
-                                                      minutes: ::Integer
-                                                    }?,
-                                                    end_time: {
-                                                      hours: ::Integer,
-                                                      minutes: ::Integer
-                                                    }?
-                                                  },
+                                                  Params::hours_of_operation_override_config
                                                 ],
                                                 effective_from: ::String,
                                                 effective_till: ::String,
-                                                ?recurrence_config: {
-                                                  recurrence_pattern: {
-                                                    frequency: ("WEEKLY" | "MONTHLY" | "YEARLY"),
-                                                    interval: ::Integer,
-                                                    by_month: Array[::Integer]?,
-                                                    by_month_day: Array[::Integer]?,
-                                                    by_weekday_occurrence: Array[::Integer]?
-                                                  }
-                                                },
+                                                ?recurrence_config: Params::recurrence_config,
                                                 ?override_type: ("STANDARD" | "OPEN" | "CLOSED")
                                               ) -> _CreateHoursOfOperationOverrideResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHoursOfOperationOverrideResponseSuccess
@@ -1206,7 +941,7 @@ module Aws
                           ?email_addresses_config: Array[
                             {
                               email_address_id: ::String
-                            },
+                            }
                           ],
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateQueueResponseSuccess
@@ -1222,23 +957,7 @@ module Aws
                                   instance_id: ::String,
                                   name: ::String,
                                   ?description: ::String,
-                                  quick_connect_config: {
-                                    quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
-                                    user_config: {
-                                      user_id: ::String,
-                                      contact_flow_id: ::String
-                                    }?,
-                                    queue_config: {
-                                      queue_id: ::String,
-                                      contact_flow_id: ::String
-                                    }?,
-                                    phone_config: {
-                                      phone_number: ::String
-                                    }?,
-                                    flow_config: {
-                                      contact_flow_id: ::String
-                                    }?
-                                  },
+                                  quick_connect_config: Params::quick_connect_config,
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateQuickConnectResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQuickConnectResponseSuccess
@@ -1255,14 +974,7 @@ module Aws
                                     description: ::String,
                                     default_outbound_queue_id: ::String,
                                     ?queue_configs: Array[
-                                      {
-                                        queue_reference: {
-                                          queue_id: ::String,
-                                          channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
-                                        },
-                                        priority: ::Integer,
-                                        delay: ::Integer
-                                      },
+                                      Params::routing_profile_queue_config
                                     ],
                                     ?manual_assignment_queue_configs: Array[
                                       {
@@ -1270,7 +982,7 @@ module Aws
                                           queue_id: ::String,
                                           channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
                                         }
-                                      },
+                                      }
                                     ],
                                     media_concurrencies: Array[
                                       {
@@ -1279,7 +991,7 @@ module Aws
                                         cross_channel_behavior: {
                                           behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
                                         }?
-                                      },
+                                      }
                                     ],
                                     ?tags: Hash[::String, ::String],
                                     ?agent_availability_timer: ("TIME_SINCE_LAST_ACTIVITY" | "TIME_SINCE_LAST_INBOUND")
@@ -1301,92 +1013,7 @@ module Aws
                          },
                          function: ::String,
                          actions: Array[
-                           {
-                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
-                             task_action: {
-                               name: ::String,
-                               description: ::String?,
-                               contact_flow_id: ::String,
-                               references: Hash[::String, {
-                                   value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                   status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
-                                   arn: ::String?,
-                                   status_reason: ::String?
-                                 }]?
-                             }?,
-                             event_bridge_action: {
-                               name: ::String
-                             }?,
-                             assign_contact_category_action: {
-                             }?,
-                             send_notification_action: {
-                               delivery_method: ("EMAIL"),
-                               subject: ::String?,
-                               content: ::String,
-                               content_type: ("PLAIN_TEXT"),
-                               recipient: {
-                                 user_tags: Hash[::String, ::String]?,
-                                 user_ids: Array[::String]?
-                               },
-                               exclusion: {
-                                 user_tags: Hash[::String, ::String]?,
-                                 user_ids: Array[::String]?
-                               }?
-                             }?,
-                             create_case_action: {
-                               fields: Array[
-                                 {
-                                   id: ::String,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   }
-                                 },
-                               ],
-                               template_id: ::String
-                             }?,
-                             update_case_action: {
-                               fields: Array[
-                                 {
-                                   id: ::String,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   }
-                                 },
-                               ]
-                             }?,
-                             assign_sla_action: {
-                               sla_assignment_type: ("CASES"),
-                               case_sla_configuration: {
-                                 name: ::String,
-                                 type: ("CaseField"),
-                                 field_id: ::String?,
-                                 target_field_values: Array[
-                                   {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   },
-                                 ]?,
-                                 target_sla_minutes: ::Integer
-                               }?
-                             }?,
-                             end_associated_tasks_action: {
-                             }?,
-                             submit_auto_evaluation_action: {
-                               evaluation_form_id: ::String
-                             }?
-                           },
+                           Params::rule_action
                          ],
                          publish_status: ("DRAFT" | "PUBLISHED"),
                          ?client_token: ::String
@@ -1412,7 +1039,7 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?,
                                          type: ("MCP" | "THIRD_PARTY_APPLICATION")?
-                                       },
+                                       }
                                      ],
                                      ?hierarchy_restricted_resources: Array[::String],
                                      ?allowed_access_control_hierarchy_group_id: ::String,
@@ -1420,21 +1047,9 @@ module Aws
                                        {
                                          type: ("MCP")?,
                                          flow_module_id: ::String?
-                                       },
+                                       }
                                      ],
-                                     ?granular_access_control_configuration: {
-                                       data_table_access_control_configuration: {
-                                         primary_attribute_access_control_configuration: {
-                                           primary_attribute_values: Array[
-                                             {
-                                               access_type: ("ALLOW")?,
-                                               attribute_name: ::String?,
-                                               values: Array[::String]?
-                                             },
-                                           ]?
-                                         }?
-                                       }?
-                                     }
+                                     ?granular_access_control_configuration: Params::granular_access_control_configuration
                                    ) -> _CreateSecurityProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSecurityProfileResponseSuccess
 
@@ -1450,49 +1065,11 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
-                                  ?constraints: {
-                                    required_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?,
-                                    read_only_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?,
-                                    invisible_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?
-                                  },
-                                  ?defaults: {
-                                    default_field_values: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?,
-                                        default_value: ::String?
-                                      },
-                                    ]?
-                                  },
+                                  ?constraints: Params::task_template_constraints,
+                                  ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),
                                   fields: Array[
-                                    {
-                                      id: {
-                                        name: ::String?
-                                      },
-                                      description: ::String?,
-                                      type: ("NAME" | "DESCRIPTION" | "SCHEDULED_TIME" | "QUICK_CONNECT" | "URL" | "NUMBER" | "TEXT" | "TEXT_AREA" | "DATE_TIME" | "BOOLEAN" | "SINGLE_SELECT" | "EMAIL" | "SELF_ASSIGN" | "EXPIRY_DURATION")?,
-                                      single_select_options: Array[::String]?
-                                    },
+                                    Params::task_template_field
                                   ],
                                   ?client_token: ::String
                                 ) -> _CreateTaskTemplateResponseSuccess
@@ -1509,17 +1086,7 @@ module Aws
                               name: ::String,
                               ?description: ::String,
                               content: ::String,
-                              ?entry_point: {
-                                type: ("VOICE_CALL" | "CHAT")?,
-                                voice_call_entry_point_parameters: {
-                                  source_phone_number: ::String?,
-                                  destination_phone_number: ::String?,
-                                  flow_id: ::String?
-                                }?,
-                                chat_entry_point_parameters: {
-                                  flow_id: ::String?
-                                }?
-                              },
+                              ?entry_point: Params::test_case_entry_point,
                               ?initialization_data: ::String,
                               ?status: ("PUBLISHED" | "SAVED"),
                               ?test_case_id: ::String,
@@ -1591,37 +1158,29 @@ module Aws
                              channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                              auto_accept: bool,
                              agent_first_callback_auto_accept: bool?
-                           },
+                           }
                          ],
                          ?after_contact_work_configs: Array[
-                           {
-                             channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                             after_contact_work_config: {
-                               after_contact_work_time_limit: ::Integer?
-                             },
-                             agent_first_callback_after_contact_work_config: {
-                               after_contact_work_time_limit: ::Integer?
-                             }?
-                           },
+                           Params::after_contact_work_config_per_channel
                          ],
                          ?phone_number_configs: Array[
                            {
                              channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                              phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
                              phone_number: ::String?
-                           },
+                           }
                          ],
                          ?persistent_connection_configs: Array[
                            {
                              channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                              persistent_connection: bool
-                           },
+                           }
                          ],
                          ?voice_enhancement_configs: Array[
                            {
                              channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                              voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
-                           },
+                           }
                          ],
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateUserResponseSuccess
@@ -1700,88 +1259,7 @@ module Aws
                               instance_id: ::String,
                               name: ::String,
                               ?description: ::String,
-                              ?theme: {
-                                light: {
-                                  palette: {
-                                    header: {
-                                      background: ::String?,
-                                      text: ::String?,
-                                      text_hover: ::String?,
-                                      invert_actions_colors: bool?
-                                    }?,
-                                    navigation: {
-                                      background: ::String?,
-                                      text_background_hover: ::String?,
-                                      text_background_active: ::String?,
-                                      text: ::String?,
-                                      text_hover: ::String?,
-                                      text_active: ::String?,
-                                      invert_actions_colors: bool?
-                                    }?,
-                                    canvas: {
-                                      container_background: ::String?,
-                                      page_background: ::String?,
-                                      active_background: ::String?
-                                    }?,
-                                    primary: {
-                                      default: ::String?,
-                                      active: ::String?,
-                                      contrast_text: ::String?
-                                    }?
-                                  }?,
-                                  images: {
-                                    logo: {
-                                      default: ::String?,
-                                      favicon: ::String?
-                                    }?
-                                  }?,
-                                  typography: {
-                                    font_family: {
-                                      default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
-                                    }?
-                                  }?
-                                }?,
-                                dark: {
-                                  palette: {
-                                    header: {
-                                      background: ::String?,
-                                      text: ::String?,
-                                      text_hover: ::String?,
-                                      invert_actions_colors: bool?
-                                    }?,
-                                    navigation: {
-                                      background: ::String?,
-                                      text_background_hover: ::String?,
-                                      text_background_active: ::String?,
-                                      text: ::String?,
-                                      text_hover: ::String?,
-                                      text_active: ::String?,
-                                      invert_actions_colors: bool?
-                                    }?,
-                                    canvas: {
-                                      container_background: ::String?,
-                                      page_background: ::String?,
-                                      active_background: ::String?
-                                    }?,
-                                    primary: {
-                                      default: ::String?,
-                                      active: ::String?,
-                                      contrast_text: ::String?
-                                    }?
-                                  }?,
-                                  images: {
-                                    logo: {
-                                      default: ::String?,
-                                      favicon: ::String?
-                                    }?
-                                  }?,
-                                  typography: {
-                                    font_family: {
-                                      default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
-                                    }?
-                                  }?
-                                }?
-                              },
+                              ?theme: Params::workspace_theme,
                               ?title: ::String,
                               ?tags: Hash[::String, ::String]
                             ) -> _CreateWorkspaceResponseSuccess
@@ -2649,13 +2127,13 @@ module Aws
                                                    {
                                                      queue_id: ::String,
                                                      channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
-                                                   },
+                                                   }
                                                  ],
                                                  ?manual_assignment_queue_references: Array[
                                                    {
                                                      queue_id: ::String,
                                                      channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
-                                                   },
+                                                   }
                                                  ]
                                                ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -2674,7 +2152,7 @@ module Aws
                                             security_profiles: Array[
                                               {
                                                 id: ::String?
-                                              },
+                                              }
                                             ],
                                             entity_type: ("USER" | "AI_AGENT"),
                                             entity_arn: ::String
@@ -2700,7 +2178,7 @@ module Aws
                                                {
                                                  attribute_name: ::String,
                                                  attribute_value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -2744,10 +2222,10 @@ module Aws
                                               {
                                                 attribute_name: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]?,
                                             attribute_names: Array[::String]
-                                          },
+                                          }
                                         ],
                                         ?time_zone: ::String,
                                         ?next_token: ::String,
@@ -2802,7 +2280,7 @@ module Aws
                                  metrics: Array[
                                    {
                                      name: ("ESTIMATED_WAIT_TIME" | "POSITION_IN_QUEUE")
-                                   },
+                                   }
                                  ]
                                ) -> _GetContactMetricsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContactMetricsResponseSuccess
@@ -2817,22 +2295,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_current_metric_data-instance_method
       def get_current_metric_data: (
                                      instance_id: ::String,
-                                     filters: {
-                                       queues: Array[::String]?,
-                                       channels: Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]?,
-                                       routing_profiles: Array[::String]?,
-                                       routing_step_expressions: Array[::String]?,
-                                       agent_statuses: Array[::String]?,
-                                       subtypes: Array[::String]?,
-                                       validation_test_types: Array[::String]?
-                                     },
+                                     filters: Params::filters,
                                      ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS" | "SUBTYPE" | "VALIDATION_TEST_TYPE")],
                                      current_metrics: Array[
                                        {
                                          name: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE" | "ESTIMATED_WAIT_TIME")?,
                                          metric_id: ::String?,
                                          unit: ("SECONDS" | "COUNT" | "PERCENT")?
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer,
@@ -2840,7 +2310,7 @@ module Aws
                                        {
                                          sort_by_metric: ("AGENTS_ONLINE" | "AGENTS_AVAILABLE" | "AGENTS_ON_CALL" | "AGENTS_NON_PRODUCTIVE" | "AGENTS_AFTER_CONTACT_WORK" | "AGENTS_ERROR" | "AGENTS_STAFFED" | "CONTACTS_IN_QUEUE" | "OLDEST_CONTACT_AGE" | "CONTACTS_SCHEDULED" | "AGENTS_ON_CONTACT" | "SLOTS_ACTIVE" | "SLOTS_AVAILABLE" | "ESTIMATED_WAIT_TIME")?,
                                          sort_order: ("ASCENDING" | "DESCENDING")?
-                                       },
+                                       }
                                      ]
                                    ) -> _GetCurrentMetricDataResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCurrentMetricDataResponseSuccess
@@ -2920,15 +2390,7 @@ module Aws
                              instance_id: ::String,
                              start_time: ::Time,
                              end_time: ::Time,
-                             filters: {
-                               queues: Array[::String]?,
-                               channels: Array[("VOICE" | "CHAT" | "TASK" | "EMAIL")]?,
-                               routing_profiles: Array[::String]?,
-                               routing_step_expressions: Array[::String]?,
-                               agent_statuses: Array[::String]?,
-                               subtypes: Array[::String]?,
-                               validation_test_types: Array[::String]?
-                             },
+                             filters: Params::filters,
                              ?groupings: Array[("QUEUE" | "CHANNEL" | "ROUTING_PROFILE" | "ROUTING_STEP_EXPRESSION" | "AGENT_STATUS" | "SUBTYPE" | "VALIDATION_TEST_TYPE")],
                              historical_metrics: Array[
                                {
@@ -2939,7 +2401,7 @@ module Aws
                                  }?,
                                  statistic: ("SUM" | "MAX" | "AVG")?,
                                  unit: ("SECONDS" | "COUNT" | "PERCENT")?
-                               },
+                               }
                              ],
                              ?next_token: ::String,
                              ?max_results: ::Integer
@@ -2967,7 +2429,7 @@ module Aws
                                     string_condition: {
                                       comparison: ("NOT_EXISTS")?
                                     }?
-                                  },
+                                  }
                                 ],
                                 ?groupings: Array[::String],
                                 metrics: Array[
@@ -2977,7 +2439,7 @@ module Aws
                                       {
                                         comparison: ::String?,
                                         threshold_value: ::Float?
-                                      },
+                                      }
                                     ]?,
                                     metric_id: ::String?,
                                     metric_filters: Array[
@@ -2985,9 +2447,9 @@ module Aws
                                         metric_filter_key: ::String?,
                                         metric_filter_values: Array[::String]?,
                                         negate: bool?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ],
                                 ?next_token: ::String,
                                 ?max_results: ::Integer
@@ -3338,7 +2800,7 @@ module Aws
                                               {
                                                 attribute_name: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
@@ -3359,7 +2821,7 @@ module Aws
                                       {
                                         attribute_name: ::String,
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer
@@ -4168,44 +3630,9 @@ module Aws
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
                                    ?search_filter: {
-                                     attribute_filter: {
-                                       or_conditions: Array[
-                                         {
-                                           tag_conditions: Array[
-                                             {
-                                               tag_key: ::String?,
-                                               tag_value: ::String?
-                                             },
-                                           ]?
-                                         },
-                                       ]?,
-                                       and_condition: {
-                                         tag_conditions: Array[
-                                           {
-                                             tag_key: ::String?,
-                                             tag_value: ::String?
-                                           },
-                                         ]?
-                                       }?,
-                                       tag_condition: {
-                                         tag_key: ::String?,
-                                         tag_value: ::String?
-                                       }?
-                                     }?
+                                     attribute_filter: Params::control_plane_attribute_filter?
                                    },
-                                   ?search_criteria: {
-                                     or_conditions: Array[
-                                       untyped,
-                                     ]?,
-                                     and_conditions: Array[
-                                       untyped,
-                                     ]?,
-                                     string_condition: {
-                                       field_name: ::String?,
-                                       value: ::String?,
-                                       comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                     }?
-                                   }
+                                   ?search_criteria: Params::agent_status_search_criteria
                                  ) -> _SearchAgentStatusesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchAgentStatusesResponseSuccess
 
@@ -4237,66 +3664,9 @@ module Aws
                                         instance_id: ::String,
                                         ?next_token: ::String,
                                         ?max_results: ::Integer,
-                                        ?search_criteria: {
-                                          or_conditions: Array[
-                                            untyped,
-                                          ]?,
-                                          and_conditions: Array[
-                                            untyped,
-                                          ]?,
-                                          string_condition: {
-                                            field_name: ::String?,
-                                            value: ::String?,
-                                            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                          }?,
-                                          number_condition: {
-                                            field_name: ::String?,
-                                            min_value: ::Integer?,
-                                            max_value: ::Integer?,
-                                            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
-                                          }?,
-                                          boolean_condition: {
-                                            field_name: ::String?,
-                                            comparison_type: ("IS_TRUE" | "IS_FALSE")?
-                                          }?,
-                                          date_time_condition: {
-                                            field_name: ::String?,
-                                            min_value: ::String?,
-                                            max_value: ::String?,
-                                            comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
-                                          }?,
-                                          decimal_condition: {
-                                            field_name: ::String?,
-                                            min_value: ::Float?,
-                                            max_value: ::Float?,
-                                            comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
-                                          }?
-                                        },
+                                        ?search_criteria: Params::evaluation_search_criteria,
                                         ?search_filter: {
-                                          attribute_filter: {
-                                            or_conditions: Array[
-                                              {
-                                                tag_conditions: Array[
-                                                  {
-                                                    tag_key: ::String?,
-                                                    tag_value: ::String?
-                                                  },
-                                                ]?
-                                              },
-                                            ]?,
-                                            and_condition: {
-                                              tag_conditions: Array[
-                                                {
-                                                  tag_key: ::String?,
-                                                  tag_value: ::String?
-                                                },
-                                              ]?
-                                            }?,
-                                            tag_condition: {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            }?
-                                          }?
+                                          attribute_filter: Params::control_plane_attribute_filter?
                                         }
                                       ) -> _SearchContactEvaluationsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactEvaluationsResponseSuccess
@@ -4313,42 +3683,9 @@ module Aws
                                          ?next_token: ::String,
                                          ?max_results: ::Integer,
                                          ?search_filter: {
-                                           tag_filter: {
-                                             or_conditions: Array[
-                                               Array[
-                                                 {
-                                                   tag_key: ::String?,
-                                                   tag_value: ::String?
-                                                 },
-                                               ],
-                                             ]?,
-                                             and_conditions: Array[
-                                               {
-                                                 tag_key: ::String?,
-                                                 tag_value: ::String?
-                                               },
-                                             ]?,
-                                             tag_condition: {
-                                               tag_key: ::String?,
-                                               tag_value: ::String?
-                                             }?
-                                           }?
+                                           tag_filter: Params::control_plane_tag_filter?
                                          },
-                                         ?search_criteria: {
-                                           or_conditions: Array[
-                                             untyped,
-                                           ]?,
-                                           and_conditions: Array[
-                                             untyped,
-                                           ]?,
-                                           string_condition: {
-                                             field_name: ::String?,
-                                             value: ::String?,
-                                             comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                           }?,
-                                           state_condition: ("ACTIVE" | "ARCHIVED")?,
-                                           status_condition: ("PUBLISHED" | "SAVED")?
-                                         }
+                                         ?search_criteria: Params::contact_flow_module_search_criteria
                                        ) -> _SearchContactFlowModulesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowModulesResponseSuccess
 
@@ -4364,51 +3701,12 @@ module Aws
                                   ?next_token: ::String,
                                   ?max_results: ::Integer,
                                   ?search_filter: {
-                                    tag_filter: {
-                                      or_conditions: Array[
-                                        Array[
-                                          {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          },
-                                        ],
-                                      ]?,
-                                      and_conditions: Array[
-                                        {
-                                          tag_key: ::String?,
-                                          tag_value: ::String?
-                                        },
-                                      ]?,
-                                      tag_condition: {
-                                        tag_key: ::String?,
-                                        tag_value: ::String?
-                                      }?
-                                    }?,
+                                    tag_filter: Params::control_plane_tag_filter?,
                                     flow_attribute_filter: {
                                       or_conditions: Array[
-                                        {
-                                          tag_conditions: Array[
-                                            {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            },
-                                          ]?,
-                                          contact_flow_type_condition: {
-                                            contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
-                                          }?
-                                        },
+                                        Params::contact_flow_attribute_and_condition
                                       ]?,
-                                      and_condition: {
-                                        tag_conditions: Array[
-                                          {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          },
-                                        ]?,
-                                        contact_flow_type_condition: {
-                                          contact_flow_type: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?
-                                        }?
-                                      }?,
+                                      and_condition: Params::contact_flow_attribute_and_condition?,
                                       tag_condition: {
                                         tag_key: ::String?,
                                         tag_value: ::String?
@@ -4418,22 +3716,7 @@ module Aws
                                       }?
                                     }?
                                   },
-                                  ?search_criteria: {
-                                    or_conditions: Array[
-                                      untyped,
-                                    ]?,
-                                    and_conditions: Array[
-                                      untyped,
-                                    ]?,
-                                    string_condition: {
-                                      field_name: ::String?,
-                                      value: ::String?,
-                                      comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                    }?,
-                                    type_condition: ("CONTACT_FLOW" | "CUSTOMER_QUEUE" | "CUSTOMER_HOLD" | "CUSTOMER_WHISPER" | "AGENT_HOLD" | "AGENT_WHISPER" | "OUTBOUND_WHISPER" | "AGENT_TRANSFER" | "QUEUE_TRANSFER" | "CAMPAIGN")?,
-                                    state_condition: ("ACTIVE" | "ARCHIVED")?,
-                                    status_condition: ("PUBLISHED" | "SAVED")?
-                                  }
+                                  ?search_criteria: Params::contact_flow_search_criteria
                                 ) -> _SearchContactFlowsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchContactFlowsResponseSuccess
 
@@ -4472,7 +3755,7 @@ module Aws
                                        participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR"),
                                        search_text: Array[::String],
                                        match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
-                                     },
+                                     }
                                    ],
                                    match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                  }?
@@ -4486,7 +3769,7 @@ module Aws
                                        agent_ids: Array[::String]?,
                                        match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                      }?
-                                   },
+                                   }
                                  ]?
                                }?,
                                additional_time_range: {
@@ -4501,7 +3784,7 @@ module Aws
                                        type: ("INITIATION_TIMESTAMP" | "SCHEDULED_TIMESTAMP" | "CONNECTED_TO_AGENT_TIMESTAMP" | "DISCONNECT_TIMESTAMP" | "ENQUEUE_TIMESTAMP"),
                                        condition_type: ("NOT_EXISTS")
                                      }?
-                                   },
+                                   }
                                  ],
                                  match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
                                }?,
@@ -4510,7 +3793,7 @@ module Aws
                                    {
                                      key: ::String,
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                }?,
@@ -4519,31 +3802,12 @@ module Aws
                                    {
                                      key: ::String,
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")?
                                }?,
                                active_regions: Array[::String]?,
-                               contact_tags: {
-                                 or_conditions: Array[
-                                   Array[
-                                     {
-                                       tag_key: ::String?,
-                                       tag_value: ::String?
-                                     },
-                                   ],
-                                 ]?,
-                                 and_conditions: Array[
-                                   {
-                                     tag_key: ::String?,
-                                     tag_value: ::String?
-                                   },
-                                 ]?,
-                                 tag_condition: {
-                                   tag_key: ::String?,
-                                   tag_value: ::String?
-                                 }?
-                               }?
+                               contact_tags: Params::control_plane_tag_filter?
                              },
                              ?max_results: ::Integer,
                              ?next_token: ::String,
@@ -4566,44 +3830,9 @@ module Aws
                                 ?next_token: ::String,
                                 ?max_results: ::Integer,
                                 ?search_filter: {
-                                  attribute_filter: {
-                                    or_conditions: Array[
-                                      {
-                                        tag_conditions: Array[
-                                          {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          },
-                                        ]?
-                                      },
-                                    ]?,
-                                    and_condition: {
-                                      tag_conditions: Array[
-                                        {
-                                          tag_key: ::String?,
-                                          tag_value: ::String?
-                                        },
-                                      ]?
-                                    }?,
-                                    tag_condition: {
-                                      tag_key: ::String?,
-                                      tag_value: ::String?
-                                    }?
-                                  }?
+                                  attribute_filter: Params::control_plane_attribute_filter?
                                 },
-                                ?search_criteria: {
-                                  or_conditions: Array[
-                                    untyped,
-                                  ]?,
-                                  and_conditions: Array[
-                                    untyped,
-                                  ]?,
-                                  string_condition: {
-                                    field_name: ::String?,
-                                    value: ::String?,
-                                    comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                  }?
-                                }
+                                ?search_criteria: Params::data_table_search_criteria
                               ) -> _SearchDataTablesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDataTablesResponseSuccess
 
@@ -4618,40 +3847,9 @@ module Aws
                                     instance_id: ::String,
                                     ?max_results: ::Integer,
                                     ?next_token: ::String,
-                                    ?search_criteria: {
-                                      or_conditions: Array[
-                                        untyped,
-                                      ]?,
-                                      and_conditions: Array[
-                                        untyped,
-                                      ]?,
-                                      string_condition: {
-                                        field_name: ::String?,
-                                        value: ::String?,
-                                        comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                      }?
-                                    },
+                                    ?search_criteria: Params::email_address_search_criteria,
                                     ?search_filter: {
-                                      tag_filter: {
-                                        or_conditions: Array[
-                                          Array[
-                                            {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            },
-                                          ],
-                                        ]?,
-                                        and_conditions: Array[
-                                          {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          },
-                                        ]?,
-                                        tag_condition: {
-                                          tag_key: ::String?,
-                                          tag_value: ::String?
-                                        }?
-                                      }?
+                                      tag_filter: Params::control_plane_tag_filter?
                                     }
                                   ) -> _SearchEmailAddressesResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchEmailAddressesResponseSuccess
@@ -4667,60 +3865,9 @@ module Aws
                                      instance_id: ::String,
                                      ?next_token: ::String,
                                      ?max_results: ::Integer,
-                                     ?search_criteria: {
-                                       or_conditions: Array[
-                                         untyped,
-                                       ]?,
-                                       and_conditions: Array[
-                                         untyped,
-                                       ]?,
-                                       string_condition: {
-                                         field_name: ::String?,
-                                         value: ::String?,
-                                         comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                       }?,
-                                       number_condition: {
-                                         field_name: ::String?,
-                                         min_value: ::Integer?,
-                                         max_value: ::Integer?,
-                                         comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
-                                       }?,
-                                       boolean_condition: {
-                                         field_name: ::String?,
-                                         comparison_type: ("IS_TRUE" | "IS_FALSE")?
-                                       }?,
-                                       date_time_condition: {
-                                         field_name: ::String?,
-                                         min_value: ::String?,
-                                         max_value: ::String?,
-                                         comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "RANGE")?
-                                       }?
-                                     },
+                                     ?search_criteria: Params::evaluation_form_search_criteria,
                                      ?search_filter: {
-                                       attribute_filter: {
-                                         or_conditions: Array[
-                                           {
-                                             tag_conditions: Array[
-                                               {
-                                                 tag_key: ::String?,
-                                                 tag_value: ::String?
-                                               },
-                                             ]?
-                                           },
-                                         ]?,
-                                         and_condition: {
-                                           tag_conditions: Array[
-                                             {
-                                               tag_key: ::String?,
-                                               tag_value: ::String?
-                                             },
-                                           ]?
-                                         }?,
-                                         tag_condition: {
-                                           tag_key: ::String?,
-                                           tag_value: ::String?
-                                         }?
-                                       }?
+                                       attribute_filter: Params::control_plane_attribute_filter?
                                      }
                                    ) -> _SearchEvaluationFormsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchEvaluationFormsResponseSuccess
@@ -4736,46 +3883,8 @@ module Aws
                                                  instance_id: ::String,
                                                  ?next_token: ::String,
                                                  ?max_results: ::Integer,
-                                                 ?search_filter: {
-                                                   tag_filter: {
-                                                     or_conditions: Array[
-                                                       Array[
-                                                         {
-                                                           tag_key: ::String?,
-                                                           tag_value: ::String?
-                                                         },
-                                                       ],
-                                                     ]?,
-                                                     and_conditions: Array[
-                                                       {
-                                                         tag_key: ::String?,
-                                                         tag_value: ::String?
-                                                       },
-                                                     ]?,
-                                                     tag_condition: {
-                                                       tag_key: ::String?,
-                                                       tag_value: ::String?
-                                                     }?
-                                                   }?
-                                                 },
-                                                 ?search_criteria: {
-                                                   or_conditions: Array[
-                                                     untyped,
-                                                   ]?,
-                                                   and_conditions: Array[
-                                                     untyped,
-                                                   ]?,
-                                                   string_condition: {
-                                                     field_name: ::String?,
-                                                     value: ::String?,
-                                                     comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                                   }?,
-                                                   date_condition: {
-                                                     field_name: ::String?,
-                                                     value: ::String?,
-                                                     comparison_type: ("GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL_TO" | "LESS_THAN_OR_EQUAL_TO" | "EQUAL_TO")?
-                                                   }?
-                                                 }
+                                                 ?search_filter: Params::hours_of_operation_search_filter,
+                                                 ?search_criteria: Params::hours_of_operation_override_search_criteria
                                                ) -> _SearchHoursOfOperationOverridesResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchHoursOfOperationOverridesResponseSuccess
 
@@ -4790,41 +3899,8 @@ module Aws
                                         instance_id: ::String,
                                         ?next_token: ::String,
                                         ?max_results: ::Integer,
-                                        ?search_filter: {
-                                          tag_filter: {
-                                            or_conditions: Array[
-                                              Array[
-                                                {
-                                                  tag_key: ::String?,
-                                                  tag_value: ::String?
-                                                },
-                                              ],
-                                            ]?,
-                                            and_conditions: Array[
-                                              {
-                                                tag_key: ::String?,
-                                                tag_value: ::String?
-                                              },
-                                            ]?,
-                                            tag_condition: {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            }?
-                                          }?
-                                        },
-                                        ?search_criteria: {
-                                          or_conditions: Array[
-                                            untyped,
-                                          ]?,
-                                          and_conditions: Array[
-                                            untyped,
-                                          ]?,
-                                          string_condition: {
-                                            field_name: ::String?,
-                                            value: ::String?,
-                                            comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                          }?
-                                        }
+                                        ?search_filter: Params::hours_of_operation_search_filter,
+                                        ?search_criteria: Params::hours_of_operation_search_criteria
                                       ) -> _SearchHoursOfOperationsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchHoursOfOperationsResponseSuccess
 
@@ -4840,44 +3916,9 @@ module Aws
                                   ?next_token: ::String,
                                   ?max_results: ::Integer,
                                   ?search_filter: {
-                                    attribute_filter: {
-                                      or_conditions: Array[
-                                        {
-                                          tag_conditions: Array[
-                                            {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            },
-                                          ]?
-                                        },
-                                      ]?,
-                                      and_condition: {
-                                        tag_conditions: Array[
-                                          {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          },
-                                        ]?
-                                      }?,
-                                      tag_condition: {
-                                        tag_key: ::String?,
-                                        tag_value: ::String?
-                                      }?
-                                    }?
+                                    attribute_filter: Params::control_plane_attribute_filter?
                                   },
-                                  ?search_criteria: {
-                                    or_conditions: Array[
-                                      untyped,
-                                    ]?,
-                                    and_conditions: Array[
-                                      untyped,
-                                    ]?,
-                                    string_condition: {
-                                      field_name: ::String?,
-                                      value: ::String?,
-                                      comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                    }?
-                                  }
+                                  ?search_criteria: Params::notification_search_criteria
                                 ) -> _SearchNotificationsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchNotificationsResponseSuccess
 
@@ -4892,19 +3933,7 @@ module Aws
                                           instance_id: ::String,
                                           ?next_token: ::String,
                                           ?max_results: ::Integer,
-                                          ?search_criteria: {
-                                            or_conditions: Array[
-                                              untyped,
-                                            ]?,
-                                            and_conditions: Array[
-                                              untyped,
-                                            ]?,
-                                            string_condition: {
-                                              field_name: ::String?,
-                                              value: ::String?,
-                                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                            }?
-                                          }
+                                          ?search_criteria: Params::predefined_attribute_search_criteria
                                         ) -> _SearchPredefinedAttributesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPredefinedAttributesResponseSuccess
 
@@ -4920,40 +3949,9 @@ module Aws
                             ?next_token: ::String,
                             ?max_results: ::Integer,
                             ?search_filter: {
-                              tag_filter: {
-                                or_conditions: Array[
-                                  Array[
-                                    {
-                                      tag_key: ::String?,
-                                      tag_value: ::String?
-                                    },
-                                  ],
-                                ]?,
-                                and_conditions: Array[
-                                  {
-                                    tag_key: ::String?,
-                                    tag_value: ::String?
-                                  },
-                                ]?,
-                                tag_condition: {
-                                  tag_key: ::String?,
-                                  tag_value: ::String?
-                                }?
-                              }?
+                              tag_filter: Params::control_plane_tag_filter?
                             },
-                            ?search_criteria: {
-                              or_conditions: Array[
-                                untyped,
-                              ]?,
-                              and_conditions: Array[
-                                untyped,
-                              ]?,
-                              string_condition: {
-                                field_name: ::String?,
-                                value: ::String?,
-                                comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                              }?
-                            }
+                            ?search_criteria: Params::prompt_search_criteria
                           ) -> _SearchPromptsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchPromptsResponseSuccess
 
@@ -4969,41 +3967,9 @@ module Aws
                            ?next_token: ::String,
                            ?max_results: ::Integer,
                            ?search_filter: {
-                             tag_filter: {
-                               or_conditions: Array[
-                                 Array[
-                                   {
-                                     tag_key: ::String?,
-                                     tag_value: ::String?
-                                   },
-                                 ],
-                               ]?,
-                               and_conditions: Array[
-                                 {
-                                   tag_key: ::String?,
-                                   tag_value: ::String?
-                                 },
-                               ]?,
-                               tag_condition: {
-                                 tag_key: ::String?,
-                                 tag_value: ::String?
-                               }?
-                             }?
+                             tag_filter: Params::control_plane_tag_filter?
                            },
-                           ?search_criteria: {
-                             or_conditions: Array[
-                               untyped,
-                             ]?,
-                             and_conditions: Array[
-                               untyped,
-                             ]?,
-                             string_condition: {
-                               field_name: ::String?,
-                               value: ::String?,
-                               comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                             }?,
-                             queue_type_condition: ("STANDARD")?
-                           }
+                           ?search_criteria: Params::queue_search_criteria
                          ) -> _SearchQueuesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQueuesResponseSuccess
 
@@ -5019,40 +3985,9 @@ module Aws
                                    ?next_token: ::String,
                                    ?max_results: ::Integer,
                                    ?search_filter: {
-                                     tag_filter: {
-                                       or_conditions: Array[
-                                         Array[
-                                           {
-                                             tag_key: ::String?,
-                                             tag_value: ::String?
-                                           },
-                                         ],
-                                       ]?,
-                                       and_conditions: Array[
-                                         {
-                                           tag_key: ::String?,
-                                           tag_value: ::String?
-                                         },
-                                       ]?,
-                                       tag_condition: {
-                                         tag_key: ::String?,
-                                         tag_value: ::String?
-                                       }?
-                                     }?
+                                     tag_filter: Params::control_plane_tag_filter?
                                    },
-                                   ?search_criteria: {
-                                     or_conditions: Array[
-                                       untyped,
-                                     ]?,
-                                     and_conditions: Array[
-                                       untyped,
-                                     ]?,
-                                     string_condition: {
-                                       field_name: ::String?,
-                                       value: ::String?,
-                                       comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                     }?
-                                   }
+                                   ?search_criteria: Params::quick_connect_search_criteria
                                  ) -> _SearchQuickConnectsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQuickConnectsResponseSuccess
 
@@ -5090,40 +4025,9 @@ module Aws
                                      ?next_token: ::String,
                                      ?max_results: ::Integer,
                                      ?search_filter: {
-                                       tag_filter: {
-                                         or_conditions: Array[
-                                           Array[
-                                             {
-                                               tag_key: ::String?,
-                                               tag_value: ::String?
-                                             },
-                                           ],
-                                         ]?,
-                                         and_conditions: Array[
-                                           {
-                                             tag_key: ::String?,
-                                             tag_value: ::String?
-                                           },
-                                         ]?,
-                                         tag_condition: {
-                                           tag_key: ::String?,
-                                           tag_value: ::String?
-                                         }?
-                                       }?
+                                       tag_filter: Params::control_plane_tag_filter?
                                      },
-                                     ?search_criteria: {
-                                       or_conditions: Array[
-                                         untyped,
-                                       ]?,
-                                       and_conditions: Array[
-                                         untyped,
-                                       ]?,
-                                       string_condition: {
-                                         field_name: ::String?,
-                                         value: ::String?,
-                                         comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                       }?
-                                     }
+                                     ?search_criteria: Params::routing_profile_search_criteria
                                    ) -> _SearchRoutingProfilesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchRoutingProfilesResponseSuccess
 
@@ -5138,40 +4042,9 @@ module Aws
                                       instance_id: ::String,
                                       ?next_token: ::String,
                                       ?max_results: ::Integer,
-                                      ?search_criteria: {
-                                        or_conditions: Array[
-                                          untyped,
-                                        ]?,
-                                        and_conditions: Array[
-                                          untyped,
-                                        ]?,
-                                        string_condition: {
-                                          field_name: ::String?,
-                                          value: ::String?,
-                                          comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                        }?
-                                      },
+                                      ?search_criteria: Params::security_profile_search_criteria,
                                       ?search_filter: {
-                                        tag_filter: {
-                                          or_conditions: Array[
-                                            Array[
-                                              {
-                                                tag_key: ::String?,
-                                                tag_value: ::String?
-                                              },
-                                            ],
-                                          ]?,
-                                          and_conditions: Array[
-                                            {
-                                              tag_key: ::String?,
-                                              tag_value: ::String?
-                                            },
-                                          ]?,
-                                          tag_condition: {
-                                            tag_key: ::String?,
-                                            tag_value: ::String?
-                                          }?
-                                        }?
+                                        tag_filter: Params::control_plane_tag_filter?
                                       }
                                     ) -> _SearchSecurityProfilesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSecurityProfilesResponseSuccess
@@ -5188,41 +4061,9 @@ module Aws
                                ?next_token: ::String,
                                ?max_results: ::Integer,
                                ?search_filter: {
-                                 tag_filter: {
-                                   or_conditions: Array[
-                                     Array[
-                                       {
-                                         tag_key: ::String?,
-                                         tag_value: ::String?
-                                       },
-                                     ],
-                                   ]?,
-                                   and_conditions: Array[
-                                     {
-                                       tag_key: ::String?,
-                                       tag_value: ::String?
-                                     },
-                                   ]?,
-                                   tag_condition: {
-                                     tag_key: ::String?,
-                                     tag_value: ::String?
-                                   }?
-                                 }?
+                                 tag_filter: Params::control_plane_tag_filter?
                                },
-                               ?search_criteria: {
-                                 or_conditions: Array[
-                                   untyped,
-                                 ]?,
-                                 and_conditions: Array[
-                                   untyped,
-                                 ]?,
-                                 string_condition: {
-                                   field_name: ::String?,
-                                   value: ::String?,
-                                   comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                 }?,
-                                 status_condition: ("PUBLISHED" | "SAVED")?
-                               }
+                               ?search_criteria: Params::test_case_search_criteria
                              ) -> _SearchTestCasesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTestCasesResponseSuccess
 
@@ -5238,44 +4079,9 @@ module Aws
                                           ?next_token: ::String,
                                           ?max_results: ::Integer,
                                           ?search_filter: {
-                                            attribute_filter: {
-                                              or_conditions: Array[
-                                                {
-                                                  tag_conditions: Array[
-                                                    {
-                                                      tag_key: ::String?,
-                                                      tag_value: ::String?
-                                                    },
-                                                  ]?
-                                                },
-                                              ]?,
-                                              and_condition: {
-                                                tag_conditions: Array[
-                                                  {
-                                                    tag_key: ::String?,
-                                                    tag_value: ::String?
-                                                  },
-                                                ]?
-                                              }?,
-                                              tag_condition: {
-                                                tag_key: ::String?,
-                                                tag_value: ::String?
-                                              }?
-                                            }?
+                                            attribute_filter: Params::control_plane_attribute_filter?
                                           },
-                                          ?search_criteria: {
-                                            or_conditions: Array[
-                                              untyped,
-                                            ]?,
-                                            and_conditions: Array[
-                                              untyped,
-                                            ]?,
-                                            string_condition: {
-                                              field_name: ::String?,
-                                              value: ::String?,
-                                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                            }?
-                                          }
+                                          ?search_criteria: Params::user_hierarchy_group_search_criteria
                                         ) -> _SearchUserHierarchyGroupsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUserHierarchyGroupsResponseSuccess
 
@@ -5291,53 +4097,12 @@ module Aws
                           ?next_token: ::String,
                           ?max_results: ::Integer,
                           ?search_filter: {
-                            tag_filter: {
-                              or_conditions: Array[
-                                Array[
-                                  {
-                                    tag_key: ::String?,
-                                    tag_value: ::String?
-                                  },
-                                ],
-                              ]?,
-                              and_conditions: Array[
-                                {
-                                  tag_key: ::String?,
-                                  tag_value: ::String?
-                                },
-                              ]?,
-                              tag_condition: {
-                                tag_key: ::String?,
-                                tag_value: ::String?
-                              }?
-                            }?,
+                            tag_filter: Params::control_plane_tag_filter?,
                             user_attribute_filter: {
                               or_conditions: Array[
-                                {
-                                  tag_conditions: Array[
-                                    {
-                                      tag_key: ::String?,
-                                      tag_value: ::String?
-                                    },
-                                  ]?,
-                                  hierarchy_group_condition: {
-                                    value: ::String?,
-                                    hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                  }?
-                                },
+                                Params::attribute_and_condition
                               ]?,
-                              and_condition: {
-                                tag_conditions: Array[
-                                  {
-                                    tag_key: ::String?,
-                                    tag_value: ::String?
-                                  },
-                                ]?,
-                                hierarchy_group_condition: {
-                                  value: ::String?,
-                                  hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                                }?
-                              }?,
+                              and_condition: Params::attribute_and_condition?,
                               tag_condition: {
                                 tag_key: ::String?,
                                 tag_value: ::String?
@@ -5348,41 +4113,7 @@ module Aws
                               }?
                             }?
                           },
-                          ?search_criteria: {
-                            or_conditions: Array[
-                              untyped,
-                            ]?,
-                            and_conditions: Array[
-                              untyped,
-                            ]?,
-                            string_condition: {
-                              field_name: ::String?,
-                              value: ::String?,
-                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                            }?,
-                            list_condition: {
-                              target_list_type: ("PROFICIENCIES")?,
-                              conditions: Array[
-                                {
-                                  string_condition: {
-                                    field_name: ::String?,
-                                    value: ::String?,
-                                    comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                  }?,
-                                  number_condition: {
-                                    field_name: ::String?,
-                                    min_value: ::Integer?,
-                                    max_value: ::Integer?,
-                                    comparison_type: ("GREATER_OR_EQUAL" | "GREATER" | "LESSER_OR_EQUAL" | "LESSER" | "EQUAL" | "NOT_EQUAL" | "RANGE")?
-                                  }?
-                                },
-                              ]?
-                            }?,
-                            hierarchy_group_condition: {
-                              value: ::String?,
-                              hierarchy_group_match_type: ("EXACT" | "WITH_CHILD_GROUPS")?
-                            }?
-                          }
+                          ?search_criteria: Params::user_search_criteria
                         ) -> _SearchUsersResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchUsersResponseSuccess
 
@@ -5398,46 +4129,9 @@ module Aws
                           ?next_token: ::String,
                           ?max_results: ::Integer,
                           ?search_filter: {
-                            attribute_filter: {
-                              or_conditions: Array[
-                                {
-                                  tag_conditions: Array[
-                                    {
-                                      tag_key: ::String?,
-                                      tag_value: ::String?
-                                    },
-                                  ]?
-                                },
-                              ]?,
-                              and_condition: {
-                                tag_conditions: Array[
-                                  {
-                                    tag_key: ::String?,
-                                    tag_value: ::String?
-                                  },
-                                ]?
-                              }?,
-                              tag_condition: {
-                                tag_key: ::String?,
-                                tag_value: ::String?
-                              }?
-                            }?
+                            attribute_filter: Params::control_plane_attribute_filter?
                           },
-                          ?search_criteria: {
-                            or_conditions: Array[
-                              untyped,
-                            ]?,
-                            and_conditions: Array[
-                              untyped,
-                            ]?,
-                            string_condition: {
-                              field_name: ::String?,
-                              value: ::String?,
-                              comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                            }?,
-                            view_type_condition: ("CUSTOMER_MANAGED" | "AWS_MANAGED")?,
-                            view_status_condition: ("PUBLISHED" | "SAVED")?
-                          }
+                          ?search_criteria: Params::view_search_criteria
                         ) -> _SearchViewsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchViewsResponseSuccess
 
@@ -5469,44 +4163,9 @@ module Aws
                                            ?next_token: ::String,
                                            ?max_results: ::Integer,
                                            ?search_filter: {
-                                             attribute_filter: {
-                                               or_conditions: Array[
-                                                 {
-                                                   tag_conditions: Array[
-                                                     {
-                                                       tag_key: ::String?,
-                                                       tag_value: ::String?
-                                                     },
-                                                   ]?
-                                                 },
-                                               ]?,
-                                               and_condition: {
-                                                 tag_conditions: Array[
-                                                   {
-                                                     tag_key: ::String?,
-                                                     tag_value: ::String?
-                                                   },
-                                                 ]?
-                                               }?,
-                                               tag_condition: {
-                                                 tag_key: ::String?,
-                                                 tag_value: ::String?
-                                               }?
-                                             }?
+                                             attribute_filter: Params::control_plane_attribute_filter?
                                            },
-                                           ?search_criteria: {
-                                             or_conditions: Array[
-                                               untyped,
-                                             ]?,
-                                             and_conditions: Array[
-                                               untyped,
-                                             ]?,
-                                             string_condition: {
-                                               field_name: ::String?,
-                                               value: ::String?,
-                                               comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                             }?
-                                           }
+                                           ?search_criteria: Params::workspace_association_search_criteria
                                          ) -> _SearchWorkspaceAssociationsResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchWorkspaceAssociationsResponseSuccess
 
@@ -5522,44 +4181,9 @@ module Aws
                                ?next_token: ::String,
                                ?max_results: ::Integer,
                                ?search_filter: {
-                                 attribute_filter: {
-                                   or_conditions: Array[
-                                     {
-                                       tag_conditions: Array[
-                                         {
-                                           tag_key: ::String?,
-                                           tag_value: ::String?
-                                         },
-                                       ]?
-                                     },
-                                   ]?,
-                                   and_condition: {
-                                     tag_conditions: Array[
-                                       {
-                                         tag_key: ::String?,
-                                         tag_value: ::String?
-                                       },
-                                     ]?
-                                   }?,
-                                   tag_condition: {
-                                     tag_key: ::String?,
-                                     tag_value: ::String?
-                                   }?
-                                 }?
+                                 attribute_filter: Params::control_plane_attribute_filter?
                                },
-                               ?search_criteria: {
-                                 or_conditions: Array[
-                                   untyped,
-                                 ]?,
-                                 and_conditions: Array[
-                                   untyped,
-                                 ]?,
-                                 string_condition: {
-                                   field_name: ::String?,
-                                   value: ::String?,
-                                   comparison_type: ("STARTS_WITH" | "CONTAINS" | "EXACT")?
-                                 }?
-                               }
+                               ?search_criteria: Params::workspace_search_criteria
                              ) -> _SearchWorkspacesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchWorkspacesResponseSuccess
 
@@ -5610,25 +4234,10 @@ module Aws
                                      {
                                        email_address: ::String,
                                        display_name: ::String?
-                                     },
+                                     }
                                    ]?
                                  },
-                                 email_message: {
-                                   message_source_type: ("TEMPLATE" | "RAW"),
-                                   templated_message_config: {
-                                     knowledge_base_id: ::String,
-                                     message_template_id: ::String,
-                                     template_attributes: {
-                                       custom_attributes: Hash[::String, ::String]?,
-                                       customer_profile_attributes: ::String?
-                                     }
-                                   }?,
-                                   raw_message: {
-                                     subject: ::String,
-                                     body: ::String,
-                                     content_type: ::String
-                                   }?
-                                 },
+                                 email_message: Params::outbound_email_content,
                                  traffic_type: ("GENERAL" | "CAMPAIGN"),
                                  ?source_campaign: {
                                    campaign_id: ::String?,
@@ -5694,15 +4303,7 @@ module Aws
                                   source_contact_id: ::String?
                                 },
                                 ?related_contact_id: ::String,
-                                ?segment_attributes: Hash[::String, {
-                                    value_string: ::String?,
-                                    value_map: Hash[::String, untyped]?,
-                                    value_integer: ::Integer?,
-                                    value_list: Array[
-                                      untyped,
-                                    ]?,
-                                    value_arn: ::String?
-                                  }],
+                                ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                 ?customer_id: ::String,
                                 ?disconnect_on_customer_exit: Array[("AGENT")]
                               ) -> _StartChatContactResponseSuccess
@@ -5803,33 +4404,25 @@ module Aws
                                      {
                                        email_address: ::String,
                                        display_name: ::String?
-                                     },
+                                     }
                                    ]?,
                                    cc_addresses: Array[
                                      {
                                        email_address: ::String,
                                        display_name: ::String?
-                                     },
+                                     }
                                    ]?
                                  },
                                  ?attachments: Array[
                                    {
                                      file_name: ::String,
                                      s3_url: ::String
-                                   },
+                                   }
                                  ],
                                  ?contact_flow_id: ::String,
                                  ?related_contact_id: ::String,
                                  ?attributes: Hash[::String, ::String],
-                                 ?segment_attributes: Hash[::String, {
-                                     value_string: ::String?,
-                                     value_map: Hash[::String, untyped]?,
-                                     value_integer: ::Integer?,
-                                     value_list: Array[
-                                       untyped,
-                                     ]?,
-                                     value_arn: ::String?
-                                   }],
+                                 ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                  ?client_token: ::String
                                ) -> _StartEmailContactResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartEmailContactResponseSuccess
@@ -5849,15 +4442,7 @@ module Aws
                                            address: ::String?
                                          },
                                          instance_id: ::String,
-                                         segment_attributes: Hash[::String, {
-                                             value_string: ::String?,
-                                             value_map: Hash[::String, untyped]?,
-                                             value_integer: ::Integer?,
-                                             value_list: Array[
-                                               untyped,
-                                             ]?,
-                                             value_arn: ::String?
-                                           }],
+                                         segment_attributes: Hash[::String, Params::segment_attribute_value],
                                          ?attributes: Hash[::String, ::String],
                                          contact_flow_id: ::String,
                                          ?chat_duration_in_minutes: ::Integer,
@@ -5868,14 +4453,7 @@ module Aws
                                            content_type: ::String,
                                            content: ::String
                                          },
-                                         ?initial_templated_system_message: {
-                                           knowledge_base_id: ::String,
-                                           message_template_id: ::String,
-                                           template_attributes: {
-                                             custom_attributes: Hash[::String, ::String]?,
-                                             customer_profile_attributes: ::String?
-                                           }
-                                         },
+                                         ?initial_templated_system_message: Params::templated_message_config,
                                          ?related_contact_id: ::String,
                                          ?supported_messaging_content_types: Array[::String],
                                          ?client_token: ::String
@@ -5903,25 +4481,10 @@ module Aws
                                               {
                                                 email_address: ::String,
                                                 display_name: ::String?
-                                              },
+                                              }
                                             ]?
                                           },
-                                          email_message: {
-                                            message_source_type: ("TEMPLATE" | "RAW"),
-                                            templated_message_config: {
-                                              knowledge_base_id: ::String,
-                                              message_template_id: ::String,
-                                              template_attributes: {
-                                                custom_attributes: Hash[::String, ::String]?,
-                                                customer_profile_attributes: ::String?
-                                              }
-                                            }?,
-                                            raw_message: {
-                                              subject: ::String,
-                                              body: ::String,
-                                              content_type: ::String
-                                            }?
-                                          },
+                                          email_message: Params::outbound_email_content,
                                           ?client_token: ::String
                                         ) -> _StartOutboundEmailContactResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundEmailContactResponseSuccess
@@ -5955,19 +4518,7 @@ module Aws
                                           },
                                           ?campaign_id: ::String,
                                           ?traffic_type: ("GENERAL" | "CAMPAIGN"),
-                                          ?outbound_strategy: {
-                                            type: ("AGENT_FIRST"),
-                                            config: {
-                                              agent_first: {
-                                                preview: {
-                                                  post_accept_timeout_config: {
-                                                    duration_in_seconds: ::Integer
-                                                  },
-                                                  allowed_user_actions: Array[("CALL" | "DISCARD")]
-                                                }?
-                                              }?
-                                            }?
-                                          },
+                                          ?outbound_strategy: Params::outbound_strategy,
                                           ?ring_timeout_in_seconds: ::Integer
                                         ) -> _StartOutboundVoiceContactResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOutboundVoiceContactResponseSuccess
@@ -6007,20 +4558,12 @@ module Aws
                                 ?task_template_id: ::String,
                                 ?quick_connect_id: ::String,
                                 ?related_contact_id: ::String,
-                                ?segment_attributes: Hash[::String, {
-                                    value_string: ::String?,
-                                    value_map: Hash[::String, untyped]?,
-                                    value_integer: ::Integer?,
-                                    value_list: Array[
-                                      untyped,
-                                    ]?,
-                                    value_arn: ::String?
-                                  }],
+                                ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                 ?attachments: Array[
                                   {
                                     file_name: ::String,
                                     s3_url: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _StartTaskContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskContactResponseSuccess
@@ -6144,15 +4687,7 @@ module Aws
       def submit_contact_evaluation: (
                                        instance_id: ::String,
                                        evaluation_id: ::String,
-                                       ?answers: Hash[::String, {
-                                           value: {
-                                             string_value: ::String?,
-                                             numeric_value: ::Float?,
-                                             string_values: Array[::String]?,
-                                             date_time_value: ::String?,
-                                             not_applicable: bool?
-                                           }?
-                                         }],
+                                       ?answers: Hash[::String, Params::evaluation_answer_input],
                                        ?notes: Hash[::String, {
                                            value: ::String?
                                          }],
@@ -6255,7 +4790,7 @@ module Aws
                                                    allowed_extensions: Array[
                                                      {
                                                        extension: ::String
-                                                     },
+                                                     }
                                                    ]
                                                  }
                                                ) -> _UpdateAttachedFilesConfigurationResponseSuccess
@@ -6291,15 +4826,7 @@ module Aws
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
-                            ?segment_attributes: Hash[::String, {
-                                value_string: ::String?,
-                                value_map: Hash[::String, untyped]?,
-                                value_integer: ::Integer?,
-                                value_list: Array[
-                                  untyped,
-                                ]?,
-                                value_arn: ::String?
-                              }],
+                            ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                             ?queue_info: {
                               id: ::String?
                             },
@@ -6337,15 +4864,7 @@ module Aws
       def update_contact_evaluation: (
                                        instance_id: ::String,
                                        evaluation_id: ::String,
-                                       ?answers: Hash[::String, {
-                                           value: {
-                                             string_value: ::String?,
-                                             numeric_value: ::Float?,
-                                             string_values: Array[::String]?,
-                                             date_time_value: ::String?,
-                                             not_applicable: bool?
-                                           }?
-                                         }],
+                                       ?answers: Hash[::String, Params::evaluation_answer_input],
                                        ?notes: Hash[::String, {
                                            value: ::String?
                                          }],
@@ -6445,45 +4964,8 @@ module Aws
                                                expiry: {
                                                  duration_in_seconds: ::Integer?
                                                }?,
-                                               expression: {
-                                                 attribute_condition: {
-                                                   name: ::String?,
-                                                   value: ::String?,
-                                                   proficiency_level: ::Float?,
-                                                   range: {
-                                                     min_proficiency_level: ::Float?,
-                                                     max_proficiency_level: ::Float?
-                                                   }?,
-                                                   match_criteria: {
-                                                     agents_criteria: {
-                                                       agent_ids: Array[::String]?
-                                                     }?
-                                                   }?,
-                                                   comparison_operator: ::String?
-                                                 }?,
-                                                 and_expression: Array[
-                                                   untyped,
-                                                 ]?,
-                                                 or_expression: Array[
-                                                   untyped,
-                                                 ]?,
-                                                 not_attribute_condition: {
-                                                   name: ::String?,
-                                                   value: ::String?,
-                                                   proficiency_level: ::Float?,
-                                                   range: {
-                                                     min_proficiency_level: ::Float?,
-                                                     max_proficiency_level: ::Float?
-                                                   }?,
-                                                   match_criteria: {
-                                                     agents_criteria: {
-                                                       agent_ids: Array[::String]?
-                                                     }?
-                                                   }?,
-                                                   comparison_operator: ::String?
-                                                 }?
-                                               }?
-                                             },
+                                               expression: Params::expression?
+                                             }
                                            ]?
                                          }
                                        ) -> _UpdateContactRoutingDataResponseSuccess
@@ -6514,22 +4996,7 @@ module Aws
                                          value_type: ("TEXT" | "NUMBER" | "BOOLEAN" | "TEXT_LIST" | "NUMBER_LIST"),
                                          ?description: ::String,
                                          ?primary: bool,
-                                         ?validation: {
-                                           min_length: ::Integer?,
-                                           max_length: ::Integer?,
-                                           min_values: ::Integer?,
-                                           max_values: ::Integer?,
-                                           ignore_case: bool?,
-                                           minimum: ::Float?,
-                                           maximum: ::Float?,
-                                           exclusive_minimum: ::Float?,
-                                           exclusive_maximum: ::Float?,
-                                           multiple_of: ::Float?,
-                                           enum: {
-                                             strict: bool?,
-                                             values: Array[::String]?
-                                           }?
-                                         }
+                                         ?validation: Params::validation
                                        ) -> _UpdateDataTableAttributeResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataTableAttributeResponseSuccess
 
@@ -6560,13 +5027,13 @@ module Aws
                                                 {
                                                   attribute_name: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ],
                                               new_primary_values: Array[
                                                 {
                                                   attribute_name: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ],
                                               lock_version: {
                                                 data_table: ::String?,
@@ -6607,133 +5074,7 @@ module Aws
                                     title: ::String,
                                     ?description: ::String,
                                     items: Array[
-                                      {
-                                        section: {
-                                          title: ::String,
-                                          ref_id: ::String,
-                                          instructions: ::String?,
-                                          items: untyped,
-                                          weight: ::Float?
-                                        }?,
-                                        question: {
-                                          title: ::String,
-                                          instructions: ::String?,
-                                          ref_id: ::String,
-                                          not_applicable_enabled: bool?,
-                                          question_type: ("TEXT" | "SINGLESELECT" | "NUMERIC" | "MULTISELECT" | "DATETIME"),
-                                          question_type_properties: {
-                                            numeric: {
-                                              min_value: ::Integer,
-                                              max_value: ::Integer,
-                                              options: Array[
-                                                {
-                                                  min_value: ::Integer,
-                                                  max_value: ::Integer,
-                                                  score: ::Integer?,
-                                                  automatic_fail: bool?,
-                                                  automatic_fail_configuration: {
-                                                    target_section: ::String?
-                                                  }?
-                                                },
-                                              ]?,
-                                              automation: {
-                                                property_value: {
-                                                  label: ("OVERALL_CUSTOMER_SENTIMENT_SCORE" | "OVERALL_AGENT_SENTIMENT_SCORE" | "CUSTOMER_SENTIMENT_SCORE_WITHOUT_AGENT" | "CUSTOMER_SENTIMENT_SCORE_WITH_AGENT" | "NON_TALK_TIME" | "NON_TALK_TIME_PERCENTAGE" | "NUMBER_OF_INTERRUPTIONS" | "CONTACT_DURATION" | "AGENT_INTERACTION_DURATION" | "CUSTOMER_HOLD_TIME" | "LONGEST_HOLD_DURATION" | "NUMBER_OF_HOLDS" | "AGENT_INTERACTION_AND_HOLD_DURATION")
-                                                }?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            single_select: {
-                                              options: Array[
-                                                {
-                                                  ref_id: ::String,
-                                                  text: ::String,
-                                                  score: ::Integer?,
-                                                  automatic_fail: bool?,
-                                                  automatic_fail_configuration: {
-                                                    target_section: ::String?
-                                                  }?
-                                                },
-                                              ],
-                                              display_as: ("DROPDOWN" | "RADIO")?,
-                                              automation: {
-                                                options: Array[
-                                                  {
-                                                    rule_category: {
-                                                      category: ::String,
-                                                      condition: ("PRESENT" | "NOT_PRESENT"),
-                                                      option_ref_id: ::String
-                                                    }?
-                                                  },
-                                                ]?,
-                                                default_option_ref_id: ::String?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            text: {
-                                              automation: {
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?,
-                                            multi_select: {
-                                              options: Array[
-                                                {
-                                                  ref_id: ::String,
-                                                  text: ::String
-                                                },
-                                              ],
-                                              display_as: ("DROPDOWN" | "CHECKBOX")?,
-                                              automation: {
-                                                options: Array[
-                                                  {
-                                                    rule_category: {
-                                                      category: ::String,
-                                                      condition: ("PRESENT" | "NOT_PRESENT"),
-                                                      option_ref_ids: Array[::String]
-                                                    }?
-                                                  },
-                                                ]?,
-                                                default_option_ref_ids: Array[::String]?,
-                                                answer_source: {
-                                                  source_type: ("CONTACT_LENS_DATA" | "GEN_AI")
-                                                }?
-                                              }?
-                                            }?
-                                          }?,
-                                          enablement: {
-                                            condition: {
-                                              operands: Array[
-                                                {
-                                                  expression: {
-                                                    source: {
-                                                      type: ("QUESTION_REF_ID"),
-                                                      ref_id: ::String?
-                                                    },
-                                                    values: Array[
-                                                      {
-                                                        type: ("OPTION_REF_ID"),
-                                                        ref_id: ::String?
-                                                      },
-                                                    ],
-                                                    comparator: ("IN" | "NOT_IN" | "ALL_IN" | "EXACT")
-                                                  }?,
-                                                  condition: untyped?
-                                                },
-                                              ],
-                                              operator: ("OR" | "AND")?
-                                            },
-                                            action: ("DISABLE" | "ENABLE"),
-                                            default_action: ("DISABLE" | "ENABLE")?
-                                          }?,
-                                          weight: ::Float?
-                                        }?
-                                      },
+                                      Params::evaluation_form_item
                                     ],
                                     ?scoring_strategy: {
                                       mode: ("QUESTION_ONLY" | "SECTION_ONLY"),
@@ -6742,17 +5083,7 @@ module Aws
                                     ?auto_evaluation_configuration: {
                                       enabled: bool
                                     },
-                                    ?review_configuration: {
-                                      review_notification_recipients: Array[
-                                        {
-                                          type: ("USER_ID"),
-                                          value: {
-                                            user_id: ::String?
-                                          }
-                                        },
-                                      ],
-                                      eligibility_days: ::Integer?
-                                    },
+                                    ?review_configuration: Params::evaluation_review_configuration,
                                     ?as_draft: bool,
                                     ?client_token: ::String,
                                     ?target_configuration: {
@@ -6772,17 +5103,7 @@ module Aws
                                        ?description: ::String,
                                        ?time_zone: ::String,
                                        ?config: Array[
-                                         {
-                                           day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
-                                           start_time: {
-                                             hours: ::Integer,
-                                             minutes: ::Integer
-                                           },
-                                           end_time: {
-                                             hours: ::Integer,
-                                             minutes: ::Integer
-                                           }
-                                         },
+                                         Params::hours_of_operation_config
                                        ]
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -6795,29 +5116,11 @@ module Aws
                                                 ?name: ::String,
                                                 ?description: ::String,
                                                 ?config: Array[
-                                                  {
-                                                    day: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY")?,
-                                                    start_time: {
-                                                      hours: ::Integer,
-                                                      minutes: ::Integer
-                                                    }?,
-                                                    end_time: {
-                                                      hours: ::Integer,
-                                                      minutes: ::Integer
-                                                    }?
-                                                  },
+                                                  Params::hours_of_operation_override_config
                                                 ],
                                                 ?effective_from: ::String,
                                                 ?effective_till: ::String,
-                                                ?recurrence_config: {
-                                                  recurrence_pattern: {
-                                                    frequency: ("WEEKLY" | "MONTHLY" | "YEARLY"),
-                                                    interval: ::Integer,
-                                                    by_month: Array[::Integer]?,
-                                                    by_month_day: Array[::Integer]?,
-                                                    by_weekday_occurrence: Array[::Integer]?
-                                                  }
-                                                },
+                                                ?recurrence_config: Params::recurrence_config,
                                                 ?override_type: ("STANDARD" | "OPEN" | "CLOSED")
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -6836,32 +5139,7 @@ module Aws
                                             instance_id: ::String,
                                             association_id: ::String,
                                             resource_type: ("CHAT_TRANSCRIPTS" | "CALL_RECORDINGS" | "SCHEDULED_REPORTS" | "MEDIA_STREAMS" | "CONTACT_TRACE_RECORDS" | "AGENT_EVENTS" | "REAL_TIME_CONTACT_ANALYSIS_SEGMENTS" | "ATTACHMENTS" | "CONTACT_EVALUATIONS" | "SCREEN_RECORDINGS" | "REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS" | "REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS" | "EMAIL_MESSAGES"),
-                                            storage_config: {
-                                              association_id: ::String?,
-                                              storage_type: ("S3" | "KINESIS_VIDEO_STREAM" | "KINESIS_STREAM" | "KINESIS_FIREHOSE"),
-                                              s3_config: {
-                                                bucket_name: ::String,
-                                                bucket_prefix: ::String,
-                                                encryption_config: {
-                                                  encryption_type: ("KMS"),
-                                                  key_id: ::String
-                                                }?
-                                              }?,
-                                              kinesis_video_stream_config: {
-                                                prefix: ::String,
-                                                retention_period_hours: ::Integer,
-                                                encryption_config: {
-                                                  encryption_type: ("KMS"),
-                                                  key_id: ::String
-                                                }
-                                              }?,
-                                              kinesis_stream_config: {
-                                                stream_arn: ::String
-                                              }?,
-                                              kinesis_firehose_config: {
-                                                firehose_arn: ::String
-                                              }?
-                                            },
+                                            storage_config: Params::instance_storage_config,
                                             ?client_token: ::String
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -6907,7 +5185,7 @@ module Aws
                                                       participant_timer_action: ("Unset")?,
                                                       participant_timer_duration_in_minutes: ::Integer?
                                                     }
-                                                  },
+                                                  }
                                                 ]
                                               }?
                                             }
@@ -7024,23 +5302,7 @@ module Aws
       def update_quick_connect_config: (
                                          instance_id: ::String,
                                          quick_connect_id: ::String,
-                                         quick_connect_config: {
-                                           quick_connect_type: ("USER" | "QUEUE" | "PHONE_NUMBER" | "FLOW"),
-                                           user_config: {
-                                             user_id: ::String,
-                                             contact_flow_id: ::String
-                                           }?,
-                                           queue_config: {
-                                             queue_id: ::String,
-                                             contact_flow_id: ::String
-                                           }?,
-                                           phone_config: {
-                                             phone_number: ::String
-                                           }?,
-                                           flow_config: {
-                                             contact_flow_id: ::String
-                                           }?
-                                         }
+                                         quick_connect_config: Params::quick_connect_config
                                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -7072,7 +5334,7 @@ module Aws
                                                     cross_channel_behavior: {
                                                       behavior_type: ("ROUTE_CURRENT_CHANNEL_ONLY" | "ROUTE_ANY_CHANNEL")
                                                     }?
-                                                  },
+                                                  }
                                                 ]
                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -7099,14 +5361,7 @@ module Aws
                                            instance_id: ::String,
                                            routing_profile_id: ::String,
                                            queue_configs: Array[
-                                             {
-                                               queue_reference: {
-                                                 queue_id: ::String,
-                                                 channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL")
-                                               },
-                                               priority: ::Integer,
-                                               delay: ::Integer
-                                             },
+                                             Params::routing_profile_queue_config
                                            ]
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -7118,92 +5373,7 @@ module Aws
                          name: ::String,
                          function: ::String,
                          actions: Array[
-                           {
-                             action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION"),
-                             task_action: {
-                               name: ::String,
-                               description: ::String?,
-                               contact_flow_id: ::String,
-                               references: Hash[::String, {
-                                   value: ::String?,
-                                   type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                   status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
-                                   arn: ::String?,
-                                   status_reason: ::String?
-                                 }]?
-                             }?,
-                             event_bridge_action: {
-                               name: ::String
-                             }?,
-                             assign_contact_category_action: {
-                             }?,
-                             send_notification_action: {
-                               delivery_method: ("EMAIL"),
-                               subject: ::String?,
-                               content: ::String,
-                               content_type: ("PLAIN_TEXT"),
-                               recipient: {
-                                 user_tags: Hash[::String, ::String]?,
-                                 user_ids: Array[::String]?
-                               },
-                               exclusion: {
-                                 user_tags: Hash[::String, ::String]?,
-                                 user_ids: Array[::String]?
-                               }?
-                             }?,
-                             create_case_action: {
-                               fields: Array[
-                                 {
-                                   id: ::String,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   }
-                                 },
-                               ],
-                               template_id: ::String
-                             }?,
-                             update_case_action: {
-                               fields: Array[
-                                 {
-                                   id: ::String,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   }
-                                 },
-                               ]
-                             }?,
-                             assign_sla_action: {
-                               sla_assignment_type: ("CASES"),
-                               case_sla_configuration: {
-                                 name: ::String,
-                                 type: ("CaseField"),
-                                 field_id: ::String?,
-                                 target_field_values: Array[
-                                   {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     empty_value: {
-                                     }?,
-                                     string_value: ::String?
-                                   },
-                                 ]?,
-                                 target_sla_minutes: ::Integer
-                               }?
-                             }?,
-                             end_associated_tasks_action: {
-                             }?,
-                             submit_auto_evaluation_action: {
-                               evaluation_form_id: ::String
-                             }?
-                           },
+                           Params::rule_action
                          ],
                          publish_status: ("DRAFT" | "PUBLISHED")
                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -7222,7 +5392,7 @@ module Aws
                                          namespace: ::String?,
                                          application_permissions: Array[::String]?,
                                          type: ("MCP" | "THIRD_PARTY_APPLICATION")?
-                                       },
+                                       }
                                      ],
                                      ?hierarchy_restricted_resources: Array[::String],
                                      ?allowed_access_control_hierarchy_group_id: ::String,
@@ -7230,21 +5400,9 @@ module Aws
                                        {
                                          type: ("MCP")?,
                                          flow_module_id: ::String?
-                                       },
+                                       }
                                      ],
-                                     ?granular_access_control_configuration: {
-                                       data_table_access_control_configuration: {
-                                         primary_attribute_access_control_configuration: {
-                                           primary_attribute_values: Array[
-                                             {
-                                               access_type: ("ALLOW")?,
-                                               attribute_name: ::String?,
-                                               values: Array[::String]?
-                                             },
-                                           ]?
-                                         }?
-                                       }?
-                                     }
+                                     ?granular_access_control_configuration: Params::granular_access_control_configuration
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -7272,49 +5430,11 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
-                                  ?constraints: {
-                                    required_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?,
-                                    read_only_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?,
-                                    invisible_fields: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?
-                                      },
-                                    ]?
-                                  },
-                                  ?defaults: {
-                                    default_field_values: Array[
-                                      {
-                                        id: {
-                                          name: ::String?
-                                        }?,
-                                        default_value: ::String?
-                                      },
-                                    ]?
-                                  },
+                                  ?constraints: Params::task_template_constraints,
+                                  ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),
                                   ?fields: Array[
-                                    {
-                                      id: {
-                                        name: ::String?
-                                      },
-                                      description: ::String?,
-                                      type: ("NAME" | "DESCRIPTION" | "SCHEDULED_TIME" | "QUICK_CONNECT" | "URL" | "NUMBER" | "TEXT" | "TEXT_AREA" | "DATE_TIME" | "BOOLEAN" | "SINGLE_SELECT" | "EMAIL" | "SELF_ASSIGN" | "EXPIRY_DURATION")?,
-                                      single_select_options: Array[::String]?
-                                    },
+                                    Params::task_template_field
                                   ]
                                 ) -> _UpdateTaskTemplateResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskTemplateResponseSuccess
@@ -7327,17 +5447,7 @@ module Aws
                               instance_id: ::String,
                               test_case_id: ::String,
                               ?content: ::String,
-                              ?entry_point: {
-                                type: ("VOICE_CALL" | "CHAT")?,
-                                voice_call_entry_point_parameters: {
-                                  source_phone_number: ::String?,
-                                  destination_phone_number: ::String?,
-                                  flow_id: ::String?
-                                }?,
-                                chat_entry_point_parameters: {
-                                  flow_id: ::String?
-                                }?
-                              },
+                              ?entry_point: Params::test_case_entry_point,
                               ?initialization_data: ::String,
                               ?name: ::String,
                               ?description: ::String,
@@ -7358,7 +5468,7 @@ module Aws
                                              {
                                                region: ::String,
                                                percentage: ::Integer
-                                             },
+                                             }
                                            ]
                                          },
                                          ?sign_in_config: {
@@ -7366,7 +5476,7 @@ module Aws
                                              {
                                                region: ::String,
                                                enabled: bool
-                                             },
+                                             }
                                            ]
                                          },
                                          ?agent_config: {
@@ -7374,7 +5484,7 @@ module Aws
                                              {
                                                region: ::String,
                                                percentage: ::Integer
-                                             },
+                                             }
                                            ]
                                          }
                                        ) -> _UpdateTrafficDistributionResponseSuccess
@@ -7387,37 +5497,29 @@ module Aws
                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                                     auto_accept: bool,
                                     agent_first_callback_auto_accept: bool?
-                                  },
+                                  }
                                 ],
                                 ?after_contact_work_configs: Array[
-                                  {
-                                    channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
-                                    after_contact_work_config: {
-                                      after_contact_work_time_limit: ::Integer?
-                                    },
-                                    agent_first_callback_after_contact_work_config: {
-                                      after_contact_work_time_limit: ::Integer?
-                                    }?
-                                  },
+                                  Params::after_contact_work_config_per_channel
                                 ],
                                 ?phone_number_configs: Array[
                                   {
                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                                     phone_type: ("SOFT_PHONE" | "DESK_PHONE"),
                                     phone_number: ::String?
-                                  },
+                                  }
                                 ],
                                 ?persistent_connection_configs: Array[
                                   {
                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                                     persistent_connection: bool
-                                  },
+                                  }
                                 ],
                                 ?voice_enhancement_configs: Array[
                                   {
                                     channel: ("VOICE" | "CHAT" | "TASK" | "EMAIL"),
                                     voice_enhancement_mode: ("VOICE_ISOLATION" | "NOISE_SUPPRESSION" | "NONE")
-                                  },
+                                  }
                                 ],
                                 user_id: ::String,
                                 instance_id: ::String
@@ -7514,7 +5616,7 @@ module Aws
                                            attribute_name: ::String,
                                            attribute_value: ::String,
                                            level: ::Float
-                                         },
+                                         }
                                        ]
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -7598,88 +5700,7 @@ module Aws
       def update_workspace_theme: (
                                     instance_id: ::String,
                                     workspace_id: ::String,
-                                    ?theme: {
-                                      light: {
-                                        palette: {
-                                          header: {
-                                            background: ::String?,
-                                            text: ::String?,
-                                            text_hover: ::String?,
-                                            invert_actions_colors: bool?
-                                          }?,
-                                          navigation: {
-                                            background: ::String?,
-                                            text_background_hover: ::String?,
-                                            text_background_active: ::String?,
-                                            text: ::String?,
-                                            text_hover: ::String?,
-                                            text_active: ::String?,
-                                            invert_actions_colors: bool?
-                                          }?,
-                                          canvas: {
-                                            container_background: ::String?,
-                                            page_background: ::String?,
-                                            active_background: ::String?
-                                          }?,
-                                          primary: {
-                                            default: ::String?,
-                                            active: ::String?,
-                                            contrast_text: ::String?
-                                          }?
-                                        }?,
-                                        images: {
-                                          logo: {
-                                            default: ::String?,
-                                            favicon: ::String?
-                                          }?
-                                        }?,
-                                        typography: {
-                                          font_family: {
-                                            default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
-                                          }?
-                                        }?
-                                      }?,
-                                      dark: {
-                                        palette: {
-                                          header: {
-                                            background: ::String?,
-                                            text: ::String?,
-                                            text_hover: ::String?,
-                                            invert_actions_colors: bool?
-                                          }?,
-                                          navigation: {
-                                            background: ::String?,
-                                            text_background_hover: ::String?,
-                                            text_background_active: ::String?,
-                                            text: ::String?,
-                                            text_hover: ::String?,
-                                            text_active: ::String?,
-                                            invert_actions_colors: bool?
-                                          }?,
-                                          canvas: {
-                                            container_background: ::String?,
-                                            page_background: ::String?,
-                                            active_background: ::String?
-                                          }?,
-                                          primary: {
-                                            default: ::String?,
-                                            active: ::String?,
-                                            contrast_text: ::String?
-                                          }?
-                                        }?,
-                                        images: {
-                                          logo: {
-                                            default: ::String?,
-                                            favicon: ::String?
-                                          }?
-                                        }?,
-                                        typography: {
-                                          font_family: {
-                                            default: ("Arial" | "Courier New" | "Georgia" | "Times New Roman" | "Trebuchet" | "Verdana")?
-                                          }?
-                                        }?
-                                      }?
-                                    }
+                                    ?theme: Params::workspace_theme
                                   ) -> _UpdateWorkspaceThemeResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateWorkspaceThemeResponseSuccess
 

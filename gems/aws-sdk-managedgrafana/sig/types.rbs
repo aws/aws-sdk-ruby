@@ -93,6 +93,7 @@ module Aws::ManagedGrafana
       attr_accessor configuration: ::String
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor grafana_version: ::String
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       attr_accessor kms_key_id: ::String
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
@@ -485,6 +486,7 @@ module Aws::ManagedGrafana
       attr_accessor remove_vpc_configuration: bool
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor remove_network_access_configuration: bool
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       SENSITIVE: [:organization_role_name, :workspace_description, :workspace_name, :workspace_organizational_units, :workspace_role_arn]
     end
 
@@ -533,7 +535,7 @@ module Aws::ManagedGrafana
       attr_accessor organizational_units: ::Array[::String]
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "SERVICE_MANAGED")
       attr_accessor stack_set_name: ::String
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED" | "DEGRADED")
       attr_accessor workspace_role_arn: ::String
       attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")
       attr_accessor free_trial_consumed: bool
@@ -544,7 +546,9 @@ module Aws::ManagedGrafana
       attr_accessor vpc_configuration: Types::VpcConfiguration
       attr_accessor network_access_control: Types::NetworkAccessConfiguration
       attr_accessor grafana_token: ::String
+      attr_accessor ip_address_type: ("IPv4" | "DualStack")
       attr_accessor kms_key_id: ::String
+      attr_accessor degraded_workspace_reason: ::String
       SENSITIVE: [:description, :name, :organization_role_name, :organizational_units, :workspace_role_arn]
     end
 
@@ -557,7 +561,7 @@ module Aws::ManagedGrafana
       attr_accessor modified: ::Time
       attr_accessor name: ::String
       attr_accessor notification_destinations: ::Array[("SNS")]
-      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED")
+      attr_accessor status: ("ACTIVE" | "CREATING" | "DELETING" | "FAILED" | "UPDATING" | "UPGRADING" | "DELETION_FAILED" | "CREATION_FAILED" | "UPDATE_FAILED" | "UPGRADE_FAILED" | "LICENSE_REMOVAL_FAILED" | "VERSION_UPDATING" | "VERSION_UPDATE_FAILED" | "DEGRADED")
       attr_accessor authentication: Types::AuthenticationSummary
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor license_type: ("ENTERPRISE" | "ENTERPRISE_FREE_TRIAL")

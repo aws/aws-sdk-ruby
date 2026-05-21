@@ -1,0 +1,35 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TranscribeStreamingService
+    module Params
+      type configuration_event = {
+      channel_definitions: Array[
+        {
+          channel_id: ::Integer,
+          participant_role: ("AGENT" | "CUSTOMER")
+        }
+      ]?,
+      post_call_analytics_settings: {
+        output_location: ::String,
+        data_access_role_arn: ::String,
+        content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
+        output_encryption_kms_key_id: ::String?
+      }?
+    }
+
+      type audio_stream = {
+      audio_event: {
+        audio_chunk: ::String?
+      }?,
+      configuration_event: Params::configuration_event?
+    }
+
+    end
+  end
+end

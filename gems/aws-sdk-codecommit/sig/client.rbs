@@ -204,18 +204,18 @@ module Aws
                                  file_path: ::String,
                                  is_move: bool?
                                }?
-                             },
+                             }
                            ],
                            ?delete_files: Array[
                              {
                                file_path: ::String
-                             },
+                             }
                            ],
                            ?set_file_modes: Array[
                              {
                                file_path: ::String,
                                file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                             },
+                             }
                            ]
                          ) -> _CreateCommitResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCommitResponseSuccess
@@ -233,7 +233,7 @@ module Aws
                                      repository_name: ::String,
                                      source_reference: ::String,
                                      destination_reference: ::String?
-                                   },
+                                   }
                                  ],
                                  ?client_request_token: ::String
                                ) -> _CreatePullRequestResponseSuccess
@@ -281,27 +281,7 @@ module Aws
                                               ?email: ::String,
                                               ?commit_message: ::String,
                                               ?keep_empty_folders: bool,
-                                              ?conflict_resolution: {
-                                                replace_contents: Array[
-                                                  {
-                                                    file_path: ::String,
-                                                    replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
-                                                    content: ::String?,
-                                                    file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
-                                                  },
-                                                ]?,
-                                                delete_files: Array[
-                                                  {
-                                                    file_path: ::String
-                                                  },
-                                                ]?,
-                                                set_file_modes: Array[
-                                                  {
-                                                    file_path: ::String,
-                                                    file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                                                  },
-                                                ]?
-                                              }
+                                              ?conflict_resolution: Params::conflict_resolution
                                             ) -> _CreateUnreferencedMergeCommitResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUnreferencedMergeCommitResponseSuccess
 
@@ -829,27 +809,7 @@ module Aws
                                       ?email: ::String,
                                       ?commit_message: ::String,
                                       ?keep_empty_folders: bool,
-                                      ?conflict_resolution: {
-                                        replace_contents: Array[
-                                          {
-                                            file_path: ::String,
-                                            replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
-                                            content: ::String?,
-                                            file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
-                                          },
-                                        ]?,
-                                        delete_files: Array[
-                                          {
-                                            file_path: ::String
-                                          },
-                                        ]?,
-                                        set_file_modes: Array[
-                                          {
-                                            file_path: ::String,
-                                            file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                                          },
-                                        ]?
-                                      }
+                                      ?conflict_resolution: Params::conflict_resolution
                                     ) -> _MergeBranchesBySquashResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeBranchesBySquashResponseSuccess
 
@@ -870,27 +830,7 @@ module Aws
                                          ?email: ::String,
                                          ?commit_message: ::String,
                                          ?keep_empty_folders: bool,
-                                         ?conflict_resolution: {
-                                           replace_contents: Array[
-                                             {
-                                               file_path: ::String,
-                                               replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
-                                               content: ::String?,
-                                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
-                                             },
-                                           ]?,
-                                           delete_files: Array[
-                                             {
-                                               file_path: ::String
-                                             },
-                                           ]?,
-                                           set_file_modes: Array[
-                                             {
-                                               file_path: ::String,
-                                               file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                                             },
-                                           ]?
-                                         }
+                                         ?conflict_resolution: Params::conflict_resolution
                                        ) -> _MergeBranchesByThreeWayResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergeBranchesByThreeWayResponseSuccess
 
@@ -921,27 +861,7 @@ module Aws
                                           ?author_name: ::String,
                                           ?email: ::String,
                                           ?keep_empty_folders: bool,
-                                          ?conflict_resolution: {
-                                            replace_contents: Array[
-                                              {
-                                                file_path: ::String,
-                                                replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
-                                                content: ::String?,
-                                                file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
-                                              },
-                                            ]?,
-                                            delete_files: Array[
-                                              {
-                                                file_path: ::String
-                                              },
-                                            ]?,
-                                            set_file_modes: Array[
-                                              {
-                                                file_path: ::String,
-                                                file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                                              },
-                                            ]?
-                                          }
+                                          ?conflict_resolution: Params::conflict_resolution
                                         ) -> _MergePullRequestBySquashResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergePullRequestBySquashResponseSuccess
 
@@ -960,27 +880,7 @@ module Aws
                                              ?author_name: ::String,
                                              ?email: ::String,
                                              ?keep_empty_folders: bool,
-                                             ?conflict_resolution: {
-                                               replace_contents: Array[
-                                                 {
-                                                   file_path: ::String,
-                                                   replacement_type: ("KEEP_BASE" | "KEEP_SOURCE" | "KEEP_DESTINATION" | "USE_NEW_CONTENT"),
-                                                   content: ::String?,
-                                                   file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")?
-                                                 },
-                                               ]?,
-                                               delete_files: Array[
-                                                 {
-                                                   file_path: ::String
-                                                 },
-                                               ]?,
-                                               set_file_modes: Array[
-                                                 {
-                                                   file_path: ::String,
-                                                   file_mode: ("EXECUTABLE" | "NORMAL" | "SYMLINK")
-                                                 },
-                                               ]?
-                                             }
+                                             ?conflict_resolution: Params::conflict_resolution
                                            ) -> _MergePullRequestByThreeWayResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _MergePullRequestByThreeWayResponseSuccess
 
@@ -1097,7 +997,7 @@ module Aws
                                          custom_data: ::String?,
                                          branches: Array[::String]?,
                                          events: Array[("all" | "updateReference" | "createReference" | "deleteReference")]
-                                       },
+                                       }
                                      ]
                                    ) -> _PutRepositoryTriggersResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRepositoryTriggersResponseSuccess
@@ -1124,7 +1024,7 @@ module Aws
                                           custom_data: ::String?,
                                           branches: Array[::String]?,
                                           events: Array[("all" | "updateReference" | "createReference" | "deleteReference")]
-                                        },
+                                        }
                                       ]
                                     ) -> _TestRepositoryTriggersResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TestRepositoryTriggersResponseSuccess

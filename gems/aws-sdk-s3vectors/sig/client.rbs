@@ -292,7 +292,7 @@ module Aws
                              },
                              metadata: {
                              }?
-                           },
+                           }
                          ]
                        ) -> _PutVectorsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutVectorsResponseSuccess

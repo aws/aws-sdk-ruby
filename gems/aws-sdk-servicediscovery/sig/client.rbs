@@ -92,7 +92,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateHttpNamespaceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHttpNamespaceResponseSuccess
@@ -111,7 +111,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ],
                                           ?properties: {
                                             dns_properties: {
@@ -136,7 +136,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ],
                                          ?properties: {
                                            dns_properties: {
@@ -165,7 +165,7 @@ module Aws
                                 {
                                   type: ("SRV" | "A" | "AAAA" | "CNAME"),
                                   ttl: ::Integer
-                                },
+                                }
                               ]
                             },
                             ?health_check_config: {
@@ -180,7 +180,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?type: ("HTTP")
                           ) -> _CreateServiceResponseSuccess
@@ -350,7 +350,7 @@ module Aws
                                  name: ("TYPE" | "NAME" | "HTTP_NAME" | "RESOURCE_OWNER"),
                                  values: Array[::String],
                                  condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
-                               },
+                               }
                              ]
                            ) -> _ListNamespacesResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNamespacesResponseSuccess
@@ -369,7 +369,7 @@ module Aws
                                  name: ("NAMESPACE_ID" | "SERVICE_ID" | "STATUS" | "TYPE" | "UPDATE_DATE"),
                                  values: Array[::String],
                                  condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
-                               },
+                               }
                              ]
                            ) -> _ListOperationsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
@@ -388,7 +388,7 @@ module Aws
                                name: ("NAMESPACE_ID" | "RESOURCE_OWNER"),
                                values: Array[::String],
                                condition: ("EQ" | "IN" | "BETWEEN" | "BEGINS_WITH")?
-                             },
+                             }
                            ]
                          ) -> _ListServicesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
@@ -426,7 +426,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -519,7 +519,7 @@ module Aws
                                   {
                                     type: ("SRV" | "A" | "AAAA" | "CNAME"),
                                     ttl: ::Integer
-                                  },
+                                  }
                                 ]
                               }?,
                               health_check_config: {

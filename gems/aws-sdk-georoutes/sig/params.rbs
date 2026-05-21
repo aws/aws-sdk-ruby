@@ -1,0 +1,64 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GeoRoutes
+    module Params
+      type isoline_avoidance_area_geometry = {
+      bounding_box: Array[::Float]?,
+      corridor: {
+        line_string: Array[
+          Array[::Float]
+        ],
+        radius: ::Integer
+      }?,
+      polygon: Array[
+        Array[
+          Array[::Float]
+        ]
+      ]?,
+      polyline_corridor: {
+        polyline: ::String,
+        radius: ::Integer
+      }?,
+      polyline_polygon: Array[::String]?
+    }
+
+      type route_avoidance_area_geometry = {
+      corridor: {
+        line_string: Array[
+          Array[::Float]
+        ],
+        radius: ::Integer
+      }?,
+      bounding_box: Array[::Float]?,
+      polygon: Array[
+        Array[
+          Array[::Float]
+        ]
+      ]?,
+      polyline_corridor: {
+        polyline: ::String,
+        radius: ::Integer
+      }?,
+      polyline_polygon: Array[::String]?
+    }
+
+      type waypoint_optimization_access_hours = {
+      from: {
+        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+        time_of_day: ::String
+      },
+      to: {
+        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
+        time_of_day: ::String
+      }
+    }
+
+    end
+  end
+end

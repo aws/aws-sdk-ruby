@@ -98,7 +98,7 @@ module Aws
                                         ?cross_account_configurations: Array[
                                           {
                                             source_role_arn: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateInvestigationGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInvestigationGroupResponseSuccess
@@ -221,7 +221,7 @@ module Aws
                                         ?cross_account_configurations: Array[
                                           {
                                             source_role_arn: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _UpdateInvestigationGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInvestigationGroupResponseSuccess

@@ -95,7 +95,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ],
                                            ?client_token: ::String
                                          ) -> _CreateRescoreExecutionPlanResponseSuccess
@@ -165,7 +165,7 @@ module Aws
                          tokenized_title: Array[::String]?,
                          tokenized_body: Array[::String]?,
                          original_score: ::Float
-                       },
+                       }
                      ]
                    ) -> _RescoreResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RescoreResponseSuccess
@@ -180,7 +180,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

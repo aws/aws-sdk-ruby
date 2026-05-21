@@ -263,25 +263,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#create_audit_suppression-instance_method
       def create_audit_suppression: (
                                       check_name: ::String,
-                                      resource_identifier: {
-                                        device_certificate_id: ::String?,
-                                        ca_certificate_id: ::String?,
-                                        cognito_identity_pool_id: ::String?,
-                                        client_id: ::String?,
-                                        policy_version_identifier: {
-                                          policy_name: ::String?,
-                                          policy_version_id: ::String?
-                                        }?,
-                                        account: ::String?,
-                                        iam_role_arn: ::String?,
-                                        role_alias_arn: ::String?,
-                                        issuer_certificate_identifier: {
-                                          issuer_certificate_subject: ::String?,
-                                          issuer_id: ::String?,
-                                          issuer_certificate_serial_number: ::String?
-                                        }?,
-                                        device_certificate_arn: ::String?
-                                      },
+                                      resource_identifier: Params::resource_identifier,
                                       ?expiration_date: ::Time,
                                       ?suppress_indefinitely: bool,
                                       ?description: ::String,
@@ -305,7 +287,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String?
-                                 },
+                                 }
                                ],
                                ?signing_disabled: bool,
                                ?enable_caching_for_http: bool
@@ -328,7 +310,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateBillingGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillingGroupResponseSuccess
@@ -361,7 +343,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String?
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateCertificateProviderResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateProviderResponseSuccess
@@ -391,24 +373,8 @@ module Aws
                               {
                                 name: ::String,
                                 type: ("STRING" | "INTEGER" | "DOUBLE" | "LONG" | "UNSIGNEDLONG" | "BOOLEAN" | "BINARY")?,
-                                value: {
-                                  s: ::String?,
-                                  b: bool?,
-                                  i: ::Integer?,
-                                  l: ::Integer?,
-                                  d: ::Float?,
-                                  bin: ::String?,
-                                  ul: ::String?
-                                }?,
-                                default_value: {
-                                  s: ::String?,
-                                  b: bool?,
-                                  i: ::Integer?,
-                                  l: ::Integer?,
-                                  d: ::Float?,
-                                  bin: ::String?,
-                                  ul: ::String?
-                                }?,
+                                value: Params::command_parameter_value?,
+                                default_value: Params::command_parameter_value?,
                                 value_conditions: Array[
                                   {
                                     comparison_operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "LESS_THAN_EQUALS" | "GREATER_THAN" | "GREATER_THAN_EQUALS" | "IN_SET" | "NOT_IN_SET" | "IN_RANGE" | "NOT_IN_RANGE"),
@@ -422,17 +388,17 @@ module Aws
                                         max: ::String
                                       }?
                                     }
-                                  },
+                                  }
                                 ]?,
                                 description: ::String?
-                              },
+                              }
                             ],
                             ?role_arn: ::String,
                             ?tags: Array[
                               {
                                 key: ::String,
                                 value: ::String?
-                              },
+                              }
                             ]
                           ) -> _CreateCommandResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCommandResponseSuccess
@@ -451,7 +417,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   client_request_token: ::String
                                 ) -> _CreateCustomMetricResponseSuccess
@@ -471,7 +437,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String?
-                                },
+                                }
                               ],
                               client_request_token: ::String
                             ) -> _CreateDimensionResponseSuccess
@@ -497,7 +463,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String?
-                                           },
+                                           }
                                          ],
                                          ?tls_config: {
                                            security_policy: ::String?
@@ -541,7 +507,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateDynamicThingGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDynamicThingGroupResponseSuccess
@@ -569,7 +535,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateFleetMetricResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetMetricResponseSuccess
@@ -592,27 +558,8 @@ module Aws
                           expires_in_sec: ::Integer?
                         },
                         ?target_selection: ("CONTINUOUS" | "SNAPSHOT"),
-                        ?job_executions_rollout_config: {
-                          maximum_per_minute: ::Integer?,
-                          exponential_rate: {
-                            base_rate_per_minute: ::Integer,
-                            increment_factor: ::Float,
-                            rate_increase_criteria: {
-                              number_of_notified_things: ::Integer?,
-                              number_of_succeeded_things: ::Integer?
-                            }
-                          }?
-                        },
-                        ?abort_config: {
-                          criteria_list: Array[
-                            {
-                              failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL"),
-                              action: ("CANCEL"),
-                              threshold_percentage: ::Float,
-                              min_number_of_executed_things: ::Integer
-                            },
-                          ]
-                        },
+                        ?job_executions_rollout_config: Params::job_executions_rollout_config,
+                        ?abort_config: Params::abort_config,
                         ?timeout_config: {
                           in_progress_timeout_in_minutes: ::Integer?
                         },
@@ -620,7 +567,7 @@ module Aws
                           {
                             key: ::String,
                             value: ::String?
-                          },
+                          }
                         ],
                         ?namespace_id: ::String,
                         ?job_template_arn: ::String,
@@ -629,7 +576,7 @@ module Aws
                             {
                               failure_type: ("FAILED" | "TIMED_OUT" | "ALL"),
                               number_of_retries: ::Integer
-                            },
+                            }
                           ]
                         },
                         ?document_parameters: Hash[::String, ::String],
@@ -641,7 +588,7 @@ module Aws
                             {
                               start_time: ::String,
                               duration_in_minutes: ::Integer
-                            },
+                            }
                           ]?
                         },
                         ?destination_package_versions: Array[::String]
@@ -664,27 +611,8 @@ module Aws
                                    role_arn: ::String?,
                                    expires_in_sec: ::Integer?
                                  },
-                                 ?job_executions_rollout_config: {
-                                   maximum_per_minute: ::Integer?,
-                                   exponential_rate: {
-                                     base_rate_per_minute: ::Integer,
-                                     increment_factor: ::Float,
-                                     rate_increase_criteria: {
-                                       number_of_notified_things: ::Integer?,
-                                       number_of_succeeded_things: ::Integer?
-                                     }
-                                   }?
-                                 },
-                                 ?abort_config: {
-                                   criteria_list: Array[
-                                     {
-                                       failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL"),
-                                       action: ("CANCEL"),
-                                       threshold_percentage: ::Float,
-                                       min_number_of_executed_things: ::Integer
-                                     },
-                                   ]
-                                 },
+                                 ?job_executions_rollout_config: Params::job_executions_rollout_config,
+                                 ?abort_config: Params::abort_config,
                                  ?timeout_config: {
                                    in_progress_timeout_in_minutes: ::Integer?
                                  },
@@ -692,21 +620,21 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?job_executions_retry_config: {
                                    criteria_list: Array[
                                      {
                                        failure_type: ("FAILED" | "TIMED_OUT" | "ALL"),
                                        number_of_retries: ::Integer
-                                     },
+                                     }
                                    ]
                                  },
                                  ?maintenance_windows: Array[
                                    {
                                      start_time: ::String,
                                      duration_in_minutes: ::Integer
-                                   },
+                                   }
                                  ],
                                  ?destination_package_versions: Array[::String]
                                ) -> _CreateJobTemplateResponseSuccess
@@ -734,33 +662,12 @@ module Aws
       def create_mitigation_action: (
                                       action_name: ::String,
                                       role_arn: ::String,
-                                      action_params: {
-                                        update_device_certificate_params: {
-                                          action: ("DEACTIVATE")
-                                        }?,
-                                        update_ca_certificate_params: {
-                                          action: ("DEACTIVATE")
-                                        }?,
-                                        add_things_to_thing_group_params: {
-                                          thing_group_names: Array[::String],
-                                          override_dynamic_groups: bool?
-                                        }?,
-                                        replace_default_policy_version_params: {
-                                          template_name: ("BLANK_POLICY")
-                                        }?,
-                                        enable_io_t_logging_params: {
-                                          role_arn_for_logging: ::String,
-                                          log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
-                                        }?,
-                                        publish_finding_to_sns_params: {
-                                          topic_arn: ::String
-                                        }?
-                                      },
+                                      action_params: Params::mitigation_action_params,
                                       ?tags: Array[
                                         {
                                           key: ::String,
                                           value: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateMitigationActionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMitigationActionResponseSuccess
@@ -801,7 +708,7 @@ module Aws
                                      action: ("CANCEL"),
                                      threshold_percentage: ::Float,
                                      min_number_of_executed_things: ::Integer
-                                   },
+                                   }
                                  ]
                                },
                                ?aws_job_timeout_config: {
@@ -852,7 +759,7 @@ module Aws
                                      }?
                                    }?,
                                    attributes: Hash[::String, ::String]?
-                                 },
+                                 }
                                ],
                                role_arn: ::String,
                                ?additional_parameters: Hash[::String, ::String],
@@ -860,7 +767,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateOTAUpdateResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOTAUpdateResponseSuccess
@@ -924,7 +831,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _CreatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
@@ -978,7 +885,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String?
-                                            },
+                                            }
                                           ],
                                           ?type: ("FLEET_PROVISIONING" | "JITP")
                                         ) -> _CreateProvisioningTemplateResponseSuccess
@@ -1013,7 +920,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateRoleAliasResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoleAliasResponseSuccess
@@ -1033,7 +940,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateScheduledAuditResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledAuditResponseSuccess
@@ -1048,36 +955,7 @@ module Aws
                                      security_profile_name: ::String,
                                      ?security_profile_description: ::String,
                                      ?behaviors: Array[
-                                       {
-                                         name: ::String,
-                                         metric: ::String?,
-                                         metric_dimension: {
-                                           dimension_name: ::String,
-                                           operator: ("IN" | "NOT_IN")?
-                                         }?,
-                                         criteria: {
-                                           comparison_operator: ("less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "in-cidr-set" | "not-in-cidr-set" | "in-port-set" | "not-in-port-set" | "in-set" | "not-in-set")?,
-                                           value: {
-                                             count: ::Integer?,
-                                             cidrs: Array[::String]?,
-                                             ports: Array[::Integer]?,
-                                             number: ::Float?,
-                                             numbers: Array[::Float]?,
-                                             strings: Array[::String]?
-                                           }?,
-                                           duration_seconds: ::Integer?,
-                                           consecutive_datapoints_to_alarm: ::Integer?,
-                                           consecutive_datapoints_to_clear: ::Integer?,
-                                           statistical_threshold: {
-                                             statistic: ::String?
-                                           }?,
-                                           ml_detection_config: {
-                                             confidence_level: ("LOW" | "MEDIUM" | "HIGH")
-                                           }?
-                                         }?,
-                                         suppress_alerts: bool?,
-                                         export_metric: bool?
-                                       },
+                                       Params::behavior
                                      ],
                                      ?alert_targets: Hash[("SNS"), {
                                          alert_target_arn: ::String,
@@ -1085,20 +963,13 @@ module Aws
                                        }],
                                      ?additional_metrics_to_retain: Array[::String],
                                      ?additional_metrics_to_retain_v2: Array[
-                                       {
-                                         metric: ::String,
-                                         metric_dimension: {
-                                           dimension_name: ::String,
-                                           operator: ("IN" | "NOT_IN")?
-                                         }?,
-                                         export_metric: bool?
-                                       },
+                                       Params::metric_to_retain
                                      ],
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      ?metrics_export_config: {
                                        mqtt_topic: ::String,
@@ -1119,21 +990,14 @@ module Aws
                            stream_id: ::String,
                            ?description: ::String,
                            files: Array[
-                             {
-                               file_id: ::Integer?,
-                               s3_location: {
-                                 bucket: ::String?,
-                                 key: ::String?,
-                                 version: ::String?
-                               }?
-                             },
+                             Params::stream_file
                            ],
                            role_arn: ::String,
                            ?tags: Array[
                              {
                                key: ::String,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _CreateStreamResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStreamResponseSuccess
@@ -1177,7 +1041,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateThingGroupResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThingGroupResponseSuccess
@@ -1191,24 +1055,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#create_thing_type-instance_method
       def create_thing_type: (
                                thing_type_name: ::String,
-                               ?thing_type_properties: {
-                                 thing_type_description: ::String?,
-                                 searchable_attributes: Array[::String]?,
-                                 mqtt5_configuration: {
-                                   propagating_attributes: Array[
-                                     {
-                                       user_property_key: ::String?,
-                                       thing_attribute: ::String?,
-                                       connection_attribute: ::String?
-                                     },
-                                   ]?
-                                 }?
-                               },
+                               ?thing_type_properties: Params::thing_type_properties,
                                ?tags: Array[
                                  {
                                    key: ::String,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateThingTypeResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateThingTypeResponseSuccess
@@ -1216,436 +1068,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#create_topic_rule-instance_method
       def create_topic_rule: (
                                rule_name: ::String,
-                               topic_rule_payload: {
-                                 sql: ::String,
-                                 description: ::String?,
-                                 actions: Array[
-                                   {
-                                     dynamo_db: {
-                                       table_name: ::String,
-                                       role_arn: ::String,
-                                       operation: ::String?,
-                                       hash_key_field: ::String,
-                                       hash_key_value: ::String,
-                                       hash_key_type: ("STRING" | "NUMBER")?,
-                                       range_key_field: ::String?,
-                                       range_key_value: ::String?,
-                                       range_key_type: ("STRING" | "NUMBER")?,
-                                       payload_field: ::String?
-                                     }?,
-                                     dynamo_d_bv_2: {
-                                       role_arn: ::String,
-                                       put_item: {
-                                         table_name: ::String
-                                       }
-                                     }?,
-                                     lambda: {
-                                       function_arn: ::String
-                                     }?,
-                                     sns: {
-                                       target_arn: ::String,
-                                       role_arn: ::String,
-                                       message_format: ("RAW" | "JSON")?
-                                     }?,
-                                     sqs: {
-                                       role_arn: ::String,
-                                       queue_url: ::String,
-                                       use_base_64: bool?
-                                     }?,
-                                     kinesis: {
-                                       role_arn: ::String,
-                                       stream_name: ::String,
-                                       partition_key: ::String?
-                                     }?,
-                                     republish: {
-                                       role_arn: ::String,
-                                       topic: ::String,
-                                       qos: ::Integer?,
-                                       headers: {
-                                         payload_format_indicator: ::String?,
-                                         content_type: ::String?,
-                                         response_topic: ::String?,
-                                         correlation_data: ::String?,
-                                         message_expiry: ::String?,
-                                         user_properties: Array[
-                                           {
-                                             key: ::String,
-                                             value: ::String
-                                           },
-                                         ]?
-                                       }?
-                                     }?,
-                                     s3: {
-                                       role_arn: ::String,
-                                       bucket_name: ::String,
-                                       key: ::String,
-                                       canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")?
-                                     }?,
-                                     firehose: {
-                                       role_arn: ::String,
-                                       delivery_stream_name: ::String,
-                                       separator: ::String?,
-                                       batch_mode: bool?
-                                     }?,
-                                     cloudwatch_metric: {
-                                       role_arn: ::String,
-                                       metric_namespace: ::String,
-                                       metric_name: ::String,
-                                       metric_value: ::String,
-                                       metric_unit: ::String,
-                                       metric_timestamp: ::String?
-                                     }?,
-                                     cloudwatch_alarm: {
-                                       role_arn: ::String,
-                                       alarm_name: ::String,
-                                       state_reason: ::String,
-                                       state_value: ::String
-                                     }?,
-                                     cloudwatch_logs: {
-                                       role_arn: ::String,
-                                       log_group_name: ::String,
-                                       batch_mode: bool?
-                                     }?,
-                                     elasticsearch: {
-                                       role_arn: ::String,
-                                       endpoint: ::String,
-                                       index: ::String,
-                                       type: ::String,
-                                       id: ::String
-                                     }?,
-                                     salesforce: {
-                                       token: ::String,
-                                       url: ::String
-                                     }?,
-                                     iot_analytics: {
-                                       channel_arn: ::String?,
-                                       channel_name: ::String?,
-                                       batch_mode: bool?,
-                                       role_arn: ::String?
-                                     }?,
-                                     iot_events: {
-                                       input_name: ::String,
-                                       message_id: ::String?,
-                                       batch_mode: bool?,
-                                       role_arn: ::String
-                                     }?,
-                                     iot_site_wise: {
-                                       put_asset_property_value_entries: Array[
-                                         {
-                                           entry_id: ::String?,
-                                           asset_id: ::String?,
-                                           property_id: ::String?,
-                                           property_alias: ::String?,
-                                           property_values: Array[
-                                             {
-                                               value: {
-                                                 string_value: ::String?,
-                                                 integer_value: ::String?,
-                                                 double_value: ::String?,
-                                                 boolean_value: ::String?
-                                               },
-                                               timestamp: {
-                                                 time_in_seconds: ::String,
-                                                 offset_in_nanos: ::String?
-                                               },
-                                               quality: ::String?
-                                             },
-                                           ]
-                                         },
-                                       ],
-                                       role_arn: ::String
-                                     }?,
-                                     step_functions: {
-                                       execution_name_prefix: ::String?,
-                                       state_machine_name: ::String,
-                                       role_arn: ::String
-                                     }?,
-                                     timestream: {
-                                       role_arn: ::String,
-                                       database_name: ::String,
-                                       table_name: ::String,
-                                       dimensions: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String
-                                         },
-                                       ],
-                                       timestamp: {
-                                         value: ::String,
-                                         unit: ::String
-                                       }?
-                                     }?,
-                                     http: {
-                                       url: ::String,
-                                       confirmation_url: ::String?,
-                                       headers: Array[
-                                         {
-                                           key: ::String,
-                                           value: ::String
-                                         },
-                                       ]?,
-                                       auth: {
-                                         sigv4: {
-                                           signing_region: ::String,
-                                           service_name: ::String,
-                                           role_arn: ::String
-                                         }?
-                                       }?,
-                                       enable_batching: bool?,
-                                       batch_config: {
-                                         max_batch_open_ms: ::Integer?,
-                                         max_batch_size: ::Integer?,
-                                         max_batch_size_bytes: ::Integer?,
-                                         batch_across_topics: bool?
-                                       }?
-                                     }?,
-                                     kafka: {
-                                       destination_arn: ::String,
-                                       topic: ::String,
-                                       key: ::String?,
-                                       partition: ::String?,
-                                       client_properties: Hash[::String, ::String],
-                                       headers: Array[
-                                         {
-                                           key: ::String,
-                                           value: ::String
-                                         },
-                                       ]?
-                                     }?,
-                                     open_search: {
-                                       role_arn: ::String,
-                                       endpoint: ::String,
-                                       index: ::String,
-                                       type: ::String,
-                                       id: ::String
-                                     }?,
-                                     location: {
-                                       role_arn: ::String,
-                                       tracker_name: ::String,
-                                       device_id: ::String,
-                                       timestamp: {
-                                         value: ::String,
-                                         unit: ::String?
-                                       }?,
-                                       latitude: ::String,
-                                       longitude: ::String
-                                     }?
-                                   },
-                                 ],
-                                 rule_disabled: bool?,
-                                 aws_iot_sql_version: ::String?,
-                                 error_action: {
-                                   dynamo_db: {
-                                     table_name: ::String,
-                                     role_arn: ::String,
-                                     operation: ::String?,
-                                     hash_key_field: ::String,
-                                     hash_key_value: ::String,
-                                     hash_key_type: ("STRING" | "NUMBER")?,
-                                     range_key_field: ::String?,
-                                     range_key_value: ::String?,
-                                     range_key_type: ("STRING" | "NUMBER")?,
-                                     payload_field: ::String?
-                                   }?,
-                                   dynamo_d_bv_2: {
-                                     role_arn: ::String,
-                                     put_item: {
-                                       table_name: ::String
-                                     }
-                                   }?,
-                                   lambda: {
-                                     function_arn: ::String
-                                   }?,
-                                   sns: {
-                                     target_arn: ::String,
-                                     role_arn: ::String,
-                                     message_format: ("RAW" | "JSON")?
-                                   }?,
-                                   sqs: {
-                                     role_arn: ::String,
-                                     queue_url: ::String,
-                                     use_base_64: bool?
-                                   }?,
-                                   kinesis: {
-                                     role_arn: ::String,
-                                     stream_name: ::String,
-                                     partition_key: ::String?
-                                   }?,
-                                   republish: {
-                                     role_arn: ::String,
-                                     topic: ::String,
-                                     qos: ::Integer?,
-                                     headers: {
-                                       payload_format_indicator: ::String?,
-                                       content_type: ::String?,
-                                       response_topic: ::String?,
-                                       correlation_data: ::String?,
-                                       message_expiry: ::String?,
-                                       user_properties: Array[
-                                         {
-                                           key: ::String,
-                                           value: ::String
-                                         },
-                                       ]?
-                                     }?
-                                   }?,
-                                   s3: {
-                                     role_arn: ::String,
-                                     bucket_name: ::String,
-                                     key: ::String,
-                                     canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")?
-                                   }?,
-                                   firehose: {
-                                     role_arn: ::String,
-                                     delivery_stream_name: ::String,
-                                     separator: ::String?,
-                                     batch_mode: bool?
-                                   }?,
-                                   cloudwatch_metric: {
-                                     role_arn: ::String,
-                                     metric_namespace: ::String,
-                                     metric_name: ::String,
-                                     metric_value: ::String,
-                                     metric_unit: ::String,
-                                     metric_timestamp: ::String?
-                                   }?,
-                                   cloudwatch_alarm: {
-                                     role_arn: ::String,
-                                     alarm_name: ::String,
-                                     state_reason: ::String,
-                                     state_value: ::String
-                                   }?,
-                                   cloudwatch_logs: {
-                                     role_arn: ::String,
-                                     log_group_name: ::String,
-                                     batch_mode: bool?
-                                   }?,
-                                   elasticsearch: {
-                                     role_arn: ::String,
-                                     endpoint: ::String,
-                                     index: ::String,
-                                     type: ::String,
-                                     id: ::String
-                                   }?,
-                                   salesforce: {
-                                     token: ::String,
-                                     url: ::String
-                                   }?,
-                                   iot_analytics: {
-                                     channel_arn: ::String?,
-                                     channel_name: ::String?,
-                                     batch_mode: bool?,
-                                     role_arn: ::String?
-                                   }?,
-                                   iot_events: {
-                                     input_name: ::String,
-                                     message_id: ::String?,
-                                     batch_mode: bool?,
-                                     role_arn: ::String
-                                   }?,
-                                   iot_site_wise: {
-                                     put_asset_property_value_entries: Array[
-                                       {
-                                         entry_id: ::String?,
-                                         asset_id: ::String?,
-                                         property_id: ::String?,
-                                         property_alias: ::String?,
-                                         property_values: Array[
-                                           {
-                                             value: {
-                                               string_value: ::String?,
-                                               integer_value: ::String?,
-                                               double_value: ::String?,
-                                               boolean_value: ::String?
-                                             },
-                                             timestamp: {
-                                               time_in_seconds: ::String,
-                                               offset_in_nanos: ::String?
-                                             },
-                                             quality: ::String?
-                                           },
-                                         ]
-                                       },
-                                     ],
-                                     role_arn: ::String
-                                   }?,
-                                   step_functions: {
-                                     execution_name_prefix: ::String?,
-                                     state_machine_name: ::String,
-                                     role_arn: ::String
-                                   }?,
-                                   timestream: {
-                                     role_arn: ::String,
-                                     database_name: ::String,
-                                     table_name: ::String,
-                                     dimensions: Array[
-                                       {
-                                         name: ::String,
-                                         value: ::String
-                                       },
-                                     ],
-                                     timestamp: {
-                                       value: ::String,
-                                       unit: ::String
-                                     }?
-                                   }?,
-                                   http: {
-                                     url: ::String,
-                                     confirmation_url: ::String?,
-                                     headers: Array[
-                                       {
-                                         key: ::String,
-                                         value: ::String
-                                       },
-                                     ]?,
-                                     auth: {
-                                       sigv4: {
-                                         signing_region: ::String,
-                                         service_name: ::String,
-                                         role_arn: ::String
-                                       }?
-                                     }?,
-                                     enable_batching: bool?,
-                                     batch_config: {
-                                       max_batch_open_ms: ::Integer?,
-                                       max_batch_size: ::Integer?,
-                                       max_batch_size_bytes: ::Integer?,
-                                       batch_across_topics: bool?
-                                     }?
-                                   }?,
-                                   kafka: {
-                                     destination_arn: ::String,
-                                     topic: ::String,
-                                     key: ::String?,
-                                     partition: ::String?,
-                                     client_properties: Hash[::String, ::String],
-                                     headers: Array[
-                                       {
-                                         key: ::String,
-                                         value: ::String
-                                       },
-                                     ]?
-                                   }?,
-                                   open_search: {
-                                     role_arn: ::String,
-                                     endpoint: ::String,
-                                     index: ::String,
-                                     type: ::String,
-                                     id: ::String
-                                   }?,
-                                   location: {
-                                     role_arn: ::String,
-                                     tracker_name: ::String,
-                                     device_id: ::String,
-                                     timestamp: {
-                                       value: ::String,
-                                       unit: ::String?
-                                     }?,
-                                     latitude: ::String,
-                                     longitude: ::String
-                                   }?
-                                 }?
-                               },
+                               topic_rule_payload: Params::topic_rule_payload,
                                ?tags: ::String
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1685,25 +1108,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#delete_audit_suppression-instance_method
       def delete_audit_suppression: (
                                       check_name: ::String,
-                                      resource_identifier: {
-                                        device_certificate_id: ::String?,
-                                        ca_certificate_id: ::String?,
-                                        cognito_identity_pool_id: ::String?,
-                                        client_id: ::String?,
-                                        policy_version_identifier: {
-                                          policy_name: ::String?,
-                                          policy_version_id: ::String?
-                                        }?,
-                                        account: ::String?,
-                                        iam_role_arn: ::String?,
-                                        role_alias_arn: ::String?,
-                                        issuer_certificate_identifier: {
-                                          issuer_certificate_subject: ::String?,
-                                          issuer_id: ::String?,
-                                          issuer_certificate_serial_number: ::String?
-                                        }?,
-                                        device_certificate_arn: ::String?
-                                      }
+                                      resource_identifier: Params::resource_identifier
                                     ) -> _DeleteAuditSuppressionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAuditSuppressionResponseSuccess
 
@@ -2066,25 +1471,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#describe_audit_suppression-instance_method
       def describe_audit_suppression: (
                                         check_name: ::String,
-                                        resource_identifier: {
-                                          device_certificate_id: ::String?,
-                                          ca_certificate_id: ::String?,
-                                          cognito_identity_pool_id: ::String?,
-                                          client_id: ::String?,
-                                          policy_version_identifier: {
-                                            policy_name: ::String?,
-                                            policy_version_id: ::String?
-                                          }?,
-                                          account: ::String?,
-                                          iam_role_arn: ::String?,
-                                          role_alias_arn: ::String?,
-                                          issuer_certificate_identifier: {
-                                            issuer_certificate_subject: ::String?,
-                                            issuer_id: ::String?,
-                                            issuer_certificate_serial_number: ::String?
-                                          }?,
-                                          device_certificate_arn: ::String?
-                                        }
+                                        resource_identifier: Params::resource_identifier
                                       ) -> _DescribeAuditSuppressionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeAuditSuppressionResponseSuccess
 
@@ -2950,25 +2337,7 @@ module Aws
       def list_audit_findings: (
                                  ?task_id: ::String,
                                  ?check_name: ::String,
-                                 ?resource_identifier: {
-                                   device_certificate_id: ::String?,
-                                   ca_certificate_id: ::String?,
-                                   cognito_identity_pool_id: ::String?,
-                                   client_id: ::String?,
-                                   policy_version_identifier: {
-                                     policy_name: ::String?,
-                                     policy_version_id: ::String?
-                                   }?,
-                                   account: ::String?,
-                                   iam_role_arn: ::String?,
-                                   role_alias_arn: ::String?,
-                                   issuer_certificate_identifier: {
-                                     issuer_certificate_subject: ::String?,
-                                     issuer_id: ::String?,
-                                     issuer_certificate_serial_number: ::String?
-                                   }?,
-                                   device_certificate_arn: ::String?
-                                 },
+                                 ?resource_identifier: Params::resource_identifier,
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
                                  ?start_time: ::Time,
@@ -3017,25 +2386,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#list_audit_suppressions-instance_method
       def list_audit_suppressions: (
                                      ?check_name: ::String,
-                                     ?resource_identifier: {
-                                       device_certificate_id: ::String?,
-                                       ca_certificate_id: ::String?,
-                                       cognito_identity_pool_id: ::String?,
-                                       client_id: ::String?,
-                                       policy_version_identifier: {
-                                         policy_name: ::String?,
-                                         policy_version_id: ::String?
-                                       }?,
-                                       account: ::String?,
-                                       iam_role_arn: ::String?,
-                                       role_alias_arn: ::String?,
-                                       issuer_certificate_identifier: {
-                                         issuer_certificate_subject: ::String?,
-                                         issuer_id: ::String?,
-                                         issuer_certificate_serial_number: ::String?
-                                       }?,
-                                       device_certificate_arn: ::String?
-                                     },
+                                     ?resource_identifier: Params::resource_identifier,
                                      ?ascending_order: bool,
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -3888,7 +3239,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      ?certificate_mode: ("DEFAULT" | "SNI_ONLY")
                                    ) -> _RegisterCACertificateResponseSuccess
@@ -3966,436 +3317,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#replace_topic_rule-instance_method
       def replace_topic_rule: (
                                 rule_name: ::String,
-                                topic_rule_payload: {
-                                  sql: ::String,
-                                  description: ::String?,
-                                  actions: Array[
-                                    {
-                                      dynamo_db: {
-                                        table_name: ::String,
-                                        role_arn: ::String,
-                                        operation: ::String?,
-                                        hash_key_field: ::String,
-                                        hash_key_value: ::String,
-                                        hash_key_type: ("STRING" | "NUMBER")?,
-                                        range_key_field: ::String?,
-                                        range_key_value: ::String?,
-                                        range_key_type: ("STRING" | "NUMBER")?,
-                                        payload_field: ::String?
-                                      }?,
-                                      dynamo_d_bv_2: {
-                                        role_arn: ::String,
-                                        put_item: {
-                                          table_name: ::String
-                                        }
-                                      }?,
-                                      lambda: {
-                                        function_arn: ::String
-                                      }?,
-                                      sns: {
-                                        target_arn: ::String,
-                                        role_arn: ::String,
-                                        message_format: ("RAW" | "JSON")?
-                                      }?,
-                                      sqs: {
-                                        role_arn: ::String,
-                                        queue_url: ::String,
-                                        use_base_64: bool?
-                                      }?,
-                                      kinesis: {
-                                        role_arn: ::String,
-                                        stream_name: ::String,
-                                        partition_key: ::String?
-                                      }?,
-                                      republish: {
-                                        role_arn: ::String,
-                                        topic: ::String,
-                                        qos: ::Integer?,
-                                        headers: {
-                                          payload_format_indicator: ::String?,
-                                          content_type: ::String?,
-                                          response_topic: ::String?,
-                                          correlation_data: ::String?,
-                                          message_expiry: ::String?,
-                                          user_properties: Array[
-                                            {
-                                              key: ::String,
-                                              value: ::String
-                                            },
-                                          ]?
-                                        }?
-                                      }?,
-                                      s3: {
-                                        role_arn: ::String,
-                                        bucket_name: ::String,
-                                        key: ::String,
-                                        canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")?
-                                      }?,
-                                      firehose: {
-                                        role_arn: ::String,
-                                        delivery_stream_name: ::String,
-                                        separator: ::String?,
-                                        batch_mode: bool?
-                                      }?,
-                                      cloudwatch_metric: {
-                                        role_arn: ::String,
-                                        metric_namespace: ::String,
-                                        metric_name: ::String,
-                                        metric_value: ::String,
-                                        metric_unit: ::String,
-                                        metric_timestamp: ::String?
-                                      }?,
-                                      cloudwatch_alarm: {
-                                        role_arn: ::String,
-                                        alarm_name: ::String,
-                                        state_reason: ::String,
-                                        state_value: ::String
-                                      }?,
-                                      cloudwatch_logs: {
-                                        role_arn: ::String,
-                                        log_group_name: ::String,
-                                        batch_mode: bool?
-                                      }?,
-                                      elasticsearch: {
-                                        role_arn: ::String,
-                                        endpoint: ::String,
-                                        index: ::String,
-                                        type: ::String,
-                                        id: ::String
-                                      }?,
-                                      salesforce: {
-                                        token: ::String,
-                                        url: ::String
-                                      }?,
-                                      iot_analytics: {
-                                        channel_arn: ::String?,
-                                        channel_name: ::String?,
-                                        batch_mode: bool?,
-                                        role_arn: ::String?
-                                      }?,
-                                      iot_events: {
-                                        input_name: ::String,
-                                        message_id: ::String?,
-                                        batch_mode: bool?,
-                                        role_arn: ::String
-                                      }?,
-                                      iot_site_wise: {
-                                        put_asset_property_value_entries: Array[
-                                          {
-                                            entry_id: ::String?,
-                                            asset_id: ::String?,
-                                            property_id: ::String?,
-                                            property_alias: ::String?,
-                                            property_values: Array[
-                                              {
-                                                value: {
-                                                  string_value: ::String?,
-                                                  integer_value: ::String?,
-                                                  double_value: ::String?,
-                                                  boolean_value: ::String?
-                                                },
-                                                timestamp: {
-                                                  time_in_seconds: ::String,
-                                                  offset_in_nanos: ::String?
-                                                },
-                                                quality: ::String?
-                                              },
-                                            ]
-                                          },
-                                        ],
-                                        role_arn: ::String
-                                      }?,
-                                      step_functions: {
-                                        execution_name_prefix: ::String?,
-                                        state_machine_name: ::String,
-                                        role_arn: ::String
-                                      }?,
-                                      timestream: {
-                                        role_arn: ::String,
-                                        database_name: ::String,
-                                        table_name: ::String,
-                                        dimensions: Array[
-                                          {
-                                            name: ::String,
-                                            value: ::String
-                                          },
-                                        ],
-                                        timestamp: {
-                                          value: ::String,
-                                          unit: ::String
-                                        }?
-                                      }?,
-                                      http: {
-                                        url: ::String,
-                                        confirmation_url: ::String?,
-                                        headers: Array[
-                                          {
-                                            key: ::String,
-                                            value: ::String
-                                          },
-                                        ]?,
-                                        auth: {
-                                          sigv4: {
-                                            signing_region: ::String,
-                                            service_name: ::String,
-                                            role_arn: ::String
-                                          }?
-                                        }?,
-                                        enable_batching: bool?,
-                                        batch_config: {
-                                          max_batch_open_ms: ::Integer?,
-                                          max_batch_size: ::Integer?,
-                                          max_batch_size_bytes: ::Integer?,
-                                          batch_across_topics: bool?
-                                        }?
-                                      }?,
-                                      kafka: {
-                                        destination_arn: ::String,
-                                        topic: ::String,
-                                        key: ::String?,
-                                        partition: ::String?,
-                                        client_properties: Hash[::String, ::String],
-                                        headers: Array[
-                                          {
-                                            key: ::String,
-                                            value: ::String
-                                          },
-                                        ]?
-                                      }?,
-                                      open_search: {
-                                        role_arn: ::String,
-                                        endpoint: ::String,
-                                        index: ::String,
-                                        type: ::String,
-                                        id: ::String
-                                      }?,
-                                      location: {
-                                        role_arn: ::String,
-                                        tracker_name: ::String,
-                                        device_id: ::String,
-                                        timestamp: {
-                                          value: ::String,
-                                          unit: ::String?
-                                        }?,
-                                        latitude: ::String,
-                                        longitude: ::String
-                                      }?
-                                    },
-                                  ],
-                                  rule_disabled: bool?,
-                                  aws_iot_sql_version: ::String?,
-                                  error_action: {
-                                    dynamo_db: {
-                                      table_name: ::String,
-                                      role_arn: ::String,
-                                      operation: ::String?,
-                                      hash_key_field: ::String,
-                                      hash_key_value: ::String,
-                                      hash_key_type: ("STRING" | "NUMBER")?,
-                                      range_key_field: ::String?,
-                                      range_key_value: ::String?,
-                                      range_key_type: ("STRING" | "NUMBER")?,
-                                      payload_field: ::String?
-                                    }?,
-                                    dynamo_d_bv_2: {
-                                      role_arn: ::String,
-                                      put_item: {
-                                        table_name: ::String
-                                      }
-                                    }?,
-                                    lambda: {
-                                      function_arn: ::String
-                                    }?,
-                                    sns: {
-                                      target_arn: ::String,
-                                      role_arn: ::String,
-                                      message_format: ("RAW" | "JSON")?
-                                    }?,
-                                    sqs: {
-                                      role_arn: ::String,
-                                      queue_url: ::String,
-                                      use_base_64: bool?
-                                    }?,
-                                    kinesis: {
-                                      role_arn: ::String,
-                                      stream_name: ::String,
-                                      partition_key: ::String?
-                                    }?,
-                                    republish: {
-                                      role_arn: ::String,
-                                      topic: ::String,
-                                      qos: ::Integer?,
-                                      headers: {
-                                        payload_format_indicator: ::String?,
-                                        content_type: ::String?,
-                                        response_topic: ::String?,
-                                        correlation_data: ::String?,
-                                        message_expiry: ::String?,
-                                        user_properties: Array[
-                                          {
-                                            key: ::String,
-                                            value: ::String
-                                          },
-                                        ]?
-                                      }?
-                                    }?,
-                                    s3: {
-                                      role_arn: ::String,
-                                      bucket_name: ::String,
-                                      key: ::String,
-                                      canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")?
-                                    }?,
-                                    firehose: {
-                                      role_arn: ::String,
-                                      delivery_stream_name: ::String,
-                                      separator: ::String?,
-                                      batch_mode: bool?
-                                    }?,
-                                    cloudwatch_metric: {
-                                      role_arn: ::String,
-                                      metric_namespace: ::String,
-                                      metric_name: ::String,
-                                      metric_value: ::String,
-                                      metric_unit: ::String,
-                                      metric_timestamp: ::String?
-                                    }?,
-                                    cloudwatch_alarm: {
-                                      role_arn: ::String,
-                                      alarm_name: ::String,
-                                      state_reason: ::String,
-                                      state_value: ::String
-                                    }?,
-                                    cloudwatch_logs: {
-                                      role_arn: ::String,
-                                      log_group_name: ::String,
-                                      batch_mode: bool?
-                                    }?,
-                                    elasticsearch: {
-                                      role_arn: ::String,
-                                      endpoint: ::String,
-                                      index: ::String,
-                                      type: ::String,
-                                      id: ::String
-                                    }?,
-                                    salesforce: {
-                                      token: ::String,
-                                      url: ::String
-                                    }?,
-                                    iot_analytics: {
-                                      channel_arn: ::String?,
-                                      channel_name: ::String?,
-                                      batch_mode: bool?,
-                                      role_arn: ::String?
-                                    }?,
-                                    iot_events: {
-                                      input_name: ::String,
-                                      message_id: ::String?,
-                                      batch_mode: bool?,
-                                      role_arn: ::String
-                                    }?,
-                                    iot_site_wise: {
-                                      put_asset_property_value_entries: Array[
-                                        {
-                                          entry_id: ::String?,
-                                          asset_id: ::String?,
-                                          property_id: ::String?,
-                                          property_alias: ::String?,
-                                          property_values: Array[
-                                            {
-                                              value: {
-                                                string_value: ::String?,
-                                                integer_value: ::String?,
-                                                double_value: ::String?,
-                                                boolean_value: ::String?
-                                              },
-                                              timestamp: {
-                                                time_in_seconds: ::String,
-                                                offset_in_nanos: ::String?
-                                              },
-                                              quality: ::String?
-                                            },
-                                          ]
-                                        },
-                                      ],
-                                      role_arn: ::String
-                                    }?,
-                                    step_functions: {
-                                      execution_name_prefix: ::String?,
-                                      state_machine_name: ::String,
-                                      role_arn: ::String
-                                    }?,
-                                    timestream: {
-                                      role_arn: ::String,
-                                      database_name: ::String,
-                                      table_name: ::String,
-                                      dimensions: Array[
-                                        {
-                                          name: ::String,
-                                          value: ::String
-                                        },
-                                      ],
-                                      timestamp: {
-                                        value: ::String,
-                                        unit: ::String
-                                      }?
-                                    }?,
-                                    http: {
-                                      url: ::String,
-                                      confirmation_url: ::String?,
-                                      headers: Array[
-                                        {
-                                          key: ::String,
-                                          value: ::String
-                                        },
-                                      ]?,
-                                      auth: {
-                                        sigv4: {
-                                          signing_region: ::String,
-                                          service_name: ::String,
-                                          role_arn: ::String
-                                        }?
-                                      }?,
-                                      enable_batching: bool?,
-                                      batch_config: {
-                                        max_batch_open_ms: ::Integer?,
-                                        max_batch_size: ::Integer?,
-                                        max_batch_size_bytes: ::Integer?,
-                                        batch_across_topics: bool?
-                                      }?
-                                    }?,
-                                    kafka: {
-                                      destination_arn: ::String,
-                                      topic: ::String,
-                                      key: ::String?,
-                                      partition: ::String?,
-                                      client_properties: Hash[::String, ::String],
-                                      headers: Array[
-                                        {
-                                          key: ::String,
-                                          value: ::String
-                                        },
-                                      ]?
-                                    }?,
-                                    open_search: {
-                                      role_arn: ::String,
-                                      endpoint: ::String,
-                                      index: ::String,
-                                      type: ::String,
-                                      id: ::String
-                                    }?,
-                                    location: {
-                                      role_arn: ::String,
-                                      tracker_name: ::String,
-                                      device_id: ::String,
-                                      timestamp: {
-                                        value: ::String,
-                                        unit: ::String?
-                                      }?,
-                                      latitude: ::String,
-                                      longitude: ::String
-                                    }?
-                                  }?
-                                }
+                                topic_rule_payload: Params::topic_rule_payload
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
@@ -4462,7 +3384,7 @@ module Aws
                                         event_type: ::String,
                                         log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")?,
                                         log_destination: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -4549,7 +3471,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -4566,7 +3488,7 @@ module Aws
                                   {
                                     action_type: ("PUBLISH" | "SUBSCRIBE" | "RECEIVE" | "CONNECT")?,
                                     resources: Array[::String]
-                                  },
+                                  }
                                 ],
                                 ?client_id: ::String,
                                 ?policy_names_to_add: Array[::String],
@@ -4648,25 +3570,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#update_audit_suppression-instance_method
       def update_audit_suppression: (
                                       check_name: ::String,
-                                      resource_identifier: {
-                                        device_certificate_id: ::String?,
-                                        ca_certificate_id: ::String?,
-                                        cognito_identity_pool_id: ::String?,
-                                        client_id: ::String?,
-                                        policy_version_identifier: {
-                                          policy_name: ::String?,
-                                          policy_version_id: ::String?
-                                        }?,
-                                        account: ::String?,
-                                        iam_role_arn: ::String?,
-                                        role_alias_arn: ::String?,
-                                        issuer_certificate_identifier: {
-                                          issuer_certificate_subject: ::String?,
-                                          issuer_id: ::String?,
-                                          issuer_certificate_serial_number: ::String?
-                                        }?,
-                                        device_certificate_arn: ::String?
-                                      },
+                                      resource_identifier: Params::resource_identifier,
                                       ?expiration_date: ::Time,
                                       ?suppress_indefinitely: bool,
                                       ?description: ::String
@@ -4891,13 +3795,13 @@ module Aws
                                                {
                                                  name: ::String?,
                                                  type: ("Number" | "String" | "Boolean")?
-                                               },
+                                               }
                                              ]?,
                                              custom_fields: Array[
                                                {
                                                  name: ::String?,
                                                  type: ("Number" | "String" | "Boolean")?
-                                               },
+                                               }
                                              ]?,
                                              filter: {
                                                named_shadow_names: Array[::String]?,
@@ -4905,7 +3809,7 @@ module Aws
                                                  {
                                                    name: ::String?,
                                                    order: ("LatLon" | "LonLat")?
-                                                 },
+                                                 }
                                                ]?
                                              }?
                                            },
@@ -4915,13 +3819,13 @@ module Aws
                                                {
                                                  name: ::String?,
                                                  type: ("Number" | "String" | "Boolean")?
-                                               },
+                                               }
                                              ]?,
                                              custom_fields: Array[
                                                {
                                                  name: ::String?,
                                                  type: ("Number" | "String" | "Boolean")?
-                                               },
+                                               }
                                              ]?
                                            }
                                          ) -> _UpdateIndexingConfigurationResponseSuccess
@@ -4935,27 +3839,8 @@ module Aws
                           role_arn: ::String?,
                           expires_in_sec: ::Integer?
                         },
-                        ?job_executions_rollout_config: {
-                          maximum_per_minute: ::Integer?,
-                          exponential_rate: {
-                            base_rate_per_minute: ::Integer,
-                            increment_factor: ::Float,
-                            rate_increase_criteria: {
-                              number_of_notified_things: ::Integer?,
-                              number_of_succeeded_things: ::Integer?
-                            }
-                          }?
-                        },
-                        ?abort_config: {
-                          criteria_list: Array[
-                            {
-                              failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL"),
-                              action: ("CANCEL"),
-                              threshold_percentage: ::Float,
-                              min_number_of_executed_things: ::Integer
-                            },
-                          ]
-                        },
+                        ?job_executions_rollout_config: Params::job_executions_rollout_config,
+                        ?abort_config: Params::abort_config,
                         ?timeout_config: {
                           in_progress_timeout_in_minutes: ::Integer?
                         },
@@ -4965,7 +3850,7 @@ module Aws
                             {
                               failure_type: ("FAILED" | "TIMED_OUT" | "ALL"),
                               number_of_retries: ::Integer
-                            },
+                            }
                           ]
                         }
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -4980,28 +3865,7 @@ module Aws
       def update_mitigation_action: (
                                       action_name: ::String,
                                       ?role_arn: ::String,
-                                      ?action_params: {
-                                        update_device_certificate_params: {
-                                          action: ("DEACTIVATE")
-                                        }?,
-                                        update_ca_certificate_params: {
-                                          action: ("DEACTIVATE")
-                                        }?,
-                                        add_things_to_thing_group_params: {
-                                          thing_group_names: Array[::String],
-                                          override_dynamic_groups: bool?
-                                        }?,
-                                        replace_default_policy_version_params: {
-                                          template_name: ("BLANK_POLICY")
-                                        }?,
-                                        enable_io_t_logging_params: {
-                                          role_arn_for_logging: ::String,
-                                          log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
-                                        }?,
-                                        publish_finding_to_sns_params: {
-                                          topic_arn: ::String
-                                        }?
-                                      }
+                                      ?action_params: Params::mitigation_action_params
                                     ) -> _UpdateMitigationActionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMitigationActionResponseSuccess
 
@@ -5117,36 +3981,7 @@ module Aws
                                      security_profile_name: ::String,
                                      ?security_profile_description: ::String,
                                      ?behaviors: Array[
-                                       {
-                                         name: ::String,
-                                         metric: ::String?,
-                                         metric_dimension: {
-                                           dimension_name: ::String,
-                                           operator: ("IN" | "NOT_IN")?
-                                         }?,
-                                         criteria: {
-                                           comparison_operator: ("less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "in-cidr-set" | "not-in-cidr-set" | "in-port-set" | "not-in-port-set" | "in-set" | "not-in-set")?,
-                                           value: {
-                                             count: ::Integer?,
-                                             cidrs: Array[::String]?,
-                                             ports: Array[::Integer]?,
-                                             number: ::Float?,
-                                             numbers: Array[::Float]?,
-                                             strings: Array[::String]?
-                                           }?,
-                                           duration_seconds: ::Integer?,
-                                           consecutive_datapoints_to_alarm: ::Integer?,
-                                           consecutive_datapoints_to_clear: ::Integer?,
-                                           statistical_threshold: {
-                                             statistic: ::String?
-                                           }?,
-                                           ml_detection_config: {
-                                             confidence_level: ("LOW" | "MEDIUM" | "HIGH")
-                                           }?
-                                         }?,
-                                         suppress_alerts: bool?,
-                                         export_metric: bool?
-                                       },
+                                       Params::behavior
                                      ],
                                      ?alert_targets: Hash[("SNS"), {
                                          alert_target_arn: ::String,
@@ -5154,14 +3989,7 @@ module Aws
                                        }],
                                      ?additional_metrics_to_retain: Array[::String],
                                      ?additional_metrics_to_retain_v2: Array[
-                                       {
-                                         metric: ::String,
-                                         metric_dimension: {
-                                           dimension_name: ::String,
-                                           operator: ("IN" | "NOT_IN")?
-                                         }?,
-                                         export_metric: bool?
-                                       },
+                                       Params::metric_to_retain
                                      ],
                                      ?delete_behaviors: bool,
                                      ?delete_alert_targets: bool,
@@ -5187,14 +4015,7 @@ module Aws
                            stream_id: ::String,
                            ?description: ::String,
                            ?files: Array[
-                             {
-                               file_id: ::Integer?,
-                               s3_location: {
-                                 bucket: ::String?,
-                                 key: ::String?,
-                                 version: ::String?
-                               }?
-                             },
+                             Params::stream_file
                            ],
                            ?role_arn: ::String
                          ) -> _UpdateStreamResponseSuccess
@@ -5252,19 +4073,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#update_thing_type-instance_method
       def update_thing_type: (
                                thing_type_name: ::String,
-                               ?thing_type_properties: {
-                                 thing_type_description: ::String?,
-                                 searchable_attributes: Array[::String]?,
-                                 mqtt5_configuration: {
-                                   propagating_attributes: Array[
-                                     {
-                                       user_property_key: ::String?,
-                                       thing_attribute: ::String?,
-                                       connection_attribute: ::String?
-                                     },
-                                   ]?
-                                 }?
-                               }
+                               ?thing_type_properties: Params::thing_type_properties
                              ) -> _UpdateThingTypeResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateThingTypeResponseSuccess
 
@@ -5286,36 +4095,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoT/Client.html#validate_security_profile_behaviors-instance_method
       def validate_security_profile_behaviors: (
                                                  behaviors: Array[
-                                                   {
-                                                     name: ::String,
-                                                     metric: ::String?,
-                                                     metric_dimension: {
-                                                       dimension_name: ::String,
-                                                       operator: ("IN" | "NOT_IN")?
-                                                     }?,
-                                                     criteria: {
-                                                       comparison_operator: ("less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "in-cidr-set" | "not-in-cidr-set" | "in-port-set" | "not-in-port-set" | "in-set" | "not-in-set")?,
-                                                       value: {
-                                                         count: ::Integer?,
-                                                         cidrs: Array[::String]?,
-                                                         ports: Array[::Integer]?,
-                                                         number: ::Float?,
-                                                         numbers: Array[::Float]?,
-                                                         strings: Array[::String]?
-                                                       }?,
-                                                       duration_seconds: ::Integer?,
-                                                       consecutive_datapoints_to_alarm: ::Integer?,
-                                                       consecutive_datapoints_to_clear: ::Integer?,
-                                                       statistical_threshold: {
-                                                         statistic: ::String?
-                                                       }?,
-                                                       ml_detection_config: {
-                                                         confidence_level: ("LOW" | "MEDIUM" | "HIGH")
-                                                       }?
-                                                     }?,
-                                                     suppress_alerts: bool?,
-                                                     export_metric: bool?
-                                                   },
+                                                   Params::behavior
                                                  ]
                                                ) -> _ValidateSecurityProfileBehaviorsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidateSecurityProfileBehaviorsResponseSuccess

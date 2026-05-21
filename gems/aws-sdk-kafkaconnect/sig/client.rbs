@@ -147,7 +147,7 @@ module Aws
                                     custom_plugin_arn: ::String,
                                     revision: ::Integer
                                   }
-                                },
+                                }
                               ],
                               service_execution_role_arn: ::String,
                               ?worker_configuration: {

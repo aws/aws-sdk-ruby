@@ -54,7 +54,7 @@ module Aws::SSMQuickSetup
   autoload :EndpointProvider, 'aws-sdk-ssmquicksetup/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssmquicksetup/endpoints'
 
-  GEM_VERSION = '1.28.0'
+  GEM_VERSION = '1.29.0'
 
 end
 

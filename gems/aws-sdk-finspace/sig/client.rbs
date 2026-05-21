@@ -91,14 +91,7 @@ module Aws
                                 ?kms_key_id: ::String,
                                 ?tags: Hash[::String, ::String],
                                 ?federation_mode: ("FEDERATED" | "LOCAL"),
-                                ?federation_parameters: {
-                                  saml_metadata_document: ::String?,
-                                  saml_metadata_url: ::String?,
-                                  application_call_back_url: ::String?,
-                                  federation_urn: ::String?,
-                                  federation_provider_name: ::String?,
-                                  attribute_map: Hash[::String, ::String]?
-                                },
+                                ?federation_parameters: Params::federation_parameters,
                                 ?superuser_parameters: {
                                   email_address: ::String,
                                   first_name: ::String,
@@ -128,7 +121,7 @@ module Aws
                                      change_type: ("PUT" | "DELETE"),
                                      s3_path: ::String?,
                                      db_path: ::String
-                                   },
+                                   }
                                  ],
                                  client_token: ::String
                                ) -> _CreateKxChangesetResponseSuccess
@@ -171,36 +164,13 @@ module Aws
                                  tickerplant_log_volumes: Array[::String]?
                                },
                                ?databases: Array[
-                                 {
-                                   database_name: ::String,
-                                   cache_configurations: Array[
-                                     {
-                                       cache_type: ::String,
-                                       db_paths: Array[::String],
-                                       dataview_name: ::String?
-                                     },
-                                   ]?,
-                                   changeset_id: ::String?,
-                                   dataview_name: ::String?,
-                                   dataview_configuration: {
-                                     dataview_name: ::String?,
-                                     dataview_version_id: ::String?,
-                                     changeset_id: ::String?,
-                                     segment_configurations: Array[
-                                       {
-                                         db_paths: Array[::String],
-                                         volume_name: ::String,
-                                         on_demand: bool?
-                                       },
-                                     ]?
-                                   }?
-                                 },
+                                 Params::kx_database_configuration
                                ],
                                ?cache_storage_configurations: Array[
                                  {
                                    type: ::String,
                                    size: ::Integer
-                                 },
+                                 }
                                ],
                                ?auto_scaling_configuration: {
                                  min_node_count: ::Integer?,
@@ -227,7 +197,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ],
                                ?code: {
                                  s3_bucket: ::String?,
@@ -301,7 +271,7 @@ module Aws
                                     db_paths: Array[::String],
                                     volume_name: ::String,
                                     on_demand: bool?
-                                  },
+                                  }
                                 ],
                                 ?auto_update: bool,
                                 ?read_write: bool,
@@ -873,14 +843,7 @@ module Aws
                                 ?name: ::String,
                                 ?description: ::String,
                                 ?federation_mode: ("FEDERATED" | "LOCAL"),
-                                ?federation_parameters: {
-                                  saml_metadata_document: ::String?,
-                                  saml_metadata_url: ::String?,
-                                  application_call_back_url: ::String?,
-                                  federation_urn: ::String?,
-                                  federation_provider_name: ::String?,
-                                  attribute_map: Hash[::String, ::String]?
-                                }
+                                ?federation_parameters: Params::federation_parameters
                               ) -> _UpdateEnvironmentResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
 
@@ -902,7 +865,7 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?deployment_configuration: {
                                                     deployment_strategy: ("NO_RESTART" | "ROLLING" | "FORCE")
@@ -919,30 +882,7 @@ module Aws
                                          cluster_name: ::String,
                                          ?client_token: ::String,
                                          databases: Array[
-                                           {
-                                             database_name: ::String,
-                                             cache_configurations: Array[
-                                               {
-                                                 cache_type: ::String,
-                                                 db_paths: Array[::String],
-                                                 dataview_name: ::String?
-                                               },
-                                             ]?,
-                                             changeset_id: ::String?,
-                                             dataview_name: ::String?,
-                                             dataview_configuration: {
-                                               dataview_name: ::String?,
-                                               dataview_version_id: ::String?,
-                                               changeset_id: ::String?,
-                                               segment_configurations: Array[
-                                                 {
-                                                   db_paths: Array[::String],
-                                                   volume_name: ::String,
-                                                   on_demand: bool?
-                                                 },
-                                               ]?
-                                             }?
-                                           },
+                                           Params::kx_database_configuration
                                          ],
                                          ?deployment_configuration: {
                                            deployment_strategy: ("NO_RESTART" | "ROLLING")
@@ -995,7 +935,7 @@ module Aws
                                     db_paths: Array[::String],
                                     volume_name: ::String,
                                     on_demand: bool?
-                                  },
+                                  }
                                 ],
                                 client_token: ::String
                               ) -> _UpdateKxDataviewResponseSuccess
@@ -1068,14 +1008,14 @@ module Aws
                                                    code: ::Integer
                                                  }?,
                                                  cidr_block: ::String
-                                               },
+                                               }
                                              ]?
                                            },
                                            ?custom_dns_configuration: Array[
                                              {
                                                custom_dns_server_name: ::String,
                                                custom_dns_server_ip: ::String
-                                             },
+                                             }
                                            ],
                                            ?client_token: ::String
                                          ) -> _UpdateKxEnvironmentNetworkResponseSuccess

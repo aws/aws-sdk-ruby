@@ -144,7 +144,7 @@ module Aws
                               {
                                 question_id: ::String?,
                                 selected_choice_ids: Array[::String]?
-                              },
+                              }
                             ],
                             client_request_token: ::String,
                             ?tags: Hash[::String, ::String]
@@ -893,7 +893,7 @@ module Aws
                                     {
                                       pillar_id: ::String?,
                                       selected_question_ids: Array[::String]?
-                                    },
+                                    }
                                   ]?
                                 }
                               ) -> _UpdateLensReviewResponseSuccess
@@ -911,7 +911,7 @@ module Aws
                               {
                                 question_id: ::String?,
                                 selected_choice_ids: Array[::String]?
-                              },
+                              }
                             ]
                           ) -> _UpdateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProfileResponseSuccess

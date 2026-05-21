@@ -181,7 +181,7 @@ module Aws
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?description: ::String,
                             ?client_token: ::String,

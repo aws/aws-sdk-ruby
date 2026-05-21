@@ -64,7 +64,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ]?
                     },
                     ?grant_full_control: ::String,
@@ -94,7 +94,7 @@ module Aws
                                   etag: ::String?,
                                   last_modified_time: ::Time?,
                                   size: ::Integer?
-                                },
+                                }
                               ],
                               quiet: bool?
                             },

@@ -144,7 +144,7 @@ module Aws
                                             user_name: ::String,
                                             authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
                                             send_email_notification: bool?
-                                          },
+                                          }
                                         ]
                                       ) -> _BatchAssociateUserStackResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchAssociateUserStackResponseSuccess
@@ -161,7 +161,7 @@ module Aws
                                                user_name: ::String,
                                                authentication_type: ("API" | "SAML" | "USERPOOL" | "AWS_AD"),
                                                send_email_notification: bool?
-                                             },
+                                             }
                                            ]
                                          ) -> _BatchDisassociateUserStackResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDisassociateUserStackResponseSuccess
@@ -192,25 +192,9 @@ module Aws
                                 s3_bucket: ::String,
                                 s3_key: ::String?
                               },
-                              ?setup_script_details: {
-                                script_s3_location: {
-                                  s3_bucket: ::String,
-                                  s3_key: ::String?
-                                },
-                                executable_path: ::String,
-                                executable_parameters: ::String?,
-                                timeout_in_seconds: ::Integer
-                              },
+                              ?setup_script_details: Params::script_details,
                               ?tags: Hash[::String, ::String],
-                              ?post_setup_script_details: {
-                                script_s3_location: {
-                                  s3_bucket: ::String,
-                                  s3_key: ::String?
-                                },
-                                executable_path: ::String,
-                                executable_parameters: ::String?,
-                                timeout_in_seconds: ::Integer
-                              },
+                              ?post_setup_script_details: Params::script_details,
                               ?packaging_type: ("CUSTOM" | "APPSTREAM2")
                             ) -> _CreateAppBlockResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppBlockResponseSuccess
@@ -237,7 +221,7 @@ module Aws
                                         {
                                           endpoint_type: ("STREAMING"),
                                           vpce_id: ::String?
-                                        },
+                                        }
                                       ],
                                       ?disable_imdsv1: bool
                                     ) -> _CreateAppBlockBuilderResponseSuccess
@@ -311,7 +295,7 @@ module Aws
                                   {
                                     name: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _CreateEntitlementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEntitlementResponseSuccess
@@ -405,7 +389,7 @@ module Aws
                                     {
                                       endpoint_type: ("STREAMING"),
                                       vpce_id: ::String?
-                                    },
+                                    }
                                   ],
                                   ?root_volume_config: {
                                     volume_size_in_gb: ::Integer?
@@ -453,7 +437,7 @@ module Aws
                                        absolute_manifest_path: ::String?,
                                        working_directory: ::String?,
                                        launch_parameters: ::String?
-                                     },
+                                     }
                                    ],
                                    ?dry_run: bool
                                  ) -> _CreateImportedImageResponseSuccess
@@ -474,7 +458,7 @@ module Aws
                               resource_identifier: ::String?,
                               domains: Array[::String]?,
                               domains_require_admin_consent: Array[::String]?
-                            },
+                            }
                           ],
                           ?redirect_url: ::String,
                           ?feedback_url: ::String,
@@ -483,7 +467,7 @@ module Aws
                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION"),
                               permission: ("ENABLED" | "DISABLED"),
                               maximum_length: ::Integer?
-                            },
+                            }
                           ],
                           ?application_settings: {
                             enabled: bool,
@@ -494,7 +478,7 @@ module Aws
                             {
                               endpoint_type: ("STREAMING"),
                               vpce_id: ::String?
-                            },
+                            }
                           ],
                           ?embed_host_domains: Array[::String],
                           ?streaming_experience_settings: {
@@ -512,7 +496,7 @@ module Aws
                               {
                                 agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT"),
                                 permission: ("ENABLED" | "DISABLED")
-                              },
+                              }
                             ],
                             s3_bucket_arn: ::String?,
                             screenshots_upload_enabled: bool?,
@@ -549,7 +533,7 @@ module Aws
                                       {
                                         display_name: ::String?,
                                         footer_link_url: ::String?
-                                      },
+                                      }
                                     ],
                                     title_text: ::String,
                                     theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED"),
@@ -1127,7 +1111,7 @@ module Aws
                                        {
                                          name: ::String,
                                          values: Array[::String]
-                                       },
+                                       }
                                      ],
                                      ?max_results: ::Integer,
                                      ?next_token: ::String
@@ -1254,7 +1238,7 @@ module Aws
                                         {
                                           endpoint_type: ("STREAMING"),
                                           vpce_id: ::String?
-                                        },
+                                        }
                                       ],
                                       ?attributes_to_delete: Array[("IAM_ROLE_ARN" | "ACCESS_ENDPOINTS" | "VPC_CONFIGURATION_SECURITY_GROUP_IDS")],
                                       ?disable_imdsv1: bool
@@ -1315,7 +1299,7 @@ module Aws
                                   {
                                     name: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _UpdateEntitlementResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEntitlementResponseSuccess
@@ -1396,7 +1380,7 @@ module Aws
                               resource_identifier: ::String?,
                               domains: Array[::String]?,
                               domains_require_admin_consent: Array[::String]?
-                            },
+                            }
                           ],
                           ?delete_storage_connectors: bool,
                           ?redirect_url: ::String,
@@ -1407,7 +1391,7 @@ module Aws
                               action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "FILE_UPLOAD" | "FILE_DOWNLOAD" | "PRINTING_TO_LOCAL_DEVICE" | "DOMAIN_PASSWORD_SIGNIN" | "DOMAIN_SMART_CARD_SIGNIN" | "AUTO_TIME_ZONE_REDIRECTION"),
                               permission: ("ENABLED" | "DISABLED"),
                               maximum_length: ::Integer?
-                            },
+                            }
                           ],
                           ?application_settings: {
                             enabled: bool,
@@ -1417,7 +1401,7 @@ module Aws
                             {
                               endpoint_type: ("STREAMING"),
                               vpce_id: ::String?
-                            },
+                            }
                           ],
                           ?embed_host_domains: Array[::String],
                           ?streaming_experience_settings: {
@@ -1435,7 +1419,7 @@ module Aws
                               {
                                 agent_action: ("COMPUTER_VISION" | "COMPUTER_INPUT"),
                                 permission: ("ENABLED" | "DISABLED")
-                              },
+                              }
                             ]?,
                             s3_bucket_arn: ::String?,
                             screenshots_upload_enabled: bool?,
@@ -1456,7 +1440,7 @@ module Aws
                                       {
                                         display_name: ::String?,
                                         footer_link_url: ::String?
-                                      },
+                                      }
                                     ],
                                     ?title_text: ::String,
                                     ?theme_styling: ("LIGHT_BLUE" | "BLUE" | "PINK" | "RED"),

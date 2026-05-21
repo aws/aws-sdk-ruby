@@ -100,7 +100,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ],
                           ?vpc_endpoint_id: ::String,
                           ?subnet_arns: Array[::String],
@@ -127,7 +127,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?cmk_secret_config: {
                                           secret_arn: ::String?,
@@ -156,7 +156,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?access_point_arn: ::String,
                                  ?file_system_access_role_arn: ::String,
@@ -177,7 +177,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateLocationFsxLustreResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxLustreResponseSuccess
@@ -188,32 +188,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_ontap-instance_method
       def create_location_fsx_ontap: (
-                                       protocol: {
-                                         nfs: {
-                                           mount_options: {
-                                             version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
-                                           }?
-                                         }?,
-                                         smb: {
-                                           domain: ::String?,
-                                           mount_options: {
-                                             version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
-                                           }?,
-                                           password: ::String?,
-                                           user: ::String,
-                                           managed_secret_config: {
-                                             secret_arn: ::String?
-                                           }?,
-                                           cmk_secret_config: {
-                                             secret_arn: ::String?,
-                                             kms_key_arn: ::String?
-                                           }?,
-                                           custom_secret_config: {
-                                             secret_arn: ::String?,
-                                             secret_access_role_arn: ::String?
-                                           }?
-                                         }?
-                                       },
+                                       protocol: Params::fsx_protocol,
                                        security_group_arns: Array[::String],
                                        storage_virtual_machine_arn: ::String,
                                        ?subdirectory: ::String,
@@ -221,7 +196,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateLocationFsxOntapResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxOntapResponseSuccess
@@ -233,39 +208,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#create_location_fsx_open_zfs-instance_method
       def create_location_fsx_open_zfs: (
                                           fsx_filesystem_arn: ::String,
-                                          protocol: {
-                                            nfs: {
-                                              mount_options: {
-                                                version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
-                                              }?
-                                            }?,
-                                            smb: {
-                                              domain: ::String?,
-                                              mount_options: {
-                                                version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
-                                              }?,
-                                              password: ::String?,
-                                              user: ::String,
-                                              managed_secret_config: {
-                                                secret_arn: ::String?
-                                              }?,
-                                              cmk_secret_config: {
-                                                secret_arn: ::String?,
-                                                kms_key_arn: ::String?
-                                              }?,
-                                              custom_secret_config: {
-                                                secret_arn: ::String?,
-                                                secret_access_role_arn: ::String?
-                                              }?
-                                            }?
-                                          },
+                                          protocol: Params::fsx_protocol,
                                           security_group_arns: Array[::String],
                                           ?subdirectory: ::String,
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String?
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateLocationFsxOpenZfsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationFsxOpenZfsResponseSuccess
@@ -283,7 +233,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String?
-                                           },
+                                           }
                                          ],
                                          user: ::String,
                                          ?domain: ::String,
@@ -310,7 +260,7 @@ module Aws
                                     {
                                       hostname: ::String,
                                       port: ::Integer
-                                    },
+                                    }
                                   ],
                                   ?block_size: ::Integer,
                                   ?replication_factor: ::Integer,
@@ -329,7 +279,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   ?cmk_secret_config: {
                                     secret_arn: ::String?,
@@ -360,7 +310,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateLocationNfsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationNfsResponseSuccess
@@ -383,7 +333,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String?
-                                              },
+                                              }
                                             ],
                                             ?server_certificate: ::String,
                                             ?cmk_secret_config: {
@@ -414,7 +364,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateLocationS3ResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationS3ResponseSuccess
@@ -446,7 +396,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?authentication_type: ("NTLM" | "KERBEROS"),
                                  ?dns_ip_addresses: Array[::String],
@@ -466,28 +416,12 @@ module Aws
                          destination_location_arn: ::String,
                          ?cloud_watch_log_group_arn: ::String,
                          ?name: ::String,
-                         ?options: {
-                           verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
-                           overwrite_mode: ("ALWAYS" | "NEVER")?,
-                           atime: ("NONE" | "BEST_EFFORT")?,
-                           mtime: ("NONE" | "PRESERVE")?,
-                           uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                           gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                           preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
-                           preserve_devices: ("NONE" | "PRESERVE")?,
-                           posix_permissions: ("NONE" | "PRESERVE")?,
-                           bytes_per_second: ::Integer?,
-                           task_queueing: ("ENABLED" | "DISABLED")?,
-                           log_level: ("OFF" | "BASIC" | "TRANSFER")?,
-                           transfer_mode: ("CHANGED" | "ALL")?,
-                           security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
-                           object_tags: ("PRESERVE" | "NONE")?
-                         },
+                         ?options: Params::options,
                          ?excludes: Array[
                            {
                              filter_type: ("SIMPLE_PATTERN")?,
                              value: ::String?
-                           },
+                           }
                          ],
                          ?schedule: {
                            schedule_expression: ::String,
@@ -497,52 +431,16 @@ module Aws
                            {
                              key: ::String,
                              value: ::String?
-                           },
+                           }
                          ],
                          ?includes: Array[
                            {
                              filter_type: ("SIMPLE_PATTERN")?,
                              value: ::String?
-                           },
+                           }
                          ],
-                         ?manifest_config: {
-                           action: ("TRANSFER")?,
-                           format: ("CSV")?,
-                           source: {
-                             s3: {
-                               manifest_object_path: ::String,
-                               bucket_access_role_arn: ::String,
-                               s3_bucket_arn: ::String,
-                               manifest_object_version_id: ::String?
-                             }
-                           }?
-                         },
-                         ?task_report_config: {
-                           destination: {
-                             s3: {
-                               subdirectory: ::String?,
-                               s3_bucket_arn: ::String,
-                               bucket_access_role_arn: ::String
-                             }?
-                           }?,
-                           output_type: ("SUMMARY_ONLY" | "STANDARD")?,
-                           report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
-                           object_version_ids: ("INCLUDE" | "NONE")?,
-                           overrides: {
-                             transferred: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             verified: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             deleted: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             skipped: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?
-                           }?
-                         },
+                         ?manifest_config: Params::manifest_config,
+                         ?task_report_config: Params::task_report_config,
                          ?task_mode: ("BASIC" | "ENHANCED")
                        ) -> _CreateTaskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTaskResponseSuccess
@@ -881,7 +779,7 @@ module Aws
                                 name: ("LocationUri" | "LocationType" | "CreationTime"),
                                 values: Array[::String],
                                 operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
-                              },
+                              }
                             ]
                           ) -> _ListLocationsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLocationsResponseSuccess
@@ -926,7 +824,7 @@ module Aws
                             name: ("LocationId" | "CreationTime"),
                             values: Array[::String],
                             operator: ("Equals" | "NotEquals" | "In" | "LessThanOrEqual" | "LessThan" | "GreaterThanOrEqual" | "GreaterThan" | "Contains" | "NotContains" | "BeginsWith")
-                          },
+                          }
                         ]
                       ) -> _ListTasksResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTasksResponseSuccess
@@ -938,78 +836,26 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#start_task_execution-instance_method
       def start_task_execution: (
                                   task_arn: ::String,
-                                  ?override_options: {
-                                    verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
-                                    overwrite_mode: ("ALWAYS" | "NEVER")?,
-                                    atime: ("NONE" | "BEST_EFFORT")?,
-                                    mtime: ("NONE" | "PRESERVE")?,
-                                    uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                                    gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                                    preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
-                                    preserve_devices: ("NONE" | "PRESERVE")?,
-                                    posix_permissions: ("NONE" | "PRESERVE")?,
-                                    bytes_per_second: ::Integer?,
-                                    task_queueing: ("ENABLED" | "DISABLED")?,
-                                    log_level: ("OFF" | "BASIC" | "TRANSFER")?,
-                                    transfer_mode: ("CHANGED" | "ALL")?,
-                                    security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
-                                    object_tags: ("PRESERVE" | "NONE")?
-                                  },
+                                  ?override_options: Params::options,
                                   ?includes: Array[
                                     {
                                       filter_type: ("SIMPLE_PATTERN")?,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   ?excludes: Array[
                                     {
                                       filter_type: ("SIMPLE_PATTERN")?,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
-                                  ?manifest_config: {
-                                    action: ("TRANSFER")?,
-                                    format: ("CSV")?,
-                                    source: {
-                                      s3: {
-                                        manifest_object_path: ::String,
-                                        bucket_access_role_arn: ::String,
-                                        s3_bucket_arn: ::String,
-                                        manifest_object_version_id: ::String?
-                                      }
-                                    }?
-                                  },
-                                  ?task_report_config: {
-                                    destination: {
-                                      s3: {
-                                        subdirectory: ::String?,
-                                        s3_bucket_arn: ::String,
-                                        bucket_access_role_arn: ::String
-                                      }?
-                                    }?,
-                                    output_type: ("SUMMARY_ONLY" | "STANDARD")?,
-                                    report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
-                                    object_version_ids: ("INCLUDE" | "NONE")?,
-                                    overrides: {
-                                      transferred: {
-                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                                      }?,
-                                      verified: {
-                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                                      }?,
-                                      deleted: {
-                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                                      }?,
-                                      skipped: {
-                                        report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                                      }?
-                                    }?
-                                  },
+                                  ?manifest_config: Params::manifest_config,
+                                  ?task_report_config: Params::task_report_config,
                                   ?tags: Array[
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _StartTaskExecutionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTaskExecutionResponseSuccess
@@ -1024,7 +870,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1136,32 +982,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_location_fsx_open_zfs-instance_method
       def update_location_fsx_open_zfs: (
                                           location_arn: ::String,
-                                          ?protocol: {
-                                            nfs: {
-                                              mount_options: {
-                                                version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
-                                              }?
-                                            }?,
-                                            smb: {
-                                              domain: ::String?,
-                                              mount_options: {
-                                                version: ("AUTOMATIC" | "SMB2" | "SMB3" | "SMB1" | "SMB2_0")?
-                                              }?,
-                                              password: ::String?,
-                                              user: ::String,
-                                              managed_secret_config: {
-                                                secret_arn: ::String?
-                                              }?,
-                                              cmk_secret_config: {
-                                                secret_arn: ::String?,
-                                                kms_key_arn: ::String?
-                                              }?,
-                                              custom_secret_config: {
-                                                secret_arn: ::String?,
-                                                secret_access_role_arn: ::String?
-                                              }?
-                                            }?
-                                          },
+                                          ?protocol: Params::fsx_protocol,
                                           ?subdirectory: ::String
                                         ) -> _UpdateLocationFsxOpenZfsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLocationFsxOpenZfsResponseSuccess
@@ -1198,7 +1019,7 @@ module Aws
                                     {
                                       hostname: ::String,
                                       port: ::Integer
-                                    },
+                                    }
                                   ],
                                   ?block_size: ::Integer,
                                   ?replication_factor: ::Integer,
@@ -1317,28 +1138,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_task-instance_method
       def update_task: (
                          task_arn: ::String,
-                         ?options: {
-                           verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
-                           overwrite_mode: ("ALWAYS" | "NEVER")?,
-                           atime: ("NONE" | "BEST_EFFORT")?,
-                           mtime: ("NONE" | "PRESERVE")?,
-                           uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                           gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                           preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
-                           preserve_devices: ("NONE" | "PRESERVE")?,
-                           posix_permissions: ("NONE" | "PRESERVE")?,
-                           bytes_per_second: ::Integer?,
-                           task_queueing: ("ENABLED" | "DISABLED")?,
-                           log_level: ("OFF" | "BASIC" | "TRANSFER")?,
-                           transfer_mode: ("CHANGED" | "ALL")?,
-                           security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
-                           object_tags: ("PRESERVE" | "NONE")?
-                         },
+                         ?options: Params::options,
                          ?excludes: Array[
                            {
                              filter_type: ("SIMPLE_PATTERN")?,
                              value: ::String?
-                           },
+                           }
                          ],
                          ?schedule: {
                            schedule_expression: ::String,
@@ -1350,46 +1155,10 @@ module Aws
                            {
                              filter_type: ("SIMPLE_PATTERN")?,
                              value: ::String?
-                           },
+                           }
                          ],
-                         ?manifest_config: {
-                           action: ("TRANSFER")?,
-                           format: ("CSV")?,
-                           source: {
-                             s3: {
-                               manifest_object_path: ::String,
-                               bucket_access_role_arn: ::String,
-                               s3_bucket_arn: ::String,
-                               manifest_object_version_id: ::String?
-                             }
-                           }?
-                         },
-                         ?task_report_config: {
-                           destination: {
-                             s3: {
-                               subdirectory: ::String?,
-                               s3_bucket_arn: ::String,
-                               bucket_access_role_arn: ::String
-                             }?
-                           }?,
-                           output_type: ("SUMMARY_ONLY" | "STANDARD")?,
-                           report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?,
-                           object_version_ids: ("INCLUDE" | "NONE")?,
-                           overrides: {
-                             transferred: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             verified: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             deleted: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?,
-                             skipped: {
-                               report_level: ("ERRORS_ONLY" | "SUCCESSES_AND_ERRORS")?
-                             }?
-                           }?
-                         }
+                         ?manifest_config: Params::manifest_config,
+                         ?task_report_config: Params::task_report_config
                        ) -> _UpdateTaskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskResponseSuccess
 
@@ -1399,23 +1168,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataSync/Client.html#update_task_execution-instance_method
       def update_task_execution: (
                                    task_execution_arn: ::String,
-                                   options: {
-                                     verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
-                                     overwrite_mode: ("ALWAYS" | "NEVER")?,
-                                     atime: ("NONE" | "BEST_EFFORT")?,
-                                     mtime: ("NONE" | "PRESERVE")?,
-                                     uid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                                     gid: ("NONE" | "INT_VALUE" | "NAME" | "BOTH")?,
-                                     preserve_deleted_files: ("PRESERVE" | "REMOVE")?,
-                                     preserve_devices: ("NONE" | "PRESERVE")?,
-                                     posix_permissions: ("NONE" | "PRESERVE")?,
-                                     bytes_per_second: ::Integer?,
-                                     task_queueing: ("ENABLED" | "DISABLED")?,
-                                     log_level: ("OFF" | "BASIC" | "TRANSFER")?,
-                                     transfer_mode: ("CHANGED" | "ALL")?,
-                                     security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
-                                     object_tags: ("PRESERVE" | "NONE")?
-                                   }
+                                   options: Params::options
                                  ) -> _UpdateTaskExecutionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTaskExecutionResponseSuccess
     end

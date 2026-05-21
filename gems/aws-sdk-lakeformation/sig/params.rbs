@@ -1,0 +1,103 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LakeFormation
+    module Params
+      type table_with_columns_resource = {
+      catalog_id: ::String?,
+      database_name: ::String,
+      name: ::String,
+      column_names: Array[::String]?,
+      column_wildcard: {
+        excluded_column_names: Array[::String]?
+      }?
+    }
+
+      type lf_tag_policy_resource = {
+      catalog_id: ::String?,
+      resource_type: ("DATABASE" | "TABLE"),
+      expression: Array[
+        {
+          tag_key: ::String,
+          tag_values: Array[::String]
+        }
+      ]?,
+      expression_name: ::String?
+    }
+
+      type resource = {
+      catalog: {
+        id: ::String?
+      }?,
+      database: {
+        catalog_id: ::String?,
+        name: ::String
+      }?,
+      table: {
+        catalog_id: ::String?,
+        database_name: ::String,
+        name: ::String?,
+        table_wildcard: {
+        }?
+      }?,
+      table_with_columns: Params::table_with_columns_resource?,
+      data_location: {
+        catalog_id: ::String?,
+        resource_arn: ::String
+      }?,
+      data_cells_filter: {
+        table_catalog_id: ::String?,
+        database_name: ::String?,
+        table_name: ::String?,
+        name: ::String?
+      }?,
+      lf_tag: {
+        catalog_id: ::String?,
+        tag_key: ::String,
+        tag_values: Array[::String]
+      }?,
+      lf_tag_policy: Params::lf_tag_policy_resource?,
+      lf_tag_expression: {
+        catalog_id: ::String?,
+        name: ::String
+      }?
+    }
+
+      type batch_permissions_request_entry = {
+      id: ::String,
+      principal: {
+        data_lake_principal_identifier: ::String?
+      }?,
+      resource: Params::resource?,
+      permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?,
+      condition: {
+        expression: ::String?
+      }?,
+      permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
+    }
+
+      type data_cells_filter = {
+      table_catalog_id: ::String,
+      database_name: ::String,
+      table_name: ::String,
+      name: ::String,
+      row_filter: {
+        filter_expression: ::String?,
+        all_rows_wildcard: {
+        }?
+      }?,
+      column_names: Array[::String]?,
+      column_wildcard: {
+        excluded_column_names: Array[::String]?
+      }?,
+      version_id: ::String?
+    }
+
+    end
+  end
+end

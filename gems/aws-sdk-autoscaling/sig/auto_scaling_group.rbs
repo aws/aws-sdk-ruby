@@ -207,7 +207,7 @@ module Aws
                                     metric_interval_lower_bound: ::Float?,
                                     metric_interval_upper_bound: ::Float?,
                                     scaling_adjustment: ::Integer
-                                  },
+                                  }
                                 ],
                                 ?estimated_instance_warmup: ::Integer,
                                 ?target_tracking_configuration: {
@@ -222,7 +222,7 @@ module Aws
                                       {
                                         name: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]?,
                                     statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")?,
                                     unit: ::String?,
@@ -239,7 +239,7 @@ module Aws
                                               {
                                                 name: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]?
                                           },
                                           stat: ::String,
@@ -249,7 +249,7 @@ module Aws
                                         label: ::String?,
                                         period: ::Integer?,
                                         return_data: bool?
-                                      },
+                                      }
                                     ]?
                                   }?,
                                   target_value: ::Float,
@@ -285,7 +285,7 @@ module Aws
                                                   {
                                                     name: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]?
                                               },
                                               stat: ::String,
@@ -293,7 +293,7 @@ module Aws
                                             }?,
                                             label: ::String?,
                                             return_data: bool?
-                                          },
+                                          }
                                         ]
                                       }?,
                                       customized_load_metric_specification: {
@@ -309,7 +309,7 @@ module Aws
                                                   {
                                                     name: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]?
                                               },
                                               stat: ::String,
@@ -317,7 +317,7 @@ module Aws
                                             }?,
                                             label: ::String?,
                                             return_data: bool?
-                                          },
+                                          }
                                         ]
                                       }?,
                                       customized_capacity_metric_specification: {
@@ -333,7 +333,7 @@ module Aws
                                                   {
                                                     name: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]?
                                               },
                                               stat: ::String,
@@ -341,10 +341,10 @@ module Aws
                                             }?,
                                             label: ::String?,
                                             return_data: bool?
-                                          },
+                                          }
                                         ]
                                       }?
-                                    },
+                                    }
                                   ],
                                   mode: ("ForecastAndScale" | "ForecastOnly")?,
                                   scheduling_buffer_time: ::Integer?,
@@ -468,13 +468,13 @@ module Aws
                                   references: Array[
                                     {
                                       instance_family: ::String?
-                                    },
+                                    }
                                   ]?
                                 }?
                               }?
                             }?,
                             image_id: ::String?
-                          },
+                          }
                         ]?
                       }?,
                       instances_distribution: {
@@ -540,7 +540,7 @@ module Aws
                           {
                             name: ::String?,
                             values: Array[::String]?
-                          },
+                          }
                         ]
                       ) -> Activity::Collection
                     | (?Hash[Symbol, untyped]) -> Activity::Collection

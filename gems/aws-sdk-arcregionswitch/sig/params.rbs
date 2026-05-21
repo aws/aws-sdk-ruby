@@ -1,0 +1,228 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ARCRegionswitch
+    module Params
+      type workflow = {
+      steps: Array[
+        Params::step
+      ]?,
+      workflow_target_action: ("activate" | "deactivate" | "postRecovery"),
+      workflow_target_region: ::String?,
+      workflow_description: ::String?
+    }
+
+      type custom_action_lambda_configuration = {
+      timeout_minutes: ::Integer?,
+      lambdas: Array[
+        {
+          cross_account_role: ::String?,
+          external_id: ::String?,
+          arn: ::String?
+        }
+      ],
+      retry_interval_minutes: ::Float,
+      region_to_run: ("activatingRegion" | "deactivatingRegion" | "activeRegion" | "inactiveRegion"),
+      ungraceful: {
+        behavior: ("skip")?
+      }?
+    }
+
+      type ec2_asg_capacity_increase_configuration = {
+      timeout_minutes: ::Integer?,
+      asgs: Array[
+        {
+          cross_account_role: ::String?,
+          external_id: ::String?,
+          arn: ::String?
+        }
+      ],
+      ungraceful: {
+        minimum_success_percentage: ::Integer
+      }?,
+      target_percent: ::Integer?,
+      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "autoscalingMaxInLast24Hours")?
+    }
+
+      type global_aurora_configuration = {
+      timeout_minutes: ::Integer?,
+      cross_account_role: ::String?,
+      external_id: ::String?,
+      behavior: ("switchoverOnly" | "failover"),
+      ungraceful: {
+        ungraceful: ("failover")?
+      }?,
+      global_cluster_identifier: ::String,
+      database_cluster_arns: Array[::String]
+    }
+
+      type ecs_capacity_increase_configuration = {
+      timeout_minutes: ::Integer?,
+      services: Array[
+        {
+          cross_account_role: ::String?,
+          external_id: ::String?,
+          cluster_arn: ::String?,
+          service_arn: ::String?
+        }
+      ],
+      ungraceful: {
+        minimum_success_percentage: ::Integer
+      }?,
+      target_percent: ::Integer?,
+      capacity_monitoring_approach: ("sampledMaxInLast24Hours" | "containerInsightsMaxInLast24Hours")?
+    }
+
+      type eks_resource_scaling_configuration = {
+      timeout_minutes: ::Integer?,
+      kubernetes_resource_type: {
+        api_version: ::String,
+        kind: ::String
+      },
+      scaling_resources: Array[
+        Hash[::String, Hash[::String, {
+              namespace: ::String,
+              name: ::String,
+              hpa_name: ::String?
+            }]]
+      ]?,
+      eks_clusters: Array[
+        {
+          cross_account_role: ::String?,
+          external_id: ::String?,
+          cluster_arn: ::String
+        }
+      ]?,
+      ungraceful: {
+        minimum_success_percentage: ::Integer
+      }?,
+      target_percent: ::Integer?,
+      capacity_monitoring_approach: ("sampledMaxInLast24Hours")?
+    }
+
+      type route_53_health_check_configuration = {
+      timeout_minutes: ::Integer?,
+      cross_account_role: ::String?,
+      external_id: ::String?,
+      hosted_zone_id: ::String,
+      record_name: ::String,
+      record_sets: Array[
+        {
+          record_set_identifier: ::String?,
+          region: ::String?
+        }
+      ]?
+    }
+
+      type document_db_configuration = {
+      timeout_minutes: ::Integer?,
+      cross_account_role: ::String?,
+      external_id: ::String?,
+      behavior: ("switchoverOnly" | "failover"),
+      ungraceful: {
+        ungraceful: ("failover")?
+      }?,
+      global_cluster_identifier: ::String,
+      database_cluster_arns: Array[::String]
+    }
+
+      type lambda_event_source_mapping_configuration = {
+      timeout_minutes: ::Integer?,
+      action: ("enable" | "disable"),
+      region_event_source_mappings: Hash[::String, {
+          cross_account_role: ::String?,
+          external_id: ::String?,
+          arn: ::String
+        }],
+      ungraceful: {
+        behavior: ("skip")?
+      }?
+    }
+
+      type execution_block_configuration = {
+      custom_action_lambda_config: Params::custom_action_lambda_configuration?,
+      ec2_asg_capacity_increase_config: Params::ec2_asg_capacity_increase_configuration?,
+      execution_approval_config: {
+        timeout_minutes: ::Integer?,
+        approval_role: ::String
+      }?,
+      arc_routing_control_config: {
+        timeout_minutes: ::Integer?,
+        cross_account_role: ::String?,
+        external_id: ::String?,
+        region_and_routing_controls: Hash[::String, Array[
+            {
+              routing_control_arn: ::String,
+              state: ("On" | "Off")
+            }
+          ]]
+      }?,
+      global_aurora_config: Params::global_aurora_configuration?,
+      parallel_config: {
+        steps: Array[
+          Params::step
+        ]
+      }?,
+      region_switch_plan_config: {
+        cross_account_role: ::String?,
+        external_id: ::String?,
+        arn: ::String
+      }?,
+      ecs_capacity_increase_config: Params::ecs_capacity_increase_configuration?,
+      eks_resource_scaling_config: Params::eks_resource_scaling_configuration?,
+      route53_health_check_config: Params::route_53_health_check_configuration?,
+      document_db_config: Params::document_db_configuration?,
+      rds_promote_read_replica_config: {
+        timeout_minutes: ::Integer?,
+        cross_account_role: ::String?,
+        external_id: ::String?,
+        db_instance_arn_map: Hash[::String, ::String]
+      }?,
+      rds_create_cross_region_read_replica_config: {
+        timeout_minutes: ::Integer?,
+        cross_account_role: ::String?,
+        external_id: ::String?,
+        db_instance_arn_map: Hash[::String, ::String]
+      }?,
+      lambda_event_source_mapping_config: Params::lambda_event_source_mapping_configuration?
+    }
+
+      type step = {
+      name: ::String,
+      description: ::String?,
+      execution_block_configuration: Params::execution_block_configuration,
+      execution_block_type: ("CustomActionLambda" | "ManualApproval" | "AuroraGlobalDatabase" | "EC2AutoScaling" | "ARCRoutingControl" | "ARCRegionSwitchPlan" | "Parallel" | "ECSServiceScaling" | "EKSResourceScaling" | "Route53HealthCheck" | "DocumentDb" | "RdsPromoteReadReplica" | "RdsCreateCrossRegionReplica" | "LambdaEventSourceMapping")
+    }
+
+      type trigger = {
+      description: ::String?,
+      target_region: ::String,
+      action: ("activate" | "deactivate" | "postRecovery"),
+      conditions: Array[
+        {
+          associated_alarm_name: ::String,
+          condition: ("red" | "green")
+        }
+      ],
+      min_delay_minutes_between_executions: ::Integer
+    }
+
+      type report_configuration = {
+      report_output: Array[
+        {
+          s3_configuration: {
+            bucket_path: ::String?,
+            bucket_owner: ::String?
+          }?
+        }
+      ]?
+    }
+
+    end
+  end
+end

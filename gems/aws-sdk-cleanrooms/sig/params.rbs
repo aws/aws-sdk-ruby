@@ -1,0 +1,164 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CleanRooms
+    module Params
+      type ml_payment_config = {
+      model_training: {
+        is_responsible: bool
+      }?,
+      model_inference: {
+        is_responsible: bool
+      }?,
+      synthetic_data_generation: {
+        is_responsible: bool
+      }?
+    }
+
+      type payment_configuration = {
+      query_compute: {
+        is_responsible: bool
+      },
+      machine_learning: Params::ml_payment_config?,
+      job_compute: {
+        is_responsible: bool
+      }?
+    }
+
+      type snowflake_table_reference = {
+      secret_arn: ::String,
+      account_identifier: ::String,
+      database_name: ::String,
+      table_name: ::String,
+      schema_name: ::String,
+      table_schema: {
+        v1: Array[
+          {
+            column_name: ::String,
+            column_type: ::String
+          }
+        ]?
+      }
+    }
+
+      type athena_table_reference = {
+      region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
+      work_group: ::String,
+      output_location: ::String?,
+      database_name: ::String,
+      table_name: ::String,
+      catalog_name: ::String?
+    }
+
+      type table_reference = {
+      glue: {
+        region: ("us-west-1" | "us-west-2" | "us-east-1" | "us-east-2" | "af-south-1" | "ap-east-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-5" | "ap-southeast-4" | "ap-southeast-7" | "ap-south-1" | "ap-northeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ca-central-1" | "ca-west-1" | "eu-south-1" | "eu-west-3" | "eu-south-2" | "eu-central-2" | "eu-central-1" | "eu-north-1" | "eu-west-1" | "eu-west-2" | "me-south-1" | "me-central-1" | "il-central-1" | "sa-east-1" | "mx-central-1" | "ap-east-2")?,
+        table_name: ::String,
+        database_name: ::String
+      }?,
+      snowflake: Params::snowflake_table_reference?,
+      athena: Params::athena_table_reference?
+    }
+
+      type analysis_rule_aggregation = {
+      aggregate_columns: Array[
+        {
+          column_names: Array[::String],
+          function: ("SUM" | "SUM_DISTINCT" | "COUNT" | "COUNT_DISTINCT" | "AVG")
+        }
+      ],
+      join_columns: Array[::String],
+      join_required: ("QUERY_RUNNER")?,
+      allowed_join_operators: Array[("OR" | "AND")]?,
+      dimension_columns: Array[::String],
+      scalar_functions: Array[("ABS" | "CAST" | "CEILING" | "COALESCE" | "CONVERT" | "CURRENT_DATE" | "DATEADD" | "EXTRACT" | "FLOOR" | "GETDATE" | "LN" | "LOG" | "LOWER" | "ROUND" | "RTRIM" | "SQRT" | "SUBSTRING" | "TO_CHAR" | "TO_DATE" | "TO_NUMBER" | "TO_TIMESTAMP" | "TRIM" | "TRUNC" | "UPPER")],
+      output_constraints: Array[
+        {
+          column_name: ::String,
+          minimum: ::Integer,
+          type: ("COUNT_DISTINCT")
+        }
+      ],
+      additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
+    }
+
+      type analysis_rule_custom = {
+      allowed_analyses: Array[::String],
+      allowed_analysis_providers: Array[::String]?,
+      additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?,
+      disallowed_output_columns: Array[::String]?,
+      differential_privacy: {
+        columns: Array[
+          {
+            name: ::String
+          }
+        ]
+      }?
+    }
+
+      type configured_table_analysis_rule_policy_v1 = {
+      list: {
+        join_columns: Array[::String],
+        allowed_join_operators: Array[("OR" | "AND")]?,
+        list_columns: Array[::String],
+        additional_analyses: ("ALLOWED" | "REQUIRED" | "NOT_ALLOWED")?
+      }?,
+      aggregation: Params::analysis_rule_aggregation?,
+      custom: Params::analysis_rule_custom?
+    }
+
+      type configured_table_analysis_rule_policy = {
+      v1: Params::configured_table_analysis_rule_policy_v1?
+    }
+
+      type configured_table_association_analysis_rule_policy_v1 = {
+      list: {
+        allowed_result_receivers: Array[::String]?,
+        allowed_additional_analyses: Array[::String]?
+      }?,
+      aggregation: {
+        allowed_result_receivers: Array[::String]?,
+        allowed_additional_analyses: Array[::String]?
+      }?,
+      custom: {
+        allowed_result_receivers: Array[::String]?,
+        allowed_additional_analyses: Array[::String]?
+      }?
+    }
+
+      type configured_table_association_analysis_rule_policy = {
+      v1: Params::configured_table_association_analysis_rule_policy_v1?
+    }
+
+      type membership_protected_query_output_configuration = {
+      s3: {
+        result_format: ("CSV" | "PARQUET"),
+        bucket: ::String,
+        key_prefix: ::String?,
+        single_file_output: bool?
+      }?
+    }
+
+      type membership_protected_query_result_configuration = {
+      output_configuration: Params::membership_protected_query_output_configuration,
+      role_arn: ::String?
+    }
+
+      type membership_protected_job_result_configuration = {
+      output_configuration: {
+        s3: {
+          bucket: ::String,
+          key_prefix: ::String?
+        }?
+      },
+      role_arn: ::String
+    }
+
+    end
+  end
+end

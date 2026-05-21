@@ -127,7 +127,7 @@ module Aws
                                 s3_uri: ::String
                               }
                             }
-                          },
+                          }
                         ],
                         output_data_config: {
                           kms_key_id: ::String?,
@@ -156,7 +156,7 @@ module Aws
                           {
                             arn: ::String,
                             type: ("RESERVATION_TIME_WINDOW_ARN")
-                          },
+                          }
                         ]
                       ) -> _CreateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
@@ -180,7 +180,7 @@ module Aws
                                    {
                                      arn: ::String,
                                      type: ("RESERVATION_TIME_WINDOW_ARN")
-                                   },
+                                   }
                                  ],
                                  ?experimental_capabilities: {
                                    enabled: ("ALL" | "NONE")?
@@ -311,7 +311,7 @@ module Aws
                               {
                                 name: ::String,
                                 values: Array[::String]
-                              },
+                              }
                             ]
                           ) -> _SearchDevicesResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDevicesResponseSuccess
@@ -330,7 +330,7 @@ module Aws
                              name: ::String,
                              values: Array[::String],
                              operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN" | "CONTAINS")
-                           },
+                           }
                          ]
                        ) -> _SearchJobsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchJobsResponseSuccess
@@ -349,7 +349,7 @@ module Aws
                                       name: ::String,
                                       values: Array[::String],
                                       operator: ("LT" | "LTE" | "EQUAL" | "GT" | "GTE" | "BETWEEN")
-                                    },
+                                    }
                                   ]
                                 ) -> _SearchQuantumTasksResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchQuantumTasksResponseSuccess
@@ -368,7 +368,7 @@ module Aws
                                         name: ::String,
                                         values: Array[::String],
                                         operator: ("EQUAL")
-                                      },
+                                      }
                                     ]
                                   ) -> _SearchSpendingLimitsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchSpendingLimitsResponseSuccess

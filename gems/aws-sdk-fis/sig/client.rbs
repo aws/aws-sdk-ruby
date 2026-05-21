@@ -90,7 +90,7 @@ module Aws
                                           {
                                             source: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?targets: Hash[::String, {
                                             resource_type: ::String,
@@ -100,7 +100,7 @@ module Aws
                                               {
                                                 path: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ]?,
                                             selection_mode: ::String,
                                             parameters: Hash[::String, ::String]?
@@ -139,7 +139,7 @@ module Aws
                                             cloud_watch_dashboards: Array[
                                               {
                                                 dashboard_identifier: ::String?
-                                              },
+                                              }
                                             ]?
                                           }?,
                                           pre_experiment_duration: ::String?,
@@ -410,7 +410,7 @@ module Aws
                                           {
                                             source: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?targets: Hash[::String, {
                                             resource_type: ::String,
@@ -420,7 +420,7 @@ module Aws
                                               {
                                                 path: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ]?,
                                             selection_mode: ::String,
                                             parameters: Hash[::String, ::String]?
@@ -457,7 +457,7 @@ module Aws
                                             cloud_watch_dashboards: Array[
                                               {
                                                 dashboard_identifier: ::String?
-                                              },
+                                              }
                                             ]?
                                           }?,
                                           pre_experiment_duration: ::String?,

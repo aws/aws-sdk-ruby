@@ -1,0 +1,492 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Inspector2
+    module Params
+      type schedule = {
+      one_time: {
+      }?,
+      daily: {
+        start_time: {
+          time_of_day: ::String,
+          timezone: ::String
+        }
+      }?,
+      weekly: {
+        start_time: {
+          time_of_day: ::String,
+          timezone: ::String
+        },
+        days: Array[("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")]
+      }?,
+      monthly: {
+        start_time: {
+          time_of_day: ::String,
+          timezone: ::String
+        },
+        day: ("SUN" | "MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT")
+      }?
+    }
+
+      type code_security_scan_configuration = {
+      periodic_scan_configuration: {
+        frequency: ("WEEKLY" | "MONTHLY" | "NEVER")?,
+        frequency_expression: ::String?
+      }?,
+      continuous_integration_scan_configuration: {
+        supported_events: Array[("PULL_REQUEST" | "PUSH")]
+      }?,
+      rule_set_categories: Array[("SAST" | "IAC" | "SCA")]
+    }
+
+      type filter_criteria = {
+      finding_arn: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      aws_account_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      finding_type: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      severity: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      first_observed_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      last_observed_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      updated_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      finding_status: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      title: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      inspector_score: Array[
+        {
+          upper_inclusive: ::Float?,
+          lower_inclusive: ::Float?
+        }
+      ]?,
+      resource_type: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      resource_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      resource_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      ec2_instance_image_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ec2_instance_vpc_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ec2_instance_subnet_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_pushed_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      ecr_image_architecture: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_registry: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_repository_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_tags: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_hash: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_last_in_use_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      ecr_image_in_use_count: Array[
+        {
+          upper_inclusive: ::Float?,
+          lower_inclusive: ::Float?
+        }
+      ]?,
+      port_range: Array[
+        {
+          begin_inclusive: ::Integer?,
+          end_inclusive: ::Integer?
+        }
+      ]?,
+      network_protocol: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      component_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      component_type: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      vulnerability_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      vulnerability_source: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      vendor_severity: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      vulnerable_packages: Array[
+        Params::package_filter
+      ]?,
+      related_vulnerabilities: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      fix_available: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      lambda_function_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      lambda_function_layers: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      lambda_function_runtime: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      lambda_function_last_modified_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      lambda_function_execution_role_arn: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      exploit_available: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_vulnerability_detector_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_vulnerability_detector_tags: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_vulnerability_file_path: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      epss_score: Array[
+        {
+          upper_inclusive: ::Float?,
+          lower_inclusive: ::Float?
+        }
+      ]?,
+      code_repository_project_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_repository_provider_type: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?
+    }
+
+      type package_filter = {
+      name: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      version: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      epoch: {
+        upper_inclusive: ::Float?,
+        lower_inclusive: ::Float?
+      }?,
+      release: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      architecture: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      source_layer_hash: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      source_lambda_layer_arn: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?,
+      file_path: {
+        comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+        value: ::String
+      }?
+    }
+
+      type coverage_filter_criteria = {
+      scan_status_code: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      scan_status_reason: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      account_id: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      resource_id: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      resource_type: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      scan_type: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_repository_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ecr_image_tags: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      ec2_instance_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      lambda_function_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      lambda_function_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      lambda_function_runtime: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      last_scanned_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      scan_mode: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      image_pulled_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      ecr_image_last_in_use_at: Array[
+        {
+          start_inclusive: ::Time?,
+          end_inclusive: ::Time?
+        }
+      ]?,
+      ecr_image_in_use_count: Array[
+        {
+          upper_inclusive: ::Integer?,
+          lower_inclusive: ::Integer?
+        }
+      ]?,
+      code_repository_project_name: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_repository_provider_type: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      code_repository_provider_type_visibility: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      last_scanned_commit_id: Array[
+        {
+          comparison: ("EQUALS" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?
+    }
+
+    end
+  end
+end

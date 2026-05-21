@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.182.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.181.0 (2026-05-18)
+------------------
+
+* Feature - Support for dataset enrichment and geo spatial in new data preparation experience
+
 1.180.0 (2026-05-13)
 ------------------
 

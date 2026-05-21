@@ -131,7 +131,7 @@ module Aws
                               {
                                 account_id: ::String,
                                 email_address: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateMembersResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembersResponseSuccess

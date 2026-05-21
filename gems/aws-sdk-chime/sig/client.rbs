@@ -98,7 +98,7 @@ module Aws
                                                            signin_delegate_groups: Array[
                                                              {
                                                                group_name: ::String?
-                                                             },
+                                                             }
                                                            ]
                                                          ) -> _AssociateSigninDelegateGroupsWithAccountResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSigninDelegateGroupsWithAccountResponseSuccess
@@ -115,7 +115,7 @@ module Aws
                                             {
                                               member_id: ::String?,
                                               role: ("Administrator" | "Member")?
-                                            },
+                                            }
                                           ]
                                         ) -> _BatchCreateRoomMembershipResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateRoomMembershipResponseSuccess
@@ -163,7 +163,7 @@ module Aws
                                            phone_number_id: ::String,
                                            product_type: ("BusinessCalling" | "VoiceConnector" | "SipMediaApplicationDialIn")?,
                                            calling_name: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _BatchUpdatePhoneNumberResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdatePhoneNumberResponseSuccess
@@ -184,7 +184,7 @@ module Aws
                                      is_alexa_for_business_enabled: bool?,
                                      alexa_for_business_room_arn: ::String?
                                    }?
-                                 },
+                                 }
                                ]
                              ) -> _BatchUpdateUserResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateUserResponseSuccess

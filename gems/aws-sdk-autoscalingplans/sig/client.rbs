@@ -92,64 +92,11 @@ module Aws
                                      {
                                        key: ::String?,
                                        values: Array[::String]?
-                                     },
+                                     }
                                    ]?
                                  },
                                  scaling_instructions: Array[
-                                   {
-                                     service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
-                                     resource_id: ::String,
-                                     scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
-                                     min_capacity: ::Integer,
-                                     max_capacity: ::Integer,
-                                     target_tracking_configurations: Array[
-                                       {
-                                         predefined_scaling_metric_specification: {
-                                           predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut"),
-                                           resource_label: ::String?
-                                         }?,
-                                         customized_scaling_metric_specification: {
-                                           metric_name: ::String,
-                                           namespace: ::String,
-                                           dimensions: Array[
-                                             {
-                                               name: ::String,
-                                               value: ::String
-                                             },
-                                           ]?,
-                                           statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
-                                           unit: ::String?
-                                         }?,
-                                         target_value: ::Float,
-                                         disable_scale_in: bool?,
-                                         scale_out_cooldown: ::Integer?,
-                                         scale_in_cooldown: ::Integer?,
-                                         estimated_instance_warmup: ::Integer?
-                                       },
-                                     ],
-                                     predefined_load_metric_specification: {
-                                       predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
-                                       resource_label: ::String?
-                                     }?,
-                                     customized_load_metric_specification: {
-                                       metric_name: ::String,
-                                       namespace: ::String,
-                                       dimensions: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String
-                                         },
-                                       ]?,
-                                       statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
-                                       unit: ::String?
-                                     }?,
-                                     scheduled_action_buffer_time: ::Integer?,
-                                     predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")?,
-                                     predictive_scaling_max_capacity_buffer: ::Integer?,
-                                     predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")?,
-                                     scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")?,
-                                     disable_dynamic_scaling: bool?
-                                   },
+                                   Params::scaling_instruction
                                  ]
                                ) -> _CreateScalingPlanResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScalingPlanResponseSuccess
@@ -194,9 +141,9 @@ module Aws
                                           {
                                             key: ::String?,
                                             values: Array[::String]?
-                                          },
+                                          }
                                         ]?
-                                      },
+                                      }
                                     ],
                                     ?max_results: ::Integer,
                                     ?next_token: ::String
@@ -233,64 +180,11 @@ module Aws
                                      {
                                        key: ::String?,
                                        values: Array[::String]?
-                                     },
+                                     }
                                    ]?
                                  },
                                  ?scaling_instructions: Array[
-                                   {
-                                     service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
-                                     resource_id: ::String,
-                                     scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
-                                     min_capacity: ::Integer,
-                                     max_capacity: ::Integer,
-                                     target_tracking_configurations: Array[
-                                       {
-                                         predefined_scaling_metric_specification: {
-                                           predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut"),
-                                           resource_label: ::String?
-                                         }?,
-                                         customized_scaling_metric_specification: {
-                                           metric_name: ::String,
-                                           namespace: ::String,
-                                           dimensions: Array[
-                                             {
-                                               name: ::String,
-                                               value: ::String
-                                             },
-                                           ]?,
-                                           statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
-                                           unit: ::String?
-                                         }?,
-                                         target_value: ::Float,
-                                         disable_scale_in: bool?,
-                                         scale_out_cooldown: ::Integer?,
-                                         scale_in_cooldown: ::Integer?,
-                                         estimated_instance_warmup: ::Integer?
-                                       },
-                                     ],
-                                     predefined_load_metric_specification: {
-                                       predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
-                                       resource_label: ::String?
-                                     }?,
-                                     customized_load_metric_specification: {
-                                       metric_name: ::String,
-                                       namespace: ::String,
-                                       dimensions: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String
-                                         },
-                                       ]?,
-                                       statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
-                                       unit: ::String?
-                                     }?,
-                                     scheduled_action_buffer_time: ::Integer?,
-                                     predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")?,
-                                     predictive_scaling_max_capacity_buffer: ::Integer?,
-                                     predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")?,
-                                     scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")?,
-                                     disable_dynamic_scaling: bool?
-                                   },
+                                   Params::scaling_instruction
                                  ]
                                ) -> _UpdateScalingPlanResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScalingPlanResponseSuccess

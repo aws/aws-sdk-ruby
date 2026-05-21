@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScalingPlans
+    module Params
+      type customized_load_metric_specification = {
+      metric_name: ::String,
+      namespace: ::String,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+      unit: ::String?
+    }
+
+      type scaling_instruction = {
+      service_namespace: ("autoscaling" | "ecs" | "ec2" | "rds" | "dynamodb"),
+      resource_id: ::String,
+      scalable_dimension: ("autoscaling:autoScalingGroup:DesiredCapacity" | "ecs:service:DesiredCount" | "ec2:spot-fleet-request:TargetCapacity" | "rds:cluster:ReadReplicaCount" | "dynamodb:table:ReadCapacityUnits" | "dynamodb:table:WriteCapacityUnits" | "dynamodb:index:ReadCapacityUnits" | "dynamodb:index:WriteCapacityUnits"),
+      min_capacity: ::Integer,
+      max_capacity: ::Integer,
+      target_tracking_configurations: Array[
+        Params::target_tracking_configuration
+      ],
+      predefined_load_metric_specification: {
+        predefined_load_metric_type: ("ASGTotalCPUUtilization" | "ASGTotalNetworkIn" | "ASGTotalNetworkOut" | "ALBTargetGroupRequestCount"),
+        resource_label: ::String?
+      }?,
+      customized_load_metric_specification: Params::customized_load_metric_specification?,
+      scheduled_action_buffer_time: ::Integer?,
+      predictive_scaling_max_capacity_behavior: ("SetForecastCapacityToMaxCapacity" | "SetMaxCapacityToForecastCapacity" | "SetMaxCapacityAboveForecastCapacity")?,
+      predictive_scaling_max_capacity_buffer: ::Integer?,
+      predictive_scaling_mode: ("ForecastAndScale" | "ForecastOnly")?,
+      scaling_policy_update_behavior: ("KeepExternalPolicies" | "ReplaceExternalPolicies")?,
+      disable_dynamic_scaling: bool?
+    }
+
+      type customized_scaling_metric_specification = {
+      metric_name: ::String,
+      namespace: ::String,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum"),
+      unit: ::String?
+    }
+
+      type target_tracking_configuration = {
+      predefined_scaling_metric_specification: {
+        predefined_scaling_metric_type: ("ASGAverageCPUUtilization" | "ASGAverageNetworkIn" | "ASGAverageNetworkOut" | "DynamoDBReadCapacityUtilization" | "DynamoDBWriteCapacityUtilization" | "ECSServiceAverageCPUUtilization" | "ECSServiceAverageMemoryUtilization" | "ALBRequestCountPerTarget" | "RDSReaderAverageCPUUtilization" | "RDSReaderAverageDatabaseConnections" | "EC2SpotFleetRequestAverageCPUUtilization" | "EC2SpotFleetRequestAverageNetworkIn" | "EC2SpotFleetRequestAverageNetworkOut"),
+        resource_label: ::String?
+      }?,
+      customized_scaling_metric_specification: Params::customized_scaling_metric_specification?,
+      target_value: ::Float,
+      disable_scale_in: bool?,
+      scale_out_cooldown: ::Integer?,
+      scale_in_cooldown: ::Integer?,
+      estimated_instance_warmup: ::Integer?
+    }
+
+    end
+  end
+end

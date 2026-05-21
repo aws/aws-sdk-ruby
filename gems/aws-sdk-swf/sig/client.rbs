@@ -486,7 +486,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String?
-                               },
+                               }
                              ]
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -636,7 +636,7 @@ module Aws
                                                    input: ::String?,
                                                    start_to_close_timeout: ::String?
                                                  }?
-                                               },
+                                               }
                                              ],
                                              ?execution_context: ::String,
                                              ?task_list: {
@@ -688,7 +688,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

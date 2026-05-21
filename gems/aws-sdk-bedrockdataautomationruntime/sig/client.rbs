@@ -116,7 +116,7 @@ module Aws
                                         blueprint_arn: ::String,
                                         version: ::String?,
                                         stage: ("DEVELOPMENT" | "LIVE")?
-                                      },
+                                      }
                                     ],
                                     data_automation_profile_arn: ::String,
                                     ?encryption_configuration: {
@@ -170,14 +170,14 @@ module Aws
                                               blueprint_arn: ::String,
                                               version: ::String?,
                                               stage: ("DEVELOPMENT" | "LIVE")?
-                                            },
+                                            }
                                           ],
                                           data_automation_profile_arn: ::String,
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _InvokeDataAutomationAsyncResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDataAutomationAsyncResponseSuccess
@@ -202,7 +202,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

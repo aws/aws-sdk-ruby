@@ -2622,7 +2622,7 @@ module Aws::ChimeSDKMediaPipelines
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmediapipelines'
-      context[:gem_version] = '1.53.0'
+      context[:gem_version] = '1.54.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

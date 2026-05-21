@@ -1,0 +1,188 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodePipeline
+    module Params
+      type artifact_store = {
+      type: ("S3"),
+      location: ::String,
+      encryption_key: {
+        id: ::String,
+        type: ("KMS")
+      }?
+    }
+
+      type pipeline_declaration = {
+      name: ::String,
+      role_arn: ::String,
+      artifact_store: Params::artifact_store?,
+      artifact_stores: Hash[::String, Params::artifact_store]?,
+      stages: Array[
+        Params::stage_declaration
+      ],
+      version: ::Integer?,
+      execution_mode: ("QUEUED" | "SUPERSEDED" | "PARALLEL")?,
+      pipeline_type: ("V1" | "V2")?,
+      variables: Array[
+        {
+          name: ::String,
+          default_value: ::String?,
+          description: ::String?
+        }
+      ]?,
+      triggers: Array[
+        Params::pipeline_trigger_declaration
+      ]?
+    }
+
+      type failure_conditions = {
+      result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
+      retry_configuration: {
+        retry_mode: ("FAILED_ACTIONS" | "ALL_ACTIONS")?
+      }?,
+      conditions: Array[
+        Params::condition
+      ]?
+    }
+
+      type success_conditions = {
+      conditions: Array[
+        Params::condition
+      ]
+    }
+
+      type before_entry_conditions = {
+      conditions: Array[
+        Params::condition
+      ]
+    }
+
+      type stage_declaration = {
+      name: ::String,
+      blockers: Array[
+        {
+          name: ::String,
+          type: ("Schedule")
+        }
+      ]?,
+      actions: Array[
+        Params::action_declaration
+      ],
+      on_failure: Params::failure_conditions?,
+      on_success: Params::success_conditions?,
+      before_entry: Params::before_entry_conditions?
+    }
+
+      type action_declaration = {
+      name: ::String,
+      action_type_id: {
+        category: ("Source" | "Build" | "Deploy" | "Test" | "Invoke" | "Approval" | "Compute"),
+        owner: ("AWS" | "ThirdParty" | "Custom"),
+        provider: ::String,
+        version: ::String
+      },
+      run_order: ::Integer?,
+      configuration: Hash[::String, ::String]?,
+      commands: Array[::String]?,
+      output_artifacts: Array[
+        {
+          name: ::String,
+          files: Array[::String]?
+        }
+      ]?,
+      input_artifacts: Array[
+        {
+          name: ::String
+        }
+      ]?,
+      output_variables: Array[::String]?,
+      role_arn: ::String?,
+      region: ::String?,
+      namespace: ::String?,
+      timeout_in_minutes: ::Integer?,
+      environment_variables: Array[
+        {
+          name: ::String,
+          value: ::String,
+          type: ("PLAINTEXT" | "SECRETS_MANAGER")?
+        }
+      ]?
+    }
+
+      type condition = {
+      result: ("ROLLBACK" | "FAIL" | "RETRY" | "SKIP")?,
+      rules: Array[
+        Params::rule_declaration
+      ]?
+    }
+
+      type rule_declaration = {
+      name: ::String,
+      rule_type_id: {
+        category: ("Rule"),
+        owner: ("AWS")?,
+        provider: ::String,
+        version: ::String?
+      },
+      configuration: Hash[::String, ::String]?,
+      commands: Array[::String]?,
+      input_artifacts: Array[
+        {
+          name: ::String
+        }
+      ]?,
+      role_arn: ::String?,
+      region: ::String?,
+      timeout_in_minutes: ::Integer?
+    }
+
+      type git_configuration = {
+      source_action_name: ::String,
+      push: Array[
+        Params::git_push_filter
+      ]?,
+      pull_request: Array[
+        Params::git_pull_request_filter
+      ]?
+    }
+
+      type pipeline_trigger_declaration = {
+      provider_type: ("CodeStarSourceConnection"),
+      git_configuration: Params::git_configuration
+    }
+
+      type git_push_filter = {
+      tags: {
+        includes: Array[::String]?,
+        excludes: Array[::String]?
+      }?,
+      branches: {
+        includes: Array[::String]?,
+        excludes: Array[::String]?
+      }?,
+      file_paths: {
+        includes: Array[::String]?,
+        excludes: Array[::String]?
+      }?
+    }
+
+      type git_pull_request_filter = {
+      events: Array[("OPEN" | "UPDATED" | "CLOSED")]?,
+      branches: {
+        includes: Array[::String]?,
+        excludes: Array[::String]?
+      }?,
+      file_paths: {
+        includes: Array[::String]?,
+        excludes: Array[::String]?
+      }?
+    }
+
+    end
+  end
+end

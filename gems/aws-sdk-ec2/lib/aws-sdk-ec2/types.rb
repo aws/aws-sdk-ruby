@@ -1385,6 +1385,17 @@ module Aws::EC2
     #   allocation.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] tag_specifications
+    #   The key/value combination of a tag assigned to the resource. Use the
+    #   tag key in the filter name and the tag value as the filter value.
+    #   For example, to find all resources that have a tag with the key
+    #   `Owner` and the value `TeamA`, specify `tag:Owner` for the filter
+    #   name and `TeamA` for the filter value.
+    #
+    #   If you specify tags, the request is authorized against the
+    #   allocation resource in addition to the pool resource.
+    #   @return [Array<Types::TagSpecification>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AllocateIpamPoolCidrRequest AWS API Documentation
     #
     class AllocateIpamPoolCidrRequest < Struct.new(
@@ -1396,7 +1407,8 @@ module Aws::EC2
       :description,
       :preview_next_cidr,
       :allowed_cidrs,
-      :disallowed_cidrs)
+      :disallowed_cidrs,
+      :tag_specifications)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27496,6 +27508,10 @@ module Aws::EC2
     #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ipam_pool_allocation_ids
+    #   The IDs of the IPAM pool allocations you want to describe.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] filters
     #   One or more filters for the request. For more information about
     #   filtering, see [Filtering CLI output][1].
@@ -27506,7 +27522,73 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamPoolAllocationsRequest AWS API Documentation
+    #
+    class DescribeIpamPoolAllocationsRequest < Struct.new(
+      :dry_run,
+      :ipam_pool_allocation_ids,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_pool_allocations
+    #   Information about the IPAM pool allocations.
+    #   @return [Array<Types::IpamPoolAllocation>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/DescribeIpamPoolAllocationsResult AWS API Documentation
+    #
+    class DescribeIpamPoolAllocationsResult < Struct.new(
+      :ipam_pool_allocations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] filters
+    #   One or more filters for the request. For more information about
+    #   filtering, see [Filtering CLI output][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -27799,7 +27881,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -27857,7 +27945,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -45194,7 +45288,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -45435,7 +45535,13 @@ module Aws::EC2
     #   @return [Array<Types::Filter>]
     #
     # @!attribute [rw] max_results
-    #   The maximum number of results to return in the request.
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -55103,6 +55209,10 @@ module Aws::EC2
     #   The owner of the resource.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The tags for the IPAM pool allocation.
+    #   @return [Array<Types::Tag>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/IpamPoolAllocation AWS API Documentation
     #
     class IpamPoolAllocation < Struct.new(
@@ -55112,7 +55222,8 @@ module Aws::EC2
       :resource_id,
       :resource_type,
       :resource_region,
-      :resource_owner)
+      :resource_owner,
+      :tags)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -62271,6 +62382,44 @@ module Aws::EC2
     #
     class ModifyIpamPolicyAllocationRulesResult < Struct.new(
       :ipam_policy_document)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run
+    #   A check for whether you have the required permissions for the action
+    #   without actually making the request and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] ipam_pool_allocation_id
+    #   The ID of the IPAM pool allocation you want to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The new description for the IPAM pool allocation. If you submit a
+    #   `null` value, the description is removed from the allocation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamPoolAllocationRequest AWS API Documentation
+    #
+    class ModifyIpamPoolAllocationRequest < Struct.new(
+      :dry_run,
+      :ipam_pool_allocation_id,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ipam_pool_allocation
+    #   The modified IPAM pool allocation.
+    #   @return [Types::IpamPoolAllocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyIpamPoolAllocationResult AWS API Documentation
+    #
+    class ModifyIpamPoolAllocationResult < Struct.new(
+      :ipam_pool_allocation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -85804,6 +85953,11 @@ module Aws::EC2
     #   The modification completion or failure time.
     #   @return [Time]
     #
+    # @!attribute [rw] operator
+    #   Describes whether the resource is managed by a service provider and,
+    #   if so, describes the service provider that manages it.
+    #   @return [Types::OperatorResponse]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/VolumeModification AWS API Documentation
     #
     class VolumeModification < Struct.new(
@@ -85822,7 +85976,8 @@ module Aws::EC2
       :original_multi_attach_enabled,
       :progress,
       :start_time,
-      :end_time)
+      :end_time,
+      :operator)
       SENSITIVE = []
       include Aws::Structure
     end

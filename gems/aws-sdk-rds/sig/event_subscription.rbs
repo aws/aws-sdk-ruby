@@ -75,7 +75,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> EventSubscription
                 | (?Hash[Symbol, untyped]) -> EventSubscription

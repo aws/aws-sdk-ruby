@@ -71,7 +71,7 @@ module Aws
                        abort_incomplete_multipart_upload: {
                          days_after_initiation: ::Integer?
                        }?
-                     },
+                     }
                    ]
                  },
                  ?expected_bucket_owner: ::String

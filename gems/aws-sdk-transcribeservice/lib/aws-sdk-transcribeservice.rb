@@ -55,7 +55,7 @@ module Aws::TranscribeService
   autoload :EndpointProvider, 'aws-sdk-transcribeservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-transcribeservice/endpoints'
 
-  GEM_VERSION = '1.138.0'
+  GEM_VERSION = '1.139.0'
 
 end
 

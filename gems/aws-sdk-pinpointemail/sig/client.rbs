@@ -102,7 +102,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateConfigurationSetResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetResponseSuccess
@@ -114,29 +114,7 @@ module Aws
       def create_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
                                                         event_destination_name: ::String,
-                                                        event_destination: {
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]?,
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?,
-                                                          pinpoint_destination: {
-                                                            application_arn: ::String?
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination_definition
                                                       ) -> _CreateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
 
@@ -150,7 +128,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateDedicatedIpPoolResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDedicatedIpPoolResponseSuccess
@@ -164,36 +142,12 @@ module Aws
       def create_deliverability_test_report: (
                                                ?report_name: ::String,
                                                from_email_address: ::String,
-                                               content: {
-                                                 simple: {
-                                                   subject: {
-                                                     data: ::String,
-                                                     charset: ::String?
-                                                   },
-                                                   body: {
-                                                     text: {
-                                                       data: ::String,
-                                                       charset: ::String?
-                                                     }?,
-                                                     html: {
-                                                       data: ::String,
-                                                       charset: ::String?
-                                                     }?
-                                                   }
-                                                 }?,
-                                                 raw: {
-                                                   data: ::String
-                                                 }?,
-                                                 template: {
-                                                   template_arn: ::String?,
-                                                   template_data: ::String?
-                                                 }?
-                                               },
+                                               content: Params::email_content,
                                                ?tags: Array[
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateDeliverabilityTestReportResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliverabilityTestReportResponseSuccess
@@ -211,7 +165,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateEmailIdentityResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailIdentityResponseSuccess
@@ -555,7 +509,7 @@ module Aws
                                                        global: bool?,
                                                        tracked_isps: Array[::String]?
                                                      }?
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _PutDeliverabilityDashboardOptionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverabilityDashboardOptionResponseSuccess
@@ -605,36 +559,12 @@ module Aws
                         },
                         ?reply_to_addresses: Array[::String],
                         ?feedback_forwarding_email_address: ::String,
-                        content: {
-                          simple: {
-                            subject: {
-                              data: ::String,
-                              charset: ::String?
-                            },
-                            body: {
-                              text: {
-                                data: ::String,
-                                charset: ::String?
-                              }?,
-                              html: {
-                                data: ::String,
-                                charset: ::String?
-                              }?
-                            }
-                          }?,
-                          raw: {
-                            data: ::String
-                          }?,
-                          template: {
-                            template_arn: ::String?,
-                            template_data: ::String?
-                          }?
-                        },
+                        content: Params::email_content,
                         ?email_tags: Array[
                           {
                             name: ::String,
                             value: ::String
-                          },
+                          }
                         ],
                         ?configuration_set_name: ::String
                       ) -> _SendEmailResponseSuccess
@@ -650,7 +580,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -672,29 +602,7 @@ module Aws
       def update_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
                                                         event_destination_name: ::String,
-                                                        event_destination: {
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE")]?,
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?,
-                                                          pinpoint_destination: {
-                                                            application_arn: ::String?
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination_definition
                                                       ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
     end

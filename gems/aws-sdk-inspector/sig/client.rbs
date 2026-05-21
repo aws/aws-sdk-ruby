@@ -90,7 +90,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _AddAttributesToFindingsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAttributesToFindingsResponseSuccess
@@ -120,7 +120,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateAssessmentTemplateResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssessmentTemplateResponseSuccess
@@ -145,7 +145,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateResourceGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceGroupResponseSuccess
@@ -428,13 +428,13 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String?
-                               },
+                               }
                              ]?,
                              user_attributes: Array[
                                {
                                  key: ::String,
                                  value: ::String?
-                               },
+                               }
                              ]?,
                              creation_time_range: {
                                begin_date: ::Time?,
@@ -505,7 +505,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

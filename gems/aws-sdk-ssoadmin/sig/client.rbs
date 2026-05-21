@@ -153,7 +153,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 ?status: ("ENABLED" | "DISABLED"),
                                 ?client_token: ::String
@@ -183,7 +183,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateInstanceResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceResponseSuccess
@@ -194,16 +194,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#create_instance_access_control_attribute_configuration-instance_method
       def create_instance_access_control_attribute_configuration: (
                                                                     instance_arn: ::String,
-                                                                    instance_access_control_attribute_configuration: {
-                                                                      access_control_attributes: Array[
-                                                                        {
-                                                                          key: ::String,
-                                                                          value: {
-                                                                            source: Array[::String]
-                                                                          }
-                                                                        },
-                                                                      ]
-                                                                    }
+                                                                    instance_access_control_attribute_configuration: Params::instance_access_control_attribute_configuration
                                                                   ) -> _CreateInstanceAccessControlAttributeConfigurationResponseSuccess
                                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceAccessControlAttributeConfigurationResponseSuccess
 
@@ -222,7 +213,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreatePermissionSetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionSetResponseSuccess
@@ -249,7 +240,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateTrustedTokenIssuerResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustedTokenIssuerResponseSuccess
@@ -972,7 +963,7 @@ module Aws
                                          {
                                            trusted_token_issuer_arn: ::String?,
                                            authorized_audiences: Array[::String]?
-                                         },
+                                         }
                                        ]?
                                      }?,
                                      refresh_token: {
@@ -1043,7 +1034,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1097,16 +1088,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#update_instance_access_control_attribute_configuration-instance_method
       def update_instance_access_control_attribute_configuration: (
                                                                     instance_arn: ::String,
-                                                                    instance_access_control_attribute_configuration: {
-                                                                      access_control_attributes: Array[
-                                                                        {
-                                                                          key: ::String,
-                                                                          value: {
-                                                                            source: Array[::String]
-                                                                          }
-                                                                        },
-                                                                      ]
-                                                                    }
+                                                                    instance_access_control_attribute_configuration: Params::instance_access_control_attribute_configuration
                                                                   ) -> _UpdateInstanceAccessControlAttributeConfigurationResponseSuccess
                                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateInstanceAccessControlAttributeConfigurationResponseSuccess
 

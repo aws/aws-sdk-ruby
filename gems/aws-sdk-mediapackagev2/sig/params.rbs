@@ -1,0 +1,164 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaPackageV2
+    module Params
+      type speke_key_provider = {
+      encryption_contract_configuration: {
+        preset_speke_20_audio: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED"),
+        preset_speke_20_video: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")
+      },
+      resource_id: ::String,
+      drm_systems: Array[("CLEAR_KEY_AES_128" | "FAIRPLAY" | "PLAYREADY" | "WIDEVINE" | "IRDETO")],
+      role_arn: ::String,
+      url: ::String,
+      certificate_arn: ::String?
+    }
+
+      type encryption = {
+      constant_initialization_vector: ::String?,
+      encryption_method: {
+        ts_encryption_method: ("AES_128" | "SAMPLE_AES")?,
+        cmaf_encryption_method: ("CENC" | "CBCS")?,
+        ism_encryption_method: ("CENC")?
+      },
+      key_rotation_interval_seconds: ::Integer?,
+      cmaf_exclude_segment_drm_metadata: bool?,
+      speke_key_provider: Params::speke_key_provider
+    }
+
+      type segment = {
+      segment_duration_seconds: ::Integer?,
+      segment_name: ::String?,
+      ts_use_audio_rendition_group: bool?,
+      include_iframe_only_streams: bool?,
+      ts_include_dvb_subtitles: bool?,
+      scte: {
+        scte_filter: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY" | "PROGRAM" | "CHAPTER" | "UNSCHEDULED_EVENT" | "ALTERNATE_CONTENT_OPPORTUNITY" | "NETWORK" | "PROVIDER_PROMO" | "DISTRIBUTOR_PROMO" | "PROVIDER_AD_BLOCK" | "DISTRIBUTOR_AD_BLOCK")]?,
+        scte_in_segments: ("NONE" | "ALL" | "MATCHES_FILTER")?,
+        custom_ad_types: Array[("PROGRAM" | "CHAPTER" | "UNSCHEDULED_EVENT" | "ALTERNATE_CONTENT_OPPORTUNITY" | "NETWORK")]?
+      }?,
+      encryption: Params::encryption?
+    }
+
+      type filter_configuration = {
+      manifest_filter: ::String?,
+      drm_settings: ::String?,
+      start: ::Time?,
+      end: ::Time?,
+      time_delay_seconds: ::Integer?,
+      clip_start_time: ::Time?
+    }
+
+      type create_hls_manifest_configuration = {
+      manifest_name: ::String,
+      child_manifest_name: ::String?,
+      scte_hls: {
+        ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?,
+        scte_in_manifests: ("ALL" | "MATCHES_FILTER")?
+      }?,
+      start_tag: {
+        time_offset: ::Float,
+        precise: bool?
+      }?,
+      manifest_window_seconds: ::Integer?,
+      program_date_time_interval_seconds: ::Integer?,
+      filter_configuration: Params::filter_configuration?,
+      url_encode_child_manifest: bool?,
+      uri_path_type: ("LEAF" | "ROOT")?
+    }
+
+      type create_low_latency_hls_manifest_configuration = {
+      manifest_name: ::String,
+      child_manifest_name: ::String?,
+      scte_hls: {
+        ad_marker_hls: ("DATERANGE" | "SCTE35_ENHANCED")?,
+        scte_in_manifests: ("ALL" | "MATCHES_FILTER")?
+      }?,
+      start_tag: {
+        time_offset: ::Float,
+        precise: bool?
+      }?,
+      manifest_window_seconds: ::Integer?,
+      program_date_time_interval_seconds: ::Integer?,
+      filter_configuration: Params::filter_configuration?,
+      url_encode_child_manifest: bool?,
+      uri_path_type: ("LEAF" | "ROOT")?
+    }
+
+      type dash_dvb_settings = {
+      font_download: {
+        url: ::String?,
+        mime_type: ::String?,
+        font_family: ::String?
+      }?,
+      error_metrics: Array[
+        {
+          reporting_url: ::String,
+          probability: ::Integer?
+        }
+      ]?
+    }
+
+      type create_dash_manifest_configuration = {
+      manifest_name: ::String,
+      manifest_window_seconds: ::Integer?,
+      filter_configuration: Params::filter_configuration?,
+      min_update_period_seconds: ::Integer?,
+      min_buffer_time_seconds: ::Integer?,
+      suggested_presentation_delay_seconds: ::Integer?,
+      segment_template_format: ("NUMBER_WITH_TIMELINE")?,
+      period_triggers: Array[("AVAILS" | "DRM_KEY_ROTATION" | "SOURCE_CHANGES" | "SOURCE_DISRUPTIONS" | "NONE")]?,
+      scte_dash: {
+        ad_marker_dash: ("BINARY" | "XML")?,
+        scte_in_manifests: ("ALL" | "MATCHES_FILTER")?
+      }?,
+      drm_signaling: ("INDIVIDUAL" | "REFERENCED")?,
+      utc_timing: {
+        timing_mode: ("HTTP_HEAD" | "HTTP_ISO" | "HTTP_XSDATE" | "UTC_DIRECT")?,
+        timing_source: ::String?
+      }?,
+      profiles: Array[("DVB_DASH")]?,
+      base_urls: Array[
+        {
+          url: ::String,
+          service_location: ::String?,
+          dvb_priority: ::Integer?,
+          dvb_weight: ::Integer?
+        }
+      ]?,
+      program_information: {
+        title: ::String?,
+        source: ::String?,
+        copyright: ::String?,
+        language_code: ::String?,
+        more_information_url: ::String?
+      }?,
+      dvb_settings: Params::dash_dvb_settings?,
+      compactness: ("STANDARD" | "NONE")?,
+      subtitle_configuration: {
+        ttml_configuration: {
+          ttml_profile: ("IMSC_1" | "EBU_TT_D_101")
+        }?
+      }?,
+      uri_path_type: ("LEAF" | "ROOT")?,
+      availability_start_time_configuration: {
+        fixed_availability_start_time: ::Time?
+      }?
+    }
+
+      type create_mss_manifest_configuration = {
+      manifest_name: ::String,
+      manifest_window_seconds: ::Integer?,
+      filter_configuration: Params::filter_configuration?,
+      manifest_layout: ("FULL" | "COMPACT")?
+    }
+
+    end
+  end
+end

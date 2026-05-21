@@ -1,0 +1,117 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EntityResolution
+    module Params
+      type id_mapping_rule_based_properties = {
+      rules: Array[
+        {
+          rule_name: ::String,
+          matching_keys: Array[::String]
+        }
+      ]?,
+      rule_definition_type: ("SOURCE" | "TARGET"),
+      attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+      record_matching_model: ("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")
+    }
+
+      type provider_properties = {
+      provider_service_arn: ::String,
+      provider_configuration: {
+      }?,
+      intermediate_source_configuration: {
+        intermediate_s3_path: ::String
+      }?
+    }
+
+      type id_mapping_techniques = {
+      id_mapping_type: ("PROVIDER" | "RULE_BASED"),
+      rule_based_properties: Params::id_mapping_rule_based_properties?,
+      provider_properties: Params::provider_properties?
+    }
+
+      type namespace_rule_based_properties = {
+      rules: Array[
+        {
+          rule_name: ::String,
+          matching_keys: Array[::String]
+        }
+      ]?,
+      rule_definition_types: Array[("SOURCE" | "TARGET")]?,
+      attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY")?,
+      record_matching_models: Array[("ONE_SOURCE_TO_ONE_TARGET" | "MANY_SOURCE_TO_ONE_TARGET")]?
+    }
+
+      type id_namespace_id_mapping_workflow_properties = {
+      id_mapping_type: ("PROVIDER" | "RULE_BASED"),
+      rule_based_properties: Params::namespace_rule_based_properties?,
+      provider_properties: {
+        provider_service_arn: ::String,
+        provider_configuration: {
+        }?
+      }?
+    }
+
+      type output_source = {
+      kms_arn: ::String?,
+      output_s3_path: ::String?,
+      output: Array[
+        {
+          name: ::String,
+          hashed: bool?
+        }
+      ],
+      apply_normalization: bool?,
+      customer_profiles_integration_config: {
+        domain_arn: ::String,
+        object_type_arn: ::String
+      }?
+    }
+
+      type rule_based_properties = {
+      rules: Array[
+        {
+          rule_name: ::String,
+          matching_keys: Array[::String]
+        }
+      ],
+      attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+      match_purpose: ("IDENTIFIER_GENERATION" | "INDEXING")?
+    }
+
+      type rule_condition_properties = {
+      rules: Array[
+        {
+          rule_name: ::String,
+          condition: ::String
+        }
+      ],
+      matching_config: {
+        enable_transitive_matching: bool?
+      }?
+    }
+
+      type resolution_techniques = {
+      resolution_type: ("RULE_MATCHING" | "ML_MATCHING" | "PROVIDER"),
+      rule_based_properties: Params::rule_based_properties?,
+      rule_condition_properties: Params::rule_condition_properties?,
+      provider_properties: Params::provider_properties?
+    }
+
+      type schema_input_attribute = {
+      field_name: ::String,
+      type: ("NAME" | "NAME_FIRST" | "NAME_MIDDLE" | "NAME_LAST" | "ADDRESS" | "ADDRESS_STREET1" | "ADDRESS_STREET2" | "ADDRESS_STREET3" | "ADDRESS_CITY" | "ADDRESS_STATE" | "ADDRESS_COUNTRY" | "ADDRESS_POSTALCODE" | "PHONE" | "PHONE_NUMBER" | "PHONE_COUNTRYCODE" | "EMAIL_ADDRESS" | "UNIQUE_ID" | "DATE" | "STRING" | "PROVIDER_ID" | "IPV4" | "IPV6" | "MAID"),
+      group_name: ::String?,
+      match_key: ::String?,
+      sub_type: ::String?,
+      hashed: bool?
+    }
+
+    end
+  end
+end

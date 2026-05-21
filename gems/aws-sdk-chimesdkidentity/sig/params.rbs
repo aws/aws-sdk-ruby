@@ -1,0 +1,28 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKIdentity
+    module Params
+      type lex_configuration = {
+      responds_to: ("STANDARD_MESSAGES")?,
+      invoked_by: {
+        standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE"),
+        targeted_messages: ("ALL" | "NONE")
+      }?,
+      lex_bot_alias_arn: ::String,
+      locale_id: ::String,
+      welcome_intent: ::String?
+    }
+
+      type configuration = {
+      lex: Params::lex_configuration
+    }
+
+    end
+  end
+end

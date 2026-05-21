@@ -132,7 +132,7 @@ module Aws
                                   {
                                     ip_rule: ::String?,
                                     rule_desc: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _AuthorizeIpRulesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AuthorizeIpRulesResponseSuccess
@@ -151,7 +151,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _CopyWorkspaceImageResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyWorkspaceImageResponseSuccess
@@ -190,7 +190,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateConnectionAliasResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionAliasResponseSuccess
@@ -207,13 +207,13 @@ module Aws
                                {
                                  ip_rule: ::String?,
                                  rule_desc: ::String?
-                               },
+                               }
                              ],
                              ?tags: Array[
                                {
                                  key: ::String,
                                  value: ::String?
-                               },
+                               }
                              ]
                            ) -> _CreateIpGroupResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIpGroupResponseSuccess
@@ -235,10 +235,10 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String?
-                                             },
+                                             }
                                            ]?,
                                            data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")?
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateStandbyWorkspacesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStandbyWorkspacesResponseSuccess
@@ -253,7 +253,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> _CreateTagsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTagsResponseSuccess
@@ -271,7 +271,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String?
-                                              },
+                                              }
                                             ]
                                           ) -> _CreateUpdatedWorkspaceImageResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUpdatedWorkspaceImageResponseSuccess
@@ -298,7 +298,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateWorkspaceBundleResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceBundleResponseSuccess
@@ -323,7 +323,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateWorkspaceImageResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspaceImageResponseSuccess
@@ -343,28 +343,16 @@ module Aws
                                    volume_encryption_key: ::String?,
                                    user_volume_encryption_enabled: bool?,
                                    root_volume_encryption_enabled: bool?,
-                                   workspace_properties: {
-                                     running_mode: ("AUTO_STOP" | "ALWAYS_ON" | "MANUAL")?,
-                                     running_mode_auto_stop_timeout_in_minutes: ::Integer?,
-                                     root_volume_size_gib: ::Integer?,
-                                     user_volume_size_gib: ::Integer?,
-                                     compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")?,
-                                     protocols: Array[("PCOIP" | "WSP")]?,
-                                     operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "WINDOWS_SERVER_2025" | "RHEL_8" | "ROCKY_8")?,
-                                     global_accelerator: {
-                                       mode: ("ENABLED_AUTO" | "DISABLED" | "INHERITED"),
-                                       preferred_protocol: ("TCP" | "NONE" | "INHERITED")?
-                                     }?
-                                   }?,
+                                   workspace_properties: Params::workspace_properties?,
                                    tags: Array[
                                      {
                                        key: ::String,
                                        value: ::String?
-                                     },
+                                     }
                                    ]?,
                                    workspace_name: ::String?,
                                    ipv_6_address: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateWorkspacesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkspacesResponseSuccess
@@ -386,7 +374,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     ?application_settings: {
                                       status: ("DISABLED" | "ENABLED"),
@@ -721,7 +709,7 @@ module Aws
                                               {
                                                 name: ("USER_IDENTITY_TYPE" | "WORKSPACE_TYPE"),
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ]
                                           ) -> _DescribeWorkspaceDirectoriesResponseSuccess
                                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeWorkspaceDirectoriesResponseSuccess
@@ -821,7 +809,7 @@ module Aws
                                            name: ("PoolName"),
                                            values: Array[::String],
                                            operator: ("EQUALS" | "NOTEQUALS" | "CONTAINS" | "NOTCONTAINS")
-                                         },
+                                         }
                                        ],
                                        ?limit: ::Integer,
                                        ?next_token: ::String
@@ -951,7 +939,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _ImportCustomWorkspaceImageResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCustomWorkspaceImageResponseSuccess
@@ -970,7 +958,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     ?applications: Array[("Microsoft_Office_2016" | "Microsoft_Office_2019")]
                                   ) -> _ImportWorkspaceImageResponseSuccess
@@ -1106,13 +1094,13 @@ module Aws
                                                action: ("CLIPBOARD_COPY_FROM_LOCAL_DEVICE" | "CLIPBOARD_COPY_TO_LOCAL_DEVICE" | "PRINTING_TO_LOCAL_DEVICE" | "SMART_CARD"),
                                                permission: ("ENABLED" | "DISABLED"),
                                                maximum_length: ::Integer?
-                                             },
+                                             }
                                            ]?,
                                            storage_connectors: Array[
                                              {
                                                connector_type: ("HOME_FOLDER"),
                                                status: ("ENABLED" | "DISABLED")
-                                             },
+                                             }
                                            ]?,
                                            global_accelerator: {
                                              mode: ("ENABLED_AUTO" | "DISABLED"),
@@ -1143,7 +1131,7 @@ module Aws
                                                       {
                                                         access_endpoint_type: ("STREAMING_WSP")?,
                                                         vpc_endpoint_id: ::String?
-                                                      },
+                                                      }
                                                     ],
                                                     internet_fallback_protocols: Array[("PCOIP")]?
                                                   }?
@@ -1174,19 +1162,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/WorkSpaces/Client.html#modify_workspace_properties-instance_method
       def modify_workspace_properties: (
                                          workspace_id: ::String,
-                                         ?workspace_properties: {
-                                           running_mode: ("AUTO_STOP" | "ALWAYS_ON" | "MANUAL")?,
-                                           running_mode_auto_stop_timeout_in_minutes: ::Integer?,
-                                           root_volume_size_gib: ::Integer?,
-                                           user_volume_size_gib: ::Integer?,
-                                           compute_type_name: ("VALUE" | "STANDARD" | "PERFORMANCE" | "POWER" | "GRAPHICS" | "POWERPRO" | "GENERALPURPOSE_4XLARGE" | "GENERALPURPOSE_8XLARGE" | "GRAPHICSPRO" | "GRAPHICS_G4DN" | "GRAPHICSPRO_G4DN" | "GRAPHICS_G6_XLARGE" | "GRAPHICS_G6_2XLARGE" | "GRAPHICS_G6_4XLARGE" | "GRAPHICS_G6_8XLARGE" | "GRAPHICS_G6_16XLARGE" | "GRAPHICS_GR6_4XLARGE" | "GRAPHICS_GR6_8XLARGE" | "GRAPHICS_G6F_LARGE" | "GRAPHICS_G6F_XLARGE" | "GRAPHICS_G6F_2XLARGE" | "GRAPHICS_G6F_4XLARGE" | "GRAPHICS_GR6F_4XLARGE")?,
-                                           protocols: Array[("PCOIP" | "WSP")]?,
-                                           operating_system_name: ("AMAZON_LINUX_2" | "UBUNTU_18_04" | "UBUNTU_20_04" | "UBUNTU_22_04" | "UNKNOWN" | "WINDOWS_10" | "WINDOWS_11" | "WINDOWS_7" | "WINDOWS_SERVER_2016" | "WINDOWS_SERVER_2019" | "WINDOWS_SERVER_2022" | "WINDOWS_SERVER_2025" | "RHEL_8" | "ROCKY_8")?,
-                                           global_accelerator: {
-                                             mode: ("ENABLED_AUTO" | "DISABLED" | "INHERITED"),
-                                             preferred_protocol: ("TCP" | "NONE" | "INHERITED")?
-                                           }?
-                                         },
+                                         ?workspace_properties: Params::workspace_properties,
                                          ?data_replication: ("NO_REPLICATION" | "PRIMARY_AS_SOURCE")
                                        ) -> _ModifyWorkspacePropertiesResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyWorkspacePropertiesResponseSuccess
@@ -1210,7 +1186,7 @@ module Aws
                                reboot_workspace_requests: Array[
                                  {
                                    workspace_id: ::String
-                                 },
+                                 }
                                ]
                              ) -> _RebootWorkspacesResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebootWorkspacesResponseSuccess
@@ -1224,7 +1200,7 @@ module Aws
                                 rebuild_workspace_requests: Array[
                                   {
                                     workspace_id: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _RebuildWorkspacesResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RebuildWorkspacesResponseSuccess
@@ -1244,7 +1220,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String?
-                                            },
+                                            }
                                           ],
                                           ?workspace_directory_name: ::String,
                                           ?workspace_directory_description: ::String,
@@ -1301,7 +1277,7 @@ module Aws
                               start_workspace_requests: Array[
                                 {
                                   workspace_id: ::String?
-                                },
+                                }
                               ]
                             ) -> _StartWorkspacesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartWorkspacesResponseSuccess
@@ -1324,7 +1300,7 @@ module Aws
                              stop_workspace_requests: Array[
                                {
                                  workspace_id: ::String?
-                               },
+                               }
                              ]
                            ) -> _StopWorkspacesResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopWorkspacesResponseSuccess
@@ -1347,7 +1323,7 @@ module Aws
                                   terminate_workspace_requests: Array[
                                     {
                                       workspace_id: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _TerminateWorkspacesResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TerminateWorkspacesResponseSuccess
@@ -1405,7 +1381,7 @@ module Aws
                                         {
                                           ip_rule: ::String?,
                                           rule_desc: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateRulesOfIpGroupResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRulesOfIpGroupResponseSuccess

@@ -1,0 +1,47 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Rekognition
+    module Params
+      type image = {
+      bytes: ::String?,
+      s3_object: {
+        bucket: ::String?,
+        name: ::String?,
+        version: ::String?
+      }?
+    }
+
+      type asset = {
+      ground_truth_manifest: {
+        s3_object: {
+          bucket: ::String?,
+          name: ::String?,
+          version: ::String?
+        }?
+      }?
+    }
+
+      type region_of_interest = {
+      bounding_box: {
+        width: ::Float?,
+        height: ::Float?,
+        left: ::Float?,
+        top: ::Float?
+      }?,
+      polygon: Array[
+        {
+          x: ::Float?,
+          y: ::Float?
+        }
+      ]?
+    }
+
+    end
+  end
+end

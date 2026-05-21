@@ -97,26 +97,11 @@ module Aws
                                            property_values: Array[
                                              {
                                                timestamp: ::Time?,
-                                               value: {
-                                                 boolean_value: bool?,
-                                                 double_value: ::Float?,
-                                                 integer_value: ::Integer?,
-                                                 long_value: ::Integer?,
-                                                 string_value: ::String?,
-                                                 list_value: Array[
-                                                   untyped,
-                                                 ]?,
-                                                 map_value: Hash[::String, untyped]?,
-                                                 relationship_value: {
-                                                   target_entity_id: ::String?,
-                                                   target_component_name: ::String?
-                                                 }?,
-                                                 expression: ::String?
-                                               },
+                                               value: Params::data_value,
                                                time: ::String?
-                                             },
+                                             }
                                            ]?
-                                         },
+                                         }
                                        ]
                                      ) -> _BatchPutPropertyValuesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutPropertyValuesResponseSuccess
@@ -147,66 +132,9 @@ module Aws
                                    ?is_singleton: bool,
                                    component_type_id: ::String,
                                    ?description: ::String,
-                                   ?property_definitions: Hash[::String, {
-                                       data_type: {
-                                         type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                         nested_type: untyped?,
-                                         allowed_values: Array[
-                                           {
-                                             boolean_value: bool?,
-                                             double_value: ::Float?,
-                                             integer_value: ::Integer?,
-                                             long_value: ::Integer?,
-                                             string_value: ::String?,
-                                             list_value: untyped?,
-                                             map_value: Hash[::String, untyped]?,
-                                             relationship_value: {
-                                               target_entity_id: ::String?,
-                                               target_component_name: ::String?
-                                             }?,
-                                             expression: ::String?
-                                           },
-                                         ]?,
-                                         unit_of_measure: ::String?,
-                                         relationship: {
-                                           target_component_type_id: ::String?,
-                                           relationship_type: ::String?
-                                         }?
-                                       }?,
-                                       is_required_in_entity: bool?,
-                                       is_external_id: bool?,
-                                       is_stored_externally: bool?,
-                                       is_time_series: bool?,
-                                       default_value: {
-                                         boolean_value: bool?,
-                                         double_value: ::Float?,
-                                         integer_value: ::Integer?,
-                                         long_value: ::Integer?,
-                                         string_value: ::String?,
-                                         list_value: Array[
-                                           untyped,
-                                         ]?,
-                                         map_value: Hash[::String, untyped]?,
-                                         relationship_value: {
-                                           target_entity_id: ::String?,
-                                           target_component_name: ::String?
-                                         }?,
-                                         expression: ::String?
-                                       }?,
-                                       configuration: Hash[::String, ::String]?,
-                                       display_name: ::String?
-                                     }],
+                                   ?property_definitions: Hash[::String, Params::property_definition_request],
                                    ?extends_from: Array[::String],
-                                   ?functions: Hash[::String, {
-                                       required_properties: Array[::String]?,
-                                       scope: ("ENTITY" | "WORKSPACE")?,
-                                       implemented_by: {
-                                         lambda: {
-                                           arn: ::String
-                                         }?,
-                                         is_native: bool?
-                                       }?
-                                     }],
+                                   ?functions: Hash[::String, Params::function_request],
                                    ?tags: Hash[::String, ::String],
                                    ?property_groups: Hash[::String, {
                                        group_type: ("TABULAR")?,
@@ -235,74 +163,7 @@ module Aws
                            ?components: Hash[::String, {
                                description: ::String?,
                                component_type_id: ::String?,
-                               properties: Hash[::String, {
-                                   definition: {
-                                     data_type: {
-                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                       nested_type: untyped?,
-                                       allowed_values: Array[
-                                         {
-                                           boolean_value: bool?,
-                                           double_value: ::Float?,
-                                           integer_value: ::Integer?,
-                                           long_value: ::Integer?,
-                                           string_value: ::String?,
-                                           list_value: untyped?,
-                                           map_value: Hash[::String, untyped]?,
-                                           relationship_value: {
-                                             target_entity_id: ::String?,
-                                             target_component_name: ::String?
-                                           }?,
-                                           expression: ::String?
-                                         },
-                                       ]?,
-                                       unit_of_measure: ::String?,
-                                       relationship: {
-                                         target_component_type_id: ::String?,
-                                         relationship_type: ::String?
-                                       }?
-                                     }?,
-                                     is_required_in_entity: bool?,
-                                     is_external_id: bool?,
-                                     is_stored_externally: bool?,
-                                     is_time_series: bool?,
-                                     default_value: {
-                                       boolean_value: bool?,
-                                       double_value: ::Float?,
-                                       integer_value: ::Integer?,
-                                       long_value: ::Integer?,
-                                       string_value: ::String?,
-                                       list_value: Array[
-                                         untyped,
-                                       ]?,
-                                       map_value: Hash[::String, untyped]?,
-                                       relationship_value: {
-                                         target_entity_id: ::String?,
-                                         target_component_name: ::String?
-                                       }?,
-                                       expression: ::String?
-                                     }?,
-                                     configuration: Hash[::String, ::String]?,
-                                     display_name: ::String?
-                                   }?,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     integer_value: ::Integer?,
-                                     long_value: ::Integer?,
-                                     string_value: ::String?,
-                                     list_value: Array[
-                                       untyped,
-                                     ]?,
-                                     map_value: Hash[::String, untyped]?,
-                                     relationship_value: {
-                                       target_entity_id: ::String?,
-                                       target_component_name: ::String?
-                                     }?,
-                                     expression: ::String?
-                                   }?,
-                                   update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")?
-                                 }]?,
+                               properties: Hash[::String, Params::property_request]?,
                                property_groups: Hash[::String, {
                                    group_type: ("TABULAR")?,
                                    property_names: Array[::String]?,
@@ -311,74 +172,7 @@ module Aws
                              }],
                            ?composite_components: Hash[::String, {
                                description: ::String?,
-                               properties: Hash[::String, {
-                                   definition: {
-                                     data_type: {
-                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                       nested_type: untyped?,
-                                       allowed_values: Array[
-                                         {
-                                           boolean_value: bool?,
-                                           double_value: ::Float?,
-                                           integer_value: ::Integer?,
-                                           long_value: ::Integer?,
-                                           string_value: ::String?,
-                                           list_value: untyped?,
-                                           map_value: Hash[::String, untyped]?,
-                                           relationship_value: {
-                                             target_entity_id: ::String?,
-                                             target_component_name: ::String?
-                                           }?,
-                                           expression: ::String?
-                                         },
-                                       ]?,
-                                       unit_of_measure: ::String?,
-                                       relationship: {
-                                         target_component_type_id: ::String?,
-                                         relationship_type: ::String?
-                                       }?
-                                     }?,
-                                     is_required_in_entity: bool?,
-                                     is_external_id: bool?,
-                                     is_stored_externally: bool?,
-                                     is_time_series: bool?,
-                                     default_value: {
-                                       boolean_value: bool?,
-                                       double_value: ::Float?,
-                                       integer_value: ::Integer?,
-                                       long_value: ::Integer?,
-                                       string_value: ::String?,
-                                       list_value: Array[
-                                         untyped,
-                                       ]?,
-                                       map_value: Hash[::String, untyped]?,
-                                       relationship_value: {
-                                         target_entity_id: ::String?,
-                                         target_component_name: ::String?
-                                       }?,
-                                       expression: ::String?
-                                     }?,
-                                     configuration: Hash[::String, ::String]?,
-                                     display_name: ::String?
-                                   }?,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     integer_value: ::Integer?,
-                                     long_value: ::Integer?,
-                                     string_value: ::String?,
-                                     list_value: Array[
-                                       untyped,
-                                     ]?,
-                                     map_value: Hash[::String, untyped]?,
-                                     relationship_value: {
-                                       target_entity_id: ::String?,
-                                       target_component_name: ::String?
-                                     }?,
-                                     expression: ::String?
-                                   }?,
-                                   update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")?
-                                 }]?,
+                               properties: Hash[::String, Params::property_request]?,
                                property_groups: Hash[::String, {
                                    group_type: ("TABULAR")?,
                                    property_names: Array[::String]?,
@@ -422,7 +216,7 @@ module Aws
                                                       include_offspring: bool?,
                                                       include_asset_model: bool?
                                                     }?
-                                                  },
+                                                  }
                                                 ]?
                                               }?,
                                               iot_twin_maker_configuration: {
@@ -435,10 +229,10 @@ module Aws
                                                     filter_by_entity: {
                                                       entity_id: ::String
                                                     }?
-                                                  },
+                                                  }
                                                 ]?
                                               }?
-                                            },
+                                            }
                                           ],
                                           destination: {
                                             type: ("s3" | "iotsitewise" | "iottwinmaker"),
@@ -670,29 +464,10 @@ module Aws
                                     {
                                       order: ("ASCENDING" | "DESCENDING")?,
                                       property_name: ::String
-                                    },
+                                    }
                                   ]?,
                                   property_filters: Array[
-                                    {
-                                      property_name: ::String?,
-                                      operator: ::String?,
-                                      value: {
-                                        boolean_value: bool?,
-                                        double_value: ::Float?,
-                                        integer_value: ::Integer?,
-                                        long_value: ::Integer?,
-                                        string_value: ::String?,
-                                        list_value: Array[
-                                          untyped,
-                                        ]?,
-                                        map_value: Hash[::String, untyped]?,
-                                        relationship_value: {
-                                          target_entity_id: ::String?,
-                                          target_component_name: ::String?
-                                        }?,
-                                        expression: ::String?
-                                      }?
-                                    },
+                                    Params::property_filter
                                   ]?
                                 }
                               ) -> _GetPropertyValueResponseSuccess
@@ -712,26 +487,7 @@ module Aws
                                         ?component_type_id: ::String,
                                         selected_properties: Array[::String],
                                         ?property_filters: Array[
-                                          {
-                                            property_name: ::String?,
-                                            operator: ::String?,
-                                            value: {
-                                              boolean_value: bool?,
-                                              double_value: ::Float?,
-                                              integer_value: ::Integer?,
-                                              long_value: ::Integer?,
-                                              string_value: ::String?,
-                                              list_value: Array[
-                                                untyped,
-                                              ]?,
-                                              map_value: Hash[::String, untyped]?,
-                                              relationship_value: {
-                                                target_entity_id: ::String?,
-                                                target_component_name: ::String?
-                                              }?,
-                                              expression: ::String?
-                                            }?
-                                          },
+                                          Params::property_filter
                                         ],
                                         ?start_date_time: ::Time,
                                         ?end_date_time: ::Time,
@@ -816,7 +572,7 @@ module Aws
                                       extends_from: ::String?,
                                       namespace: ::String?,
                                       is_abstract: bool?
-                                    },
+                                    }
                                   ],
                                   ?next_token: ::String,
                                   ?max_results: ::Integer
@@ -851,7 +607,7 @@ module Aws
                                parent_entity_id: ::String?,
                                component_type_id: ::String?,
                                external_id: ::String?
-                             },
+                             }
                            ],
                            ?max_results: ::Integer,
                            ?next_token: ::String
@@ -871,7 +627,7 @@ module Aws
                                            {
                                              workspace_id: ::String?,
                                              state: ("VALIDATING" | "PENDING" | "RUNNING" | "CANCELLING" | "ERROR" | "COMPLETED" | "CANCELLED")?
-                                           },
+                                           }
                                          ],
                                          ?next_token: ::String,
                                          ?max_results: ::Integer
@@ -935,7 +691,7 @@ module Aws
                                      resource_type: ("ENTITY" | "COMPONENT_TYPE")?,
                                      resource_id: ::String?,
                                      external_id: ::String?
-                                   },
+                                   }
                                  ],
                                  ?max_results: ::Integer,
                                  ?next_token: ::String
@@ -1000,66 +756,9 @@ module Aws
                                    ?is_singleton: bool,
                                    component_type_id: ::String,
                                    ?description: ::String,
-                                   ?property_definitions: Hash[::String, {
-                                       data_type: {
-                                         type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                         nested_type: untyped?,
-                                         allowed_values: Array[
-                                           {
-                                             boolean_value: bool?,
-                                             double_value: ::Float?,
-                                             integer_value: ::Integer?,
-                                             long_value: ::Integer?,
-                                             string_value: ::String?,
-                                             list_value: untyped?,
-                                             map_value: Hash[::String, untyped]?,
-                                             relationship_value: {
-                                               target_entity_id: ::String?,
-                                               target_component_name: ::String?
-                                             }?,
-                                             expression: ::String?
-                                           },
-                                         ]?,
-                                         unit_of_measure: ::String?,
-                                         relationship: {
-                                           target_component_type_id: ::String?,
-                                           relationship_type: ::String?
-                                         }?
-                                       }?,
-                                       is_required_in_entity: bool?,
-                                       is_external_id: bool?,
-                                       is_stored_externally: bool?,
-                                       is_time_series: bool?,
-                                       default_value: {
-                                         boolean_value: bool?,
-                                         double_value: ::Float?,
-                                         integer_value: ::Integer?,
-                                         long_value: ::Integer?,
-                                         string_value: ::String?,
-                                         list_value: Array[
-                                           untyped,
-                                         ]?,
-                                         map_value: Hash[::String, untyped]?,
-                                         relationship_value: {
-                                           target_entity_id: ::String?,
-                                           target_component_name: ::String?
-                                         }?,
-                                         expression: ::String?
-                                       }?,
-                                       configuration: Hash[::String, ::String]?,
-                                       display_name: ::String?
-                                     }],
+                                   ?property_definitions: Hash[::String, Params::property_definition_request],
                                    ?extends_from: Array[::String],
-                                   ?functions: Hash[::String, {
-                                       required_properties: Array[::String]?,
-                                       scope: ("ENTITY" | "WORKSPACE")?,
-                                       implemented_by: {
-                                         lambda: {
-                                           arn: ::String
-                                         }?,
-                                         is_native: bool?
-                                       }?
-                                     }],
+                                   ?functions: Hash[::String, Params::function_request],
                                    ?property_groups: Hash[::String, {
                                        group_type: ("TABULAR")?,
                                        property_names: Array[::String]?
@@ -1086,74 +785,7 @@ module Aws
                                update_type: ("CREATE" | "UPDATE" | "DELETE")?,
                                description: ::String?,
                                component_type_id: ::String?,
-                               property_updates: Hash[::String, {
-                                   definition: {
-                                     data_type: {
-                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                       nested_type: untyped?,
-                                       allowed_values: Array[
-                                         {
-                                           boolean_value: bool?,
-                                           double_value: ::Float?,
-                                           integer_value: ::Integer?,
-                                           long_value: ::Integer?,
-                                           string_value: ::String?,
-                                           list_value: untyped?,
-                                           map_value: Hash[::String, untyped]?,
-                                           relationship_value: {
-                                             target_entity_id: ::String?,
-                                             target_component_name: ::String?
-                                           }?,
-                                           expression: ::String?
-                                         },
-                                       ]?,
-                                       unit_of_measure: ::String?,
-                                       relationship: {
-                                         target_component_type_id: ::String?,
-                                         relationship_type: ::String?
-                                       }?
-                                     }?,
-                                     is_required_in_entity: bool?,
-                                     is_external_id: bool?,
-                                     is_stored_externally: bool?,
-                                     is_time_series: bool?,
-                                     default_value: {
-                                       boolean_value: bool?,
-                                       double_value: ::Float?,
-                                       integer_value: ::Integer?,
-                                       long_value: ::Integer?,
-                                       string_value: ::String?,
-                                       list_value: Array[
-                                         untyped,
-                                       ]?,
-                                       map_value: Hash[::String, untyped]?,
-                                       relationship_value: {
-                                         target_entity_id: ::String?,
-                                         target_component_name: ::String?
-                                       }?,
-                                       expression: ::String?
-                                     }?,
-                                     configuration: Hash[::String, ::String]?,
-                                     display_name: ::String?
-                                   }?,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     integer_value: ::Integer?,
-                                     long_value: ::Integer?,
-                                     string_value: ::String?,
-                                     list_value: Array[
-                                       untyped,
-                                     ]?,
-                                     map_value: Hash[::String, untyped]?,
-                                     relationship_value: {
-                                       target_entity_id: ::String?,
-                                       target_component_name: ::String?
-                                     }?,
-                                     expression: ::String?
-                                   }?,
-                                   update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")?
-                                 }]?,
+                               property_updates: Hash[::String, Params::property_request]?,
                                property_group_updates: Hash[::String, {
                                    group_type: ("TABULAR")?,
                                    property_names: Array[::String]?,
@@ -1163,74 +795,7 @@ module Aws
                            ?composite_component_updates: Hash[::String, {
                                update_type: ("CREATE" | "UPDATE" | "DELETE")?,
                                description: ::String?,
-                               property_updates: Hash[::String, {
-                                   definition: {
-                                     data_type: {
-                                       type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
-                                       nested_type: untyped?,
-                                       allowed_values: Array[
-                                         {
-                                           boolean_value: bool?,
-                                           double_value: ::Float?,
-                                           integer_value: ::Integer?,
-                                           long_value: ::Integer?,
-                                           string_value: ::String?,
-                                           list_value: untyped?,
-                                           map_value: Hash[::String, untyped]?,
-                                           relationship_value: {
-                                             target_entity_id: ::String?,
-                                             target_component_name: ::String?
-                                           }?,
-                                           expression: ::String?
-                                         },
-                                       ]?,
-                                       unit_of_measure: ::String?,
-                                       relationship: {
-                                         target_component_type_id: ::String?,
-                                         relationship_type: ::String?
-                                       }?
-                                     }?,
-                                     is_required_in_entity: bool?,
-                                     is_external_id: bool?,
-                                     is_stored_externally: bool?,
-                                     is_time_series: bool?,
-                                     default_value: {
-                                       boolean_value: bool?,
-                                       double_value: ::Float?,
-                                       integer_value: ::Integer?,
-                                       long_value: ::Integer?,
-                                       string_value: ::String?,
-                                       list_value: Array[
-                                         untyped,
-                                       ]?,
-                                       map_value: Hash[::String, untyped]?,
-                                       relationship_value: {
-                                         target_entity_id: ::String?,
-                                         target_component_name: ::String?
-                                       }?,
-                                       expression: ::String?
-                                     }?,
-                                     configuration: Hash[::String, ::String]?,
-                                     display_name: ::String?
-                                   }?,
-                                   value: {
-                                     boolean_value: bool?,
-                                     double_value: ::Float?,
-                                     integer_value: ::Integer?,
-                                     long_value: ::Integer?,
-                                     string_value: ::String?,
-                                     list_value: Array[
-                                       untyped,
-                                     ]?,
-                                     map_value: Hash[::String, untyped]?,
-                                     relationship_value: {
-                                       target_entity_id: ::String?,
-                                       target_component_name: ::String?
-                                     }?,
-                                     expression: ::String?
-                                   }?,
-                                   update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")?
-                                 }]?,
+                               property_updates: Hash[::String, Params::property_request]?,
                                property_group_updates: Hash[::String, {
                                    group_type: ("TABULAR")?,
                                    property_names: Array[::String]?,

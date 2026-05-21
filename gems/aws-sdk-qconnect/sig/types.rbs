@@ -1826,6 +1826,21 @@ module Aws::QConnect
       SENSITIVE: []
     end
 
+    class ListModelsRequest
+      attr_accessor assistant_id: ::String
+      attr_accessor ai_prompt_type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")
+      attr_accessor model_lifecycle: ("ACTIVE" | "LEGACY")
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListModelsResponse
+      attr_accessor model_summaries: ::Array[Types::ModelSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListQuickResponsesRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -2089,6 +2104,18 @@ module Aws::QConnect
       attr_accessor is_active: bool
       attr_accessor version_number: ::Integer
       SENSITIVE: [:channel]
+    end
+
+    class ModelSummary
+      attr_accessor model_id: ::String
+      attr_accessor display_name: ::String
+      attr_accessor cross_region_status: ("NONE" | "REGIONAL" | "GLOBAL")
+      attr_accessor supports_prompt_caching: bool
+      attr_accessor supported_ai_prompt_types: ::Array[("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION")]
+      attr_accessor model_lifecycle: ("ACTIVE" | "LEGACY")
+      attr_accessor legacy_timestamp: ::Time
+      attr_accessor end_of_life_timestamp: ::Time
+      SENSITIVE: []
     end
 
     class NoteTakingAIAgentConfiguration

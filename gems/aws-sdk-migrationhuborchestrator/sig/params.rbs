@@ -1,0 +1,38 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MigrationHubOrchestrator
+    module Params
+      type workflow_step_automation_configuration = {
+      script_location_s3_bucket: ::String?,
+      script_location_s3_key: {
+        linux: ::String?,
+        windows: ::String?
+      }?,
+      command: {
+        linux: ::String?,
+        windows: ::String?
+      }?,
+      run_environment: ("AWS" | "ONPREMISE")?,
+      target_type: ("SINGLE" | "ALL" | "NONE")?
+    }
+
+      type workflow_step_output = {
+      name: ::String?,
+      data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")?,
+      required: bool?,
+      value: {
+        integer_value: ::Integer?,
+        string_value: ::String?,
+        list_of_string_value: Array[::String]?
+      }?
+    }
+
+    end
+  end
+end

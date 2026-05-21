@@ -1,0 +1,82 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SecurityAgent
+    module Params
+      type aws_resources = {
+      vpcs: Array[
+        {
+          vpc_arn: ::String?,
+          security_group_arns: Array[::String]?,
+          subnet_arns: Array[::String]?
+        }
+      ]?,
+      log_groups: Array[::String]?,
+      s3_buckets: Array[::String]?,
+      secret_arns: Array[::String]?,
+      lambda_function_arns: Array[::String]?,
+      iam_roles: Array[::String]?
+    }
+
+      type assets = {
+      endpoints: Array[
+        {
+          uri: ::String?
+        }
+      ]?,
+      actors: Array[
+        Params::actor
+      ]?,
+      documents: Array[
+        {
+          s3_location: ::String?,
+          artifact_id: ::String?
+        }
+      ]?,
+      source_code: Array[
+        {
+          s3_location: ::String?
+        }
+      ]?,
+      integrated_repositories: Array[
+        {
+          integration_id: ::String,
+          provider_resource_id: ::String
+        }
+      ]?
+    }
+
+      type actor = {
+      identifier: ::String?,
+      uris: Array[::String]?,
+      authentication: {
+        provider_type: ("SECRETS_MANAGER" | "AWS_LAMBDA" | "AWS_IAM_ROLE" | "AWS_INTERNAL")?,
+        value: ::String?
+      }?,
+      description: ::String?
+    }
+
+      type network_traffic_config = {
+      rules: Array[
+        {
+          effect: ("ALLOW" | "DENY")?,
+          pattern: ::String?,
+          network_traffic_rule_type: ("URL")?
+        }
+      ]?,
+      custom_headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?
+    }
+
+    end
+  end
+end

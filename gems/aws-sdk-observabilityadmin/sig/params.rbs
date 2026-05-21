@@ -1,0 +1,148 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ObservabilityAdmin
+    module Params
+      type centralization_rule_source = {
+      regions: Array[::String],
+      scope: ::String?,
+      source_logs_configuration: {
+        log_group_selection_criteria: ::String?,
+        data_source_selection_criteria: ::String?,
+        encrypted_log_group_strategy: ("ALLOW" | "SKIP")
+      }?
+    }
+
+      type destination_logs_configuration = {
+      logs_encryption_configuration: {
+        encryption_strategy: ("CUSTOMER_MANAGED" | "AWS_OWNED"),
+        kms_key_arn: ::String?,
+        encryption_conflict_resolution_strategy: ("ALLOW" | "SKIP")?
+      }?,
+      backup_configuration: {
+        region: ::String,
+        kms_key_arn: ::String?
+      }?,
+      log_group_name_configuration: {
+        log_group_name_pattern: ::String
+      }?
+    }
+
+      type centralization_rule_destination = {
+      region: ::String,
+      account: ::String?,
+      destination_logs_configuration: Params::destination_logs_configuration?
+    }
+
+      type centralization_rule = {
+      source: Params::centralization_rule_source,
+      destination: Params::centralization_rule_destination
+    }
+
+      type cloudtrail_parameters = {
+      advanced_event_selectors: Array[
+        Params::advanced_event_selector
+      ]
+    }
+
+      type logging_filter = {
+      filters: Array[
+        Params::filter
+      ]?,
+      default_behavior: ("KEEP" | "DROP")?
+    }
+
+      type waf_logging_parameters = {
+      redacted_fields: Array[
+        Params::field_to_match
+      ]?,
+      logging_filter: Params::logging_filter?,
+      log_type: ("WAF_LOGS")?
+    }
+
+      type telemetry_destination_configuration = {
+      destination_type: ("cloud-watch-logs")?,
+      destination_pattern: ::String?,
+      retention_in_days: ::Integer?,
+      vpc_flow_log_parameters: {
+        log_format: ::String?,
+        traffic_type: ::String?,
+        max_aggregation_interval: ::Integer?
+      }?,
+      cloudtrail_parameters: Params::cloudtrail_parameters?,
+      elb_load_balancer_logging_parameters: {
+        output_format: ("plain" | "json")?,
+        field_delimiter: ::String?
+      }?,
+      waf_logging_parameters: Params::waf_logging_parameters?,
+      log_delivery_parameters: {
+        log_types: Array[("APPLICATION_LOGS" | "USAGE_LOGS" | "SECURITY_FINDING_LOGS" | "ACCESS_LOGS" | "CONNECTION_LOGS")]?
+      }?,
+      msk_monitoring_parameters: {
+        enhanced_monitoring: ("DEFAULT" | "PER_BROKER" | "PER_TOPIC_PER_BROKER" | "PER_TOPIC_PER_PARTITION")?
+      }?
+    }
+
+      type telemetry_rule = {
+      resource_type: ("AWS::EC2::Instance" | "AWS::EC2::VPC" | "AWS::Lambda::Function" | "AWS::CloudTrail" | "AWS::EKS::Cluster" | "AWS::WAFv2::WebACL" | "AWS::ElasticLoadBalancingV2::LoadBalancer" | "AWS::Route53Resolver::ResolverEndpoint" | "AWS::BedrockAgentCore::Runtime" | "AWS::BedrockAgentCore::Browser" | "AWS::BedrockAgentCore::CodeInterpreter" | "AWS::BedrockAgentCore::Gateway" | "AWS::BedrockAgentCore::Memory" | "AWS::BedrockAgentCore::WorkloadIdentity" | "AWS::SecurityHub::Hub" | "AWS::CloudFront::Distribution" | "AWS::SecurityHub::HubV2" | "AWS::CloudWatch::OTelEnrichment" | "AWS::MSK::Cluster")?,
+      telemetry_type: ("Logs" | "Metrics" | "Traces"),
+      telemetry_source_types: Array[("VPC_FLOW_LOGS" | "ROUTE53_RESOLVER_QUERY_LOGS" | "EKS_AUDIT_LOGS" | "EKS_AUTHENTICATOR_LOGS" | "EKS_CONTROLLER_MANAGER_LOGS" | "EKS_SCHEDULER_LOGS" | "EKS_API_LOGS")]?,
+      destination_configuration: Params::telemetry_destination_configuration?,
+      scope: ::String?,
+      selection_criteria: ::String?,
+      allow_field_updates: bool?,
+      regions: Array[::String]?,
+      all_regions: bool?
+    }
+
+      type advanced_event_selector = {
+      name: ::String?,
+      field_selectors: Array[
+        Params::advanced_field_selector
+      ]
+    }
+
+      type advanced_field_selector = {
+      field: ::String,
+      equals: Array[::String]?,
+      starts_with: Array[::String]?,
+      ends_with: Array[::String]?,
+      not_equals: Array[::String]?,
+      not_starts_with: Array[::String]?,
+      not_ends_with: Array[::String]?
+    }
+
+      type field_to_match = {
+      single_header: {
+        name: ::String?
+      }?,
+      uri_path: ::String?,
+      query_string: ::String?,
+      method: ::String?
+    }
+
+      type filter = {
+      behavior: ("KEEP" | "DROP")?,
+      requirement: ("MEETS_ALL" | "MEETS_ANY")?,
+      conditions: Array[
+        Params::condition
+      ]?
+    }
+
+      type condition = {
+      action_condition: {
+        action: ("ALLOW" | "BLOCK" | "COUNT" | "CAPTCHA" | "CHALLENGE" | "EXCLUDED_AS_COUNT")?
+      }?,
+      label_name_condition: {
+        label_name: ::String?
+      }?
+    }
+
+    end
+  end
+end

@@ -1,0 +1,138 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AutoScaling
+    module Params
+      type launch_template = {
+      launch_template_specification: {
+        launch_template_id: ::String?,
+        launch_template_name: ::String?,
+        version: ::String?
+      }?,
+      overrides: Array[
+        Params::launch_template_overrides
+      ]?
+    }
+
+      type instances_distribution = {
+      on_demand_allocation_strategy: ::String?,
+      on_demand_base_capacity: ::Integer?,
+      on_demand_percentage_above_base_capacity: ::Integer?,
+      spot_allocation_strategy: ::String?,
+      spot_instance_pools: ::Integer?,
+      spot_max_price: ::String?
+    }
+
+      type mixed_instances_policy = {
+      launch_template: Params::launch_template?,
+      instances_distribution: Params::instances_distribution?
+    }
+
+      type instance_requirements = {
+      v_cpu_count: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      memory_mi_b: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      cpu_manufacturers: Array[("intel" | "amd" | "amazon-web-services" | "apple")]?,
+      memory_gi_b_per_v_cpu: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      excluded_instance_types: Array[::String]?,
+      instance_generations: Array[("current" | "previous")]?,
+      spot_max_price_percentage_over_lowest_price: ::Integer?,
+      max_spot_price_as_percentage_of_optimal_on_demand_price: ::Integer?,
+      on_demand_max_price_percentage_over_lowest_price: ::Integer?,
+      bare_metal: ("included" | "excluded" | "required")?,
+      burstable_performance: ("included" | "excluded" | "required")?,
+      require_hibernate_support: bool?,
+      network_interface_count: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      local_storage: ("included" | "excluded" | "required")?,
+      local_storage_types: Array[("hdd" | "ssd")]?,
+      total_local_storage_gb: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      baseline_ebs_bandwidth_mbps: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      accelerator_types: Array[("gpu" | "fpga" | "inference")]?,
+      accelerator_count: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      accelerator_manufacturers: Array[("nvidia" | "amd" | "amazon-web-services" | "xilinx")]?,
+      accelerator_names: Array[("a100" | "v100" | "k80" | "t4" | "m60" | "radeon-pro-v520" | "vu9p")]?,
+      accelerator_total_memory_mi_b: {
+        min: ::Integer?,
+        max: ::Integer?
+      }?,
+      network_bandwidth_gbps: {
+        min: ::Float?,
+        max: ::Float?
+      }?,
+      allowed_instance_types: Array[::String]?,
+      baseline_performance_factors: {
+        cpu: {
+          references: Array[
+            {
+              instance_family: ::String?
+            }
+          ]?
+        }?
+      }?
+    }
+
+      type launch_template_overrides = {
+      instance_type: ::String?,
+      weighted_capacity: ::String?,
+      launch_template_specification: {
+        launch_template_id: ::String?,
+        launch_template_name: ::String?,
+        version: ::String?
+      }?,
+      instance_requirements: Params::instance_requirements?,
+      image_id: ::String?
+    }
+
+      type metric = {
+      namespace: ::String,
+      metric_name: ::String,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type metric_stat = {
+      metric: Params::metric,
+      stat: ::String,
+      unit: ::String?
+    }
+
+      type metric_data_query = {
+      id: ::String,
+      expression: ::String?,
+      metric_stat: Params::metric_stat?,
+      label: ::String?,
+      return_data: bool?
+    }
+
+    end
+  end
+end

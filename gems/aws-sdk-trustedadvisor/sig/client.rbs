@@ -88,7 +88,7 @@ module Aws
                                                               {
                                                                 arn: ::String,
                                                                 is_excluded: bool
-                                                              },
+                                                              }
                                                             ]
                                                           ) -> _BatchUpdateRecommendationResourceExclusionResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRecommendationResourceExclusionResponseSuccess

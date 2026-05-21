@@ -1,0 +1,145 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QApps
+    module Params
+      type app_definition_input = {
+      cards: Array[
+        Params::card_input
+      ],
+      initial_prompt: ::String?
+    }
+
+      type document_attribute = {
+      name: ::String,
+      value: {
+        string_value: ::String?,
+        string_list_value: Array[::String]?,
+        long_value: ::Integer?,
+        date_value: ::Time?
+      }
+    }
+
+      type attribute_filter = {
+      and_all_filters: Array[
+        {
+          and_all_filters: untyped?,
+          or_all_filters: untyped?,
+          not_filter: untyped?,
+          equals_to: Params::document_attribute?,
+          contains_all: Params::document_attribute?,
+          contains_any: Params::document_attribute?,
+          greater_than: Params::document_attribute?,
+          greater_than_or_equals: Params::document_attribute?,
+          less_than: Params::document_attribute?,
+          less_than_or_equals: Params::document_attribute?
+        }
+      ]?,
+      or_all_filters: Array[
+        {
+          and_all_filters: untyped?,
+          or_all_filters: untyped?,
+          not_filter: untyped?,
+          equals_to: Params::document_attribute?,
+          contains_all: Params::document_attribute?,
+          contains_any: Params::document_attribute?,
+          greater_than: Params::document_attribute?,
+          greater_than_or_equals: Params::document_attribute?,
+          less_than: Params::document_attribute?,
+          less_than_or_equals: Params::document_attribute?
+        }
+      ]?,
+      not_filter: {
+        and_all_filters: Array[
+          untyped
+        ]?,
+        or_all_filters: Array[
+          untyped
+        ]?,
+        not_filter: untyped?,
+        equals_to: Params::document_attribute?,
+        contains_all: Params::document_attribute?,
+        contains_any: Params::document_attribute?,
+        greater_than: Params::document_attribute?,
+        greater_than_or_equals: Params::document_attribute?,
+        less_than: Params::document_attribute?,
+        less_than_or_equals: Params::document_attribute?
+      }?,
+      equals_to: Params::document_attribute?,
+      contains_all: Params::document_attribute?,
+      contains_any: Params::document_attribute?,
+      greater_than: Params::document_attribute?,
+      greater_than_or_equals: Params::document_attribute?,
+      less_than: Params::document_attribute?,
+      less_than_or_equals: Params::document_attribute?
+    }
+
+      type q_query_card_input = {
+      title: ::String,
+      id: ::String,
+      type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
+      prompt: ::String,
+      output_source: ("approved-sources" | "llm")?,
+      attribute_filter: Params::attribute_filter?
+    }
+
+      type q_plugin_card_input = {
+      title: ::String,
+      id: ::String,
+      type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
+      prompt: ::String,
+      plugin_id: ::String,
+      action_identifier: ::String?
+    }
+
+      type file_upload_card_input = {
+      title: ::String,
+      id: ::String,
+      type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
+      filename: ::String?,
+      file_id: ::String?,
+      allow_override: bool?
+    }
+
+      type form_input_card_input = {
+      title: ::String,
+      id: ::String,
+      type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
+      metadata: {
+        schema: {
+        }
+      },
+      compute_mode: ("append" | "replace")?
+    }
+
+      type card_input = {
+      text_input: {
+        title: ::String,
+        id: ::String,
+        type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
+        placeholder: ::String?,
+        default_value: ::String?
+      }?,
+      q_query: Params::q_query_card_input?,
+      q_plugin: Params::q_plugin_card_input?,
+      file_upload: Params::file_upload_card_input?,
+      form_input: Params::form_input_card_input?
+    }
+
+      type card_value = {
+      card_id: ::String,
+      value: ::String,
+      submission_mutation: {
+        submission_id: ::String,
+        mutation_type: ("edit" | "delete" | "add")
+      }?
+    }
+
+    end
+  end
+end

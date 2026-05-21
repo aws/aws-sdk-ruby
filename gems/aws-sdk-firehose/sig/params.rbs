@@ -1,0 +1,150 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Firehose
+    module Params
+      type s3_destination_configuration = {
+      role_arn: ::String,
+      bucket_arn: ::String,
+      prefix: ::String?,
+      error_output_prefix: ::String?,
+      buffering_hints: {
+        size_in_m_bs: ::Integer?,
+        interval_in_seconds: ::Integer?
+      }?,
+      compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
+      encryption_configuration: {
+        no_encryption_config: ("NoEncryption")?,
+        kms_encryption_config: {
+          awskms_key_arn: ::String
+        }?
+      }?,
+      cloud_watch_logging_options: {
+        enabled: bool?,
+        log_group_name: ::String?,
+        log_stream_name: ::String?
+      }?
+    }
+
+      type processing_configuration = {
+      enabled: bool?,
+      processors: Array[
+        {
+          type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
+          parameters: Array[
+            {
+              parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
+              parameter_value: ::String
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type schema_configuration = {
+      role_arn: ::String?,
+      catalog_id: ::String?,
+      database_name: ::String?,
+      table_name: ::String?,
+      region: ::String?,
+      version_id: ::String?
+    }
+
+      type deserializer = {
+      open_x_json_ser_de: {
+        convert_dots_in_json_keys_to_underscores: bool?,
+        case_insensitive: bool?,
+        column_to_json_key_mappings: Hash[::String, ::String]?
+      }?,
+      hive_json_ser_de: {
+        timestamp_formats: Array[::String]?
+      }?
+    }
+
+      type input_format_configuration = {
+      deserializer: Params::deserializer?
+    }
+
+      type parquet_ser_de = {
+      block_size_bytes: ::Integer?,
+      page_size_bytes: ::Integer?,
+      compression: ("UNCOMPRESSED" | "GZIP" | "SNAPPY")?,
+      enable_dictionary_compression: bool?,
+      max_padding_bytes: ::Integer?,
+      writer_version: ("V1" | "V2")?
+    }
+
+      type orc_ser_de = {
+      stripe_size_bytes: ::Integer?,
+      block_size_bytes: ::Integer?,
+      row_index_stride: ::Integer?,
+      enable_padding: bool?,
+      padding_tolerance: ::Float?,
+      compression: ("NONE" | "ZLIB" | "SNAPPY")?,
+      bloom_filter_columns: Array[::String]?,
+      bloom_filter_false_positive_probability: ::Float?,
+      dictionary_key_threshold: ::Float?,
+      format_version: ("V0_11" | "V0_12")?
+    }
+
+      type serializer = {
+      parquet_ser_de: Params::parquet_ser_de?,
+      orc_ser_de: Params::orc_ser_de?
+    }
+
+      type output_format_configuration = {
+      serializer: Params::serializer?
+    }
+
+      type data_format_conversion_configuration = {
+      schema_configuration: Params::schema_configuration?,
+      input_format_configuration: Params::input_format_configuration?,
+      output_format_configuration: Params::output_format_configuration?,
+      enabled: bool?
+    }
+
+      type destination_table_configuration = {
+      destination_table_name: ::String,
+      destination_database_name: ::String,
+      unique_keys: Array[::String]?,
+      partition_spec: {
+        identity: Array[
+          {
+            source_name: ::String
+          }
+        ]?
+      }?,
+      s3_error_output_prefix: ::String?
+    }
+
+      type s3_destination_update = {
+      role_arn: ::String?,
+      bucket_arn: ::String?,
+      prefix: ::String?,
+      error_output_prefix: ::String?,
+      buffering_hints: {
+        size_in_m_bs: ::Integer?,
+        interval_in_seconds: ::Integer?
+      }?,
+      compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
+      encryption_configuration: {
+        no_encryption_config: ("NoEncryption")?,
+        kms_encryption_config: {
+          awskms_key_arn: ::String
+        }?
+      }?,
+      cloud_watch_logging_options: {
+        enabled: bool?,
+        log_group_name: ::String?,
+        log_stream_name: ::String?
+      }?
+    }
+
+    end
+  end
+end

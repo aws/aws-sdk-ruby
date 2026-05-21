@@ -96,7 +96,7 @@ module Aws
                                    invite_code: ::String?,
                                    invite_code_ttl: ::Integer?,
                                    code_validation: bool?
-                                 },
+                                 }
                                ],
                                ?client_token: ::String
                              ) -> _BatchCreateUserResponseSuccess
@@ -247,13 +247,13 @@ module Aws
                                        {
                                          region: ::String,
                                          network_id: ::String
-                                       },
+                                       }
                                      ]?,
                                      permitted_wickr_enterprise_networks: Array[
                                        {
                                          domain: ::String,
                                          network_id: ::String
-                                       },
+                                       }
                                      ]?
                                    },
                                    ?client_token: ::String
@@ -806,13 +806,13 @@ module Aws
                                        {
                                          region: ::String,
                                          network_id: ::String
-                                       },
+                                       }
                                      ]?,
                                      permitted_wickr_enterprise_networks: Array[
                                        {
                                          domain: ::String,
                                          network_id: ::String
-                                       },
+                                       }
                                      ]?
                                    }
                                  ) -> _UpdateSecurityGroupResponseSuccess

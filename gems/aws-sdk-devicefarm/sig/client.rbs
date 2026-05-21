@@ -93,7 +93,7 @@ module Aws
                                     attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")?,
                                     operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?max_devices: ::Integer
                               ) -> _CreateDevicePoolResponseSuccess
@@ -151,7 +151,7 @@ module Aws
                               {
                                 name: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?execution_role_arn: ::String
                           ) -> _CreateProjectResponseSuccess
@@ -373,40 +373,7 @@ module Aws
                                              filter: ::String?,
                                              parameters: Hash[::String, ::String]?
                                            },
-                                           ?configuration: {
-                                             extra_data_package_arn: ::String?,
-                                             network_profile_arn: ::String?,
-                                             locale: ::String?,
-                                             location: {
-                                               latitude: ::Float,
-                                               longitude: ::Float
-                                             }?,
-                                             vpce_configuration_arns: Array[::String]?,
-                                             device_proxy: {
-                                               host: ::String,
-                                               port: ::Integer
-                                             }?,
-                                             customer_artifact_paths: {
-                                               ios_paths: Array[::String]?,
-                                               android_paths: Array[::String]?,
-                                               device_host_paths: Array[::String]?
-                                             }?,
-                                             radios: {
-                                               wifi: bool?,
-                                               bluetooth: bool?,
-                                               nfc: bool?,
-                                               gps: bool?
-                                             }?,
-                                             auxiliary_apps: Array[::String]?,
-                                             billing_method: ("METERED" | "UNMETERED")?,
-                                             environment_variables: Array[
-                                               {
-                                                 name: ::String,
-                                                 value: ::String
-                                               },
-                                             ]?,
-                                             execution_role_arn: ::String?
-                                           },
+                                           ?configuration: Params::schedule_run_configuration,
                                            ?project_arn: ::String
                                          ) -> _GetDevicePoolCompatibilityResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDevicePoolCompatibilityResponseSuccess
@@ -608,7 +575,7 @@ module Aws
                               attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE"),
                               operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS"),
                               values: Array[::String]
-                            },
+                            }
                           ]
                         ) -> _ListDevicesResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDevicesResponseSuccess
@@ -897,7 +864,7 @@ module Aws
                                 attribute: ("ARN" | "PLATFORM" | "OS_VERSION" | "MODEL" | "AVAILABILITY" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE"),
                                 operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS"),
                                 values: Array[::String]
-                              },
+                              }
                             ],
                             max_devices: ::Integer
                           },
@@ -909,40 +876,7 @@ module Aws
                             filter: ::String?,
                             parameters: Hash[::String, ::String]?
                           },
-                          ?configuration: {
-                            extra_data_package_arn: ::String?,
-                            network_profile_arn: ::String?,
-                            locale: ::String?,
-                            location: {
-                              latitude: ::Float,
-                              longitude: ::Float
-                            }?,
-                            vpce_configuration_arns: Array[::String]?,
-                            device_proxy: {
-                              host: ::String,
-                              port: ::Integer
-                            }?,
-                            customer_artifact_paths: {
-                              ios_paths: Array[::String]?,
-                              android_paths: Array[::String]?,
-                              device_host_paths: Array[::String]?
-                            }?,
-                            radios: {
-                              wifi: bool?,
-                              bluetooth: bool?,
-                              nfc: bool?,
-                              gps: bool?
-                            }?,
-                            auxiliary_apps: Array[::String]?,
-                            billing_method: ("METERED" | "UNMETERED")?,
-                            environment_variables: Array[
-                              {
-                                name: ::String,
-                                value: ::String
-                              },
-                            ]?,
-                            execution_role_arn: ::String?
-                          },
+                          ?configuration: Params::schedule_run_configuration,
                           ?execution_configuration: {
                             job_timeout_minutes: ::Integer?,
                             accounts_cleanup: bool?,
@@ -993,7 +927,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1034,7 +968,7 @@ module Aws
                                     attribute: ("ARN" | "PLATFORM" | "FORM_FACTOR" | "MANUFACTURER" | "REMOTE_ACCESS_ENABLED" | "REMOTE_DEBUG_ENABLED" | "APPIUM_VERSION" | "INSTANCE_ARN" | "INSTANCE_LABELS" | "FLEET_TYPE" | "OS_VERSION" | "MODEL" | "AVAILABILITY")?,
                                     operator: ("EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "IN" | "NOT_IN" | "CONTAINS")?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?max_devices: ::Integer,
                                 ?clear_max_devices: bool
@@ -1095,7 +1029,7 @@ module Aws
                               {
                                 name: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?execution_role_arn: ::String
                           ) -> _UpdateProjectResponseSuccess

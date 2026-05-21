@@ -89,7 +89,7 @@ module Aws
                                  {
                                    id: ::String,
                                    string_value: ::String
-                                 },
+                                 }
                                ],
                                ?start_timestamp: ::Time
                              ) -> _ActivatePipelineResponseSuccess
@@ -105,7 +105,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ]
                     ) -> _AddTagsResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
@@ -123,7 +123,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreatePipelineResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePipelineResponseSuccess
@@ -231,17 +231,7 @@ module Aws
       def put_pipeline_definition: (
                                      pipeline_id: ::String,
                                      pipeline_objects: Array[
-                                       {
-                                         id: ::String,
-                                         name: ::String,
-                                         fields: Array[
-                                           {
-                                             key: ::String,
-                                             string_value: ::String?,
-                                             ref_value: ::String?
-                                           },
-                                         ]
-                                       },
+                                       Params::pipeline_object
                                      ],
                                      ?parameter_objects: Array[
                                        {
@@ -250,15 +240,15 @@ module Aws
                                            {
                                              key: ::String,
                                              string_value: ::String
-                                           },
+                                           }
                                          ]
-                                       },
+                                       }
                                      ],
                                      ?parameter_values: Array[
                                        {
                                          id: ::String,
                                          string_value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _PutPipelineDefinitionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutPipelineDefinitionResponseSuccess
@@ -280,7 +270,7 @@ module Aws
                                    type: ("EQ" | "REF_EQ" | "LE" | "GE" | "BETWEEN")?,
                                    values: Array[::String]?
                                  }?
-                               },
+                               }
                              ]?
                            },
                            sphere: ::String,
@@ -311,7 +301,7 @@ module Aws
                                       key: ::String,
                                       string_value: ::String?,
                                       ref_value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _ReportTaskProgressResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReportTaskProgressResponseSuccess
@@ -359,17 +349,7 @@ module Aws
       def validate_pipeline_definition: (
                                           pipeline_id: ::String,
                                           pipeline_objects: Array[
-                                            {
-                                              id: ::String,
-                                              name: ::String,
-                                              fields: Array[
-                                                {
-                                                  key: ::String,
-                                                  string_value: ::String?,
-                                                  ref_value: ::String?
-                                                },
-                                              ]
-                                            },
+                                            Params::pipeline_object
                                           ],
                                           ?parameter_objects: Array[
                                             {
@@ -378,15 +358,15 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   string_value: ::String
-                                                },
+                                                }
                                               ]
-                                            },
+                                            }
                                           ],
                                           ?parameter_values: Array[
                                             {
                                               id: ::String,
                                               string_value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _ValidatePipelineDefinitionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ValidatePipelineDefinitionResponseSuccess

@@ -97,25 +97,8 @@ module Aws
       def accept_link: (
                          gateway_id: ::String,
                          link_id: ::String,
-                         ?attributes: {
-                           responder_error_masking: Array[
-                             {
-                               http_code: ::String,
-                               action: ("NO_BID" | "PASSTHROUGH"),
-                               logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
-                               response_logging_percentage: ::Float?
-                             },
-                           ]?,
-                           customer_provided_id: ::String?
-                         },
-                         log_settings: {
-                           application_logs: {
-                             sampling: {
-                               error_log: ::Float,
-                               filter_log: ::Float
-                             }
-                           }
-                         },
+                         ?attributes: Params::link_attributes,
+                         log_settings: Params::link_log_settings,
                          ?timeout_in_millis: ::Integer
                        ) -> _AcceptLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptLinkResponseSuccess
@@ -145,25 +128,8 @@ module Aws
       def create_inbound_external_link: (
                                           client_token: ::String,
                                           gateway_id: ::String,
-                                          ?attributes: {
-                                            responder_error_masking: Array[
-                                              {
-                                                http_code: ::String,
-                                                action: ("NO_BID" | "PASSTHROUGH"),
-                                                logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
-                                                response_logging_percentage: ::Float?
-                                              },
-                                            ]?,
-                                            customer_provided_id: ::String?
-                                          },
-                                          log_settings: {
-                                            application_logs: {
-                                              sampling: {
-                                                error_log: ::Float,
-                                                filter_log: ::Float
-                                              }
-                                            }
-                                          },
+                                          ?attributes: Params::link_attributes,
+                                          log_settings: Params::link_log_settings,
                                           ?tags: Hash[::String, ::String]
                                         ) -> _CreateInboundExternalLinkResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInboundExternalLinkResponseSuccess
@@ -188,27 +154,10 @@ module Aws
       def create_link: (
                          gateway_id: ::String,
                          peer_gateway_id: ::String,
-                         ?attributes: {
-                           responder_error_masking: Array[
-                             {
-                               http_code: ::String,
-                               action: ("NO_BID" | "PASSTHROUGH"),
-                               logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
-                               response_logging_percentage: ::Float?
-                             },
-                           ]?,
-                           customer_provided_id: ::String?
-                         },
+                         ?attributes: Params::link_attributes,
                          ?http_responder_allowed: bool,
                          ?tags: Hash[::String, ::String],
-                         log_settings: {
-                           application_logs: {
-                             sampling: {
-                               error_log: ::Float,
-                               filter_log: ::Float
-                             }
-                           }
-                         },
+                         log_settings: Params::link_log_settings,
                          ?timeout_in_millis: ::Integer
                        ) -> _CreateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkResponseSuccess
@@ -225,17 +174,7 @@ module Aws
                                       gateway_id: ::String,
                                       link_id: ::String,
                                       priority: ::Integer,
-                                      conditions: {
-                                        host_header: ::String?,
-                                        host_header_wildcard: ::String?,
-                                        path_prefix: ::String?,
-                                        path_exact: ::String?,
-                                        query_string_equals: {
-                                          key: ::String,
-                                          value: ::String
-                                        }?,
-                                        query_string_exists: ::String?
-                                      },
+                                      conditions: Params::rule_condition,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateLinkRoutingRuleResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLinkRoutingRuleResponseSuccess
@@ -250,26 +189,9 @@ module Aws
       def create_outbound_external_link: (
                                            client_token: ::String,
                                            gateway_id: ::String,
-                                           ?attributes: {
-                                             responder_error_masking: Array[
-                                               {
-                                                 http_code: ::String,
-                                                 action: ("NO_BID" | "PASSTHROUGH"),
-                                                 logging_types: Array[("NONE" | "METRIC" | "RESPONSE")],
-                                                 response_logging_percentage: ::Float?
-                                               },
-                                             ]?,
-                                             customer_provided_id: ::String?
-                                           },
+                                           ?attributes: Params::link_attributes,
                                            public_endpoint: ::String,
-                                           log_settings: {
-                                             application_logs: {
-                                               sampling: {
-                                                 error_log: ::Float,
-                                                 filter_log: ::Float
-                                               }
-                                             }
-                                           },
+                                           log_settings: Params::link_log_settings,
                                            ?tags: Hash[::String, ::String]
                                          ) -> _CreateOutboundExternalLinkResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutboundExternalLinkResponseSuccess
@@ -312,30 +234,7 @@ module Aws
                                       ?trust_store_configuration: {
                                         certificate_authority_certificates: Array[::String]
                                       },
-                                      ?managed_endpoint_configuration: {
-                                        auto_scaling_groups: {
-                                          auto_scaling_group_names: Array[::String],
-                                          role_arn: ::String,
-                                          health_check_config: {
-                                            port: ::Integer,
-                                            path: ::String,
-                                            protocol: ("HTTP" | "HTTPS")?,
-                                            timeout_ms: ::Integer?,
-                                            interval_seconds: ::Integer?,
-                                            status_code_matcher: ::String?,
-                                            healthy_threshold_count: ::Integer?,
-                                            unhealthy_threshold_count: ::Integer?
-                                          }?
-                                        }?,
-                                        eks_endpoints: {
-                                          endpoints_resource_name: ::String,
-                                          endpoints_resource_namespace: ::String,
-                                          cluster_api_server_endpoint_uri: ::String,
-                                          cluster_api_server_ca_certificate_chain: ::String,
-                                          cluster_name: ::String,
-                                          role_arn: ::String
-                                        }?
-                                      },
+                                      ?managed_endpoint_configuration: Params::managed_endpoint_configuration,
                                       client_token: ::String,
                                       ?description: ::String,
                                       ?tags: Hash[::String, ::String],
@@ -572,6 +471,7 @@ module Aws
         def active_links_count: () -> ::Integer
         def total_links_count: () -> ::Integer
         def inbound_links_count: () -> ::Integer
+        def links_requested_count: () -> ::Integer
         def gateway_type: () -> ("EXTERNAL" | "INTERNAL")
         def external_inbound_endpoint: () -> ::String
       end
@@ -706,14 +606,7 @@ module Aws
       def update_link: (
                          gateway_id: ::String,
                          link_id: ::String,
-                         ?log_settings: {
-                           application_logs: {
-                             sampling: {
-                               error_log: ::Float,
-                               filter_log: ::Float
-                             }
-                           }
-                         },
+                         ?log_settings: Params::link_log_settings,
                          ?timeout_in_millis: ::Integer
                        ) -> _UpdateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess
@@ -748,9 +641,9 @@ module Aws
                                                    {
                                                      path: ::String,
                                                      values: Array[::String]
-                                                   },
+                                                   }
                                                  ]
-                                               },
+                                               }
                                              ],
                                              action: {
                                                no_bid: {
@@ -767,7 +660,7 @@ module Aws
                                              tps: ::Float?
                                            }?
                                          }?
-                                       },
+                                       }
                                      ]
                                    ) -> _UpdateLinkModuleFlowResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkModuleFlowResponseSuccess
@@ -784,17 +677,7 @@ module Aws
                                       link_id: ::String,
                                       rule_id: ::String,
                                       priority: ::Integer,
-                                      conditions: {
-                                        host_header: ::String?,
-                                        host_header_wildcard: ::String?,
-                                        path_prefix: ::String?,
-                                        path_exact: ::String?,
-                                        query_string_equals: {
-                                          key: ::String,
-                                          value: ::String
-                                        }?,
-                                        query_string_exists: ::String?
-                                      }
+                                      conditions: Params::rule_condition
                                     ) -> _UpdateLinkRoutingRuleResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkRoutingRuleResponseSuccess
 
@@ -827,30 +710,7 @@ module Aws
                                       ?trust_store_configuration: {
                                         certificate_authority_certificates: Array[::String]
                                       },
-                                      ?managed_endpoint_configuration: {
-                                        auto_scaling_groups: {
-                                          auto_scaling_group_names: Array[::String],
-                                          role_arn: ::String,
-                                          health_check_config: {
-                                            port: ::Integer,
-                                            path: ::String,
-                                            protocol: ("HTTP" | "HTTPS")?,
-                                            timeout_ms: ::Integer?,
-                                            interval_seconds: ::Integer?,
-                                            status_code_matcher: ::String?,
-                                            healthy_threshold_count: ::Integer?,
-                                            unhealthy_threshold_count: ::Integer?
-                                          }?
-                                        }?,
-                                        eks_endpoints: {
-                                          endpoints_resource_name: ::String,
-                                          endpoints_resource_namespace: ::String,
-                                          cluster_api_server_endpoint_uri: ::String,
-                                          cluster_api_server_ca_certificate_chain: ::String,
-                                          cluster_name: ::String,
-                                          role_arn: ::String
-                                        }?
-                                      },
+                                      ?managed_endpoint_configuration: Params::managed_endpoint_configuration,
                                       client_token: ::String,
                                       gateway_id: ::String,
                                       ?description: ::String

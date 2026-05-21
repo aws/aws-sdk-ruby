@@ -1,0 +1,100 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Macie2
+    module Params
+      type criteria_block_for_job = {
+      and: Array[
+        Params::criteria_for_job
+      ]?
+    }
+
+      type criteria_for_job = {
+      simple_criterion: {
+        comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS")?,
+        values: Array[::String]?
+      }?,
+      tag_criterion: {
+        comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+        tag_values: Array[
+          {
+            key: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type job_scoping_block = {
+      and: Array[
+        Params::job_scope_term
+      ]?
+    }
+
+      type tag_scope_term = {
+      comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+      key: ::String?,
+      tag_values: Array[
+        {
+          key: ::String?,
+          value: ::String?
+        }
+      ]?,
+      target: ("S3_OBJECT")?
+    }
+
+      type job_scope_term = {
+      simple_scope_term: {
+        comparator: ("EQ" | "GT" | "GTE" | "LT" | "LTE" | "NE" | "CONTAINS" | "STARTS_WITH")?,
+        key: ("OBJECT_EXTENSION" | "OBJECT_LAST_MODIFIED_DATE" | "OBJECT_SIZE" | "OBJECT_KEY")?,
+        values: Array[::String]?
+      }?,
+      tag_scope_term: Params::tag_scope_term?
+    }
+
+      type finding_criteria = {
+      criterion: Hash[::String, Params::criterion_additional_properties]?
+    }
+
+      type criterion_additional_properties = {
+      eq: Array[::String]?,
+      eq_exact_match: Array[::String]?,
+      gt: ::Integer?,
+      gte: ::Integer?,
+      lt: ::Integer?,
+      lte: ::Integer?,
+      neq: Array[::String]?
+    }
+
+      type search_resources_criteria_block = {
+      and: Array[
+        Params::search_resources_criteria
+      ]?
+    }
+
+      type search_resources_criteria = {
+      simple_criterion: {
+        comparator: ("EQ" | "NE")?,
+        key: ("ACCOUNT_ID" | "S3_BUCKET_NAME" | "S3_BUCKET_EFFECTIVE_PERMISSION" | "S3_BUCKET_SHARED_ACCESS" | "AUTOMATED_DISCOVERY_MONITORING_STATUS")?,
+        values: Array[::String]?
+      }?,
+      tag_criterion: {
+        comparator: ("EQ" | "NE")?,
+        tag_values: Array[
+          {
+            key: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+    end
+  end
+end

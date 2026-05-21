@@ -183,7 +183,7 @@ module Aws
                                    name: ::String,
                                    value: ::String,
                                    operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
-                                 },
+                                 }
                                ]
                              ) -> _ListApplicationsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListApplicationsResponseSuccess
@@ -229,7 +229,7 @@ module Aws
                                                      name: ::String,
                                                      value: ::String,
                                                      operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _ListConfigurationCheckOperationsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationCheckOperationsResponseSuccess
@@ -263,7 +263,7 @@ module Aws
                                        name: ::String,
                                        value: ::String,
                                        operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
-                                     },
+                                     }
                                    ]
                                  ) -> _ListOperationEventsResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationEventsResponseSuccess
@@ -283,7 +283,7 @@ module Aws
                                  name: ::String,
                                  value: ::String,
                                  operator: ("Equals" | "GreaterThanOrEquals" | "LessThanOrEquals")
-                               },
+                               }
                              ]
                            ) -> _ListOperationsResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOperationsResponseSuccess
@@ -354,7 +354,7 @@ module Aws
                                       database_name: ::String,
                                       credential_type: ("ADMIN"),
                                       secret_id: ::String
-                                    },
+                                    }
                                   ],
                                   ?database_arn: ::String,
                                   ?components_info: Array[
@@ -362,7 +362,7 @@ module Aws
                                       component_type: ("HANA" | "HANA_NODE" | "ABAP" | "ASCS" | "DIALOG" | "WEBDISP" | "WD" | "ERS"),
                                       sid: ::String,
                                       ec2_instance_id: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _RegisterApplicationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterApplicationResponseSuccess
@@ -443,14 +443,14 @@ module Aws
                                              database_name: ::String,
                                              credential_type: ("ADMIN"),
                                              secret_id: ::String
-                                           },
+                                           }
                                          ],
                                          ?credentials_to_remove: Array[
                                            {
                                              database_name: ::String,
                                              credential_type: ("ADMIN"),
                                              secret_id: ::String
-                                           },
+                                           }
                                          ],
                                          ?backint: {
                                            backint_mode: ("AWSBackup"),

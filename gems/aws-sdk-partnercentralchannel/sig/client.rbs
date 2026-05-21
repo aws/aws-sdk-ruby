@@ -128,7 +128,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateChannelHandshakeResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelHandshakeResponseSuccess
@@ -148,7 +148,7 @@ module Aws
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateProgramManagementAccountResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProgramManagementAccountResponseSuccess
@@ -171,25 +171,9 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
-                                 ?requested_support_plan: {
-                                   resold_enterprise: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     tam_location: ::String,
-                                     charge_account_id: ::String?
-                                   }?,
-                                   partner_led_support: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
-                                     tam_location: ::String
-                                   }?,
-                                   resold_unified_operations: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     tam_location: ::String,
-                                     charge_account_id: ::String?
-                                   }?
-                                 }
+                                 ?requested_support_plan: Params::support_plan
                                ) -> _CreateRelationshipResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationshipResponseSuccess
 
@@ -343,7 +327,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -382,23 +366,7 @@ module Aws
                                  program_management_account_identifier: ::String,
                                  ?revision: ::String,
                                  ?display_name: ::String,
-                                 ?requested_support_plan: {
-                                   resold_enterprise: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     tam_location: ::String,
-                                     charge_account_id: ::String?
-                                   }?,
-                                   partner_led_support: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
-                                     tam_location: ::String
-                                   }?,
-                                   resold_unified_operations: {
-                                     coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
-                                     tam_location: ::String,
-                                     charge_account_id: ::String?
-                                   }?
-                                 }
+                                 ?requested_support_plan: Params::support_plan
                                ) -> _UpdateRelationshipResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationshipResponseSuccess
     end

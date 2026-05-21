@@ -1,0 +1,22 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTWireless
+    module Params
+      type lo_ra_wan_multicast = {
+      rf_region: ("EU868" | "US915" | "AU915" | "AS923-1" | "AS923-2" | "AS923-3" | "AS923-4" | "EU433" | "CN470" | "CN779" | "RU864" | "KR920" | "IN865")?,
+      dl_class: ("ClassB" | "ClassC")?,
+      participating_gateways: {
+        gateway_list: Array[::String]?,
+        transmission_interval: ::Integer?
+      }?
+    }
+
+    end
+  end
+end

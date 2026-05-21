@@ -95,7 +95,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ]
                                          ) -> _AssociateFirewallRuleGroupResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateFirewallRuleGroupResponseSuccess
@@ -151,7 +151,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateFirewallDomainListResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallDomainListResponseSuccess
@@ -191,7 +191,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateFirewallRuleGroupResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFirewallRuleGroupResponseSuccess
@@ -211,7 +211,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateOutpostResolverResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOutpostResolverResponseSuccess
@@ -231,7 +231,7 @@ module Aws
                                           subnet_id: ::String,
                                           ip: ::String?,
                                           ipv_6: ::String?
-                                        },
+                                        }
                                       ],
                                       ?outpost_arn: ::String,
                                       ?preferred_instance_type: ::String,
@@ -239,7 +239,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?resolver_endpoint_type: ("IPV6" | "IPV4" | "DUALSTACK"),
                                       ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
@@ -263,7 +263,7 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ]
                                             ) -> _CreateResolverQueryLogConfigResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResolverQueryLogConfigResponseSuccess
@@ -285,14 +285,14 @@ module Aws
                                       ipv_6: ::String?,
                                       protocol: ("DoH" | "Do53" | "DoH-FIPS")?,
                                       server_name_indication: ::String?
-                                    },
+                                    }
                                   ],
                                   ?resolver_endpoint_id: ::String,
                                   ?tags: Array[
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?delegation_record: ::String
                                 ) -> _CreateResolverRuleResponseSuccess
@@ -702,7 +702,7 @@ module Aws
                                             {
                                               name: ::String?,
                                               values: Array[::String]?
-                                            },
+                                            }
                                           ]
                                         ) -> _ListResolverDnssecConfigsResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverDnssecConfigsResponseSuccess
@@ -735,7 +735,7 @@ module Aws
                                        {
                                          name: ::String?,
                                          values: Array[::String]?
-                                       },
+                                       }
                                      ]
                                    ) -> _ListResolverEndpointsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverEndpointsResponseSuccess
@@ -755,7 +755,7 @@ module Aws
                                                            {
                                                              name: ::String?,
                                                              values: Array[::String]?
-                                                           },
+                                                           }
                                                          ],
                                                          ?sort_by: ::String,
                                                          ?sort_order: ("ASCENDING" | "DESCENDING")
@@ -777,7 +777,7 @@ module Aws
                                                {
                                                  name: ::String?,
                                                  values: Array[::String]?
-                                               },
+                                               }
                                              ],
                                              ?sort_by: ::String,
                                              ?sort_order: ("ASCENDING" | "DESCENDING")
@@ -798,7 +798,7 @@ module Aws
                                                {
                                                  name: ::String?,
                                                  values: Array[::String]?
-                                               },
+                                               }
                                              ]
                                            ) -> _ListResolverRuleAssociationsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverRuleAssociationsResponseSuccess
@@ -817,7 +817,7 @@ module Aws
                                    {
                                      name: ::String?,
                                      values: Array[::String]?
-                                   },
+                                   }
                                  ]
                                ) -> _ListResolverRulesResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListResolverRulesResponseSuccess
@@ -878,7 +878,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1003,7 +1003,7 @@ module Aws
                                         {
                                           ip_id: ::String,
                                           ipv_6: ::String
-                                        },
+                                        }
                                       ],
                                       ?protocols: Array[("DoH" | "Do53" | "DoH-FIPS")],
                                       ?rni_enhanced_metrics_enabled: bool,
@@ -1029,7 +1029,7 @@ module Aws
                                         ipv_6: ::String?,
                                         protocol: ("DoH" | "Do53" | "DoH-FIPS")?,
                                         server_name_indication: ::String?
-                                      },
+                                      }
                                     ]?,
                                     resolver_endpoint_id: ::String?
                                   }

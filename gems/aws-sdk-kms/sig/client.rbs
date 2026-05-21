@@ -136,16 +136,19 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#create_grant-instance_method
       def create_grant: (
                           key_id: ::String,
-                          grantee_principal: ::String,
+                          ?grantee_principal: ::String,
                           ?retiring_principal: ::String,
                           operations: Array[("Decrypt" | "Encrypt" | "GenerateDataKey" | "GenerateDataKeyWithoutPlaintext" | "ReEncryptFrom" | "ReEncryptTo" | "Sign" | "Verify" | "GetPublicKey" | "CreateGrant" | "RetireGrant" | "DescribeKey" | "GenerateDataKeyPair" | "GenerateDataKeyPairWithoutPlaintext" | "GenerateMac" | "VerifyMac" | "DeriveSharedSecret")],
                           ?constraints: {
                             encryption_context_subset: Hash[::String, ::String]?,
-                            encryption_context_equals: Hash[::String, ::String]?
+                            encryption_context_equals: Hash[::String, ::String]?,
+                            source_arn: ::String?
                           },
                           ?grant_tokens: Array[::String],
                           ?name: ::String,
-                          ?dry_run: bool
+                          ?dry_run: bool,
+                          ?grantee_service_principal: ::String,
+                          ?retiring_service_principal: ::String
                         ) -> _CreateGrantResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantResponseSuccess
 
@@ -167,7 +170,7 @@ module Aws
                           {
                             tag_key: ::String,
                             tag_value: ::String
-                          },
+                          }
                         ],
                         ?multi_region: bool,
                         ?xks_key_id: ::String
@@ -554,7 +557,8 @@ module Aws
                          ?marker: ::String,
                          key_id: ::String,
                          ?grant_id: ::String,
-                         ?grantee_principal: ::String
+                         ?grantee_principal: ::String,
+                         ?grantee_service_principal: ::String
                        ) -> _ListGrantsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGrantsResponseSuccess
 
@@ -624,9 +628,10 @@ module Aws
       def list_retirable_grants: (
                                    ?limit: ::Integer,
                                    ?marker: ::String,
-                                   retiring_principal: ::String
+                                   ?retiring_principal: ::String,
+                                   ?retiring_service_principal: ::String
                                  ) -> _ListRetirableGrantsResponseSuccess
-                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetirableGrantsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRetirableGrantsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/KMS/Client.html#put_key_policy-instance_method
       def put_key_policy: (
@@ -679,7 +684,7 @@ module Aws
                              {
                                tag_key: ::String,
                                tag_value: ::String
-                             },
+                             }
                            ]
                          ) -> _ReplicateKeyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ReplicateKeyResponseSuccess
@@ -749,7 +754,7 @@ module Aws
                             {
                               tag_key: ::String,
                               tag_value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

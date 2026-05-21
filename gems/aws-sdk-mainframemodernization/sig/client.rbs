@@ -126,7 +126,7 @@ module Aws
                                                external_location: {
                                                  s3_location: ::String?
                                                }
-                                             },
+                                             }
                                            ]?,
                                            s3_location: ::String?
                                          },
@@ -168,7 +168,7 @@ module Aws
                                                          length: ::Integer,
                                                          name: ::String?,
                                                          offset: ::Integer
-                                                       },
+                                                       }
                                                      ]?,
                                                      compressed: bool?,
                                                      encoding: ::String?,
@@ -190,7 +190,7 @@ module Aws
                                                external_location: {
                                                  s3_location: ::String?
                                                }
-                                             },
+                                             }
                                            ]?,
                                            s3_location: ::String?
                                          }
@@ -240,7 +240,7 @@ module Aws
                                       file_system_id: ::String,
                                       mount_point: ::String
                                     }?
-                                  },
+                                  }
                                 ],
                                 ?subnet_ids: Array[::String],
                                 ?tags: Hash[::String, ::String]

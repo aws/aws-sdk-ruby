@@ -137,20 +137,7 @@ module Aws
                               vod_source_name: ::String?
                             },
                             outputs: Array[
-                              {
-                                dash_playlist_settings: {
-                                  manifest_window_seconds: ::Integer?,
-                                  min_buffer_time_seconds: ::Integer?,
-                                  min_update_period_seconds: ::Integer?,
-                                  suggested_presentation_delay_seconds: ::Integer?
-                                }?,
-                                hls_playlist_settings: {
-                                  manifest_window_seconds: ::Integer?,
-                                  ad_markup_type: Array[("DATERANGE" | "SCTE35_ENHANCED")]?
-                                }?,
-                                manifest_name: ::String,
-                                source_group: ::String
-                              },
+                              Params::request_output_item
                             ],
                             playback_mode: ("LOOP" | "LINEAR"),
                             ?tags: Hash[::String, ::String],
@@ -179,7 +166,7 @@ module Aws
                                     path: ::String,
                                     source_group: ::String,
                                     type: ("DASH" | "HLS")
-                                  },
+                                  }
                                 ],
                                 live_source_name: ::String,
                                 source_location_name: ::String,
@@ -206,7 +193,7 @@ module Aws
                                           {
                                             dynamic_variable: ::String,
                                             operator: ("EQUALS")
-                                          },
+                                          }
                                         ]?,
                                         end_time: ::Time,
                                         start_time: ::Time?
@@ -235,7 +222,7 @@ module Aws
                                             {
                                               dynamic_variable: ::String,
                                               operator: ("EQUALS")
-                                            },
+                                            }
                                           ]?
                                         },
                                         recurring_retrieval: {
@@ -276,40 +263,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_program-instance_method
       def create_program: (
                             ?ad_breaks: Array[
-                              {
-                                message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer,
-                                slate: {
-                                  source_location_name: ::String?,
-                                  vod_source_name: ::String?
-                                }?,
-                                splice_insert_message: {
-                                  avail_num: ::Integer?,
-                                  avails_expected: ::Integer?,
-                                  splice_event_id: ::Integer?,
-                                  unique_program_id: ::Integer?
-                                }?,
-                                time_signal_message: {
-                                  segmentation_descriptors: Array[
-                                    {
-                                      segmentation_event_id: ::Integer?,
-                                      segmentation_upid_type: ::Integer?,
-                                      segmentation_upid: ::String?,
-                                      segmentation_type_id: ::Integer?,
-                                      segment_num: ::Integer?,
-                                      segments_expected: ::Integer?,
-                                      sub_segment_num: ::Integer?,
-                                      sub_segments_expected: ::Integer?
-                                    },
-                                  ]?
-                                }?,
-                                ad_break_metadata: Array[
-                                  {
-                                    key: ::String,
-                                    value: ::String
-                                  },
-                                ]?
-                              },
+                              Params::ad_break
                             ],
                             channel_name: ::String,
                             ?live_source_name: ::String,
@@ -330,58 +284,7 @@ module Aws
                             source_location_name: ::String,
                             ?vod_source_name: ::String,
                             ?audience_media: Array[
-                              {
-                                audience: ::String?,
-                                alternate_media: Array[
-                                  {
-                                    source_location_name: ::String?,
-                                    live_source_name: ::String?,
-                                    vod_source_name: ::String?,
-                                    clip_range: {
-                                      end_offset_millis: ::Integer?,
-                                      start_offset_millis: ::Integer?
-                                    }?,
-                                    scheduled_start_time_millis: ::Integer?,
-                                    ad_breaks: Array[
-                                      {
-                                        message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                        offset_millis: ::Integer,
-                                        slate: {
-                                          source_location_name: ::String?,
-                                          vod_source_name: ::String?
-                                        }?,
-                                        splice_insert_message: {
-                                          avail_num: ::Integer?,
-                                          avails_expected: ::Integer?,
-                                          splice_event_id: ::Integer?,
-                                          unique_program_id: ::Integer?
-                                        }?,
-                                        time_signal_message: {
-                                          segmentation_descriptors: Array[
-                                            {
-                                              segmentation_event_id: ::Integer?,
-                                              segmentation_upid_type: ::Integer?,
-                                              segmentation_upid: ::String?,
-                                              segmentation_type_id: ::Integer?,
-                                              segment_num: ::Integer?,
-                                              segments_expected: ::Integer?,
-                                              sub_segment_num: ::Integer?,
-                                              sub_segments_expected: ::Integer?
-                                            },
-                                          ]?
-                                        }?,
-                                        ad_break_metadata: Array[
-                                          {
-                                            key: ::String,
-                                            value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?,
-                                    duration_millis: ::Integer?
-                                  },
-                                ]?
-                              },
+                              Params::audience_media
                             ],
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateProgramResponseSuccess
@@ -401,14 +304,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#create_source_location-instance_method
       def create_source_location: (
-                                    ?access_configuration: {
-                                      access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")?,
-                                      secrets_manager_access_token_configuration: {
-                                        header_name: ::String?,
-                                        secret_arn: ::String?,
-                                        secret_string_key: ::String?
-                                      }?
-                                    },
+                                    ?access_configuration: Params::access_configuration,
                                     ?default_segment_delivery_configuration: {
                                       base_url: ::String?
                                     },
@@ -419,7 +315,7 @@ module Aws
                                       {
                                         base_url: ::String?,
                                         name: ::String?
-                                      },
+                                      }
                                     ],
                                     source_location_name: ::String,
                                     ?tags: Hash[::String, ::String]
@@ -443,7 +339,7 @@ module Aws
                                    path: ::String,
                                    source_group: ::String,
                                    type: ("DASH" | "HLS")
-                                 },
+                                 }
                                ],
                                source_location_name: ::String,
                                ?tags: Hash[::String, ::String],
@@ -885,7 +781,7 @@ module Aws
                               {
                                 run_condition: ::String?,
                                 function_id: ::String?
-                              },
+                              }
                             ],
                             timeout_milliseconds: ::Integer
                           },
@@ -1026,20 +922,7 @@ module Aws
                               vod_source_name: ::String?
                             },
                             outputs: Array[
-                              {
-                                dash_playlist_settings: {
-                                  manifest_window_seconds: ::Integer?,
-                                  min_buffer_time_seconds: ::Integer?,
-                                  min_update_period_seconds: ::Integer?,
-                                  suggested_presentation_delay_seconds: ::Integer?
-                                }?,
-                                hls_playlist_settings: {
-                                  manifest_window_seconds: ::Integer?,
-                                  ad_markup_type: Array[("DATERANGE" | "SCTE35_ENHANCED")]?
-                                }?,
-                                manifest_name: ::String,
-                                source_group: ::String
-                              },
+                              Params::request_output_item
                             ],
                             ?time_shift_configuration: {
                               max_time_delay_seconds: ::Integer
@@ -1065,7 +948,7 @@ module Aws
                                     path: ::String,
                                     source_group: ::String,
                                     type: ("DASH" | "HLS")
-                                  },
+                                  }
                                 ],
                                 live_source_name: ::String,
                                 source_location_name: ::String
@@ -1091,40 +974,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_program-instance_method
       def update_program: (
                             ?ad_breaks: Array[
-                              {
-                                message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                offset_millis: ::Integer,
-                                slate: {
-                                  source_location_name: ::String?,
-                                  vod_source_name: ::String?
-                                }?,
-                                splice_insert_message: {
-                                  avail_num: ::Integer?,
-                                  avails_expected: ::Integer?,
-                                  splice_event_id: ::Integer?,
-                                  unique_program_id: ::Integer?
-                                }?,
-                                time_signal_message: {
-                                  segmentation_descriptors: Array[
-                                    {
-                                      segmentation_event_id: ::Integer?,
-                                      segmentation_upid_type: ::Integer?,
-                                      segmentation_upid: ::String?,
-                                      segmentation_type_id: ::Integer?,
-                                      segment_num: ::Integer?,
-                                      segments_expected: ::Integer?,
-                                      sub_segment_num: ::Integer?,
-                                      sub_segments_expected: ::Integer?
-                                    },
-                                  ]?
-                                }?,
-                                ad_break_metadata: Array[
-                                  {
-                                    key: ::String,
-                                    value: ::String
-                                  },
-                                ]?
-                              },
+                              Params::ad_break
                             ],
                             channel_name: ::String,
                             program_name: ::String,
@@ -1139,58 +989,7 @@ module Aws
                               }?
                             },
                             ?audience_media: Array[
-                              {
-                                audience: ::String?,
-                                alternate_media: Array[
-                                  {
-                                    source_location_name: ::String?,
-                                    live_source_name: ::String?,
-                                    vod_source_name: ::String?,
-                                    clip_range: {
-                                      end_offset_millis: ::Integer?,
-                                      start_offset_millis: ::Integer?
-                                    }?,
-                                    scheduled_start_time_millis: ::Integer?,
-                                    ad_breaks: Array[
-                                      {
-                                        message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
-                                        offset_millis: ::Integer,
-                                        slate: {
-                                          source_location_name: ::String?,
-                                          vod_source_name: ::String?
-                                        }?,
-                                        splice_insert_message: {
-                                          avail_num: ::Integer?,
-                                          avails_expected: ::Integer?,
-                                          splice_event_id: ::Integer?,
-                                          unique_program_id: ::Integer?
-                                        }?,
-                                        time_signal_message: {
-                                          segmentation_descriptors: Array[
-                                            {
-                                              segmentation_event_id: ::Integer?,
-                                              segmentation_upid_type: ::Integer?,
-                                              segmentation_upid: ::String?,
-                                              segmentation_type_id: ::Integer?,
-                                              segment_num: ::Integer?,
-                                              segments_expected: ::Integer?,
-                                              sub_segment_num: ::Integer?,
-                                              sub_segments_expected: ::Integer?
-                                            },
-                                          ]?
-                                        }?,
-                                        ad_break_metadata: Array[
-                                          {
-                                            key: ::String,
-                                            value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?,
-                                    duration_millis: ::Integer?
-                                  },
-                                ]?
-                              },
+                              Params::audience_media
                             ]
                           ) -> _UpdateProgramResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProgramResponseSuccess
@@ -1209,14 +1008,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaTailor/Client.html#update_source_location-instance_method
       def update_source_location: (
-                                    ?access_configuration: {
-                                      access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")?,
-                                      secrets_manager_access_token_configuration: {
-                                        header_name: ::String?,
-                                        secret_arn: ::String?,
-                                        secret_string_key: ::String?
-                                      }?
-                                    },
+                                    ?access_configuration: Params::access_configuration,
                                     ?default_segment_delivery_configuration: {
                                       base_url: ::String?
                                     },
@@ -1227,7 +1019,7 @@ module Aws
                                       {
                                         base_url: ::String?,
                                         name: ::String?
-                                      },
+                                      }
                                     ],
                                     source_location_name: ::String
                                   ) -> _UpdateSourceLocationResponseSuccess
@@ -1250,7 +1042,7 @@ module Aws
                                    path: ::String,
                                    source_group: ::String,
                                    type: ("DASH" | "HLS")
-                                 },
+                                 }
                                ],
                                source_location_name: ::String,
                                vod_source_name: ::String

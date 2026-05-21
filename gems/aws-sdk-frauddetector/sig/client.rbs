@@ -93,13 +93,13 @@ module Aws
                                        default_value: ::String?,
                                        description: ::String?,
                                        variable_type: ::String?
-                                     },
+                                     }
                                    ],
                                    ?tags: Array[
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _BatchCreateVariableResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateVariableResponseSuccess
@@ -147,7 +147,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateBatchImportJobResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchImportJobResponseSuccess
@@ -168,7 +168,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateBatchPredictionJobResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchPredictionJobResponseSuccess
@@ -189,7 +189,7 @@ module Aws
                                          detector_id: ::String,
                                          rule_id: ::String,
                                          rule_version: ::String
-                                       },
+                                       }
                                      ],
                                      ?model_versions: Array[
                                        {
@@ -197,14 +197,14 @@ module Aws
                                          model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
                                          model_version_number: ::String,
                                          arn: ::String?
-                                       },
+                                       }
                                      ],
                                      ?rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED"),
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateDetectorVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDetectorVersionResponseSuccess
@@ -222,7 +222,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateListResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListResponseSuccess
@@ -240,7 +240,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelResponseSuccess
@@ -278,7 +278,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateModelVersionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelVersionResponseSuccess
@@ -299,7 +299,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
@@ -319,7 +319,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateVariableResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVariableResponseSuccess
@@ -621,7 +621,7 @@ module Aws
                                     {
                                       entity_type: ::String,
                                       entity_id: ::String
-                                    },
+                                    }
                                   ],
                                   event_timestamp: ::String,
                                   event_variables: Hash[::String, ::String],
@@ -861,7 +861,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _PutDetectorResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDetectorResponseSuccess
@@ -877,7 +877,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _PutEntityTypeResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEntityTypeResponseSuccess
@@ -897,7 +897,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?event_orchestration: {
                               event_bridge_enabled: bool
@@ -930,7 +930,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _PutExternalModelResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutExternalModelResponseSuccess
@@ -955,7 +955,7 @@ module Aws
                          {
                            key: ::String,
                            value: ::String
-                         },
+                         }
                        ]
                      ) -> _PutLabelResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutLabelResponseSuccess
@@ -971,7 +971,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _PutOutcomeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutOutcomeResponseSuccess
@@ -991,7 +991,7 @@ module Aws
                           {
                             entity_type: ::String,
                             entity_id: ::String
-                          },
+                          }
                         ]
                       ) -> _SendEventResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendEventResponseSuccess
@@ -1006,7 +1006,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1034,7 +1034,7 @@ module Aws
                                          detector_id: ::String,
                                          rule_id: ::String,
                                          rule_version: ::String
-                                       },
+                                       }
                                      ],
                                      ?description: ::String,
                                      ?model_versions: Array[
@@ -1043,7 +1043,7 @@ module Aws
                                          model_type: ("ONLINE_FRAUD_INSIGHTS" | "TRANSACTION_FRAUD_INSIGHTS" | "ACCOUNT_TAKEOVER_INSIGHTS"),
                                          model_version_number: ::String,
                                          arn: ::String?
-                                       },
+                                       }
                                      ],
                                      ?rule_execution_mode: ("ALL_MATCHED" | "FIRST_MATCHED")
                                    ) -> _UpdateDetectorVersionResponseSuccess
@@ -1133,7 +1133,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _UpdateModelVersionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelVersionResponseSuccess
@@ -1183,7 +1183,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _UpdateRuleVersionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleVersionResponseSuccess

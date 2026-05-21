@@ -79,7 +79,7 @@ module Aws
                       {
                         key: ::String,
                         value: ::String
-                      },
+                      }
                     ]
                   ) -> User
                 | (?Hash[Symbol, untyped]) -> User

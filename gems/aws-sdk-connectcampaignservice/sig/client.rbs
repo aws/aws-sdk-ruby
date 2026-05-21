@@ -88,19 +88,7 @@ module Aws
       def create_campaign: (
                              name: ::String,
                              connect_instance_id: ::String,
-                             dialer_config: {
-                               progressive_dialer_config: {
-                                 bandwidth_allocation: ::Float,
-                                 dialing_capacity: ::Float?
-                               }?,
-                               predictive_dialer_config: {
-                                 bandwidth_allocation: ::Float,
-                                 dialing_capacity: ::Float?
-                               }?,
-                               agentless_dialer_config: {
-                                 dialing_capacity: ::Float?
-                               }?
-                             },
+                             dialer_config: Params::dialer_config,
                              outbound_call_config: {
                                connect_contact_flow_id: ::String,
                                connect_source_phone_number: ::String?,
@@ -231,7 +219,7 @@ module Aws
                                         phone_number: ::String,
                                         expiration_time: ::Time,
                                         attributes: Hash[::String, ::String]
-                                      },
+                                      }
                                     ]
                                   ) -> _PutDialRequestBatchResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDialRequestBatchResponseSuccess
@@ -286,19 +274,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCampaignService/Client.html#update_campaign_dialer_config-instance_method
       def update_campaign_dialer_config: (
                                            id: ::String,
-                                           dialer_config: {
-                                             progressive_dialer_config: {
-                                               bandwidth_allocation: ::Float,
-                                               dialing_capacity: ::Float?
-                                             }?,
-                                             predictive_dialer_config: {
-                                               bandwidth_allocation: ::Float,
-                                               dialing_capacity: ::Float?
-                                             }?,
-                                             agentless_dialer_config: {
-                                               dialing_capacity: ::Float?
-                                             }?
-                                           }
+                                           dialer_config: Params::dialer_config
                                          ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 

@@ -20,7 +20,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeBundleTasksResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeBundleTasksResponseSuccess
@@ -69,7 +69,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?dry_run: bool
                   ) -> Client::_DescribeCustomerGatewaysResponseSuccess
@@ -85,7 +85,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?export_task_ids: Array[::String]
                   ) -> Client::_DescribeExportTasksResponseSuccess
@@ -101,7 +101,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?export_task_ids: Array[::String]
                   ) -> Client::_DescribeExportTasksResponseSuccess
@@ -125,7 +125,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeImagesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
@@ -148,7 +148,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeImagesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeImagesResponseSuccess
@@ -166,7 +166,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?dry_run: bool,
                     ?max_results: ::Integer
@@ -186,7 +186,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -206,7 +206,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -228,7 +228,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?include_all_instances: bool
                   ) -> Client::_DescribeInstanceStatusResponseSuccess
@@ -247,7 +247,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -267,7 +267,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -288,7 +288,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeInternetGatewaysResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeInternetGatewaysResponseSuccess
@@ -307,7 +307,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeKeyPairsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeKeyPairsResponseSuccess
@@ -323,7 +323,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?nat_gateway_ids: Array[::String],
@@ -342,7 +342,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?nat_gateway_ids: Array[::String],
@@ -365,7 +365,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeNetworkInterfacesResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeNetworkInterfacesResponseSuccess
@@ -392,7 +392,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?next_token: ::String,
@@ -411,7 +411,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?next_token: ::String,
@@ -430,7 +430,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?next_token: ::String,
@@ -449,7 +449,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?max_results: ::Integer,
                     ?next_token: ::String,
@@ -472,7 +472,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeSecurityGroupsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSecurityGroupsResponseSuccess
@@ -487,7 +487,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer,
@@ -505,7 +505,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer,
@@ -529,7 +529,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeSnapshotsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSnapshotsResponseSuccess
@@ -545,7 +545,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?import_task_ids: Array[::String],
                     ?max_results: ::Integer,
@@ -567,7 +567,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeSpotInstanceRequestsResponseSuccess
@@ -584,7 +584,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -601,7 +601,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?subnet_ids: Array[::String],
                     ?next_token: ::String,
@@ -625,7 +625,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?include_all_instances: bool
                   ) -> Client::_DescribeInstanceStatusResponseSuccess
@@ -644,7 +644,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -664,7 +664,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -684,7 +684,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer
@@ -701,7 +701,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?vpc_ids: Array[::String],
                     ?next_token: ::String,
@@ -720,7 +720,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?vpc_ids: Array[::String],
                     ?next_token: ::String,
@@ -743,7 +743,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
@@ -762,7 +762,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
                 | (?Hash[Symbol, untyped]) -> Client::_DescribeVpcPeeringConnectionsResponseSuccess
@@ -777,7 +777,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?vpn_connection_ids: Array[::String],
                     ?dry_run: bool
@@ -794,7 +794,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ],
                     ?vpn_connection_ids: Array[::String],
                     ?dry_run: bool

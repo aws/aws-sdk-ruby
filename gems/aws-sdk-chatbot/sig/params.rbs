@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Chatbot
+    module Params
+      type custom_action_attachment = {
+      notification_type: ::String?,
+      button_text: ::String?,
+      criteria: Array[
+        {
+          operator: ("HAS_VALUE" | "EQUALS"),
+          variable_name: ::String,
+          value: ::String?
+        }
+      ]?,
+      variables: Hash[::String, ::String]?
+    }
+
+    end
+  end
+end

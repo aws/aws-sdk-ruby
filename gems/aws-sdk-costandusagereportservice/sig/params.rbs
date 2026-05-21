@@ -1,0 +1,32 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CostandUsageReportService
+    module Params
+      type report_definition = {
+      report_name: ::String,
+      time_unit: ("HOURLY" | "DAILY" | "MONTHLY"),
+      format: ("textORcsv" | "Parquet"),
+      compression: ("ZIP" | "GZIP" | "Parquet"),
+      additional_schema_elements: Array[("RESOURCES" | "SPLIT_COST_ALLOCATION_DATA" | "MANUAL_DISCOUNT_COMPATIBILITY")],
+      s3_bucket: ::String,
+      s3_prefix: ::String,
+      s3_region: ("af-south-1" | "ap-east-1" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ca-central-1" | "eu-central-1" | "eu-central-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "me-central-1" | "me-south-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2" | "cn-north-1" | "cn-northwest-1"),
+      additional_artifacts: Array[("REDSHIFT" | "QUICKSIGHT" | "ATHENA")]?,
+      refresh_closed_reports: bool?,
+      report_versioning: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")?,
+      billing_view_arn: ::String?,
+      report_status: {
+        last_delivery: ::String?,
+        last_status: ("SUCCESS" | "ERROR_PERMISSIONS" | "ERROR_NO_BUCKET")?
+      }?
+    }
+
+    end
+  end
+end

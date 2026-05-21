@@ -352,6 +352,21 @@ module Aws::PaymentCryptographyData
       SENSITIVE: [:random_key_send, :random_key_receive]
     end
 
+    class GenerateAuthRequestCryptogramInput
+      attr_accessor key_identifier: ::String
+      attr_accessor transaction_data: ::String
+      attr_accessor major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B")
+      attr_accessor session_key_derivation_attributes: Types::SessionKeyDerivation
+      SENSITIVE: [:transaction_data]
+    end
+
+    class GenerateAuthRequestCryptogramOutput
+      attr_accessor key_arn: ::String
+      attr_accessor key_check_value: ::String
+      attr_accessor auth_request_cryptogram: ::String
+      SENSITIVE: [:auth_request_cryptogram]
+    end
+
     class GenerateCardValidationDataInput
       attr_accessor key_identifier: ::String
       attr_accessor primary_account_number: ::String
@@ -495,6 +510,7 @@ module Aws::PaymentCryptographyData
 
     class KekValidationRequest
       attr_accessor derive_key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224")
+      attr_accessor random_key_max_length: ("BYTES_8" | "BYTES_16" | "BYTES_24")
       SENSITIVE: []
     end
 

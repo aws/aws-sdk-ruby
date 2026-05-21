@@ -127,7 +127,7 @@ module Aws
                                                    name: ::String?,
                                                    operator: ("Equal" | "NotEqual" | "Contains")?,
                                                    values: Array[::String]?
-                                                 },
+                                                 }
                                                ],
                                                ?max_results: ::Integer,
                                                ?next_token: ::String
@@ -146,7 +146,7 @@ module Aws
                                           name: ::String?,
                                           operator: ("Equal" | "NotEqual" | "Contains")?,
                                           values: Array[::String]?
-                                        },
+                                        }
                                       ],
                                       ?max_results: ::Integer,
                                       ?next_token: ::String

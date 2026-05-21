@@ -2426,6 +2426,7 @@ module Aws::RTBFabric
     #   * {Types::GetResponderGatewayResponse#active_links_count #active_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#total_links_count #total_links_count} => Integer
     #   * {Types::GetResponderGatewayResponse#inbound_links_count #inbound_links_count} => Integer
+    #   * {Types::GetResponderGatewayResponse#links_requested_count #links_requested_count} => Integer
     #   * {Types::GetResponderGatewayResponse#gateway_type #gateway_type} => String
     #   * {Types::GetResponderGatewayResponse#external_inbound_endpoint #external_inbound_endpoint} => String
     #
@@ -2445,6 +2446,7 @@ module Aws::RTBFabric
     #     description: "My responder gateway", 
     #     gateway_id: "rtb-gw-12345678", 
     #     inbound_links_count: 3, 
+    #     links_requested_count: 3, 
     #     port: 443, 
     #     protocol: "HTTPS", 
     #     security_group_ids: [
@@ -2507,6 +2509,7 @@ module Aws::RTBFabric
     #   resp.active_links_count #=> Integer
     #   resp.total_links_count #=> Integer
     #   resp.inbound_links_count #=> Integer
+    #   resp.links_requested_count #=> Integer
     #   resp.gateway_type #=> String, one of "EXTERNAL", "INTERNAL"
     #   resp.external_inbound_endpoint #=> String
     #
@@ -3712,7 +3715,7 @@ module Aws::RTBFabric
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rtbfabric'
-      context[:gem_version] = '1.11.0'
+      context[:gem_version] = '1.12.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

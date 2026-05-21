@@ -1,0 +1,500 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaConnect
+    module Params
+      type add_bridge_network_output_request = {
+      ip_address: ::String,
+      name: ::String,
+      network_name: ::String,
+      port: ::Integer,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq"),
+      ttl: ::Integer
+    }
+
+      type add_bridge_output_request = {
+      network_output: Params::add_bridge_network_output_request?
+    }
+
+      type add_bridge_network_source_request = {
+      multicast_ip: ::String,
+      multicast_source_settings: {
+        multicast_source_ip: ::String?
+      }?,
+      name: ::String,
+      network_name: ::String,
+      port: ::Integer,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")
+    }
+
+      type add_bridge_source_request = {
+      flow_source: {
+        flow_arn: ::String,
+        flow_vpc_interface_attachment: {
+          vpc_interface_name: ::String?
+        }?,
+        name: ::String
+      }?,
+      network_source: Params::add_bridge_network_source_request?
+    }
+
+      type fmtp_request = {
+      channel_order: ::String?,
+      colorimetry: ("BT601" | "BT709" | "BT2020" | "BT2100" | "ST2065-1" | "ST2065-3" | "XYZ")?,
+      exact_framerate: ::String?,
+      par: ::String?,
+      range: ("NARROW" | "FULL" | "FULLPROTECT")?,
+      scan_mode: ("progressive" | "interlace" | "progressive-segmented-frame")?,
+      tcs: ("SDR" | "PQ" | "HLG" | "LINEAR" | "BT2100LINPQ" | "BT2100LINHLG" | "ST2065-1" | "ST428-1" | "DENSITY")?
+    }
+
+      type media_stream_attributes_request = {
+      fmtp: Params::fmtp_request?,
+      lang: ::String?
+    }
+
+      type add_media_stream_request = {
+      attributes: Params::media_stream_attributes_request?,
+      clock_rate: ::Integer?,
+      description: ::String?,
+      media_stream_id: ::Integer,
+      media_stream_name: ::String,
+      media_stream_type: ("video" | "audio" | "ancillary-data"),
+      video_format: ::String?,
+      media_stream_tags: Hash[::String, ::String]?
+    }
+
+      type encryption = {
+      algorithm: ("aes128" | "aes192" | "aes256")?,
+      constant_initialization_vector: ::String?,
+      device_id: ::String?,
+      key_type: ("speke" | "static-key" | "srt-password")?,
+      region: ::String?,
+      resource_id: ::String?,
+      role_arn: ::String,
+      secret_arn: ::String?,
+      url: ::String?
+    }
+
+      type flow_transit_encryption_key_configuration = {
+      secrets_manager: {
+        secret_arn: ::String,
+        role_arn: ::String
+      }?,
+      automatic: {
+      }?
+    }
+
+      type flow_transit_encryption = {
+      encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+      encryption_key_configuration: Params::flow_transit_encryption_key_configuration
+    }
+
+      type add_output_request = {
+      cidr_allow_list: Array[::String]?,
+      description: ::String?,
+      destination: ::String?,
+      encryption: Params::encryption?,
+      max_latency: ::Integer?,
+      media_stream_output_configurations: Array[
+        Params::media_stream_output_configuration_request
+      ]?,
+      min_latency: ::Integer?,
+      name: ::String?,
+      port: ::Integer?,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
+      remote_id: ::String?,
+      sender_control_port: ::Integer?,
+      smoothing_latency: ::Integer?,
+      stream_id: ::String?,
+      vpc_interface_attachment: {
+        vpc_interface_name: ::String?
+      }?,
+      output_status: ("ENABLED" | "DISABLED")?,
+      ndi_speed_hq_quality: ::Integer?,
+      ndi_program_name: ::String?,
+      output_tags: Hash[::String, ::String]?,
+      router_integration_state: ("ENABLED" | "DISABLED")?,
+      router_integration_transit_encryption: Params::flow_transit_encryption?
+    }
+
+      type media_stream_output_configuration_request = {
+      destination_configurations: Array[
+        {
+          destination_ip: ::String,
+          destination_port: ::Integer,
+          interface: {
+            name: ::String
+          }
+        }
+      ]?,
+      encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+      encoding_parameters: {
+        compression_factor: ::Float,
+        encoder_profile: ("main" | "high")
+      }?,
+      media_stream_name: ::String
+    }
+
+      type set_source_request = {
+      decryption: Params::encryption?,
+      description: ::String?,
+      entitlement_arn: ::String?,
+      ingest_port: ::Integer?,
+      max_bitrate: ::Integer?,
+      max_latency: ::Integer?,
+      max_sync_buffer: ::Integer?,
+      media_stream_source_configurations: Array[
+        Params::media_stream_source_configuration_request
+      ]?,
+      min_latency: ::Integer?,
+      name: ::String?,
+      protocol: ("zixi-push" | "rtp-fec" | "rtp" | "zixi-pull" | "rist" | "st2110-jpegxs" | "cdi" | "srt-listener" | "srt-caller" | "fujitsu-qos" | "udp" | "ndi-speed-hq")?,
+      sender_control_port: ::Integer?,
+      sender_ip_address: ::String?,
+      source_listener_address: ::String?,
+      source_listener_port: ::Integer?,
+      stream_id: ::String?,
+      vpc_interface_name: ::String?,
+      whitelist_cidr: ::String?,
+      gateway_bridge_source: {
+        bridge_arn: ::String,
+        vpc_interface_attachment: {
+          vpc_interface_name: ::String?
+        }?
+      }?,
+      ndi_source_settings: {
+        source_name: ::String?
+      }?,
+      source_tags: Hash[::String, ::String]?,
+      router_integration_state: ("ENABLED" | "DISABLED")?,
+      router_integration_transit_decryption: Params::flow_transit_encryption?
+    }
+
+      type media_stream_source_configuration_request = {
+      encoding_name: ("jxsv" | "raw" | "smpte291" | "pcm"),
+      input_configurations: Array[
+        {
+          input_port: ::Integer,
+          interface: {
+            name: ::String
+          }
+        }
+      ]?,
+      media_stream_name: ::String
+    }
+
+      type vpc_interface_request = {
+      name: ::String,
+      network_interface_type: ("ena" | "efa")?,
+      role_arn: ::String,
+      security_group_ids: Array[::String],
+      subnet_id: ::String,
+      vpc_interface_tags: Hash[::String, ::String]?
+    }
+
+      type failover_config = {
+      failover_mode: ("MERGE" | "FAILOVER")?,
+      recovery_window: ::Integer?,
+      source_priority: {
+        primary_source: ::String?
+      }?,
+      state: ("ENABLED" | "DISABLED")?
+    }
+
+      type grant_entitlement_request = {
+      data_transfer_subscriber_fee_percent: ::Integer?,
+      description: ::String?,
+      encryption: Params::encryption?,
+      entitlement_status: ("ENABLED" | "DISABLED")?,
+      name: ::String?,
+      subscribers: Array[::String],
+      entitlement_tags: Hash[::String, ::String]?
+    }
+
+      type monitoring_config = {
+      thumbnail_state: ("ENABLED" | "DISABLED")?,
+      audio_monitoring_settings: Array[
+        {
+          silent_audio: {
+            state: ("ENABLED" | "DISABLED")?,
+            threshold_seconds: ::Integer?
+          }?
+        }
+      ]?,
+      content_quality_analysis_state: ("ENABLED" | "DISABLED")?,
+      video_monitoring_settings: Array[
+        Params::video_monitoring_setting
+      ]?
+    }
+
+      type video_monitoring_setting = {
+      black_frames: {
+        state: ("ENABLED" | "DISABLED")?,
+        threshold_seconds: ::Integer?
+      }?,
+      frozen_frames: {
+        state: ("ENABLED" | "DISABLED")?,
+        threshold_seconds: ::Integer?
+      }?
+    }
+
+      type ndi_config = {
+      ndi_state: ("ENABLED" | "DISABLED")?,
+      machine_name: ::String?,
+      ndi_discovery_servers: Array[
+        {
+          discovery_server_address: ::String,
+          discovery_server_port: ::Integer?,
+          vpc_interface_adapter: ::String
+        }
+      ]?
+    }
+
+      type srt_listener_router_input_configuration = {
+      port: ::Integer,
+      minimum_latency_milliseconds: ::Integer,
+      decryption_configuration: {
+        encryption_key: {
+          secret_arn: ::String,
+          role_arn: ::String
+        }
+      }?
+    }
+
+      type srt_caller_router_input_configuration = {
+      source_address: ::String,
+      source_port: ::Integer,
+      minimum_latency_milliseconds: ::Integer,
+      stream_id: ::String?,
+      decryption_configuration: {
+        encryption_key: {
+          secret_arn: ::String,
+          role_arn: ::String
+        }
+      }?
+    }
+
+      type router_input_protocol_configuration = {
+      rist: {
+        port: ::Integer,
+        recovery_latency_milliseconds: ::Integer
+      }?,
+      srt_listener: Params::srt_listener_router_input_configuration?,
+      srt_caller: Params::srt_caller_router_input_configuration?,
+      rtp: {
+        port: ::Integer,
+        forward_error_correction: ("ENABLED" | "DISABLED")?
+      }?
+    }
+
+      type standard_router_input_configuration = {
+      network_interface_arn: ::String,
+      protocol_configuration: Params::router_input_protocol_configuration,
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+    }
+
+      type media_live_transit_encryption_key_configuration = {
+      secrets_manager: {
+        secret_arn: ::String,
+        role_arn: ::String
+      }?,
+      automatic: {
+      }?
+    }
+
+      type media_live_transit_encryption = {
+      encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+      encryption_key_configuration: Params::media_live_transit_encryption_key_configuration
+    }
+
+      type media_live_channel_router_input_configuration = {
+      media_live_channel_arn: ::String?,
+      media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")?,
+      media_live_channel_output_name: ::String?,
+      source_transit_decryption: Params::media_live_transit_encryption
+    }
+
+      type failover_router_input_configuration = {
+      network_interface_arn: ::String,
+      protocol_configurations: Array[
+        Params::failover_router_input_protocol_configuration
+      ],
+      source_priority_mode: ("NO_PRIORITY" | "PRIMARY_SECONDARY"),
+      primary_source_index: ::Integer?
+    }
+
+      type media_connect_flow_router_input_configuration = {
+      flow_arn: ::String?,
+      flow_output_arn: ::String?,
+      source_transit_decryption: Params::flow_transit_encryption
+    }
+
+      type merge_router_input_configuration = {
+      network_interface_arn: ::String,
+      protocol_configurations: Array[
+        Params::merge_router_input_protocol_configuration
+      ],
+      merge_recovery_window_milliseconds: ::Integer
+    }
+
+      type router_input_configuration = {
+      standard: Params::standard_router_input_configuration?,
+      media_live_channel: Params::media_live_channel_router_input_configuration?,
+      failover: Params::failover_router_input_configuration?,
+      media_connect_flow: Params::media_connect_flow_router_input_configuration?,
+      merge: Params::merge_router_input_configuration?
+    }
+
+      type failover_router_input_protocol_configuration = {
+      rist: {
+        port: ::Integer,
+        recovery_latency_milliseconds: ::Integer
+      }?,
+      srt_listener: Params::srt_listener_router_input_configuration?,
+      srt_caller: Params::srt_caller_router_input_configuration?,
+      rtp: {
+        port: ::Integer,
+        forward_error_correction: ("ENABLED" | "DISABLED")?
+      }?
+    }
+
+      type merge_router_input_protocol_configuration = {
+      rtp: {
+        port: ::Integer,
+        forward_error_correction: ("ENABLED" | "DISABLED")?
+      }?,
+      rist: {
+        port: ::Integer,
+        recovery_latency_milliseconds: ::Integer
+      }?
+    }
+
+      type router_input_transit_encryption_key_configuration = {
+      secrets_manager: {
+        secret_arn: ::String,
+        role_arn: ::String
+      }?,
+      automatic: {
+      }?
+    }
+
+      type router_input_transit_encryption = {
+      encryption_key_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+      encryption_key_configuration: Params::router_input_transit_encryption_key_configuration
+    }
+
+      type maintenance_configuration = {
+      preferred_day_time: {
+        day: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"),
+        time: ::String
+      }?,
+      default: {
+      }?
+    }
+
+      type router_network_interface_configuration = {
+      public: {
+        allow_rules: Array[
+          {
+            cidr: ::String
+          }
+        ]
+      }?,
+      vpc: {
+        security_group_ids: Array[::String],
+        subnet_id: ::String
+      }?
+    }
+
+      type srt_listener_router_output_configuration = {
+      port: ::Integer,
+      minimum_latency_milliseconds: ::Integer,
+      encryption_configuration: {
+        encryption_key: {
+          secret_arn: ::String,
+          role_arn: ::String
+        }
+      }?
+    }
+
+      type srt_caller_router_output_configuration = {
+      destination_address: ::String,
+      destination_port: ::Integer,
+      minimum_latency_milliseconds: ::Integer,
+      stream_id: ::String?,
+      encryption_configuration: {
+        encryption_key: {
+          secret_arn: ::String,
+          role_arn: ::String
+        }
+      }?
+    }
+
+      type router_output_protocol_configuration = {
+      rist: {
+        destination_address: ::String,
+        destination_port: ::Integer
+      }?,
+      srt_listener: Params::srt_listener_router_output_configuration?,
+      srt_caller: Params::srt_caller_router_output_configuration?,
+      rtp: {
+        destination_address: ::String,
+        destination_port: ::Integer,
+        forward_error_correction: ("ENABLED" | "DISABLED")?
+      }?
+    }
+
+      type standard_router_output_configuration = {
+      network_interface_arn: ::String,
+      protocol_configuration: Params::router_output_protocol_configuration,
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+    }
+
+      type media_connect_flow_router_output_configuration = {
+      flow_arn: ::String?,
+      flow_source_arn: ::String?,
+      destination_transit_encryption: Params::flow_transit_encryption
+    }
+
+      type media_live_input_router_output_configuration = {
+      media_live_input_arn: ::String?,
+      media_live_pipeline_id: ("PIPELINE_0" | "PIPELINE_1")?,
+      destination_transit_encryption: Params::media_live_transit_encryption
+    }
+
+      type router_output_configuration = {
+      standard: Params::standard_router_output_configuration?,
+      media_connect_flow: Params::media_connect_flow_router_output_configuration?,
+      media_live_input: Params::media_live_input_router_output_configuration?
+    }
+
+      type update_failover_config = {
+      failover_mode: ("MERGE" | "FAILOVER")?,
+      recovery_window: ::Integer?,
+      source_priority: {
+        primary_source: ::String?
+      }?,
+      state: ("ENABLED" | "DISABLED")?
+    }
+
+      type update_encryption = {
+      algorithm: ("aes128" | "aes192" | "aes256")?,
+      constant_initialization_vector: ::String?,
+      device_id: ::String?,
+      key_type: ("speke" | "static-key" | "srt-password")?,
+      region: ::String?,
+      resource_id: ::String?,
+      role_arn: ::String?,
+      secret_arn: ::String?,
+      url: ::String?
+    }
+
+    end
+  end
+end

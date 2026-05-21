@@ -1,0 +1,38 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LicenseManagerUserSubscriptions
+    module Params
+      type active_directory_settings = {
+      domain_name: ::String?,
+      domain_ipv_4_list: Array[::String]?,
+      domain_ipv_6_list: Array[::String]?,
+      domain_credentials_provider: {
+        secrets_manager_credentials_provider: {
+          secret_id: ::String?
+        }?
+      }?,
+      domain_network_settings: {
+        subnets: Array[::String]
+      }?
+    }
+
+      type active_directory_identity_provider = {
+      directory_id: ::String?,
+      active_directory_settings: Params::active_directory_settings?,
+      active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
+      is_shared_active_directory: bool?
+    }
+
+      type identity_provider = {
+      active_directory_identity_provider: Params::active_directory_identity_provider?
+    }
+
+    end
+  end
+end

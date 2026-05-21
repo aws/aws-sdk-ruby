@@ -122,7 +122,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateAliasResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAliasResponseSuccess
@@ -148,7 +148,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?server_sdk_version: ::String
                         ) -> _CreateBuildResponseSuccess
@@ -174,7 +174,7 @@ module Aws
                                         to_port: ::Integer,
                                         ip_range: ::String,
                                         protocol: ("TCP" | "UDP")
-                                      },
+                                      }
                                     ],
                                     ?game_server_container_groups_per_instance: ::Integer,
                                     ?instance_type: ::String,
@@ -182,7 +182,7 @@ module Aws
                                     ?locations: Array[
                                       {
                                         location: ::String
-                                      },
+                                      }
                                     ],
                                     ?metric_groups: Array[::String],
                                     ?new_game_session_protection_policy: ("NoProtection" | "FullProtection"),
@@ -199,7 +199,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?player_gateway_mode: ("DISABLED" | "ENABLED" | "REQUIRED")
                                   ) -> _CreateContainerFleetResponseSuccess
@@ -215,82 +215,9 @@ module Aws
                                                ?container_group_type: ("GAME_SERVER" | "PER_INSTANCE"),
                                                total_memory_limit_mebibytes: ::Integer,
                                                total_vcpu_limit: ::Float,
-                                               ?game_server_container_definition: {
-                                                 container_name: ::String,
-                                                 depends_on: Array[
-                                                   {
-                                                     container_name: ::String,
-                                                     condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
-                                                   },
-                                                 ]?,
-                                                 mount_points: Array[
-                                                   {
-                                                     instance_path: ::String,
-                                                     container_path: ::String?,
-                                                     access_level: ("READ_ONLY" | "READ_AND_WRITE")?
-                                                   },
-                                                 ]?,
-                                                 environment_override: Array[
-                                                   {
-                                                     name: ::String,
-                                                     value: ::String
-                                                   },
-                                                 ]?,
-                                                 image_uri: ::String,
-                                                 port_configuration: {
-                                                   container_port_ranges: Array[
-                                                     {
-                                                       from_port: ::Integer,
-                                                       to_port: ::Integer,
-                                                       protocol: ("TCP" | "UDP")
-                                                     },
-                                                   ]
-                                                 },
-                                                 server_sdk_version: ::String
-                                               },
+                                               ?game_server_container_definition: Params::game_server_container_definition_input,
                                                ?support_container_definitions: Array[
-                                                 {
-                                                   container_name: ::String,
-                                                   depends_on: Array[
-                                                     {
-                                                       container_name: ::String,
-                                                       condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
-                                                     },
-                                                   ]?,
-                                                   mount_points: Array[
-                                                     {
-                                                       instance_path: ::String,
-                                                       container_path: ::String?,
-                                                       access_level: ("READ_ONLY" | "READ_AND_WRITE")?
-                                                     },
-                                                   ]?,
-                                                   environment_override: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String
-                                                     },
-                                                   ]?,
-                                                   essential: bool?,
-                                                   health_check: {
-                                                     command: Array[::String],
-                                                     interval: ::Integer?,
-                                                     retries: ::Integer?,
-                                                     start_period: ::Integer?,
-                                                     timeout: ::Integer?
-                                                   }?,
-                                                   image_uri: ::String,
-                                                   memory_hard_limit_mebibytes: ::Integer?,
-                                                   port_configuration: {
-                                                     container_port_ranges: Array[
-                                                       {
-                                                         from_port: ::Integer,
-                                                         to_port: ::Integer,
-                                                         protocol: ("TCP" | "UDP")
-                                                       },
-                                                     ]
-                                                   }?,
-                                                   vcpu: ::Float?
-                                                 },
+                                                 Params::support_container_definition_input
                                                ],
                                                operating_system: ("AMAZON_LINUX_2023"),
                                                ?version_description: ::String,
@@ -298,7 +225,7 @@ module Aws
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateContainerGroupDefinitionResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerGroupDefinitionResponseSuccess
@@ -324,20 +251,10 @@ module Aws
                               to_port: ::Integer,
                               ip_range: ::String,
                               protocol: ("TCP" | "UDP")
-                            },
+                            }
                           ],
                           ?new_game_session_protection_policy: ("NoProtection" | "FullProtection"),
-                          ?runtime_configuration: {
-                            server_processes: Array[
-                              {
-                                launch_path: ::String,
-                                parameters: ::String?,
-                                concurrent_executions: ::Integer
-                              },
-                            ]?,
-                            max_concurrent_game_session_activations: ::Integer?,
-                            game_session_activation_timeout_seconds: ::Integer?
-                          },
+                          ?runtime_configuration: Params::runtime_configuration,
                           ?resource_creation_limit_policy: {
                             new_game_sessions_per_creator: ::Integer?,
                             policy_period_in_minutes: ::Integer?
@@ -353,13 +270,13 @@ module Aws
                           ?locations: Array[
                             {
                               location: ::String
-                            },
+                            }
                           ],
                           ?tags: Array[
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?compute_type: ("EC2" | "ANYWHERE"),
                           ?anywhere_configuration: {
@@ -385,7 +302,7 @@ module Aws
                                     locations: Array[
                                       {
                                         location: ::String
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateFleetLocationsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetLocationsResponseSuccess
@@ -409,7 +326,7 @@ module Aws
                                         {
                                           instance_type: ("c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge"),
                                           weighted_capacity: ::String?
-                                        },
+                                        }
                                       ],
                                       ?auto_scaling_policy: {
                                         estimated_instance_warmup: ::Integer?,
@@ -424,7 +341,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateGameServerGroupResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameServerGroupResponseSuccess
@@ -443,7 +360,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?creator_id: ::String,
                                  ?game_session_id: ::String,
@@ -465,12 +382,12 @@ module Aws
                                          {
                                            maximum_individual_player_latency_milliseconds: ::Integer?,
                                            policy_duration_seconds: ::Integer?
-                                         },
+                                         }
                                        ],
                                        ?destinations: Array[
                                          {
                                            destination_arn: ::String?
-                                         },
+                                         }
                                        ],
                                        ?filter_configuration: {
                                          allowed_locations: Array[::String]?
@@ -485,7 +402,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateGameSessionQueueResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGameSessionQueueResponseSuccess
@@ -501,7 +418,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateLocationResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLocationResponseSuccess
@@ -526,7 +443,7 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ],
                                               ?game_session_data: ::String,
                                               ?backfill_mode: ("AUTOMATIC" | "MANUAL"),
@@ -535,7 +452,7 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ]
                                             ) -> _CreateMatchmakingConfigurationResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMatchmakingConfigurationResponseSuccess
@@ -552,7 +469,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateMatchmakingRuleSetResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMatchmakingRuleSetResponseSuccess
@@ -600,7 +517,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
                            ?node_js_version: ::String
                          ) -> _CreateScriptResponseSuccess
@@ -1553,7 +1470,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ],
                                           maximum_player_session_count: ::Integer,
                                           ?game_session_name: ::String,
@@ -1562,13 +1479,13 @@ module Aws
                                               player_id: ::String?,
                                               region_identifier: ::String?,
                                               latency_in_milliseconds: ::Float?
-                                            },
+                                            }
                                           ],
                                           ?desired_player_sessions: Array[
                                             {
                                               player_id: ::String?,
                                               player_data: ::String?
-                                            },
+                                            }
                                           ],
                                           ?game_session_data: ::String,
                                           ?priority_configuration_override: {
@@ -1588,12 +1505,7 @@ module Aws
                                   configuration_name: ::String,
                                   ?game_session_arn: ::String,
                                   players: Array[
-                                    {
-                                      player_id: ::String?,
-                                      player_attributes: Hash[::String, untyped]?,
-                                      team: ::String?,
-                                      latency_in_ms: Hash[::String, ::Integer]?
-                                    },
+                                    Params::player
                                   ]
                                 ) -> _StartMatchBackfillResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMatchBackfillResponseSuccess
@@ -1607,12 +1519,7 @@ module Aws
                                ?ticket_id: ::String,
                                configuration_name: ::String,
                                players: Array[
-                                 {
-                                   player_id: ::String?,
-                                   player_attributes: Hash[::String, untyped]?,
-                                   team: ::String?,
-                                   latency_in_ms: Hash[::String, ::Integer]?
-                                 },
+                                 Params::player
                                ]
                              ) -> _StartMatchmakingResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMatchmakingResponseSuccess
@@ -1670,7 +1577,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1745,7 +1652,7 @@ module Aws
                                         to_port: ::Integer,
                                         ip_range: ::String,
                                         protocol: ("TCP" | "UDP")
-                                      },
+                                      }
                                     ],
                                     ?instance_inbound_permission_revocations: Array[
                                       {
@@ -1753,7 +1660,7 @@ module Aws
                                         to_port: ::Integer,
                                         ip_range: ::String,
                                         protocol: ("TCP" | "UDP")
-                                      },
+                                      }
                                     ],
                                     ?deployment_configuration: {
                                       protection_strategy: ("WITH_PROTECTION" | "IGNORE_PROTECTION")?,
@@ -1783,82 +1690,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_container_group_definition-instance_method
       def update_container_group_definition: (
                                                name: ::String,
-                                               ?game_server_container_definition: {
-                                                 container_name: ::String,
-                                                 depends_on: Array[
-                                                   {
-                                                     container_name: ::String,
-                                                     condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
-                                                   },
-                                                 ]?,
-                                                 mount_points: Array[
-                                                   {
-                                                     instance_path: ::String,
-                                                     container_path: ::String?,
-                                                     access_level: ("READ_ONLY" | "READ_AND_WRITE")?
-                                                   },
-                                                 ]?,
-                                                 environment_override: Array[
-                                                   {
-                                                     name: ::String,
-                                                     value: ::String
-                                                   },
-                                                 ]?,
-                                                 image_uri: ::String,
-                                                 port_configuration: {
-                                                   container_port_ranges: Array[
-                                                     {
-                                                       from_port: ::Integer,
-                                                       to_port: ::Integer,
-                                                       protocol: ("TCP" | "UDP")
-                                                     },
-                                                   ]
-                                                 },
-                                                 server_sdk_version: ::String
-                                               },
+                                               ?game_server_container_definition: Params::game_server_container_definition_input,
                                                ?support_container_definitions: Array[
-                                                 {
-                                                   container_name: ::String,
-                                                   depends_on: Array[
-                                                     {
-                                                       container_name: ::String,
-                                                       condition: ("START" | "COMPLETE" | "SUCCESS" | "HEALTHY")
-                                                     },
-                                                   ]?,
-                                                   mount_points: Array[
-                                                     {
-                                                       instance_path: ::String,
-                                                       container_path: ::String?,
-                                                       access_level: ("READ_ONLY" | "READ_AND_WRITE")?
-                                                     },
-                                                   ]?,
-                                                   environment_override: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String
-                                                     },
-                                                   ]?,
-                                                   essential: bool?,
-                                                   health_check: {
-                                                     command: Array[::String],
-                                                     interval: ::Integer?,
-                                                     retries: ::Integer?,
-                                                     start_period: ::Integer?,
-                                                     timeout: ::Integer?
-                                                   }?,
-                                                   image_uri: ::String,
-                                                   memory_hard_limit_mebibytes: ::Integer?,
-                                                   port_configuration: {
-                                                     container_port_ranges: Array[
-                                                       {
-                                                         from_port: ::Integer,
-                                                         to_port: ::Integer,
-                                                         protocol: ("TCP" | "UDP")
-                                                       },
-                                                     ]
-                                                   }?,
-                                                   vcpu: ::Float?
-                                                 },
+                                                 Params::support_container_definition_input
                                                ],
                                                ?total_memory_limit_mebibytes: ::Integer,
                                                ?total_vcpu_limit: ::Float,
@@ -1925,7 +1759,7 @@ module Aws
                                             to_port: ::Integer,
                                             ip_range: ::String,
                                             protocol: ("TCP" | "UDP")
-                                          },
+                                          }
                                         ],
                                         ?inbound_permission_revocations: Array[
                                           {
@@ -1933,7 +1767,7 @@ module Aws
                                             to_port: ::Integer,
                                             ip_range: ::String,
                                             protocol: ("TCP" | "UDP")
-                                          },
+                                          }
                                         ]
                                       ) -> _UpdateFleetPortSettingsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFleetPortSettingsResponseSuccess
@@ -1964,7 +1798,7 @@ module Aws
                                         {
                                           instance_type: ("c4.large" | "c4.xlarge" | "c4.2xlarge" | "c4.4xlarge" | "c4.8xlarge" | "c5.large" | "c5.xlarge" | "c5.2xlarge" | "c5.4xlarge" | "c5.9xlarge" | "c5.12xlarge" | "c5.18xlarge" | "c5.24xlarge" | "c5a.large" | "c5a.xlarge" | "c5a.2xlarge" | "c5a.4xlarge" | "c5a.8xlarge" | "c5a.12xlarge" | "c5a.16xlarge" | "c5a.24xlarge" | "c6g.medium" | "c6g.large" | "c6g.xlarge" | "c6g.2xlarge" | "c6g.4xlarge" | "c6g.8xlarge" | "c6g.12xlarge" | "c6g.16xlarge" | "r4.large" | "r4.xlarge" | "r4.2xlarge" | "r4.4xlarge" | "r4.8xlarge" | "r4.16xlarge" | "r5.large" | "r5.xlarge" | "r5.2xlarge" | "r5.4xlarge" | "r5.8xlarge" | "r5.12xlarge" | "r5.16xlarge" | "r5.24xlarge" | "r5a.large" | "r5a.xlarge" | "r5a.2xlarge" | "r5a.4xlarge" | "r5a.8xlarge" | "r5a.12xlarge" | "r5a.16xlarge" | "r5a.24xlarge" | "r6g.medium" | "r6g.large" | "r6g.xlarge" | "r6g.2xlarge" | "r6g.4xlarge" | "r6g.8xlarge" | "r6g.12xlarge" | "r6g.16xlarge" | "m4.large" | "m4.xlarge" | "m4.2xlarge" | "m4.4xlarge" | "m4.10xlarge" | "m5.large" | "m5.xlarge" | "m5.2xlarge" | "m5.4xlarge" | "m5.8xlarge" | "m5.12xlarge" | "m5.16xlarge" | "m5.24xlarge" | "m5a.large" | "m5a.xlarge" | "m5a.2xlarge" | "m5a.4xlarge" | "m5a.8xlarge" | "m5a.12xlarge" | "m5a.16xlarge" | "m5a.24xlarge" | "m6g.medium" | "m6g.large" | "m6g.xlarge" | "m6g.2xlarge" | "m6g.4xlarge" | "m6g.8xlarge" | "m6g.12xlarge" | "m6g.16xlarge"),
                                           weighted_capacity: ::String?
-                                        },
+                                        }
                                       ],
                                       ?game_server_protection_policy: ("NO_PROTECTION" | "FULL_PROTECTION"),
                                       ?balancing_strategy: ("SPOT_ONLY" | "SPOT_PREFERRED" | "ON_DEMAND_ONLY")
@@ -1986,7 +1820,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _UpdateGameSessionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGameSessionResponseSuccess
@@ -2003,12 +1837,12 @@ module Aws
                                          {
                                            maximum_individual_player_latency_milliseconds: ::Integer?,
                                            policy_duration_seconds: ::Integer?
-                                         },
+                                         }
                                        ],
                                        ?destinations: Array[
                                          {
                                            destination_arn: ::String?
-                                         },
+                                         }
                                        ],
                                        ?filter_configuration: {
                                          allowed_locations: Array[::String]?
@@ -2042,7 +1876,7 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ],
                                               ?game_session_data: ::String,
                                               ?backfill_mode: ("AUTOMATIC" | "MANUAL"),
@@ -2057,17 +1891,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GameLift/Client.html#update_runtime_configuration-instance_method
       def update_runtime_configuration: (
                                           fleet_id: ::String,
-                                          runtime_configuration: {
-                                            server_processes: Array[
-                                              {
-                                                launch_path: ::String,
-                                                parameters: ::String?,
-                                                concurrent_executions: ::Integer
-                                              },
-                                            ]?,
-                                            max_concurrent_game_session_activations: ::Integer?,
-                                            game_session_activation_timeout_seconds: ::Integer?
-                                          }
+                                          runtime_configuration: Params::runtime_configuration
                                         ) -> _UpdateRuntimeConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuntimeConfigurationResponseSuccess
 

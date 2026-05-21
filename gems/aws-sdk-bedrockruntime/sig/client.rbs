@@ -107,7 +107,7 @@ module Aws
                                      bytes: ::String?
                                    }
                                  }?
-                               },
+                               }
                              ],
                              ?output_scope: ("INTERVENTIONS" | "FULL")
                            ) -> _ApplyGuardrailResponseSuccess
@@ -128,246 +128,10 @@ module Aws
       def converse: (
                       model_id: ::String,
                       ?messages: Array[
-                        {
-                          role: ("user" | "assistant"),
-                          content: Array[
-                            {
-                              text: ::String?,
-                              image: {
-                                format: ("png" | "jpeg" | "gif" | "webp"),
-                                source: {
-                                  bytes: ::String?,
-                                  s3_location: {
-                                    uri: ::String,
-                                    bucket_owner: ::String?
-                                  }?
-                                },
-                                error: {
-                                  message: ::String?
-                                }?
-                              }?,
-                              document: {
-                                format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                name: ::String,
-                                source: {
-                                  bytes: ::String?,
-                                  s3_location: {
-                                    uri: ::String,
-                                    bucket_owner: ::String?
-                                  }?,
-                                  text: ::String?,
-                                  content: Array[
-                                    {
-                                      text: ::String?
-                                    },
-                                  ]?
-                                },
-                                context: ::String?,
-                                citations: {
-                                  enabled: bool
-                                }?
-                              }?,
-                              video: {
-                                format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                source: {
-                                  bytes: ::String?,
-                                  s3_location: {
-                                    uri: ::String,
-                                    bucket_owner: ::String?
-                                  }?
-                                }
-                              }?,
-                              audio: {
-                                format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
-                                source: {
-                                  bytes: ::String?,
-                                  s3_location: {
-                                    uri: ::String,
-                                    bucket_owner: ::String?
-                                  }?
-                                },
-                                error: {
-                                  message: ::String?
-                                }?
-                              }?,
-                              tool_use: {
-                                tool_use_id: ::String,
-                                name: ::String,
-                                input: {
-                                },
-                                type: ("server_tool_use")?
-                              }?,
-                              tool_result: {
-                                tool_use_id: ::String,
-                                content: Array[
-                                  {
-                                    json: {
-                                    }?,
-                                    text: ::String?,
-                                    image: {
-                                      format: ("png" | "jpeg" | "gif" | "webp"),
-                                      source: {
-                                        bytes: ::String?,
-                                        s3_location: {
-                                          uri: ::String,
-                                          bucket_owner: ::String?
-                                        }?
-                                      },
-                                      error: {
-                                        message: ::String?
-                                      }?
-                                    }?,
-                                    document: {
-                                      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                      name: ::String,
-                                      source: {
-                                        bytes: ::String?,
-                                        s3_location: {
-                                          uri: ::String,
-                                          bucket_owner: ::String?
-                                        }?,
-                                        text: ::String?,
-                                        content: Array[
-                                          {
-                                            text: ::String?
-                                          },
-                                        ]?
-                                      },
-                                      context: ::String?,
-                                      citations: {
-                                        enabled: bool
-                                      }?
-                                    }?,
-                                    video: {
-                                      format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                      source: {
-                                        bytes: ::String?,
-                                        s3_location: {
-                                          uri: ::String,
-                                          bucket_owner: ::String?
-                                        }?
-                                      }
-                                    }?,
-                                    search_result: {
-                                      source: ::String,
-                                      title: ::String,
-                                      content: Array[
-                                        {
-                                          text: ::String
-                                        },
-                                      ],
-                                      citations: {
-                                        enabled: bool
-                                      }?
-                                    }?
-                                  },
-                                ],
-                                status: ("success" | "error")?,
-                                type: ::String?
-                              }?,
-                              guard_content: {
-                                text: {
-                                  text: ::String,
-                                  qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                                }?,
-                                image: {
-                                  format: ("png" | "jpeg"),
-                                  source: {
-                                    bytes: ::String?
-                                  }
-                                }?
-                              }?,
-                              cache_point: {
-                                type: ("default"),
-                                ttl: ("5m" | "1h")?
-                              }?,
-                              reasoning_content: {
-                                reasoning_text: {
-                                  text: ::String,
-                                  signature: ::String?
-                                }?,
-                                redacted_content: ::String?
-                              }?,
-                              citations_content: {
-                                content: Array[
-                                  {
-                                    text: ::String?
-                                  },
-                                ]?,
-                                citations: Array[
-                                  {
-                                    title: ::String?,
-                                    source: ::String?,
-                                    source_content: Array[
-                                      {
-                                        text: ::String?
-                                      },
-                                    ]?,
-                                    location: {
-                                      web: {
-                                        url: ::String?,
-                                        domain: ::String?
-                                      }?,
-                                      document_char: {
-                                        document_index: ::Integer?,
-                                        start: ::Integer?,
-                                        end: ::Integer?
-                                      }?,
-                                      document_page: {
-                                        document_index: ::Integer?,
-                                        start: ::Integer?,
-                                        end: ::Integer?
-                                      }?,
-                                      document_chunk: {
-                                        document_index: ::Integer?,
-                                        start: ::Integer?,
-                                        end: ::Integer?
-                                      }?,
-                                      search_result_location: {
-                                        search_result_index: ::Integer?,
-                                        start: ::Integer?,
-                                        end: ::Integer?
-                                      }?
-                                    }?
-                                  },
-                                ]?
-                              }?,
-                              search_result: {
-                                source: ::String,
-                                title: ::String,
-                                content: Array[
-                                  {
-                                    text: ::String
-                                  },
-                                ],
-                                citations: {
-                                  enabled: bool
-                                }?
-                              }?
-                            },
-                          ]
-                        },
+                        Params::message
                       ],
                       ?system: Array[
-                        {
-                          text: ::String?,
-                          guard_content: {
-                            text: {
-                              text: ::String,
-                              qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                            }?,
-                            image: {
-                              format: ("png" | "jpeg"),
-                              source: {
-                                bytes: ::String?
-                              }
-                            }?
-                          }?,
-                          cache_point: {
-                            type: ("default"),
-                            ttl: ("5m" | "1h")?
-                          }?
-                        },
+                        Params::system_content_block
                       ],
                       ?inference_config: {
                         max_tokens: ::Integer?,
@@ -375,37 +139,7 @@ module Aws
                         top_p: ::Float?,
                         stop_sequences: Array[::String]?
                       },
-                      ?tool_config: {
-                        tools: Array[
-                          {
-                            tool_spec: {
-                              name: ::String,
-                              description: ::String?,
-                              input_schema: {
-                                json: {
-                                }?
-                              },
-                              strict: bool?
-                            }?,
-                            system_tool: {
-                              name: ::String
-                            }?,
-                            cache_point: {
-                              type: ("default"),
-                              ttl: ("5m" | "1h")?
-                            }?
-                          },
-                        ],
-                        tool_choice: {
-                          auto: {
-                          }?,
-                          any: {
-                          }?,
-                          tool: {
-                            name: ::String
-                          }?
-                        }?
-                      },
+                      ?tool_config: Params::tool_configuration,
                       ?guardrail_config: {
                         guardrail_identifier: ::String?,
                         guardrail_version: ::String?,
@@ -424,18 +158,7 @@ module Aws
                       ?service_tier: {
                         type: ("priority" | "default" | "flex" | "reserved")
                       },
-                      ?output_config: {
-                        text_format: {
-                          type: ("json_schema"),
-                          structure: {
-                            json_schema: {
-                              schema: ::String,
-                              name: ::String?,
-                              description: ::String?
-                            }?
-                          }
-                        }?
-                      }
+                      ?output_config: Params::output_config
                     ) -> _ConverseResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConverseResponseSuccess
 
@@ -447,246 +170,10 @@ module Aws
       def converse_stream: (
                              model_id: ::String,
                              ?messages: Array[
-                               {
-                                 role: ("user" | "assistant"),
-                                 content: Array[
-                                   {
-                                     text: ::String?,
-                                     image: {
-                                       format: ("png" | "jpeg" | "gif" | "webp"),
-                                       source: {
-                                         bytes: ::String?,
-                                         s3_location: {
-                                           uri: ::String,
-                                           bucket_owner: ::String?
-                                         }?
-                                       },
-                                       error: {
-                                         message: ::String?
-                                       }?
-                                     }?,
-                                     document: {
-                                       format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                       name: ::String,
-                                       source: {
-                                         bytes: ::String?,
-                                         s3_location: {
-                                           uri: ::String,
-                                           bucket_owner: ::String?
-                                         }?,
-                                         text: ::String?,
-                                         content: Array[
-                                           {
-                                             text: ::String?
-                                           },
-                                         ]?
-                                       },
-                                       context: ::String?,
-                                       citations: {
-                                         enabled: bool
-                                       }?
-                                     }?,
-                                     video: {
-                                       format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                       source: {
-                                         bytes: ::String?,
-                                         s3_location: {
-                                           uri: ::String,
-                                           bucket_owner: ::String?
-                                         }?
-                                       }
-                                     }?,
-                                     audio: {
-                                       format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
-                                       source: {
-                                         bytes: ::String?,
-                                         s3_location: {
-                                           uri: ::String,
-                                           bucket_owner: ::String?
-                                         }?
-                                       },
-                                       error: {
-                                         message: ::String?
-                                       }?
-                                     }?,
-                                     tool_use: {
-                                       tool_use_id: ::String,
-                                       name: ::String,
-                                       input: {
-                                       },
-                                       type: ("server_tool_use")?
-                                     }?,
-                                     tool_result: {
-                                       tool_use_id: ::String,
-                                       content: Array[
-                                         {
-                                           json: {
-                                           }?,
-                                           text: ::String?,
-                                           image: {
-                                             format: ("png" | "jpeg" | "gif" | "webp"),
-                                             source: {
-                                               bytes: ::String?,
-                                               s3_location: {
-                                                 uri: ::String,
-                                                 bucket_owner: ::String?
-                                               }?
-                                             },
-                                             error: {
-                                               message: ::String?
-                                             }?
-                                           }?,
-                                           document: {
-                                             format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                             name: ::String,
-                                             source: {
-                                               bytes: ::String?,
-                                               s3_location: {
-                                                 uri: ::String,
-                                                 bucket_owner: ::String?
-                                               }?,
-                                               text: ::String?,
-                                               content: Array[
-                                                 {
-                                                   text: ::String?
-                                                 },
-                                               ]?
-                                             },
-                                             context: ::String?,
-                                             citations: {
-                                               enabled: bool
-                                             }?
-                                           }?,
-                                           video: {
-                                             format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                             source: {
-                                               bytes: ::String?,
-                                               s3_location: {
-                                                 uri: ::String,
-                                                 bucket_owner: ::String?
-                                               }?
-                                             }
-                                           }?,
-                                           search_result: {
-                                             source: ::String,
-                                             title: ::String,
-                                             content: Array[
-                                               {
-                                                 text: ::String
-                                               },
-                                             ],
-                                             citations: {
-                                               enabled: bool
-                                             }?
-                                           }?
-                                         },
-                                       ],
-                                       status: ("success" | "error")?,
-                                       type: ::String?
-                                     }?,
-                                     guard_content: {
-                                       text: {
-                                         text: ::String,
-                                         qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                                       }?,
-                                       image: {
-                                         format: ("png" | "jpeg"),
-                                         source: {
-                                           bytes: ::String?
-                                         }
-                                       }?
-                                     }?,
-                                     cache_point: {
-                                       type: ("default"),
-                                       ttl: ("5m" | "1h")?
-                                     }?,
-                                     reasoning_content: {
-                                       reasoning_text: {
-                                         text: ::String,
-                                         signature: ::String?
-                                       }?,
-                                       redacted_content: ::String?
-                                     }?,
-                                     citations_content: {
-                                       content: Array[
-                                         {
-                                           text: ::String?
-                                         },
-                                       ]?,
-                                       citations: Array[
-                                         {
-                                           title: ::String?,
-                                           source: ::String?,
-                                           source_content: Array[
-                                             {
-                                               text: ::String?
-                                             },
-                                           ]?,
-                                           location: {
-                                             web: {
-                                               url: ::String?,
-                                               domain: ::String?
-                                             }?,
-                                             document_char: {
-                                               document_index: ::Integer?,
-                                               start: ::Integer?,
-                                               end: ::Integer?
-                                             }?,
-                                             document_page: {
-                                               document_index: ::Integer?,
-                                               start: ::Integer?,
-                                               end: ::Integer?
-                                             }?,
-                                             document_chunk: {
-                                               document_index: ::Integer?,
-                                               start: ::Integer?,
-                                               end: ::Integer?
-                                             }?,
-                                             search_result_location: {
-                                               search_result_index: ::Integer?,
-                                               start: ::Integer?,
-                                               end: ::Integer?
-                                             }?
-                                           }?
-                                         },
-                                       ]?
-                                     }?,
-                                     search_result: {
-                                       source: ::String,
-                                       title: ::String,
-                                       content: Array[
-                                         {
-                                           text: ::String
-                                         },
-                                       ],
-                                       citations: {
-                                         enabled: bool
-                                       }?
-                                     }?
-                                   },
-                                 ]
-                               },
+                               Params::message
                              ],
                              ?system: Array[
-                               {
-                                 text: ::String?,
-                                 guard_content: {
-                                   text: {
-                                     text: ::String,
-                                     qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                                   }?,
-                                   image: {
-                                     format: ("png" | "jpeg"),
-                                     source: {
-                                       bytes: ::String?
-                                     }
-                                   }?
-                                 }?,
-                                 cache_point: {
-                                   type: ("default"),
-                                   ttl: ("5m" | "1h")?
-                                 }?
-                               },
+                               Params::system_content_block
                              ],
                              ?inference_config: {
                                max_tokens: ::Integer?,
@@ -694,37 +181,7 @@ module Aws
                                top_p: ::Float?,
                                stop_sequences: Array[::String]?
                              },
-                             ?tool_config: {
-                               tools: Array[
-                                 {
-                                   tool_spec: {
-                                     name: ::String,
-                                     description: ::String?,
-                                     input_schema: {
-                                       json: {
-                                       }?
-                                     },
-                                     strict: bool?
-                                   }?,
-                                   system_tool: {
-                                     name: ::String
-                                   }?,
-                                   cache_point: {
-                                     type: ("default"),
-                                     ttl: ("5m" | "1h")?
-                                   }?
-                                 },
-                               ],
-                               tool_choice: {
-                                 auto: {
-                                 }?,
-                                 any: {
-                                 }?,
-                                 tool: {
-                                   name: ::String
-                                 }?
-                               }?
-                             },
+                             ?tool_config: Params::tool_configuration,
                              ?guardrail_config: {
                                guardrail_identifier: ::String?,
                                guardrail_version: ::String?,
@@ -744,18 +201,7 @@ module Aws
                              ?service_tier: {
                                type: ("priority" | "default" | "flex" | "reserved")
                              },
-                             ?output_config: {
-                               text_format: {
-                                 type: ("json_schema"),
-                                 structure: {
-                                   json_schema: {
-                                     schema: ::String,
-                                     name: ::String?,
-                                     description: ::String?
-                                   }?
-                                 }
-                               }?
-                             }
+                             ?output_config: Params::output_config
                            ) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _ConverseStreamResponseSuccess
 
@@ -772,278 +218,12 @@ module Aws
                             }?,
                             converse: {
                               messages: Array[
-                                {
-                                  role: ("user" | "assistant"),
-                                  content: Array[
-                                    {
-                                      text: ::String?,
-                                      image: {
-                                        format: ("png" | "jpeg" | "gif" | "webp"),
-                                        source: {
-                                          bytes: ::String?,
-                                          s3_location: {
-                                            uri: ::String,
-                                            bucket_owner: ::String?
-                                          }?
-                                        },
-                                        error: {
-                                          message: ::String?
-                                        }?
-                                      }?,
-                                      document: {
-                                        format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                        name: ::String,
-                                        source: {
-                                          bytes: ::String?,
-                                          s3_location: {
-                                            uri: ::String,
-                                            bucket_owner: ::String?
-                                          }?,
-                                          text: ::String?,
-                                          content: Array[
-                                            {
-                                              text: ::String?
-                                            },
-                                          ]?
-                                        },
-                                        context: ::String?,
-                                        citations: {
-                                          enabled: bool
-                                        }?
-                                      }?,
-                                      video: {
-                                        format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                        source: {
-                                          bytes: ::String?,
-                                          s3_location: {
-                                            uri: ::String,
-                                            bucket_owner: ::String?
-                                          }?
-                                        }
-                                      }?,
-                                      audio: {
-                                        format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
-                                        source: {
-                                          bytes: ::String?,
-                                          s3_location: {
-                                            uri: ::String,
-                                            bucket_owner: ::String?
-                                          }?
-                                        },
-                                        error: {
-                                          message: ::String?
-                                        }?
-                                      }?,
-                                      tool_use: {
-                                        tool_use_id: ::String,
-                                        name: ::String,
-                                        input: {
-                                        },
-                                        type: ("server_tool_use")?
-                                      }?,
-                                      tool_result: {
-                                        tool_use_id: ::String,
-                                        content: Array[
-                                          {
-                                            json: {
-                                            }?,
-                                            text: ::String?,
-                                            image: {
-                                              format: ("png" | "jpeg" | "gif" | "webp"),
-                                              source: {
-                                                bytes: ::String?,
-                                                s3_location: {
-                                                  uri: ::String,
-                                                  bucket_owner: ::String?
-                                                }?
-                                              },
-                                              error: {
-                                                message: ::String?
-                                              }?
-                                            }?,
-                                            document: {
-                                              format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
-                                              name: ::String,
-                                              source: {
-                                                bytes: ::String?,
-                                                s3_location: {
-                                                  uri: ::String,
-                                                  bucket_owner: ::String?
-                                                }?,
-                                                text: ::String?,
-                                                content: Array[
-                                                  {
-                                                    text: ::String?
-                                                  },
-                                                ]?
-                                              },
-                                              context: ::String?,
-                                              citations: {
-                                                enabled: bool
-                                              }?
-                                            }?,
-                                            video: {
-                                              format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
-                                              source: {
-                                                bytes: ::String?,
-                                                s3_location: {
-                                                  uri: ::String,
-                                                  bucket_owner: ::String?
-                                                }?
-                                              }
-                                            }?,
-                                            search_result: {
-                                              source: ::String,
-                                              title: ::String,
-                                              content: Array[
-                                                {
-                                                  text: ::String
-                                                },
-                                              ],
-                                              citations: {
-                                                enabled: bool
-                                              }?
-                                            }?
-                                          },
-                                        ],
-                                        status: ("success" | "error")?,
-                                        type: ::String?
-                                      }?,
-                                      guard_content: {
-                                        text: {
-                                          text: ::String,
-                                          qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                                        }?,
-                                        image: {
-                                          format: ("png" | "jpeg"),
-                                          source: {
-                                            bytes: ::String?
-                                          }
-                                        }?
-                                      }?,
-                                      cache_point: {
-                                        type: ("default"),
-                                        ttl: ("5m" | "1h")?
-                                      }?,
-                                      reasoning_content: {
-                                        reasoning_text: {
-                                          text: ::String,
-                                          signature: ::String?
-                                        }?,
-                                        redacted_content: ::String?
-                                      }?,
-                                      citations_content: {
-                                        content: Array[
-                                          {
-                                            text: ::String?
-                                          },
-                                        ]?,
-                                        citations: Array[
-                                          {
-                                            title: ::String?,
-                                            source: ::String?,
-                                            source_content: Array[
-                                              {
-                                                text: ::String?
-                                              },
-                                            ]?,
-                                            location: {
-                                              web: {
-                                                url: ::String?,
-                                                domain: ::String?
-                                              }?,
-                                              document_char: {
-                                                document_index: ::Integer?,
-                                                start: ::Integer?,
-                                                end: ::Integer?
-                                              }?,
-                                              document_page: {
-                                                document_index: ::Integer?,
-                                                start: ::Integer?,
-                                                end: ::Integer?
-                                              }?,
-                                              document_chunk: {
-                                                document_index: ::Integer?,
-                                                start: ::Integer?,
-                                                end: ::Integer?
-                                              }?,
-                                              search_result_location: {
-                                                search_result_index: ::Integer?,
-                                                start: ::Integer?,
-                                                end: ::Integer?
-                                              }?
-                                            }?
-                                          },
-                                        ]?
-                                      }?,
-                                      search_result: {
-                                        source: ::String,
-                                        title: ::String,
-                                        content: Array[
-                                          {
-                                            text: ::String
-                                          },
-                                        ],
-                                        citations: {
-                                          enabled: bool
-                                        }?
-                                      }?
-                                    },
-                                  ]
-                                },
+                                Params::message
                               ]?,
                               system: Array[
-                                {
-                                  text: ::String?,
-                                  guard_content: {
-                                    text: {
-                                      text: ::String,
-                                      qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
-                                    }?,
-                                    image: {
-                                      format: ("png" | "jpeg"),
-                                      source: {
-                                        bytes: ::String?
-                                      }
-                                    }?
-                                  }?,
-                                  cache_point: {
-                                    type: ("default"),
-                                    ttl: ("5m" | "1h")?
-                                  }?
-                                },
+                                Params::system_content_block
                               ]?,
-                              tool_config: {
-                                tools: Array[
-                                  {
-                                    tool_spec: {
-                                      name: ::String,
-                                      description: ::String?,
-                                      input_schema: {
-                                        json: {
-                                        }?
-                                      },
-                                      strict: bool?
-                                    }?,
-                                    system_tool: {
-                                      name: ::String
-                                    }?,
-                                    cache_point: {
-                                      type: ("default"),
-                                      ttl: ("5m" | "1h")?
-                                    }?
-                                  },
-                                ],
-                                tool_choice: {
-                                  auto: {
-                                  }?,
-                                  any: {
-                                  }?,
-                                  tool: {
-                                    name: ::String
-                                  }?
-                                }?
-                              }?,
+                              tool_config: Params::tool_configuration?,
                               additional_model_request_fields: {
                               }?
                             }?
@@ -1086,7 +266,8 @@ module Aws
                           ?guardrail_identifier: ::String,
                           ?guardrail_version: ::String,
                           ?performance_config_latency: ("standard" | "optimized"),
-                          ?service_tier: ("priority" | "default" | "flex" | "reserved")
+                          ?service_tier: ("priority" | "default" | "flex" | "reserved"),
+                          ?request_metadata: ::String
                         ) -> _InvokeModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeModelResponseSuccess
 
@@ -1107,7 +288,8 @@ module Aws
                                                ?guardrail_identifier: ::String,
                                                ?guardrail_version: ::String,
                                                ?performance_config_latency: ("standard" | "optimized"),
-                                               ?service_tier: ("priority" | "default" | "flex" | "reserved")
+                                               ?service_tier: ("priority" | "default" | "flex" | "reserved"),
+                                               ?request_metadata: ::String
                                              ) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _InvokeModelWithResponseStreamResponseSuccess
 
@@ -1149,7 +331,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _StartAsyncInvokeResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartAsyncInvokeResponseSuccess

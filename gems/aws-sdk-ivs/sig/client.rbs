@@ -132,7 +132,7 @@ module Aws
                                                        channel_arn: ::String,
                                                        viewer_id: ::String,
                                                        viewer_session_versions_less_than_or_equal_to: ::Integer?
-                                                     },
+                                                     }
                                                    ]
                                                  ) -> _BatchStartViewerSessionRevocationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchStartViewerSessionRevocationResponseSuccess
@@ -147,7 +147,7 @@ module Aws
                                      media_tailor_playback_configurations: Array[
                                        {
                                          playback_configuration_arn: ::String?
-                                       },
+                                       }
                                      ],
                                      ?tags: Hash[::String, ::String]
                                    ) -> _CreateAdConfigurationResponseSuccess

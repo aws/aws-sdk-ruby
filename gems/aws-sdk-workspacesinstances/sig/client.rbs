@@ -110,9 +110,9 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]?
-                             },
+                             }
                            ],
                            ?throughput: ::Integer,
                            ?volume_type: ("standard" | "io1" | "io2" | "gp2" | "sc1" | "st1" | "gp3")
@@ -130,7 +130,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ],
                                        managed_instance: {
                                          block_device_mappings: Array[
@@ -146,7 +146,7 @@ module Aws
                                              }?,
                                              no_device: ::String?,
                                              virtual_name: ::String?
-                                           },
+                                           }
                                          ]?,
                                          capacity_reservation_specification: {
                                            capacity_reservation_preference: ("capacity-reservations-only" | "open" | "none")?,
@@ -192,7 +192,7 @@ module Aws
                                            {
                                              ipv_6_address: ::String?,
                                              is_primary_ipv_6: bool?
-                                           },
+                                           }
                                          ]?,
                                          ipv_6_address_count: ::Integer?,
                                          kernel_id: ::String?,
@@ -200,7 +200,7 @@ module Aws
                                          license_specifications: Array[
                                            {
                                              license_configuration_arn: ::String?
-                                           },
+                                           }
                                          ]?,
                                          maintenance_options: {
                                            auto_recovery: ("disabled" | "default")?
@@ -236,7 +236,7 @@ module Aws
                                              ipv_4_prefixes: Array[
                                                {
                                                  ipv_4_prefix: ::String?
-                                               },
+                                               }
                                              ]?,
                                              ipv_4_prefix_count: ::Integer?,
                                              ipv_6_address_count: ::Integer?,
@@ -244,12 +244,12 @@ module Aws
                                                {
                                                  ipv_6_address: ::String?,
                                                  is_primary_ipv_6: bool?
-                                               },
+                                               }
                                              ]?,
                                              ipv_6_prefixes: Array[
                                                {
                                                  ipv_6_prefix: ::String?
-                                               },
+                                               }
                                              ]?,
                                              ipv_6_prefix_count: ::Integer?,
                                              network_card_index: ::Integer?,
@@ -260,12 +260,12 @@ module Aws
                                                {
                                                  primary: bool?,
                                                  private_ip_address: ::String?
-                                               },
+                                               }
                                              ]?,
                                              secondary_private_ip_address_count: ::Integer?,
                                              groups: Array[::String]?,
                                              subnet_id: ::String?
-                                           },
+                                           }
                                          ]?,
                                          network_performance_options: {
                                            bandwidth_weighting: ("default" | "vpc-1" | "ebs-1")?
@@ -297,9 +297,9 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]?
-                                           },
+                                           }
                                          ]?,
                                          user_data: ::String?
                                        },
@@ -416,7 +416,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

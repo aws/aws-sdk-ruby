@@ -1,0 +1,171 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockDataAutomation
+    module Params
+      type document_standard_extraction = {
+      granularity: {
+        types: Array[("DOCUMENT" | "PAGE" | "ELEMENT" | "WORD" | "LINE")]?
+      },
+      bounding_box: {
+        state: ("ENABLED" | "DISABLED")
+      }
+    }
+
+      type document_output_format = {
+      text_format: {
+        types: Array[("PLAIN_TEXT" | "MARKDOWN" | "HTML" | "CSV")]?
+      },
+      additional_file_format: {
+        state: ("ENABLED" | "DISABLED")
+      }
+    }
+
+      type document_standard_output_configuration = {
+      extraction: Params::document_standard_extraction?,
+      generative_field: {
+        state: ("ENABLED" | "DISABLED")
+      }?,
+      output_format: Params::document_output_format?
+    }
+
+      type image_standard_extraction = {
+      category: {
+        state: ("ENABLED" | "DISABLED"),
+        types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]?
+      },
+      bounding_box: {
+        state: ("ENABLED" | "DISABLED")
+      }
+    }
+
+      type image_standard_output_configuration = {
+      extraction: Params::image_standard_extraction?,
+      generative_field: {
+        state: ("ENABLED" | "DISABLED"),
+        types: Array[("IMAGE_SUMMARY" | "IAB")]?
+      }?
+    }
+
+      type video_standard_extraction = {
+      category: {
+        state: ("ENABLED" | "DISABLED"),
+        types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]?
+      },
+      bounding_box: {
+        state: ("ENABLED" | "DISABLED")
+      }
+    }
+
+      type video_standard_output_configuration = {
+      extraction: Params::video_standard_extraction?,
+      generative_field: {
+        state: ("ENABLED" | "DISABLED"),
+        types: Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]?
+      }?
+    }
+
+      type transcript_configuration = {
+      speaker_labeling: {
+        state: ("ENABLED" | "DISABLED")
+      }?,
+      channel_labeling: {
+        state: ("ENABLED" | "DISABLED")
+      }?
+    }
+
+      type audio_extraction_category_type_configuration = {
+      transcript: Params::transcript_configuration?
+    }
+
+      type audio_extraction_category = {
+      state: ("ENABLED" | "DISABLED"),
+      types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?,
+      type_configuration: Params::audio_extraction_category_type_configuration?
+    }
+
+      type audio_standard_extraction = {
+      category: Params::audio_extraction_category
+    }
+
+      type audio_standard_output_configuration = {
+      extraction: Params::audio_standard_extraction?,
+      generative_field: {
+        state: ("ENABLED" | "DISABLED"),
+        types: Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]?
+      }?
+    }
+
+      type standard_output_configuration = {
+      document: Params::document_standard_output_configuration?,
+      image: Params::image_standard_output_configuration?,
+      video: Params::video_standard_output_configuration?,
+      audio: Params::audio_standard_output_configuration?
+    }
+
+      type sensitive_data_configuration = {
+      detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
+      detection_scope: Array[("STANDARD" | "CUSTOM")]?,
+      pii_entities_configuration: {
+        pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
+        redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
+      }?
+    }
+
+      type document_override_configuration = {
+      splitter: {
+        state: ("ENABLED" | "DISABLED")?
+      }?,
+      modality_processing: {
+        state: ("ENABLED" | "DISABLED")?
+      }?,
+      sensitive_data_configuration: Params::sensitive_data_configuration?
+    }
+
+      type image_override_configuration = {
+      modality_processing: {
+        state: ("ENABLED" | "DISABLED")?
+      }?,
+      sensitive_data_configuration: Params::sensitive_data_configuration?
+    }
+
+      type video_override_configuration = {
+      modality_processing: {
+        state: ("ENABLED" | "DISABLED")?
+      }?,
+      sensitive_data_configuration: Params::sensitive_data_configuration?
+    }
+
+      type audio_override_configuration = {
+      modality_processing: {
+        state: ("ENABLED" | "DISABLED")?
+      }?,
+      language_configuration: {
+        input_languages: Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]?,
+        generative_output_language: ("DEFAULT" | "EN")?,
+        identify_multiple_languages: bool?
+      }?,
+      sensitive_data_configuration: Params::sensitive_data_configuration?
+    }
+
+      type override_configuration = {
+      document: Params::document_override_configuration?,
+      image: Params::image_override_configuration?,
+      video: Params::video_override_configuration?,
+      audio: Params::audio_override_configuration?,
+      modality_routing: {
+        jpeg: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
+        png: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
+        mp4: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
+        mov: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?
+      }?
+    }
+
+    end
+  end
+end

@@ -95,7 +95,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ]
                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -153,23 +153,7 @@ module Aws
       def create_elasticsearch_domain: (
                                          domain_name: ::String,
                                          ?elasticsearch_version: ::String,
-                                         ?elasticsearch_cluster_config: {
-                                           instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
-                                           instance_count: ::Integer?,
-                                           dedicated_master_enabled: bool?,
-                                           zone_awareness_enabled: bool?,
-                                           zone_awareness_config: {
-                                             availability_zone_count: ::Integer?
-                                           }?,
-                                           dedicated_master_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
-                                           dedicated_master_count: ::Integer?,
-                                           warm_enabled: bool?,
-                                           warm_type: ("ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch")?,
-                                           warm_count: ::Integer?,
-                                           cold_storage_options: {
-                                             enabled: bool
-                                           }?
-                                         },
+                                         ?elasticsearch_cluster_config: Params::elasticsearch_cluster_config,
                                          ?ebs_options: {
                                            ebs_enabled: bool?,
                                            volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
@@ -210,46 +194,18 @@ module Aws
                                            custom_endpoint: ::String?,
                                            custom_endpoint_certificate_arn: ::String?
                                          },
-                                         ?advanced_security_options: {
-                                           enabled: bool?,
-                                           internal_user_database_enabled: bool?,
-                                           master_user_options: {
-                                             master_user_arn: ::String?,
-                                             master_user_name: ::String?,
-                                             master_user_password: ::String?
-                                           }?,
-                                           saml_options: {
-                                             enabled: bool?,
-                                             idp: {
-                                               metadata_content: ::String,
-                                               entity_id: ::String
-                                             }?,
-                                             master_user_name: ::String?,
-                                             master_backend_role: ::String?,
-                                             subject_key: ::String?,
-                                             roles_key: ::String?,
-                                             session_timeout_minutes: ::Integer?
-                                           }?,
-                                           anonymous_auth_enabled: bool?
-                                         },
+                                         ?advanced_security_options: Params::advanced_security_options_input,
                                          ?auto_tune_options: {
                                            desired_state: ("ENABLED" | "DISABLED")?,
                                            maintenance_schedules: Array[
-                                             {
-                                               start_at: ::Time?,
-                                               duration: {
-                                                 value: ::Integer?,
-                                                 unit: ("HOURS")?
-                                               }?,
-                                               cron_expression_for_recurrence: ::String?
-                                             },
+                                             Params::auto_tune_maintenance_schedule
                                            ]?
                                          },
                                          ?tag_list: Array[
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ],
                                          ?deployment_strategy_options: {
                                            deployment_strategy: ("Default" | "CapacityOptimized")
@@ -448,7 +404,7 @@ module Aws
                                                                  {
                                                                    name: ::String?,
                                                                    values: Array[::String]?
-                                                                 },
+                                                                 }
                                                                ],
                                                                ?max_results: ::Integer,
                                                                ?next_token: ::String
@@ -466,7 +422,7 @@ module Aws
                                                                   {
                                                                     name: ::String?,
                                                                     values: Array[::String]?
-                                                                  },
+                                                                  }
                                                                 ],
                                                                 ?max_results: ::Integer,
                                                                 ?next_token: ::String
@@ -484,7 +440,7 @@ module Aws
                                  {
                                    name: ("PackageID" | "PackageName" | "PackageStatus")?,
                                    value: Array[::String]?
-                                 },
+                                 }
                                ],
                                ?max_results: ::Integer,
                                ?next_token: ::String
@@ -753,23 +709,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElasticsearchService/Client.html#update_elasticsearch_domain_config-instance_method
       def update_elasticsearch_domain_config: (
                                                 domain_name: ::String,
-                                                ?elasticsearch_cluster_config: {
-                                                  instance_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
-                                                  instance_count: ::Integer?,
-                                                  dedicated_master_enabled: bool?,
-                                                  zone_awareness_enabled: bool?,
-                                                  zone_awareness_config: {
-                                                    availability_zone_count: ::Integer?
-                                                  }?,
-                                                  dedicated_master_type: ("m3.medium.elasticsearch" | "m3.large.elasticsearch" | "m3.xlarge.elasticsearch" | "m3.2xlarge.elasticsearch" | "m4.large.elasticsearch" | "m4.xlarge.elasticsearch" | "m4.2xlarge.elasticsearch" | "m4.4xlarge.elasticsearch" | "m4.10xlarge.elasticsearch" | "m5.large.elasticsearch" | "m5.xlarge.elasticsearch" | "m5.2xlarge.elasticsearch" | "m5.4xlarge.elasticsearch" | "m5.12xlarge.elasticsearch" | "r5.large.elasticsearch" | "r5.xlarge.elasticsearch" | "r5.2xlarge.elasticsearch" | "r5.4xlarge.elasticsearch" | "r5.12xlarge.elasticsearch" | "c5.large.elasticsearch" | "c5.xlarge.elasticsearch" | "c5.2xlarge.elasticsearch" | "c5.4xlarge.elasticsearch" | "c5.9xlarge.elasticsearch" | "c5.18xlarge.elasticsearch" | "ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch" | "t2.micro.elasticsearch" | "t2.small.elasticsearch" | "t2.medium.elasticsearch" | "r3.large.elasticsearch" | "r3.xlarge.elasticsearch" | "r3.2xlarge.elasticsearch" | "r3.4xlarge.elasticsearch" | "r3.8xlarge.elasticsearch" | "i2.xlarge.elasticsearch" | "i2.2xlarge.elasticsearch" | "d2.xlarge.elasticsearch" | "d2.2xlarge.elasticsearch" | "d2.4xlarge.elasticsearch" | "d2.8xlarge.elasticsearch" | "c4.large.elasticsearch" | "c4.xlarge.elasticsearch" | "c4.2xlarge.elasticsearch" | "c4.4xlarge.elasticsearch" | "c4.8xlarge.elasticsearch" | "r4.large.elasticsearch" | "r4.xlarge.elasticsearch" | "r4.2xlarge.elasticsearch" | "r4.4xlarge.elasticsearch" | "r4.8xlarge.elasticsearch" | "r4.16xlarge.elasticsearch" | "i3.large.elasticsearch" | "i3.xlarge.elasticsearch" | "i3.2xlarge.elasticsearch" | "i3.4xlarge.elasticsearch" | "i3.8xlarge.elasticsearch" | "i3.16xlarge.elasticsearch")?,
-                                                  dedicated_master_count: ::Integer?,
-                                                  warm_enabled: bool?,
-                                                  warm_type: ("ultrawarm1.medium.elasticsearch" | "ultrawarm1.large.elasticsearch")?,
-                                                  warm_count: ::Integer?,
-                                                  cold_storage_options: {
-                                                    enabled: bool
-                                                  }?
-                                                },
+                                                ?elasticsearch_cluster_config: Params::elasticsearch_cluster_config,
                                                 ?ebs_options: {
                                                   ebs_enabled: bool?,
                                                   volume_type: ("standard" | "gp2" | "io1" | "gp3")?,
@@ -803,28 +743,7 @@ module Aws
                                                   custom_endpoint: ::String?,
                                                   custom_endpoint_certificate_arn: ::String?
                                                 },
-                                                ?advanced_security_options: {
-                                                  enabled: bool?,
-                                                  internal_user_database_enabled: bool?,
-                                                  master_user_options: {
-                                                    master_user_arn: ::String?,
-                                                    master_user_name: ::String?,
-                                                    master_user_password: ::String?
-                                                  }?,
-                                                  saml_options: {
-                                                    enabled: bool?,
-                                                    idp: {
-                                                      metadata_content: ::String,
-                                                      entity_id: ::String
-                                                    }?,
-                                                    master_user_name: ::String?,
-                                                    master_backend_role: ::String?,
-                                                    subject_key: ::String?,
-                                                    roles_key: ::String?,
-                                                    session_timeout_minutes: ::Integer?
-                                                  }?,
-                                                  anonymous_auth_enabled: bool?
-                                                },
+                                                ?advanced_security_options: Params::advanced_security_options_input,
                                                 ?node_to_node_encryption_options: {
                                                   enabled: bool?
                                                 },
@@ -836,14 +755,7 @@ module Aws
                                                   desired_state: ("ENABLED" | "DISABLED")?,
                                                   rollback_on_disable: ("NO_ROLLBACK" | "DEFAULT_ROLLBACK")?,
                                                   maintenance_schedules: Array[
-                                                    {
-                                                      start_at: ::Time?,
-                                                      duration: {
-                                                        value: ::Integer?,
-                                                        unit: ("HOURS")?
-                                                      }?,
-                                                      cron_expression_for_recurrence: ::String?
-                                                    },
+                                                    Params::auto_tune_maintenance_schedule
                                                   ]?
                                                 },
                                                 ?dry_run: bool,

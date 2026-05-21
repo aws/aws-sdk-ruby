@@ -1,0 +1,83 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module VPCLattice
+    module Params
+      type http_match = {
+      method: ::String?,
+      path_match: {
+        match: {
+          exact: ::String?,
+          prefix: ::String?
+        },
+        case_sensitive: bool?
+      }?,
+      header_matches: Array[
+        Params::header_match
+      ]?
+    }
+
+      type rule_match = {
+      http_match: Params::http_match?
+    }
+
+      type header_match = {
+      name: ::String,
+      match: {
+        exact: ::String?,
+        prefix: ::String?,
+        contains: ::String?
+      },
+      case_sensitive: bool?
+    }
+
+      type rule_action = {
+      forward: {
+        target_groups: Array[
+          {
+            target_group_identifier: ::String,
+            weight: ::Integer?
+          }
+        ]
+      }?,
+      fixed_response: {
+        status_code: ::Integer
+      }?
+    }
+
+      type resource_configuration_definition = {
+      dns_resource: {
+        domain_name: ::String?,
+        ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")?
+      }?,
+      ip_resource: {
+        ip_address: ::String?
+      }?,
+      arn_resource: {
+        arn: ::String?
+      }?
+    }
+
+      type health_check_config = {
+      enabled: bool?,
+      protocol: ("HTTP" | "HTTPS" | "TCP")?,
+      protocol_version: ("HTTP1" | "HTTP2")?,
+      port: ::Integer?,
+      path: ::String?,
+      health_check_interval_seconds: ::Integer?,
+      health_check_timeout_seconds: ::Integer?,
+      healthy_threshold_count: ::Integer?,
+      unhealthy_threshold_count: ::Integer?,
+      matcher: {
+        http_code: ::String?
+      }?
+    }
+
+    end
+  end
+end

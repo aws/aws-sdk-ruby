@@ -92,7 +92,7 @@ module Aws
                                       {
                                         key: ("description" | "name" | "tag-key" | "tag-value" | "primary-region" | "owning-service" | "all")?,
                                         values: Array[::String]?
-                                      },
+                                      }
                                     ],
                                     ?max_results: ::Integer,
                                     ?next_token: ::String
@@ -130,13 +130,13 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ],
                            ?add_replica_regions: Array[
                              {
                                region: ::String?,
                                kms_key_id: ::String?
-                             },
+                             }
                            ],
                            ?force_overwrite_replica_secret: bool,
                            ?type: ::String
@@ -275,7 +275,7 @@ module Aws
                             {
                               key: ("description" | "name" | "tag-key" | "tag-value" | "primary-region" | "owning-service" | "all")?,
                               values: Array[::String]?
-                            },
+                            }
                           ],
                           ?sort_order: ("asc" | "desc"),
                           ?sort_by: ("created-date" | "last-accessed-date" | "last-changed-date" | "name")
@@ -337,7 +337,7 @@ module Aws
                                            {
                                              region: ::String?,
                                              kms_key_id: ::String?
-                                           },
+                                           }
                                          ],
                                          ?force_overwrite_replica_secret: bool
                                        ) -> _ReplicateSecretToRegionsResponseSuccess
@@ -374,7 +374,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ],
                            ?external_secret_rotation_role_arn: ::String,
                            ?rotate_immediately: bool
@@ -398,7 +398,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

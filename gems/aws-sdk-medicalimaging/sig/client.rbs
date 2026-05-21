@@ -298,10 +298,10 @@ module Aws
                                            dicom_study_time: ::String?
                                          }?,
                                          is_primary: bool?
-                                       },
+                                       }
                                      ],
                                      operator: ("EQUAL" | "BETWEEN")
-                                   },
+                                   }
                                  ]?,
                                  sort: {
                                    sort_order: ("ASC" | "DESC"),
@@ -336,7 +336,7 @@ module Aws
                                             study_instance_uid: ::String,
                                             series_instance_uid: ::String?,
                                             metadata_file_path: ::String
-                                          },
+                                          }
                                         ]
                                       }?
                                     }

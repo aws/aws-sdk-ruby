@@ -1,0 +1,479 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DatabaseMigrationService
+    module Params
+      type postgre_sql_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type my_sql_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type oracle_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      asm_server: ::String?,
+      secrets_manager_oracle_asm_secret_id: ::String?,
+      secrets_manager_oracle_asm_access_role_arn: ::String?,
+      secrets_manager_security_db_encryption_secret_id: ::String?,
+      secrets_manager_security_db_encryption_access_role_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type sybase_ase_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      encrypt_password: bool?,
+      certificate_arn: ::String?
+    }
+
+      type microsoft_sql_server_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type maria_db_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type ibm_db_2_luw_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      encryption_algorithm: ::Integer?,
+      security_mechanism: ::Integer?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type ibm_db_2z_os_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      s3_path: ::String?,
+      s3_access_role_arn: ::String?
+    }
+
+      type mongo_db_data_provider_settings = {
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+      certificate_arn: ::String?,
+      auth_type: ("no" | "password")?,
+      auth_source: ::String?,
+      auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?
+    }
+
+      type data_provider_settings = {
+      redshift_settings: {
+        server_name: ::String?,
+        port: ::Integer?,
+        database_name: ::String?,
+        s3_path: ::String?,
+        s3_access_role_arn: ::String?
+      }?,
+      postgre_sql_settings: Params::postgre_sql_data_provider_settings?,
+      my_sql_settings: Params::my_sql_data_provider_settings?,
+      oracle_settings: Params::oracle_data_provider_settings?,
+      sybase_ase_settings: Params::sybase_ase_data_provider_settings?,
+      microsoft_sql_server_settings: Params::microsoft_sql_server_data_provider_settings?,
+      doc_db_settings: {
+        server_name: ::String?,
+        port: ::Integer?,
+        database_name: ::String?,
+        ssl_mode: ("none" | "require" | "verify-ca" | "verify-full")?,
+        certificate_arn: ::String?
+      }?,
+      maria_db_settings: Params::maria_db_data_provider_settings?,
+      ibm_db_2_luw_settings: Params::ibm_db_2_luw_data_provider_settings?,
+      ibm_db_2z_os_settings: Params::ibm_db_2z_os_data_provider_settings?,
+      mongo_db_settings: Params::mongo_db_data_provider_settings?
+    }
+
+      type s3_settings = {
+      service_access_role_arn: ::String?,
+      external_table_definition: ::String?,
+      csv_row_delimiter: ::String?,
+      csv_delimiter: ::String?,
+      bucket_folder: ::String?,
+      bucket_name: ::String?,
+      compression_type: ("none" | "gzip")?,
+      encryption_mode: ("sse-s3" | "sse-kms")?,
+      server_side_encryption_kms_key_id: ::String?,
+      data_format: ("csv" | "parquet")?,
+      encoding_type: ("plain" | "plain-dictionary" | "rle-dictionary")?,
+      dict_page_size_limit: ::Integer?,
+      row_group_length: ::Integer?,
+      data_page_size: ::Integer?,
+      parquet_version: ("parquet-1-0" | "parquet-2-0")?,
+      enable_statistics: bool?,
+      include_op_for_full_load: bool?,
+      cdc_inserts_only: bool?,
+      timestamp_column_name: ::String?,
+      parquet_timestamp_in_millisecond: bool?,
+      cdc_inserts_and_updates: bool?,
+      date_partition_enabled: bool?,
+      date_partition_sequence: ("YYYYMMDD" | "YYYYMMDDHH" | "YYYYMM" | "MMYYYYDD" | "DDMMYYYY")?,
+      date_partition_delimiter: ("SLASH" | "UNDERSCORE" | "DASH" | "NONE")?,
+      use_csv_no_sup_value: bool?,
+      csv_no_sup_value: ::String?,
+      preserve_transactions: bool?,
+      cdc_path: ::String?,
+      use_task_start_time_for_full_load_timestamp: bool?,
+      canned_acl_for_objects: ("none" | "private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
+      add_column_name: bool?,
+      cdc_max_batch_interval: ::Integer?,
+      cdc_min_file_size: ::Integer?,
+      csv_null_value: ::String?,
+      ignore_header_rows: ::Integer?,
+      max_file_size: ::Integer?,
+      rfc_4180: bool?,
+      date_partition_timezone: ::String?,
+      add_trailing_padding_character: bool?,
+      expected_bucket_owner: ::String?,
+      glue_catalog_generation: bool?
+    }
+
+      type mongo_db_settings = {
+      username: ::String?,
+      password: ::String?,
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      auth_type: ("no" | "password")?,
+      auth_mechanism: ("default" | "mongodb_cr" | "scram_sha_1")?,
+      nesting_level: ("none" | "one")?,
+      extract_doc_id: ::String?,
+      docs_to_investigate: ::String?,
+      auth_source: ::String?,
+      kms_key_id: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      use_update_look_up: bool?,
+      replicate_shard_collections: bool?
+    }
+
+      type kinesis_settings = {
+      stream_arn: ::String?,
+      message_format: ("json" | "json-unformatted")?,
+      service_access_role_arn: ::String?,
+      include_transaction_details: bool?,
+      include_partition_value: bool?,
+      partition_include_schema_table: bool?,
+      include_table_alter_operations: bool?,
+      include_control_details: bool?,
+      include_null_and_empty: bool?,
+      no_hex_prefix: bool?,
+      use_large_integer_value: bool?
+    }
+
+      type kafka_settings = {
+      broker: ::String?,
+      topic: ::String?,
+      message_format: ("json" | "json-unformatted")?,
+      include_transaction_details: bool?,
+      include_partition_value: bool?,
+      partition_include_schema_table: bool?,
+      include_table_alter_operations: bool?,
+      include_control_details: bool?,
+      message_max_bytes: ::Integer?,
+      include_null_and_empty: bool?,
+      security_protocol: ("plaintext" | "ssl-authentication" | "ssl-encryption" | "sasl-ssl")?,
+      ssl_client_certificate_arn: ::String?,
+      ssl_client_key_arn: ::String?,
+      ssl_client_key_password: ::String?,
+      ssl_ca_certificate_arn: ::String?,
+      sasl_username: ::String?,
+      sasl_password: ::String?,
+      no_hex_prefix: bool?,
+      sasl_mechanism: ("scram-sha-512" | "plain")?,
+      ssl_endpoint_identification_algorithm: ("none" | "https")?,
+      use_large_integer_value: bool?
+    }
+
+      type neptune_settings = {
+      service_access_role_arn: ::String?,
+      s3_bucket_name: ::String,
+      s3_bucket_folder: ::String,
+      error_retry_duration: ::Integer?,
+      max_file_size: ::Integer?,
+      max_retry_count: ::Integer?,
+      iam_auth_enabled: bool?
+    }
+
+      type redshift_settings = {
+      accept_any_date: bool?,
+      after_connect_script: ::String?,
+      bucket_folder: ::String?,
+      bucket_name: ::String?,
+      case_sensitive_names: bool?,
+      comp_update: bool?,
+      connection_timeout: ::Integer?,
+      database_name: ::String?,
+      date_format: ::String?,
+      empty_as_null: bool?,
+      encryption_mode: ("sse-s3" | "sse-kms")?,
+      explicit_ids: bool?,
+      file_transfer_upload_streams: ::Integer?,
+      load_timeout: ::Integer?,
+      max_file_size: ::Integer?,
+      password: ::String?,
+      port: ::Integer?,
+      remove_quotes: bool?,
+      replace_invalid_chars: ::String?,
+      replace_chars: ::String?,
+      server_name: ::String?,
+      service_access_role_arn: ::String?,
+      server_side_encryption_kms_key_id: ::String?,
+      time_format: ::String?,
+      trim_blanks: bool?,
+      truncate_columns: bool?,
+      username: ::String?,
+      write_buffer_size: ::Integer?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      map_boolean_as_boolean: bool?
+    }
+
+      type postgre_sql_settings = {
+      after_connect_script: ::String?,
+      capture_ddls: bool?,
+      max_file_size: ::Integer?,
+      database_name: ::String?,
+      ddl_artifacts_schema: ::String?,
+      execute_timeout: ::Integer?,
+      fail_tasks_on_lob_truncation: bool?,
+      heartbeat_enable: bool?,
+      heartbeat_schema: ::String?,
+      heartbeat_frequency: ::Integer?,
+      password: ::String?,
+      port: ::Integer?,
+      server_name: ::String?,
+      username: ::String?,
+      slot_name: ::String?,
+      plugin_name: ("no-preference" | "test-decoding" | "pglogical")?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      trim_space_in_char: bool?,
+      map_boolean_as_boolean: bool?,
+      map_jsonb_as_clob: bool?,
+      map_long_varchar_as: ("wstring" | "clob" | "nclob")?,
+      database_mode: ("default" | "babelfish")?,
+      babelfish_database_name: ::String?,
+      disable_unicode_source_filter: bool?,
+      service_access_role_arn: ::String?,
+      authentication_method: ("password" | "iam")?
+    }
+
+      type my_sql_settings = {
+      after_connect_script: ::String?,
+      clean_source_metadata_on_mismatch: bool?,
+      database_name: ::String?,
+      events_poll_interval: ::Integer?,
+      target_db_type: ("specific-database" | "multiple-databases")?,
+      max_file_size: ::Integer?,
+      parallel_load_threads: ::Integer?,
+      password: ::String?,
+      port: ::Integer?,
+      server_name: ::String?,
+      server_timezone: ::String?,
+      username: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      execute_timeout: ::Integer?,
+      service_access_role_arn: ::String?,
+      authentication_method: ("password" | "iam")?
+    }
+
+      type oracle_settings = {
+      add_supplemental_logging: bool?,
+      archived_log_dest_id: ::Integer?,
+      additional_archived_log_dest_id: ::Integer?,
+      extra_archived_log_dest_ids: Array[::Integer]?,
+      allow_select_nested_tables: bool?,
+      parallel_asm_read_threads: ::Integer?,
+      read_ahead_blocks: ::Integer?,
+      access_alternate_directly: bool?,
+      use_alternate_folder_for_online: bool?,
+      oracle_path_prefix: ::String?,
+      use_path_prefix: ::String?,
+      replace_path_prefix: bool?,
+      enable_homogenous_tablespace: bool?,
+      direct_path_no_log: bool?,
+      archived_logs_only: bool?,
+      asm_password: ::String?,
+      asm_server: ::String?,
+      asm_user: ::String?,
+      char_length_semantics: ("default" | "char" | "byte")?,
+      database_name: ::String?,
+      direct_path_parallel_load: bool?,
+      fail_tasks_on_lob_truncation: bool?,
+      number_datatype_scale: ::Integer?,
+      password: ::String?,
+      port: ::Integer?,
+      read_table_space_name: bool?,
+      retry_interval: ::Integer?,
+      security_db_encryption: ::String?,
+      security_db_encryption_name: ::String?,
+      server_name: ::String?,
+      spatial_data_option_to_geo_json_function_name: ::String?,
+      standby_delay_time: ::Integer?,
+      username: ::String?,
+      use_b_file: bool?,
+      use_direct_path_full_load: bool?,
+      use_logminer_reader: bool?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      secrets_manager_oracle_asm_access_role_arn: ::String?,
+      secrets_manager_oracle_asm_secret_id: ::String?,
+      trim_space_in_char: bool?,
+      convert_timestamp_with_zone_to_utc: bool?,
+      open_transaction_window: ::Integer?,
+      authentication_method: ("password" | "kerberos")?
+    }
+
+      type sybase_settings = {
+      database_name: ::String?,
+      password: ::String?,
+      port: ::Integer?,
+      server_name: ::String?,
+      username: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?
+    }
+
+      type microsoft_sql_server_settings = {
+      port: ::Integer?,
+      bcp_packet_size: ::Integer?,
+      database_name: ::String?,
+      control_tables_file_group: ::String?,
+      password: ::String?,
+      query_single_always_on_node: bool?,
+      read_backup_only: bool?,
+      safeguard_policy: ("rely-on-sql-server-replication-agent" | "exclusive-automatic-truncation" | "shared-automatic-truncation")?,
+      server_name: ::String?,
+      username: ::String?,
+      use_bcp_full_load: bool?,
+      use_third_party_backup_device: bool?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      trim_space_in_char: bool?,
+      tlog_access_mode: ("BackupOnly" | "PreferBackup" | "PreferTlog" | "TlogOnly")?,
+      force_lob_lookup: bool?,
+      authentication_method: ("password" | "kerberos")?
+    }
+
+      type ibm_db_2_settings = {
+      database_name: ::String?,
+      password: ::String?,
+      port: ::Integer?,
+      server_name: ::String?,
+      set_data_capture_changes: bool?,
+      current_lsn: ::String?,
+      max_k_bytes_per_read: ::Integer?,
+      username: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      load_timeout: ::Integer?,
+      write_buffer_size: ::Integer?,
+      max_file_size: ::Integer?,
+      keep_csv_files: bool?
+    }
+
+      type doc_db_settings = {
+      username: ::String?,
+      password: ::String?,
+      server_name: ::String?,
+      port: ::Integer?,
+      database_name: ::String?,
+      nesting_level: ("none" | "one")?,
+      extract_doc_id: bool?,
+      docs_to_investigate: ::Integer?,
+      kms_key_id: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?,
+      use_update_look_up: bool?,
+      replicate_shard_collections: bool?
+    }
+
+      type redis_settings = {
+      server_name: ::String,
+      port: ::Integer,
+      ssl_security_protocol: ("plaintext" | "ssl-encryption")?,
+      auth_type: ("none" | "auth-role" | "auth-token")?,
+      auth_user_name: ::String?,
+      auth_password: ::String?,
+      ssl_ca_certificate_arn: ::String?
+    }
+
+      type gcp_my_sql_settings = {
+      after_connect_script: ::String?,
+      clean_source_metadata_on_mismatch: bool?,
+      database_name: ::String?,
+      events_poll_interval: ::Integer?,
+      target_db_type: ("specific-database" | "multiple-databases")?,
+      max_file_size: ::Integer?,
+      parallel_load_threads: ::Integer?,
+      password: ::String?,
+      port: ::Integer?,
+      server_name: ::String?,
+      server_timezone: ::String?,
+      username: ::String?,
+      secrets_manager_access_role_arn: ::String?,
+      secrets_manager_secret_id: ::String?
+    }
+
+      type compute_config = {
+      availability_zone: ::String?,
+      dns_name_servers: ::String?,
+      kms_key_id: ::String?,
+      max_capacity_units: ::Integer?,
+      min_capacity_units: ::Integer?,
+      multi_az: bool?,
+      preferred_maintenance_window: ::String?,
+      replication_subnet_group_id: ::String?,
+      vpc_security_group_ids: Array[::String]?
+    }
+
+    end
+  end
+end

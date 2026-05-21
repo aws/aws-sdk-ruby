@@ -1,0 +1,166 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatchLogs
+    module Params
+      type destination_configuration = {
+      s3_configuration: {
+        destination_identifier: ::String,
+        role_arn: ::String,
+        owner_account_id: ::String?,
+        kms_key_id: ::String?
+      }
+    }
+
+      type date_time_converter = {
+      source: ::String,
+      target: ::String,
+      target_format: ::String?,
+      match_patterns: Array[::String],
+      source_timezone: ::String?,
+      target_timezone: ::String?,
+      locale: ::String?
+    }
+
+      type list_to_map = {
+      source: ::String,
+      key: ::String,
+      value_key: ::String?,
+      target: ::String?,
+      flatten: bool?,
+      flattened_element: ("first" | "last")?
+    }
+
+      type parse_key_value = {
+      source: ::String?,
+      destination: ::String?,
+      field_delimiter: ::String?,
+      key_value_delimiter: ::String?,
+      key_prefix: ::String?,
+      non_match_value: ::String?,
+      overwrite_if_exists: bool?
+    }
+
+      type processor = {
+      add_keys: {
+        entries: Array[
+          {
+            key: ::String,
+            value: ::String,
+            overwrite_if_exists: bool?
+          }
+        ]
+      }?,
+      copy_value: {
+        entries: Array[
+          {
+            source: ::String,
+            target: ::String,
+            overwrite_if_exists: bool?
+          }
+        ]
+      }?,
+      csv: {
+        quote_character: ::String?,
+        delimiter: ::String?,
+        columns: Array[::String]?,
+        source: ::String?,
+        destination: ::String?
+      }?,
+      date_time_converter: Params::date_time_converter?,
+      delete_keys: {
+        with_keys: Array[::String]
+      }?,
+      grok: {
+        source: ::String?,
+        match: ::String
+      }?,
+      list_to_map: Params::list_to_map?,
+      lower_case_string: {
+        with_keys: Array[::String]
+      }?,
+      move_keys: {
+        entries: Array[
+          {
+            source: ::String,
+            target: ::String,
+            overwrite_if_exists: bool?
+          }
+        ]
+      }?,
+      parse_cloudfront: {
+        source: ::String?
+      }?,
+      parse_json: {
+        source: ::String?,
+        destination: ::String?
+      }?,
+      parse_key_value: Params::parse_key_value?,
+      parse_route_53: {
+        source: ::String?
+      }?,
+      parse_to_ocsf: {
+        source: ::String?,
+        event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF"),
+        ocsf_version: ("V1.1" | "V1.5"),
+        mapping_version: ::String?
+      }?,
+      parse_postgres: {
+        source: ::String?
+      }?,
+      parse_vpc: {
+        source: ::String?
+      }?,
+      parse_waf: {
+        source: ::String?
+      }?,
+      rename_keys: {
+        entries: Array[
+          {
+            key: ::String,
+            rename_to: ::String,
+            overwrite_if_exists: bool?
+          }
+        ]
+      }?,
+      split_string: {
+        entries: Array[
+          {
+            source: ::String,
+            delimiter: ::String
+          }
+        ]
+      }?,
+      substitute_string: {
+        entries: Array[
+          {
+            source: ::String,
+            from: ::String,
+            to: ::String
+          }
+        ]
+      }?,
+      trim_string: {
+        with_keys: Array[::String]
+      }?,
+      type_converter: {
+        entries: Array[
+          {
+            key: ::String,
+            type: ("boolean" | "integer" | "double" | "string")
+          }
+        ]
+      }?,
+      upper_case_string: {
+        with_keys: Array[::String]
+      }?
+    }
+
+    end
+  end
+end

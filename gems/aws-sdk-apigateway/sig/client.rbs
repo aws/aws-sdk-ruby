@@ -102,7 +102,7 @@ module Aws
                               {
                                 rest_api_id: ::String?,
                                 stage_name: ::String?
-                              },
+                              }
                             ],
                             ?customer_id: ::String,
                             ?tags: Hash[::String, ::String]
@@ -441,7 +441,7 @@ module Aws
                                        burst_limit: ::Integer?,
                                        rate_limit: ::Float?
                                      }]?
-                                 },
+                                 }
                                ],
                                ?throttle: {
                                  burst_limit: ::Integer?,
@@ -1712,7 +1712,7 @@ module Aws
                                 path: ::String?,
                                 value: ::String?,
                                 from: ::String?
-                              },
+                              }
                             ]
                           ) -> _UpdateAccountResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountResponseSuccess
@@ -1739,7 +1739,7 @@ module Aws
                                 path: ::String?,
                                 value: ::String?,
                                 from: ::String?
-                              },
+                              }
                             ]
                           ) -> _UpdateApiKeyResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateApiKeyResponseSuccess
@@ -1767,7 +1767,7 @@ module Aws
                                    path: ::String?,
                                    value: ::String?,
                                    from: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _UpdateAuthorizerResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAuthorizerResponseSuccess
@@ -1789,7 +1789,7 @@ module Aws
                                           path: ::String?,
                                           value: ::String?,
                                           from: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateBasePathMappingResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBasePathMappingResponseSuccess
@@ -1812,7 +1812,7 @@ module Aws
                                            path: ::String?,
                                            value: ::String?,
                                            from: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _UpdateClientCertificateResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateClientCertificateResponseSuccess
@@ -1834,7 +1834,7 @@ module Aws
                                    path: ::String?,
                                    value: ::String?,
                                    from: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _UpdateDeploymentResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDeploymentResponseSuccess
@@ -1855,7 +1855,7 @@ module Aws
                                            path: ::String?,
                                            value: ::String?,
                                            from: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _UpdateDocumentationPartResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentationPartResponseSuccess
@@ -1876,7 +1876,7 @@ module Aws
                                               path: ::String?,
                                               value: ::String?,
                                               from: ::String?
-                                            },
+                                            }
                                           ]
                                         ) -> _UpdateDocumentationVersionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDocumentationVersionResponseSuccess
@@ -1917,7 +1917,7 @@ module Aws
                                     path: ::String?,
                                     value: ::String?,
                                     from: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _UpdateDomainNameResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainNameResponseSuccess
@@ -1940,7 +1940,7 @@ module Aws
                                          path: ::String?,
                                          value: ::String?,
                                          from: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _UpdateGatewayResponseResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayResponseResponseSuccess
@@ -1976,7 +1976,7 @@ module Aws
                                     path: ::String?,
                                     value: ::String?,
                                     from: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _UpdateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
@@ -2001,7 +2001,7 @@ module Aws
                                              path: ::String?,
                                              value: ::String?,
                                              from: ::String?
-                                           },
+                                           }
                                          ]
                                        ) -> _UpdateIntegrationResponseResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseResponseSuccess
@@ -2031,7 +2031,7 @@ module Aws
                                path: ::String?,
                                value: ::String?,
                                from: ::String?
-                             },
+                             }
                            ]
                          ) -> _UpdateMethodResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMethodResponseSuccess
@@ -2054,7 +2054,7 @@ module Aws
                                         path: ::String?,
                                         value: ::String?,
                                         from: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _UpdateMethodResponseResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMethodResponseResponseSuccess
@@ -2077,7 +2077,7 @@ module Aws
                               path: ::String?,
                               value: ::String?,
                               from: ::String?
-                            },
+                            }
                           ]
                         ) -> _UpdateModelResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateModelResponseSuccess
@@ -2099,7 +2099,7 @@ module Aws
                                           path: ::String?,
                                           value: ::String?,
                                           from: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateRequestValidatorResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRequestValidatorResponseSuccess
@@ -2122,7 +2122,7 @@ module Aws
                                  path: ::String?,
                                  value: ::String?,
                                  from: ::String?
-                               },
+                               }
                              ]
                            ) -> _UpdateResourceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourceResponseSuccess
@@ -2157,7 +2157,7 @@ module Aws
                                  path: ::String?,
                                  value: ::String?,
                                  from: ::String?
-                               },
+                               }
                              ]
                            ) -> _UpdateRestApiResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRestApiResponseSuccess
@@ -2192,7 +2192,7 @@ module Aws
                               path: ::String?,
                               value: ::String?,
                               from: ::String?
-                            },
+                            }
                           ]
                         ) -> _UpdateStageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateStageResponseSuccess
@@ -2215,7 +2215,7 @@ module Aws
                               path: ::String?,
                               value: ::String?,
                               from: ::String?
-                            },
+                            }
                           ]
                         ) -> _UpdateUsageResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUsageResponseSuccess
@@ -2240,7 +2240,7 @@ module Aws
                                    path: ::String?,
                                    value: ::String?,
                                    from: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _UpdateUsagePlanResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUsagePlanResponseSuccess
@@ -2264,7 +2264,7 @@ module Aws
                                  path: ::String?,
                                  value: ::String?,
                                  from: ::String?
-                               },
+                               }
                              ]
                            ) -> _UpdateVpcLinkResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVpcLinkResponseSuccess

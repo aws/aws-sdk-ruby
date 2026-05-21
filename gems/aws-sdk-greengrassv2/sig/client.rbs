@@ -97,7 +97,7 @@ module Aws
                                                             ?entries: Array[
                                                               {
                                                                 thing_name: ::String
-                                                              },
+                                                              }
                                                             ],
                                                             core_device_thing_name: ::String
                                                           ) -> _BatchAssociateClientDeviceWithCoreDeviceResponseSuccess
@@ -112,7 +112,7 @@ module Aws
                                                                ?entries: Array[
                                                                  {
                                                                    thing_name: ::String
-                                                                 },
+                                                                 }
                                                                ],
                                                                core_device_thing_name: ::String
                                                              ) -> _BatchDisassociateClientDeviceFromCoreDeviceResponseSuccess
@@ -147,7 +147,7 @@ module Aws
                                           {
                                             name: ::String?,
                                             attributes: Hash[::String, ::String]?
-                                          },
+                                          }
                                         ]?,
                                         component_dependencies: Hash[::String, {
                                             version_requirement: ::String?,
@@ -158,7 +158,7 @@ module Aws
                                             {
                                               topic: ::String,
                                               type: ("PUB_SUB" | "IOT_CORE")
-                                            },
+                                            }
                                           ]?,
                                           max_queue_size: ::Integer?,
                                           max_instances_count: ::Integer?,
@@ -180,14 +180,14 @@ module Aws
                                                   destination_path: ::String,
                                                   permission: ("ro" | "rw")?,
                                                   add_group_owner: bool?
-                                                },
+                                                }
                                               ]?,
                                               devices: Array[
                                                 {
                                                   path: ::String,
                                                   permission: ("ro" | "rw")?,
                                                   add_group_owner: bool?
-                                                },
+                                                }
                                               ]?
                                             }?
                                           }?
@@ -242,7 +242,7 @@ module Aws
                                        action: ("CANCEL"),
                                        threshold_percentage: ::Float,
                                        min_number_of_executed_things: ::Integer
-                                     },
+                                     }
                                    ]
                                  }?,
                                  timeout_config: {
@@ -518,7 +518,7 @@ module Aws
                                               component_name: ::String?,
                                               component_version: ::String?,
                                               version_requirements: Hash[::String, ::String]?
-                                            },
+                                            }
                                           ]
                                         ) -> _ResolveComponentCandidatesResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResolveComponentCandidatesResponseSuccess
@@ -557,7 +557,7 @@ module Aws
                                           host_address: ::String?,
                                           port_number: ::Integer?,
                                           metadata: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateConnectivityInfoResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectivityInfoResponseSuccess

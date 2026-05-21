@@ -102,19 +102,19 @@ module Aws
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               slurmdbd_custom_settings: Array[
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               cgroup_custom_settings: Array[
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
@@ -152,7 +152,7 @@ module Aws
                                        instance_configs: Array[
                                          {
                                            instance_type: ::String?
-                                         },
+                                         }
                                        ],
                                        ?spot_options: {
                                          allocation_strategy: ("lowest-price" | "capacity-optimized" | "price-capacity-optimized")?
@@ -162,7 +162,7 @@ module Aws
                                            {
                                              parameter_name: ::String,
                                              parameter_value: ::String
-                                           },
+                                           }
                                          ]?
                                        },
                                        ?client_token: ::String,
@@ -181,14 +181,14 @@ module Aws
                           ?compute_node_group_configurations: Array[
                             {
                               compute_node_group_id: ::String?
-                            },
+                            }
                           ],
                           ?slurm_configuration: {
                             slurm_custom_settings: Array[
                               {
                                 parameter_name: ::String,
                                 parameter_value: ::String
-                              },
+                              }
                             ]?
                           },
                           ?client_token: ::String,
@@ -355,19 +355,19 @@ module Aws
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               slurmdbd_custom_settings: Array[
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               cgroup_custom_settings: Array[
                                 {
                                   parameter_name: ::String,
                                   parameter_value: ::String
-                                },
+                                }
                               ]?,
                               accounting: {
                                 default_purge_time_in_days: ::Integer?,
@@ -408,7 +408,7 @@ module Aws
                                            {
                                              parameter_name: ::String,
                                              parameter_value: ::String
-                                           },
+                                           }
                                          ]?
                                        },
                                        ?client_token: ::String
@@ -426,14 +426,14 @@ module Aws
                           ?compute_node_group_configurations: Array[
                             {
                               compute_node_group_id: ::String?
-                            },
+                            }
                           ],
                           ?slurm_configuration: {
                             slurm_custom_settings: Array[
                               {
                                 parameter_name: ::String,
                                 parameter_value: ::String
-                              },
+                              }
                             ]?
                           },
                           ?client_token: ::String

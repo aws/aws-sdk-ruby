@@ -1,0 +1,2140 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Glue
+    module Params
+      type schema_reference = {
+      schema_id: {
+        schema_arn: ::String?,
+        schema_name: ::String?,
+        registry_name: ::String?
+      }?,
+      schema_version_id: ::String?,
+      schema_version_number: ::Integer?
+    }
+
+      type storage_descriptor = {
+      columns: Array[
+        {
+          name: ::String,
+          type: ::String?,
+          comment: ::String?,
+          parameters: Hash[::String, ::String]?
+        }
+      ]?,
+      location: ::String?,
+      additional_locations: Array[::String]?,
+      input_format: ::String?,
+      output_format: ::String?,
+      compressed: bool?,
+      number_of_buckets: ::Integer?,
+      serde_info: {
+        name: ::String?,
+        serialization_library: ::String?,
+        parameters: Hash[::String, ::String]?
+      }?,
+      bucket_columns: Array[::String]?,
+      sort_columns: Array[
+        {
+          column: ::String,
+          sort_order: ::Integer
+        }
+      ]?,
+      parameters: Hash[::String, ::String]?,
+      skewed_info: {
+        skewed_column_names: Array[::String]?,
+        skewed_column_values: Array[::String]?,
+        skewed_column_value_location_maps: Hash[::String, ::String]?
+      }?,
+      stored_as_sub_directories: bool?,
+      schema_reference: Params::schema_reference?
+    }
+
+      type partition_input = {
+      values: Array[::String]?,
+      last_access_time: ::Time?,
+      storage_descriptor: Params::storage_descriptor?,
+      parameters: Hash[::String, ::String]?,
+      last_analyzed_time: ::Time?
+    }
+
+      type catalog_properties = {
+      data_lake_access_properties: {
+        data_lake_access: bool?,
+        data_transfer_role: ::String?,
+        kms_key: ::String?,
+        catalog_type: ::String?
+      }?,
+      iceberg_optimization_properties: {
+        role_arn: ::String?,
+        compaction: Hash[::String, ::String]?,
+        retention: Hash[::String, ::String]?,
+        orphan_file_deletion: Hash[::String, ::String]?
+      }?,
+      custom_properties: Hash[::String, ::String]?
+    }
+
+      type catalog_input = {
+      description: ::String?,
+      federated_catalog: {
+        identifier: ::String?,
+        connection_name: ::String?,
+        connection_type: ::String?
+      }?,
+      parameters: Hash[::String, ::String]?,
+      target_redshift_catalog: {
+        catalog_arn: ::String
+      }?,
+      catalog_properties: Params::catalog_properties?,
+      create_table_default_permissions: Array[
+        {
+          principal: {
+            data_lake_principal_identifier: ::String?
+          }?,
+          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]?
+        }
+      ]?,
+      create_database_default_permissions: Array[
+        {
+          principal: {
+            data_lake_principal_identifier: ::String?
+          }?,
+          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]?
+        }
+      ]?,
+      allow_full_table_external_data_access: ("True" | "False")?,
+      overwrite_child_resource_permissions_with_default: ("Accept" | "Deny")?
+    }
+
+      type o_auth_2_properties_input = {
+      o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")?,
+      o_auth_2_client_application: {
+        user_managed_client_application_client_id: ::String?,
+        aws_managed_client_application_reference: ::String?
+      }?,
+      token_url: ::String?,
+      token_url_parameters_map: Hash[::String, ::String]?,
+      authorization_code_properties: {
+        authorization_code: ::String?,
+        redirect_uri: ::String?
+      }?,
+      o_auth_2_credentials: {
+        user_managed_client_application_client_secret: ::String?,
+        access_token: ::String?,
+        refresh_token: ::String?,
+        jwt_token: ::String?
+      }?
+    }
+
+      type authentication_configuration_input = {
+      authentication_type: ("BASIC" | "OAUTH2" | "CUSTOM" | "IAM")?,
+      o_auth_2_properties: Params::o_auth_2_properties_input?,
+      secret_arn: ::String?,
+      kms_key_arn: ::String?,
+      basic_authentication_credentials: {
+        username: ::String?,
+        password: ::String?
+      }?,
+      custom_authentication_credentials: Hash[::String, ::String]?
+    }
+
+      type connection_input = {
+      name: ::String,
+      description: ::String?,
+      connection_type: ("JDBC" | "SFTP" | "MONGODB" | "KAFKA" | "NETWORK" | "MARKETPLACE" | "CUSTOM" | "SALESFORCE" | "VIEW_VALIDATION_REDSHIFT" | "VIEW_VALIDATION_ATHENA" | "GOOGLEADS" | "GOOGLESHEETS" | "GOOGLEANALYTICS4" | "SERVICENOW" | "MARKETO" | "SAPODATA" | "ZENDESK" | "JIRACLOUD" | "NETSUITEERP" | "HUBSPOT" | "FACEBOOKADS" | "INSTAGRAMADS" | "ZOHOCRM" | "SALESFORCEPARDOT" | "SALESFORCEMARKETINGCLOUD" | "ADOBEANALYTICS" | "SLACK" | "LINKEDIN" | "MIXPANEL" | "ASANA" | "STRIPE" | "SMARTSHEET" | "DATADOG" | "WOOCOMMERCE" | "INTERCOM" | "SNAPCHATADS" | "PAYPAL" | "QUICKBOOKS" | "FACEBOOKPAGEINSIGHTS" | "FRESHDESK" | "TWILIO" | "DOCUSIGNMONITOR" | "FRESHSALES" | "ZOOM" | "GOOGLESEARCHCONSOLE" | "SALESFORCECOMMERCECLOUD" | "SAPCONCUR" | "DYNATRACE" | "MICROSOFTDYNAMIC365FINANCEANDOPS" | "MICROSOFTTEAMS" | "BLACKBAUDRAISEREDGENXT" | "MAILCHIMP" | "GITLAB" | "PENDO" | "PRODUCTBOARD" | "CIRCLECI" | "PIPEDIVE" | "SENDGRID" | "AZURECOSMOS" | "AZURESQL" | "BIGQUERY" | "BLACKBAUD" | "CLOUDERAHIVE" | "CLOUDERAIMPALA" | "CLOUDWATCH" | "CLOUDWATCHMETRICS" | "CMDB" | "DATALAKEGEN2" | "DB2" | "DB2AS400" | "DOCUMENTDB" | "DOMO" | "DYNAMODB" | "GOOGLECLOUDSTORAGE" | "HBASE" | "KUSTOMER" | "MICROSOFTDYNAMICS365CRM" | "MONDAY" | "MYSQL" | "OKTA" | "OPENSEARCH" | "ORACLE" | "PIPEDRIVE" | "POSTGRESQL" | "SAPHANA" | "SQLSERVER" | "SYNAPSE" | "TERADATA" | "TERADATANOS" | "TIMESTREAM" | "TPCDS" | "VERTICA"),
+      match_criteria: Array[::String]?,
+      connection_properties: Hash[("HOST" | "PORT" | "USERNAME" | "PASSWORD" | "ENCRYPTED_PASSWORD" | "JDBC_DRIVER_JAR_URI" | "JDBC_DRIVER_CLASS_NAME" | "JDBC_ENGINE" | "JDBC_ENGINE_VERSION" | "CONFIG_FILES" | "INSTANCE_ID" | "JDBC_CONNECTION_URL" | "JDBC_ENFORCE_SSL" | "CUSTOM_JDBC_CERT" | "SKIP_CUSTOM_JDBC_CERT_VALIDATION" | "CUSTOM_JDBC_CERT_STRING" | "CONNECTION_URL" | "KAFKA_BOOTSTRAP_SERVERS" | "KAFKA_SSL_ENABLED" | "KAFKA_CUSTOM_CERT" | "KAFKA_SKIP_CUSTOM_CERT_VALIDATION" | "KAFKA_CLIENT_KEYSTORE" | "KAFKA_CLIENT_KEYSTORE_PASSWORD" | "KAFKA_CLIENT_KEY_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD" | "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD" | "KAFKA_SASL_MECHANISM" | "KAFKA_SASL_PLAIN_USERNAME" | "KAFKA_SASL_PLAIN_PASSWORD" | "ENCRYPTED_KAFKA_SASL_PLAIN_PASSWORD" | "KAFKA_SASL_SCRAM_USERNAME" | "KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_SCRAM_SECRETS_ARN" | "ENCRYPTED_KAFKA_SASL_SCRAM_PASSWORD" | "KAFKA_SASL_GSSAPI_KEYTAB" | "KAFKA_SASL_GSSAPI_KRB5_CONF" | "KAFKA_SASL_GSSAPI_SERVICE" | "KAFKA_SASL_GSSAPI_PRINCIPAL" | "SECRET_ID" | "CONNECTOR_URL" | "CONNECTOR_TYPE" | "CONNECTOR_CLASS_NAME" | "ENDPOINT" | "ENDPOINT_TYPE" | "ROLE_ARN" | "REGION" | "WORKGROUP_NAME" | "CLUSTER_IDENTIFIER" | "DATABASE"), ::String],
+      spark_properties: Hash[::String, ::String]?,
+      athena_properties: Hash[::String, ::String]?,
+      python_properties: Hash[::String, ::String]?,
+      physical_connection_requirements: {
+        subnet_id: ::String?,
+        security_group_id_list: Array[::String]?,
+        availability_zone: ::String?
+      }?,
+      authentication_configuration: Params::authentication_configuration_input?,
+      validate_credentials: bool?,
+      validate_for_compute_environments: Array[("SPARK" | "ATHENA" | "PYTHON")]?
+    }
+
+      type crawler_targets = {
+      s3_targets: Array[
+        Params::s3_target
+      ]?,
+      jdbc_targets: Array[
+        {
+          connection_name: ::String?,
+          path: ::String?,
+          exclusions: Array[::String]?,
+          enable_additional_metadata: Array[("COMMENTS" | "RAWTYPES")]?
+        }
+      ]?,
+      mongo_db_targets: Array[
+        {
+          connection_name: ::String?,
+          path: ::String?,
+          scan_all: bool?
+        }
+      ]?,
+      dynamo_db_targets: Array[
+        {
+          path: ::String?,
+          scan_all: bool?,
+          scan_rate: ::Float?
+        }
+      ]?,
+      catalog_targets: Array[
+        {
+          database_name: ::String,
+          tables: Array[::String],
+          connection_name: ::String?,
+          event_queue_arn: ::String?,
+          dlq_event_queue_arn: ::String?
+        }
+      ]?,
+      delta_targets: Array[
+        {
+          delta_tables: Array[::String]?,
+          connection_name: ::String?,
+          write_manifest: bool?,
+          create_native_delta_table: bool?
+        }
+      ]?,
+      iceberg_targets: Array[
+        {
+          paths: Array[::String]?,
+          connection_name: ::String?,
+          exclusions: Array[::String]?,
+          maximum_traversal_depth: ::Integer?
+        }
+      ]?,
+      hudi_targets: Array[
+        {
+          paths: Array[::String]?,
+          connection_name: ::String?,
+          exclusions: Array[::String]?,
+          maximum_traversal_depth: ::Integer?
+        }
+      ]?
+    }
+
+      type s3_target = {
+      path: ::String?,
+      exclusions: Array[::String]?,
+      connection_name: ::String?,
+      sample_size: ::Integer?,
+      event_queue_arn: ::String?,
+      dlq_event_queue_arn: ::String?
+    }
+
+      type database_input = {
+      name: ::String,
+      description: ::String?,
+      location_uri: ::String?,
+      parameters: Hash[::String, ::String]?,
+      create_table_default_permissions: Array[
+        {
+          principal: {
+            data_lake_principal_identifier: ::String?
+          }?,
+          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS")]?
+        }
+      ]?,
+      target_database: {
+        catalog_id: ::String?,
+        database_name: ::String?,
+        region: ::String?
+      }?,
+      federated_database: {
+        identifier: ::String?,
+        connection_name: ::String?,
+        connection_type: ::String?
+      }?
+    }
+
+      type target_table_config = {
+      unnest_spec: ("TOPLEVEL" | "FULL" | "NOUNNEST")?,
+      partition_spec: Array[
+        {
+          field_name: ::String?,
+          function_spec: ::String?,
+          conversion_spec: ::String?
+        }
+      ]?,
+      target_table_name: ::String?
+    }
+
+      type athena_connector_source = {
+      name: ::String,
+      connection_name: ::String,
+      connector_name: ::String,
+      connection_type: ::String,
+      connection_table: ::String?,
+      schema_name: ::String,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type jdbc_connector_options = {
+      filter_predicate: ::String?,
+      partition_column: ::String?,
+      lower_bound: ::Integer?,
+      upper_bound: ::Integer?,
+      num_partitions: ::Integer?,
+      job_bookmark_keys: Array[::String]?,
+      job_bookmark_keys_sort_order: ::String?,
+      data_type_mapping: Hash[("ARRAY" | "BIGINT" | "BINARY" | "BIT" | "BLOB" | "BOOLEAN" | "CHAR" | "CLOB" | "DATALINK" | "DATE" | "DECIMAL" | "DISTINCT" | "DOUBLE" | "FLOAT" | "INTEGER" | "JAVA_OBJECT" | "LONGNVARCHAR" | "LONGVARBINARY" | "LONGVARCHAR" | "NCHAR" | "NCLOB" | "NULL" | "NUMERIC" | "NVARCHAR" | "OTHER" | "REAL" | "REF" | "REF_CURSOR" | "ROWID" | "SMALLINT" | "SQLXML" | "STRUCT" | "TIME" | "TIME_WITH_TIMEZONE" | "TIMESTAMP" | "TIMESTAMP_WITH_TIMEZONE" | "TINYINT" | "VARBINARY" | "VARCHAR"), ("DATE" | "STRING" | "TIMESTAMP" | "INT" | "FLOAT" | "LONG" | "BIGDECIMAL" | "BYTE" | "SHORT" | "DOUBLE")]?
+    }
+
+      type jdbc_connector_source = {
+      name: ::String,
+      connection_name: ::String,
+      connector_name: ::String,
+      connection_type: ::String,
+      additional_options: Params::jdbc_connector_options?,
+      connection_table: ::String?,
+      query: ::String?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type spark_connector_source = {
+      name: ::String,
+      connection_name: ::String,
+      connector_name: ::String,
+      connection_type: ::String,
+      additional_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type catalog_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      partition_predicate: ::String?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_catalog_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      partition_predicate: ::String?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?
+      }?
+    }
+
+      type s3_csv_source = {
+      name: ::String,
+      paths: Array[::String],
+      compression_type: ("gzip" | "bzip2")?,
+      exclusions: Array[::String]?,
+      group_size: ::String?,
+      group_files: ::String?,
+      recurse: bool?,
+      max_band: ::Integer?,
+      max_files_in_band: ::Integer?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      separator: ("comma" | "ctrla" | "pipe" | "semicolon" | "tab"),
+      escaper: ::String?,
+      quote_char: ("quote" | "quillemet" | "single_quote" | "disabled"),
+      multiline: bool?,
+      with_header: bool?,
+      write_header: bool?,
+      skip_first: bool?,
+      optimize_performance: bool?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_json_source = {
+      name: ::String,
+      paths: Array[::String],
+      compression_type: ("gzip" | "bzip2")?,
+      exclusions: Array[::String]?,
+      group_size: ::String?,
+      group_files: ::String?,
+      recurse: bool?,
+      max_band: ::Integer?,
+      max_files_in_band: ::Integer?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      json_path: ::String?,
+      multiline: bool?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_parquet_source = {
+      name: ::String,
+      paths: Array[::String],
+      compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+      exclusions: Array[::String]?,
+      group_size: ::String?,
+      group_files: ::String?,
+      recurse: bool?,
+      max_band: ::Integer?,
+      max_files_in_band: ::Integer?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type dynamo_db_catalog_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      pitr_enabled: bool?,
+      additional_options: {
+        dynamodb_export: ::String?,
+        dynamodb_unnest_ddb_json: bool?
+      }?
+    }
+
+      type jdbc_connector_target = {
+      name: ::String,
+      inputs: Array[::String],
+      connection_name: ::String,
+      connection_table: ::String,
+      connector_name: ::String,
+      connection_type: ::String,
+      additional_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type spark_connector_target = {
+      name: ::String,
+      inputs: Array[::String],
+      connection_name: ::String,
+      connector_name: ::String,
+      connection_type: ::String,
+      additional_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type redshift_target = {
+      name: ::String,
+      inputs: Array[::String],
+      database: ::String,
+      table: ::String,
+      redshift_tmp_dir: ::String?,
+      tmp_dir_iam_role: ::String?,
+      upsert_redshift_options: {
+        table_location: ::String?,
+        connection_name: ::String?,
+        upsert_keys: Array[::String]?
+      }?
+    }
+
+      type s3_catalog_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      table: ::String,
+      database: ::String,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?
+    }
+
+      type s3_glue_parquet_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      path: ::String,
+      compression: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+      number_target_partitions: ::String?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?
+    }
+
+      type s3_direct_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      path: ::String,
+      compression: ::String?,
+      number_target_partitions: ::String?,
+      format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type apply_mapping = {
+      name: ::String,
+      inputs: Array[::String],
+      mapping: Array[
+        Params::mapping
+      ]
+    }
+
+      type join = {
+      name: ::String,
+      inputs: Array[::String],
+      join_type: ("equijoin" | "left" | "right" | "outer" | "leftsemi" | "leftanti"),
+      columns: Array[
+        {
+          from: ::String,
+          keys: Array[
+            Array[::String]
+          ]
+        }
+      ]
+    }
+
+      type filter = {
+      name: ::String,
+      inputs: Array[::String],
+      logical_operator: ("AND" | "OR"),
+      filters: Array[
+        Params::filter_expression
+      ]
+    }
+
+      type custom_code = {
+      name: ::String,
+      inputs: Array[::String],
+      code: ::String,
+      class_name: ::String,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type spark_sql = {
+      name: ::String,
+      inputs: Array[::String],
+      sql_query: ::String,
+      sql_aliases: Array[
+        {
+          from: ::String,
+          alias: ::String
+        }
+      ],
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type kinesis_streaming_source_options = {
+      endpoint_url: ::String?,
+      stream_name: ::String?,
+      classification: ::String?,
+      delimiter: ::String?,
+      starting_position: ("latest" | "trim_horizon" | "earliest" | "timestamp")?,
+      max_fetch_time_in_ms: ::Integer?,
+      max_fetch_records_per_shard: ::Integer?,
+      max_record_per_read: ::Integer?,
+      add_idle_time_between_reads: bool?,
+      idle_time_between_reads_in_ms: ::Integer?,
+      describe_shard_interval: ::Integer?,
+      num_retries: ::Integer?,
+      retry_interval_ms: ::Integer?,
+      max_retry_interval_ms: ::Integer?,
+      avoid_empty_batches: bool?,
+      stream_arn: ::String?,
+      role_arn: ::String?,
+      role_session_name: ::String?,
+      add_record_timestamp: ::String?,
+      emit_consumer_lag_metrics: ::String?,
+      starting_timestamp: ::Time?,
+      fanout_consumer_arn: ::String?
+    }
+
+      type direct_kinesis_source = {
+      name: ::String,
+      window_size: ::Integer?,
+      detect_schema: bool?,
+      streaming_options: Params::kinesis_streaming_source_options?,
+      data_preview_options: {
+        polling_time: ::Integer?,
+        record_polling_limit: ::Integer?
+      }?
+    }
+
+      type kafka_streaming_source_options = {
+      bootstrap_servers: ::String?,
+      security_protocol: ::String?,
+      connection_name: ::String?,
+      topic_name: ::String?,
+      assign: ::String?,
+      subscribe_pattern: ::String?,
+      classification: ::String?,
+      delimiter: ::String?,
+      starting_offsets: ::String?,
+      ending_offsets: ::String?,
+      poll_timeout_ms: ::Integer?,
+      num_retries: ::Integer?,
+      retry_interval_ms: ::Integer?,
+      max_offsets_per_trigger: ::Integer?,
+      min_partitions: ::Integer?,
+      include_headers: bool?,
+      add_record_timestamp: ::String?,
+      emit_consumer_lag_metrics: ::String?,
+      starting_timestamp: ::Time?
+    }
+
+      type direct_kafka_source = {
+      name: ::String,
+      streaming_options: Params::kafka_streaming_source_options?,
+      window_size: ::Integer?,
+      detect_schema: bool?,
+      data_preview_options: {
+        polling_time: ::Integer?,
+        record_polling_limit: ::Integer?
+      }?
+    }
+
+      type catalog_kinesis_source = {
+      name: ::String,
+      window_size: ::Integer?,
+      detect_schema: bool?,
+      table: ::String,
+      database: ::String,
+      streaming_options: Params::kinesis_streaming_source_options?,
+      data_preview_options: {
+        polling_time: ::Integer?,
+        record_polling_limit: ::Integer?
+      }?
+    }
+
+      type catalog_kafka_source = {
+      name: ::String,
+      window_size: ::Integer?,
+      detect_schema: bool?,
+      table: ::String,
+      database: ::String,
+      streaming_options: Params::kafka_streaming_source_options?,
+      data_preview_options: {
+        polling_time: ::Integer?,
+        record_polling_limit: ::Integer?
+      }?
+    }
+
+      type drop_null_fields = {
+      name: ::String,
+      inputs: Array[::String],
+      null_check_box_list: {
+        is_empty: bool?,
+        is_null_string: bool?,
+        is_neg_one: bool?
+      }?,
+      null_text_list: Array[
+        {
+          value: ::String,
+          datatype: {
+            id: ::String,
+            label: ::String
+          }
+        }
+      ]?
+    }
+
+      type pii_detection = {
+      name: ::String,
+      inputs: Array[::String],
+      pii_type: ("RowAudit" | "RowHashing" | "RowMasking" | "RowPartialMasking" | "ColumnAudit" | "ColumnHashing" | "ColumnMasking"),
+      entity_types_to_detect: Array[::String],
+      output_column_name: ::String?,
+      sample_fraction: ::Float?,
+      threshold_fraction: ::Float?,
+      mask_value: ::String?,
+      redact_text: ::String?,
+      redact_char: ::String?,
+      match_pattern: ::String?,
+      num_left_chars_to_exclude: ::Integer?,
+      num_right_chars_to_exclude: ::Integer?,
+      detection_parameters: ::String?,
+      detection_sensitivity: ::String?
+    }
+
+      type aggregate = {
+      name: ::String,
+      inputs: Array[::String],
+      groups: Array[
+        Array[::String]
+      ],
+      aggs: Array[
+        {
+          column: Array[::String],
+          agg_func: ("avg" | "countDistinct" | "count" | "first" | "last" | "kurtosis" | "max" | "min" | "skewness" | "stddev_samp" | "stddev_pop" | "sum" | "sumDistinct" | "var_samp" | "var_pop")
+        }
+      ]
+    }
+
+      type governed_catalog_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      table: ::String,
+      database: ::String,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+      }?
+    }
+
+      type governed_catalog_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      partition_predicate: ::String?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?
+      }?
+    }
+
+      type route = {
+      name: ::String,
+      inputs: Array[::String],
+      group_filters_list: Array[
+        Params::group_filters
+      ]
+    }
+
+      type dynamic_transform = {
+      name: ::String,
+      transform_name: ::String,
+      inputs: Array[::String],
+      parameters: Array[
+        Params::transform_config_parameter
+      ]?,
+      function_name: ::String,
+      path: ::String,
+      version: ::String?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type evaluate_data_quality = {
+      name: ::String,
+      inputs: Array[::String],
+      ruleset: ::String,
+      output: ("PrimaryInput" | "EvaluationResults")?,
+      publishing_options: {
+        evaluation_context: ::String?,
+        results_s3_prefix: ::String?,
+        cloud_watch_metrics_enabled: bool?,
+        results_publishing_enabled: bool?
+      }?,
+      stop_job_on_failure_options: {
+        stop_job_on_failure_timing: ("Immediate" | "AfterDataLoad")?
+      }?
+    }
+
+      type s3_catalog_hudi_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_hudi_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type catalog_hudi_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_hudi_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_hudi_source = {
+      name: ::String,
+      paths: Array[::String],
+      additional_hudi_options: Hash[::String, ::String]?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_hudi_catalog_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      table: ::String,
+      database: ::String,
+      additional_options: Hash[::String, ::String],
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_hudi_direct_target = {
+      name: ::String,
+      inputs: Array[::String],
+      path: ::String,
+      compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+      number_target_partitions: ::String?,
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+      additional_options: Hash[::String, ::String],
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?
+    }
+
+      type direct_jdbc_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      connection_name: ::String,
+      connection_type: ("sqlserver" | "mysql" | "oracle" | "postgresql" | "redshift"),
+      redshift_tmp_dir: ::String?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_catalog_delta_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_delta_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type catalog_delta_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_delta_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_delta_source = {
+      name: ::String,
+      paths: Array[::String],
+      additional_delta_options: Hash[::String, ::String]?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_delta_catalog_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      table: ::String,
+      database: ::String,
+      additional_options: Hash[::String, ::String]?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_delta_direct_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      path: ::String,
+      compression: ("uncompressed" | "snappy"),
+      number_target_partitions: ::String?,
+      format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+      additional_options: Hash[::String, ::String]?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?
+    }
+
+      type amazon_redshift_node_data = {
+      access_type: ::String?,
+      source_type: ::String?,
+      connection: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      schema: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      table: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      catalog_database: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      catalog_table: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      catalog_redshift_schema: ::String?,
+      catalog_redshift_table: ::String?,
+      temp_dir: ::String?,
+      iam_role: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      advanced_options: Array[
+        {
+          key: ::String?,
+          value: ::String?
+        }
+      ]?,
+      sample_query: ::String?,
+      pre_action: ::String?,
+      post_action: ::String?,
+      action: ::String?,
+      table_prefix: ::String?,
+      upsert: bool?,
+      merge_action: ::String?,
+      merge_when_matched: ::String?,
+      merge_when_not_matched: ::String?,
+      merge_clause: ::String?,
+      crawler_connection: ::String?,
+      table_schema: Array[
+        {
+          value: ::String?,
+          label: ::String?,
+          description: ::String?
+        }
+      ]?,
+      staging_table: ::String?,
+      selected_columns: Array[
+        {
+          value: ::String?,
+          label: ::String?,
+          description: ::String?
+        }
+      ]?
+    }
+
+      type amazon_redshift_source = {
+      name: ::String?,
+      data: Params::amazon_redshift_node_data?
+    }
+
+      type amazon_redshift_target = {
+      name: ::String?,
+      data: Params::amazon_redshift_node_data?,
+      inputs: Array[::String]?
+    }
+
+      type evaluate_data_quality_multi_frame = {
+      name: ::String,
+      inputs: Array[::String],
+      additional_data_sources: Hash[::String, ::String]?,
+      ruleset: ::String,
+      publishing_options: {
+        evaluation_context: ::String?,
+        results_s3_prefix: ::String?,
+        cloud_watch_metrics_enabled: bool?,
+        results_publishing_enabled: bool?
+      }?,
+      additional_options: Hash[("performanceTuning.caching" | "observations.scope" | "compositeRuleEvaluation.method"), ::String]?,
+      stop_job_on_failure_options: {
+        stop_job_on_failure_timing: ("Immediate" | "AfterDataLoad")?
+      }?
+    }
+
+      type recipe = {
+      name: ::String,
+      inputs: Array[::String],
+      recipe_reference: {
+        recipe_arn: ::String,
+        recipe_version: ::String
+      }?,
+      recipe_steps: Array[
+        Params::recipe_step
+      ]?
+    }
+
+      type snowflake_node_data = {
+      source_type: ::String?,
+      connection: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      schema: ::String?,
+      table: ::String?,
+      database: ::String?,
+      temp_dir: ::String?,
+      iam_role: {
+        value: ::String?,
+        label: ::String?,
+        description: ::String?
+      }?,
+      additional_options: Hash[::String, ::String]?,
+      sample_query: ::String?,
+      pre_action: ::String?,
+      post_action: ::String?,
+      action: ::String?,
+      upsert: bool?,
+      merge_action: ::String?,
+      merge_when_matched: ::String?,
+      merge_when_not_matched: ::String?,
+      merge_clause: ::String?,
+      staging_table: ::String?,
+      selected_columns: Array[
+        {
+          value: ::String?,
+          label: ::String?,
+          description: ::String?
+        }
+      ]?,
+      auto_pushdown: bool?,
+      table_schema: Array[
+        {
+          value: ::String?,
+          label: ::String?,
+          description: ::String?
+        }
+      ]?
+    }
+
+      type snowflake_source = {
+      name: ::String,
+      data: Params::snowflake_node_data,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type snowflake_target = {
+      name: ::String,
+      data: Params::snowflake_node_data,
+      inputs: Array[::String]?
+    }
+
+      type connector_data_source = {
+      name: ::String,
+      connection_type: ::String,
+      data: Hash[::String, ::String],
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_catalog_iceberg_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_iceberg_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type catalog_iceberg_source = {
+      name: ::String,
+      database: ::String,
+      table: ::String,
+      additional_iceberg_options: Hash[::String, ::String]?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_iceberg_catalog_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      table: ::String,
+      database: ::String,
+      additional_options: Hash[::String, ::String]?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?
+    }
+
+      type s3_iceberg_direct_target = {
+      name: ::String,
+      inputs: Array[::String],
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      path: ::String,
+      format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml"),
+      additional_options: Hash[::String, ::String]?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?,
+      compression: ("gzip" | "lzo" | "uncompressed" | "snappy"),
+      number_target_partitions: ::String?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_excel_source = {
+      name: ::String,
+      paths: Array[::String],
+      compression_type: ("snappy" | "lzo" | "gzip" | "brotli" | "lz4" | "uncompressed" | "none")?,
+      exclusions: Array[::String]?,
+      group_size: ::String?,
+      group_files: ::String?,
+      recurse: bool?,
+      max_band: ::Integer?,
+      max_files_in_band: ::Integer?,
+      additional_options: {
+        bounded_size: ::Integer?,
+        bounded_files: ::Integer?,
+        enable_sample_path: bool?,
+        sample_path: ::String?
+      }?,
+      number_rows: ::Integer?,
+      skip_footer: ::Integer?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type s3_hyper_direct_target = {
+      name: ::String,
+      inputs: Array[::String],
+      format: ("json" | "csv" | "avro" | "orc" | "parquet" | "hudi" | "delta" | "iceberg" | "hyper" | "xml")?,
+      partition_keys: Array[
+        Array[::String]
+      ]?,
+      path: ::String,
+      compression: ("uncompressed")?,
+      schema_change_policy: {
+        enable_update_catalog: bool?,
+        update_behavior: ("UPDATE_IN_DATABASE" | "LOG")?,
+        table: ::String?,
+        database: ::String?
+      }?,
+      auto_data_quality: {
+        is_enabled: bool?,
+        evaluation_context: ::String?
+      }?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type ddbelt_connection_options = {
+      dynamodb_export: ("ddb" | "s3")?,
+      dynamodb_unnest_ddb_json: bool?,
+      dynamodb_table_arn: ::String,
+      dynamodb_s3_bucket: ::String?,
+      dynamodb_s3_prefix: ::String?,
+      dynamodb_s3_bucket_owner: ::String?,
+      dynamodb_sts_role_arn: ::String?
+    }
+
+      type dynamo_dbelt_connector_source = {
+      name: ::String,
+      connection_options: Params::ddbelt_connection_options?,
+      output_schemas: Array[
+        {
+          columns: Array[
+            {
+              name: ::String,
+              type: ::String?,
+              glue_studio_type: ::String?
+            }
+          ]?
+        }
+      ]?
+    }
+
+      type code_gen_configuration_node = {
+      athena_connector_source: Params::athena_connector_source?,
+      jdbc_connector_source: Params::jdbc_connector_source?,
+      spark_connector_source: Params::spark_connector_source?,
+      catalog_source: Params::catalog_source?,
+      redshift_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String,
+        redshift_tmp_dir: ::String?,
+        tmp_dir_iam_role: ::String?
+      }?,
+      s3_catalog_source: Params::s3_catalog_source?,
+      s3_csv_source: Params::s3_csv_source?,
+      s3_json_source: Params::s3_json_source?,
+      s3_parquet_source: Params::s3_parquet_source?,
+      relational_catalog_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String
+      }?,
+      dynamo_db_catalog_source: Params::dynamo_db_catalog_source?,
+      jdbc_connector_target: Params::jdbc_connector_target?,
+      spark_connector_target: Params::spark_connector_target?,
+      catalog_target: {
+        name: ::String,
+        inputs: Array[::String],
+        partition_keys: Array[
+          Array[::String]
+        ]?,
+        database: ::String,
+        table: ::String
+      }?,
+      redshift_target: Params::redshift_target?,
+      s3_catalog_target: Params::s3_catalog_target?,
+      s3_glue_parquet_target: Params::s3_glue_parquet_target?,
+      s3_direct_target: Params::s3_direct_target?,
+      apply_mapping: Params::apply_mapping?,
+      select_fields: {
+        name: ::String,
+        inputs: Array[::String],
+        paths: Array[
+          Array[::String]
+        ]
+      }?,
+      drop_fields: {
+        name: ::String,
+        inputs: Array[::String],
+        paths: Array[
+          Array[::String]
+        ]
+      }?,
+      rename_field: {
+        name: ::String,
+        inputs: Array[::String],
+        source_path: Array[::String],
+        target_path: Array[::String]
+      }?,
+      spigot: {
+        name: ::String,
+        inputs: Array[::String],
+        path: ::String,
+        topk: ::Integer?,
+        prob: ::Float?
+      }?,
+      join: Params::join?,
+      split_fields: {
+        name: ::String,
+        inputs: Array[::String],
+        paths: Array[
+          Array[::String]
+        ]
+      }?,
+      select_from_collection: {
+        name: ::String,
+        inputs: Array[::String],
+        index: ::Integer
+      }?,
+      fill_missing_values: {
+        name: ::String,
+        inputs: Array[::String],
+        imputed_path: ::String,
+        filled_path: ::String?
+      }?,
+      filter: Params::filter?,
+      custom_code: Params::custom_code?,
+      spark_sql: Params::spark_sql?,
+      direct_kinesis_source: Params::direct_kinesis_source?,
+      direct_kafka_source: Params::direct_kafka_source?,
+      catalog_kinesis_source: Params::catalog_kinesis_source?,
+      catalog_kafka_source: Params::catalog_kafka_source?,
+      drop_null_fields: Params::drop_null_fields?,
+      merge: {
+        name: ::String,
+        inputs: Array[::String],
+        source: ::String,
+        primary_keys: Array[
+          Array[::String]
+        ]
+      }?,
+      union: {
+        name: ::String,
+        inputs: Array[::String],
+        union_type: ("ALL" | "DISTINCT")
+      }?,
+      pii_detection: Params::pii_detection?,
+      aggregate: Params::aggregate?,
+      drop_duplicates: {
+        name: ::String,
+        inputs: Array[::String],
+        columns: Array[
+          Array[::String]
+        ]?
+      }?,
+      governed_catalog_target: Params::governed_catalog_target?,
+      governed_catalog_source: Params::governed_catalog_source?,
+      microsoft_sql_server_catalog_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String
+      }?,
+      my_sql_catalog_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String
+      }?,
+      oracle_sql_catalog_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String
+      }?,
+      postgre_sql_catalog_source: {
+        name: ::String,
+        database: ::String,
+        table: ::String
+      }?,
+      microsoft_sql_server_catalog_target: {
+        name: ::String,
+        inputs: Array[::String],
+        database: ::String,
+        table: ::String
+      }?,
+      my_sql_catalog_target: {
+        name: ::String,
+        inputs: Array[::String],
+        database: ::String,
+        table: ::String
+      }?,
+      oracle_sql_catalog_target: {
+        name: ::String,
+        inputs: Array[::String],
+        database: ::String,
+        table: ::String
+      }?,
+      postgre_sql_catalog_target: {
+        name: ::String,
+        inputs: Array[::String],
+        database: ::String,
+        table: ::String
+      }?,
+      route: Params::route?,
+      dynamic_transform: Params::dynamic_transform?,
+      evaluate_data_quality: Params::evaluate_data_quality?,
+      s3_catalog_hudi_source: Params::s3_catalog_hudi_source?,
+      catalog_hudi_source: Params::catalog_hudi_source?,
+      s3_hudi_source: Params::s3_hudi_source?,
+      s3_hudi_catalog_target: Params::s3_hudi_catalog_target?,
+      s3_hudi_direct_target: Params::s3_hudi_direct_target?,
+      direct_jdbc_source: Params::direct_jdbc_source?,
+      s3_catalog_delta_source: Params::s3_catalog_delta_source?,
+      catalog_delta_source: Params::catalog_delta_source?,
+      s3_delta_source: Params::s3_delta_source?,
+      s3_delta_catalog_target: Params::s3_delta_catalog_target?,
+      s3_delta_direct_target: Params::s3_delta_direct_target?,
+      amazon_redshift_source: Params::amazon_redshift_source?,
+      amazon_redshift_target: Params::amazon_redshift_target?,
+      evaluate_data_quality_multi_frame: Params::evaluate_data_quality_multi_frame?,
+      recipe: Params::recipe?,
+      snowflake_source: Params::snowflake_source?,
+      snowflake_target: Params::snowflake_target?,
+      connector_data_source: Params::connector_data_source?,
+      connector_data_target: {
+        name: ::String,
+        connection_type: ::String,
+        data: Hash[::String, ::String],
+        inputs: Array[::String]?
+      }?,
+      s3_catalog_iceberg_source: Params::s3_catalog_iceberg_source?,
+      catalog_iceberg_source: Params::catalog_iceberg_source?,
+      s3_iceberg_catalog_target: Params::s3_iceberg_catalog_target?,
+      s3_iceberg_direct_target: Params::s3_iceberg_direct_target?,
+      s3_excel_source: Params::s3_excel_source?,
+      s3_hyper_direct_target: Params::s3_hyper_direct_target?,
+      dynamo_dbelt_connector_source: Params::dynamo_dbelt_connector_source?
+    }
+
+      type mapping = {
+      to_key: ::String?,
+      from_path: Array[::String]?,
+      from_type: ::String?,
+      to_type: ::String?,
+      dropped: bool?,
+      children: Array[
+        {
+          to_key: ::String?,
+          from_path: Array[::String]?,
+          from_type: ::String?,
+          to_type: ::String?,
+          dropped: bool?,
+          children: untyped?
+        }
+      ]?
+    }
+
+      type filter_expression = {
+      operation: ("EQ" | "LT" | "GT" | "LTE" | "GTE" | "REGEX" | "ISNULL"),
+      negated: bool?,
+      values: Array[
+        {
+          type: ("COLUMNEXTRACTED" | "CONSTANT"),
+          value: Array[::String]
+        }
+      ]
+    }
+
+      type group_filters = {
+      group_name: ::String,
+      filters: Array[
+        Params::filter_expression
+      ],
+      logical_operator: ("AND" | "OR")
+    }
+
+      type transform_config_parameter = {
+      name: ::String,
+      type: ("str" | "int" | "float" | "complex" | "bool" | "list" | "null"),
+      validation_rule: ::String?,
+      validation_message: ::String?,
+      value: Array[::String]?,
+      list_type: ("str" | "int" | "float" | "complex" | "bool" | "list" | "null")?,
+      is_optional: bool?
+    }
+
+      type recipe_step = {
+      action: {
+        operation: ::String,
+        parameters: Hash[::String, ::String]?
+      },
+      condition_expressions: Array[
+        {
+          condition: ::String,
+          value: ::String?,
+          target_column: ::String
+        }
+      ]?
+    }
+
+      type source_control_details = {
+      provider: ("GITHUB" | "GITLAB" | "BITBUCKET" | "AWS_CODE_COMMIT")?,
+      repository: ::String?,
+      owner: ::String?,
+      branch: ::String?,
+      folder: ::String?,
+      last_commit_id: ::String?,
+      auth_strategy: ("PERSONAL_ACCESS_TOKEN" | "AWS_SECRETS_MANAGER")?,
+      auth_token: ::String?
+    }
+
+      type transform_parameters = {
+      transform_type: ("FIND_MATCHES"),
+      find_matches_parameters: {
+        primary_key_column_name: ::String?,
+        precision_recall_tradeoff: ::Float?,
+        accuracy_cost_tradeoff: ::Float?,
+        enforce_provided_labels: bool?
+      }?
+    }
+
+      type view_definition_input = {
+      is_protected: bool?,
+      definer: ::String?,
+      representations: Array[
+        {
+          dialect: ("REDSHIFT" | "ATHENA" | "SPARK")?,
+          dialect_version: ::String?,
+          view_original_text: ::String?,
+          validation_connection: ::String?,
+          view_expanded_text: ::String?
+        }
+      ]?,
+      view_version_id: ::Integer?,
+      view_version_token: ::String?,
+      refresh_seconds: ::Integer?,
+      last_refresh_type: ("FULL" | "INCREMENTAL")?,
+      sub_objects: Array[::String]?,
+      sub_object_version_ids: Array[::Integer]?
+    }
+
+      type table_input = {
+      name: ::String,
+      description: ::String?,
+      owner: ::String?,
+      last_access_time: ::Time?,
+      last_analyzed_time: ::Time?,
+      retention: ::Integer?,
+      storage_descriptor: Params::storage_descriptor?,
+      partition_keys: Array[
+        {
+          name: ::String,
+          type: ::String?,
+          comment: ::String?,
+          parameters: Hash[::String, ::String]?
+        }
+      ]?,
+      view_original_text: ::String?,
+      view_expanded_text: ::String?,
+      table_type: ::String?,
+      parameters: Hash[::String, ::String]?,
+      target_table: {
+        catalog_id: ::String?,
+        database_name: ::String?,
+        name: ::String?,
+        region: ::String?
+      }?,
+      view_definition: Params::view_definition_input?
+    }
+
+      type iceberg_schema = {
+      schema_id: ::Integer?,
+      identifier_field_ids: Array[::Integer]?,
+      type: ("struct")?,
+      fields: Array[
+        Params::iceberg_struct_field
+      ]
+    }
+
+      type iceberg_struct_field = {
+      id: ::Integer,
+      name: ::String,
+      type: {
+      },
+      required: bool,
+      doc: ::String?,
+      initial_default: {
+      }?,
+      write_default: {
+      }?
+    }
+
+      type iceberg_partition_spec = {
+      fields: Array[
+        {
+          source_id: ::Integer,
+          transform: ::String,
+          name: ::String,
+          field_id: ::Integer?
+        }
+      ],
+      spec_id: ::Integer?
+    }
+
+      type iceberg_sort_order = {
+      order_id: ::Integer,
+      fields: Array[
+        {
+          source_id: ::Integer,
+          transform: ::String,
+          direction: ("asc" | "desc"),
+          null_order: ("nulls-first" | "nulls-last")
+        }
+      ]
+    }
+
+      type retention_configuration = {
+      iceberg_configuration: {
+        snapshot_retention_period_in_days: ::Integer?,
+        number_of_snapshots_to_retain: ::Integer?,
+        clean_expired_files: bool?,
+        run_rate_in_hours: ::Integer?
+      }?
+    }
+
+      type table_optimizer_configuration = {
+      role_arn: ::String?,
+      enabled: bool?,
+      vpc_configuration: {
+        glue_connection_name: ::String?
+      }?,
+      compaction_configuration: {
+        iceberg_configuration: {
+          strategy: ("binpack" | "sort" | "z-order")?,
+          min_input_files: ::Integer?,
+          delete_file_threshold: ::Integer?
+        }?
+      }?,
+      retention_configuration: Params::retention_configuration?,
+      orphan_file_deletion_configuration: {
+        iceberg_configuration: {
+          orphan_file_retention_period_in_days: ::Integer?,
+          location: ::String?,
+          run_rate_in_hours: ::Integer?
+        }?
+      }?
+    }
+
+      type predicate = {
+      logical: ("AND" | "ANY")?,
+      conditions: Array[
+        {
+          logical_operator: ("EQUALS")?,
+          job_name: ::String?,
+          state: ("STARTING" | "RUNNING" | "STOPPING" | "STOPPED" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "ERROR" | "WAITING" | "EXPIRED")?,
+          crawler_name: ::String?,
+          crawl_state: ("RUNNING" | "CANCELLING" | "CANCELLED" | "SUCCEEDED" | "FAILED" | "ERROR")?
+        }
+      ]?
+    }
+
+      type action = {
+      job_name: ::String?,
+      arguments: Hash[::String, ::String]?,
+      timeout: ::Integer?,
+      security_configuration: ::String?,
+      notification_property: {
+        notify_delay_after: ::Integer?
+      }?,
+      crawler_name: ::String?
+    }
+
+      type profile_configuration = {
+      session_configuration: Hash[::String, {
+          default_value: ::String?,
+          allowed_values: Array[::String]?,
+          min_value: ::String?,
+          max_value: ::String?
+        }]?,
+      job_configuration: Hash[::String, {
+          default_value: ::String?,
+          allowed_values: Array[::String]?,
+          min_value: ::String?,
+          max_value: ::String?
+        }]?
+    }
+
+      type user_defined_function_input = {
+      function_name: ::String?,
+      class_name: ::String?,
+      owner_name: ::String?,
+      function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")?,
+      owner_type: ("USER" | "ROLE" | "GROUP")?,
+      resource_uris: Array[
+        {
+          resource_type: ("JAR" | "FILE" | "ARCHIVE")?,
+          uri: ::String?
+        }
+      ]?
+    }
+
+      type transform_filter_criteria = {
+      name: ::String?,
+      transform_type: ("FIND_MATCHES")?,
+      status: ("NOT_READY" | "READY" | "DELETING")?,
+      glue_version: ::String?,
+      created_before: ::Time?,
+      created_after: ::Time?,
+      last_modified_before: ::Time?,
+      last_modified_after: ::Time?,
+      schema: Array[
+        {
+          name: ::String?,
+          data_type: ::String?
+        }
+      ]?
+    }
+
+      type location = {
+      jdbc: Array[
+        {
+          name: ::String,
+          value: ::String,
+          param: bool?
+        }
+      ]?,
+      s3: Array[
+        {
+          name: ::String,
+          value: ::String,
+          param: bool?
+        }
+      ]?,
+      dynamo_db: Array[
+        {
+          name: ::String,
+          value: ::String,
+          param: bool?
+        }
+      ]?
+    }
+
+      type data_quality_glue_table = {
+      database_name: ::String,
+      table_name: ::String,
+      catalog_id: ::String?,
+      connection_name: ::String?,
+      additional_options: Hash[::String, ::String]?,
+      pre_processing_query: ::String?
+    }
+
+      type data_source = {
+      glue_table: {
+        database_name: ::String,
+        table_name: ::String,
+        catalog_id: ::String?,
+        connection_name: ::String?,
+        additional_options: Hash[::String, ::String]?
+      }?,
+      data_quality_glue_table: Params::data_quality_glue_table?
+    }
+
+      type connector_property = {
+      name: ::String,
+      key_override: ::String?,
+      required: bool,
+      default_value: ::String?,
+      allowed_values: Array[::String]?,
+      property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+      property_type: ("USER_INPUT" | "SECRET" | "READ_ONLY" | "UNUSED" | "SECRET_OR_USER_INPUT")
+    }
+
+      type extracted_parameter = {
+      key: ::String?,
+      default_value: ::String?,
+      property_location: ("HEADER" | "BODY" | "QUERY_PARAM" | "PATH")?,
+      value: {
+        content_path: ::String?,
+        header_key: ::String?
+      }?
+    }
+
+      type cursor_configuration = {
+      next_page: Params::extracted_parameter,
+      limit_parameter: Params::extracted_parameter?
+    }
+
+      type offset_configuration = {
+      offset_parameter: Params::extracted_parameter,
+      limit_parameter: Params::extracted_parameter
+    }
+
+      type pagination_configuration = {
+      cursor_configuration: Params::cursor_configuration?,
+      offset_configuration: Params::offset_configuration?
+    }
+
+      type source_configuration = {
+      request_method: ("GET" | "POST")?,
+      request_path: ::String?,
+      request_parameters: Array[
+        Params::connector_property
+      ]?,
+      response_configuration: {
+        result_path: ::String,
+        error_path: ::String?
+      }?,
+      pagination_configuration: Params::pagination_configuration?
+    }
+
+      type decimal_column_statistics_data = {
+      minimum_value: {
+        unscaled_value: ::String,
+        scale: ::Integer
+      }?,
+      maximum_value: {
+        unscaled_value: ::String,
+        scale: ::Integer
+      }?,
+      number_of_nulls: ::Integer,
+      number_of_distinct_values: ::Integer
+    }
+
+      type column_statistics_data = {
+      type: ("BOOLEAN" | "DATE" | "DECIMAL" | "DOUBLE" | "LONG" | "STRING" | "BINARY"),
+      boolean_column_statistics_data: {
+        number_of_trues: ::Integer,
+        number_of_falses: ::Integer,
+        number_of_nulls: ::Integer
+      }?,
+      date_column_statistics_data: {
+        minimum_value: ::Time?,
+        maximum_value: ::Time?,
+        number_of_nulls: ::Integer,
+        number_of_distinct_values: ::Integer
+      }?,
+      decimal_column_statistics_data: Params::decimal_column_statistics_data?,
+      double_column_statistics_data: {
+        minimum_value: ::Float?,
+        maximum_value: ::Float?,
+        number_of_nulls: ::Integer,
+        number_of_distinct_values: ::Integer
+      }?,
+      long_column_statistics_data: {
+        minimum_value: ::Integer?,
+        maximum_value: ::Integer?,
+        number_of_nulls: ::Integer,
+        number_of_distinct_values: ::Integer
+      }?,
+      string_column_statistics_data: {
+        maximum_length: ::Integer,
+        average_length: ::Float,
+        number_of_nulls: ::Integer,
+        number_of_distinct_values: ::Integer
+      }?,
+      binary_column_statistics_data: {
+        maximum_length: ::Integer,
+        average_length: ::Float,
+        number_of_nulls: ::Integer
+      }?
+    }
+
+      type column_statistics = {
+      column_name: ::String,
+      column_type: ::String,
+      analyzed_time: ::Time,
+      statistics_data: Params::column_statistics_data
+    }
+
+    end
+  end
+end

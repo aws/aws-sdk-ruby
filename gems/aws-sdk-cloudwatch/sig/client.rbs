@@ -102,48 +102,11 @@ module Aws
                                        {
                                          name: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?stat: ::String,
-                                     ?single_metric_anomaly_detector: {
-                                       account_id: ::String?,
-                                       namespace: ::String?,
-                                       metric_name: ::String?,
-                                       dimensions: Array[
-                                         {
-                                           name: ::String,
-                                           value: ::String
-                                         },
-                                       ]?,
-                                       stat: ::String?
-                                     },
-                                     ?metric_math_anomaly_detector: {
-                                       metric_data_queries: Array[
-                                         {
-                                           id: ::String,
-                                           metric_stat: {
-                                             metric: {
-                                               namespace: ::String?,
-                                               metric_name: ::String?,
-                                               dimensions: Array[
-                                                 {
-                                                   name: ::String,
-                                                   value: ::String
-                                                 },
-                                               ]?
-                                             },
-                                             period: ::Integer,
-                                             stat: ::String,
-                                             unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                           }?,
-                                           expression: ::String?,
-                                           label: ::String?,
-                                           return_data: bool?,
-                                           period: ::Integer?,
-                                           account_id: ::String?
-                                         },
-                                       ]?
-                                     }
+                                     ?single_metric_anomaly_detector: Params::single_metric_anomaly_detector,
+                                     ?metric_math_anomaly_detector: Params::metric_math_anomaly_detector
                                    ) -> _DeleteAnomalyDetectorResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAnomalyDetectorResponseSuccess
 
@@ -240,7 +203,7 @@ module Aws
                                           {
                                             name: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?period: ::Integer,
                                         ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
@@ -262,7 +225,7 @@ module Aws
                                           {
                                             name: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?anomaly_detector_types: Array[("SINGLE_METRIC" | "METRIC_MATH")]
                                       ) -> _DescribeAnomalyDetectorsResponseSuccess
@@ -373,29 +336,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/Client.html#get_metric_data-instance_method
       def get_metric_data: (
                              metric_data_queries: Array[
-                               {
-                                 id: ::String,
-                                 metric_stat: {
-                                   metric: {
-                                     namespace: ::String?,
-                                     metric_name: ::String?,
-                                     dimensions: Array[
-                                       {
-                                         name: ::String,
-                                         value: ::String
-                                       },
-                                     ]?
-                                   },
-                                   period: ::Integer,
-                                   stat: ::String,
-                                   unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                 }?,
-                                 expression: ::String?,
-                                 label: ::String?,
-                                 return_data: bool?,
-                                 period: ::Integer?,
-                                 account_id: ::String?
-                               },
+                               Params::metric_data_query
                              ],
                              start_time: ::Time,
                              end_time: ::Time,
@@ -421,7 +362,7 @@ module Aws
                                      {
                                        name: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    start_time: ::Time,
                                    end_time: ::Time,
@@ -538,7 +479,7 @@ module Aws
                             {
                               name: ::String,
                               value: ::String?
-                            },
+                            }
                           ],
                           ?next_token: ::String,
                           ?recently_active: ("PT3H"),
@@ -575,7 +516,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?start_date: ::Time,
                                  ?expire_date: ::Time
@@ -593,7 +534,7 @@ module Aws
                                     {
                                       name: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?stat: ::String,
                                   ?configuration: {
@@ -601,52 +542,15 @@ module Aws
                                       {
                                         start_time: ::Time,
                                         end_time: ::Time
-                                      },
+                                      }
                                     ]?,
                                     metric_timezone: ::String?
                                   },
                                   ?metric_characteristics: {
                                     periodic_spikes: bool?
                                   },
-                                  ?single_metric_anomaly_detector: {
-                                    account_id: ::String?,
-                                    namespace: ::String?,
-                                    metric_name: ::String?,
-                                    dimensions: Array[
-                                      {
-                                        name: ::String,
-                                        value: ::String
-                                      },
-                                    ]?,
-                                    stat: ::String?
-                                  },
-                                  ?metric_math_anomaly_detector: {
-                                    metric_data_queries: Array[
-                                      {
-                                        id: ::String,
-                                        metric_stat: {
-                                          metric: {
-                                            namespace: ::String?,
-                                            metric_name: ::String?,
-                                            dimensions: Array[
-                                              {
-                                                name: ::String,
-                                                value: ::String
-                                              },
-                                            ]?
-                                          },
-                                          period: ::Integer,
-                                          stat: ::String,
-                                          unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                        }?,
-                                        expression: ::String?,
-                                        label: ::String?,
-                                        return_data: bool?,
-                                        period: ::Integer?,
-                                        account_id: ::String?
-                                      },
-                                    ]?
-                                  }
+                                  ?single_metric_anomaly_detector: Params::single_metric_anomaly_detector,
+                                  ?metric_math_anomaly_detector: Params::metric_math_anomaly_detector
                                 ) -> _PutAnomalyDetectorResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAnomalyDetectorResponseSuccess
 
@@ -663,7 +567,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?actions_suppressor: ::String,
                                  ?actions_suppressor_wait_period: ::Integer,
@@ -683,7 +587,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _PutDashboardResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDashboardResponseSuccess
@@ -700,7 +604,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?apply_on_transformed_logs: bool
                             ) -> _PutInsightRuleResponseSuccess
@@ -720,9 +624,9 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ]?
-                                         },
+                                         }
                                        ]
                                      ) -> _PutManagedInsightRulesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutManagedInsightRulesResponseSuccess
@@ -743,7 +647,7 @@ module Aws
                                 {
                                   name: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?period: ::Integer,
                               ?unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None"),
@@ -754,35 +658,13 @@ module Aws
                               ?treat_missing_data: ::String,
                               ?evaluate_low_sample_count_percentile: ::String,
                               ?metrics: Array[
-                                {
-                                  id: ::String,
-                                  metric_stat: {
-                                    metric: {
-                                      namespace: ::String?,
-                                      metric_name: ::String?,
-                                      dimensions: Array[
-                                        {
-                                          name: ::String,
-                                          value: ::String
-                                        },
-                                      ]?
-                                    },
-                                    period: ::Integer,
-                                    stat: ::String,
-                                    unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                  }?,
-                                  expression: ::String?,
-                                  label: ::String?,
-                                  return_data: bool?,
-                                  period: ::Integer?,
-                                  account_id: ::String?
-                                },
+                                Params::metric_data_query
                               ],
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?threshold_metric_id: ::String,
                               ?evaluation_criteria: {
@@ -800,27 +682,7 @@ module Aws
       def put_metric_data: (
                              namespace: ::String,
                              ?metric_data: Array[
-                               {
-                                 metric_name: ::String,
-                                 dimensions: Array[
-                                   {
-                                     name: ::String,
-                                     value: ::String
-                                   },
-                                 ]?,
-                                 timestamp: ::Time?,
-                                 value: ::Float?,
-                                 statistic_values: {
-                                   sample_count: ::Float,
-                                   sum: ::Float,
-                                   minimum: ::Float,
-                                   maximum: ::Float
-                                 }?,
-                                 values: Array[::Float]?,
-                                 counts: Array[::Float]?,
-                                 unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
-                                 storage_resolution: ::Integer?
-                               },
+                               Params::metric_datum
                              ],
                              ?entity_metric_data: Array[
                                {
@@ -829,29 +691,9 @@ module Aws
                                    attributes: Hash[::String, ::String]?
                                  }?,
                                  metric_data: Array[
-                                   {
-                                     metric_name: ::String,
-                                     dimensions: Array[
-                                       {
-                                         name: ::String,
-                                         value: ::String
-                                       },
-                                     ]?,
-                                     timestamp: ::Time?,
-                                     value: ::Float?,
-                                     statistic_values: {
-                                       sample_count: ::Float,
-                                       sum: ::Float,
-                                       minimum: ::Float,
-                                       maximum: ::Float
-                                     }?,
-                                     values: Array[::Float]?,
-                                     counts: Array[::Float]?,
-                                     unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
-                                     storage_resolution: ::Integer?
-                                   },
+                                   Params::metric_datum
                                  ]?
-                               },
+                               }
                              ],
                              ?strict_entity_validation: bool
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -868,13 +710,13 @@ module Aws
                                  {
                                    namespace: ::String?,
                                    metric_names: Array[::String]?
-                                 },
+                                 }
                                ],
                                ?exclude_filters: Array[
                                  {
                                    namespace: ::String?,
                                    metric_names: Array[::String]?
-                                 },
+                                 }
                                ],
                                firehose_arn: ::String,
                                role_arn: ::String,
@@ -883,7 +725,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?statistics_configurations: Array[
                                  {
@@ -891,10 +733,10 @@ module Aws
                                      {
                                        namespace: ::String,
                                        metric_name: ::String
-                                     },
+                                     }
                                    ],
                                    additional_statistics: Array[::String]
-                                 },
+                                 }
                                ],
                                ?include_linked_accounts_metrics: bool
                              ) -> _PutMetricStreamResponseSuccess
@@ -953,7 +795,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

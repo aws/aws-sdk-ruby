@@ -87,82 +87,13 @@ module Aws
       def create_call_analytics_category: (
                                             category_name: ::String,
                                             rules: Array[
-                                              {
-                                                non_talk_time_filter: {
-                                                  threshold: ::Integer?,
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  negate: bool?
-                                                }?,
-                                                interruption_filter: {
-                                                  threshold: ::Integer?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  negate: bool?
-                                                }?,
-                                                transcript_filter: {
-                                                  transcript_filter_type: ("EXACT"),
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  negate: bool?,
-                                                  targets: Array[::String]
-                                                }?,
-                                                sentiment_filter: {
-                                                  sentiments: Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")],
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  negate: bool?
-                                                }?
-                                              },
+                                              Params::rule
                                             ],
                                             ?tags: Array[
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?input_type: ("REAL_TIME" | "POST_CALL")
                                           ) -> _CreateCallAnalyticsCategoryResponseSuccess
@@ -190,7 +121,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateLanguageModelResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLanguageModelResponseSuccess
@@ -212,7 +143,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateMedicalVocabularyResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMedicalVocabularyResponseSuccess
@@ -235,7 +166,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?data_access_role_arn: ::String
                              ) -> _CreateVocabularyResponseSuccess
@@ -257,7 +188,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?data_access_role_arn: ::String
                                     ) -> _CreateVocabularyFilterResponseSuccess
@@ -604,13 +535,13 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?channel_definitions: Array[
                                         {
                                           channel_id: ::Integer?,
                                           participant_role: ("AGENT" | "CUSTOMER")?
-                                        },
+                                        }
                                       ]
                                     ) -> _StartCallAnalyticsJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCallAnalyticsJobResponseSuccess
@@ -645,13 +576,13 @@ module Aws
                                         {
                                           channel_id: ::Integer,
                                           participant_role: ("PATIENT" | "CLINICIAN")
-                                        },
+                                        }
                                       ],
                                       ?tags: Array[
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?medical_scribe_context: {
                                         patient_context: {
@@ -694,7 +625,7 @@ module Aws
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _StartMedicalTranscriptionJobResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMedicalTranscriptionJobResponseSuccess
@@ -750,7 +681,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?language_id_settings: Hash[("af-ZA" | "ar-AE" | "ar-SA" | "da-DK" | "de-CH" | "de-DE" | "en-AB" | "en-AU" | "en-GB" | "en-IE" | "en-IN" | "en-US" | "en-WL" | "es-ES" | "es-US" | "fa-IR" | "fr-CA" | "fr-FR" | "he-IL" | "hi-IN" | "id-ID" | "it-IT" | "ja-JP" | "ko-KR" | "ms-MY" | "nl-NL" | "pt-BR" | "pt-PT" | "ru-RU" | "ta-IN" | "te-IN" | "tr-TR" | "zh-CN" | "zh-TW" | "th-TH" | "en-ZA" | "en-NZ" | "vi-VN" | "sv-SE" | "ab-GE" | "ast-ES" | "az-AZ" | "ba-RU" | "be-BY" | "bg-BG" | "bn-IN" | "bs-BA" | "ca-ES" | "ckb-IQ" | "ckb-IR" | "cs-CZ" | "cy-WL" | "el-GR" | "et-EE" | "et-ET" | "eu-ES" | "fi-FI" | "gl-ES" | "gu-IN" | "ha-NG" | "hr-HR" | "hu-HU" | "hy-AM" | "is-IS" | "ka-GE" | "kab-DZ" | "kk-KZ" | "kn-IN" | "ky-KG" | "lg-IN" | "lt-LT" | "lv-LV" | "mhr-RU" | "mi-NZ" | "mk-MK" | "ml-IN" | "mn-MN" | "mr-IN" | "mt-MT" | "no-NO" | "or-IN" | "pa-IN" | "pl-PL" | "ps-AF" | "ro-RO" | "rw-RW" | "si-LK" | "sk-SK" | "sl-SI" | "so-SO" | "sr-RS" | "su-ID" | "sw-BI" | "sw-KE" | "sw-RW" | "sw-TZ" | "sw-UG" | "tl-PH" | "tt-RU" | "ug-CN" | "uk-UA" | "uz-UZ" | "wo-SN" | "zh-HK" | "zu-ZA"), {
                                          vocabulary_name: ::String?,
@@ -760,7 +691,7 @@ module Aws
                                      ?toxicity_detection: Array[
                                        {
                                          toxicity_categories: Array[("ALL")]
-                                       },
+                                       }
                                      ]
                                    ) -> _StartTranscriptionJobResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTranscriptionJobResponseSuccess
@@ -775,7 +706,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -798,76 +729,7 @@ module Aws
       def update_call_analytics_category: (
                                             category_name: ::String,
                                             rules: Array[
-                                              {
-                                                non_talk_time_filter: {
-                                                  threshold: ::Integer?,
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  negate: bool?
-                                                }?,
-                                                interruption_filter: {
-                                                  threshold: ::Integer?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  negate: bool?
-                                                }?,
-                                                transcript_filter: {
-                                                  transcript_filter_type: ("EXACT"),
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  negate: bool?,
-                                                  targets: Array[::String]
-                                                }?,
-                                                sentiment_filter: {
-                                                  sentiments: Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")],
-                                                  absolute_time_range: {
-                                                    start_time: ::Integer?,
-                                                    end_time: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  relative_time_range: {
-                                                    start_percentage: ::Integer?,
-                                                    end_percentage: ::Integer?,
-                                                    first: ::Integer?,
-                                                    last: ::Integer?
-                                                  }?,
-                                                  participant_role: ("AGENT" | "CUSTOMER")?,
-                                                  negate: bool?
-                                                }?
-                                              },
+                                              Params::rule
                                             ],
                                             ?input_type: ("REAL_TIME" | "POST_CALL")
                                           ) -> _UpdateCallAnalyticsCategoryResponseSuccess

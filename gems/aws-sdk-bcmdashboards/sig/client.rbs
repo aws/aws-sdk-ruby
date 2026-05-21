@@ -88,245 +88,13 @@ module Aws
                               name: ::String,
                               ?description: ::String,
                               widgets: Array[
-                                {
-                                  id: ::String?,
-                                  title: ::String,
-                                  description: ::String?,
-                                  width: ::Integer?,
-                                  height: ::Integer?,
-                                  horizontal_offset: ::Integer?,
-                                  configs: Array[
-                                    {
-                                      query_parameters: {
-                                        cost_and_usage: {
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")],
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY"),
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        savings_plans_coverage: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        savings_plans_utilization: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        reservation_coverage: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?,
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")]?
-                                        }?,
-                                        reservation_utilization: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?
-                                      },
-                                      display_config: {
-                                        graph: Hash[::String, {
-                                            visual_type: ("LINE" | "BAR" | "STACK")
-                                          }]?,
-                                        table: {
-                                        }?
-                                      }
-                                    },
-                                  ]
-                                },
+                                Params::widget
                               ],
                               ?resource_tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDashboardResponseSuccess
@@ -341,33 +109,16 @@ module Aws
                                        name: ::String,
                                        dashboard_arn: ::String,
                                        scheduled_report_execution_role_arn: ::String,
-                                       schedule_config: {
-                                         schedule_expression: ::String?,
-                                         schedule_expression_time_zone: ::String?,
-                                         schedule_period: {
-                                           start_time: ::Time?,
-                                           end_time: ::Time?
-                                         }?,
-                                         state: ("ENABLED" | "DISABLED")?
-                                       },
+                                       schedule_config: Params::schedule_config,
                                        description: ::String?,
                                        widget_ids: Array[::String]?,
-                                       widget_date_range_override: {
-                                         start_time: {
-                                           type: ("ABSOLUTE" | "RELATIVE"),
-                                           value: ::String
-                                         },
-                                         end_time: {
-                                           type: ("ABSOLUTE" | "RELATIVE"),
-                                           value: ::String
-                                         }
-                                       }?
+                                       widget_date_range_override: Params::date_time_range?
                                      },
                                      ?resource_tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?client_token: ::String
                                    ) -> _CreateScheduledReportResponseSuccess
@@ -487,7 +238,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -512,239 +263,7 @@ module Aws
                               name: ::String,
                               ?description: ::String,
                               ?widgets: Array[
-                                {
-                                  id: ::String?,
-                                  title: ::String,
-                                  description: ::String?,
-                                  width: ::Integer?,
-                                  height: ::Integer?,
-                                  horizontal_offset: ::Integer?,
-                                  configs: Array[
-                                    {
-                                      query_parameters: {
-                                        cost_and_usage: {
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")],
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY"),
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        savings_plans_coverage: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        savings_plans_utilization: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?,
-                                        reservation_coverage: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?,
-                                          metrics: Array[("AmortizedCost" | "BlendedCost" | "NetAmortizedCost" | "NetUnblendedCost" | "NormalizedUsageAmount" | "UnblendedCost" | "UsageQuantity" | "SpendCoveredBySavingsPlans" | "Hour" | "Unit" | "Cost")]?
-                                        }?,
-                                        reservation_utilization: {
-                                          time_range: {
-                                            start_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            },
-                                            end_time: {
-                                              type: ("ABSOLUTE" | "RELATIVE"),
-                                              value: ::String
-                                            }
-                                          },
-                                          group_by: Array[
-                                            {
-                                              key: ::String,
-                                              type: ("DIMENSION" | "TAG" | "COST_CATEGORY")?
-                                            },
-                                          ]?,
-                                          granularity: ("HOURLY" | "DAILY" | "MONTHLY")?,
-                                          filter: {
-                                            or: Array[
-                                              untyped,
-                                            ]?,
-                                            and: Array[
-                                              untyped,
-                                            ]?,
-                                            not: untyped?,
-                                            dimensions: {
-                                              key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "RESOURCE_ID" | "SUBSCRIPTION_ID" | "TAG_KEY" | "OPERATING_SYSTEM" | "TENANCY" | "BILLING_ENTITY" | "RESERVATION_ID" | "COST_CATEGORY_NAME" | "DATABASE_ENGINE" | "LEGAL_ENTITY_NAME" | "SAVINGS_PLANS_TYPE" | "INSTANCE_TYPE_FAMILY" | "CACHE_ENGINE" | "DEPLOYMENT_OPTION" | "SCOPE" | "PLATFORM"),
-                                              values: Array[::String],
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            tags: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?,
-                                            cost_categories: {
-                                              key: ::String?,
-                                              values: Array[::String]?,
-                                              match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
-                                            }?
-                                          }?
-                                        }?
-                                      },
-                                      display_config: {
-                                        graph: Hash[::String, {
-                                            visual_type: ("LINE" | "BAR" | "STACK")
-                                          }]?,
-                                        table: {
-                                        }?
-                                      }
-                                    },
-                                  ]
-                                },
+                                Params::widget
                               ]
                             ) -> _UpdateDashboardResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDashboardResponseSuccess
@@ -760,26 +279,9 @@ module Aws
                                      ?description: ::String,
                                      ?dashboard_arn: ::String,
                                      ?scheduled_report_execution_role_arn: ::String,
-                                     ?schedule_config: {
-                                       schedule_expression: ::String?,
-                                       schedule_expression_time_zone: ::String?,
-                                       schedule_period: {
-                                         start_time: ::Time?,
-                                         end_time: ::Time?
-                                       }?,
-                                       state: ("ENABLED" | "DISABLED")?
-                                     },
+                                     ?schedule_config: Params::schedule_config,
                                      ?widget_ids: Array[::String],
-                                     ?widget_date_range_override: {
-                                       start_time: {
-                                         type: ("ABSOLUTE" | "RELATIVE"),
-                                         value: ::String
-                                       },
-                                       end_time: {
-                                         type: ("ABSOLUTE" | "RELATIVE"),
-                                         value: ::String
-                                       }
-                                     },
+                                     ?widget_date_range_override: Params::date_time_range,
                                      ?clear_widget_ids: bool,
                                      ?clear_widget_date_range_override: bool
                                    ) -> _UpdateScheduledReportResponseSuccess

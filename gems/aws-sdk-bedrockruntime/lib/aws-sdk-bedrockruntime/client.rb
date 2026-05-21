@@ -3376,6 +3376,9 @@ module Aws::BedrockRuntime
     # @option params [String] :service_tier
     #   Specifies the processing tier type used for serving the request.
     #
+    # @option params [String] :request_metadata
+    #   Key-value pairs that you can use to filter invocation logs.
+    #
     # @return [Types::InvokeModelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeModelResponse#body #body} => String
@@ -3395,6 +3398,7 @@ module Aws::BedrockRuntime
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
     #     service_tier: "priority", # accepts priority, default, flex, reserved
+    #     request_metadata: "RequestMetadataJson",
     #   })
     #
     # @example Response structure
@@ -3535,6 +3539,9 @@ module Aws::BedrockRuntime
     #
     # @option params [String] :service_tier
     #   Specifies the processing tier type used for serving the request.
+    #
+    # @option params [String] :request_metadata
+    #   Key-value pairs that you can use to filter invocation logs.
     #
     # @return [Types::InvokeModelWithResponseStreamResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3698,6 +3705,7 @@ module Aws::BedrockRuntime
     #     guardrail_version: "GuardrailVersion",
     #     performance_config_latency: "standard", # accepts standard, optimized
     #     service_tier: "priority", # accepts priority, default, flex, reserved
+    #     request_metadata: "RequestMetadataJson",
     #   })
     #
     # @example Response structure
@@ -3926,7 +3934,7 @@ module Aws::BedrockRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockruntime'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.78.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

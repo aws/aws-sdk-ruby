@@ -108,7 +108,7 @@ module Aws
                                                  {
                                                    key: ::String?,
                                                    value: ::String?
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateAutoScalingConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAutoScalingConfigurationResponseSuccess
@@ -125,7 +125,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateConnectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectionResponseSuccess
@@ -144,7 +144,7 @@ module Aws
                                                   {
                                                     key: ::String?,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _CreateObservabilityConfigurationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateObservabilityConfigurationResponseSuccess
@@ -157,42 +157,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#create_service-instance_method
       def create_service: (
                             service_name: ::String,
-                            source_configuration: {
-                              code_repository: {
-                                repository_url: ::String,
-                                source_code_version: {
-                                  type: ("BRANCH"),
-                                  value: ::String
-                                },
-                                code_configuration: {
-                                  configuration_source: ("REPOSITORY" | "API"),
-                                  code_configuration_values: {
-                                    runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18" | "NODEJS_22"),
-                                    build_command: ::String?,
-                                    start_command: ::String?,
-                                    port: ::String?,
-                                    runtime_environment_variables: Hash[::String, ::String]?,
-                                    runtime_environment_secrets: Hash[::String, ::String]?
-                                  }?
-                                }?,
-                                source_directory: ::String?
-                              }?,
-                              image_repository: {
-                                image_identifier: ::String,
-                                image_configuration: {
-                                  runtime_environment_variables: Hash[::String, ::String]?,
-                                  start_command: ::String?,
-                                  port: ::String?,
-                                  runtime_environment_secrets: Hash[::String, ::String]?
-                                }?,
-                                image_repository_type: ("ECR" | "ECR_PUBLIC")
-                              }?,
-                              auto_deployments_enabled: bool?,
-                              authentication_configuration: {
-                                connection_arn: ::String?,
-                                access_role_arn: ::String?
-                              }?
-                            },
+                            source_configuration: Params::source_configuration,
                             ?instance_configuration: {
                               cpu: ::String?,
                               memory: ::String?,
@@ -202,30 +167,14 @@ module Aws
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?encryption_configuration: {
                               kms_key: ::String
                             },
-                            ?health_check_configuration: {
-                              protocol: ("TCP" | "HTTP")?,
-                              path: ::String?,
-                              interval: ::Integer?,
-                              timeout: ::Integer?,
-                              healthy_threshold: ::Integer?,
-                              unhealthy_threshold: ::Integer?
-                            },
+                            ?health_check_configuration: Params::health_check_configuration,
                             ?auto_scaling_configuration_arn: ::String,
-                            ?network_configuration: {
-                              egress_configuration: {
-                                egress_type: ("DEFAULT" | "VPC")?,
-                                vpc_connector_arn: ::String?
-                              }?,
-                              ingress_configuration: {
-                                is_publicly_accessible: bool?
-                              }?,
-                              ip_address_type: ("IPV4" | "DUAL_STACK")?
-                            },
+                            ?network_configuration: Params::network_configuration,
                             ?observability_configuration: {
                               observability_enabled: bool,
                               observability_configuration_arn: ::String?
@@ -246,7 +195,7 @@ module Aws
                                     {
                                       key: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateVpcConnectorResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcConnectorResponseSuccess
@@ -267,7 +216,7 @@ module Aws
                                              {
                                                key: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _CreateVpcIngressConnectionResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcIngressConnectionResponseSuccess
@@ -573,7 +522,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -606,66 +555,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AppRunner/Client.html#update_service-instance_method
       def update_service: (
                             service_arn: ::String,
-                            ?source_configuration: {
-                              code_repository: {
-                                repository_url: ::String,
-                                source_code_version: {
-                                  type: ("BRANCH"),
-                                  value: ::String
-                                },
-                                code_configuration: {
-                                  configuration_source: ("REPOSITORY" | "API"),
-                                  code_configuration_values: {
-                                    runtime: ("PYTHON_3" | "NODEJS_12" | "NODEJS_14" | "CORRETTO_8" | "CORRETTO_11" | "NODEJS_16" | "GO_1" | "DOTNET_6" | "PHP_81" | "RUBY_31" | "PYTHON_311" | "NODEJS_18" | "NODEJS_22"),
-                                    build_command: ::String?,
-                                    start_command: ::String?,
-                                    port: ::String?,
-                                    runtime_environment_variables: Hash[::String, ::String]?,
-                                    runtime_environment_secrets: Hash[::String, ::String]?
-                                  }?
-                                }?,
-                                source_directory: ::String?
-                              }?,
-                              image_repository: {
-                                image_identifier: ::String,
-                                image_configuration: {
-                                  runtime_environment_variables: Hash[::String, ::String]?,
-                                  start_command: ::String?,
-                                  port: ::String?,
-                                  runtime_environment_secrets: Hash[::String, ::String]?
-                                }?,
-                                image_repository_type: ("ECR" | "ECR_PUBLIC")
-                              }?,
-                              auto_deployments_enabled: bool?,
-                              authentication_configuration: {
-                                connection_arn: ::String?,
-                                access_role_arn: ::String?
-                              }?
-                            },
+                            ?source_configuration: Params::source_configuration,
                             ?instance_configuration: {
                               cpu: ::String?,
                               memory: ::String?,
                               instance_role_arn: ::String?
                             },
                             ?auto_scaling_configuration_arn: ::String,
-                            ?health_check_configuration: {
-                              protocol: ("TCP" | "HTTP")?,
-                              path: ::String?,
-                              interval: ::Integer?,
-                              timeout: ::Integer?,
-                              healthy_threshold: ::Integer?,
-                              unhealthy_threshold: ::Integer?
-                            },
-                            ?network_configuration: {
-                              egress_configuration: {
-                                egress_type: ("DEFAULT" | "VPC")?,
-                                vpc_connector_arn: ::String?
-                              }?,
-                              ingress_configuration: {
-                                is_publicly_accessible: bool?
-                              }?,
-                              ip_address_type: ("IPV4" | "DUAL_STACK")?
-                            },
+                            ?health_check_configuration: Params::health_check_configuration,
+                            ?network_configuration: Params::network_configuration,
                             ?observability_configuration: {
                               observability_enabled: bool,
                               observability_configuration_arn: ::String?

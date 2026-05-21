@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Invoicing
+    module Params
+      type test_env_preference_input = {
+      buyer_domain: ("NetworkID"),
+      buyer_identifier: ::String,
+      supplier_domain: ("NetworkID"),
+      supplier_identifier: ::String,
+      procurement_portal_shared_secret: ::String?,
+      procurement_portal_instance_endpoint: ::String?
+    }
+
+      type einvoice_delivery_preference = {
+      einvoice_delivery_document_types: Array[("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")],
+      einvoice_delivery_attachment_types: Array[("INVOICE_PDF" | "RFP_PDF")]?,
+      protocol: ("CXML"),
+      purchase_order_data_sources: Array[
+        {
+          einvoice_delivery_document_type: ("AWS_CLOUD_INVOICE" | "AWS_CLOUD_CREDIT_MEMO" | "AWS_MARKETPLACE_INVOICE" | "AWS_MARKETPLACE_CREDIT_MEMO" | "AWS_REQUEST_FOR_PAYMENT")?,
+          purchase_order_data_source_type: ("ASSOCIATED_PURCHASE_ORDER_REQUIRED" | "PURCHASE_ORDER_NOT_REQUIRED")?
+        }
+      ],
+      connection_testing_method: ("PROD_ENV_DOLLAR_TEST" | "TEST_ENV_REPLAY_TEST"),
+      einvoice_delivery_activation_date: ::Time
+    }
+
+    end
+  end
+end

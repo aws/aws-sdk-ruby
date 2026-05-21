@@ -490,7 +490,7 @@ module Aws
                                   field: ("NAME"),
                                   operator: ("EQUALS"),
                                   value: ::String
-                                },
+                                }
                               ]
                             }
                           ) -> _SearchContentResponseSuccess
@@ -514,7 +514,7 @@ module Aws
                                           name: ::String,
                                           operator: ("EQUALS" | "PREFIX"),
                                           values: Array[::String]?
-                                        },
+                                        }
                                       ]?,
                                       order_on_field: {
                                         name: ::String,
@@ -527,7 +527,7 @@ module Aws
                                           operator: ("CONTAINS" | "CONTAINS_AND_PREFIX"),
                                           priority: ("HIGH" | "MEDIUM" | "LOW")?,
                                           values: Array[::String]
-                                        },
+                                        }
                                       ]?
                                     }
                                   ) -> _SearchQuickResponsesResponseSuccess
@@ -549,7 +549,7 @@ module Aws
                                    field: ("NAME"),
                                    operator: ("EQUALS"),
                                    value: ::String
-                                 },
+                                 }
                                ]
                              }
                            ) -> _SearchSessionsResponseSuccess

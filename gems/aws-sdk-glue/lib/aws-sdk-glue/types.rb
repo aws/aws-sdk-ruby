@@ -12224,6 +12224,15 @@ module Aws::Glue
     #   thrown.
     #   @return [Boolean]
     #
+    # @!attribute [rw] has_databases
+    #   When `true`, the response only includes catalogs that can contain
+    #   databases. Some catalogs are organizational containers that hold
+    #   only other catalogs, not databases. When this parameter is set to
+    #   `true`, those container-only catalogs are excluded, and only
+    #   catalogs capable of containing databases are returned. Defaults to
+    #   `false`.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetCatalogsRequest AWS API Documentation
     #
     class GetCatalogsRequest < Struct.new(
@@ -12231,7 +12240,8 @@ module Aws::Glue
       :next_token,
       :max_results,
       :recursive,
-      :include_root)
+      :include_root,
+      :has_databases)
       SENSITIVE = []
       include Aws::Structure
     end

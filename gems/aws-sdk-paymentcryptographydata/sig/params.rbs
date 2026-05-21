@@ -1,0 +1,150 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PaymentCryptographyData
+    module Params
+      type emv_encryption_attributes = {
+      major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+      primary_account_number: ::String,
+      pan_sequence_number: ::String,
+      session_derivation_data: ::String,
+      mode: ("ECB" | "CBC")?,
+      initialization_vector: ::String?
+    }
+
+      type encryption_decryption_attributes = {
+      symmetric: {
+        mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+        initialization_vector: ::String?,
+        padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+      }?,
+      asymmetric: {
+        padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+      }?,
+      dukpt: {
+        key_serial_number: ::String,
+        mode: ("ECB" | "CBC")?,
+        dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+        dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+        initialization_vector: ::String?
+      }?,
+      emv: Params::emv_encryption_attributes?
+    }
+
+      type ecdh_derivation_attributes = {
+      certificate_authority_public_key_identifier: ::String,
+      public_key_certificate: ::String,
+      key_algorithm: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "HMAC_SHA224"),
+      key_derivation_function: ("NIST_SP800" | "ANSI_X963"),
+      key_derivation_hash_algorithm: ("SHA_256" | "SHA_384" | "SHA_512"),
+      shared_information: ::String
+    }
+
+      type wrapped_key_material = {
+      tr_31_key_block: ::String?,
+      diffie_hellman_symmetric_key: Params::ecdh_derivation_attributes?
+    }
+
+      type wrapped_key = {
+      wrapped_key_material: Params::wrapped_key_material,
+      key_check_value_algorithm: ("CMAC" | "ANSI_X9_24" | "HMAC" | "SHA_1")?
+    }
+
+      type session_key_derivation = {
+      emv_common: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String,
+        application_transaction_counter: ::String
+      }?,
+      mastercard: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String,
+        application_transaction_counter: ::String,
+        unpredictable_number: ::String
+      }?,
+      emv_2000: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String,
+        application_transaction_counter: ::String
+      }?,
+      amex: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String
+      }?,
+      visa: {
+        primary_account_number: ::String,
+        pan_sequence_number: ::String
+      }?
+    }
+
+      type mac_algorithm_emv = {
+      major_key_derivation_mode: ("EMV_OPTION_A" | "EMV_OPTION_B"),
+      primary_account_number: ::String,
+      pan_sequence_number: ::String,
+      session_key_derivation_mode: ("EMV_COMMON_SESSION_KEY" | "EMV2000" | "AMEX" | "MASTERCARD_SESSION_KEY" | "VISA"),
+      session_key_derivation_value: {
+        application_cryptogram: ::String?,
+        application_transaction_counter: ::String?
+      }
+    }
+
+      type mac_attributes = {
+      algorithm: ("ISO9797_ALGORITHM1" | "ISO9797_ALGORITHM3" | "CMAC" | "HMAC" | "HMAC_SHA224" | "HMAC_SHA256" | "HMAC_SHA384" | "HMAC_SHA512" | "AS2805_4_1")?,
+      emv_mac: Params::mac_algorithm_emv?,
+      dukpt_iso_9797_algorithm_1: {
+        key_serial_number: ::String,
+        dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+        dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
+      }?,
+      dukpt_iso_9797_algorithm_3: {
+        key_serial_number: ::String,
+        dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+        dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
+      }?,
+      dukpt_cmac: {
+        key_serial_number: ::String,
+        dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE"),
+        dukpt_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?
+      }?
+    }
+
+      type re_encryption_attributes = {
+      symmetric: {
+        mode: ("ECB" | "CBC" | "CFB" | "CFB1" | "CFB8" | "CFB64" | "CFB128" | "OFB"),
+        initialization_vector: ::String?,
+        padding_type: ("PKCS1" | "OAEP_SHA1" | "OAEP_SHA256" | "OAEP_SHA512")?
+      }?,
+      dukpt: {
+        key_serial_number: ::String,
+        mode: ("ECB" | "CBC")?,
+        dukpt_key_derivation_type: ("TDES_2KEY" | "TDES_3KEY" | "AES_128" | "AES_192" | "AES_256")?,
+        dukpt_key_variant: ("BIDIRECTIONAL" | "REQUEST" | "RESPONSE")?,
+        initialization_vector: ::String?
+      }?
+    }
+
+      type translation_iso_formats = {
+      iso_format_0: {
+        primary_account_number: ::String
+      }?,
+      iso_format_1: {
+      }?,
+      iso_format_3: {
+        primary_account_number: ::String
+      }?,
+      iso_format_4: {
+        primary_account_number: ::String
+      }?,
+      as_2805_format_0: {
+        primary_account_number: ::String
+      }?
+    }
+
+    end
+  end
+end

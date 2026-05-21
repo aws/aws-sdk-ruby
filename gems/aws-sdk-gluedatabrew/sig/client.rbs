@@ -98,75 +98,9 @@ module Aws
       def create_dataset: (
                             name: ::String,
                             ?format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC"),
-                            ?format_options: {
-                              json: {
-                                multi_line: bool?
-                              }?,
-                              excel: {
-                                sheet_names: Array[::String]?,
-                                sheet_indexes: Array[::Integer]?,
-                                header_row: bool?
-                              }?,
-                              csv: {
-                                delimiter: ::String?,
-                                header_row: bool?
-                              }?
-                            },
-                            input: {
-                              s3_input_definition: {
-                                bucket: ::String,
-                                key: ::String?,
-                                bucket_owner: ::String?
-                              }?,
-                              data_catalog_input_definition: {
-                                catalog_id: ::String?,
-                                database_name: ::String,
-                                table_name: ::String,
-                                temp_directory: {
-                                  bucket: ::String,
-                                  key: ::String?,
-                                  bucket_owner: ::String?
-                                }?
-                              }?,
-                              database_input_definition: {
-                                glue_connection_name: ::String,
-                                database_table_name: ::String?,
-                                temp_directory: {
-                                  bucket: ::String,
-                                  key: ::String?,
-                                  bucket_owner: ::String?
-                                }?,
-                                query_string: ::String?
-                              }?,
-                              metadata: {
-                                source_arn: ::String?
-                              }?
-                            },
-                            ?path_options: {
-                              last_modified_date_condition: {
-                                expression: ::String,
-                                values_map: Hash[::String, ::String]
-                              }?,
-                              files_limit: {
-                                max_files: ::Integer,
-                                ordered_by: ("LAST_MODIFIED_DATE")?,
-                                order: ("DESCENDING" | "ASCENDING")?
-                              }?,
-                              parameters: Hash[::String, {
-                                  name: ::String,
-                                  type: ("Datetime" | "Number" | "String"),
-                                  datetime_options: {
-                                    format: ::String,
-                                    timezone_offset: ::String?,
-                                    locale_code: ::String?
-                                  }?,
-                                  create_column: bool?,
-                                  filter: {
-                                    expression: ::String,
-                                    values_map: Hash[::String, ::String]
-                                  }?
-                                }]?
-                            },
+                            ?format_options: Params::format_options,
+                            input: Params::input,
+                            ?path_options: Params::path_options,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
@@ -189,55 +123,12 @@ module Aws
                                   key: ::String?,
                                   bucket_owner: ::String?
                                 },
-                                ?configuration: {
-                                  dataset_statistics_configuration: {
-                                    included_statistics: Array[::String]?,
-                                    overrides: Array[
-                                      {
-                                        statistic: ::String,
-                                        parameters: Hash[::String, ::String]
-                                      },
-                                    ]?
-                                  }?,
-                                  profile_columns: Array[
-                                    {
-                                      regex: ::String?,
-                                      name: ::String?
-                                    },
-                                  ]?,
-                                  column_statistics_configurations: Array[
-                                    {
-                                      selectors: Array[
-                                        {
-                                          regex: ::String?,
-                                          name: ::String?
-                                        },
-                                      ]?,
-                                      statistics: {
-                                        included_statistics: Array[::String]?,
-                                        overrides: Array[
-                                          {
-                                            statistic: ::String,
-                                            parameters: Hash[::String, ::String]
-                                          },
-                                        ]?
-                                      }
-                                    },
-                                  ]?,
-                                  entity_detector_configuration: {
-                                    entity_types: Array[::String],
-                                    allowed_statistics: Array[
-                                      {
-                                        statistics: Array[::String]
-                                      },
-                                    ]?
-                                  }?
-                                },
+                                ?configuration: Params::profile_configuration,
                                 ?validation_configurations: Array[
                                   {
                                     ruleset_arn: ::String,
                                     validation_mode: ("CHECK_ALL")?
-                                  },
+                                  }
                                 ],
                                 role_arn: ::String,
                                 ?tags: Hash[::String, ::String],
@@ -276,19 +167,7 @@ module Aws
                            ?description: ::String,
                            name: ::String,
                            steps: Array[
-                             {
-                               action: {
-                                 operation: ::String,
-                                 parameters: Hash[::String, ::String]?
-                               },
-                               condition_expressions: Array[
-                                 {
-                                   condition: ::String,
-                                   value: ::String?,
-                                   target_column: ::String
-                                 },
-                               ]?
-                             },
+                             Params::recipe_step
                            ],
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateRecipeResponseSuccess
@@ -308,60 +187,13 @@ module Aws
                                ?max_capacity: ::Integer,
                                ?max_retries: ::Integer,
                                ?outputs: Array[
-                                 {
-                                   compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")?,
-                                   format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")?,
-                                   partition_columns: Array[::String]?,
-                                   location: {
-                                     bucket: ::String,
-                                     key: ::String?,
-                                     bucket_owner: ::String?
-                                   },
-                                   overwrite: bool?,
-                                   format_options: {
-                                     csv: {
-                                       delimiter: ::String?
-                                     }?
-                                   }?,
-                                   max_output_files: ::Integer?
-                                 },
+                                 Params::output
                                ],
                                ?data_catalog_outputs: Array[
-                                 {
-                                   catalog_id: ::String?,
-                                   database_name: ::String,
-                                   table_name: ::String,
-                                   s3_options: {
-                                     location: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }
-                                   }?,
-                                   database_options: {
-                                     temp_directory: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }?,
-                                     table_name: ::String
-                                   }?,
-                                   overwrite: bool?
-                                 },
+                                 Params::data_catalog_output
                                ],
                                ?database_outputs: Array[
-                                 {
-                                   glue_connection_name: ::String,
-                                   database_options: {
-                                     temp_directory: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }?,
-                                     table_name: ::String
-                                   },
-                                   database_output_mode: ("NEW_TABLE")?
-                                 },
+                                 Params::database_output
                                ],
                                ?project_name: ::String,
                                ?recipe_reference: {
@@ -384,23 +216,7 @@ module Aws
                             ?description: ::String,
                             target_arn: ::String,
                             rules: Array[
-                              {
-                                name: ::String,
-                                disabled: bool?,
-                                check_expression: ::String,
-                                substitution_map: Hash[::String, ::String]?,
-                                threshold: {
-                                  value: ::Float,
-                                  type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")?,
-                                  unit: ("COUNT" | "PERCENTAGE")?
-                                }?,
-                                column_selectors: Array[
-                                  {
-                                    regex: ::String?,
-                                    name: ::String?
-                                  },
-                                ]?
-                              },
+                              Params::rule
                             ],
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateRulesetResponseSuccess
@@ -781,19 +597,7 @@ module Aws
       def send_project_session_action: (
                                          ?preview: bool,
                                          name: ::String,
-                                         ?recipe_step: {
-                                           action: {
-                                             operation: ::String,
-                                             parameters: Hash[::String, ::String]?
-                                           },
-                                           condition_expressions: Array[
-                                             {
-                                               condition: ::String,
-                                               value: ::String?,
-                                               target_column: ::String
-                                             },
-                                           ]?
-                                         },
+                                         ?recipe_step: Params::recipe_step,
                                          ?step_index: ::Integer,
                                          ?client_session_id: ::String,
                                          ?view_frame: {
@@ -868,75 +672,9 @@ module Aws
       def update_dataset: (
                             name: ::String,
                             ?format: ("CSV" | "JSON" | "PARQUET" | "EXCEL" | "ORC"),
-                            ?format_options: {
-                              json: {
-                                multi_line: bool?
-                              }?,
-                              excel: {
-                                sheet_names: Array[::String]?,
-                                sheet_indexes: Array[::Integer]?,
-                                header_row: bool?
-                              }?,
-                              csv: {
-                                delimiter: ::String?,
-                                header_row: bool?
-                              }?
-                            },
-                            input: {
-                              s3_input_definition: {
-                                bucket: ::String,
-                                key: ::String?,
-                                bucket_owner: ::String?
-                              }?,
-                              data_catalog_input_definition: {
-                                catalog_id: ::String?,
-                                database_name: ::String,
-                                table_name: ::String,
-                                temp_directory: {
-                                  bucket: ::String,
-                                  key: ::String?,
-                                  bucket_owner: ::String?
-                                }?
-                              }?,
-                              database_input_definition: {
-                                glue_connection_name: ::String,
-                                database_table_name: ::String?,
-                                temp_directory: {
-                                  bucket: ::String,
-                                  key: ::String?,
-                                  bucket_owner: ::String?
-                                }?,
-                                query_string: ::String?
-                              }?,
-                              metadata: {
-                                source_arn: ::String?
-                              }?
-                            },
-                            ?path_options: {
-                              last_modified_date_condition: {
-                                expression: ::String,
-                                values_map: Hash[::String, ::String]
-                              }?,
-                              files_limit: {
-                                max_files: ::Integer,
-                                ordered_by: ("LAST_MODIFIED_DATE")?,
-                                order: ("DESCENDING" | "ASCENDING")?
-                              }?,
-                              parameters: Hash[::String, {
-                                  name: ::String,
-                                  type: ("Datetime" | "Number" | "String"),
-                                  datetime_options: {
-                                    format: ::String,
-                                    timezone_offset: ::String?,
-                                    locale_code: ::String?
-                                  }?,
-                                  create_column: bool?,
-                                  filter: {
-                                    expression: ::String,
-                                    values_map: Hash[::String, ::String]
-                                  }?
-                                }]?
-                            }
+                            ?format_options: Params::format_options,
+                            input: Params::input,
+                            ?path_options: Params::path_options
                           ) -> _UpdateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess
 
@@ -946,50 +684,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GlueDataBrew/Client.html#update_profile_job-instance_method
       def update_profile_job: (
-                                ?configuration: {
-                                  dataset_statistics_configuration: {
-                                    included_statistics: Array[::String]?,
-                                    overrides: Array[
-                                      {
-                                        statistic: ::String,
-                                        parameters: Hash[::String, ::String]
-                                      },
-                                    ]?
-                                  }?,
-                                  profile_columns: Array[
-                                    {
-                                      regex: ::String?,
-                                      name: ::String?
-                                    },
-                                  ]?,
-                                  column_statistics_configurations: Array[
-                                    {
-                                      selectors: Array[
-                                        {
-                                          regex: ::String?,
-                                          name: ::String?
-                                        },
-                                      ]?,
-                                      statistics: {
-                                        included_statistics: Array[::String]?,
-                                        overrides: Array[
-                                          {
-                                            statistic: ::String,
-                                            parameters: Hash[::String, ::String]
-                                          },
-                                        ]?
-                                      }
-                                    },
-                                  ]?,
-                                  entity_detector_configuration: {
-                                    entity_types: Array[::String],
-                                    allowed_statistics: Array[
-                                      {
-                                        statistics: Array[::String]
-                                      },
-                                    ]?
-                                  }?
-                                },
+                                ?configuration: Params::profile_configuration,
                                 ?encryption_key_arn: ::String,
                                 ?encryption_mode: ("SSE-KMS" | "SSE-S3"),
                                 name: ::String,
@@ -1005,7 +700,7 @@ module Aws
                                   {
                                     ruleset_arn: ::String,
                                     validation_mode: ("CHECK_ALL")?
-                                  },
+                                  }
                                 ],
                                 role_arn: ::String,
                                 ?timeout: ::Integer,
@@ -1041,19 +736,7 @@ module Aws
                            ?description: ::String,
                            name: ::String,
                            ?steps: Array[
-                             {
-                               action: {
-                                 operation: ::String,
-                                 parameters: Hash[::String, ::String]?
-                               },
-                               condition_expressions: Array[
-                                 {
-                                   condition: ::String,
-                                   value: ::String?,
-                                   target_column: ::String
-                                 },
-                               ]?
-                             },
+                             Params::recipe_step
                            ]
                          ) -> _UpdateRecipeResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecipeResponseSuccess
@@ -1071,60 +754,13 @@ module Aws
                                ?max_capacity: ::Integer,
                                ?max_retries: ::Integer,
                                ?outputs: Array[
-                                 {
-                                   compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")?,
-                                   format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")?,
-                                   partition_columns: Array[::String]?,
-                                   location: {
-                                     bucket: ::String,
-                                     key: ::String?,
-                                     bucket_owner: ::String?
-                                   },
-                                   overwrite: bool?,
-                                   format_options: {
-                                     csv: {
-                                       delimiter: ::String?
-                                     }?
-                                   }?,
-                                   max_output_files: ::Integer?
-                                 },
+                                 Params::output
                                ],
                                ?data_catalog_outputs: Array[
-                                 {
-                                   catalog_id: ::String?,
-                                   database_name: ::String,
-                                   table_name: ::String,
-                                   s3_options: {
-                                     location: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }
-                                   }?,
-                                   database_options: {
-                                     temp_directory: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }?,
-                                     table_name: ::String
-                                   }?,
-                                   overwrite: bool?
-                                 },
+                                 Params::data_catalog_output
                                ],
                                ?database_outputs: Array[
-                                 {
-                                   glue_connection_name: ::String,
-                                   database_options: {
-                                     temp_directory: {
-                                       bucket: ::String,
-                                       key: ::String?,
-                                       bucket_owner: ::String?
-                                     }?,
-                                     table_name: ::String
-                                   },
-                                   database_output_mode: ("NEW_TABLE")?
-                                 },
+                                 Params::database_output
                                ],
                                role_arn: ::String,
                                ?timeout: ::Integer
@@ -1140,23 +776,7 @@ module Aws
                             name: ::String,
                             ?description: ::String,
                             rules: Array[
-                              {
-                                name: ::String,
-                                disabled: bool?,
-                                check_expression: ::String,
-                                substitution_map: Hash[::String, ::String]?,
-                                threshold: {
-                                  value: ::Float,
-                                  type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")?,
-                                  unit: ("COUNT" | "PERCENTAGE")?
-                                }?,
-                                column_selectors: Array[
-                                  {
-                                    regex: ::String?,
-                                    name: ::String?
-                                  },
-                                ]?
-                              },
+                              Params::rule
                             ]
                           ) -> _UpdateRulesetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRulesetResponseSuccess

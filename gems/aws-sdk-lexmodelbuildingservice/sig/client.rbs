@@ -599,31 +599,12 @@ module Aws
                        {
                          intent_name: ::String,
                          intent_version: ::String
-                       },
+                       }
                      ],
                      ?enable_model_improvements: bool,
                      ?nlu_intent_confidence_threshold: ::Float,
-                     ?clarification_prompt: {
-                       messages: Array[
-                         {
-                           content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                           content: ::String,
-                           group_number: ::Integer?
-                         },
-                       ],
-                       max_attempts: ::Integer,
-                       response_card: ::String?
-                     },
-                     ?abort_statement: {
-                       messages: Array[
-                         {
-                           content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                           content: ::String,
-                           group_number: ::Integer?
-                         },
-                       ],
-                       response_card: ::String?
-                     },
+                     ?clarification_prompt: Params::prompt,
+                     ?abort_statement: Params::statement,
                      ?idle_session_ttl_in_seconds: ::Integer,
                      ?voice_id: ::String,
                      ?checksum: ::String,
@@ -636,7 +617,7 @@ module Aws
                        {
                          key: ::String,
                          value: ::String
-                       },
+                       }
                      ]
                    ) -> _PutBotResponseSuccess
                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBotResponseSuccess
@@ -667,7 +648,7 @@ module Aws
                                  destination: ("CLOUDWATCH_LOGS" | "S3"),
                                  kms_key_arn: ::String?,
                                  resource_arn: ::String
-                               },
+                               }
                              ],
                              iam_role_arn: ::String
                            },
@@ -675,7 +656,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _PutBotAliasResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutBotAliasResponseSuccess
@@ -713,17 +694,7 @@ module Aws
                             slot_constraint: ("Required" | "Optional"),
                             slot_type: ::String?,
                             slot_type_version: ::String?,
-                            value_elicitation_prompt: {
-                              messages: Array[
-                                {
-                                  content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                                  content: ::String,
-                                  group_number: ::Integer?
-                                },
-                              ],
-                              max_attempts: ::Integer,
-                              response_card: ::String?
-                            }?,
+                            value_elicitation_prompt: Params::prompt?,
                             priority: ::Integer?,
                             sample_utterances: Array[::String]?,
                             response_card: ::String?,
@@ -732,66 +703,19 @@ module Aws
                               default_value_list: Array[
                                 {
                                   default_value: ::String
-                                },
+                                }
                               ]
                             }?
-                          },
+                          }
                         ],
                         ?sample_utterances: Array[::String],
-                        ?confirmation_prompt: {
-                          messages: Array[
-                            {
-                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                              content: ::String,
-                              group_number: ::Integer?
-                            },
-                          ],
-                          max_attempts: ::Integer,
-                          response_card: ::String?
-                        },
-                        ?rejection_statement: {
-                          messages: Array[
-                            {
-                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                              content: ::String,
-                              group_number: ::Integer?
-                            },
-                          ],
-                          response_card: ::String?
-                        },
+                        ?confirmation_prompt: Params::prompt,
+                        ?rejection_statement: Params::statement,
                         ?follow_up_prompt: {
-                          prompt: {
-                            messages: Array[
-                              {
-                                content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                                content: ::String,
-                                group_number: ::Integer?
-                              },
-                            ],
-                            max_attempts: ::Integer,
-                            response_card: ::String?
-                          },
-                          rejection_statement: {
-                            messages: Array[
-                              {
-                                content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                                content: ::String,
-                                group_number: ::Integer?
-                              },
-                            ],
-                            response_card: ::String?
-                          }
+                          prompt: Params::prompt,
+                          rejection_statement: Params::statement
                         },
-                        ?conclusion_statement: {
-                          messages: Array[
-                            {
-                              content_type: ("PlainText" | "SSML" | "CustomPayload"),
-                              content: ::String,
-                              group_number: ::Integer?
-                            },
-                          ],
-                          response_card: ::String?
-                        },
+                        ?conclusion_statement: Params::statement,
                         ?dialog_code_hook: {
                           uri: ::String,
                           message_version: ::String
@@ -814,14 +738,14 @@ module Aws
                         ?input_contexts: Array[
                           {
                             name: ::String
-                          },
+                          }
                         ],
                         ?output_contexts: Array[
                           {
                             name: ::String,
                             time_to_live_in_seconds: ::Integer,
                             turns_to_live: ::Integer
-                          },
+                          }
                         ]
                       ) -> _PutIntentResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutIntentResponseSuccess
@@ -848,7 +772,7 @@ module Aws
                              {
                                value: ::String,
                                synonyms: Array[::String]?
-                             },
+                             }
                            ],
                            ?checksum: ::String,
                            ?value_selection_strategy: ("ORIGINAL_VALUE" | "TOP_RESOLUTION"),
@@ -859,7 +783,7 @@ module Aws
                                regex_configuration: {
                                  pattern: ::String
                                }?
-                             },
+                             }
                            ]
                          ) -> _PutSlotTypeResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutSlotTypeResponseSuccess
@@ -883,7 +807,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _StartImportResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartImportResponseSuccess
@@ -919,7 +843,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

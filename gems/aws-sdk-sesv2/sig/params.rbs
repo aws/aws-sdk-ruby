@@ -1,0 +1,133 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SESV2
+    module Params
+      type suppression_validation_options = {
+      condition_threshold: {
+        condition_threshold_enabled: ("ENABLED" | "DISABLED"),
+        overall_confidence_threshold: {
+          confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
+        }?
+      }
+    }
+
+      type vdm_options = {
+      dashboard_options: {
+        engagement_metrics: ("ENABLED" | "DISABLED")?
+      }?,
+      guardian_options: {
+        optimized_shared_delivery: ("ENABLED" | "DISABLED")?
+      }?
+    }
+
+      type event_destination_definition = {
+      enabled: bool?,
+      matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
+      kinesis_firehose_destination: {
+        iam_role_arn: ::String,
+        delivery_stream_arn: ::String
+      }?,
+      cloud_watch_destination: {
+        dimension_configurations: Array[
+          {
+            dimension_name: ::String,
+            dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
+            default_dimension_value: ::String
+          }
+        ]
+      }?,
+      sns_destination: {
+        topic_arn: ::String
+      }?,
+      event_bridge_destination: {
+        event_bus_arn: ::String
+      }?,
+      pinpoint_destination: {
+        application_arn: ::String?
+      }?
+    }
+
+      type body = {
+      text: {
+        data: ::String,
+        charset: ::String?
+      }?,
+      html: {
+        data: ::String,
+        charset: ::String?
+      }?
+    }
+
+      type message = {
+      subject: {
+        data: ::String,
+        charset: ::String?
+      },
+      body: Params::body,
+      headers: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      attachments: Array[
+        Params::attachment
+      ]?
+    }
+
+      type template = {
+      template_name: ::String?,
+      template_arn: ::String?,
+      template_content: {
+        subject: ::String?,
+        text: ::String?,
+        html: ::String?
+      }?,
+      template_data: ::String?,
+      headers: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      attachments: Array[
+        Params::attachment
+      ]?
+    }
+
+      type email_content = {
+      simple: Params::message?,
+      raw: {
+        data: ::String
+      }?,
+      template: Params::template?
+    }
+
+      type attachment = {
+      raw_content: ::String,
+      content_disposition: ("ATTACHMENT" | "INLINE")?,
+      file_name: ::String,
+      content_description: ::String?,
+      content_id: ::String?,
+      content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
+      content_type: ::String?
+    }
+
+      type message_insights_filters = {
+      from_email_address: Array[::String]?,
+      destination: Array[::String]?,
+      subject: Array[::String]?,
+      isp: Array[::String]?,
+      last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
+      last_engagement_event: Array[("OPEN" | "CLICK")]?
+    }
+
+    end
+  end
+end

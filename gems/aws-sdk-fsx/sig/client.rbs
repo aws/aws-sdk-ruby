@@ -117,7 +117,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CopyBackupResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyBackupResponseSuccess
@@ -191,7 +191,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
                            ?volume_id: ::String
                          ) -> _CreateBackupResponseSuccess
@@ -208,20 +208,13 @@ module Aws
                                                 data_repository_path: ::String,
                                                 ?batch_import_meta_data_on_create: bool,
                                                 ?imported_file_chunk_size: ::Integer,
-                                                ?s3: {
-                                                  auto_import_policy: {
-                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
-                                                  }?,
-                                                  auto_export_policy: {
-                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
-                                                  }?
-                                                },
+                                                ?s3: Params::s3_data_repository_configuration,
                                                 ?client_request_token: ::String,
                                                 ?tags: Array[
                                                   {
                                                     key: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _CreateDataRepositoryAssociationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataRepositoryAssociationResponseSuccess
@@ -246,7 +239,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ],
                                          ?capacity_to_release: ::Integer,
                                          ?release_configuration: {
@@ -274,7 +267,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?copy_tags_to_data_repository_associations: bool,
                                ?kms_key_id: ::String,
@@ -295,7 +288,7 @@ module Aws
                                      version: ("NFS3"),
                                      dns_ips: Array[::String]?
                                    }?
-                                 },
+                                 }
                                ]
                              ) -> _CreateFileCacheResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileCacheResponseSuccess
@@ -316,74 +309,11 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 ?kms_key_id: ::String,
-                                ?windows_configuration: {
-                                  active_directory_id: ::String?,
-                                  self_managed_active_directory_configuration: {
-                                    domain_name: ::String,
-                                    organizational_unit_distinguished_name: ::String?,
-                                    file_system_administrators_group: ::String?,
-                                    user_name: ::String?,
-                                    password: ::String?,
-                                    dns_ips: Array[::String],
-                                    domain_join_service_account_secret: ::String?
-                                  }?,
-                                  deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")?,
-                                  preferred_subnet_id: ::String?,
-                                  throughput_capacity: ::Integer,
-                                  weekly_maintenance_start_time: ::String?,
-                                  daily_automatic_backup_start_time: ::String?,
-                                  automatic_backup_retention_days: ::Integer?,
-                                  copy_tags_to_backups: bool?,
-                                  aliases: Array[::String]?,
-                                  audit_log_configuration: {
-                                    file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
-                                    file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
-                                    audit_log_destination: ::String?
-                                  }?,
-                                  disk_iops_configuration: {
-                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
-                                    iops: ::Integer?
-                                  }?,
-                                  fsrm_configuration: {
-                                    fsrm_service_enabled: bool,
-                                    event_log_destination: ::String?
-                                  }?
-                                },
-                                ?lustre_configuration: {
-                                  weekly_maintenance_start_time: ::String?,
-                                  import_path: ::String?,
-                                  export_path: ::String?,
-                                  imported_file_chunk_size: ::Integer?,
-                                  deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")?,
-                                  auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
-                                  per_unit_storage_throughput: ::Integer?,
-                                  daily_automatic_backup_start_time: ::String?,
-                                  automatic_backup_retention_days: ::Integer?,
-                                  copy_tags_to_backups: bool?,
-                                  drive_cache_type: ("NONE" | "READ")?,
-                                  data_compression_type: ("NONE" | "LZ4")?,
-                                  efa_enabled: bool?,
-                                  log_configuration: {
-                                    level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
-                                    destination: ::String?
-                                  }?,
-                                  root_squash_configuration: {
-                                    root_squash: ::String?,
-                                    no_squash_nids: Array[::String]?
-                                  }?,
-                                  metadata_configuration: {
-                                    iops: ::Integer?,
-                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")
-                                  }?,
-                                  throughput_capacity: ::Integer?,
-                                  data_read_cache_configuration: {
-                                    sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
-                                    size_gi_b: ::Integer?
-                                  }?
-                                },
+                                ?windows_configuration: Params::create_file_system_windows_configuration,
+                                ?lustre_configuration: Params::create_file_system_lustre_configuration,
                                 ?ontap_configuration: {
                                   automatic_backup_retention_days: ::Integer?,
                                   daily_automatic_backup_start_time: ::String?,
@@ -403,50 +333,7 @@ module Aws
                                   endpoint_ipv_6_address_range: ::String?
                                 },
                                 ?file_system_type_version: ::String,
-                                ?open_zfs_configuration: {
-                                  automatic_backup_retention_days: ::Integer?,
-                                  copy_tags_to_backups: bool?,
-                                  copy_tags_to_volumes: bool?,
-                                  daily_automatic_backup_start_time: ::String?,
-                                  deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1"),
-                                  throughput_capacity: ::Integer,
-                                  weekly_maintenance_start_time: ::String?,
-                                  disk_iops_configuration: {
-                                    mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
-                                    iops: ::Integer?
-                                  }?,
-                                  root_volume_configuration: {
-                                    record_size_ki_b: ::Integer?,
-                                    data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
-                                    nfs_exports: Array[
-                                      {
-                                        client_configurations: Array[
-                                          {
-                                            clients: ::String,
-                                            options: Array[::String]
-                                          },
-                                        ]
-                                      },
-                                    ]?,
-                                    user_and_group_quotas: Array[
-                                      {
-                                        type: ("USER" | "GROUP"),
-                                        id: ::Integer,
-                                        storage_capacity_quota_gi_b: ::Integer
-                                      },
-                                    ]?,
-                                    copy_tags_to_snapshots: bool?,
-                                    read_only: bool?
-                                  }?,
-                                  preferred_subnet_id: ::String?,
-                                  endpoint_ip_address_range: ::String?,
-                                  endpoint_ipv_6_address_range: ::String?,
-                                  route_table_ids: Array[::String]?,
-                                  read_cache_configuration: {
-                                    sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
-                                    size_gi_b: ::Integer?
-                                  }?
-                                },
+                                ?open_zfs_configuration: Params::create_file_system_open_zfs_configuration,
                                 ?network_type: ("IPV4" | "DUAL")
                               ) -> _CreateFileSystemResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFileSystemResponseSuccess
@@ -465,120 +352,14 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
-                                            ?windows_configuration: {
-                                              active_directory_id: ::String?,
-                                              self_managed_active_directory_configuration: {
-                                                domain_name: ::String,
-                                                organizational_unit_distinguished_name: ::String?,
-                                                file_system_administrators_group: ::String?,
-                                                user_name: ::String?,
-                                                password: ::String?,
-                                                dns_ips: Array[::String],
-                                                domain_join_service_account_secret: ::String?
-                                              }?,
-                                              deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")?,
-                                              preferred_subnet_id: ::String?,
-                                              throughput_capacity: ::Integer,
-                                              weekly_maintenance_start_time: ::String?,
-                                              daily_automatic_backup_start_time: ::String?,
-                                              automatic_backup_retention_days: ::Integer?,
-                                              copy_tags_to_backups: bool?,
-                                              aliases: Array[::String]?,
-                                              audit_log_configuration: {
-                                                file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
-                                                file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
-                                                audit_log_destination: ::String?
-                                              }?,
-                                              disk_iops_configuration: {
-                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
-                                                iops: ::Integer?
-                                              }?,
-                                              fsrm_configuration: {
-                                                fsrm_service_enabled: bool,
-                                                event_log_destination: ::String?
-                                              }?
-                                            },
-                                            ?lustre_configuration: {
-                                              weekly_maintenance_start_time: ::String?,
-                                              import_path: ::String?,
-                                              export_path: ::String?,
-                                              imported_file_chunk_size: ::Integer?,
-                                              deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")?,
-                                              auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
-                                              per_unit_storage_throughput: ::Integer?,
-                                              daily_automatic_backup_start_time: ::String?,
-                                              automatic_backup_retention_days: ::Integer?,
-                                              copy_tags_to_backups: bool?,
-                                              drive_cache_type: ("NONE" | "READ")?,
-                                              data_compression_type: ("NONE" | "LZ4")?,
-                                              efa_enabled: bool?,
-                                              log_configuration: {
-                                                level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
-                                                destination: ::String?
-                                              }?,
-                                              root_squash_configuration: {
-                                                root_squash: ::String?,
-                                                no_squash_nids: Array[::String]?
-                                              }?,
-                                              metadata_configuration: {
-                                                iops: ::Integer?,
-                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")
-                                              }?,
-                                              throughput_capacity: ::Integer?,
-                                              data_read_cache_configuration: {
-                                                sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
-                                                size_gi_b: ::Integer?
-                                              }?
-                                            },
+                                            ?windows_configuration: Params::create_file_system_windows_configuration,
+                                            ?lustre_configuration: Params::create_file_system_lustre_configuration,
                                             ?storage_type: ("SSD" | "HDD" | "INTELLIGENT_TIERING"),
                                             ?kms_key_id: ::String,
                                             ?file_system_type_version: ::String,
-                                            ?open_zfs_configuration: {
-                                              automatic_backup_retention_days: ::Integer?,
-                                              copy_tags_to_backups: bool?,
-                                              copy_tags_to_volumes: bool?,
-                                              daily_automatic_backup_start_time: ::String?,
-                                              deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1"),
-                                              throughput_capacity: ::Integer,
-                                              weekly_maintenance_start_time: ::String?,
-                                              disk_iops_configuration: {
-                                                mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
-                                                iops: ::Integer?
-                                              }?,
-                                              root_volume_configuration: {
-                                                record_size_ki_b: ::Integer?,
-                                                data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
-                                                nfs_exports: Array[
-                                                  {
-                                                    client_configurations: Array[
-                                                      {
-                                                        clients: ::String,
-                                                        options: Array[::String]
-                                                      },
-                                                    ]
-                                                  },
-                                                ]?,
-                                                user_and_group_quotas: Array[
-                                                  {
-                                                    type: ("USER" | "GROUP"),
-                                                    id: ::Integer,
-                                                    storage_capacity_quota_gi_b: ::Integer
-                                                  },
-                                                ]?,
-                                                copy_tags_to_snapshots: bool?,
-                                                read_only: bool?
-                                              }?,
-                                              preferred_subnet_id: ::String?,
-                                              endpoint_ip_address_range: ::String?,
-                                              endpoint_ipv_6_address_range: ::String?,
-                                              route_table_ids: Array[::String]?,
-                                              read_cache_configuration: {
-                                                sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
-                                                size_gi_b: ::Integer?
-                                              }?
-                                            },
+                                            ?open_zfs_configuration: Params::create_file_system_open_zfs_configuration,
                                             ?storage_capacity: ::Integer,
                                             ?network_type: ("IPV4" | "DUAL")
                                           ) -> _CreateFileSystemFromBackupResponseSuccess
@@ -597,7 +378,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
@@ -610,15 +391,7 @@ module Aws
       def create_storage_virtual_machine: (
                                             ?active_directory_configuration: {
                                               net_bios_name: ::String,
-                                              self_managed_active_directory_configuration: {
-                                                domain_name: ::String,
-                                                organizational_unit_distinguished_name: ::String?,
-                                                file_system_administrators_group: ::String?,
-                                                user_name: ::String?,
-                                                password: ::String?,
-                                                dns_ips: Array[::String],
-                                                domain_join_service_account_secret: ::String?
-                                              }?
+                                              self_managed_active_directory_configuration: Params::self_managed_active_directory_configuration?
                                             },
                                             ?client_request_token: ::String,
                                             file_system_id: ::String,
@@ -628,7 +401,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?root_volume_security_style: ("UNIX" | "NTFS" | "MIXED")
                                           ) -> _CreateStorageVirtualMachineResponseSuccess
@@ -643,55 +416,12 @@ module Aws
                            ?client_request_token: ::String,
                            volume_type: ("ONTAP" | "OPENZFS"),
                            name: ::String,
-                           ?ontap_configuration: {
-                             junction_path: ::String?,
-                             security_style: ("UNIX" | "NTFS" | "MIXED")?,
-                             size_in_megabytes: ::Integer?,
-                             storage_efficiency_enabled: bool?,
-                             storage_virtual_machine_id: ::String,
-                             tiering_policy: {
-                               cooling_period: ::Integer?,
-                               name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
-                             }?,
-                             ontap_volume_type: ("RW" | "DP")?,
-                             snapshot_policy: ::String?,
-                             copy_tags_to_backups: bool?,
-                             snaplock_configuration: {
-                               audit_log_volume: bool?,
-                               autocommit_period: {
-                                 type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
-                                 value: ::Integer?
-                               }?,
-                               privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
-                               retention_period: {
-                                 default_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 },
-                                 minimum_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 },
-                                 maximum_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 }
-                               }?,
-                               snaplock_type: ("COMPLIANCE" | "ENTERPRISE"),
-                               volume_append_mode_enabled: bool?
-                             }?,
-                             volume_style: ("FLEXVOL" | "FLEXGROUP")?,
-                             aggregate_configuration: {
-                               aggregates: Array[::String]?,
-                               constituents_per_aggregate: ::Integer?
-                             }?,
-                             size_in_bytes: ::Integer?
-                           },
+                           ?ontap_configuration: Params::create_ontap_volume_configuration,
                            ?tags: Array[
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
                            ?open_zfs_configuration: {
                              parent_volume_id: ::String,
@@ -711,16 +441,16 @@ module Aws
                                    {
                                      clients: ::String,
                                      options: Array[::String]
-                                   },
+                                   }
                                  ]
-                               },
+                               }
                              ]?,
                              user_and_group_quotas: Array[
                                {
                                  type: ("USER" | "GROUP"),
                                  id: ::Integer,
                                  storage_capacity_quota_gi_b: ::Integer
-                               },
+                               }
                              ]?
                            }
                          ) -> _CreateVolumeResponseSuccess
@@ -735,55 +465,12 @@ module Aws
                                        backup_id: ::String,
                                        ?client_request_token: ::String,
                                        name: ::String,
-                                       ?ontap_configuration: {
-                                         junction_path: ::String?,
-                                         security_style: ("UNIX" | "NTFS" | "MIXED")?,
-                                         size_in_megabytes: ::Integer?,
-                                         storage_efficiency_enabled: bool?,
-                                         storage_virtual_machine_id: ::String,
-                                         tiering_policy: {
-                                           cooling_period: ::Integer?,
-                                           name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
-                                         }?,
-                                         ontap_volume_type: ("RW" | "DP")?,
-                                         snapshot_policy: ::String?,
-                                         copy_tags_to_backups: bool?,
-                                         snaplock_configuration: {
-                                           audit_log_volume: bool?,
-                                           autocommit_period: {
-                                             type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
-                                             value: ::Integer?
-                                           }?,
-                                           privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
-                                           retention_period: {
-                                             default_retention: {
-                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                               value: ::Integer?
-                                             },
-                                             minimum_retention: {
-                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                               value: ::Integer?
-                                             },
-                                             maximum_retention: {
-                                               type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                               value: ::Integer?
-                                             }
-                                           }?,
-                                           snaplock_type: ("COMPLIANCE" | "ENTERPRISE"),
-                                           volume_append_mode_enabled: bool?
-                                         }?,
-                                         volume_style: ("FLEXVOL" | "FLEXGROUP")?,
-                                         aggregate_configuration: {
-                                           aggregates: Array[::String]?,
-                                           constituents_per_aggregate: ::Integer?
-                                         }?,
-                                         size_in_bytes: ::Integer?
-                                       },
+                                       ?ontap_configuration: Params::create_ontap_volume_configuration,
                                        ?tags: Array[
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateVolumeFromBackupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVolumeFromBackupResponseSuccess
@@ -844,7 +531,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?lustre_configuration: {
@@ -853,7 +540,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?open_zfs_configuration: {
@@ -862,7 +549,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]?,
                                   options: Array[("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS")]?
                                 }
@@ -909,7 +596,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]?,
                              bypass_snaplock_enterprise_retention: bool?
                            },
@@ -931,7 +618,7 @@ module Aws
                                 {
                                   name: ("file-system-id" | "backup-type" | "file-system-type" | "volume-id" | "data-repository-type" | "file-cache-id" | "file-cache-type")?,
                                   values: Array[::String]?
-                                },
+                                }
                               ],
                               ?max_results: ::Integer,
                               ?next_token: ::String
@@ -950,7 +637,7 @@ module Aws
                                                      {
                                                        name: ("file-system-id" | "backup-type" | "file-system-type" | "volume-id" | "data-repository-type" | "file-cache-id" | "file-cache-type")?,
                                                        values: Array[::String]?
-                                                     },
+                                                     }
                                                    ],
                                                    ?max_results: ::Integer,
                                                    ?next_token: ::String
@@ -969,7 +656,7 @@ module Aws
                                               {
                                                 name: ("file-system-id" | "task-lifecycle" | "data-repository-association-id" | "file-cache-id")?,
                                                 values: Array[::String]?
-                                              },
+                                              }
                                             ],
                                             ?max_results: ::Integer,
                                             ?next_token: ::String
@@ -1028,7 +715,7 @@ module Aws
                                                     {
                                                       name: ("file-system-id" | "volume-id" | "type")?,
                                                       values: Array[::String]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?max_results: ::Integer,
                                                   ?next_token: ::String
@@ -1056,7 +743,7 @@ module Aws
                                   {
                                     name: ("file-system-id" | "volume-id")?,
                                     values: Array[::String]?
-                                  },
+                                  }
                                 ],
                                 ?max_results: ::Integer,
                                 ?next_token: ::String,
@@ -1076,7 +763,7 @@ module Aws
                                                  {
                                                    name: ("file-system-id")?,
                                                    values: Array[::String]?
-                                                 },
+                                                 }
                                                ],
                                                ?max_results: ::Integer,
                                                ?next_token: ::String
@@ -1095,7 +782,7 @@ module Aws
                                 {
                                   name: ("file-system-id" | "storage-virtual-machine-id")?,
                                   values: Array[::String]?
-                                },
+                                }
                               ],
                               ?max_results: ::Integer,
                               ?next_token: ::String
@@ -1186,7 +873,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1210,14 +897,7 @@ module Aws
                                                 association_id: ::String,
                                                 ?client_request_token: ::String,
                                                 ?imported_file_chunk_size: ::Integer,
-                                                ?s3: {
-                                                  auto_import_policy: {
-                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
-                                                  }?,
-                                                  auto_export_policy: {
-                                                    events: Array[("NEW" | "CHANGED" | "DELETED")]?
-                                                  }?
-                                                }
+                                                ?s3: Params::s3_data_repository_configuration
                                               ) -> _UpdateDataRepositoryAssociationResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataRepositoryAssociationResponseSuccess
 
@@ -1249,15 +929,7 @@ module Aws
                                   daily_automatic_backup_start_time: ::String?,
                                   automatic_backup_retention_days: ::Integer?,
                                   throughput_capacity: ::Integer?,
-                                  self_managed_active_directory_configuration: {
-                                    user_name: ::String?,
-                                    password: ::String?,
-                                    dns_ips: Array[::String]?,
-                                    domain_name: ::String?,
-                                    organizational_unit_distinguished_name: ::String?,
-                                    file_system_administrators_group: ::String?,
-                                    domain_join_service_account_secret: ::String?
-                                  }?,
+                                  self_managed_active_directory_configuration: Params::self_managed_active_directory_configuration_updates?,
                                   audit_log_configuration: {
                                     file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
                                     file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
@@ -1368,15 +1040,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/FSx/Client.html#update_storage_virtual_machine-instance_method
       def update_storage_virtual_machine: (
                                             ?active_directory_configuration: {
-                                              self_managed_active_directory_configuration: {
-                                                user_name: ::String?,
-                                                password: ::String?,
-                                                dns_ips: Array[::String]?,
-                                                domain_name: ::String?,
-                                                organizational_unit_distinguished_name: ::String?,
-                                                file_system_administrators_group: ::String?,
-                                                domain_join_service_account_secret: ::String?
-                                              }?,
+                                              self_managed_active_directory_configuration: Params::self_managed_active_directory_configuration_updates?,
                                               net_bios_name: ::String?
                                             },
                                             ?client_request_token: ::String,
@@ -1411,20 +1075,7 @@ module Aws
                                  value: ::Integer?
                                }?,
                                privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
-                               retention_period: {
-                                 default_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 },
-                                 minimum_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 },
-                                 maximum_retention: {
-                                   type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
-                                   value: ::Integer?
-                                 }
-                               }?,
+                               retention_period: Params::snaplock_retention_period?,
                                volume_append_mode_enabled: bool?
                              }?,
                              size_in_bytes: ::Integer?
@@ -1441,16 +1092,16 @@ module Aws
                                    {
                                      clients: ::String,
                                      options: Array[::String]
-                                   },
+                                   }
                                  ]
-                               },
+                               }
                              ]?,
                              user_and_group_quotas: Array[
                                {
                                  type: ("USER" | "GROUP"),
                                  id: ::Integer,
                                  storage_capacity_quota_gi_b: ::Integer
-                               },
+                               }
                              ]?,
                              read_only: bool?
                            }

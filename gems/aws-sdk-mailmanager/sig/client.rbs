@@ -91,7 +91,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateAddonInstanceResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonInstanceResponseSuccess
@@ -108,7 +108,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateAddonSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddonSubscriptionResponseSuccess
@@ -125,7 +125,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _CreateAddressListResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAddressListResponseSuccess
@@ -162,7 +162,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateArchiveResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateArchiveResponseSuccess
@@ -178,17 +178,7 @@ module Aws
                                   type: ("OPEN" | "AUTH" | "MTLS"),
                                   rule_set_id: ::String,
                                   traffic_policy_id: ::String,
-                                  ?ingress_point_configuration: {
-                                    smtp_password: ::String?,
-                                    secret_arn: ::String?,
-                                    tls_auth_configuration: {
-                                      trust_store: {
-                                        ca_content: ::String,
-                                        crl_content: ::String?,
-                                        kms_key_arn: ::String?
-                                      }?
-                                    }?
-                                  },
+                                  ?ingress_point_configuration: Params::ingress_point_configuration,
                                   ?network_configuration: {
                                     public_network_configuration: {
                                       ip_type: ("IPV4" | "DUAL_STACK")
@@ -202,7 +192,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateIngressPointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngressPointResponseSuccess
@@ -226,7 +216,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateRelayResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelayResponseSuccess
@@ -240,202 +230,13 @@ module Aws
                              ?client_token: ::String,
                              rule_set_name: ::String,
                              rules: Array[
-                               {
-                                 name: ::String?,
-                                 conditions: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         is_in_address_list: {
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
-                                           address_lists: Array[::String]
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         attribute: ("SPF" | "DKIM")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?
-                                   },
-                                 ]?,
-                                 unless: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         is_in_address_list: {
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
-                                           address_lists: Array[::String]
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         attribute: ("SPF" | "DKIM")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?
-                                   },
-                                 ]?,
-                                 actions: Array[
-                                   {
-                                     drop: {
-                                     }?,
-                                     relay: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       relay: ::String,
-                                       mail_from: ("REPLACE" | "PRESERVE")?
-                                     }?,
-                                     archive: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       target_archive: ::String
-                                     }?,
-                                     write_to_s3: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       s3_bucket: ::String,
-                                       s3_prefix: ::String?,
-                                       s3_sse_kms_key_id: ::String?
-                                     }?,
-                                     send: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String
-                                     }?,
-                                     add_header: {
-                                       header_name: ::String,
-                                       header_value: ::String
-                                     }?,
-                                     replace_recipient: {
-                                       replace_with: Array[::String]?
-                                     }?,
-                                     deliver_to_mailbox: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       mailbox_arn: ::String,
-                                       role_arn: ::String
-                                     }?,
-                                     deliver_to_q_business: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       application_id: ::String,
-                                       index_id: ::String,
-                                       role_arn: ::String
-                                     }?,
-                                     publish_to_sns: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       topic_arn: ::String,
-                                       role_arn: ::String,
-                                       encoding: ("UTF-8" | "BASE64")?,
-                                       payload_type: ("HEADERS" | "CONTENT")?
-                                     }?,
-                                     bounce: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       sender: ::String,
-                                       status_code: ::String,
-                                       smtp_reply_code: ::String,
-                                       diagnostic_message: ::String,
-                                       message: ::String?
-                                     }?,
-                                     invoke_lambda: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       function_arn: ::String,
-                                       invocation_type: ("EVENT" | "REQUEST_RESPONSE"),
-                                       role_arn: ::String,
-                                       retry_time_minutes: ::Integer?
-                                     }?
-                                   },
-                                 ]
-                               },
+                               Params::rule
                              ],
                              ?tags: Array[
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateRuleSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleSetResponseSuccess
@@ -449,58 +250,7 @@ module Aws
                                    ?client_token: ::String,
                                    traffic_policy_name: ::String,
                                    policy_statements: Array[
-                                     {
-                                       conditions: Array[
-                                         {
-                                           string_expression: {
-                                             evaluate: {
-                                               attribute: ("RECIPIENT")?,
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?
-                                             },
-                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                             values: Array[::String]
-                                           }?,
-                                           ip_expression: {
-                                             evaluate: {
-                                               attribute: ("SENDER_IP")?
-                                             },
-                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                             values: Array[::String]
-                                           }?,
-                                           ipv_6_expression: {
-                                             evaluate: {
-                                               attribute: ("SENDER_IPV6")?
-                                             },
-                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                             values: Array[::String]
-                                           }?,
-                                           tls_expression: {
-                                             evaluate: {
-                                               attribute: ("TLS_PROTOCOL")?
-                                             },
-                                             operator: ("MINIMUM_TLS_VERSION" | "IS"),
-                                             value: ("TLS1_2" | "TLS1_3")
-                                           }?,
-                                           boolean_expression: {
-                                             evaluate: {
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?,
-                                               is_in_address_list: {
-                                                 attribute: ("RECIPIENT"),
-                                                 address_lists: Array[::String]
-                                               }?
-                                             },
-                                             operator: ("IS_TRUE" | "IS_FALSE")
-                                           }?
-                                         },
-                                       ],
-                                       action: ("ALLOW" | "DENY")
-                                     },
+                                     Params::policy_statement
                                    ],
                                    default_action: ("ALLOW" | "DENY"),
                                    ?max_message_size_bytes: ::Integer,
@@ -508,7 +258,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateTrafficPolicyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrafficPolicyResponseSuccess
@@ -1005,42 +755,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_archive_export-instance_method
       def start_archive_export: (
                                   archive_id: ::String,
-                                  ?filters: {
-                                    include: Array[
-                                      {
-                                        string_expression: {
-                                          evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
-                                          },
-                                          operator: ("CONTAINS"),
-                                          values: Array[::String]
-                                        }?,
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?
-                                      },
-                                    ]?,
-                                    unless: Array[
-                                      {
-                                        string_expression: {
-                                          evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
-                                          },
-                                          operator: ("CONTAINS"),
-                                          values: Array[::String]
-                                        }?,
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?
-                                      },
-                                    ]?
-                                  },
+                                  ?filters: Params::archive_filters,
                                   from_timestamp: ::Time,
                                   to_timestamp: ::Time,
                                   ?max_results: ::Integer,
@@ -1060,42 +775,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MailManager/Client.html#start_archive_search-instance_method
       def start_archive_search: (
                                   archive_id: ::String,
-                                  ?filters: {
-                                    include: Array[
-                                      {
-                                        string_expression: {
-                                          evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
-                                          },
-                                          operator: ("CONTAINS"),
-                                          values: Array[::String]
-                                        }?,
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?
-                                      },
-                                    ]?,
-                                    unless: Array[
-                                      {
-                                        string_expression: {
-                                          evaluate: {
-                                            attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
-                                          },
-                                          operator: ("CONTAINS"),
-                                          values: Array[::String]
-                                        }?,
-                                        boolean_expression: {
-                                          evaluate: {
-                                            attribute: ("HAS_ATTACHMENTS")?
-                                          },
-                                          operator: ("IS_TRUE" | "IS_FALSE")
-                                        }?
-                                      },
-                                    ]?
-                                  },
+                                  ?filters: Params::archive_filters,
                                   from_timestamp: ::Time,
                                   to_timestamp: ::Time,
                                   max_results: ::Integer
@@ -1139,7 +819,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1177,17 +857,7 @@ module Aws
                                   ?status_to_update: ("ACTIVE" | "CLOSED"),
                                   ?rule_set_id: ::String,
                                   ?traffic_policy_id: ::String,
-                                  ?ingress_point_configuration: {
-                                    smtp_password: ::String?,
-                                    secret_arn: ::String?,
-                                    tls_auth_configuration: {
-                                      trust_store: {
-                                        ca_content: ::String,
-                                        crl_content: ::String?,
-                                        kms_key_arn: ::String?
-                                      }?
-                                    }?
-                                  },
+                                  ?ingress_point_configuration: Params::ingress_point_configuration,
                                   ?tls_policy: ("REQUIRED" | "OPTIONAL" | "FIPS")
                                 ) -> _UpdateIngressPointResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIngressPointResponseSuccess
@@ -1217,196 +887,7 @@ module Aws
                              rule_set_id: ::String,
                              ?rule_set_name: ::String,
                              ?rules: Array[
-                               {
-                                 name: ::String?,
-                                 conditions: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         is_in_address_list: {
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
-                                           address_lists: Array[::String]
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         attribute: ("SPF" | "DKIM")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?
-                                   },
-                                 ]?,
-                                 unless: Array[
-                                   {
-                                     boolean_expression: {
-                                       evaluate: {
-                                         attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         is_in_address_list: {
-                                           attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
-                                           address_lists: Array[::String]
-                                         }?
-                                       },
-                                       operator: ("IS_TRUE" | "IS_FALSE")
-                                     }?,
-                                     string_expression: {
-                                       evaluate: {
-                                         attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
-                                         mime_header_attribute: ::String?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?,
-                                         client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                       values: Array[::String]
-                                     }?,
-                                     number_expression: {
-                                       evaluate: {
-                                         attribute: ("MESSAGE_SIZE")?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
-                                       value: ::Float
-                                     }?,
-                                     ip_expression: {
-                                       evaluate: {
-                                         attribute: ("SOURCE_IP")?
-                                       },
-                                       operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                       values: Array[::String]
-                                     }?,
-                                     verdict_expression: {
-                                       evaluate: {
-                                         attribute: ("SPF" | "DKIM")?,
-                                         analysis: {
-                                           analyzer: ::String,
-                                           result_field: ::String
-                                         }?
-                                       },
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
-                                     }?,
-                                     dmarc_expression: {
-                                       operator: ("EQUALS" | "NOT_EQUALS"),
-                                       values: Array[("NONE" | "QUARANTINE" | "REJECT")]
-                                     }?
-                                   },
-                                 ]?,
-                                 actions: Array[
-                                   {
-                                     drop: {
-                                     }?,
-                                     relay: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       relay: ::String,
-                                       mail_from: ("REPLACE" | "PRESERVE")?
-                                     }?,
-                                     archive: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       target_archive: ::String
-                                     }?,
-                                     write_to_s3: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       s3_bucket: ::String,
-                                       s3_prefix: ::String?,
-                                       s3_sse_kms_key_id: ::String?
-                                     }?,
-                                     send: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String
-                                     }?,
-                                     add_header: {
-                                       header_name: ::String,
-                                       header_value: ::String
-                                     }?,
-                                     replace_recipient: {
-                                       replace_with: Array[::String]?
-                                     }?,
-                                     deliver_to_mailbox: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       mailbox_arn: ::String,
-                                       role_arn: ::String
-                                     }?,
-                                     deliver_to_q_business: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       application_id: ::String,
-                                       index_id: ::String,
-                                       role_arn: ::String
-                                     }?,
-                                     publish_to_sns: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       topic_arn: ::String,
-                                       role_arn: ::String,
-                                       encoding: ("UTF-8" | "BASE64")?,
-                                       payload_type: ("HEADERS" | "CONTENT")?
-                                     }?,
-                                     bounce: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       role_arn: ::String,
-                                       sender: ::String,
-                                       status_code: ::String,
-                                       smtp_reply_code: ::String,
-                                       diagnostic_message: ::String,
-                                       message: ::String?
-                                     }?,
-                                     invoke_lambda: {
-                                       action_failure_policy: ("CONTINUE" | "DROP")?,
-                                       function_arn: ::String,
-                                       invocation_type: ("EVENT" | "REQUEST_RESPONSE"),
-                                       role_arn: ::String,
-                                       retry_time_minutes: ::Integer?
-                                     }?
-                                   },
-                                 ]
-                               },
+                               Params::rule
                              ]
                            ) -> _UpdateRuleSetResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleSetResponseSuccess
@@ -1419,58 +900,7 @@ module Aws
                                    traffic_policy_id: ::String,
                                    ?traffic_policy_name: ::String,
                                    ?policy_statements: Array[
-                                     {
-                                       conditions: Array[
-                                         {
-                                           string_expression: {
-                                             evaluate: {
-                                               attribute: ("RECIPIENT")?,
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?
-                                             },
-                                             operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
-                                             values: Array[::String]
-                                           }?,
-                                           ip_expression: {
-                                             evaluate: {
-                                               attribute: ("SENDER_IP")?
-                                             },
-                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                             values: Array[::String]
-                                           }?,
-                                           ipv_6_expression: {
-                                             evaluate: {
-                                               attribute: ("SENDER_IPV6")?
-                                             },
-                                             operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
-                                             values: Array[::String]
-                                           }?,
-                                           tls_expression: {
-                                             evaluate: {
-                                               attribute: ("TLS_PROTOCOL")?
-                                             },
-                                             operator: ("MINIMUM_TLS_VERSION" | "IS"),
-                                             value: ("TLS1_2" | "TLS1_3")
-                                           }?,
-                                           boolean_expression: {
-                                             evaluate: {
-                                               analysis: {
-                                                 analyzer: ::String,
-                                                 result_field: ::String
-                                               }?,
-                                               is_in_address_list: {
-                                                 attribute: ("RECIPIENT"),
-                                                 address_lists: Array[::String]
-                                               }?
-                                             },
-                                             operator: ("IS_TRUE" | "IS_FALSE")
-                                           }?
-                                         },
-                                       ],
-                                       action: ("ALLOW" | "DENY")
-                                     },
+                                     Params::policy_statement
                                    ],
                                    ?default_action: ("ALLOW" | "DENY"),
                                    ?max_message_size_bytes: ::Integer

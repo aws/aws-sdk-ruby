@@ -1,0 +1,112 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BCMPricingCalculator
+    module Params
+      type expression = {
+      and: Array[
+        {
+          and: untyped?,
+          or: untyped?,
+          not: untyped?,
+          cost_categories: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?,
+          dimensions: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?,
+          tags: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?
+        }
+      ]?,
+      or: Array[
+        {
+          and: untyped?,
+          or: untyped?,
+          not: untyped?,
+          cost_categories: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?,
+          dimensions: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?,
+          tags: {
+            key: ::String?,
+            match_options: Array[::String]?,
+            values: Array[::String]?
+          }?
+        }
+      ]?,
+      not: {
+        and: Array[
+          untyped
+        ]?,
+        or: Array[
+          untyped
+        ]?,
+        not: untyped?,
+        cost_categories: {
+          key: ::String?,
+          match_options: Array[::String]?,
+          values: Array[::String]?
+        }?,
+        dimensions: {
+          key: ::String?,
+          match_options: Array[::String]?,
+          values: Array[::String]?
+        }?,
+        tags: {
+          key: ::String?,
+          match_options: Array[::String]?,
+          values: Array[::String]?
+        }?
+      }?,
+      cost_categories: {
+        key: ::String?,
+        match_options: Array[::String]?,
+        values: Array[::String]?
+      }?,
+      dimensions: {
+        key: ::String?,
+        match_options: Array[::String]?,
+        values: Array[::String]?
+      }?,
+      tags: {
+        key: ::String?,
+        match_options: Array[::String]?,
+        values: Array[::String]?
+      }?
+    }
+
+      type historical_usage_entity = {
+      service_code: ::String,
+      usage_type: ::String,
+      operation: ::String,
+      location: ::String?,
+      usage_account_id: ::String,
+      bill_interval: {
+        start: ::Time?,
+        end: ::Time?
+      },
+      filter_expression: Params::expression
+    }
+
+    end
+  end
+end

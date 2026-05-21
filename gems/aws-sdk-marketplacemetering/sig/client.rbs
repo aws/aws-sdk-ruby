@@ -99,13 +99,13 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]?
-                                     },
+                                     }
                                    ]?,
                                    customer_aws_account_id: ::String?,
                                    license_arn: ::String?
-                                 },
+                                 }
                                ],
                                ?product_code: ::String
                              ) -> _BatchMeterUsageResponseSuccess
@@ -129,9 +129,9 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]?
-                           },
+                           }
                          ],
                          ?client_token: ::String
                        ) -> _MeterUsageResponseSuccess

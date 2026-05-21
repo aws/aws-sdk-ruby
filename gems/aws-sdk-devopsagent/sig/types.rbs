@@ -33,6 +33,7 @@ module Aws::DevOpsAgent
       attr_accessor azureidentity: Types::RegisteredAzureIdentityDetails
       attr_accessor mcpservergrafana: Types::RegisteredGrafanaServerDetails
       attr_accessor pagerduty: Types::RegisteredPagerDutyDetails
+      attr_accessor mcpserversigv4: Types::RegisteredMCPServerSigV4Details
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -59,6 +60,8 @@ module Aws::DevOpsAgent
       class Mcpservergrafana < AdditionalServiceDetails
       end
       class Pagerduty < AdditionalServiceDetails
+      end
+      class Mcpserversigv4 < AdditionalServiceDetails
       end
       class Unknown < AdditionalServiceDetails
       end
@@ -722,7 +725,7 @@ module Aws::DevOpsAgent
     class ListServicesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4")
       SENSITIVE: []
     end
 
@@ -847,6 +850,27 @@ module Aws::DevOpsAgent
       SENSITIVE: [:client_id, :client_secret]
     end
 
+    class MCPServerSigV4AuthorizationConfig
+      attr_accessor region: ::String
+      attr_accessor service: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor custom_headers: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class MCPServerSigV4Configuration
+      attr_accessor tools: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class MCPServerSigV4ServiceDetails
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor description: ::String
+      attr_accessor authorization_config: Types::MCPServerSigV4AuthorizationConfig
+      SENSITIVE: [:description]
+    end
+
     class MCPServerSplunkConfiguration < Aws::EmptyStructure
     end
 
@@ -969,6 +993,8 @@ module Aws::DevOpsAgent
       attr_accessor priority: ("HIGH" | "MEDIUM" | "LOW")
       attr_accessor goal_version: ::Integer
       attr_accessor additional_context: ::String
+      attr_accessor rank_position: ::Integer
+      attr_accessor ranked_at: ::Time
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor version: ::Integer
@@ -1000,7 +1026,7 @@ module Aws::DevOpsAgent
     end
 
     class RegisterServiceInput
-      attr_accessor service: ("dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      attr_accessor service: ("dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4")
       attr_accessor service_details: Types::ServiceDetails
       attr_accessor kms_key_arn: ::String
       attr_accessor private_connection_name: ::String
@@ -1059,6 +1085,17 @@ module Aws::DevOpsAgent
       SENSITIVE: [:description]
     end
 
+    class RegisteredMCPServerSigV4Details
+      attr_accessor name: ::String
+      attr_accessor endpoint: ::String
+      attr_accessor description: ::String
+      attr_accessor region: ::String
+      attr_accessor service: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor custom_headers: ::Hash[::String, ::String]
+      SENSITIVE: [:description]
+    end
+
     class RegisteredNewRelicDetails
       attr_accessor account_id: ::String
       attr_accessor region: ("US" | "EU")
@@ -1073,7 +1110,7 @@ module Aws::DevOpsAgent
 
     class RegisteredService
       attr_accessor service_id: ::String
-      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity")
+      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4")
       attr_accessor name: ::String
       attr_accessor accessible_resources: ::Array[untyped]
       attr_accessor additional_service_details: Types::AdditionalServiceDetails
@@ -1244,6 +1281,7 @@ module Aws::DevOpsAgent
       attr_accessor azuredevops: Types::AzureDevOpsConfiguration
       attr_accessor mcpservergrafana: Types::MCPServerGrafanaConfiguration
       attr_accessor pagerduty: Types::PagerDutyConfiguration
+      attr_accessor mcpserversigv4: Types::MCPServerSigV4Configuration
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1279,6 +1317,8 @@ module Aws::DevOpsAgent
       end
       class Pagerduty < ServiceConfiguration
       end
+      class Mcpserversigv4 < ServiceConfiguration
+      end
       class Unknown < ServiceConfiguration
       end
     end
@@ -1295,6 +1335,7 @@ module Aws::DevOpsAgent
       attr_accessor mcpservergrafana: Types::GrafanaServiceDetails
       attr_accessor pagerduty: Types::PagerDutyDetails
       attr_accessor azureidentity: Types::RegisteredAzureIdentityDetails
+      attr_accessor mcpserversigv4: Types::MCPServerSigV4ServiceDetails
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -1319,6 +1360,8 @@ module Aws::DevOpsAgent
       class Pagerduty < ServiceDetails
       end
       class Azureidentity < ServiceDetails
+      end
+      class Mcpserversigv4 < ServiceDetails
       end
       class Unknown < ServiceDetails
       end

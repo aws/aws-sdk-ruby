@@ -106,13 +106,13 @@ module Aws
                                     {
                                       primary_identity_id: ::String,
                                       primary_identity_source_arn: ::String
-                                    },
+                                    }
                                   ],
                                   description: ::String,
                                   policies: Array[
                                     {
                                       policy_arn: ::String
-                                    },
+                                    }
                                   ],
                                   name: ::String,
                                   ?tags: Hash[::String, ::String]
@@ -330,7 +330,7 @@ module Aws
                                field_name: ("ActionName" | "ApprovalTeamName" | "VotingTime" | "Vote" | "SessionStatus" | "InitiationTime")?,
                                operator: ("EQ" | "NE" | "GT" | "LT" | "GTE" | "LTE" | "CONTAINS" | "NOT_CONTAINS" | "BETWEEN")?,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
@@ -403,7 +403,7 @@ module Aws
                                     {
                                       primary_identity_id: ::String,
                                       primary_identity_source_arn: ::String
-                                    },
+                                    }
                                   ],
                                   ?description: ::String,
                                   arn: ::String,

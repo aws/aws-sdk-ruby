@@ -108,7 +108,7 @@ module Aws
                                                                         savings_plan_id: ::String?
                                                                       }?
                                                                     }
-                                                                  },
+                                                                  }
                                                                 ],
                                                                 ?client_token: ::String
                                                               ) -> _BatchCreateBillScenarioCommitmentModificationResponseSuccess
@@ -135,44 +135,10 @@ module Aws
                                                                  {
                                                                    start_hour: ::Time,
                                                                    amount: ::Float
-                                                                 },
-                                                               ]?,
-                                                               historical_usage: {
-                                                                 service_code: ::String,
-                                                                 usage_type: ::String,
-                                                                 operation: ::String,
-                                                                 location: ::String?,
-                                                                 usage_account_id: ::String,
-                                                                 bill_interval: {
-                                                                   start: ::Time?,
-                                                                   end: ::Time?
-                                                                 },
-                                                                 filter_expression: {
-                                                                   and: Array[
-                                                                     untyped,
-                                                                   ]?,
-                                                                   or: Array[
-                                                                     untyped,
-                                                                   ]?,
-                                                                   not: untyped?,
-                                                                   cost_categories: {
-                                                                     key: ::String?,
-                                                                     match_options: Array[::String]?,
-                                                                     values: Array[::String]?
-                                                                   }?,
-                                                                   dimensions: {
-                                                                     key: ::String?,
-                                                                     match_options: Array[::String]?,
-                                                                     values: Array[::String]?
-                                                                   }?,
-                                                                   tags: {
-                                                                     key: ::String?,
-                                                                     match_options: Array[::String]?,
-                                                                     values: Array[::String]?
-                                                                   }?
                                                                  }
-                                                               }?
-                                                             },
+                                                               ]?,
+                                                               historical_usage: Params::historical_usage_entity?
+                                                             }
                                                            ],
                                                            ?client_token: ::String
                                                          ) -> _BatchCreateBillScenarioUsageModificationResponseSuccess
@@ -195,42 +161,8 @@ module Aws
                                                       group: ::String?,
                                                       usage_account_id: ::String,
                                                       amount: ::Float,
-                                                      historical_usage: {
-                                                        service_code: ::String,
-                                                        usage_type: ::String,
-                                                        operation: ::String,
-                                                        location: ::String?,
-                                                        usage_account_id: ::String,
-                                                        bill_interval: {
-                                                          start: ::Time?,
-                                                          end: ::Time?
-                                                        },
-                                                        filter_expression: {
-                                                          and: Array[
-                                                            untyped,
-                                                          ]?,
-                                                          or: Array[
-                                                            untyped,
-                                                          ]?,
-                                                          not: untyped?,
-                                                          cost_categories: {
-                                                            key: ::String?,
-                                                            match_options: Array[::String]?,
-                                                            values: Array[::String]?
-                                                          }?,
-                                                          dimensions: {
-                                                            key: ::String?,
-                                                            match_options: Array[::String]?,
-                                                            values: Array[::String]?
-                                                          }?,
-                                                          tags: {
-                                                            key: ::String?,
-                                                            match_options: Array[::String]?,
-                                                            values: Array[::String]?
-                                                          }?
-                                                        }
-                                                      }?
-                                                    },
+                                                      historical_usage: Params::historical_usage_entity?
+                                                    }
                                                   ],
                                                   ?client_token: ::String
                                                 ) -> _BatchCreateWorkloadEstimateUsageResponseSuccess
@@ -281,7 +213,7 @@ module Aws
                                                                   {
                                                                     id: ::String,
                                                                     group: ::String?
-                                                                  },
+                                                                  }
                                                                 ]
                                                               ) -> _BatchUpdateBillScenarioCommitmentModificationResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateBillScenarioCommitmentModificationResponseSuccess
@@ -302,9 +234,9 @@ module Aws
                                                                  {
                                                                    start_hour: ::Time,
                                                                    amount: ::Float
-                                                                 },
+                                                                 }
                                                                ]?
-                                                             },
+                                                             }
                                                            ]
                                                          ) -> _BatchUpdateBillScenarioUsageModificationResponseSuccess
                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateBillScenarioUsageModificationResponseSuccess
@@ -322,7 +254,7 @@ module Aws
                                                       id: ::String,
                                                       group: ::String?,
                                                       amount: ::Float?
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _BatchUpdateWorkloadEstimateUsageResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateWorkloadEstimateUsageResponseSuccess
@@ -528,7 +460,7 @@ module Aws
                                                               name: ("USAGE_ACCOUNT_ID" | "SERVICE_CODE" | "USAGE_TYPE" | "OPERATION" | "LOCATION" | "USAGE_GROUP" | "HISTORICAL_USAGE_ACCOUNT_ID" | "HISTORICAL_SERVICE_CODE" | "HISTORICAL_USAGE_TYPE" | "HISTORICAL_OPERATION" | "HISTORICAL_LOCATION"),
                                                               values: Array[::String],
                                                               match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                                            },
+                                                            }
                                                           ],
                                                           ?next_token: ::String,
                                                           ?max_results: ::Integer
@@ -548,7 +480,7 @@ module Aws
                                                name: ("USAGE_ACCOUNT_ID" | "SERVICE_CODE" | "USAGE_TYPE" | "OPERATION" | "LOCATION" | "LINE_ITEM_TYPE"),
                                                values: Array[::String],
                                                match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                             },
+                                             }
                                            ],
                                            ?next_token: ::String,
                                            ?max_results: ::Integer
@@ -567,7 +499,7 @@ module Aws
                                      name: ("STATUS" | "NAME"),
                                      values: Array[::String],
                                      match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                   },
+                                   }
                                  ],
                                  ?created_at_filter: {
                                    after_timestamp: ::Time?,
@@ -608,7 +540,7 @@ module Aws
                                                         name: ("USAGE_ACCOUNT_ID" | "SERVICE_CODE" | "USAGE_TYPE" | "OPERATION" | "LOCATION" | "USAGE_GROUP" | "HISTORICAL_USAGE_ACCOUNT_ID" | "HISTORICAL_SERVICE_CODE" | "HISTORICAL_USAGE_TYPE" | "HISTORICAL_OPERATION" | "HISTORICAL_LOCATION"),
                                                         values: Array[::String],
                                                         match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                                      },
+                                                      }
                                                     ],
                                                     ?next_token: ::String,
                                                     ?max_results: ::Integer
@@ -627,7 +559,7 @@ module Aws
                                      name: ("STATUS" | "NAME" | "GROUP_SHARING_PREFERENCE" | "COST_CATEGORY_ARN"),
                                      values: Array[::String],
                                      match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                   },
+                                   }
                                  ],
                                  ?created_at_filter: {
                                    after_timestamp: ::Time?,
@@ -665,7 +597,7 @@ module Aws
                                               name: ("USAGE_ACCOUNT_ID" | "SERVICE_CODE" | "USAGE_TYPE" | "OPERATION" | "LOCATION" | "USAGE_GROUP" | "HISTORICAL_USAGE_ACCOUNT_ID" | "HISTORICAL_SERVICE_CODE" | "HISTORICAL_USAGE_TYPE" | "HISTORICAL_OPERATION" | "HISTORICAL_LOCATION"),
                                               values: Array[::String],
                                               match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                            },
+                                            }
                                           ],
                                           ?next_token: ::String,
                                           ?max_results: ::Integer
@@ -692,7 +624,7 @@ module Aws
                                          name: ("STATUS" | "NAME"),
                                          values: Array[::String],
                                          match_option: ("EQUALS" | "STARTS_WITH" | "CONTAINS")?
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer

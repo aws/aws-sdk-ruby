@@ -118,6 +118,7 @@ module Aws::KMS
     GetParametersForImportResponse = Shapes::StructureShape.new(name: 'GetParametersForImportResponse')
     GetPublicKeyRequest = Shapes::StructureShape.new(name: 'GetPublicKeyRequest')
     GetPublicKeyResponse = Shapes::StructureShape.new(name: 'GetPublicKeyResponse')
+    GrantConstraintSourceArnType = Shapes::StringShape.new(name: 'GrantConstraintSourceArnType')
     GrantConstraints = Shapes::StructureShape.new(name: 'GrantConstraints')
     GrantIdType = Shapes::StringShape.new(name: 'GrantIdType')
     GrantList = Shapes::ListShape.new(name: 'GrantList')
@@ -217,6 +218,7 @@ module Aws::KMS
     RotationsListEntry = Shapes::StructureShape.new(name: 'RotationsListEntry')
     ScheduleKeyDeletionRequest = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionRequest')
     ScheduleKeyDeletionResponse = Shapes::StructureShape.new(name: 'ScheduleKeyDeletionResponse')
+    ServicePrincipalType = Shapes::StringShape.new(name: 'ServicePrincipalType')
     SignRequest = Shapes::StructureShape.new(name: 'SignRequest')
     SignResponse = Shapes::StructureShape.new(name: 'SignResponse')
     SigningAlgorithmSpec = Shapes::StringShape.new(name: 'SigningAlgorithmSpec')
@@ -326,13 +328,15 @@ module Aws::KMS
     CreateCustomKeyStoreResponse.struct_class = Types::CreateCustomKeyStoreResponse
 
     CreateGrantRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
-    CreateGrantRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "GranteePrincipal"))
+    CreateGrantRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "GranteePrincipal"))
     CreateGrantRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "RetiringPrincipal"))
     CreateGrantRequest.add_member(:operations, Shapes::ShapeRef.new(shape: GrantOperationList, required: true, location_name: "Operations"))
     CreateGrantRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: GrantConstraints, location_name: "Constraints"))
     CreateGrantRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
     CreateGrantRequest.add_member(:name, Shapes::ShapeRef.new(shape: GrantNameType, location_name: "Name"))
     CreateGrantRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    CreateGrantRequest.add_member(:grantee_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "GranteeServicePrincipal"))
+    CreateGrantRequest.add_member(:retiring_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "RetiringServicePrincipal"))
     CreateGrantRequest.struct_class = Types::CreateGrantRequest
 
     CreateGrantResponse.add_member(:grant_token, Shapes::ShapeRef.new(shape: GrantTokenType, location_name: "GrantToken"))
@@ -631,6 +635,7 @@ module Aws::KMS
 
     GrantConstraints.add_member(:encryption_context_subset, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextSubset"))
     GrantConstraints.add_member(:encryption_context_equals, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextEquals"))
+    GrantConstraints.add_member(:source_arn, Shapes::ShapeRef.new(shape: GrantConstraintSourceArnType, location_name: "SourceArn"))
     GrantConstraints.struct_class = Types::GrantConstraints
 
     GrantList.member = Shapes::ShapeRef.new(shape: GrantListEntry)
@@ -644,6 +649,8 @@ module Aws::KMS
     GrantListEntry.add_member(:issuing_account, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "IssuingAccount"))
     GrantListEntry.add_member(:operations, Shapes::ShapeRef.new(shape: GrantOperationList, location_name: "Operations"))
     GrantListEntry.add_member(:constraints, Shapes::ShapeRef.new(shape: GrantConstraints, location_name: "Constraints"))
+    GrantListEntry.add_member(:grantee_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "GranteeServicePrincipal"))
+    GrantListEntry.add_member(:retiring_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "RetiringServicePrincipal"))
     GrantListEntry.struct_class = Types::GrantListEntry
 
     GrantOperationList.member = Shapes::ShapeRef.new(shape: GrantOperation)
@@ -772,6 +779,7 @@ module Aws::KMS
     ListGrantsRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     ListGrantsRequest.add_member(:grant_id, Shapes::ShapeRef.new(shape: GrantIdType, location_name: "GrantId"))
     ListGrantsRequest.add_member(:grantee_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "GranteePrincipal"))
+    ListGrantsRequest.add_member(:grantee_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "GranteeServicePrincipal"))
     ListGrantsRequest.struct_class = Types::ListGrantsRequest
 
     ListGrantsResponse.add_member(:grants, Shapes::ShapeRef.new(shape: GrantList, location_name: "Grants"))
@@ -821,7 +829,8 @@ module Aws::KMS
 
     ListRetirableGrantsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: LimitType, location_name: "Limit"))
     ListRetirableGrantsRequest.add_member(:marker, Shapes::ShapeRef.new(shape: MarkerType, location_name: "Marker"))
-    ListRetirableGrantsRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, required: true, location_name: "RetiringPrincipal"))
+    ListRetirableGrantsRequest.add_member(:retiring_principal, Shapes::ShapeRef.new(shape: PrincipalIdType, location_name: "RetiringPrincipal"))
+    ListRetirableGrantsRequest.add_member(:retiring_service_principal, Shapes::ShapeRef.new(shape: ServicePrincipalType, location_name: "RetiringServicePrincipal"))
     ListRetirableGrantsRequest.struct_class = Types::ListRetirableGrantsRequest
 
     MacAlgorithmSpecList.member = Shapes::ShapeRef.new(shape: MacAlgorithmSpec)

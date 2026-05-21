@@ -106,21 +106,7 @@ module Aws
                                        mark_as_anomaly: bool?,
                                        skip: bool?
                                      },
-                                     configuration: {
-                                       random_cut_forest: {
-                                         query: ::String,
-                                         shingle_size: ::Integer?,
-                                         sample_size: ::Integer?,
-                                         ignore_near_expected_from_above: {
-                                           amount: ::Float?,
-                                           ratio: ::Float?
-                                         }?,
-                                         ignore_near_expected_from_below: {
-                                           amount: ::Float?,
-                                           ratio: ::Float?
-                                         }?
-                                       }?
-                                     },
+                                     configuration: Params::anomaly_detector_configuration,
                                      ?labels: Hash[::String, ::String],
                                      ?client_token: ::String,
                                      ?tags: Hash[::String, ::String]
@@ -147,14 +133,7 @@ module Aws
       def create_query_logging_configuration: (
                                                 workspace_id: ::String,
                                                 destinations: Array[
-                                                  {
-                                                    cloud_watch_logs: {
-                                                      log_group_arn: ::String
-                                                    },
-                                                    filters: {
-                                                      qsp_threshold: ::Integer
-                                                    }
-                                                  },
+                                                  Params::logging_destination
                                                 ],
                                                 ?client_token: ::String
                                               ) -> _CreateQueryLoggingConfigurationResponseSuccess
@@ -512,21 +491,7 @@ module Aws
                                     mark_as_anomaly: bool?,
                                     skip: bool?
                                   },
-                                  configuration: {
-                                    random_cut_forest: {
-                                      query: ::String,
-                                      shingle_size: ::Integer?,
-                                      sample_size: ::Integer?,
-                                      ignore_near_expected_from_above: {
-                                        amount: ::Float?,
-                                        ratio: ::Float?
-                                      }?,
-                                      ignore_near_expected_from_below: {
-                                        amount: ::Float?,
-                                        ratio: ::Float?
-                                      }?
-                                    }?
-                                  },
+                                  configuration: Params::anomaly_detector_configuration,
                                   ?labels: Hash[::String, ::String],
                                   ?client_token: ::String
                                 ) -> _PutAnomalyDetectorResponseSuccess
@@ -602,14 +567,7 @@ module Aws
       def update_query_logging_configuration: (
                                                 workspace_id: ::String,
                                                 destinations: Array[
-                                                  {
-                                                    cloud_watch_logs: {
-                                                      log_group_arn: ::String
-                                                    },
-                                                    filters: {
-                                                      qsp_threshold: ::Integer
-                                                    }
-                                                  },
+                                                  Params::logging_destination
                                                 ],
                                                 ?client_token: ::String
                                               ) -> _UpdateQueryLoggingConfigurationResponseSuccess
@@ -660,7 +618,7 @@ module Aws
                                                       config: {
                                                         options: Hash[::String, ::String]?
                                                       }?
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _UpdateScraperLoggingConfigurationResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScraperLoggingConfigurationResponseSuccess
@@ -687,7 +645,7 @@ module Aws
                                                   max_series: ::Integer?
                                                 },
                                                 label_set: Hash[::String, ::String]
-                                              },
+                                              }
                                             ],
                                             ?retention_period_in_days: ::Integer
                                           ) -> _UpdateWorkspaceConfigurationResponseSuccess

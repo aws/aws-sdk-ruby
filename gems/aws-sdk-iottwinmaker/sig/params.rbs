@@ -1,0 +1,116 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTTwinMaker
+    module Params
+      type data_value = {
+      boolean_value: bool?,
+      double_value: ::Float?,
+      integer_value: ::Integer?,
+      long_value: ::Integer?,
+      string_value: ::String?,
+      list_value: Array[
+        {
+          boolean_value: bool?,
+          double_value: ::Float?,
+          integer_value: ::Integer?,
+          long_value: ::Integer?,
+          string_value: ::String?,
+          list_value: untyped?,
+          map_value: Hash[::String, untyped]?,
+          relationship_value: {
+            target_entity_id: ::String?,
+            target_component_name: ::String?
+          }?,
+          expression: ::String?
+        }
+      ]?,
+      map_value: Hash[::String, {
+          boolean_value: bool?,
+          double_value: ::Float?,
+          integer_value: ::Integer?,
+          long_value: ::Integer?,
+          string_value: ::String?,
+          list_value: Array[
+            untyped
+          ]?,
+          map_value: untyped?,
+          relationship_value: {
+            target_entity_id: ::String?,
+            target_component_name: ::String?
+          }?,
+          expression: ::String?
+        }]?,
+      relationship_value: {
+        target_entity_id: ::String?,
+        target_component_name: ::String?
+      }?,
+      expression: ::String?
+    }
+
+      type data_type = {
+      type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+      nested_type: {
+        type: ("RELATIONSHIP" | "STRING" | "LONG" | "BOOLEAN" | "INTEGER" | "DOUBLE" | "LIST" | "MAP"),
+        nested_type: untyped?,
+        allowed_values: Array[
+          Params::data_value
+        ]?,
+        unit_of_measure: ::String?,
+        relationship: {
+          target_component_type_id: ::String?,
+          relationship_type: ::String?
+        }?
+      }?,
+      allowed_values: Array[
+        Params::data_value
+      ]?,
+      unit_of_measure: ::String?,
+      relationship: {
+        target_component_type_id: ::String?,
+        relationship_type: ::String?
+      }?
+    }
+
+      type property_definition_request = {
+      data_type: Params::data_type?,
+      is_required_in_entity: bool?,
+      is_external_id: bool?,
+      is_stored_externally: bool?,
+      is_time_series: bool?,
+      default_value: Params::data_value?,
+      configuration: Hash[::String, ::String]?,
+      display_name: ::String?
+    }
+
+      type function_request = {
+      required_properties: Array[::String]?,
+      scope: ("ENTITY" | "WORKSPACE")?,
+      implemented_by: {
+        lambda: {
+          arn: ::String
+        }?,
+        is_native: bool?
+      }?
+    }
+
+      type property_request = {
+      definition: Params::property_definition_request?,
+      value: Params::data_value?,
+      update_type: ("UPDATE" | "DELETE" | "CREATE" | "RESET_VALUE")?
+    }
+
+      type property_filter = {
+      property_name: ::String?,
+      operator: ::String?,
+      value: Params::data_value?
+    }
+
+    end
+  end
+end

@@ -57,7 +57,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> DBSubnetGroup
                 | (?Hash[Symbol, untyped]) -> DBSubnetGroup

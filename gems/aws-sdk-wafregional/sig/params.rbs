@@ -1,0 +1,39 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WAFRegional
+    module Params
+      type rule_update = {
+      action: ("INSERT" | "DELETE"),
+      predicate: {
+        negated: bool,
+        type: ("IPMatch" | "ByteMatch" | "SqlInjectionMatch" | "GeoMatch" | "SizeConstraint" | "XssMatch" | "RegexMatch"),
+        data_id: ::String
+      }
+    }
+
+      type activated_rule = {
+      priority: ::Integer,
+      rule_id: ::String,
+      action: {
+        type: ("BLOCK" | "ALLOW" | "COUNT")
+      }?,
+      override_action: {
+        type: ("NONE" | "COUNT")
+      }?,
+      type: ("REGULAR" | "RATE_BASED" | "GROUP")?,
+      excluded_rules: Array[
+        {
+          rule_id: ::String
+        }
+      ]?
+    }
+
+    end
+  end
+end

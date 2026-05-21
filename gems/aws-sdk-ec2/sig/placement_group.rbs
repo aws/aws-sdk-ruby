@@ -73,7 +73,7 @@ module Aws
                          {
                            name: ::String?,
                            values: Array[::String]?
-                         },
+                         }
                        ]
                      ) -> Instance::Collection
                    | (?Hash[Symbol, untyped]) -> Instance::Collection

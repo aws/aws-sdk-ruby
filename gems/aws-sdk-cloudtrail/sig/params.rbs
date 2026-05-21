@@ -1,0 +1,39 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudTrail
+    module Params
+      type refresh_schedule = {
+      frequency: {
+        unit: ("HOURS" | "DAYS")?,
+        value: ::Integer?
+      }?,
+      status: ("ENABLED" | "DISABLED")?,
+      time_of_day: ::String?
+    }
+
+      type advanced_event_selector = {
+      name: ::String?,
+      field_selectors: Array[
+        Params::advanced_field_selector
+      ]
+    }
+
+      type advanced_field_selector = {
+      field: ::String,
+      equals: Array[::String]?,
+      starts_with: Array[::String]?,
+      ends_with: Array[::String]?,
+      not_equals: Array[::String]?,
+      not_starts_with: Array[::String]?,
+      not_ends_with: Array[::String]?
+    }
+
+    end
+  end
+end

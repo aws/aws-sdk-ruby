@@ -108,38 +108,7 @@ module Aws
                                                  state: ("Enabled" | "Disabled"),
                                                  mux_type: ("ContentOnly")?
                                                },
-                                               composited_video: {
-                                                 layout: ("GridView")?,
-                                                 resolution: ("HD" | "FHD")?,
-                                                 grid_view_configuration: {
-                                                   content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly"),
-                                                   presenter_only_configuration: {
-                                                     presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
-                                                   }?,
-                                                   active_speaker_only_configuration: {
-                                                     active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
-                                                   }?,
-                                                   horizontal_layout_configuration: {
-                                                     tile_order: ("JoinSequence" | "SpeakerSequence")?,
-                                                     tile_position: ("Top" | "Bottom")?,
-                                                     tile_count: ::Integer?,
-                                                     tile_aspect_ratio: ::String?
-                                                   }?,
-                                                   vertical_layout_configuration: {
-                                                     tile_order: ("JoinSequence" | "SpeakerSequence")?,
-                                                     tile_position: ("Left" | "Right")?,
-                                                     tile_count: ::Integer?,
-                                                     tile_aspect_ratio: ::String?
-                                                   }?,
-                                                   video_attribute: {
-                                                     corner_radius: ::Integer?,
-                                                     border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
-                                                     highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
-                                                     border_thickness: ::Integer?
-                                                   }?,
-                                                   canvas_orientation: ("Landscape" | "Portrait")?
-                                                 }
-                                               }?
+                                               composited_video: Params::composited_video_artifacts_configuration?
                                              }?
                                            },
                                            ?sse_aws_key_management_params: {
@@ -151,7 +120,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ]
                                          ) -> _CreateMediaCapturePipelineResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaCapturePipelineResponseSuccess
@@ -193,7 +162,7 @@ module Aws
                                                          }
                                                        }
                                                      }
-                                                   },
+                                                   }
                                                  ],
                                                  sinks: Array[
                                                    {
@@ -201,14 +170,14 @@ module Aws
                                                      s3_bucket_sink_configuration: {
                                                        destination: ::String
                                                      }
-                                                   },
+                                                   }
                                                  ],
                                                  ?client_request_token: ::String,
                                                  ?tags: Array[
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _CreateMediaConcatenationPipelineResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaConcatenationPipelineResponseSuccess
@@ -231,10 +200,10 @@ module Aws
                                                       {
                                                         channel_id: ::Integer,
                                                         participant_role: ("AGENT" | "CUSTOMER")?
-                                                      },
+                                                      }
                                                     ]?
                                                   }
-                                                },
+                                                }
                                               ],
                                               media_encoding: ("pcm"),
                                               media_sample_rate: ::Integer
@@ -244,7 +213,7 @@ module Aws
                                               streams: Array[
                                                 {
                                                   stream_arn: ::String?
-                                                },
+                                                }
                                               ],
                                               fragment_selector: {
                                                 fragment_selector_type: ("ProducerTimestamp" | "ServerTimestamp"),
@@ -262,7 +231,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?client_request_token: ::String
                                           ) -> _CreateMediaInsightsPipelineResponseSuccess
@@ -276,100 +245,15 @@ module Aws
       def create_media_insights_pipeline_configuration: (
                                                           media_insights_pipeline_configuration_name: ::String,
                                                           resource_access_role_arn: ::String,
-                                                          ?real_time_alert_configuration: {
-                                                            disabled: bool?,
-                                                            rules: Array[
-                                                              {
-                                                                type: ("KeywordMatch" | "Sentiment" | "IssueDetection"),
-                                                                keyword_match_configuration: {
-                                                                  rule_name: ::String,
-                                                                  keywords: Array[::String],
-                                                                  negate: bool?
-                                                                }?,
-                                                                sentiment_configuration: {
-                                                                  rule_name: ::String,
-                                                                  sentiment_type: ("NEGATIVE"),
-                                                                  time_period: ::Integer
-                                                                }?,
-                                                                issue_detection_configuration: {
-                                                                  rule_name: ::String
-                                                                }?
-                                                              },
-                                                            ]?
-                                                          },
+                                                          ?real_time_alert_configuration: Params::real_time_alert_configuration,
                                                           elements: Array[
-                                                            {
-                                                              type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink"),
-                                                              amazon_transcribe_call_analytics_processor_configuration: {
-                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
-                                                                vocabulary_name: ::String?,
-                                                                vocabulary_filter_name: ::String?,
-                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
-                                                                language_model_name: ::String?,
-                                                                enable_partial_results_stabilization: bool?,
-                                                                partial_results_stability: ("high" | "medium" | "low")?,
-                                                                content_identification_type: ("PII")?,
-                                                                content_redaction_type: ("PII")?,
-                                                                pii_entity_types: ::String?,
-                                                                filter_partial_results: bool?,
-                                                                post_call_analytics_settings: {
-                                                                  output_location: ::String,
-                                                                  data_access_role_arn: ::String,
-                                                                  content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
-                                                                  output_encryption_kms_key_id: ::String?
-                                                                }?,
-                                                                call_analytics_stream_categories: Array[::String]?
-                                                              }?,
-                                                              amazon_transcribe_processor_configuration: {
-                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
-                                                                vocabulary_name: ::String?,
-                                                                vocabulary_filter_name: ::String?,
-                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
-                                                                show_speaker_label: bool?,
-                                                                enable_partial_results_stabilization: bool?,
-                                                                partial_results_stability: ("high" | "medium" | "low")?,
-                                                                content_identification_type: ("PII")?,
-                                                                content_redaction_type: ("PII")?,
-                                                                pii_entity_types: ::String?,
-                                                                language_model_name: ::String?,
-                                                                filter_partial_results: bool?,
-                                                                identify_language: bool?,
-                                                                identify_multiple_languages: bool?,
-                                                                language_options: ::String?,
-                                                                preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
-                                                                vocabulary_names: ::String?,
-                                                                vocabulary_filter_names: ::String?
-                                                              }?,
-                                                              kinesis_data_stream_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              s3_recording_sink_configuration: {
-                                                                destination: ::String?,
-                                                                recording_file_format: ("Wav" | "Opus")?
-                                                              }?,
-                                                              voice_analytics_processor_configuration: {
-                                                                speaker_search_status: ("Enabled" | "Disabled")?,
-                                                                voice_tone_analysis_status: ("Enabled" | "Disabled")?
-                                                              }?,
-                                                              lambda_function_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              sqs_queue_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              sns_topic_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              voice_enhancement_sink_configuration: {
-                                                                disabled: bool?
-                                                              }?
-                                                            },
+                                                            Params::media_insights_pipeline_configuration_element
                                                           ],
                                                           ?tags: Array[
                                                             {
                                                               key: ::String,
                                                               value: ::String
-                                                            },
+                                                            }
                                                           ],
                                                           ?client_request_token: ::String
                                                         ) -> _CreateMediaInsightsPipelineConfigurationResponseSuccess
@@ -387,38 +271,7 @@ module Aws
                                                       chime_sdk_meeting_live_connector_configuration: {
                                                         arn: ::String,
                                                         mux_type: ("AudioWithCompositedVideo" | "AudioWithActiveSpeakerVideo"),
-                                                        composited_video: {
-                                                          layout: ("GridView")?,
-                                                          resolution: ("HD" | "FHD")?,
-                                                          grid_view_configuration: {
-                                                            content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly"),
-                                                            presenter_only_configuration: {
-                                                              presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
-                                                            }?,
-                                                            active_speaker_only_configuration: {
-                                                              active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
-                                                            }?,
-                                                            horizontal_layout_configuration: {
-                                                              tile_order: ("JoinSequence" | "SpeakerSequence")?,
-                                                              tile_position: ("Top" | "Bottom")?,
-                                                              tile_count: ::Integer?,
-                                                              tile_aspect_ratio: ::String?
-                                                            }?,
-                                                            vertical_layout_configuration: {
-                                                              tile_order: ("JoinSequence" | "SpeakerSequence")?,
-                                                              tile_position: ("Left" | "Right")?,
-                                                              tile_count: ::Integer?,
-                                                              tile_aspect_ratio: ::String?
-                                                            }?,
-                                                            video_attribute: {
-                                                              corner_radius: ::Integer?,
-                                                              border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
-                                                              highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
-                                                              border_thickness: ::Integer?
-                                                            }?,
-                                                            canvas_orientation: ("Landscape" | "Portrait")?
-                                                          }
-                                                        }?,
+                                                        composited_video: Params::composited_video_artifacts_configuration?,
                                                         source_configuration: {
                                                           selected_video_streams: {
                                                             attendee_ids: Array[::String]?,
@@ -426,7 +279,7 @@ module Aws
                                                           }?
                                                         }?
                                                       }
-                                                    },
+                                                    }
                                                   ],
                                                   sinks: Array[
                                                     {
@@ -436,14 +289,14 @@ module Aws
                                                         audio_channels: ("Stereo" | "Mono")?,
                                                         audio_sample_rate: ::String?
                                                       }
-                                                    },
+                                                    }
                                                   ],
                                                   ?client_request_token: ::String,
                                                   ?tags: Array[
                                                     {
                                                       key: ::String,
                                                       value: ::String
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _CreateMediaLiveConnectorPipelineResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaLiveConnectorPipelineResponseSuccess
@@ -464,7 +317,7 @@ module Aws
                                                                {
                                                                  key: ::String,
                                                                  value: ::String
-                                                               },
+                                                               }
                                                              ]
                                                            ) -> _CreateMediaPipelineKinesisVideoStreamPoolResponseSuccess
                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaPipelineKinesisVideoStreamPoolResponseSuccess
@@ -479,7 +332,7 @@ module Aws
                                             {
                                               source_type: ("ChimeSdkMeeting"),
                                               source_arn: ::String
-                                            },
+                                            }
                                           ],
                                           sinks: Array[
                                             {
@@ -487,14 +340,14 @@ module Aws
                                               sink_type: ("KinesisVideoStreamPool"),
                                               reserved_stream_capacity: ::Integer,
                                               media_stream_type: ("MixedAudio" | "IndividualAudio")
-                                            },
+                                            }
                                           ],
                                           ?client_request_token: ::String,
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateMediaStreamPipelineResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMediaStreamPipelineResponseSuccess
@@ -701,7 +554,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -724,94 +577,9 @@ module Aws
       def update_media_insights_pipeline_configuration: (
                                                           identifier: ::String,
                                                           resource_access_role_arn: ::String,
-                                                          ?real_time_alert_configuration: {
-                                                            disabled: bool?,
-                                                            rules: Array[
-                                                              {
-                                                                type: ("KeywordMatch" | "Sentiment" | "IssueDetection"),
-                                                                keyword_match_configuration: {
-                                                                  rule_name: ::String,
-                                                                  keywords: Array[::String],
-                                                                  negate: bool?
-                                                                }?,
-                                                                sentiment_configuration: {
-                                                                  rule_name: ::String,
-                                                                  sentiment_type: ("NEGATIVE"),
-                                                                  time_period: ::Integer
-                                                                }?,
-                                                                issue_detection_configuration: {
-                                                                  rule_name: ::String
-                                                                }?
-                                                              },
-                                                            ]?
-                                                          },
+                                                          ?real_time_alert_configuration: Params::real_time_alert_configuration,
                                                           elements: Array[
-                                                            {
-                                                              type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink"),
-                                                              amazon_transcribe_call_analytics_processor_configuration: {
-                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
-                                                                vocabulary_name: ::String?,
-                                                                vocabulary_filter_name: ::String?,
-                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
-                                                                language_model_name: ::String?,
-                                                                enable_partial_results_stabilization: bool?,
-                                                                partial_results_stability: ("high" | "medium" | "low")?,
-                                                                content_identification_type: ("PII")?,
-                                                                content_redaction_type: ("PII")?,
-                                                                pii_entity_types: ::String?,
-                                                                filter_partial_results: bool?,
-                                                                post_call_analytics_settings: {
-                                                                  output_location: ::String,
-                                                                  data_access_role_arn: ::String,
-                                                                  content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
-                                                                  output_encryption_kms_key_id: ::String?
-                                                                }?,
-                                                                call_analytics_stream_categories: Array[::String]?
-                                                              }?,
-                                                              amazon_transcribe_processor_configuration: {
-                                                                language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
-                                                                vocabulary_name: ::String?,
-                                                                vocabulary_filter_name: ::String?,
-                                                                vocabulary_filter_method: ("remove" | "mask" | "tag")?,
-                                                                show_speaker_label: bool?,
-                                                                enable_partial_results_stabilization: bool?,
-                                                                partial_results_stability: ("high" | "medium" | "low")?,
-                                                                content_identification_type: ("PII")?,
-                                                                content_redaction_type: ("PII")?,
-                                                                pii_entity_types: ::String?,
-                                                                language_model_name: ::String?,
-                                                                filter_partial_results: bool?,
-                                                                identify_language: bool?,
-                                                                identify_multiple_languages: bool?,
-                                                                language_options: ::String?,
-                                                                preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
-                                                                vocabulary_names: ::String?,
-                                                                vocabulary_filter_names: ::String?
-                                                              }?,
-                                                              kinesis_data_stream_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              s3_recording_sink_configuration: {
-                                                                destination: ::String?,
-                                                                recording_file_format: ("Wav" | "Opus")?
-                                                              }?,
-                                                              voice_analytics_processor_configuration: {
-                                                                speaker_search_status: ("Enabled" | "Disabled")?,
-                                                                voice_tone_analysis_status: ("Enabled" | "Disabled")?
-                                                              }?,
-                                                              lambda_function_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              sqs_queue_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              sns_topic_sink_configuration: {
-                                                                insights_target: ::String?
-                                                              }?,
-                                                              voice_enhancement_sink_configuration: {
-                                                                disabled: bool?
-                                                              }?
-                                                            },
+                                                            Params::media_insights_pipeline_configuration_element
                                                           ]
                                                         ) -> _UpdateMediaInsightsPipelineConfigurationResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMediaInsightsPipelineConfigurationResponseSuccess

@@ -1,0 +1,114 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Backup
+    module Params
+      type backup_plan_input = {
+      backup_plan_name: ::String,
+      rules: Array[
+        Params::backup_rule_input
+      ],
+      advanced_backup_settings: Array[
+        {
+          resource_type: ::String?,
+          backup_options: Hash[::String, ::String]?
+        }
+      ]?,
+      scan_settings: Array[
+        {
+          malware_scanner: ("GUARDDUTY")?,
+          resource_types: Array[::String]?,
+          scanner_role_arn: ::String?
+        }
+      ]?
+    }
+
+      type backup_rule_input = {
+      rule_name: ::String,
+      target_backup_vault_name: ::String,
+      target_logically_air_gapped_backup_vault_arn: ::String?,
+      schedule_expression: ::String?,
+      start_window_minutes: ::Integer?,
+      completion_window_minutes: ::Integer?,
+      lifecycle: {
+        move_to_cold_storage_after_days: ::Integer?,
+        delete_after_days: ::Integer?,
+        opt_in_to_archive_for_supported_resources: bool?,
+        delete_after_event: ("DELETE_AFTER_COPY")?
+      }?,
+      recovery_point_tags: Hash[::String, ::String]?,
+      copy_actions: Array[
+        Params::copy_action
+      ]?,
+      enable_continuous_backup: bool?,
+      schedule_expression_timezone: ::String?,
+      index_actions: Array[
+        {
+          resource_types: Array[::String]?
+        }
+      ]?,
+      scan_actions: Array[
+        {
+          malware_scanner: ("GUARDDUTY")?,
+          scan_mode: ("FULL_SCAN" | "INCREMENTAL_SCAN")?
+        }
+      ]?
+    }
+
+      type copy_action = {
+      lifecycle: {
+        move_to_cold_storage_after_days: ::Integer?,
+        delete_after_days: ::Integer?,
+        opt_in_to_archive_for_supported_resources: bool?,
+        delete_after_event: ("DELETE_AFTER_COPY")?
+      }?,
+      destination_backup_vault_arn: ::String
+    }
+
+      type framework_control = {
+      control_name: ::String,
+      control_input_parameters: Array[
+        {
+          parameter_name: ::String?,
+          parameter_value: ::String?
+        }
+      ]?,
+      control_scope: {
+        compliance_resource_ids: Array[::String]?,
+        compliance_resource_types: Array[::String]?,
+        tags: Hash[::String, ::String]?
+      }?
+    }
+
+      type report_setting = {
+      report_template: ::String,
+      framework_arns: Array[::String]?,
+      number_of_frameworks: ::Integer?,
+      accounts: Array[::String]?,
+      organization_units: Array[::String]?,
+      regions: Array[::String]?
+    }
+
+      type protected_resource_conditions = {
+      string_equals: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      string_not_equals: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+    end
+  end
+end

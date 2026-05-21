@@ -289,60 +289,9 @@ module Aws
                                            arn: ::String,
                                            ?next_token: ::String,
                                            raster_data_collection_query: {
-                                             area_of_interest: {
-                                               area_of_interest_geometry: {
-                                                 multi_polygon_geometry: {
-                                                   coordinates: Array[
-                                                     Array[
-                                                       Array[
-                                                         Array[::Float],
-                                                       ],
-                                                     ],
-                                                   ]
-                                                 }?,
-                                                 polygon_geometry: {
-                                                   coordinates: Array[
-                                                     Array[
-                                                       Array[::Float],
-                                                     ],
-                                                   ]
-                                                 }?
-                                               }?
-                                             }?,
+                                             area_of_interest: Params::area_of_interest?,
                                              band_filter: Array[::String]?,
-                                             property_filters: {
-                                               logical_operator: ("AND")?,
-                                               properties: Array[
-                                                 {
-                                                   property: {
-                                                     eo_cloud_cover: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     landsat_cloud_cover_land: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     platform: {
-                                                       comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")?,
-                                                       value: ::String
-                                                     }?,
-                                                     view_off_nadir: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     view_sun_azimuth: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     view_sun_elevation: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?
-                                                   }
-                                                 },
-                                               ]?
-                                             }?,
+                                             property_filters: Params::property_filters?,
                                              time_range_filter: {
                                                end_time: ::Time,
                                                start_time: ::Time
@@ -371,59 +320,8 @@ module Aws
                                          input_config: {
                                            previous_earth_observation_job_arn: ::String?,
                                            raster_data_collection_query: {
-                                             area_of_interest: {
-                                               area_of_interest_geometry: {
-                                                 multi_polygon_geometry: {
-                                                   coordinates: Array[
-                                                     Array[
-                                                       Array[
-                                                         Array[::Float],
-                                                       ],
-                                                     ],
-                                                   ]
-                                                 }?,
-                                                 polygon_geometry: {
-                                                   coordinates: Array[
-                                                     Array[
-                                                       Array[::Float],
-                                                     ],
-                                                   ]
-                                                 }?
-                                               }?
-                                             }?,
-                                             property_filters: {
-                                               logical_operator: ("AND")?,
-                                               properties: Array[
-                                                 {
-                                                   property: {
-                                                     eo_cloud_cover: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     landsat_cloud_cover_land: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     platform: {
-                                                       comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")?,
-                                                       value: ::String
-                                                     }?,
-                                                     view_off_nadir: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     view_sun_azimuth: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?,
-                                                     view_sun_elevation: {
-                                                       lower_bound: ::Float,
-                                                       upper_bound: ::Float
-                                                     }?
-                                                   }
-                                                 },
-                                               ]?
-                                             }?,
+                                             area_of_interest: Params::area_of_interest?,
+                                             property_filters: Params::property_filters?,
                                              raster_data_collection_arn: ::String,
                                              time_range_filter: {
                                                end_time: ::Time,
@@ -439,7 +337,7 @@ module Aws
                                                    equation: ::String,
                                                    name: ::String,
                                                    output_type: ("INT32" | "FLOAT32" | "INT16" | "FLOAT64" | "UINT16")?
-                                                 },
+                                                 }
                                                ]?
                                              }?,
                                              predefined_indices: Array[::String]?

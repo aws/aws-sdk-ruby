@@ -90,7 +90,7 @@ module Aws
                         {
                           key: ::String?,
                           value: ::String?
-                        },
+                        }
                       ],
                       resource_id: ::String,
                       resource_type: ("BatchPrediction" | "DataSource" | "Evaluation" | "MLModel")

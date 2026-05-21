@@ -110,7 +110,7 @@ module Aws
                                           {
                                             tag_key: ::String,
                                             tag_value: ::String
-                                          },
+                                          }
                                         ],
                                         ?batch_inference_job_mode: ("BATCH_INFERENCE" | "THEME_GENERATION"),
                                         ?theme_generation_config: {
@@ -148,7 +148,7 @@ module Aws
                                         {
                                           tag_key: ::String,
                                           tag_value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateBatchSegmentJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBatchSegmentJobResponseSuccess
@@ -172,7 +172,7 @@ module Aws
                                {
                                  tag_key: ::String,
                                  tag_value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateCampaignResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
@@ -193,7 +193,7 @@ module Aws
                                         {
                                           tag_key: ::String,
                                           tag_value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateDataDeletionJobResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataDeletionJobResponseSuccess
@@ -212,7 +212,7 @@ module Aws
                               {
                                 tag_key: ::String,
                                 tag_value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
@@ -237,7 +237,7 @@ module Aws
                                          {
                                            tag_key: ::String,
                                            tag_value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateDatasetExportJobResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetExportJobResponseSuccess
@@ -257,7 +257,7 @@ module Aws
                                     {
                                       tag_key: ::String,
                                       tag_value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateDatasetGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetGroupResponseSuccess
@@ -278,7 +278,7 @@ module Aws
                                          {
                                            tag_key: ::String,
                                            tag_value: ::String
-                                         },
+                                         }
                                        ],
                                        ?import_mode: ("FULL" | "INCREMENTAL"),
                                        ?publish_attribution_metrics_to_s3: bool
@@ -298,7 +298,7 @@ module Aws
                                     {
                                       tag_key: ::String,
                                       tag_value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateEventTrackerResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventTrackerResponseSuccess
@@ -316,7 +316,7 @@ module Aws
                              {
                                tag_key: ::String,
                                tag_value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreateFilterResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFilterResponseSuccess
@@ -334,7 +334,7 @@ module Aws
                                            event_type: ::String,
                                            metric_name: ::String,
                                            expression: ::String
-                                         },
+                                         }
                                        ],
                                        metrics_output_config: {
                                          s3_data_destination: {
@@ -355,20 +355,12 @@ module Aws
                                 name: ::String,
                                 dataset_group_arn: ::String,
                                 recipe_arn: ::String,
-                                ?recommender_config: {
-                                  item_exploration_config: Hash[::String, ::String]?,
-                                  min_recommendation_requests_per_second: ::Integer?,
-                                  training_data_config: {
-                                    excluded_dataset_columns: Hash[::String, Array[::String]]?,
-                                    included_dataset_columns: Hash[::String, Array[::String]]?
-                                  }?,
-                                  enable_metadata_with_recommendations: bool?
-                                },
+                                ?recommender_config: Params::recommender_config,
                                 ?tags: Array[
                                   {
                                     tag_key: ::String,
                                     tag_value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _CreateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRecommenderResponseSuccess
@@ -417,20 +409,20 @@ module Aws
                                        name: ::String?,
                                        min_value: ::Integer?,
                                        max_value: ::Integer?
-                                     },
+                                     }
                                    ]?,
                                    continuous_hyper_parameter_ranges: Array[
                                      {
                                        name: ::String?,
                                        min_value: ::Float?,
                                        max_value: ::Float?
-                                     },
+                                     }
                                    ]?,
                                    categorical_hyper_parameter_ranges: Array[
                                      {
                                        name: ::String?,
                                        values: Array[::String]?
-                                     },
+                                     }
                                    ]?
                                  }?
                                }?,
@@ -446,7 +438,7 @@ module Aws
                                      event_type: ::String?,
                                      event_value_threshold: ::Float?,
                                      weight: ::Float?
-                                   },
+                                   }
                                  ]?
                                }?,
                                optimization_objective: {
@@ -465,7 +457,7 @@ module Aws
                                {
                                  tag_key: ::String,
                                  tag_value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateSolutionResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolutionResponseSuccess
@@ -483,7 +475,7 @@ module Aws
                                        {
                                          tag_key: ::String,
                                          tag_value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateSolutionVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSolutionVersionResponseSuccess
@@ -999,7 +991,7 @@ module Aws
                             {
                               tag_key: ::String,
                               tag_value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1054,7 +1046,7 @@ module Aws
                                            event_type: ::String,
                                            metric_name: ::String,
                                            expression: ::String
-                                         },
+                                         }
                                        ],
                                        ?remove_metrics: Array[::String],
                                        ?metrics_output_config: {
@@ -1075,15 +1067,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Personalize/Client.html#update_recommender-instance_method
       def update_recommender: (
                                 recommender_arn: ::String,
-                                recommender_config: {
-                                  item_exploration_config: Hash[::String, ::String]?,
-                                  min_recommendation_requests_per_second: ::Integer?,
-                                  training_data_config: {
-                                    excluded_dataset_columns: Hash[::String, Array[::String]]?,
-                                    included_dataset_columns: Hash[::String, Array[::String]]?
-                                  }?,
-                                  enable_metadata_with_recommendations: bool?
-                                }
+                                recommender_config: Params::recommender_config
                               ) -> _UpdateRecommenderResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRecommenderResponseSuccess
 
@@ -1106,7 +1090,7 @@ module Aws
                                      event_type: ::String?,
                                      event_value_threshold: ::Float?,
                                      weight: ::Float?
-                                   },
+                                   }
                                  ]?
                                }?
                              }

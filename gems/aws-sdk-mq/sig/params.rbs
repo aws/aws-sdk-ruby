@@ -1,0 +1,27 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MQ
+    module Params
+      type ldap_server_metadata_input = {
+      hosts: Array[::String],
+      role_base: ::String,
+      role_name: ::String?,
+      role_search_matching: ::String,
+      role_search_subtree: bool?,
+      service_account_password: ::String,
+      service_account_username: ::String,
+      user_base: ::String,
+      user_role_name: ::String?,
+      user_search_matching: ::String,
+      user_search_subtree: bool?
+    }
+
+    end
+  end
+end

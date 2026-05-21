@@ -51,7 +51,7 @@ module Aws
                         key: ::String,
                         value: ::String?,
                         propagate_at_launch: bool?
-                      },
+                      }
                     ]
                   ) -> ::Aws::EmptyStructure
                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure
@@ -65,7 +65,7 @@ module Aws
                         key: ::String,
                         value: ::String?,
                         propagate_at_launch: bool?
-                      },
+                      }
                     ]
                   ) -> ::Aws::EmptyStructure
                 | (?Hash[Symbol, untyped]) -> ::Aws::EmptyStructure

@@ -89,7 +89,7 @@ module Aws
                                            event_publishers: Array[("AnomalyDetection")],
                                            id: ::String?,
                                            uri: ::String
-                                         },
+                                         }
                                        ],
                                        profiling_group_name: ::String
                                      ) -> _AddNotificationChannelsResponseSuccess
@@ -112,7 +112,7 @@ module Aws
                                              frame_name: ::String,
                                              thread_states: Array[::String],
                                              type: ("AggregatedRelativeTotalTime")
-                                           },
+                                           }
                                          ],
                                          ?period: ::String,
                                          profiling_group_name: ::String,

@@ -115,28 +115,14 @@ module Aws
                                           placement_group: ::String?,
                                           bid_percentage: ::Integer?,
                                           spot_iam_fleet_role: ::String?,
-                                          launch_template: {
-                                            launch_template_id: ::String?,
-                                            launch_template_name: ::String?,
-                                            version: ::String?,
-                                            overrides: Array[
-                                              {
-                                                launch_template_id: ::String?,
-                                                launch_template_name: ::String?,
-                                                version: ::String?,
-                                                target_instance_types: Array[::String]?,
-                                                userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
-                                              },
-                                            ]?,
-                                            userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
-                                          }?,
+                                          launch_template: Params::launch_template_specification?,
                                           ec2_configuration: Array[
                                             {
                                               image_type: ::String,
                                               image_id_override: ::String?,
                                               batch_image_status: ::String?,
                                               image_kubernetes_version: ::String?
-                                            },
+                                            }
                                           ]?,
                                           scaling_policy: {
                                             min_scale_down_delay_minutes: ::Integer?
@@ -181,13 +167,13 @@ module Aws
                                 {
                                   order: ::Integer,
                                   compute_environment: ::String
-                                },
+                                }
                               ],
                               ?service_environment_order: Array[
                                 {
                                   order: ::Integer,
                                   service_environment: ::String
-                                },
+                                }
                               ],
                               ?job_queue_type: ("EKS" | "ECS" | "ECS_FARGATE" | "SAGEMAKER_TRAINING"),
                               ?tags: Hash[::String, ::String],
@@ -197,7 +183,7 @@ module Aws
                                   state: ("RUNNABLE"),
                                   max_time_seconds: ::Integer,
                                   action: ("CANCEL" | "TERMINATE")
-                                },
+                                }
                               ]
                             ) -> _CreateJobQueueResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobQueueResponseSuccess
@@ -215,7 +201,7 @@ module Aws
                                   {
                                     max_capacity: ::Integer,
                                     capacity_unit: ::String
-                                  },
+                                  }
                                 ],
                                 resource_sharing_configuration: {
                                   strategy: ("RESERVE" | "LEND" | "LEND_AND_BORROW"),
@@ -240,16 +226,7 @@ module Aws
                                       ?quota_share_policy: {
                                         idle_resource_assignment_strategy: ("FIFO")
                                       },
-                                      ?fairshare_policy: {
-                                        share_decay_seconds: ::Integer?,
-                                        compute_reservation: ::Integer?,
-                                        share_distribution: Array[
-                                          {
-                                            share_identifier: ::String,
-                                            weight_factor: ::Float?
-                                          },
-                                        ]?
-                                      },
+                                      ?fairshare_policy: Params::fairshare_policy,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateSchedulingPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSchedulingPolicyResponseSuccess
@@ -268,7 +245,7 @@ module Aws
                                           {
                                             max_capacity: ::Integer?,
                                             capacity_unit: ::String?
-                                          },
+                                          }
                                         ],
                                         ?tags: Hash[::String, ::String]
                                       ) -> _CreateServiceEnvironmentResponseSuccess
@@ -502,7 +479,7 @@ module Aws
                                          {
                                            name: ::String?,
                                            values: Array[::String]?
-                                         },
+                                         }
                                        ],
                                        ?max_results: ::Integer,
                                        ?next_token: ::String
@@ -526,7 +503,7 @@ module Aws
                          {
                            name: ::String?,
                            values: Array[::String]?
-                         },
+                         }
                        ]
                      ) -> _ListJobsResponseSuccess
                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListJobsResponseSuccess
@@ -543,7 +520,7 @@ module Aws
                                                 {
                                                   name: ::String?,
                                                   values: Array[::String]?
-                                                },
+                                                }
                                               ],
                                               ?max_results: ::Integer,
                                               ?next_token: ::String
@@ -590,7 +567,7 @@ module Aws
                                  {
                                    name: ::String?,
                                    values: Array[::String]?
-                                 },
+                                 }
                                ]
                              ) -> _ListServiceJobsResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceJobsResponseSuccess
@@ -617,761 +594,43 @@ module Aws
                                      type: ("container" | "multinode"),
                                      ?parameters: Hash[::String, ::String],
                                      ?scheduling_priority: ::Integer,
-                                     ?container_properties: {
-                                       image: ::String?,
-                                       vcpus: ::Integer?,
-                                       memory: ::Integer?,
-                                       command: Array[::String]?,
-                                       job_role_arn: ::String?,
-                                       execution_role_arn: ::String?,
-                                       volumes: Array[
-                                         {
-                                           host: {
-                                             source_path: ::String?
-                                           }?,
-                                           name: ::String?,
-                                           efs_volume_configuration: {
-                                             file_system_id: ::String,
-                                             root_directory: ::String?,
-                                             transit_encryption: ("ENABLED" | "DISABLED")?,
-                                             transit_encryption_port: ::Integer?,
-                                             authorization_config: {
-                                               access_point_id: ::String?,
-                                               iam: ("ENABLED" | "DISABLED")?
-                                             }?
-                                           }?,
-                                           s3files_volume_configuration: {
-                                             file_system_arn: ::String,
-                                             root_directory: ::String?,
-                                             transit_encryption_port: ::Integer?,
-                                             access_point_arn: ::String?
-                                           }?
-                                         },
-                                       ]?,
-                                       environment: Array[
-                                         {
-                                           name: ::String?,
-                                           value: ::String?
-                                         },
-                                       ]?,
-                                       mount_points: Array[
-                                         {
-                                           container_path: ::String?,
-                                           read_only: bool?,
-                                           source_volume: ::String?
-                                         },
-                                       ]?,
-                                       readonly_root_filesystem: bool?,
-                                       privileged: bool?,
-                                       ulimits: Array[
-                                         {
-                                           hard_limit: ::Integer,
-                                           name: ::String,
-                                           soft_limit: ::Integer
-                                         },
-                                       ]?,
-                                       user: ::String?,
-                                       instance_type: ::String?,
-                                       resource_requirements: Array[
-                                         {
-                                           value: ::String,
-                                           type: ("GPU" | "VCPU" | "MEMORY")
-                                         },
-                                       ]?,
-                                       linux_parameters: {
-                                         devices: Array[
-                                           {
-                                             host_path: ::String,
-                                             container_path: ::String?,
-                                             permissions: Array[("READ" | "WRITE" | "MKNOD")]?
-                                           },
-                                         ]?,
-                                         init_process_enabled: bool?,
-                                         shared_memory_size: ::Integer?,
-                                         tmpfs: Array[
-                                           {
-                                             container_path: ::String,
-                                             size: ::Integer,
-                                             mount_options: Array[::String]?
-                                           },
-                                         ]?,
-                                         max_swap: ::Integer?,
-                                         swappiness: ::Integer?
-                                       }?,
-                                       log_configuration: {
-                                         log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
-                                         options: Hash[::String, ::String]?,
-                                         secret_options: Array[
-                                           {
-                                             name: ::String,
-                                             value_from: ::String
-                                           },
-                                         ]?
-                                       }?,
-                                       secrets: Array[
-                                         {
-                                           name: ::String,
-                                           value_from: ::String
-                                         },
-                                       ]?,
-                                       network_configuration: {
-                                         assign_public_ip: ("ENABLED" | "DISABLED")?
-                                       }?,
-                                       fargate_platform_configuration: {
-                                         platform_version: ::String?
-                                       }?,
-                                       enable_execute_command: bool?,
-                                       ephemeral_storage: {
-                                         size_in_gi_b: ::Integer
-                                       }?,
-                                       runtime_platform: {
-                                         operating_system_family: ::String?,
-                                         cpu_architecture: ::String?
-                                       }?,
-                                       repository_credentials: {
-                                         credentials_parameter: ::String
-                                       }?
-                                     },
+                                     ?container_properties: Params::container_properties,
                                      ?node_properties: {
                                        num_nodes: ::Integer,
                                        main_node: ::Integer,
                                        node_range_properties: Array[
                                          {
                                            target_nodes: ::String,
-                                           container: {
-                                             image: ::String?,
-                                             vcpus: ::Integer?,
-                                             memory: ::Integer?,
-                                             command: Array[::String]?,
-                                             job_role_arn: ::String?,
-                                             execution_role_arn: ::String?,
-                                             volumes: Array[
-                                               {
-                                                 host: {
-                                                   source_path: ::String?
-                                                 }?,
-                                                 name: ::String?,
-                                                 efs_volume_configuration: {
-                                                   file_system_id: ::String,
-                                                   root_directory: ::String?,
-                                                   transit_encryption: ("ENABLED" | "DISABLED")?,
-                                                   transit_encryption_port: ::Integer?,
-                                                   authorization_config: {
-                                                     access_point_id: ::String?,
-                                                     iam: ("ENABLED" | "DISABLED")?
-                                                   }?
-                                                 }?,
-                                                 s3files_volume_configuration: {
-                                                   file_system_arn: ::String,
-                                                   root_directory: ::String?,
-                                                   transit_encryption_port: ::Integer?,
-                                                   access_point_arn: ::String?
-                                                 }?
-                                               },
-                                             ]?,
-                                             environment: Array[
-                                               {
-                                                 name: ::String?,
-                                                 value: ::String?
-                                               },
-                                             ]?,
-                                             mount_points: Array[
-                                               {
-                                                 container_path: ::String?,
-                                                 read_only: bool?,
-                                                 source_volume: ::String?
-                                               },
-                                             ]?,
-                                             readonly_root_filesystem: bool?,
-                                             privileged: bool?,
-                                             ulimits: Array[
-                                               {
-                                                 hard_limit: ::Integer,
-                                                 name: ::String,
-                                                 soft_limit: ::Integer
-                                               },
-                                             ]?,
-                                             user: ::String?,
-                                             instance_type: ::String?,
-                                             resource_requirements: Array[
-                                               {
-                                                 value: ::String,
-                                                 type: ("GPU" | "VCPU" | "MEMORY")
-                                               },
-                                             ]?,
-                                             linux_parameters: {
-                                               devices: Array[
-                                                 {
-                                                   host_path: ::String,
-                                                   container_path: ::String?,
-                                                   permissions: Array[("READ" | "WRITE" | "MKNOD")]?
-                                                 },
-                                               ]?,
-                                               init_process_enabled: bool?,
-                                               shared_memory_size: ::Integer?,
-                                               tmpfs: Array[
-                                                 {
-                                                   container_path: ::String,
-                                                   size: ::Integer,
-                                                   mount_options: Array[::String]?
-                                                 },
-                                               ]?,
-                                               max_swap: ::Integer?,
-                                               swappiness: ::Integer?
-                                             }?,
-                                             log_configuration: {
-                                               log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
-                                               options: Hash[::String, ::String]?,
-                                               secret_options: Array[
-                                                 {
-                                                   name: ::String,
-                                                   value_from: ::String
-                                                 },
-                                               ]?
-                                             }?,
-                                             secrets: Array[
-                                               {
-                                                 name: ::String,
-                                                 value_from: ::String
-                                               },
-                                             ]?,
-                                             network_configuration: {
-                                               assign_public_ip: ("ENABLED" | "DISABLED")?
-                                             }?,
-                                             fargate_platform_configuration: {
-                                               platform_version: ::String?
-                                             }?,
-                                             enable_execute_command: bool?,
-                                             ephemeral_storage: {
-                                               size_in_gi_b: ::Integer
-                                             }?,
-                                             runtime_platform: {
-                                               operating_system_family: ::String?,
-                                               cpu_architecture: ::String?
-                                             }?,
-                                             repository_credentials: {
-                                               credentials_parameter: ::String
-                                             }?
-                                           }?,
+                                           container: Params::container_properties?,
                                            instance_types: Array[::String]?,
-                                           ecs_properties: {
-                                             task_properties: Array[
-                                               {
-                                                 containers: Array[
-                                                   {
-                                                     command: Array[::String]?,
-                                                     depends_on: Array[
-                                                       {
-                                                         container_name: ::String?,
-                                                         condition: ::String?
-                                                       },
-                                                     ]?,
-                                                     environment: Array[
-                                                       {
-                                                         name: ::String?,
-                                                         value: ::String?
-                                                       },
-                                                     ]?,
-                                                     essential: bool?,
-                                                     firelens_configuration: {
-                                                       type: ("fluentd" | "fluentbit"),
-                                                       options: Hash[::String, ::String]?
-                                                     }?,
-                                                     image: ::String,
-                                                     linux_parameters: {
-                                                       devices: Array[
-                                                         {
-                                                           host_path: ::String,
-                                                           container_path: ::String?,
-                                                           permissions: Array[("READ" | "WRITE" | "MKNOD")]?
-                                                         },
-                                                       ]?,
-                                                       init_process_enabled: bool?,
-                                                       shared_memory_size: ::Integer?,
-                                                       tmpfs: Array[
-                                                         {
-                                                           container_path: ::String,
-                                                           size: ::Integer,
-                                                           mount_options: Array[::String]?
-                                                         },
-                                                       ]?,
-                                                       max_swap: ::Integer?,
-                                                       swappiness: ::Integer?
-                                                     }?,
-                                                     log_configuration: {
-                                                       log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
-                                                       options: Hash[::String, ::String]?,
-                                                       secret_options: Array[
-                                                         {
-                                                           name: ::String,
-                                                           value_from: ::String
-                                                         },
-                                                       ]?
-                                                     }?,
-                                                     mount_points: Array[
-                                                       {
-                                                         container_path: ::String?,
-                                                         read_only: bool?,
-                                                         source_volume: ::String?
-                                                       },
-                                                     ]?,
-                                                     name: ::String?,
-                                                     privileged: bool?,
-                                                     readonly_root_filesystem: bool?,
-                                                     repository_credentials: {
-                                                       credentials_parameter: ::String
-                                                     }?,
-                                                     resource_requirements: Array[
-                                                       {
-                                                         value: ::String,
-                                                         type: ("GPU" | "VCPU" | "MEMORY")
-                                                       },
-                                                     ]?,
-                                                     secrets: Array[
-                                                       {
-                                                         name: ::String,
-                                                         value_from: ::String
-                                                       },
-                                                     ]?,
-                                                     ulimits: Array[
-                                                       {
-                                                         hard_limit: ::Integer,
-                                                         name: ::String,
-                                                         soft_limit: ::Integer
-                                                       },
-                                                     ]?,
-                                                     user: ::String?,
-                                                     start_timeout: ::Integer?,
-                                                     stop_timeout: ::Integer?
-                                                   },
-                                                 ],
-                                                 ephemeral_storage: {
-                                                   size_in_gi_b: ::Integer
-                                                 }?,
-                                                 execution_role_arn: ::String?,
-                                                 platform_version: ::String?,
-                                                 ipc_mode: ::String?,
-                                                 task_role_arn: ::String?,
-                                                 pid_mode: ::String?,
-                                                 network_configuration: {
-                                                   assign_public_ip: ("ENABLED" | "DISABLED")?
-                                                 }?,
-                                                 runtime_platform: {
-                                                   operating_system_family: ::String?,
-                                                   cpu_architecture: ::String?
-                                                 }?,
-                                                 volumes: Array[
-                                                   {
-                                                     host: {
-                                                       source_path: ::String?
-                                                     }?,
-                                                     name: ::String?,
-                                                     efs_volume_configuration: {
-                                                       file_system_id: ::String,
-                                                       root_directory: ::String?,
-                                                       transit_encryption: ("ENABLED" | "DISABLED")?,
-                                                       transit_encryption_port: ::Integer?,
-                                                       authorization_config: {
-                                                         access_point_id: ::String?,
-                                                         iam: ("ENABLED" | "DISABLED")?
-                                                       }?
-                                                     }?,
-                                                     s3files_volume_configuration: {
-                                                       file_system_arn: ::String,
-                                                       root_directory: ::String?,
-                                                       transit_encryption_port: ::Integer?,
-                                                       access_point_arn: ::String?
-                                                     }?
-                                                   },
-                                                 ]?,
-                                                 enable_execute_command: bool?
-                                               },
-                                             ]
-                                           }?,
-                                           eks_properties: {
-                                             pod_properties: {
-                                               service_account_name: ::String?,
-                                               host_network: bool?,
-                                               dns_policy: ::String?,
-                                               image_pull_secrets: Array[
-                                                 {
-                                                   name: ::String
-                                                 },
-                                               ]?,
-                                               containers: Array[
-                                                 {
-                                                   name: ::String?,
-                                                   image: ::String,
-                                                   image_pull_policy: ::String?,
-                                                   command: Array[::String]?,
-                                                   args: Array[::String]?,
-                                                   env: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String?
-                                                     },
-                                                   ]?,
-                                                   resources: {
-                                                     limits: Hash[::String, ::String]?,
-                                                     requests: Hash[::String, ::String]?
-                                                   }?,
-                                                   volume_mounts: Array[
-                                                     {
-                                                       name: ::String?,
-                                                       mount_path: ::String?,
-                                                       sub_path: ::String?,
-                                                       read_only: bool?
-                                                     },
-                                                   ]?,
-                                                   security_context: {
-                                                     run_as_user: ::Integer?,
-                                                     run_as_group: ::Integer?,
-                                                     privileged: bool?,
-                                                     allow_privilege_escalation: bool?,
-                                                     read_only_root_filesystem: bool?,
-                                                     run_as_non_root: bool?
-                                                   }?
-                                                 },
-                                               ]?,
-                                               init_containers: Array[
-                                                 {
-                                                   name: ::String?,
-                                                   image: ::String,
-                                                   image_pull_policy: ::String?,
-                                                   command: Array[::String]?,
-                                                   args: Array[::String]?,
-                                                   env: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String?
-                                                     },
-                                                   ]?,
-                                                   resources: {
-                                                     limits: Hash[::String, ::String]?,
-                                                     requests: Hash[::String, ::String]?
-                                                   }?,
-                                                   volume_mounts: Array[
-                                                     {
-                                                       name: ::String?,
-                                                       mount_path: ::String?,
-                                                       sub_path: ::String?,
-                                                       read_only: bool?
-                                                     },
-                                                   ]?,
-                                                   security_context: {
-                                                     run_as_user: ::Integer?,
-                                                     run_as_group: ::Integer?,
-                                                     privileged: bool?,
-                                                     allow_privilege_escalation: bool?,
-                                                     read_only_root_filesystem: bool?,
-                                                     run_as_non_root: bool?
-                                                   }?
-                                                 },
-                                               ]?,
-                                               volumes: Array[
-                                                 {
-                                                   name: ::String,
-                                                   host_path: {
-                                                     path: ::String?
-                                                   }?,
-                                                   empty_dir: {
-                                                     medium: ::String?,
-                                                     size_limit: ::String?
-                                                   }?,
-                                                   secret: {
-                                                     secret_name: ::String,
-                                                     optional: bool?
-                                                   }?,
-                                                   persistent_volume_claim: {
-                                                     claim_name: ::String,
-                                                     read_only: bool?
-                                                   }?
-                                                 },
-                                               ]?,
-                                               metadata: {
-                                                 labels: Hash[::String, ::String]?,
-                                                 annotations: Hash[::String, ::String]?,
-                                                 namespace: ::String?
-                                               }?,
-                                               share_process_namespace: bool?
-                                             }?
-                                           }?,
+                                           ecs_properties: Params::ecs_properties?,
+                                           eks_properties: Params::eks_properties?,
                                            consumable_resource_properties: {
                                              consumable_resource_list: Array[
                                                {
                                                  consumable_resource: ::String?,
                                                  quantity: ::Integer?
-                                               },
+                                               }
                                              ]?
                                            }?
-                                         },
+                                         }
                                        ]
                                      },
-                                     ?retry_strategy: {
-                                       attempts: ::Integer?,
-                                       evaluate_on_exit: Array[
-                                         {
-                                           on_status_reason: ::String?,
-                                           on_reason: ::String?,
-                                           on_exit_code: ::String?,
-                                           action: ("RETRY" | "EXIT")
-                                         },
-                                       ]?
-                                     },
+                                     ?retry_strategy: Params::retry_strategy,
                                      ?propagate_tags: bool,
                                      ?timeout: {
                                        attempt_duration_seconds: ::Integer?
                                      },
                                      ?tags: Hash[::String, ::String],
                                      ?platform_capabilities: Array[("EC2" | "FARGATE")],
-                                     ?eks_properties: {
-                                       pod_properties: {
-                                         service_account_name: ::String?,
-                                         host_network: bool?,
-                                         dns_policy: ::String?,
-                                         image_pull_secrets: Array[
-                                           {
-                                             name: ::String
-                                           },
-                                         ]?,
-                                         containers: Array[
-                                           {
-                                             name: ::String?,
-                                             image: ::String,
-                                             image_pull_policy: ::String?,
-                                             command: Array[::String]?,
-                                             args: Array[::String]?,
-                                             env: Array[
-                                               {
-                                                 name: ::String,
-                                                 value: ::String?
-                                               },
-                                             ]?,
-                                             resources: {
-                                               limits: Hash[::String, ::String]?,
-                                               requests: Hash[::String, ::String]?
-                                             }?,
-                                             volume_mounts: Array[
-                                               {
-                                                 name: ::String?,
-                                                 mount_path: ::String?,
-                                                 sub_path: ::String?,
-                                                 read_only: bool?
-                                               },
-                                             ]?,
-                                             security_context: {
-                                               run_as_user: ::Integer?,
-                                               run_as_group: ::Integer?,
-                                               privileged: bool?,
-                                               allow_privilege_escalation: bool?,
-                                               read_only_root_filesystem: bool?,
-                                               run_as_non_root: bool?
-                                             }?
-                                           },
-                                         ]?,
-                                         init_containers: Array[
-                                           {
-                                             name: ::String?,
-                                             image: ::String,
-                                             image_pull_policy: ::String?,
-                                             command: Array[::String]?,
-                                             args: Array[::String]?,
-                                             env: Array[
-                                               {
-                                                 name: ::String,
-                                                 value: ::String?
-                                               },
-                                             ]?,
-                                             resources: {
-                                               limits: Hash[::String, ::String]?,
-                                               requests: Hash[::String, ::String]?
-                                             }?,
-                                             volume_mounts: Array[
-                                               {
-                                                 name: ::String?,
-                                                 mount_path: ::String?,
-                                                 sub_path: ::String?,
-                                                 read_only: bool?
-                                               },
-                                             ]?,
-                                             security_context: {
-                                               run_as_user: ::Integer?,
-                                               run_as_group: ::Integer?,
-                                               privileged: bool?,
-                                               allow_privilege_escalation: bool?,
-                                               read_only_root_filesystem: bool?,
-                                               run_as_non_root: bool?
-                                             }?
-                                           },
-                                         ]?,
-                                         volumes: Array[
-                                           {
-                                             name: ::String,
-                                             host_path: {
-                                               path: ::String?
-                                             }?,
-                                             empty_dir: {
-                                               medium: ::String?,
-                                               size_limit: ::String?
-                                             }?,
-                                             secret: {
-                                               secret_name: ::String,
-                                               optional: bool?
-                                             }?,
-                                             persistent_volume_claim: {
-                                               claim_name: ::String,
-                                               read_only: bool?
-                                             }?
-                                           },
-                                         ]?,
-                                         metadata: {
-                                           labels: Hash[::String, ::String]?,
-                                           annotations: Hash[::String, ::String]?,
-                                           namespace: ::String?
-                                         }?,
-                                         share_process_namespace: bool?
-                                       }?
-                                     },
-                                     ?ecs_properties: {
-                                       task_properties: Array[
-                                         {
-                                           containers: Array[
-                                             {
-                                               command: Array[::String]?,
-                                               depends_on: Array[
-                                                 {
-                                                   container_name: ::String?,
-                                                   condition: ::String?
-                                                 },
-                                               ]?,
-                                               environment: Array[
-                                                 {
-                                                   name: ::String?,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               essential: bool?,
-                                               firelens_configuration: {
-                                                 type: ("fluentd" | "fluentbit"),
-                                                 options: Hash[::String, ::String]?
-                                               }?,
-                                               image: ::String,
-                                               linux_parameters: {
-                                                 devices: Array[
-                                                   {
-                                                     host_path: ::String,
-                                                     container_path: ::String?,
-                                                     permissions: Array[("READ" | "WRITE" | "MKNOD")]?
-                                                   },
-                                                 ]?,
-                                                 init_process_enabled: bool?,
-                                                 shared_memory_size: ::Integer?,
-                                                 tmpfs: Array[
-                                                   {
-                                                     container_path: ::String,
-                                                     size: ::Integer,
-                                                     mount_options: Array[::String]?
-                                                   },
-                                                 ]?,
-                                                 max_swap: ::Integer?,
-                                                 swappiness: ::Integer?
-                                               }?,
-                                               log_configuration: {
-                                                 log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens"),
-                                                 options: Hash[::String, ::String]?,
-                                                 secret_options: Array[
-                                                   {
-                                                     name: ::String,
-                                                     value_from: ::String
-                                                   },
-                                                 ]?
-                                               }?,
-                                               mount_points: Array[
-                                                 {
-                                                   container_path: ::String?,
-                                                   read_only: bool?,
-                                                   source_volume: ::String?
-                                                 },
-                                               ]?,
-                                               name: ::String?,
-                                               privileged: bool?,
-                                               readonly_root_filesystem: bool?,
-                                               repository_credentials: {
-                                                 credentials_parameter: ::String
-                                               }?,
-                                               resource_requirements: Array[
-                                                 {
-                                                   value: ::String,
-                                                   type: ("GPU" | "VCPU" | "MEMORY")
-                                                 },
-                                               ]?,
-                                               secrets: Array[
-                                                 {
-                                                   name: ::String,
-                                                   value_from: ::String
-                                                 },
-                                               ]?,
-                                               ulimits: Array[
-                                                 {
-                                                   hard_limit: ::Integer,
-                                                   name: ::String,
-                                                   soft_limit: ::Integer
-                                                 },
-                                               ]?,
-                                               user: ::String?,
-                                               start_timeout: ::Integer?,
-                                               stop_timeout: ::Integer?
-                                             },
-                                           ],
-                                           ephemeral_storage: {
-                                             size_in_gi_b: ::Integer
-                                           }?,
-                                           execution_role_arn: ::String?,
-                                           platform_version: ::String?,
-                                           ipc_mode: ::String?,
-                                           task_role_arn: ::String?,
-                                           pid_mode: ::String?,
-                                           network_configuration: {
-                                             assign_public_ip: ("ENABLED" | "DISABLED")?
-                                           }?,
-                                           runtime_platform: {
-                                             operating_system_family: ::String?,
-                                             cpu_architecture: ::String?
-                                           }?,
-                                           volumes: Array[
-                                             {
-                                               host: {
-                                                 source_path: ::String?
-                                               }?,
-                                               name: ::String?,
-                                               efs_volume_configuration: {
-                                                 file_system_id: ::String,
-                                                 root_directory: ::String?,
-                                                 transit_encryption: ("ENABLED" | "DISABLED")?,
-                                                 transit_encryption_port: ::Integer?,
-                                                 authorization_config: {
-                                                   access_point_id: ::String?,
-                                                   iam: ("ENABLED" | "DISABLED")?
-                                                 }?
-                                               }?,
-                                               s3files_volume_configuration: {
-                                                 file_system_arn: ::String,
-                                                 root_directory: ::String?,
-                                                 transit_encryption_port: ::Integer?,
-                                                 access_point_arn: ::String?
-                                               }?
-                                             },
-                                           ]?,
-                                           enable_execute_command: bool?
-                                         },
-                                       ]
-                                     },
+                                     ?eks_properties: Params::eks_properties,
+                                     ?ecs_properties: Params::ecs_properties,
                                      ?consumable_resource_properties: {
                                        consumable_resource_list: Array[
                                          {
                                            consumable_resource: ::String?,
                                            quantity: ::Integer?
-                                         },
+                                         }
                                        ]?
                                      }
                                    ) -> _RegisterJobDefinitionResponseSuccess
@@ -1396,223 +655,45 @@ module Aws
                           {
                             job_id: ::String?,
                             type: ("N_TO_N" | "SEQUENTIAL")?
-                          },
+                          }
                         ],
                         job_definition: ::String,
                         ?parameters: Hash[::String, ::String],
-                        ?container_overrides: {
-                          vcpus: ::Integer?,
-                          memory: ::Integer?,
-                          command: Array[::String]?,
-                          instance_type: ::String?,
-                          environment: Array[
-                            {
-                              name: ::String?,
-                              value: ::String?
-                            },
-                          ]?,
-                          resource_requirements: Array[
-                            {
-                              value: ::String,
-                              type: ("GPU" | "VCPU" | "MEMORY")
-                            },
-                          ]?
-                        },
+                        ?container_overrides: Params::container_overrides,
                         ?node_overrides: {
                           num_nodes: ::Integer?,
                           node_property_overrides: Array[
                             {
                               target_nodes: ::String,
-                              container_overrides: {
-                                vcpus: ::Integer?,
-                                memory: ::Integer?,
-                                command: Array[::String]?,
-                                instance_type: ::String?,
-                                environment: Array[
-                                  {
-                                    name: ::String?,
-                                    value: ::String?
-                                  },
-                                ]?,
-                                resource_requirements: Array[
-                                  {
-                                    value: ::String,
-                                    type: ("GPU" | "VCPU" | "MEMORY")
-                                  },
-                                ]?
-                              }?,
-                              ecs_properties_override: {
-                                task_properties: Array[
-                                  {
-                                    containers: Array[
-                                      {
-                                        command: Array[::String]?,
-                                        environment: Array[
-                                          {
-                                            name: ::String?,
-                                            value: ::String?
-                                          },
-                                        ]?,
-                                        name: ::String?,
-                                        resource_requirements: Array[
-                                          {
-                                            value: ::String,
-                                            type: ("GPU" | "VCPU" | "MEMORY")
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  },
-                                ]?
-                              }?,
+                              container_overrides: Params::container_overrides?,
+                              ecs_properties_override: Params::ecs_properties_override?,
                               instance_types: Array[::String]?,
-                              eks_properties_override: {
-                                pod_properties: {
-                                  containers: Array[
-                                    {
-                                      name: ::String?,
-                                      image: ::String?,
-                                      command: Array[::String]?,
-                                      args: Array[::String]?,
-                                      env: Array[
-                                        {
-                                          name: ::String,
-                                          value: ::String?
-                                        },
-                                      ]?,
-                                      resources: {
-                                        limits: Hash[::String, ::String]?,
-                                        requests: Hash[::String, ::String]?
-                                      }?
-                                    },
-                                  ]?,
-                                  init_containers: Array[
-                                    {
-                                      name: ::String?,
-                                      image: ::String?,
-                                      command: Array[::String]?,
-                                      args: Array[::String]?,
-                                      env: Array[
-                                        {
-                                          name: ::String,
-                                          value: ::String?
-                                        },
-                                      ]?,
-                                      resources: {
-                                        limits: Hash[::String, ::String]?,
-                                        requests: Hash[::String, ::String]?
-                                      }?
-                                    },
-                                  ]?,
-                                  metadata: {
-                                    labels: Hash[::String, ::String]?,
-                                    annotations: Hash[::String, ::String]?,
-                                    namespace: ::String?
-                                  }?
-                                }?
-                              }?,
+                              eks_properties_override: Params::eks_properties_override?,
                               consumable_resource_properties_override: {
                                 consumable_resource_list: Array[
                                   {
                                     consumable_resource: ::String?,
                                     quantity: ::Integer?
-                                  },
+                                  }
                                 ]?
                               }?
-                            },
+                            }
                           ]?
                         },
-                        ?retry_strategy: {
-                          attempts: ::Integer?,
-                          evaluate_on_exit: Array[
-                            {
-                              on_status_reason: ::String?,
-                              on_reason: ::String?,
-                              on_exit_code: ::String?,
-                              action: ("RETRY" | "EXIT")
-                            },
-                          ]?
-                        },
+                        ?retry_strategy: Params::retry_strategy,
                         ?propagate_tags: bool,
                         ?timeout: {
                           attempt_duration_seconds: ::Integer?
                         },
                         ?tags: Hash[::String, ::String],
-                        ?eks_properties_override: {
-                          pod_properties: {
-                            containers: Array[
-                              {
-                                name: ::String?,
-                                image: ::String?,
-                                command: Array[::String]?,
-                                args: Array[::String]?,
-                                env: Array[
-                                  {
-                                    name: ::String,
-                                    value: ::String?
-                                  },
-                                ]?,
-                                resources: {
-                                  limits: Hash[::String, ::String]?,
-                                  requests: Hash[::String, ::String]?
-                                }?
-                              },
-                            ]?,
-                            init_containers: Array[
-                              {
-                                name: ::String?,
-                                image: ::String?,
-                                command: Array[::String]?,
-                                args: Array[::String]?,
-                                env: Array[
-                                  {
-                                    name: ::String,
-                                    value: ::String?
-                                  },
-                                ]?,
-                                resources: {
-                                  limits: Hash[::String, ::String]?,
-                                  requests: Hash[::String, ::String]?
-                                }?
-                              },
-                            ]?,
-                            metadata: {
-                              labels: Hash[::String, ::String]?,
-                              annotations: Hash[::String, ::String]?,
-                              namespace: ::String?
-                            }?
-                          }?
-                        },
-                        ?ecs_properties_override: {
-                          task_properties: Array[
-                            {
-                              containers: Array[
-                                {
-                                  command: Array[::String]?,
-                                  environment: Array[
-                                    {
-                                      name: ::String?,
-                                      value: ::String?
-                                    },
-                                  ]?,
-                                  name: ::String?,
-                                  resource_requirements: Array[
-                                    {
-                                      value: ::String,
-                                      type: ("GPU" | "VCPU" | "MEMORY")
-                                    },
-                                  ]?
-                                },
-                              ]?
-                            },
-                          ]?
-                        },
+                        ?eks_properties_override: Params::eks_properties_override,
+                        ?ecs_properties_override: Params::ecs_properties_override,
                         ?consumable_resource_properties_override: {
                           consumable_resource_list: Array[
                             {
                               consumable_resource: ::String?,
                               quantity: ::Integer?
-                            },
+                            }
                           ]?
                         }
                       ) -> _SubmitJobResponseSuccess
@@ -1634,7 +715,7 @@ module Aws
                                     {
                                       action: ("RETRY" | "EXIT")?,
                                       on_status_reason: ::String?
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?scheduling_priority: ::Integer,
@@ -1716,28 +797,14 @@ module Aws
                                           tags: Hash[::String, ::String]?,
                                           placement_group: ::String?,
                                           bid_percentage: ::Integer?,
-                                          launch_template: {
-                                            launch_template_id: ::String?,
-                                            launch_template_name: ::String?,
-                                            version: ::String?,
-                                            overrides: Array[
-                                              {
-                                                launch_template_id: ::String?,
-                                                launch_template_name: ::String?,
-                                                version: ::String?,
-                                                target_instance_types: Array[::String]?,
-                                                userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
-                                              },
-                                            ]?,
-                                            userdata_type: ("EKS_BOOTSTRAP_SH" | "EKS_NODEADM")?
-                                          }?,
+                                          launch_template: Params::launch_template_specification?,
                                           ec2_configuration: Array[
                                             {
                                               image_type: ::String,
                                               image_id_override: ::String?,
                                               batch_image_status: ::String?,
                                               image_kubernetes_version: ::String?
-                                            },
+                                            }
                                           ]?,
                                           update_to_latest_image_version: bool?,
                                           type: ("EC2" | "SPOT" | "FARGATE" | "FARGATE_SPOT")?,
@@ -1785,13 +852,13 @@ module Aws
                                 {
                                   order: ::Integer,
                                   compute_environment: ::String
-                                },
+                                }
                               ],
                               ?service_environment_order: Array[
                                 {
                                   order: ::Integer,
                                   service_environment: ::String
-                                },
+                                }
                               ],
                               ?job_state_time_limit_actions: Array[
                                 {
@@ -1799,7 +866,7 @@ module Aws
                                   state: ("RUNNABLE"),
                                   max_time_seconds: ::Integer,
                                   action: ("CANCEL" | "TERMINATE")
-                                },
+                                }
                               ]
                             ) -> _UpdateJobQueueResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobQueueResponseSuccess
@@ -1816,7 +883,7 @@ module Aws
                                   {
                                     max_capacity: ::Integer,
                                     capacity_unit: ::String
-                                  },
+                                  }
                                 ],
                                 ?resource_sharing_configuration: {
                                   strategy: ("RESERVE" | "LEND" | "LEND_AND_BORROW"),
@@ -1838,16 +905,7 @@ module Aws
                                       ?quota_share_policy: {
                                         idle_resource_assignment_strategy: ("FIFO")
                                       },
-                                      ?fairshare_policy: {
-                                        share_decay_seconds: ::Integer?,
-                                        compute_reservation: ::Integer?,
-                                        share_distribution: Array[
-                                          {
-                                            share_identifier: ::String,
-                                            weight_factor: ::Float?
-                                          },
-                                        ]?
-                                      }
+                                      ?fairshare_policy: Params::fairshare_policy
                                     ) -> _UpdateSchedulingPolicyResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSchedulingPolicyResponseSuccess
 
@@ -1864,7 +922,7 @@ module Aws
                                           {
                                             max_capacity: ::Integer?,
                                             capacity_unit: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _UpdateServiceEnvironmentResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateServiceEnvironmentResponseSuccess

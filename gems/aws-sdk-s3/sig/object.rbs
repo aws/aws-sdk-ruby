@@ -406,21 +406,21 @@ module Aws
                                         uri: ::String?
                                       }?,
                                       permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                                    },
+                                    }
                                   ]?,
                                   tagging: {
                                     tag_set: Array[
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]
                                   }?,
                                   user_metadata: Array[
                                     {
                                       name: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ]?,
                                   storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")?
                                 }?

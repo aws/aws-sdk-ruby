@@ -131,59 +131,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_cluster-instance_method
       def create_cluster: (
                             job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE"),
-                            ?resources: {
-                              s3_resources: Array[
-                                {
-                                  bucket_arn: ::String?,
-                                  key_range: {
-                                    begin_marker: ::String?,
-                                    end_marker: ::String?
-                                  }?,
-                                  target_on_device_services: Array[
-                                    {
-                                      service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
-                                      transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
-                                    },
-                                  ]?
-                                },
-                              ]?,
-                              lambda_resources: Array[
-                                {
-                                  lambda_arn: ::String?,
-                                  event_triggers: Array[
-                                    {
-                                      event_resource_arn: ::String?
-                                    },
-                                  ]?
-                                },
-                              ]?,
-                              ec2_ami_resources: Array[
-                                {
-                                  ami_id: ::String,
-                                  snowball_ami_id: ::String?
-                                },
-                              ]?
-                            },
-                            ?on_device_service_configuration: {
-                              nfs_on_device_service: {
-                                storage_limit: ::Integer?,
-                                storage_unit: ("TB")?
-                              }?,
-                              tgw_on_device_service: {
-                                storage_limit: ::Integer?,
-                                storage_unit: ("TB")?
-                              }?,
-                              eks_on_device_service: {
-                                kubernetes_version: ::String?,
-                                eks_anywhere_version: ::String?
-                              }?,
-                              s3_on_device_service: {
-                                storage_limit: ::Float?,
-                                storage_unit: ("TB")?,
-                                service_size: ::Integer?,
-                                fault_tolerance: ::Integer?
-                              }?
-                            },
+                            ?resources: Params::job_resource,
+                            ?on_device_service_configuration: Params::on_device_service_configuration,
                             ?description: ::String,
                             address_id: ::String,
                             ?kms_key_arn: ::String,
@@ -217,59 +166,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Snowball/Client.html#create_job-instance_method
       def create_job: (
                         ?job_type: ("IMPORT" | "EXPORT" | "LOCAL_USE"),
-                        ?resources: {
-                          s3_resources: Array[
-                            {
-                              bucket_arn: ::String?,
-                              key_range: {
-                                begin_marker: ::String?,
-                                end_marker: ::String?
-                              }?,
-                              target_on_device_services: Array[
-                                {
-                                  service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
-                                  transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
-                                },
-                              ]?
-                            },
-                          ]?,
-                          lambda_resources: Array[
-                            {
-                              lambda_arn: ::String?,
-                              event_triggers: Array[
-                                {
-                                  event_resource_arn: ::String?
-                                },
-                              ]?
-                            },
-                          ]?,
-                          ec2_ami_resources: Array[
-                            {
-                              ami_id: ::String,
-                              snowball_ami_id: ::String?
-                            },
-                          ]?
-                        },
-                        ?on_device_service_configuration: {
-                          nfs_on_device_service: {
-                            storage_limit: ::Integer?,
-                            storage_unit: ("TB")?
-                          }?,
-                          tgw_on_device_service: {
-                            storage_limit: ::Integer?,
-                            storage_unit: ("TB")?
-                          }?,
-                          eks_on_device_service: {
-                            kubernetes_version: ::String?,
-                            eks_anywhere_version: ::String?
-                          }?,
-                          s3_on_device_service: {
-                            storage_limit: ::Float?,
-                            storage_unit: ("TB")?,
-                            service_size: ::Integer?,
-                            fault_tolerance: ::Integer?
-                          }?
-                        },
+                        ?resources: Params::job_resource,
+                        ?on_device_service_configuration: Params::on_device_service_configuration,
                         ?description: ::String,
                         ?address_id: ::String,
                         ?kms_key_arn: ::String,
@@ -300,15 +198,7 @@ module Aws
                         ?remote_management: ("INSTALLED_ONLY" | "INSTALLED_AUTOSTART" | "NOT_INSTALLED"),
                         ?long_term_pricing_id: ::String,
                         ?impact_level: ("IL2" | "IL4" | "IL5" | "IL6" | "IL99"),
-                        ?pickup_details: {
-                          name: ::String?,
-                          phone_number: ::String?,
-                          email: ::String?,
-                          identification_number: ::String?,
-                          identification_expiration_date: ::Time?,
-                          identification_issuing_org: ::String?,
-                          device_pickup_id: ::String?
-                        }
+                        ?pickup_details: Params::pickup_details
                       ) -> _CreateJobResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateJobResponseSuccess
 
@@ -519,7 +409,7 @@ module Aws
                                        service_version: {
                                          version: ::String?
                                        }?
-                                     },
+                                     }
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -534,59 +424,8 @@ module Aws
                             cluster_id: ::String,
                             ?role_arn: ::String,
                             ?description: ::String,
-                            ?resources: {
-                              s3_resources: Array[
-                                {
-                                  bucket_arn: ::String?,
-                                  key_range: {
-                                    begin_marker: ::String?,
-                                    end_marker: ::String?
-                                  }?,
-                                  target_on_device_services: Array[
-                                    {
-                                      service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
-                                      transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
-                                    },
-                                  ]?
-                                },
-                              ]?,
-                              lambda_resources: Array[
-                                {
-                                  lambda_arn: ::String?,
-                                  event_triggers: Array[
-                                    {
-                                      event_resource_arn: ::String?
-                                    },
-                                  ]?
-                                },
-                              ]?,
-                              ec2_ami_resources: Array[
-                                {
-                                  ami_id: ::String,
-                                  snowball_ami_id: ::String?
-                                },
-                              ]?
-                            },
-                            ?on_device_service_configuration: {
-                              nfs_on_device_service: {
-                                storage_limit: ::Integer?,
-                                storage_unit: ("TB")?
-                              }?,
-                              tgw_on_device_service: {
-                                storage_limit: ::Integer?,
-                                storage_unit: ("TB")?
-                              }?,
-                              eks_on_device_service: {
-                                kubernetes_version: ::String?,
-                                eks_anywhere_version: ::String?
-                              }?,
-                              s3_on_device_service: {
-                                storage_limit: ::Float?,
-                                storage_unit: ("TB")?,
-                                service_size: ::Integer?,
-                                fault_tolerance: ::Integer?
-                              }?
-                            },
+                            ?resources: Params::job_resource,
+                            ?on_device_service_configuration: Params::on_device_service_configuration,
                             ?address_id: ::String,
                             ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
                             ?notification: {
@@ -612,73 +451,14 @@ module Aws
                           notify_all: bool?,
                           device_pickup_sns_topic_arn: ::String?
                         },
-                        ?resources: {
-                          s3_resources: Array[
-                            {
-                              bucket_arn: ::String?,
-                              key_range: {
-                                begin_marker: ::String?,
-                                end_marker: ::String?
-                              }?,
-                              target_on_device_services: Array[
-                                {
-                                  service_name: ("NFS_ON_DEVICE_SERVICE" | "S3_ON_DEVICE_SERVICE")?,
-                                  transfer_option: ("IMPORT" | "EXPORT" | "LOCAL_USE")?
-                                },
-                              ]?
-                            },
-                          ]?,
-                          lambda_resources: Array[
-                            {
-                              lambda_arn: ::String?,
-                              event_triggers: Array[
-                                {
-                                  event_resource_arn: ::String?
-                                },
-                              ]?
-                            },
-                          ]?,
-                          ec2_ami_resources: Array[
-                            {
-                              ami_id: ::String,
-                              snowball_ami_id: ::String?
-                            },
-                          ]?
-                        },
-                        ?on_device_service_configuration: {
-                          nfs_on_device_service: {
-                            storage_limit: ::Integer?,
-                            storage_unit: ("TB")?
-                          }?,
-                          tgw_on_device_service: {
-                            storage_limit: ::Integer?,
-                            storage_unit: ("TB")?
-                          }?,
-                          eks_on_device_service: {
-                            kubernetes_version: ::String?,
-                            eks_anywhere_version: ::String?
-                          }?,
-                          s3_on_device_service: {
-                            storage_limit: ::Float?,
-                            storage_unit: ("TB")?,
-                            service_size: ::Integer?,
-                            fault_tolerance: ::Integer?
-                          }?
-                        },
+                        ?resources: Params::job_resource,
+                        ?on_device_service_configuration: Params::on_device_service_configuration,
                         ?address_id: ::String,
                         ?shipping_option: ("SECOND_DAY" | "NEXT_DAY" | "EXPRESS" | "STANDARD"),
                         ?description: ::String,
                         ?snowball_capacity_preference: ("T50" | "T80" | "T100" | "T42" | "T98" | "T8" | "T14" | "T32" | "NoPreference" | "T240" | "T13"),
                         ?forwarding_address_id: ::String,
-                        ?pickup_details: {
-                          name: ::String?,
-                          phone_number: ::String?,
-                          email: ::String?,
-                          identification_number: ::String?,
-                          identification_expiration_date: ::Time?,
-                          identification_issuing_org: ::String?,
-                          device_pickup_id: ::String?
-                        }
+                        ?pickup_details: Params::pickup_details
                       ) -> _UpdateJobResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateJobResponseSuccess
 

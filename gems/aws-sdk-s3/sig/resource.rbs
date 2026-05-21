@@ -113,7 +113,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]?
                            },
                            ?grant_full_control: ::String,

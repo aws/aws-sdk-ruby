@@ -85,67 +85,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#add_lf_tags_to_resource-instance_method
       def add_lf_tags_to_resource: (
                                      ?catalog_id: ::String,
-                                     resource: {
-                                       catalog: {
-                                         id: ::String?
-                                       }?,
-                                       database: {
-                                         catalog_id: ::String?,
-                                         name: ::String
-                                       }?,
-                                       table: {
-                                         catalog_id: ::String?,
-                                         database_name: ::String,
-                                         name: ::String?,
-                                         table_wildcard: {
-                                         }?
-                                       }?,
-                                       table_with_columns: {
-                                         catalog_id: ::String?,
-                                         database_name: ::String,
-                                         name: ::String,
-                                         column_names: Array[::String]?,
-                                         column_wildcard: {
-                                           excluded_column_names: Array[::String]?
-                                         }?
-                                       }?,
-                                       data_location: {
-                                         catalog_id: ::String?,
-                                         resource_arn: ::String
-                                       }?,
-                                       data_cells_filter: {
-                                         table_catalog_id: ::String?,
-                                         database_name: ::String?,
-                                         table_name: ::String?,
-                                         name: ::String?
-                                       }?,
-                                       lf_tag: {
-                                         catalog_id: ::String?,
-                                         tag_key: ::String,
-                                         tag_values: Array[::String]
-                                       }?,
-                                       lf_tag_policy: {
-                                         catalog_id: ::String?,
-                                         resource_type: ("DATABASE" | "TABLE"),
-                                         expression: Array[
-                                           {
-                                             tag_key: ::String,
-                                             tag_values: Array[::String]
-                                           },
-                                         ]?,
-                                         expression_name: ::String?
-                                       }?,
-                                       lf_tag_expression: {
-                                         catalog_id: ::String?,
-                                         name: ::String
-                                       }?
-                                     },
+                                     resource: Params::resource,
                                      lf_tags: Array[
                                        {
                                          catalog_id: ::String?,
                                          tag_key: ::String,
                                          tag_values: Array[::String]
-                                       },
+                                       }
                                      ]
                                    ) -> _AddLFTagsToResourceResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddLFTagsToResourceResponseSuccess
@@ -174,72 +120,7 @@ module Aws
       def batch_grant_permissions: (
                                      ?catalog_id: ::String,
                                      entries: Array[
-                                       {
-                                         id: ::String,
-                                         principal: {
-                                           data_lake_principal_identifier: ::String?
-                                         }?,
-                                         resource: {
-                                           catalog: {
-                                             id: ::String?
-                                           }?,
-                                           database: {
-                                             catalog_id: ::String?,
-                                             name: ::String
-                                           }?,
-                                           table: {
-                                             catalog_id: ::String?,
-                                             database_name: ::String,
-                                             name: ::String?,
-                                             table_wildcard: {
-                                             }?
-                                           }?,
-                                           table_with_columns: {
-                                             catalog_id: ::String?,
-                                             database_name: ::String,
-                                             name: ::String,
-                                             column_names: Array[::String]?,
-                                             column_wildcard: {
-                                               excluded_column_names: Array[::String]?
-                                             }?
-                                           }?,
-                                           data_location: {
-                                             catalog_id: ::String?,
-                                             resource_arn: ::String
-                                           }?,
-                                           data_cells_filter: {
-                                             table_catalog_id: ::String?,
-                                             database_name: ::String?,
-                                             table_name: ::String?,
-                                             name: ::String?
-                                           }?,
-                                           lf_tag: {
-                                             catalog_id: ::String?,
-                                             tag_key: ::String,
-                                             tag_values: Array[::String]
-                                           }?,
-                                           lf_tag_policy: {
-                                             catalog_id: ::String?,
-                                             resource_type: ("DATABASE" | "TABLE"),
-                                             expression: Array[
-                                               {
-                                                 tag_key: ::String,
-                                                 tag_values: Array[::String]
-                                               },
-                                             ]?,
-                                             expression_name: ::String?
-                                           }?,
-                                           lf_tag_expression: {
-                                             catalog_id: ::String?,
-                                             name: ::String
-                                           }?
-                                         }?,
-                                         permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?,
-                                         condition: {
-                                           expression: ::String?
-                                         }?,
-                                         permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
-                                       },
+                                       Params::batch_permissions_request_entry
                                      ]
                                    ) -> _BatchGrantPermissionsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGrantPermissionsResponseSuccess
@@ -252,72 +133,7 @@ module Aws
       def batch_revoke_permissions: (
                                       ?catalog_id: ::String,
                                       entries: Array[
-                                        {
-                                          id: ::String,
-                                          principal: {
-                                            data_lake_principal_identifier: ::String?
-                                          }?,
-                                          resource: {
-                                            catalog: {
-                                              id: ::String?
-                                            }?,
-                                            database: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?,
-                                            table: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String?,
-                                              table_wildcard: {
-                                              }?
-                                            }?,
-                                            table_with_columns: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String,
-                                              column_names: Array[::String]?,
-                                              column_wildcard: {
-                                                excluded_column_names: Array[::String]?
-                                              }?
-                                            }?,
-                                            data_location: {
-                                              catalog_id: ::String?,
-                                              resource_arn: ::String
-                                            }?,
-                                            data_cells_filter: {
-                                              table_catalog_id: ::String?,
-                                              database_name: ::String?,
-                                              table_name: ::String?,
-                                              name: ::String?
-                                            }?,
-                                            lf_tag: {
-                                              catalog_id: ::String?,
-                                              tag_key: ::String,
-                                              tag_values: Array[::String]
-                                            }?,
-                                            lf_tag_policy: {
-                                              catalog_id: ::String?,
-                                              resource_type: ("DATABASE" | "TABLE"),
-                                              expression: Array[
-                                                {
-                                                  tag_key: ::String,
-                                                  tag_values: Array[::String]
-                                                },
-                                              ]?,
-                                              expression_name: ::String?
-                                            }?,
-                                            lf_tag_expression: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?
-                                          }?,
-                                          permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?,
-                                          condition: {
-                                            expression: ::String?
-                                          }?,
-                                          permissions_with_grant_option: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
-                                        },
+                                        Params::batch_permissions_request_entry
                                       ]
                                     ) -> _BatchRevokePermissionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchRevokePermissionsResponseSuccess
@@ -346,22 +162,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#create_data_cells_filter-instance_method
       def create_data_cells_filter: (
-                                      table_data: {
-                                        table_catalog_id: ::String,
-                                        database_name: ::String,
-                                        table_name: ::String,
-                                        name: ::String,
-                                        row_filter: {
-                                          filter_expression: ::String?,
-                                          all_rows_wildcard: {
-                                          }?
-                                        }?,
-                                        column_names: Array[::String]?,
-                                        column_wildcard: {
-                                          excluded_column_names: Array[::String]?
-                                        }?,
-                                        version_id: ::String?
-                                      }
+                                      table_data: Params::data_cells_filter
                                     ) -> _CreateDataCellsFilterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataCellsFilterResponseSuccess
 
@@ -388,7 +189,7 @@ module Aws
                                         {
                                           tag_key: ::String,
                                           tag_values: Array[::String]
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateLFTagExpressionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLFTagExpressionResponseSuccess
@@ -408,7 +209,7 @@ module Aws
                                                                  ?share_recipients: Array[
                                                                    {
                                                                      data_lake_principal_identifier: ::String?
-                                                                   },
+                                                                   }
                                                                  ],
                                                                  ?service_integrations: Array[
                                                                    {
@@ -417,9 +218,9 @@ module Aws
                                                                          redshift_connect: {
                                                                            authorization: ("ENABLED" | "DISABLED")
                                                                          }?
-                                                                       },
+                                                                       }
                                                                      ]?
-                                                                   },
+                                                                   }
                                                                  ]
                                                                ) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
                                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLakeFormationIdentityCenterConfigurationResponseSuccess
@@ -432,61 +233,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           },
-                                          resource: {
-                                            catalog: {
-                                              id: ::String?
-                                            }?,
-                                            database: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?,
-                                            table: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String?,
-                                              table_wildcard: {
-                                              }?
-                                            }?,
-                                            table_with_columns: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String,
-                                              column_names: Array[::String]?,
-                                              column_wildcard: {
-                                                excluded_column_names: Array[::String]?
-                                              }?
-                                            }?,
-                                            data_location: {
-                                              catalog_id: ::String?,
-                                              resource_arn: ::String
-                                            }?,
-                                            data_cells_filter: {
-                                              table_catalog_id: ::String?,
-                                              database_name: ::String?,
-                                              table_name: ::String?,
-                                              name: ::String?
-                                            }?,
-                                            lf_tag: {
-                                              catalog_id: ::String?,
-                                              tag_key: ::String,
-                                              tag_values: Array[::String]
-                                            }?,
-                                            lf_tag_policy: {
-                                              catalog_id: ::String?,
-                                              resource_type: ("DATABASE" | "TABLE"),
-                                              expression: Array[
-                                                {
-                                                  tag_key: ::String,
-                                                  tag_values: Array[::String]
-                                                },
-                                              ]?,
-                                              expression_name: ::String?
-                                            }?,
-                                            lf_tag_expression: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?
-                                          },
+                                          resource: Params::resource,
                                           ?condition: {
                                             expression: ::String?
                                           }
@@ -542,61 +289,7 @@ module Aws
                                           principal: {
                                             data_lake_principal_identifier: ::String?
                                           },
-                                          resource: {
-                                            catalog: {
-                                              id: ::String?
-                                            }?,
-                                            database: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?,
-                                            table: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String?,
-                                              table_wildcard: {
-                                              }?
-                                            }?,
-                                            table_with_columns: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String,
-                                              column_names: Array[::String]?,
-                                              column_wildcard: {
-                                                excluded_column_names: Array[::String]?
-                                              }?
-                                            }?,
-                                            data_location: {
-                                              catalog_id: ::String?,
-                                              resource_arn: ::String
-                                            }?,
-                                            data_cells_filter: {
-                                              table_catalog_id: ::String?,
-                                              database_name: ::String?,
-                                              table_name: ::String?,
-                                              name: ::String?
-                                            }?,
-                                            lf_tag: {
-                                              catalog_id: ::String?,
-                                              tag_key: ::String,
-                                              tag_values: Array[::String]
-                                            }?,
-                                            lf_tag_policy: {
-                                              catalog_id: ::String?,
-                                              resource_type: ("DATABASE" | "TABLE"),
-                                              expression: Array[
-                                                {
-                                                  tag_key: ::String,
-                                                  tag_values: Array[::String]
-                                                },
-                                              ]?,
-                                              expression_name: ::String?
-                                            }?,
-                                            lf_tag_expression: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?
-                                          },
+                                          resource: Params::resource,
                                           ?condition: {
                                             expression: ::String?
                                           }
@@ -616,7 +309,7 @@ module Aws
                                         {
                                           uri: ::String,
                                           etag: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _DeleteObjectsOnCancelResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteObjectsOnCancelResponseSuccess
@@ -779,61 +472,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#get_resource_lf_tags-instance_method
       def get_resource_lf_tags: (
                                   ?catalog_id: ::String,
-                                  resource: {
-                                    catalog: {
-                                      id: ::String?
-                                    }?,
-                                    database: {
-                                      catalog_id: ::String?,
-                                      name: ::String
-                                    }?,
-                                    table: {
-                                      catalog_id: ::String?,
-                                      database_name: ::String,
-                                      name: ::String?,
-                                      table_wildcard: {
-                                      }?
-                                    }?,
-                                    table_with_columns: {
-                                      catalog_id: ::String?,
-                                      database_name: ::String,
-                                      name: ::String,
-                                      column_names: Array[::String]?,
-                                      column_wildcard: {
-                                        excluded_column_names: Array[::String]?
-                                      }?
-                                    }?,
-                                    data_location: {
-                                      catalog_id: ::String?,
-                                      resource_arn: ::String
-                                    }?,
-                                    data_cells_filter: {
-                                      table_catalog_id: ::String?,
-                                      database_name: ::String?,
-                                      table_name: ::String?,
-                                      name: ::String?
-                                    }?,
-                                    lf_tag: {
-                                      catalog_id: ::String?,
-                                      tag_key: ::String,
-                                      tag_values: Array[::String]
-                                    }?,
-                                    lf_tag_policy: {
-                                      catalog_id: ::String?,
-                                      resource_type: ("DATABASE" | "TABLE"),
-                                      expression: Array[
-                                        {
-                                          tag_key: ::String,
-                                          tag_values: Array[::String]
-                                        },
-                                      ]?,
-                                      expression_name: ::String?
-                                    }?,
-                                    lf_tag_expression: {
-                                      catalog_id: ::String?,
-                                      name: ::String
-                                    }?
-                                  },
+                                  resource: Params::resource,
                                   ?show_assigned_lf_tags: bool
                                 ) -> _GetResourceLFTagsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourceLFTagsResponseSuccess
@@ -958,61 +597,7 @@ module Aws
                                principal: {
                                  data_lake_principal_identifier: ::String?
                                },
-                               resource: {
-                                 catalog: {
-                                   id: ::String?
-                                 }?,
-                                 database: {
-                                   catalog_id: ::String?,
-                                   name: ::String
-                                 }?,
-                                 table: {
-                                   catalog_id: ::String?,
-                                   database_name: ::String,
-                                   name: ::String?,
-                                   table_wildcard: {
-                                   }?
-                                 }?,
-                                 table_with_columns: {
-                                   catalog_id: ::String?,
-                                   database_name: ::String,
-                                   name: ::String,
-                                   column_names: Array[::String]?,
-                                   column_wildcard: {
-                                     excluded_column_names: Array[::String]?
-                                   }?
-                                 }?,
-                                 data_location: {
-                                   catalog_id: ::String?,
-                                   resource_arn: ::String
-                                 }?,
-                                 data_cells_filter: {
-                                   table_catalog_id: ::String?,
-                                   database_name: ::String?,
-                                   table_name: ::String?,
-                                   name: ::String?
-                                 }?,
-                                 lf_tag: {
-                                   catalog_id: ::String?,
-                                   tag_key: ::String,
-                                   tag_values: Array[::String]
-                                 }?,
-                                 lf_tag_policy: {
-                                   catalog_id: ::String?,
-                                   resource_type: ("DATABASE" | "TABLE"),
-                                   expression: Array[
-                                     {
-                                       tag_key: ::String,
-                                       tag_values: Array[::String]
-                                     },
-                                   ]?,
-                                   expression_name: ::String?
-                                 }?,
-                                 lf_tag_expression: {
-                                   catalog_id: ::String?,
-                                   name: ::String
-                                 }?
-                               },
+                               resource: Params::resource,
                                permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
                                ?condition: {
                                  expression: ::String?
@@ -1077,61 +662,7 @@ module Aws
                                          ?principal: {
                                            data_lake_principal_identifier: ::String?
                                          },
-                                         ?resource: {
-                                           catalog: {
-                                             id: ::String?
-                                           }?,
-                                           database: {
-                                             catalog_id: ::String?,
-                                             name: ::String
-                                           }?,
-                                           table: {
-                                             catalog_id: ::String?,
-                                             database_name: ::String,
-                                             name: ::String?,
-                                             table_wildcard: {
-                                             }?
-                                           }?,
-                                           table_with_columns: {
-                                             catalog_id: ::String?,
-                                             database_name: ::String,
-                                             name: ::String,
-                                             column_names: Array[::String]?,
-                                             column_wildcard: {
-                                               excluded_column_names: Array[::String]?
-                                             }?
-                                           }?,
-                                           data_location: {
-                                             catalog_id: ::String?,
-                                             resource_arn: ::String
-                                           }?,
-                                           data_cells_filter: {
-                                             table_catalog_id: ::String?,
-                                             database_name: ::String?,
-                                             table_name: ::String?,
-                                             name: ::String?
-                                           }?,
-                                           lf_tag: {
-                                             catalog_id: ::String?,
-                                             tag_key: ::String,
-                                             tag_values: Array[::String]
-                                           }?,
-                                           lf_tag_policy: {
-                                             catalog_id: ::String?,
-                                             resource_type: ("DATABASE" | "TABLE"),
-                                             expression: Array[
-                                               {
-                                                 tag_key: ::String,
-                                                 tag_values: Array[::String]
-                                               },
-                                             ]?,
-                                             expression_name: ::String?
-                                           }?,
-                                           lf_tag_expression: {
-                                             catalog_id: ::String?,
-                                             name: ::String
-                                           }?
-                                         },
+                                         ?resource: Params::resource,
                                          ?max_results: ::Integer,
                                          ?next_token: ::String
                                        ) -> _ListLakeFormationOptInsResponseSuccess
@@ -1149,61 +680,7 @@ module Aws
                                 data_lake_principal_identifier: ::String?
                               },
                               ?resource_type: ("CATALOG" | "DATABASE" | "TABLE" | "DATA_LOCATION" | "LF_TAG" | "LF_TAG_POLICY" | "LF_TAG_POLICY_DATABASE" | "LF_TAG_POLICY_TABLE" | "LF_NAMED_TAG_EXPRESSION"),
-                              ?resource: {
-                                catalog: {
-                                  id: ::String?
-                                }?,
-                                database: {
-                                  catalog_id: ::String?,
-                                  name: ::String
-                                }?,
-                                table: {
-                                  catalog_id: ::String?,
-                                  database_name: ::String,
-                                  name: ::String?,
-                                  table_wildcard: {
-                                  }?
-                                }?,
-                                table_with_columns: {
-                                  catalog_id: ::String?,
-                                  database_name: ::String,
-                                  name: ::String,
-                                  column_names: Array[::String]?,
-                                  column_wildcard: {
-                                    excluded_column_names: Array[::String]?
-                                  }?
-                                }?,
-                                data_location: {
-                                  catalog_id: ::String?,
-                                  resource_arn: ::String
-                                }?,
-                                data_cells_filter: {
-                                  table_catalog_id: ::String?,
-                                  database_name: ::String?,
-                                  table_name: ::String?,
-                                  name: ::String?
-                                }?,
-                                lf_tag: {
-                                  catalog_id: ::String?,
-                                  tag_key: ::String,
-                                  tag_values: Array[::String]
-                                }?,
-                                lf_tag_policy: {
-                                  catalog_id: ::String?,
-                                  resource_type: ("DATABASE" | "TABLE"),
-                                  expression: Array[
-                                    {
-                                      tag_key: ::String,
-                                      tag_values: Array[::String]
-                                    },
-                                  ]?,
-                                  expression_name: ::String?
-                                }?,
-                                lf_tag_expression: {
-                                  catalog_id: ::String?,
-                                  name: ::String
-                                }?
-                              },
+                              ?resource: Params::resource,
                               ?next_token: ::String,
                               ?max_results: ::Integer,
                               ?include_related: ::String
@@ -1222,7 +699,7 @@ module Aws
                                 field: ("RESOURCE_ARN" | "ROLE_ARN" | "LAST_MODIFIED")?,
                                 comparison_operator: ("EQ" | "NE" | "LE" | "LT" | "GE" | "GT" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH" | "IN" | "BETWEEN")?,
                                 string_value_list: Array[::String]?
-                              },
+                              }
                             ],
                             ?max_results: ::Integer,
                             ?next_token: ::String
@@ -1269,12 +746,12 @@ module Aws
                                       data_lake_admins: Array[
                                         {
                                           data_lake_principal_identifier: ::String?
-                                        },
+                                        }
                                       ]?,
                                       read_only_admins: Array[
                                         {
                                           data_lake_principal_identifier: ::String?
-                                        },
+                                        }
                                       ]?,
                                       create_database_default_permissions: Array[
                                         {
@@ -1282,7 +759,7 @@ module Aws
                                             data_lake_principal_identifier: ::String?
                                           }?,
                                           permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
-                                        },
+                                        }
                                       ]?,
                                       create_table_default_permissions: Array[
                                         {
@@ -1290,7 +767,7 @@ module Aws
                                             data_lake_principal_identifier: ::String?
                                           }?,
                                           permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")]?
-                                        },
+                                        }
                                       ]?,
                                       parameters: Hash[::String, ::String]?,
                                       trusted_resource_owners: Array[::String]?,
@@ -1299,7 +776,7 @@ module Aws
                                       external_data_filtering_allow_list: Array[
                                         {
                                           data_lake_principal_identifier: ::String?
-                                        },
+                                        }
                                       ]?,
                                       authorized_session_tag_value_list: Array[::String]?
                                     }
@@ -1328,67 +805,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#remove_lf_tags_from_resource-instance_method
       def remove_lf_tags_from_resource: (
                                           ?catalog_id: ::String,
-                                          resource: {
-                                            catalog: {
-                                              id: ::String?
-                                            }?,
-                                            database: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?,
-                                            table: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String?,
-                                              table_wildcard: {
-                                              }?
-                                            }?,
-                                            table_with_columns: {
-                                              catalog_id: ::String?,
-                                              database_name: ::String,
-                                              name: ::String,
-                                              column_names: Array[::String]?,
-                                              column_wildcard: {
-                                                excluded_column_names: Array[::String]?
-                                              }?
-                                            }?,
-                                            data_location: {
-                                              catalog_id: ::String?,
-                                              resource_arn: ::String
-                                            }?,
-                                            data_cells_filter: {
-                                              table_catalog_id: ::String?,
-                                              database_name: ::String?,
-                                              table_name: ::String?,
-                                              name: ::String?
-                                            }?,
-                                            lf_tag: {
-                                              catalog_id: ::String?,
-                                              tag_key: ::String,
-                                              tag_values: Array[::String]
-                                            }?,
-                                            lf_tag_policy: {
-                                              catalog_id: ::String?,
-                                              resource_type: ("DATABASE" | "TABLE"),
-                                              expression: Array[
-                                                {
-                                                  tag_key: ::String,
-                                                  tag_values: Array[::String]
-                                                },
-                                              ]?,
-                                              expression_name: ::String?
-                                            }?,
-                                            lf_tag_expression: {
-                                              catalog_id: ::String?,
-                                              name: ::String
-                                            }?
-                                          },
+                                          resource: Params::resource,
                                           lf_tags: Array[
                                             {
                                               catalog_id: ::String?,
                                               tag_key: ::String,
                                               tag_values: Array[::String]
-                                            },
+                                            }
                                           ]
                                         ) -> _RemoveLFTagsFromResourceResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveLFTagsFromResourceResponseSuccess
@@ -1402,61 +825,7 @@ module Aws
                                 principal: {
                                   data_lake_principal_identifier: ::String?
                                 },
-                                resource: {
-                                  catalog: {
-                                    id: ::String?
-                                  }?,
-                                  database: {
-                                    catalog_id: ::String?,
-                                    name: ::String
-                                  }?,
-                                  table: {
-                                    catalog_id: ::String?,
-                                    database_name: ::String,
-                                    name: ::String?,
-                                    table_wildcard: {
-                                    }?
-                                  }?,
-                                  table_with_columns: {
-                                    catalog_id: ::String?,
-                                    database_name: ::String,
-                                    name: ::String,
-                                    column_names: Array[::String]?,
-                                    column_wildcard: {
-                                      excluded_column_names: Array[::String]?
-                                    }?
-                                  }?,
-                                  data_location: {
-                                    catalog_id: ::String?,
-                                    resource_arn: ::String
-                                  }?,
-                                  data_cells_filter: {
-                                    table_catalog_id: ::String?,
-                                    database_name: ::String?,
-                                    table_name: ::String?,
-                                    name: ::String?
-                                  }?,
-                                  lf_tag: {
-                                    catalog_id: ::String?,
-                                    tag_key: ::String,
-                                    tag_values: Array[::String]
-                                  }?,
-                                  lf_tag_policy: {
-                                    catalog_id: ::String?,
-                                    resource_type: ("DATABASE" | "TABLE"),
-                                    expression: Array[
-                                      {
-                                        tag_key: ::String,
-                                        tag_values: Array[::String]
-                                      },
-                                    ]?,
-                                    expression_name: ::String?
-                                  }?,
-                                  lf_tag_expression: {
-                                    catalog_id: ::String?,
-                                    name: ::String
-                                  }?
-                                },
+                                resource: Params::resource,
                                 permissions: Array[("ALL" | "SELECT" | "ALTER" | "DROP" | "DELETE" | "INSERT" | "DESCRIBE" | "CREATE_DATABASE" | "CREATE_TABLE" | "DATA_LOCATION_ACCESS" | "CREATE_LF_TAG" | "ASSOCIATE" | "GRANT_WITH_LF_TAG_EXPRESSION" | "CREATE_LF_TAG_EXPRESSION" | "CREATE_CATALOG" | "SUPER_USER")],
                                 ?condition: {
                                   expression: ::String?
@@ -1479,7 +848,7 @@ module Aws
                                            {
                                              tag_key: ::String,
                                              tag_values: Array[::String]
-                                           },
+                                           }
                                          ]
                                        ) -> _SearchDatabasesByLFTagsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchDatabasesByLFTagsResponseSuccess
@@ -1498,7 +867,7 @@ module Aws
                                         {
                                           tag_key: ::String,
                                           tag_values: Array[::String]
-                                        },
+                                        }
                                       ]
                                     ) -> _SearchTablesByLFTagsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchTablesByLFTagsResponseSuccess
@@ -1535,22 +904,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LakeFormation/Client.html#update_data_cells_filter-instance_method
       def update_data_cells_filter: (
-                                      table_data: {
-                                        table_catalog_id: ::String,
-                                        database_name: ::String,
-                                        table_name: ::String,
-                                        name: ::String,
-                                        row_filter: {
-                                          filter_expression: ::String?,
-                                          all_rows_wildcard: {
-                                          }?
-                                        }?,
-                                        column_names: Array[::String]?,
-                                        column_wildcard: {
-                                          excluded_column_names: Array[::String]?
-                                        }?,
-                                        version_id: ::String?
-                                      }
+                                      table_data: Params::data_cells_filter
                                     ) -> _UpdateDataCellsFilterResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataCellsFilterResponseSuccess
 
@@ -1578,7 +932,7 @@ module Aws
                                         {
                                           tag_key: ::String,
                                           tag_values: Array[::String]
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateLFTagExpressionResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLFTagExpressionResponseSuccess
@@ -1592,7 +946,7 @@ module Aws
                                                                  ?share_recipients: Array[
                                                                    {
                                                                      data_lake_principal_identifier: ::String?
-                                                                   },
+                                                                   }
                                                                  ],
                                                                  ?service_integrations: Array[
                                                                    {
@@ -1601,9 +955,9 @@ module Aws
                                                                          redshift_connect: {
                                                                            authorization: ("ENABLED" | "DISABLED")
                                                                          }?
-                                                                       },
+                                                                       }
                                                                      ]?
-                                                                   },
+                                                                   }
                                                                  ],
                                                                  ?application_status: ("ENABLED" | "DISABLED"),
                                                                  ?external_filtering: {
@@ -1648,7 +1002,7 @@ module Aws
                                         etag: ::String?,
                                         partition_values: Array[::String]?
                                       }?
-                                    },
+                                    }
                                   ]
                                 ) -> _UpdateTableObjectsResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableObjectsResponseSuccess

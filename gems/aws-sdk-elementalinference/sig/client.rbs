@@ -88,18 +88,7 @@ module Aws
                             id: ::String,
                             associated_resource_name: ::String,
                             outputs: Array[
-                              {
-                                name: ::String,
-                                output_config: {
-                                  cropping: {
-                                  }?,
-                                  clipping: {
-                                    callback_metadata: ::String?
-                                  }?
-                                },
-                                status: ("ENABLED" | "DISABLED"),
-                                description: ::String?
-                              },
+                              Params::create_output
                             ],
                             ?dry_run: bool
                           ) -> _AssociateFeedResponseSuccess
@@ -120,18 +109,7 @@ module Aws
       def create_feed: (
                          name: ::String,
                          outputs: Array[
-                           {
-                             name: ::String,
-                             output_config: {
-                               cropping: {
-                               }?,
-                               clipping: {
-                                 callback_metadata: ::String?
-                               }?
-                             },
-                             status: ("ENABLED" | "DISABLED"),
-                             description: ::String?
-                           },
+                           Params::create_output
                          ],
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateFeedResponseSuccess
@@ -243,7 +221,7 @@ module Aws
                              status: ("ENABLED" | "DISABLED"),
                              description: ::String?,
                              from_association: bool?
-                           },
+                           }
                          ]
                        ) -> _UpdateFeedResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFeedResponseSuccess

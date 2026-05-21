@@ -104,7 +104,7 @@ module Aws
                                        {
                                          name: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?workgroup_name: ::String,
                                      ?client_token: ::String,
@@ -199,7 +199,7 @@ module Aws
                                  {
                                    name: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?workgroup_name: ::String,
                                ?client_token: ::String,

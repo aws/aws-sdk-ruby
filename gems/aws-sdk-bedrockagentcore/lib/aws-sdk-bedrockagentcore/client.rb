@@ -922,7 +922,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Create a new payment instrument for a connector
+    # Create a new payment instrument for a connector.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment instrument.
@@ -943,7 +943,8 @@ module Aws::BedrockAgentCore
     #   The details of the payment instrument.
     #
     # @option params [String] :client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1064,7 +1065,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Create a new payment manager session
+    # Create a new payment session.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment session.
@@ -1083,7 +1084,8 @@ module Aws::BedrockAgentCore
     #   minutes.
     #
     # @option params [String] :client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -1277,33 +1279,8 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Delete a payment instrument
-    #
-    # Marks a payment instrument as deleted by updating its status to
-    # DELETED. This is a soft delete operation that preserves the record in
-    # the database for audit and compliance purposes. The record remains
-    # queryable for audit purposes but is excluded from normal list and get
-    # operations.
-    #
-    # Deleting an already-deleted or non-existent instrument returns
-    # ResourceNotFoundException (404).
-    #
-    # Authorization: The caller must own the instrument (accountId, userId,
-    # and paymentManagerId must match). If authorization fails, a 403
-    # Forbidden error is returned.
-    #
-    # Timestamp Management: The updatedAt timestamp is set to the current
-    # time, while createdAt is preserved. The version field is incremented
-    # for optimistic locking.
-    #
-    # Errors:
-    #
-    # * ResourceNotFoundException: The instrument does not exist or is
-    #   already deleted
-    # * AccessDeniedException: The caller is not authorized to delete this
-    #   instrument
-    # * ValidationException: Required fields are missing or invalid
-    # * InternalServerException: An unexpected server error occurred
+    # Deletes a payment instrument. This is a soft delete operation that
+    # preserves the record for audit and compliance purposes.
     #
     # @option params [String] :user_id
     #   The user ID making the delete request. Must match the instrument's
@@ -1346,26 +1323,8 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Delete a payment manager session
-    #
-    # Permanently removes a payment session record from the database. This
-    # is a hard delete operation that removes the session completely.
-    #
-    # Deleting a non-existent or already-deleted session returns
-    # ResourceNotFoundException (404).
-    #
-    # Authorization: The caller must own the session (accountId, userId, and
-    # paymentManagerId must match). If authorization fails, a 403 Forbidden
-    # error is returned.
-    #
-    # Errors:
-    #
-    # * ResourceNotFoundException: The session does not exist or has already
-    #   been deleted
-    # * AccessDeniedException: The caller is not authorized to delete this
-    #   session
-    # * ValidationException: Required fields are missing or invalid
-    # * InternalServerException: An unexpected server error occurred
+    # Deletes a payment session. This permanently removes the payment
+    # session record.
     #
     # @option params [String] :user_id
     #   The user ID making the delete request. Must match the session's
@@ -2005,7 +1964,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Get a payment instrument by ID
+    # Get a payment instrument by ID.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment instrument.
@@ -2084,7 +2043,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Get the balance of a payment instrument
+    # Get the balance of a payment instrument.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment instrument.
@@ -2103,12 +2062,11 @@ module Aws::BedrockAgentCore
     #
     # @option params [required, String] :chain
     #   The specific blockchain chain to query balance on. Required because
-    #   balances are chain-specific — the same wallet address may hold
-    #   different token balances on different chains.
+    #   balances are chain-specific.
     #
     # @option params [required, String] :token
-    #   The token to query balance for. Required to specify which supported
-    #   token's balance to return.
+    #   The token to query balance for. Only tokens supported for X402
+    #   payments are returned.
     #
     # @return [Types::GetPaymentInstrumentBalanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2145,7 +2103,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Get a payment session
+    # Get a payment session.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment session.
@@ -2421,15 +2379,14 @@ module Aws::BedrockAgentCore
     # vendor-specific authentication mechanisms.
     #
     # @option params [required, String] :workload_identity_token
-    #   Workload access token for authorization. Named workloadIdentityToken
-    #   for consistency with APIKey and OAuth2CredentialProvider.
+    #   Workload access token for authorization.
     #
     # @option params [required, String] :resource_credential_provider_name
-    #   Name of the payment credential provider to use
+    #   Name of the payment credential provider to use.
     #
     # @option params [required, Types::PaymentTokenRequestInput] :payment_token_request
-    #   Vendor-specific token request input Contains all request parameters in
-    #   a type-safe, vendor-specific structure
+    #   Vendor-specific token request input. Contains all request parameters
+    #   in a type-safe, vendor-specific structure.
     #
     # @return [Types::GetResourcePaymentTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4385,11 +4342,13 @@ module Aws::BedrockAgentCore
     #
     # @option params [String] :namespace
     #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix.
+    #   records in namespaces that start with the provided prefix. Either
+    #   `namespace` or `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
-    #   records where namespace falls under the same parent hierarchy.
+    #   records where namespace falls under the same parent hierarchy. Either
+    #   `namespace` or `namespacePath` is required.
     #
     # @option params [String] :memory_strategy_id
     #   The memory strategy identifier to filter memory records by. If
@@ -4469,7 +4428,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # List payment instruments for a manager
+    # List payment instruments for a manager.
     #
     # @option params [String] :user_id
     #   The user ID associated with the payment instruments.
@@ -4529,7 +4488,7 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # List payment manager sessions
+    # List payment sessions.
     #
     # @option params [String] :user_id
     #   The user ID associated with the payment sessions.
@@ -4703,7 +4662,8 @@ module Aws::BedrockAgentCore
       req.send_request(options)
     end
 
-    # Process a payment transaction
+    # Processes a payment using a payment instrument within a payment
+    # session.
     #
     # @option params [String] :user_id
     #   The user ID associated with this payment.
@@ -4712,22 +4672,23 @@ module Aws::BedrockAgentCore
     #   The agent name associated with this request, used for observability.
     #
     # @option params [required, String] :payment_manager_arn
-    #   The ARN of the payment manager handling this payment.
+    #   The ARN of the payment manager.
     #
     # @option params [required, String] :payment_session_id
-    #   The ID of the payment session for this transaction.
+    #   The ID of the payment session.
     #
     # @option params [required, String] :payment_instrument_id
-    #   The ID of the payment instrument to use for this transaction.
+    #   The ID of the payment instrument to use.
     #
     # @option params [required, String] :payment_type
-    #   The type of payment being processed.
+    #   The type of payment to process.
     #
     # @option params [required, Types::PaymentInput] :payment_input
     #   The payment input details specific to the payment type.
     #
     # @option params [String] :client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
@@ -4798,11 +4759,13 @@ module Aws::BedrockAgentCore
     #
     # @option params [String] :namespace
     #   The namespace prefix to filter memory records by. Searches for memory
-    #   records in namespaces that start with the provided prefix.
+    #   records in namespaces that start with the provided prefix. Either
+    #   `namespace` or `namespacePath` is required.
     #
     # @option params [String] :namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
-    #   records where namespace falls under the same parent hierarchy.
+    #   records where namespace falls under the same parent hierarchy. Either
+    #   `namespace` or `namespacePath` is required.
     #
     # @option params [required, Types::SearchCriteria] :search_criteria
     #   The search criteria to use for finding relevant memory records. This
@@ -6114,7 +6077,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.34.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

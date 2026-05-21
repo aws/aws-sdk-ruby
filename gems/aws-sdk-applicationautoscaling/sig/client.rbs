@@ -223,7 +223,7 @@ module Aws
                                       metric_interval_lower_bound: ::Float?,
                                       metric_interval_upper_bound: ::Float?,
                                       scaling_adjustment: ::Integer
-                                    },
+                                    }
                                   ]?,
                                   min_adjustment_magnitude: ::Integer?,
                                   cooldown: ::Integer?,
@@ -242,7 +242,7 @@ module Aws
                                       {
                                         name: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]?,
                                     statistic: ("Average" | "Minimum" | "Maximum" | "SampleCount" | "Sum")?,
                                     unit: ::String?,
@@ -257,7 +257,7 @@ module Aws
                                               {
                                                 name: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]?,
                                             metric_name: ::String?,
                                             namespace: ::String?
@@ -266,7 +266,7 @@ module Aws
                                           unit: ::String?
                                         }?,
                                         return_data: bool?
-                                      },
+                                      }
                                     ]?
                                   }?,
                                   scale_out_cooldown: ::Integer?,
@@ -289,79 +289,10 @@ module Aws
                                         predefined_metric_type: ::String,
                                         resource_label: ::String?
                                       }?,
-                                      customized_scaling_metric_specification: {
-                                        metric_data_queries: Array[
-                                          {
-                                            id: ::String,
-                                            expression: ::String?,
-                                            metric_stat: {
-                                              metric: {
-                                                dimensions: Array[
-                                                  {
-                                                    name: ::String,
-                                                    value: ::String
-                                                  },
-                                                ]?,
-                                                metric_name: ::String?,
-                                                namespace: ::String?
-                                              },
-                                              stat: ::String,
-                                              unit: ::String?
-                                            }?,
-                                            label: ::String?,
-                                            return_data: bool?
-                                          },
-                                        ]
-                                      }?,
-                                      customized_load_metric_specification: {
-                                        metric_data_queries: Array[
-                                          {
-                                            id: ::String,
-                                            expression: ::String?,
-                                            metric_stat: {
-                                              metric: {
-                                                dimensions: Array[
-                                                  {
-                                                    name: ::String,
-                                                    value: ::String
-                                                  },
-                                                ]?,
-                                                metric_name: ::String?,
-                                                namespace: ::String?
-                                              },
-                                              stat: ::String,
-                                              unit: ::String?
-                                            }?,
-                                            label: ::String?,
-                                            return_data: bool?
-                                          },
-                                        ]
-                                      }?,
-                                      customized_capacity_metric_specification: {
-                                        metric_data_queries: Array[
-                                          {
-                                            id: ::String,
-                                            expression: ::String?,
-                                            metric_stat: {
-                                              metric: {
-                                                dimensions: Array[
-                                                  {
-                                                    name: ::String,
-                                                    value: ::String
-                                                  },
-                                                ]?,
-                                                metric_name: ::String?,
-                                                namespace: ::String?
-                                              },
-                                              stat: ::String,
-                                              unit: ::String?
-                                            }?,
-                                            label: ::String?,
-                                            return_data: bool?
-                                          },
-                                        ]
-                                      }?
-                                    },
+                                      customized_scaling_metric_specification: Params::predictive_scaling_customized_metric_specification?,
+                                      customized_load_metric_specification: Params::predictive_scaling_customized_metric_specification?,
+                                      customized_capacity_metric_specification: Params::predictive_scaling_customized_metric_specification?
+                                    }
                                   ],
                                   mode: ("ForecastOnly" | "ForecastAndScale")?,
                                   scheduling_buffer_time: ::Integer?,

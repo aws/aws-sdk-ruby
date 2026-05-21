@@ -88,7 +88,7 @@ module Aws::Evs
     #
     #     If this check fails, you will need to add hosts so that your
     #     environment meets this minimum requirement. Amazon EVS only
-    #     supports environments with 4-16 hosts.
+    #     supports environments with 4-32 hosts.
     #   @return [String]
     #
     # @!attribute [rw] result
@@ -1157,7 +1157,7 @@ module Aws::Evs
     # An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts
     # are created in an Amazon EVS environment during environment creation.
     # You can add hosts to an environment using the `CreateEnvironmentHost`
-    # operation. Amazon EVS supports 4-16 hosts per environment.
+    # operation. Amazon EVS supports 4-32 hosts per environment.
     #
     # @!attribute [rw] host_name
     #   The DNS hostname of the host. DNS hostnames for hosts must be unique

@@ -100,35 +100,7 @@ module Aws
                                           instance_id: ::String,
                                           name: ::String,
                                           sources: Array[
-                                            {
-                                              source_type: ("S3" | "DATASET"),
-                                              source_name: ::String,
-                                              s3_source: {
-                                                bucket_name: ::String,
-                                                prefix: ::String,
-                                                options: {
-                                                  file_type: ("CSV" | "PARQUET" | "JSON")?
-                                                }?
-                                              }?,
-                                              dataset_source: {
-                                                dataset_identifier: ::String,
-                                                options: {
-                                                  load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                  dedupe_records: bool?,
-                                                  dedupe_strategy: {
-                                                    type: ("FIELD_PRIORITY"),
-                                                    field_priority: {
-                                                      fields: Array[
-                                                        {
-                                                          name: ::String,
-                                                          sort_order: ("ASC" | "DESC")
-                                                        },
-                                                      ]
-                                                    }?
-                                                  }?
-                                                }?
-                                              }?
-                                            },
+                                            Params::data_integration_flow_source
                                           ],
                                           transformation: {
                                             transformation_type: ("SQL" | "NONE"),
@@ -136,34 +108,7 @@ module Aws
                                               query: ::String
                                             }?
                                           },
-                                          target: {
-                                            target_type: ("S3" | "DATASET"),
-                                            s3_target: {
-                                              bucket_name: ::String,
-                                              prefix: ::String,
-                                              options: {
-                                                file_type: ("CSV" | "PARQUET" | "JSON")?
-                                              }?
-                                            }?,
-                                            dataset_target: {
-                                              dataset_identifier: ::String,
-                                              options: {
-                                                load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                dedupe_records: bool?,
-                                                dedupe_strategy: {
-                                                  type: ("FIELD_PRIORITY"),
-                                                  field_priority: {
-                                                    fields: Array[
-                                                      {
-                                                        name: ::String,
-                                                        sort_order: ("ASC" | "DESC")
-                                                      },
-                                                    ]
-                                                  }?
-                                                }?
-                                              }?
-                                            }?
-                                          },
+                                          target: Params::data_integration_flow_target,
                                           ?tags: Hash[::String, ::String]
                                         ) -> _CreateDataIntegrationFlowResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationFlowResponseSuccess
@@ -184,12 +129,12 @@ module Aws
                                             name: ::String,
                                             type: ("INT" | "DOUBLE" | "STRING" | "TIMESTAMP" | "LONG"),
                                             is_required: bool
-                                          },
+                                          }
                                         ],
                                         primary_keys: Array[
                                           {
                                             name: ::String
-                                          },
+                                          }
                                         ]?
                                       },
                                       ?description: ::String,
@@ -200,7 +145,7 @@ module Aws
                                             transform: {
                                               type: ("YEAR" | "MONTH" | "DAY" | "HOUR" | "IDENTITY")
                                             }
-                                          },
+                                          }
                                         ]
                                       },
                                       ?tags: Hash[::String, ::String]
@@ -501,35 +446,7 @@ module Aws
                                           instance_id: ::String,
                                           name: ::String,
                                           ?sources: Array[
-                                            {
-                                              source_type: ("S3" | "DATASET"),
-                                              source_name: ::String,
-                                              s3_source: {
-                                                bucket_name: ::String,
-                                                prefix: ::String,
-                                                options: {
-                                                  file_type: ("CSV" | "PARQUET" | "JSON")?
-                                                }?
-                                              }?,
-                                              dataset_source: {
-                                                dataset_identifier: ::String,
-                                                options: {
-                                                  load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                  dedupe_records: bool?,
-                                                  dedupe_strategy: {
-                                                    type: ("FIELD_PRIORITY"),
-                                                    field_priority: {
-                                                      fields: Array[
-                                                        {
-                                                          name: ::String,
-                                                          sort_order: ("ASC" | "DESC")
-                                                        },
-                                                      ]
-                                                    }?
-                                                  }?
-                                                }?
-                                              }?
-                                            },
+                                            Params::data_integration_flow_source
                                           ],
                                           ?transformation: {
                                             transformation_type: ("SQL" | "NONE"),
@@ -537,34 +454,7 @@ module Aws
                                               query: ::String
                                             }?
                                           },
-                                          ?target: {
-                                            target_type: ("S3" | "DATASET"),
-                                            s3_target: {
-                                              bucket_name: ::String,
-                                              prefix: ::String,
-                                              options: {
-                                                file_type: ("CSV" | "PARQUET" | "JSON")?
-                                              }?
-                                            }?,
-                                            dataset_target: {
-                                              dataset_identifier: ::String,
-                                              options: {
-                                                load_type: ("INCREMENTAL" | "REPLACE")?,
-                                                dedupe_records: bool?,
-                                                dedupe_strategy: {
-                                                  type: ("FIELD_PRIORITY"),
-                                                  field_priority: {
-                                                    fields: Array[
-                                                      {
-                                                        name: ::String,
-                                                        sort_order: ("ASC" | "DESC")
-                                                      },
-                                                    ]
-                                                  }?
-                                                }?
-                                              }?
-                                            }?
-                                          }
+                                          ?target: Params::data_integration_flow_target
                                         ) -> _UpdateDataIntegrationFlowResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationFlowResponseSuccess
 

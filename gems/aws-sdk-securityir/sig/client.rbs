@@ -129,19 +129,19 @@ module Aws
                              email: ::String,
                              name: ::String?,
                              job_title: ::String?
-                           },
+                           }
                          ],
                          ?threat_actor_ip_addresses: Array[
                            {
                              ip_address: ::String,
                              user_agent: ::String?
-                           },
+                           }
                          ],
                          ?impacted_services: Array[::String],
                          ?impacted_aws_regions: Array[
                            {
                              region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
-                           },
+                           }
                          ],
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateCaseResponseSuccess
@@ -173,13 +173,13 @@ module Aws
                                    job_title: ::String,
                                    email: ::String,
                                    communication_preferences: Array[("Case Created" | "Case Updated" | "Case Acknowledged" | "Case Closed" | "Case Updated To Service Managed" | "Case Status Updated" | "Case Pending Customer Action Reminder" | "Case Attachment Url Uploaded" | "Case Comment Added" | "Case Comment Updated" | "Membership Created" | "Membership Updated" | "Membership Cancelled" | "Register Delegated Administrator" | "Deregister Delegated Administrator" | "Disable AWS Service Access")]?
-                                 },
+                                 }
                                ],
                                ?opt_in_features: Array[
                                  {
                                    feature_name: ("Triage"),
                                    is_enabled: bool
-                                 },
+                                 }
                                ],
                                ?tags: Hash[::String, ::String],
                                ?cover_entire_organization: bool
@@ -385,38 +385,38 @@ module Aws
                              email: ::String,
                              name: ::String?,
                              job_title: ::String?
-                           },
+                           }
                          ],
                          ?watchers_to_delete: Array[
                            {
                              email: ::String,
                              name: ::String?,
                              job_title: ::String?
-                           },
+                           }
                          ],
                          ?threat_actor_ip_addresses_to_add: Array[
                            {
                              ip_address: ::String,
                              user_agent: ::String?
-                           },
+                           }
                          ],
                          ?threat_actor_ip_addresses_to_delete: Array[
                            {
                              ip_address: ::String,
                              user_agent: ::String?
-                           },
+                           }
                          ],
                          ?impacted_services_to_add: Array[::String],
                          ?impacted_services_to_delete: Array[::String],
                          ?impacted_aws_regions_to_add: Array[
                            {
                              region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
-                           },
+                           }
                          ],
                          ?impacted_aws_regions_to_delete: Array[
                            {
                              region: ("af-south-1" | "ap-east-1" | "ap-east-2" | "ap-northeast-1" | "ap-northeast-2" | "ap-northeast-3" | "ap-south-1" | "ap-south-2" | "ap-southeast-1" | "ap-southeast-2" | "ap-southeast-3" | "ap-southeast-4" | "ap-southeast-5" | "ap-southeast-6" | "ap-southeast-7" | "ca-central-1" | "ca-west-1" | "cn-north-1" | "cn-northwest-1" | "eu-central-1" | "eu-central-2" | "eu-north-1" | "eu-south-1" | "eu-south-2" | "eu-west-1" | "eu-west-2" | "eu-west-3" | "il-central-1" | "me-central-1" | "me-south-1" | "mx-central-1" | "sa-east-1" | "us-east-1" | "us-east-2" | "us-west-1" | "us-west-2")
-                           },
+                           }
                          ],
                          ?impacted_accounts_to_add: Array[::String],
                          ?impacted_accounts_to_delete: Array[::String],
@@ -424,7 +424,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _UpdateCaseResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCaseResponseSuccess
@@ -466,13 +466,13 @@ module Aws
                                    job_title: ::String,
                                    email: ::String,
                                    communication_preferences: Array[("Case Created" | "Case Updated" | "Case Acknowledged" | "Case Closed" | "Case Updated To Service Managed" | "Case Status Updated" | "Case Pending Customer Action Reminder" | "Case Attachment Url Uploaded" | "Case Comment Added" | "Case Comment Updated" | "Membership Created" | "Membership Updated" | "Membership Cancelled" | "Register Delegated Administrator" | "Deregister Delegated Administrator" | "Disable AWS Service Access")]?
-                                 },
+                                 }
                                ],
                                ?opt_in_features: Array[
                                  {
                                    feature_name: ("Triage"),
                                    is_enabled: bool
-                                 },
+                                 }
                                ],
                                ?membership_accounts_configurations_update: {
                                  cover_entire_organization: bool?,

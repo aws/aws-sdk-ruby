@@ -226,7 +226,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreatePartnerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePartnerResponseSuccess
@@ -538,7 +538,7 @@ module Aws
                                              website_url: ::String,
                                              logo_url: ::String,
                                              locale: ::String
-                                           },
+                                           }
                                          ]?
                                        }
                                      ) -> _StartProfileUpdateTaskResponseSuccess
@@ -579,7 +579,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

@@ -107,24 +107,12 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]?,
                                       state_templates: Array[
-                                        {
-                                          identifier: ::String,
-                                          state_template_update_strategy: {
-                                            periodic: {
-                                              state_template_update_rate: {
-                                                unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                                value: ::Integer
-                                              }
-                                            }?,
-                                            on_change: {
-                                            }?
-                                          }
-                                        },
+                                        Params::state_template_association
                                       ]?
-                                    },
+                                    }
                                   ]
                                 ) -> _BatchCreateVehicleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateVehicleResponseSuccess
@@ -144,37 +132,13 @@ module Aws
                                       attributes: Hash[::String, ::String]?,
                                       attribute_update_mode: ("Overwrite" | "Merge")?,
                                       state_templates_to_add: Array[
-                                        {
-                                          identifier: ::String,
-                                          state_template_update_strategy: {
-                                            periodic: {
-                                              state_template_update_rate: {
-                                                unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                                value: ::Integer
-                                              }
-                                            }?,
-                                            on_change: {
-                                            }?
-                                          }
-                                        },
+                                        Params::state_template_association
                                       ]?,
                                       state_templates_to_remove: Array[::String]?,
                                       state_templates_to_update: Array[
-                                        {
-                                          identifier: ::String,
-                                          state_template_update_strategy: {
-                                            periodic: {
-                                              state_template_update_rate: {
-                                                unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                                value: ::Integer
-                                              }
-                                            }?,
-                                            on_change: {
-                                            }?
-                                          }
-                                        },
+                                        Params::state_template_association
                                       ]?
-                                    },
+                                    }
                                   ]
                                 ) -> _BatchUpdateVehicleResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateVehicleResponseSuccess
@@ -203,7 +167,7 @@ module Aws
                                  max_sample_count: ::Integer?,
                                  minimum_sampling_interval_ms: ::Integer?,
                                  data_partition_id: ::String?
-                               },
+                               }
                              ],
                              collection_scheme: {
                                time_based_collection_scheme: {
@@ -221,7 +185,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              ?data_destination_configs: Array[
                                {
@@ -239,7 +203,7 @@ module Aws
                                    mqtt_topic_arn: ::String,
                                    execution_role_arn: ::String
                                  }?
-                               },
+                               }
                              ],
                              ?data_partitions: Array[
                                {
@@ -259,7 +223,7 @@ module Aws
                                    expression: ::String,
                                    condition_language_version: ::Integer?
                                  }?
-                               },
+                               }
                              ],
                              ?signals_to_fetch: Array[
                                {
@@ -275,7 +239,7 @@ module Aws
                                  },
                                  condition_language_version: ::Integer?,
                                  actions: Array[::String]
-                               },
+                               }
                              ]
                            ) -> _CreateCampaignResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCampaignResponseSuccess
@@ -291,97 +255,17 @@ module Aws
                                      ?description: ::String,
                                      model_manifest_arn: ::String,
                                      ?signal_decoders: Array[
-                                       {
-                                         fully_qualified_name: ::String,
-                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL" | "CUSTOM_DECODING_SIGNAL"),
-                                         interface_id: ::String,
-                                         can_signal: {
-                                           message_id: ::Integer,
-                                           is_big_endian: bool,
-                                           is_signed: bool,
-                                           start_bit: ::Integer,
-                                           offset: ::Float,
-                                           factor: ::Float,
-                                           length: ::Integer,
-                                           name: ::String?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         obd_signal: {
-                                           pid_response_length: ::Integer,
-                                           service_mode: ::Integer,
-                                           pid: ::Integer,
-                                           scaling: ::Float,
-                                           offset: ::Float,
-                                           start_byte: ::Integer,
-                                           byte_length: ::Integer,
-                                           bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?,
-                                           is_signed: bool?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         message_signal: {
-                                           topic_name: ::String,
-                                           structured_message: {
-                                             primitive_message_definition: {
-                                               ros2_primitive_message_definition: {
-                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
-                                                 offset: ::Float?,
-                                                 scaling: ::Float?,
-                                                 upper_bound: ::Integer?
-                                               }?
-                                             }?,
-                                             structured_message_list_definition: {
-                                               name: ::String,
-                                               member_type: untyped,
-                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
-                                               capacity: ::Integer?
-                                             }?,
-                                             structured_message_definition: Array[
-                                               {
-                                                 field_name: ::String,
-                                                 data_type: untyped
-                                               },
-                                             ]?
-                                           }
-                                         }?,
-                                         custom_decoding_signal: {
-                                           id: ::String
-                                         }?
-                                       },
+                                       Params::signal_decoder
                                      ],
                                      ?network_interfaces: Array[
-                                       {
-                                         interface_id: ::String,
-                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE" | "CUSTOM_DECODING_INTERFACE"),
-                                         can_interface: {
-                                           name: ::String,
-                                           protocol_name: ::String?,
-                                           protocol_version: ::String?
-                                         }?,
-                                         obd_interface: {
-                                           name: ::String,
-                                           request_message_id: ::Integer,
-                                           obd_standard: ::String?,
-                                           pid_request_interval_seconds: ::Integer?,
-                                           dtc_request_interval_seconds: ::Integer?,
-                                           use_extended_ids: bool?,
-                                           has_transmission_ecu: bool?
-                                         }?,
-                                         vehicle_middleware: {
-                                           name: ::String,
-                                           protocol_name: ("ROS_2")
-                                         }?,
-                                         custom_decoding_interface: {
-                                           name: ::String
-                                         }?
-                                       },
+                                       Params::network_interface
                                      ],
                                      ?default_for_unmapped_signals: ("CUSTOM_DECODING"),
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateDecoderManifestResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDecoderManifestResponseSuccess
@@ -400,7 +284,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateFleetResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFleetResponseSuccess
@@ -420,7 +304,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateModelManifestResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateModelManifestResponseSuccess
@@ -435,73 +319,13 @@ module Aws
                                    name: ::String,
                                    ?description: ::String,
                                    ?nodes: Array[
-                                     {
-                                       branch: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       sensor: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       actuator: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       attribute: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         default_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       struct: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       property: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         data_encoding: ("BINARY" | "TYPED")?,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?
-                                     },
+                                     Params::node
                                    ],
                                    ?tags: Array[
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateSignalCatalogResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSignalCatalogResponseSuccess
@@ -524,7 +348,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateStateTemplateResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStateTemplateResponseSuccess
@@ -546,22 +370,10 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?state_templates: Array[
-                              {
-                                identifier: ::String,
-                                state_template_update_strategy: {
-                                  periodic: {
-                                    state_template_update_rate: {
-                                      unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                      value: ::Integer
-                                    }
-                                  }?,
-                                  on_change: {
-                                  }?
-                                }
-                              },
+                              Params::state_template_association
                             ]
                           ) -> _CreateVehicleResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVehicleResponseSuccess
@@ -848,7 +660,7 @@ module Aws
                                            can_dbc_files: Array[::String],
                                            signals_map: Hash[::String, ::String]?
                                          }?
-                                       },
+                                       }
                                      ]
                                    ) -> _ImportDecoderManifestResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDecoderManifestResponseSuccess
@@ -869,7 +681,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _ImportSignalCatalogResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportSignalCatalogResponseSuccess
@@ -1114,7 +926,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1154,177 +966,17 @@ module Aws
                                      name: ::String,
                                      ?description: ::String,
                                      ?signal_decoders_to_add: Array[
-                                       {
-                                         fully_qualified_name: ::String,
-                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL" | "CUSTOM_DECODING_SIGNAL"),
-                                         interface_id: ::String,
-                                         can_signal: {
-                                           message_id: ::Integer,
-                                           is_big_endian: bool,
-                                           is_signed: bool,
-                                           start_bit: ::Integer,
-                                           offset: ::Float,
-                                           factor: ::Float,
-                                           length: ::Integer,
-                                           name: ::String?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         obd_signal: {
-                                           pid_response_length: ::Integer,
-                                           service_mode: ::Integer,
-                                           pid: ::Integer,
-                                           scaling: ::Float,
-                                           offset: ::Float,
-                                           start_byte: ::Integer,
-                                           byte_length: ::Integer,
-                                           bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?,
-                                           is_signed: bool?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         message_signal: {
-                                           topic_name: ::String,
-                                           structured_message: {
-                                             primitive_message_definition: {
-                                               ros2_primitive_message_definition: {
-                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
-                                                 offset: ::Float?,
-                                                 scaling: ::Float?,
-                                                 upper_bound: ::Integer?
-                                               }?
-                                             }?,
-                                             structured_message_list_definition: {
-                                               name: ::String,
-                                               member_type: untyped,
-                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
-                                               capacity: ::Integer?
-                                             }?,
-                                             structured_message_definition: Array[
-                                               {
-                                                 field_name: ::String,
-                                                 data_type: untyped
-                                               },
-                                             ]?
-                                           }
-                                         }?,
-                                         custom_decoding_signal: {
-                                           id: ::String
-                                         }?
-                                       },
+                                       Params::signal_decoder
                                      ],
                                      ?signal_decoders_to_update: Array[
-                                       {
-                                         fully_qualified_name: ::String,
-                                         type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL" | "CUSTOM_DECODING_SIGNAL"),
-                                         interface_id: ::String,
-                                         can_signal: {
-                                           message_id: ::Integer,
-                                           is_big_endian: bool,
-                                           is_signed: bool,
-                                           start_bit: ::Integer,
-                                           offset: ::Float,
-                                           factor: ::Float,
-                                           length: ::Integer,
-                                           name: ::String?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         obd_signal: {
-                                           pid_response_length: ::Integer,
-                                           service_mode: ::Integer,
-                                           pid: ::Integer,
-                                           scaling: ::Float,
-                                           offset: ::Float,
-                                           start_byte: ::Integer,
-                                           byte_length: ::Integer,
-                                           bit_right_shift: ::Integer?,
-                                           bit_mask_length: ::Integer?,
-                                           is_signed: bool?,
-                                           signal_value_type: ("INTEGER" | "FLOATING_POINT")?
-                                         }?,
-                                         message_signal: {
-                                           topic_name: ::String,
-                                           structured_message: {
-                                             primitive_message_definition: {
-                                               ros2_primitive_message_definition: {
-                                                 primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
-                                                 offset: ::Float?,
-                                                 scaling: ::Float?,
-                                                 upper_bound: ::Integer?
-                                               }?
-                                             }?,
-                                             structured_message_list_definition: {
-                                               name: ::String,
-                                               member_type: untyped,
-                                               list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
-                                               capacity: ::Integer?
-                                             }?,
-                                             structured_message_definition: Array[
-                                               {
-                                                 field_name: ::String,
-                                                 data_type: untyped
-                                               },
-                                             ]?
-                                           }
-                                         }?,
-                                         custom_decoding_signal: {
-                                           id: ::String
-                                         }?
-                                       },
+                                       Params::signal_decoder
                                      ],
                                      ?signal_decoders_to_remove: Array[::String],
                                      ?network_interfaces_to_add: Array[
-                                       {
-                                         interface_id: ::String,
-                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE" | "CUSTOM_DECODING_INTERFACE"),
-                                         can_interface: {
-                                           name: ::String,
-                                           protocol_name: ::String?,
-                                           protocol_version: ::String?
-                                         }?,
-                                         obd_interface: {
-                                           name: ::String,
-                                           request_message_id: ::Integer,
-                                           obd_standard: ::String?,
-                                           pid_request_interval_seconds: ::Integer?,
-                                           dtc_request_interval_seconds: ::Integer?,
-                                           use_extended_ids: bool?,
-                                           has_transmission_ecu: bool?
-                                         }?,
-                                         vehicle_middleware: {
-                                           name: ::String,
-                                           protocol_name: ("ROS_2")
-                                         }?,
-                                         custom_decoding_interface: {
-                                           name: ::String
-                                         }?
-                                       },
+                                       Params::network_interface
                                      ],
                                      ?network_interfaces_to_update: Array[
-                                       {
-                                         interface_id: ::String,
-                                         type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE" | "CUSTOM_DECODING_INTERFACE"),
-                                         can_interface: {
-                                           name: ::String,
-                                           protocol_name: ::String?,
-                                           protocol_version: ::String?
-                                         }?,
-                                         obd_interface: {
-                                           name: ::String,
-                                           request_message_id: ::Integer,
-                                           obd_standard: ::String?,
-                                           pid_request_interval_seconds: ::Integer?,
-                                           dtc_request_interval_seconds: ::Integer?,
-                                           use_extended_ids: bool?,
-                                           has_transmission_ecu: bool?
-                                         }?,
-                                         vehicle_middleware: {
-                                           name: ::String,
-                                           protocol_name: ("ROS_2")
-                                         }?,
-                                         custom_decoding_interface: {
-                                           name: ::String
-                                         }?
-                                       },
+                                       Params::network_interface
                                      ],
                                      ?network_interfaces_to_remove: Array[::String],
                                      ?status: ("ACTIVE" | "DRAFT" | "INVALID" | "VALIDATING"),
@@ -1369,130 +1021,10 @@ module Aws
                                    name: ::String,
                                    ?description: ::String,
                                    ?nodes_to_add: Array[
-                                     {
-                                       branch: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       sensor: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       actuator: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       attribute: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         default_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       struct: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       property: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         data_encoding: ("BINARY" | "TYPED")?,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?
-                                     },
+                                     Params::node
                                    ],
                                    ?nodes_to_update: Array[
-                                     {
-                                       branch: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       sensor: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       actuator: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?,
-                                       attribute: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         description: ::String?,
-                                         unit: ::String?,
-                                         allowed_values: Array[::String]?,
-                                         min: ::Float?,
-                                         max: ::Float?,
-                                         assigned_value: ::String?,
-                                         default_value: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       struct: {
-                                         fully_qualified_name: ::String,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?
-                                       }?,
-                                       property: {
-                                         fully_qualified_name: ::String,
-                                         data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
-                                         data_encoding: ("BINARY" | "TYPED")?,
-                                         description: ::String?,
-                                         deprecation_message: ::String?,
-                                         comment: ::String?,
-                                         struct_fully_qualified_name: ::String?
-                                       }?
-                                     },
+                                     Params::node
                                    ],
                                    ?nodes_to_remove: Array[::String]
                                  ) -> _UpdateSignalCatalogResponseSuccess
@@ -1528,35 +1060,11 @@ module Aws
                             ?attributes: Hash[::String, ::String],
                             ?attribute_update_mode: ("Overwrite" | "Merge"),
                             ?state_templates_to_add: Array[
-                              {
-                                identifier: ::String,
-                                state_template_update_strategy: {
-                                  periodic: {
-                                    state_template_update_rate: {
-                                      unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                      value: ::Integer
-                                    }
-                                  }?,
-                                  on_change: {
-                                  }?
-                                }
-                              },
+                              Params::state_template_association
                             ],
                             ?state_templates_to_remove: Array[::String],
                             ?state_templates_to_update: Array[
-                              {
-                                identifier: ::String,
-                                state_template_update_strategy: {
-                                  periodic: {
-                                    state_template_update_rate: {
-                                      unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
-                                      value: ::Integer
-                                    }
-                                  }?,
-                                  on_change: {
-                                  }?
-                                }
-                              },
+                              Params::state_template_association
                             ]
                           ) -> _UpdateVehicleResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateVehicleResponseSuccess

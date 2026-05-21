@@ -1295,7 +1295,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] rule_based_matching
     #   The process of matching duplicate profiles using the Rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to
     #   your configuration in the `RuleBasedMatchingRequest`. You can use
     #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
@@ -1367,7 +1367,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] rule_based_matching
     #   The process of matching duplicate profiles using the Rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to
     #   your configuration in the `RuleBasedMatchingRequest`. You can use
     #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
@@ -1907,8 +1907,8 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] fields
     #   A map of dataset type to column definitions that specifies which
-    #   data columns to include in the schema. Currently only the
-    #   `_webAnalytics` key is supported.
+    #   data columns to include in the schema. The `_webAnalytics` and
+    #   `_catalogItem` keys are supported.
     #   @return [Hash<String,Array<Types::RecommenderSchemaField>>]
     #
     # @!attribute [rw] tags
@@ -2123,8 +2123,8 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] destination_uri
     #   The destination to which the segment will be exported. This field
-    #   must be provided if the request is not submitted from the Amazon
-    #   Connect Admin Website.
+    #   must be provided if the request is not submitted from the Connect
+    #   Customer Admin Website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/CreateSegmentSnapshotRequest AWS API Documentation
@@ -3874,7 +3874,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] rule_based_matching
     #   The process of matching duplicate profiles using the Rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to
     #   your configuration in the `RuleBasedMatchingRequest`. You can use
     #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
@@ -5183,8 +5183,8 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] destination_uri
     #   The destination to which the segment will be exported. This field
-    #   must be provided if the request is not submitted from the Amazon
-    #   Connect Admin Website.
+    #   must be provided if the request is not submitted from the Connect
+    #   Customer Admin Website.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/GetSegmentSnapshotResponse AWS API Documentation
@@ -8698,7 +8698,8 @@ module Aws::CustomerProfiles
     #   @return [Types::EventsConfig]
     #
     # @!attribute [rw] training_frequency
-    #   How often the recommender should retrain its model with new data.
+    #   How often the recommender should retrain its model with new data. If
+    #   set to 0, automatic retraining will not be enabled.
     #   @return [Integer]
     #
     # @!attribute [rw] inference_config
@@ -8708,11 +8709,25 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] included_columns
     #   A map of dataset type to a list of column names to train on. The
-    #   column names must be a subset of the columns defined in the
-    #   recommender schema. If not specified, all columns in the schema are
-    #   used for training. The following columns are always included and do
-    #   not need to be specified: `Item.Id`, `ItemList[].Id`,
-    #   `EventTimestamp`, `EventType`, and `EventValue`.
+    #   `_webAnalytics` and `_catalogItem` keys are supported. The column
+    #   names must be a subset of the columns defined in the recommender
+    #   schema. If not specified, all columns in the schema are used for
+    #   training. The following columns are always included in training and
+    #   do not need to be specified: `Item.Id`, `EventTimestamp`, and
+    #   `EventType` for `_webAnalytics`; `Id` for `_catalogItem`. Mutually
+    #   exclusive with ExcludedColumns — both cannot be specified in the
+    #   same request.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] excluded_columns
+    #   A map of dataset type to a list of column names to exclude from
+    #   training. The `_webAnalytics` and `_catalogItem` keys are supported.
+    #   The column names must be valid columns defined in the recommender
+    #   schema. All columns in the schema except the listed columns will be
+    #   used for training. The following columns are mandatory and cannot be
+    #   excluded: `Item.Id`, `EventTimestamp`, and `EventType` for
+    #   `_webAnalytics`; `Id` for `_catalogItem`. Mutually exclusive with
+    #   IncludedColumns — both cannot be specified in the same request.
     #   @return [Hash<String,Array<String>>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/customer-profiles-2020-08-15/RecommenderConfig AWS API Documentation
@@ -8721,7 +8736,8 @@ module Aws::CustomerProfiles
       :events_config,
       :training_frequency,
       :inference_config,
-      :included_columns)
+      :included_columns,
+      :excluded_columns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10263,7 +10279,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] rule_based_matching
     #   The process of matching duplicate profiles using the rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to
     #   your configuration in the `RuleBasedMatchingRequest`. You can use
     #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return
@@ -10335,7 +10351,7 @@ module Aws::CustomerProfiles
     #
     # @!attribute [rw] rule_based_matching
     #   The process of matching duplicate profiles using the rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to
     #   your configuration in the `RuleBasedMatchingRequest`. You can use
     #   the `ListRuleBasedMatches` and `GetSimilarProfiles` API to return

@@ -2958,6 +2958,7 @@ module Aws::Glue
       attr_accessor max_results: ::Integer
       attr_accessor recursive: bool
       attr_accessor include_root: bool
+      attr_accessor has_databases: bool
       SENSITIVE: []
     end
 

@@ -90,85 +90,12 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_agent_runtime-instance_method
       def create_agent_runtime: (
                                   agent_runtime_name: ::String,
-                                  agent_runtime_artifact: {
-                                    container_configuration: {
-                                      container_uri: ::String
-                                    }?,
-                                    code_configuration: {
-                                      code: {
-                                        s3: {
-                                          bucket: ::String,
-                                          prefix: ::String,
-                                          version_id: ::String?
-                                        }?
-                                      },
-                                      runtime: ("PYTHON_3_10" | "PYTHON_3_11" | "PYTHON_3_12" | "PYTHON_3_13" | "PYTHON_3_14" | "NODE_22"),
-                                      entry_point: Array[::String]
-                                    }?
-                                  },
+                                  agent_runtime_artifact: Params::agent_runtime_artifact,
                                   role_arn: ::String,
-                                  network_configuration: {
-                                    network_mode: ("PUBLIC" | "VPC"),
-                                    network_mode_config: {
-                                      security_groups: Array[::String],
-                                      subnets: Array[::String],
-                                      require_service_s3_endpoint: bool?
-                                    }?
-                                  },
+                                  network_configuration: Params::network_configuration,
                                   ?client_token: ::String,
                                   ?description: ::String,
-                                  ?authorizer_configuration: {
-                                    custom_jwt_authorizer: {
-                                      discovery_url: ::String,
-                                      allowed_audience: Array[::String]?,
-                                      allowed_clients: Array[::String]?,
-                                      allowed_scopes: Array[::String]?,
-                                      custom_claims: Array[
-                                        {
-                                          inbound_token_claim_name: ::String,
-                                          inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                          authorizing_claim_match_value: {
-                                            claim_match_value: {
-                                              match_value_string: ::String?,
-                                              match_value_string_list: Array[::String]?
-                                            },
-                                            claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                          }
-                                        },
-                                      ]?,
-                                      private_endpoint: {
-                                        self_managed_lattice_resource: {
-                                          resource_configuration_identifier: ::String?
-                                        }?,
-                                        managed_vpc_resource: {
-                                          vpc_identifier: ::String,
-                                          subnet_ids: Array[::String],
-                                          endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                          security_group_ids: Array[::String]?,
-                                          tags: Hash[::String, ::String]?,
-                                          routing_domain: ::String?
-                                        }?
-                                      }?,
-                                      private_endpoint_overrides: Array[
-                                        {
-                                          domain: ::String,
-                                          private_endpoint: {
-                                            self_managed_lattice_resource: {
-                                              resource_configuration_identifier: ::String?
-                                            }?,
-                                            managed_vpc_resource: {
-                                              vpc_identifier: ::String,
-                                              subnet_ids: Array[::String],
-                                              endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                              security_group_ids: Array[::String]?,
-                                              tags: Hash[::String, ::String]?,
-                                              routing_domain: ::String?
-                                            }?
-                                          }
-                                        },
-                                      ]?
-                                    }?
-                                  },
+                                  ?authorizer_configuration: Params::authorizer_configuration,
                                   ?request_header_configuration: {
                                     request_header_allowlist: Array[::String]?
                                   },
@@ -181,19 +108,7 @@ module Aws
                                   },
                                   ?environment_variables: Hash[::String, ::String],
                                   ?filesystem_configurations: Array[
-                                    {
-                                      session_storage: {
-                                        mount_path: ::String
-                                      }?,
-                                      s3_files_access_point: {
-                                        access_point_arn: ::String,
-                                        mount_path: ::String
-                                      }?,
-                                      efs_access_point: {
-                                        access_point_arn: ::String,
-                                        mount_path: ::String
-                                      }?
-                                    },
+                                    Params::filesystem_configuration
                                   ],
                                   ?tags: Hash[::String, ::String]
                                 ) -> _CreateAgentRuntimeResponseSuccess
@@ -275,7 +190,7 @@ module Aws
                                   }?
                                 },
                                 type: ("MANAGED" | "RECOMMENDED")?
-                              },
+                              }
                             ],
                             ?certificates: Array[
                               {
@@ -284,7 +199,7 @@ module Aws
                                     secret_arn: ::String
                                   }?
                                 }
-                              },
+                              }
                             ],
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String]
@@ -334,7 +249,7 @@ module Aws
                                              secret_arn: ::String
                                            }?
                                          }
-                                       },
+                                       }
                                      ],
                                      ?client_token: ::String,
                                      ?tags: Hash[::String, ::String]
@@ -379,45 +294,7 @@ module Aws
                               ?client_token: ::String,
                               evaluator_name: ::String,
                               ?description: ::String,
-                              evaluator_config: {
-                                llm_as_a_judge: {
-                                  instructions: ::String,
-                                  rating_scale: {
-                                    numerical: Array[
-                                      {
-                                        definition: ::String,
-                                        value: ::Float,
-                                        label: ::String
-                                      },
-                                    ]?,
-                                    categorical: Array[
-                                      {
-                                        definition: ::String,
-                                        label: ::String
-                                      },
-                                    ]?
-                                  },
-                                  model_config: {
-                                    bedrock_evaluator_model_config: {
-                                      model_id: ::String,
-                                      inference_config: {
-                                        max_tokens: ::Integer?,
-                                        temperature: ::Float?,
-                                        top_p: ::Float?,
-                                        stop_sequences: Array[::String]?
-                                      }?,
-                                      additional_model_request_fields: {
-                                      }?
-                                    }?
-                                  }
-                                }?,
-                                code_based: {
-                                  lambda_config: {
-                                    lambda_arn: ::String,
-                                    lambda_timeout_in_seconds: ::Integer?
-                                  }?
-                                }?
-                              },
+                              evaluator_config: Params::evaluator_config,
                               level: ("TOOL_CALL" | "TRACE" | "SESSION"),
                               ?kms_key_arn: ::String,
                               ?tags: Hash[::String, ::String]
@@ -453,85 +330,12 @@ module Aws
                             ?client_token: ::String,
                             role_arn: ::String,
                             ?protocol_type: ("MCP"),
-                            ?protocol_configuration: {
-                              mcp: {
-                                supported_versions: Array[::String]?,
-                                instructions: ::String?,
-                                search_type: ("SEMANTIC")?,
-                                session_configuration: {
-                                  session_timeout_in_seconds: ::Integer?
-                                }?,
-                                streaming_configuration: {
-                                  enable_response_streaming: bool?
-                                }?
-                              }?
-                            },
+                            ?protocol_configuration: Params::gateway_protocol_configuration,
                             authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE" | "AUTHENTICATE_ONLY"),
-                            ?authorizer_configuration: {
-                              custom_jwt_authorizer: {
-                                discovery_url: ::String,
-                                allowed_audience: Array[::String]?,
-                                allowed_clients: Array[::String]?,
-                                allowed_scopes: Array[::String]?,
-                                custom_claims: Array[
-                                  {
-                                    inbound_token_claim_name: ::String,
-                                    inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                    authorizing_claim_match_value: {
-                                      claim_match_value: {
-                                        match_value_string: ::String?,
-                                        match_value_string_list: Array[::String]?
-                                      },
-                                      claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                    }
-                                  },
-                                ]?,
-                                private_endpoint: {
-                                  self_managed_lattice_resource: {
-                                    resource_configuration_identifier: ::String?
-                                  }?,
-                                  managed_vpc_resource: {
-                                    vpc_identifier: ::String,
-                                    subnet_ids: Array[::String],
-                                    endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                    security_group_ids: Array[::String]?,
-                                    tags: Hash[::String, ::String]?,
-                                    routing_domain: ::String?
-                                  }?
-                                }?,
-                                private_endpoint_overrides: Array[
-                                  {
-                                    domain: ::String,
-                                    private_endpoint: {
-                                      self_managed_lattice_resource: {
-                                        resource_configuration_identifier: ::String?
-                                      }?,
-                                      managed_vpc_resource: {
-                                        vpc_identifier: ::String,
-                                        subnet_ids: Array[::String],
-                                        endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                        security_group_ids: Array[::String]?,
-                                        tags: Hash[::String, ::String]?,
-                                        routing_domain: ::String?
-                                      }?
-                                    }
-                                  },
-                                ]?
-                              }?
-                            },
+                            ?authorizer_configuration: Params::authorizer_configuration,
                             ?kms_key_arn: ::String,
                             ?interceptor_configurations: Array[
-                              {
-                                interceptor: {
-                                  lambda: {
-                                    arn: ::String
-                                  }?
-                                },
-                                interception_points: Array[("REQUEST" | "RESPONSE")],
-                                input_configuration: {
-                                  pass_request_headers: bool
-                                }?
-                              },
+                              Params::gateway_interceptor_configuration
                             ],
                             ?policy_engine_configuration: {
                               arn: ::String,
@@ -560,61 +364,10 @@ module Aws
                                  ?client_token: ::String,
                                  priority: ::Integer,
                                  ?conditions: Array[
-                                   {
-                                     match_principals: {
-                                       any_of: Array[
-                                         {
-                                           iam_principal: {
-                                             arn: ::String,
-                                             operator: ("StringEquals" | "StringLike")?
-                                           }?
-                                         },
-                                       ]
-                                     }?,
-                                     match_paths: {
-                                       any_of: Array[::String]
-                                     }?
-                                   },
+                                   Params::condition
                                  ],
                                  actions: Array[
-                                   {
-                                     configuration_bundle: {
-                                       static_override: {
-                                         bundle_arn: ::String,
-                                         bundle_version: ::String
-                                       }?,
-                                       weighted_override: {
-                                         traffic_split: Array[
-                                           {
-                                             name: ::String,
-                                             weight: ::Integer,
-                                             configuration_bundle: {
-                                               bundle_arn: ::String,
-                                               bundle_version: ::String
-                                             },
-                                             description: ::String?,
-                                             metadata: Hash[::String, ::String]?
-                                           },
-                                         ]
-                                       }?
-                                     }?,
-                                     route_to_target: {
-                                       static_route: {
-                                         target_name: ::String
-                                       }?,
-                                       weighted_route: {
-                                         traffic_split: Array[
-                                           {
-                                             name: ::String,
-                                             weight: ::Integer,
-                                             target_name: ::String,
-                                             description: ::String?,
-                                             metadata: Hash[::String, ::String]?
-                                           },
-                                         ]
-                                       }?
-                                     }?
-                                   },
+                                   Params::action
                                  ],
                                  ?description: ::String
                                ) -> _CreateGatewayRuleResponseSuccess
@@ -645,133 +398,16 @@ module Aws
                                    name: ::String,
                                    ?description: ::String,
                                    ?client_token: ::String,
-                                   target_configuration: {
-                                     mcp: {
-                                       open_api_schema: {
-                                         s3: {
-                                           uri: ::String?,
-                                           bucket_owner_account_id: ::String?
-                                         }?,
-                                         inline_payload: ::String?
-                                       }?,
-                                       smithy_model: {
-                                         s3: {
-                                           uri: ::String?,
-                                           bucket_owner_account_id: ::String?
-                                         }?,
-                                         inline_payload: ::String?
-                                       }?,
-                                       lambda: {
-                                         lambda_arn: ::String,
-                                         tool_schema: {
-                                           s3: {
-                                             uri: ::String?,
-                                             bucket_owner_account_id: ::String?
-                                           }?,
-                                           inline_payload: Array[
-                                             {
-                                               name: ::String,
-                                               description: ::String,
-                                               input_schema: {
-                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
-                                                 properties: Hash[::String, untyped]?,
-                                                 required: Array[::String]?,
-                                                 items: untyped?,
-                                                 description: ::String?
-                                               },
-                                               output_schema: {
-                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
-                                                 properties: Hash[::String, untyped]?,
-                                                 required: Array[::String]?,
-                                                 items: untyped?,
-                                                 description: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }
-                                       }?,
-                                       mcp_server: {
-                                         endpoint: ::String,
-                                         mcp_tool_schema: {
-                                           s3: {
-                                             uri: ::String?,
-                                             bucket_owner_account_id: ::String?
-                                           }?,
-                                           inline_payload: ::String?
-                                         }?,
-                                         listing_mode: ("DEFAULT" | "DYNAMIC")?,
-                                         resource_priority: ::Integer?
-                                       }?,
-                                       api_gateway: {
-                                         rest_api_id: ::String,
-                                         stage: ::String,
-                                         api_gateway_tool_configuration: {
-                                           tool_overrides: Array[
-                                             {
-                                               name: ::String,
-                                               description: ::String?,
-                                               path: ::String,
-                                               method: ("GET" | "DELETE" | "HEAD" | "OPTIONS" | "PATCH" | "PUT" | "POST")
-                                             },
-                                           ]?,
-                                           tool_filters: Array[
-                                             {
-                                               filter_path: ::String,
-                                               methods: Array[("GET" | "DELETE" | "HEAD" | "OPTIONS" | "PATCH" | "PUT" | "POST")]
-                                             },
-                                           ]
-                                         }
-                                       }?
-                                     }?,
-                                     http: {
-                                       agentcore_runtime: {
-                                         arn: ::String,
-                                         qualifier: ::String?
-                                       }?
-                                     }?
-                                   },
+                                   target_configuration: Params::target_configuration,
                                    ?credential_provider_configurations: Array[
-                                     {
-                                       credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY" | "CALLER_IAM_CREDENTIALS" | "JWT_PASSTHROUGH"),
-                                       credential_provider: {
-                                         oauth_credential_provider: {
-                                           provider_arn: ::String,
-                                           scopes: Array[::String],
-                                           custom_parameters: Hash[::String, ::String]?,
-                                           grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")?,
-                                           default_return_url: ::String?
-                                         }?,
-                                         api_key_credential_provider: {
-                                           provider_arn: ::String,
-                                           credential_parameter_name: ::String?,
-                                           credential_prefix: ::String?,
-                                           credential_location: ("HEADER" | "QUERY_PARAMETER")?
-                                         }?,
-                                         iam_credential_provider: {
-                                           service: ::String,
-                                           region: ::String?
-                                         }?
-                                       }?
-                                     },
+                                     Params::credential_provider_configuration
                                    ],
                                    ?metadata_configuration: {
                                      allowed_request_headers: Array[::String]?,
                                      allowed_query_parameters: Array[::String]?,
                                      allowed_response_headers: Array[::String]?
                                    },
-                                   ?private_endpoint: {
-                                     self_managed_lattice_resource: {
-                                       resource_configuration_identifier: ::String?
-                                     }?,
-                                     managed_vpc_resource: {
-                                       vpc_identifier: ::String,
-                                       subnet_ids: Array[::String],
-                                       endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                       security_group_ids: Array[::String]?,
-                                       tags: Hash[::String, ::String]?,
-                                       routing_domain: ::String?
-                                     }?
-                                   }
+                                   ?private_endpoint: Params::private_endpoint
                                  ) -> _CreateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGatewayTargetResponseSuccess
 
@@ -784,193 +420,31 @@ module Aws
                             harness_name: ::String,
                             ?client_token: ::String,
                             execution_role_arn: ::String,
-                            ?environment: {
-                              agent_core_runtime_environment: {
-                                lifecycle_configuration: {
-                                  idle_runtime_session_timeout: ::Integer?,
-                                  max_lifetime: ::Integer?
-                                }?,
-                                network_configuration: {
-                                  network_mode: ("PUBLIC" | "VPC"),
-                                  network_mode_config: {
-                                    security_groups: Array[::String],
-                                    subnets: Array[::String],
-                                    require_service_s3_endpoint: bool?
-                                  }?
-                                }?,
-                                filesystem_configurations: Array[
-                                  {
-                                    session_storage: {
-                                      mount_path: ::String
-                                    }?,
-                                    s3_files_access_point: {
-                                      access_point_arn: ::String,
-                                      mount_path: ::String
-                                    }?,
-                                    efs_access_point: {
-                                      access_point_arn: ::String,
-                                      mount_path: ::String
-                                    }?
-                                  },
-                                ]?
-                              }?
-                            },
+                            ?environment: Params::harness_environment_provider_request,
                             ?environment_artifact: {
                               container_configuration: {
                                 container_uri: ::String
                               }?
                             },
                             ?environment_variables: Hash[::String, ::String],
-                            ?authorizer_configuration: {
-                              custom_jwt_authorizer: {
-                                discovery_url: ::String,
-                                allowed_audience: Array[::String]?,
-                                allowed_clients: Array[::String]?,
-                                allowed_scopes: Array[::String]?,
-                                custom_claims: Array[
-                                  {
-                                    inbound_token_claim_name: ::String,
-                                    inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                    authorizing_claim_match_value: {
-                                      claim_match_value: {
-                                        match_value_string: ::String?,
-                                        match_value_string_list: Array[::String]?
-                                      },
-                                      claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                    }
-                                  },
-                                ]?,
-                                private_endpoint: {
-                                  self_managed_lattice_resource: {
-                                    resource_configuration_identifier: ::String?
-                                  }?,
-                                  managed_vpc_resource: {
-                                    vpc_identifier: ::String,
-                                    subnet_ids: Array[::String],
-                                    endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                    security_group_ids: Array[::String]?,
-                                    tags: Hash[::String, ::String]?,
-                                    routing_domain: ::String?
-                                  }?
-                                }?,
-                                private_endpoint_overrides: Array[
-                                  {
-                                    domain: ::String,
-                                    private_endpoint: {
-                                      self_managed_lattice_resource: {
-                                        resource_configuration_identifier: ::String?
-                                      }?,
-                                      managed_vpc_resource: {
-                                        vpc_identifier: ::String,
-                                        subnet_ids: Array[::String],
-                                        endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                        security_group_ids: Array[::String]?,
-                                        tags: Hash[::String, ::String]?,
-                                        routing_domain: ::String?
-                                      }?
-                                    }
-                                  },
-                                ]?
-                              }?
-                            },
-                            ?model: {
-                              bedrock_model_config: {
-                                model_id: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?
-                              }?,
-                              open_ai_model_config: {
-                                model_id: ::String,
-                                api_key_arn: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?
-                              }?,
-                              gemini_model_config: {
-                                model_id: ::String,
-                                api_key_arn: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?,
-                                top_k: ::Integer?
-                              }?
-                            },
+                            ?authorizer_configuration: Params::authorizer_configuration,
+                            ?model: Params::harness_model_configuration,
                             ?system_prompt: Array[
                               {
                                 text: ::String?
-                              },
+                              }
                             ],
                             ?tools: Array[
-                              {
-                                type: ("remote_mcp" | "agentcore_browser" | "agentcore_gateway" | "inline_function" | "agentcore_code_interpreter"),
-                                name: ::String?,
-                                config: {
-                                  remote_mcp: {
-                                    url: ::String,
-                                    headers: Hash[::String, ::String]?
-                                  }?,
-                                  agent_core_browser: {
-                                    browser_arn: ::String?
-                                  }?,
-                                  agent_core_gateway: {
-                                    gateway_arn: ::String,
-                                    outbound_auth: {
-                                      aws_iam: {
-                                      }?,
-                                      none: {
-                                      }?,
-                                      oauth: {
-                                        provider_arn: ::String,
-                                        scopes: Array[::String],
-                                        custom_parameters: Hash[::String, ::String]?,
-                                        grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")?,
-                                        default_return_url: ::String?
-                                      }?
-                                    }?
-                                  }?,
-                                  inline_function: {
-                                    description: ::String,
-                                    input_schema: {
-                                    }
-                                  }?,
-                                  agent_core_code_interpreter: {
-                                    code_interpreter_arn: ::String?
-                                  }?
-                                }?
-                              },
+                              Params::harness_tool
                             ],
                             ?skills: Array[
                               {
                                 path: ::String?
-                              },
+                              }
                             ],
                             ?allowed_tools: Array[::String],
-                            ?memory: {
-                              agent_core_memory_configuration: {
-                                arn: ::String,
-                                actor_id: ::String?,
-                                messages_count: ::Integer?,
-                                retrieval_config: Hash[::String, {
-                                    top_k: ::Integer?,
-                                    relevance_score: ::Float?,
-                                    strategy_id: ::String?
-                                  }]?
-                              }?
-                            },
-                            ?truncation: {
-                              strategy: ("sliding_window" | "summarization" | "none"),
-                              config: {
-                                sliding_window: {
-                                  messages_count: ::Integer?
-                                }?,
-                                summarization: {
-                                  summary_ratio: ::Float?,
-                                  preserve_recent_messages: ::Integer?,
-                                  summarization_system_prompt: ::String?
-                                }?
-                              }?
-                            },
+                            ?memory: Params::harness_memory_configuration,
+                            ?truncation: Params::harness_truncation_configuration,
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer,
@@ -991,317 +465,15 @@ module Aws
                            ?memory_execution_role_arn: ::String,
                            event_expiry_duration: ::Integer,
                            ?memory_strategies: Array[
-                             {
-                               semantic_memory_strategy: {
-                                 name: ::String,
-                                 description: ::String?,
-                                 namespaces: Array[::String]?,
-                                 namespace_templates: Array[::String]?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               }?,
-                               summary_memory_strategy: {
-                                 name: ::String,
-                                 description: ::String?,
-                                 namespaces: Array[::String]?,
-                                 namespace_templates: Array[::String]?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               }?,
-                               user_preference_memory_strategy: {
-                                 name: ::String,
-                                 description: ::String?,
-                                 namespaces: Array[::String]?,
-                                 namespace_templates: Array[::String]?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               }?,
-                               custom_memory_strategy: {
-                                 name: ::String,
-                                 description: ::String?,
-                                 namespaces: Array[::String]?,
-                                 namespace_templates: Array[::String]?,
-                                 configuration: {
-                                   semantic_override: {
-                                     extraction: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?,
-                                     consolidation: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?
-                                   }?,
-                                   summary_override: {
-                                     consolidation: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?
-                                   }?,
-                                   user_preference_override: {
-                                     extraction: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?,
-                                     consolidation: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?
-                                   }?,
-                                   episodic_override: {
-                                     extraction: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?,
-                                     consolidation: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String
-                                     }?,
-                                     reflection: {
-                                       append_to_prompt: ::String,
-                                       model_id: ::String,
-                                       namespaces: Array[::String]?,
-                                       namespace_templates: Array[::String]?,
-                                       memory_record_schema: {
-                                         metadata_schema: Array[
-                                           {
-                                             key: ::String,
-                                             type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                             extraction_config: {
-                                               llm_extraction_config: {
-                                                 llm_extraction_instruction: ::String?,
-                                                 definition: ::String,
-                                                 validation: {
-                                                   string_validation: {
-                                                     allowed_values: Array[::String]
-                                                   }?,
-                                                   string_list_validation: {
-                                                     allowed_values: Array[::String]?,
-                                                     max_items: ::Integer?
-                                                   }?,
-                                                   number_validation: {
-                                                     min_value: ::Float?,
-                                                     max_value: ::Float?
-                                                   }?
-                                                 }?
-                                               }?
-                                             }?
-                                           },
-                                         ]?
-                                       }?
-                                     }?
-                                   }?,
-                                   self_managed_configuration: {
-                                     trigger_conditions: Array[
-                                       {
-                                         message_based_trigger: {
-                                           message_count: ::Integer?
-                                         }?,
-                                         token_based_trigger: {
-                                           token_count: ::Integer?
-                                         }?,
-                                         time_based_trigger: {
-                                           idle_session_timeout: ::Integer?
-                                         }?
-                                       },
-                                     ]?,
-                                     invocation_configuration: {
-                                       topic_arn: ::String,
-                                       payload_delivery_bucket_name: ::String
-                                     },
-                                     historical_context_window_size: ::Integer?
-                                   }?
-                                 }?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               }?,
-                               episodic_memory_strategy: {
-                                 name: ::String,
-                                 description: ::String?,
-                                 namespaces: Array[::String]?,
-                                 namespace_templates: Array[::String]?,
-                                 reflection_configuration: {
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               }?
-                             },
+                             Params::memory_strategy_input
                            ],
                            ?indexed_keys: Array[
                              {
                                key: ::String,
                                type: ("STRING" | "STRINGLIST" | "NUMBER")
-                             },
+                             }
                            ],
-                           ?stream_delivery_resources: {
-                             resources: Array[
-                               {
-                                 kinesis: {
-                                   data_stream_arn: ::String,
-                                   content_configurations: Array[
-                                     {
-                                       type: ("MEMORY_RECORDS"),
-                                       level: ("METADATA_ONLY" | "FULL_CONTENT")?
-                                     },
-                                   ]
-                                 }?
-                               },
-                             ]
-                           },
+                           ?stream_delivery_resources: Params::stream_delivery_resources,
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateMemoryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemoryResponseSuccess
@@ -1319,97 +491,7 @@ module Aws
       def create_oauth_2_credential_provider: (
                                                 name: ::String,
                                                 credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2"),
-                                                oauth2_provider_config_input: {
-                                                  custom_oauth_2_provider_config: {
-                                                    oauth_discovery: {
-                                                      discovery_url: ::String?,
-                                                      authorization_server_metadata: {
-                                                        issuer: ::String,
-                                                        authorization_endpoint: ::String,
-                                                        token_endpoint: ::String,
-                                                        response_types: Array[::String]?,
-                                                        token_endpoint_auth_methods: Array[::String]?
-                                                      }?
-                                                    },
-                                                    client_id: ::String?,
-                                                    client_secret: ::String?,
-                                                    private_endpoint: {
-                                                      self_managed_lattice_resource: {
-                                                        resource_configuration_identifier: ::String?
-                                                      }?,
-                                                      managed_vpc_resource: {
-                                                        vpc_identifier: ::String,
-                                                        subnet_ids: Array[::String],
-                                                        endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                        security_group_ids: Array[::String]?,
-                                                        tags: Hash[::String, ::String]?,
-                                                        routing_domain: ::String?
-                                                      }?
-                                                    }?,
-                                                    private_endpoint_overrides: Array[
-                                                      {
-                                                        domain: ::String,
-                                                        private_endpoint: {
-                                                          self_managed_lattice_resource: {
-                                                            resource_configuration_identifier: ::String?
-                                                          }?,
-                                                          managed_vpc_resource: {
-                                                            vpc_identifier: ::String,
-                                                            subnet_ids: Array[::String],
-                                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                            security_group_ids: Array[::String]?,
-                                                            tags: Hash[::String, ::String]?,
-                                                            routing_domain: ::String?
-                                                          }?
-                                                        }
-                                                      },
-                                                    ]?,
-                                                    on_behalf_of_token_exchange_config: {
-                                                      grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT"),
-                                                      token_exchange_grant_type_config: {
-                                                        actor_token_content: ("NONE" | "M2M" | "AWS_IAM_ID_TOKEN_JWT"),
-                                                        actor_token_scopes: Array[::String]?
-                                                      }?
-                                                    }?,
-                                                    client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT")?
-                                                  }?,
-                                                  google_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  github_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  slack_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  salesforce_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  microsoft_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String,
-                                                    tenant_id: ::String?
-                                                  }?,
-                                                  atlassian_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  linkedin_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  included_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String,
-                                                    issuer: ::String?,
-                                                    authorization_endpoint: ::String?,
-                                                    token_endpoint: ::String?
-                                                  }?
-                                                },
+                                                oauth2_provider_config_input: Params::oauth_2_provider_config_input,
                                                 ?tags: Hash[::String, ::String]
                                               ) -> _CreateOauth2CredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOauth2CredentialProviderResponseSuccess
@@ -1429,25 +511,7 @@ module Aws
                                              ?client_token: ::String,
                                              online_evaluation_config_name: ::String,
                                              ?description: ::String,
-                                             rule: {
-                                               sampling_config: {
-                                                 sampling_percentage: ::Float
-                                               },
-                                               filters: Array[
-                                                 {
-                                                   key: ::String,
-                                                   operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
-                                                   value: {
-                                                     string_value: ::String?,
-                                                     double_value: ::Float?,
-                                                     boolean_value: bool?
-                                                   }
-                                                 },
-                                               ]?,
-                                               session_config: {
-                                                 session_timeout_minutes: ::Integer
-                                               }?
-                                             },
+                                             rule: Params::rule,
                                              data_source_config: {
                                                cloud_watch_logs: {
                                                  log_group_names: Array[::String],
@@ -1457,7 +521,7 @@ module Aws
                                              evaluators: Array[
                                                {
                                                  evaluator_id: ::String?
-                                               },
+                                               }
                                              ],
                                              evaluation_execution_role_arn: ::String,
                                              enable_on_create: bool,
@@ -1482,14 +546,7 @@ module Aws
                                       ?description: ::String,
                                       type: ("CoinbaseCDP" | "StripePrivy"),
                                       credential_provider_configurations: Array[
-                                        {
-                                          coinbase_cdp: {
-                                            credential_provider_arn: ::String
-                                          }?,
-                                          stripe_privy: {
-                                            credential_provider_arn: ::String
-                                          }?
-                                        },
+                                        Params::credentials_provider_configuration
                                       ],
                                       ?client_token: ::String
                                     ) -> _CreatePaymentConnectorResponseSuccess
@@ -1506,19 +563,7 @@ module Aws
       def create_payment_credential_provider: (
                                                 name: ::String,
                                                 credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy"),
-                                                provider_configuration_input: {
-                                                  coinbase_cdp_configuration: {
-                                                    api_key_id: ::String,
-                                                    api_key_secret: ::String,
-                                                    wallet_secret: ::String
-                                                  }?,
-                                                  stripe_privy_configuration: {
-                                                    app_id: ::String,
-                                                    app_secret: ::String,
-                                                    authorization_private_key: ::String,
-                                                    authorization_id: ::String
-                                                  }?
-                                                },
+                                                provider_configuration_input: Params::payment_provider_configuration_input,
                                                 ?tags: Hash[::String, ::String]
                                               ) -> _CreatePaymentCredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePaymentCredentialProviderResponseSuccess
@@ -1541,58 +586,7 @@ module Aws
                                     name: ::String,
                                     ?description: ::String,
                                     authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
-                                    ?authorizer_configuration: {
-                                      custom_jwt_authorizer: {
-                                        discovery_url: ::String,
-                                        allowed_audience: Array[::String]?,
-                                        allowed_clients: Array[::String]?,
-                                        allowed_scopes: Array[::String]?,
-                                        custom_claims: Array[
-                                          {
-                                            inbound_token_claim_name: ::String,
-                                            inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                            authorizing_claim_match_value: {
-                                              claim_match_value: {
-                                                match_value_string: ::String?,
-                                                match_value_string_list: Array[::String]?
-                                              },
-                                              claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                            }
-                                          },
-                                        ]?,
-                                        private_endpoint: {
-                                          self_managed_lattice_resource: {
-                                            resource_configuration_identifier: ::String?
-                                          }?,
-                                          managed_vpc_resource: {
-                                            vpc_identifier: ::String,
-                                            subnet_ids: Array[::String],
-                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                            security_group_ids: Array[::String]?,
-                                            tags: Hash[::String, ::String]?,
-                                            routing_domain: ::String?
-                                          }?
-                                        }?,
-                                        private_endpoint_overrides: Array[
-                                          {
-                                            domain: ::String,
-                                            private_endpoint: {
-                                              self_managed_lattice_resource: {
-                                                resource_configuration_identifier: ::String?
-                                              }?,
-                                              managed_vpc_resource: {
-                                                vpc_identifier: ::String,
-                                                subnet_ids: Array[::String],
-                                                endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                security_group_ids: Array[::String]?,
-                                                tags: Hash[::String, ::String]?,
-                                                routing_domain: ::String?
-                                              }?
-                                            }
-                                          },
-                                        ]?
-                                      }?
-                                    },
+                                    ?authorizer_configuration: Params::authorizer_configuration,
                                     role_arn: ::String,
                                     ?client_token: ::String,
                                     ?tags: Hash[::String, ::String]
@@ -1615,15 +609,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#create_policy-instance_method
       def create_policy: (
                            name: ::String,
-                           definition: {
-                             cedar: {
-                               statement: ::String
-                             }?,
-                             policy_generation: {
-                               policy_generation_id: ::String,
-                               policy_generation_asset_id: ::String
-                             }?
-                           },
+                           definition: Params::policy_definition,
                            ?description: ::String,
                            ?validation_mode: ("FAIL_ON_ANY_FINDINGS" | "IGNORE_ALL_FINDINGS"),
                            policy_engine_id: ::String,
@@ -1662,58 +648,7 @@ module Aws
                              name: ::String,
                              ?description: ::String,
                              ?authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
-                             ?authorizer_configuration: {
-                               custom_jwt_authorizer: {
-                                 discovery_url: ::String,
-                                 allowed_audience: Array[::String]?,
-                                 allowed_clients: Array[::String]?,
-                                 allowed_scopes: Array[::String]?,
-                                 custom_claims: Array[
-                                   {
-                                     inbound_token_claim_name: ::String,
-                                     inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                     authorizing_claim_match_value: {
-                                       claim_match_value: {
-                                         match_value_string: ::String?,
-                                         match_value_string_list: Array[::String]?
-                                       },
-                                       claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                     }
-                                   },
-                                 ]?,
-                                 private_endpoint: {
-                                   self_managed_lattice_resource: {
-                                     resource_configuration_identifier: ::String?
-                                   }?,
-                                   managed_vpc_resource: {
-                                     vpc_identifier: ::String,
-                                     subnet_ids: Array[::String],
-                                     endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                     security_group_ids: Array[::String]?,
-                                     tags: Hash[::String, ::String]?,
-                                     routing_domain: ::String?
-                                   }?
-                                 }?,
-                                 private_endpoint_overrides: Array[
-                                   {
-                                     domain: ::String,
-                                     private_endpoint: {
-                                       self_managed_lattice_resource: {
-                                         resource_configuration_identifier: ::String?
-                                       }?,
-                                       managed_vpc_resource: {
-                                         vpc_identifier: ::String,
-                                         subnet_ids: Array[::String],
-                                         endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                         security_group_ids: Array[::String]?,
-                                         tags: Hash[::String, ::String]?,
-                                         routing_domain: ::String?
-                                       }?
-                                     }
-                                   },
-                                 ]?
-                               }?
-                             },
+                             ?authorizer_configuration: Params::authorizer_configuration,
                              ?client_token: ::String,
                              ?approval_configuration: {
                                auto_approval: bool?
@@ -1764,29 +699,7 @@ module Aws
                                     },
                                     ?record_version: ::String,
                                     ?synchronization_type: ("URL"),
-                                    ?synchronization_configuration: {
-                                      from_url: {
-                                        url: ::String,
-                                        credential_provider_configurations: Array[
-                                          {
-                                            credential_provider_type: ("OAUTH" | "IAM"),
-                                            credential_provider: {
-                                              oauth_credential_provider: {
-                                                provider_arn: ::String,
-                                                grant_type: ("CLIENT_CREDENTIALS")?,
-                                                scopes: Array[::String]?,
-                                                custom_parameters: Hash[::String, ::String]?
-                                              }?,
-                                              iam_credential_provider: {
-                                                role_arn: ::String?,
-                                                service: ::String?,
-                                                region: ::String?
-                                              }?
-                                            }
-                                          },
-                                        ]?
-                                      }?
-                                    },
+                                    ?synchronization_configuration: Params::synchronization_configuration,
                                     ?client_token: ::String
                                   ) -> _CreateRegistryRecordResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRegistryRecordResponseSuccess
@@ -3175,84 +2088,11 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#update_agent_runtime-instance_method
       def update_agent_runtime: (
                                   agent_runtime_id: ::String,
-                                  agent_runtime_artifact: {
-                                    container_configuration: {
-                                      container_uri: ::String
-                                    }?,
-                                    code_configuration: {
-                                      code: {
-                                        s3: {
-                                          bucket: ::String,
-                                          prefix: ::String,
-                                          version_id: ::String?
-                                        }?
-                                      },
-                                      runtime: ("PYTHON_3_10" | "PYTHON_3_11" | "PYTHON_3_12" | "PYTHON_3_13" | "PYTHON_3_14" | "NODE_22"),
-                                      entry_point: Array[::String]
-                                    }?
-                                  },
+                                  agent_runtime_artifact: Params::agent_runtime_artifact,
                                   role_arn: ::String,
-                                  network_configuration: {
-                                    network_mode: ("PUBLIC" | "VPC"),
-                                    network_mode_config: {
-                                      security_groups: Array[::String],
-                                      subnets: Array[::String],
-                                      require_service_s3_endpoint: bool?
-                                    }?
-                                  },
+                                  network_configuration: Params::network_configuration,
                                   ?description: ::String,
-                                  ?authorizer_configuration: {
-                                    custom_jwt_authorizer: {
-                                      discovery_url: ::String,
-                                      allowed_audience: Array[::String]?,
-                                      allowed_clients: Array[::String]?,
-                                      allowed_scopes: Array[::String]?,
-                                      custom_claims: Array[
-                                        {
-                                          inbound_token_claim_name: ::String,
-                                          inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                          authorizing_claim_match_value: {
-                                            claim_match_value: {
-                                              match_value_string: ::String?,
-                                              match_value_string_list: Array[::String]?
-                                            },
-                                            claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                          }
-                                        },
-                                      ]?,
-                                      private_endpoint: {
-                                        self_managed_lattice_resource: {
-                                          resource_configuration_identifier: ::String?
-                                        }?,
-                                        managed_vpc_resource: {
-                                          vpc_identifier: ::String,
-                                          subnet_ids: Array[::String],
-                                          endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                          security_group_ids: Array[::String]?,
-                                          tags: Hash[::String, ::String]?,
-                                          routing_domain: ::String?
-                                        }?
-                                      }?,
-                                      private_endpoint_overrides: Array[
-                                        {
-                                          domain: ::String,
-                                          private_endpoint: {
-                                            self_managed_lattice_resource: {
-                                              resource_configuration_identifier: ::String?
-                                            }?,
-                                            managed_vpc_resource: {
-                                              vpc_identifier: ::String,
-                                              subnet_ids: Array[::String],
-                                              endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                              security_group_ids: Array[::String]?,
-                                              tags: Hash[::String, ::String]?,
-                                              routing_domain: ::String?
-                                            }?
-                                          }
-                                        },
-                                      ]?
-                                    }?
-                                  },
+                                  ?authorizer_configuration: Params::authorizer_configuration,
                                   ?request_header_configuration: {
                                     request_header_allowlist: Array[::String]?
                                   },
@@ -3268,19 +2108,7 @@ module Aws
                                   },
                                   ?environment_variables: Hash[::String, ::String],
                                   ?filesystem_configurations: Array[
-                                    {
-                                      session_storage: {
-                                        mount_path: ::String
-                                      }?,
-                                      s3_files_access_point: {
-                                        access_point_arn: ::String,
-                                        mount_path: ::String
-                                      }?,
-                                      efs_access_point: {
-                                        access_point_arn: ::String,
-                                        mount_path: ::String
-                                      }?
-                                    },
+                                    Params::filesystem_configuration
                                   ],
                                   ?client_token: ::String
                                 ) -> _UpdateAgentRuntimeResponseSuccess
@@ -3360,45 +2188,7 @@ module Aws
                               ?client_token: ::String,
                               evaluator_id: ::String,
                               ?description: ::String,
-                              ?evaluator_config: {
-                                llm_as_a_judge: {
-                                  instructions: ::String,
-                                  rating_scale: {
-                                    numerical: Array[
-                                      {
-                                        definition: ::String,
-                                        value: ::Float,
-                                        label: ::String
-                                      },
-                                    ]?,
-                                    categorical: Array[
-                                      {
-                                        definition: ::String,
-                                        label: ::String
-                                      },
-                                    ]?
-                                  },
-                                  model_config: {
-                                    bedrock_evaluator_model_config: {
-                                      model_id: ::String,
-                                      inference_config: {
-                                        max_tokens: ::Integer?,
-                                        temperature: ::Float?,
-                                        top_p: ::Float?,
-                                        stop_sequences: Array[::String]?
-                                      }?,
-                                      additional_model_request_fields: {
-                                      }?
-                                    }?
-                                  }
-                                }?,
-                                code_based: {
-                                  lambda_config: {
-                                    lambda_arn: ::String,
-                                    lambda_timeout_in_seconds: ::Integer?
-                                  }?
-                                }?
-                              },
+                              ?evaluator_config: Params::evaluator_config,
                               ?level: ("TOOL_CALL" | "TRACE" | "SESSION"),
                               ?kms_key_arn: ::String
                             ) -> _UpdateEvaluatorResponseSuccess
@@ -3433,85 +2223,12 @@ module Aws
                             ?description: ::String,
                             role_arn: ::String,
                             ?protocol_type: ("MCP"),
-                            ?protocol_configuration: {
-                              mcp: {
-                                supported_versions: Array[::String]?,
-                                instructions: ::String?,
-                                search_type: ("SEMANTIC")?,
-                                session_configuration: {
-                                  session_timeout_in_seconds: ::Integer?
-                                }?,
-                                streaming_configuration: {
-                                  enable_response_streaming: bool?
-                                }?
-                              }?
-                            },
+                            ?protocol_configuration: Params::gateway_protocol_configuration,
                             authorizer_type: ("CUSTOM_JWT" | "AWS_IAM" | "NONE" | "AUTHENTICATE_ONLY"),
-                            ?authorizer_configuration: {
-                              custom_jwt_authorizer: {
-                                discovery_url: ::String,
-                                allowed_audience: Array[::String]?,
-                                allowed_clients: Array[::String]?,
-                                allowed_scopes: Array[::String]?,
-                                custom_claims: Array[
-                                  {
-                                    inbound_token_claim_name: ::String,
-                                    inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                    authorizing_claim_match_value: {
-                                      claim_match_value: {
-                                        match_value_string: ::String?,
-                                        match_value_string_list: Array[::String]?
-                                      },
-                                      claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                    }
-                                  },
-                                ]?,
-                                private_endpoint: {
-                                  self_managed_lattice_resource: {
-                                    resource_configuration_identifier: ::String?
-                                  }?,
-                                  managed_vpc_resource: {
-                                    vpc_identifier: ::String,
-                                    subnet_ids: Array[::String],
-                                    endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                    security_group_ids: Array[::String]?,
-                                    tags: Hash[::String, ::String]?,
-                                    routing_domain: ::String?
-                                  }?
-                                }?,
-                                private_endpoint_overrides: Array[
-                                  {
-                                    domain: ::String,
-                                    private_endpoint: {
-                                      self_managed_lattice_resource: {
-                                        resource_configuration_identifier: ::String?
-                                      }?,
-                                      managed_vpc_resource: {
-                                        vpc_identifier: ::String,
-                                        subnet_ids: Array[::String],
-                                        endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                        security_group_ids: Array[::String]?,
-                                        tags: Hash[::String, ::String]?,
-                                        routing_domain: ::String?
-                                      }?
-                                    }
-                                  },
-                                ]?
-                              }?
-                            },
+                            ?authorizer_configuration: Params::authorizer_configuration,
                             ?kms_key_arn: ::String,
                             ?interceptor_configurations: Array[
-                              {
-                                interceptor: {
-                                  lambda: {
-                                    arn: ::String
-                                  }?
-                                },
-                                interception_points: Array[("REQUEST" | "RESPONSE")],
-                                input_configuration: {
-                                  pass_request_headers: bool
-                                }?
-                              },
+                              Params::gateway_interceptor_configuration
                             ],
                             ?policy_engine_configuration: {
                               arn: ::String,
@@ -3540,61 +2257,10 @@ module Aws
                                  rule_id: ::String,
                                  ?priority: ::Integer,
                                  ?conditions: Array[
-                                   {
-                                     match_principals: {
-                                       any_of: Array[
-                                         {
-                                           iam_principal: {
-                                             arn: ::String,
-                                             operator: ("StringEquals" | "StringLike")?
-                                           }?
-                                         },
-                                       ]
-                                     }?,
-                                     match_paths: {
-                                       any_of: Array[::String]
-                                     }?
-                                   },
+                                   Params::condition
                                  ],
                                  ?actions: Array[
-                                   {
-                                     configuration_bundle: {
-                                       static_override: {
-                                         bundle_arn: ::String,
-                                         bundle_version: ::String
-                                       }?,
-                                       weighted_override: {
-                                         traffic_split: Array[
-                                           {
-                                             name: ::String,
-                                             weight: ::Integer,
-                                             configuration_bundle: {
-                                               bundle_arn: ::String,
-                                               bundle_version: ::String
-                                             },
-                                             description: ::String?,
-                                             metadata: Hash[::String, ::String]?
-                                           },
-                                         ]
-                                       }?
-                                     }?,
-                                     route_to_target: {
-                                       static_route: {
-                                         target_name: ::String
-                                       }?,
-                                       weighted_route: {
-                                         traffic_split: Array[
-                                           {
-                                             name: ::String,
-                                             weight: ::Integer,
-                                             target_name: ::String,
-                                             description: ::String?,
-                                             metadata: Hash[::String, ::String]?
-                                           },
-                                         ]
-                                       }?
-                                     }?
-                                   },
+                                   Params::action
                                  ],
                                  ?description: ::String
                                ) -> _UpdateGatewayRuleResponseSuccess
@@ -3625,133 +2291,16 @@ module Aws
                                    target_id: ::String,
                                    name: ::String,
                                    ?description: ::String,
-                                   target_configuration: {
-                                     mcp: {
-                                       open_api_schema: {
-                                         s3: {
-                                           uri: ::String?,
-                                           bucket_owner_account_id: ::String?
-                                         }?,
-                                         inline_payload: ::String?
-                                       }?,
-                                       smithy_model: {
-                                         s3: {
-                                           uri: ::String?,
-                                           bucket_owner_account_id: ::String?
-                                         }?,
-                                         inline_payload: ::String?
-                                       }?,
-                                       lambda: {
-                                         lambda_arn: ::String,
-                                         tool_schema: {
-                                           s3: {
-                                             uri: ::String?,
-                                             bucket_owner_account_id: ::String?
-                                           }?,
-                                           inline_payload: Array[
-                                             {
-                                               name: ::String,
-                                               description: ::String,
-                                               input_schema: {
-                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
-                                                 properties: Hash[::String, untyped]?,
-                                                 required: Array[::String]?,
-                                                 items: untyped?,
-                                                 description: ::String?
-                                               },
-                                               output_schema: {
-                                                 type: ("string" | "number" | "object" | "array" | "boolean" | "integer"),
-                                                 properties: Hash[::String, untyped]?,
-                                                 required: Array[::String]?,
-                                                 items: untyped?,
-                                                 description: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }
-                                       }?,
-                                       mcp_server: {
-                                         endpoint: ::String,
-                                         mcp_tool_schema: {
-                                           s3: {
-                                             uri: ::String?,
-                                             bucket_owner_account_id: ::String?
-                                           }?,
-                                           inline_payload: ::String?
-                                         }?,
-                                         listing_mode: ("DEFAULT" | "DYNAMIC")?,
-                                         resource_priority: ::Integer?
-                                       }?,
-                                       api_gateway: {
-                                         rest_api_id: ::String,
-                                         stage: ::String,
-                                         api_gateway_tool_configuration: {
-                                           tool_overrides: Array[
-                                             {
-                                               name: ::String,
-                                               description: ::String?,
-                                               path: ::String,
-                                               method: ("GET" | "DELETE" | "HEAD" | "OPTIONS" | "PATCH" | "PUT" | "POST")
-                                             },
-                                           ]?,
-                                           tool_filters: Array[
-                                             {
-                                               filter_path: ::String,
-                                               methods: Array[("GET" | "DELETE" | "HEAD" | "OPTIONS" | "PATCH" | "PUT" | "POST")]
-                                             },
-                                           ]
-                                         }
-                                       }?
-                                     }?,
-                                     http: {
-                                       agentcore_runtime: {
-                                         arn: ::String,
-                                         qualifier: ::String?
-                                       }?
-                                     }?
-                                   },
+                                   target_configuration: Params::target_configuration,
                                    ?credential_provider_configurations: Array[
-                                     {
-                                       credential_provider_type: ("GATEWAY_IAM_ROLE" | "OAUTH" | "API_KEY" | "CALLER_IAM_CREDENTIALS" | "JWT_PASSTHROUGH"),
-                                       credential_provider: {
-                                         oauth_credential_provider: {
-                                           provider_arn: ::String,
-                                           scopes: Array[::String],
-                                           custom_parameters: Hash[::String, ::String]?,
-                                           grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")?,
-                                           default_return_url: ::String?
-                                         }?,
-                                         api_key_credential_provider: {
-                                           provider_arn: ::String,
-                                           credential_parameter_name: ::String?,
-                                           credential_prefix: ::String?,
-                                           credential_location: ("HEADER" | "QUERY_PARAMETER")?
-                                         }?,
-                                         iam_credential_provider: {
-                                           service: ::String,
-                                           region: ::String?
-                                         }?
-                                       }?
-                                     },
+                                     Params::credential_provider_configuration
                                    ],
                                    ?metadata_configuration: {
                                      allowed_request_headers: Array[::String]?,
                                      allowed_query_parameters: Array[::String]?,
                                      allowed_response_headers: Array[::String]?
                                    },
-                                   ?private_endpoint: {
-                                     self_managed_lattice_resource: {
-                                       resource_configuration_identifier: ::String?
-                                     }?,
-                                     managed_vpc_resource: {
-                                       vpc_identifier: ::String,
-                                       subnet_ids: Array[::String],
-                                       endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                       security_group_ids: Array[::String]?,
-                                       tags: Hash[::String, ::String]?,
-                                       routing_domain: ::String?
-                                     }?
-                                   }
+                                   ?private_endpoint: Params::private_endpoint
                                  ) -> _UpdateGatewayTargetResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGatewayTargetResponseSuccess
 
@@ -3764,37 +2313,7 @@ module Aws
                             harness_id: ::String,
                             ?client_token: ::String,
                             ?execution_role_arn: ::String,
-                            ?environment: {
-                              agent_core_runtime_environment: {
-                                lifecycle_configuration: {
-                                  idle_runtime_session_timeout: ::Integer?,
-                                  max_lifetime: ::Integer?
-                                }?,
-                                network_configuration: {
-                                  network_mode: ("PUBLIC" | "VPC"),
-                                  network_mode_config: {
-                                    security_groups: Array[::String],
-                                    subnets: Array[::String],
-                                    require_service_s3_endpoint: bool?
-                                  }?
-                                }?,
-                                filesystem_configurations: Array[
-                                  {
-                                    session_storage: {
-                                      mount_path: ::String
-                                    }?,
-                                    s3_files_access_point: {
-                                      access_point_arn: ::String,
-                                      mount_path: ::String
-                                    }?,
-                                    efs_access_point: {
-                                      access_point_arn: ::String,
-                                      mount_path: ::String
-                                    }?
-                                  },
-                                ]?
-                              }?
-                            },
+                            ?environment: Params::harness_environment_provider_request,
                             ?environment_artifact: {
                               optional_value: {
                                 container_configuration: {
@@ -3803,160 +2322,26 @@ module Aws
                               }?
                             },
                             ?environment_variables: Hash[::String, ::String],
-                            ?authorizer_configuration: {
-                              optional_value: {
-                                custom_jwt_authorizer: {
-                                  discovery_url: ::String,
-                                  allowed_audience: Array[::String]?,
-                                  allowed_clients: Array[::String]?,
-                                  allowed_scopes: Array[::String]?,
-                                  custom_claims: Array[
-                                    {
-                                      inbound_token_claim_name: ::String,
-                                      inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                      authorizing_claim_match_value: {
-                                        claim_match_value: {
-                                          match_value_string: ::String?,
-                                          match_value_string_list: Array[::String]?
-                                        },
-                                        claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                      }
-                                    },
-                                  ]?,
-                                  private_endpoint: {
-                                    self_managed_lattice_resource: {
-                                      resource_configuration_identifier: ::String?
-                                    }?,
-                                    managed_vpc_resource: {
-                                      vpc_identifier: ::String,
-                                      subnet_ids: Array[::String],
-                                      endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                      security_group_ids: Array[::String]?,
-                                      tags: Hash[::String, ::String]?,
-                                      routing_domain: ::String?
-                                    }?
-                                  }?,
-                                  private_endpoint_overrides: Array[
-                                    {
-                                      domain: ::String,
-                                      private_endpoint: {
-                                        self_managed_lattice_resource: {
-                                          resource_configuration_identifier: ::String?
-                                        }?,
-                                        managed_vpc_resource: {
-                                          vpc_identifier: ::String,
-                                          subnet_ids: Array[::String],
-                                          endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                          security_group_ids: Array[::String]?,
-                                          tags: Hash[::String, ::String]?,
-                                          routing_domain: ::String?
-                                        }?
-                                      }
-                                    },
-                                  ]?
-                                }?
-                              }?
-                            },
-                            ?model: {
-                              bedrock_model_config: {
-                                model_id: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?
-                              }?,
-                              open_ai_model_config: {
-                                model_id: ::String,
-                                api_key_arn: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?
-                              }?,
-                              gemini_model_config: {
-                                model_id: ::String,
-                                api_key_arn: ::String,
-                                max_tokens: ::Integer?,
-                                temperature: ::Float?,
-                                top_p: ::Float?,
-                                top_k: ::Integer?
-                              }?
-                            },
+                            ?authorizer_configuration: Params::updated_authorizer_configuration,
+                            ?model: Params::harness_model_configuration,
                             ?system_prompt: Array[
                               {
                                 text: ::String?
-                              },
+                              }
                             ],
                             ?tools: Array[
-                              {
-                                type: ("remote_mcp" | "agentcore_browser" | "agentcore_gateway" | "inline_function" | "agentcore_code_interpreter"),
-                                name: ::String?,
-                                config: {
-                                  remote_mcp: {
-                                    url: ::String,
-                                    headers: Hash[::String, ::String]?
-                                  }?,
-                                  agent_core_browser: {
-                                    browser_arn: ::String?
-                                  }?,
-                                  agent_core_gateway: {
-                                    gateway_arn: ::String,
-                                    outbound_auth: {
-                                      aws_iam: {
-                                      }?,
-                                      none: {
-                                      }?,
-                                      oauth: {
-                                        provider_arn: ::String,
-                                        scopes: Array[::String],
-                                        custom_parameters: Hash[::String, ::String]?,
-                                        grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")?,
-                                        default_return_url: ::String?
-                                      }?
-                                    }?
-                                  }?,
-                                  inline_function: {
-                                    description: ::String,
-                                    input_schema: {
-                                    }
-                                  }?,
-                                  agent_core_code_interpreter: {
-                                    code_interpreter_arn: ::String?
-                                  }?
-                                }?
-                              },
+                              Params::harness_tool
                             ],
                             ?skills: Array[
                               {
                                 path: ::String?
-                              },
+                              }
                             ],
                             ?allowed_tools: Array[::String],
                             ?memory: {
-                              optional_value: {
-                                agent_core_memory_configuration: {
-                                  arn: ::String,
-                                  actor_id: ::String?,
-                                  messages_count: ::Integer?,
-                                  retrieval_config: Hash[::String, {
-                                      top_k: ::Integer?,
-                                      relevance_score: ::Float?,
-                                      strategy_id: ::String?
-                                    }]?
-                                }?
-                              }?
+                              optional_value: Params::harness_memory_configuration?
                             },
-                            ?truncation: {
-                              strategy: ("sliding_window" | "summarization" | "none"),
-                              config: {
-                                sliding_window: {
-                                  messages_count: ::Integer?
-                                }?,
-                                summarization: {
-                                  summary_ratio: ::Float?,
-                                  preserve_recent_messages: ::Integer?,
-                                  summarization_system_prompt: ::String?
-                                }?
-                              }?
-                            },
+                            ?truncation: Params::harness_truncation_configuration,
                             ?max_iterations: ::Integer,
                             ?max_tokens: ::Integer,
                             ?timeout_seconds: ::Integer
@@ -3976,295 +2361,7 @@ module Aws
                            ?memory_execution_role_arn: ::String,
                            ?memory_strategies: {
                              add_memory_strategies: Array[
-                               {
-                                 semantic_memory_strategy: {
-                                   name: ::String,
-                                   description: ::String?,
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?,
-                                 summary_memory_strategy: {
-                                   name: ::String,
-                                   description: ::String?,
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?,
-                                 user_preference_memory_strategy: {
-                                   name: ::String,
-                                   description: ::String?,
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?,
-                                 custom_memory_strategy: {
-                                   name: ::String,
-                                   description: ::String?,
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   configuration: {
-                                     semantic_override: {
-                                       extraction: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?,
-                                       consolidation: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?
-                                     }?,
-                                     summary_override: {
-                                       consolidation: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?
-                                     }?,
-                                     user_preference_override: {
-                                       extraction: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?,
-                                       consolidation: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?
-                                     }?,
-                                     episodic_override: {
-                                       extraction: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?,
-                                       consolidation: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String
-                                       }?,
-                                       reflection: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String,
-                                         namespaces: Array[::String]?,
-                                         namespace_templates: Array[::String]?,
-                                         memory_record_schema: {
-                                           metadata_schema: Array[
-                                             {
-                                               key: ::String,
-                                               type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                               extraction_config: {
-                                                 llm_extraction_config: {
-                                                   llm_extraction_instruction: ::String?,
-                                                   definition: ::String,
-                                                   validation: {
-                                                     string_validation: {
-                                                       allowed_values: Array[::String]
-                                                     }?,
-                                                     string_list_validation: {
-                                                       allowed_values: Array[::String]?,
-                                                       max_items: ::Integer?
-                                                     }?,
-                                                     number_validation: {
-                                                       min_value: ::Float?,
-                                                       max_value: ::Float?
-                                                     }?
-                                                   }?
-                                                 }?
-                                               }?
-                                             },
-                                           ]?
-                                         }?
-                                       }?
-                                     }?,
-                                     self_managed_configuration: {
-                                       trigger_conditions: Array[
-                                         {
-                                           message_based_trigger: {
-                                             message_count: ::Integer?
-                                           }?,
-                                           token_based_trigger: {
-                                             token_count: ::Integer?
-                                           }?,
-                                           time_based_trigger: {
-                                             idle_session_timeout: ::Integer?
-                                           }?
-                                         },
-                                       ]?,
-                                       invocation_configuration: {
-                                         topic_arn: ::String,
-                                         payload_delivery_bucket_name: ::String
-                                       },
-                                       historical_context_window_size: ::Integer?
-                                     }?
-                                   }?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?,
-                                 episodic_memory_strategy: {
-                                   name: ::String,
-                                   description: ::String?,
-                                   namespaces: Array[::String]?,
-                                   namespace_templates: Array[::String]?,
-                                   reflection_configuration: {
-                                     namespaces: Array[::String]?,
-                                     namespace_templates: Array[::String]?,
-                                     memory_record_schema: {
-                                       metadata_schema: Array[
-                                         {
-                                           key: ::String,
-                                           type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                           extraction_config: {
-                                             llm_extraction_config: {
-                                               llm_extraction_instruction: ::String?,
-                                               definition: ::String,
-                                               validation: {
-                                                 string_validation: {
-                                                   allowed_values: Array[::String]
-                                                 }?,
-                                                 string_list_validation: {
-                                                   allowed_values: Array[::String]?,
-                                                   max_items: ::Integer?
-                                                 }?,
-                                                 number_validation: {
-                                                   min_value: ::Float?,
-                                                   max_value: ::Float?
-                                                 }?
-                                               }?
-                                             }?
-                                           }?
-                                         },
-                                       ]?
-                                     }?
-                                   }?,
-                                   memory_record_schema: {
-                                     metadata_schema: Array[
-                                       {
-                                         key: ::String,
-                                         type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                         extraction_config: {
-                                           llm_extraction_config: {
-                                             llm_extraction_instruction: ::String?,
-                                             definition: ::String,
-                                             validation: {
-                                               string_validation: {
-                                                 allowed_values: Array[::String]
-                                               }?,
-                                               string_list_validation: {
-                                                 allowed_values: Array[::String]?,
-                                                 max_items: ::Integer?
-                                               }?,
-                                               number_validation: {
-                                                 min_value: ::Float?,
-                                                 max_value: ::Float?
-                                               }?
-                                             }?
-                                           }?
-                                         }?
-                                       },
-                                     ]?
-                                   }?
-                                 }?
-                               },
+                               Params::memory_strategy_input
                              ]?,
                              modify_memory_strategies: Array[
                                {
@@ -4310,86 +2407,14 @@ module Aws
                                      }?
                                    }?,
                                    reflection: {
-                                     episodic_reflection_configuration: {
-                                       namespaces: Array[::String]?,
-                                       namespace_templates: Array[::String]?,
-                                       memory_record_schema: {
-                                         metadata_schema: Array[
-                                           {
-                                             key: ::String,
-                                             type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                             extraction_config: {
-                                               llm_extraction_config: {
-                                                 llm_extraction_instruction: ::String?,
-                                                 definition: ::String,
-                                                 validation: {
-                                                   string_validation: {
-                                                     allowed_values: Array[::String]
-                                                   }?,
-                                                   string_list_validation: {
-                                                     allowed_values: Array[::String]?,
-                                                     max_items: ::Integer?
-                                                   }?,
-                                                   number_validation: {
-                                                     min_value: ::Float?,
-                                                     max_value: ::Float?
-                                                   }?
-                                                 }?
-                                               }?
-                                             }?
-                                           },
-                                         ]?
-                                       }?
-                                     }?,
+                                     episodic_reflection_configuration: Params::episodic_reflection_configuration_input?,
                                      custom_reflection_configuration: {
-                                       episodic_reflection_override: {
-                                         append_to_prompt: ::String,
-                                         model_id: ::String,
-                                         namespaces: Array[::String]?,
-                                         namespace_templates: Array[::String]?,
-                                         memory_record_schema: {
-                                           metadata_schema: Array[
-                                             {
-                                               key: ::String,
-                                               type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                               extraction_config: {
-                                                 llm_extraction_config: {
-                                                   llm_extraction_instruction: ::String?,
-                                                   definition: ::String,
-                                                   validation: {
-                                                     string_validation: {
-                                                       allowed_values: Array[::String]
-                                                     }?,
-                                                     string_list_validation: {
-                                                       allowed_values: Array[::String]?,
-                                                       max_items: ::Integer?
-                                                     }?,
-                                                     number_validation: {
-                                                       min_value: ::Float?,
-                                                       max_value: ::Float?
-                                                     }?
-                                                   }?
-                                                 }?
-                                               }?
-                                             },
-                                           ]?
-                                         }?
-                                       }?
+                                       episodic_reflection_override: Params::episodic_override_reflection_configuration_input?
                                      }?
                                    }?,
                                    self_managed_configuration: {
                                      trigger_conditions: Array[
-                                       {
-                                         message_based_trigger: {
-                                           message_count: ::Integer?
-                                         }?,
-                                         token_based_trigger: {
-                                           token_count: ::Integer?
-                                         }?,
-                                         time_based_trigger: {
-                                           idle_session_timeout: ::Integer?
-                                         }?
-                                       },
+                                       Params::trigger_condition_input
                                      ]?,
                                      invocation_configuration: {
                                        topic_arn: ::String?,
@@ -4398,62 +2423,22 @@ module Aws
                                      historical_context_window_size: ::Integer?
                                    }?
                                  }?,
-                                 memory_record_schema: {
-                                   metadata_schema: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("STRING" | "STRINGLIST" | "NUMBER")?,
-                                       extraction_config: {
-                                         llm_extraction_config: {
-                                           llm_extraction_instruction: ::String?,
-                                           definition: ::String,
-                                           validation: {
-                                             string_validation: {
-                                               allowed_values: Array[::String]
-                                             }?,
-                                             string_list_validation: {
-                                               allowed_values: Array[::String]?,
-                                               max_items: ::Integer?
-                                             }?,
-                                             number_validation: {
-                                               min_value: ::Float?,
-                                               max_value: ::Float?
-                                             }?
-                                           }?
-                                         }?
-                                       }?
-                                     },
-                                   ]?
-                                 }?
-                               },
+                                 memory_record_schema: Params::memory_record_schema?
+                               }
                              ]?,
                              delete_memory_strategies: Array[
                                {
                                  memory_strategy_id: ::String
-                               },
+                               }
                              ]?
                            },
                            ?add_indexed_keys: Array[
                              {
                                key: ::String,
                                type: ("STRING" | "STRINGLIST" | "NUMBER")
-                             },
+                             }
                            ],
-                           ?stream_delivery_resources: {
-                             resources: Array[
-                               {
-                                 kinesis: {
-                                   data_stream_arn: ::String,
-                                   content_configurations: Array[
-                                     {
-                                       type: ("MEMORY_RECORDS"),
-                                       level: ("METADATA_ONLY" | "FULL_CONTENT")?
-                                     },
-                                   ]
-                                 }?
-                               },
-                             ]
-                           }
+                           ?stream_delivery_resources: Params::stream_delivery_resources
                          ) -> _UpdateMemoryResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemoryResponseSuccess
 
@@ -4473,97 +2458,7 @@ module Aws
       def update_oauth_2_credential_provider: (
                                                 name: ::String,
                                                 credential_provider_vendor: ("GoogleOauth2" | "GithubOauth2" | "SlackOauth2" | "SalesforceOauth2" | "MicrosoftOauth2" | "CustomOauth2" | "AtlassianOauth2" | "LinkedinOauth2" | "XOauth2" | "OktaOauth2" | "OneLoginOauth2" | "PingOneOauth2" | "FacebookOauth2" | "YandexOauth2" | "RedditOauth2" | "ZoomOauth2" | "TwitchOauth2" | "SpotifyOauth2" | "DropboxOauth2" | "NotionOauth2" | "HubspotOauth2" | "CyberArkOauth2" | "FusionAuthOauth2" | "Auth0Oauth2" | "CognitoOauth2"),
-                                                oauth2_provider_config_input: {
-                                                  custom_oauth_2_provider_config: {
-                                                    oauth_discovery: {
-                                                      discovery_url: ::String?,
-                                                      authorization_server_metadata: {
-                                                        issuer: ::String,
-                                                        authorization_endpoint: ::String,
-                                                        token_endpoint: ::String,
-                                                        response_types: Array[::String]?,
-                                                        token_endpoint_auth_methods: Array[::String]?
-                                                      }?
-                                                    },
-                                                    client_id: ::String?,
-                                                    client_secret: ::String?,
-                                                    private_endpoint: {
-                                                      self_managed_lattice_resource: {
-                                                        resource_configuration_identifier: ::String?
-                                                      }?,
-                                                      managed_vpc_resource: {
-                                                        vpc_identifier: ::String,
-                                                        subnet_ids: Array[::String],
-                                                        endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                        security_group_ids: Array[::String]?,
-                                                        tags: Hash[::String, ::String]?,
-                                                        routing_domain: ::String?
-                                                      }?
-                                                    }?,
-                                                    private_endpoint_overrides: Array[
-                                                      {
-                                                        domain: ::String,
-                                                        private_endpoint: {
-                                                          self_managed_lattice_resource: {
-                                                            resource_configuration_identifier: ::String?
-                                                          }?,
-                                                          managed_vpc_resource: {
-                                                            vpc_identifier: ::String,
-                                                            subnet_ids: Array[::String],
-                                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                            security_group_ids: Array[::String]?,
-                                                            tags: Hash[::String, ::String]?,
-                                                            routing_domain: ::String?
-                                                          }?
-                                                        }
-                                                      },
-                                                    ]?,
-                                                    on_behalf_of_token_exchange_config: {
-                                                      grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT"),
-                                                      token_exchange_grant_type_config: {
-                                                        actor_token_content: ("NONE" | "M2M" | "AWS_IAM_ID_TOKEN_JWT"),
-                                                        actor_token_scopes: Array[::String]?
-                                                      }?
-                                                    }?,
-                                                    client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT")?
-                                                  }?,
-                                                  google_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  github_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  slack_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  salesforce_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  microsoft_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String,
-                                                    tenant_id: ::String?
-                                                  }?,
-                                                  atlassian_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  linkedin_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String
-                                                  }?,
-                                                  included_oauth_2_provider_config: {
-                                                    client_id: ::String,
-                                                    client_secret: ::String,
-                                                    issuer: ::String?,
-                                                    authorization_endpoint: ::String?,
-                                                    token_endpoint: ::String?
-                                                  }?
-                                                }
+                                                oauth2_provider_config_input: Params::oauth_2_provider_config_input
                                               ) -> _UpdateOauth2CredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOauth2CredentialProviderResponseSuccess
 
@@ -4581,25 +2476,7 @@ module Aws
                                              ?client_token: ::String,
                                              online_evaluation_config_id: ::String,
                                              ?description: ::String,
-                                             ?rule: {
-                                               sampling_config: {
-                                                 sampling_percentage: ::Float
-                                               },
-                                               filters: Array[
-                                                 {
-                                                   key: ::String,
-                                                   operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
-                                                   value: {
-                                                     string_value: ::String?,
-                                                     double_value: ::Float?,
-                                                     boolean_value: bool?
-                                                   }
-                                                 },
-                                               ]?,
-                                               session_config: {
-                                                 session_timeout_minutes: ::Integer
-                                               }?
-                                             },
+                                             ?rule: Params::rule,
                                              ?data_source_config: {
                                                cloud_watch_logs: {
                                                  log_group_names: Array[::String],
@@ -4609,7 +2486,7 @@ module Aws
                                              ?evaluators: Array[
                                                {
                                                  evaluator_id: ::String?
-                                               },
+                                               }
                                              ],
                                              ?evaluation_execution_role_arn: ::String,
                                              ?execution_status: ("ENABLED" | "DISABLED")
@@ -4633,14 +2510,7 @@ module Aws
                                       ?description: ::String,
                                       ?type: ("CoinbaseCDP" | "StripePrivy"),
                                       ?credential_provider_configurations: Array[
-                                        {
-                                          coinbase_cdp: {
-                                            credential_provider_arn: ::String
-                                          }?,
-                                          stripe_privy: {
-                                            credential_provider_arn: ::String
-                                          }?
-                                        },
+                                        Params::credentials_provider_configuration
                                       ],
                                       ?client_token: ::String
                                     ) -> _UpdatePaymentConnectorResponseSuccess
@@ -4659,19 +2529,7 @@ module Aws
       def update_payment_credential_provider: (
                                                 name: ::String,
                                                 credential_provider_vendor: ("CoinbaseCDP" | "StripePrivy"),
-                                                provider_configuration_input: {
-                                                  coinbase_cdp_configuration: {
-                                                    api_key_id: ::String,
-                                                    api_key_secret: ::String,
-                                                    wallet_secret: ::String
-                                                  }?,
-                                                  stripe_privy_configuration: {
-                                                    app_id: ::String,
-                                                    app_secret: ::String,
-                                                    authorization_private_key: ::String,
-                                                    authorization_id: ::String
-                                                  }?
-                                                }
+                                                provider_configuration_input: Params::payment_provider_configuration_input
                                               ) -> _UpdatePaymentCredentialProviderResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePaymentCredentialProviderResponseSuccess
 
@@ -4691,58 +2549,7 @@ module Aws
                                     payment_manager_id: ::String,
                                     ?description: ::String,
                                     ?authorizer_type: ("CUSTOM_JWT" | "AWS_IAM"),
-                                    ?authorizer_configuration: {
-                                      custom_jwt_authorizer: {
-                                        discovery_url: ::String,
-                                        allowed_audience: Array[::String]?,
-                                        allowed_clients: Array[::String]?,
-                                        allowed_scopes: Array[::String]?,
-                                        custom_claims: Array[
-                                          {
-                                            inbound_token_claim_name: ::String,
-                                            inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                            authorizing_claim_match_value: {
-                                              claim_match_value: {
-                                                match_value_string: ::String?,
-                                                match_value_string_list: Array[::String]?
-                                              },
-                                              claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                            }
-                                          },
-                                        ]?,
-                                        private_endpoint: {
-                                          self_managed_lattice_resource: {
-                                            resource_configuration_identifier: ::String?
-                                          }?,
-                                          managed_vpc_resource: {
-                                            vpc_identifier: ::String,
-                                            subnet_ids: Array[::String],
-                                            endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                            security_group_ids: Array[::String]?,
-                                            tags: Hash[::String, ::String]?,
-                                            routing_domain: ::String?
-                                          }?
-                                        }?,
-                                        private_endpoint_overrides: Array[
-                                          {
-                                            domain: ::String,
-                                            private_endpoint: {
-                                              self_managed_lattice_resource: {
-                                                resource_configuration_identifier: ::String?
-                                              }?,
-                                              managed_vpc_resource: {
-                                                vpc_identifier: ::String,
-                                                subnet_ids: Array[::String],
-                                                endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                                security_group_ids: Array[::String]?,
-                                                tags: Hash[::String, ::String]?,
-                                                routing_domain: ::String?
-                                              }?
-                                            }
-                                          },
-                                        ]?
-                                      }?
-                                    },
+                                    ?authorizer_configuration: Params::authorizer_configuration,
                                     ?role_arn: ::String,
                                     ?client_token: ::String
                                   ) -> _UpdatePaymentManagerResponseSuccess
@@ -4768,15 +2575,7 @@ module Aws
                            ?description: {
                              optional_value: ::String?
                            },
-                           ?definition: {
-                             cedar: {
-                               statement: ::String
-                             }?,
-                             policy_generation: {
-                               policy_generation_id: ::String,
-                               policy_generation_asset_id: ::String
-                             }?
-                           },
+                           ?definition: Params::policy_definition,
                            ?validation_mode: ("FAIL_ON_ANY_FINDINGS" | "IGNORE_ALL_FINDINGS")
                          ) -> _UpdatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePolicyResponseSuccess
@@ -4823,60 +2622,7 @@ module Aws
                              ?description: {
                                optional_value: ::String?
                              },
-                             ?authorizer_configuration: {
-                               optional_value: {
-                                 custom_jwt_authorizer: {
-                                   discovery_url: ::String,
-                                   allowed_audience: Array[::String]?,
-                                   allowed_clients: Array[::String]?,
-                                   allowed_scopes: Array[::String]?,
-                                   custom_claims: Array[
-                                     {
-                                       inbound_token_claim_name: ::String,
-                                       inbound_token_claim_value_type: ("STRING" | "STRING_ARRAY"),
-                                       authorizing_claim_match_value: {
-                                         claim_match_value: {
-                                           match_value_string: ::String?,
-                                           match_value_string_list: Array[::String]?
-                                         },
-                                         claim_match_operator: ("EQUALS" | "CONTAINS" | "CONTAINS_ANY")
-                                       }
-                                     },
-                                   ]?,
-                                   private_endpoint: {
-                                     self_managed_lattice_resource: {
-                                       resource_configuration_identifier: ::String?
-                                     }?,
-                                     managed_vpc_resource: {
-                                       vpc_identifier: ::String,
-                                       subnet_ids: Array[::String],
-                                       endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                       security_group_ids: Array[::String]?,
-                                       tags: Hash[::String, ::String]?,
-                                       routing_domain: ::String?
-                                     }?
-                                   }?,
-                                   private_endpoint_overrides: Array[
-                                     {
-                                       domain: ::String,
-                                       private_endpoint: {
-                                         self_managed_lattice_resource: {
-                                           resource_configuration_identifier: ::String?
-                                         }?,
-                                         managed_vpc_resource: {
-                                           vpc_identifier: ::String,
-                                           subnet_ids: Array[::String],
-                                           endpoint_ip_address_type: ("IPV4" | "IPV6"),
-                                           security_group_ids: Array[::String]?,
-                                           tags: Hash[::String, ::String]?,
-                                           routing_domain: ::String?
-                                         }?
-                                       }
-                                     },
-                                   ]?
-                                 }?
-                               }?
-                             },
+                             ?authorizer_configuration: Params::updated_authorizer_configuration,
                              ?approval_configuration: {
                                optional_value: {
                                  auto_approval: bool?
@@ -4964,29 +2710,7 @@ module Aws
                                       optional_value: ("URL")?
                                     },
                                     ?synchronization_configuration: {
-                                      optional_value: {
-                                        from_url: {
-                                          url: ::String,
-                                          credential_provider_configurations: Array[
-                                            {
-                                              credential_provider_type: ("OAUTH" | "IAM"),
-                                              credential_provider: {
-                                                oauth_credential_provider: {
-                                                  provider_arn: ::String,
-                                                  grant_type: ("CLIENT_CREDENTIALS")?,
-                                                  scopes: Array[::String]?,
-                                                  custom_parameters: Hash[::String, ::String]?
-                                                }?,
-                                                iam_credential_provider: {
-                                                  role_arn: ::String?,
-                                                  service: ::String?,
-                                                  region: ::String?
-                                                }?
-                                              }
-                                            },
-                                          ]?
-                                        }?
-                                      }?
+                                      optional_value: Params::synchronization_configuration?
                                     },
                                     ?trigger_synchronization: bool
                                   ) -> _UpdateRegistryRecordResponseSuccess

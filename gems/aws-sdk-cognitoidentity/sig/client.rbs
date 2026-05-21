@@ -105,7 +105,7 @@ module Aws
                                       provider_name: ::String?,
                                       client_id: ::String?,
                                       server_side_token_check: bool?
-                                    },
+                                    }
                                   ],
                                   ?saml_provider_arns: Array[::String],
                                   ?identity_pool_tags: Hash[::String, ::String]
@@ -318,7 +318,7 @@ module Aws
                                                match_type: ("Equals" | "Contains" | "StartsWith" | "NotEqual"),
                                                value: ::String,
                                                role_arn: ::String
-                                             },
+                                             }
                                            ]
                                          }?
                                        }]
@@ -405,7 +405,7 @@ module Aws
                                       provider_name: ::String?,
                                       client_id: ::String?,
                                       server_side_token_check: bool?
-                                    },
+                                    }
                                   ],
                                   ?saml_provider_arns: Array[::String],
                                   ?identity_pool_tags: Hash[::String, ::String]

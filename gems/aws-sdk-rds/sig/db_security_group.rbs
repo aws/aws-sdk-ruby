@@ -65,7 +65,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> DBSecurityGroup
                 | (?Hash[Symbol, untyped]) -> DBSecurityGroup
@@ -106,7 +106,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ]
                   ) -> Event::Collection
                 | (?Hash[Symbol, untyped]) -> Event::Collection

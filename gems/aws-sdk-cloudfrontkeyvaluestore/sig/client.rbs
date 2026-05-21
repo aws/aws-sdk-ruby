@@ -165,12 +165,12 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ],
                          ?deletes: Array[
                            {
                              key: ::String
-                           },
+                           }
                          ]
                        ) -> _UpdateKeysResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeysResponseSuccess

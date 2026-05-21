@@ -48,7 +48,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> DBClusterParameterGroup
                 | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
@@ -73,7 +73,7 @@ module Aws
                         minimum_engine_version: ::String?,
                         apply_method: ("immediate" | "pending-reboot")?,
                         supported_engine_modes: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> DBClusterParameterGroup
                 | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup
@@ -94,7 +94,7 @@ module Aws
                        minimum_engine_version: ::String?,
                        apply_method: ("immediate" | "pending-reboot")?,
                        supported_engine_modes: Array[::String]?
-                     },
+                     }
                    ]
                  ) -> DBClusterParameterGroup
                | (?Hash[Symbol, untyped]) -> DBClusterParameterGroup

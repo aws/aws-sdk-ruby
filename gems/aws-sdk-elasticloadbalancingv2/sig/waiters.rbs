@@ -60,7 +60,7 @@ module Aws
                         port: ::Integer?,
                         availability_zone: ::String?,
                         quic_server_id: ::String?
-                      },
+                      }
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
                   ) -> Client::_DescribeTargetHealthResponseSuccess
@@ -79,7 +79,7 @@ module Aws
                         port: ::Integer?,
                         availability_zone: ::String?,
                         quic_server_id: ::String?
-                      },
+                      }
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
                   ) -> Client::_DescribeTargetHealthResponseSuccess

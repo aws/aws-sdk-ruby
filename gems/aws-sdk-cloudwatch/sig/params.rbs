@@ -1,0 +1,82 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudWatch
+    module Params
+      type single_metric_anomaly_detector = {
+      account_id: ::String?,
+      namespace: ::String?,
+      metric_name: ::String?,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      stat: ::String?
+    }
+
+      type metric_math_anomaly_detector = {
+      metric_data_queries: Array[
+        Params::metric_data_query
+      ]?
+    }
+
+      type metric = {
+      namespace: ::String?,
+      metric_name: ::String?,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type metric_stat = {
+      metric: Params::metric,
+      period: ::Integer,
+      stat: ::String,
+      unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+    }
+
+      type metric_data_query = {
+      id: ::String,
+      metric_stat: Params::metric_stat?,
+      expression: ::String?,
+      label: ::String?,
+      return_data: bool?,
+      period: ::Integer?,
+      account_id: ::String?
+    }
+
+      type metric_datum = {
+      metric_name: ::String,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      timestamp: ::Time?,
+      value: ::Float?,
+      statistic_values: {
+        sample_count: ::Float,
+        sum: ::Float,
+        minimum: ::Float,
+        maximum: ::Float
+      }?,
+      values: Array[::Float]?,
+      counts: Array[::Float]?,
+      unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?,
+      storage_resolution: ::Integer?
+    }
+
+    end
+  end
+end

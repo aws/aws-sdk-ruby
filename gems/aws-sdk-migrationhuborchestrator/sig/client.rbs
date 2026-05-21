@@ -141,31 +141,10 @@ module Aws
                                   workflow_id: ::String,
                                   step_action_type: ("MANUAL" | "AUTOMATED"),
                                   ?description: ::String,
-                                  ?workflow_step_automation_configuration: {
-                                    script_location_s3_bucket: ::String?,
-                                    script_location_s3_key: {
-                                      linux: ::String?,
-                                      windows: ::String?
-                                    }?,
-                                    command: {
-                                      linux: ::String?,
-                                      windows: ::String?
-                                    }?,
-                                    run_environment: ("AWS" | "ONPREMISE")?,
-                                    target_type: ("SINGLE" | "ALL" | "NONE")?
-                                  },
+                                  ?workflow_step_automation_configuration: Params::workflow_step_automation_configuration,
                                   ?step_target: Array[::String],
                                   ?outputs: Array[
-                                    {
-                                      name: ::String?,
-                                      data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")?,
-                                      required: bool?,
-                                      value: {
-                                        integer_value: ::Integer?,
-                                        string_value: ::String?,
-                                        list_of_string_value: Array[::String]?
-                                      }?
-                                    },
+                                    Params::workflow_step_output
                                   ],
                                   ?previous: Array[::String],
                                   ?next: Array[::String]
@@ -609,31 +588,10 @@ module Aws
                                   ?name: ::String,
                                   ?description: ::String,
                                   ?step_action_type: ("MANUAL" | "AUTOMATED"),
-                                  ?workflow_step_automation_configuration: {
-                                    script_location_s3_bucket: ::String?,
-                                    script_location_s3_key: {
-                                      linux: ::String?,
-                                      windows: ::String?
-                                    }?,
-                                    command: {
-                                      linux: ::String?,
-                                      windows: ::String?
-                                    }?,
-                                    run_environment: ("AWS" | "ONPREMISE")?,
-                                    target_type: ("SINGLE" | "ALL" | "NONE")?
-                                  },
+                                  ?workflow_step_automation_configuration: Params::workflow_step_automation_configuration,
                                   ?step_target: Array[::String],
                                   ?outputs: Array[
-                                    {
-                                      name: ::String?,
-                                      data_type: ("STRING" | "INTEGER" | "STRINGLIST" | "STRINGMAP")?,
-                                      required: bool?,
-                                      value: {
-                                        integer_value: ::Integer?,
-                                        string_value: ::String?,
-                                        list_of_string_value: Array[::String]?
-                                      }?
-                                    },
+                                    Params::workflow_step_output
                                   ],
                                   ?previous: Array[::String],
                                   ?next: Array[::String],

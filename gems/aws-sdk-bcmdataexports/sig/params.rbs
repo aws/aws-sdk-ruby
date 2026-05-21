@@ -1,0 +1,44 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BCMDataExports
+    module Params
+      type s3_destination = {
+      s3_bucket: ::String,
+      s3_bucket_owner: ::String?,
+      s3_prefix: ::String,
+      s3_region: ::String,
+      s3_output_configurations: {
+        output_type: ("CUSTOM" | "ATHENA" | "REDSHIFT"),
+        format: ("TEXT_OR_CSV" | "PARQUET"),
+        compression: ("GZIP" | "PARQUET"),
+        overwrite: ("CREATE_NEW_REPORT" | "OVERWRITE_REPORT")
+      }
+    }
+
+      type destination_configurations = {
+      s3_destination: Params::s3_destination
+    }
+
+      type export = {
+      export_arn: ::String?,
+      name: ::String,
+      description: ::String?,
+      data_query: {
+        query_statement: ::String,
+        table_configurations: Hash[::String, Hash[::String, ::String]]?
+      },
+      destination_configurations: Params::destination_configurations,
+      refresh_cadence: {
+        frequency: ("SYNCHRONOUS")
+      }
+    }
+
+    end
+  end
+end

@@ -1,0 +1,92 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TranscribeService
+    module Params
+      type non_talk_time_filter = {
+      threshold: ::Integer?,
+      absolute_time_range: {
+        start_time: ::Integer?,
+        end_time: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      relative_time_range: {
+        start_percentage: ::Integer?,
+        end_percentage: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      negate: bool?
+    }
+
+      type interruption_filter = {
+      threshold: ::Integer?,
+      participant_role: ("AGENT" | "CUSTOMER")?,
+      absolute_time_range: {
+        start_time: ::Integer?,
+        end_time: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      relative_time_range: {
+        start_percentage: ::Integer?,
+        end_percentage: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      negate: bool?
+    }
+
+      type transcript_filter = {
+      transcript_filter_type: ("EXACT"),
+      absolute_time_range: {
+        start_time: ::Integer?,
+        end_time: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      relative_time_range: {
+        start_percentage: ::Integer?,
+        end_percentage: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      participant_role: ("AGENT" | "CUSTOMER")?,
+      negate: bool?,
+      targets: Array[::String]
+    }
+
+      type sentiment_filter = {
+      sentiments: Array[("POSITIVE" | "NEGATIVE" | "NEUTRAL" | "MIXED")],
+      absolute_time_range: {
+        start_time: ::Integer?,
+        end_time: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      relative_time_range: {
+        start_percentage: ::Integer?,
+        end_percentage: ::Integer?,
+        first: ::Integer?,
+        last: ::Integer?
+      }?,
+      participant_role: ("AGENT" | "CUSTOMER")?,
+      negate: bool?
+    }
+
+      type rule = {
+      non_talk_time_filter: Params::non_talk_time_filter?,
+      interruption_filter: Params::interruption_filter?,
+      transcript_filter: Params::transcript_filter?,
+      sentiment_filter: Params::sentiment_filter?
+    }
+
+    end
+  end
+end

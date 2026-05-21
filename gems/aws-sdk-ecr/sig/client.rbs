@@ -105,7 +105,7 @@ module Aws
                                   {
                                     image_digest: ::String?,
                                     image_tag: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _BatchDeleteImageResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteImageResponseSuccess
@@ -123,7 +123,7 @@ module Aws
                                {
                                  image_digest: ::String?,
                                  image_tag: ::String?
-                               },
+                               }
                              ],
                              ?accepted_media_types: Array[::String]
                            ) -> _BatchGetImageResponseSuccess
@@ -191,14 +191,14 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
                                ?image_tag_mutability_exclusion_filters: Array[
                                  {
                                    filter_type: ("WILDCARD"),
                                    filter: ::String
-                                 },
+                                 }
                                ],
                                ?image_scanning_configuration: {
                                  scan_on_push: bool?
@@ -227,14 +227,14 @@ module Aws
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
                                                  ?image_tag_mutability_exclusion_filters: Array[
                                                    {
                                                      filter_type: ("WILDCARD"),
                                                      filter: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
@@ -410,7 +410,7 @@ module Aws
                                {
                                  image_digest: ::String?,
                                  image_tag: ::String?
-                               },
+                               }
                              ],
                              ?next_token: ::String,
                              ?max_results: ::Integer,
@@ -539,7 +539,7 @@ module Aws
                                             {
                                               image_digest: ::String?,
                                               image_tag: ::String?
-                                            },
+                                            }
                                           ],
                                           ?next_token: ::String,
                                           ?max_results: ::Integer,
@@ -724,7 +724,7 @@ module Aws
                                         {
                                           filter_type: ("WILDCARD"),
                                           filter: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _PutImageTagMutabilityResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutImageTagMutabilityResponseSuccess
@@ -768,9 +768,9 @@ module Aws
                                                        {
                                                          filter: ::String,
                                                          filter_type: ("WILDCARD")
-                                                       },
+                                                       }
                                                      ]
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _PutRegistryScanningConfigurationResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRegistryScanningConfigurationResponseSuccess
@@ -788,15 +788,15 @@ module Aws
                                                    {
                                                      region: ::String,
                                                      registry_id: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  repository_filters: Array[
                                                    {
                                                      filter: ::String,
                                                      filter_type: ("PREFIX_MATCH")
-                                                   },
+                                                   }
                                                  ]?
-                                               },
+                                               }
                                              ]
                                            }
                                          ) -> _PutReplicationConfigurationResponseSuccess
@@ -816,9 +816,9 @@ module Aws
                                                {
                                                  filter: ::String,
                                                  filter_type: ("WILDCARD_MATCH")
-                                               },
+                                               }
                                              ]?
-                                           },
+                                           }
                                          ]
                                        }
                                      ) -> _PutSigningConfigurationResponseSuccess
@@ -893,7 +893,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -962,14 +962,14 @@ module Aws
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  ?image_tag_mutability: ("MUTABLE" | "IMMUTABLE" | "IMMUTABLE_WITH_EXCLUSION" | "MUTABLE_WITH_EXCLUSION"),
                                                  ?image_tag_mutability_exclusion_filters: Array[
                                                    {
                                                      filter_type: ("WILDCARD"),
                                                      filter: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  ?repository_policy: ::String,
                                                  ?lifecycle_policy: ::String,
@@ -1033,7 +1033,7 @@ module Aws
                       {
                         image_digest: ::String?,
                         image_tag: ::String?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer,

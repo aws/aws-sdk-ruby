@@ -93,7 +93,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _CreatePerformanceAnalysisReportResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePerformanceAnalysisReportResponseSuccess
@@ -203,7 +203,7 @@ module Aws
                                         limit: ::Integer?
                                       }?,
                                       filter: Hash[::String, ::String]?
-                                    },
+                                    }
                                   ],
                                   start_time: ::Time,
                                   end_time: ::Time,
@@ -282,7 +282,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

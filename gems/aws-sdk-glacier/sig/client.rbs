@@ -345,7 +345,7 @@ module Aws
                                       email_address: ::String?
                                     }?,
                                     permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                                  },
+                                  }
                                 ]?,
                                 tagging: Hash[::String, ::String]?,
                                 user_metadata: Hash[::String, ::String]?,
@@ -494,7 +494,7 @@ module Aws
                                            {
                                              strategy: ::String?,
                                              bytes_per_hour: ::Integer?
-                                           },
+                                           }
                                          ]?
                                        }
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

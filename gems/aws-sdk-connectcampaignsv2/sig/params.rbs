@@ -1,0 +1,137 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ConnectCampaignsV2
+    module Params
+      type telephony_outbound_mode = {
+      progressive: {
+        bandwidth_allocation: ::Float
+      }?,
+      predictive: {
+        bandwidth_allocation: ::Float
+      }?,
+      agentless: {
+      }?,
+      preview: {
+        bandwidth_allocation: ::Float,
+        timeout_config: {
+          duration_in_seconds: ::Integer
+        },
+        agent_actions: Array[("DISCARD")]?
+      }?
+    }
+
+      type telephony_outbound_config = {
+      connect_contact_flow_id: ::String,
+      connect_source_phone_number: ::String?,
+      answer_machine_detection_config: {
+        enable_answer_machine_detection: bool,
+        await_answer_machine_prompt: bool?
+      }?,
+      ring_timeout: ::Integer?
+    }
+
+      type telephony_channel_subtype_config = {
+      capacity: ::Float?,
+      connect_queue_id: ::String?,
+      outbound_mode: Params::telephony_outbound_mode,
+      default_outbound_config: Params::telephony_outbound_config
+    }
+
+      type sms_channel_subtype_config = {
+      capacity: ::Float?,
+      outbound_mode: {
+        agentless: {
+        }?
+      },
+      default_outbound_config: {
+        connect_source_phone_number_arn: ::String,
+        wisdom_template_arn: ::String
+      }
+    }
+
+      type email_channel_subtype_config = {
+      capacity: ::Float?,
+      outbound_mode: {
+        agentless: {
+        }?
+      },
+      default_outbound_config: {
+        connect_source_email_address: ::String,
+        source_email_address_display_name: ::String?,
+        wisdom_template_arn: ::String
+      }
+    }
+
+      type whats_app_channel_subtype_config = {
+      capacity: ::Float?,
+      outbound_mode: {
+        agentless: {
+        }?
+      },
+      default_outbound_config: {
+        connect_source_phone_number_arn: ::String,
+        wisdom_template_arn: ::String
+      }
+    }
+
+      type channel_subtype_config = {
+      telephony: Params::telephony_channel_subtype_config?,
+      sms: Params::sms_channel_subtype_config?,
+      email: Params::email_channel_subtype_config?,
+      whats_app: Params::whats_app_channel_subtype_config?
+    }
+
+      type time_window = {
+      open_hours: {
+        daily_hours: Hash[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY"), Array[
+            {
+              start_time: ::String,
+              end_time: ::String
+            }
+          ]]?
+      },
+      restricted_periods: {
+        restricted_period_list: Array[
+          {
+            name: ::String?,
+            start_date: ::String,
+            end_date: ::String
+          }
+        ]?
+      }?
+    }
+
+      type communication_time_config = {
+      local_time_zone_config: {
+        default_time_zone: ::String?,
+        local_time_zone_detection: Array[("ZIP_CODE" | "AREA_CODE")]?,
+        local_time_zone_detection_scope: ("PRIMARY_ONLY" | "ALL_AVAILABLE")?
+      },
+      telephony: Params::time_window?,
+      sms: Params::time_window?,
+      email: Params::time_window?,
+      whats_app: Params::time_window?
+    }
+
+      type communication_limits_config = {
+      all_channel_subtypes: {
+        communication_limits_list: Array[
+          {
+            max_count_per_recipient: ::Integer,
+            frequency: ::Integer,
+            unit: ("DAY")
+          }
+        ]?
+      }?,
+      instance_limits_handling: ("OPT_IN" | "OPT_OUT")?
+    }
+
+    end
+  end
+end

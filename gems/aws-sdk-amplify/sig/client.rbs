@@ -103,25 +103,14 @@ module Aws
                             target: ::String,
                             status: ::String?,
                             condition: ::String?
-                          },
+                          }
                         ],
                         ?tags: Hash[::String, ::String],
                         ?build_spec: ::String,
                         ?custom_headers: ::String,
                         ?enable_auto_branch_creation: bool,
                         ?auto_branch_creation_patterns: Array[::String],
-                        ?auto_branch_creation_config: {
-                          stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")?,
-                          framework: ::String?,
-                          enable_auto_build: bool?,
-                          environment_variables: Hash[::String, ::String]?,
-                          basic_auth_credentials: ::String?,
-                          enable_basic_auth: bool?,
-                          enable_performance_mode: bool?,
-                          build_spec: ::String?,
-                          enable_pull_request_preview: bool?,
-                          pull_request_environment_name: ::String?
-                        },
+                        ?auto_branch_creation_config: Params::auto_branch_creation_config,
                         ?job_config: {
                           build_compute_type: ("STANDARD_8GB" | "LARGE_16GB" | "XLARGE_72GB")
                         },
@@ -203,7 +192,7 @@ module Aws
                                          {
                                            prefix: ::String,
                                            branch_name: ::String
-                                         },
+                                         }
                                        ],
                                        ?auto_sub_domain_creation_patterns: Array[::String],
                                        ?auto_sub_domain_iam_role: ::String,
@@ -570,24 +559,13 @@ module Aws
                             target: ::String,
                             status: ::String?,
                             condition: ::String?
-                          },
+                          }
                         ],
                         ?build_spec: ::String,
                         ?custom_headers: ::String,
                         ?enable_auto_branch_creation: bool,
                         ?auto_branch_creation_patterns: Array[::String],
-                        ?auto_branch_creation_config: {
-                          stage: ("PRODUCTION" | "BETA" | "DEVELOPMENT" | "EXPERIMENTAL" | "PULL_REQUEST")?,
-                          framework: ::String?,
-                          enable_auto_build: bool?,
-                          environment_variables: Hash[::String, ::String]?,
-                          basic_auth_credentials: ::String?,
-                          enable_basic_auth: bool?,
-                          enable_performance_mode: bool?,
-                          build_spec: ::String?,
-                          enable_pull_request_preview: bool?,
-                          pull_request_environment_name: ::String?
-                        },
+                        ?auto_branch_creation_config: Params::auto_branch_creation_config,
                         ?repository: ::String,
                         ?oauth_token: ::String,
                         ?access_token: ::String,
@@ -644,7 +622,7 @@ module Aws
                                          {
                                            prefix: ::String,
                                            branch_name: ::String
-                                         },
+                                         }
                                        ],
                                        ?auto_sub_domain_creation_patterns: Array[::String],
                                        ?auto_sub_domain_iam_role: ::String,

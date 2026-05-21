@@ -120,7 +120,7 @@ module Aws
                                             priority: ::Integer?,
                                             dns_view_id: ::String,
                                             q_type: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _BatchCreateFirewallRuleResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateFirewallRuleResponseSuccess
@@ -135,7 +135,7 @@ module Aws
                                         firewall_rules: Array[
                                           {
                                             firewall_rule_id: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _BatchDeleteFirewallRuleResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteFirewallRuleResponseSuccess
@@ -160,7 +160,7 @@ module Aws
                                             firewall_rule_id: ::String,
                                             name: ::String?,
                                             priority: ::Integer?
-                                          },
+                                          }
                                         ]
                                       ) -> _BatchUpdateFirewallRuleResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateFirewallRuleResponseSuccess

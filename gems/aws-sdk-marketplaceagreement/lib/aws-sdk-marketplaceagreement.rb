@@ -55,7 +55,7 @@ module Aws::MarketplaceAgreement
   autoload :EndpointProvider, 'aws-sdk-marketplaceagreement/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-marketplaceagreement/endpoints'
 
-  GEM_VERSION = '1.37.0'
+  GEM_VERSION = '1.38.0'
 
 end
 

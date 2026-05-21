@@ -1,0 +1,755 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockAgent
+    module Params
+      type prompt_override_configuration = {
+      prompt_configurations: Array[
+        Params::prompt_configuration
+      ],
+      override_lambda: ::String?
+    }
+
+      type prompt_configuration = {
+      prompt_type: ("PRE_PROCESSING" | "ORCHESTRATION" | "POST_PROCESSING" | "KNOWLEDGE_BASE_RESPONSE_GENERATION" | "MEMORY_SUMMARIZATION")?,
+      prompt_creation_mode: ("DEFAULT" | "OVERRIDDEN")?,
+      prompt_state: ("ENABLED" | "DISABLED")?,
+      base_prompt_template: ::String?,
+      inference_configuration: {
+        temperature: ::Float?,
+        top_p: ::Float?,
+        top_k: ::Integer?,
+        maximum_length: ::Integer?,
+        stop_sequences: Array[::String]?
+      }?,
+      parser_mode: ("DEFAULT" | "OVERRIDDEN")?,
+      foundation_model: ::String?,
+      additional_model_request_fields: {
+      }?
+    }
+
+      type function_schema = {
+      functions: Array[
+        Params::function
+      ]?
+    }
+
+      type function = {
+      name: ::String,
+      description: ::String?,
+      parameters: Hash[::String, {
+          description: ::String?,
+          type: ("string" | "number" | "integer" | "boolean" | "array"),
+          required: bool?
+        }]?,
+      require_confirmation: ("ENABLED" | "DISABLED")?
+    }
+
+      type web_crawler_configuration = {
+      crawler_limits: {
+        rate_limit: ::Integer?,
+        max_pages: ::Integer?
+      }?,
+      inclusion_filters: Array[::String]?,
+      exclusion_filters: Array[::String]?,
+      scope: ("HOST_ONLY" | "SUBDOMAINS")?,
+      user_agent: ::String?,
+      user_agent_header: ::String?
+    }
+
+      type web_data_source_configuration = {
+      source_configuration: {
+        url_configuration: {
+          seed_urls: Array[
+            {
+              url: ::String?
+            }
+          ]?
+        }
+      },
+      crawler_configuration: Params::web_crawler_configuration?
+    }
+
+      type crawl_filter_configuration = {
+      type: ("PATTERN"),
+      pattern_object_filter: {
+        filters: Array[
+          {
+            object_type: ::String,
+            inclusion_filters: Array[::String]?,
+            exclusion_filters: Array[::String]?
+          }
+        ]
+      }?
+    }
+
+      type confluence_crawler_configuration = {
+      filter_configuration: Params::crawl_filter_configuration?
+    }
+
+      type confluence_data_source_configuration = {
+      source_configuration: {
+        host_url: ::String,
+        host_type: ("SAAS"),
+        auth_type: ("BASIC" | "OAUTH2_CLIENT_CREDENTIALS"),
+        credentials_secret_arn: ::String
+      },
+      crawler_configuration: Params::confluence_crawler_configuration?
+    }
+
+      type salesforce_crawler_configuration = {
+      filter_configuration: Params::crawl_filter_configuration?
+    }
+
+      type salesforce_data_source_configuration = {
+      source_configuration: {
+        host_url: ::String,
+        auth_type: ("OAUTH2_CLIENT_CREDENTIALS"),
+        credentials_secret_arn: ::String
+      },
+      crawler_configuration: Params::salesforce_crawler_configuration?
+    }
+
+      type share_point_source_configuration = {
+      tenant_id: ::String?,
+      domain: ::String,
+      site_urls: Array[::String],
+      host_type: ("ONLINE"),
+      auth_type: ("OAUTH2_CLIENT_CREDENTIALS" | "OAUTH2_SHAREPOINT_APP_ONLY_CLIENT_CREDENTIALS"),
+      credentials_secret_arn: ::String
+    }
+
+      type share_point_crawler_configuration = {
+      filter_configuration: Params::crawl_filter_configuration?
+    }
+
+      type share_point_data_source_configuration = {
+      source_configuration: Params::share_point_source_configuration,
+      crawler_configuration: Params::share_point_crawler_configuration?
+    }
+
+      type data_source_configuration = {
+      type: ("S3" | "WEB" | "CONFLUENCE" | "SALESFORCE" | "SHAREPOINT" | "CUSTOM" | "REDSHIFT_METADATA"),
+      s3_configuration: {
+        bucket_arn: ::String,
+        inclusion_prefixes: Array[::String]?,
+        bucket_owner_account_id: ::String?
+      }?,
+      web_configuration: Params::web_data_source_configuration?,
+      confluence_configuration: Params::confluence_data_source_configuration?,
+      salesforce_configuration: Params::salesforce_data_source_configuration?,
+      share_point_configuration: Params::share_point_data_source_configuration?
+    }
+
+      type chunking_configuration = {
+      chunking_strategy: ("FIXED_SIZE" | "NONE" | "HIERARCHICAL" | "SEMANTIC"),
+      fixed_size_chunking_configuration: {
+        max_tokens: ::Integer,
+        overlap_percentage: ::Integer
+      }?,
+      hierarchical_chunking_configuration: {
+        level_configurations: Array[
+          {
+            max_tokens: ::Integer
+          }
+        ],
+        overlap_tokens: ::Integer
+      }?,
+      semantic_chunking_configuration: {
+        max_tokens: ::Integer,
+        buffer_size: ::Integer,
+        breakpoint_percentile_threshold: ::Integer
+      }?
+    }
+
+      type custom_transformation_configuration = {
+      intermediate_storage: {
+        s3_location: {
+          uri: ::String
+        }
+      },
+      transformations: Array[
+        Params::transformation
+      ]
+    }
+
+      type parsing_configuration = {
+      parsing_strategy: ("BEDROCK_FOUNDATION_MODEL" | "BEDROCK_DATA_AUTOMATION"),
+      bedrock_foundation_model_configuration: {
+        model_arn: ::String,
+        parsing_prompt: {
+          parsing_prompt_text: ::String
+        }?,
+        parsing_modality: ("MULTIMODAL")?
+      }?,
+      bedrock_data_automation_configuration: {
+        parsing_modality: ("MULTIMODAL")?
+      }?
+    }
+
+      type context_enrichment_configuration = {
+      type: ("BEDROCK_FOUNDATION_MODEL"),
+      bedrock_foundation_model_configuration: {
+        enrichment_strategy_configuration: {
+          method: ("CHUNK_ENTITY_EXTRACTION")
+        },
+        model_arn: ::String
+      }?
+    }
+
+      type vector_ingestion_configuration = {
+      chunking_configuration: Params::chunking_configuration?,
+      custom_transformation_configuration: Params::custom_transformation_configuration?,
+      parsing_configuration: Params::parsing_configuration?,
+      context_enrichment_configuration: Params::context_enrichment_configuration?
+    }
+
+      type transformation = {
+      transformation_function: {
+        transformation_lambda_configuration: {
+          lambda_arn: ::String
+        }
+      },
+      step_to_apply: ("POST_CHUNKING")
+    }
+
+      type flow_definition = {
+      nodes: Array[
+        Params::flow_node
+      ]?,
+      connections: Array[
+        Params::flow_connection
+      ]?
+    }
+
+      type prompt_inference_configuration = {
+      text: {
+        temperature: ::Float?,
+        top_p: ::Float?,
+        max_tokens: ::Integer?,
+        stop_sequences: Array[::String]?
+      }?
+    }
+
+      type reranking_metadata_selective_mode_configuration = {
+      fields_to_include: Array[
+        {
+          field_name: ::String
+        }
+      ]?,
+      fields_to_exclude: Array[
+        {
+          field_name: ::String
+        }
+      ]?
+    }
+
+      type metadata_configuration_for_reranking = {
+      selection_mode: ("SELECTIVE" | "ALL"),
+      selective_mode_configuration: Params::reranking_metadata_selective_mode_configuration?
+    }
+
+      type vector_search_bedrock_reranking_configuration = {
+      model_configuration: {
+        model_arn: ::String,
+        additional_model_request_fields: Hash[::String, {
+          }]?
+      },
+      number_of_reranked_results: ::Integer?,
+      metadata_configuration: Params::metadata_configuration_for_reranking?
+    }
+
+      type vector_search_reranking_configuration = {
+      type: ("BEDROCK_RERANKING_MODEL"),
+      bedrock_reranking_configuration: Params::vector_search_bedrock_reranking_configuration?
+    }
+
+      type knowledge_base_orchestration_configuration = {
+      prompt_template: {
+        text_prompt_template: ::String?
+      }?,
+      inference_config: Params::prompt_inference_configuration?,
+      additional_model_request_fields: Hash[::String, {
+        }]?,
+      performance_config: {
+        latency: ("standard" | "optimized")?
+      }?
+    }
+
+      type knowledge_base_flow_node_configuration = {
+      knowledge_base_id: ::String,
+      model_id: ::String?,
+      guardrail_configuration: {
+        guardrail_identifier: ::String?,
+        guardrail_version: ::String?
+      }?,
+      number_of_results: ::Integer?,
+      prompt_template: {
+        text_prompt_template: ::String?
+      }?,
+      inference_configuration: Params::prompt_inference_configuration?,
+      reranking_configuration: Params::vector_search_reranking_configuration?,
+      orchestration_configuration: Params::knowledge_base_orchestration_configuration?
+    }
+
+      type text_prompt_template_configuration = {
+      text: ::String,
+      cache_point: {
+        type: ("default")
+      }?,
+      input_variables: Array[
+        {
+          name: ::String?
+        }
+      ]?
+    }
+
+      type tool_choice = {
+      auto: {
+      }?,
+      any: {
+      }?,
+      tool: {
+        name: ::String
+      }?
+    }
+
+      type tool_configuration = {
+      tools: Array[
+        Params::tool
+      ],
+      tool_choice: Params::tool_choice?
+    }
+
+      type chat_prompt_template_configuration = {
+      messages: Array[
+        Params::message
+      ],
+      system: Array[
+        {
+          text: ::String?,
+          cache_point: {
+            type: ("default")
+          }?
+        }
+      ]?,
+      input_variables: Array[
+        {
+          name: ::String?
+        }
+      ]?,
+      tool_configuration: Params::tool_configuration?
+    }
+
+      type prompt_template_configuration = {
+      text: Params::text_prompt_template_configuration?,
+      chat: Params::chat_prompt_template_configuration?
+    }
+
+      type prompt_flow_node_inline_configuration = {
+      template_type: ("TEXT" | "CHAT"),
+      template_configuration: Params::prompt_template_configuration,
+      model_id: ::String,
+      inference_configuration: Params::prompt_inference_configuration?,
+      additional_model_request_fields: {
+      }?
+    }
+
+      type prompt_flow_node_source_configuration = {
+      resource: {
+        prompt_arn: ::String
+      }?,
+      inline: Params::prompt_flow_node_inline_configuration?
+    }
+
+      type prompt_flow_node_configuration = {
+      source_configuration: Params::prompt_flow_node_source_configuration,
+      guardrail_configuration: {
+        guardrail_identifier: ::String?,
+        guardrail_version: ::String?
+      }?
+    }
+
+      type flow_node_configuration = {
+      input: {
+      }?,
+      output: {
+      }?,
+      knowledge_base: Params::knowledge_base_flow_node_configuration?,
+      condition: {
+        conditions: Array[
+          {
+            name: ::String,
+            expression: ::String?
+          }
+        ]
+      }?,
+      lex: {
+        bot_alias_arn: ::String,
+        locale_id: ::String
+      }?,
+      prompt: Params::prompt_flow_node_configuration?,
+      lambda_function: {
+        lambda_arn: ::String
+      }?,
+      storage: {
+        service_configuration: {
+          s3: {
+            bucket_name: ::String
+          }?
+        }
+      }?,
+      agent: {
+        agent_alias_arn: ::String
+      }?,
+      retrieval: {
+        service_configuration: {
+          s3: {
+            bucket_name: ::String
+          }?
+        }
+      }?,
+      iterator: {
+      }?,
+      collector: {
+      }?,
+      inline_code: {
+        code: ::String,
+        language: ("Python_3")
+      }?,
+      loop: {
+        definition: Params::flow_definition
+      }?,
+      loop_input: {
+      }?,
+      loop_controller: {
+        continue_condition: {
+          name: ::String,
+          expression: ::String?
+        },
+        max_iterations: ::Integer?
+      }?
+    }
+
+      type flow_node = {
+      name: ::String,
+      type: ("Input" | "Output" | "KnowledgeBase" | "Condition" | "Lex" | "Prompt" | "LambdaFunction" | "Storage" | "Agent" | "Retrieval" | "Iterator" | "Collector" | "InlineCode" | "Loop" | "LoopInput" | "LoopController"),
+      configuration: Params::flow_node_configuration?,
+      inputs: Array[
+        {
+          name: ::String,
+          type: ("String" | "Number" | "Boolean" | "Object" | "Array"),
+          expression: ::String,
+          category: ("LoopCondition" | "ReturnValueToLoopStart" | "ExitLoop")?
+        }
+      ]?,
+      outputs: Array[
+        {
+          name: ::String,
+          type: ("String" | "Number" | "Boolean" | "Object" | "Array")
+        }
+      ]?
+    }
+
+      type message = {
+      role: ("user" | "assistant"),
+      content: Array[
+        {
+          text: ::String?,
+          cache_point: {
+            type: ("default")
+          }?
+        }
+      ]
+    }
+
+      type tool_specification = {
+      name: ::String,
+      description: ::String?,
+      input_schema: {
+        json: {
+        }?
+      },
+      strict: bool?
+    }
+
+      type tool = {
+      tool_spec: Params::tool_specification?,
+      cache_point: {
+        type: ("default")
+      }?
+    }
+
+      type flow_connection_configuration = {
+      data: {
+        source_output: ::String,
+        target_input: ::String
+      }?,
+      conditional: {
+        condition: ::String
+      }?
+    }
+
+      type flow_connection = {
+      type: ("Data" | "Conditional"),
+      name: ::String,
+      source: ::String,
+      target: ::String,
+      configuration: Params::flow_connection_configuration?
+    }
+
+      type bedrock_embedding_model_configuration = {
+      dimensions: ::Integer?,
+      embedding_data_type: ("FLOAT32" | "BINARY")?,
+      audio: Array[
+        {
+          segmentation_configuration: {
+            fixed_length_duration: ::Integer
+          }
+        }
+      ]?,
+      video: Array[
+        {
+          segmentation_configuration: {
+            fixed_length_duration: ::Integer
+          }
+        }
+      ]?
+    }
+
+      type embedding_model_configuration = {
+      bedrock_embedding_model_configuration: Params::bedrock_embedding_model_configuration?
+    }
+
+      type supplemental_data_storage_configuration = {
+      storage_locations: Array[
+        {
+          type: ("S3"),
+          s3_location: {
+            uri: ::String
+          }?
+        }
+      ]
+    }
+
+      type vector_knowledge_base_configuration = {
+      embedding_model_arn: ::String,
+      embedding_model_configuration: Params::embedding_model_configuration?,
+      supplemental_data_storage_configuration: Params::supplemental_data_storage_configuration?
+    }
+
+      type redshift_provisioned_configuration = {
+      cluster_identifier: ::String,
+      auth_configuration: {
+        type: ("IAM" | "USERNAME_PASSWORD" | "USERNAME"),
+        database_user: ::String?,
+        username_password_secret_arn: ::String?
+      }
+    }
+
+      type redshift_query_engine_configuration = {
+      type: ("SERVERLESS" | "PROVISIONED"),
+      serverless_configuration: {
+        workgroup_arn: ::String,
+        auth_configuration: {
+          type: ("IAM" | "USERNAME_PASSWORD"),
+          username_password_secret_arn: ::String?
+        }
+      }?,
+      provisioned_configuration: Params::redshift_provisioned_configuration?
+    }
+
+      type query_generation_context = {
+      tables: Array[
+        Params::query_generation_table
+      ]?,
+      curated_queries: Array[
+        {
+          natural_language: ::String,
+          sql: ::String
+        }
+      ]?
+    }
+
+      type query_generation_configuration = {
+      execution_timeout_seconds: ::Integer?,
+      generation_context: Params::query_generation_context?
+    }
+
+      type redshift_configuration = {
+      storage_configurations: Array[
+        Params::redshift_query_engine_storage_configuration
+      ],
+      query_engine_configuration: Params::redshift_query_engine_configuration,
+      query_generation_configuration: Params::query_generation_configuration?
+    }
+
+      type sql_knowledge_base_configuration = {
+      type: ("REDSHIFT"),
+      redshift_configuration: Params::redshift_configuration?
+    }
+
+      type knowledge_base_configuration = {
+      type: ("VECTOR" | "KENDRA" | "SQL"),
+      vector_knowledge_base_configuration: Params::vector_knowledge_base_configuration?,
+      kendra_knowledge_base_configuration: {
+        kendra_index_arn: ::String
+      }?,
+      sql_knowledge_base_configuration: Params::sql_knowledge_base_configuration?
+    }
+
+      type redshift_query_engine_storage_configuration = {
+      type: ("REDSHIFT" | "AWS_DATA_CATALOG"),
+      aws_data_catalog_configuration: {
+        table_names: Array[::String]
+      }?,
+      redshift_configuration: {
+        database_name: ::String
+      }?
+    }
+
+      type query_generation_table = {
+      name: ::String,
+      description: ::String?,
+      inclusion: ("INCLUDE" | "EXCLUDE")?,
+      columns: Array[
+        {
+          name: ::String?,
+          description: ::String?,
+          inclusion: ("INCLUDE" | "EXCLUDE")?
+        }
+      ]?
+    }
+
+      type open_search_serverless_configuration = {
+      collection_arn: ::String,
+      vector_index_name: ::String,
+      field_mapping: {
+        vector_field: ::String,
+        text_field: ::String,
+        metadata_field: ::String
+      }
+    }
+
+      type open_search_managed_cluster_configuration = {
+      domain_endpoint: ::String,
+      domain_arn: ::String,
+      vector_index_name: ::String,
+      field_mapping: {
+        vector_field: ::String,
+        text_field: ::String,
+        metadata_field: ::String
+      }
+    }
+
+      type pinecone_configuration = {
+      connection_string: ::String,
+      credentials_secret_arn: ::String,
+      namespace: ::String?,
+      field_mapping: {
+        text_field: ::String,
+        metadata_field: ::String
+      }
+    }
+
+      type redis_enterprise_cloud_configuration = {
+      endpoint: ::String,
+      vector_index_name: ::String,
+      credentials_secret_arn: ::String,
+      field_mapping: {
+        vector_field: ::String,
+        text_field: ::String,
+        metadata_field: ::String
+      }
+    }
+
+      type rds_configuration = {
+      resource_arn: ::String,
+      credentials_secret_arn: ::String,
+      database_name: ::String,
+      table_name: ::String,
+      field_mapping: {
+        primary_key_field: ::String,
+        vector_field: ::String,
+        text_field: ::String,
+        metadata_field: ::String,
+        custom_metadata_field: ::String?
+      }
+    }
+
+      type mongo_db_atlas_configuration = {
+      endpoint: ::String,
+      database_name: ::String,
+      collection_name: ::String,
+      vector_index_name: ::String,
+      credentials_secret_arn: ::String,
+      field_mapping: {
+        vector_field: ::String,
+        text_field: ::String,
+        metadata_field: ::String
+      },
+      endpoint_service_name: ::String?,
+      text_index_name: ::String?
+    }
+
+      type storage_configuration = {
+      type: ("OPENSEARCH_SERVERLESS" | "PINECONE" | "REDIS_ENTERPRISE_CLOUD" | "RDS" | "MONGO_DB_ATLAS" | "NEPTUNE_ANALYTICS" | "OPENSEARCH_MANAGED_CLUSTER" | "S3_VECTORS"),
+      opensearch_serverless_configuration: Params::open_search_serverless_configuration?,
+      opensearch_managed_cluster_configuration: Params::open_search_managed_cluster_configuration?,
+      pinecone_configuration: Params::pinecone_configuration?,
+      redis_enterprise_cloud_configuration: Params::redis_enterprise_cloud_configuration?,
+      rds_configuration: Params::rds_configuration?,
+      mongo_db_atlas_configuration: Params::mongo_db_atlas_configuration?,
+      neptune_analytics_configuration: {
+        graph_arn: ::String,
+        field_mapping: {
+          text_field: ::String,
+          metadata_field: ::String
+        }
+      }?,
+      s3_vectors_configuration: {
+        vector_bucket_arn: ::String?,
+        index_arn: ::String?,
+        index_name: ::String?
+      }?
+    }
+
+      type prompt_variant = {
+      name: ::String,
+      template_type: ("TEXT" | "CHAT"),
+      template_configuration: Params::prompt_template_configuration,
+      model_id: ::String?,
+      inference_configuration: Params::prompt_inference_configuration?,
+      metadata: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      additional_model_request_fields: {
+      }?,
+      gen_ai_resource: {
+        agent: {
+          agent_identifier: ::String
+        }?
+      }?
+    }
+
+      type document_identifier = {
+      data_source_type: ("CUSTOM" | "S3"),
+      s3: {
+        uri: ::String
+      }?,
+      custom: {
+        id: ::String
+      }?
+    }
+
+    end
+  end
+end

@@ -1,0 +1,98 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module KinesisAnalyticsV2
+    module Params
+      type mapping_parameters = {
+      json_mapping_parameters: {
+        record_row_path: ::String
+      }?,
+      csv_mapping_parameters: {
+        record_row_delimiter: ::String,
+        record_column_delimiter: ::String
+      }?
+    }
+
+      type record_format = {
+      record_format_type: ("JSON" | "CSV"),
+      mapping_parameters: Params::mapping_parameters?
+    }
+
+      type source_schema = {
+      record_format: Params::record_format,
+      record_encoding: ::String?,
+      record_columns: Array[
+        {
+          name: ::String,
+          mapping: ::String?,
+          sql_type: ::String
+        }
+      ]
+    }
+
+      type input = {
+      name_prefix: ::String,
+      input_processing_configuration: {
+        input_lambda_processor: {
+          resource_arn: ::String
+        }
+      }?,
+      kinesis_streams_input: {
+        resource_arn: ::String
+      }?,
+      kinesis_firehose_input: {
+        resource_arn: ::String
+      }?,
+      input_parallelism: {
+        count: ::Integer?
+      }?,
+      input_schema: Params::source_schema
+    }
+
+      type output = {
+      name: ::String,
+      kinesis_streams_output: {
+        resource_arn: ::String
+      }?,
+      kinesis_firehose_output: {
+        resource_arn: ::String
+      }?,
+      lambda_output: {
+        resource_arn: ::String
+      }?,
+      destination_schema: {
+        record_format_type: ("JSON" | "CSV")
+      }
+    }
+
+      type reference_data_source = {
+      table_name: ::String,
+      s3_reference_data_source: {
+        bucket_arn: ::String?,
+        file_key: ::String?
+      }?,
+      reference_schema: Params::source_schema
+    }
+
+      type custom_artifact_configuration = {
+      artifact_type: ("UDF" | "DEPENDENCY_JAR"),
+      s3_content_location: {
+        bucket_arn: ::String,
+        file_key: ::String,
+        object_version: ::String?
+      }?,
+      maven_reference: {
+        group_id: ::String,
+        artifact_id: ::String,
+        version: ::String
+      }?
+    }
+
+    end
+  end
+end

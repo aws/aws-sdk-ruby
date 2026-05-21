@@ -114,7 +114,7 @@ module Aws
                                                     {
                                                       type: ("retention"),
                                                       resource: ::String
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _BatchGetEffectiveLifecyclePolicyResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetEffectiveLifecyclePolicyResponseSuccess
@@ -130,7 +130,7 @@ module Aws
                                           {
                                             type: ("retention"),
                                             name: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _BatchGetLifecyclePolicyResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetLifecyclePolicyResponseSuccess
@@ -173,7 +173,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?standby_replicas: ("ENABLED" | "DISABLED"),
                                ?vector_options: {
@@ -201,7 +201,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?capacity_limits: {
                                        max_indexing_capacity_in_ocu: ::Float?,
@@ -565,7 +565,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

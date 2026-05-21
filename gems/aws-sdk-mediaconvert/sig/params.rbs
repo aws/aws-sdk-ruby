@@ -1,0 +1,1591 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaConvert
+    module Params
+      type esam_settings = {
+      manifest_confirm_condition_notification: {
+        mcc_xml: ::String?
+      }?,
+      response_signal_preroll: ::Integer?,
+      signal_processing_notification: {
+        scc_xml: ::String?
+      }?
+    }
+
+      type remix_settings = {
+      audio_description_audio_channel: ::Integer?,
+      audio_description_data_channel: ::Integer?,
+      channel_mapping: {
+        output_channels: Array[
+          {
+            input_channels: Array[::Integer]?,
+            input_channels_fine_tune: Array[::Float]?
+          }
+        ]?
+      }?,
+      channels_in: ::Integer?,
+      channels_out: ::Integer?
+    }
+
+      type audio_selector = {
+      audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")?,
+      custom_language_code: ::String?,
+      default_selection: ("DEFAULT" | "NOT_DEFAULT")?,
+      external_audio_file_input: ::String?,
+      hls_rendition_group_settings: {
+        rendition_group_id: ::String?,
+        rendition_language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+        rendition_name: ::String?
+      }?,
+      language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+      offset: ::Integer?,
+      pids: Array[::Integer]?,
+      program_selection: ::Integer?,
+      remix_settings: Params::remix_settings?,
+      selector_type: ("PID" | "TRACK" | "LANGUAGE_CODE" | "HLS_RENDITION_GROUP" | "ALL_PCM" | "STREAM")?,
+      streams: Array[::Integer]?,
+      tracks: Array[::Integer]?
+    }
+
+      type file_source_settings = {
+      byte_rate_limit: ("ENABLED" | "DISABLED")?,
+      convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
+      convert_paint_to_pop: ("ENABLED" | "DISABLED")?,
+      framerate: {
+        framerate_denominator: ::Integer?,
+        framerate_numerator: ::Integer?
+      }?,
+      source_file: ::String?,
+      time_delta: ::Integer?,
+      time_delta_units: ("SECONDS" | "MILLISECONDS")?,
+      upconvert_stl_to_teletext: ("UPCONVERT" | "DISABLED")?
+    }
+
+      type caption_source_settings = {
+      ancillary_source_settings: {
+        convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
+        source_ancillary_channel_number: ::Integer?,
+        terminate_captions: ("END_OF_INPUT" | "DISABLED")?
+      }?,
+      dvb_sub_source_settings: {
+        pid: ::Integer?
+      }?,
+      embedded_source_settings: {
+        convert_608_to_708: ("UPCONVERT" | "DISABLED")?,
+        source_608_channel_number: ::Integer?,
+        source_608_track_number: ::Integer?,
+        terminate_captions: ("END_OF_INPUT" | "DISABLED")?
+      }?,
+      file_source_settings: Params::file_source_settings?,
+      source_type: ("ANCILLARY" | "DVB_SUB" | "EMBEDDED" | "SCTE20" | "SCC" | "TTML" | "STL" | "SRT" | "SMI" | "SMPTE_TT" | "TELETEXT" | "NULL_SOURCE" | "IMSC" | "WEBVTT" | "TT_3GPP")?,
+      teletext_source_settings: {
+        page_number: ::String?
+      }?,
+      track_source_settings: {
+        stream_number: ::Integer?,
+        track_number: ::Integer?
+      }?,
+      webvtt_hls_source_settings: {
+        rendition_group_id: ::String?,
+        rendition_language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+        rendition_name: ::String?
+      }?
+    }
+
+      type caption_selector = {
+      custom_language_code: ::String?,
+      language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+      source_settings: Params::caption_source_settings?
+    }
+
+      type image_inserter = {
+      insertable_images: Array[
+        Params::insertable_image
+      ]?,
+      sdr_reference_white_level: ::Integer?
+    }
+
+      type insertable_image = {
+      duration: ::Integer?,
+      fade_in: ::Integer?,
+      fade_out: ::Integer?,
+      height: ::Integer?,
+      image_inserter_input: ::String?,
+      image_x: ::Integer?,
+      image_y: ::Integer?,
+      layer: ::Integer?,
+      opacity: ::Integer?,
+      start_time: ::String?,
+      width: ::Integer?
+    }
+
+      type video_overlay_position = {
+      height: ::Integer?,
+      opacity: ::Integer?,
+      unit: ("PIXELS" | "PERCENTAGE")?,
+      width: ::Integer?,
+      x_position: ::Integer?,
+      y_position: ::Integer?
+    }
+
+      type video_overlay_input = {
+      audio_selectors: Hash[::String, Params::audio_selector]?,
+      file_input: ::String?,
+      input_clippings: Array[
+        {
+          end_timecode: ::String?,
+          start_timecode: ::String?
+        }
+      ]?,
+      timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
+      timecode_start: ::String?
+    }
+
+      type video_overlay = {
+      crop: {
+        height: ::Integer?,
+        unit: ("PIXELS" | "PERCENTAGE")?,
+        width: ::Integer?,
+        x: ::Integer?,
+        y: ::Integer?
+      }?,
+      end_timecode: ::String?,
+      initial_position: Params::video_overlay_position?,
+      input: Params::video_overlay_input?,
+      playback: ("ONCE" | "REPEAT")?,
+      start_timecode: ::String?,
+      transitions: Array[
+        Params::video_overlay_transition
+      ]?
+    }
+
+      type video_overlay_transition = {
+      end_position: Params::video_overlay_position?,
+      end_timecode: ::String?,
+      start_timecode: ::String?
+    }
+
+      type hdr_10_metadata = {
+      blue_primary_x: ::Integer?,
+      blue_primary_y: ::Integer?,
+      green_primary_x: ::Integer?,
+      green_primary_y: ::Integer?,
+      max_content_light_level: ::Integer?,
+      max_frame_average_light_level: ::Integer?,
+      max_luminance: ::Integer?,
+      min_luminance: ::Integer?,
+      red_primary_x: ::Integer?,
+      red_primary_y: ::Integer?,
+      white_point_x: ::Integer?,
+      white_point_y: ::Integer?
+    }
+
+      type video_selector = {
+      alpha_behavior: ("DISCARD" | "REMAP_TO_LUMA")?,
+      color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")?,
+      color_space_usage: ("FORCE" | "FALLBACK")?,
+      embedded_timecode_override: ("NONE" | "USE_MDPM")?,
+      hdr_10_metadata: Params::hdr_10_metadata?,
+      max_luminance: ::Integer?,
+      pad_video: ("DISABLED" | "BLACK")?,
+      pid: ::Integer?,
+      program_number: ::Integer?,
+      rotate: ("DEGREE_0" | "DEGREES_90" | "DEGREES_180" | "DEGREES_270" | "AUTO")?,
+      sample_range: ("FOLLOW" | "FULL_RANGE" | "LIMITED_RANGE")?,
+      selector_type: ("AUTO" | "STREAM")?,
+      streams: Array[::Integer]?
+    }
+
+      type kantar_watermark_settings = {
+      channel_name: ::String?,
+      content_reference: ::String?,
+      credentials_secret_name: ::String?,
+      file_offset: ::Float?,
+      kantar_license_id: ::Integer?,
+      kantar_server_url: ::String?,
+      log_destination: ::String?,
+      metadata_3: ::String?,
+      metadata_4: ::String?,
+      metadata_5: ::String?,
+      metadata_6: ::String?,
+      metadata_7: ::String?,
+      metadata_8: ::String?
+    }
+
+      type motion_image_inserter = {
+      framerate: {
+        framerate_denominator: ::Integer?,
+        framerate_numerator: ::Integer?
+      }?,
+      input: ::String?,
+      insertion_mode: ("MOV" | "PNG")?,
+      offset: {
+        image_x: ::Integer?,
+        image_y: ::Integer?
+      }?,
+      playback: ("ONCE" | "REPEAT")?,
+      start_time: ::String?
+    }
+
+      type nielsen_non_linear_watermark_settings = {
+      active_watermark_process: ("NAES2_AND_NW" | "CBET" | "NAES2_AND_NW_AND_CBET")?,
+      adi_filename: ::String?,
+      asset_id: ::String?,
+      asset_name: ::String?,
+      cbet_source_id: ::String?,
+      episode_id: ::String?,
+      metadata_destination: ::String?,
+      source_id: ::Integer?,
+      source_watermark_status: ("CLEAN" | "WATERMARKED")?,
+      tic_server_url: ::String?,
+      unique_tic_per_audio_track: ("RESERVE_UNIQUE_TICS_PER_TRACK" | "SAME_TICS_PER_TRACK")?
+    }
+
+      type automated_abr_settings = {
+      max_abr_bitrate: ::Integer?,
+      max_quality_level: ::Float?,
+      max_renditions: ::Integer?,
+      min_abr_bitrate: ::Integer?,
+      rules: Array[
+        Params::automated_abr_rule
+      ]?
+    }
+
+      type automated_encoding_settings = {
+      abr_settings: Params::automated_abr_settings?
+    }
+
+      type s3_destination_settings = {
+      access_control: {
+        canned_acl: ("PUBLIC_READ" | "AUTHENTICATED_READ" | "BUCKET_OWNER_READ" | "BUCKET_OWNER_FULL_CONTROL")?
+      }?,
+      encryption: {
+        encryption_type: ("SERVER_SIDE_ENCRYPTION_S3" | "SERVER_SIDE_ENCRYPTION_KMS")?,
+        kms_encryption_context: ::String?,
+        kms_key_arn: ::String?
+      }?,
+      storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE")?
+    }
+
+      type destination_settings = {
+      s3_settings: Params::s3_destination_settings?
+    }
+
+      type speke_key_provider_cmaf = {
+      certificate_arn: ::String?,
+      dash_signaled_system_ids: Array[::String]?,
+      encryption_contract_configuration: {
+        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+      }?,
+      hls_signaled_system_ids: Array[::String]?,
+      resource_id: ::String?,
+      url: ::String?
+    }
+
+      type cmaf_encryption_settings = {
+      clear_lead: ("ENABLED" | "DISABLED")?,
+      constant_initialization_vector: ::String?,
+      encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
+      initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")?,
+      speke_key_provider: Params::speke_key_provider_cmaf?,
+      static_key_provider: {
+        key_format: ::String?,
+        key_format_versions: ::String?,
+        static_key_value: ::String?,
+        url: ::String?
+      }?,
+      type: ("SPEKE" | "STATIC_KEY")?
+    }
+
+      type cmaf_image_based_trick_play_settings = {
+      interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
+      thumbnail_height: ::Integer?,
+      thumbnail_interval: ::Float?,
+      thumbnail_width: ::Integer?,
+      tile_height: ::Integer?,
+      tile_width: ::Integer?
+    }
+
+      type cmaf_group_settings = {
+      additional_manifests: Array[
+        {
+          manifest_name_modifier: ::String?,
+          selected_outputs: Array[::String]?
+        }
+      ]?,
+      base_url: ::String?,
+      client_cache: ("DISABLED" | "ENABLED")?,
+      codec_specification: ("RFC_6381" | "RFC_4281")?,
+      dash_i_frame_trick_play_name_modifier: ::String?,
+      dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")?,
+      destination: ::String?,
+      destination_settings: Params::destination_settings?,
+      encryption: Params::cmaf_encryption_settings?,
+      fragment_length: ::Integer?,
+      image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
+      image_based_trick_play_settings: Params::cmaf_image_based_trick_play_settings?,
+      manifest_compression: ("GZIP" | "NONE")?,
+      manifest_duration_format: ("FLOATING_POINT" | "INTEGER")?,
+      min_buffer_time: ::Integer?,
+      min_final_segment_length: ::Float?,
+      mpd_manifest_bandwidth_type: ("AVERAGE" | "MAX")?,
+      mpd_profile: ("MAIN_PROFILE" | "ON_DEMAND_PROFILE")?,
+      pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")?,
+      segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")?,
+      segment_length: ::Integer?,
+      segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")?,
+      stream_inf_resolution: ("INCLUDE" | "EXCLUDE")?,
+      target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")?,
+      video_composition_offsets: ("SIGNED" | "UNSIGNED")?,
+      write_dash_manifest: ("DISABLED" | "ENABLED")?,
+      write_hls_manifest: ("DISABLED" | "ENABLED")?,
+      write_segment_timeline_in_representation: ("ENABLED" | "DISABLED")?
+    }
+
+      type speke_key_provider = {
+      certificate_arn: ::String?,
+      encryption_contract_configuration: {
+        speke_audio_preset: ("PRESET_AUDIO_1" | "PRESET_AUDIO_2" | "PRESET_AUDIO_3" | "SHARED" | "UNENCRYPTED")?,
+        speke_video_preset: ("PRESET_VIDEO_1" | "PRESET_VIDEO_2" | "PRESET_VIDEO_3" | "PRESET_VIDEO_4" | "PRESET_VIDEO_5" | "PRESET_VIDEO_6" | "PRESET_VIDEO_7" | "PRESET_VIDEO_8" | "SHARED" | "UNENCRYPTED")?
+      }?,
+      resource_id: ::String?,
+      system_ids: Array[::String]?,
+      url: ::String?
+    }
+
+      type dash_iso_encryption_settings = {
+      playback_device_compatibility: ("CENC_V1" | "UNENCRYPTED_SEI")?,
+      speke_key_provider: Params::speke_key_provider?
+    }
+
+      type dash_iso_image_based_trick_play_settings = {
+      interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
+      thumbnail_height: ::Integer?,
+      thumbnail_interval: ::Float?,
+      thumbnail_width: ::Integer?,
+      tile_height: ::Integer?,
+      tile_width: ::Integer?
+    }
+
+      type dash_iso_group_settings = {
+      additional_manifests: Array[
+        {
+          manifest_name_modifier: ::String?,
+          selected_outputs: Array[::String]?
+        }
+      ]?,
+      audio_channel_config_scheme_id_uri: ("MPEG_CHANNEL_CONFIGURATION" | "DOLBY_CHANNEL_CONFIGURATION")?,
+      base_url: ::String?,
+      dash_i_frame_trick_play_name_modifier: ::String?,
+      dash_manifest_style: ("BASIC" | "COMPACT" | "DISTINCT" | "FULL")?,
+      destination: ::String?,
+      destination_settings: Params::destination_settings?,
+      encryption: Params::dash_iso_encryption_settings?,
+      fragment_length: ::Integer?,
+      hbbtv_compliance: ("HBBTV_1_5" | "NONE")?,
+      image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
+      image_based_trick_play_settings: Params::dash_iso_image_based_trick_play_settings?,
+      min_buffer_time: ::Integer?,
+      min_final_segment_length: ::Float?,
+      mpd_manifest_bandwidth_type: ("AVERAGE" | "MAX")?,
+      mpd_profile: ("MAIN_PROFILE" | "ON_DEMAND_PROFILE")?,
+      pts_offset_handling_for_b_frames: ("ZERO_BASED" | "MATCH_INITIAL_PTS")?,
+      segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")?,
+      segment_length: ::Integer?,
+      segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")?,
+      video_composition_offsets: ("SIGNED" | "UNSIGNED")?,
+      write_segment_timeline_in_representation: ("ENABLED" | "DISABLED")?
+    }
+
+      type file_group_settings = {
+      destination: ::String?,
+      destination_settings: Params::destination_settings?
+    }
+
+      type hls_encryption_settings = {
+      constant_initialization_vector: ::String?,
+      encryption_method: ("AES128" | "SAMPLE_AES")?,
+      initialization_vector_in_manifest: ("INCLUDE" | "EXCLUDE")?,
+      offline_encrypted: ("ENABLED" | "DISABLED")?,
+      speke_key_provider: Params::speke_key_provider?,
+      static_key_provider: {
+        key_format: ::String?,
+        key_format_versions: ::String?,
+        static_key_value: ::String?,
+        url: ::String?
+      }?,
+      type: ("SPEKE" | "STATIC_KEY")?
+    }
+
+      type hls_image_based_trick_play_settings = {
+      interval_cadence: ("FOLLOW_IFRAME" | "FOLLOW_CUSTOM" | "FOLLOW_SEGMENTATION")?,
+      thumbnail_height: ::Integer?,
+      thumbnail_interval: ::Float?,
+      thumbnail_width: ::Integer?,
+      tile_height: ::Integer?,
+      tile_width: ::Integer?
+    }
+
+      type hls_group_settings = {
+      ad_markers: Array[("ELEMENTAL" | "ELEMENTAL_SCTE35")]?,
+      additional_manifests: Array[
+        {
+          manifest_name_modifier: ::String?,
+          selected_outputs: Array[::String]?
+        }
+      ]?,
+      audio_only_header: ("INCLUDE" | "EXCLUDE")?,
+      base_url: ::String?,
+      caption_language_mappings: Array[
+        {
+          caption_channel: ::Integer?,
+          custom_language_code: ::String?,
+          language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+          language_description: ::String?
+        }
+      ]?,
+      caption_language_setting: ("INSERT" | "OMIT" | "NONE")?,
+      caption_segment_length_control: ("LARGE_SEGMENTS" | "MATCH_VIDEO")?,
+      client_cache: ("DISABLED" | "ENABLED")?,
+      codec_specification: ("RFC_6381" | "RFC_4281")?,
+      destination: ::String?,
+      destination_settings: Params::destination_settings?,
+      directory_structure: ("SINGLE_DIRECTORY" | "SUBDIRECTORY_PER_STREAM")?,
+      encryption: Params::hls_encryption_settings?,
+      image_based_trick_play: ("NONE" | "THUMBNAIL" | "THUMBNAIL_AND_FULLFRAME" | "ADVANCED")?,
+      image_based_trick_play_settings: Params::hls_image_based_trick_play_settings?,
+      manifest_compression: ("GZIP" | "NONE")?,
+      manifest_duration_format: ("FLOATING_POINT" | "INTEGER")?,
+      min_final_segment_length: ::Float?,
+      min_segment_length: ::Integer?,
+      output_selection: ("MANIFESTS_AND_SEGMENTS" | "SEGMENTS_ONLY")?,
+      program_date_time: ("INCLUDE" | "EXCLUDE")?,
+      program_date_time_period: ::Integer?,
+      progressive_write_hls_manifest: ("ENABLED" | "DISABLED")?,
+      segment_control: ("SINGLE_FILE" | "SEGMENTED_FILES")?,
+      segment_length: ::Integer?,
+      segment_length_control: ("EXACT" | "GOP_MULTIPLE" | "MATCH")?,
+      segments_per_subdirectory: ::Integer?,
+      stream_inf_resolution: ("INCLUDE" | "EXCLUDE")?,
+      target_duration_compatibility_mode: ("LEGACY" | "SPEC_COMPLIANT")?,
+      timed_metadata_id_3_frame: ("NONE" | "PRIV" | "TDRL")?,
+      timed_metadata_id_3_period: ::Integer?,
+      timestamp_delta_milliseconds: ::Integer?
+    }
+
+      type ms_smooth_encryption_settings = {
+      speke_key_provider: Params::speke_key_provider?
+    }
+
+      type ms_smooth_group_settings = {
+      additional_manifests: Array[
+        {
+          manifest_name_modifier: ::String?,
+          selected_outputs: Array[::String]?
+        }
+      ]?,
+      audio_deduplication: ("COMBINE_DUPLICATE_STREAMS" | "NONE")?,
+      destination: ::String?,
+      destination_settings: Params::destination_settings?,
+      encryption: Params::ms_smooth_encryption_settings?,
+      fragment_length: ::Integer?,
+      fragment_length_control: ("EXACT" | "GOP_MULTIPLE")?,
+      manifest_encoding: ("UTF8" | "UTF16")?
+    }
+
+      type output_group_settings = {
+      cmaf_group_settings: Params::cmaf_group_settings?,
+      dash_iso_group_settings: Params::dash_iso_group_settings?,
+      file_group_settings: Params::file_group_settings?,
+      hls_group_settings: Params::hls_group_settings?,
+      ms_smooth_group_settings: Params::ms_smooth_group_settings?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      type: ("HLS_GROUP_SETTINGS" | "DASH_ISO_GROUP_SETTINGS" | "FILE_GROUP_SETTINGS" | "MS_SMOOTH_GROUP_SETTINGS" | "CMAF_GROUP_SETTINGS")?
+    }
+
+      type output_group = {
+      automated_encoding_settings: Params::automated_encoding_settings?,
+      custom_name: ::String?,
+      name: ::String?,
+      output_group_settings: Params::output_group_settings?,
+      outputs: Array[
+        Params::output
+      ]?
+    }
+
+      type automated_abr_rule = {
+      allowed_renditions: Array[
+        {
+          height: ::Integer?,
+          required: ("ENABLED" | "DISABLED")?,
+          width: ::Integer?
+        }
+      ]?,
+      force_include_renditions: Array[
+        {
+          height: ::Integer?,
+          width: ::Integer?
+        }
+      ]?,
+      min_bottom_rendition_size: {
+        height: ::Integer?,
+        width: ::Integer?
+      }?,
+      min_top_rendition_size: {
+        height: ::Integer?,
+        width: ::Integer?
+      }?,
+      type: ("MIN_TOP_RENDITION_SIZE" | "MIN_BOTTOM_RENDITION_SIZE" | "FORCE_INCLUDE_RENDITIONS" | "ALLOWED_RENDITIONS")?
+    }
+
+      type cmfc_settings = {
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      audio_group_id: ::String?,
+      audio_rendition_sets: ::String?,
+      audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")?,
+      c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+      certificate_secret: ::String?,
+      descriptive_video_service_flag: ("DONT_FLAG" | "FLAG")?,
+      i_frame_only_manifest: ("INCLUDE" | "EXCLUDE")?,
+      klv_metadata: ("PASSTHROUGH" | "NONE")?,
+      manifest_metadata_signaling: ("ENABLED" | "DISABLED")?,
+      scte_35_esam: ("INSERT" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      signing_kms_key: ::String?,
+      timed_metadata: ("PASSTHROUGH" | "NONE")?,
+      timed_metadata_box_version: ("VERSION_0" | "VERSION_1")?,
+      timed_metadata_scheme_id_uri: ::String?,
+      timed_metadata_value: ::String?
+    }
+
+      type m2ts_settings = {
+      audio_buffer_model: ("DVB" | "ATSC")?,
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      audio_frames_per_pes: ::Integer?,
+      audio_pids: Array[::Integer]?,
+      audio_pts_offset_delta: ::Integer?,
+      bitrate: ::Integer?,
+      buffer_model: ("MULTIPLEX" | "NONE")?,
+      data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")?,
+      dvb_nit_settings: {
+        network_id: ::Integer?,
+        network_name: ::String?,
+        nit_interval: ::Integer?
+      }?,
+      dvb_sdt_settings: {
+        output_sdt: ("SDT_FOLLOW" | "SDT_FOLLOW_IF_PRESENT" | "SDT_MANUAL" | "SDT_NONE")?,
+        sdt_interval: ::Integer?,
+        service_name: ::String?,
+        service_provider_name: ::String?
+      }?,
+      dvb_sub_pids: Array[::Integer]?,
+      dvb_tdt_settings: {
+        tdt_interval: ::Integer?
+      }?,
+      dvb_teletext_pid: ::Integer?,
+      ebp_audio_interval: ("VIDEO_AND_FIXED_INTERVALS" | "VIDEO_INTERVAL")?,
+      ebp_placement: ("VIDEO_AND_AUDIO_PIDS" | "VIDEO_PID")?,
+      es_rate_in_pes: ("INCLUDE" | "EXCLUDE")?,
+      force_ts_video_ebp_order: ("FORCE" | "DEFAULT")?,
+      fragment_time: ::Float?,
+      klv_metadata: ("PASSTHROUGH" | "NONE")?,
+      max_pcr_interval: ::Integer?,
+      min_ebp_interval: ::Integer?,
+      nielsen_id_3: ("INSERT" | "NONE")?,
+      null_packet_bitrate: ::Float?,
+      pat_interval: ::Integer?,
+      pcr_control: ("PCR_EVERY_PES_PACKET" | "CONFIGURED_PCR_PERIOD")?,
+      pcr_pid: ::Integer?,
+      pmt_interval: ::Integer?,
+      pmt_pid: ::Integer?,
+      prevent_buffer_underflow: ("DISABLED" | "ENABLED")?,
+      private_metadata_pid: ::Integer?,
+      program_number: ::Integer?,
+      pts_offset: ::Integer?,
+      pts_offset_mode: ("AUTO" | "SECONDS" | "MILLISECONDS")?,
+      rate_mode: ("VBR" | "CBR")?,
+      scte_35_esam: {
+        scte_35_esam_pid: ::Integer?
+      }?,
+      scte_35_pid: ::Integer?,
+      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      segmentation_markers: ("NONE" | "RAI_SEGSTART" | "RAI_ADAPT" | "PSI_SEGSTART" | "EBP" | "EBP_LEGACY")?,
+      segmentation_style: ("MAINTAIN_CADENCE" | "RESET_CADENCE")?,
+      segmentation_time: ::Float?,
+      timed_metadata_pid: ::Integer?,
+      transport_stream_id: ::Integer?,
+      video_pid: ::Integer?
+    }
+
+      type m3u_8_settings = {
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      audio_frames_per_pes: ::Integer?,
+      audio_pids: Array[::Integer]?,
+      audio_pts_offset_delta: ::Integer?,
+      data_pts_control: ("AUTO" | "ALIGN_TO_VIDEO")?,
+      max_pcr_interval: ::Integer?,
+      nielsen_id_3: ("INSERT" | "NONE")?,
+      pat_interval: ::Integer?,
+      pcr_control: ("PCR_EVERY_PES_PACKET" | "CONFIGURED_PCR_PERIOD")?,
+      pcr_pid: ::Integer?,
+      pmt_interval: ::Integer?,
+      pmt_pid: ::Integer?,
+      private_metadata_pid: ::Integer?,
+      program_number: ::Integer?,
+      pts_offset: ::Integer?,
+      pts_offset_mode: ("AUTO" | "SECONDS" | "MILLISECONDS")?,
+      scte_35_pid: ::Integer?,
+      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      timed_metadata: ("PASSTHROUGH" | "NONE")?,
+      timed_metadata_pid: ::Integer?,
+      transport_stream_id: ::Integer?,
+      video_pid: ::Integer?
+    }
+
+      type mp_4_settings = {
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+      certificate_secret: ::String?,
+      cslg_atom: ("INCLUDE" | "EXCLUDE")?,
+      ctts_version: ::Integer?,
+      free_space_box: ("INCLUDE" | "EXCLUDE")?,
+      moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?,
+      mp_4_major_brand: ::String?,
+      signing_kms_key: ::String?
+    }
+
+      type mpd_settings = {
+      accessibility_caption_hints: ("INCLUDE" | "EXCLUDE")?,
+      audio_duration: ("DEFAULT_CODEC_DURATION" | "MATCH_VIDEO_DURATION")?,
+      c2pa_manifest: ("INCLUDE" | "EXCLUDE")?,
+      caption_container_type: ("RAW" | "FRAGMENTED_MP4")?,
+      certificate_secret: ::String?,
+      klv_metadata: ("NONE" | "PASSTHROUGH")?,
+      manifest_metadata_signaling: ("ENABLED" | "DISABLED")?,
+      scte_35_esam: ("INSERT" | "NONE")?,
+      scte_35_source: ("PASSTHROUGH" | "NONE")?,
+      signing_kms_key: ::String?,
+      timed_metadata: ("PASSTHROUGH" | "NONE")?,
+      timed_metadata_box_version: ("VERSION_0" | "VERSION_1")?,
+      timed_metadata_scheme_id_uri: ::String?,
+      timed_metadata_value: ::String?
+    }
+
+      type mxf_settings = {
+      afd_signaling: ("NO_COPY" | "COPY_FROM_VIDEO")?,
+      profile: ("D_10" | "XDCAM" | "OP1A" | "XAVC" | "XDCAM_RDD9")?,
+      uncompressed_audio_wrapping: ("AUTO" | "AES3")?,
+      xavc_profile_settings: {
+        duration_mode: ("ALLOW_ANY_DURATION" | "DROP_FRAMES_FOR_COMPLIANCE")?,
+        max_anc_data_size: ::Integer?
+      }?
+    }
+
+      type container_settings = {
+      cmfc_settings: Params::cmfc_settings?,
+      container: ("F4V" | "GIF" | "ISMV" | "M2TS" | "M3U8" | "CMFC" | "MOV" | "MP4" | "MPD" | "MXF" | "OGG" | "WEBM" | "RAW" | "Y4M")?,
+      f4v_settings: {
+        moov_placement: ("PROGRESSIVE_DOWNLOAD" | "NORMAL")?
+      }?,
+      m2ts_settings: Params::m2ts_settings?,
+      m3u_8_settings: Params::m3u_8_settings?,
+      mov_settings: {
+        clap_atom: ("INCLUDE" | "EXCLUDE")?,
+        cslg_atom: ("INCLUDE" | "EXCLUDE")?,
+        mpeg_2_four_cc_control: ("XDCAM" | "MPEG")?,
+        padding_control: ("OMNEON" | "NONE")?,
+        reference: ("SELF_CONTAINED" | "EXTERNAL")?
+      }?,
+      mp_4_settings: Params::mp_4_settings?,
+      mpd_settings: Params::mpd_settings?,
+      mxf_settings: Params::mxf_settings?
+    }
+
+      type hls_settings = {
+      audio_group_id: ::String?,
+      audio_only_container: ("AUTOMATIC" | "M2TS")?,
+      audio_rendition_sets: ::String?,
+      audio_track_type: ("ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" | "ALTERNATE_AUDIO_AUTO_SELECT" | "ALTERNATE_AUDIO_NOT_AUTO_SELECT" | "AUDIO_ONLY_VARIANT_STREAM")?,
+      descriptive_video_service_flag: ("DONT_FLAG" | "FLAG")?,
+      i_frame_only_manifest: ("INCLUDE" | "INCLUDE_AS_TS" | "EXCLUDE")?,
+      segment_modifier: ::String?
+    }
+
+      type output_settings = {
+      hls_settings: Params::hls_settings?
+    }
+
+      type av_1_settings = {
+      adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
+      bit_depth: ("BIT_8" | "BIT_10")?,
+      film_grain_synthesis: ("DISABLED" | "ENABLED")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_size: ::Float?,
+      max_bitrate: ::Integer?,
+      number_b_frames_between_reference_frames: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      qvbr_settings: {
+        qvbr_quality_level: ::Integer?,
+        qvbr_quality_level_fine_tune: ::Float?
+      }?,
+      rate_control_mode: ("QVBR")?,
+      slices: ::Integer?,
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?
+    }
+
+      type avc_intra_settings = {
+      avc_intra_class: ("CLASS_50" | "CLASS_100" | "CLASS_200" | "CLASS_4K_2K")?,
+      avc_intra_uhd_settings: {
+        quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?
+      }?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      telecine: ("NONE" | "HARD")?
+    }
+
+      type h264_settings = {
+      adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
+      bandwidth_reduction_filter: {
+        sharpening: ("LOW" | "MEDIUM" | "HIGH" | "OFF")?,
+        strength: ("LOW" | "MEDIUM" | "HIGH" | "AUTO" | "OFF")?
+      }?,
+      bitrate: ::Integer?,
+      codec_level: ("AUTO" | "LEVEL_1" | "LEVEL_1_1" | "LEVEL_1_2" | "LEVEL_1_3" | "LEVEL_2" | "LEVEL_2_1" | "LEVEL_2_2" | "LEVEL_3" | "LEVEL_3_1" | "LEVEL_3_2" | "LEVEL_4" | "LEVEL_4_1" | "LEVEL_4_2" | "LEVEL_5" | "LEVEL_5_1" | "LEVEL_5_2")?,
+      codec_profile: ("BASELINE" | "HIGH" | "HIGH_10BIT" | "HIGH_422" | "HIGH_422_10BIT" | "MAIN")?,
+      dynamic_sub_gop: ("ADAPTIVE" | "STATIC")?,
+      end_of_stream_markers: ("INCLUDE" | "SUPPRESS")?,
+      entropy_encoding: ("CABAC" | "CAVLC")?,
+      field_encoding: ("PAFF" | "FORCE_FIELD" | "MBAFF")?,
+      flicker_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_b_reference: ("DISABLED" | "ENABLED")?,
+      gop_closed_cadence: ::Integer?,
+      gop_size: ::Float?,
+      gop_size_units: ("FRAMES" | "SECONDS" | "AUTO")?,
+      hrd_buffer_final_fill_percentage: ::Integer?,
+      hrd_buffer_initial_fill_percentage: ::Integer?,
+      hrd_buffer_size: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      max_bitrate: ::Integer?,
+      min_i_interval: ::Integer?,
+      number_b_frames_between_reference_frames: ::Integer?,
+      number_reference_frames: ::Integer?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
+      qvbr_settings: {
+        max_average_bitrate: ::Integer?,
+        qvbr_quality_level: ::Integer?,
+        qvbr_quality_level_fine_tune: ::Float?
+      }?,
+      rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
+      repeat_pps: ("DISABLED" | "ENABLED")?,
+      saliency_aware_encoding: ("DISABLED" | "PREFERRED")?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
+      slices: ::Integer?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      softness: ::Integer?,
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      syntax: ("DEFAULT" | "RP2027")?,
+      telecine: ("NONE" | "SOFT" | "HARD")?,
+      temporal_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      unregistered_sei_timecode: ("DISABLED" | "ENABLED")?,
+      write_mp_4_packaging_type: ("AVC1" | "AVC3")?
+    }
+
+      type h265_settings = {
+      adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX" | "AUTO")?,
+      alternate_transfer_function_sei: ("DISABLED" | "ENABLED")?,
+      bandwidth_reduction_filter: {
+        sharpening: ("LOW" | "MEDIUM" | "HIGH" | "OFF")?,
+        strength: ("LOW" | "MEDIUM" | "HIGH" | "AUTO" | "OFF")?
+      }?,
+      bitrate: ::Integer?,
+      codec_level: ("AUTO" | "LEVEL_1" | "LEVEL_2" | "LEVEL_2_1" | "LEVEL_3" | "LEVEL_3_1" | "LEVEL_4" | "LEVEL_4_1" | "LEVEL_5" | "LEVEL_5_1" | "LEVEL_5_2" | "LEVEL_6" | "LEVEL_6_1" | "LEVEL_6_2")?,
+      codec_profile: ("MAIN_MAIN" | "MAIN_HIGH" | "MAIN10_MAIN" | "MAIN10_HIGH" | "MAIN_422_8BIT_MAIN" | "MAIN_422_8BIT_HIGH" | "MAIN_422_10BIT_MAIN" | "MAIN_422_10BIT_HIGH")?,
+      deblocking: ("ENABLED" | "DISABLED")?,
+      dynamic_sub_gop: ("ADAPTIVE" | "STATIC")?,
+      end_of_stream_markers: ("INCLUDE" | "SUPPRESS")?,
+      flicker_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_b_reference: ("DISABLED" | "ENABLED")?,
+      gop_closed_cadence: ::Integer?,
+      gop_size: ::Float?,
+      gop_size_units: ("FRAMES" | "SECONDS" | "AUTO")?,
+      hrd_buffer_final_fill_percentage: ::Integer?,
+      hrd_buffer_initial_fill_percentage: ::Integer?,
+      hrd_buffer_size: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      max_bitrate: ::Integer?,
+      min_i_interval: ::Integer?,
+      mv_over_picture_boundaries: ("ENABLED" | "DISABLED")?,
+      mv_temporal_predictor: ("ENABLED" | "DISABLED")?,
+      number_b_frames_between_reference_frames: ::Integer?,
+      number_reference_frames: ::Integer?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
+      qvbr_settings: {
+        max_average_bitrate: ::Integer?,
+        qvbr_quality_level: ::Integer?,
+        qvbr_quality_level_fine_tune: ::Float?
+      }?,
+      rate_control_mode: ("VBR" | "CBR" | "QVBR")?,
+      sample_adaptive_offset_filter_mode: ("DEFAULT" | "ADAPTIVE" | "OFF")?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      scene_change_detect: ("DISABLED" | "ENABLED" | "TRANSITION_DETECTION")?,
+      slices: ::Integer?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      telecine: ("NONE" | "SOFT" | "HARD")?,
+      temporal_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      temporal_ids: ("DISABLED" | "ENABLED")?,
+      tile_height: ::Integer?,
+      tile_padding: ("NONE" | "PADDED")?,
+      tile_width: ::Integer?,
+      tiles: ("DISABLED" | "ENABLED")?,
+      tree_block_size: ("AUTO" | "TREE_SIZE_32X32")?,
+      unregistered_sei_timecode: ("DISABLED" | "ENABLED")?,
+      write_mp_4_packaging_type: ("HVC1" | "HEV1")?
+    }
+
+      type mpeg_2_settings = {
+      adaptive_quantization: ("OFF" | "LOW" | "MEDIUM" | "HIGH")?,
+      bitrate: ::Integer?,
+      codec_level: ("AUTO" | "LOW" | "MAIN" | "HIGH1440" | "HIGH")?,
+      codec_profile: ("MAIN" | "PROFILE_422")?,
+      dynamic_sub_gop: ("ADAPTIVE" | "STATIC")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_closed_cadence: ::Integer?,
+      gop_size: ::Float?,
+      gop_size_units: ("FRAMES" | "SECONDS")?,
+      hrd_buffer_final_fill_percentage: ::Integer?,
+      hrd_buffer_initial_fill_percentage: ::Integer?,
+      hrd_buffer_size: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      intra_dc_precision: ("AUTO" | "INTRA_DC_PRECISION_8" | "INTRA_DC_PRECISION_9" | "INTRA_DC_PRECISION_10" | "INTRA_DC_PRECISION_11")?,
+      max_bitrate: ::Integer?,
+      min_i_interval: ::Integer?,
+      number_b_frames_between_reference_frames: ::Integer?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      quality_tuning_level: ("SINGLE_PASS" | "MULTI_PASS")?,
+      rate_control_mode: ("VBR" | "CBR")?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      scene_change_detect: ("DISABLED" | "ENABLED")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      softness: ::Integer?,
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      syntax: ("DEFAULT" | "D_10")?,
+      telecine: ("NONE" | "SOFT" | "HARD")?,
+      temporal_adaptive_quantization: ("DISABLED" | "ENABLED")?
+    }
+
+      type prores_settings = {
+      chroma_sampling: ("PRESERVE_444_SAMPLING" | "SUBSAMPLE_TO_422")?,
+      codec_profile: ("APPLE_PRORES_422" | "APPLE_PRORES_422_HQ" | "APPLE_PRORES_422_LT" | "APPLE_PRORES_422_PROXY" | "APPLE_PRORES_4444" | "APPLE_PRORES_4444_XQ")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      telecine: ("NONE" | "HARD")?
+    }
+
+      type uncompressed_settings = {
+      fourcc: ("I420" | "I422" | "I444")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      interlace_mode: ("INTERLACED" | "PROGRESSIVE")?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      telecine: ("NONE" | "HARD")?
+    }
+
+      type vc_3_settings = {
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      interlace_mode: ("INTERLACED" | "PROGRESSIVE")?,
+      scan_type_conversion_mode: ("INTERLACED" | "INTERLACED_OPTIMIZE")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      telecine: ("NONE" | "HARD")?,
+      vc_3_class: ("CLASS_145_8BIT" | "CLASS_220_8BIT" | "CLASS_220_10BIT")?
+    }
+
+      type vp_8_settings = {
+      bitrate: ::Integer?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_size: ::Float?,
+      hrd_buffer_size: ::Integer?,
+      max_bitrate: ::Integer?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      quality_tuning_level: ("MULTI_PASS" | "MULTI_PASS_HQ")?,
+      rate_control_mode: ("VBR")?
+    }
+
+      type vp_9_settings = {
+      bitrate: ::Integer?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      gop_size: ::Float?,
+      hrd_buffer_size: ::Integer?,
+      max_bitrate: ::Integer?,
+      par_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      par_denominator: ::Integer?,
+      par_numerator: ::Integer?,
+      quality_tuning_level: ("MULTI_PASS" | "MULTI_PASS_HQ")?,
+      rate_control_mode: ("VBR")?
+    }
+
+      type xavc_4k_profile_settings = {
+      bitrate_class: ("BITRATE_CLASS_100" | "BITRATE_CLASS_140" | "BITRATE_CLASS_200")?,
+      codec_profile: ("HIGH" | "HIGH_422")?,
+      flicker_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      gop_b_reference: ("DISABLED" | "ENABLED")?,
+      gop_closed_cadence: ::Integer?,
+      hrd_buffer_size: ::Integer?,
+      quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
+      slices: ::Integer?
+    }
+
+      type xavc_hd_profile_settings = {
+      bitrate_class: ("BITRATE_CLASS_25" | "BITRATE_CLASS_35" | "BITRATE_CLASS_50")?,
+      flicker_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      gop_b_reference: ("DISABLED" | "ENABLED")?,
+      gop_closed_cadence: ::Integer?,
+      hrd_buffer_size: ::Integer?,
+      interlace_mode: ("PROGRESSIVE" | "TOP_FIELD" | "BOTTOM_FIELD" | "FOLLOW_TOP_FIELD" | "FOLLOW_BOTTOM_FIELD")?,
+      quality_tuning_level: ("SINGLE_PASS" | "SINGLE_PASS_HQ" | "MULTI_PASS_HQ")?,
+      slices: ::Integer?,
+      telecine: ("NONE" | "HARD")?
+    }
+
+      type xavc_settings = {
+      adaptive_quantization: ("OFF" | "AUTO" | "LOW" | "MEDIUM" | "HIGH" | "HIGHER" | "MAX")?,
+      entropy_encoding: ("AUTO" | "CABAC" | "CAVLC")?,
+      framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+      framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE" | "FRAMEFORMER" | "MAINTAIN_FRAME_COUNT")?,
+      framerate_denominator: ::Integer?,
+      framerate_numerator: ::Integer?,
+      per_frame_metrics: Array[("PSNR" | "SSIM" | "MS_SSIM" | "PSNR_HVS" | "VMAF" | "QVBR" | "SHOT_CHANGE")]?,
+      profile: ("XAVC_HD_INTRA_CBG" | "XAVC_4K_INTRA_CBG" | "XAVC_4K_INTRA_VBR" | "XAVC_HD" | "XAVC_4K")?,
+      slow_pal: ("DISABLED" | "ENABLED")?,
+      softness: ::Integer?,
+      spatial_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      temporal_adaptive_quantization: ("DISABLED" | "ENABLED")?,
+      xavc_4k_intra_cbg_profile_settings: {
+        xavc_class: ("CLASS_100" | "CLASS_300" | "CLASS_480")?
+      }?,
+      xavc_4k_intra_vbr_profile_settings: {
+        xavc_class: ("CLASS_100" | "CLASS_300" | "CLASS_480")?
+      }?,
+      xavc_4k_profile_settings: Params::xavc_4k_profile_settings?,
+      xavc_hd_intra_cbg_profile_settings: {
+        xavc_class: ("CLASS_50" | "CLASS_100" | "CLASS_200")?
+      }?,
+      xavc_hd_profile_settings: Params::xavc_hd_profile_settings?
+    }
+
+      type video_codec_settings = {
+      av_1_settings: Params::av_1_settings?,
+      avc_intra_settings: Params::avc_intra_settings?,
+      codec: ("AV1" | "AVC_INTRA" | "FRAME_CAPTURE" | "GIF" | "H_264" | "H_265" | "MPEG2" | "PASSTHROUGH" | "PRORES" | "UNCOMPRESSED" | "VC3" | "VP8" | "VP9" | "XAVC")?,
+      frame_capture_settings: {
+        framerate_denominator: ::Integer?,
+        framerate_numerator: ::Integer?,
+        max_captures: ::Integer?,
+        quality: ::Integer?
+      }?,
+      gif_settings: {
+        framerate_control: ("INITIALIZE_FROM_SOURCE" | "SPECIFIED")?,
+        framerate_conversion_algorithm: ("DUPLICATE_DROP" | "INTERPOLATE")?,
+        framerate_denominator: ::Integer?,
+        framerate_numerator: ::Integer?
+      }?,
+      h264_settings: Params::h264_settings?,
+      h265_settings: Params::h265_settings?,
+      mpeg_2_settings: Params::mpeg_2_settings?,
+      passthrough_settings: {
+        frame_control: ("NEAREST_IDRFRAME" | "NEAREST_IFRAME")?,
+        video_selector_mode: ("AUTO" | "REMUX_ALL")?
+      }?,
+      prores_settings: Params::prores_settings?,
+      uncompressed_settings: Params::uncompressed_settings?,
+      vc_3_settings: Params::vc_3_settings?,
+      vp_8_settings: Params::vp_8_settings?,
+      vp_9_settings: Params::vp_9_settings?,
+      xavc_settings: Params::xavc_settings?
+    }
+
+      type color_corrector = {
+      brightness: ::Integer?,
+      clip_limits: {
+        maximum_rgb_tolerance: ::Integer?,
+        maximum_yuv: ::Integer?,
+        minimum_rgb_tolerance: ::Integer?,
+        minimum_yuv: ::Integer?
+      }?,
+      color_space_conversion: ("NONE" | "FORCE_601" | "FORCE_709" | "FORCE_HDR10" | "FORCE_HLG_2020" | "FORCE_P3DCI" | "FORCE_P3D65_SDR" | "FORCE_P3D65_HDR")?,
+      contrast: ::Integer?,
+      hdr_10_metadata: Params::hdr_10_metadata?,
+      hdr_to_sdr_tone_mapper: ("PRESERVE_DETAILS" | "VIBRANT")?,
+      hue: ::Integer?,
+      max_luminance: ::Integer?,
+      sample_range_conversion: ("LIMITED_RANGE_SQUEEZE" | "NONE" | "LIMITED_RANGE_CLIP")?,
+      saturation: ::Integer?,
+      sdr_reference_white_level: ::Integer?
+    }
+
+      type dolby_vision = {
+      compatibility: ("DUPLICATE_STREAM" | "SUPPLEMENTAL_CODECS")?,
+      l6_metadata: {
+        max_cll: ::Integer?,
+        max_fall: ::Integer?
+      }?,
+      l6_mode: ("PASSTHROUGH" | "RECALCULATE" | "SPECIFY")?,
+      mapping: ("HDR10_NOMAP" | "HDR10_1000")?,
+      profile: ("PROFILE_5" | "PROFILE_8_1")?
+    }
+
+      type noise_reducer = {
+      filter: ("BILATERAL" | "MEAN" | "GAUSSIAN" | "LANCZOS" | "SHARPEN" | "CONSERVE" | "SPATIAL" | "TEMPORAL")?,
+      filter_settings: {
+        strength: ::Integer?
+      }?,
+      spatial_filter_settings: {
+        post_filter_sharpen_strength: ::Integer?,
+        speed: ::Integer?,
+        strength: ::Integer?
+      }?,
+      temporal_filter_settings: {
+        aggressive_mode: ::Integer?,
+        post_temporal_sharpening: ("DISABLED" | "ENABLED" | "AUTO")?,
+        post_temporal_sharpening_strength: ("LOW" | "MEDIUM" | "HIGH")?,
+        speed: ::Integer?,
+        strength: ::Integer?
+      }?
+    }
+
+      type partner_watermarking = {
+      nexguard_file_marker_settings: {
+        license: ::String?,
+        payload: ::Integer?,
+        preset: ::String?,
+        strength: ("LIGHTEST" | "LIGHTER" | "DEFAULT" | "STRONGER" | "STRONGEST")?
+      }?
+    }
+
+      type video_preprocessor = {
+      color_corrector: Params::color_corrector?,
+      deinterlacer: {
+        algorithm: ("INTERPOLATE" | "INTERPOLATE_TICKER" | "BLEND" | "BLEND_TICKER" | "LINEAR_INTERPOLATION")?,
+        control: ("FORCE_ALL_FRAMES" | "NORMAL")?,
+        mode: ("DEINTERLACE" | "INVERSE_TELECINE" | "ADAPTIVE")?
+      }?,
+      dolby_vision: Params::dolby_vision?,
+      hdr_10_plus: {
+        mastering_monitor_nits: ::Integer?,
+        target_monitor_nits: ::Integer?
+      }?,
+      image_inserter: Params::image_inserter?,
+      noise_reducer: Params::noise_reducer?,
+      partner_watermarking: Params::partner_watermarking?,
+      timecode_burnin: {
+        font_size: ::Integer?,
+        position: ("TOP_CENTER" | "TOP_LEFT" | "TOP_RIGHT" | "MIDDLE_LEFT" | "MIDDLE_CENTER" | "MIDDLE_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_CENTER" | "BOTTOM_RIGHT")?,
+        prefix: ::String?
+      }?
+    }
+
+      type video_description = {
+      afd_signaling: ("NONE" | "AUTO" | "FIXED")?,
+      anti_alias: ("DISABLED" | "ENABLED")?,
+      chroma_position_mode: ("AUTO" | "FORCE_CENTER" | "FORCE_TOP_LEFT")?,
+      codec_settings: Params::video_codec_settings?,
+      color_metadata: ("IGNORE" | "INSERT")?,
+      crop: {
+        height: ::Integer?,
+        width: ::Integer?,
+        x: ::Integer?,
+        y: ::Integer?
+      }?,
+      drop_frame_timecode: ("DISABLED" | "ENABLED")?,
+      fixed_afd: ::Integer?,
+      height: ::Integer?,
+      position: {
+        height: ::Integer?,
+        width: ::Integer?,
+        x: ::Integer?,
+        y: ::Integer?
+      }?,
+      respond_to_afd: ("NONE" | "RESPOND" | "PASSTHROUGH")?,
+      scaling_behavior: ("DEFAULT" | "STRETCH_TO_OUTPUT" | "FIT" | "FIT_NO_UPSCALE" | "FILL" | "SMART_CROP")?,
+      sharpness: ::Integer?,
+      timecode_insertion: ("DISABLED" | "PIC_TIMING_SEI")?,
+      timecode_track: ("DISABLED" | "ENABLED")?,
+      video_preprocessors: Params::video_preprocessor?,
+      width: ::Integer?
+    }
+
+      type output = {
+      audio_descriptions: Array[
+        Params::audio_description
+      ]?,
+      caption_descriptions: Array[
+        Params::caption_description
+      ]?,
+      container_settings: Params::container_settings?,
+      extension: ::String?,
+      name_modifier: ::String?,
+      output_settings: Params::output_settings?,
+      preset: ::String?,
+      video_description: Params::video_description?
+    }
+
+      type audio_normalization_settings = {
+      algorithm: ("ITU_BS_1770_1" | "ITU_BS_1770_2" | "ITU_BS_1770_3" | "ITU_BS_1770_4")?,
+      algorithm_control: ("CORRECT_AUDIO" | "MEASURE_ONLY")?,
+      correction_gate_level: ::Integer?,
+      loudness_logging: ("LOG" | "DONT_LOG")?,
+      peak_calculation: ("TRUE_PEAK" | "NONE")?,
+      target_lkfs: ::Float?,
+      true_peak_limiter_threshold: ::Float?
+    }
+
+      type aac_settings = {
+      audio_description_broadcaster_mix: ("BROADCASTER_MIXED_AD" | "NORMAL")?,
+      bitrate: ::Integer?,
+      codec_profile: ("LC" | "HEV1" | "HEV2" | "XHE")?,
+      coding_mode: ("AD_RECEIVER_MIX" | "CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_5_1" | "CODING_MODE_AUTO")?,
+      loudness_measurement_mode: ("PROGRAM" | "ANCHOR")?,
+      rap_interval: ::Integer?,
+      rate_control_mode: ("CBR" | "VBR")?,
+      raw_format: ("LATM_LOAS" | "NONE")?,
+      sample_rate: ::Integer?,
+      specification: ("MPEG2" | "MPEG4")?,
+      target_loudness_range: ::Integer?,
+      vbr_quality: ("LOW" | "MEDIUM_LOW" | "MEDIUM_HIGH" | "HIGH")?
+    }
+
+      type ac_3_settings = {
+      bitrate: ::Integer?,
+      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "DIALOGUE" | "EMERGENCY" | "HEARING_IMPAIRED" | "MUSIC_AND_EFFECTS" | "VISUALLY_IMPAIRED" | "VOICE_OVER")?,
+      coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_1_1" | "CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_AUTO")?,
+      dialnorm: ::Integer?,
+      dynamic_range_compression_line: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
+      dynamic_range_compression_profile: ("FILM_STANDARD" | "NONE")?,
+      dynamic_range_compression_rf: ("FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH" | "NONE")?,
+      lfe_filter: ("ENABLED" | "DISABLED")?,
+      metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
+      sample_rate: ::Integer?
+    }
+
+      type ac_4_settings = {
+      bitrate: ::Integer?,
+      bitstream_mode: ("COMPLETE_MAIN" | "EMERGENCY")?,
+      coding_mode: ("CODING_MODE_2_0" | "CODING_MODE_3_2_LFE" | "CODING_MODE_5_1_4")?,
+      dynamic_range_compression_flat_panel_tv: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_compression_home_theater: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_compression_portable_headphones: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_compression_portable_speakers: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      lo_ro_center_mix_level: ::Float?,
+      lo_ro_surround_mix_level: ::Float?,
+      lt_rt_center_mix_level: ::Float?,
+      lt_rt_surround_mix_level: ::Float?,
+      sample_rate: ::Integer?,
+      stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?
+    }
+
+      type eac_3_atmos_settings = {
+      bitrate: ::Integer?,
+      bitstream_mode: ("COMPLETE_MAIN")?,
+      coding_mode: ("CODING_MODE_AUTO" | "CODING_MODE_5_1_4" | "CODING_MODE_7_1_4" | "CODING_MODE_9_1_6")?,
+      dialogue_intelligence: ("ENABLED" | "DISABLED")?,
+      downmix_control: ("SPECIFIED" | "INITIALIZE_FROM_SOURCE")?,
+      dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_compression_rf: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_control: ("SPECIFIED" | "INITIALIZE_FROM_SOURCE")?,
+      lo_ro_center_mix_level: ::Float?,
+      lo_ro_surround_mix_level: ::Float?,
+      lt_rt_center_mix_level: ::Float?,
+      lt_rt_surround_mix_level: ::Float?,
+      metering_mode: ("LEQ_A" | "ITU_BS_1770_1" | "ITU_BS_1770_2" | "ITU_BS_1770_3" | "ITU_BS_1770_4")?,
+      sample_rate: ::Integer?,
+      speech_threshold: ::Integer?,
+      stereo_downmix: ("NOT_INDICATED" | "STEREO" | "SURROUND" | "DPL2")?,
+      surround_ex_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")?
+    }
+
+      type eac_3_settings = {
+      attenuation_control: ("ATTENUATE_3_DB" | "NONE")?,
+      bitrate: ::Integer?,
+      bitstream_mode: ("COMPLETE_MAIN" | "COMMENTARY" | "EMERGENCY" | "HEARING_IMPAIRED" | "VISUALLY_IMPAIRED")?,
+      coding_mode: ("CODING_MODE_1_0" | "CODING_MODE_2_0" | "CODING_MODE_3_2" | "CODING_MODE_AUTO")?,
+      dc_filter: ("ENABLED" | "DISABLED")?,
+      dialnorm: ::Integer?,
+      dynamic_range_compression_line: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      dynamic_range_compression_rf: ("NONE" | "FILM_STANDARD" | "FILM_LIGHT" | "MUSIC_STANDARD" | "MUSIC_LIGHT" | "SPEECH")?,
+      lfe_control: ("LFE" | "NO_LFE")?,
+      lfe_filter: ("ENABLED" | "DISABLED")?,
+      lo_ro_center_mix_level: ::Float?,
+      lo_ro_surround_mix_level: ::Float?,
+      lt_rt_center_mix_level: ::Float?,
+      lt_rt_surround_mix_level: ::Float?,
+      metadata_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
+      passthrough_control: ("WHEN_POSSIBLE" | "NO_PASSTHROUGH")?,
+      phase_control: ("SHIFT_90_DEGREES" | "NO_SHIFT")?,
+      sample_rate: ::Integer?,
+      stereo_downmix: ("NOT_INDICATED" | "LO_RO" | "LT_RT" | "DPL2")?,
+      surround_ex_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")?,
+      surround_mode: ("NOT_INDICATED" | "ENABLED" | "DISABLED")?
+    }
+
+      type audio_codec_settings = {
+      aac_settings: Params::aac_settings?,
+      ac_3_settings: Params::ac_3_settings?,
+      ac_4_settings: Params::ac_4_settings?,
+      aiff_settings: {
+        bit_depth: ::Integer?,
+        channels: ::Integer?,
+        sample_rate: ::Integer?
+      }?,
+      codec: ("AAC" | "MP2" | "MP3" | "WAV" | "AIFF" | "AC3" | "AC4" | "EAC3" | "EAC3_ATMOS" | "VORBIS" | "OPUS" | "PASSTHROUGH" | "FLAC")?,
+      eac_3_atmos_settings: Params::eac_3_atmos_settings?,
+      eac_3_settings: Params::eac_3_settings?,
+      flac_settings: {
+        bit_depth: ::Integer?,
+        channels: ::Integer?,
+        sample_rate: ::Integer?
+      }?,
+      mp_2_settings: {
+        audio_description_mix: ("BROADCASTER_MIXED_AD" | "NONE")?,
+        bitrate: ::Integer?,
+        channels: ::Integer?,
+        sample_rate: ::Integer?
+      }?,
+      mp_3_settings: {
+        bitrate: ::Integer?,
+        channels: ::Integer?,
+        rate_control_mode: ("CBR" | "VBR")?,
+        sample_rate: ::Integer?,
+        vbr_quality: ::Integer?
+      }?,
+      opus_settings: {
+        bitrate: ::Integer?,
+        channels: ::Integer?,
+        sample_rate: ::Integer?
+      }?,
+      vorbis_settings: {
+        channels: ::Integer?,
+        sample_rate: ::Integer?,
+        vbr_quality: ::Integer?
+      }?,
+      wav_settings: {
+        bit_depth: ::Integer?,
+        channels: ::Integer?,
+        format: ("RIFF" | "RF64" | "EXTENSIBLE")?,
+        sample_rate: ::Integer?
+      }?
+    }
+
+      type audio_description = {
+      audio_channel_tagging_settings: {
+        channel_tag: ("L" | "R" | "C" | "LFE" | "LS" | "RS" | "LC" | "RC" | "CS" | "LSD" | "RSD" | "TCS" | "VHL" | "VHC" | "VHR" | "TBL" | "TBC" | "TBR" | "RSL" | "RSR" | "LW" | "RW" | "LFE2" | "LT" | "RT" | "HI" | "NAR" | "M")?,
+        channel_tags: Array[("L" | "R" | "C" | "LFE" | "LS" | "RS" | "LC" | "RC" | "CS" | "LSD" | "RSD" | "TCS" | "VHL" | "VHC" | "VHR" | "TBL" | "TBC" | "TBR" | "RSL" | "RSR" | "LW" | "RW" | "LFE2" | "LT" | "RT" | "HI" | "NAR" | "M")]?
+      }?,
+      audio_normalization_settings: Params::audio_normalization_settings?,
+      audio_pitch_correction_settings: {
+        slow_pal_pitch_correction: ("DISABLED" | "ENABLED")?
+      }?,
+      audio_source_name: ::String?,
+      audio_type: ::Integer?,
+      audio_type_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
+      codec_settings: Params::audio_codec_settings?,
+      custom_language_code: ::String?,
+      language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+      language_code_control: ("FOLLOW_INPUT" | "USE_CONFIGURED")?,
+      remix_settings: Params::remix_settings?,
+      stream_name: ::String?
+    }
+
+      type burnin_destination_settings = {
+      alignment: ("CENTERED" | "LEFT" | "AUTO")?,
+      apply_font_color: ("WHITE_TEXT_ONLY" | "ALL_TEXT")?,
+      background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")?,
+      background_opacity: ::Integer?,
+      fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")?,
+      font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")?,
+      font_file_bold: ::String?,
+      font_file_bold_italic: ::String?,
+      font_file_italic: ::String?,
+      font_file_regular: ::String?,
+      font_opacity: ::Integer?,
+      font_resolution: ::Integer?,
+      font_script: ("AUTOMATIC" | "HANS" | "HANT")?,
+      font_size: ::Integer?,
+      hex_font_color: ::String?,
+      outline_color: ("BLACK" | "WHITE" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "AUTO")?,
+      outline_size: ::Integer?,
+      remove_ruby_reserve_attributes: ("DISABLED" | "ENABLED")?,
+      shadow_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")?,
+      shadow_opacity: ::Integer?,
+      shadow_x_offset: ::Integer?,
+      shadow_y_offset: ::Integer?,
+      style_passthrough: ("ENABLED" | "DISABLED")?,
+      teletext_spacing: ("FIXED_GRID" | "PROPORTIONAL" | "AUTO")?,
+      x_position: ::Integer?,
+      y_position: ::Integer?
+    }
+
+      type dvb_sub_destination_settings = {
+      alignment: ("CENTERED" | "LEFT" | "AUTO")?,
+      apply_font_color: ("WHITE_TEXT_ONLY" | "ALL_TEXT")?,
+      background_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")?,
+      background_opacity: ::Integer?,
+      dds_handling: ("NONE" | "SPECIFIED" | "NO_DISPLAY_WINDOW" | "SPECIFIED_OPTIMAL")?,
+      dds_x_coordinate: ::Integer?,
+      dds_y_coordinate: ::Integer?,
+      fallback_font: ("BEST_MATCH" | "MONOSPACED_SANSSERIF" | "MONOSPACED_SERIF" | "PROPORTIONAL_SANSSERIF" | "PROPORTIONAL_SERIF")?,
+      font_color: ("WHITE" | "BLACK" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "HEX" | "AUTO")?,
+      font_file_bold: ::String?,
+      font_file_bold_italic: ::String?,
+      font_file_italic: ::String?,
+      font_file_regular: ::String?,
+      font_opacity: ::Integer?,
+      font_resolution: ::Integer?,
+      font_script: ("AUTOMATIC" | "HANS" | "HANT")?,
+      font_size: ::Integer?,
+      height: ::Integer?,
+      hex_font_color: ::String?,
+      outline_color: ("BLACK" | "WHITE" | "YELLOW" | "RED" | "GREEN" | "BLUE" | "AUTO")?,
+      outline_size: ::Integer?,
+      shadow_color: ("NONE" | "BLACK" | "WHITE" | "AUTO")?,
+      shadow_opacity: ::Integer?,
+      shadow_x_offset: ::Integer?,
+      shadow_y_offset: ::Integer?,
+      style_passthrough: ("ENABLED" | "DISABLED")?,
+      subtitling_type: ("HEARING_IMPAIRED" | "STANDARD")?,
+      teletext_spacing: ("FIXED_GRID" | "PROPORTIONAL" | "AUTO")?,
+      width: ::Integer?,
+      x_position: ::Integer?,
+      y_position: ::Integer?
+    }
+
+      type caption_destination_settings = {
+      burnin_destination_settings: Params::burnin_destination_settings?,
+      destination_type: ("BURN_IN" | "DVB_SUB" | "EMBEDDED" | "EMBEDDED_PLUS_SCTE20" | "IMSC" | "SCTE20_PLUS_EMBEDDED" | "SCC" | "SRT" | "SMI" | "TELETEXT" | "TTML" | "WEBVTT")?,
+      dvb_sub_destination_settings: Params::dvb_sub_destination_settings?,
+      embedded_destination_settings: {
+        destination_608_channel_number: ::Integer?,
+        destination_708_service_number: ::Integer?
+      }?,
+      imsc_destination_settings: {
+        accessibility: ("DISABLED" | "ENABLED")?,
+        style_passthrough: ("ENABLED" | "DISABLED")?
+      }?,
+      scc_destination_settings: {
+        framerate: ("FRAMERATE_23_97" | "FRAMERATE_24" | "FRAMERATE_25" | "FRAMERATE_29_97_DROPFRAME" | "FRAMERATE_29_97_NON_DROPFRAME")?
+      }?,
+      srt_destination_settings: {
+        style_passthrough: ("ENABLED" | "DISABLED")?
+      }?,
+      teletext_destination_settings: {
+        page_number: ::String?,
+        page_types: Array[("PAGE_TYPE_INITIAL" | "PAGE_TYPE_SUBTITLE" | "PAGE_TYPE_ADDL_INFO" | "PAGE_TYPE_PROGRAM_SCHEDULE" | "PAGE_TYPE_HEARING_IMPAIRED_SUBTITLE")]?
+      }?,
+      ttml_destination_settings: {
+        style_passthrough: ("ENABLED" | "DISABLED")?
+      }?,
+      webvtt_destination_settings: {
+        accessibility: ("DISABLED" | "ENABLED")?,
+        style_passthrough: ("ENABLED" | "DISABLED" | "STRICT" | "MERGE")?
+      }?
+    }
+
+      type caption_description = {
+      caption_selector_name: ::String?,
+      custom_language_code: ::String?,
+      destination_settings: Params::caption_destination_settings?,
+      language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+      language_description: ::String?
+    }
+
+      type job_template_settings = {
+      ad_avail_offset: ::Integer?,
+      avail_blanking: {
+        avail_blanking_image: ::String?
+      }?,
+      color_conversion_3_dlut_settings: Array[
+        {
+          file_input: ::String?,
+          input_color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")?,
+          input_mastering_luminance: ::Integer?,
+          output_color_space: ("FOLLOW" | "REC_601" | "REC_709" | "HDR10" | "HLG_2020" | "P3DCI" | "P3D65_SDR" | "P3D65_HDR")?,
+          output_mastering_luminance: ::Integer?
+        }
+      ]?,
+      esam: Params::esam_settings?,
+      extended_data_services: {
+        copy_protection_action: ("PASSTHROUGH" | "STRIP")?,
+        vchip_action: ("PASSTHROUGH" | "STRIP")?
+      }?,
+      follow_source: ::Integer?,
+      inputs: Array[
+        Params::input_template
+      ]?,
+      kantar_watermark: Params::kantar_watermark_settings?,
+      motion_image_inserter: Params::motion_image_inserter?,
+      nielsen_configuration: {
+        breakout_code: ::Integer?,
+        distributor_id: ::String?
+      }?,
+      nielsen_non_linear_watermark: Params::nielsen_non_linear_watermark_settings?,
+      output_groups: Array[
+        Params::output_group
+      ]?,
+      timecode_config: {
+        anchor: ::String?,
+        source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
+        start: ::String?,
+        timestamp_offset: ::String?
+      }?,
+      timed_metadata_insertion: {
+        id_3_insertions: Array[
+          {
+            id_3: ::String?,
+            timecode: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type input_template = {
+      advanced_input_filter: ("ENABLED" | "DISABLED")?,
+      advanced_input_filter_settings: {
+        add_texture: ("ENABLED" | "DISABLED")?,
+        sharpening: ("OFF" | "LOW" | "HIGH")?
+      }?,
+      audio_selector_groups: Hash[::String, {
+          audio_selector_names: Array[::String]?
+        }]?,
+      audio_selectors: Hash[::String, Params::audio_selector]?,
+      caption_selectors: Hash[::String, Params::caption_selector]?,
+      crop: {
+        height: ::Integer?,
+        width: ::Integer?,
+        x: ::Integer?,
+        y: ::Integer?
+      }?,
+      deblock_filter: ("ENABLED" | "DISABLED")?,
+      denoise_filter: ("ENABLED" | "DISABLED")?,
+      dolby_vision_metadata_xml: ::String?,
+      dynamic_audio_selectors: Hash[::String, {
+          audio_duration_correction: ("DISABLED" | "AUTO" | "TRACK" | "FRAME" | "FORCE")?,
+          external_audio_file_input: ::String?,
+          language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+          offset: ::Integer?,
+          selector_type: ("ALL_TRACKS" | "LANGUAGE_CODE")?
+        }]?,
+      filter_enable: ("AUTO" | "DISABLE" | "FORCE")?,
+      filter_strength: ::Integer?,
+      image_inserter: Params::image_inserter?,
+      input_clippings: Array[
+        {
+          end_timecode: ::String?,
+          start_timecode: ::String?
+        }
+      ]?,
+      input_scan_type: ("AUTO" | "PSF")?,
+      multi_view_settings: Array[
+        {
+          input: {
+            file_input: ::String?
+          }?
+        }
+      ]?,
+      position: {
+        height: ::Integer?,
+        width: ::Integer?,
+        x: ::Integer?,
+        y: ::Integer?
+      }?,
+      program_number: ::Integer?,
+      psi_control: ("IGNORE_PSI" | "USE_PSI")?,
+      timecode_source: ("EMBEDDED" | "ZEROBASED" | "SPECIFIEDSTART")?,
+      timecode_start: ::String?,
+      video_overlays: Array[
+        Params::video_overlay
+      ]?,
+      video_selector: Params::video_selector?
+    }
+
+      type preset_settings = {
+      audio_descriptions: Array[
+        Params::audio_description
+      ]?,
+      caption_descriptions: Array[
+        Params::caption_description_preset
+      ]?,
+      container_settings: Params::container_settings?,
+      video_description: Params::video_description?
+    }
+
+      type caption_description_preset = {
+      custom_language_code: ::String?,
+      destination_settings: Params::caption_destination_settings?,
+      language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")?,
+      language_description: ::String?
+    }
+
+    end
+  end
+end

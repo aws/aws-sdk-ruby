@@ -401,7 +401,7 @@ module Aws
                              data: ::String,
                              explicit_hash_key: ::String?,
                              partition_key: ::String
-                           },
+                           }
                          ],
                          ?stream_name: ::String,
                          ?stream_arn: ::String,

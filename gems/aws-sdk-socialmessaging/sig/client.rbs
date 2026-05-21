@@ -101,9 +101,9 @@ module Aws
                                                           {
                                                             key: ::String,
                                                             value: ::String?
-                                                          },
+                                                          }
                                                         ]?
-                                                      },
+                                                      }
                                                     ],
                                                     phone_number_parent: ::String?,
                                                     waba: {
@@ -112,13 +112,13 @@ module Aws
                                                         {
                                                           event_destination_arn: ::String,
                                                           role_arn: ::String?
-                                                        },
+                                                        }
                                                       ]?,
                                                       tags: Array[
                                                         {
                                                           key: ::String,
                                                           value: ::String?
-                                                        },
+                                                        }
                                                       ]?
                                                     }?
                                                   }
@@ -159,9 +159,9 @@ module Aws
                                                                   otp_type: ::String?,
                                                                   zero_tap_terms_accepted: bool?,
                                                                   supported_apps: Array[
-                                                                    Hash[::String, ::String],
+                                                                    Hash[::String, ::String]
                                                                   ]?
-                                                                },
+                                                                }
                                                               ]?,
                                                               library_template_body_inputs: {
                                                                 add_contact_number: bool?,
@@ -354,7 +354,7 @@ module Aws
                                                                  {
                                                                    event_destination_arn: ::String,
                                                                    role_arn: ::String?
-                                                                 },
+                                                                 }
                                                                ]
                                                              ) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
                                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutWhatsAppBusinessAccountEventDestinationsResponseSuccess
@@ -382,7 +382,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

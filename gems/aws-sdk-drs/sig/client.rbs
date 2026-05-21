@@ -162,7 +162,7 @@ module Aws
                                                            interval: ::Integer,
                                                            retention_duration: ::Integer,
                                                            enabled: bool?
-                                                         },
+                                                         }
                                                        ],
                                                        ?tags: Hash[::String, ::String],
                                                        ?auto_replicate_new_disks: bool,
@@ -614,7 +614,7 @@ module Aws
                               {
                                 source_server_id: ::String,
                                 recovery_snapshot_id: ::String?
-                              },
+                              }
                             ],
                             ?is_drill: bool,
                             ?tags: Hash[::String, ::String]
@@ -641,7 +641,7 @@ module Aws
                                              {
                                                source_network_id: ::String,
                                                cfn_stack_name: ::String?
-                                             },
+                                             }
                                            ],
                                            ?deploy_as_new: bool,
                                            ?tags: Hash[::String, ::String]
@@ -808,7 +808,7 @@ module Aws
                                                   iops: ::Integer?,
                                                   throughput: ::Integer?,
                                                   optimized_staging_disk_type: ("AUTO" | "GP2" | "GP3" | "IO1" | "SC1" | "ST1" | "STANDARD")?
-                                                },
+                                                }
                                               ],
                                               ?ebs_encryption: ("DEFAULT" | "CUSTOM" | "NONE"),
                                               ?ebs_encryption_key_arn: ::String,
@@ -823,7 +823,7 @@ module Aws
                                                   interval: ::Integer,
                                                   retention_duration: ::Integer,
                                                   enabled: bool?
-                                                },
+                                                }
                                               ],
                                               ?auto_replicate_new_disks: bool,
                                               ?internet_protocol: ("IPV4" | "IPV6")
@@ -874,7 +874,7 @@ module Aws
                                                            interval: ::Integer,
                                                            retention_duration: ::Integer,
                                                            enabled: bool?
-                                                         },
+                                                         }
                                                        ],
                                                        ?auto_replicate_new_disks: bool,
                                                        ?internet_protocol: ("IPV4" | "IPV6")

@@ -1851,7 +1851,7 @@ module Aws::ApplicationDiscoveryService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-applicationdiscoveryservice'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

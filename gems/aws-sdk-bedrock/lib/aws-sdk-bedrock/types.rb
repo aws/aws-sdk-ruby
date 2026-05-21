@@ -122,6 +122,68 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Input data configuration for the advanced prompt optimization job.
+    #
+    # @!attribute [rw] s3_uri
+    #   S3 URI of the input JSONL file.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AdvancedPromptOptimizationInputConfig AWS API Documentation
+    #
+    class AdvancedPromptOptimizationInputConfig < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary of an advanced prompt optimization job.
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   Name of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Status of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Creation time of the advanced prompt optimization job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time of the advanced prompt optimization job.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AdvancedPromptOptimizationJobSummary AWS API Documentation
+    #
+    class AdvancedPromptOptimizationJobSummary < Struct.new(
+      :job_arn,
+      :job_name,
+      :job_status,
+      :creation_time,
+      :last_modified_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Output data configuration for the advanced prompt optimization job.
+    #
+    # @!attribute [rw] s3_uri
+    #   S3 URI prefix for the output location.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/AdvancedPromptOptimizationOutputConfig AWS API Documentation
+    #
+    class AdvancedPromptOptimizationOutputConfig < Struct.new(
+      :s3_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about the agreement availability
     #
     # @!attribute [rw] status
@@ -2634,6 +2696,82 @@ module Aws::Bedrock
       class Unknown < AutomatedReasoningPolicyWorkflowTypeContent; end
     end
 
+    # Batch deletion error for an advanced prompt optimization job.
+    #
+    # @!attribute [rw] job_identifier
+    #   Identifier of the job that failed to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Error code for the deletion failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Error message describing the deletion failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteAdvancedPromptOptimizationJobError AWS API Documentation
+    #
+    class BatchDeleteAdvancedPromptOptimizationJobError < Struct.new(
+      :job_identifier,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Successfully deleted advanced prompt optimization job.
+    #
+    # @!attribute [rw] job_identifier
+    #   Identifier of the deleted job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Status of the deleted job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteAdvancedPromptOptimizationJobItem AWS API Documentation
+    #
+    class BatchDeleteAdvancedPromptOptimizationJobItem < Struct.new(
+      :job_identifier,
+      :job_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch Delete Advanced Prompt Optimization Jobs Request
+    #
+    # @!attribute [rw] job_identifiers
+    #   List of advanced prompt optimization job identifiers to delete.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteAdvancedPromptOptimizationJobRequest AWS API Documentation
+    #
+    class BatchDeleteAdvancedPromptOptimizationJobRequest < Struct.new(
+      :job_identifiers)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Batch Delete Advanced Prompt Optimization Jobs Response
+    #
+    # @!attribute [rw] errors
+    #   List of errors encountered during batch deletion.
+    #   @return [Array<Types::BatchDeleteAdvancedPromptOptimizationJobError>]
+    #
+    # @!attribute [rw] advanced_prompt_optimization_jobs
+    #   List of successfully deleted advanced prompt optimization jobs.
+    #   @return [Array<Types::BatchDeleteAdvancedPromptOptimizationJobItem>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteAdvancedPromptOptimizationJobResponse AWS API Documentation
+    #
+    class BatchDeleteAdvancedPromptOptimizationJobResponse < Struct.new(
+      :errors,
+      :advanced_prompt_optimization_jobs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A JSON array that provides the status of the evaluation jobs being
     # deleted.
     #
@@ -2809,6 +2947,72 @@ module Aws::Bedrock
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Create Advanced Prompt Optimization Job Request
+    #
+    # @!attribute [rw] job_name
+    #   Name of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_description
+    #   Description of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Input data configuration for the advanced prompt optimization job.
+    #   @return [Types::AdvancedPromptOptimizationInputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   Output data configuration for the advanced prompt optimization job.
+    #   @return [Types::AdvancedPromptOptimizationOutputConfig]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   KMS key ARN for encrypting output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags to associate with the job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] model_configurations
+    #   Model configurations for advanced prompt optimization.
+    #   @return [Array<Types::ModelConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateAdvancedPromptOptimizationJobRequest AWS API Documentation
+    #
+    class CreateAdvancedPromptOptimizationJobRequest < Struct.new(
+      :job_name,
+      :job_description,
+      :client_token,
+      :input_config,
+      :output_config,
+      :encryption_key_arn,
+      :tags,
+      :model_configurations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Create Advanced Prompt Optimization Job Response
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the created advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateAdvancedPromptOptimizationJobResponse AWS API Documentation
+    #
+    class CreateAdvancedPromptOptimizationJobResponse < Struct.new(
+      :job_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5735,6 +5939,84 @@ module Aws::Bedrock
       :guardrail_configuration,
       :kb_inference_config,
       :additional_model_request_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get Advanced Prompt Optimization Job Request
+    #
+    # @!attribute [rw] job_identifier
+    #   ARN or ID of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAdvancedPromptOptimizationJobRequest AWS API Documentation
+    #
+    class GetAdvancedPromptOptimizationJobRequest < Struct.new(
+      :job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Get Advanced Prompt Optimization Job Response
+    #
+    # @!attribute [rw] job_arn
+    #   ARN of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   Name of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_description
+    #   Description of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_status
+    #   Status of the advanced prompt optimization job.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_config
+    #   Input data configuration for the advanced prompt optimization job.
+    #   @return [Types::AdvancedPromptOptimizationInputConfig]
+    #
+    # @!attribute [rw] output_config
+    #   Output data configuration for the advanced prompt optimization job.
+    #   @return [Types::AdvancedPromptOptimizationOutputConfig]
+    #
+    # @!attribute [rw] encryption_key_arn
+    #   KMS key ARN used for encrypting output data.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_time
+    #   Creation time of the advanced prompt optimization job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_time
+    #   Last modified time of the advanced prompt optimization job.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_message
+    #   Failure message if the advanced prompt optimization job failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] model_configurations
+    #   Model configurations for advanced prompt optimization.
+    #   @return [Array<Types::ModelConfiguration>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAdvancedPromptOptimizationJobResponse AWS API Documentation
+    #
+    class GetAdvancedPromptOptimizationJobResponse < Struct.new(
+      :job_arn,
+      :job_name,
+      :job_description,
+      :job_status,
+      :input_config,
+      :output_config,
+      :encryption_key_arn,
+      :creation_time,
+      :last_modified_time,
+      :failure_message,
+      :model_configurations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9336,6 +9618,35 @@ module Aws::Bedrock
       include Aws::Structure
     end
 
+    # Inference configuration for a model.
+    #
+    # @!attribute [rw] max_tokens
+    #   The maximum number of tokens to generate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] temperature
+    #   The temperature for sampling.
+    #   @return [Float]
+    #
+    # @!attribute [rw] top_p
+    #   The top-p value for nucleus sampling.
+    #   @return [Float]
+    #
+    # @!attribute [rw] stop_sequences
+    #   Stop sequences that end generation.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/InferenceConfiguration AWS API Documentation
+    #
+    class InferenceConfiguration < Struct.new(
+      :max_tokens,
+      :temperature,
+      :top_p,
+      :stop_sequences)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about a model.
     #
     # @!attribute [rw] model_arn
@@ -9678,6 +9989,54 @@ module Aws::Bedrock
     #
     class LegalTerm < Struct.new(
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List Advanced Prompt Optimization Jobs Request
+    #
+    # @!attribute [rw] max_results
+    #   Maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_by
+    #   Field to sort by in the returned list of jobs.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   Sort order for the results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListAdvancedPromptOptimizationJobsRequest AWS API Documentation
+    #
+    class ListAdvancedPromptOptimizationJobsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # List Advanced Prompt Optimization Jobs Response
+    #
+    # @!attribute [rw] job_summaries
+    #   List of advanced prompt optimization job summaries.
+    #   @return [Array<Types::AdvancedPromptOptimizationJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   Pagination token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListAdvancedPromptOptimizationJobsResponse AWS API Documentation
+    #
+    class ListAdvancedPromptOptimizationJobsResponse < Struct.new(
+      :job_summaries,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11158,6 +11517,30 @@ module Aws::Bedrock
     class MetadataConfigurationForReranking < Struct.new(
       :selection_mode,
       :selective_mode_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for a model used in advanced prompt optimization.
+    #
+    # @!attribute [rw] model_id
+    #   The model ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] inference_config
+    #   Inference configuration for the model.
+    #   @return [Types::InferenceConfiguration]
+    #
+    # @!attribute [rw] additional_model_request_fields
+    #   Additional model request fields.
+    #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ModelConfiguration AWS API Documentation
+    #
+    class ModelConfiguration < Struct.new(
+      :model_id,
+      :inference_config,
+      :additional_model_request_fields)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12906,6 +13289,26 @@ module Aws::Bedrock
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Stop Advanced Prompt Optimization Job Request
+    #
+    # @!attribute [rw] job_identifier
+    #   ARN or ID of the advanced prompt optimization job to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopAdvancedPromptOptimizationJobRequest AWS API Documentation
+    #
+    class StopAdvancedPromptOptimizationJobRequest < Struct.new(
+      :job_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Stop Advanced Prompt Optimization Job Response
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopAdvancedPromptOptimizationJobResponse AWS API Documentation
+    #
+    class StopAdvancedPromptOptimizationJobResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] job_identifier
     #   The Amazon Resource Name (ARN) of the evaluation job you want to

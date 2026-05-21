@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockAgentCore
+    module Params
+      type variant_configuration = {
+      configuration_bundle: {
+        bundle_arn: ::String,
+        bundle_version: ::String
+      }?,
+      target: {
+        name: ::String
+      }?
+    }
+
+      type variant = {
+      name: ::String,
+      weight: ::Integer,
+      variant_configuration: Params::variant_configuration
+    }
+
+      type memory_record_right_expression = {
+      metadata_value: {
+        string_value: ::String?,
+        string_list_value: Array[::String]?,
+        number_value: ::Float?,
+        date_time_value: ::Time?
+      }?
+    }
+
+      type memory_metadata_filter_expression = {
+      left: {
+        metadata_key: ::String?
+      },
+      operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS"),
+      right: Params::memory_record_right_expression?
+    }
+
+      type cloud_watch_logs_rule = {
+      filters: Array[
+        Params::cloud_watch_logs_filter
+      ]?
+    }
+
+      type cloud_watch_logs_trace_config = {
+      log_group_arns: Array[::String],
+      service_names: Array[::String],
+      start_time: ::Time,
+      end_time: ::Time,
+      rule: Params::cloud_watch_logs_rule?
+    }
+
+      type agent_traces_config = {
+      session_spans: Array[
+        {
+        }
+      ]?,
+      cloudwatch_logs: Params::cloud_watch_logs_trace_config?
+    }
+
+      type cloud_watch_logs_filter = {
+      key: ::String,
+      operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
+      value: {
+        string_value: ::String?,
+        double_value: ::Float?,
+        boolean_value: bool?
+      }
+    }
+
+    end
+  end
+end

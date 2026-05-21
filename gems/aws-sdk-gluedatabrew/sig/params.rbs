@@ -1,0 +1,218 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GlueDataBrew
+    module Params
+      type format_options = {
+      json: {
+        multi_line: bool?
+      }?,
+      excel: {
+        sheet_names: Array[::String]?,
+        sheet_indexes: Array[::Integer]?,
+        header_row: bool?
+      }?,
+      csv: {
+        delimiter: ::String?,
+        header_row: bool?
+      }?
+    }
+
+      type data_catalog_input_definition = {
+      catalog_id: ::String?,
+      database_name: ::String,
+      table_name: ::String,
+      temp_directory: {
+        bucket: ::String,
+        key: ::String?,
+        bucket_owner: ::String?
+      }?
+    }
+
+      type database_input_definition = {
+      glue_connection_name: ::String,
+      database_table_name: ::String?,
+      temp_directory: {
+        bucket: ::String,
+        key: ::String?,
+        bucket_owner: ::String?
+      }?,
+      query_string: ::String?
+    }
+
+      type input = {
+      s3_input_definition: {
+        bucket: ::String,
+        key: ::String?,
+        bucket_owner: ::String?
+      }?,
+      data_catalog_input_definition: Params::data_catalog_input_definition?,
+      database_input_definition: Params::database_input_definition?,
+      metadata: {
+        source_arn: ::String?
+      }?
+    }
+
+      type path_options = {
+      last_modified_date_condition: {
+        expression: ::String,
+        values_map: Hash[::String, ::String]
+      }?,
+      files_limit: {
+        max_files: ::Integer,
+        ordered_by: ("LAST_MODIFIED_DATE")?,
+        order: ("DESCENDING" | "ASCENDING")?
+      }?,
+      parameters: Hash[::String, Params::dataset_parameter]?
+    }
+
+      type dataset_parameter = {
+      name: ::String,
+      type: ("Datetime" | "Number" | "String"),
+      datetime_options: {
+        format: ::String,
+        timezone_offset: ::String?,
+        locale_code: ::String?
+      }?,
+      create_column: bool?,
+      filter: {
+        expression: ::String,
+        values_map: Hash[::String, ::String]
+      }?
+    }
+
+      type profile_configuration = {
+      dataset_statistics_configuration: {
+        included_statistics: Array[::String]?,
+        overrides: Array[
+          {
+            statistic: ::String,
+            parameters: Hash[::String, ::String]
+          }
+        ]?
+      }?,
+      profile_columns: Array[
+        {
+          regex: ::String?,
+          name: ::String?
+        }
+      ]?,
+      column_statistics_configurations: Array[
+        Params::column_statistics_configuration
+      ]?,
+      entity_detector_configuration: {
+        entity_types: Array[::String],
+        allowed_statistics: Array[
+          {
+            statistics: Array[::String]
+          }
+        ]?
+      }?
+    }
+
+      type column_statistics_configuration = {
+      selectors: Array[
+        {
+          regex: ::String?,
+          name: ::String?
+        }
+      ]?,
+      statistics: {
+        included_statistics: Array[::String]?,
+        overrides: Array[
+          {
+            statistic: ::String,
+            parameters: Hash[::String, ::String]
+          }
+        ]?
+      }
+    }
+
+      type recipe_step = {
+      action: {
+        operation: ::String,
+        parameters: Hash[::String, ::String]?
+      },
+      condition_expressions: Array[
+        {
+          condition: ::String,
+          value: ::String?,
+          target_column: ::String
+        }
+      ]?
+    }
+
+      type output = {
+      compression_format: ("GZIP" | "LZ4" | "SNAPPY" | "BZIP2" | "DEFLATE" | "LZO" | "BROTLI" | "ZSTD" | "ZLIB")?,
+      format: ("CSV" | "JSON" | "PARQUET" | "GLUEPARQUET" | "AVRO" | "ORC" | "XML" | "TABLEAUHYPER")?,
+      partition_columns: Array[::String]?,
+      location: {
+        bucket: ::String,
+        key: ::String?,
+        bucket_owner: ::String?
+      },
+      overwrite: bool?,
+      format_options: {
+        csv: {
+          delimiter: ::String?
+        }?
+      }?,
+      max_output_files: ::Integer?
+    }
+
+      type database_table_output_options = {
+      temp_directory: {
+        bucket: ::String,
+        key: ::String?,
+        bucket_owner: ::String?
+      }?,
+      table_name: ::String
+    }
+
+      type data_catalog_output = {
+      catalog_id: ::String?,
+      database_name: ::String,
+      table_name: ::String,
+      s3_options: {
+        location: {
+          bucket: ::String,
+          key: ::String?,
+          bucket_owner: ::String?
+        }
+      }?,
+      database_options: Params::database_table_output_options?,
+      overwrite: bool?
+    }
+
+      type database_output = {
+      glue_connection_name: ::String,
+      database_options: Params::database_table_output_options,
+      database_output_mode: ("NEW_TABLE")?
+    }
+
+      type rule = {
+      name: ::String,
+      disabled: bool?,
+      check_expression: ::String,
+      substitution_map: Hash[::String, ::String]?,
+      threshold: {
+        value: ::Float,
+        type: ("GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN" | "LESS_THAN")?,
+        unit: ("COUNT" | "PERCENTAGE")?
+      }?,
+      column_selectors: Array[
+        {
+          regex: ::String?,
+          name: ::String?
+        }
+      ]?
+    }
+
+    end
+  end
+end

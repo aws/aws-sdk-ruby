@@ -60,6 +60,7 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse = Shapes::StructureShape.new(name: 'CreateOriginEndpointResponse')
     CustomAdType = Shapes::StringShape.new(name: 'CustomAdType')
     CustomAdTypeList = Shapes::ListShape.new(name: 'CustomAdTypeList')
+    DashAvailabilityStartTimeConfiguration = Shapes::UnionShape.new(name: 'DashAvailabilityStartTimeConfiguration')
     DashBaseUrl = Shapes::StructureShape.new(name: 'DashBaseUrl')
     DashBaseUrlDvbPriorityInteger = Shapes::IntegerShape.new(name: 'DashBaseUrlDvbPriorityInteger')
     DashBaseUrlDvbWeightInteger = Shapes::IntegerShape.new(name: 'DashBaseUrlDvbWeightInteger')
@@ -224,6 +225,7 @@ module Aws::MediaPackageV2
     SpekeKeyProviderUrlString = Shapes::StringShape.new(name: 'SpekeKeyProviderUrlString')
     StartTag = Shapes::StructureShape.new(name: 'StartTag')
     String = Shapes::StringShape.new(name: 'String')
+    SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TagArn = Shapes::StringShape.new(name: 'TagArn')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
@@ -346,6 +348,7 @@ module Aws::MediaPackageV2
     CreateDashManifestConfiguration.add_member(:compactness, Shapes::ShapeRef.new(shape: DashCompactness, location_name: "Compactness"))
     CreateDashManifestConfiguration.add_member(:subtitle_configuration, Shapes::ShapeRef.new(shape: DashSubtitleConfiguration, location_name: "SubtitleConfiguration"))
     CreateDashManifestConfiguration.add_member(:uri_path_type, Shapes::ShapeRef.new(shape: UriPathType, location_name: "UriPathType"))
+    CreateDashManifestConfiguration.add_member(:availability_start_time_configuration, Shapes::ShapeRef.new(shape: DashAvailabilityStartTimeConfiguration, location_name: "AvailabilityStartTimeConfiguration"))
     CreateDashManifestConfiguration.struct_class = Types::CreateDashManifestConfiguration
 
     CreateDashManifests.member = Shapes::ShapeRef.new(shape: CreateDashManifestConfiguration)
@@ -451,6 +454,12 @@ module Aws::MediaPackageV2
     CreateOriginEndpointResponse.struct_class = Types::CreateOriginEndpointResponse
 
     CustomAdTypeList.member = Shapes::ShapeRef.new(shape: CustomAdType)
+
+    DashAvailabilityStartTimeConfiguration.add_member(:fixed_availability_start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "FixedAvailabilityStartTime"))
+    DashAvailabilityStartTimeConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DashAvailabilityStartTimeConfiguration.add_member_subclass(:fixed_availability_start_time, Types::DashAvailabilityStartTimeConfiguration::FixedAvailabilityStartTime)
+    DashAvailabilityStartTimeConfiguration.add_member_subclass(:unknown, Types::DashAvailabilityStartTimeConfiguration::Unknown)
+    DashAvailabilityStartTimeConfiguration.struct_class = Types::DashAvailabilityStartTimeConfiguration
 
     DashBaseUrl.add_member(:url, Shapes::ShapeRef.new(shape: DashBaseUrlUrlString, required: true, location_name: "Url"))
     DashBaseUrl.add_member(:service_location, Shapes::ShapeRef.new(shape: DashBaseUrlServiceLocationString, location_name: "ServiceLocation"))
@@ -619,6 +628,7 @@ module Aws::MediaPackageV2
     GetDashManifestConfiguration.add_member(:compactness, Shapes::ShapeRef.new(shape: DashCompactness, location_name: "Compactness"))
     GetDashManifestConfiguration.add_member(:subtitle_configuration, Shapes::ShapeRef.new(shape: DashSubtitleConfiguration, location_name: "SubtitleConfiguration"))
     GetDashManifestConfiguration.add_member(:uri_path_type, Shapes::ShapeRef.new(shape: UriPathType, location_name: "UriPathType"))
+    GetDashManifestConfiguration.add_member(:availability_start_time_configuration, Shapes::ShapeRef.new(shape: DashAvailabilityStartTimeConfiguration, location_name: "AvailabilityStartTimeConfiguration"))
     GetDashManifestConfiguration.struct_class = Types::GetDashManifestConfiguration
 
     GetDashManifests.member = Shapes::ShapeRef.new(shape: GetDashManifestConfiguration)

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.52.0 (2026-05-20)
+------------------
+
+* Feature - GenerateAuthRequestCryptogram API launch.
+
+1.51.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.50.0 (2026-05-13)
 ------------------
 

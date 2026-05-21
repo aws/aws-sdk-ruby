@@ -233,14 +233,14 @@ module Aws::BedrockAgentCore
       class Unknown < AgentTracesConfig; end
     end
 
-    # Money amount with currency
+    # Represents a monetary amount with a currency.
     #
     # @!attribute [rw] value
     #   The numeric value of the amount.
     #   @return [String]
     #
     # @!attribute [rw] currency
-    #   The currency code for this amount.
+    #   The currency code for the amount.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/Amount AWS API Documentation
@@ -293,10 +293,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Available session limits. Currently only budget is supported.
+    # The available spending limits for a payment session.
     #
     # @!attribute [rw] available_spend_amount
-    #   The available spend amount for this session.
+    #   The remaining available amount that can be spent.
     #   @return [Types::Amount]
     #
     # @!attribute [rw] updated_at
@@ -421,7 +421,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Summary representation for list responses
+    # Summary representation for list responses.
     #
     # @!attribute [rw] batch_evaluation_id
     #   The unique identifier of the batch evaluation.
@@ -977,7 +977,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # CloudWatch Logs destination for batch evaluation results
+    # CloudWatch Logs destination for batch evaluation results.
     #
     # @!attribute [rw] log_group_name
     #   The name of the CloudWatch log group where evaluation results will
@@ -1084,14 +1084,15 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Coinbase CDP token request parameters
+    # Coinbase CDP token request parameters.
     #
     # @!attribute [rw] request_method
     #   The HTTP method for the payment API request.
     #   @return [String]
     #
     # @!attribute [rw] request_host
-    #   Optional - defaults to "api.cdp.coinbase.com"
+    #   The host for the payment API request. Defaults to
+    #   "api.cdp.coinbase.com".
     #   @return [String]
     #
     # @!attribute [rw] request_path
@@ -1100,11 +1101,11 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] include_wallet_auth_token
     #   Set to true for wallet write operations (requires walletSecret
-    #   configured)
+    #   configured).
     #   @return [Boolean]
     #
     # @!attribute [rw] request_body
-    #   Request body JSON - used to generate wallet auth JWT
+    #   Request body JSON — used to generate wallet auth JWT.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CoinbaseCdpTokenRequestInput AWS API Documentation
@@ -1119,14 +1120,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Coinbase CDP token response
+    # Coinbase CDP token response.
     #
     # @!attribute [rw] bearer_token
-    #   Bearer Token for Authorization header
+    #   Bearer Token for Authorization header.
     #   @return [String]
     #
     # @!attribute [rw] wallet_auth_token
-    #   Wallet Auth Token for X-Wallet-Auth header
+    #   Wallet Auth Token for X-Wallet-Auth header.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CoinbaseCdpTokenResponseOutput AWS API Documentation
@@ -1619,7 +1620,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for creating a payment instrument
+    # Request structure for creating a payment instrument.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment instrument.
@@ -1646,7 +1647,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::PaymentInstrumentDetails]
     #
     # @!attribute [rw] client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1666,10 +1668,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for creating a payment instrument
+    # Response structure for creating a payment instrument.
     #
     # @!attribute [rw] payment_instrument
-    #   Represents a payment instrument
+    #   The created payment instrument.
     #   @return [Types::PaymentInstrument]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentInstrumentResponse AWS API Documentation
@@ -1680,7 +1682,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for creating a payment session
+    # Request structure for creating a payment session.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment session.
@@ -1704,7 +1706,8 @@ module Aws::BedrockAgentCore
     #   @return [Integer]
     #
     # @!attribute [rw] client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -1723,10 +1726,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for creating a payment session
+    # Response structure for creating a payment session.
     #
     # @!attribute [rw] payment_session
-    #   Payment manager session
+    #   The created payment session.
     #   @return [Types::PaymentSession]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CreatePaymentSessionResponse AWS API Documentation
@@ -1737,14 +1740,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # X402 payment requirement input
+    # The input for a crypto X402 payment.
     #
     # @!attribute [rw] version
-    #   The X402 protocol version (e.g., "v1", "v2")
+    #   The version of the X402 protocol.
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   This can hold any JSON-like object
+    #   The X402 payment payload.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CryptoX402PaymentInput AWS API Documentation
@@ -1756,14 +1759,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # X402 payment requirement output
+    # The output from a crypto X402 payment.
     #
     # @!attribute [rw] version
-    #   The X402 protocol version (e.g., "1", "2")
+    #   The version of the X402 protocol.
     #   @return [String]
     #
     # @!attribute [rw] payload
-    #   This can hold any JSON-like object
+    #   The X402 payment response payload.
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/CryptoX402PaymentOutput AWS API Documentation
@@ -1789,7 +1792,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Where to pull session spans from
+    # Configuration for the data source used in evaluation.
     #
     # @note DataSourceConfig is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1950,10 +1953,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for deleting a payment instrument
-    #
-    # All fields are required and must match the instrument owner's
-    # identifiers for authorization to succeed.
+    # Request structure for deleting a payment instrument.
     #
     # @!attribute [rw] user_id
     #   The user ID making the delete request. Must match the instrument's
@@ -1985,10 +1985,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for deleting a payment instrument
-    #
-    # Returns the deletion status with HTTP 200 OK status code on successful
-    # soft deletion.
+    # Response structure for deleting a payment instrument.
     #
     # @!attribute [rw] status
     #   The status of the instrument after deletion. Always DELETED for
@@ -2003,10 +2000,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for deleting a payment session
-    #
-    # All fields are required and must match the session owner's
-    # identifiers for authorization to succeed.
+    # Request structure for deleting a payment session.
     #
     # @!attribute [rw] user_id
     #   The user ID making the delete request. Must match the session's
@@ -2032,10 +2026,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for deleting a payment session
-    #
-    # Returns the deletion status with HTTP 200 status code on successful
-    # deletion.
+    # Response structure for deleting a payment session.
     #
     # @!attribute [rw] status
     #   The status of the deletion. Always DELETED for successful hard
@@ -2127,17 +2118,16 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Embedded Crypto wallet instrument details
+    # Embedded crypto wallet instrument details.
     #
     # @!attribute [rw] network
     #   The blockchain network for this embedded crypto wallet. Supported
-    #   networks: ETHEREUM, SOLANA
+    #   networks: ETHEREUM, SOLANA.
     #   @return [String]
     #
     # @!attribute [rw] linked_accounts
-    #   List of linkedAccounts linked to this wallet. Each linkedAccount
-    #   represents a way the end user can authenticate to this wallet. Can
-    #   be empty when adding a new linkedAccount to an existing wallet.
+    #   List of linked accounts linked to this wallet. Each represents a way
+    #   the end user can authenticate to this wallet.
     #   @return [Array<Types::LinkedAccount>]
     #
     # @!attribute [rw] wallet_address
@@ -2145,9 +2135,8 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] redirect_url
-    #   URL for the end user to complete a provider-specific action (e.g.,
-    #   wallet linking, onboarding). Returned by the payment connector
-    #   during instrument creation.
+    #   URL for the end user to complete a provider-specific action such as
+    #   wallet linking or onboarding.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/EmbeddedCryptoWallet AWS API Documentation
@@ -2515,7 +2504,7 @@ module Aws::BedrockAgentCore
       class Unknown < EvaluationTarget; end
     end
 
-    # An evaluator to run against sessions
+    # An evaluator to run against sessions.
     #
     # @!attribute [rw] evaluator_id
     #   The unique identifier of the evaluator. Can reference built-in
@@ -3388,7 +3377,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for getting payment instrument balance
+    # Request structure for getting payment instrument balance.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment instrument.
@@ -3412,13 +3401,12 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] chain
     #   The specific blockchain chain to query balance on. Required because
-    #   balances are chain-specific — the same wallet address may hold
-    #   different token balances on different chains.
+    #   balances are chain-specific.
     #   @return [String]
     #
     # @!attribute [rw] token
-    #   The token to query balance for. Required to specify which supported
-    #   token's balance to return.
+    #   The token to query balance for. Only tokens supported for X402
+    #   payments are returned.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentBalanceRequest AWS API Documentation
@@ -3435,7 +3423,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for getting payment instrument balance
+    # Response structure for getting payment instrument balance.
     #
     # @!attribute [rw] payment_instrument_id
     #   The ID of the payment instrument.
@@ -3454,7 +3442,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for getting a payment instrument
+    # Request structure for getting a payment instrument.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment instrument.
@@ -3488,10 +3476,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for getting a payment instrument
+    # Response structure for getting a payment instrument.
     #
     # @!attribute [rw] payment_instrument
-    #   Represents a payment instrument
+    #   The payment instrument details.
     #   @return [Types::PaymentInstrument]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentInstrumentResponse AWS API Documentation
@@ -3502,7 +3490,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for getting a payment session
+    # Request structure for getting a payment session.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment session.
@@ -3531,10 +3519,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for getting a payment session
+    # Response structure for getting a payment session.
     #
     # @!attribute [rw] payment_session
-    #   Payment manager session
+    #   The payment session details.
     #   @return [Types::PaymentSession]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetPaymentSessionResponse AWS API Documentation
@@ -3758,17 +3746,16 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] workload_identity_token
-    #   Workload access token for authorization. Named workloadIdentityToken
-    #   for consistency with APIKey and OAuth2CredentialProvider.
+    #   Workload access token for authorization.
     #   @return [String]
     #
     # @!attribute [rw] resource_credential_provider_name
-    #   Name of the payment credential provider to use
+    #   Name of the payment credential provider to use.
     #   @return [String]
     #
     # @!attribute [rw] payment_token_request
-    #   Vendor-specific token request input Contains all request parameters
-    #   in a type-safe, vendor-specific structure
+    #   Vendor-specific token request input. Contains all request parameters
+    #   in a type-safe, vendor-specific structure.
     #   @return [Types::PaymentTokenRequestInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourcePaymentTokenRequest AWS API Documentation
@@ -3782,8 +3769,8 @@ module Aws::BedrockAgentCore
     end
 
     # @!attribute [rw] payment_token_response
-    #   Vendor-specific token response output Contains all response data in
-    #   a type-safe, vendor-specific structure
+    #   Vendor-specific token response output. Contains all response data in
+    #   a type-safe, vendor-specific structure.
     #   @return [Types::PaymentTokenResponseOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/GetResourcePaymentTokenResponse AWS API Documentation
@@ -3879,7 +3866,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Where to pull ground truth from
+    # Where to pull ground truth from.
     #
     # @note GroundTruthSource is a union - when making an API calls you must set exactly one of the members.
     #
@@ -4851,7 +4838,8 @@ module Aws::BedrockAgentCore
     # and per-turn expected responses.
     #
     # @!attribute [rw] assertions
-    #   assertions for evaluation, reuses common model EvaluationContentList
+    #   Assertions for evaluation, reuses common model
+    #   EvaluationContentList.
     #   @return [Array<Types::EvaluationContent>]
     #
     # @!attribute [rw] expected_trajectory
@@ -5579,28 +5567,27 @@ module Aws::BedrockAgentCore
       class Unknown < LeftExpression; end
     end
 
-    # Represents different linkedAccounts that can be linked to an embedded
-    # wallet. This union supports multiple linkedAccount approaches: email,
-    # SMS, JWT, and OAuth2.
+    # Represents different linked accounts that can be linked to an embedded
+    # wallet. Supports email, SMS, JWT, and OAuth2 approaches.
     #
     # @note LinkedAccount is a union - when making an API calls you must set exactly one of the members.
     #
     # @note LinkedAccount is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LinkedAccount corresponding to the set member.
     #
     # @!attribute [rw] email
-    #   Email-based linkedAccount
+    #   Email-based linked account.
     #   @return [Types::LinkedAccountEmail]
     #
     # @!attribute [rw] sms
-    #   SMS-based linkedAccount using phone number
+    #   SMS-based linked account using phone number.
     #   @return [Types::LinkedAccountSms]
     #
     # @!attribute [rw] developer_jwt
-    #   Developer JWT linkedAccount with key ID and subject
+    #   Developer JWT linked account with key ID and subject.
     #   @return [Types::LinkedAccountDeveloperJwt]
     #
     # @!attribute [rw] o_auth_2
-    #   OAuth2 provider linkedAccount (Google, Apple, X, Telegram, GitHub)
+    #   OAuth2 provider linked account (Google, Apple, X, Telegram, GitHub).
     #   @return [Types::LinkedAccountOAuth2]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccount AWS API Documentation
@@ -5643,10 +5630,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # LinkedAccount using an email address.
+    # Linked account using an email address.
     #
     # @!attribute [rw] email_address
-    #   The email address used for linkedAccount. Must be a valid email
+    #   The email address used for the linked account. Must be a valid email
     #   format.
     #   @return [String]
     #
@@ -5666,23 +5653,23 @@ module Aws::BedrockAgentCore
     # @note LinkedAccountOAuth2 is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of LinkedAccountOAuth2 corresponding to the set member.
     #
     # @!attribute [rw] google
-    #   Google OAuth2 authentication
+    #   Google OAuth2 authentication.
     #   @return [Types::OAuth2Authentication]
     #
     # @!attribute [rw] apple
-    #   Apple OAuth2 authentication
+    #   Apple OAuth2 authentication.
     #   @return [Types::OAuth2Authentication]
     #
     # @!attribute [rw] x
-    #   X (formerly Twitter) OAuth2 authentication
+    #   X (formerly Twitter) OAuth2 authentication.
     #   @return [Types::OAuth2Authentication]
     #
     # @!attribute [rw] telegram
-    #   Telegram OAuth2 authentication
+    #   Telegram OAuth2 authentication.
     #   @return [Types::OAuth2Authentication]
     #
     # @!attribute [rw] github
-    #   GitHub OAuth2 authentication
+    #   GitHub OAuth2 authentication.
     #   @return [Types::OAuth2Authentication]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountOAuth2 AWS API Documentation
@@ -5706,12 +5693,10 @@ module Aws::BedrockAgentCore
       class Unknown < LinkedAccountOAuth2; end
     end
 
-    # LinkedAccount using a phone number in E.164 format.
+    # Linked account using a phone number in E.164 format.
     #
     # @!attribute [rw] phone_number
-    #   The phone number in E.164 format (e.g., +1234567890). Must be a
-    #   valid E.164 formatted phone number starting with + and containing
-    #   1-15 digits.
+    #   The phone number in E.164 format (e.g., +1234567890).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/LinkedAccountSms AWS API Documentation
@@ -6084,12 +6069,14 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] namespace
     #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix.
+    #   records in namespaces that start with the provided prefix. Either
+    #   `namespace` or `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
     #   records where namespace falls under the same parent hierarchy.
+    #   Either `namespace` or `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] memory_strategy_id
@@ -6147,7 +6134,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for listing payment instruments
+    # Request structure for listing payment instruments.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with the payment instruments.
@@ -6186,7 +6173,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for listing payment instruments
+    # Response structure for listing payment instruments.
     #
     # @!attribute [rw] payment_instruments
     #   List of payment instrument summaries matching the request criteria.
@@ -6205,7 +6192,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for listing payment sessions
+    # Request structure for listing payment sessions.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with the payment sessions.
@@ -6239,7 +6226,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for listing payment sessions
+    # Response structure for listing payment sessions.
     #
     # @!attribute [rw] payment_sessions
     #   List of payment session summaries matching the request criteria.
@@ -6987,8 +6974,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # OAuth2 authentication information for third-party providers. Supports
-    # Google, Apple, X, Telegram, and GitHub providers.
+    # OAuth2 authentication information for third-party providers.
     #
     # @!attribute [rw] sub
     #   The subject (sub) claim from the OAuth2 provider. Uniquely
@@ -6996,15 +6982,15 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] email_address
-    #   The email address from the OAuth2 provider (optional).
+    #   The email address from the OAuth2 provider.
     #   @return [String]
     #
     # @!attribute [rw] name
-    #   The user's name from the OAuth2 provider (optional).
+    #   The user's name from the OAuth2 provider.
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The username from the OAuth2 provider (optional).
+    #   The username from the OAuth2 provider.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/OAuth2Authentication AWS API Documentation
@@ -7054,7 +7040,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Output destination configuration
+    # Output destination configuration.
     #
     # @note OutputConfig is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of OutputConfig corresponding to the set member.
     #
@@ -7104,12 +7090,12 @@ module Aws::BedrockAgentCore
       class Unknown < PayloadType; end
     end
 
-    # Payment request details union
+    # The payment input details, which vary by payment type.
     #
     # @note PaymentInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] crypto_x402
-    #   X402 payment requirement input
+    #   Input for a crypto X402 payment.
     #   @return [Types::CryptoX402PaymentInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInput AWS API Documentation
@@ -7125,7 +7111,7 @@ module Aws::BedrockAgentCore
       class Unknown < PaymentInput; end
     end
 
-    # Represents a payment instrument
+    # Represents a payment instrument.
     #
     # @!attribute [rw] payment_instrument_id
     #   The unique identifier for this payment instrument.
@@ -7179,14 +7165,14 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Details specific to the instrument type
+    # Details specific to the instrument type.
     #
     # @note PaymentInstrumentDetails is a union - when making an API calls you must set exactly one of the members.
     #
     # @note PaymentInstrumentDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentInstrumentDetails corresponding to the set member.
     #
     # @!attribute [rw] embedded_crypto_wallet
-    #   Embedded crypto wallet managed directly by end user
+    #   Embedded crypto wallet managed directly by end user.
     #   @return [Types::EmbeddedCryptoWallet]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentInstrumentDetails AWS API Documentation
@@ -7202,7 +7188,7 @@ module Aws::BedrockAgentCore
       class Unknown < PaymentInstrumentDetails; end
     end
 
-    # Summary of a payment instrument for list operations
+    # Summary of a payment instrument for list operations.
     #
     # @!attribute [rw] payment_instrument_id
     #   The unique identifier for this payment instrument.
@@ -7251,13 +7237,12 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Payment response payload union. We will support versioning by
-    # introducing other model in this union
+    # The payment output details, which vary by payment type.
     #
     # @note PaymentOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentOutput corresponding to the set member.
     #
     # @!attribute [rw] crypto_x402
-    #   X402 payment requirement output
+    #   Output from a crypto X402 payment.
     #   @return [Types::CryptoX402PaymentOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentOutput AWS API Documentation
@@ -7273,10 +7258,10 @@ module Aws::BedrockAgentCore
       class Unknown < PaymentOutput; end
     end
 
-    # Payment manager session
+    # A payment session for managing payment transactions.
     #
     # @!attribute [rw] payment_session_id
-    #   The unique identifier for this payment session.
+    #   The unique identifier of the payment session.
     #   @return [String]
     #
     # @!attribute [rw] payment_manager_arn
@@ -7284,11 +7269,11 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] limits
-    #   The spending limits for this session.
+    #   The spending limits for the payment session.
     #   @return [Types::SessionLimits]
     #
     # @!attribute [rw] user_id
-    #   The user ID associated with this payment session.
+    #   The user ID associated with this session.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time_in_minutes
@@ -7296,16 +7281,15 @@ module Aws::BedrockAgentCore
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when this payment session was created.
+    #   The timestamp when the session was created.
     #   @return [Time]
     #
     # @!attribute [rw] available_limits
-    #   The available limits for this session after accounting for processed
-    #   payments.
+    #   The current available spending limits.
     #   @return [Types::AvailableLimits]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when this payment session was last updated.
+    #   The timestamp when the session was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentSession AWS API Documentation
@@ -7323,10 +7307,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Summary of a payment session for list operations
+    # Summary information about a payment session.
     #
     # @!attribute [rw] payment_session_id
-    #   The unique identifier for this payment session.
+    #   The unique identifier of the payment session.
     #   @return [String]
     #
     # @!attribute [rw] payment_manager_arn
@@ -7334,7 +7318,7 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   The user ID associated with this payment session.
+    #   The user ID associated with this session.
     #   @return [String]
     #
     # @!attribute [rw] expiry_time_in_minutes
@@ -7342,11 +7326,11 @@ module Aws::BedrockAgentCore
     #   @return [Integer]
     #
     # @!attribute [rw] created_at
-    #   The timestamp when this payment session was created.
+    #   The timestamp when the session was created.
     #   @return [Time]
     #
     # @!attribute [rw] updated_at
-    #   The timestamp when this payment session was last updated.
+    #   The timestamp when the session was last updated.
     #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentSessionSummary AWS API Documentation
@@ -7362,16 +7346,16 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # VENDOR-SPECIFIC TOKEN REQUEST CONFIGURATION - Input
+    # Vendor-specific token request configuration.
     #
     # @note PaymentTokenRequestInput is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] coinbase_cdp_token_request
-    #   Coinbase CDP token request parameters
+    #   The Coinbase CDP token request.
     #   @return [Types::CoinbaseCdpTokenRequestInput]
     #
     # @!attribute [rw] stripe_privy_token_request
-    #   StripePrivy token request parameters
+    #   The Stripe Privy token request.
     #   @return [Types::StripePrivyTokenRequestInput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentTokenRequestInput AWS API Documentation
@@ -7389,17 +7373,16 @@ module Aws::BedrockAgentCore
       class Unknown < PaymentTokenRequestInput; end
     end
 
-    # VENDOR-SPECIFIC TOKEN RESPONSE CONFIGURATION - Output
+    # Vendor-specific token response configuration.
     #
     # @note PaymentTokenResponseOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of PaymentTokenResponseOutput corresponding to the set member.
     #
     # @!attribute [rw] coinbase_cdp_token_response
-    #   Coinbase CDP token response
+    #   The Coinbase CDP token response.
     #   @return [Types::CoinbaseCdpTokenResponseOutput]
     #
     # @!attribute [rw] stripe_privy_token_response
-    #   StripePrivy token response containing appId, basicAuthToken, and
-    #   optionally authorizationSignature
+    #   The Stripe Privy token response.
     #   @return [Types::StripePrivyTokenResponseOutput]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/PaymentTokenResponseOutput AWS API Documentation
@@ -7438,7 +7421,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Request structure for processing a payment
+    # Request structure for processing a payment.
     #
     # @!attribute [rw] user_id
     #   The user ID associated with this payment.
@@ -7449,19 +7432,19 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] payment_manager_arn
-    #   The ARN of the payment manager handling this payment.
+    #   The ARN of the payment manager.
     #   @return [String]
     #
     # @!attribute [rw] payment_session_id
-    #   The ID of the payment session for this transaction.
+    #   The ID of the payment session.
     #   @return [String]
     #
     # @!attribute [rw] payment_instrument_id
-    #   The ID of the payment instrument to use for this transaction.
+    #   The ID of the payment instrument to use.
     #   @return [String]
     #
     # @!attribute [rw] payment_type
-    #   The type of payment being processed.
+    #   The type of payment to process.
     #   @return [String]
     #
     # @!attribute [rw] payment_input
@@ -7469,7 +7452,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::PaymentInput]
     #
     # @!attribute [rw] client_token
-    #   Idempotency token to ensure request uniqueness.
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
     #
     #   **A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.
@@ -7490,30 +7474,30 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Response structure for processing a payment
+    # Response structure for processing a payment.
     #
     # @!attribute [rw] process_payment_id
-    #   The unique ID of the processed payment transaction.
+    #   The unique identifier of the processed payment.
     #   @return [String]
     #
     # @!attribute [rw] payment_manager_arn
-    #   The ARN of the payment manager that processed this payment.
+    #   The ARN of the payment manager.
     #   @return [String]
     #
     # @!attribute [rw] payment_session_id
-    #   The ID of the payment session for this transaction.
+    #   The ID of the payment session used.
     #   @return [String]
     #
     # @!attribute [rw] payment_instrument_id
-    #   The ID of the payment instrument used for this transaction.
+    #   The ID of the payment instrument used.
     #   @return [String]
     #
     # @!attribute [rw] payment_type
-    #   The type of payment that was processed.
+    #   The type of payment processed.
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   The status of the payment transaction.
+    #   The status of the payment.
     #   @return [String]
     #
     # @!attribute [rw] payment_output
@@ -7970,11 +7954,13 @@ module Aws::BedrockAgentCore
     # @!attribute [rw] namespace
     #   The namespace prefix to filter memory records by. Searches for
     #   memory records in namespaces that start with the provided prefix.
+    #   Either `namespace` or `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] namespace_path
     #   Use namespacePath for hierarchical retrievals. Return all memory
     #   records where namespace falls under the same parent hierarchy.
+    #   Either `namespace` or `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] search_criteria
@@ -8408,10 +8394,10 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # Session spending limits
+    # The spending limits configuration for a payment session.
     #
     # @!attribute [rw] max_spend_amount
-    #   The maximum amount that can be spent in this session.
+    #   The maximum amount that can be spent in the session.
     #   @return [Types::Amount]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionLimits AWS API Documentation
@@ -9206,10 +9192,10 @@ module Aws::BedrockAgentCore
       class Unknown < StreamUpdate; end
     end
 
-    # StripePrivy token request parameters
+    # Stripe Privy token request parameters.
     #
     # @!attribute [rw] request_host
-    #   Optional - defaults to "api.privy.io"
+    #   The host for the Privy API request. Defaults to "api.privy.io".
     #   @return [String]
     #
     # @!attribute [rw] request_path
@@ -9217,11 +9203,11 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] request_body
-    #   Request body JSON for the Privy API call
+    #   Request body JSON for the Privy API call.
     #   @return [String]
     #
     # @!attribute [rw] include_authorization_signature
-    #   Set to true to generate privy-authorization-signature
+    #   Set to true to generate privy-authorization-signature.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StripePrivyTokenRequestInput AWS API Documentation
@@ -9235,26 +9221,26 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # StripePrivy token response containing appId, basicAuthToken, and
-    # optionally authorizationSignature
+    # Stripe Privy token response containing appId, basicAuthToken, and
+    # optionally authorizationSignature.
     #
     # @!attribute [rw] authorization_signature
     #   Base64-encoded ECDSA P-256 authorization signature (only present
-    #   when includeAuthorizationSignature is true)
+    #   when includeAuthorizationSignature is true).
     #   @return [String]
     #
     # @!attribute [rw] request_expiry
     #   Unix timestamp in milliseconds when the authorization signature
-    #   expires. Set as privy-request-expiry header.
+    #   expires.
     #   @return [Integer]
     #
     # @!attribute [rw] app_id
-    #   The Privy app ID for the privy-app-id header
+    #   The Privy app ID for the privy-app-id header.
     #   @return [String]
     #
     # @!attribute [rw] basic_auth_token
     #   Base64-encoded Basic Auth token (appId:appSecret) for the
-    #   Authorization header
+    #   Authorization header.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/StripePrivyTokenResponseOutput AWS API Documentation
@@ -9425,7 +9411,7 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
-    # A single token balance entry
+    # A single token balance entry.
     #
     # @!attribute [rw] amount
     #   Raw balance in the smallest denomination (e.g., USDC base units

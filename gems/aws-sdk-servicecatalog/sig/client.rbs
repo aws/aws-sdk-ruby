@@ -158,7 +158,7 @@ module Aws
                                                                            service_action_id: ::String,
                                                                            product_id: ::String,
                                                                            provisioning_artifact_id: ::String
-                                                                         },
+                                                                         }
                                                                        ],
                                                                        ?accept_language: ::String
                                                                      ) -> _BatchAssociateServiceActionWithProvisioningArtifactResponseSuccess
@@ -175,7 +175,7 @@ module Aws
                                                                               service_action_id: ::String,
                                                                               product_id: ::String,
                                                                               provisioning_artifact_id: ::String
-                                                                            },
+                                                                            }
                                                                           ],
                                                                           ?accept_language: ::String
                                                                         ) -> _BatchDisassociateServiceActionFromProvisioningArtifactResponseSuccess
@@ -192,7 +192,7 @@ module Aws
                           ?target_product_id: ::String,
                           ?target_product_name: ::String,
                           ?source_provisioning_artifact_identifiers: Array[
-                            Hash[("Id"), ::String],
+                            Hash[("Id"), ::String]
                           ],
                           ?copy_options: Array[("CopyTags")],
                           idempotency_token: ::String
@@ -232,7 +232,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               idempotency_token: ::String
                             ) -> _CreatePortfolioResponseSuccess
@@ -277,7 +277,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?provisioning_artifact_parameters: {
                               name: ::String?,
@@ -287,17 +287,7 @@ module Aws
                               disable_template_validation: bool?
                             },
                             idempotency_token: ::String,
-                            ?source_connection: {
-                              type: ("CODESTAR")?,
-                              connection_parameters: {
-                                code_star: {
-                                  connection_arn: ::String,
-                                  repository: ::String,
-                                  branch: ::String,
-                                  artifact_path: ::String
-                                }?
-                              }
-                            }
+                            ?source_connection: Params::source_connection
                           ) -> _CreateProductResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProductResponseSuccess
 
@@ -324,14 +314,14 @@ module Aws
                                                  key: ::String?,
                                                  value: ::String?,
                                                  use_previous_value: bool?
-                                               },
+                                               }
                                              ],
                                              idempotency_token: ::String,
                                              ?tags: Array[
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _CreateProvisionedProductPlanResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProvisionedProductPlanResponseSuccess
@@ -1124,7 +1114,7 @@ module Aws
                                                                  output_key: ::String?,
                                                                  output_value: ::String?,
                                                                  description: ::String?
-                                                               },
+                                                               }
                                                              ],
                                                              idempotency_token: ::String
                                                            ) -> _NotifyProvisionProductEngineWorkflowResultResponseSuccess
@@ -1157,7 +1147,7 @@ module Aws
                                                                           output_key: ::String?,
                                                                           output_value: ::String?,
                                                                           description: ::String?
-                                                                        },
+                                                                        }
                                                                       ],
                                                                       idempotency_token: ::String
                                                                     ) -> _NotifyUpdateProvisionedProductEngineWorkflowResultResponseSuccess
@@ -1181,7 +1171,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ],
                                ?provisioning_preferences: {
                                  stack_set_accounts: Array[::String]?,
@@ -1195,7 +1185,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?notification_arns: Array[::String],
                                provision_token: ::String
@@ -1332,7 +1322,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?remove_tags: Array[::String]
                             ) -> _UpdatePortfolioResponseSuccess
@@ -1377,20 +1367,10 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?remove_tags: Array[::String],
-                            ?source_connection: {
-                              type: ("CODESTAR")?,
-                              connection_parameters: {
-                                code_star: {
-                                  connection_arn: ::String,
-                                  repository: ::String,
-                                  branch: ::String,
-                                  artifact_path: ::String
-                                }?
-                              }
-                            }
+                            ?source_connection: Params::source_connection
                           ) -> _UpdateProductResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateProductResponseSuccess
 
@@ -1414,7 +1394,7 @@ module Aws
                                             key: ::String?,
                                             value: ::String?,
                                             use_previous_value: bool?
-                                          },
+                                          }
                                         ],
                                         ?provisioning_preferences: {
                                           stack_set_accounts: Array[::String]?,
@@ -1429,7 +1409,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         update_token: ::String
                                       ) -> _UpdateProvisionedProductResponseSuccess

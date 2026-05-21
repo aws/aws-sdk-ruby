@@ -118,26 +118,7 @@ module Aws
                                                 ?description: ::String,
                                                 ?is_mtls_enabled_vm_cluster: bool,
                                                 ?license_model: ("BRING_YOUR_OWN_LICENSE" | "LICENSE_INCLUDED"),
-                                                ?maintenance_window: {
-                                                  custom_action_timeout_in_mins: ::Integer?,
-                                                  days_of_week: Array[
-                                                    {
-                                                      name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
-                                                    },
-                                                  ]?,
-                                                  hours_of_day: Array[::Integer]?,
-                                                  is_custom_action_timeout_enabled: bool?,
-                                                  lead_time_in_weeks: ::Integer?,
-                                                  months: Array[
-                                                    {
-                                                      name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
-                                                    },
-                                                  ]?,
-                                                  patching_mode: ("ROLLING" | "NONROLLING")?,
-                                                  preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
-                                                  skip_ru: bool?,
-                                                  weeks_of_month: Array[::Integer]?
-                                                },
+                                                ?maintenance_window: Params::maintenance_window,
                                                 memory_per_oracle_compute_unit_in_g_bs: ::Integer,
                                                 ?scan_listener_port_non_tls: ::Integer,
                                                 ?scan_listener_port_tls: ::Integer,
@@ -165,28 +146,9 @@ module Aws
                                                  ?customer_contacts_to_send_to_oci: Array[
                                                    {
                                                      email: ::String?
-                                                   },
+                                                   }
                                                  ],
-                                                 ?maintenance_window: {
-                                                   custom_action_timeout_in_mins: ::Integer?,
-                                                   days_of_week: Array[
-                                                     {
-                                                       name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
-                                                     },
-                                                   ]?,
-                                                   hours_of_day: Array[::Integer]?,
-                                                   is_custom_action_timeout_enabled: bool?,
-                                                   lead_time_in_weeks: ::Integer?,
-                                                   months: Array[
-                                                     {
-                                                       name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
-                                                     },
-                                                   ]?,
-                                                   patching_mode: ("ROLLING" | "NONROLLING")?,
-                                                   preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
-                                                   skip_ru: bool?,
-                                                   weeks_of_month: Array[::Integer]?
-                                                 },
+                                                 ?maintenance_window: Params::maintenance_window,
                                                  storage_count: ::Integer,
                                                  ?client_token: ::String,
                                                  ?database_server_type: ::String,
@@ -662,26 +624,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_cloud_exadata_infrastructure-instance_method
       def update_cloud_exadata_infrastructure: (
                                                  cloud_exadata_infrastructure_id: ::String,
-                                                 ?maintenance_window: {
-                                                   custom_action_timeout_in_mins: ::Integer?,
-                                                   days_of_week: Array[
-                                                     {
-                                                       name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
-                                                     },
-                                                   ]?,
-                                                   hours_of_day: Array[::Integer]?,
-                                                   is_custom_action_timeout_enabled: bool?,
-                                                   lead_time_in_weeks: ::Integer?,
-                                                   months: Array[
-                                                     {
-                                                       name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
-                                                     },
-                                                   ]?,
-                                                   patching_mode: ("ROLLING" | "NONROLLING")?,
-                                                   preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
-                                                   skip_ru: bool?,
-                                                   weeks_of_month: Array[::Integer]?
-                                                 }
+                                                 ?maintenance_window: Params::maintenance_window
                                                ) -> _UpdateCloudExadataInfrastructureResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCloudExadataInfrastructureResponseSuccess
 

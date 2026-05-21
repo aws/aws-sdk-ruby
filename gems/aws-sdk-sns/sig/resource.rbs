@@ -96,7 +96,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?data_protection_policy: ::String
                         ) -> Topic

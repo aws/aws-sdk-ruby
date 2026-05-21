@@ -1,0 +1,108 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CognitoIdentityProvider
+    module Params
+      type schema_attribute_type = {
+      name: ::String?,
+      attribute_data_type: ("String" | "Number" | "DateTime" | "Boolean")?,
+      developer_only_attribute: bool?,
+      mutable: bool?,
+      required: bool?,
+      number_attribute_constraints: {
+        min_value: ::String?,
+        max_value: ::String?
+      }?,
+      string_attribute_constraints: {
+        min_length: ::String?,
+        max_length: ::String?
+      }?
+    }
+
+      type context_data_type = {
+      ip_address: ::String,
+      server_name: ::String,
+      server_path: ::String,
+      http_headers: Array[
+        {
+          header_name: ::String?,
+          header_value: ::String?
+        }
+      ],
+      encoded_data: ::String?
+    }
+
+      type password_policy_type = {
+      minimum_length: ::Integer?,
+      require_uppercase: bool?,
+      require_lowercase: bool?,
+      require_numbers: bool?,
+      require_symbols: bool?,
+      password_history_size: ::Integer?,
+      temporary_password_validity_days: ::Integer?
+    }
+
+      type user_pool_policy_type = {
+      password_policy: Params::password_policy_type?,
+      sign_in_policy: {
+        allowed_first_auth_factors: Array[("PASSWORD" | "EMAIL_OTP" | "SMS_OTP" | "WEB_AUTHN")]?
+      }?
+    }
+
+      type lambda_config_type = {
+      pre_sign_up: ::String?,
+      custom_message: ::String?,
+      post_confirmation: ::String?,
+      pre_authentication: ::String?,
+      post_authentication: ::String?,
+      define_auth_challenge: ::String?,
+      create_auth_challenge: ::String?,
+      verify_auth_challenge_response: ::String?,
+      pre_token_generation: ::String?,
+      user_migration: ::String?,
+      pre_token_generation_config: {
+        lambda_version: ("V1_0" | "V2_0" | "V3_0"),
+        lambda_arn: ::String
+      }?,
+      custom_sms_sender: {
+        lambda_version: ("V1_0"),
+        lambda_arn: ::String
+      }?,
+      custom_email_sender: {
+        lambda_version: ("V1_0"),
+        lambda_arn: ::String
+      }?,
+      kms_key_id: ::String?,
+      inbound_federation: {
+        lambda_version: ("V1_0"),
+        lambda_arn: ::String
+      }?
+    }
+
+      type verification_message_template_type = {
+      sms_message: ::String?,
+      email_message: ::String?,
+      email_subject: ::String?,
+      email_message_by_link: ::String?,
+      email_subject_by_link: ::String?,
+      default_email_option: ("CONFIRM_WITH_LINK" | "CONFIRM_WITH_CODE")?
+    }
+
+      type admin_create_user_config_type = {
+      allow_admin_create_user_only: bool?,
+      unused_account_validity_days: ::Integer?,
+      invite_message_template: {
+        sms_message: ::String?,
+        email_message: ::String?,
+        email_subject: ::String?
+      }?
+    }
+
+    end
+  end
+end

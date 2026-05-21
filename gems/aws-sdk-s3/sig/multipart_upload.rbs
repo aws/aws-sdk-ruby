@@ -82,7 +82,7 @@ module Aws
                             checksum_xxhash3: ::String?,
                             checksum_xxhash128: ::String?,
                             part_number: ::Integer?
-                          },
+                          }
                         ]?
                       },
                       ?checksum_crc32: ::String,

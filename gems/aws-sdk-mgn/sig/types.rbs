@@ -1295,6 +1295,7 @@ module Aws::Mgn
       attr_accessor logical_id: ::String
       attr_accessor mapper_segment_id: ::String
       attr_accessor artifacts: ::Array[Types::NetworkMigrationCodeGenerationArtifact]
+      attr_accessor referenced_segments: ::Array[::String]
       attr_accessor created_at: ::Time
       SENSITIVE: []
     end
@@ -1820,7 +1821,7 @@ module Aws::Mgn
     class StartNetworkMigrationMappingRequest
       attr_accessor network_migration_execution_id: ::String
       attr_accessor network_migration_definition_id: ::String
-      attr_accessor security_group_mapping_strategy: ("MAP" | "SKIP")
+      attr_accessor security_group_mapping_strategy: ("MAP" | "SKIP" | "MAP_DHCP")
       SENSITIVE: []
     end
 

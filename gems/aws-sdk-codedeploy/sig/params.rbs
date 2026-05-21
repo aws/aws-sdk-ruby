@@ -1,0 +1,80 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeDeploy
+    module Params
+      type revision_location = {
+      revision_type: ("S3" | "GitHub" | "String" | "AppSpecContent")?,
+      s3_location: {
+        bucket: ::String?,
+        key: ::String?,
+        bundle_type: ("tar" | "tgz" | "zip" | "YAML" | "JSON")?,
+        version: ::String?,
+        e_tag: ::String?
+      }?,
+      git_hub_location: {
+        repository: ::String?,
+        commit_id: ::String?
+      }?,
+      string: {
+        content: ::String?,
+        sha256: ::String?
+      }?,
+      app_spec_content: {
+        content: ::String?,
+        sha256: ::String?
+      }?
+    }
+
+      type blue_green_deployment_configuration = {
+      terminate_blue_instances_on_deployment_success: {
+        action: ("TERMINATE" | "KEEP_ALIVE")?,
+        termination_wait_time_in_minutes: ::Integer?
+      }?,
+      deployment_ready_option: {
+        action_on_timeout: ("CONTINUE_DEPLOYMENT" | "STOP_DEPLOYMENT")?,
+        wait_time_in_minutes: ::Integer?
+      }?,
+      green_fleet_provisioning_option: {
+        action: ("DISCOVER_EXISTING" | "COPY_AUTO_SCALING_GROUP")?
+      }?
+    }
+
+      type load_balancer_info = {
+      elb_info_list: Array[
+        {
+          name: ::String?
+        }
+      ]?,
+      target_group_info_list: Array[
+        {
+          name: ::String?
+        }
+      ]?,
+      target_group_pair_info_list: Array[
+        Params::target_group_pair_info
+      ]?
+    }
+
+      type target_group_pair_info = {
+      target_groups: Array[
+        {
+          name: ::String?
+        }
+      ]?,
+      prod_traffic_route: {
+        listener_arns: Array[::String]?
+      }?,
+      test_traffic_route: {
+        listener_arns: Array[::String]?
+      }?
+    }
+
+    end
+  end
+end

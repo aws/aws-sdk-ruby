@@ -478,6 +478,41 @@ module Aws::Bedrock
 
     # @!group API Operations
 
+    # Batch delete the specified advanced prompt optimization jobs.
+    #
+    # @option params [required, Array<String>] :job_identifiers
+    #   List of advanced prompt optimization job identifiers to delete.
+    #
+    # @return [Types::BatchDeleteAdvancedPromptOptimizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchDeleteAdvancedPromptOptimizationJobResponse#errors #errors} => Array&lt;Types::BatchDeleteAdvancedPromptOptimizationJobError&gt;
+    #   * {Types::BatchDeleteAdvancedPromptOptimizationJobResponse#advanced_prompt_optimization_jobs #advanced_prompt_optimization_jobs} => Array&lt;Types::BatchDeleteAdvancedPromptOptimizationJobItem&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_delete_advanced_prompt_optimization_job({
+    #     job_identifiers: ["AdvancedPromptOptimizationJobIdentifier"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.errors #=> Array
+    #   resp.errors[0].job_identifier #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #   resp.advanced_prompt_optimization_jobs #=> Array
+    #   resp.advanced_prompt_optimization_jobs[0].job_identifier #=> String
+    #   resp.advanced_prompt_optimization_jobs[0].job_status #=> String, one of "InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/BatchDeleteAdvancedPromptOptimizationJob AWS API Documentation
+    #
+    # @overload batch_delete_advanced_prompt_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def batch_delete_advanced_prompt_optimization_job(params = {}, options = {})
+      req = build_request(:batch_delete_advanced_prompt_optimization_job, params)
+      req.send_request(options)
+    end
+
     # Deletes a batch of evaluation jobs. An evaluation job can only be
     # deleted if it has following status `FAILED`, `COMPLETED`, and
     # `STOPPED`. You can request up to 25 model evaluation jobs be deleted
@@ -574,6 +609,88 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def cancel_automated_reasoning_policy_build_workflow(params = {}, options = {})
       req = build_request(:cancel_automated_reasoning_policy_build_workflow, params)
+      req.send_request(options)
+    end
+
+    # Creates an asynchronous batch job for advanced prompt optimization.
+    #
+    # @option params [required, String] :job_name
+    #   Name of the advanced prompt optimization job.
+    #
+    # @option params [String] :job_description
+    #   Description of the advanced prompt optimization job.
+    #
+    # @option params [String] :client_token
+    #   Idempotency token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::AdvancedPromptOptimizationInputConfig] :input_config
+    #   Input data configuration for the advanced prompt optimization job.
+    #
+    # @option params [required, Types::AdvancedPromptOptimizationOutputConfig] :output_config
+    #   Output data configuration for the advanced prompt optimization job.
+    #
+    # @option params [String] :encryption_key_arn
+    #   KMS key ARN for encrypting output data.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to associate with the job.
+    #
+    # @option params [required, Array<Types::ModelConfiguration>] :model_configurations
+    #   Model configurations for advanced prompt optimization.
+    #
+    # @return [Types::CreateAdvancedPromptOptimizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateAdvancedPromptOptimizationJobResponse#job_arn #job_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_advanced_prompt_optimization_job({
+    #     job_name: "AdvancedPromptOptimizationJobName", # required
+    #     job_description: "AdvancedPromptOptimizationJobDescription",
+    #     client_token: "IdempotencyToken",
+    #     input_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     output_config: { # required
+    #       s3_uri: "S3UriFolder", # required
+    #     },
+    #     encryption_key_arn: "KmsKeyArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       },
+    #     ],
+    #     model_configurations: [ # required
+    #       {
+    #         model_id: "BedrockModelId", # required
+    #         inference_config: {
+    #           max_tokens: 1,
+    #           temperature: 1.0,
+    #           top_p: 1.0,
+    #           stop_sequences: ["InferenceConfigurationStopSequencesListMemberString"],
+    #         },
+    #         additional_model_request_fields: {
+    #           "AdditionalModelRequestFieldsKey" => {
+    #           },
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/CreateAdvancedPromptOptimizationJob AWS API Documentation
+    #
+    # @overload create_advanced_prompt_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def create_advanced_prompt_optimization_job(params = {}, options = {})
+      req = build_request(:create_advanced_prompt_optimization_job, params)
       req.send_request(options)
     end
 
@@ -3275,6 +3392,62 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Retrieves the details and status of an advanced prompt optimization
+    # job.
+    #
+    # @option params [required, String] :job_identifier
+    #   ARN or ID of the advanced prompt optimization job.
+    #
+    # @return [Types::GetAdvancedPromptOptimizationJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#job_arn #job_arn} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#job_name #job_name} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#job_description #job_description} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#job_status #job_status} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#input_config #input_config} => Types::AdvancedPromptOptimizationInputConfig
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#output_config #output_config} => Types::AdvancedPromptOptimizationOutputConfig
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#encryption_key_arn #encryption_key_arn} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#creation_time #creation_time} => Time
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#failure_message #failure_message} => String
+    #   * {Types::GetAdvancedPromptOptimizationJobResponse#model_configurations #model_configurations} => Array&lt;Types::ModelConfiguration&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_advanced_prompt_optimization_job({
+    #     job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_arn #=> String
+    #   resp.job_name #=> String
+    #   resp.job_description #=> String
+    #   resp.job_status #=> String, one of "InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"
+    #   resp.input_config.s3_uri #=> String
+    #   resp.output_config.s3_uri #=> String
+    #   resp.encryption_key_arn #=> String
+    #   resp.creation_time #=> Time
+    #   resp.last_modified_time #=> Time
+    #   resp.failure_message #=> String
+    #   resp.model_configurations #=> Array
+    #   resp.model_configurations[0].model_id #=> String
+    #   resp.model_configurations[0].inference_config.max_tokens #=> Integer
+    #   resp.model_configurations[0].inference_config.temperature #=> Float
+    #   resp.model_configurations[0].inference_config.top_p #=> Float
+    #   resp.model_configurations[0].inference_config.stop_sequences #=> Array
+    #   resp.model_configurations[0].inference_config.stop_sequences[0] #=> String
+    #   resp.model_configurations[0].additional_model_request_fields #=> Hash
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GetAdvancedPromptOptimizationJob AWS API Documentation
+    #
+    # @overload get_advanced_prompt_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def get_advanced_prompt_optimization_job(params = {}, options = {})
+      req = build_request(:get_advanced_prompt_optimization_job, params)
+      req.send_request(options)
+    end
+
     # Retrieves details about an Automated Reasoning policy or policy
     # version. Returns information including the policy definition,
     # metadata, and timestamps.
@@ -5104,6 +5277,55 @@ module Aws::Bedrock
     # @param [Hash] params ({})
     def get_use_case_for_model_access(params = {}, options = {})
       req = build_request(:get_use_case_for_model_access, params)
+      req.send_request(options)
+    end
+
+    # Lists all advanced prompt optimization jobs for the account.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   Pagination token for the next page of results.
+    #
+    # @option params [String] :sort_by
+    #   Field to sort by in the returned list of jobs.
+    #
+    # @option params [String] :sort_order
+    #   Sort order for the results.
+    #
+    # @return [Types::ListAdvancedPromptOptimizationJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAdvancedPromptOptimizationJobsResponse#job_summaries #job_summaries} => Array&lt;Types::AdvancedPromptOptimizationJobSummary&gt;
+    #   * {Types::ListAdvancedPromptOptimizationJobsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_advanced_prompt_optimization_jobs({
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime", # accepts CreationTime
+    #     sort_order: "Ascending", # accepts Ascending, Descending
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_summaries #=> Array
+    #   resp.job_summaries[0].job_arn #=> String
+    #   resp.job_summaries[0].job_name #=> String
+    #   resp.job_summaries[0].job_status #=> String, one of "InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"
+    #   resp.job_summaries[0].creation_time #=> Time
+    #   resp.job_summaries[0].last_modified_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/ListAdvancedPromptOptimizationJobs AWS API Documentation
+    #
+    # @overload list_advanced_prompt_optimization_jobs(params = {})
+    # @param [Hash] params ({})
+    def list_advanced_prompt_optimization_jobs(params = {}, options = {})
+      req = build_request(:list_advanced_prompt_optimization_jobs, params)
       req.send_request(options)
     end
 
@@ -7190,6 +7412,28 @@ module Aws::Bedrock
       req.send_request(options)
     end
 
+    # Stops an in-progress advanced prompt optimization job.
+    #
+    # @option params [required, String] :job_identifier
+    #   ARN or ID of the advanced prompt optimization job to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_advanced_prompt_optimization_job({
+    #     job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/StopAdvancedPromptOptimizationJob AWS API Documentation
+    #
+    # @overload stop_advanced_prompt_optimization_job(params = {})
+    # @param [Hash] params ({})
+    def stop_advanced_prompt_optimization_job(params = {}, options = {})
+      req = build_request(:stop_advanced_prompt_optimization_job, params)
+      req.send_request(options)
+    end
+
     # Stops an evaluation job that is current being created or running.
     #
     # @option params [required, String] :job_identifier
@@ -8002,7 +8246,7 @@ module Aws::Bedrock
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrock'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

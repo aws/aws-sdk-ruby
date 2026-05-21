@@ -1,0 +1,132 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Control
+    module Params
+      type object_lambda_configuration = {
+      supporting_access_point: ::String,
+      cloud_watch_metrics_enabled: bool?,
+      allowed_features: Array[("GetObject-Range" | "GetObject-PartNumber" | "HeadObject-Range" | "HeadObject-PartNumber")]?,
+      transformation_configurations: Array[
+        Params::object_lambda_transformation_configuration
+      ]
+    }
+
+      type object_lambda_transformation_configuration = {
+      actions: Array[("GetObject" | "HeadObject" | "ListObjects" | "ListObjectsV2")],
+      content_transformation: {
+        aws_lambda: {
+          function_arn: ::String,
+          function_payload: ::String?
+        }?
+      }
+    }
+
+      type s3_grant = {
+      grantee: {
+        type_identifier: ("id" | "emailAddress" | "uri")?,
+        identifier: ::String?,
+        display_name: ::String?
+      }?,
+      permission: ("FULL_CONTROL" | "READ" | "WRITE" | "READ_ACP" | "WRITE_ACP")?
+    }
+
+      type storage_lens_group_and_operator = {
+      match_any_prefix: Array[::String]?,
+      match_any_suffix: Array[::String]?,
+      match_any_tag: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      match_object_age: {
+        days_greater_than: ::Integer?,
+        days_less_than: ::Integer?
+      }?,
+      match_object_size: {
+        bytes_greater_than: ::Integer?,
+        bytes_less_than: ::Integer?
+      }?
+    }
+
+      type storage_lens_group_or_operator = {
+      match_any_prefix: Array[::String]?,
+      match_any_suffix: Array[::String]?,
+      match_any_tag: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      match_object_age: {
+        days_greater_than: ::Integer?,
+        days_less_than: ::Integer?
+      }?,
+      match_object_size: {
+        bytes_greater_than: ::Integer?,
+        bytes_less_than: ::Integer?
+      }?
+    }
+
+      type storage_lens_group_filter = {
+      match_any_prefix: Array[::String]?,
+      match_any_suffix: Array[::String]?,
+      match_any_tag: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      match_object_age: {
+        days_greater_than: ::Integer?,
+        days_less_than: ::Integer?
+      }?,
+      match_object_size: {
+        bytes_greater_than: ::Integer?,
+        bytes_less_than: ::Integer?
+      }?,
+      and: Params::storage_lens_group_and_operator?,
+      or: Params::storage_lens_group_or_operator?
+    }
+
+      type storage_lens_group = {
+      name: ::String,
+      filter: Params::storage_lens_group_filter,
+      storage_lens_group_arn: ::String?
+    }
+
+      type s3_bucket_destination = {
+      format: ("CSV" | "Parquet"),
+      output_schema_version: ("V_1"),
+      account_id: ::String,
+      arn: ::String,
+      prefix: ::String?,
+      encryption: {
+        sses3: {
+        }?,
+        ssekms: {
+          key_id: ::String
+        }?
+      }?
+    }
+
+      type storage_lens_table_destination = {
+      is_enabled: bool,
+      encryption: {
+        sses3: {
+        }?,
+        ssekms: {
+          key_id: ::String
+        }?
+      }?
+    }
+
+    end
+  end
+end

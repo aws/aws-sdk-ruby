@@ -1,0 +1,23 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppStream
+    module Params
+      type script_details = {
+      script_s3_location: {
+        s3_bucket: ::String,
+        s3_key: ::String?
+      },
+      executable_path: ::String,
+      executable_parameters: ::String?,
+      timeout_in_seconds: ::Integer
+    }
+
+    end
+  end
+end

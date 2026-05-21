@@ -1641,7 +1641,12 @@ module Aws::RTBFabric
     #   @return [Integer]
     #
     # @!attribute [rw] inbound_links_count
-    #   The count of inbound links for the responder gateway.
+    #   Deprecated. Use 'linksRequestedCount' instead.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] links_requested_count
+    #   The count of requested links waiting for the responder gateway to
+    #   accept or reject.
     #   @return [Integer]
     #
     # @!attribute [rw] gateway_type
@@ -1673,6 +1678,7 @@ module Aws::RTBFabric
       :active_links_count,
       :total_links_count,
       :inbound_links_count,
+      :links_requested_count,
       :gateway_type,
       :external_inbound_endpoint)
       SENSITIVE = []
@@ -1837,7 +1843,7 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
-    # Summary of a routing rule for list responses
+    # A summary of a link routing rule.
     #
     # @!attribute [rw] rule_id
     #   The unique identifier of the routing rule.
@@ -2418,14 +2424,17 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
-    # Key-value pair for query string matching
+    # A key-value pair for query string matching in a routing rule
+    # condition.
     #
     # @!attribute [rw] key
-    #   RFC 3986 unreserved characters
+    #   The key of the query string parameter to match. Must contain only
+    #   RFC 3986 unreserved characters.
     #   @return [String]
     #
     # @!attribute [rw] value
-    #   RFC 3986 unreserved characters
+    #   The value of the query string parameter to match. Must contain only
+    #   RFC 3986 unreserved characters.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/QueryStringKeyValuePair AWS API Documentation
@@ -2578,34 +2587,36 @@ module Aws::RTBFabric
       include Aws::Structure
     end
 
-    # Conditions bag for a routing rule. All non-null fields must match (AND
-    # logic). At least one field must be set (enforced by CP).
+    # The conditions for a routing rule. All specified fields must match for
+    # the rule to apply (AND logic). At least one condition field must be
+    # set.
     #
     # @!attribute [rw] host_header
-    #   Exact host match — RFC 3986 unreserved characters
+    #   The exact host header value to match.
     #   @return [String]
     #
     # @!attribute [rw] host_header_wildcard
-    #   Wildcard host pattern (e.g., *.example.com) — RFC 3986 unreserved
-    #   plus *
+    #   A wildcard pattern for host header matching (for example,
+    #   `*.example.com`).
     #   @return [String]
     #
     # @!attribute [rw] path_prefix
-    #   Path prefix matching — strict starts-with, no wildcard (preferred
-    #   for new rules). Must start with /; RFC 3986 unreserved plus /
+    #   The path prefix to match. The request path must start with this
+    #   value. Must start with `/`.
     #   @return [String]
     #
     # @!attribute [rw] path_exact
-    #   Exact path match — must start with /; RFC 3986 unreserved plus /
+    #   The exact path to match. Must start with `/`.
     #   @return [String]
     #
     # @!attribute [rw] query_string_equals
-    #   Query string key=value pair match (single pair)
+    #   A query string key-value pair that must be present and match
+    #   exactly.
     #   @return [Types::QueryStringKeyValuePair]
     #
     # @!attribute [rw] query_string_exists
-    #   Query string key presence check (any value accepted) — RFC 3986
-    #   unreserved characters
+    #   A query string key that must be present in the request (any value is
+    #   accepted).
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rtbfabric-2023-05-15/RuleCondition AWS API Documentation

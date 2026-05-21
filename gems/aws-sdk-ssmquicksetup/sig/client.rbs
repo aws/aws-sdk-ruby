@@ -91,7 +91,7 @@ module Aws
                                               parameters: Hash[::String, ::String],
                                               type: ::String,
                                               type_version: ::String?
-                                            },
+                                            }
                                           ],
                                           ?description: ::String,
                                           ?name: ::String,
@@ -161,7 +161,7 @@ module Aws
                                            {
                                              key: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?max_items: ::Integer,
                                          ?starting_token: ::String
@@ -180,7 +180,7 @@ module Aws
                                    {
                                      key: ::String,
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  ?manager_arn: ::String,
                                  ?max_items: ::Integer,

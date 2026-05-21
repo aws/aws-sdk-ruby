@@ -54,6 +54,9 @@ module Aws::DevOpsAgent
     CreateChatResponse = Shapes::StructureShape.new(name: 'CreateChatResponse')
     CreatePrivateConnectionInput = Shapes::StructureShape.new(name: 'CreatePrivateConnectionInput')
     CreatePrivateConnectionOutput = Shapes::StructureShape.new(name: 'CreatePrivateConnectionOutput')
+    CustomHeaderName = Shapes::StringShape.new(name: 'CustomHeaderName')
+    CustomHeaderValue = Shapes::StringShape.new(name: 'CustomHeaderValue')
+    CustomHeaders = Shapes::MapShape.new(name: 'CustomHeaders')
     DatadogAuthorizationConfig = Shapes::UnionShape.new(name: 'DatadogAuthorizationConfig')
     DatadogServiceDetails = Shapes::StructureShape.new(name: 'DatadogServiceDetails')
     DatadogServiceDetailsDescriptionString = Shapes::StringShape.new(name: 'DatadogServiceDetailsDescriptionString')
@@ -214,6 +217,13 @@ module Aws::DevOpsAgent
     MCPServerOAuthClientCredentialsConfig = Shapes::StructureShape.new(name: 'MCPServerOAuthClientCredentialsConfig')
     MCPServerOAuthClientCredentialsConfigClientNameString = Shapes::StringShape.new(name: 'MCPServerOAuthClientCredentialsConfigClientNameString')
     MCPServerOAuthClientCredentialsConfigExchangeUrlString = Shapes::StringShape.new(name: 'MCPServerOAuthClientCredentialsConfigExchangeUrlString')
+    MCPServerSigV4AuthorizationConfig = Shapes::StructureShape.new(name: 'MCPServerSigV4AuthorizationConfig')
+    MCPServerSigV4AuthorizationConfigServiceString = Shapes::StringShape.new(name: 'MCPServerSigV4AuthorizationConfigServiceString')
+    MCPServerSigV4Configuration = Shapes::StructureShape.new(name: 'MCPServerSigV4Configuration')
+    MCPServerSigV4ServiceDetails = Shapes::StructureShape.new(name: 'MCPServerSigV4ServiceDetails')
+    MCPServerSigV4ServiceDetailsDescriptionString = Shapes::StringShape.new(name: 'MCPServerSigV4ServiceDetailsDescriptionString')
+    MCPServerSigV4ServiceDetailsEndpointString = Shapes::StringShape.new(name: 'MCPServerSigV4ServiceDetailsEndpointString')
+    MCPServerSigV4ServiceDetailsNameString = Shapes::StringShape.new(name: 'MCPServerSigV4ServiceDetailsNameString')
     MCPServerSplunkConfiguration = Shapes::StructureShape.new(name: 'MCPServerSplunkConfiguration')
     MCPToolsList = Shapes::ListShape.new(name: 'MCPToolsList')
     MCPToolsListMemberString = Shapes::StringShape.new(name: 'MCPToolsListMemberString')
@@ -261,6 +271,7 @@ module Aws::DevOpsAgent
     RecommendationContentSpecString = Shapes::StringShape.new(name: 'RecommendationContentSpecString')
     RecommendationList = Shapes::ListShape.new(name: 'RecommendationList')
     RecommendationPriority = Shapes::StringShape.new(name: 'RecommendationPriority')
+    RecommendationRankPositionInteger = Shapes::IntegerShape.new(name: 'RecommendationRankPositionInteger')
     RecommendationStatus = Shapes::StringShape.new(name: 'RecommendationStatus')
     ReferenceInput = Shapes::StructureShape.new(name: 'ReferenceInput')
     ReferenceInputReferenceUrlString = Shapes::StringShape.new(name: 'ReferenceInputReferenceUrlString')
@@ -276,6 +287,11 @@ module Aws::DevOpsAgent
     RegisteredGrafanaServerDetails = Shapes::StructureShape.new(name: 'RegisteredGrafanaServerDetails')
     RegisteredGrafanaServerDetailsEndpointString = Shapes::StringShape.new(name: 'RegisteredGrafanaServerDetailsEndpointString')
     RegisteredMCPServerDetails = Shapes::StructureShape.new(name: 'RegisteredMCPServerDetails')
+    RegisteredMCPServerSigV4Details = Shapes::StructureShape.new(name: 'RegisteredMCPServerSigV4Details')
+    RegisteredMCPServerSigV4DetailsDescriptionString = Shapes::StringShape.new(name: 'RegisteredMCPServerSigV4DetailsDescriptionString')
+    RegisteredMCPServerSigV4DetailsEndpointString = Shapes::StringShape.new(name: 'RegisteredMCPServerSigV4DetailsEndpointString')
+    RegisteredMCPServerSigV4DetailsNameString = Shapes::StringShape.new(name: 'RegisteredMCPServerSigV4DetailsNameString')
+    RegisteredMCPServerSigV4DetailsServiceString = Shapes::StringShape.new(name: 'RegisteredMCPServerSigV4DetailsServiceString')
     RegisteredNewRelicDetails = Shapes::StructureShape.new(name: 'RegisteredNewRelicDetails')
     RegisteredPagerDutyDetails = Shapes::StructureShape.new(name: 'RegisteredPagerDutyDetails')
     RegisteredService = Shapes::StructureShape.new(name: 'RegisteredService')
@@ -322,6 +338,7 @@ module Aws::DevOpsAgent
     ServiceNowServiceAuthorizationConfig = Shapes::UnionShape.new(name: 'ServiceNowServiceAuthorizationConfig')
     ServiceNowServiceDetails = Shapes::StructureShape.new(name: 'ServiceNowServiceDetails')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SigV4Region = Shapes::StringShape.new(name: 'SigV4Region')
     SlackChannel = Shapes::StructureShape.new(name: 'SlackChannel')
     SlackChannelChannelIdString = Shapes::StringShape.new(name: 'SlackChannelChannelIdString')
     SlackConfiguration = Shapes::StructureShape.new(name: 'SlackConfiguration')
@@ -409,6 +426,7 @@ module Aws::DevOpsAgent
     AdditionalServiceDetails.add_member(:azureidentity, Shapes::ShapeRef.new(shape: RegisteredAzureIdentityDetails, location_name: "azureidentity"))
     AdditionalServiceDetails.add_member(:mcpservergrafana, Shapes::ShapeRef.new(shape: RegisteredGrafanaServerDetails, location_name: "mcpservergrafana"))
     AdditionalServiceDetails.add_member(:pagerduty, Shapes::ShapeRef.new(shape: RegisteredPagerDutyDetails, location_name: "pagerduty"))
+    AdditionalServiceDetails.add_member(:mcpserversigv4, Shapes::ShapeRef.new(shape: RegisteredMCPServerSigV4Details, location_name: "mcpserversigv4"))
     AdditionalServiceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     AdditionalServiceDetails.add_member_subclass(:github, Types::AdditionalServiceDetails::Github)
     AdditionalServiceDetails.add_member_subclass(:slack, Types::AdditionalServiceDetails::Slack)
@@ -422,6 +440,7 @@ module Aws::DevOpsAgent
     AdditionalServiceDetails.add_member_subclass(:azureidentity, Types::AdditionalServiceDetails::Azureidentity)
     AdditionalServiceDetails.add_member_subclass(:mcpservergrafana, Types::AdditionalServiceDetails::Mcpservergrafana)
     AdditionalServiceDetails.add_member_subclass(:pagerduty, Types::AdditionalServiceDetails::Pagerduty)
+    AdditionalServiceDetails.add_member_subclass(:mcpserversigv4, Types::AdditionalServiceDetails::Mcpserversigv4)
     AdditionalServiceDetails.add_member_subclass(:unknown, Types::AdditionalServiceDetails::Unknown)
     AdditionalServiceDetails.struct_class = Types::AdditionalServiceDetails
 
@@ -542,6 +561,9 @@ module Aws::DevOpsAgent
     CreatePrivateConnectionOutput.add_member(:certificate_expiry_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "certificateExpiryTime"))
     CreatePrivateConnectionOutput.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     CreatePrivateConnectionOutput.struct_class = Types::CreatePrivateConnectionOutput
+
+    CustomHeaders.key = Shapes::ShapeRef.new(shape: CustomHeaderName)
+    CustomHeaders.value = Shapes::ShapeRef.new(shape: CustomHeaderValue)
 
     DatadogAuthorizationConfig.add_member(:authorization_discovery, Shapes::ShapeRef.new(shape: MCPServerAuthorizationDiscoveryConfig, location_name: "authorizationDiscovery"))
     DatadogAuthorizationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1004,6 +1026,21 @@ module Aws::DevOpsAgent
     MCPServerOAuthClientCredentialsConfig.add_member(:scopes, Shapes::ShapeRef.new(shape: Scopes, location_name: "scopes"))
     MCPServerOAuthClientCredentialsConfig.struct_class = Types::MCPServerOAuthClientCredentialsConfig
 
+    MCPServerSigV4AuthorizationConfig.add_member(:region, Shapes::ShapeRef.new(shape: SigV4Region, required: true, location_name: "region"))
+    MCPServerSigV4AuthorizationConfig.add_member(:service, Shapes::ShapeRef.new(shape: MCPServerSigV4AuthorizationConfigServiceString, required: true, location_name: "service"))
+    MCPServerSigV4AuthorizationConfig.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    MCPServerSigV4AuthorizationConfig.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "customHeaders"))
+    MCPServerSigV4AuthorizationConfig.struct_class = Types::MCPServerSigV4AuthorizationConfig
+
+    MCPServerSigV4Configuration.add_member(:tools, Shapes::ShapeRef.new(shape: MCPToolsList, required: true, location_name: "tools"))
+    MCPServerSigV4Configuration.struct_class = Types::MCPServerSigV4Configuration
+
+    MCPServerSigV4ServiceDetails.add_member(:name, Shapes::ShapeRef.new(shape: MCPServerSigV4ServiceDetailsNameString, required: true, location_name: "name"))
+    MCPServerSigV4ServiceDetails.add_member(:endpoint, Shapes::ShapeRef.new(shape: MCPServerSigV4ServiceDetailsEndpointString, required: true, location_name: "endpoint"))
+    MCPServerSigV4ServiceDetails.add_member(:description, Shapes::ShapeRef.new(shape: MCPServerSigV4ServiceDetailsDescriptionString, location_name: "description"))
+    MCPServerSigV4ServiceDetails.add_member(:authorization_config, Shapes::ShapeRef.new(shape: MCPServerSigV4AuthorizationConfig, required: true, location_name: "authorizationConfig"))
+    MCPServerSigV4ServiceDetails.struct_class = Types::MCPServerSigV4ServiceDetails
+
     MCPServerSplunkConfiguration.struct_class = Types::MCPServerSplunkConfiguration
 
     MCPToolsList.member = Shapes::ShapeRef.new(shape: MCPToolsListMemberString)
@@ -1106,6 +1143,8 @@ module Aws::DevOpsAgent
     Recommendation.add_member(:priority, Shapes::ShapeRef.new(shape: RecommendationPriority, required: true, location_name: "priority"))
     Recommendation.add_member(:goal_version, Shapes::ShapeRef.new(shape: Long, location_name: "goalVersion"))
     Recommendation.add_member(:additional_context, Shapes::ShapeRef.new(shape: String, location_name: "additionalContext"))
+    Recommendation.add_member(:rank_position, Shapes::ShapeRef.new(shape: RecommendationRankPositionInteger, location_name: "rankPosition"))
+    Recommendation.add_member(:ranked_at, Shapes::ShapeRef.new(shape: BackLogTimestamp, location_name: "rankedAt"))
     Recommendation.add_member(:created_at, Shapes::ShapeRef.new(shape: BackLogTimestamp, required: true, location_name: "createdAt"))
     Recommendation.add_member(:updated_at, Shapes::ShapeRef.new(shape: BackLogTimestamp, required: true, location_name: "updatedAt"))
     Recommendation.add_member(:version, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "version"))
@@ -1174,6 +1213,15 @@ module Aws::DevOpsAgent
     RegisteredMCPServerDetails.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     RegisteredMCPServerDetails.add_member(:api_key_header, Shapes::ShapeRef.new(shape: String, location_name: "apiKeyHeader"))
     RegisteredMCPServerDetails.struct_class = Types::RegisteredMCPServerDetails
+
+    RegisteredMCPServerSigV4Details.add_member(:name, Shapes::ShapeRef.new(shape: RegisteredMCPServerSigV4DetailsNameString, required: true, location_name: "name"))
+    RegisteredMCPServerSigV4Details.add_member(:endpoint, Shapes::ShapeRef.new(shape: RegisteredMCPServerSigV4DetailsEndpointString, required: true, location_name: "endpoint"))
+    RegisteredMCPServerSigV4Details.add_member(:description, Shapes::ShapeRef.new(shape: RegisteredMCPServerSigV4DetailsDescriptionString, location_name: "description"))
+    RegisteredMCPServerSigV4Details.add_member(:region, Shapes::ShapeRef.new(shape: SigV4Region, required: true, location_name: "region"))
+    RegisteredMCPServerSigV4Details.add_member(:service, Shapes::ShapeRef.new(shape: RegisteredMCPServerSigV4DetailsServiceString, required: true, location_name: "service"))
+    RegisteredMCPServerSigV4Details.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleArn"))
+    RegisteredMCPServerSigV4Details.add_member(:custom_headers, Shapes::ShapeRef.new(shape: CustomHeaders, location_name: "customHeaders"))
+    RegisteredMCPServerSigV4Details.struct_class = Types::RegisteredMCPServerSigV4Details
 
     RegisteredNewRelicDetails.add_member(:account_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "accountId"))
     RegisteredNewRelicDetails.add_member(:region, Shapes::ShapeRef.new(shape: NewRelicRegion, required: true, location_name: "region"))
@@ -1317,6 +1365,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member(:azuredevops, Shapes::ShapeRef.new(shape: AzureDevOpsConfiguration, location_name: "azuredevops"))
     ServiceConfiguration.add_member(:mcpservergrafana, Shapes::ShapeRef.new(shape: MCPServerGrafanaConfiguration, location_name: "mcpservergrafana"))
     ServiceConfiguration.add_member(:pagerduty, Shapes::ShapeRef.new(shape: PagerDutyConfiguration, location_name: "pagerduty"))
+    ServiceConfiguration.add_member(:mcpserversigv4, Shapes::ShapeRef.new(shape: MCPServerSigV4Configuration, location_name: "mcpserversigv4"))
     ServiceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceConfiguration.add_member_subclass(:source_aws, Types::ServiceConfiguration::SourceAws)
     ServiceConfiguration.add_member_subclass(:aws, Types::ServiceConfiguration::Aws)
@@ -1334,6 +1383,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member_subclass(:azuredevops, Types::ServiceConfiguration::Azuredevops)
     ServiceConfiguration.add_member_subclass(:mcpservergrafana, Types::ServiceConfiguration::Mcpservergrafana)
     ServiceConfiguration.add_member_subclass(:pagerduty, Types::ServiceConfiguration::Pagerduty)
+    ServiceConfiguration.add_member_subclass(:mcpserversigv4, Types::ServiceConfiguration::Mcpserversigv4)
     ServiceConfiguration.add_member_subclass(:unknown, Types::ServiceConfiguration::Unknown)
     ServiceConfiguration.struct_class = Types::ServiceConfiguration
 
@@ -1348,6 +1398,7 @@ module Aws::DevOpsAgent
     ServiceDetails.add_member(:mcpservergrafana, Shapes::ShapeRef.new(shape: GrafanaServiceDetails, location_name: "mcpservergrafana"))
     ServiceDetails.add_member(:pagerduty, Shapes::ShapeRef.new(shape: PagerDutyDetails, location_name: "pagerduty"))
     ServiceDetails.add_member(:azureidentity, Shapes::ShapeRef.new(shape: RegisteredAzureIdentityDetails, location_name: "azureidentity"))
+    ServiceDetails.add_member(:mcpserversigv4, Shapes::ShapeRef.new(shape: MCPServerSigV4ServiceDetails, location_name: "mcpserversigv4"))
     ServiceDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceDetails.add_member_subclass(:dynatrace, Types::ServiceDetails::Dynatrace)
     ServiceDetails.add_member_subclass(:servicenow, Types::ServiceDetails::Servicenow)
@@ -1360,6 +1411,7 @@ module Aws::DevOpsAgent
     ServiceDetails.add_member_subclass(:mcpservergrafana, Types::ServiceDetails::Mcpservergrafana)
     ServiceDetails.add_member_subclass(:pagerduty, Types::ServiceDetails::Pagerduty)
     ServiceDetails.add_member_subclass(:azureidentity, Types::ServiceDetails::Azureidentity)
+    ServiceDetails.add_member_subclass(:mcpserversigv4, Types::ServiceDetails::Mcpserversigv4)
     ServiceDetails.add_member_subclass(:unknown, Types::ServiceDetails::Unknown)
     ServiceDetails.struct_class = Types::ServiceDetails
 
@@ -1616,9 +1668,9 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
       end)
 
       api.add_operation(:create_agent_space, Seahorse::Model::Operation.new.tap do |o|
@@ -1636,8 +1688,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
@@ -1697,8 +1749,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:delete_agent_space, Seahorse::Model::Operation.new.tap do |o|
@@ -1798,8 +1850,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:disassociate_service, Seahorse::Model::Operation.new.tap do |o|
@@ -1839,8 +1891,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_account_usage, Seahorse::Model::Operation.new.tap do |o|
@@ -1939,8 +1991,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:get_recommendation, Seahorse::Model::Operation.new.tap do |o|
@@ -1999,8 +2051,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2051,8 +2103,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2097,8 +2149,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2123,8 +2175,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2149,8 +2201,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "limit",
           tokens: {
@@ -2195,8 +2247,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_recommendations, Seahorse::Model::Operation.new.tap do |o|
@@ -2215,8 +2267,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:list_services, Seahorse::Model::Operation.new.tap do |o|
@@ -2235,8 +2287,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -2261,8 +2313,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:list_webhooks, Seahorse::Model::Operation.new.tap do |o|
@@ -2300,8 +2352,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
-        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
@@ -2341,8 +2393,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -2361,8 +2413,8 @@ module Aws::DevOpsAgent
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
       end)
 
       api.add_operation(:update_agent_space, Seahorse::Model::Operation.new.tap do |o|
@@ -2449,6 +2501,9 @@ module Aws::DevOpsAgent
         o.name = "UpdateOperatorAppIdpConfig"
         o.http_method = "PATCH"
         o.http_request_uri = "/v1/agentspaces/{agentSpaceId}/operator/idp"
+        o.endpoint_pattern = {
+          "hostPrefix" => "cp.",
+        }
         o.input = Shapes::ShapeRef.new(shape: UpdateOperatorAppIdpConfigInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateOperatorAppIdpConfigOutput)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

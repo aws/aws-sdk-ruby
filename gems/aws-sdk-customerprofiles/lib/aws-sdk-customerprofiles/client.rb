@@ -873,8 +873,8 @@ module Aws::CustomerProfiles
     # encryption keys. You can create multiple domains, and each domain can
     # have multiple third-party integrations.
     #
-    # Each Amazon Connect instance can be associated with only one domain.
-    # Multiple Amazon Connect instances can be associated with one domain.
+    # Each Connect Customer instance can be associated with only one domain.
+    # Multiple Connect Customer instances can be associated with one domain.
     #
     # Use this API or [UpdateDomain][1] to enable [identity resolution][2]:
     # set `Matching` to true.
@@ -937,7 +937,7 @@ module Aws::CustomerProfiles
     #
     # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
     #   The process of matching duplicate profiles using the Rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to your
     #   configuration in the `RuleBasedMatchingRequest`. You can use the
     #   `ListRuleBasedMatches` and `GetSimilarProfiles` API to return and
@@ -1167,7 +1167,7 @@ module Aws::CustomerProfiles
     end
 
     # Creates an event stream, which is a subscription to real-time events,
-    # such as when profiles are created and updated through Amazon Connect
+    # such as when profiles are created and updated through Connect Customer
     # Customer Profiles.
     #
     # Each event stream can be associated with only one Kinesis Data Stream
@@ -1719,6 +1719,9 @@ module Aws::CustomerProfiles
     #       included_columns: {
     #         "String" => ["text"],
     #       },
+    #       excluded_columns: {
+    #         "String" => ["text"],
+    #       },
     #     },
     #     description: "sensitiveText",
     #     recommender_schema_name: "name",
@@ -1812,8 +1815,8 @@ module Aws::CustomerProfiles
     #
     # @option params [required, Hash<String,Array>] :fields
     #   A map of dataset type to column definitions that specifies which data
-    #   columns to include in the schema. Currently only the `_webAnalytics`
-    #   key is supported.
+    #   columns to include in the schema. The `_webAnalytics` and
+    #   `_catalogItem` keys are supported.
     #
     # @option params [Hash<String,String>] :tags
     #   The tags used to organize, track, or control access for this resource.
@@ -2430,7 +2433,7 @@ module Aws::CustomerProfiles
     #
     # @option params [String] :destination_uri
     #   The destination to which the segment will be exported. This field must
-    #   be provided if the request is not submitted from the Amazon Connect
+    #   be provided if the request is not submitted from the Connect Customer
     #   Admin Website.
     #
     # @return [Types::CreateSegmentSnapshotResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4166,6 +4169,9 @@ module Aws::CustomerProfiles
     #   resp.recommender_config.included_columns #=> Hash
     #   resp.recommender_config.included_columns["String"] #=> Array
     #   resp.recommender_config.included_columns["String"][0] #=> String
+    #   resp.recommender_config.excluded_columns #=> Hash
+    #   resp.recommender_config.excluded_columns["String"] #=> Array
+    #   resp.recommender_config.excluded_columns["String"][0] #=> String
     #   resp.description #=> String
     #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.last_updated_at #=> Time
@@ -4180,6 +4186,9 @@ module Aws::CustomerProfiles
     #   resp.latest_recommender_update.recommender_config.included_columns #=> Hash
     #   resp.latest_recommender_update.recommender_config.included_columns["String"] #=> Array
     #   resp.latest_recommender_update.recommender_config.included_columns["String"][0] #=> String
+    #   resp.latest_recommender_update.recommender_config.excluded_columns #=> Hash
+    #   resp.latest_recommender_update.recommender_config.excluded_columns["String"] #=> Array
+    #   resp.latest_recommender_update.recommender_config.excluded_columns["String"][0] #=> String
     #   resp.latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.latest_recommender_update.created_at #=> Time
     #   resp.latest_recommender_update.last_updated_at #=> Time
@@ -6001,6 +6010,9 @@ module Aws::CustomerProfiles
     #   resp.recommenders[0].recommender_config.included_columns #=> Hash
     #   resp.recommenders[0].recommender_config.included_columns["String"] #=> Array
     #   resp.recommenders[0].recommender_config.included_columns["String"][0] #=> String
+    #   resp.recommenders[0].recommender_config.excluded_columns #=> Hash
+    #   resp.recommenders[0].recommender_config.excluded_columns["String"] #=> Array
+    #   resp.recommenders[0].recommender_config.excluded_columns["String"][0] #=> String
     #   resp.recommenders[0].created_at #=> Time
     #   resp.recommenders[0].description #=> String
     #   resp.recommenders[0].status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
@@ -6017,6 +6029,9 @@ module Aws::CustomerProfiles
     #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns #=> Hash
     #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns["String"] #=> Array
     #   resp.recommenders[0].latest_recommender_update.recommender_config.included_columns["String"][0] #=> String
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns #=> Hash
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns["String"] #=> Array
+    #   resp.recommenders[0].latest_recommender_update.recommender_config.excluded_columns["String"][0] #=> String
     #   resp.recommenders[0].latest_recommender_update.status #=> String, one of "PENDING", "IN_PROGRESS", "ACTIVE", "FAILED", "STOPPING", "INACTIVE", "STARTING", "DELETING"
     #   resp.recommenders[0].latest_recommender_update.created_at #=> Time
     #   resp.recommenders[0].latest_recommender_update.last_updated_at #=> Time
@@ -7328,7 +7343,7 @@ module Aws::CustomerProfiles
     #
     # @option params [Types::RuleBasedMatchingRequest] :rule_based_matching
     #   The process of matching duplicate profiles using the rule-Based
-    #   matching. If `RuleBasedMatching` = true, Amazon Connect Customer
+    #   matching. If `RuleBasedMatching` = true, Connect Customer Customer
     #   Profiles will start to match and merge your profiles according to your
     #   configuration in the `RuleBasedMatchingRequest`. You can use the
     #   `ListRuleBasedMatches` and `GetSimilarProfiles` API to return and
@@ -7909,6 +7924,9 @@ module Aws::CustomerProfiles
     #       included_columns: {
     #         "String" => ["text"],
     #       },
+    #       excluded_columns: {
+    #         "String" => ["text"],
+    #       },
     #     },
     #   })
     #
@@ -7943,7 +7961,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

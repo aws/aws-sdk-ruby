@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaPackageVod
+    module Params
+      type speke_key_provider = {
+      encryption_contract_configuration: {
+        preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+        preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+      }?,
+      role_arn: ::String,
+      system_ids: Array[::String],
+      url: ::String
+    }
+
+      type hls_manifest = {
+      ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")?,
+      include_iframe_only_stream: bool?,
+      manifest_name: ::String?,
+      program_date_time_interval_seconds: ::Integer?,
+      repeat_ext_x_key: bool?,
+      stream_selection: {
+        max_video_bits_per_second: ::Integer?,
+        min_video_bits_per_second: ::Integer?,
+        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+      }?
+    }
+
+    end
+  end
+end

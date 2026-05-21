@@ -518,8 +518,9 @@ module Aws::PaymentCryptographyData
     # operations][6] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][7].
     #
     # **Related operations:**
     #
@@ -537,6 +538,7 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
@@ -671,14 +673,15 @@ module Aws::PaymentCryptographyData
     # operations][6] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][7].
     #
     # **Related operations:**
     #
     # * DecryptData
     #
-    # * [GetPublicCertificate][7]
+    # * [GetPublicCertificate][8]
     #
     # * [ImportKey][3]
     #
@@ -692,7 +695,8 @@ module Aws::PaymentCryptographyData
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+    # [8]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
@@ -791,9 +795,9 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
-    # Establishes node-to-node initialization between payment processing
-    # nodes such as an acquirer, issuer or payment network using Australian
-    # Standard 2805 (AS2805).
+    # Generates a `KekValidationRequest` or a `KekValidationResponse` for
+    # node-to-node initialization between payment processing nodes using
+    # [Australian Standard 2805 (AS2805)][1].
     #
     # During node-to-node initialization, both communicating nodes must
     # validate that they possess the correct Key Encrypting Keys (KEKs)
@@ -802,38 +806,50 @@ module Aws::PaymentCryptographyData
     # partner node. Each node uses its KEK to encrypt and decrypt session
     # keys exchanged between the nodes. A KEK can be created or imported
     # into Amazon Web Services Payment Cryptography using either the
-    # [CreateKey][1] or [ImportKey][2] operations.
+    # [CreateKey][2] or [ImportKey][3] operations.
     #
-    # The node initiating communication can use
-    # `GenerateAS2805KekValidation` to generate a combined KEK validation
-    # request and KEK validation response to send to the partnering node for
-    # validation. When invoked, the API internally generates a random
-    # sending key encrypted under KEKs and provides a receiving key
-    # encrypted under KEKr as response. The initiating node sends the
-    # response returned by this API to its partner for validation.
+    # To use `GenerateAs2805KekValidation` to generate a KEK validation
+    # request, set `KekValidationType` to `KekValidationRequest`. This
+    # operation returns both `RandomKeySend` (KRs) and `RandomKeyReceive`
+    # (KRr) as response values. The partnering node receives the KRs, uses
+    # its KEKr to decrypt it, and generates a KRr which is an inverted value
+    # of KRs. The node receiving the KRr validates it against its own KRr
+    # generated during KEK validation request outside of Amazon Web Services
+    # Payment Cryptography.
+    #
+    # You can also use this operation to generate a KEK validation response,
+    # by setting `KekValidationType` to `KekValidationResponse` and
+    # providing the incoming KRs. This operation then calculates a KRr. To
+    # learn more about more about node-to-node initialization, see
+    # [Validation of KEK][4] in the *Amazon Web Services Payment
+    # Cryptography User Guide*.
     #
     # For information about valid keys for this operation, see
-    # [Understanding key attributes][3] and [Key types for specific data
-    # operations][4] in the *Amazon Web Services Payment Cryptography User
+    # [Understanding key attributes][5] and [Key types for specific data
+    # operations][6] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][7].
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
-    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
-    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
-    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.kekvalidation.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of sending KEK that Amazon Web Services Payment
     #   Cryptography uses for node-to-node initialization
     #
     # @option params [required, Types::As2805KekValidationType] :kek_validation_type
-    #   Parameter information for generating a random key for KEK validation
-    #   to perform node-to-node initialization.
+    #   Defines whether to generate a KEK validation request or KEK validation
+    #   response for node-to-node initialization.
     #
     # @option params [required, String] :random_key_send_variant_mask
     #   The key variant to use for generating a random key for KEK validation
@@ -853,6 +869,7 @@ module Aws::PaymentCryptographyData
     #     kek_validation_type: { # required
     #       kek_validation_request: {
     #         derive_key_algorithm: "TDES_2KEY", # required, accepts TDES_2KEY, TDES_3KEY, AES_128, AES_192, AES_256, HMAC_SHA256, HMAC_SHA384, HMAC_SHA512, HMAC_SHA224
+    #         random_key_max_length: "BYTES_8", # accepts BYTES_8, BYTES_16, BYTES_24
     #       },
     #       kek_validation_response: {
     #         random_key_send: "As2805RandomKeyMaterial", # required
@@ -877,6 +894,120 @@ module Aws::PaymentCryptographyData
       req.send_request(options)
     end
 
+    # Generates an Authorization Request Cryptogram (ARQC) for an EMV chip
+    # payment card authorization. For more information, see [Generate auth
+    # request cryptogram][1] in the *Amazon Web Services Payment
+    # Cryptography User Guide*.
+    #
+    # ARQC generation uses an Issuer Master Key (IMK) for application
+    # cryptograms (TR31\_E0\_EMV\_MKEY\_APP\_CRYPTOGRAMS) to derive a
+    # session key, which is then used to generate the cryptogram from the
+    # provided transaction data (when applicable). To use this operation,
+    # you must first create or import an IMK-AC key by calling
+    # [CreateKey][2] or [ImportKey][3]. The `KeyModesOfUse` should be set to
+    # `DeriveKey` for the IMK-AC encryption key.
+    #
+    # This operation is intended for development and testing scenarios only.
+    # It is not recommended to use this operation as a substitute for
+    # card-based cryptogram generation in production payment flows.
+    #
+    # For information about valid keys for this operation, see
+    # [Understanding key attributes][4] and [Key types for specific data
+    # operations][5] in the *Amazon Web Services Payment Cryptography User
+    # Guide*.
+    #
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
+    #
+    # **Related operations:**
+    #
+    # * VerifyAuthRequestCryptogram
+    #
+    # ^
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.generateauthrequestcryptogram.html
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+    #
+    # @option params [required, String] :key_identifier
+    #   The `keyARN` of the IMK-AC (TR31\_E0\_EMV\_MKEY\_APP\_CRYPTOGRAMS)
+    #   that Amazon Web Services Payment Cryptography uses to generate the
+    #   ARQC.
+    #
+    # @option params [required, String] :transaction_data
+    #   The transaction data that Amazon Web Services Payment Cryptography
+    #   uses for ARQC generation. The same transaction data is used for ARQC
+    #   verification by the issuer using VerifyAuthRequestCryptogram.
+    #
+    # @option params [required, String] :major_key_derivation_mode
+    #   The method to use when deriving the major encryption key for ARQC
+    #   generation within Amazon Web Services Payment Cryptography.
+    #
+    # @option params [required, Types::SessionKeyDerivation] :session_key_derivation_attributes
+    #   The attributes and values to use for deriving a session key for ARQC
+    #   generation within Amazon Web Services Payment Cryptography.
+    #
+    # @return [Types::GenerateAuthRequestCryptogramOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GenerateAuthRequestCryptogramOutput#key_arn #key_arn} => String
+    #   * {Types::GenerateAuthRequestCryptogramOutput#key_check_value #key_check_value} => String
+    #   * {Types::GenerateAuthRequestCryptogramOutput#auth_request_cryptogram #auth_request_cryptogram} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.generate_auth_request_cryptogram({
+    #     key_identifier: "KeyArnOrKeyAliasType", # required
+    #     transaction_data: "TransactionDataType", # required
+    #     major_key_derivation_mode: "EMV_OPTION_A", # required, accepts EMV_OPTION_A, EMV_OPTION_B
+    #     session_key_derivation_attributes: { # required
+    #       emv_common: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #       },
+    #       mastercard: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #         unpredictable_number: "HexLengthEquals8", # required
+    #       },
+    #       emv_2000: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #         application_transaction_counter: "HexLengthEquals4", # required
+    #       },
+    #       amex: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #       },
+    #       visa: {
+    #         primary_account_number: "PrimaryAccountNumberType", # required
+    #         pan_sequence_number: "NumberLengthEquals2", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_arn #=> String
+    #   resp.key_check_value #=> String
+    #   resp.auth_request_cryptogram #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/payment-cryptography-data-2022-02-03/GenerateAuthRequestCryptogram AWS API Documentation
+    #
+    # @overload generate_auth_request_cryptogram(params = {})
+    # @param [Hash] params ({})
+    def generate_auth_request_cryptogram(params = {}, options = {})
+      req = build_request(:generate_auth_request_cryptogram, params)
+      req.send_request(options)
+    end
+
     # Generates card-related validation data using algorithms such as Card
     # Verification Values (CVV/CVV2), Dynamic Card Verification Values
     # (dCVV/dCVV2), or Card Security Codes (CSC). For more information, see
@@ -898,8 +1029,9 @@ module Aws::PaymentCryptographyData
     # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
     #
     # **Related operations:**
     #
@@ -914,6 +1046,7 @@ module Aws::PaymentCryptographyData
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the CVK encryption key that Amazon Web Services
@@ -1015,8 +1148,9 @@ module Aws::PaymentCryptographyData
     # operations][2] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][3].
     #
     # **Related operations:**
     #
@@ -1028,6 +1162,7 @@ module Aws::PaymentCryptographyData
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the MAC generation encryption key.
@@ -1133,8 +1268,9 @@ module Aws::PaymentCryptographyData
     #
     #  </note>
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][2].
     #
     # **Related operations:**
     #
@@ -1145,6 +1281,7 @@ module Aws::PaymentCryptographyData
     #
     #
     # [1]: https://www.emvco.com/specifications/
+    # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :new_pin_pek_identifier
     #   The `keyARN` of the PEK protecting the incoming new encrypted PIN
@@ -1293,8 +1430,9 @@ module Aws::PaymentCryptographyData
     # operations][4] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][5].
     #
     # **Related operations:**
     #
@@ -1310,6 +1448,7 @@ module Aws::PaymentCryptographyData
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :generation_key_identifier
     #   The `keyARN` of the PEK that Amazon Web Services Payment Cryptography
@@ -1464,8 +1603,9 @@ module Aws::PaymentCryptographyData
     # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
     #
     # **Related operations:**
     #
@@ -1473,7 +1613,7 @@ module Aws::PaymentCryptographyData
     #
     # * EncryptData
     #
-    # * [GetPublicCertificate][6]
+    # * [GetPublicCertificate][7]
     #
     # * [ImportKey][2]
     #
@@ -1484,7 +1624,8 @@ module Aws::PaymentCryptographyData
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/use-cases-acquirers-dynamickeys.html
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
     #
     # @option params [required, String] :incoming_key_identifier
     #   The `keyARN` of the encryption key of incoming ciphertext data.
@@ -1628,16 +1769,17 @@ module Aws::PaymentCryptographyData
     # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
     #
     # **Related operations:**
     #
-    # * [CreateKey][6]
+    # * [CreateKey][7]
     #
-    # * [GetPublicCertificate][7]
+    # * [GetPublicCertificate][8]
     #
-    # * [ImportKey][8]
+    # * [ImportKey][9]
     #
     #
     #
@@ -1646,9 +1788,10 @@ module Aws::PaymentCryptographyData
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/terminology.html#terms.kek
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
-    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
-    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
-    # [8]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+    # [7]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+    # [8]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+    # [9]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
     #
     # @option params [required, Types::IncomingKeyMaterial] :incoming_key_material
     #   Parameter information of the TR31WrappedKeyBlock containing the
@@ -1759,8 +1902,9 @@ module Aws::PaymentCryptographyData
     #
     #  </note>
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
     #
     # **Related operations:**
     #
@@ -1775,6 +1919,7 @@ module Aws::PaymentCryptographyData
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :incoming_key_identifier
     #   The `keyARN` of the encryption key under which incoming PIN block data
@@ -1946,8 +2091,9 @@ module Aws::PaymentCryptographyData
     # operations][5] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][6].
     #
     # **Related operations:**
     #
@@ -1962,6 +2108,7 @@ module Aws::PaymentCryptographyData
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
     # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [5]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [6]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the major encryption key that Amazon Web Services
@@ -2017,7 +2164,7 @@ module Aws::PaymentCryptographyData
     #         primary_account_number: "PrimaryAccountNumberType", # required
     #         pan_sequence_number: "NumberLengthEquals2", # required
     #         application_transaction_counter: "HexLengthEquals4", # required
-    #         unpredictable_number: "HexLengthBetween2And8", # required
+    #         unpredictable_number: "HexLengthEquals8", # required
     #       },
     #       emv_2000: {
     #         primary_account_number: "PrimaryAccountNumberType", # required
@@ -2080,8 +2227,9 @@ module Aws::PaymentCryptographyData
     # operations][3] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][4].
     #
     # **Related operations:**
     #
@@ -2096,6 +2244,7 @@ module Aws::PaymentCryptographyData
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-card-data.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the CVK encryption key that Amazon Web Services
@@ -2193,8 +2342,9 @@ module Aws::PaymentCryptographyData
     # operations][2] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][3].
     #
     # **Related operations:**
     #
@@ -2206,6 +2356,7 @@ module Aws::PaymentCryptographyData
     #
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :key_identifier
     #   The `keyARN` of the encryption key that Amazon Web Services Payment
@@ -2297,8 +2448,9 @@ module Aws::PaymentCryptographyData
     # operations][3] in the *Amazon Web Services Payment Cryptography User
     # Guide*.
     #
-    # **Cross-account use**: This operation can't be used across different
-    # Amazon Web Services accounts.
+    # **Cross-account use**: This operation supports cross-account use when
+    # the key has a resource-based policy that grants access. For more
+    # information, see [Resource-based policies][4].
     #
     # **Related operations:**
     #
@@ -2311,6 +2463,7 @@ module Aws::PaymentCryptographyData
     # [1]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-pin-data.html
     # [2]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
     # [3]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+    # [4]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
     #
     # @option params [required, String] :verification_key_identifier
     #   The `keyARN` of the PIN verification key.
@@ -2435,7 +2588,7 @@ module Aws::PaymentCryptographyData
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-paymentcryptographydata'
-      context[:gem_version] = '1.50.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

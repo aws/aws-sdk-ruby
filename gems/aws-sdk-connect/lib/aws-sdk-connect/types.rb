@@ -38,7 +38,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -170,7 +170,7 @@ module Aws::Connect
     # [1]: https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] channel
@@ -253,8 +253,8 @@ module Aws::Connect
 
     # A structure that defines search criteria for contacts using agent
     # hierarchy group levels. For more information about agent hierarchies,
-    # see [Set Up Agent Hierarchies][1] in the *Amazon Connect Administrator
-    # Guide*.
+    # see [Set Up Agent Hierarchies][1] in the *Connect Customer
+    # Administrator Guide*.
     #
     #
     #
@@ -326,7 +326,7 @@ module Aws::Connect
     #   The configuration for the allowed video and screen sharing
     #   capabilities for participants present over the call. For more
     #   information, see [Set up in-app, web, video calling, and screen
-    #   sharing capabilities][1] in the *Amazon Connect Administrator
+    #   sharing capabilities][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -699,7 +699,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
+    # This API is in preview release for Connect Customer and is subject to
     # change.
     #
     # Information about associations that are successfully created:
@@ -779,7 +779,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
+    # This API is in preview release for Connect Customer and is subject to
     # change.
     #
     # A third-party application's metadata.
@@ -843,7 +843,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -857,9 +857,9 @@ module Aws::Connect
     #
     # @!attribute [rw] target_account_id
     #   The identifier of the target account. Use to associate a dataset to
-    #   a different account than the one containing the Amazon Connect
+    #   a different account than the one containing the Connect Customer
     #   instance. If not specified, by default this value is the Amazon Web
-    #   Services account that has the Amazon Connect instance.
+    #   Services account that has the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/AssociateAnalyticsDataSetRequest AWS API Documentation
@@ -900,7 +900,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -937,7 +937,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -979,7 +979,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -988,7 +988,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] user_id
@@ -1011,7 +1011,7 @@ module Aws::Connect
     class AssociateContactWithUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1053,7 +1053,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1064,8 +1064,8 @@ module Aws::Connect
     # @!attribute [rw] alias_configuration
     #   Configuration object that specifies which email address will serve
     #   as the alias. The specified email address must already exist in the
-    #   Amazon Connect instance and cannot already be configured as an alias
-    #   or have an alias of its own.
+    #   Connect Customer instance and cannot already be configured as an
+    #   alias or have an alias of its own.
     #   @return [Types::AliasConfiguration]
     #
     # @!attribute [rw] client_token
@@ -1098,7 +1098,7 @@ module Aws::Connect
     class AssociateEmailAddressAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1168,7 +1168,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1244,7 +1244,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1282,7 +1282,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1323,7 +1323,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1346,7 +1346,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1390,7 +1390,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1417,7 +1417,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1452,7 +1452,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1540,7 +1540,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -1563,7 +1563,7 @@ module Aws::Connect
     class AssociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN of the instance).
     #   @return [String]
     #
@@ -1636,7 +1636,7 @@ module Aws::Connect
     # identifier.
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] contact_arn
@@ -1792,7 +1792,7 @@ module Aws::Connect
     # The configuration for attached files for a specific attachment scope.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] attachment_scope
@@ -1827,7 +1827,7 @@ module Aws::Connect
     # A summary of the attached files configuration.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] attachment_scope
@@ -2023,7 +2023,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
+    # This API is in preview release for Connect Customer and is subject to
     # change. To request access to this API, contact Amazon Web Services
     # Support.
     #
@@ -2055,9 +2055,9 @@ module Aws::Connect
     #
     # @!attribute [rw] allowed_ips
     #   A list of IP address range strings that are allowed to access the
-    #   Amazon Connect instance. For more information about how to configure
-    #   IP addresses, see [Configure IP address based access control][1] in
-    #   the *Amazon Connect Administrator Guide*.
+    #   Connect Customer instance. For more information about how to
+    #   configure IP addresses, see [Configure IP address based access
+    #   control][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -2066,9 +2066,9 @@ module Aws::Connect
     #
     # @!attribute [rw] blocked_ips
     #   A list of IP address range strings that are blocked from accessing
-    #   the Amazon Connect instance. For more information about how to
+    #   the Connect Customer instance. For more information about how to
     #   configure IP addresses, see [Configure IP address based access
-    #   control][1] in the *Amazon Connect Administrator Guide*.
+    #   control][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -2077,9 +2077,10 @@ module Aws::Connect
     #
     # @!attribute [rw] is_default
     #   Shows whether the authentication profile is the default
-    #   authentication profile for the Amazon Connect instance. The default
-    #   authentication profile applies to all agents in an Amazon Connect
-    #   instance, unless overridden by another authentication profile.
+    #   authentication profile for the Connect Customer instance. The
+    #   default authentication profile applies to all agents in an Connect
+    #   Customer instance, unless overridden by another authentication
+    #   profile.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_time
@@ -2097,10 +2098,10 @@ module Aws::Connect
     #
     # @!attribute [rw] periodic_session_duration
     #   The short lived session duration configuration for users logged in
-    #   to Amazon Connect, in minutes. This value determines the maximum
+    #   to Connect Customer, in minutes. This value determines the maximum
     #   possible time before an agent is authenticated. For more
-    #   information, see [Configure the session duration][1] in the *Amazon
-    #   Connect Administrator Guide*.
+    #   information, see [Configure the session duration][1] in the *Connect
+    #   Customer Administrator Guide*.
     #
     #
     #
@@ -2108,10 +2109,10 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] max_session_duration
-    #   The long lived session duration for users logged in to Amazon
-    #   Connect, in minutes. After this time period, users must log in
+    #   The long lived session duration for users logged in to Connect
+    #   Customer, in minutes. After this time period, users must log in
     #   again. For more information, see [Configure the session duration][1]
-    #   in the *Amazon Connect Administrator Guide*.
+    #   in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -2148,7 +2149,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
+    # This API is in preview release for Connect Customer and is subject to
     # change. To request access to this API, contact Amazon Web Services
     # Support.
     #
@@ -2169,9 +2170,10 @@ module Aws::Connect
     #
     # @!attribute [rw] is_default
     #   Shows whether the authentication profile is the default
-    #   authentication profile for the Amazon Connect instance. The default
-    #   authentication profile applies to all agents in an Amazon Connect
-    #   instance, unless overridden by another authentication profile.
+    #   authentication profile for the Connect Customer instance. The
+    #   default authentication profile applies to all agents in an Connect
+    #   Customer instance, unless overridden by another authentication
+    #   profile.
     #   @return [Boolean]
     #
     # @!attribute [rw] last_modified_time
@@ -2298,7 +2300,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -2312,9 +2314,9 @@ module Aws::Connect
     #
     # @!attribute [rw] target_account_id
     #   The identifier of the target account. Use to associate a dataset to
-    #   a different account than the one containing the Amazon Connect
+    #   a different account than the one containing the Connect Customer
     #   instance. If not specified, by default this value is the Amazon Web
-    #   Services account that has the Amazon Connect instance.
+    #   Services account that has the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchAssociateAnalyticsDataSetRequest AWS API Documentation
@@ -2653,7 +2655,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -2667,9 +2669,9 @@ module Aws::Connect
     #
     # @!attribute [rw] target_account_id
     #   The identifier of the target account. Use to disassociate a dataset
-    #   from a different account than the one containing the Amazon Connect
-    #   instance. If not specified, by default this value is the Amazon Web
-    #   Services account that has the Amazon Connect instance.
+    #   from a different account than the one containing the Connect
+    #   Customer instance. If not specified, by default this value is the
+    #   Amazon Web Services account that has the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/BatchDisassociateAnalyticsDataSetRequest AWS API Documentation
@@ -2749,7 +2751,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -2808,7 +2810,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -3094,11 +3096,11 @@ module Aws::Connect
     #   `EVENT`.
     #
     #   * For allowed message content types, see the `ContentType` parameter
-    #     in the [SendMessage][1] topic in the *Amazon Connect Participant
+    #     in the [SendMessage][1] topic in the *Connect Customer Participant
     #     Service API Reference*.
     #
     #   * For allowed event content types, see the `ContentType` parameter
-    #     in the [SendEvent][2] topic in the *Amazon Connect Participant
+    #     in the [SendEvent][2] topic in the *Connect Customer Participant
     #     Service API Reference*.
     #
     #
@@ -3112,11 +3114,11 @@ module Aws::Connect
     #   `MESSAGE` and for certain `ContentTypes` when `Type` is `EVENT`.
     #
     #   * For allowed message content, see the `Content` parameter in the
-    #     [SendMessage][1] topic in the *Amazon Connect Participant Service
-    #     API Reference*.
+    #     [SendMessage][1] topic in the *Connect Customer Participant
+    #     Service API Reference*.
     #
     #   * For allowed event content, see the `Content` parameter in the
-    #     [SendEvent][2] topic in the *Amazon Connect Participant Service
+    #     [SendEvent][2] topic in the *Connect Customer Participant Service
     #     API Reference*.
     #
     #
@@ -3226,15 +3228,15 @@ module Aws::Connect
     end
 
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through. You must enter `InstanceId` or `TargetArn`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance. You must enter `InstanceId` or
     #   `TargetArn`.
     #
     #
@@ -3304,8 +3306,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Information about a phone number that has been claimed to your Amazon
-    # Connect instance or traffic distribution group.
+    # Information about a phone number that has been claimed to your Connect
+    # Customer instance or traffic distribution group.
     #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
@@ -3333,15 +3335,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance.
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance.
     #
     #
     #
@@ -3433,7 +3435,7 @@ module Aws::Connect
     # Request to CompleteAttachedFileUpload API
     #
     # @!attribute [rw] instance_id
-    #   The unique identifier of the Amazon Connect instance.
+    #   The unique identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] file_id
@@ -3649,14 +3651,14 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] wisdom_info
-    #   Information about Amazon Connect Wisdom.
+    #   Information about Connect Customer Wisdom.
     #   @return [Types::WisdomInfo]
     #
     # @!attribute [rw] customer_id
     #   The customer's identification number. For example, the `CustomerId`
     #   may be a customer number from your CRM. You can create a Lambda
     #   function to pull the unique customer ID of the caller from your CRM
-    #   system. If you enable Amazon Connect Voice ID capability, this
+    #   system. If you enable Connect Customer Voice ID capability, this
     #   attribute is populated with the `CustomerSpeakerId` of the caller.
     #   @return [String]
     #
@@ -3694,7 +3696,7 @@ module Aws::Connect
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] connected_to_system_timestamp
-    #   The timestamp when customer endpoint connected to Amazon Connect.
+    #   The timestamp when customer endpoint connected to Connect Customer.
     #   @return [Time]
     #
     # @!attribute [rw] routing_criteria
@@ -3711,7 +3713,7 @@ module Aws::Connect
     #
     # @!attribute [rw] answering_machine_detection_status
     #   Indicates how an [outbound campaign][1] call is actually disposed if
-    #   the contact is connected to Amazon Connect.
+    #   the contact is connected to Connect Customer.
     #
     #
     #
@@ -3742,8 +3744,8 @@ module Aws::Connect
     #
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
-    #   segments using an attribute map. The attributes are standard Amazon
-    #   Connect attributes and can be accessed in flows. Attribute keys can
+    #   segments using an attribute map. The attributes are standard Connect
+    #   Customer attributes and can be accessed in flows. Attribute keys can
     #   include only alphanumeric, -, and \_ characters. This field can be
     #   used to show channel subtype. For example, `connect:Guide` or
     #   `connect:SMS`.
@@ -3756,7 +3758,7 @@ module Aws::Connect
     # @!attribute [rw] disconnect_reason
     #   The disconnect reason for the contact. For a list and description of
     #   all the possible disconnect reasons by channel, see DisconnectReason
-    #   under [ContactTraceRecord][1] in the *Amazon Connect Administrator
+    #   under [ContactTraceRecord][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -3853,10 +3855,10 @@ module Aws::Connect
     end
 
     # A structure that defines search criteria for contacts using analysis
-    # outputs from Amazon Connect Contact Lens.
+    # outputs from Connect Customer Contact Lens.
     #
     # @!attribute [rw] transcript
-    #   Search criteria based on transcript analyzed by Amazon Connect
+    #   Search criteria based on transcript analyzed by Connect Customer
     #   Contact Lens.
     #   @return [Types::Transcript]
     #
@@ -3901,7 +3903,7 @@ module Aws::Connect
     # Request object with information to create a contact.
     #
     # @!attribute [rw] system_endpoint
-    #   Endpoint associated with the Amazon Connect instance from which
+    #   Endpoint associated with the Connect Customer instance from which
     #   outbound contact will be initiated for the campaign.
     #   @return [Types::Endpoint]
     #
@@ -3914,7 +3916,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] queue_id
-    #   The identifier of the queue associated with the Amazon Connect
+    #   The identifier of the queue associated with the Connect Customer
     #   instance in which contacts that are created will be queued.
     #   @return [String]
     #
@@ -4050,7 +4052,8 @@ module Aws::Connect
     #
     # @!attribute [rw] type
     #   The type of the flow. For descriptions of the available types, see
-    #   [Choose a flow type][1] in the *Amazon Connect Administrator Guide*.
+    #   [Choose a flow type][1] in the *Connect Customer Administrator
+    #   Guide*.
     #
     #
     #
@@ -4071,7 +4074,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -4195,7 +4198,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #
     #
@@ -4545,7 +4548,7 @@ module Aws::Connect
 
     # Contains summary information about a flow.
     #
-    # You can also create and update flows using the [Amazon Connect Flow
+    # You can also create and update flows using the [Connect Customer Flow
     # language][1].
     #
     #
@@ -4759,8 +4762,8 @@ module Aws::Connect
     #   @return [Time]
     #
     # @!attribute [rw] disconnect_timestamp
-    #   The timestamp when the customer endpoint disconnected from Amazon
-    #   Connect.
+    #   The timestamp when the customer endpoint disconnected from Connect
+    #   Customer.
     #   @return [Time]
     #
     # @!attribute [rw] scheduled_timestamp
@@ -4991,7 +4994,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5071,7 +5074,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5125,7 +5128,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5143,7 +5146,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #
     #
@@ -5211,7 +5214,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5260,7 +5263,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] name
@@ -5269,7 +5272,8 @@ module Aws::Connect
     #
     # @!attribute [rw] type
     #   The type of the flow. For descriptions of the available types, see
-    #   [Choose a flow type][1] in the *Amazon Connect Administrator Guide*.
+    #   [Choose a flow type][1] in the *Connect Customer Administrator
+    #   Guide*.
     #
     #
     #
@@ -5282,7 +5286,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -5341,7 +5345,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -5402,7 +5406,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5425,12 +5429,12 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] related_contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -5495,7 +5499,7 @@ module Aws::Connect
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
     #   segments (unique contact ID) using an attribute map. The attributes
-    #   are standard Amazon Connect attributes. They can be accessed in
+    #   are standard Connect Customer attributes. They can be accessed in
     #   flows.
     #
     #   Attribute keys can include only alphanumeric, -, and \_.
@@ -5515,8 +5519,8 @@ module Aws::Connect
     # @!attribute [rw] previous_contact_id
     #   The ID of the previous contact when creating a transfer contact.
     #   This value can be provided only for external audio contacts. For
-    #   more information, see [Integrate Amazon Connect Contact Lens with
-    #   external voice systems][1] in the *Amazon Connect Administrator
+    #   more information, see [Integrate Connect Customer Contact Lens with
+    #   external voice systems][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -5546,7 +5550,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] contact_arn
@@ -5732,7 +5736,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5796,7 +5800,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -5900,7 +5904,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -5974,7 +5978,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6056,7 +6060,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] identity_management_type
-    #   The type of identity management for your Amazon Connect users.
+    #   The type of identity management for your Connect Customer users.
     #   @return [String]
     #
     # @!attribute [rw] instance_alias
@@ -6113,7 +6117,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6129,8 +6133,8 @@ module Aws::Connect
     #   The Amazon Resource Name (ARN) of the integration.
     #
     #   <note markdown="1"> When integrating with Amazon Web Services End User Messaging, the
-    #   Amazon Connect and Amazon Web Services End User Messaging instances
-    #   must be in the same account.
+    #   Connect Customer and Amazon Web Services End User Messaging
+    #   instances must be in the same account.
     #
     #    </note>
     #   @return [String]
@@ -6277,7 +6281,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6286,7 +6290,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   Supports contacts in the CHAT channel and VOICE (WebRTC) channels.
     #   For WebRTC calls, this should be the initial contact ID that was
     #   generated when the contact was first created (from the
@@ -6346,7 +6350,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6366,9 +6370,9 @@ module Aws::Connect
     #     terminated past chat contact of the specified past ended chat
     #     session. To use this type, provide the `initialContactId` of the
     #     past ended chat session in the `sourceContactId` field. In this
-    #     type, Amazon Connect determines what the most recent chat contact
-    #     on the past ended chat session and uses it to start a persistent
-    #     chat.
+    #     type, Connect Customer determines what the most recent chat
+    #     contact on the past ended chat session and uses it to start a
+    #     persistent chat.
     #
     #   * `FROM_SEGMENT`: Rehydrates a chat from the specified past chat
     #     contact provided in the `sourceContactId` field.
@@ -6466,7 +6470,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -6480,15 +6484,15 @@ module Aws::Connect
     #
     # @!attribute [rw] purposes
     #   Values that enable you to categorize your predefined attributes. You
-    #   can use them in custom UI elements across the Amazon Connect admin
+    #   can use them in custom UI elements across the Connect Customer admin
     #   website.
     #   @return [Array<String>]
     #
     # @!attribute [rw] attribute_configuration
     #   Custom metadata that is associated to predefined attributes to
     #   control behavior in upstream services, such as controlling how a
-    #   predefined attribute should be displayed in the Amazon Connect admin
-    #   website.
+    #   predefined attribute should be displayed in the Connect Customer
+    #   admin website.
     #   @return [Types::InputPredefinedAttributeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CreatePredefinedAttributeRequest AWS API Documentation
@@ -6504,7 +6508,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6630,7 +6634,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6715,7 +6719,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6771,7 +6775,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6800,8 +6804,8 @@ module Aws::Connect
     #   The limit of 10 array members applies to the maximum number of
     #   `RoutingProfileQueueConfig` objects that can be passed during a
     #   CreateRoutingProfile API request. It is different from the quota of
-    #   50 queues per routing profile per instance that is listed in [Amazon
-    #   Connect service quotas][1].
+    #   50 queues per routing profile per instance that is listed in
+    #   [Connect Customer service quotas][1].
     #
     #
     #
@@ -6816,7 +6820,7 @@ module Aws::Connect
     #   RoutingProfileManualAssignmentQueueConfig objects that can be passed
     #   during a CreateRoutingProfile API request. It is different from the
     #   quota of 50 queues per routing profile per instance that is listed
-    #   in Amazon Connect service quotas.
+    #   in Connect Customer service quotas.
     #
     #   Note: Use this config for chat, email, and task contacts. It does
     #   not support voice contacts.
@@ -6873,7 +6877,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6964,7 +6968,7 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -6980,14 +6984,14 @@ module Aws::Connect
     #
     # @!attribute [rw] allowed_access_control_tags
     #   The list of tags that a security profile uses to restrict access to
-    #   resources in Amazon Connect.
+    #   resources in Connect Customer.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tag_restricted_resources
     #   The list of resources that a security profile applies tag
-    #   restrictions to in Amazon Connect. For a list of Amazon Connect
-    #   resources that you can tag, see [Add tags to resources in Amazon
-    #   Connect][1] in the *Amazon Connect Administrator Guide*.
+    #   restrictions to in Connect Customer. For a list of Connect Customer
+    #   resources that you can tag, see [Add tags to resources in Connect
+    #   Customer][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -7001,13 +7005,13 @@ module Aws::Connect
     #
     # @!attribute [rw] hierarchy_restricted_resources
     #   The list of resources that a security profile applies hierarchy
-    #   restrictions to in Amazon Connect. Following are acceptable
+    #   restrictions to in Connect Customer. Following are acceptable
     #   ResourceNames: `User`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_access_control_hierarchy_group_id
     #   The identifier of the hierarchy group that a security profile uses
-    #   to restrict access to resources in Amazon Connect.
+    #   to restrict access to resources in Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] allowed_flow_modules
@@ -7056,7 +7060,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -7242,7 +7246,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that has been
+    #   The identifier of the Connect Customer instance that has been
     #   replicated. You can find the `instanceId` in the ARN of the
     #   instance.
     #   @return [String]
@@ -7298,7 +7302,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -7361,7 +7365,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -7420,7 +7424,7 @@ module Aws::Connect
     #
     # @!attribute [rw] password
     #   The password for the user account. A password is required if you are
-    #   using Amazon Connect for identity management. Otherwise, it is an
+    #   using Connect Customer for identity management. Otherwise, it is an
     #   error to include a password.
     #   @return [String]
     #
@@ -7438,16 +7442,16 @@ module Aws::Connect
     #
     # @!attribute [rw] directory_user_id
     #   The identifier of the user account in the directory used for
-    #   identity management. If Amazon Connect cannot access the directory,
-    #   you can specify this identifier to authenticate users. If you
-    #   include the identifier, we assume that Amazon Connect cannot access
-    #   the directory. Otherwise, the identity information is used to
+    #   identity management. If Connect Customer cannot access the
+    #   directory, you can specify this identifier to authenticate users. If
+    #   you include the identifier, we assume that Connect Customer cannot
+    #   access the directory. Otherwise, the identity information is used to
     #   authenticate users from your directory.
     #
     #   This parameter is required if you are using an existing directory
-    #   for identity management in Amazon Connect when Amazon Connect cannot
-    #   access your directory to authenticate users. If you are using SAML
-    #   for identity management and include this parameter, an error is
+    #   for identity management in Connect Customer when Connect Customer
+    #   cannot access your directory to authenticate users. If you are using
+    #   SAML for identity management and include this parameter, an error is
     #   returned.
     #   @return [String]
     #
@@ -7464,7 +7468,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -7541,7 +7545,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -7606,7 +7610,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -7663,7 +7667,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -7890,17 +7894,17 @@ module Aws::Connect
     # Contains credentials to use for federation.
     #
     # @!attribute [rw] access_token
-    #   An access token generated for a federated user to access Amazon
-    #   Connect.
+    #   An access token generated for a federated user to access Connect
+    #   Customer.
     #   @return [String]
     #
     # @!attribute [rw] access_token_expiration
     #   A token generated with an expiration time for the session a user is
-    #   logged in to Amazon Connect.
+    #   logged in to Connect Customer.
     #   @return [Time]
     #
     # @!attribute [rw] refresh_token
-    #   Renews a token generated for a user to access the Amazon Connect
+    #   Renews a token generated for a user to access the Connect Customer
     #   instance.
     #   @return [String]
     #
@@ -7937,7 +7941,7 @@ module Aws::Connect
     end
 
     # Contains information about a real-time metric. For a description of
-    # each metric, see [Metrics definitions][1] in the *Amazon Connect
+    # each metric, see [Metrics definitions][1] in the *Connect Customer
     # Administrator Guide*.
     #
     # Only one of either the Name or MetricId is required.
@@ -8042,7 +8046,7 @@ module Aws::Connect
     #   The configuration for the allowed video and screen sharing
     #   capabilities for participants present over the call. For more
     #   information, see [Set up in-app, web, video calling, and screen
-    #   sharing capabilities][1] in the *Amazon Connect Administrator
+    #   sharing capabilities][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -8686,7 +8690,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8768,7 +8772,7 @@ module Aws::Connect
     # Contains information about a default vocabulary.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8845,7 +8849,7 @@ module Aws::Connect
     class DeleteAttachedFileResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8867,7 +8871,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8898,7 +8902,7 @@ module Aws::Connect
     class DeleteContactFlowModuleAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8924,7 +8928,7 @@ module Aws::Connect
     class DeleteContactFlowModuleResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8955,7 +8959,7 @@ module Aws::Connect
     class DeleteContactFlowModuleVersionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -8981,7 +8985,7 @@ module Aws::Connect
     class DeleteContactFlowResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9069,7 +9073,7 @@ module Aws::Connect
     class DeleteDataTableResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9095,7 +9099,7 @@ module Aws::Connect
     class DeleteEmailAddressResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9122,7 +9126,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -9144,7 +9148,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9166,7 +9170,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9198,7 +9202,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9248,7 +9252,7 @@ module Aws::Connect
     class DeleteNotificationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -9266,7 +9270,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9301,7 +9305,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact within the Amazon Connect instance.
+    #   The identifier of the contact within the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DeletePushNotificationRegistrationRequest AWS API Documentation
@@ -9319,7 +9323,7 @@ module Aws::Connect
     class DeletePushNotificationRegistrationResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9341,7 +9345,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9363,7 +9367,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9385,7 +9389,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9407,7 +9411,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9429,7 +9433,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9493,7 +9497,7 @@ module Aws::Connect
     class DeleteTrafficDistributionGroupResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9524,7 +9528,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9542,7 +9546,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9564,7 +9568,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -9586,7 +9590,7 @@ module Aws::Connect
     class DeleteViewResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -9613,7 +9617,7 @@ module Aws::Connect
     class DeleteViewVersionResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9746,7 +9750,7 @@ module Aws::Connect
     class DeleteWorkspaceResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9780,7 +9784,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9819,7 +9823,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9849,7 +9853,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9889,7 +9893,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9928,7 +9932,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -9962,7 +9966,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -9991,7 +9995,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10093,7 +10097,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10172,7 +10176,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10211,7 +10215,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -10245,7 +10249,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10279,7 +10283,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10313,7 +10317,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10336,10 +10340,10 @@ module Aws::Connect
     # @!attribute [rw] replication_configuration
     #   Status information about the replication process. This field is
     #   included only when you are using the [ReplicateInstance][1] API to
-    #   replicate an Amazon Connect instance across Amazon Web Services
-    #   Regions. For information about replicating Amazon Connect instances,
-    #   see [Create a replica of your existing Amazon Connect instance][2]
-    #   in the *Amazon Connect Administrator Guide*.
+    #   replicate an Connect Customer instance across Amazon Web Services
+    #   Regions. For information about replicating Connect Customer
+    #   instances, see [Create a replica of your existing Connect Customer
+    #   instance][2] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -10357,7 +10361,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10444,8 +10448,8 @@ module Aws::Connect
     end
 
     # @!attribute [rw] claimed_phone_number_summary
-    #   Information about a phone number that's been claimed to your Amazon
-    #   Connect instance or traffic distribution group.
+    #   Information about a phone number that's been claimed to your
+    #   Connect Customer instance or traffic distribution group.
     #   @return [Types::ClaimedPhoneNumberSummary]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DescribePhoneNumberResponse AWS API Documentation
@@ -10457,7 +10461,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -10487,7 +10491,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10521,7 +10525,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10555,7 +10559,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10589,7 +10593,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10623,7 +10627,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10661,7 +10665,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10758,7 +10762,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10788,7 +10792,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10821,7 +10825,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10851,7 +10855,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -10882,7 +10886,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -10904,8 +10908,8 @@ module Aws::Connect
     end
 
     # @!attribute [rw] vocabulary
-    #   A list of specific words that you want Contact Lens for Amazon
-    #   Connect to recognize in your audio input. They are generally
+    #   A list of specific words that you want Contact Lens for Connect
+    #   Customer to recognize in your audio input. They are generally
     #   domain-specific words and phrases, words that Contact Lens is not
     #   recognizing, or proper nouns.
     #   @return [Types::Vocabulary]
@@ -11035,7 +11039,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11049,9 +11053,9 @@ module Aws::Connect
     #
     # @!attribute [rw] target_account_id
     #   The identifier of the target account. Use to associate a dataset to
-    #   a different account than the one containing the Amazon Connect
+    #   a different account than the one containing the Connect Customer
     #   instance. If not specified, by default this value is the Amazon Web
-    #   Services account that has the Amazon Connect instance.
+    #   Services account that has the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/DisassociateAnalyticsDataSetRequest AWS API Documentation
@@ -11065,7 +11069,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11102,7 +11106,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11148,7 +11152,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11192,7 +11196,7 @@ module Aws::Connect
     class DisassociateEmailAddressAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11258,7 +11262,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11301,7 +11305,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance..
     #
     #
@@ -11339,7 +11343,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11386,7 +11390,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11404,7 +11408,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11448,7 +11452,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11475,7 +11479,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11508,7 +11512,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11584,7 +11588,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -11607,7 +11611,7 @@ module Aws::Connect
     class DisassociateTrafficDistributionGroupUserResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -11691,8 +11695,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains details about why a contact was disconnected. Only Amazon
-    # Connect outbound campaigns can provide this field.
+    # Contains details about why a contact was disconnected. Only Connect
+    # Customer outbound campaigns can provide this field.
     #
     # @!attribute [rw] code
     #   A code that indicates how the contact was terminated.
@@ -11711,7 +11715,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -11835,8 +11839,8 @@ module Aws::Connect
     #
     # @!attribute [rw] email_address_id
     #   The identifier of the email address that should be associated with
-    #   the queue. This email address must already exist in the Amazon
-    #   Connect instance and will be used to route incoming email contacts
+    #   the queue. This email address must already exist in the Connect
+    #   Customer instance and will be used to route incoming email contacts
     #   to the specified queue.
     #   @return [String]
     #
@@ -12088,8 +12092,8 @@ module Aws::Connect
     #   <note markdown="1"> Be sure to provide the full ARN of the encryption key, not just the
     #   ID.
     #
-    #    Amazon Connect supports only KMS keys with the default key spec of [
-    #   `SYMMETRIC_DEFAULT` ][1].
+    #    Connect Customer supports only KMS keys with the default key spec of
+    #   [ `SYMMETRIC_DEFAULT` ][1].
     #
     #    </note>
     #
@@ -12158,7 +12162,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # This API is in preview release for Amazon Connect and is subject to
+    # This API is in preview release for Connect Customer and is subject to
     # change.
     #
     # List of errors for dataset association failures.
@@ -13688,7 +13692,7 @@ module Aws::Connect
     # Metadata information about a contact evaluation.
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] evaluator_arn
@@ -14036,7 +14040,7 @@ module Aws::Connect
     # Metadata information about an evaluation search.
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] evaluator_arn
@@ -14350,7 +14354,7 @@ module Aws::Connect
     # @note EvaluatorUserUnion is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] connect_user_arn
-    #   Represents the Amazon Connect ARN of the user.
+    #   Represents the Connect Customer ARN of the user.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EvaluatorUserUnion AWS API Documentation
@@ -14765,7 +14769,7 @@ module Aws::Connect
     # Request to GetAttachedFile API.
     #
     # @!attribute [rw] instance_id
-    #   The unique identifier of the Amazon Connect instance.
+    #   The unique identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] file_id
@@ -14876,7 +14880,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] initial_contact_id
@@ -14905,7 +14909,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -14914,7 +14918,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] metrics
@@ -14962,7 +14966,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -15046,8 +15050,8 @@ module Aws::Connect
     # @!attribute [rw] current_metrics
     #   The metrics to retrieve. Specify the name or metricId, and unit for
     #   each metric. The following metrics are available. For a description
-    #   of all the metrics, see [Metrics definitions][1] in the *Amazon
-    #   Connect Administrator Guide*.
+    #   of all the metrics, see [Metrics definitions][1] in the *Connect
+    #   Customer Administrator Guide*.
     #
     #   <note markdown="1"> MetricId should be used to reference custom metrics or out of the
     #   box metrics as Arn. If using MetricId, the limit is 10 MetricId per
@@ -15257,7 +15261,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -15332,7 +15336,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -15390,7 +15394,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -15435,7 +15439,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -15490,7 +15494,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -15552,7 +15556,7 @@ module Aws::Connect
     #   The metrics to retrieve. Specify the name, unit, and statistic for
     #   each metric. The following historical metrics are available. For a
     #   description of each metric, see [Metrics definition][1] in the
-    #   *Amazon Connect Administrator Guide*.
+    #   *Connect Customer Administrator Guide*.
     #
     #   <note markdown="1"> This API does not support a contacts incoming metric (there's no
     #   CONTACTS\_INCOMING metric missing from the documented list).
@@ -15844,7 +15848,7 @@ module Aws::Connect
 
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the resource. This includes the
-    #   `instanceId` an Amazon Connect instance.
+    #   `instanceId` an Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -15871,9 +15875,9 @@ module Aws::Connect
     #     `THIRTY_MIN` \| `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
     #
     #     For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
-    #     `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #     `StartTime` and `EndTime` differs by 1 day, then Connect Customer
     #     returns 48 results in the response. Each result is aggregated by
-    #     the THIRTY\_MIN period. By default Amazon Connect aggregates
+    #     the THIRTY\_MIN period. By default Connect Customer aggregates
     #     results based on the `TOTAL` interval period.
     #
     #     The following list describes restrictions on `StartTime` and
@@ -15931,8 +15935,8 @@ module Aws::Connect
     #   `TEST_CASE_EXECUTION_FAILURE_REASON` \| `TEST_CASE_EXECUTION_RESULT`
     #   \| `TEST_CASE_EXECUTION_STATE`
     #
-    #   <note markdown="1"> The following filter keys correspond to Amazon Connect resources and
-    #   are used for authorizing requests. A `GetMetricDataV2` request
+    #   <note markdown="1"> The following filter keys correspond to Connect Customer resources
+    #   and are used for authorizing requests. A `GetMetricDataV2` request
     #   requires at least one of these filters:
     #
     #    `QUEUE`, `ROUTING_PROFILE`, `AGENT`, `AGENT_HIERARCHY_LEVEL_ONE`,
@@ -15983,7 +15987,7 @@ module Aws::Connect
     #     filter key.
     #
     #   * To filter by phone number, see [Create a historical metrics
-    #     report][2] in the *Amazon Connect Administrator Guide*.
+    #     report][2] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -16038,7 +16042,7 @@ module Aws::Connect
     #   The metrics to retrieve. Specify the name or metricId, groupings,
     #   and filters for each metric. The following historical metrics are
     #   available. For a description of each metric, see [Metrics
-    #   definition][1] in the *Amazon Connect Administrator Guide*.
+    #   definition][1] in the *Connect Customer Administrator Guide*.
     #
     #   <note markdown="1"> MetricId should be used to reference custom metrics or out of the
     #   box metrics as Arn. If using MetricId, the limit is 20 MetricId per
@@ -17993,7 +17997,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -18039,7 +18043,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -18067,7 +18071,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -18652,7 +18656,7 @@ module Aws::Connect
     # @!attribute [rw] name
     #   The name of the metric. Following is a list of each supported metric
     #   mapped to the UI name, linked to a detailed description in the
-    #   *Amazon Connect Administrator Guide*.
+    #   *Connect Customer Administrator Guide*.
     #
     #   ABANDON\_TIME
     #
@@ -19323,7 +19327,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -19518,10 +19522,10 @@ module Aws::Connect
 
     # Custom metadata that is associated to predefined attributes to control
     # behavior in upstream services, such as controlling how a predefined
-    # attribute should be displayed in the Amazon Connect admin website.
+    # attribute should be displayed in the Connect Customer admin website.
     #
     # @!attribute [rw] enable_value_validation_on_association
-    #   When this parameter is set to true, Amazon Connect enforces strict
+    #   When this parameter is set to true, Connect Customer enforces strict
     #   validation on the specific values, if the values are predefined in
     #   attributes. The contact will store only valid and predefined values
     #   for the predefined attribute key.
@@ -19535,10 +19539,10 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # The Amazon Connect instance.
+    # The Connect Customer instance.
     #
     # @!attribute [rw] id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -19583,7 +19587,7 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access the Amazon Connect
+    #   This URL allows contact center users to access the Connect Customer
     #   admin website.
     #   @return [String]
     #
@@ -19703,7 +19707,7 @@ module Aws::Connect
     #   @return [Boolean]
     #
     # @!attribute [rw] instance_access_url
-    #   This URL allows contact center users to access the Amazon Connect
+    #   This URL allows contact center users to access the Connect Customer
     #   admin website.
     #   @return [String]
     #
@@ -19735,7 +19739,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -19805,9 +19809,9 @@ module Aws::Connect
     #   `HOUR` \| `DAY` \| `WEEK` \| `TOTAL`.
     #
     #   For example, if `IntervalPeriod` is selected `THIRTY_MIN`,
-    #   `StartTime` and `EndTime` differs by 1 day, then Amazon Connect
+    #   `StartTime` and `EndTime` differs by 1 day, then Connect Customer
     #   returns 48 results in the response. Each result is aggregated by the
-    #   THIRTY\_MIN period. By default Amazon Connect aggregates results
+    #   THIRTY\_MIN period. By default Connect Customer aggregates results
     #   based on the `TOTAL` interval period.
     #
     #   The following list describes restrictions on `StartTime` and
@@ -20089,7 +20093,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20141,7 +20145,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20195,7 +20199,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20244,7 +20248,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20291,7 +20295,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20300,7 +20304,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -20344,7 +20348,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20392,7 +20396,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20439,7 +20443,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20577,7 +20581,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20586,7 +20590,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -20630,7 +20634,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20682,7 +20686,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20734,7 +20738,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20786,7 +20790,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -20834,7 +20838,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -20887,7 +20891,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21165,7 +21169,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21278,7 +21282,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21331,7 +21335,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21379,7 +21383,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21431,7 +21435,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -21490,7 +21494,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21538,7 +21542,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21585,7 +21589,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21674,7 +21678,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21731,7 +21735,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21778,7 +21782,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21874,7 +21878,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -21942,8 +21946,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Information about phone numbers that have been claimed to your Amazon
-    # Connect instance or traffic distribution group.
+    # Information about phone numbers that have been claimed to your Connect
+    # Customer instance or traffic distribution group.
     #
     # @!attribute [rw] phone_number_id
     #   A unique identifier for the phone number.
@@ -21967,15 +21971,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance.
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance.
     #
     #
     #
@@ -22011,21 +22015,21 @@ module Aws::Connect
     end
 
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through. If both `TargetArn` and `InstanceId` input are not
-    #   provided, this API lists numbers claimed to all the Amazon Connect
+    #   provided, this API lists numbers claimed to all the Connect Customer
     #   instances belonging to your account in the same Amazon Web Services
     #   Region as the request.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance. If both `TargetArn` and `InstanceId` are
-    #   not provided, this API lists numbers claimed to all the Amazon
-    #   Connect instances belonging to your account in the same Amazon Web
-    #   Services Region as the request.
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance. If both `TargetArn` and
+    #   `InstanceId` are not provided, this API lists numbers claimed to all
+    #   the Connect Customer instances belonging to your account in the same
+    #   Amazon Web Services Region as the request.
     #
     #
     #
@@ -22076,7 +22080,7 @@ module Aws::Connect
     #
     # @!attribute [rw] list_phone_numbers_summary_list
     #   Information about phone numbers that have been claimed to your
-    #   Amazon Connect instances or traffic distribution groups.
+    #   Connect Customer instances or traffic distribution groups.
     #   @return [Array<Types::ListPhoneNumbersSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListPhoneNumbersV2Response AWS API Documentation
@@ -22089,7 +22093,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -22132,7 +22136,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -22175,7 +22179,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22240,7 +22244,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22304,7 +22308,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22357,7 +22361,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #   Both Instance ID and Instance ARN are supported input formats.
     #
@@ -22378,10 +22382,10 @@ module Aws::Connect
     #   @return [Integer]
     #
     # @!attribute [rw] quick_connect_types
-    #   The type of quick connect. In the Amazon Connect admin website, when
-    #   you create a quick connect, you are prompted to assign one of the
-    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
-    #   (QUEUE).
+    #   The type of quick connect. In the Connect Customer admin website,
+    #   when you create a quick connect, you are prompted to assign one of
+    #   the following types: Agent (USER), External (PHONE\_NUMBER), or
+    #   Queue (QUEUE).
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ListQuickConnectsRequest AWS API Documentation
@@ -22414,7 +22418,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22423,7 +22427,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -22493,7 +22497,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22557,7 +22561,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22621,7 +22625,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22669,7 +22673,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22726,7 +22730,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22777,7 +22781,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22840,7 +22844,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22904,7 +22908,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -22968,7 +22972,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23016,10 +23020,10 @@ module Aws::Connect
     end
 
     # @!attribute [rw] resource_arn
-    #   The Amazon Resource Name (ARN) of the resource. All Amazon Connect
+    #   The Amazon Resource Name (ARN) of the resource. All Connect Customer
     #   resources (instances, queues, flows, routing profiles, etc) have an
     #   ARN. To locate the ARN for an instance, for example, see [Find your
-    #   Amazon Connect instance ID/ARN][1].
+    #   Connect Customer instance ID/ARN][1].
     #
     #
     #
@@ -23047,7 +23051,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23336,7 +23340,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23376,7 +23380,7 @@ module Aws::Connect
     # integration association.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23428,7 +23432,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23528,7 +23532,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -23586,7 +23590,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -23634,7 +23638,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -23684,7 +23688,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -24083,20 +24087,21 @@ module Aws::Connect
     #
     #   For valid values of metric-level filters `INITIATION_METHOD`,
     #   `DISCONNECT_REASON`, and `ANSWERING_MACHINE_DETECTION_STATUS`, see
-    #   [ContactTraceRecord][1] in the *Amazon Connect Administrator Guide*.
+    #   [ContactTraceRecord][1] in the *Connect Customer Administrator
+    #   Guide*.
     #
     #   For valid values of the metric-level filter `FLOWS_OUTCOME_TYPE`,
-    #   see the description for the [Flow outcome][2] metric in the *Amazon
-    #   Connect Administrator Guide*.
+    #   see the description for the [Flow outcome][2] metric in the *Connect
+    #   Customer Administrator Guide*.
     #
     #   For valid values of the metric-level filter
     #   `BOT_CONVERSATION_OUTCOME_TYPE`, see the description for the [Bot
-    #   conversations completed][3] in the *Amazon Connect Administrator
+    #   conversations completed][3] in the *Connect Customer Administrator
     #   Guide*.
     #
     #   For valid values of the metric-level filter
     #   `BOT_INTENT_OUTCOME_TYPE`, see the description for the [Bot intents
-    #   completed][4] metric in the *Amazon Connect Administrator Guide*.
+    #   completed][4] metric in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -24190,7 +24195,7 @@ module Aws::Connect
     #
     # @!attribute [rw] metric_id
     #   Historical metrics or custom metrics can be referenced via this
-    #   field. This field is a valid Amazon Connect Arn or a UUID
+    #   field. This field is a valid Connect Customer Arn or a UUID
     #   @return [String]
     #
     # @!attribute [rw] metric_filters
@@ -24209,7 +24214,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -24337,7 +24342,7 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes. They can be accessed in flows
+    #   standard Connect Customer attributes. They can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -24472,8 +24477,8 @@ module Aws::Connect
     # @!attribute [rw] user_tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \{ "Tags": \{"key1":"value1",
-    #   "key2":"value2"} }. Amazon Connect users with the specified tags
-    #   will be notified.
+    #   "key2":"value2"} }. Connect Customer users with the specified
+    #   tags will be notified.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] user_ids
@@ -25083,7 +25088,8 @@ module Aws::Connect
     # The configuration for the allowed video and screen sharing
     # capabilities for participants present over the call. For more
     # information, see [Set up in-app, web, video calling, and screen
-    # sharing capabilities][1] in the *Amazon Connect Administrator Guide*.
+    # sharing capabilities][1] in the *Connect Customer Administrator
+    # Guide*.
     #
     #
     #
@@ -25150,7 +25156,7 @@ module Aws::Connect
     #   The configuration for the allowed video and screen sharing
     #   capabilities for participants present over the call. For more
     #   information, see [Set up in-app, web, video calling, and screen
-    #   sharing capabilities][1] in the *Amazon Connect Administrator
+    #   sharing capabilities][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -25330,7 +25336,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   `instanceId` in the ARN of the instance.
     #   @return [String]
     #
@@ -25368,7 +25374,7 @@ module Aws::Connect
     #     terminated past chat contact of the specified past ended chat
     #     session. To use this type, provide the `initialContactId` of the
     #     past ended chat session in the `sourceContactId` field. In this
-    #     type, Amazon Connect determines the most recent chat contact on
+    #     type, Connect Customer determines the most recent chat contact on
     #     the specified chat session that has ended, and uses it to start a
     #     persistent chat.
     #
@@ -25560,15 +25566,15 @@ module Aws::Connect
     #
     # @!attribute [rw] purposes
     #   Values that enable you to categorize your predefined attributes. You
-    #   can use them in custom UI elements across the Amazon Connect admin
+    #   can use them in custom UI elements across the Connect Customer admin
     #   website.
     #   @return [Array<String>]
     #
     # @!attribute [rw] attribute_configuration
     #   Custom metadata that is associated to predefined attributes to
     #   control behavior in upstream services, such as controlling how a
-    #   predefined attribute should be displayed in the Amazon Connect admin
-    #   website.
+    #   predefined attribute should be displayed in the Connect Customer
+    #   admin website.
     #   @return [Types::PredefinedAttributeConfiguration]
     #
     # @!attribute [rw] last_modified_time
@@ -25594,10 +25600,10 @@ module Aws::Connect
 
     # Custom metadata that is associated to predefined attributes to control
     # behavior in upstream services, such as controlling how a predefined
-    # attribute should be displayed in the Amazon Connect admin website.
+    # attribute should be displayed in the Connect Customer admin website.
     #
     # @!attribute [rw] enable_value_validation_on_association
-    #   When this parameter is set to true, Amazon Connect enforces strict
+    #   When this parameter is set to true, Connect Customer enforces strict
     #   validation on the specific values, if the values are predefined in
     #   attributes. The contact will store only valid and predefined values
     #   for teh predefined attribute key.
@@ -25605,7 +25611,7 @@ module Aws::Connect
     #
     # @!attribute [rw] is_read_only
     #   A boolean flag used to indicate whether a predefined attribute
-    #   should be displayed in the Amazon Connect admin website.
+    #   should be displayed in the Connect Customer admin website.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/PredefinedAttributeConfiguration AWS API Documentation
@@ -26013,7 +26019,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -26365,10 +26371,10 @@ module Aws::Connect
     # Contains configuration settings for a quick connect.
     #
     # @!attribute [rw] quick_connect_type
-    #   The type of quick connect. In the Amazon Connect admin website, when
-    #   you create a quick connect, you are prompted to assign one of the
-    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
-    #   (QUEUE).
+    #   The type of quick connect. In the Connect Customer admin website,
+    #   when you create a quick connect, you are prompted to assign one of
+    #   the following types: Agent (USER), External (PHONE\_NUMBER), or
+    #   Queue (QUEUE).
     #   @return [String]
     #
     # @!attribute [rw] user_config
@@ -26505,10 +26511,10 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] quick_connect_type
-    #   The type of quick connect. In the Amazon Connect admin website, when
-    #   you create a quick connect, you are prompted to assign one of the
-    #   following types: Agent (USER), External (PHONE\_NUMBER), or Queue
-    #   (QUEUE).
+    #   The type of quick connect. In the Connect Customer admin website,
+    #   when you create a quick connect, you are prompted to assign one of
+    #   the following types: Agent (USER), External (PHONE\_NUMBER), or
+    #   Queue (QUEUE).
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -26575,8 +26581,8 @@ module Aws::Connect
     #
     # @!attribute [rw] content_type
     #   Describes the MIME file type of the attachment. For a list of
-    #   supported file types, see [Feature specifications][1] in the *Amazon
-    #   Connect Administrator Guide*.
+    #   supported file types, see [Feature specifications][1] in the
+    #   *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -27382,7 +27388,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #   You can provide the `InstanceId`, or the entire ARN.
     #
@@ -27392,8 +27398,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] replica_region
-    #   The Amazon Web Services Region where to replicate the Amazon Connect
-    #   instance.
+    #   The Amazon Web Services Region where to replicate the Connect
+    #   Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -27445,12 +27451,13 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Details about the status of the replication of a source Amazon Connect
-    # instance across Amazon Web Services Regions. Use these details to
-    # understand the general status of a given replication. For information
-    # about why a replication process may fail, see [Why a ReplicateInstance
-    # call fails][1] in the *Create a replica of your existing Amazon
-    # Connect instance* topic in the *Amazon Connect Administrator Guide*.
+    # Details about the status of the replication of a source Connect
+    # Customer instance across Amazon Web Services Regions. Use these
+    # details to understand the general status of a given replication. For
+    # information about why a replication process may fail, see [Why a
+    # ReplicateInstance call fails][1] in the *Create a replica of your
+    # existing Connect Customer instance* topic in the *Connect Customer
+    # Administrator Guide*.
     #
     #
     #
@@ -27459,11 +27466,11 @@ module Aws::Connect
     # @!attribute [rw] replication_status_summary_list
     #   A list of replication status summaries. The summaries contain
     #   details about the replication of configuration information for
-    #   Amazon Connect resources, for each Amazon Web Services Region.
+    #   Connect Customer resources, for each Amazon Web Services Region.
     #   @return [Array<Types::ReplicationStatusSummary>]
     #
     # @!attribute [rw] source_region
-    #   The Amazon Web Services Region where the source Amazon Connect
+    #   The Amazon Web Services Region where the source Connect Customer
     #   instance was created. This is the Region where the
     #   [ReplicateInstance][1] API was called to start the replication
     #   process.
@@ -27474,11 +27481,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] global_sign_in_endpoint
-    #   The URL that is used to sign-in to your Amazon Connect instance
+    #   The URL that is used to sign-in to your Connect Customer instance
     #   according to your traffic distribution group configuration. For more
     #   information about sign-in and traffic distribution groups, see
     #   [Important things to know][1] in the *Create traffic distribution
-    #   groups* topic in the *Amazon Connect Administrator Guide*.
+    #   groups* topic in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -27496,10 +27503,10 @@ module Aws::Connect
     end
 
     # Status information about the replication process, where you use the
-    # [ReplicateInstance][1] API to create a replica of your Amazon Connect
-    # instance in another Amazon Web Services Region. For more information,
-    # see [Set up Amazon Connect Global Resiliency][2] in the *Amazon
-    # Connect Administrator Guide*.
+    # [ReplicateInstance][1] API to create a replica of your Connect
+    # Customer instance in another Amazon Web Services Region. For more
+    # information, see [Set up Connect Customer Global Resiliency][2] in the
+    # *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -27518,7 +27525,7 @@ module Aws::Connect
     # @!attribute [rw] replication_status_reason
     #   A description of the replication status. Use this information to
     #   resolve any issues that are preventing the successful replication of
-    #   your Amazon Connect instance to another Region.
+    #   your Connect Customer instance to another Region.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/ReplicationStatusSummary AWS API Documentation
@@ -27627,7 +27634,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -27668,7 +27675,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   `instanceId` in the ARN of the instance.
     #   @return [String]
     #
@@ -27693,7 +27700,7 @@ module Aws::Connect
     # Latest routing criteria on the contact.
     #
     # @!attribute [rw] steps
-    #   List of routing steps. When Amazon Connect does not find an
+    #   List of routing steps. When Connect Customer does not find an
     #   available agent meeting the requirements in a step for a given step
     #   duration, the routing criteria will move on to the next step
     #   sequentially until a join is completed with an agent. When all steps
@@ -27726,7 +27733,7 @@ module Aws::Connect
     # An object to define the RoutingCriteria.
     #
     # @!attribute [rw] steps
-    #   When Amazon Connect does not find an available agent meeting the
+    #   When Connect Customer does not find an available agent meeting the
     #   requirements in a step for a given step duration, the routing
     #   criteria will move on to the next step sequentially until a join is
     #   completed with an agent. When all steps are exhausted, the contact
@@ -27781,7 +27788,7 @@ module Aws::Connect
     # Contains information about a routing profile.
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -27953,7 +27960,8 @@ module Aws::Connect
     # @!attribute [rw] delay
     #   The delay, in seconds, a contact should be in the queue before they
     #   are routed to an available agent. For more information, see [Queues:
-    #   priority and delay][1] in the *Amazon Connect Administrator Guide*.
+    #   priority and delay][1] in the *Connect Customer Administrator
+    #   Guide*.
     #
     #
     #
@@ -27996,8 +28004,8 @@ module Aws::Connect
     # @!attribute [rw] delay
     #   The delay, in seconds, that a contact should be in the queue before
     #   they are routed to an available agent. For more information, see
-    #   [Queues: priority and delay][1] in the *Amazon Connect Administrator
-    #   Guide*.
+    #   [Queues: priority and delay][1] in the *Connect Customer
+    #   Administrator Guide*.
     #
     #
     #
@@ -28409,7 +28417,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -28467,15 +28475,15 @@ module Aws::Connect
     end
 
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through. You must enter `InstanceId` or `TargetArn`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance. You must enter `InstanceId` or
     #   `TargetArn`.
     #
     #
@@ -28526,8 +28534,8 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] available_numbers_list
-    #   A list of available phone numbers that you can claim to your Amazon
-    #   Connect instance or traffic distribution group.
+    #   A list of available phone numbers that you can claim to your Connect
+    #   Customer instance or traffic distribution group.
     #   @return [Array<Types::AvailableNumberSummary>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/SearchAvailablePhoneNumbersResponse AWS API Documentation
@@ -28540,7 +28548,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -28603,7 +28611,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -28668,7 +28676,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -28779,8 +28787,8 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of Amazon Connect instance. You can find the instance
-    #   ID in the Amazon Resource Name (ARN) of the instance.
+    #   The identifier of Connect Customer instance. You can find the
+    #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
     # @!attribute [rw] time_range
@@ -28906,7 +28914,7 @@ module Aws::Connect
     #   @return [Array<String>]
     #
     # @!attribute [rw] contact_analysis
-    #   Search criteria based on analysis outputs from Amazon Connect
+    #   Search criteria based on analysis outputs from Connect Customer
     #   Contact Lens.
     #   @return [Types::ContactAnalysis]
     #
@@ -28929,14 +28937,14 @@ module Aws::Connect
     # @!attribute [rw] searchable_contact_attributes
     #   The search criteria based on user-defined contact attributes that
     #   have been configured for contact search. For more information, see
-    #   [Search by custom contact attributes][1] in the *Amazon Connect
+    #   [Search by custom contact attributes][1] in the *Connect Customer
     #   Administrator Guide*.
     #
     #   To use `SearchableContactAttributes` in a search request, the
     #   `GetContactAttributes` action is required to perform an API request.
     #   For more information, see
     #   [https://docs.aws.amazon.com/service-authorization/latest/reference/list\_amazonconnect.html#amazonconnect-actions-as-permissions][2]Actions
-    #   defined by Amazon Connect.
+    #   defined by Connect Customer.
     #
     #
     #
@@ -29049,7 +29057,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29111,7 +29119,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29173,7 +29181,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] next_token
@@ -29233,7 +29241,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29361,7 +29369,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -29416,7 +29424,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29478,7 +29486,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29547,7 +29555,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29609,7 +29617,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -29669,7 +29677,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] tags
-    #   A list of tags used in the Amazon Connect instance.
+    #   A list of tags used in the Connect Customer instance.
     #   @return [Array<Types::TagSet>]
     #
     # @!attribute [rw] next_token
@@ -29687,7 +29695,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29757,7 +29765,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -29888,7 +29896,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -29947,7 +29955,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -30079,7 +30087,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -30461,12 +30469,12 @@ module Aws::Connect
     #
     # @!attribute [rw] allowed_access_control_tags
     #   The list of tags that a security profile uses to restrict access to
-    #   resources in Amazon Connect.
+    #   resources in Connect Customer.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tag_restricted_resources
     #   The list of resources that a security profile applies tag
-    #   restrictions to in Amazon Connect.
+    #   restrictions to in Connect Customer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] last_modified_time
@@ -30480,13 +30488,13 @@ module Aws::Connect
     #
     # @!attribute [rw] hierarchy_restricted_resources
     #   The list of resources that a security profile applies hierarchy
-    #   restrictions to in Amazon Connect. Following are acceptable
+    #   restrictions to in Connect Customer. Following are acceptable
     #   ResourceNames: `User`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_access_control_hierarchy_group_id
     #   The identifier of the hierarchy group that a security profile uses
-    #   to restrict access to resources in Amazon Connect.
+    #   to restrict access to resources in Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] granular_access_control_configuration
@@ -30705,7 +30713,7 @@ module Aws::Connect
     #
     # @!attribute [rw] destination_id
     #   Chat system identifier, used in part to uniquely identify chat. This
-    #   is associated with the Amazon Connect instance and flow to be used
+    #   is associated with the Connect Customer instance and flow to be used
     #   to start chats. For Server Migration Service, this is the phone
     #   number destination of inbound Server Migration Service messages
     #   represented by an Amazon Web Services End User Messaging phone
@@ -30769,7 +30777,7 @@ module Aws::Connect
     # @!attribute [rw] subject
     #   The subject of the email if the delivery method is `EMAIL`. Supports
     #   variable injection. For more information, see [JSONPath
-    #   reference][1] in the *Amazon Connect Administrators Guide*.
+    #   reference][1] in the *Connect Customer Administrators Guide*.
     #
     #
     #
@@ -30778,7 +30786,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   Notification content. Supports variable injection. For more
-    #   information, see [JSONPath reference][1] in the *Amazon Connect
+    #   information, see [JSONPath reference][1] in the *Connect Customer
     #   Administrators Guide*.
     #
     #
@@ -30812,7 +30820,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31037,7 +31045,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The unique identifier of the Amazon Connect instance.
+    #   The unique identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] file_name
@@ -31141,7 +31149,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31151,18 +31159,18 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for initiating the chat. To see the
-    #   ContactFlowId in the Amazon Connect admin website, on the navigation
-    #   menu go to **Routing**, **Flows**. Choose the flow. On the flow
-    #   page, under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   ContactFlowId in the Connect Customer admin website, on the
+    #   navigation menu go to **Routing**, **Flows**. Choose the flow. On
+    #   the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes. They can be accessed in flows
+    #   standard Connect Customer attributes. They can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -31237,8 +31245,8 @@ module Aws::Connect
     #   @return [Types::PersistentChat]
     #
     # @!attribute [rw] related_contact_id
-    #   The unique identifier for an Amazon Connect contact. This identifier
-    #   is related to the chat starting.
+    #   The unique identifier for an Connect Customer contact. This
+    #   identifier is related to the chat starting.
     #
     #   <note markdown="1"> You cannot provide data for both RelatedContactId and
     #   PersistentChat.
@@ -31248,8 +31256,8 @@ module Aws::Connect
     #
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
-    #   segments using an attribute map. The attributes are standard Amazon
-    #   Connect attributes. They can be accessed in flows.
+    #   segments using an attribute map. The attributes are standard Connect
+    #   Customer attributes. They can be accessed in flows.
     #
     #   Attribute keys can include only alphanumeric, -, and \_.
     #
@@ -31298,7 +31306,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of this contact within the Amazon Connect instance.
+    #   The identifier of this contact within the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] participant_id
@@ -31333,7 +31341,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31342,7 +31350,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] evaluation_form_id
@@ -31404,7 +31412,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31441,7 +31449,7 @@ module Aws::Connect
     class StartContactMediaProcessingResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31478,7 +31486,7 @@ module Aws::Connect
     class StartContactRecordingResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31534,7 +31542,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31547,7 +31555,7 @@ module Aws::Connect
     #   @return [Types::EmailAddressInfo]
     #
     # @!attribute [rw] destination_email_address
-    #   The email address associated with the Amazon Connect instance.
+    #   The email address associated with the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] description
@@ -31581,11 +31589,11 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for initiating the emails. To see the
-    #   ContactFlowId in the Amazon Connect admin website, on the navigation
-    #   menu go to **Routing**, **Flows**. Choose the flow. On the flow
-    #   page, under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   ContactFlowId in the Connect Customer admin website, on the
+    #   navigation menu go to **Routing**, **Flows**. Choose the flow. On
+    #   the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
@@ -31601,7 +31609,7 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -31611,8 +31619,8 @@ module Aws::Connect
     #
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
-    #   segments using an attribute map. The attributes are standard Amazon
-    #   Connect attributes. They can be accessed in flows.
+    #   segments using an attribute map. The attributes are standard Connect
+    #   Customer attributes. They can be accessed in flows.
     #
     #   Attribute keys can include only alphanumeric, -, and \_.
     #
@@ -31664,7 +31672,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of this contact within the Amazon Connect instance.
+    #   The identifier of this contact within the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartEmailContactResponse AWS API Documentation
@@ -31684,14 +31692,14 @@ module Aws::Connect
     #   @return [Types::Endpoint]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
-    #   segments using an attribute map. The attributes are standard Amazon
-    #   Connect attributes. They can be accessed in flows.
+    #   segments using an attribute map. The attributes are standard Connect
+    #   Customer attributes. They can be accessed in flows.
     #
     #   * Attribute keys can include only alphanumeric, `-`, and `_`.
     #
@@ -31701,14 +31709,14 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for the call. To see the ContactFlowId in
-    #   the Amazon Connect console user interface, on the navigation menu go
-    #   to **Routing, Contact Flows**. Choose the flow. On the flow page,
+    #   the Connect Customer console user interface, on the navigation menu
+    #   go to **Routing, Contact Flows**. Choose the flow. On the flow page,
     #   under the name of the flow, choose **Show additional flow
     #   information**. The ContactFlowId is the last part of the ARN, shown
     #   here in bold:
@@ -31738,8 +31746,8 @@ module Aws::Connect
     #   @return [Types::TemplatedMessageConfig]
     #
     # @!attribute [rw] related_contact_id
-    #   The unique identifier for an Amazon Connect contact. This identifier
-    #   is related to the contact starting.
+    #   The unique identifier for an Connect Customer contact. This
+    #   identifier is related to the contact starting.
     #   @return [String]
     #
     # @!attribute [rw] supported_messaging_content_types
@@ -31803,7 +31811,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of this contact within the Amazon Connect instance.
+    #   The identifier of this contact within the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundChatContactResponse AWS API Documentation
@@ -31815,7 +31823,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31824,11 +31832,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] from_email_address
-    #   The email address associated with the Amazon Connect instance.
+    #   The email address associated with the Connect Customer instance.
     #   @return [Types::EmailAddressInfo]
     #
     # @!attribute [rw] destination_email_address
@@ -31872,7 +31880,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundEmailContactResponse AWS API Documentation
@@ -31891,7 +31899,7 @@ module Aws::Connect
     # @!attribute [rw] description
     #   A description of the voice contact that appears in the agent's
     #   snapshot in the CCP logs. For more information about CCP logs, see
-    #   [Download and review CCP logs][1] in the *Amazon Connect
+    #   [Download and review CCP logs][1] in the *Connect Customer
     #   Administrator Guide*.
     #
     #
@@ -31922,17 +31930,17 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for the outbound call. To see the
-    #   ContactFlowId in the Amazon Connect admin website, on the navigation
-    #   menu go to **Routing**, **Contact Flows**. Choose the flow. On the
-    #   flow page, under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   ContactFlowId in the Connect Customer admin website, on the
+    #   navigation menu go to **Routing**, **Contact Flows**. Choose the
+    #   flow. On the flow page, under the name of the flow, choose **Show
+    #   additional flow information**. The ContactFlowId is the last part of
+    #   the ARN, shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -31957,7 +31965,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] source_phone_number
-    #   The phone number associated with the Amazon Connect instance, in
+    #   The phone number associated with the Connect Customer instance, in
     #   E.164 format. If you do not specify a source phone number, you must
     #   specify a queue.
     #   @return [String]
@@ -31971,7 +31979,7 @@ module Aws::Connect
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -31990,7 +31998,7 @@ module Aws::Connect
     #
     # @!attribute [rw] traffic_type
     #   Denotes the class of traffic. Calls with different traffic types are
-    #   handled differently by Amazon Connect. The default value is
+    #   handled differently by Connect Customer. The default value is
     #   `GENERAL`. Use `CAMPAIGN` if `EnableAnswerMachineDetection` is set
     #   to `true`. For all other cases, use `GENERAL`.
     #   @return [String]
@@ -32028,7 +32036,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of this contact within the Amazon Connect instance.
+    #   The identifier of this contact within the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartOutboundVoiceContactResponse AWS API Documentation
@@ -32054,7 +32062,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32063,7 +32071,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartScreenSharingRequest AWS API Documentation
@@ -32081,7 +32089,7 @@ module Aws::Connect
     class StartScreenSharingResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32098,18 +32106,18 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for initiating the tasks. To see the
-    #   ContactFlowId in the Amazon Connect admin website, on the navigation
-    #   menu go to **Routing**, **Flows**. Choose the flow. On the flow
-    #   page, under the name of the flow, choose **Show additional flow
-    #   information**. The ContactFlowId is the last part of the ARN, shown
-    #   here in bold:
+    #   ContactFlowId in the Connect Customer admin website, on the
+    #   navigation menu go to **Routing**, **Flows**. Choose the flow. On
+    #   the flow page, under the name of the flow, choose **Show additional
+    #   flow information**. The ContactFlowId is the last part of the ARN,
+    #   shown here in bold:
     #
     #   arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/**846ec553-a005-41c0-8341-xxxxxxxxxxxx**
     #   @return [String]
     #
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -32157,8 +32165,8 @@ module Aws::Connect
     #
     # @!attribute [rw] task_template_id
     #   A unique identifier for the task template. For more information
-    #   about task templates, see [Create task templates][1] in the *Amazon
-    #   Connect Administrator Guide*.
+    #   about task templates, see [Create task templates][1] in the *Connect
+    #   Customer Administrator Guide*.
     #
     #
     #
@@ -32193,7 +32201,7 @@ module Aws::Connect
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
     #   segments (unique contact ID) using an attribute map. The attributes
-    #   are standard Amazon Connect attributes. They can be accessed in
+    #   are standard Connect Customer attributes. They can be accessed in
     #   flows.
     #
     #   Attribute keys can include only alphanumeric, -, and \_.
@@ -32242,7 +32250,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of this contact within the Amazon Connect instance.
+    #   The identifier of this contact within the Connect Customer instance.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/StartTaskContactResponse AWS API Documentation
@@ -32309,7 +32317,7 @@ module Aws::Connect
 
     # @!attribute [rw] attributes
     #   A custom key-value pair using an attribute map. The attributes are
-    #   standard Amazon Connect attributes, and can be accessed in flows
+    #   standard Connect Customer attributes, and can be accessed in flows
     #   just like any other contact attributes.
     #
     #   There can be up to 32,768 UTF-8 bytes across all key-value pairs per
@@ -32336,7 +32344,7 @@ module Aws::Connect
     #
     # @!attribute [rw] contact_flow_id
     #   The identifier of the flow for the call. To see the ContactFlowId in
-    #   the Amazon Connect admin website, on the navigation menu go to
+    #   the Connect Customer admin website, on the navigation menu go to
     #   **Routing**, **Flows**. Choose the flow. On the flow page, under the
     #   name of the flow, choose **Show additional flow information**. The
     #   ContactFlowId is the last part of the ARN, shown here in bold:
@@ -32345,7 +32353,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32363,8 +32371,8 @@ module Aws::Connect
     #   @return [Types::ParticipantDetails]
     #
     # @!attribute [rw] related_contact_id
-    #   The unique identifier for an Amazon Connect contact. This identifier
-    #   is related to the contact starting.
+    #   The unique identifier for an Connect Customer contact. This
+    #   identifier is related to the contact starting.
     #   @return [String]
     #
     # @!attribute [rw] references
@@ -32402,7 +32410,7 @@ module Aws::Connect
     #   @return [Types::ConnectionData]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] participant_id
@@ -32480,7 +32488,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32506,7 +32514,7 @@ module Aws::Connect
     class StopContactMediaProcessingResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32547,7 +32555,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32556,11 +32564,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] disconnect_reason
-    #   The reason a contact can be disconnected. Only Amazon Connect
+    #   The reason a contact can be disconnected. Only Connect Customer
     #   outbound campaigns can provide this field. For a list and
     #   description of all the possible disconnect reasons by channel
     #   (including outbound campaign voice contacts) see DisconnectReason
-    #   under [ContactTraceRecord][1] in the *Amazon Connect Administrator
+    #   under [ContactTraceRecord][1] in the *Connect Customer Administrator
     #   Guide*.
     #
     #
@@ -32583,7 +32591,7 @@ module Aws::Connect
     class StopContactResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32716,7 +32724,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32806,7 +32814,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32863,11 +32871,11 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -32971,7 +32979,7 @@ module Aws::Connect
     #
     # @!attribute [rw] name
     #   The name. Supports variable injection. For more information, see
-    #   [JSONPath reference][1] in the *Amazon Connect Administrators
+    #   [JSONPath reference][1] in the *Connect Customer Administrators
     #   Guide*.
     #
     #
@@ -32981,7 +32989,7 @@ module Aws::Connect
     #
     # @!attribute [rw] description
     #   The description. Supports variable injection. For more information,
-    #   see [JSONPath reference][1] in the *Amazon Connect Administrators
+    #   see [JSONPath reference][1] in the *Connect Customer Administrators
     #   Guide*.
     #
     #
@@ -33739,8 +33747,8 @@ module Aws::Connect
     end
 
     # A structure that defines search criteria and matching logic to search
-    # for contacts by matching text with transcripts analyzed by Amazon
-    # Connect Contact Lens.
+    # for contacts by matching text with transcripts analyzed by Connect
+    # Customer Contact Lens.
     #
     # @!attribute [rw] criteria
     #   The list of search criteria based on Contact Lens conversational
@@ -33788,7 +33796,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -33797,7 +33805,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] queue_id
@@ -33841,7 +33849,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] contact_arn
@@ -33858,11 +33866,11 @@ module Aws::Connect
     end
 
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -33907,7 +33915,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -33954,7 +33962,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -33988,7 +33996,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] attachment_scope
@@ -34024,7 +34032,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34043,7 +34051,7 @@ module Aws::Connect
     # @!attribute [rw] allowed_ips
     #   A list of IP address range strings that are allowed to access the
     #   instance. For more information on how to configure IP addresses,
-    #   see[Configure session timeouts][1] in the *Amazon Connect
+    #   see[Configure session timeouts][1] in the *Connect Customer
     #   Administrator Guide*.
     #
     #
@@ -34055,7 +34063,7 @@ module Aws::Connect
     #   A list of IP address range strings that are blocked from accessing
     #   the instance. For more information on how to configure IP addresses,
     #   For more information on how to configure IP addresses, see
-    #   [Configure IP-based access control][1] in the *Amazon Connect
+    #   [Configure IP-based access control][1] in the *Connect Customer
     #   Administrator Guide*.
     #
     #
@@ -34065,10 +34073,10 @@ module Aws::Connect
     #
     # @!attribute [rw] periodic_session_duration
     #   The short lived session duration configuration for users logged in
-    #   to Amazon Connect, in minutes. This value determines the maximum
+    #   to Connect Customer, in minutes. This value determines the maximum
     #   possible time before an agent is authenticated. For more
     #   information, For more information on how to configure IP addresses,
-    #   see [Configure session timeouts][1] in the *Amazon Connect
+    #   see [Configure session timeouts][1] in the *Connect Customer
     #   Administrator Guide*.
     #
     #
@@ -34121,7 +34129,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34130,7 +34138,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] attributes
-    #   The Amazon Connect attributes. These attributes can be accessed in
+    #   The Connect Customer attributes. These attributes can be accessed in
     #   flows just like any other contact attributes.
     #
     #   You can have up to 32,768 UTF-8 bytes across all attributes for a
@@ -34148,7 +34156,7 @@ module Aws::Connect
     #     another flow), then use flow attributes. This way you aren't
     #     needlessly persisting the 32 KB of information from one flow to
     #     another. For more information, see [Flow block: Set contact
-    #     attributes][1] in the *Amazon Connect Administrator Guide*.
+    #     attributes][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -34170,7 +34178,7 @@ module Aws::Connect
     class UpdateContactAttributesResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34224,7 +34232,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -34233,7 +34241,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #   Length Constraints: Minimum length of 1. Maximum length of 256000.
     #
@@ -34257,7 +34265,7 @@ module Aws::Connect
     class UpdateContactFlowContentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34298,7 +34306,7 @@ module Aws::Connect
     class UpdateContactFlowMetadataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34344,7 +34352,7 @@ module Aws::Connect
     class UpdateContactFlowModuleAliasResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34358,7 +34366,7 @@ module Aws::Connect
     #
     # @!attribute [rw] content
     #   The JSON string that represents the content of the flow. For an
-    #   example, see [Example flow in Amazon Connect Flow language][1].
+    #   example, see [Example flow in Connect Customer Flow language][1].
     #
     #
     #
@@ -34385,7 +34393,7 @@ module Aws::Connect
     class UpdateContactFlowModuleContentResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34426,7 +34434,7 @@ module Aws::Connect
     class UpdateContactFlowModuleMetadataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] contact_flow_id
@@ -34457,7 +34465,7 @@ module Aws::Connect
     class UpdateContactFlowNameResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34486,7 +34494,7 @@ module Aws::Connect
     # @!attribute [rw] segment_attributes
     #   A set of system defined key-value pairs stored on individual contact
     #   segments (unique contact ID) using an attribute map. The attributes
-    #   are standard Amazon Connect attributes. They can be accessed in
+    #   are standard Connect Customer attributes. They can be accessed in
     #   flows.
     #
     #   Attribute keys can include only alphanumeric, -, and \_.
@@ -34503,8 +34511,8 @@ module Aws::Connect
     #   Information about the queue associated with a contact. This
     #   parameter can only be updated for external audio contacts. It is
     #   used when you integrate third-party systems with Contact Lens for
-    #   analytics. For more information, see [Amazon Connect Contact Lens
-    #   integration][1] in the <i> Amazon Connect Administrator Guide</i>.
+    #   analytics. For more information, see [Connect Customer Contact Lens
+    #   integration][1] in the <i> Connect Customer Administrator Guide</i>.
     #
     #
     #
@@ -34515,8 +34523,8 @@ module Aws::Connect
     #   Information about the agent associated with a contact. This
     #   parameter can only be updated for external audio contacts. It is
     #   used when you integrate third-party systems with Contact Lens for
-    #   analytics. For more information, see [Amazon Connect Contact Lens
-    #   integration][1] in the <i> Amazon Connect Administrator Guide</i>.
+    #   analytics. For more information, see [Connect Customer Contact Lens
+    #   integration][1] in the <i> Connect Customer Administrator Guide</i>.
     #
     #
     #
@@ -34527,8 +34535,8 @@ module Aws::Connect
     #   The endpoint of the customer for which the contact was initiated.
     #   For external audio contacts, this is usually the end customer's
     #   phone number. This value can only be updated for external audio
-    #   contacts. For more information, see [Amazon Connect Contact Lens
-    #   integration][1] in the *Amazon Connect Administrator Guide*.
+    #   contacts. For more information, see [Connect Customer Contact Lens
+    #   integration][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -34539,8 +34547,8 @@ module Aws::Connect
     #   External system endpoint for the contact was initiated. For external
     #   audio contacts, this is the phone number of the external system such
     #   as the contact center. This value can only be updated for external
-    #   audio contacts. For more information, see [Amazon Connect Contact
-    #   Lens integration][1] in the *Amazon Connect Administrator Guide*.
+    #   audio contacts. For more information, see [Connect Customer Contact
+    #   Lens integration][1] in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -34569,7 +34577,7 @@ module Aws::Connect
     class UpdateContactResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34578,7 +34586,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] queue_time_adjustment_seconds
@@ -34617,7 +34625,7 @@ module Aws::Connect
     class UpdateContactRoutingDataResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34832,7 +34840,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -34893,7 +34901,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35010,7 +35018,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance.
+    #   The identifier of the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] hours_of_operation_id
@@ -35078,7 +35086,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35120,7 +35128,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35175,7 +35183,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35268,7 +35276,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35328,7 +35336,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35337,11 +35345,11 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] contact_id
-    #   The identifier of the contact in this instance of Amazon Connect.
+    #   The identifier of the contact in this instance of Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] channel_configuration
-    #   The Amazon Connect channel you want to configure.
+    #   The Connect Customer channel you want to configure.
     #   @return [Types::UpdateParticipantRoleConfigChannelInfo]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdateParticipantRoleConfigRequest AWS API Documentation
@@ -35395,15 +35403,15 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] target_arn
-    #   The Amazon Resource Name (ARN) for Amazon Connect instances or
+    #   The Amazon Resource Name (ARN) for Connect Customer instances or
     #   traffic distribution groups that phone number inbound traffic is
     #   routed through. You must enter `InstanceId` or `TargetArn`.
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance that phone numbers are
-    #   claimed to. You can [find the instance ID][1] in the Amazon Resource
-    #   Name (ARN) of the instance. You must enter `InstanceId` or
+    #   The identifier of the Connect Customer instance that phone numbers
+    #   are claimed to. You can [find the instance ID][1] in the Amazon
+    #   Resource Name (ARN) of the instance. You must enter `InstanceId` or
     #   `TargetArn`.
     #
     #
@@ -35454,7 +35462,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -35468,15 +35476,15 @@ module Aws::Connect
     #
     # @!attribute [rw] purposes
     #   Values that enable you to categorize your predefined attributes. You
-    #   can use them in custom UI elements across the Amazon Connect admin
+    #   can use them in custom UI elements across the Connect Customer admin
     #   website.
     #   @return [Array<String>]
     #
     # @!attribute [rw] attribute_configuration
     #   Custom metadata that is associated to predefined attributes to
     #   control behavior in upstream services, such as controlling how a
-    #   predefined attribute should be displayed in the Amazon Connect admin
-    #   website.
+    #   predefined attribute should be displayed in the Connect Customer
+    #   admin website.
     #   @return [Types::InputPredefinedAttributeConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/UpdatePredefinedAttributeRequest AWS API Documentation
@@ -35492,7 +35500,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35552,7 +35560,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35579,7 +35587,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35607,7 +35615,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35639,7 +35647,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35666,7 +35674,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35693,7 +35701,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35720,7 +35728,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35747,7 +35755,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35779,7 +35787,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35808,7 +35816,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35836,7 +35844,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35863,7 +35871,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35897,7 +35905,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35930,7 +35938,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35988,7 +35996,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -35998,12 +36006,12 @@ module Aws::Connect
     #
     # @!attribute [rw] allowed_access_control_tags
     #   The list of tags that a security profile uses to restrict access to
-    #   resources in Amazon Connect.
+    #   resources in Connect Customer.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] tag_restricted_resources
     #   The list of resources that a security profile applies tag
-    #   restrictions to in Amazon Connect.
+    #   restrictions to in Connect Customer.
     #   @return [Array<String>]
     #
     # @!attribute [rw] applications
@@ -36012,13 +36020,13 @@ module Aws::Connect
     #
     # @!attribute [rw] hierarchy_restricted_resources
     #   The list of resources that a security profile applies hierarchy
-    #   restrictions to in Amazon Connect. Following are acceptable
+    #   restrictions to in Connect Customer. Following are acceptable
     #   ResourceNames: `User`.
     #   @return [Array<String>]
     #
     # @!attribute [rw] allowed_access_control_hierarchy_group_id
     #   The identifier of the hierarchy group that a security profile uses
-    #   to restrict access to resources in Amazon Connect.
+    #   to restrict access to resources in Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] allowed_flow_modules
@@ -36053,7 +36061,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36117,7 +36125,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36334,7 +36342,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36366,7 +36374,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36393,7 +36401,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36416,7 +36424,7 @@ module Aws::Connect
     #   @return [Types::HierarchyStructureUpdate]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36442,7 +36450,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36521,7 +36529,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36540,7 +36548,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instance ID in the Amazon Resource Name (ARN) of the instance.
     #   @return [String]
     #
@@ -36573,7 +36581,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36600,7 +36608,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can [find the
+    #   The identifier of the Connect Customer instance. You can [find the
     #   instance ID][1] in the Amazon Resource Name (ARN) of the instance.
     #
     #
@@ -36619,7 +36627,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -36665,7 +36673,7 @@ module Aws::Connect
     end
 
     # @!attribute [rw] instance_id
-    #   The identifier of the Amazon Connect instance. You can find the
+    #   The identifier of the Connect Customer instance. You can find the
     #   instanceId in the ARN of the instance.
     #   @return [String]
     #
@@ -36926,7 +36934,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Contains information about a user account for an Amazon Connect
+    # Contains information about a user account for an Connect Customer
     # instance.
     #
     # @!attribute [rw] id
@@ -37183,28 +37191,28 @@ module Aws::Connect
 
     # Contains information about the identity of a user.
     #
-    # <note markdown="1"> For Amazon Connect instances that are created with the
+    # <note markdown="1"> For Connect Customer instances that are created with the
     # `EXISTING_DIRECTORY` identity management type, `FirstName`,
-    # `LastName`, and `Email` cannot be updated from within Amazon Connect
+    # `LastName`, and `Email` cannot be updated from within Connect Customer
     # because they are managed by the directory.
     #
     #  </note>
     #
     # The `FirstName` and `LastName` length constraints below apply only to
-    # instances using SAML for identity management. If you are using Amazon
-    # Connect for identity management, the length constraints are 1-255 for
+    # instances using SAML for identity management. If you are using Connect
+    # Customer for identity management, the length constraints are 1-255 for
     # `FirstName`, and 1-256 for `LastName`.
     #
     # @!attribute [rw] first_name
-    #   The first name. This is required if you are using Amazon Connect or
-    #   SAML for identity management. Inputs must be in Unicode
+    #   The first name. This is required if you are using Connect Customer
+    #   or SAML for identity management. Inputs must be in Unicode
     #   Normalization Form C (NFC). Text containing characters in a non-NFC
     #   form (for example, decomposed characters or combining marks) are not
     #   accepted.
     #   @return [String]
     #
     # @!attribute [rw] last_name
-    #   The last name. This is required if you are using Amazon Connect or
+    #   The last name. This is required if you are using Connect Customer or
     #   SAML for identity management. Inputs must be in Unicode
     #   Normalization Form C (NFC). Text containing characters in a non-NFC
     #   form (for example, decomposed characters or combining marks) are not
@@ -37275,8 +37283,8 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # No user with the specified credentials was found in the Amazon Connect
-    # instance.
+    # No user with the specified credentials was found in the Connect
+    # Customer instance.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -37395,12 +37403,12 @@ module Aws::Connect
     #
     # @!attribute [rw] attribute_name
     #   The name of user's proficiency. You must use name of predefined
-    #   attribute present in the Amazon Connect instance.
+    #   attribute present in the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] attribute_value
     #   The value of user's proficiency. You must use value of predefined
-    #   attribute present in the Amazon Connect instance.
+    #   attribute present in the Connect Customer instance.
     #   @return [String]
     #
     # @!attribute [rw] level
@@ -37671,7 +37679,7 @@ module Aws::Connect
     #   @return [String]
     #
     # @!attribute [rw] username
-    #   The Amazon Connect user name of the user account.
+    #   The Connect Customer user name of the user account.
     #   @return [String]
     #
     # @!attribute [rw] last_modified_time
@@ -38269,7 +38277,7 @@ module Aws::Connect
       include Aws::Structure
     end
 
-    # Information about Amazon Connect Wisdom.
+    # Information about Connect Customer Wisdom.
     #
     # @!attribute [rw] session_arn
     #   The Amazon Resource Name (ARN) of the Wisdom session.

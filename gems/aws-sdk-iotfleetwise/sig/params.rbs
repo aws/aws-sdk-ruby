@@ -1,0 +1,213 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoTFleetWise
+    module Params
+      type state_template_update_strategy = {
+      periodic: {
+        state_template_update_rate: {
+          unit: ("MILLISECOND" | "SECOND" | "MINUTE" | "HOUR"),
+          value: ::Integer
+        }
+      }?,
+      on_change: {
+      }?
+    }
+
+      type state_template_association = {
+      identifier: ::String,
+      state_template_update_strategy: Params::state_template_update_strategy
+    }
+
+      type can_signal = {
+      message_id: ::Integer,
+      is_big_endian: bool,
+      is_signed: bool,
+      start_bit: ::Integer,
+      offset: ::Float,
+      factor: ::Float,
+      length: ::Integer,
+      name: ::String?,
+      signal_value_type: ("INTEGER" | "FLOATING_POINT")?
+    }
+
+      type obd_signal = {
+      pid_response_length: ::Integer,
+      service_mode: ::Integer,
+      pid: ::Integer,
+      scaling: ::Float,
+      offset: ::Float,
+      start_byte: ::Integer,
+      byte_length: ::Integer,
+      bit_right_shift: ::Integer?,
+      bit_mask_length: ::Integer?,
+      is_signed: bool?,
+      signal_value_type: ("INTEGER" | "FLOATING_POINT")?
+    }
+
+      type primitive_message_definition = {
+      ros2_primitive_message_definition: {
+        primitive_type: ("BOOL" | "BYTE" | "CHAR" | "FLOAT32" | "FLOAT64" | "INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "STRING" | "WSTRING"),
+        offset: ::Float?,
+        scaling: ::Float?,
+        upper_bound: ::Integer?
+      }?
+    }
+
+      type structured_message = {
+      primitive_message_definition: Params::primitive_message_definition?,
+      structured_message_list_definition: {
+        name: ::String,
+        member_type: {
+          primitive_message_definition: Params::primitive_message_definition?,
+          structured_message_list_definition: untyped?,
+          structured_message_definition: Array[
+            {
+              field_name: ::String,
+              data_type: untyped
+            }
+          ]?
+        },
+        list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
+        capacity: ::Integer?
+      }?,
+      structured_message_definition: Array[
+        {
+          field_name: ::String,
+          data_type: {
+            primitive_message_definition: Params::primitive_message_definition?,
+            structured_message_list_definition: {
+              name: ::String,
+              member_type: untyped,
+              list_type: ("FIXED_CAPACITY" | "DYNAMIC_UNBOUNDED_CAPACITY" | "DYNAMIC_BOUNDED_CAPACITY"),
+              capacity: ::Integer?
+            }?,
+            structured_message_definition: untyped?
+          }
+        }
+      ]?
+    }
+
+      type message_signal = {
+      topic_name: ::String,
+      structured_message: Params::structured_message
+    }
+
+      type signal_decoder = {
+      fully_qualified_name: ::String,
+      type: ("CAN_SIGNAL" | "OBD_SIGNAL" | "MESSAGE_SIGNAL" | "CUSTOM_DECODING_SIGNAL"),
+      interface_id: ::String,
+      can_signal: Params::can_signal?,
+      obd_signal: Params::obd_signal?,
+      message_signal: Params::message_signal?,
+      custom_decoding_signal: {
+        id: ::String
+      }?
+    }
+
+      type obd_interface = {
+      name: ::String,
+      request_message_id: ::Integer,
+      obd_standard: ::String?,
+      pid_request_interval_seconds: ::Integer?,
+      dtc_request_interval_seconds: ::Integer?,
+      use_extended_ids: bool?,
+      has_transmission_ecu: bool?
+    }
+
+      type network_interface = {
+      interface_id: ::String,
+      type: ("CAN_INTERFACE" | "OBD_INTERFACE" | "VEHICLE_MIDDLEWARE" | "CUSTOM_DECODING_INTERFACE"),
+      can_interface: {
+        name: ::String,
+        protocol_name: ::String?,
+        protocol_version: ::String?
+      }?,
+      obd_interface: Params::obd_interface?,
+      vehicle_middleware: {
+        name: ::String,
+        protocol_name: ("ROS_2")
+      }?,
+      custom_decoding_interface: {
+        name: ::String
+      }?
+    }
+
+      type sensor = {
+      fully_qualified_name: ::String,
+      data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+      description: ::String?,
+      unit: ::String?,
+      allowed_values: Array[::String]?,
+      min: ::Float?,
+      max: ::Float?,
+      deprecation_message: ::String?,
+      comment: ::String?,
+      struct_fully_qualified_name: ::String?
+    }
+
+      type actuator = {
+      fully_qualified_name: ::String,
+      data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+      description: ::String?,
+      unit: ::String?,
+      allowed_values: Array[::String]?,
+      min: ::Float?,
+      max: ::Float?,
+      assigned_value: ::String?,
+      deprecation_message: ::String?,
+      comment: ::String?,
+      struct_fully_qualified_name: ::String?
+    }
+
+      type attribute = {
+      fully_qualified_name: ::String,
+      data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+      description: ::String?,
+      unit: ::String?,
+      allowed_values: Array[::String]?,
+      min: ::Float?,
+      max: ::Float?,
+      assigned_value: ::String?,
+      default_value: ::String?,
+      deprecation_message: ::String?,
+      comment: ::String?
+    }
+
+      type custom_property = {
+      fully_qualified_name: ::String,
+      data_type: ("INT8" | "UINT8" | "INT16" | "UINT16" | "INT32" | "UINT32" | "INT64" | "UINT64" | "BOOLEAN" | "FLOAT" | "DOUBLE" | "STRING" | "UNIX_TIMESTAMP" | "INT8_ARRAY" | "UINT8_ARRAY" | "INT16_ARRAY" | "UINT16_ARRAY" | "INT32_ARRAY" | "UINT32_ARRAY" | "INT64_ARRAY" | "UINT64_ARRAY" | "BOOLEAN_ARRAY" | "FLOAT_ARRAY" | "DOUBLE_ARRAY" | "STRING_ARRAY" | "UNIX_TIMESTAMP_ARRAY" | "UNKNOWN" | "STRUCT" | "STRUCT_ARRAY"),
+      data_encoding: ("BINARY" | "TYPED")?,
+      description: ::String?,
+      deprecation_message: ::String?,
+      comment: ::String?,
+      struct_fully_qualified_name: ::String?
+    }
+
+      type node = {
+      branch: {
+        fully_qualified_name: ::String,
+        description: ::String?,
+        deprecation_message: ::String?,
+        comment: ::String?
+      }?,
+      sensor: Params::sensor?,
+      actuator: Params::actuator?,
+      attribute: Params::attribute?,
+      struct: {
+        fully_qualified_name: ::String,
+        description: ::String?,
+        deprecation_message: ::String?,
+        comment: ::String?
+      }?,
+      property: Params::custom_property?
+    }
+
+    end
+  end
+end

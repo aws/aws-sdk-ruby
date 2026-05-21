@@ -171,14 +171,7 @@ module Aws
                        ?request_attributes: Hash[::String, ::String],
                        input_text: ::String,
                        ?active_contexts: Array[
-                         {
-                           name: ::String,
-                           time_to_live: {
-                             time_to_live_in_seconds: ::Integer?,
-                             turns_to_live: ::Integer?
-                           },
-                           parameters: Hash[::String, ::String]
-                         },
+                         Params::active_context
                        ]
                      ) -> _PostTextResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PostTextResponseSuccess
@@ -222,18 +215,11 @@ module Aws
                              dialog_action_type: ("ElicitIntent" | "ConfirmIntent" | "ElicitSlot" | "Close" | "Delegate"),
                              fulfillment_state: ("Fulfilled" | "Failed" | "ReadyForFulfillment")?,
                              slot_to_elicit: ::String?
-                           },
+                           }
                          ],
                          ?accept: ::String,
                          ?active_contexts: Array[
-                           {
-                             name: ::String,
-                             time_to_live: {
-                               time_to_live_in_seconds: ::Integer?,
-                               turns_to_live: ::Integer?
-                             },
-                             parameters: Hash[::String, ::String]
-                           },
+                           Params::active_context
                          ]
                        ) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess

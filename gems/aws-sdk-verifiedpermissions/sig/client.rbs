@@ -90,7 +90,7 @@ module Aws
                                 {
                                   policy_store_id: ::String,
                                   policy_id: ::String
-                                },
+                                }
                               ]
                             ) -> _BatchGetPolicyResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetPolicyResponseSuccess
@@ -102,41 +102,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VerifiedPermissions/Client.html#batch_is_authorized-instance_method
       def batch_is_authorized: (
                                  policy_store_id: ::String,
-                                 ?entities: {
-                                   entity_list: Array[
-                                     {
-                                       identifier: {
-                                         entity_type: ::String,
-                                         entity_id: ::String
-                                       },
-                                       attributes: Hash[::String, untyped]?,
-                                       parents: Array[
-                                         {
-                                           entity_type: ::String,
-                                           entity_id: ::String
-                                         },
-                                       ]?,
-                                       tags: Hash[::String, {
-                                           boolean: bool?,
-                                           entity_identifier: {
-                                             entity_type: ::String,
-                                             entity_id: ::String
-                                           }?,
-                                           long: ::Integer?,
-                                           string: ::String?,
-                                           set: Array[
-                                             untyped,
-                                           ]?,
-                                           record: Hash[::String, untyped]?,
-                                           ipaddr: ::String?,
-                                           decimal: ::String?,
-                                           datetime: ::String?,
-                                           duration: ::String?
-                                         }]?
-                                     },
-                                   ]?,
-                                   cedar_json: ::String?
-                                 },
+                                 ?entities: Params::entities_definition,
                                  requests: Array[
                                    {
                                      principal: {
@@ -151,11 +117,8 @@ module Aws
                                        entity_type: ::String,
                                        entity_id: ::String
                                      }?,
-                                     context: {
-                                       context_map: Hash[::String, untyped]?,
-                                       cedar_json: ::String?
-                                     }?
-                                   },
+                                     context: Params::context_definition?
+                                   }
                                  ]
                                ) -> _BatchIsAuthorizedResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchIsAuthorizedResponseSuccess
@@ -170,41 +133,7 @@ module Aws
                                             policy_store_id: ::String,
                                             ?identity_token: ::String,
                                             ?access_token: ::String,
-                                            ?entities: {
-                                              entity_list: Array[
-                                                {
-                                                  identifier: {
-                                                    entity_type: ::String,
-                                                    entity_id: ::String
-                                                  },
-                                                  attributes: Hash[::String, untyped]?,
-                                                  parents: Array[
-                                                    {
-                                                      entity_type: ::String,
-                                                      entity_id: ::String
-                                                    },
-                                                  ]?,
-                                                  tags: Hash[::String, {
-                                                      boolean: bool?,
-                                                      entity_identifier: {
-                                                        entity_type: ::String,
-                                                        entity_id: ::String
-                                                      }?,
-                                                      long: ::Integer?,
-                                                      string: ::String?,
-                                                      set: Array[
-                                                        untyped,
-                                                      ]?,
-                                                      record: Hash[::String, untyped]?,
-                                                      ipaddr: ::String?,
-                                                      decimal: ::String?,
-                                                      datetime: ::String?,
-                                                      duration: ::String?
-                                                    }]?
-                                                },
-                                              ]?,
-                                              cedar_json: ::String?
-                                            },
+                                            ?entities: Params::entities_definition,
                                             requests: Array[
                                               {
                                                 action: {
@@ -215,11 +144,8 @@ module Aws
                                                   entity_type: ::String,
                                                   entity_id: ::String
                                                 }?,
-                                                context: {
-                                                  context_map: Hash[::String, untyped]?,
-                                                  cedar_json: ::String?
-                                                }?
-                                              },
+                                                context: Params::context_definition?
+                                              }
                                             ]
                                           ) -> _BatchIsAuthorizedWithTokenResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchIsAuthorizedWithTokenResponseSuccess
@@ -533,45 +459,8 @@ module Aws
                              entity_type: ::String,
                              entity_id: ::String
                            },
-                           ?context: {
-                             context_map: Hash[::String, untyped]?,
-                             cedar_json: ::String?
-                           },
-                           ?entities: {
-                             entity_list: Array[
-                               {
-                                 identifier: {
-                                   entity_type: ::String,
-                                   entity_id: ::String
-                                 },
-                                 attributes: Hash[::String, untyped]?,
-                                 parents: Array[
-                                   {
-                                     entity_type: ::String,
-                                     entity_id: ::String
-                                   },
-                                 ]?,
-                                 tags: Hash[::String, {
-                                     boolean: bool?,
-                                     entity_identifier: {
-                                       entity_type: ::String,
-                                       entity_id: ::String
-                                     }?,
-                                     long: ::Integer?,
-                                     string: ::String?,
-                                     set: Array[
-                                       untyped,
-                                     ]?,
-                                     record: Hash[::String, untyped]?,
-                                     ipaddr: ::String?,
-                                     decimal: ::String?,
-                                     datetime: ::String?,
-                                     duration: ::String?
-                                   }]?
-                               },
-                             ]?,
-                             cedar_json: ::String?
-                           }
+                           ?context: Params::context_definition,
+                           ?entities: Params::entities_definition
                          ) -> _IsAuthorizedResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedResponseSuccess
 
@@ -595,45 +484,8 @@ module Aws
                                         entity_type: ::String,
                                         entity_id: ::String
                                       },
-                                      ?context: {
-                                        context_map: Hash[::String, untyped]?,
-                                        cedar_json: ::String?
-                                      },
-                                      ?entities: {
-                                        entity_list: Array[
-                                          {
-                                            identifier: {
-                                              entity_type: ::String,
-                                              entity_id: ::String
-                                            },
-                                            attributes: Hash[::String, untyped]?,
-                                            parents: Array[
-                                              {
-                                                entity_type: ::String,
-                                                entity_id: ::String
-                                              },
-                                            ]?,
-                                            tags: Hash[::String, {
-                                                boolean: bool?,
-                                                entity_identifier: {
-                                                  entity_type: ::String,
-                                                  entity_id: ::String
-                                                }?,
-                                                long: ::Integer?,
-                                                string: ::String?,
-                                                set: Array[
-                                                  untyped,
-                                                ]?,
-                                                record: Hash[::String, untyped]?,
-                                                ipaddr: ::String?,
-                                                decimal: ::String?,
-                                                datetime: ::String?,
-                                                duration: ::String?
-                                              }]?
-                                          },
-                                        ]?,
-                                        cedar_json: ::String?
-                                      }
+                                      ?context: Params::context_definition,
+                                      ?entities: Params::entities_definition
                                     ) -> _IsAuthorizedWithTokenResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _IsAuthorizedWithTokenResponseSuccess
 
@@ -650,7 +502,7 @@ module Aws
                                    ?filters: Array[
                                      {
                                        principal_entity_type: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _ListIdentitySourcesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIdentitySourcesResponseSuccess

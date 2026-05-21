@@ -151,7 +151,7 @@ module Aws
                                              checksum_xxhash3: ::String?,
                                              checksum_xxhash128: ::String?,
                                              part_number: ::Integer?
-                                           },
+                                           }
                                          ]?
                                        },
                                        upload_id: ::String,
@@ -262,7 +262,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]?
                            },
                            ?grant_full_control: ::String,
@@ -551,7 +551,7 @@ module Aws
                                   etag: ::String?,
                                   last_modified_time: ::Time?,
                                   size: ::Integer?
-                                },
+                                }
                               ],
                               quiet: bool?
                             },
@@ -1416,24 +1416,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_bucket_acl-instance_method
       def put_bucket_acl: (
                             ?acl: ("private" | "public-read" | "public-read-write" | "authenticated-read"),
-                            ?access_control_policy: {
-                              grants: Array[
-                                {
-                                  grantee: {
-                                    display_name: ::String?,
-                                    email_address: ::String?,
-                                    id: ::String?,
-                                    type: ("CanonicalUser" | "AmazonCustomerByEmail" | "Group"),
-                                    uri: ::String?
-                                  }?,
-                                  permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                                },
-                              ]?,
-                              owner: {
-                                display_name: ::String?,
-                                id: ::String?
-                              }?
-                            },
+                            ?access_control_policy: Params::access_control_policy,
                             bucket: ::String,
                             ?content_md5: ::String,
                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128"),
@@ -1464,7 +1447,7 @@ module Aws
                                                         {
                                                           key: ::String,
                                                           value: ::String
-                                                        },
+                                                        }
                                                       ]?
                                                     }?
                                                   }?,
@@ -1498,7 +1481,7 @@ module Aws
                                    allowed_origins: Array[::String],
                                    expose_headers: Array[::String]?,
                                    max_age_seconds: ::Integer?
-                                 },
+                                 }
                                ]
                              },
                              ?content_md5: ::String,
@@ -1523,7 +1506,7 @@ module Aws
                                          blocked_encryption_types: {
                                            encryption_type: Array[("NONE" | "SSE-C")]?
                                          }?
-                                       },
+                                       }
                                      ]
                                    },
                                    ?expected_bucket_owner: ::String
@@ -1549,7 +1532,7 @@ module Aws
                                                                   {
                                                                     key: ::String,
                                                                     value: ::String
-                                                                  },
+                                                                  }
                                                                 ]?
                                                               }?
                                                             }?,
@@ -1558,7 +1541,7 @@ module Aws
                                                               {
                                                                 days: ::Integer,
                                                                 access_tier: ("ARCHIVE_ACCESS" | "DEEP_ARCHIVE_ACCESS")
-                                                              },
+                                                              }
                                                             ]
                                                           }
                                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1632,7 +1615,7 @@ module Aws
                                         abort_incomplete_multipart_upload: {
                                           days_after_initiation: ::Integer?
                                         }?
-                                      },
+                                      }
                                     ]
                                   },
                                   ?expected_bucket_owner: ::String
@@ -1671,7 +1654,7 @@ module Aws
                                                             {
                                                               key: ::String,
                                                               value: ::String
-                                                            },
+                                                            }
                                                           ]?,
                                                           object_size_greater_than: ::Integer?,
                                                           object_size_less_than: ::Integer?
@@ -1683,14 +1666,14 @@ module Aws
                                                           date: ::Time?,
                                                           days: ::Integer?,
                                                           storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")?
-                                                        },
+                                                        }
                                                       ]?,
                                                       noncurrent_version_transitions: Array[
                                                         {
                                                           noncurrent_days: ::Integer?,
                                                           storage_class: ("GLACIER" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "DEEP_ARCHIVE" | "GLACIER_IR")?,
                                                           newer_noncurrent_versions: ::Integer?
-                                                        },
+                                                        }
                                                       ]?,
                                                       noncurrent_version_expiration: {
                                                         noncurrent_days: ::Integer?,
@@ -1699,7 +1682,7 @@ module Aws
                                                       abort_incomplete_multipart_upload: {
                                                         days_after_initiation: ::Integer?
                                                       }?
-                                                    },
+                                                    }
                                                   ]
                                                 },
                                                 ?expected_bucket_owner: ::String,
@@ -1723,7 +1706,7 @@ module Aws
                                           uri: ::String?
                                         }?,
                                         permission: ("FULL_CONTROL" | "READ" | "WRITE")?
-                                      },
+                                      }
                                     ]?,
                                     target_prefix: ::String,
                                     target_object_key_format: {
@@ -1760,7 +1743,7 @@ module Aws
                                                       {
                                                         key: ::String,
                                                         value: ::String
-                                                      },
+                                                      }
                                                     ]?,
                                                     access_point_arn: ::String?
                                                   }?
@@ -1809,51 +1792,24 @@ module Aws
                                                          id: ::String?,
                                                          topic_arn: ::String,
                                                          events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete")],
-                                                         filter: {
-                                                           key: {
-                                                             filter_rules: Array[
-                                                               {
-                                                                 name: ("prefix" | "suffix")?,
-                                                                 value: ::String?
-                                                               },
-                                                             ]?
-                                                           }?
-                                                         }?
-                                                       },
+                                                         filter: Params::notification_configuration_filter?
+                                                       }
                                                      ]?,
                                                      queue_configurations: Array[
                                                        {
                                                          id: ::String?,
                                                          queue_arn: ::String,
                                                          events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete")],
-                                                         filter: {
-                                                           key: {
-                                                             filter_rules: Array[
-                                                               {
-                                                                 name: ("prefix" | "suffix")?,
-                                                                 value: ::String?
-                                                               },
-                                                             ]?
-                                                           }?
-                                                         }?
-                                                       },
+                                                         filter: Params::notification_configuration_filter?
+                                                       }
                                                      ]?,
                                                      lambda_function_configurations: Array[
                                                        {
                                                          id: ::String?,
                                                          lambda_function_arn: ::String,
                                                          events: Array[("s3:ReducedRedundancyLostObject" | "s3:ObjectCreated:*" | "s3:ObjectCreated:Put" | "s3:ObjectCreated:Post" | "s3:ObjectCreated:Copy" | "s3:ObjectCreated:CompleteMultipartUpload" | "s3:ObjectRemoved:*" | "s3:ObjectRemoved:Delete" | "s3:ObjectRemoved:DeleteMarkerCreated" | "s3:ObjectRestore:*" | "s3:ObjectRestore:Post" | "s3:ObjectRestore:Completed" | "s3:Replication:*" | "s3:Replication:OperationFailedReplication" | "s3:Replication:OperationNotTracked" | "s3:Replication:OperationMissedThreshold" | "s3:Replication:OperationReplicatedAfterThreshold" | "s3:ObjectRestore:Delete" | "s3:LifecycleTransition" | "s3:IntelligentTiering" | "s3:ObjectAcl:Put" | "s3:LifecycleExpiration:*" | "s3:LifecycleExpiration:Delete" | "s3:LifecycleExpiration:DeleteMarkerCreated" | "s3:ObjectTagging:*" | "s3:ObjectTagging:Put" | "s3:ObjectTagging:Delete")],
-                                                         filter: {
-                                                           key: {
-                                                             filter_rules: Array[
-                                                               {
-                                                                 name: ("prefix" | "suffix")?,
-                                                                 value: ::String?
-                                                               },
-                                                             ]?
-                                                           }?
-                                                         }?
-                                                       },
+                                                         filter: Params::notification_configuration_filter?
+                                                       }
                                                      ]?,
                                                      event_bridge_configuration: {
                                                      }?
@@ -1872,7 +1828,7 @@ module Aws
                                              rules: Array[
                                                {
                                                  object_ownership: ("BucketOwnerPreferred" | "ObjectWriter" | "BucketOwnerEnforced")
-                                               },
+                                               }
                                              ]
                                            },
                                            ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128")
@@ -1914,7 +1870,7 @@ module Aws
                                                 {
                                                   key: ::String,
                                                   value: ::String
-                                                },
+                                                }
                                               ]?
                                             }?
                                           }?,
@@ -1956,7 +1912,7 @@ module Aws
                                           delete_marker_replication: {
                                             status: ("Enabled" | "Disabled")?
                                           }?
-                                        },
+                                        }
                                       ]
                                     },
                                     ?token: ::String,
@@ -1986,7 +1942,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 },
                                 ?expected_bucket_owner: ::String
@@ -2036,7 +1992,7 @@ module Aws
                                         replace_key_prefix_with: ::String?,
                                         replace_key_with: ::String?
                                       }
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?expected_bucket_owner: ::String
@@ -2126,24 +2082,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3/Client.html#put_object_acl-instance_method
       def put_object_acl: (
                             ?acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control"),
-                            ?access_control_policy: {
-                              grants: Array[
-                                {
-                                  grantee: {
-                                    display_name: ::String?,
-                                    email_address: ::String?,
-                                    id: ::String?,
-                                    type: ("CanonicalUser" | "AmazonCustomerByEmail" | "Group"),
-                                    uri: ::String?
-                                  }?,
-                                  permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                                },
-                              ]?,
-                              owner: {
-                                display_name: ::String?,
-                                id: ::String?
-                              }?
-                            },
+                            ?access_control_policy: Params::access_control_policy,
                             bucket: ::String,
                             ?content_md5: ::String,
                             ?checksum_algorithm: ("CRC32" | "CRC32C" | "SHA1" | "SHA256" | "CRC64NVME" | "SHA512" | "MD5" | "XXHASH64" | "XXHASH3" | "XXHASH128"),
@@ -2240,7 +2179,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 },
                                 ?expected_bucket_owner: ::String,
@@ -2302,37 +2241,10 @@ module Aws
                               tier: ("Standard" | "Bulk" | "Expedited")?,
                               description: ::String?,
                               select_parameters: {
-                                input_serialization: {
-                                  csv: {
-                                    file_header_info: ("USE" | "IGNORE" | "NONE")?,
-                                    comments: ::String?,
-                                    quote_escape_character: ::String?,
-                                    record_delimiter: ::String?,
-                                    field_delimiter: ::String?,
-                                    quote_character: ::String?,
-                                    allow_quoted_record_delimiter: bool?
-                                  }?,
-                                  compression_type: ("NONE" | "GZIP" | "BZIP2")?,
-                                  json: {
-                                    type: ("DOCUMENT" | "LINES")?
-                                  }?,
-                                  parquet: {
-                                  }?
-                                },
+                                input_serialization: Params::input_serialization,
                                 expression_type: ("SQL"),
                                 expression: ::String,
-                                output_serialization: {
-                                  csv: {
-                                    quote_fields: ("ALWAYS" | "ASNEEDED")?,
-                                    quote_escape_character: ::String?,
-                                    record_delimiter: ::String?,
-                                    field_delimiter: ::String?,
-                                    quote_character: ::String?
-                                  }?,
-                                  json: {
-                                    record_delimiter: ::String?
-                                  }?
-                                }
+                                output_serialization: Params::output_serialization
                               }?,
                               output_location: {
                                 s3: {
@@ -2345,30 +2257,21 @@ module Aws
                                   }?,
                                   canned_acl: ("private" | "public-read" | "public-read-write" | "authenticated-read" | "aws-exec-read" | "bucket-owner-read" | "bucket-owner-full-control")?,
                                   access_control_list: Array[
-                                    {
-                                      grantee: {
-                                        display_name: ::String?,
-                                        email_address: ::String?,
-                                        id: ::String?,
-                                        type: ("CanonicalUser" | "AmazonCustomerByEmail" | "Group"),
-                                        uri: ::String?
-                                      }?,
-                                      permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                                    },
+                                    Params::grant
                                   ]?,
                                   tagging: {
                                     tag_set: Array[
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]
                                   }?,
                                   user_metadata: Array[
                                     {
                                       name: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ]?,
                                   storage_class: ("STANDARD" | "REDUCED_REDUNDANCY" | "STANDARD_IA" | "ONEZONE_IA" | "INTELLIGENT_TIERING" | "GLACIER" | "DEEP_ARCHIVE" | "OUTPOSTS" | "GLACIER_IR" | "SNOW" | "EXPRESS_ONEZONE" | "FSX_OPENZFS" | "FSX_ONTAP")?
                                 }?
@@ -2396,35 +2299,8 @@ module Aws
                                    ?request_progress: {
                                      enabled: bool?
                                    },
-                                   input_serialization: {
-                                     csv: {
-                                       file_header_info: ("USE" | "IGNORE" | "NONE")?,
-                                       comments: ::String?,
-                                       quote_escape_character: ::String?,
-                                       record_delimiter: ::String?,
-                                       field_delimiter: ::String?,
-                                       quote_character: ::String?,
-                                       allow_quoted_record_delimiter: bool?
-                                     }?,
-                                     compression_type: ("NONE" | "GZIP" | "BZIP2")?,
-                                     json: {
-                                       type: ("DOCUMENT" | "LINES")?
-                                     }?,
-                                     parquet: {
-                                     }?
-                                   },
-                                   output_serialization: {
-                                     csv: {
-                                       quote_fields: ("ALWAYS" | "ASNEEDED")?,
-                                       quote_escape_character: ::String?,
-                                       record_delimiter: ::String?,
-                                       field_delimiter: ::String?,
-                                       quote_character: ::String?
-                                     }?,
-                                     json: {
-                                       record_delimiter: ::String?
-                                     }?
-                                   },
+                                   input_serialization: Params::input_serialization,
+                                   output_serialization: Params::output_serialization,
                                    ?scan_range: {
                                      start: ::Integer?,
                                      end: ::Integer?

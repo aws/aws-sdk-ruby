@@ -133,7 +133,7 @@ module Aws
                                            {
                                              key: ::String?,
                                              value: ::String?
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateCapacityReservationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCapacityReservationResponseSuccess
@@ -152,7 +152,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateDataCatalogResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataCatalogResponseSuccess
@@ -215,17 +215,7 @@ module Aws
       def create_work_group: (
                                name: ::String,
                                ?configuration: {
-                                 result_configuration: {
-                                   output_location: ::String?,
-                                   encryption_configuration: {
-                                     encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
-                                     kms_key: ::String?
-                                   }?,
-                                   expected_bucket_owner: ::String?,
-                                   acl_configuration: {
-                                     s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
-                                   }?
-                                 }?,
+                                 result_configuration: Params::result_configuration?,
                                  managed_query_results_configuration: {
                                    enabled: bool,
                                    encryption_configuration: {
@@ -242,36 +232,8 @@ module Aws
                                  }?,
                                  additional_configuration: ::String?,
                                  execution_role: ::String?,
-                                 monitoring_configuration: {
-                                   cloud_watch_logging_configuration: {
-                                     enabled: bool,
-                                     log_group: ::String?,
-                                     log_stream_name_prefix: ::String?,
-                                     log_types: Hash[::String, Array[::String]]?
-                                   }?,
-                                   managed_logging_configuration: {
-                                     enabled: bool,
-                                     kms_key: ::String?
-                                   }?,
-                                   s3_logging_configuration: {
-                                     enabled: bool,
-                                     kms_key: ::String?,
-                                     log_location: ::String?
-                                   }?
-                                 }?,
-                                 engine_configuration: {
-                                   coordinator_dpu_size: ::Integer?,
-                                   max_concurrent_dpus: ::Integer?,
-                                   default_executor_dpu_size: ::Integer?,
-                                   additional_configs: Hash[::String, ::String]?,
-                                   spark_properties: Hash[::String, ::String]?,
-                                   classifications: Array[
-                                     {
-                                       name: ::String?,
-                                       properties: Hash[::String, ::String]?
-                                     },
-                                   ]?
-                                 }?,
+                                 monitoring_configuration: Params::monitoring_configuration?,
+                                 engine_configuration: Params::engine_configuration?,
                                  customer_content_encryption_configuration: {
                                    kms_key: ::String
                                  }?,
@@ -291,7 +253,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreateWorkGroupResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkGroupResponseSuccess
@@ -825,7 +787,7 @@ module Aws
                                                    capacity_assignments: Array[
                                                      {
                                                        work_group_names: Array[::String]?
-                                                     },
+                                                     }
                                                    ]
                                                  ) -> _PutCapacityAssignmentConfigurationResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutCapacityAssignmentConfigurationResponseSuccess
@@ -859,17 +821,7 @@ module Aws
                                      database: ::String?,
                                      catalog: ::String?
                                    },
-                                   ?result_configuration: {
-                                     output_location: ::String?,
-                                     encryption_configuration: {
-                                       encryption_option: ("SSE_S3" | "SSE_KMS" | "CSE_KMS"),
-                                       kms_key: ::String?
-                                     }?,
-                                     expected_bucket_owner: ::String?,
-                                     acl_configuration: {
-                                       s3_acl_option: ("BUCKET_OWNER_FULL_CONTROL")
-                                     }?
-                                   },
+                                   ?result_configuration: Params::result_configuration,
                                    ?work_group: ::String,
                                    ?execution_parameters: Array[::String],
                                    ?result_reuse_configuration: {
@@ -878,19 +830,7 @@ module Aws
                                        max_age_in_minutes: ::Integer?
                                      }?
                                    },
-                                   ?engine_configuration: {
-                                     coordinator_dpu_size: ::Integer?,
-                                     max_concurrent_dpus: ::Integer?,
-                                     default_executor_dpu_size: ::Integer?,
-                                     additional_configs: Hash[::String, ::String]?,
-                                     spark_properties: Hash[::String, ::String]?,
-                                     classifications: Array[
-                                       {
-                                         name: ::String?,
-                                         properties: Hash[::String, ::String]?
-                                       },
-                                     ]?
-                                   }
+                                   ?engine_configuration: Params::engine_configuration
                                  ) -> _StartQueryExecutionResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartQueryExecutionResponseSuccess
 
@@ -903,37 +843,9 @@ module Aws
       def start_session: (
                            ?description: ::String,
                            work_group: ::String,
-                           engine_configuration: {
-                             coordinator_dpu_size: ::Integer?,
-                             max_concurrent_dpus: ::Integer?,
-                             default_executor_dpu_size: ::Integer?,
-                             additional_configs: Hash[::String, ::String]?,
-                             spark_properties: Hash[::String, ::String]?,
-                             classifications: Array[
-                               {
-                                 name: ::String?,
-                                 properties: Hash[::String, ::String]?
-                               },
-                             ]?
-                           },
+                           engine_configuration: Params::engine_configuration,
                            ?execution_role: ::String,
-                           ?monitoring_configuration: {
-                             cloud_watch_logging_configuration: {
-                               enabled: bool,
-                               log_group: ::String?,
-                               log_stream_name_prefix: ::String?,
-                               log_types: Hash[::String, Array[::String]]?
-                             }?,
-                             managed_logging_configuration: {
-                               enabled: bool,
-                               kms_key: ::String?
-                             }?,
-                             s3_logging_configuration: {
-                               enabled: bool,
-                               kms_key: ::String?,
-                               log_location: ::String?
-                             }?
-                           },
+                           ?monitoring_configuration: Params::monitoring_configuration,
                            ?notebook_version: ::String,
                            ?session_idle_timeout_in_minutes: ::Integer,
                            ?client_request_token: ::String,
@@ -941,7 +853,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ],
                            ?copy_work_group_tags: bool
                          ) -> _StartSessionResponseSuccess
@@ -976,7 +888,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1122,36 +1034,8 @@ module Aws
                                    create_user_level_prefix: bool?,
                                    authentication_type: ("DIRECTORY_IDENTITY")
                                  }?,
-                                 monitoring_configuration: {
-                                   cloud_watch_logging_configuration: {
-                                     enabled: bool,
-                                     log_group: ::String?,
-                                     log_stream_name_prefix: ::String?,
-                                     log_types: Hash[::String, Array[::String]]?
-                                   }?,
-                                   managed_logging_configuration: {
-                                     enabled: bool,
-                                     kms_key: ::String?
-                                   }?,
-                                   s3_logging_configuration: {
-                                     enabled: bool,
-                                     kms_key: ::String?,
-                                     log_location: ::String?
-                                   }?
-                                 }?,
-                                 engine_configuration: {
-                                   coordinator_dpu_size: ::Integer?,
-                                   max_concurrent_dpus: ::Integer?,
-                                   default_executor_dpu_size: ::Integer?,
-                                   additional_configs: Hash[::String, ::String]?,
-                                   spark_properties: Hash[::String, ::String]?,
-                                   classifications: Array[
-                                     {
-                                       name: ::String?,
-                                       properties: Hash[::String, ::String]?
-                                     },
-                                   ]?
-                                 }?
+                                 monitoring_configuration: Params::monitoring_configuration?,
+                                 engine_configuration: Params::engine_configuration?
                                },
                                ?state: ("ENABLED" | "DISABLED")
                              ) -> _UpdateWorkGroupResponseSuccess

@@ -1,0 +1,48 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Health
+    module Params
+      type event_filter = {
+      actionabilities: Array[("ACTION_REQUIRED" | "ACTION_MAY_BE_REQUIRED" | "INFORMATIONAL")]?,
+      event_arns: Array[::String]?,
+      event_type_codes: Array[::String]?,
+      services: Array[::String]?,
+      regions: Array[::String]?,
+      availability_zones: Array[::String]?,
+      start_times: Array[
+        {
+          from: ::Time?,
+          to: ::Time?
+        }
+      ]?,
+      end_times: Array[
+        {
+          from: ::Time?,
+          to: ::Time?
+        }
+      ]?,
+      last_updated_times: Array[
+        {
+          from: ::Time?,
+          to: ::Time?
+        }
+      ]?,
+      entity_arns: Array[::String]?,
+      entity_values: Array[::String]?,
+      event_type_categories: Array[("issue" | "accountNotification" | "scheduledChange" | "investigation")]?,
+      tags: Array[
+        Hash[::String, ::String]
+      ]?,
+      event_status_codes: Array[("open" | "closed" | "upcoming")]?,
+      personas: Array[("OPERATIONS" | "SECURITY" | "BILLING")]?
+    }
+
+    end
+  end
+end

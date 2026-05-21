@@ -91,7 +91,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _CreateAppInstanceResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceResponseSuccess
@@ -122,20 +122,9 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
-                                     ],
-                                     configuration: {
-                                       lex: {
-                                         responds_to: ("STANDARD_MESSAGES")?,
-                                         invoked_by: {
-                                           standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE"),
-                                           targeted_messages: ("ALL" | "NONE")
-                                         }?,
-                                         lex_bot_alias_arn: ::String,
-                                         locale_id: ::String,
-                                         welcome_intent: ::String?
                                        }
-                                     }
+                                     ],
+                                     configuration: Params::configuration
                                    ) -> _CreateAppInstanceBotResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAppInstanceBotResponseSuccess
 
@@ -154,7 +143,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?expiration_settings: {
                                         expiration_days: ::Integer,
@@ -393,7 +382,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -426,18 +415,7 @@ module Aws
                                      app_instance_bot_arn: ::String,
                                      name: ::String,
                                      metadata: ::String,
-                                     ?configuration: {
-                                       lex: {
-                                         responds_to: ("STANDARD_MESSAGES")?,
-                                         invoked_by: {
-                                           standard_messages: ("AUTO" | "ALL" | "MENTIONS" | "NONE"),
-                                           targeted_messages: ("ALL" | "NONE")
-                                         }?,
-                                         lex_bot_alias_arn: ::String,
-                                         locale_id: ::String,
-                                         welcome_intent: ::String?
-                                       }
-                                     }
+                                     ?configuration: Params::configuration
                                    ) -> _UpdateAppInstanceBotResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAppInstanceBotResponseSuccess
 

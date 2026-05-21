@@ -97,7 +97,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?connection_type: ("CONNECT_SSH" | "CONNECT_SSM"),
                                     ?dry_run: bool
@@ -203,7 +203,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

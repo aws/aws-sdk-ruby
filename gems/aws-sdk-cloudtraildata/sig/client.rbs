@@ -90,7 +90,7 @@ module Aws
                                   event_data: ::String,
                                   event_data_checksum: ::String?,
                                   id: ::String
-                                },
+                                }
                               ],
                               channel_arn: ::String,
                               ?external_id: ::String

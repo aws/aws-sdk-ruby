@@ -1,0 +1,120 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LicenseManager
+    module Params
+      type entitlement = {
+      name: ::String,
+      value: ::String?,
+      max_count: ::Integer?,
+      overage: bool?,
+      unit: ("Count" | "None" | "Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second"),
+      allow_check_in: bool?
+    }
+
+      type consumption_configuration = {
+      renew_type: ("None" | "Weekly" | "Monthly")?,
+      provisional_configuration: {
+        max_time_to_live_in_minutes: ::Integer
+      }?,
+      borrow_configuration: {
+        allow_early_check_in: bool,
+        max_time_to_live_in_minutes: ::Integer
+      }?
+    }
+
+      type and_rule_statement = {
+      matching_rule_statements: Array[
+        {
+          key_to_match: ::String,
+          constraint: ::String,
+          value_to_match: Array[::String]
+        }
+      ]?,
+      script_rule_statements: Array[
+        {
+          key_to_match: ::String,
+          script: ::String
+        }
+      ]?
+    }
+
+      type or_rule_statement = {
+      matching_rule_statements: Array[
+        {
+          key_to_match: ::String,
+          constraint: ::String,
+          value_to_match: Array[::String]
+        }
+      ]?,
+      script_rule_statements: Array[
+        {
+          key_to_match: ::String,
+          script: ::String
+        }
+      ]?
+    }
+
+      type license_configuration_rule_statement = {
+      and_rule_statement: Params::and_rule_statement?,
+      or_rule_statement: Params::or_rule_statement?,
+      matching_rule_statement: {
+        key_to_match: ::String,
+        constraint: ::String,
+        value_to_match: Array[::String]
+      }?
+    }
+
+      type license_rule_statement = {
+      and_rule_statement: Params::and_rule_statement?,
+      or_rule_statement: Params::or_rule_statement?,
+      matching_rule_statement: {
+        key_to_match: ::String,
+        constraint: ::String,
+        value_to_match: Array[::String]
+      }?
+    }
+
+      type instance_rule_statement = {
+      and_rule_statement: Params::and_rule_statement?,
+      or_rule_statement: Params::or_rule_statement?,
+      matching_rule_statement: {
+        key_to_match: ::String,
+        constraint: ::String,
+        value_to_match: Array[::String]
+      }?,
+      script_rule_statement: {
+        key_to_match: ::String,
+        script: ::String
+      }?
+    }
+
+      type rule_statement = {
+      license_configuration_rule_statement: Params::license_configuration_rule_statement?,
+      license_rule_statement: Params::license_rule_statement?,
+      instance_rule_statement: Params::instance_rule_statement?
+    }
+
+      type license_asset_rule = {
+      rule_statement: Params::rule_statement
+    }
+
+      type product_information = {
+      resource_type: ::String,
+      product_information_filter_list: Array[
+        {
+          product_information_filter_name: ::String,
+          product_information_filter_value: Array[::String]?,
+          product_information_filter_comparator: ::String
+        }
+      ]
+    }
+
+    end
+  end
+end

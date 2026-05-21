@@ -1158,6 +1158,9 @@ module Aws::EC2
     DescribeIpamExternalResourceVerificationTokensResult = Shapes::StructureShape.new(name: 'DescribeIpamExternalResourceVerificationTokensResult')
     DescribeIpamPoliciesRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesRequest')
     DescribeIpamPoliciesResult = Shapes::StructureShape.new(name: 'DescribeIpamPoliciesResult')
+    DescribeIpamPoolAllocationsMaxResults = Shapes::IntegerShape.new(name: 'DescribeIpamPoolAllocationsMaxResults')
+    DescribeIpamPoolAllocationsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolAllocationsRequest')
+    DescribeIpamPoolAllocationsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolAllocationsResult')
     DescribeIpamPoolsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPoolsRequest')
     DescribeIpamPoolsResult = Shapes::StructureShape.new(name: 'DescribeIpamPoolsResult')
     DescribeIpamPrefixListResolverTargetsRequest = Shapes::StructureShape.new(name: 'DescribeIpamPrefixListResolverTargetsRequest')
@@ -2691,6 +2694,8 @@ module Aws::EC2
     ModifyInstancePlacementResult = Shapes::StructureShape.new(name: 'ModifyInstancePlacementResult')
     ModifyIpamPolicyAllocationRulesRequest = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesRequest')
     ModifyIpamPolicyAllocationRulesResult = Shapes::StructureShape.new(name: 'ModifyIpamPolicyAllocationRulesResult')
+    ModifyIpamPoolAllocationRequest = Shapes::StructureShape.new(name: 'ModifyIpamPoolAllocationRequest')
+    ModifyIpamPoolAllocationResult = Shapes::StructureShape.new(name: 'ModifyIpamPoolAllocationResult')
     ModifyIpamPoolRequest = Shapes::StructureShape.new(name: 'ModifyIpamPoolRequest')
     ModifyIpamPoolResult = Shapes::StructureShape.new(name: 'ModifyIpamPoolResult')
     ModifyIpamPrefixListResolverRequest = Shapes::StructureShape.new(name: 'ModifyIpamPrefixListResolverRequest')
@@ -4297,6 +4302,7 @@ module Aws::EC2
     AllocateIpamPoolCidrRequest.add_member(:preview_next_cidr, Shapes::ShapeRef.new(shape: Boolean, location_name: "PreviewNextCidr"))
     AllocateIpamPoolCidrRequest.add_member(:allowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationAllowedCidrs, location_name: "AllowedCidr"))
     AllocateIpamPoolCidrRequest.add_member(:disallowed_cidrs, Shapes::ShapeRef.new(shape: IpamPoolAllocationDisallowedCidrs, location_name: "DisallowedCidr"))
+    AllocateIpamPoolCidrRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecification"))
     AllocateIpamPoolCidrRequest.struct_class = Types::AllocateIpamPoolCidrRequest
 
     AllocateIpamPoolCidrResult.add_member(:ipam_pool_allocation, Shapes::ShapeRef.new(shape: IpamPoolAllocation, location_name: "ipamPoolAllocation"))
@@ -8721,6 +8727,17 @@ module Aws::EC2
     DescribeIpamPoliciesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeIpamPoliciesResult.add_member(:ipam_policies, Shapes::ShapeRef.new(shape: IpamPolicySet, location_name: "ipamPolicySet"))
     DescribeIpamPoliciesResult.struct_class = Types::DescribeIpamPoliciesResult
+
+    DescribeIpamPoolAllocationsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    DescribeIpamPoolAllocationsRequest.add_member(:ipam_pool_allocation_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "IpamPoolAllocationId"))
+    DescribeIpamPoolAllocationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
+    DescribeIpamPoolAllocationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsMaxResults, location_name: "MaxResults"))
+    DescribeIpamPoolAllocationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    DescribeIpamPoolAllocationsRequest.struct_class = Types::DescribeIpamPoolAllocationsRequest
+
+    DescribeIpamPoolAllocationsResult.add_member(:ipam_pool_allocations, Shapes::ShapeRef.new(shape: IpamPoolAllocationSet, location_name: "ipamPoolAllocationSet"))
+    DescribeIpamPoolAllocationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeIpamPoolAllocationsResult.struct_class = Types::DescribeIpamPoolAllocationsResult
 
     DescribeIpamPoolsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     DescribeIpamPoolsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
@@ -13392,6 +13409,7 @@ module Aws::EC2
     IpamPoolAllocation.add_member(:resource_type, Shapes::ShapeRef.new(shape: IpamPoolAllocationResourceType, location_name: "resourceType"))
     IpamPoolAllocation.add_member(:resource_region, Shapes::ShapeRef.new(shape: String, location_name: "resourceRegion"))
     IpamPoolAllocation.add_member(:resource_owner, Shapes::ShapeRef.new(shape: String, location_name: "resourceOwner"))
+    IpamPoolAllocation.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     IpamPoolAllocation.struct_class = Types::IpamPoolAllocation
 
     IpamPoolAllocationAllowedCidrs.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
@@ -14669,6 +14687,14 @@ module Aws::EC2
 
     ModifyIpamPolicyAllocationRulesResult.add_member(:ipam_policy_document, Shapes::ShapeRef.new(shape: IpamPolicyDocument, location_name: "ipamPolicyDocument"))
     ModifyIpamPolicyAllocationRulesResult.struct_class = Types::ModifyIpamPolicyAllocationRulesResult
+
+    ModifyIpamPoolAllocationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyIpamPoolAllocationRequest.add_member(:ipam_pool_allocation_id, Shapes::ShapeRef.new(shape: IpamPoolAllocationId, required: true, location_name: "IpamPoolAllocationId"))
+    ModifyIpamPoolAllocationRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+    ModifyIpamPoolAllocationRequest.struct_class = Types::ModifyIpamPoolAllocationRequest
+
+    ModifyIpamPoolAllocationResult.add_member(:ipam_pool_allocation, Shapes::ShapeRef.new(shape: IpamPoolAllocation, location_name: "ipamPoolAllocation"))
+    ModifyIpamPoolAllocationResult.struct_class = Types::ModifyIpamPoolAllocationResult
 
     ModifyIpamPoolRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     ModifyIpamPoolRequest.add_member(:ipam_pool_id, Shapes::ShapeRef.new(shape: IpamPoolId, required: true, location_name: "IpamPoolId"))
@@ -19277,6 +19303,7 @@ module Aws::EC2
     VolumeModification.add_member(:progress, Shapes::ShapeRef.new(shape: Long, location_name: "progress"))
     VolumeModification.add_member(:start_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "startTime"))
     VolumeModification.add_member(:end_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "endTime"))
+    VolumeModification.add_member(:operator, Shapes::ShapeRef.new(shape: OperatorResponse, location_name: "operator"))
     VolumeModification.struct_class = Types::VolumeModification
 
     VolumeModificationList.member = Shapes::ShapeRef.new(shape: VolumeModification, location_name: "item")
@@ -22743,6 +22770,20 @@ module Aws::EC2
         o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoliciesResult)
       end)
 
+      api.add_operation(:describe_ipam_pool_allocations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeIpamPoolAllocations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeIpamPoolAllocationsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_ipam_pools, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeIpamPools"
         o.http_method = "POST"
@@ -25780,6 +25821,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyIpamPoolRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyIpamPoolResult)
+      end)
+
+      api.add_operation(:modify_ipam_pool_allocation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyIpamPoolAllocation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyIpamPoolAllocationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyIpamPoolAllocationResult)
       end)
 
       api.add_operation(:modify_ipam_prefix_list_resolver, Seahorse::Model::Operation.new.tap do |o|

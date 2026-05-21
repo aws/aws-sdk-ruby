@@ -1,0 +1,77 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkSpacesWeb
+    module Params
+      type inline_redaction_configuration = {
+      inline_redaction_patterns: Array[
+        Params::inline_redaction_pattern
+      ],
+      global_enforced_urls: Array[::String]?,
+      global_exempt_urls: Array[::String]?,
+      global_confidence_level: ::Integer?
+    }
+
+      type inline_redaction_pattern = {
+      built_in_pattern_id: ::String?,
+      custom_pattern: {
+        pattern_name: ::String,
+        pattern_regex: ::String,
+        pattern_description: ::String?,
+        keyword_regex: ::String?
+      }?,
+      redaction_place_holder: {
+        redaction_place_holder_type: ("CustomText"),
+        redaction_place_holder_text: ::String?
+      },
+      enforced_urls: Array[::String]?,
+      exempt_urls: Array[::String]?,
+      confidence_level: ::Integer?
+    }
+
+      type log_configuration = {
+      s3: {
+        bucket: ::String,
+        key_prefix: ::String?,
+        bucket_owner: ::String?,
+        log_file_format: ("JSONLines" | "Json"),
+        folder_structure: ("Flat" | "NestedByDate")
+      }?
+    }
+
+      type cookie_synchronization_configuration = {
+      allowlist: Array[
+        {
+          domain: ::String,
+          name: ::String?,
+          path: ::String?
+        }
+      ],
+      blocklist: Array[
+        {
+          domain: ::String,
+          name: ::String?,
+          path: ::String?
+        }
+      ]?
+    }
+
+      type localized_branding_strings = {
+      browser_tab_title: ::String,
+      welcome_text: ::String,
+      login_title: ::String?,
+      login_description: ::String?,
+      login_button_text: ::String?,
+      contact_link: ::String?,
+      contact_button_text: ::String?,
+      loading_text: ::String?
+    }
+
+    end
+  end
+end

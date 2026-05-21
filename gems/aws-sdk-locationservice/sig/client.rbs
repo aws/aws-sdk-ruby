@@ -118,15 +118,7 @@ module Aws
       def batch_evaluate_geofences: (
                                       collection_name: ::String,
                                       device_position_updates: Array[
-                                        {
-                                          device_id: ::String,
-                                          sample_time: ::Time,
-                                          position: Array[::Float],
-                                          accuracy: {
-                                            horizontal: ::Float
-                                          }?,
-                                          position_properties: Hash[::String, ::String]?
-                                        },
+                                        Params::device_position_update
                                       ]
                                     ) -> _BatchEvaluateGeofencesResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchEvaluateGeofencesResponseSuccess
@@ -154,27 +146,9 @@ module Aws
                                 entries: Array[
                                   {
                                     geofence_id: ::String,
-                                    geometry: {
-                                      polygon: Array[
-                                        Array[
-                                          Array[::Float],
-                                        ],
-                                      ]?,
-                                      circle: {
-                                        center: Array[::Float],
-                                        radius: ::Float
-                                      }?,
-                                      geobuf: ::String?,
-                                      multi_polygon: Array[
-                                        Array[
-                                          Array[
-                                            Array[::Float],
-                                          ],
-                                        ],
-                                      ]?
-                                    },
+                                    geometry: Params::geofence_geometry,
                                     geofence_properties: Hash[::String, ::String]?
-                                  },
+                                  }
                                 ]
                               ) -> _BatchPutGeofenceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutGeofenceResponseSuccess
@@ -187,15 +161,7 @@ module Aws
       def batch_update_device_position: (
                                           tracker_name: ::String,
                                           updates: Array[
-                                            {
-                                              device_id: ::String,
-                                              sample_time: ::Time,
-                                              position: Array[::Float],
-                                              accuracy: {
-                                                horizontal: ::Float
-                                              }?,
-                                              position_properties: Hash[::String, ::String]?
-                                            },
+                                            Params::device_position_update
                                           ]
                                         ) -> _BatchUpdateDevicePositionResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateDevicePositionResponseSuccess
@@ -211,7 +177,7 @@ module Aws
                              departure_position: Array[::Float],
                              destination_position: Array[::Float],
                              ?waypoint_positions: Array[
-                               Array[::Float],
+                               Array[::Float]
                              ],
                              ?travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle"),
                              ?departure_time: ::Time,
@@ -222,20 +188,7 @@ module Aws
                                avoid_ferries: bool?,
                                avoid_tolls: bool?
                              },
-                             ?truck_mode_options: {
-                               avoid_ferries: bool?,
-                               avoid_tolls: bool?,
-                               dimensions: {
-                                 length: ::Float?,
-                                 height: ::Float?,
-                                 width: ::Float?,
-                                 unit: ("Meters" | "Feet")?
-                               }?,
-                               weight: {
-                                 total: ::Float?,
-                                 unit: ("Kilograms" | "Pounds")?
-                               }?
-                             },
+                             ?truck_mode_options: Params::calculate_route_truck_mode_options,
                              ?arrival_time: ::Time,
                              ?optimize_for: ("FastestRoute" | "ShortestRoute"),
                              ?key: ::String
@@ -253,10 +206,10 @@ module Aws
       def calculate_route_matrix: (
                                     calculator_name: ::String,
                                     departure_positions: Array[
-                                      Array[::Float],
+                                      Array[::Float]
                                     ],
                                     destination_positions: Array[
-                                      Array[::Float],
+                                      Array[::Float]
                                     ],
                                     ?travel_mode: ("Car" | "Truck" | "Walking" | "Bicycle" | "Motorcycle"),
                                     ?departure_time: ::Time,
@@ -266,20 +219,7 @@ module Aws
                                       avoid_ferries: bool?,
                                       avoid_tolls: bool?
                                     },
-                                    ?truck_mode_options: {
-                                      avoid_ferries: bool?,
-                                      avoid_tolls: bool?,
-                                      dimensions: {
-                                        length: ::Float?,
-                                        height: ::Float?,
-                                        width: ::Float?,
-                                        unit: ("Meters" | "Feet")?
-                                      }?,
-                                      weight: {
-                                        total: ::Float?,
-                                        unit: ("Kilograms" | "Pounds")?
-                                      }?
-                                    },
+                                    ?truck_mode_options: Params::calculate_route_truck_mode_options,
                                     ?key: ::String
                                   ) -> _CalculateRouteMatrixResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRouteMatrixResponseSuccess
@@ -323,22 +263,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LocationService/Client.html#create_key-instance_method
       def create_key: (
                         key_name: ::String,
-                        restrictions: {
-                          allow_actions: Array[::String],
-                          allow_resources: Array[::String],
-                          allow_referers: Array[::String]?,
-                          allow_android_apps: Array[
-                            {
-                              package: ::String,
-                              certificate_fingerprint: ::String
-                            },
-                          ]?,
-                          allow_apple_apps: Array[
-                            {
-                              bundle_id: ::String
-                            },
-                          ]?
-                        },
+                        restrictions: Params::api_key_restrictions,
                         ?description: ::String,
                         ?expire_time: ::Time,
                         ?no_expiry: bool,
@@ -773,8 +698,8 @@ module Aws
                                    ?filter_geometry: {
                                      polygon: Array[
                                        Array[
-                                         Array[::Float],
-                                       ],
+                                         Array[::Float]
+                                       ]
                                      ]?
                                    }
                                  ) -> _ListDevicePositionsResponseSuccess
@@ -916,25 +841,7 @@ module Aws
       def put_geofence: (
                           collection_name: ::String,
                           geofence_id: ::String,
-                          geometry: {
-                            polygon: Array[
-                              Array[
-                                Array[::Float],
-                              ],
-                            ]?,
-                            circle: {
-                              center: Array[::Float],
-                              radius: ::Float
-                            }?,
-                            geobuf: ::String?,
-                            multi_polygon: Array[
-                              Array[
-                                Array[
-                                  Array[::Float],
-                                ],
-                              ],
-                            ]?
-                          },
+                          geometry: Params::geofence_geometry,
                           ?geofence_properties: Hash[::String, ::String]
                         ) -> _PutGeofenceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGeofenceResponseSuccess
@@ -1070,22 +977,7 @@ module Aws
                         ?expire_time: ::Time,
                         ?no_expiry: bool,
                         ?force_update: bool,
-                        ?restrictions: {
-                          allow_actions: Array[::String],
-                          allow_resources: Array[::String],
-                          allow_referers: Array[::String]?,
-                          allow_android_apps: Array[
-                            {
-                              package: ::String,
-                              certificate_fingerprint: ::String
-                            },
-                          ]?,
-                          allow_apple_apps: Array[
-                            {
-                              bundle_id: ::String
-                            },
-                          ]?
-                        }
+                        ?restrictions: Params::api_key_restrictions
                       ) -> _UpdateKeyResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKeyResponseSuccess
 
@@ -1179,7 +1071,7 @@ module Aws
                                         {
                                           mac_address: ::String,
                                           rss: ::Integer
-                                        },
+                                        }
                                       ]?,
                                       cell_signals: {
                                         lte_cell_details: Array[
@@ -1198,14 +1090,14 @@ module Aws
                                                 pci: ::Integer,
                                                 rsrp: ::Integer?,
                                                 rsrq: ::Float?
-                                              },
+                                              }
                                             ]?,
                                             timing_advance: ::Integer?,
                                             nr_capable: bool?,
                                             rsrp: ::Integer?,
                                             rsrq: ::Float?,
                                             tac: ::Integer?
-                                          },
+                                          }
                                         ]
                                       }?
                                     },

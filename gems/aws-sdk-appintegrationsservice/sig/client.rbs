@@ -98,14 +98,14 @@ module Aws
                                   {
                                     event: ::String,
                                     description: ::String?
-                                  },
+                                  }
                                 ],
                                 ?publications: Array[
                                   {
                                     event: ::String,
                                     schema: ::String,
                                     description: ::String?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String,
                                 ?tags: Hash[::String, ::String],
@@ -173,18 +173,7 @@ module Aws
                                                  ?destination_uri: ::String,
                                                  ?client_association_metadata: Hash[::String, ::String],
                                                  ?client_token: ::String,
-                                                 ?execution_configuration: {
-                                                   execution_mode: ("ON_DEMAND" | "SCHEDULED"),
-                                                   on_demand_configuration: {
-                                                     start_time: ::String,
-                                                     end_time: ::String?
-                                                   }?,
-                                                   schedule_configuration: {
-                                                     first_execution_from: ::String?,
-                                                     object: ::String?,
-                                                     schedule_expression: ::String
-                                                   }?
-                                                 }
+                                                 ?execution_configuration: Params::execution_configuration
                                                ) -> _CreateDataIntegrationAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataIntegrationAssociationResponseSuccess
 
@@ -416,14 +405,14 @@ module Aws
                                   {
                                     event: ::String,
                                     description: ::String?
-                                  },
+                                  }
                                 ],
                                 ?publications: Array[
                                   {
                                     event: ::String,
                                     schema: ::String,
                                     description: ::String?
-                                  },
+                                  }
                                 ],
                                 ?permissions: Array[::String],
                                 ?is_service: bool,
@@ -459,18 +448,7 @@ module Aws
       def update_data_integration_association: (
                                                  data_integration_identifier: ::String,
                                                  data_integration_association_identifier: ::String,
-                                                 execution_configuration: {
-                                                   execution_mode: ("ON_DEMAND" | "SCHEDULED"),
-                                                   on_demand_configuration: {
-                                                     start_time: ::String,
-                                                     end_time: ::String?
-                                                   }?,
-                                                   schedule_configuration: {
-                                                     first_execution_from: ::String?,
-                                                     object: ::String?,
-                                                     schedule_expression: ::String
-                                                   }?
-                                                 }
+                                                 execution_configuration: Params::execution_configuration
                                                ) -> _UpdateDataIntegrationAssociationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataIntegrationAssociationResponseSuccess
 

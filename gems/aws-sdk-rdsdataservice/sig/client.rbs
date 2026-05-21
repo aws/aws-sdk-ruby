@@ -91,28 +91,8 @@ module Aws
                                      ?schema: ::String,
                                      ?parameter_sets: Array[
                                        Array[
-                                         {
-                                           name: ::String?,
-                                           value: {
-                                             is_null: bool?,
-                                             boolean_value: bool?,
-                                             long_value: ::Integer?,
-                                             double_value: ::Float?,
-                                             string_value: ::String?,
-                                             blob_value: ::String?,
-                                             array_value: {
-                                               boolean_values: Array[bool]?,
-                                               long_values: Array[::Integer]?,
-                                               double_values: Array[::Float]?,
-                                               string_values: Array[::String]?,
-                                               array_values: Array[
-                                                 untyped,
-                                               ]?
-                                             }?
-                                           }?,
-                                           type_hint: ("JSON" | "UUID" | "TIMESTAMP" | "DATE" | "TIME" | "DECIMAL")?
-                                         },
-                                       ],
+                                         Params::sql_parameter
+                                       ]
                                      ],
                                      ?transaction_id: ::String
                                    ) -> _BatchExecuteStatementResponseSuccess
@@ -173,27 +153,7 @@ module Aws
                                ?database: ::String,
                                ?schema: ::String,
                                ?parameters: Array[
-                                 {
-                                   name: ::String?,
-                                   value: {
-                                     is_null: bool?,
-                                     boolean_value: bool?,
-                                     long_value: ::Integer?,
-                                     double_value: ::Float?,
-                                     string_value: ::String?,
-                                     blob_value: ::String?,
-                                     array_value: {
-                                       boolean_values: Array[bool]?,
-                                       long_values: Array[::Integer]?,
-                                       double_values: Array[::Float]?,
-                                       string_values: Array[::String]?,
-                                       array_values: Array[
-                                         untyped,
-                                       ]?
-                                     }?
-                                   }?,
-                                   type_hint: ("JSON" | "UUID" | "TIMESTAMP" | "DATE" | "TIME" | "DECIMAL")?
-                                 },
+                                 Params::sql_parameter
                                ],
                                ?transaction_id: ::String,
                                ?include_result_metadata: bool,

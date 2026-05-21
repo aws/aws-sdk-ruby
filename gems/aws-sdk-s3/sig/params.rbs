@@ -1,0 +1,78 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3
+    module Params
+      type access_control_policy = {
+      grants: Array[
+        Params::grant
+      ]?,
+      owner: {
+        display_name: ::String?,
+        id: ::String?
+      }?
+    }
+
+      type grant = {
+      grantee: {
+        display_name: ::String?,
+        email_address: ::String?,
+        id: ::String?,
+        type: ("CanonicalUser" | "AmazonCustomerByEmail" | "Group"),
+        uri: ::String?
+      }?,
+      permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
+    }
+
+      type notification_configuration_filter = {
+      key: {
+        filter_rules: Array[
+          {
+            name: ("prefix" | "suffix")?,
+            value: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type csv_input = {
+      file_header_info: ("USE" | "IGNORE" | "NONE")?,
+      comments: ::String?,
+      quote_escape_character: ::String?,
+      record_delimiter: ::String?,
+      field_delimiter: ::String?,
+      quote_character: ::String?,
+      allow_quoted_record_delimiter: bool?
+    }
+
+      type input_serialization = {
+      csv: Params::csv_input?,
+      compression_type: ("NONE" | "GZIP" | "BZIP2")?,
+      json: {
+        type: ("DOCUMENT" | "LINES")?
+      }?,
+      parquet: {
+      }?
+    }
+
+      type output_serialization = {
+      csv: {
+        quote_fields: ("ALWAYS" | "ASNEEDED")?,
+        quote_escape_character: ::String?,
+        record_delimiter: ::String?,
+        field_delimiter: ::String?,
+        quote_character: ::String?
+      }?,
+      json: {
+        record_delimiter: ::String?
+      }?
+    }
+
+    end
+  end
+end

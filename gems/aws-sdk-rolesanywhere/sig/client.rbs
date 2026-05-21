@@ -95,7 +95,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?accept_role_session_name: bool
                           ) -> _CreateProfileResponseSuccess
@@ -120,7 +120,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?notification_settings: Array[
                                    {
@@ -128,7 +128,7 @@ module Aws
                                      event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
                                      threshold: ::Integer?,
                                      channel: ("ALL")?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustAnchorResponseSuccess
@@ -288,7 +288,7 @@ module Aws
                           {
                             key: ::String,
                             value: ::String
-                          },
+                          }
                         ],
                         trust_anchor_arn: ::String
                       ) -> _ImportCrlResponseSuccess
@@ -363,7 +363,7 @@ module Aws
                                    mapping_rules: Array[
                                      {
                                        specifier: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _PutAttributeMappingResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAttributeMappingResponseSuccess
@@ -381,7 +381,7 @@ module Aws
                                            event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
                                            threshold: ::Integer?,
                                            channel: ("ALL")?
-                                         },
+                                         }
                                        ]
                                      ) -> _PutNotificationSettingsResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutNotificationSettingsResponseSuccess
@@ -397,7 +397,7 @@ module Aws
                                            {
                                              event: ("CA_CERTIFICATE_EXPIRY" | "END_ENTITY_CERTIFICATE_EXPIRY"),
                                              channel: ("ALL")?
-                                           },
+                                           }
                                          ]
                                        ) -> _ResetNotificationSettingsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetNotificationSettingsResponseSuccess
@@ -412,7 +412,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

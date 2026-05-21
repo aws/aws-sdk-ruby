@@ -54,7 +54,7 @@ module Aws::ConfigService
   autoload :EndpointProvider, 'aws-sdk-configservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-configservice/endpoints'
 
-  GEM_VERSION = '1.149.0'
+  GEM_VERSION = '1.150.0'
 
 end
 

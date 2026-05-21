@@ -6065,6 +6065,71 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Lists the models available to an Amazon Q in Connect assistant in the
+    # assistant's Amazon Web Services Region. The available models are
+    # determined by the region of the specified assistant.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant. Can be either the
+    #   ID or the ARN. URLs cannot contain the ARN. The assistant's region
+    #   determines which models are available.
+    #
+    # @option params [String] :ai_prompt_type
+    #   The type of the AI Prompt to filter models by. When specified, only
+    #   models that support the given AI Prompt type are returned.
+    #
+    # @option params [String] :model_lifecycle
+    #   The lifecycle status of models to filter by. When specified, only
+    #   models with the given lifecycle status are returned.
+    #
+    # @option params [String] :next_token
+    #   The token for the next set of results. Use the value returned in the
+    #   previous response in the next request to retrieve the next set of
+    #   results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return per page.
+    #
+    # @return [Types::ListModelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListModelsResponse#model_summaries #model_summaries} => Array&lt;Types::ModelSummary&gt;
+    #   * {Types::ListModelsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_models({
+    #     assistant_id: "UuidOrArn", # required
+    #     ai_prompt_type: "ANSWER_GENERATION", # accepts ANSWER_GENERATION, INTENT_LABELING_GENERATION, QUERY_REFORMULATION, SELF_SERVICE_PRE_PROCESSING, SELF_SERVICE_ANSWER_GENERATION, EMAIL_RESPONSE, EMAIL_OVERVIEW, EMAIL_GENERATIVE_ANSWER, EMAIL_QUERY_REFORMULATION, ORCHESTRATION, NOTE_TAKING, CASE_SUMMARIZATION
+    #     model_lifecycle: "ACTIVE", # accepts ACTIVE, LEGACY
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.model_summaries #=> Array
+    #   resp.model_summaries[0].model_id #=> String
+    #   resp.model_summaries[0].display_name #=> String
+    #   resp.model_summaries[0].cross_region_status #=> String, one of "NONE", "REGIONAL", "GLOBAL"
+    #   resp.model_summaries[0].supports_prompt_caching #=> Boolean
+    #   resp.model_summaries[0].supported_ai_prompt_types #=> Array
+    #   resp.model_summaries[0].supported_ai_prompt_types[0] #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
+    #   resp.model_summaries[0].model_lifecycle #=> String, one of "ACTIVE", "LEGACY"
+    #   resp.model_summaries[0].legacy_timestamp #=> Time
+    #   resp.model_summaries[0].end_of_life_timestamp #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListModels AWS API Documentation
+    #
+    # @overload list_models(params = {})
+    # @param [Hash] params ({})
+    def list_models(params = {}, options = {})
+      req = build_request(:list_models, params)
+      req.send_request(options)
+    end
+
     # Lists information about quick response.
     #
     # @option params [String] :next_token
@@ -9464,7 +9529,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.54.0'
+      context[:gem_version] = '1.56.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

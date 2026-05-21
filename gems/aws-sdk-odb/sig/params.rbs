@@ -1,0 +1,34 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Odb
+    module Params
+      type maintenance_window = {
+      custom_action_timeout_in_mins: ::Integer?,
+      days_of_week: Array[
+        {
+          name: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")?
+        }
+      ]?,
+      hours_of_day: Array[::Integer]?,
+      is_custom_action_timeout_enabled: bool?,
+      lead_time_in_weeks: ::Integer?,
+      months: Array[
+        {
+          name: ("JANUARY" | "FEBRUARY" | "MARCH" | "APRIL" | "MAY" | "JUNE" | "JULY" | "AUGUST" | "SEPTEMBER" | "OCTOBER" | "NOVEMBER" | "DECEMBER")?
+        }
+      ]?,
+      patching_mode: ("ROLLING" | "NONROLLING")?,
+      preference: ("NO_PREFERENCE" | "CUSTOM_PREFERENCE")?,
+      skip_ru: bool?,
+      weeks_of_month: Array[::Integer]?
+    }
+
+    end
+  end
+end

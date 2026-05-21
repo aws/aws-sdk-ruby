@@ -90,44 +90,10 @@ module Aws
                                rules: Array[
                                  {
                                    rule_identifier: ::String,
-                                   match: {
-                                     http_match: {
-                                       method: ::String?,
-                                       path_match: {
-                                         match: {
-                                           exact: ::String?,
-                                           prefix: ::String?
-                                         },
-                                         case_sensitive: bool?
-                                       }?,
-                                       header_matches: Array[
-                                         {
-                                           name: ::String,
-                                           match: {
-                                             exact: ::String?,
-                                             prefix: ::String?,
-                                             contains: ::String?
-                                           },
-                                           case_sensitive: bool?
-                                         },
-                                       ]?
-                                     }?
-                                   }?,
+                                   match: Params::rule_match?,
                                    priority: ::Integer?,
-                                   action: {
-                                     forward: {
-                                       target_groups: Array[
-                                         {
-                                           target_group_identifier: ::String,
-                                           weight: ::Integer?
-                                         },
-                                       ]
-                                     }?,
-                                     fixed_response: {
-                                       status_code: ::Integer
-                                     }?
-                                   }?
-                                 },
+                                   action: Params::rule_action?
+                                 }
                                ]
                              ) -> _BatchUpdateRuleResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRuleResponseSuccess
@@ -168,19 +134,7 @@ module Aws
                              name: ::String,
                              protocol: ("HTTP" | "HTTPS" | "TLS_PASSTHROUGH"),
                              ?port: ::Integer,
-                             default_action: {
-                               forward: {
-                                 target_groups: Array[
-                                   {
-                                     target_group_identifier: ::String,
-                                     weight: ::Integer?
-                                   },
-                                 ]
-                               }?,
-                               fixed_response: {
-                                 status_code: ::Integer
-                               }?
-                             },
+                             default_action: Params::rule_action,
                              ?client_token: ::String,
                              ?tags: Hash[::String, ::String]
                            ) -> _CreateListenerResponseSuccess
@@ -214,18 +168,7 @@ module Aws
                                            ?protocol: ("TCP"),
                                            ?resource_gateway_identifier: ::String,
                                            ?resource_configuration_group_identifier: ::String,
-                                           ?resource_configuration_definition: {
-                                             dns_resource: {
-                                               domain_name: ::String?,
-                                               ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")?
-                                             }?,
-                                             ip_resource: {
-                                               ip_address: ::String?
-                                             }?,
-                                             arn_resource: {
-                                               arn: ::String?
-                                             }?
-                                           },
+                                           ?resource_configuration_definition: Params::resource_configuration_definition,
                                            ?allow_association_to_shareable_service_network: bool,
                                            ?custom_domain_name: ::String,
                                            ?group_domain: ::String,
@@ -276,43 +219,9 @@ module Aws
                          service_identifier: ::String,
                          listener_identifier: ::String,
                          name: ::String,
-                         match: {
-                           http_match: {
-                             method: ::String?,
-                             path_match: {
-                               match: {
-                                 exact: ::String?,
-                                 prefix: ::String?
-                               },
-                               case_sensitive: bool?
-                             }?,
-                             header_matches: Array[
-                               {
-                                 name: ::String,
-                                 match: {
-                                   exact: ::String?,
-                                   prefix: ::String?,
-                                   contains: ::String?
-                                 },
-                                 case_sensitive: bool?
-                               },
-                             ]?
-                           }?
-                         },
+                         match: Params::rule_match,
                          priority: ::Integer,
-                         action: {
-                           forward: {
-                             target_groups: Array[
-                               {
-                                 target_group_identifier: ::String,
-                                 weight: ::Integer?
-                               },
-                             ]
-                           }?,
-                           fixed_response: {
-                             status_code: ::Integer
-                           }?
-                         },
+                         action: Params::rule_action,
                          ?client_token: ::String,
                          ?tags: Hash[::String, ::String]
                        ) -> _CreateRuleResponseSuccess
@@ -440,20 +349,7 @@ module Aws
                                    protocol_version: ("HTTP1" | "HTTP2" | "GRPC")?,
                                    ip_address_type: ("IPV4" | "IPV6")?,
                                    vpc_identifier: ::String?,
-                                   health_check: {
-                                     enabled: bool?,
-                                     protocol: ("HTTP" | "HTTPS" | "TCP")?,
-                                     protocol_version: ("HTTP1" | "HTTP2")?,
-                                     port: ::Integer?,
-                                     path: ::String?,
-                                     health_check_interval_seconds: ::Integer?,
-                                     health_check_timeout_seconds: ::Integer?,
-                                     healthy_threshold_count: ::Integer?,
-                                     unhealthy_threshold_count: ::Integer?,
-                                     matcher: {
-                                       http_code: ::String?
-                                     }?
-                                   }?,
+                                   health_check: Params::health_check_config?,
                                    lambda_event_structure_version: ("V1" | "V2")?
                                  },
                                  ?client_token: ::String,
@@ -636,7 +532,7 @@ module Aws
                                   {
                                     id: ::String,
                                     port: ::Integer?
-                                  },
+                                  }
                                 ]
                               ) -> _DeregisterTargetsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTargetsResponseSuccess
@@ -1138,7 +1034,7 @@ module Aws
                             {
                               id: ::String,
                               port: ::Integer?
-                            },
+                            }
                           ]
                         ) -> _ListTargetsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTargetsResponseSuccess
@@ -1177,7 +1073,7 @@ module Aws
                                 {
                                   id: ::String,
                                   port: ::Integer?
-                                },
+                                }
                               ]
                             ) -> _RegisterTargetsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetsResponseSuccess
@@ -1248,19 +1144,7 @@ module Aws
       def update_listener: (
                              service_identifier: ::String,
                              listener_identifier: ::String,
-                             default_action: {
-                               forward: {
-                                 target_groups: Array[
-                                   {
-                                     target_group_identifier: ::String,
-                                     weight: ::Integer?
-                                   },
-                                 ]
-                               }?,
-                               fixed_response: {
-                                 status_code: ::Integer
-                               }?
-                             }
+                             default_action: Params::rule_action
                            ) -> _UpdateListenerResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateListenerResponseSuccess
 
@@ -1281,18 +1165,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_resource_configuration-instance_method
       def update_resource_configuration: (
                                            resource_configuration_identifier: ::String,
-                                           ?resource_configuration_definition: {
-                                             dns_resource: {
-                                               domain_name: ::String?,
-                                               ip_address_type: ("IPV4" | "IPV6" | "DUALSTACK")?
-                                             }?,
-                                             ip_resource: {
-                                               ip_address: ::String?
-                                             }?,
-                                             arn_resource: {
-                                               arn: ::String?
-                                             }?
-                                           },
+                                           ?resource_configuration_definition: Params::resource_configuration_definition,
                                            ?allow_association_to_shareable_service_network: bool,
                                            ?port_ranges: Array[::String]
                                          ) -> _UpdateResourceConfigurationResponseSuccess
@@ -1331,43 +1204,9 @@ module Aws
                          service_identifier: ::String,
                          listener_identifier: ::String,
                          rule_identifier: ::String,
-                         ?match: {
-                           http_match: {
-                             method: ::String?,
-                             path_match: {
-                               match: {
-                                 exact: ::String?,
-                                 prefix: ::String?
-                               },
-                               case_sensitive: bool?
-                             }?,
-                             header_matches: Array[
-                               {
-                                 name: ::String,
-                                 match: {
-                                   exact: ::String?,
-                                   prefix: ::String?,
-                                   contains: ::String?
-                                 },
-                                 case_sensitive: bool?
-                               },
-                             ]?
-                           }?
-                         },
+                         ?match: Params::rule_match,
                          ?priority: ::Integer,
-                         ?action: {
-                           forward: {
-                             target_groups: Array[
-                               {
-                                 target_group_identifier: ::String,
-                                 weight: ::Integer?
-                               },
-                             ]
-                           }?,
-                           fixed_response: {
-                             status_code: ::Integer
-                           }?
-                         }
+                         ?action: Params::rule_action
                        ) -> _UpdateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess
 
@@ -1429,20 +1268,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/VPCLattice/Client.html#update_target_group-instance_method
       def update_target_group: (
                                  target_group_identifier: ::String,
-                                 health_check: {
-                                   enabled: bool?,
-                                   protocol: ("HTTP" | "HTTPS" | "TCP")?,
-                                   protocol_version: ("HTTP1" | "HTTP2")?,
-                                   port: ::Integer?,
-                                   path: ::String?,
-                                   health_check_interval_seconds: ::Integer?,
-                                   health_check_timeout_seconds: ::Integer?,
-                                   healthy_threshold_count: ::Integer?,
-                                   unhealthy_threshold_count: ::Integer?,
-                                   matcher: {
-                                     http_code: ::String?
-                                   }?
-                                 }
+                                 health_check: Params::health_check_config
                                ) -> _UpdateTargetGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTargetGroupResponseSuccess
     end

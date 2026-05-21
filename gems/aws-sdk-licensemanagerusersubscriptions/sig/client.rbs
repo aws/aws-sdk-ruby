@@ -86,26 +86,7 @@ module Aws
       def associate_user: (
                             username: ::String,
                             instance_id: ::String,
-                            identity_provider: {
-                              active_directory_identity_provider: {
-                                directory_id: ::String?,
-                                active_directory_settings: {
-                                  domain_name: ::String?,
-                                  domain_ipv_4_list: Array[::String]?,
-                                  domain_ipv_6_list: Array[::String]?,
-                                  domain_credentials_provider: {
-                                    secrets_manager_credentials_provider: {
-                                      secret_id: ::String?
-                                    }?
-                                  }?,
-                                  domain_network_settings: {
-                                    subnets: Array[::String]
-                                  }?
-                                }?,
-                                active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                is_shared_active_directory: bool?
-                              }?
-                            },
+                            identity_provider: Params::identity_provider,
                             ?domain: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _AssociateUserResponseSuccess
@@ -152,26 +133,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#deregister_identity_provider-instance_method
       def deregister_identity_provider: (
-                                          ?identity_provider: {
-                                            active_directory_identity_provider: {
-                                              directory_id: ::String?,
-                                              active_directory_settings: {
-                                                domain_name: ::String?,
-                                                domain_ipv_4_list: Array[::String]?,
-                                                domain_ipv_6_list: Array[::String]?,
-                                                domain_credentials_provider: {
-                                                  secrets_manager_credentials_provider: {
-                                                    secret_id: ::String?
-                                                  }?
-                                                }?,
-                                                domain_network_settings: {
-                                                  subnets: Array[::String]
-                                                }?
-                                              }?,
-                                              active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                              is_shared_active_directory: bool?
-                                            }?
-                                          },
+                                          ?identity_provider: Params::identity_provider,
                                           ?product: ::String,
                                           ?identity_provider_arn: ::String
                                         ) -> _DeregisterIdentityProviderResponseSuccess
@@ -185,26 +147,7 @@ module Aws
       def disassociate_user: (
                                ?username: ::String,
                                ?instance_id: ::String,
-                               ?identity_provider: {
-                                 active_directory_identity_provider: {
-                                   directory_id: ::String?,
-                                   active_directory_settings: {
-                                     domain_name: ::String?,
-                                     domain_ipv_4_list: Array[::String]?,
-                                     domain_ipv_6_list: Array[::String]?,
-                                     domain_credentials_provider: {
-                                       secrets_manager_credentials_provider: {
-                                         secret_id: ::String?
-                                       }?
-                                     }?,
-                                     domain_network_settings: {
-                                       subnets: Array[::String]
-                                     }?
-                                   }?,
-                                   active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                   is_shared_active_directory: bool?
-                                 }?
-                               },
+                               ?identity_provider: Params::identity_provider,
                                ?instance_user_arn: ::String,
                                ?domain: ::String
                              ) -> _DisassociateUserResponseSuccess
@@ -223,7 +166,7 @@ module Aws
                                          attribute: ::String?,
                                          operation: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String
                                    ) -> _ListIdentityProvidersResponseSuccess
@@ -243,7 +186,7 @@ module Aws
                                 attribute: ::String?,
                                 operation: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ]
                           ) -> _ListInstancesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstancesResponseSuccess
@@ -261,7 +204,7 @@ module Aws
                                                attribute: ::String?,
                                                operation: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ],
                                            ?next_token: ::String
                                          ) -> _ListLicenseServerEndpointsResponseSuccess
@@ -275,33 +218,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#list_product_subscriptions-instance_method
       def list_product_subscriptions: (
                                         ?product: ::String,
-                                        identity_provider: {
-                                          active_directory_identity_provider: {
-                                            directory_id: ::String?,
-                                            active_directory_settings: {
-                                              domain_name: ::String?,
-                                              domain_ipv_4_list: Array[::String]?,
-                                              domain_ipv_6_list: Array[::String]?,
-                                              domain_credentials_provider: {
-                                                secrets_manager_credentials_provider: {
-                                                  secret_id: ::String?
-                                                }?
-                                              }?,
-                                              domain_network_settings: {
-                                                subnets: Array[::String]
-                                              }?
-                                            }?,
-                                            active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                            is_shared_active_directory: bool?
-                                          }?
-                                        },
+                                        identity_provider: Params::identity_provider,
                                         ?max_results: ::Integer,
                                         ?filters: Array[
                                           {
                                             attribute: ::String?,
                                             operation: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?next_token: ::String
                                       ) -> _ListProductSubscriptionsResponseSuccess
@@ -325,33 +249,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#list_user_associations-instance_method
       def list_user_associations: (
                                     instance_id: ::String,
-                                    identity_provider: {
-                                      active_directory_identity_provider: {
-                                        directory_id: ::String?,
-                                        active_directory_settings: {
-                                          domain_name: ::String?,
-                                          domain_ipv_4_list: Array[::String]?,
-                                          domain_ipv_6_list: Array[::String]?,
-                                          domain_credentials_provider: {
-                                            secrets_manager_credentials_provider: {
-                                              secret_id: ::String?
-                                            }?
-                                          }?,
-                                          domain_network_settings: {
-                                            subnets: Array[::String]
-                                          }?
-                                        }?,
-                                        active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                        is_shared_active_directory: bool?
-                                      }?
-                                    },
+                                    identity_provider: Params::identity_provider,
                                     ?max_results: ::Integer,
                                     ?filters: Array[
                                       {
                                         attribute: ::String?,
                                         operation: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String
                                   ) -> _ListUserAssociationsResponseSuccess
@@ -363,26 +268,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#register_identity_provider-instance_method
       def register_identity_provider: (
-                                        identity_provider: {
-                                          active_directory_identity_provider: {
-                                            directory_id: ::String?,
-                                            active_directory_settings: {
-                                              domain_name: ::String?,
-                                              domain_ipv_4_list: Array[::String]?,
-                                              domain_ipv_6_list: Array[::String]?,
-                                              domain_credentials_provider: {
-                                                secrets_manager_credentials_provider: {
-                                                  secret_id: ::String?
-                                                }?
-                                              }?,
-                                              domain_network_settings: {
-                                                subnets: Array[::String]
-                                              }?
-                                            }?,
-                                            active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                            is_shared_active_directory: bool?
-                                          }?
-                                        },
+                                        identity_provider: Params::identity_provider,
                                         product: ::String,
                                         ?settings: {
                                           subnets: Array[::String],
@@ -399,26 +285,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#start_product_subscription-instance_method
       def start_product_subscription: (
                                         username: ::String,
-                                        identity_provider: {
-                                          active_directory_identity_provider: {
-                                            directory_id: ::String?,
-                                            active_directory_settings: {
-                                              domain_name: ::String?,
-                                              domain_ipv_4_list: Array[::String]?,
-                                              domain_ipv_6_list: Array[::String]?,
-                                              domain_credentials_provider: {
-                                                secrets_manager_credentials_provider: {
-                                                  secret_id: ::String?
-                                                }?
-                                              }?,
-                                              domain_network_settings: {
-                                                subnets: Array[::String]
-                                              }?
-                                            }?,
-                                            active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                            is_shared_active_directory: bool?
-                                          }?
-                                        },
+                                        identity_provider: Params::identity_provider,
                                         product: ::String,
                                         ?domain: ::String,
                                         ?tags: Hash[::String, ::String]
@@ -432,26 +299,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#stop_product_subscription-instance_method
       def stop_product_subscription: (
                                        ?username: ::String,
-                                       ?identity_provider: {
-                                         active_directory_identity_provider: {
-                                           directory_id: ::String?,
-                                           active_directory_settings: {
-                                             domain_name: ::String?,
-                                             domain_ipv_4_list: Array[::String]?,
-                                             domain_ipv_6_list: Array[::String]?,
-                                             domain_credentials_provider: {
-                                               secrets_manager_credentials_provider: {
-                                                 secret_id: ::String?
-                                               }?
-                                             }?,
-                                             domain_network_settings: {
-                                               subnets: Array[::String]
-                                             }?
-                                           }?,
-                                           active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                           is_shared_active_directory: bool?
-                                         }?
-                                       },
+                                       ?identity_provider: Params::identity_provider,
                                        ?product: ::String,
                                        ?product_user_arn: ::String,
                                        ?domain: ::String
@@ -484,26 +332,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/LicenseManagerUserSubscriptions/Client.html#update_identity_provider_settings-instance_method
       def update_identity_provider_settings: (
-                                               ?identity_provider: {
-                                                 active_directory_identity_provider: {
-                                                   directory_id: ::String?,
-                                                   active_directory_settings: {
-                                                     domain_name: ::String?,
-                                                     domain_ipv_4_list: Array[::String]?,
-                                                     domain_ipv_6_list: Array[::String]?,
-                                                     domain_credentials_provider: {
-                                                       secrets_manager_credentials_provider: {
-                                                         secret_id: ::String?
-                                                       }?
-                                                     }?,
-                                                     domain_network_settings: {
-                                                       subnets: Array[::String]
-                                                     }?
-                                                   }?,
-                                                   active_directory_type: ("SELF_MANAGED" | "AWS_MANAGED")?,
-                                                   is_shared_active_directory: bool?
-                                                 }?
-                                               },
+                                               ?identity_provider: Params::identity_provider,
                                                ?product: ::String,
                                                ?identity_provider_arn: ::String,
                                                update_settings: {

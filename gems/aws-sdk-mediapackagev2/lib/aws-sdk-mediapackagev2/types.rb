@@ -583,6 +583,13 @@ module Aws::MediaPackageV2
     #   specify a value, the default is `LEAF`.
     #   @return [String]
     #
+    # @!attribute [rw] availability_start_time_configuration
+    #   The configuration for the DASH `availabilityStartTime` attribute of
+    #   the Media Presentation Description (MPD). If you don't specify a
+    #   value, MediaPackage uses the default availability start time of
+    #   `2024-01-01T00:00:00Z`.
+    #   @return [Types::DashAvailabilityStartTimeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/CreateDashManifestConfiguration AWS API Documentation
     #
     class CreateDashManifestConfiguration < Struct.new(
@@ -603,7 +610,8 @@ module Aws::MediaPackageV2
       :dvb_settings,
       :compactness,
       :subtitle_configuration,
-      :uri_path_type)
+      :uri_path_type,
+      :availability_start_time_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1208,6 +1216,35 @@ module Aws::MediaPackageV2
       :tags)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The configuration for the DASH `availabilityStartTime` attribute of
+    # the Media Presentation Description (MPD). Use this configuration to
+    # set a custom availability start time for your DASH manifest.
+    #
+    # @note DashAvailabilityStartTimeConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DashAvailabilityStartTimeConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DashAvailabilityStartTimeConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_availability_start_time
+    #   The fixed availability start time for the DASH manifest, in ISO 8601
+    #   date-time format. The value must have hourly granularity, meaning
+    #   that the minutes, seconds, and fractional seconds must be zero. The
+    #   value must be on or after `2024-01-01T00:00:00Z` and must be at
+    #   least 14 days before the current time.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/DashAvailabilityStartTimeConfiguration AWS API Documentation
+    #
+    class DashAvailabilityStartTimeConfiguration < Struct.new(
+      :fixed_availability_start_time,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedAvailabilityStartTime < DashAvailabilityStartTimeConfiguration; end
+      class Unknown < DashAvailabilityStartTimeConfiguration; end
     end
 
     # The base URLs to use for retrieving segments. You can specify multiple
@@ -2169,6 +2206,11 @@ module Aws::MediaPackageV2
     #   include the full path from root.
     #   @return [String]
     #
+    # @!attribute [rw] availability_start_time_configuration
+    #   The configuration for the DASH `availabilityStartTime` attribute of
+    #   the Media Presentation Description (MPD).
+    #   @return [Types::DashAvailabilityStartTimeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/GetDashManifestConfiguration AWS API Documentation
     #
     class GetDashManifestConfiguration < Struct.new(
@@ -2190,7 +2232,8 @@ module Aws::MediaPackageV2
       :dvb_settings,
       :compactness,
       :subtitle_configuration,
-      :uri_path_type)
+      :uri_path_type,
+      :availability_start_time_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

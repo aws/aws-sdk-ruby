@@ -1,0 +1,65 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ComputeOptimizerAutomation
+    module Params
+      type criteria = {
+      region: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::String]?
+        }
+      ]?,
+      resource_arn: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::String]?
+        }
+      ]?,
+      ebs_volume_type: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::String]?
+        }
+      ]?,
+      ebs_volume_size_in_gib: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::Integer]?
+        }
+      ]?,
+      estimated_monthly_savings: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::Float]?
+        }
+      ]?,
+      resource_tag: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          key: ::String?,
+          values: Array[::String]?
+        }
+      ]?,
+      look_back_period_in_days: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::Integer]?
+        }
+      ]?,
+      restart_needed: Array[
+        {
+          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
+          values: Array[::String]?
+        }
+      ]?
+    }
+
+    end
+  end
+end

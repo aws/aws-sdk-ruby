@@ -1,0 +1,44 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApplicationAutoScaling
+    module Params
+      type predictive_scaling_customized_metric_specification = {
+      metric_data_queries: Array[
+        Params::predictive_scaling_metric_data_query
+      ]
+    }
+
+      type predictive_scaling_metric = {
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?,
+      metric_name: ::String?,
+      namespace: ::String?
+    }
+
+      type predictive_scaling_metric_stat = {
+      metric: Params::predictive_scaling_metric,
+      stat: ::String,
+      unit: ::String?
+    }
+
+      type predictive_scaling_metric_data_query = {
+      id: ::String,
+      expression: ::String?,
+      metric_stat: Params::predictive_scaling_metric_stat?,
+      label: ::String?,
+      return_data: bool?
+    }
+
+    end
+  end
+end

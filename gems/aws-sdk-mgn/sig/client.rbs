@@ -235,29 +235,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_launch_configuration_template-instance_method
       def create_launch_configuration_template: (
-                                                  ?post_launch_actions: {
-                                                    deployment: ("TEST_AND_CUTOVER" | "CUTOVER_ONLY" | "TEST_ONLY")?,
-                                                    s3_log_bucket: ::String?,
-                                                    s3_output_key_prefix: ::String?,
-                                                    cloud_watch_log_group_name: ::String?,
-                                                    ssm_documents: Array[
-                                                      {
-                                                        action_name: ::String,
-                                                        ssm_document_name: ::String,
-                                                        timeout_seconds: ::Integer?,
-                                                        must_succeed_for_cutover: bool?,
-                                                        parameters: Hash[::String, Array[
-                                                            {
-                                                              parameter_type: ("STRING" | "SECURE_STRING"),
-                                                              parameter_name: ::String
-                                                            },
-                                                          ]]?,
-                                                        external_parameters: Hash[::String, {
-                                                            dynamic_path: ::String?
-                                                          }]?
-                                                      },
-                                                    ]?
-                                                  },
+                                                  ?post_launch_actions: Params::post_launch_actions,
                                                   ?enable_map_auto_tagging: bool,
                                                   ?map_auto_tagging_mpe_id: ::String,
                                                   ?tags: Hash[::String, ::String],
@@ -306,14 +284,7 @@ module Aws
                                                  name: ::String,
                                                  ?description: ::String,
                                                  ?source_configurations: Array[
-                                                   {
-                                                     source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT"),
-                                                     source_s3_configuration: {
-                                                       s3_bucket: ::String,
-                                                       s3_bucket_owner: ::String,
-                                                       s3_key: ::String
-                                                     }
-                                                   },
+                                                   Params::source_configuration
                                                  ],
                                                  target_s3_configuration: {
                                                    s3_bucket: ::String,
@@ -1180,7 +1151,7 @@ module Aws
                                           {
                                             parameter_type: ("STRING" | "SECURE_STRING"),
                                             parameter_name: ::String
-                                          },
+                                          }
                                         ]],
                                       ?external_parameters: Hash[::String, {
                                           dynamic_path: ::String?
@@ -1222,7 +1193,7 @@ module Aws
                                      {
                                        parameter_type: ("STRING" | "SECURE_STRING"),
                                        parameter_name: ::String
-                                     },
+                                     }
                                    ]],
                                  ?operating_system: ::String,
                                  ?external_parameters: Hash[::String, {
@@ -1406,7 +1377,7 @@ module Aws
       def start_network_migration_mapping: (
                                              network_migration_execution_id: ::String,
                                              network_migration_definition_id: ::String,
-                                             ?security_group_mapping_strategy: ("MAP" | "SKIP")
+                                             ?security_group_mapping_strategy: ("MAP" | "SKIP" | "MAP_DHCP")
                                            ) -> _StartNetworkMigrationMappingResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingResponseSuccess
 
@@ -1429,14 +1400,14 @@ module Aws
                                                               {
                                                                 segment_id: ::String?,
                                                                 construct_id: ::String?
-                                                              },
+                                                              }
                                                             ]?
                                                           }?,
                                                           split: {
                                                             split_constructs: Array[
                                                               {
                                                                 cidr_block: ::String?
-                                                              },
+                                                              }
                                                             ]?
                                                           }?,
                                                           delete: {
@@ -1447,14 +1418,14 @@ module Aws
                                                             properties: Hash[::String, ::String]?
                                                           }?
                                                         }?
-                                                      },
+                                                      }
                                                     ],
                                                     ?segments: Array[
                                                       {
                                                         segment_id: ::String,
                                                         target_account: ::String?,
                                                         scope_tags: Hash[::String, ::String]?
-                                                      },
+                                                      }
                                                     ]
                                                   ) -> _StartNetworkMigrationMappingUpdateResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNetworkMigrationMappingUpdateResponseSuccess
@@ -1655,29 +1626,7 @@ module Aws
                                            os_byol: bool?
                                          },
                                          ?boot_mode: ("LEGACY_BIOS" | "UEFI" | "USE_SOURCE"),
-                                         ?post_launch_actions: {
-                                           deployment: ("TEST_AND_CUTOVER" | "CUTOVER_ONLY" | "TEST_ONLY")?,
-                                           s3_log_bucket: ::String?,
-                                           s3_output_key_prefix: ::String?,
-                                           cloud_watch_log_group_name: ::String?,
-                                           ssm_documents: Array[
-                                             {
-                                               action_name: ::String,
-                                               ssm_document_name: ::String,
-                                               timeout_seconds: ::Integer?,
-                                               must_succeed_for_cutover: bool?,
-                                               parameters: Hash[::String, Array[
-                                                   {
-                                                     parameter_type: ("STRING" | "SECURE_STRING"),
-                                                     parameter_name: ::String
-                                                   },
-                                                 ]]?,
-                                               external_parameters: Hash[::String, {
-                                                   dynamic_path: ::String?
-                                                 }]?
-                                             },
-                                           ]?
-                                         },
+                                         ?post_launch_actions: Params::post_launch_actions,
                                          ?enable_map_auto_tagging: bool,
                                          ?map_auto_tagging_mpe_id: ::String,
                                          ?account_id: ::String
@@ -1709,29 +1658,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#update_launch_configuration_template-instance_method
       def update_launch_configuration_template: (
                                                   launch_configuration_template_id: ::String,
-                                                  ?post_launch_actions: {
-                                                    deployment: ("TEST_AND_CUTOVER" | "CUTOVER_ONLY" | "TEST_ONLY")?,
-                                                    s3_log_bucket: ::String?,
-                                                    s3_output_key_prefix: ::String?,
-                                                    cloud_watch_log_group_name: ::String?,
-                                                    ssm_documents: Array[
-                                                      {
-                                                        action_name: ::String,
-                                                        ssm_document_name: ::String,
-                                                        timeout_seconds: ::Integer?,
-                                                        must_succeed_for_cutover: bool?,
-                                                        parameters: Hash[::String, Array[
-                                                            {
-                                                              parameter_type: ("STRING" | "SECURE_STRING"),
-                                                              parameter_name: ::String
-                                                            },
-                                                          ]]?,
-                                                        external_parameters: Hash[::String, {
-                                                            dynamic_path: ::String?
-                                                          }]?
-                                                      },
-                                                    ]?
-                                                  },
+                                                  ?post_launch_actions: Params::post_launch_actions,
                                                   ?enable_map_auto_tagging: bool,
                                                   ?map_auto_tagging_mpe_id: ::String,
                                                   ?launch_disposition: ("STOPPED" | "STARTED"),
@@ -1780,14 +1707,7 @@ module Aws
                                                  ?name: ::String,
                                                  ?description: ::String,
                                                  ?source_configurations: Array[
-                                                   {
-                                                     source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT"),
-                                                     source_s3_configuration: {
-                                                       s3_bucket: ::String,
-                                                       s3_bucket_owner: ::String,
-                                                       s3_key: ::String
-                                                     }
-                                                   },
+                                                   Params::source_configuration
                                                  ],
                                                  ?target_s3_configuration: {
                                                    s3_bucket: ::String?,
@@ -1869,7 +1789,7 @@ module Aws
                                                   staging_disk_type: ("AUTO" | "GP2" | "IO1" | "SC1" | "ST1" | "STANDARD" | "GP3" | "IO2")?,
                                                   iops: ::Integer?,
                                                   throughput: ::Integer?
-                                                },
+                                                }
                                               ],
                                               ?ebs_encryption: ("DEFAULT" | "CUSTOM"),
                                               ?ebs_encryption_key_arn: ::String,

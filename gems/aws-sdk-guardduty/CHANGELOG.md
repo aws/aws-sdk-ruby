@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.150.0 (2026-05-19)
+------------------
+
+* Feature - Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+
 1.149.0 (2026-05-13)
 ------------------
 

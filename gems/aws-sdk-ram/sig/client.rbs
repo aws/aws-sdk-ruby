@@ -135,7 +135,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CreatePermissionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePermissionResponseSuccess
@@ -167,7 +167,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ],
                                    ?allow_external_principals: bool,
                                    ?client_token: ::String,
@@ -326,7 +326,7 @@ module Aws
                                    {
                                      tag_key: ::String?,
                                      tag_values: Array[::String]?
-                                   },
+                                   }
                                  ],
                                  ?next_token: ::String,
                                  ?max_results: ::Integer,
@@ -557,7 +557,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ],
                           ?resource_arn: ::String
                         ) -> _TagResourceResponseSuccess

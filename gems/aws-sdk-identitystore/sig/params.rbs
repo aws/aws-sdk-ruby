@@ -1,0 +1,24 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IdentityStore
+    module Params
+      type alternate_identifier = {
+      external_id: {
+        issuer: ::String,
+        id: ::String
+      }?,
+      unique_attribute: {
+        attribute_path: ::String,
+        attribute_value: untyped
+      }?
+    }
+
+    end
+  end
+end

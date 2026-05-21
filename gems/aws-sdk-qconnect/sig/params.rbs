@@ -1,0 +1,590 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QConnect
+    module Params
+      type manual_search_ai_agent_configuration = {
+      answer_generation_ai_prompt_id: ::String?,
+      answer_generation_ai_guardrail_id: ::String?,
+      association_configurations: Array[
+        Params::association_configuration
+      ]?,
+      locale: ::String?
+    }
+
+      type answer_recommendation_ai_agent_configuration = {
+      intent_labeling_generation_ai_prompt_id: ::String?,
+      query_reformulation_ai_prompt_id: ::String?,
+      answer_generation_ai_prompt_id: ::String?,
+      answer_generation_ai_guardrail_id: ::String?,
+      association_configurations: Array[
+        Params::association_configuration
+      ]?,
+      locale: ::String?,
+      suggested_messages: Array[::String]?
+    }
+
+      type self_service_ai_agent_configuration = {
+      self_service_pre_processing_ai_prompt_id: ::String?,
+      self_service_answer_generation_ai_prompt_id: ::String?,
+      self_service_ai_guardrail_id: ::String?,
+      association_configurations: Array[
+        Params::association_configuration
+      ]?
+    }
+
+      type email_response_ai_agent_configuration = {
+      email_response_ai_prompt_id: ::String?,
+      email_query_reformulation_ai_prompt_id: ::String?,
+      locale: ::String?,
+      association_configurations: Array[
+        Params::association_configuration
+      ]?
+    }
+
+      type email_generative_answer_ai_agent_configuration = {
+      email_generative_answer_ai_prompt_id: ::String?,
+      email_query_reformulation_ai_prompt_id: ::String?,
+      locale: ::String?,
+      association_configurations: Array[
+        Params::association_configuration
+      ]?
+    }
+
+      type orchestration_ai_agent_configuration = {
+      orchestration_ai_prompt_id: ::String,
+      orchestration_ai_guardrail_id: ::String?,
+      tool_configurations: Array[
+        Params::tool_configuration
+      ]?,
+      connect_instance_arn: ::String?,
+      locale: ::String?
+    }
+
+      type ai_agent_configuration = {
+      manual_search_ai_agent_configuration: Params::manual_search_ai_agent_configuration?,
+      answer_recommendation_ai_agent_configuration: Params::answer_recommendation_ai_agent_configuration?,
+      self_service_ai_agent_configuration: Params::self_service_ai_agent_configuration?,
+      email_response_ai_agent_configuration: Params::email_response_ai_agent_configuration?,
+      email_overview_ai_agent_configuration: {
+        email_overview_ai_prompt_id: ::String?,
+        locale: ::String?
+      }?,
+      email_generative_answer_ai_agent_configuration: Params::email_generative_answer_ai_agent_configuration?,
+      orchestration_ai_agent_configuration: Params::orchestration_ai_agent_configuration?,
+      note_taking_ai_agent_configuration: {
+        note_taking_ai_prompt_id: ::String?,
+        note_taking_ai_guardrail_id: ::String?,
+        locale: ::String?
+      }?,
+      case_summarization_ai_agent_configuration: {
+        case_summarization_ai_prompt_id: ::String?,
+        case_summarization_ai_guardrail_id: ::String?,
+        locale: ::String?
+      }?
+    }
+
+      type tag_filter = {
+      tag_condition: {
+        key: ::String,
+        value: ::String?
+      }?,
+      and_conditions: Array[
+        {
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      or_conditions: Array[
+        Params::or_condition
+      ]?
+    }
+
+      type knowledge_base_association_configuration_data = {
+      content_tag_filter: Params::tag_filter?,
+      max_results: ::Integer?,
+      override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
+    }
+
+      type association_configuration_data = {
+      knowledge_base_association_configuration_data: Params::knowledge_base_association_configuration_data?
+    }
+
+      type association_configuration = {
+      association_id: ::String?,
+      association_type: ("KNOWLEDGE_BASE")?,
+      association_configuration_data: Params::association_configuration_data?
+    }
+
+      type or_condition = {
+      and_conditions: Array[
+        {
+          key: ::String,
+          value: ::String?
+        }
+      ]?,
+      tag_condition: {
+        key: ::String,
+        value: ::String?
+      }?
+    }
+
+      type tool_configuration = {
+      tool_name: ::String,
+      tool_type: ("MODEL_CONTEXT_PROTOCOL" | "RETURN_TO_CONTROL" | "CONSTANT"),
+      title: ::String?,
+      tool_id: ::String?,
+      description: ::String?,
+      instruction: {
+        instruction: ::String?,
+        examples: Array[::String]?
+      }?,
+      override_input_values: Array[
+        Params::tool_override_input_value
+      ]?,
+      output_filters: Array[
+        {
+          json_path: ::String,
+          output_configuration: {
+            output_variable_name_override: ::String?,
+            session_data_namespace: ::String?
+          }?
+        }
+      ]?,
+      input_schema: {
+      }?,
+      output_schema: {
+      }?,
+      annotations: {
+        title: ::String?,
+        destructive_hint: bool?
+      }?,
+      user_interaction_configuration: {
+        is_user_confirmation_required: bool?
+      }?
+    }
+
+      type tool_override_input_value = {
+      json_path: ::String,
+      value: {
+        constant: {
+          type: ("STRING" | "NUMBER" | "JSON_STRING"),
+          value: ::String
+        }?
+      }
+    }
+
+      type ai_guardrail_topic_policy_config = {
+      topics_config: Array[
+        {
+          name: ::String,
+          definition: ::String,
+          examples: Array[::String]?,
+          type: ("DENY")
+        }
+      ]
+    }
+
+      type ai_guardrail_word_policy_config = {
+      words_config: Array[
+        {
+          text: ::String
+        }
+      ]?,
+      managed_word_lists_config: Array[
+        {
+          type: ("PROFANITY")
+        }
+      ]?
+    }
+
+      type ai_guardrail_sensitive_information_policy_config = {
+      pii_entities_config: Array[
+        {
+          type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
+          action: ("BLOCK" | "ANONYMIZE")
+        }
+      ]?,
+      regexes_config: Array[
+        {
+          name: ::String,
+          description: ::String?,
+          pattern: ::String,
+          action: ("BLOCK" | "ANONYMIZE")
+        }
+      ]?
+    }
+
+      type email_message_template_content_body = {
+      plain_text: {
+        content: ::String?
+      }?,
+      html: {
+        content: ::String?
+      }?
+    }
+
+      type email_message_template_content = {
+      subject: ::String?,
+      body: Params::email_message_template_content_body?,
+      headers: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?
+    }
+
+      type push_adm_message_template_content = {
+      title: ::String?,
+      body: {
+        content: ::String?
+      }?,
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      sound: ::String?,
+      url: ::String?,
+      image_url: ::String?,
+      image_icon_url: ::String?,
+      small_image_icon_url: ::String?,
+      raw_content: {
+        content: ::String?
+      }?
+    }
+
+      type push_apns_message_template_content = {
+      title: ::String?,
+      body: {
+        content: ::String?
+      }?,
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      sound: ::String?,
+      url: ::String?,
+      media_url: ::String?,
+      raw_content: {
+        content: ::String?
+      }?
+    }
+
+      type push_fcm_message_template_content = {
+      title: ::String?,
+      body: {
+        content: ::String?
+      }?,
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      sound: ::String?,
+      url: ::String?,
+      image_url: ::String?,
+      image_icon_url: ::String?,
+      small_image_icon_url: ::String?,
+      raw_content: {
+        content: ::String?
+      }?
+    }
+
+      type push_baidu_message_template_content = {
+      title: ::String?,
+      body: {
+        content: ::String?
+      }?,
+      action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
+      sound: ::String?,
+      url: ::String?,
+      image_url: ::String?,
+      image_icon_url: ::String?,
+      small_image_icon_url: ::String?,
+      raw_content: {
+        content: ::String?
+      }?
+    }
+
+      type push_message_template_content = {
+      adm: Params::push_adm_message_template_content?,
+      apns: Params::push_apns_message_template_content?,
+      fcm: Params::push_fcm_message_template_content?,
+      baidu: Params::push_baidu_message_template_content?
+    }
+
+      type message_template_content_provider = {
+      email: Params::email_message_template_content?,
+      sms: {
+        body: {
+          plain_text: {
+            content: ::String?
+          }?
+        }?
+      }?,
+      whats_app: {
+        data: ::String?
+      }?,
+      push: Params::push_message_template_content?
+    }
+
+      type system_attributes = {
+      name: ::String?,
+      customer_endpoint: {
+        address: ::String?
+      }?,
+      system_endpoint: {
+        address: ::String?
+      }?
+    }
+
+      type customer_profile_attributes = {
+      profile_id: ::String?,
+      profile_arn: ::String?,
+      first_name: ::String?,
+      middle_name: ::String?,
+      last_name: ::String?,
+      account_number: ::String?,
+      email_address: ::String?,
+      phone_number: ::String?,
+      additional_information: ::String?,
+      party_type: ::String?,
+      business_name: ::String?,
+      birth_date: ::String?,
+      gender: ::String?,
+      mobile_phone_number: ::String?,
+      home_phone_number: ::String?,
+      business_phone_number: ::String?,
+      business_email_address: ::String?,
+      address1: ::String?,
+      address2: ::String?,
+      address3: ::String?,
+      address4: ::String?,
+      city: ::String?,
+      county: ::String?,
+      country: ::String?,
+      postal_code: ::String?,
+      province: ::String?,
+      state: ::String?,
+      shipping_address_1: ::String?,
+      shipping_address_2: ::String?,
+      shipping_address_3: ::String?,
+      shipping_address_4: ::String?,
+      shipping_city: ::String?,
+      shipping_county: ::String?,
+      shipping_country: ::String?,
+      shipping_postal_code: ::String?,
+      shipping_province: ::String?,
+      shipping_state: ::String?,
+      mailing_address_1: ::String?,
+      mailing_address_2: ::String?,
+      mailing_address_3: ::String?,
+      mailing_address_4: ::String?,
+      mailing_city: ::String?,
+      mailing_county: ::String?,
+      mailing_country: ::String?,
+      mailing_postal_code: ::String?,
+      mailing_province: ::String?,
+      mailing_state: ::String?,
+      billing_address_1: ::String?,
+      billing_address_2: ::String?,
+      billing_address_3: ::String?,
+      billing_address_4: ::String?,
+      billing_city: ::String?,
+      billing_county: ::String?,
+      billing_country: ::String?,
+      billing_postal_code: ::String?,
+      billing_province: ::String?,
+      billing_state: ::String?,
+      custom: Hash[::String, ::String]?
+    }
+
+      type message_template_attributes = {
+      system_attributes: Params::system_attributes?,
+      agent_attributes: {
+        first_name: ::String?,
+        last_name: ::String?
+      }?,
+      customer_profile_attributes: Params::customer_profile_attributes?,
+      custom_attributes: Hash[::String, ::String]?
+    }
+
+      type retrieval_filter_configuration = {
+      and_all: Array[
+        {
+          and_all: untyped?,
+          equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          list_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          or_all: untyped?,
+          starts_with: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          string_contains: {
+            key: ::String,
+            value: {
+            }
+          }?
+        }
+      ]?,
+      equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      greater_than: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      greater_than_or_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      in: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      less_than: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      less_than_or_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      list_contains: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      not_equals: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      not_in: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      or_all: Array[
+        {
+          and_all: untyped?,
+          equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          greater_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          less_than_or_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          list_contains: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_equals: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          not_in: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          or_all: untyped?,
+          starts_with: {
+            key: ::String,
+            value: {
+            }
+          }?,
+          string_contains: {
+            key: ::String,
+            value: {
+            }
+          }?
+        }
+      ]?,
+      starts_with: {
+        key: ::String,
+        value: {
+        }
+      }?,
+      string_contains: {
+        key: ::String,
+        value: {
+        }
+      }?
+    }
+
+    end
+  end
+end

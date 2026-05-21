@@ -1,0 +1,228 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PcaConnectorAd
+    module Params
+      type certificate_validity = {
+      renewal_period: {
+        period: ::Integer,
+        period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      },
+      validity_period: {
+        period: ::Integer,
+        period_type: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS" | "YEARS")
+      }
+    }
+
+      type key_usage = {
+      critical: bool?,
+      usage_flags: {
+        data_encipherment: bool?,
+        digital_signature: bool?,
+        key_agreement: bool?,
+        key_encipherment: bool?,
+        non_repudiation: bool?
+      }
+    }
+
+      type extensions_v2 = {
+      application_policies: {
+        critical: bool?,
+        policies: Array[
+          {
+            policy_object_identifier: ::String?,
+            policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+          }
+        ]
+      }?,
+      key_usage: Params::key_usage
+    }
+
+      type subject_name_flags_v2 = {
+      require_common_name: bool?,
+      require_directory_path: bool?,
+      require_dns_as_cn: bool?,
+      require_email: bool?,
+      san_require_directory_guid: bool?,
+      san_require_dns: bool?,
+      san_require_domain_dns: bool?,
+      san_require_email: bool?,
+      san_require_spn: bool?,
+      san_require_upn: bool?
+    }
+
+      type template_v2 = {
+      certificate_validity: Params::certificate_validity,
+      enrollment_flags: {
+        enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+        include_symmetric_algorithms: bool?,
+        no_security_extension: bool?,
+        remove_invalid_certificate_from_personal_store: bool?,
+        user_interaction_required: bool?
+      },
+      extensions: Params::extensions_v2,
+      general_flags: {
+        auto_enrollment: bool?,
+        machine_type: bool?
+      },
+      private_key_attributes: {
+        crypto_providers: Array[::String]?,
+        key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+        minimal_key_length: ::Integer
+      },
+      private_key_flags: {
+        client_version: ("WINDOWS_SERVER_2003" | "WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+        exportable_key: bool?,
+        strong_key_protection_required: bool?
+      },
+      subject_name_flags: Params::subject_name_flags_v2,
+      superseded_templates: Array[::String]?
+    }
+
+      type extensions_v3 = {
+      application_policies: {
+        critical: bool?,
+        policies: Array[
+          {
+            policy_object_identifier: ::String?,
+            policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+          }
+        ]
+      }?,
+      key_usage: Params::key_usage
+    }
+
+      type key_usage_property = {
+      property_flags: {
+        decrypt: bool?,
+        key_agreement: bool?,
+        sign: bool?
+      }?,
+      property_type: ("ALL")?
+    }
+
+      type private_key_attributes_v3 = {
+      algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521"),
+      crypto_providers: Array[::String]?,
+      key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+      key_usage_property: Params::key_usage_property,
+      minimal_key_length: ::Integer
+    }
+
+      type subject_name_flags_v3 = {
+      require_common_name: bool?,
+      require_directory_path: bool?,
+      require_dns_as_cn: bool?,
+      require_email: bool?,
+      san_require_directory_guid: bool?,
+      san_require_dns: bool?,
+      san_require_domain_dns: bool?,
+      san_require_email: bool?,
+      san_require_spn: bool?,
+      san_require_upn: bool?
+    }
+
+      type template_v3 = {
+      certificate_validity: Params::certificate_validity,
+      enrollment_flags: {
+        enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+        include_symmetric_algorithms: bool?,
+        no_security_extension: bool?,
+        remove_invalid_certificate_from_personal_store: bool?,
+        user_interaction_required: bool?
+      },
+      extensions: Params::extensions_v3,
+      general_flags: {
+        auto_enrollment: bool?,
+        machine_type: bool?
+      },
+      hash_algorithm: ("SHA256" | "SHA384" | "SHA512"),
+      private_key_attributes: Params::private_key_attributes_v3,
+      private_key_flags: {
+        client_version: ("WINDOWS_SERVER_2008" | "WINDOWS_SERVER_2008_R2" | "WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+        exportable_key: bool?,
+        require_alternate_signature_algorithm: bool?,
+        strong_key_protection_required: bool?
+      },
+      subject_name_flags: Params::subject_name_flags_v3,
+      superseded_templates: Array[::String]?
+    }
+
+      type extensions_v4 = {
+      application_policies: {
+        critical: bool?,
+        policies: Array[
+          {
+            policy_object_identifier: ::String?,
+            policy_type: ("ALL_APPLICATION_POLICIES" | "ANY_PURPOSE" | "ATTESTATION_IDENTITY_KEY_CERTIFICATE" | "CERTIFICATE_REQUEST_AGENT" | "CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "CTL_USAGE" | "DIGITAL_RIGHTS" | "DIRECTORY_SERVICE_EMAIL_REPLICATION" | "DISALLOWED_LIST" | "DNS_SERVER_TRUST" | "DOCUMENT_ENCRYPTION" | "DOCUMENT_SIGNING" | "DYNAMIC_CODE_GENERATOR" | "EARLY_LAUNCH_ANTIMALWARE_DRIVER" | "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "ENCLAVE" | "ENCRYPTING_FILE_SYSTEM" | "ENDORSEMENT_KEY_CERTIFICATE" | "FILE_RECOVERY" | "HAL_EXTENSION" | "IP_SECURITY_END_SYSTEM" | "IP_SECURITY_IKE_INTERMEDIATE" | "IP_SECURITY_TUNNEL_TERMINATION" | "IP_SECURITY_USER" | "ISOLATED_USER_MODE" | "KDC_AUTHENTICATION" | "KERNEL_MODE_CODE_SIGNING" | "KEY_PACK_LICENSES" | "KEY_RECOVERY" | "KEY_RECOVERY_AGENT" | "LICENSE_SERVER_VERIFICATION" | "LIFETIME_SIGNING" | "MICROSOFT_PUBLISHER" | "MICROSOFT_TIME_STAMPING" | "MICROSOFT_TRUST_LIST_SIGNING" | "OCSP_SIGNING" | "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "PLATFORM_CERTIFICATE" | "PREVIEW_BUILD_SIGNING" | "PRIVATE_KEY_ARCHIVAL" | "PROTECTED_PROCESS_LIGHT_VERIFICATION" | "PROTECTED_PROCESS_VERIFICATION" | "QUALIFIED_SUBORDINATION" | "REVOKED_LIST_SIGNER" | "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION" | "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION" | "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL" | "ROOT_LIST_SIGNER" | "SECURE_EMAIL" | "SERVER_AUTHENTICATION" | "SMART_CARD_LOGIN" | "SPC_ENCRYPTED_DIGEST_RETRY_COUNT" | "SPC_RELAXED_PE_MARKER_CHECK" | "TIME_STAMPING" | "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION" | "WINDOWS_HARDWARE_DRIVER_VERIFICATION" | "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION" | "WINDOWS_KITS_COMPONENT" | "WINDOWS_RT_VERIFICATION" | "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION" | "WINDOWS_STORE" | "WINDOWS_SYSTEM_COMPONENT_VERIFICATION" | "WINDOWS_TCB_COMPONENT" | "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT" | "WINDOWS_UPDATE")?
+          }
+        ]
+      }?,
+      key_usage: Params::key_usage
+    }
+
+      type private_key_attributes_v4 = {
+      algorithm: ("RSA" | "ECDH_P256" | "ECDH_P384" | "ECDH_P521")?,
+      crypto_providers: Array[::String]?,
+      key_spec: ("KEY_EXCHANGE" | "SIGNATURE"),
+      key_usage_property: Params::key_usage_property?,
+      minimal_key_length: ::Integer
+    }
+
+      type private_key_flags_v4 = {
+      client_version: ("WINDOWS_SERVER_2012" | "WINDOWS_SERVER_2012_R2" | "WINDOWS_SERVER_2016"),
+      exportable_key: bool?,
+      require_alternate_signature_algorithm: bool?,
+      require_same_key_renewal: bool?,
+      strong_key_protection_required: bool?,
+      use_legacy_provider: bool?
+    }
+
+      type subject_name_flags_v4 = {
+      require_common_name: bool?,
+      require_directory_path: bool?,
+      require_dns_as_cn: bool?,
+      require_email: bool?,
+      san_require_directory_guid: bool?,
+      san_require_dns: bool?,
+      san_require_domain_dns: bool?,
+      san_require_email: bool?,
+      san_require_spn: bool?,
+      san_require_upn: bool?
+    }
+
+      type template_v4 = {
+      certificate_validity: Params::certificate_validity,
+      enrollment_flags: {
+        enable_key_reuse_on_nt_token_keyset_storage_full: bool?,
+        include_symmetric_algorithms: bool?,
+        no_security_extension: bool?,
+        remove_invalid_certificate_from_personal_store: bool?,
+        user_interaction_required: bool?
+      },
+      extensions: Params::extensions_v4,
+      general_flags: {
+        auto_enrollment: bool?,
+        machine_type: bool?
+      },
+      hash_algorithm: ("SHA256" | "SHA384" | "SHA512")?,
+      private_key_attributes: Params::private_key_attributes_v4,
+      private_key_flags: Params::private_key_flags_v4,
+      subject_name_flags: Params::subject_name_flags_v4,
+      superseded_templates: Array[::String]?
+    }
+
+      type template_definition = {
+      template_v2: Params::template_v2?,
+      template_v3: Params::template_v3?,
+      template_v4: Params::template_v4?
+    }
+
+    end
+  end
+end

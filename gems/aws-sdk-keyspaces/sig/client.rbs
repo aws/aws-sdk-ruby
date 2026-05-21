@@ -90,7 +90,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              ?replication_specification: {
                                replication_strategy: ("SINGLE_REGION" | "MULTI_REGION"),
@@ -112,23 +112,23 @@ module Aws
                               {
                                 name: ::String,
                                 type: ::String
-                              },
+                              }
                             ],
                             partition_keys: Array[
                               {
                                 name: ::String
-                              },
+                              }
                             ],
                             clustering_keys: Array[
                               {
                                 name: ::String,
                                 order_by: ("ASC" | "DESC")
-                              },
+                              }
                             ]?,
                             static_columns: Array[
                               {
                                 name: ::String
-                              },
+                              }
                             ]?
                           },
                           ?comment: {
@@ -154,69 +154,16 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?client_side_timestamps: {
                             status: ("ENABLED")
                           },
-                          ?auto_scaling_specification: {
-                            write_capacity_auto_scaling: {
-                              auto_scaling_disabled: bool?,
-                              minimum_units: ::Integer?,
-                              maximum_units: ::Integer?,
-                              scaling_policy: {
-                                target_tracking_scaling_policy_configuration: {
-                                  disable_scale_in: bool?,
-                                  scale_in_cooldown: ::Integer?,
-                                  scale_out_cooldown: ::Integer?,
-                                  target_value: ::Float
-                                }?
-                              }?
-                            }?,
-                            read_capacity_auto_scaling: {
-                              auto_scaling_disabled: bool?,
-                              minimum_units: ::Integer?,
-                              maximum_units: ::Integer?,
-                              scaling_policy: {
-                                target_tracking_scaling_policy_configuration: {
-                                  disable_scale_in: bool?,
-                                  scale_in_cooldown: ::Integer?,
-                                  scale_out_cooldown: ::Integer?,
-                                  target_value: ::Float
-                                }?
-                              }?
-                            }?
-                          },
+                          ?auto_scaling_specification: Params::auto_scaling_specification,
                           ?replica_specifications: Array[
-                            {
-                              region: ::String,
-                              read_capacity_units: ::Integer?,
-                              read_capacity_auto_scaling: {
-                                auto_scaling_disabled: bool?,
-                                minimum_units: ::Integer?,
-                                maximum_units: ::Integer?,
-                                scaling_policy: {
-                                  target_tracking_scaling_policy_configuration: {
-                                    disable_scale_in: bool?,
-                                    scale_in_cooldown: ::Integer?,
-                                    scale_out_cooldown: ::Integer?,
-                                    target_value: ::Float
-                                  }?
-                                }?
-                              }?
-                            },
+                            Params::replica_specification
                           ],
-                          ?cdc_specification: {
-                            status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING"),
-                            view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")?,
-                            tags: Array[
-                              {
-                                key: ::String,
-                                value: ::String
-                              },
-                            ]?,
-                            propagate_tags: ("TABLE" | "NONE")?
-                          },
+                          ?cdc_specification: Params::cdc_specification,
                           ?warm_throughput_specification: {
                             read_units_per_second: ::Integer?,
                             write_units_per_second: ::Integer?
@@ -237,7 +184,7 @@ module Aws
                            {
                              name: ::String,
                              type: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateTypeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTypeResponseSuccess
@@ -426,54 +373,11 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
-                           ?auto_scaling_specification: {
-                             write_capacity_auto_scaling: {
-                               auto_scaling_disabled: bool?,
-                               minimum_units: ::Integer?,
-                               maximum_units: ::Integer?,
-                               scaling_policy: {
-                                 target_tracking_scaling_policy_configuration: {
-                                   disable_scale_in: bool?,
-                                   scale_in_cooldown: ::Integer?,
-                                   scale_out_cooldown: ::Integer?,
-                                   target_value: ::Float
-                                 }?
-                               }?
-                             }?,
-                             read_capacity_auto_scaling: {
-                               auto_scaling_disabled: bool?,
-                               minimum_units: ::Integer?,
-                               maximum_units: ::Integer?,
-                               scaling_policy: {
-                                 target_tracking_scaling_policy_configuration: {
-                                   disable_scale_in: bool?,
-                                   scale_in_cooldown: ::Integer?,
-                                   scale_out_cooldown: ::Integer?,
-                                   target_value: ::Float
-                                 }?
-                               }?
-                             }?
-                           },
+                           ?auto_scaling_specification: Params::auto_scaling_specification,
                            ?replica_specifications: Array[
-                             {
-                               region: ::String,
-                               read_capacity_units: ::Integer?,
-                               read_capacity_auto_scaling: {
-                                 auto_scaling_disabled: bool?,
-                                 minimum_units: ::Integer?,
-                                 maximum_units: ::Integer?,
-                                 scaling_policy: {
-                                   target_tracking_scaling_policy_configuration: {
-                                     disable_scale_in: bool?,
-                                     scale_in_cooldown: ::Integer?,
-                                     scale_out_cooldown: ::Integer?,
-                                     target_value: ::Float
-                                   }?
-                                 }?
-                               }?
-                             },
+                             Params::replica_specification
                            ]
                          ) -> _RestoreTableResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreTableResponseSuccess
@@ -488,7 +392,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -503,7 +407,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _UntagResourceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UntagResourceResponseSuccess
@@ -537,7 +441,7 @@ module Aws
                             {
                               name: ::String,
                               type: ::String
-                            },
+                            }
                           ],
                           ?capacity_specification: {
                             throughput_mode: ("PAY_PER_REQUEST" | "PROVISIONED"),
@@ -558,64 +462,11 @@ module Aws
                           ?client_side_timestamps: {
                             status: ("ENABLED")
                           },
-                          ?auto_scaling_specification: {
-                            write_capacity_auto_scaling: {
-                              auto_scaling_disabled: bool?,
-                              minimum_units: ::Integer?,
-                              maximum_units: ::Integer?,
-                              scaling_policy: {
-                                target_tracking_scaling_policy_configuration: {
-                                  disable_scale_in: bool?,
-                                  scale_in_cooldown: ::Integer?,
-                                  scale_out_cooldown: ::Integer?,
-                                  target_value: ::Float
-                                }?
-                              }?
-                            }?,
-                            read_capacity_auto_scaling: {
-                              auto_scaling_disabled: bool?,
-                              minimum_units: ::Integer?,
-                              maximum_units: ::Integer?,
-                              scaling_policy: {
-                                target_tracking_scaling_policy_configuration: {
-                                  disable_scale_in: bool?,
-                                  scale_in_cooldown: ::Integer?,
-                                  scale_out_cooldown: ::Integer?,
-                                  target_value: ::Float
-                                }?
-                              }?
-                            }?
-                          },
+                          ?auto_scaling_specification: Params::auto_scaling_specification,
                           ?replica_specifications: Array[
-                            {
-                              region: ::String,
-                              read_capacity_units: ::Integer?,
-                              read_capacity_auto_scaling: {
-                                auto_scaling_disabled: bool?,
-                                minimum_units: ::Integer?,
-                                maximum_units: ::Integer?,
-                                scaling_policy: {
-                                  target_tracking_scaling_policy_configuration: {
-                                    disable_scale_in: bool?,
-                                    scale_in_cooldown: ::Integer?,
-                                    scale_out_cooldown: ::Integer?,
-                                    target_value: ::Float
-                                  }?
-                                }?
-                              }?
-                            },
+                            Params::replica_specification
                           ],
-                          ?cdc_specification: {
-                            status: ("ENABLED" | "ENABLING" | "DISABLED" | "DISABLING"),
-                            view_type: ("NEW_IMAGE" | "OLD_IMAGE" | "KEYS_ONLY" | "NEW_AND_OLD_IMAGES")?,
-                            tags: Array[
-                              {
-                                key: ::String,
-                                value: ::String
-                              },
-                            ]?,
-                            propagate_tags: ("TABLE" | "NONE")?
-                          },
+                          ?cdc_specification: Params::cdc_specification,
                           ?warm_throughput_specification: {
                             read_units_per_second: ::Integer?,
                             write_units_per_second: ::Integer?

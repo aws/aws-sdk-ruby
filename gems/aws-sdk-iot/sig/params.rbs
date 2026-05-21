@@ -1,0 +1,403 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module IoT
+    module Params
+      type resource_identifier = {
+      device_certificate_id: ::String?,
+      ca_certificate_id: ::String?,
+      cognito_identity_pool_id: ::String?,
+      client_id: ::String?,
+      policy_version_identifier: {
+        policy_name: ::String?,
+        policy_version_id: ::String?
+      }?,
+      account: ::String?,
+      iam_role_arn: ::String?,
+      role_alias_arn: ::String?,
+      issuer_certificate_identifier: {
+        issuer_certificate_subject: ::String?,
+        issuer_id: ::String?,
+        issuer_certificate_serial_number: ::String?
+      }?,
+      device_certificate_arn: ::String?
+    }
+
+      type command_parameter_value = {
+      s: ::String?,
+      b: bool?,
+      i: ::Integer?,
+      l: ::Integer?,
+      d: ::Float?,
+      bin: ::String?,
+      ul: ::String?
+    }
+
+      type exponential_rollout_rate = {
+      base_rate_per_minute: ::Integer,
+      increment_factor: ::Float,
+      rate_increase_criteria: {
+        number_of_notified_things: ::Integer?,
+        number_of_succeeded_things: ::Integer?
+      }
+    }
+
+      type job_executions_rollout_config = {
+      maximum_per_minute: ::Integer?,
+      exponential_rate: Params::exponential_rollout_rate?
+    }
+
+      type abort_config = {
+      criteria_list: Array[
+        {
+          failure_type: ("FAILED" | "REJECTED" | "TIMED_OUT" | "ALL"),
+          action: ("CANCEL"),
+          threshold_percentage: ::Float,
+          min_number_of_executed_things: ::Integer
+        }
+      ]
+    }
+
+      type mitigation_action_params = {
+      update_device_certificate_params: {
+        action: ("DEACTIVATE")
+      }?,
+      update_ca_certificate_params: {
+        action: ("DEACTIVATE")
+      }?,
+      add_things_to_thing_group_params: {
+        thing_group_names: Array[::String],
+        override_dynamic_groups: bool?
+      }?,
+      replace_default_policy_version_params: {
+        template_name: ("BLANK_POLICY")
+      }?,
+      enable_io_t_logging_params: {
+        role_arn_for_logging: ::String,
+        log_level: ("DEBUG" | "INFO" | "ERROR" | "WARN" | "DISABLED")
+      }?,
+      publish_finding_to_sns_params: {
+        topic_arn: ::String
+      }?
+    }
+
+      type metric_value = {
+      count: ::Integer?,
+      cidrs: Array[::String]?,
+      ports: Array[::Integer]?,
+      number: ::Float?,
+      numbers: Array[::Float]?,
+      strings: Array[::String]?
+    }
+
+      type behavior_criteria = {
+      comparison_operator: ("less-than" | "less-than-equals" | "greater-than" | "greater-than-equals" | "in-cidr-set" | "not-in-cidr-set" | "in-port-set" | "not-in-port-set" | "in-set" | "not-in-set")?,
+      value: Params::metric_value?,
+      duration_seconds: ::Integer?,
+      consecutive_datapoints_to_alarm: ::Integer?,
+      consecutive_datapoints_to_clear: ::Integer?,
+      statistical_threshold: {
+        statistic: ::String?
+      }?,
+      ml_detection_config: {
+        confidence_level: ("LOW" | "MEDIUM" | "HIGH")
+      }?
+    }
+
+      type behavior = {
+      name: ::String,
+      metric: ::String?,
+      metric_dimension: {
+        dimension_name: ::String,
+        operator: ("IN" | "NOT_IN")?
+      }?,
+      criteria: Params::behavior_criteria?,
+      suppress_alerts: bool?,
+      export_metric: bool?
+    }
+
+      type metric_to_retain = {
+      metric: ::String,
+      metric_dimension: {
+        dimension_name: ::String,
+        operator: ("IN" | "NOT_IN")?
+      }?,
+      export_metric: bool?
+    }
+
+      type stream_file = {
+      file_id: ::Integer?,
+      s3_location: {
+        bucket: ::String?,
+        key: ::String?,
+        version: ::String?
+      }?
+    }
+
+      type thing_type_properties = {
+      thing_type_description: ::String?,
+      searchable_attributes: Array[::String]?,
+      mqtt5_configuration: {
+        propagating_attributes: Array[
+          {
+            user_property_key: ::String?,
+            thing_attribute: ::String?,
+            connection_attribute: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type dynamo_db_action = {
+      table_name: ::String,
+      role_arn: ::String,
+      operation: ::String?,
+      hash_key_field: ::String,
+      hash_key_value: ::String,
+      hash_key_type: ("STRING" | "NUMBER")?,
+      range_key_field: ::String?,
+      range_key_value: ::String?,
+      range_key_type: ("STRING" | "NUMBER")?,
+      payload_field: ::String?
+    }
+
+      type mqtt_headers = {
+      payload_format_indicator: ::String?,
+      content_type: ::String?,
+      response_topic: ::String?,
+      correlation_data: ::String?,
+      message_expiry: ::String?,
+      user_properties: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type republish_action = {
+      role_arn: ::String,
+      topic: ::String,
+      qos: ::Integer?,
+      headers: Params::mqtt_headers?
+    }
+
+      type cloudwatch_metric_action = {
+      role_arn: ::String,
+      metric_namespace: ::String,
+      metric_name: ::String,
+      metric_value: ::String,
+      metric_unit: ::String,
+      metric_timestamp: ::String?
+    }
+
+      type iot_site_wise_action = {
+      put_asset_property_value_entries: Array[
+        Params::put_asset_property_value_entry
+      ],
+      role_arn: ::String
+    }
+
+      type timestream_action = {
+      role_arn: ::String,
+      database_name: ::String,
+      table_name: ::String,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ],
+      timestamp: {
+        value: ::String,
+        unit: ::String
+      }?
+    }
+
+      type http_action = {
+      url: ::String,
+      confirmation_url: ::String?,
+      headers: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      auth: {
+        sigv4: {
+          signing_region: ::String,
+          service_name: ::String,
+          role_arn: ::String
+        }?
+      }?,
+      enable_batching: bool?,
+      batch_config: {
+        max_batch_open_ms: ::Integer?,
+        max_batch_size: ::Integer?,
+        max_batch_size_bytes: ::Integer?,
+        batch_across_topics: bool?
+      }?
+    }
+
+      type kafka_action = {
+      destination_arn: ::String,
+      topic: ::String,
+      key: ::String?,
+      partition: ::String?,
+      client_properties: Hash[::String, ::String],
+      headers: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type location_action = {
+      role_arn: ::String,
+      tracker_name: ::String,
+      device_id: ::String,
+      timestamp: {
+        value: ::String,
+        unit: ::String?
+      }?,
+      latitude: ::String,
+      longitude: ::String
+    }
+
+      type action = {
+      dynamo_db: Params::dynamo_db_action?,
+      dynamo_d_bv_2: {
+        role_arn: ::String,
+        put_item: {
+          table_name: ::String
+        }
+      }?,
+      lambda: {
+        function_arn: ::String
+      }?,
+      sns: {
+        target_arn: ::String,
+        role_arn: ::String,
+        message_format: ("RAW" | "JSON")?
+      }?,
+      sqs: {
+        role_arn: ::String,
+        queue_url: ::String,
+        use_base_64: bool?
+      }?,
+      kinesis: {
+        role_arn: ::String,
+        stream_name: ::String,
+        partition_key: ::String?
+      }?,
+      republish: Params::republish_action?,
+      s3: {
+        role_arn: ::String,
+        bucket_name: ::String,
+        key: ::String,
+        canned_acl: ("private" | "public-read" | "public-read-write" | "aws-exec-read" | "authenticated-read" | "bucket-owner-read" | "bucket-owner-full-control" | "log-delivery-write")?
+      }?,
+      firehose: {
+        role_arn: ::String,
+        delivery_stream_name: ::String,
+        separator: ::String?,
+        batch_mode: bool?
+      }?,
+      cloudwatch_metric: Params::cloudwatch_metric_action?,
+      cloudwatch_alarm: {
+        role_arn: ::String,
+        alarm_name: ::String,
+        state_reason: ::String,
+        state_value: ::String
+      }?,
+      cloudwatch_logs: {
+        role_arn: ::String,
+        log_group_name: ::String,
+        batch_mode: bool?
+      }?,
+      elasticsearch: {
+        role_arn: ::String,
+        endpoint: ::String,
+        index: ::String,
+        type: ::String,
+        id: ::String
+      }?,
+      salesforce: {
+        token: ::String,
+        url: ::String
+      }?,
+      iot_analytics: {
+        channel_arn: ::String?,
+        channel_name: ::String?,
+        batch_mode: bool?,
+        role_arn: ::String?
+      }?,
+      iot_events: {
+        input_name: ::String,
+        message_id: ::String?,
+        batch_mode: bool?,
+        role_arn: ::String
+      }?,
+      iot_site_wise: Params::iot_site_wise_action?,
+      step_functions: {
+        execution_name_prefix: ::String?,
+        state_machine_name: ::String,
+        role_arn: ::String
+      }?,
+      timestream: Params::timestream_action?,
+      http: Params::http_action?,
+      kafka: Params::kafka_action?,
+      open_search: {
+        role_arn: ::String,
+        endpoint: ::String,
+        index: ::String,
+        type: ::String,
+        id: ::String
+      }?,
+      location: Params::location_action?
+    }
+
+      type topic_rule_payload = {
+      sql: ::String,
+      description: ::String?,
+      actions: Array[
+        Params::action
+      ],
+      rule_disabled: bool?,
+      aws_iot_sql_version: ::String?,
+      error_action: Params::action?
+    }
+
+      type put_asset_property_value_entry = {
+      entry_id: ::String?,
+      asset_id: ::String?,
+      property_id: ::String?,
+      property_alias: ::String?,
+      property_values: Array[
+        Params::asset_property_value
+      ]
+    }
+
+      type asset_property_value = {
+      value: {
+        string_value: ::String?,
+        integer_value: ::String?,
+        double_value: ::String?,
+        boolean_value: ::String?
+      },
+      timestamp: {
+        time_in_seconds: ::String,
+        offset_in_nanos: ::String?
+      },
+      quality: ::String?
+    }
+
+    end
+  end
+end

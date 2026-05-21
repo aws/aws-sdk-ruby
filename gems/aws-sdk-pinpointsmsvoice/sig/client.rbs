@@ -93,21 +93,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#create_configuration_set_event_destination-instance_method
       def create_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
-                                                        ?event_destination: {
-                                                          cloud_watch_logs_destination: {
-                                                            iam_role_arn: ::String?,
-                                                            log_group_arn: ::String?
-                                                          }?,
-                                                          enabled: bool?,
-                                                          kinesis_firehose_destination: {
-                                                            delivery_stream_arn: ::String?,
-                                                            iam_role_arn: ::String?
-                                                          }?,
-                                                          matching_event_types: Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String?
-                                                          }?
-                                                        },
+                                                        ?event_destination: Params::event_destination_definition,
                                                         ?event_destination_name: ::String
                                                       ) -> _CreateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
@@ -187,21 +173,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/PinpointSMSVoice/Client.html#update_configuration_set_event_destination-instance_method
       def update_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
-                                                        ?event_destination: {
-                                                          cloud_watch_logs_destination: {
-                                                            iam_role_arn: ::String?,
-                                                            log_group_arn: ::String?
-                                                          }?,
-                                                          enabled: bool?,
-                                                          kinesis_firehose_destination: {
-                                                            delivery_stream_arn: ::String?,
-                                                            iam_role_arn: ::String?
-                                                          }?,
-                                                          matching_event_types: Array[("INITIATED_CALL" | "RINGING" | "ANSWERED" | "COMPLETED_CALL" | "BUSY" | "FAILED" | "NO_ANSWER")]?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String?
-                                                          }?
-                                                        },
+                                                        ?event_destination: Params::event_destination_definition,
                                                         event_destination_name: ::String
                                                       ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess

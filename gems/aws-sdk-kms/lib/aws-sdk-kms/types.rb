@@ -605,6 +605,9 @@ module Aws::KMS
     #   see [IAM ARNs][1] in the <i> <i>Identity and Access Management User
     #   Guide</i> </i>.
     #
+    #   You must specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
@@ -625,6 +628,9 @@ module Aws::KMS
     #   have permission to retire the grant or revoke the grant. For
     #   details, see RevokeGrant and [Retiring and revoking grants][3] in
     #   the *Key Management Service Developer Guide*.
+    #
+    #   You can specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
     #
     #
     #
@@ -656,40 +662,55 @@ module Aws::KMS
     #   This field may be displayed in plaintext in CloudTrail logs and
     #   other output.
     #
-    #   KMS supports the `EncryptionContextEquals` and
-    #   `EncryptionContextSubset` grant constraints, which allow the
-    #   permissions in the grant only when the encryption context in the
-    #   request matches (`EncryptionContextEquals`) or includes
-    #   (`EncryptionContextSubset`) the encryption context specified in the
-    #   constraint.
+    #   KMS supports the following grant constraints.
     #
-    #   The encryption context grant constraints are supported only on
-    #   [grant operations][1] that include an `EncryptionContext` parameter,
-    #   such as cryptographic operations on symmetric encryption KMS keys.
-    #   Grants with grant constraints can include the DescribeKey and
-    #   RetireGrant operations, but the constraint doesn't apply to these
-    #   operations. If a grant with a grant constraint includes the
-    #   `CreateGrant` operation, the constraint requires that any grants
-    #   created with the `CreateGrant` permission have an equally strict or
-    #   stricter encryption context constraint.
+    #   * `EncryptionContextEquals` and `EncryptionContextSubset` — These
+    #     encryption context grant constraints allow the permissions in the
+    #     grant only when the encryption context in the request matches
+    #     (`EncryptionContextEquals`) or includes
+    #     (`EncryptionContextSubset`) the encryption context specified in
+    #     the constraint.
     #
-    #   You cannot use an encryption context grant constraint for
-    #   cryptographic operations with asymmetric KMS keys or HMAC KMS keys.
-    #   Operations with these keys don't support an encryption context.
+    #     Encryption context grant constraints are supported only on [grant
+    #     operations][1] that include an `EncryptionContext` parameter, such
+    #     as cryptographic operations on symmetric encryption KMS keys. You
+    #     cannot use an encryption context grant constraint for
+    #     cryptographic operations with asymmetric KMS keys or HMAC KMS
+    #     keys. Operations with these keys don't support an encryption
+    #     context. Grants with encryption context grant constraints can
+    #     include the DescribeKey and RetireGrant operations, but the
+    #     constraint doesn't apply to these operations. If a grant with an
+    #     encryption context grant constraint includes the `CreateGrant`
+    #     operation, the constraint requires that any grants created with
+    #     the `CreateGrant` permission have an equally strict or stricter
+    #     encryption context constraint.
     #
-    #   Each constraint value can include up to 8 encryption context pairs.
-    #   The encryption context value in each constraint cannot exceed 384
-    #   characters. For information about grant constraints, see [Using
-    #   grant constraints][2] in the *Key Management Service Developer
-    #   Guide*. For more information about encryption context, see
-    #   [Encryption context][3] in the <i> <i>Key Management Service
-    #   Developer Guide</i> </i>.
+    #     Each constraint value can include up to 8 encryption context
+    #     pairs. The encryption context value in each constraint cannot
+    #     exceed 384 characters. For more information about encryption
+    #     context, see [Encryption context][2] in the <i> <i>Key Management
+    #     Service Developer Guide</i> </i>.
+    #
+    #   * `SourceArn` — This grant constraint allows the permissions in the
+    #     grant only when the request is made on behalf of a specific Amazon
+    #     Web Services resource, identified by its [Amazon Resource Name
+    #     (ARN)][3]. This is effectively the same as having the
+    #     [aws:SourceArn][4] global condition key in the grant. The
+    #     SourceArn constraint is supported on grants for all types of KMS
+    #     keys and can also be applied to the DescribeKey operation when
+    #     specified in the request. However, it does not apply to
+    #     RetireGrant operation.
+    #
+    #   For information about grant constraints, see [Using grant
+    #   constraints][5] in the *Key Management Service Developer Guide*.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations
-    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
-    #   [3]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context
+    #   [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
+    #   [5]: https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints
     #   @return [Types::GrantConstraints]
     #
     # @!attribute [rw] grant_tokens
@@ -739,6 +760,34 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
     #   @return [Boolean]
     #
+    # @!attribute [rw] grantee_service_principal
+    #   The Amazon Web Services [service principal][1] that gets the
+    #   permissions specified in the grant.
+    #
+    #   When you specify a `GranteeServicePrincipal`, you must also specify
+    #   a `SourceArn` grant constraint. In addition, you must specify either
+    #   a `RetiringPrincipal` or a `RetiringServicePrincipal`.
+    #
+    #   You must specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #   @return [String]
+    #
+    # @!attribute [rw] retiring_service_principal
+    #   The Amazon Web Services [service principal][1] that has permission
+    #   to use the RetireGrant operation to retire the grant.
+    #
+    #   You can specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/CreateGrantRequest AWS API Documentation
     #
     class CreateGrantRequest < Struct.new(
@@ -749,7 +798,9 @@ module Aws::KMS
       :constraints,
       :grant_tokens,
       :name,
-      :dry_run)
+      :dry_run,
+      :grantee_service_principal,
+      :retiring_service_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3851,36 +3902,49 @@ module Aws::KMS
     end
 
     # Use this structure to allow [cryptographic operations][1] in the grant
-    # only when the operation request includes the specified [encryption
-    # context][2].
+    # only when the operation request meets the specified constraints.
     #
-    # KMS applies the grant constraints only to cryptographic operations
-    # that support an encryption context, that is, all cryptographic
-    # operations with a symmetric KMS key. Grant constraints are not applied
-    # to operations that do not support an encryption context, such as
-    # cryptographic operations with asymmetric KMS keys and management
-    # operations, such as DescribeKey or RetireGrant.
+    # KMS supports the following grant constraints:
     #
-    # In a cryptographic operation, the encryption context in the decryption
-    # operation must be an exact, case-sensitive match for the keys and
-    # values in the encryption context of the encryption operation. Only the
-    # order of the pairs can vary.
+    # * `EncryptionContextEquals` and `EncryptionContextSubset` — These
+    #   encryption context constraints apply only to cryptographic
+    #   operations that support an encryption context, that is, all
+    #   cryptographic operations with a symmetric KMS key. Encryption
+    #   context grant constraints are not applied to operations that do not
+    #   support an encryption context, such as cryptographic operations with
+    #   asymmetric KMS keys and management operations, such as DescribeKey
+    #   or RetireGrant.
     #
-    #  However, in a grant constraint, the key in each key-value pair is not
-    # case sensitive, but the value is case sensitive.
+    #   In a cryptographic operation, the encryption context in the
+    #   decryption operation must be an exact, case-sensitive match for the
+    #   keys and values in the encryption context of the encryption
+    #   operation. Only the order of the pairs can vary.
     #
-    #  To avoid confusion, do not use multiple encryption context pairs that
-    # differ only by case. To require a fully case-sensitive encryption
-    # context, use the `kms:EncryptionContext:` and
-    # `kms:EncryptionContextKeys` conditions in an IAM or key policy. For
-    # details, see [kms:EncryptionContext:context-key][3] in the <i> <i>Key
-    # Management Service Developer Guide</i> </i>.
+    #    However, in a grant constraint, the key in each key-value pair is
+    #   not case sensitive, but the value is case sensitive.
+    #
+    #    To avoid confusion, do not use multiple encryption context pairs
+    #   that differ only by case. To require a fully case-sensitive
+    #   encryption context, use the `kms:EncryptionContext:` and
+    #   `kms:EncryptionContextKeys` conditions in an IAM or key policy. For
+    #   details, see [kms:EncryptionContext:context-key][2] in the <i>
+    #   <i>Key Management Service Developer Guide</i> </i>.
+    #
+    # * `SourceArn` — This grant constraint allows the permissions in the
+    #   grant only when the request is made on behalf of a specific Amazon
+    #   Web Services resource, identified by its [Amazon Resource Name
+    #   (ARN)][3]. This is effectively the same as having the
+    #   [aws:SourceArn][4] global condition key in the grant. The SourceArn
+    #   constraint is supported on grants for all types of KMS keys and can
+    #   also be applied to the DescribeKey operation when specified in the
+    #   request. However, it does not apply to RetireGrant operation.
     #
     #
     #
     # [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
-    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
-    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-encryption-context
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-encryption-context
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    # [4]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
     #
     # @!attribute [rw] encryption_context_subset
     #   A list of key-value pairs that must be included in the encryption
@@ -3905,11 +3969,26 @@ module Aws::KMS
     #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] source_arn
+    #   The [ Amazon Resource Name (ARN)][1] of an Amazon Web Services
+    #   resource on behalf of which the request is made. This is effectively
+    #   the same as having the [aws:SourceArn][2] global condition key in
+    #   the grant. The SourceArn constraint ensures that the principal can
+    #   use the KMS key only when the request is made on behalf of the
+    #   specified resource.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantConstraints AWS API Documentation
     #
     class GrantConstraints < Struct.new(
       :encryption_context_subset,
-      :encryption_context_equals)
+      :encryption_context_equals,
+      :source_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3937,12 +4016,13 @@ module Aws::KMS
     # @!attribute [rw] grantee_principal
     #   The identity that gets the permissions in the grant.
     #
-    #   The `GranteePrincipal` field in the `ListGrants` response usually
-    #   contains the user or role designated as the grantee principal in the
-    #   grant. However, when the grantee principal in the grant is an Amazon
-    #   Web Services service, the `GranteePrincipal` field contains the
-    #   [service principal][1], which might represent several different
-    #   grantee principals.
+    #   When a grant is created with the `GranteePrincipal` field, the
+    #   `ListGrants` response usually contains the user or role designated
+    #   as the grantee principal in the grant. However, if the grantee
+    #   principal is an Amazon Web Services service, the `GranteePrincipal`
+    #   field contains an Amazon Web Services [service principal][1], which
+    #   might correspond to several different grantee principals, such as an
+    #   IAM user, IAM role, or Amazon Web Services account.
     #
     #
     #
@@ -3962,9 +4042,27 @@ module Aws::KMS
     #   @return [Array<String>]
     #
     # @!attribute [rw] constraints
-    #   A list of key-value pairs that must be present in the encryption
-    #   context of certain subsequent operations that the grant allows.
+    #   The constraints on the grant, such as encryption context pairs or a
+    #   SourceArn, that restrict the subsequent operations the grant allows.
     #   @return [Types::GrantConstraints]
+    #
+    # @!attribute [rw] grantee_service_principal
+    #   The Amazon Web Services [service principal][1] that gets the
+    #   permissions in the grant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #   @return [String]
+    #
+    # @!attribute [rw] retiring_service_principal
+    #   The Amazon Web Services [service principal][1] that can retire the
+    #   grant.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GrantListEntry AWS API Documentation
     #
@@ -3977,7 +4075,9 @@ module Aws::KMS
       :retiring_principal,
       :issuing_account,
       :operations,
-      :constraints)
+      :constraints,
+      :grantee_service_principal,
+      :retiring_service_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4887,6 +4987,18 @@ module Aws::KMS
     # @!attribute [rw] grantee_principal
     #   Returns only grants where the specified principal is the grantee
     #   principal for the grant.
+    #
+    #   You can specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] grantee_service_principal
+    #   Returns only grants where the specified Amazon Web Services service
+    #   principal is the grantee service principal for the grant. This
+    #   filter is only usable by callers in a service principal.
+    #
+    #   You can specify either `GranteePrincipal` or
+    #   `GranteeServicePrincipal`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListGrantsRequest AWS API Documentation
@@ -4896,7 +5008,8 @@ module Aws::KMS
       :marker,
       :key_id,
       :grant_id,
-      :grantee_principal)
+      :grantee_principal,
+      :grantee_service_principal)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5241,10 +5354,21 @@ module Aws::KMS
     #   syntax for a principal, see [IAM ARNs][2] in the <i> <i>Identity and
     #   Access Management User Guide</i> </i>.
     #
+    #   You must specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+    #   @return [String]
+    #
+    # @!attribute [rw] retiring_service_principal
+    #   The retiring service principal for which to list grants. This filter
+    #   is only usable by callers in a service principal.
+    #
+    #   You must specify either `RetiringPrincipal` or
+    #   `RetiringServicePrincipal`, but not both.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/ListRetirableGrantsRequest AWS API Documentation
@@ -5252,7 +5376,8 @@ module Aws::KMS
     class ListRetirableGrantsRequest < Struct.new(
       :limit,
       :marker,
-      :retiring_principal)
+      :retiring_principal,
+      :retiring_service_principal)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -18,7 +18,7 @@ module Aws
                     ?instances: Array[
                       {
                         instance_id: ::String?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeInstanceHealthResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeInstanceHealthResponseSuccess
@@ -33,7 +33,7 @@ module Aws
                     ?instances: Array[
                       {
                         instance_id: ::String?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeInstanceHealthResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeInstanceHealthResponseSuccess
@@ -48,7 +48,7 @@ module Aws
                     ?instances: Array[
                       {
                         instance_id: ::String?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeInstanceHealthResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_DescribeInstanceHealthResponseSuccess

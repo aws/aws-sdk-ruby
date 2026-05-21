@@ -54,7 +54,7 @@ module Aws::RecycleBin
   autoload :EndpointProvider, 'aws-sdk-recyclebin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-recyclebin/endpoints'
 
-  GEM_VERSION = '1.53.0'
+  GEM_VERSION = '1.54.0'
 
 end
 

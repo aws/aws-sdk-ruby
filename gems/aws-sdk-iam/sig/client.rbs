@@ -171,7 +171,7 @@ module Aws
                                              name: ::String?,
                                              values: Array[::String]?,
                                              type: ("string" | "stringList")?
-                                           },
+                                           }
                                          ]?
                                        },
                                        ?request_message: ::String,
@@ -206,7 +206,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateInstanceProfileResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceProfileResponseSuccess
@@ -237,7 +237,7 @@ module Aws
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _CreateOpenIDConnectProviderResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOpenIDConnectProviderResponseSuccess
@@ -256,7 +256,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
@@ -289,7 +289,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateRoleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRoleResponseSuccess
@@ -307,7 +307,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?assertion_encryption_mode: ("Required" | "Allowed"),
                                   ?add_private_key: ::String
@@ -351,7 +351,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
@@ -368,7 +368,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateVirtualMFADeviceResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVirtualMFADeviceResponseSuccess
@@ -1627,7 +1627,7 @@ module Aws
                                         context_key_name: ::String?,
                                         context_key_values: Array[::String]?,
                                         context_key_type: ("string" | "stringList" | "numeric" | "numericList" | "boolean" | "booleanList" | "ip" | "ipList" | "binary" | "binaryList" | "date" | "dateList")?
-                                      },
+                                      }
                                     ],
                                     ?resource_handling_option: ::String,
                                     ?max_items: ::Integer,
@@ -1656,7 +1656,7 @@ module Aws
                                            context_key_name: ::String?,
                                            context_key_values: Array[::String]?,
                                            context_key_type: ("string" | "stringList" | "numeric" | "numericList" | "boolean" | "booleanList" | "ip" | "ipList" | "binary" | "binaryList" | "date" | "dateList")?
-                                         },
+                                         }
                                        ],
                                        ?resource_handling_option: ::String,
                                        ?max_items: ::Integer,
@@ -1671,7 +1671,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1683,7 +1683,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1695,7 +1695,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1707,7 +1707,7 @@ module Aws
                           {
                             key: ::String,
                             value: ::String
-                          },
+                          }
                         ]
                       ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1719,7 +1719,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ]
                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1731,7 +1731,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1743,7 +1743,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ]
                                   ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1755,7 +1755,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String
-                        },
+                        }
                       ]
                     ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1978,7 +1978,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _UploadServerCertificateResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UploadServerCertificateResponseSuccess

@@ -102,290 +102,7 @@ module Aws
                              assistant_id: ::String,
                              name: ::String,
                              type: ("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"),
-                             configuration: {
-                               manual_search_ai_agent_configuration: {
-                                 answer_generation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?,
-                                 locale: ::String?
-                               }?,
-                               answer_recommendation_ai_agent_configuration: {
-                                 intent_labeling_generation_ai_prompt_id: ::String?,
-                                 query_reformulation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?,
-                                 locale: ::String?,
-                                 suggested_messages: Array[::String]?
-                               }?,
-                               self_service_ai_agent_configuration: {
-                                 self_service_pre_processing_ai_prompt_id: ::String?,
-                                 self_service_answer_generation_ai_prompt_id: ::String?,
-                                 self_service_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               email_response_ai_agent_configuration: {
-                                 email_response_ai_prompt_id: ::String?,
-                                 email_query_reformulation_ai_prompt_id: ::String?,
-                                 locale: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               email_overview_ai_agent_configuration: {
-                                 email_overview_ai_prompt_id: ::String?,
-                                 locale: ::String?
-                               }?,
-                               email_generative_answer_ai_agent_configuration: {
-                                 email_generative_answer_ai_prompt_id: ::String?,
-                                 email_query_reformulation_ai_prompt_id: ::String?,
-                                 locale: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               orchestration_ai_agent_configuration: {
-                                 orchestration_ai_prompt_id: ::String,
-                                 orchestration_ai_guardrail_id: ::String?,
-                                 tool_configurations: Array[
-                                   {
-                                     tool_name: ::String,
-                                     tool_type: ("MODEL_CONTEXT_PROTOCOL" | "RETURN_TO_CONTROL" | "CONSTANT"),
-                                     title: ::String?,
-                                     tool_id: ::String?,
-                                     description: ::String?,
-                                     instruction: {
-                                       instruction: ::String?,
-                                       examples: Array[::String]?
-                                     }?,
-                                     override_input_values: Array[
-                                       {
-                                         json_path: ::String,
-                                         value: {
-                                           constant: {
-                                             type: ("STRING" | "NUMBER" | "JSON_STRING"),
-                                             value: ::String
-                                           }?
-                                         }
-                                       },
-                                     ]?,
-                                     output_filters: Array[
-                                       {
-                                         json_path: ::String,
-                                         output_configuration: {
-                                           output_variable_name_override: ::String?,
-                                           session_data_namespace: ::String?
-                                         }?
-                                       },
-                                     ]?,
-                                     input_schema: {
-                                     }?,
-                                     output_schema: {
-                                     }?,
-                                     annotations: {
-                                       title: ::String?,
-                                       destructive_hint: bool?
-                                     }?,
-                                     user_interaction_configuration: {
-                                       is_user_confirmation_required: bool?
-                                     }?
-                                   },
-                                 ]?,
-                                 connect_instance_arn: ::String?,
-                                 locale: ::String?
-                               }?,
-                               note_taking_ai_agent_configuration: {
-                                 note_taking_ai_prompt_id: ::String?,
-                                 note_taking_ai_guardrail_id: ::String?,
-                                 locale: ::String?
-                               }?,
-                               case_summarization_ai_agent_configuration: {
-                                 case_summarization_ai_prompt_id: ::String?,
-                                 case_summarization_ai_guardrail_id: ::String?,
-                                 locale: ::String?
-                               }?
-                             },
+                             configuration: Params::ai_agent_configuration,
                              visibility_status: ("SAVED" | "PUBLISHED"),
                              ?tags: Hash[::String, ::String],
                              ?description: ::String
@@ -419,59 +136,24 @@ module Aws
                                  blocked_outputs_messaging: ::String,
                                  visibility_status: ("SAVED" | "PUBLISHED"),
                                  ?description: ::String,
-                                 ?topic_policy_config: {
-                                   topics_config: Array[
-                                     {
-                                       name: ::String,
-                                       definition: ::String,
-                                       examples: Array[::String]?,
-                                       type: ("DENY")
-                                     },
-                                   ]
-                                 },
+                                 ?topic_policy_config: Params::ai_guardrail_topic_policy_config,
                                  ?content_policy_config: {
                                    filters_config: Array[
                                      {
                                        type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
                                        input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
                                        output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
-                                     },
+                                     }
                                    ]
                                  },
-                                 ?word_policy_config: {
-                                   words_config: Array[
-                                     {
-                                       text: ::String
-                                     },
-                                   ]?,
-                                   managed_word_lists_config: Array[
-                                     {
-                                       type: ("PROFANITY")
-                                     },
-                                   ]?
-                                 },
-                                 ?sensitive_information_policy_config: {
-                                   pii_entities_config: Array[
-                                     {
-                                       type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
-                                       action: ("BLOCK" | "ANONYMIZE")
-                                     },
-                                   ]?,
-                                   regexes_config: Array[
-                                     {
-                                       name: ::String,
-                                       description: ::String?,
-                                       pattern: ::String,
-                                       action: ("BLOCK" | "ANONYMIZE")
-                                     },
-                                   ]?
-                                 },
+                                 ?word_policy_config: Params::ai_guardrail_word_policy_config,
+                                 ?sensitive_information_policy_config: Params::ai_guardrail_sensitive_information_policy_config,
                                  ?contextual_grounding_policy_config: {
                                    filters_config: Array[
                                      {
                                        type: ("GROUNDING" | "RELEVANCE"),
                                        threshold: ::Float
-                                     },
+                                     }
                                    ]
                                  },
                                  ?tags: Hash[::String, ::String]
@@ -629,7 +311,7 @@ module Aws
                                            seed_urls: Array[
                                              {
                                                url: ::String?
-                                             },
+                                             }
                                            ]?
                                          },
                                          crawler_limits: {
@@ -655,7 +337,7 @@ module Aws
                                          level_configurations: Array[
                                            {
                                              max_tokens: ::Integer
-                                           },
+                                           }
                                          ],
                                          overlap_tokens: ::Integer
                                        }?,
@@ -691,95 +373,7 @@ module Aws
       def create_message_template: (
                                      knowledge_base_id: ::String,
                                      ?name: ::String,
-                                     ?content: {
-                                       email: {
-                                         subject: ::String?,
-                                         body: {
-                                           plain_text: {
-                                             content: ::String?
-                                           }?,
-                                           html: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         headers: Array[
-                                           {
-                                             name: ::String?,
-                                             value: ::String?
-                                           },
-                                         ]?
-                                       }?,
-                                       sms: {
-                                         body: {
-                                           plain_text: {
-                                             content: ::String?
-                                           }?
-                                         }?
-                                       }?,
-                                       whats_app: {
-                                         data: ::String?
-                                       }?,
-                                       push: {
-                                         adm: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         apns: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           media_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         fcm: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         baidu: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?
-                                       }?
-                                     },
+                                     ?content: Params::message_template_content_provider,
                                      ?description: ::String,
                                      channel_subtype: ("EMAIL" | "SMS" | "WHATSAPP" | "PUSH"),
                                      ?language: ::String,
@@ -790,82 +384,7 @@ module Aws
                                          components: Array[::String]?
                                        }?
                                      },
-                                     ?default_attributes: {
-                                       system_attributes: {
-                                         name: ::String?,
-                                         customer_endpoint: {
-                                           address: ::String?
-                                         }?,
-                                         system_endpoint: {
-                                           address: ::String?
-                                         }?
-                                       }?,
-                                       agent_attributes: {
-                                         first_name: ::String?,
-                                         last_name: ::String?
-                                       }?,
-                                       customer_profile_attributes: {
-                                         profile_id: ::String?,
-                                         profile_arn: ::String?,
-                                         first_name: ::String?,
-                                         middle_name: ::String?,
-                                         last_name: ::String?,
-                                         account_number: ::String?,
-                                         email_address: ::String?,
-                                         phone_number: ::String?,
-                                         additional_information: ::String?,
-                                         party_type: ::String?,
-                                         business_name: ::String?,
-                                         birth_date: ::String?,
-                                         gender: ::String?,
-                                         mobile_phone_number: ::String?,
-                                         home_phone_number: ::String?,
-                                         business_phone_number: ::String?,
-                                         business_email_address: ::String?,
-                                         address1: ::String?,
-                                         address2: ::String?,
-                                         address3: ::String?,
-                                         address4: ::String?,
-                                         city: ::String?,
-                                         county: ::String?,
-                                         country: ::String?,
-                                         postal_code: ::String?,
-                                         province: ::String?,
-                                         state: ::String?,
-                                         shipping_address_1: ::String?,
-                                         shipping_address_2: ::String?,
-                                         shipping_address_3: ::String?,
-                                         shipping_address_4: ::String?,
-                                         shipping_city: ::String?,
-                                         shipping_county: ::String?,
-                                         shipping_country: ::String?,
-                                         shipping_postal_code: ::String?,
-                                         shipping_province: ::String?,
-                                         shipping_state: ::String?,
-                                         mailing_address_1: ::String?,
-                                         mailing_address_2: ::String?,
-                                         mailing_address_3: ::String?,
-                                         mailing_address_4: ::String?,
-                                         mailing_city: ::String?,
-                                         mailing_county: ::String?,
-                                         mailing_country: ::String?,
-                                         mailing_postal_code: ::String?,
-                                         mailing_province: ::String?,
-                                         mailing_state: ::String?,
-                                         billing_address_1: ::String?,
-                                         billing_address_2: ::String?,
-                                         billing_address_3: ::String?,
-                                         billing_address_4: ::String?,
-                                         billing_city: ::String?,
-                                         billing_county: ::String?,
-                                         billing_country: ::String?,
-                                         billing_postal_code: ::String?,
-                                         billing_province: ::String?,
-                                         billing_state: ::String?,
-                                         custom: Hash[::String, ::String]?
-                                       }?,
-                                       custom_attributes: Hash[::String, ::String]?
-                                     },
+                                     ?default_attributes: Params::message_template_attributes,
                                      ?grouping_configuration: {
                                        criteria: ::String?,
                                        values: Array[::String]?
@@ -939,32 +458,7 @@ module Aws
                             name: ::String,
                             ?description: ::String,
                             ?tags: Hash[::String, ::String],
-                            ?tag_filter: {
-                              tag_condition: {
-                                key: ::String,
-                                value: ::String?
-                              }?,
-                              and_conditions: Array[
-                                {
-                                  key: ::String,
-                                  value: ::String?
-                                },
-                              ]?,
-                              or_conditions: Array[
-                                {
-                                  and_conditions: Array[
-                                    {
-                                      key: ::String,
-                                      value: ::String?
-                                    },
-                                  ]?,
-                                  tag_condition: {
-                                    key: ::String,
-                                    value: ::String?
-                                  }?
-                                },
-                              ]?
-                            },
+                            ?tag_filter: Params::tag_filter,
                             ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), {
                                 ai_agent_id: ::String
                               }],
@@ -973,7 +467,7 @@ module Aws
                               {
                                 ai_agent_id: ::String?,
                                 orchestrator_use_case: ::String
-                              },
+                              }
                             ],
                             ?remove_orchestrator_configuration_list: bool
                           ) -> _CreateSessionResponseSuccess
@@ -1529,6 +1023,21 @@ module Aws
                          ) -> _ListMessagesResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMessagesResponseSuccess
 
+      interface _ListModelsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListModelsResponse]
+        def model_summaries: () -> ::Array[Types::ModelSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QConnect/Client.html#list_models-instance_method
+      def list_models: (
+                         assistant_id: ::String,
+                         ?ai_prompt_type: ("ANSWER_GENERATION" | "INTENT_LABELING_GENERATION" | "QUERY_REFORMULATION" | "SELF_SERVICE_PRE_PROCESSING" | "SELF_SERVICE_ANSWER_GENERATION" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "EMAIL_QUERY_REFORMULATION" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"),
+                         ?model_lifecycle: ("ACTIVE" | "LEGACY"),
+                         ?next_token: ::String,
+                         ?max_results: ::Integer
+                       ) -> _ListModelsResponseSuccess
+                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListModelsResponseSuccess
+
       interface _ListQuickResponsesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListQuickResponsesResponse]
         def quick_response_summaries: () -> ::Array[Types::QuickResponseSummary]
@@ -1619,7 +1128,7 @@ module Aws
                                    comparator: ("EQUALS"),
                                    value: ::String
                                  }?
-                               },
+                               }
                              ],
                              ?query_input_data: {
                                query_text_input_data: {
@@ -1667,82 +1176,7 @@ module Aws
       def render_message_template: (
                                      knowledge_base_id: ::String,
                                      message_template_id: ::String,
-                                     attributes: {
-                                       system_attributes: {
-                                         name: ::String?,
-                                         customer_endpoint: {
-                                           address: ::String?
-                                         }?,
-                                         system_endpoint: {
-                                           address: ::String?
-                                         }?
-                                       }?,
-                                       agent_attributes: {
-                                         first_name: ::String?,
-                                         last_name: ::String?
-                                       }?,
-                                       customer_profile_attributes: {
-                                         profile_id: ::String?,
-                                         profile_arn: ::String?,
-                                         first_name: ::String?,
-                                         middle_name: ::String?,
-                                         last_name: ::String?,
-                                         account_number: ::String?,
-                                         email_address: ::String?,
-                                         phone_number: ::String?,
-                                         additional_information: ::String?,
-                                         party_type: ::String?,
-                                         business_name: ::String?,
-                                         birth_date: ::String?,
-                                         gender: ::String?,
-                                         mobile_phone_number: ::String?,
-                                         home_phone_number: ::String?,
-                                         business_phone_number: ::String?,
-                                         business_email_address: ::String?,
-                                         address1: ::String?,
-                                         address2: ::String?,
-                                         address3: ::String?,
-                                         address4: ::String?,
-                                         city: ::String?,
-                                         county: ::String?,
-                                         country: ::String?,
-                                         postal_code: ::String?,
-                                         province: ::String?,
-                                         state: ::String?,
-                                         shipping_address_1: ::String?,
-                                         shipping_address_2: ::String?,
-                                         shipping_address_3: ::String?,
-                                         shipping_address_4: ::String?,
-                                         shipping_city: ::String?,
-                                         shipping_county: ::String?,
-                                         shipping_country: ::String?,
-                                         shipping_postal_code: ::String?,
-                                         shipping_province: ::String?,
-                                         shipping_state: ::String?,
-                                         mailing_address_1: ::String?,
-                                         mailing_address_2: ::String?,
-                                         mailing_address_3: ::String?,
-                                         mailing_address_4: ::String?,
-                                         mailing_city: ::String?,
-                                         mailing_county: ::String?,
-                                         mailing_country: ::String?,
-                                         mailing_postal_code: ::String?,
-                                         mailing_province: ::String?,
-                                         mailing_state: ::String?,
-                                         billing_address_1: ::String?,
-                                         billing_address_2: ::String?,
-                                         billing_address_3: ::String?,
-                                         billing_address_4: ::String?,
-                                         billing_city: ::String?,
-                                         billing_county: ::String?,
-                                         billing_country: ::String?,
-                                         billing_postal_code: ::String?,
-                                         billing_province: ::String?,
-                                         billing_state: ::String?,
-                                         custom: Hash[::String, ::String]?
-                                       }?,
-                                       custom_attributes: Hash[::String, ::String]?
-                                     }
+                                     attributes: Params::message_template_attributes
                                    ) -> _RenderMessageTemplateResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RenderMessageTemplateResponseSuccess
 
@@ -1757,69 +1191,7 @@ module Aws
                         knowledge_source: {
                           assistant_association_ids: Array[::String]?
                         },
-                        filter: {
-                          and_all: Array[
-                            untyped,
-                          ]?,
-                          equals: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          greater_than: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          greater_than_or_equals: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          in: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          less_than: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          less_than_or_equals: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          list_contains: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          not_equals: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          not_in: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          or_all: Array[
-                            untyped,
-                          ]?,
-                          starts_with: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?,
-                          string_contains: {
-                            key: ::String,
-                            value: {
-                            }
-                          }?
-                        }?,
+                        filter: Params::retrieval_filter_configuration?,
                         number_of_results: ::Integer?,
                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
                       },
@@ -1843,7 +1215,7 @@ module Aws
                                   field: ("NAME"),
                                   operator: ("EQUALS"),
                                   value: ::String
-                                },
+                                }
                               ]
                             }
                           ) -> _SearchContentResponseSuccess
@@ -1865,7 +1237,7 @@ module Aws
                                             operator: ("CONTAINS" | "CONTAINS_AND_PREFIX"),
                                             allow_fuzziness: bool?,
                                             priority: ("HIGH" | "MEDIUM" | "LOW")?
-                                          },
+                                          }
                                         ]?,
                                         filters: Array[
                                           {
@@ -1873,7 +1245,7 @@ module Aws
                                             values: Array[::String]?,
                                             operator: ("EQUALS" | "PREFIX"),
                                             include_no_existence: bool?
-                                          },
+                                          }
                                         ]?,
                                         order_on_field: {
                                           name: ::String,
@@ -1901,7 +1273,7 @@ module Aws
                                           operator: ("CONTAINS" | "CONTAINS_AND_PREFIX"),
                                           allow_fuzziness: bool?,
                                           priority: ("HIGH" | "MEDIUM" | "LOW")?
-                                        },
+                                        }
                                       ]?,
                                       filters: Array[
                                         {
@@ -1909,7 +1281,7 @@ module Aws
                                           values: Array[::String]?,
                                           operator: ("EQUALS" | "PREFIX"),
                                           include_no_existence: bool?
-                                        },
+                                        }
                                       ]?,
                                       order_on_field: {
                                         name: ::String,
@@ -1938,7 +1310,7 @@ module Aws
                                    field: ("NAME"),
                                    operator: ("EQUALS"),
                                    value: ::String
-                                 },
+                                 }
                                ]
                              }
                            ) -> _SearchSessionsResponseSuccess
@@ -1970,7 +1342,7 @@ module Aws
                                     },
                                     source_url: ::String?,
                                     reference_type: ("WEB_CRAWLER" | "KNOWLEDGE_BASE" | "BEDROCK_KB_S3" | "BEDROCK_KB_WEB" | "BEDROCK_KB_CONFLUENCE" | "BEDROCK_KB_SALESFORCE" | "BEDROCK_KB_SHAREPOINT" | "BEDROCK_KB_KENDRA" | "BEDROCK_KB_CUSTOM_DOCUMENT" | "BEDROCK_KB_SQL")
-                                  },
+                                  }
                                 ]?,
                                 ai_guardrail_assessment: {
                                   blocked: bool
@@ -1994,7 +1366,7 @@ module Aws
                                 input_transcript: ::String?,
                                 bot_response: ::String?,
                                 timestamp: ::Time?
-                              },
+                              }
                             ]
                           },
                           ?configuration: {
@@ -2075,290 +1447,7 @@ module Aws
                              assistant_id: ::String,
                              ai_agent_id: ::String,
                              visibility_status: ("SAVED" | "PUBLISHED"),
-                             ?configuration: {
-                               manual_search_ai_agent_configuration: {
-                                 answer_generation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?,
-                                 locale: ::String?
-                               }?,
-                               answer_recommendation_ai_agent_configuration: {
-                                 intent_labeling_generation_ai_prompt_id: ::String?,
-                                 query_reformulation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_prompt_id: ::String?,
-                                 answer_generation_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?,
-                                 locale: ::String?,
-                                 suggested_messages: Array[::String]?
-                               }?,
-                               self_service_ai_agent_configuration: {
-                                 self_service_pre_processing_ai_prompt_id: ::String?,
-                                 self_service_answer_generation_ai_prompt_id: ::String?,
-                                 self_service_ai_guardrail_id: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               email_response_ai_agent_configuration: {
-                                 email_response_ai_prompt_id: ::String?,
-                                 email_query_reformulation_ai_prompt_id: ::String?,
-                                 locale: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               email_overview_ai_agent_configuration: {
-                                 email_overview_ai_prompt_id: ::String?,
-                                 locale: ::String?
-                               }?,
-                               email_generative_answer_ai_agent_configuration: {
-                                 email_generative_answer_ai_prompt_id: ::String?,
-                                 email_query_reformulation_ai_prompt_id: ::String?,
-                                 locale: ::String?,
-                                 association_configurations: Array[
-                                   {
-                                     association_id: ::String?,
-                                     association_type: ("KNOWLEDGE_BASE")?,
-                                     association_configuration_data: {
-                                       knowledge_base_association_configuration_data: {
-                                         content_tag_filter: {
-                                           tag_condition: {
-                                             key: ::String,
-                                             value: ::String?
-                                           }?,
-                                           and_conditions: Array[
-                                             {
-                                               key: ::String,
-                                               value: ::String?
-                                             },
-                                           ]?,
-                                           or_conditions: Array[
-                                             {
-                                               and_conditions: Array[
-                                                 {
-                                                   key: ::String,
-                                                   value: ::String?
-                                                 },
-                                               ]?,
-                                               tag_condition: {
-                                                 key: ::String,
-                                                 value: ::String?
-                                               }?
-                                             },
-                                           ]?
-                                         }?,
-                                         max_results: ::Integer?,
-                                         override_knowledge_base_search_type: ("HYBRID" | "SEMANTIC")?
-                                       }?
-                                     }?
-                                   },
-                                 ]?
-                               }?,
-                               orchestration_ai_agent_configuration: {
-                                 orchestration_ai_prompt_id: ::String,
-                                 orchestration_ai_guardrail_id: ::String?,
-                                 tool_configurations: Array[
-                                   {
-                                     tool_name: ::String,
-                                     tool_type: ("MODEL_CONTEXT_PROTOCOL" | "RETURN_TO_CONTROL" | "CONSTANT"),
-                                     title: ::String?,
-                                     tool_id: ::String?,
-                                     description: ::String?,
-                                     instruction: {
-                                       instruction: ::String?,
-                                       examples: Array[::String]?
-                                     }?,
-                                     override_input_values: Array[
-                                       {
-                                         json_path: ::String,
-                                         value: {
-                                           constant: {
-                                             type: ("STRING" | "NUMBER" | "JSON_STRING"),
-                                             value: ::String
-                                           }?
-                                         }
-                                       },
-                                     ]?,
-                                     output_filters: Array[
-                                       {
-                                         json_path: ::String,
-                                         output_configuration: {
-                                           output_variable_name_override: ::String?,
-                                           session_data_namespace: ::String?
-                                         }?
-                                       },
-                                     ]?,
-                                     input_schema: {
-                                     }?,
-                                     output_schema: {
-                                     }?,
-                                     annotations: {
-                                       title: ::String?,
-                                       destructive_hint: bool?
-                                     }?,
-                                     user_interaction_configuration: {
-                                       is_user_confirmation_required: bool?
-                                     }?
-                                   },
-                                 ]?,
-                                 connect_instance_arn: ::String?,
-                                 locale: ::String?
-                               }?,
-                               note_taking_ai_agent_configuration: {
-                                 note_taking_ai_prompt_id: ::String?,
-                                 note_taking_ai_guardrail_id: ::String?,
-                                 locale: ::String?
-                               }?,
-                               case_summarization_ai_agent_configuration: {
-                                 case_summarization_ai_prompt_id: ::String?,
-                                 case_summarization_ai_guardrail_id: ::String?,
-                                 locale: ::String?
-                               }?
-                             },
+                             ?configuration: Params::ai_agent_configuration,
                              ?description: ::String
                            ) -> _UpdateAIAgentResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAIAgentResponseSuccess
@@ -2376,59 +1465,24 @@ module Aws
                                  blocked_input_messaging: ::String,
                                  blocked_outputs_messaging: ::String,
                                  ?description: ::String,
-                                 ?topic_policy_config: {
-                                   topics_config: Array[
-                                     {
-                                       name: ::String,
-                                       definition: ::String,
-                                       examples: Array[::String]?,
-                                       type: ("DENY")
-                                     },
-                                   ]
-                                 },
+                                 ?topic_policy_config: Params::ai_guardrail_topic_policy_config,
                                  ?content_policy_config: {
                                    filters_config: Array[
                                      {
                                        type: ("SEXUAL" | "VIOLENCE" | "HATE" | "INSULTS" | "MISCONDUCT" | "PROMPT_ATTACK"),
                                        input_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH"),
                                        output_strength: ("NONE" | "LOW" | "MEDIUM" | "HIGH")
-                                     },
+                                     }
                                    ]
                                  },
-                                 ?word_policy_config: {
-                                   words_config: Array[
-                                     {
-                                       text: ::String
-                                     },
-                                   ]?,
-                                   managed_word_lists_config: Array[
-                                     {
-                                       type: ("PROFANITY")
-                                     },
-                                   ]?
-                                 },
-                                 ?sensitive_information_policy_config: {
-                                   pii_entities_config: Array[
-                                     {
-                                       type: ("ADDRESS" | "AGE" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "DRIVER_ID" | "EMAIL" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "IP_ADDRESS" | "LICENSE_PLATE" | "MAC_ADDRESS" | "NAME" | "PASSWORD" | "PHONE" | "PIN" | "SWIFT_CODE" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER" | "URL" | "USERNAME" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "VEHICLE_IDENTIFICATION_NUMBER"),
-                                       action: ("BLOCK" | "ANONYMIZE")
-                                     },
-                                   ]?,
-                                   regexes_config: Array[
-                                     {
-                                       name: ::String,
-                                       description: ::String?,
-                                       pattern: ::String,
-                                       action: ("BLOCK" | "ANONYMIZE")
-                                     },
-                                   ]?
-                                 },
+                                 ?word_policy_config: Params::ai_guardrail_word_policy_config,
+                                 ?sensitive_information_policy_config: Params::ai_guardrail_sensitive_information_policy_config,
                                  ?contextual_grounding_policy_config: {
                                    filters_config: Array[
                                      {
                                        type: ("GROUNDING" | "RELEVANCE"),
                                        threshold: ::Float
-                                     },
+                                     }
                                    ]
                                  }
                                ) -> _UpdateAIGuardrailResponseSuccess
@@ -2511,95 +1565,7 @@ module Aws
       def update_message_template: (
                                      knowledge_base_id: ::String,
                                      message_template_id: ::String,
-                                     ?content: {
-                                       email: {
-                                         subject: ::String?,
-                                         body: {
-                                           plain_text: {
-                                             content: ::String?
-                                           }?,
-                                           html: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         headers: Array[
-                                           {
-                                             name: ::String?,
-                                             value: ::String?
-                                           },
-                                         ]?
-                                       }?,
-                                       sms: {
-                                         body: {
-                                           plain_text: {
-                                             content: ::String?
-                                           }?
-                                         }?
-                                       }?,
-                                       whats_app: {
-                                         data: ::String?
-                                       }?,
-                                       push: {
-                                         adm: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         apns: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           media_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         fcm: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?,
-                                         baidu: {
-                                           title: ::String?,
-                                           body: {
-                                             content: ::String?
-                                           }?,
-                                           action: ("OPEN_APP" | "DEEP_LINK" | "URL")?,
-                                           sound: ::String?,
-                                           url: ::String?,
-                                           image_url: ::String?,
-                                           image_icon_url: ::String?,
-                                           small_image_icon_url: ::String?,
-                                           raw_content: {
-                                             content: ::String?
-                                           }?
-                                         }?
-                                       }?
-                                     },
+                                     ?content: Params::message_template_content_provider,
                                      ?language: ::String,
                                      ?source_configuration: {
                                        whats_app: {
@@ -2608,82 +1574,7 @@ module Aws
                                          components: Array[::String]?
                                        }?
                                      },
-                                     ?default_attributes: {
-                                       system_attributes: {
-                                         name: ::String?,
-                                         customer_endpoint: {
-                                           address: ::String?
-                                         }?,
-                                         system_endpoint: {
-                                           address: ::String?
-                                         }?
-                                       }?,
-                                       agent_attributes: {
-                                         first_name: ::String?,
-                                         last_name: ::String?
-                                       }?,
-                                       customer_profile_attributes: {
-                                         profile_id: ::String?,
-                                         profile_arn: ::String?,
-                                         first_name: ::String?,
-                                         middle_name: ::String?,
-                                         last_name: ::String?,
-                                         account_number: ::String?,
-                                         email_address: ::String?,
-                                         phone_number: ::String?,
-                                         additional_information: ::String?,
-                                         party_type: ::String?,
-                                         business_name: ::String?,
-                                         birth_date: ::String?,
-                                         gender: ::String?,
-                                         mobile_phone_number: ::String?,
-                                         home_phone_number: ::String?,
-                                         business_phone_number: ::String?,
-                                         business_email_address: ::String?,
-                                         address1: ::String?,
-                                         address2: ::String?,
-                                         address3: ::String?,
-                                         address4: ::String?,
-                                         city: ::String?,
-                                         county: ::String?,
-                                         country: ::String?,
-                                         postal_code: ::String?,
-                                         province: ::String?,
-                                         state: ::String?,
-                                         shipping_address_1: ::String?,
-                                         shipping_address_2: ::String?,
-                                         shipping_address_3: ::String?,
-                                         shipping_address_4: ::String?,
-                                         shipping_city: ::String?,
-                                         shipping_county: ::String?,
-                                         shipping_country: ::String?,
-                                         shipping_postal_code: ::String?,
-                                         shipping_province: ::String?,
-                                         shipping_state: ::String?,
-                                         mailing_address_1: ::String?,
-                                         mailing_address_2: ::String?,
-                                         mailing_address_3: ::String?,
-                                         mailing_address_4: ::String?,
-                                         mailing_city: ::String?,
-                                         mailing_county: ::String?,
-                                         mailing_country: ::String?,
-                                         mailing_postal_code: ::String?,
-                                         mailing_province: ::String?,
-                                         mailing_state: ::String?,
-                                         billing_address_1: ::String?,
-                                         billing_address_2: ::String?,
-                                         billing_address_3: ::String?,
-                                         billing_address_4: ::String?,
-                                         billing_city: ::String?,
-                                         billing_county: ::String?,
-                                         billing_country: ::String?,
-                                         billing_postal_code: ::String?,
-                                         billing_province: ::String?,
-                                         billing_state: ::String?,
-                                         custom: Hash[::String, ::String]?
-                                       }?,
-                                       custom_attributes: Hash[::String, ::String]?
-                                     }
+                                     ?default_attributes: Params::message_template_attributes
                                    ) -> _UpdateMessageTemplateResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMessageTemplateResponseSuccess
 
@@ -2741,32 +1632,7 @@ module Aws
                             assistant_id: ::String,
                             session_id: ::String,
                             ?description: ::String,
-                            ?tag_filter: {
-                              tag_condition: {
-                                key: ::String,
-                                value: ::String?
-                              }?,
-                              and_conditions: Array[
-                                {
-                                  key: ::String,
-                                  value: ::String?
-                                },
-                              ]?,
-                              or_conditions: Array[
-                                {
-                                  and_conditions: Array[
-                                    {
-                                      key: ::String,
-                                      value: ::String?
-                                    },
-                                  ]?,
-                                  tag_condition: {
-                                    key: ::String,
-                                    value: ::String?
-                                  }?
-                                },
-                              ]?
-                            },
+                            ?tag_filter: Params::tag_filter,
                             ?ai_agent_configuration: Hash[("MANUAL_SEARCH" | "ANSWER_RECOMMENDATION" | "SELF_SERVICE" | "EMAIL_RESPONSE" | "EMAIL_OVERVIEW" | "EMAIL_GENERATIVE_ANSWER" | "ORCHESTRATION" | "NOTE_TAKING" | "CASE_SUMMARIZATION"), {
                                 ai_agent_id: ::String
                               }],
@@ -2774,7 +1640,7 @@ module Aws
                               {
                                 ai_agent_id: ::String?,
                                 orchestrator_use_case: ::String
-                              },
+                              }
                             ],
                             ?remove_orchestrator_configuration_list: bool
                           ) -> _UpdateSessionResponseSuccess
@@ -2797,7 +1663,7 @@ module Aws
                                      value: {
                                        string_value: ::String?
                                      }
-                                   },
+                                   }
                                  ]
                                ) -> _UpdateSessionDataResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSessionDataResponseSuccess

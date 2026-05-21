@@ -1,0 +1,195 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ACM
+    module Params
+      type certificate_filter_statement = {
+      and: Array[
+        {
+          and: untyped?,
+          or: untyped?,
+          not: untyped?,
+          filter: {
+            certificate_arn: ::String?,
+            x509_attribute_filter: {
+              subject: {
+                common_name: {
+                  value: ::String,
+                  comparison_operator: ("CONTAINS" | "EQUALS")
+                }?
+              }?,
+              subject_alternative_name: {
+                dns_name: {
+                  value: ::String,
+                  comparison_operator: ("CONTAINS" | "EQUALS")
+                }?
+              }?,
+              extended_key_usage: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")?,
+              key_usage: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")?,
+              key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")?,
+              serial_number: ::String?,
+              not_after: {
+                start: ::Time?,
+                end: ::Time?
+              }?,
+              not_before: {
+                start: ::Time?,
+                end: ::Time?
+              }?
+            }?,
+            acm_certificate_metadata_filter: {
+              status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")?,
+              renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")?,
+              type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")?,
+              in_use: bool?,
+              exported: bool?,
+              export_option: ("ENABLED" | "DISABLED")?,
+              managed_by: ("CLOUDFRONT")?,
+              validation_method: ("EMAIL" | "DNS" | "HTTP")?
+            }?
+          }?
+        }
+      ]?,
+      or: Array[
+        {
+          and: untyped?,
+          or: untyped?,
+          not: untyped?,
+          filter: {
+            certificate_arn: ::String?,
+            x509_attribute_filter: {
+              subject: {
+                common_name: {
+                  value: ::String,
+                  comparison_operator: ("CONTAINS" | "EQUALS")
+                }?
+              }?,
+              subject_alternative_name: {
+                dns_name: {
+                  value: ::String,
+                  comparison_operator: ("CONTAINS" | "EQUALS")
+                }?
+              }?,
+              extended_key_usage: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")?,
+              key_usage: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")?,
+              key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")?,
+              serial_number: ::String?,
+              not_after: {
+                start: ::Time?,
+                end: ::Time?
+              }?,
+              not_before: {
+                start: ::Time?,
+                end: ::Time?
+              }?
+            }?,
+            acm_certificate_metadata_filter: {
+              status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")?,
+              renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")?,
+              type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")?,
+              in_use: bool?,
+              exported: bool?,
+              export_option: ("ENABLED" | "DISABLED")?,
+              managed_by: ("CLOUDFRONT")?,
+              validation_method: ("EMAIL" | "DNS" | "HTTP")?
+            }?
+          }?
+        }
+      ]?,
+      not: {
+        and: Array[
+          untyped
+        ]?,
+        or: Array[
+          untyped
+        ]?,
+        not: untyped?,
+        filter: {
+          certificate_arn: ::String?,
+          x509_attribute_filter: {
+            subject: {
+              common_name: {
+                value: ::String,
+                comparison_operator: ("CONTAINS" | "EQUALS")
+              }?
+            }?,
+            subject_alternative_name: {
+              dns_name: {
+                value: ::String,
+                comparison_operator: ("CONTAINS" | "EQUALS")
+              }?
+            }?,
+            extended_key_usage: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")?,
+            key_usage: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")?,
+            key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")?,
+            serial_number: ::String?,
+            not_after: {
+              start: ::Time?,
+              end: ::Time?
+            }?,
+            not_before: {
+              start: ::Time?,
+              end: ::Time?
+            }?
+          }?,
+          acm_certificate_metadata_filter: {
+            status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")?,
+            renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")?,
+            type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")?,
+            in_use: bool?,
+            exported: bool?,
+            export_option: ("ENABLED" | "DISABLED")?,
+            managed_by: ("CLOUDFRONT")?,
+            validation_method: ("EMAIL" | "DNS" | "HTTP")?
+          }?
+        }?
+      }?,
+      filter: {
+        certificate_arn: ::String?,
+        x509_attribute_filter: {
+          subject: {
+            common_name: {
+              value: ::String,
+              comparison_operator: ("CONTAINS" | "EQUALS")
+            }?
+          }?,
+          subject_alternative_name: {
+            dns_name: {
+              value: ::String,
+              comparison_operator: ("CONTAINS" | "EQUALS")
+            }?
+          }?,
+          extended_key_usage: ("TLS_WEB_SERVER_AUTHENTICATION" | "TLS_WEB_CLIENT_AUTHENTICATION" | "CODE_SIGNING" | "EMAIL_PROTECTION" | "TIME_STAMPING" | "OCSP_SIGNING" | "IPSEC_END_SYSTEM" | "IPSEC_TUNNEL" | "IPSEC_USER" | "ANY" | "NONE" | "CUSTOM")?,
+          key_usage: ("DIGITAL_SIGNATURE" | "NON_REPUDIATION" | "KEY_ENCIPHERMENT" | "DATA_ENCIPHERMENT" | "KEY_AGREEMENT" | "CERTIFICATE_SIGNING" | "CRL_SIGNING" | "ENCIPHER_ONLY" | "DECIPHER_ONLY" | "ANY" | "CUSTOM")?,
+          key_algorithm: ("RSA_1024" | "RSA_2048" | "RSA_3072" | "RSA_4096" | "EC_prime256v1" | "EC_secp384r1" | "EC_secp521r1")?,
+          serial_number: ::String?,
+          not_after: {
+            start: ::Time?,
+            end: ::Time?
+          }?,
+          not_before: {
+            start: ::Time?,
+            end: ::Time?
+          }?
+        }?,
+        acm_certificate_metadata_filter: {
+          status: ("PENDING_VALIDATION" | "ISSUED" | "INACTIVE" | "EXPIRED" | "VALIDATION_TIMED_OUT" | "REVOKED" | "FAILED")?,
+          renewal_status: ("PENDING_AUTO_RENEWAL" | "PENDING_VALIDATION" | "SUCCESS" | "FAILED")?,
+          type: ("IMPORTED" | "AMAZON_ISSUED" | "PRIVATE")?,
+          in_use: bool?,
+          exported: bool?,
+          export_option: ("ENABLED" | "DISABLED")?,
+          managed_by: ("CLOUDFRONT")?,
+          validation_method: ("EMAIL" | "DNS" | "HTTP")?
+        }?
+      }?
+    }
+
+    end
+  end
+end

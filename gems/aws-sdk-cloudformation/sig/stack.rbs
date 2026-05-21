@@ -129,7 +129,7 @@ module Aws
                         parameter_value: ::String?,
                         use_previous_value: bool?,
                         resolved_value: ::String?
-                      },
+                      }
                     ],
                     ?disable_rollback: bool,
                     ?rollback_configuration: {
@@ -137,7 +137,7 @@ module Aws
                         {
                           arn: ::String,
                           type: ::String
-                        },
+                        }
                       ]?,
                       monitoring_time_in_minutes: ::Integer?
                     },
@@ -153,7 +153,7 @@ module Aws
                       {
                         key: ::String,
                         value: ::String
-                      },
+                      }
                     ],
                     ?client_request_token: ::String,
                     ?enable_termination_protection: bool,
@@ -183,7 +183,7 @@ module Aws
                         parameter_value: ::String?,
                         use_previous_value: bool?,
                         resolved_value: ::String?
-                      },
+                      }
                     ],
                     ?capabilities: Array[("CAPABILITY_IAM" | "CAPABILITY_NAMED_IAM" | "CAPABILITY_AUTO_EXPAND")],
                     ?resource_types: Array[::String],
@@ -193,7 +193,7 @@ module Aws
                         {
                           arn: ::String,
                           type: ::String
-                        },
+                        }
                       ]?,
                       monitoring_time_in_minutes: ::Integer?
                     },
@@ -204,7 +204,7 @@ module Aws
                       {
                         key: ::String,
                         value: ::String
-                      },
+                      }
                     ],
                     ?disable_rollback: bool,
                     ?client_request_token: ::String,

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.618.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.617.0 (2026-05-18)
+------------------
+
+* Feature - Amazon VPC IP Address Manager (IPAM) now supports tags on IPAM pool allocations, enabling all standard tagging features for allocations including tag-on-create.
+
 1.616.0 (2026-05-13)
 ------------------
 

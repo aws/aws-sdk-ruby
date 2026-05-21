@@ -70,7 +70,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> OptionGroup
                 | (?Hash[Symbol, untyped]) -> OptionGroup
@@ -83,7 +83,7 @@ module Aws
                     {
                       key: ::String?,
                       value: ::String?
-                    },
+                    }
                   ]
                 ) -> OptionGroup
               | (?Hash[Symbol, untyped]) -> OptionGroup
@@ -113,9 +113,9 @@ module Aws
                             allowed_values: ::String?,
                             is_modifiable: bool?,
                             is_collection: bool?
-                          },
+                          }
                         ]?
-                      },
+                      }
                     ],
                     ?options_to_remove: Array[::String],
                     ?apply_immediately: bool

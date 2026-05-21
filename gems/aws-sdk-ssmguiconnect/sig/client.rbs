@@ -112,7 +112,7 @@ module Aws
                                                            {
                                                              bucket_name: ::String,
                                                              bucket_owner: ::String
-                                                           },
+                                                           }
                                                          ]
                                                        }
                                                      }

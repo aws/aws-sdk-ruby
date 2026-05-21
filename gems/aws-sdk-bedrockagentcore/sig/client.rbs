@@ -104,7 +104,7 @@ module Aws
                                                  number_value: ::Float?,
                                                  date_time_value: ::Time?
                                                }]?
-                                           },
+                                           }
                                          ],
                                          ?client_token: ::String
                                        ) -> _BatchCreateMemoryRecordsResponseSuccess
@@ -121,7 +121,7 @@ module Aws
                                          records: Array[
                                            {
                                              memory_record_id: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _BatchDeleteMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteMemoryRecordsResponseSuccess
@@ -149,7 +149,7 @@ module Aws
                                                  number_value: ::Float?,
                                                  date_time_value: ::Time?
                                                }]?
-                                           },
+                                           }
                                          ]
                                        ) -> _BatchUpdateMemoryRecordsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateMemoryRecordsResponseSuccess
@@ -182,19 +182,7 @@ module Aws
                             ?description: ::String,
                             gateway_arn: ::String,
                             variants: Array[
-                              {
-                                name: ::String,
-                                weight: ::Integer,
-                                variant_configuration: {
-                                  configuration_bundle: {
-                                    bundle_arn: ::String,
-                                    bundle_version: ::String
-                                  }?,
-                                  target: {
-                                    name: ::String
-                                  }?
-                                }
-                              },
+                              Params::variant
                             ],
                             ?gateway_filter: {
                               target_paths: Array[::String]?
@@ -205,7 +193,7 @@ module Aws
                                 {
                                   name: ::String,
                                   online_evaluation_config_arn: ::String
-                                },
+                                }
                               ]?
                             },
                             role_arn: ::String,
@@ -234,7 +222,7 @@ module Aws
                               }?,
                               blob: {
                               }?
-                            },
+                            }
                           ],
                           ?branch: {
                             root_event_id: ::String?,
@@ -305,7 +293,7 @@ module Aws
                                                    username: ::String?
                                                  }?
                                                }?
-                                             },
+                                             }
                                            ],
                                            wallet_address: ::String?,
                                            redirect_url: ::String?
@@ -429,7 +417,7 @@ module Aws
                       evaluation_input: {
                         session_spans: Array[
                           {
-                          },
+                          }
                         ]?
                       },
                       ?evaluation_target: {
@@ -451,12 +439,12 @@ module Aws
                           assertions: Array[
                             {
                               text: ::String?
-                            },
+                            }
                           ]?,
                           expected_trajectory: {
                             tool_names: Array[::String]?
                           }?
-                        },
+                        }
                       ]
                     ) -> _EvaluateResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EvaluateResponseSuccess
@@ -881,7 +869,7 @@ module Aws
                                            path: ::String,
                                            text: ::String?,
                                            blob: ::String?
-                                         },
+                                         }
                                        ]?,
                                        directory_path: ::String?,
                                        task_id: ::String?,
@@ -919,7 +907,7 @@ module Aws
                                           text: ::String?,
                                           json: {
                                           }?
-                                        },
+                                        }
                                       ],
                                       status: ("success" | "error")?,
                                       type: ("tool_use" | "server_tool_use" | "mcp_tool_use")?
@@ -931,9 +919,9 @@ module Aws
                                       }?,
                                       redacted_content: ::String?
                                     }?
-                                  },
+                                  }
                                 ]
-                              },
+                              }
                             ],
                             ?model: {
                               bedrock_model_config: {
@@ -961,7 +949,7 @@ module Aws
                             ?system_prompt: Array[
                               {
                                 text: ::String?
-                              },
+                              }
                             ],
                             ?tools: Array[
                               {
@@ -1000,12 +988,12 @@ module Aws
                                     code_interpreter_arn: ::String?
                                   }?
                                 }?
-                              },
+                              }
                             ],
                             ?skills: Array[
                               {
                                 path: ::String?
-                              },
+                              }
                             ],
                             ?allowed_tools: Array[::String],
                             ?max_iterations: ::Integer,
@@ -1107,7 +1095,7 @@ module Aws
                                    string_value: ::String?
                                  }?
                                }?
-                             },
+                             }
                            ]?
                          },
                          ?max_results: ::Integer,
@@ -1148,20 +1136,7 @@ module Aws
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
                                  ?metadata_filters: Array[
-                                   {
-                                     left: {
-                                       metadata_key: ::String?
-                                     },
-                                     operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS"),
-                                     right: {
-                                       metadata_value: {
-                                         string_value: ::String?,
-                                         string_list_value: Array[::String]?,
-                                         number_value: ::Float?,
-                                         date_time_value: ::Time?
-                                       }?
-                                     }?
-                                   },
+                                   Params::memory_metadata_filter_expression
                                  ]
                                ) -> _ListMemoryRecordsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMemoryRecordsResponseSuccess
@@ -1273,20 +1248,7 @@ module Aws
                                        memory_strategy_id: ::String?,
                                        top_k: ::Integer?,
                                        metadata_filters: Array[
-                                         {
-                                           left: {
-                                             metadata_key: ::String?
-                                           },
-                                           operator: ("EQUALS_TO" | "EXISTS" | "NOT_EXISTS" | "BEFORE" | "AFTER" | "CONTAINS" | "GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS"),
-                                           right: {
-                                             metadata_value: {
-                                               string_value: ::String?,
-                                               string_list_value: Array[::String]?,
-                                               number_value: ::Float?,
-                                               date_time_value: ::Time?
-                                             }?
-                                           }?
-                                         },
+                                         Params::memory_metadata_filter_expression
                                        ]?
                                      },
                                      ?next_token: ::String,
@@ -1343,7 +1305,7 @@ module Aws
                                     ?evaluators: Array[
                                       {
                                         evaluator_id: ::String
-                                      },
+                                      }
                                     ],
                                     data_source_config: {
                                       cloud_watch_logs: {
@@ -1369,7 +1331,7 @@ module Aws
                                               assertions: Array[
                                                 {
                                                   text: ::String?
-                                                },
+                                                }
                                               ]?,
                                               expected_trajectory: {
                                                 tool_names: Array[::String]?
@@ -1382,12 +1344,12 @@ module Aws
                                                   expected_response: {
                                                     text: ::String?
                                                   }?
-                                                },
+                                                }
                                               ]?
                                             }?
                                           }?,
                                           metadata: Hash[::String, ::String]?
-                                        },
+                                        }
                                       ]?
                                     },
                                     ?description: ::String
@@ -1421,7 +1383,7 @@ module Aws
                                            version_id: ::String?
                                          }?
                                        }
-                                     },
+                                     }
                                    ],
                                    ?profile_configuration: {
                                      profile_identifier: ::String
@@ -1439,7 +1401,7 @@ module Aws
                                              }?
                                            }?
                                          }?
-                                       },
+                                       }
                                      ],
                                      bypass: {
                                        domain_patterns: Array[::String]?
@@ -1455,7 +1417,7 @@ module Aws
                                          }?
                                        },
                                        type: ("MANAGED" | "RECOMMENDED")?
-                                     },
+                                     }
                                    ],
                                    ?certificates: Array[
                                      {
@@ -1464,7 +1426,7 @@ module Aws
                                            secret_arn: ::String
                                          }?
                                        }
-                                     },
+                                     }
                                    ],
                                    ?client_token: ::String
                                  ) -> _StartBrowserSessionResponseSuccess
@@ -1490,7 +1452,7 @@ module Aws
                                                     secret_arn: ::String
                                                   }?
                                                 }
-                                              },
+                                              }
                                             ],
                                             ?client_token: ::String
                                           ) -> _StartCodeInterpreterSessionResponseSuccess
@@ -1537,36 +1499,12 @@ module Aws
                                           system_prompt_json_path: ::String
                                         }?
                                       },
-                                      agent_traces: {
-                                        session_spans: Array[
-                                          {
-                                          },
-                                        ]?,
-                                        cloudwatch_logs: {
-                                          log_group_arns: Array[::String],
-                                          service_names: Array[::String],
-                                          start_time: ::Time,
-                                          end_time: ::Time,
-                                          rule: {
-                                            filters: Array[
-                                              {
-                                                key: ::String,
-                                                operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
-                                                value: {
-                                                  string_value: ::String?,
-                                                  double_value: ::Float?,
-                                                  boolean_value: bool?
-                                                }
-                                              },
-                                            ]?
-                                          }?
-                                        }?
-                                      },
+                                      agent_traces: Params::agent_traces_config,
                                       evaluation_config: {
                                         evaluators: Array[
                                           {
                                             evaluator_arn: ::String
-                                          },
+                                          }
                                         ]
                                       }
                                     }?,
@@ -1579,7 +1517,7 @@ module Aws
                                               tool_description: {
                                                 text: ::String?
                                               }
-                                            },
+                                            }
                                           ]
                                         }?,
                                         configuration_bundle: {
@@ -1589,35 +1527,11 @@ module Aws
                                             {
                                               tool_name: ::String,
                                               tool_description_json_path: ::String
-                                            },
+                                            }
                                           ]
                                         }?
                                       },
-                                      agent_traces: {
-                                        session_spans: Array[
-                                          {
-                                          },
-                                        ]?,
-                                        cloudwatch_logs: {
-                                          log_group_arns: Array[::String],
-                                          service_names: Array[::String],
-                                          start_time: ::Time,
-                                          end_time: ::Time,
-                                          rule: {
-                                            filters: Array[
-                                              {
-                                                key: ::String,
-                                                operator: ("Equals" | "NotEquals" | "GreaterThan" | "LessThan" | "GreaterThanOrEqual" | "LessThanOrEqual" | "Contains" | "NotContains"),
-                                                value: {
-                                                  string_value: ::String?,
-                                                  double_value: ::Float?,
-                                                  boolean_value: bool?
-                                                }
-                                              },
-                                            ]?
-                                          }?
-                                        }?
-                                      }
+                                      agent_traces: Params::agent_traces_config
                                     }?
                                   },
                                   ?client_token: ::String
@@ -1698,19 +1612,7 @@ module Aws
                             ?name: ::String,
                             ?description: ::String,
                             ?variants: Array[
-                              {
-                                name: ::String,
-                                weight: ::Integer,
-                                variant_configuration: {
-                                  configuration_bundle: {
-                                    bundle_arn: ::String,
-                                    bundle_version: ::String
-                                  }?,
-                                  target: {
-                                    name: ::String
-                                  }?
-                                }
-                              },
+                              Params::variant
                             ],
                             ?gateway_filter: {
                               target_paths: Array[::String]?
@@ -1721,7 +1623,7 @@ module Aws
                                 {
                                   name: ::String,
                                   online_evaluation_config_arn: ::String
-                                },
+                                }
                               ]?
                             },
                             ?role_arn: ::String,

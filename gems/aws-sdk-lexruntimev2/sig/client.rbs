@@ -129,72 +129,9 @@ module Aws
                          locale_id: ::String,
                          session_id: ::String,
                          ?messages: Array[
-                           {
-                             content: ::String?,
-                             content_type: ("CustomPayload" | "ImageResponseCard" | "PlainText" | "SSML"),
-                             image_response_card: {
-                               title: ::String,
-                               subtitle: ::String?,
-                               image_url: ::String?,
-                               buttons: Array[
-                                 {
-                                   text: ::String,
-                                   value: ::String
-                                 },
-                               ]?
-                             }?
-                           },
+                           Params::message
                          ],
-                         session_state: {
-                           dialog_action: {
-                             type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None"),
-                             slot_to_elicit: ::String?,
-                             slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")?,
-                             sub_slot_to_elicit: {
-                               name: ::String,
-                               sub_slot_to_elicit: untyped?
-                             }?
-                           }?,
-                           intent: {
-                             name: ::String,
-                             slots: Hash[::String, {
-                                 value: {
-                                   original_value: ::String?,
-                                   interpreted_value: ::String,
-                                   resolved_values: Array[::String]?
-                                 }?,
-                                 shape: ("Scalar" | "List" | "Composite")?,
-                                 values: Array[
-                                   untyped,
-                                 ]?,
-                                 sub_slots: untyped?
-                               }]?,
-                             state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")?,
-                             confirmation_state: ("Confirmed" | "Denied" | "None")?
-                           }?,
-                           active_contexts: Array[
-                             {
-                               name: ::String,
-                               time_to_live: {
-                                 time_to_live_in_seconds: ::Integer,
-                                 turns_to_live: ::Integer
-                               },
-                               context_attributes: Hash[::String, ::String]
-                             },
-                           ]?,
-                           session_attributes: Hash[::String, ::String]?,
-                           originating_request_id: ::String?,
-                           runtime_hints: {
-                             slot_hints: Hash[::String, Hash[::String, {
-                                   runtime_hint_values: Array[
-                                     {
-                                       phrase: ::String
-                                     },
-                                   ]?,
-                                   sub_slot_hints: untyped?
-                                 }]]?
-                           }?
-                         },
+                         session_state: Params::session_state,
                          ?request_attributes: Hash[::String, ::String],
                          ?response_content_type: ::String
                        ) ?{ (*untyped) -> void } -> _PutSessionResponseSuccess
@@ -216,56 +153,7 @@ module Aws
                             locale_id: ::String,
                             session_id: ::String,
                             text: ::String,
-                            ?session_state: {
-                              dialog_action: {
-                                type: ("Close" | "ConfirmIntent" | "Delegate" | "ElicitIntent" | "ElicitSlot" | "None"),
-                                slot_to_elicit: ::String?,
-                                slot_elicitation_style: ("Default" | "SpellByLetter" | "SpellByWord")?,
-                                sub_slot_to_elicit: {
-                                  name: ::String,
-                                  sub_slot_to_elicit: untyped?
-                                }?
-                              }?,
-                              intent: {
-                                name: ::String,
-                                slots: Hash[::String, {
-                                    value: {
-                                      original_value: ::String?,
-                                      interpreted_value: ::String,
-                                      resolved_values: Array[::String]?
-                                    }?,
-                                    shape: ("Scalar" | "List" | "Composite")?,
-                                    values: Array[
-                                      untyped,
-                                    ]?,
-                                    sub_slots: untyped?
-                                  }]?,
-                                state: ("Failed" | "Fulfilled" | "InProgress" | "ReadyForFulfillment" | "Waiting" | "FulfillmentInProgress")?,
-                                confirmation_state: ("Confirmed" | "Denied" | "None")?
-                              }?,
-                              active_contexts: Array[
-                                {
-                                  name: ::String,
-                                  time_to_live: {
-                                    time_to_live_in_seconds: ::Integer,
-                                    turns_to_live: ::Integer
-                                  },
-                                  context_attributes: Hash[::String, ::String]
-                                },
-                              ]?,
-                              session_attributes: Hash[::String, ::String]?,
-                              originating_request_id: ::String?,
-                              runtime_hints: {
-                                slot_hints: Hash[::String, Hash[::String, {
-                                      runtime_hint_values: Array[
-                                        {
-                                          phrase: ::String
-                                        },
-                                      ]?,
-                                      sub_slot_hints: untyped?
-                                    }]]?
-                              }?
-                            },
+                            ?session_state: Params::session_state,
                             ?request_attributes: Hash[::String, ::String]
                           ) -> _RecognizeTextResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RecognizeTextResponseSuccess

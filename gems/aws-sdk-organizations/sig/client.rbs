@@ -126,7 +126,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateAccountResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountResponseSuccess
@@ -145,7 +145,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateGovCloudAccountResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGovCloudAccountResponseSuccess
@@ -172,7 +172,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateOrganizationalUnitResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOrganizationalUnitResponseSuccess
@@ -191,7 +191,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreatePolicyResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePolicyResponseSuccess
@@ -385,7 +385,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]
                                           ) -> _InviteAccountToOrganizationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteAccountToOrganizationResponseSuccess
@@ -408,7 +408,7 @@ module Aws
                                                               {
                                                                 key: ::String,
                                                                 value: ::String
-                                                              },
+                                                              }
                                                             ]
                                                           ) -> _InviteOrganizationToTransferResponsibilityResponseSuccess
                                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InviteOrganizationToTransferResponsibilityResponseSuccess
@@ -707,7 +707,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
@@ -732,7 +732,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]

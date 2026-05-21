@@ -1,0 +1,28 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataExchange
+    module Params
+      type auto_export_revision_to_s3_request_details = {
+      encryption: {
+        kms_key_arn: ::String?,
+        type: ("aws:kms" | "AES256")
+      }?,
+      revision_destination: {
+        bucket: ::String,
+        key_pattern: ::String?
+      }
+    }
+
+      type action = {
+      export_revision_to_s3: Params::auto_export_revision_to_s3_request_details?
+    }
+
+    end
+  end
+end

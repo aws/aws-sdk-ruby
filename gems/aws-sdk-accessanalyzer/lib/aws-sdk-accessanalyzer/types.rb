@@ -563,6 +563,13 @@ module Aws::AccessAnalyzer
     #   [2]: https://docs.aws.amazon.com/access-analyzer/latest/APIReference/API_ListAnalyzers.html
     #   @return [Types::AnalyzerConfiguration]
     #
+    # @!attribute [rw] managed_by
+    #   The service principal that manages this analyzer (for example,
+    #   `securityhubv2.amazonaws.com`). This field is only present for
+    #   service-linked analyzers and is not included for customer-managed
+    #   analyzers.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/AnalyzerSummary AWS API Documentation
     #
     class AnalyzerSummary < Struct.new(
@@ -575,7 +582,8 @@ module Aws::AccessAnalyzer
       :tags,
       :status,
       :status_reason,
-      :configuration)
+      :configuration,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1169,6 +1177,59 @@ module Aws::AccessAnalyzer
       include Aws::Structure
     end
 
+    # Creates a service-linked analyzer.
+    #
+    # @!attribute [rw] type
+    #   The type of analyzer to create. Valid values are
+    #   `ACCOUNT_UNUSED_ACCESS` and `ORGANIZATION_UNUSED_ACCESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] archive_rules
+    #   Specifies the archive rules to add for the analyzer. Archive rules
+    #   automatically archive findings that meet the criteria you define for
+    #   the rule.
+    #   @return [Array<Types::InlineArchiveRule>]
+    #
+    # @!attribute [rw] client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   Specifies the configuration of the analyzer. The specified scope of
+    #   unused access is used for the configuration.
+    #   @return [Types::AnalyzerConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateServiceLinkedAnalyzerRequest AWS API Documentation
+    #
+    class CreateServiceLinkedAnalyzerRequest < Struct.new(
+      :type,
+      :archive_rules,
+      :client_token,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The response to the request to create a service-linked analyzer.
+    #
+    # @!attribute [rw] arn
+    #   The ARN of the service-linked analyzer that was created by the
+    #   request. The analyzer name follows the format
+    #   `_AccessAnalyzerFor{ServiceName}-{Id}` where `Id` is a randomly
+    #   generated identifier.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateServiceLinkedAnalyzerResponse AWS API Documentation
+    #
+    class CreateServiceLinkedAnalyzerResponse < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The criteria to use in the filter that defines the archive rule. For
     # more information on available filter keys, see [IAM Access Analyzer
     # filter keys][1].
@@ -1253,6 +1314,30 @@ module Aws::AccessAnalyzer
     class DeleteArchiveRuleRequest < Struct.new(
       :analyzer_name,
       :rule_name,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Deletes a service-linked analyzer.
+    #
+    # @!attribute [rw] analyzer_name
+    #   The name of the service-linked analyzer to delete. Service-linked
+    #   analyzer names follow the format
+    #   `_AccessAnalyzerFor{ServiceName}-{Id}`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/DeleteServiceLinkedAnalyzerRequest AWS API Documentation
+    #
+    class DeleteServiceLinkedAnalyzerRequest < Struct.new(
+      :analyzer_name,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

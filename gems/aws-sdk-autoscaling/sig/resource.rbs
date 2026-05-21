@@ -162,13 +162,13 @@ module Aws
                                         references: Array[
                                           {
                                             instance_family: ::String?
-                                          },
+                                          }
                                         ]?
                                       }?
                                     }?
                                   }?,
                                   image_id: ::String?
-                                },
+                                }
                               ]?
                             }?,
                             instances_distribution: {
@@ -205,7 +205,7 @@ module Aws
                               default_result: ::String?,
                               notification_target_arn: ::String?,
                               role_arn: ::String?
-                            },
+                            }
                           ],
                           ?deletion_protection: ("none" | "prevent-force-deletion" | "prevent-all-deletion"),
                           ?tags: Array[
@@ -215,7 +215,7 @@ module Aws
                               key: ::String,
                               value: ::String?,
                               propagate_at_launch: bool?
-                            },
+                            }
                           ],
                           ?service_linked_role_arn: ::String,
                           ?max_instance_lifetime: ::Integer,
@@ -226,7 +226,7 @@ module Aws
                             {
                               identifier: ::String,
                               type: ::String?
-                            },
+                            }
                           ],
                           ?instance_maintenance_policy: {
                             min_healthy_percentage: ::Integer?,
@@ -282,7 +282,7 @@ module Aws
                                                throughput: ::Integer?
                                              }?,
                                              no_device: bool?
-                                           },
+                                           }
                                          ],
                                          ?instance_monitoring: {
                                            enabled: bool?
@@ -310,7 +310,7 @@ module Aws
                           {
                             name: ::String?,
                             values: Array[::String]?
-                          },
+                          }
                         ]
                       ) -> Activity::Collection
                     | (?Hash[Symbol, untyped]) -> Activity::Collection
@@ -329,7 +329,7 @@ module Aws
                       {
                         name: ::String?,
                         values: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> AutoScalingGroup::Collection
                 | (?Hash[Symbol, untyped]) -> AutoScalingGroup::Collection
@@ -378,7 +378,7 @@ module Aws
                     {
                       name: ::String?,
                       values: Array[::String]?
-                    },
+                    }
                   ]
                 ) -> Tag::Collection
               | (?Hash[Symbol, untyped]) -> Tag::Collection

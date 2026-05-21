@@ -1,0 +1,338 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AmplifyUIBuilder
+    module Params
+      type component_condition_property = {
+      property: ::String?,
+      field: ::String?,
+      operator: ::String?,
+      operand: ::String?,
+      then: Params::component_property?,
+      else: Params::component_property?,
+      operand_type: ::String?
+    }
+
+      type component_property = {
+      value: ::String?,
+      binding_properties: {
+        property: ::String,
+        field: ::String?
+      }?,
+      collection_binding_properties: {
+        property: ::String,
+        field: ::String?
+      }?,
+      default_value: ::String?,
+      model: ::String?,
+      bindings: Hash[::String, {
+          element: ::String,
+          property: ::String
+        }]?,
+      event: ::String?,
+      user_attribute: ::String?,
+      concat: Array[
+        {
+          value: ::String?,
+          binding_properties: {
+            property: ::String,
+            field: ::String?
+          }?,
+          collection_binding_properties: {
+            property: ::String,
+            field: ::String?
+          }?,
+          default_value: ::String?,
+          model: ::String?,
+          bindings: Hash[::String, {
+              element: ::String,
+              property: ::String
+            }]?,
+          event: ::String?,
+          user_attribute: ::String?,
+          concat: untyped?,
+          condition: Params::component_condition_property?,
+          configured: bool?,
+          type: ::String?,
+          imported_value: ::String?,
+          component_name: ::String?,
+          property: ::String?
+        }
+      ]?,
+      condition: Params::component_condition_property?,
+      configured: bool?,
+      type: ::String?,
+      imported_value: ::String?,
+      component_name: ::String?,
+      property: ::String?
+    }
+
+      type component_child = {
+      component_type: ::String,
+      name: ::String,
+      properties: Hash[::String, Params::component_property],
+      children: Array[
+        {
+          component_type: ::String,
+          name: ::String,
+          properties: Hash[::String, Params::component_property],
+          children: untyped?,
+          events: Hash[::String, Params::component_event]?,
+          source_id: ::String?
+        }
+      ]?,
+      events: Hash[::String, Params::component_event]?,
+      source_id: ::String?
+    }
+
+      type mutation_action_set_state_parameter = {
+      component_name: ::String,
+      property: ::String,
+      set: Params::component_property
+    }
+
+      type action_parameters = {
+      type: Params::component_property?,
+      url: Params::component_property?,
+      anchor: Params::component_property?,
+      target: Params::component_property?,
+      global: Params::component_property?,
+      model: ::String?,
+      id: Params::component_property?,
+      fields: Hash[::String, Params::component_property]?,
+      state: Params::mutation_action_set_state_parameter?
+    }
+
+      type component_event = {
+      action: ::String?,
+      parameters: Params::action_parameters?,
+      binding_event: ::String?
+    }
+
+      type component_binding_properties_value_properties = {
+      model: ::String?,
+      field: ::String?,
+      predicates: Array[
+        Params::predicate
+      ]?,
+      user_attribute: ::String?,
+      bucket: ::String?,
+      key: ::String?,
+      default_value: ::String?,
+      slot_name: ::String?
+    }
+
+      type component_binding_properties_value = {
+      type: ::String?,
+      binding_properties: Params::component_binding_properties_value_properties?,
+      default_value: ::String?
+    }
+
+      type predicate = {
+      or: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          field: ::String?,
+          operator: ::String?,
+          operand: ::String?,
+          operand_type: ::String?
+        }
+      ]?,
+      and: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          field: ::String?,
+          operator: ::String?,
+          operand: ::String?,
+          operand_type: ::String?
+        }
+      ]?,
+      field: ::String?,
+      operator: ::String?,
+      operand: ::String?,
+      operand_type: ::String?
+    }
+
+      type component_data_configuration = {
+      model: ::String,
+      sort: Array[
+        {
+          field: ::String,
+          direction: ("ASC" | "DESC")
+        }
+      ]?,
+      predicate: Params::predicate?,
+      identifiers: Array[::String]?
+    }
+
+      type value_mappings = {
+      values: Array[
+        Params::value_mapping
+      ],
+      binding_properties: Hash[::String, {
+          type: ::String?,
+          binding_properties: {
+            model: ::String?
+          }?
+        }]?
+    }
+
+      type file_uploader_field_config = {
+      access_level: ("public" | "protected" | "private"),
+      accepted_file_types: Array[::String],
+      show_thumbnails: bool?,
+      is_resumable: bool?,
+      max_file_count: ::Integer?,
+      max_size: ::Integer?
+    }
+
+      type field_input_config = {
+      type: ::String,
+      required: bool?,
+      read_only: bool?,
+      placeholder: ::String?,
+      default_value: ::String?,
+      descriptive_text: ::String?,
+      default_checked: bool?,
+      default_country_code: ::String?,
+      value_mappings: Params::value_mappings?,
+      name: ::String?,
+      min_value: ::Float?,
+      max_value: ::Float?,
+      step: ::Float?,
+      value: ::String?,
+      is_array: bool?,
+      file_uploader_config: Params::file_uploader_field_config?
+    }
+
+      type field_config = {
+      label: ::String?,
+      position: {
+        fixed: ("first")?,
+        right_of: ::String?,
+        below: ::String?
+      }?,
+      excluded: bool?,
+      input_type: Params::field_input_config?,
+      validations: Array[
+        {
+          type: ::String,
+          str_values: Array[::String]?,
+          num_values: Array[::Integer]?,
+          validation_message: ::String?
+        }
+      ]?
+    }
+
+      type form_input_value_property = {
+      value: ::String?,
+      binding_properties: {
+        property: ::String,
+        field: ::String?
+      }?,
+      concat: Array[
+        {
+          value: ::String?,
+          binding_properties: {
+            property: ::String,
+            field: ::String?
+          }?,
+          concat: untyped?
+        }
+      ]?
+    }
+
+      type value_mapping = {
+      display_value: Params::form_input_value_property?,
+      value: Params::form_input_value_property
+    }
+
+      type form_style = {
+      horizontal_gap: {
+        token_reference: ::String?,
+        value: ::String?
+      }?,
+      vertical_gap: {
+        token_reference: ::String?,
+        value: ::String?
+      }?,
+      outer_padding: {
+        token_reference: ::String?,
+        value: ::String?
+      }?
+    }
+
+      type sectional_element = {
+      type: ::String,
+      position: {
+        fixed: ("first")?,
+        right_of: ::String?,
+        below: ::String?
+      }?,
+      text: ::String?,
+      level: ::Integer?,
+      orientation: ::String?,
+      excluded: bool?
+    }
+
+      type form_button = {
+      excluded: bool?,
+      children: ::String?,
+      position: {
+        fixed: ("first")?,
+        right_of: ::String?,
+        below: ::String?
+      }?
+    }
+
+      type form_cta = {
+      position: ("top" | "bottom" | "top_and_bottom")?,
+      clear: Params::form_button?,
+      cancel: Params::form_button?,
+      submit: Params::form_button?
+    }
+
+      type theme_values = {
+      key: ::String?,
+      value: {
+        value: ::String?,
+        children: Array[
+          {
+            key: ::String?,
+            value: untyped?
+          }
+        ]?
+      }?
+    }
+
+      type codegen_generic_data_relationship_type = {
+      type: ("HAS_MANY" | "HAS_ONE" | "BELONGS_TO"),
+      related_model_name: ::String,
+      related_model_fields: Array[::String]?,
+      can_unlink_associated_model: bool?,
+      related_join_field_name: ::String?,
+      related_join_table_name: ::String?,
+      belongs_to_field_on_related_model: ::String?,
+      associated_fields: Array[::String]?,
+      is_has_many_index: bool?
+    }
+
+      type codegen_generic_data_field = {
+      data_type: ("ID" | "String" | "Int" | "Float" | "AWSDate" | "AWSTime" | "AWSDateTime" | "AWSTimestamp" | "AWSEmail" | "AWSURL" | "AWSIPAddress" | "Boolean" | "AWSJSON" | "AWSPhone" | "Enum" | "Model" | "NonModel"),
+      data_type_value: ::String,
+      required: bool,
+      read_only: bool,
+      is_array: bool,
+      relationship: Params::codegen_generic_data_relationship_type?
+    }
+
+    end
+  end
+end

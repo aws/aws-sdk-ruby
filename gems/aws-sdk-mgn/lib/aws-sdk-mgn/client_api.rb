@@ -1562,6 +1562,7 @@ module Aws::Mgn
     NetworkMigrationCodeGenerationSegment.add_member(:logical_id, Shapes::ShapeRef.new(shape: LogicalID, location_name: "logicalID"))
     NetworkMigrationCodeGenerationSegment.add_member(:mapper_segment_id, Shapes::ShapeRef.new(shape: SegmentID, location_name: "mapperSegmentID"))
     NetworkMigrationCodeGenerationSegment.add_member(:artifacts, Shapes::ShapeRef.new(shape: NetworkMigrationCodeGenerationArtifacts, location_name: "artifacts"))
+    NetworkMigrationCodeGenerationSegment.add_member(:referenced_segments, Shapes::ShapeRef.new(shape: referencedSegmentsList, location_name: "referencedSegments"))
     NetworkMigrationCodeGenerationSegment.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     NetworkMigrationCodeGenerationSegment.struct_class = Types::NetworkMigrationCodeGenerationSegment
 

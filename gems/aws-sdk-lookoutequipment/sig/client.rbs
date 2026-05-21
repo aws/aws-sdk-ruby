@@ -97,7 +97,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
@@ -115,17 +115,7 @@ module Aws
                                         inference_scheduler_name: ::String,
                                         ?data_delay_offset_in_minutes: ::Integer,
                                         data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H"),
-                                        data_input_configuration: {
-                                          s3_input_configuration: {
-                                            bucket: ::String,
-                                            prefix: ::String?
-                                          }?,
-                                          input_time_zone_offset: ::String?,
-                                          inference_input_name_configuration: {
-                                            timestamp_format: ::String?,
-                                            component_timestamp_delimiter: ::String?
-                                          }?
-                                        },
+                                        data_input_configuration: Params::inference_input_configuration,
                                         data_output_configuration: {
                                           s3_output_configuration: {
                                             bucket: ::String,
@@ -140,7 +130,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateInferenceSchedulerResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInferenceSchedulerResponseSuccess
@@ -176,7 +166,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _CreateLabelGroupResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLabelGroupResponseSuccess
@@ -214,7 +204,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?off_condition: ::String,
                           ?model_diagnostics_output_configuration: {
@@ -534,7 +524,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _ImportDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportDatasetResponseSuccess
@@ -566,7 +556,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?inference_data_import_strategy: ("NO_IMPORT" | "ADD_WHEN_EMPTY" | "OVERWRITE")
                                 ) -> _ImportModelVersionResponseSuccess
@@ -843,7 +833,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -879,17 +869,7 @@ module Aws
                                         inference_scheduler_name: ::String,
                                         ?data_delay_offset_in_minutes: ::Integer,
                                         ?data_upload_frequency: ("PT5M" | "PT10M" | "PT15M" | "PT30M" | "PT1H"),
-                                        ?data_input_configuration: {
-                                          s3_input_configuration: {
-                                            bucket: ::String,
-                                            prefix: ::String?
-                                          }?,
-                                          input_time_zone_offset: ::String?,
-                                          inference_input_name_configuration: {
-                                            timestamp_format: ::String?,
-                                            component_timestamp_delimiter: ::String?
-                                          }?
-                                        },
+                                        ?data_input_configuration: Params::inference_input_configuration,
                                         ?data_output_configuration: {
                                           s3_output_configuration: {
                                             bucket: ::String,

@@ -1,0 +1,106 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DynamoDB
+    module Params
+      type attribute_value = {
+      s: ::String?,
+      n: ::String?,
+      b: ::String?,
+      ss: Array[::String]?,
+      ns: Array[::String]?,
+      bs: Array[::String]?,
+      m: Hash[::String, untyped]?,
+      l: Array[untyped]?,
+      null: bool?,
+      bool: bool?
+    }
+
+      type local_secondary_index = {
+      index_name: ::String,
+      key_schema: Array[
+        {
+          attribute_name: ::String,
+          key_type: ("HASH" | "RANGE")
+        }
+      ],
+      projection: {
+        projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+        non_key_attributes: Array[::String]?
+      }
+    }
+
+      type global_secondary_index = {
+      index_name: ::String,
+      key_schema: Array[
+        {
+          attribute_name: ::String,
+          key_type: ("HASH" | "RANGE")
+        }
+      ],
+      projection: {
+        projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
+        non_key_attributes: Array[::String]?
+      },
+      provisioned_throughput: {
+        read_capacity_units: ::Integer,
+        write_capacity_units: ::Integer
+      }?,
+      on_demand_throughput: {
+        max_read_request_units: ::Integer?,
+        max_write_request_units: ::Integer?
+      }?,
+      warm_throughput: {
+        read_units_per_second: ::Integer?,
+        write_units_per_second: ::Integer?
+      }?
+    }
+
+      type expected_attribute_value = {
+      value: Params::attribute_value?,
+      exists: bool?,
+      comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")?,
+      attribute_value_list: Array[Params::attribute_value]?
+    }
+
+      type condition = {
+      attribute_value_list: Array[Params::attribute_value]?,
+      comparison_operator: ("EQ" | "NE" | "IN" | "LE" | "LT" | "GE" | "GT" | "BETWEEN" | "NOT_NULL" | "NULL" | "CONTAINS" | "NOT_CONTAINS" | "BEGINS_WITH")
+    }
+
+      type auto_scaling_policy_update = {
+      policy_name: ::String?,
+      target_tracking_scaling_policy_configuration: {
+        disable_scale_in: bool?,
+        scale_in_cooldown: ::Integer?,
+        scale_out_cooldown: ::Integer?,
+        target_value: ::Float
+      }
+    }
+
+      type auto_scaling_settings_update = {
+      minimum_units: ::Integer?,
+      maximum_units: ::Integer?,
+      auto_scaling_disabled: bool?,
+      auto_scaling_role_arn: ::String?,
+      scaling_policy_update: Params::auto_scaling_policy_update?
+    }
+
+      type replica_global_secondary_index = {
+      index_name: ::String,
+      provisioned_throughput_override: {
+        read_capacity_units: ::Integer?
+      }?,
+      on_demand_throughput_override: {
+        max_read_request_units: ::Integer?
+      }?
+    }
+
+    end
+  end
+end

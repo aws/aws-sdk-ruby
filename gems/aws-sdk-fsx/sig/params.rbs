@@ -1,0 +1,197 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FSx
+    module Params
+      type s3_data_repository_configuration = {
+      auto_import_policy: {
+        events: Array[("NEW" | "CHANGED" | "DELETED")]?
+      }?,
+      auto_export_policy: {
+        events: Array[("NEW" | "CHANGED" | "DELETED")]?
+      }?
+    }
+
+      type self_managed_active_directory_configuration = {
+      domain_name: ::String,
+      organizational_unit_distinguished_name: ::String?,
+      file_system_administrators_group: ::String?,
+      user_name: ::String?,
+      password: ::String?,
+      dns_ips: Array[::String],
+      domain_join_service_account_secret: ::String?
+    }
+
+      type create_file_system_windows_configuration = {
+      active_directory_id: ::String?,
+      self_managed_active_directory_configuration: Params::self_managed_active_directory_configuration?,
+      deployment_type: ("MULTI_AZ_1" | "SINGLE_AZ_1" | "SINGLE_AZ_2")?,
+      preferred_subnet_id: ::String?,
+      throughput_capacity: ::Integer,
+      weekly_maintenance_start_time: ::String?,
+      daily_automatic_backup_start_time: ::String?,
+      automatic_backup_retention_days: ::Integer?,
+      copy_tags_to_backups: bool?,
+      aliases: Array[::String]?,
+      audit_log_configuration: {
+        file_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+        file_share_access_audit_log_level: ("DISABLED" | "SUCCESS_ONLY" | "FAILURE_ONLY" | "SUCCESS_AND_FAILURE"),
+        audit_log_destination: ::String?
+      }?,
+      disk_iops_configuration: {
+        mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+        iops: ::Integer?
+      }?,
+      fsrm_configuration: {
+        fsrm_service_enabled: bool,
+        event_log_destination: ::String?
+      }?
+    }
+
+      type create_file_system_lustre_configuration = {
+      weekly_maintenance_start_time: ::String?,
+      import_path: ::String?,
+      export_path: ::String?,
+      imported_file_chunk_size: ::Integer?,
+      deployment_type: ("SCRATCH_1" | "SCRATCH_2" | "PERSISTENT_1" | "PERSISTENT_2")?,
+      auto_import_policy: ("NONE" | "NEW" | "NEW_CHANGED" | "NEW_CHANGED_DELETED")?,
+      per_unit_storage_throughput: ::Integer?,
+      daily_automatic_backup_start_time: ::String?,
+      automatic_backup_retention_days: ::Integer?,
+      copy_tags_to_backups: bool?,
+      drive_cache_type: ("NONE" | "READ")?,
+      data_compression_type: ("NONE" | "LZ4")?,
+      efa_enabled: bool?,
+      log_configuration: {
+        level: ("DISABLED" | "WARN_ONLY" | "ERROR_ONLY" | "WARN_ERROR"),
+        destination: ::String?
+      }?,
+      root_squash_configuration: {
+        root_squash: ::String?,
+        no_squash_nids: Array[::String]?
+      }?,
+      metadata_configuration: {
+        iops: ::Integer?,
+        mode: ("AUTOMATIC" | "USER_PROVISIONED")
+      }?,
+      throughput_capacity: ::Integer?,
+      data_read_cache_configuration: {
+        sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
+        size_gi_b: ::Integer?
+      }?
+    }
+
+      type open_zfs_create_root_volume_configuration = {
+      record_size_ki_b: ::Integer?,
+      data_compression_type: ("NONE" | "ZSTD" | "LZ4")?,
+      nfs_exports: Array[
+        {
+          client_configurations: Array[
+            {
+              clients: ::String,
+              options: Array[::String]
+            }
+          ]
+        }
+      ]?,
+      user_and_group_quotas: Array[
+        {
+          type: ("USER" | "GROUP"),
+          id: ::Integer,
+          storage_capacity_quota_gi_b: ::Integer
+        }
+      ]?,
+      copy_tags_to_snapshots: bool?,
+      read_only: bool?
+    }
+
+      type create_file_system_open_zfs_configuration = {
+      automatic_backup_retention_days: ::Integer?,
+      copy_tags_to_backups: bool?,
+      copy_tags_to_volumes: bool?,
+      daily_automatic_backup_start_time: ::String?,
+      deployment_type: ("SINGLE_AZ_1" | "SINGLE_AZ_2" | "SINGLE_AZ_HA_1" | "SINGLE_AZ_HA_2" | "MULTI_AZ_1"),
+      throughput_capacity: ::Integer,
+      weekly_maintenance_start_time: ::String?,
+      disk_iops_configuration: {
+        mode: ("AUTOMATIC" | "USER_PROVISIONED")?,
+        iops: ::Integer?
+      }?,
+      root_volume_configuration: Params::open_zfs_create_root_volume_configuration?,
+      preferred_subnet_id: ::String?,
+      endpoint_ip_address_range: ::String?,
+      endpoint_ipv_6_address_range: ::String?,
+      route_table_ids: Array[::String]?,
+      read_cache_configuration: {
+        sizing_mode: ("NO_CACHE" | "USER_PROVISIONED" | "PROPORTIONAL_TO_THROUGHPUT_CAPACITY")?,
+        size_gi_b: ::Integer?
+      }?
+    }
+
+      type snaplock_retention_period = {
+      default_retention: {
+        type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+        value: ::Integer?
+      },
+      minimum_retention: {
+        type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+        value: ::Integer?
+      },
+      maximum_retention: {
+        type: ("SECONDS" | "MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "INFINITE" | "UNSPECIFIED"),
+        value: ::Integer?
+      }
+    }
+
+      type create_snaplock_configuration = {
+      audit_log_volume: bool?,
+      autocommit_period: {
+        type: ("MINUTES" | "HOURS" | "DAYS" | "MONTHS" | "YEARS" | "NONE"),
+        value: ::Integer?
+      }?,
+      privileged_delete: ("DISABLED" | "ENABLED" | "PERMANENTLY_DISABLED")?,
+      retention_period: Params::snaplock_retention_period?,
+      snaplock_type: ("COMPLIANCE" | "ENTERPRISE"),
+      volume_append_mode_enabled: bool?
+    }
+
+      type create_ontap_volume_configuration = {
+      junction_path: ::String?,
+      security_style: ("UNIX" | "NTFS" | "MIXED")?,
+      size_in_megabytes: ::Integer?,
+      storage_efficiency_enabled: bool?,
+      storage_virtual_machine_id: ::String,
+      tiering_policy: {
+        cooling_period: ::Integer?,
+        name: ("SNAPSHOT_ONLY" | "AUTO" | "ALL" | "NONE")?
+      }?,
+      ontap_volume_type: ("RW" | "DP")?,
+      snapshot_policy: ::String?,
+      copy_tags_to_backups: bool?,
+      snaplock_configuration: Params::create_snaplock_configuration?,
+      volume_style: ("FLEXVOL" | "FLEXGROUP")?,
+      aggregate_configuration: {
+        aggregates: Array[::String]?,
+        constituents_per_aggregate: ::Integer?
+      }?,
+      size_in_bytes: ::Integer?
+    }
+
+      type self_managed_active_directory_configuration_updates = {
+      user_name: ::String?,
+      password: ::String?,
+      dns_ips: Array[::String]?,
+      domain_name: ::String?,
+      organizational_unit_distinguished_name: ::String?,
+      file_system_administrators_group: ::String?,
+      domain_join_service_account_secret: ::String?
+    }
+
+    end
+  end
+end

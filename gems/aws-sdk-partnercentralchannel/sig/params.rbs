@@ -1,0 +1,31 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module PartnerCentralChannel
+    module Params
+      type support_plan = {
+      resold_enterprise: {
+        coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+        tam_location: ::String,
+        charge_account_id: ::String?
+      }?,
+      partner_led_support: {
+        coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+        provider: ("DISTRIBUTOR" | "DISTRIBUTION_SELLER")?,
+        tam_location: ::String
+      }?,
+      resold_unified_operations: {
+        coverage: ("ENTIRE_ORGANIZATION" | "MANAGEMENT_ACCOUNT_ONLY"),
+        tam_location: ::String,
+        charge_account_id: ::String?
+      }?
+    }
+
+    end
+  end
+end

@@ -111,7 +111,7 @@ module Aws
                                     objectives: Array[
                                       {
                                         arn: ::String?
-                                      },
+                                      }
                                     ]?
                                   }
                                 ) -> _ListCommonControlsResponseSuccess
@@ -177,7 +177,7 @@ module Aws
                                domains: Array[
                                  {
                                    arn: ::String?
-                                 },
+                                 }
                                ]?
                              }
                            ) -> _ListObjectivesResponseSuccess

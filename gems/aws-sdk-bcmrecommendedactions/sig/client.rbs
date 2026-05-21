@@ -92,7 +92,7 @@ module Aws
                                             key: ("FEATURE" | "SEVERITY" | "TYPE"),
                                             match_option: ("EQUALS" | "NOT_EQUALS"),
                                             values: Array[::String]
-                                          },
+                                          }
                                         ]?
                                       },
                                       ?max_results: ::Integer,

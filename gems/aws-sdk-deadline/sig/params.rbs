@@ -1,0 +1,214 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Deadline
+    module Params
+      type customer_managed_worker_capabilities = {
+      v_cpu_count: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      memory_mi_b: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      accelerator_types: Array[("gpu")]?,
+      accelerator_count: {
+        min: ::Integer,
+        max: ::Integer?
+      }?,
+      accelerator_total_memory_mi_b: {
+        min: ::Integer,
+        max: ::Integer?
+      }?,
+      os_family: ("WINDOWS" | "LINUX" | "MACOS"),
+      cpu_architecture_type: ("x86_64" | "arm64"),
+      custom_amounts: Array[
+        {
+          name: ::String,
+          min: ::Float,
+          max: ::Float?
+        }
+      ]?,
+      custom_attributes: Array[
+        {
+          name: ::String,
+          values: Array[::String]
+        }
+      ]?
+    }
+
+      type customer_managed_fleet_configuration = {
+      mode: ("NO_SCALING" | "EVENT_BASED_AUTO_SCALING"),
+      auto_scaling_configuration: {
+        standby_worker_count: ::Integer?,
+        worker_idle_duration_seconds: ::Integer?,
+        scale_out_workers_per_minute: ::Integer?
+      }?,
+      worker_capabilities: Params::customer_managed_worker_capabilities,
+      storage_profile_id: ::String?,
+      tag_propagation_mode: ("NO_PROPAGATION" | "PROPAGATE_TAGS_TO_WORKERS_AT_LAUNCH")?
+    }
+
+      type accelerator_capabilities = {
+      selections: Array[
+        {
+          name: ("t4" | "a10g" | "l4" | "l40s" | "rtx-pro-server-6000"),
+          runtime: ::String?
+        }
+      ],
+      count: {
+        min: ::Integer,
+        max: ::Integer?
+      }?
+    }
+
+      type service_managed_ec2_instance_capabilities = {
+      v_cpu_count: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      memory_mi_b: {
+        min: ::Integer,
+        max: ::Integer?
+      },
+      os_family: ("WINDOWS" | "LINUX"),
+      cpu_architecture_type: ("x86_64" | "arm64"),
+      root_ebs_volume: {
+        size_gi_b: ::Integer?,
+        iops: ::Integer?,
+        throughput_mi_b: ::Integer?
+      }?,
+      accelerator_capabilities: Params::accelerator_capabilities?,
+      allowed_instance_types: Array[::String]?,
+      excluded_instance_types: Array[::String]?,
+      custom_amounts: Array[
+        {
+          name: ::String,
+          min: ::Float,
+          max: ::Float?
+        }
+      ]?,
+      custom_attributes: Array[
+        {
+          name: ::String,
+          values: Array[::String]
+        }
+      ]?
+    }
+
+      type service_managed_ec2_fleet_configuration = {
+      instance_capabilities: Params::service_managed_ec2_instance_capabilities,
+      instance_market_options: {
+        type: ("on-demand" | "spot" | "wait-and-save")
+      },
+      vpc_configuration: {
+        resource_configuration_arns: Array[::String]?
+      }?,
+      storage_profile_id: ::String?,
+      auto_scaling_configuration: {
+        standby_worker_count: ::Integer?,
+        worker_idle_duration_seconds: ::Integer?,
+        scale_out_workers_per_minute: ::Integer?
+      }?
+    }
+
+      type fleet_configuration = {
+      customer_managed: Params::customer_managed_fleet_configuration?,
+      service_managed_ec2: Params::service_managed_ec2_fleet_configuration?
+    }
+
+      type job_run_as_user = {
+      posix: {
+        user: ::String,
+        group: ::String
+      }?,
+      windows: {
+        user: ::String,
+        password_arn: ::String
+      }?,
+      run_as: ("QUEUE_CONFIGURED_USER" | "WORKER_AGENT_USER")
+    }
+
+      type weighted_balanced_scheduling_configuration = {
+      priority_weight: ::Float?,
+      error_weight: ::Float?,
+      submission_time_weight: ::Float?,
+      rendering_task_weight: ::Float?,
+      rendering_task_buffer: ::Integer?,
+      max_priority_override: {
+        always_schedule_first: {
+        }?
+      }?,
+      min_priority_override: {
+        always_schedule_last: {
+        }?
+      }?
+    }
+
+      type scheduling_configuration = {
+      priority_fifo: {
+      }?,
+      priority_balanced: {
+        rendering_task_buffer: ::Integer?
+      }?,
+      weighted_balanced: Params::weighted_balanced_scheduling_configuration?
+    }
+
+      type search_grouped_filter_expressions = {
+      filters: Array[
+        Params::search_filter_expression
+      ],
+      operator: ("AND" | "OR")
+    }
+
+      type search_filter_expression = {
+      date_time_filter: {
+        name: ::String,
+        operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS"),
+        date_time: ::Time
+      }?,
+      parameter_filter: {
+        name: ::String,
+        operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS"),
+        value: ::String
+      }?,
+      search_term_filter: {
+        search_term: ::String,
+        match_type: ("FUZZY_MATCH" | "CONTAINS")?
+      }?,
+      string_filter: {
+        name: ::String,
+        operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS"),
+        value: ::String
+      }?,
+      string_list_filter: {
+        name: ::String,
+        operator: ("EQUAL" | "NOT_EQUAL" | "GREATER_THAN_EQUAL_TO" | "GREATER_THAN" | "LESS_THAN_EQUAL_TO" | "LESS_THAN" | "ANY_EQUALS" | "ALL_NOT_EQUALS"),
+        values: Array[::String]
+      }?,
+      group_filter: Params::search_grouped_filter_expressions?
+    }
+
+      type search_sort_expression = {
+      user_jobs_first: {
+        user_identity_id: ::String
+      }?,
+      field_sort: {
+        sort_order: ("ASCENDING" | "DESCENDING"),
+        name: ::String
+      }?,
+      parameter_sort: {
+        sort_order: ("ASCENDING" | "DESCENDING"),
+        name: ::String
+      }?
+    }
+
+    end
+  end
+end

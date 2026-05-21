@@ -1020,7 +1020,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_analyzer({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS, ORGANIZATION_UNUSED_ACCESS, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS
     #     archive_rules: [
     #       {
@@ -1113,7 +1113,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_archive_rule({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     filter: { # required
     #       "String" => {
@@ -1132,6 +1132,99 @@ module Aws::AccessAnalyzer
     # @param [Hash] params ({})
     def create_archive_rule(params = {}, options = {})
       req = build_request(:create_archive_rule, params)
+      req.send_request(options)
+    end
+
+    # Creates a service-linked analyzer managed by an Amazon Web Services
+    # service. This operation can only be invoked by authorized Amazon Web
+    # Services services. Direct customer invocation returns
+    # `AccessDeniedException`.
+    #
+    # Service-linked analyzers enable Amazon Web Services services to create
+    # and manage analyzers on behalf of customers. The lifecycle of these
+    # analyzers is managed by the calling service.
+    #
+    # @option params [required, String] :type
+    #   The type of analyzer to create. Valid values are
+    #   `ACCOUNT_UNUSED_ACCESS` and `ORGANIZATION_UNUSED_ACCESS`.
+    #
+    # @option params [Array<Types::InlineArchiveRule>] :archive_rules
+    #   Specifies the archive rules to add for the analyzer. Archive rules
+    #   automatically archive findings that meet the criteria you define for
+    #   the rule.
+    #
+    # @option params [String] :client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [Types::AnalyzerConfiguration] :configuration
+    #   Specifies the configuration of the analyzer. The specified scope of
+    #   unused access is used for the configuration.
+    #
+    # @return [Types::CreateServiceLinkedAnalyzerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateServiceLinkedAnalyzerResponse#arn #arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_service_linked_analyzer({
+    #     type: "ACCOUNT", # required, accepts ACCOUNT, ORGANIZATION, ACCOUNT_UNUSED_ACCESS, ORGANIZATION_UNUSED_ACCESS, ACCOUNT_INTERNAL_ACCESS, ORGANIZATION_INTERNAL_ACCESS
+    #     archive_rules: [
+    #       {
+    #         rule_name: "Name", # required
+    #         filter: { # required
+    #           "String" => {
+    #             eq: ["String"],
+    #             neq: ["String"],
+    #             contains: ["String"],
+    #             exists: false,
+    #           },
+    #         },
+    #       },
+    #     ],
+    #     client_token: "String",
+    #     configuration: {
+    #       unused_access: {
+    #         unused_access_age: 1,
+    #         analysis_rule: {
+    #           exclusions: [
+    #             {
+    #               account_ids: ["String"],
+    #               resource_tags: [
+    #                 {
+    #                   "String" => "String",
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       internal_access: {
+    #         analysis_rule: {
+    #           inclusions: [
+    #             {
+    #               account_ids: ["String"],
+    #               resource_types: ["AWS::S3::Bucket"], # accepts AWS::S3::Bucket, AWS::IAM::Role, AWS::SQS::Queue, AWS::Lambda::Function, AWS::Lambda::LayerVersion, AWS::KMS::Key, AWS::SecretsManager::Secret, AWS::EFS::FileSystem, AWS::EC2::Snapshot, AWS::ECR::Repository, AWS::RDS::DBSnapshot, AWS::RDS::DBClusterSnapshot, AWS::SNS::Topic, AWS::S3Express::DirectoryBucket, AWS::DynamoDB::Table, AWS::DynamoDB::Stream, AWS::IAM::User
+    #               resource_arns: ["String"],
+    #             },
+    #           ],
+    #         },
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/CreateServiceLinkedAnalyzer AWS API Documentation
+    #
+    # @overload create_service_linked_analyzer(params = {})
+    # @param [Hash] params ({})
+    def create_service_linked_analyzer(params = {}, options = {})
+      req = build_request(:create_service_linked_analyzer, params)
       req.send_request(options)
     end
 
@@ -1154,7 +1247,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_analyzer({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     client_token: "String",
     #   })
     #
@@ -1187,7 +1280,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_archive_rule({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     client_token: "String",
     #   })
@@ -1198,6 +1291,43 @@ module Aws::AccessAnalyzer
     # @param [Hash] params ({})
     def delete_archive_rule(params = {}, options = {})
       req = build_request(:delete_archive_rule, params)
+      req.send_request(options)
+    end
+
+    # Deletes a service-linked analyzer. This operation can be invoked by
+    # both authorized Amazon Web Services services and customers.
+    #
+    # When invoked by a customer, IAM Access Analyzer performs a callback to
+    # the managing service to verify whether the analyzer is still in use
+    # and can be deleted. If the service indicates the analyzer is still in
+    # use, the deletion is rejected with `ConflictException`.
+    #
+    # @option params [required, String] :analyzer_name
+    #   The name of the service-linked analyzer to delete. Service-linked
+    #   analyzer names follow the format
+    #   `_AccessAnalyzerFor{ServiceName}-{Id}`.
+    #
+    # @option params [String] :client_token
+    #   A client token.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_service_linked_analyzer({
+    #     analyzer_name: "AnalyzerName", # required
+    #     client_token: "String",
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/DeleteServiceLinkedAnalyzer AWS API Documentation
+    #
+    # @overload delete_service_linked_analyzer(params = {})
+    # @param [Hash] params ({})
+    def delete_service_linked_analyzer(params = {}, options = {})
+      req = build_request(:delete_service_linked_analyzer, params)
       req.send_request(options)
     end
 
@@ -1407,7 +1537,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_analyzer({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #   })
     #
     # @example Response structure
@@ -1436,6 +1566,7 @@ module Aws::AccessAnalyzer
     #   resp.analyzer.configuration.internal_access.analysis_rule.inclusions[0].resource_types[0] #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream", "AWS::IAM::User"
     #   resp.analyzer.configuration.internal_access.analysis_rule.inclusions[0].resource_arns #=> Array
     #   resp.analyzer.configuration.internal_access.analysis_rule.inclusions[0].resource_arns[0] #=> String
+    #   resp.analyzer.managed_by #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/GetAnalyzer AWS API Documentation
     #
@@ -1468,7 +1599,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_archive_rule({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #   })
     #
@@ -2175,6 +2306,7 @@ module Aws::AccessAnalyzer
     #   resp.analyzers[0].configuration.internal_access.analysis_rule.inclusions[0].resource_types[0] #=> String, one of "AWS::S3::Bucket", "AWS::IAM::Role", "AWS::SQS::Queue", "AWS::Lambda::Function", "AWS::Lambda::LayerVersion", "AWS::KMS::Key", "AWS::SecretsManager::Secret", "AWS::EFS::FileSystem", "AWS::EC2::Snapshot", "AWS::ECR::Repository", "AWS::RDS::DBSnapshot", "AWS::RDS::DBClusterSnapshot", "AWS::SNS::Topic", "AWS::S3Express::DirectoryBucket", "AWS::DynamoDB::Table", "AWS::DynamoDB::Stream", "AWS::IAM::User"
     #   resp.analyzers[0].configuration.internal_access.analysis_rule.inclusions[0].resource_arns #=> Array
     #   resp.analyzers[0].configuration.internal_access.analysis_rule.inclusions[0].resource_arns[0] #=> String
+    #   resp.analyzers[0].managed_by #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/accessanalyzer-2019-11-01/ListAnalyzers AWS API Documentation
@@ -2207,7 +2339,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_archive_rules({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     next_token: "Token",
     #     max_results: 1,
     #   })
@@ -2675,7 +2807,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_analyzer({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     configuration: {
     #       unused_access: {
     #         unused_access_age: 1,
@@ -2755,7 +2887,7 @@ module Aws::AccessAnalyzer
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_archive_rule({
-    #     analyzer_name: "Name", # required
+    #     analyzer_name: "AnalyzerName", # required
     #     rule_name: "Name", # required
     #     filter: { # required
     #       "String" => {
@@ -2936,7 +3068,7 @@ module Aws::AccessAnalyzer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-accessanalyzer'
-      context[:gem_version] = '1.89.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

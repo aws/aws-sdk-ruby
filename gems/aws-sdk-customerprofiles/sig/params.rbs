@@ -1,0 +1,392 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CustomerProfiles
+    module Params
+      type range = {
+      value: ::Integer?,
+      unit: ("DAYS")?,
+      value_range: {
+        start: ::Integer,
+        end: ::Integer
+      }?,
+      timestamp_source: ::String?,
+      timestamp_format: ::String?
+    }
+
+      type conditions = {
+      range: Params::range?,
+      object_count: ::Integer?,
+      threshold: {
+        value: ::String,
+        operator: ("EQUAL_TO" | "GREATER_THAN" | "LESS_THAN" | "NOT_EQUAL_TO")
+      }?
+    }
+
+      type auto_merging = {
+      enabled: bool,
+      consolidation: {
+        matching_attributes_list: Array[
+          Array[::String]
+        ]
+      }?,
+      conflict_resolution: {
+        conflict_resolving_model: ("RECENCY" | "SOURCE"),
+        source_name: ::String?
+      }?,
+      min_allowed_confidence_score_for_merging: ::Float?
+    }
+
+      type matching_request = {
+      enabled: bool,
+      job_schedule: {
+        day_of_the_week: ("SUNDAY" | "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY"),
+        time: ::String
+      }?,
+      auto_merging: Params::auto_merging?,
+      exporting_config: {
+        s3_exporting: {
+          s3_bucket_name: ::String,
+          s3_key_name: ::String?
+        }?
+      }?
+    }
+
+      type rule_based_matching_request = {
+      enabled: bool,
+      matching_rules: Array[
+        {
+          rule: Array[::String]
+        }
+      ]?,
+      max_allowed_rule_level_for_merging: ::Integer?,
+      max_allowed_rule_level_for_matching: ::Integer?,
+      attribute_types_selector: {
+        attribute_matching_model: ("ONE_TO_ONE" | "MANY_TO_MANY"),
+        address: Array[::String]?,
+        phone_number: Array[::String]?,
+        email_address: Array[::String]?
+      }?,
+      conflict_resolution: {
+        conflict_resolving_model: ("RECENCY" | "SOURCE"),
+        source_name: ::String?
+      }?,
+      exporting_config: {
+        s3_exporting: {
+          s3_bucket_name: ::String,
+          s3_key_name: ::String?
+        }?
+      }?
+    }
+
+      type event_trigger_condition = {
+      event_trigger_dimensions: Array[
+        Params::event_trigger_dimension
+      ],
+      logical_operator: ("ANY" | "ALL" | "NONE")
+    }
+
+      type event_trigger_dimension = {
+      object_attributes: Array[
+        {
+          source: ::String?,
+          field_name: ::String?,
+          comparison_operator: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL" | "BEFORE" | "AFTER" | "ON" | "BETWEEN" | "NOT_BETWEEN"),
+          values: Array[::String]
+        }
+      ]
+    }
+
+      type event_trigger_limits = {
+      event_expiration: ::Integer?,
+      periods: Array[
+        {
+          unit: ("HOURS" | "DAYS" | "WEEKS" | "MONTHS"),
+          value: ::Integer,
+          max_invocations_per_profile: ::Integer?,
+          unlimited: bool?
+        }
+      ]?
+    }
+
+      type source_connector_properties = {
+      marketo: {
+        object: ::String
+      }?,
+      s3: {
+        bucket_name: ::String,
+        bucket_prefix: ::String?
+      }?,
+      salesforce: {
+        object: ::String,
+        enable_dynamic_field_update: bool?,
+        include_deleted_records: bool?
+      }?,
+      service_now: {
+        object: ::String
+      }?,
+      zendesk: {
+        object: ::String
+      }?
+    }
+
+      type source_flow_config = {
+      connector_profile_name: ::String?,
+      connector_type: ("Salesforce" | "Marketo" | "Zendesk" | "Servicenow" | "S3"),
+      incremental_pull_config: {
+        datetime_type_field_name: ::String?
+      }?,
+      source_connector_properties: Params::source_connector_properties
+    }
+
+      type scheduled_trigger_properties = {
+      schedule_expression: ::String,
+      data_pull_mode: ("Incremental" | "Complete")?,
+      schedule_start_time: ::Time?,
+      schedule_end_time: ::Time?,
+      timezone: ::String?,
+      schedule_offset: ::Integer?,
+      first_execution_from: ::Time?
+    }
+
+      type trigger_properties = {
+      scheduled: Params::scheduled_trigger_properties?
+    }
+
+      type trigger_config = {
+      trigger_type: ("Scheduled" | "Event" | "OnDemand"),
+      trigger_properties: Params::trigger_properties?
+    }
+
+      type flow_definition = {
+      description: ::String?,
+      flow_name: ::String,
+      kms_arn: ::String,
+      source_flow_config: Params::source_flow_config,
+      tasks: Array[
+        Params::task
+      ],
+      trigger_config: Params::trigger_config
+    }
+
+      type task = {
+      connector_operator: {
+        marketo: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+        s3: ("PROJECTION" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+        salesforce: ("PROJECTION" | "LESS_THAN" | "CONTAINS" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+        service_now: ("PROJECTION" | "CONTAINS" | "LESS_THAN" | "GREATER_THAN" | "BETWEEN" | "LESS_THAN_OR_EQUAL_TO" | "GREATER_THAN_OR_EQUAL_TO" | "EQUAL_TO" | "NOT_EQUAL_TO" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?,
+        zendesk: ("PROJECTION" | "GREATER_THAN" | "ADDITION" | "MULTIPLICATION" | "DIVISION" | "SUBTRACTION" | "MASK_ALL" | "MASK_FIRST_N" | "MASK_LAST_N" | "VALIDATE_NON_NULL" | "VALIDATE_NON_ZERO" | "VALIDATE_NON_NEGATIVE" | "VALIDATE_NUMERIC" | "NO_OP")?
+      }?,
+      destination_field: ::String?,
+      source_fields: Array[::String],
+      task_properties: Hash[("VALUE" | "VALUES" | "DATA_TYPE" | "UPPER_BOUND" | "LOWER_BOUND" | "SOURCE_DATA_TYPE" | "DESTINATION_DATA_TYPE" | "VALIDATION_ACTION" | "MASK_VALUE" | "MASK_LENGTH" | "TRUNCATE_LENGTH" | "MATH_OPERATION_FIELDS_ORDER" | "CONCAT_FORMAT" | "SUBFIELD_CATEGORY_MAP"), ::String]?,
+      task_type: ("Arithmetic" | "Filter" | "Map" | "Mask" | "Merge" | "Truncate" | "Validate")
+    }
+
+      type address = {
+      address_1: ::String?,
+      address_2: ::String?,
+      address_3: ::String?,
+      address_4: ::String?,
+      city: ::String?,
+      county: ::String?,
+      state: ::String?,
+      province: ::String?,
+      country: ::String?,
+      postal_code: ::String?
+    }
+
+      type engagement_preferences = {
+      phone: Array[
+        {
+          key_name: ::String?,
+          key_value: ::String?,
+          profile_id: ::String?,
+          contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+        }
+      ]?,
+      email: Array[
+        {
+          key_name: ::String?,
+          key_value: ::String?,
+          profile_id: ::String?,
+          contact_type: ("PhoneNumber" | "MobilePhoneNumber" | "HomePhoneNumber" | "BusinessPhoneNumber" | "EmailAddress" | "PersonalEmailAddress" | "BusinessEmailAddress")?
+        }
+      ]?
+    }
+
+      type recommender_config = {
+      events_config: {
+        event_parameters_list: Array[
+          {
+            event_type: ::String,
+            event_value_threshold: ::Float?,
+            event_weight: ::Float?
+          }
+        ]
+      }?,
+      training_frequency: ::Integer?,
+      inference_config: {
+        min_provisioned_tps: ::Integer?
+      }?,
+      included_columns: Hash[::String, Array[::String]]?,
+      excluded_columns: Hash[::String, Array[::String]]?
+    }
+
+      type group = {
+      dimensions: Array[
+        Params::dimension
+      ]?,
+      source_segments: Array[
+        {
+          segment_definition_name: ::String?
+        }
+      ]?,
+      source_type: ("ALL" | "ANY" | "NONE")?,
+      type: ("ALL" | "ANY" | "NONE")?
+    }
+
+      type address_dimension = {
+      city: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      country: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      county: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      postal_code: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      province: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      state: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?
+    }
+
+      type profile_attributes = {
+      account_number: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      additional_information: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      first_name: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      last_name: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      middle_name: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      gender_string: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      party_type_string: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      birth_date: {
+        dimension_type: ("BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON"),
+        values: Array[::String]
+      }?,
+      phone_number: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      business_name: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      business_phone_number: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      home_phone_number: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      mobile_phone_number: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      email_address: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      personal_email_address: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      business_email_address: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH"),
+        values: Array[::String]
+      }?,
+      address: Params::address_dimension?,
+      shipping_address: Params::address_dimension?,
+      mailing_address: Params::address_dimension?,
+      billing_address: Params::address_dimension?,
+      attributes: Hash[::String, {
+          dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+          values: Array[::String]
+        }]?,
+      profile_type: {
+        dimension_type: ("INCLUSIVE" | "EXCLUSIVE"),
+        values: Array[("ACCOUNT_PROFILE" | "PROFILE")]
+      }?
+    }
+
+      type dimension = {
+      profile_attributes: Params::profile_attributes?,
+      calculated_attributes: Hash[::String, Params::calculated_attribute_dimension]?
+    }
+
+      type calculated_attribute_dimension = {
+      dimension_type: ("INCLUSIVE" | "EXCLUSIVE" | "CONTAINS" | "BEGINS_WITH" | "ENDS_WITH" | "BEFORE" | "AFTER" | "BETWEEN" | "NOT_BETWEEN" | "ON" | "GREATER_THAN" | "LESS_THAN" | "GREATER_THAN_OR_EQUAL" | "LESS_THAN_OR_EQUAL" | "EQUAL"),
+      values: Array[::String],
+      condition_overrides: {
+        range: {
+          start: ::Integer,
+          end: ::Integer?,
+          unit: ("DAYS")
+        }?
+      }?
+    }
+
+      type update_address = {
+      address_1: ::String?,
+      address_2: ::String?,
+      address_3: ::String?,
+      address_4: ::String?,
+      city: ::String?,
+      county: ::String?,
+      state: ::String?,
+      province: ::String?,
+      country: ::String?,
+      postal_code: ::String?
+    }
+
+    end
+  end
+end

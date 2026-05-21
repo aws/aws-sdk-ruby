@@ -184,7 +184,7 @@ module Aws
                                            match_option: ("NOT_EQUAL" | "EQUAL"),
                                            values: Array[("SAVINGS_PLAN_NEGATION")]?,
                                            attribute_values: Array[::String]?
-                                         },
+                                         }
                                        ]?
                                      },
                                      ?account_id: ::String,
@@ -372,7 +372,7 @@ module Aws
                                      {
                                        search_option: ("STARTS_WITH"),
                                        search_value: ::String
-                                     },
+                                     }
                                    ]?,
                                    responsibility_transfer_arns: Array[::String]?
                                  }
@@ -588,7 +588,7 @@ module Aws
                                            match_option: ("NOT_EQUAL" | "EQUAL"),
                                            values: Array[("SAVINGS_PLAN_NEGATION")]?,
                                            attribute_values: Array[::String]?
-                                         },
+                                         }
                                        ]?
                                      },
                                      ?billing_period_range: {

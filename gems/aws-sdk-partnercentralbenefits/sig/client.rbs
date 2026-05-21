@@ -93,7 +93,7 @@ module Aws
                                          {
                                            field_path: ::String,
                                            new_value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _AmendBenefitApplicationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AmendBenefitApplicationResponseSuccess
@@ -144,7 +144,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?associated_resources: Array[::String],
                                         ?partner_contacts: Array[
@@ -154,13 +154,13 @@ module Aws
                                             last_name: ::String?,
                                             business_title: ::String?,
                                             phone: ::String?
-                                          },
+                                          }
                                         ],
                                         ?file_details: Array[
                                           {
                                             file_uri: ::String,
                                             business_use_case: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateBenefitApplicationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBenefitApplicationResponseSuccess
@@ -289,7 +289,7 @@ module Aws
                                            resource_type: ("OPPORTUNITY" | "BENEFIT_ALLOCATION")?,
                                            resource_identifier: ::String?,
                                            resource_arn: ::String?
-                                         },
+                                         }
                                        ],
                                        ?associated_resource_arns: Array[::String],
                                        ?max_results: ::Integer,
@@ -355,7 +355,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -393,13 +393,13 @@ module Aws
                                             last_name: ::String?,
                                             business_title: ::String?,
                                             phone: ::String?
-                                          },
+                                          }
                                         ],
                                         ?file_details: Array[
                                           {
                                             file_uri: ::String,
                                             business_use_case: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _UpdateBenefitApplicationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBenefitApplicationResponseSuccess

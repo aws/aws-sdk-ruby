@@ -238,14 +238,7 @@ module Aws
                                     schedule_expression: ::String,
                                     ?timezone: ::String,
                                     ?start_time_offset: ::Integer,
-                                    ?destination_configuration: {
-                                      s3_configuration: {
-                                        destination_identifier: ::String,
-                                        role_arn: ::String,
-                                        owner_account_id: ::String?,
-                                        kms_key_id: ::String?
-                                      }
-                                    },
+                                    ?destination_configuration: Params::destination_configuration,
                                     ?schedule_start_time: ::Integer,
                                     ?schedule_end_time: ::Integer,
                                     execution_role_arn: ::String,
@@ -956,7 +949,7 @@ module Aws
                                                   {
                                                     name: ::String,
                                                     type: ::String?
-                                                  },
+                                                  }
                                                 ],
                                                 group_by: ("DATA_SOURCE_NAME_TYPE_AND_FORMAT" | "DATA_SOURCE_NAME_AND_TYPE"),
                                                 ?next_token: ::String,
@@ -1020,14 +1013,14 @@ module Aws
                                {
                                  name: ::String,
                                  type: ::String?
-                               },
+                               }
                              ],
                              ?field_index_names: Array[::String],
                              ?log_group_tags: Array[
                                {
                                  key: ::String,
                                  values: Array[::String]?
-                               },
+                               }
                              ]
                            ) -> _ListLogGroupsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListLogGroupsResponseSuccess
@@ -1233,7 +1226,7 @@ module Aws
                               {
                                 timestamp: ::Integer,
                                 message: ::String
-                              },
+                              }
                             ],
                             ?sequence_token: ::String,
                             ?entity: {
@@ -1263,7 +1256,7 @@ module Aws
                                    default_value: ::Float?,
                                    dimensions: Hash[::String, ::String]?,
                                    unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                 },
+                                 }
                                ],
                                ?apply_on_transformed_logs: bool,
                                ?field_selection_criteria: ::String,
@@ -1288,7 +1281,7 @@ module Aws
                                       name: ::String,
                                       default_value: ::String?,
                                       description: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _PutQueryDefinitionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutQueryDefinitionResponseSuccess
@@ -1332,143 +1325,7 @@ module Aws
       def put_transformer: (
                              log_group_identifier: ::String,
                              transformer_config: Array[
-                               {
-                                 add_keys: {
-                                   entries: Array[
-                                     {
-                                       key: ::String,
-                                       value: ::String,
-                                       overwrite_if_exists: bool?
-                                     },
-                                   ]
-                                 }?,
-                                 copy_value: {
-                                   entries: Array[
-                                     {
-                                       source: ::String,
-                                       target: ::String,
-                                       overwrite_if_exists: bool?
-                                     },
-                                   ]
-                                 }?,
-                                 csv: {
-                                   quote_character: ::String?,
-                                   delimiter: ::String?,
-                                   columns: Array[::String]?,
-                                   source: ::String?,
-                                   destination: ::String?
-                                 }?,
-                                 date_time_converter: {
-                                   source: ::String,
-                                   target: ::String,
-                                   target_format: ::String?,
-                                   match_patterns: Array[::String],
-                                   source_timezone: ::String?,
-                                   target_timezone: ::String?,
-                                   locale: ::String?
-                                 }?,
-                                 delete_keys: {
-                                   with_keys: Array[::String]
-                                 }?,
-                                 grok: {
-                                   source: ::String?,
-                                   match: ::String
-                                 }?,
-                                 list_to_map: {
-                                   source: ::String,
-                                   key: ::String,
-                                   value_key: ::String?,
-                                   target: ::String?,
-                                   flatten: bool?,
-                                   flattened_element: ("first" | "last")?
-                                 }?,
-                                 lower_case_string: {
-                                   with_keys: Array[::String]
-                                 }?,
-                                 move_keys: {
-                                   entries: Array[
-                                     {
-                                       source: ::String,
-                                       target: ::String,
-                                       overwrite_if_exists: bool?
-                                     },
-                                   ]
-                                 }?,
-                                 parse_cloudfront: {
-                                   source: ::String?
-                                 }?,
-                                 parse_json: {
-                                   source: ::String?,
-                                   destination: ::String?
-                                 }?,
-                                 parse_key_value: {
-                                   source: ::String?,
-                                   destination: ::String?,
-                                   field_delimiter: ::String?,
-                                   key_value_delimiter: ::String?,
-                                   key_prefix: ::String?,
-                                   non_match_value: ::String?,
-                                   overwrite_if_exists: bool?
-                                 }?,
-                                 parse_route_53: {
-                                   source: ::String?
-                                 }?,
-                                 parse_to_ocsf: {
-                                   source: ::String?,
-                                   event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF"),
-                                   ocsf_version: ("V1.1" | "V1.5"),
-                                   mapping_version: ::String?
-                                 }?,
-                                 parse_postgres: {
-                                   source: ::String?
-                                 }?,
-                                 parse_vpc: {
-                                   source: ::String?
-                                 }?,
-                                 parse_waf: {
-                                   source: ::String?
-                                 }?,
-                                 rename_keys: {
-                                   entries: Array[
-                                     {
-                                       key: ::String,
-                                       rename_to: ::String,
-                                       overwrite_if_exists: bool?
-                                     },
-                                   ]
-                                 }?,
-                                 split_string: {
-                                   entries: Array[
-                                     {
-                                       source: ::String,
-                                       delimiter: ::String
-                                     },
-                                   ]
-                                 }?,
-                                 substitute_string: {
-                                   entries: Array[
-                                     {
-                                       source: ::String,
-                                       from: ::String,
-                                       to: ::String
-                                     },
-                                   ]
-                                 }?,
-                                 trim_string: {
-                                   with_keys: Array[::String]
-                                 }?,
-                                 type_converter: {
-                                   entries: Array[
-                                     {
-                                       key: ::String,
-                                       type: ("boolean" | "integer" | "double" | "string")
-                                     },
-                                   ]
-                                 }?,
-                                 upper_case_string: {
-                                   with_keys: Array[::String]
-                                 }?
-                               },
+                               Params::processor
                              ]
                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1545,143 +1402,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#test_transformer-instance_method
       def test_transformer: (
                               transformer_config: Array[
-                                {
-                                  add_keys: {
-                                    entries: Array[
-                                      {
-                                        key: ::String,
-                                        value: ::String,
-                                        overwrite_if_exists: bool?
-                                      },
-                                    ]
-                                  }?,
-                                  copy_value: {
-                                    entries: Array[
-                                      {
-                                        source: ::String,
-                                        target: ::String,
-                                        overwrite_if_exists: bool?
-                                      },
-                                    ]
-                                  }?,
-                                  csv: {
-                                    quote_character: ::String?,
-                                    delimiter: ::String?,
-                                    columns: Array[::String]?,
-                                    source: ::String?,
-                                    destination: ::String?
-                                  }?,
-                                  date_time_converter: {
-                                    source: ::String,
-                                    target: ::String,
-                                    target_format: ::String?,
-                                    match_patterns: Array[::String],
-                                    source_timezone: ::String?,
-                                    target_timezone: ::String?,
-                                    locale: ::String?
-                                  }?,
-                                  delete_keys: {
-                                    with_keys: Array[::String]
-                                  }?,
-                                  grok: {
-                                    source: ::String?,
-                                    match: ::String
-                                  }?,
-                                  list_to_map: {
-                                    source: ::String,
-                                    key: ::String,
-                                    value_key: ::String?,
-                                    target: ::String?,
-                                    flatten: bool?,
-                                    flattened_element: ("first" | "last")?
-                                  }?,
-                                  lower_case_string: {
-                                    with_keys: Array[::String]
-                                  }?,
-                                  move_keys: {
-                                    entries: Array[
-                                      {
-                                        source: ::String,
-                                        target: ::String,
-                                        overwrite_if_exists: bool?
-                                      },
-                                    ]
-                                  }?,
-                                  parse_cloudfront: {
-                                    source: ::String?
-                                  }?,
-                                  parse_json: {
-                                    source: ::String?,
-                                    destination: ::String?
-                                  }?,
-                                  parse_key_value: {
-                                    source: ::String?,
-                                    destination: ::String?,
-                                    field_delimiter: ::String?,
-                                    key_value_delimiter: ::String?,
-                                    key_prefix: ::String?,
-                                    non_match_value: ::String?,
-                                    overwrite_if_exists: bool?
-                                  }?,
-                                  parse_route_53: {
-                                    source: ::String?
-                                  }?,
-                                  parse_to_ocsf: {
-                                    source: ::String?,
-                                    event_source: ("CloudTrail" | "Route53Resolver" | "VPCFlow" | "EKSAudit" | "AWSWAF"),
-                                    ocsf_version: ("V1.1" | "V1.5"),
-                                    mapping_version: ::String?
-                                  }?,
-                                  parse_postgres: {
-                                    source: ::String?
-                                  }?,
-                                  parse_vpc: {
-                                    source: ::String?
-                                  }?,
-                                  parse_waf: {
-                                    source: ::String?
-                                  }?,
-                                  rename_keys: {
-                                    entries: Array[
-                                      {
-                                        key: ::String,
-                                        rename_to: ::String,
-                                        overwrite_if_exists: bool?
-                                      },
-                                    ]
-                                  }?,
-                                  split_string: {
-                                    entries: Array[
-                                      {
-                                        source: ::String,
-                                        delimiter: ::String
-                                      },
-                                    ]
-                                  }?,
-                                  substitute_string: {
-                                    entries: Array[
-                                      {
-                                        source: ::String,
-                                        from: ::String,
-                                        to: ::String
-                                      },
-                                    ]
-                                  }?,
-                                  trim_string: {
-                                    with_keys: Array[::String]
-                                  }?,
-                                  type_converter: {
-                                    entries: Array[
-                                      {
-                                        key: ::String,
-                                        type: ("boolean" | "integer" | "double" | "string")
-                                      },
-                                    ]
-                                  }?,
-                                  upper_case_string: {
-                                    with_keys: Array[::String]
-                                  }?
-                                },
+                                Params::processor
                               ],
                               log_event_messages: Array[::String]
                             ) -> _TestTransformerResponseSuccess
@@ -1785,14 +1506,7 @@ module Aws
                                     schedule_expression: ::String,
                                     ?timezone: ::String,
                                     ?start_time_offset: ::Integer,
-                                    ?destination_configuration: {
-                                      s3_configuration: {
-                                        destination_identifier: ::String,
-                                        role_arn: ::String,
-                                        owner_account_id: ::String?,
-                                        kms_key_id: ::String?
-                                      }
-                                    },
+                                    ?destination_configuration: Params::destination_configuration,
                                     ?schedule_start_time: ::Integer,
                                     ?schedule_end_time: ::Integer,
                                     execution_role_arn: ::String,

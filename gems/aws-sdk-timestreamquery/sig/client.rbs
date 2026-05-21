@@ -114,7 +114,7 @@ module Aws
                                           {
                                             name: ::String,
                                             dimension_value_type: ("VARCHAR")
-                                          },
+                                          }
                                         ],
                                         multi_measure_mappings: {
                                           target_multi_measure_name: ::String?,
@@ -123,7 +123,7 @@ module Aws
                                               source_column: ::String,
                                               target_multi_measure_attribute_name: ::String?,
                                               measure_value_type: ("BIGINT" | "BOOLEAN" | "DOUBLE" | "VARCHAR" | "TIMESTAMP")
-                                            },
+                                            }
                                           ]
                                         }?,
                                         mixed_measure_mappings: Array[
@@ -137,9 +137,9 @@ module Aws
                                                 source_column: ::String,
                                                 target_multi_measure_attribute_name: ::String?,
                                                 measure_value_type: ("BIGINT" | "BOOLEAN" | "DOUBLE" | "VARCHAR" | "TIMESTAMP")
-                                              },
+                                              }
                                             ]?
-                                          },
+                                          }
                                         ]?,
                                         measure_name_column: ::String?
                                       }
@@ -150,7 +150,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?kms_key_id: ::String,
                                     error_report_configuration: {
@@ -279,7 +279,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

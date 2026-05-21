@@ -1009,7 +1009,7 @@ module Aws::Evs
     end
 
     # Creates an ESX host and adds it to an Amazon EVS environment. Amazon
-    # EVS supports 4-16 hosts per environment.
+    # EVS supports 4-32 hosts per environment.
     #
     # This action can only be used after the Amazon EVS environment is
     # deployed.
@@ -2079,7 +2079,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.17.0'
+      context[:gem_version] = '1.19.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

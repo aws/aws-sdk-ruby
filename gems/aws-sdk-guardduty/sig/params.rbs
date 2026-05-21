@@ -1,0 +1,73 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module GuardDuty
+    module Params
+      type data_source_configurations = {
+      s3_logs: {
+        enable: bool
+      }?,
+      kubernetes: {
+        audit_logs: {
+          enable: bool
+        }
+      }?,
+      malware_protection: {
+        scan_ec2_instance_with_findings: {
+          ebs_volumes: bool?
+        }?
+      }?
+    }
+
+      type detector_feature_configuration = {
+      name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
+      status: ("ENABLED" | "DISABLED")?,
+      additional_configuration: Array[
+        {
+          name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
+          status: ("ENABLED" | "DISABLED")?
+        }
+      ]?
+    }
+
+      type finding_criteria = {
+      criterion: Hash[::String, Params::condition]?
+    }
+
+      type condition = {
+      eq: Array[::String]?,
+      neq: Array[::String]?,
+      gt: ::Integer?,
+      gte: ::Integer?,
+      lt: ::Integer?,
+      lte: ::Integer?,
+      equals: Array[::String]?,
+      not_equals: Array[::String]?,
+      greater_than: ::Integer?,
+      greater_than_or_equal: ::Integer?,
+      less_than: ::Integer?,
+      less_than_or_equal: ::Integer?,
+      matches: Array[::String]?,
+      not_matches: Array[::String]?
+    }
+
+      type coverage_filter_criteria = {
+      filter_criterion: Array[
+        {
+          criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
+          filter_condition: {
+            equals: Array[::String]?,
+            not_equals: Array[::String]?
+          }?
+        }
+      ]?
+    }
+
+    end
+  end
+end

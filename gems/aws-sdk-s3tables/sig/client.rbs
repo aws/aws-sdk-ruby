@@ -110,7 +110,7 @@ module Aws
                                     name: ::String,
                                     type: ::String,
                                     required: bool?
-                                  },
+                                  }
                                 ]
                               }?,
                               schema_v2: {
@@ -123,7 +123,7 @@ module Aws
                                     },
                                     required: bool,
                                     doc: ::String?
-                                  },
+                                  }
                                 ],
                                 schema_id: ::Integer?,
                                 identifier_field_ids: Array[::Integer]?
@@ -135,7 +135,7 @@ module Aws
                                     transform: ::String,
                                     name: ::String,
                                     field_id: ::Integer?
-                                  },
+                                  }
                                 ],
                                 spec_id: ::Integer?
                               }?,
@@ -147,7 +147,7 @@ module Aws
                                     transform: ::String,
                                     direction: ("asc" | "desc"),
                                     null_order: ("nulls-first" | "nulls-last")
-                                  },
+                                  }
                                 ]
                               }?,
                               properties: Hash[::String, ::String]?
@@ -596,9 +596,9 @@ module Aws
                                                 destinations: Array[
                                                   {
                                                     destination_table_bucket_arn: ::String
-                                                  },
+                                                  }
                                                 ]
-                                              },
+                                              }
                                             ]
                                           }
                                         ) -> _PutTableBucketReplicationResponseSuccess
@@ -672,9 +672,9 @@ module Aws
                                          destinations: Array[
                                            {
                                              destination_table_bucket_arn: ::String
-                                           },
+                                           }
                                          ]
-                                       },
+                                       }
                                      ]
                                    }
                                  ) -> _PutTableReplicationResponseSuccess

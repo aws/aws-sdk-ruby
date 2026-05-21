@@ -48,7 +48,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> DBParameterGroup
                 | (?Hash[Symbol, untyped]) -> DBParameterGroup
@@ -61,7 +61,7 @@ module Aws
                     {
                       key: ::String?,
                       value: ::String?
-                    },
+                    }
                   ]
                 ) -> DBParameterGroup
               | (?Hash[Symbol, untyped]) -> DBParameterGroup
@@ -86,7 +86,7 @@ module Aws
                         minimum_engine_version: ::String?,
                         apply_method: ("immediate" | "pending-reboot")?,
                         supported_engine_modes: Array[::String]?
-                      },
+                      }
                     ]
                   ) -> DBParameterGroup
                 | (?Hash[Symbol, untyped]) -> DBParameterGroup
@@ -107,7 +107,7 @@ module Aws
                        minimum_engine_version: ::String?,
                        apply_method: ("immediate" | "pending-reboot")?,
                        supported_engine_modes: Array[::String]?
-                     },
+                     }
                    ]
                  ) -> DBParameterGroup
                | (?Hash[Symbol, untyped]) -> DBParameterGroup
@@ -134,7 +134,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ]
                   ) -> Event::Collection
                 | (?Hash[Symbol, untyped]) -> Event::Collection
@@ -146,7 +146,7 @@ module Aws
                           {
                             name: ::String,
                             values: Array[::String]
-                          },
+                          }
                         ]
                       ) -> Parameter::Collection
                     | (?Hash[Symbol, untyped]) -> Parameter::Collection

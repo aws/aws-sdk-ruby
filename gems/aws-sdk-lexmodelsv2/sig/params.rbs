@@ -1,0 +1,480 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexModelsV2
+    module Params
+      type bot_alias_locale_settings = {
+      enabled: bool,
+      code_hook_specification: {
+        lambda_code_hook: {
+          lambda_arn: ::String,
+          code_hook_interface_version: ::String
+        }
+      }?
+    }
+
+      type conversation_log_settings = {
+      text_log_settings: Array[
+        Params::text_log_setting
+      ]?,
+      audio_log_settings: Array[
+        Params::audio_log_setting
+      ]?
+    }
+
+      type text_log_setting = {
+      enabled: bool,
+      destination: {
+        cloud_watch: {
+          cloud_watch_log_group_arn: ::String,
+          log_prefix: ::String
+        }
+      },
+      selective_logging_enabled: bool?
+    }
+
+      type audio_log_setting = {
+      enabled: bool,
+      destination: {
+        s3_bucket: {
+          kms_key_arn: ::String?,
+          s3_bucket_arn: ::String,
+          log_prefix: ::String
+        }
+      },
+      selective_logging_enabled: bool?
+    }
+
+      type speech_recognition_settings = {
+      speech_model_preference: ("Standard" | "Neural" | "Deepgram")?,
+      speech_model_config: {
+        deepgram_config: {
+          api_token_secret_arn: ::String,
+          model_id: ::String?
+        }?
+      }?
+    }
+
+      type bedrock_model_specification = {
+      model_arn: ::String,
+      guardrail: {
+        identifier: ::String,
+        version: ::String
+      }?,
+      trace_status: ("ENABLED" | "DISABLED")?,
+      custom_prompt: ::String?
+    }
+
+      type slot_resolution_improvement_specification = {
+      enabled: bool,
+      bedrock_model_specification: Params::bedrock_model_specification?
+    }
+
+      type nlu_improvement_specification = {
+      enabled: bool,
+      assisted_nlu_mode: ("Primary" | "Fallback")?,
+      intent_disambiguation_settings: {
+        enabled: bool,
+        max_disambiguation_intents: ::Integer?,
+        custom_disambiguation_message: ::String?
+      }?
+    }
+
+      type runtime_settings = {
+      slot_resolution_improvement: Params::slot_resolution_improvement_specification?,
+      nlu_improvement: Params::nlu_improvement_specification?
+    }
+
+      type descriptive_bot_builder_specification = {
+      enabled: bool,
+      bedrock_model_specification: Params::bedrock_model_specification?
+    }
+
+      type sample_utterance_generation_specification = {
+      enabled: bool,
+      bedrock_model_specification: Params::bedrock_model_specification?
+    }
+
+      type buildtime_settings = {
+      descriptive_bot_builder: Params::descriptive_bot_builder_specification?,
+      sample_utterance_generation: Params::sample_utterance_generation_specification?
+    }
+
+      type generative_ai_settings = {
+      runtime_settings: Params::runtime_settings?,
+      buildtime_settings: Params::buildtime_settings?
+    }
+
+      type response_specification = {
+      message_groups: Array[
+        Params::message_group
+      ],
+      allow_interrupt: bool?
+    }
+
+      type intent_override = {
+      name: ::String?,
+      slots: Hash[::String, Params::slot_value_override]?
+    }
+
+      type dialog_state = {
+      dialog_action: {
+        type: ("ElicitIntent" | "StartIntent" | "ElicitSlot" | "EvaluateConditional" | "InvokeDialogCodeHook" | "ConfirmIntent" | "FulfillIntent" | "CloseIntent" | "EndConversation"),
+        slot_to_elicit: ::String?,
+        suppress_next_message: bool?
+      }?,
+      intent: Params::intent_override?,
+      session_attributes: Hash[::String, ::String]?
+    }
+
+      type default_conditional_branch = {
+      next_step: Params::dialog_state?,
+      response: Params::response_specification?
+    }
+
+      type conditional_specification = {
+      active: bool,
+      conditional_branches: Array[
+        Params::conditional_branch
+      ],
+      default_branch: Params::default_conditional_branch
+    }
+
+      type post_fulfillment_status_specification = {
+      success_response: Params::response_specification?,
+      failure_response: Params::response_specification?,
+      timeout_response: Params::response_specification?,
+      success_next_step: Params::dialog_state?,
+      success_conditional: Params::conditional_specification?,
+      failure_next_step: Params::dialog_state?,
+      failure_conditional: Params::conditional_specification?,
+      timeout_next_step: Params::dialog_state?,
+      timeout_conditional: Params::conditional_specification?
+    }
+
+      type fulfillment_start_response_specification = {
+      delay_in_seconds: ::Integer,
+      message_groups: Array[
+        Params::message_group
+      ],
+      allow_interrupt: bool?
+    }
+
+      type fulfillment_update_response_specification = {
+      frequency_in_seconds: ::Integer,
+      message_groups: Array[
+        Params::message_group
+      ],
+      allow_interrupt: bool?
+    }
+
+      type fulfillment_updates_specification = {
+      active: bool,
+      start_response: Params::fulfillment_start_response_specification?,
+      update_response: Params::fulfillment_update_response_specification?,
+      timeout_in_seconds: ::Integer?
+    }
+
+      type fulfillment_code_hook_settings = {
+      enabled: bool,
+      post_fulfillment_status_specification: Params::post_fulfillment_status_specification?,
+      fulfillment_updates_specification: Params::fulfillment_updates_specification?,
+      active: bool?
+    }
+
+      type image_response_card = {
+      title: ::String,
+      subtitle: ::String?,
+      image_url: ::String?,
+      buttons: Array[
+        {
+          text: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type message = {
+      plain_text_message: {
+        value: ::String
+      }?,
+      custom_payload: {
+        value: ::String
+      }?,
+      ssml_message: {
+        value: ::String
+      }?,
+      image_response_card: Params::image_response_card?
+    }
+
+      type message_group = {
+      message: Params::message,
+      variations: Array[
+        Params::message
+      ]?
+    }
+
+      type slot_value_override = {
+      shape: ("Scalar" | "List")?,
+      value: {
+        interpreted_value: ::String?
+      }?,
+      values: Array[
+        {
+          shape: ("Scalar" | "List")?,
+          value: {
+            interpreted_value: ::String?
+          }?,
+          values: untyped?
+        }
+      ]?
+    }
+
+      type conditional_branch = {
+      name: ::String,
+      condition: {
+        expression_string: ::String
+      },
+      next_step: Params::dialog_state,
+      response: Params::response_specification?
+    }
+
+      type prompt_specification = {
+      message_groups: Array[
+        Params::message_group
+      ],
+      max_retries: ::Integer,
+      allow_interrupt: bool?,
+      message_selection_strategy: ("Random" | "Ordered")?,
+      prompt_attempts_specification: Hash[("Initial" | "Retry1" | "Retry2" | "Retry3" | "Retry4" | "Retry5"), Params::prompt_attempt_specification]?
+    }
+
+      type post_dialog_code_hook_invocation_specification = {
+      success_response: Params::response_specification?,
+      success_next_step: Params::dialog_state?,
+      success_conditional: Params::conditional_specification?,
+      failure_response: Params::response_specification?,
+      failure_next_step: Params::dialog_state?,
+      failure_conditional: Params::conditional_specification?,
+      timeout_response: Params::response_specification?,
+      timeout_next_step: Params::dialog_state?,
+      timeout_conditional: Params::conditional_specification?
+    }
+
+      type dialog_code_hook_invocation_setting = {
+      enable_code_hook_invocation: bool,
+      active: bool,
+      invocation_label: ::String?,
+      post_code_hook_specification: Params::post_dialog_code_hook_invocation_specification
+    }
+
+      type intent_confirmation_setting = {
+      prompt_specification: Params::prompt_specification,
+      declination_response: Params::response_specification?,
+      active: bool?,
+      confirmation_response: Params::response_specification?,
+      confirmation_next_step: Params::dialog_state?,
+      confirmation_conditional: Params::conditional_specification?,
+      declination_next_step: Params::dialog_state?,
+      declination_conditional: Params::conditional_specification?,
+      failure_response: Params::response_specification?,
+      failure_next_step: Params::dialog_state?,
+      failure_conditional: Params::conditional_specification?,
+      code_hook: Params::dialog_code_hook_invocation_setting?,
+      elicitation_code_hook: {
+        enable_code_hook_invocation: bool,
+        invocation_label: ::String?
+      }?
+    }
+
+      type audio_and_dtmf_input_specification = {
+      start_timeout_ms: ::Integer,
+      audio_specification: {
+        max_length_ms: ::Integer,
+        end_timeout_ms: ::Integer
+      }?,
+      dtmf_specification: {
+        max_length: ::Integer,
+        end_timeout_ms: ::Integer,
+        deletion_character: ::String,
+        end_character: ::String
+      }?
+    }
+
+      type prompt_attempt_specification = {
+      allow_interrupt: bool?,
+      allowed_input_types: {
+        allow_audio_input: bool,
+        allow_dtmf_input: bool
+      },
+      audio_and_dtmf_input_specification: Params::audio_and_dtmf_input_specification?,
+      text_input_specification: {
+        start_timeout_ms: ::Integer
+      }?
+    }
+
+      type intent_closing_setting = {
+      closing_response: Params::response_specification?,
+      active: bool?,
+      next_step: Params::dialog_state?,
+      conditional: Params::conditional_specification?
+    }
+
+      type initial_response_setting = {
+      initial_response: Params::response_specification?,
+      next_step: Params::dialog_state?,
+      conditional: Params::conditional_specification?,
+      code_hook: Params::dialog_code_hook_invocation_setting?
+    }
+
+      type opensearch_configuration = {
+      domain_endpoint: ::String,
+      index_name: ::String,
+      exact_response: bool?,
+      exact_response_fields: {
+        question_field: ::String,
+        answer_field: ::String
+      }?,
+      include_fields: Array[::String]?
+    }
+
+      type data_source_configuration = {
+      opensearch_configuration: Params::opensearch_configuration?,
+      kendra_configuration: {
+        kendra_index: ::String,
+        query_filter_string_enabled: bool?,
+        query_filter_string: ::String?,
+        exact_response: bool?
+      }?,
+      bedrock_knowledge_store_configuration: {
+        bedrock_knowledge_base_arn: ::String,
+        exact_response: bool?,
+        exact_response_fields: {
+          answer_field: ::String?
+        }?
+      }?
+    }
+
+      type qn_a_intent_configuration = {
+      data_source_configuration: Params::data_source_configuration?,
+      bedrock_model_configuration: Params::bedrock_model_specification?
+    }
+
+      type still_waiting_response_specification = {
+      message_groups: Array[
+        Params::message_group
+      ],
+      frequency_in_seconds: ::Integer,
+      timeout_in_seconds: ::Integer,
+      allow_interrupt: bool?
+    }
+
+      type wait_and_continue_specification = {
+      waiting_response: Params::response_specification,
+      continue_response: Params::response_specification,
+      still_waiting_response: Params::still_waiting_response_specification?,
+      active: bool?
+    }
+
+      type slot_capture_setting = {
+      capture_response: Params::response_specification?,
+      capture_next_step: Params::dialog_state?,
+      capture_conditional: Params::conditional_specification?,
+      failure_response: Params::response_specification?,
+      failure_next_step: Params::dialog_state?,
+      failure_conditional: Params::conditional_specification?,
+      code_hook: Params::dialog_code_hook_invocation_setting?,
+      elicitation_code_hook: {
+        enable_code_hook_invocation: bool,
+        invocation_label: ::String?
+      }?
+    }
+
+      type slot_value_elicitation_setting = {
+      default_value_specification: {
+        default_value_list: Array[
+          {
+            default_value: ::String
+          }
+        ]
+      }?,
+      slot_constraint: ("Required" | "Optional"),
+      prompt_specification: Params::prompt_specification?,
+      sample_utterances: Array[
+        {
+          utterance: ::String
+        }
+      ]?,
+      wait_and_continue_specification: Params::wait_and_continue_specification?,
+      slot_capture_setting: Params::slot_capture_setting?,
+      slot_resolution_setting: {
+        slot_resolution_strategy: ("EnhancedFallback" | "Default")
+      }?
+    }
+
+      type sub_slot_setting = {
+      expression: ::String?,
+      slot_specifications: Hash[::String, Params::specifications]?
+    }
+
+      type sub_slot_value_elicitation_setting = {
+      default_value_specification: {
+        default_value_list: Array[
+          {
+            default_value: ::String
+          }
+        ]
+      }?,
+      prompt_specification: Params::prompt_specification,
+      sample_utterances: Array[
+        {
+          utterance: ::String
+        }
+      ]?,
+      wait_and_continue_specification: Params::wait_and_continue_specification?
+    }
+
+      type specifications = {
+      slot_type_id: ::String,
+      value_elicitation_setting: Params::sub_slot_value_elicitation_setting
+    }
+
+      type slot_type_value = {
+      sample_value: {
+        value: ::String
+      }?,
+      synonyms: Array[
+        {
+          value: ::String
+        }
+      ]?
+    }
+
+      type slot_value_selection_setting = {
+      resolution_strategy: ("OriginalValue" | "TopResolution" | "Concatenation"),
+      regex_filter: {
+        pattern: ::String
+      }?,
+      advanced_recognition_setting: {
+        audio_recognition_strategy: ("UseSlotValuesAsCustomVocabulary")?
+      }?
+    }
+
+      type external_source_setting = {
+      grammar_slot_type_setting: {
+        source: {
+          s3_bucket_name: ::String,
+          s3_object_key: ::String,
+          kms_key_arn: ::String?
+        }?
+      }?
+    }
+
+    end
+  end
+end

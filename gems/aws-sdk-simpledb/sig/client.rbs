@@ -89,9 +89,9 @@ module Aws
                                              alternate_name_encoding: ::String?,
                                              value: ::String,
                                              alternate_value_encoding: ::String?
-                                           },
+                                           }
                                          ]?
-                                       },
+                                       }
                                      ]
                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -107,9 +107,9 @@ module Aws
                                           name: ::String,
                                           value: ::String,
                                           replace: bool?
-                                        },
+                                        }
                                       ]
-                                    },
+                                    }
                                   ]
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -130,7 +130,7 @@ module Aws
                                    alternate_name_encoding: ::String?,
                                    value: ::String,
                                    alternate_value_encoding: ::String?
-                                 },
+                                 }
                                ],
                                ?expected: {
                                  name: ::String?,
@@ -196,7 +196,7 @@ module Aws
                                 name: ::String,
                                 value: ::String,
                                 replace: bool?
-                              },
+                              }
                             ],
                             ?expected: {
                               name: ::String?,

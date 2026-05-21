@@ -935,7 +935,8 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
       attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
-      SENSITIVE: [:body]
+      attr_accessor request_metadata: ::String
+      SENSITIVE: [:body, :request_metadata]
     end
 
     class InvokeModelResponse
@@ -972,7 +973,8 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_version: ::String
       attr_accessor performance_config_latency: ("standard" | "optimized")
       attr_accessor service_tier: ("priority" | "default" | "flex" | "reserved")
-      SENSITIVE: [:body]
+      attr_accessor request_metadata: ::String
+      SENSITIVE: [:body, :request_metadata]
     end
 
     class InvokeModelWithResponseStreamResponse

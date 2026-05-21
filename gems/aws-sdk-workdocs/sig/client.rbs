@@ -110,7 +110,7 @@ module Aws
                                           id: ::String,
                                           type: ("USER" | "GROUP" | "INVITE" | "ANONYMOUS" | "ORGANIZATION"),
                                           role: ("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")
-                                        },
+                                        }
                                       ],
                                       ?notification_options: {
                                         send_email: bool?,
@@ -594,7 +594,7 @@ module Aws
                                   {
                                     id: ::String,
                                     roles: Array[("VIEWER" | "CONTRIBUTOR" | "OWNER" | "COOWNER")]?
-                                  },
+                                  }
                                 ]?,
                                 ancestor_ids: Array[::String]?,
                                 search_collection_types: Array[("OWNED" | "SHARED_WITH_ME")]?,
@@ -615,7 +615,7 @@ module Aws
                                 {
                                   field: ("RELEVANCE" | "NAME" | "SIZE" | "CREATED_TIMESTAMP" | "MODIFIED_TIMESTAMP")?,
                                   order: ("ASC" | "DESC")?
-                                },
+                                }
                               ],
                               ?limit: ::Integer,
                               ?marker: ::String

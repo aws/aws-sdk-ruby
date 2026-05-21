@@ -102,6 +102,10 @@ module Aws::DevOpsAgent
     #   Pagerduty service details.
     #   @return [Types::RegisteredPagerDutyDetails]
     #
+    # @!attribute [rw] mcpserversigv4
+    #   SigV4-authenticated MCP server-specific service details.
+    #   @return [Types::RegisteredMCPServerSigV4Details]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/AdditionalServiceDetails AWS API Documentation
     #
     class AdditionalServiceDetails < Struct.new(
@@ -117,6 +121,7 @@ module Aws::DevOpsAgent
       :azureidentity,
       :mcpservergrafana,
       :pagerduty,
+      :mcpserversigv4,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -134,6 +139,7 @@ module Aws::DevOpsAgent
       class Azureidentity < AdditionalServiceDetails; end
       class Mcpservergrafana < AdditionalServiceDetails; end
       class Pagerduty < AdditionalServiceDetails; end
+      class Mcpserversigv4 < AdditionalServiceDetails; end
       class Unknown < AdditionalServiceDetails; end
     end
 
@@ -1996,15 +2002,11 @@ module Aws::DevOpsAgent
     #   @return [String]
     #
     # @!attribute [rw] filter
-    #   Filter criteria to apply when listing tasks
-    #
-    #   Filtering restrictions:
-    #
-    #   * Each filter field list is limited to a single value
-    #   * Filtering by Priority and Status at the same time when not
-    #     filtering by Type is not permitted
-    #   * Timestamp filters (createdAfter, createdBefore) can be combined
-    #     with other filters when not sorting by priority
+    #   Filter criteria to apply when listing tasks Filtering restrictions:
+    #   - Each filter field list is limited to a single value - Filtering by
+    #   Priority and Status at the same time when not filtering by Type is
+    #   not permitted - Timestamp filters (createdAfter, createdBefore) can
+    #   be combined with other filters when not sorting by priority
     #   @return [Types::TaskFilter]
     #
     # @!attribute [rw] limit
@@ -2017,14 +2019,10 @@ module Aws::DevOpsAgent
     #   @return [String]
     #
     # @!attribute [rw] sort_field
-    #   Field to sort by
-    #
-    #       Sorting restrictions:
-    #
-    #   * Only sorting on createdAt is supported when using priority or
-    #     status filters alone.
-    #   * Sorting by priority is not supported when using Timestamp filters
-    #     (createdAfter, createdBefore)
+    #   Field to sort by Sorting restrictions: - Only sorting on createdAt
+    #   is supported when using priority or status filters alone. - Sorting
+    #   by priority is not supported when using Timestamp filters
+    #   (createdAfter, createdBefore)
     #   @return [String]
     #
     # @!attribute [rw] order
@@ -2825,6 +2823,80 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Authorization configuration for SigV4-authenticated MCP server.
+    #
+    # @!attribute [rw] region
+    #   AWS region for SigV4 signing. Use '*' for SigV4a multi-region
+    #   signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   AWS service name for SigV4 signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   IAM role ARN to assume for SigV4 signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_headers
+    #   Custom headers for the SigV4 MCP server.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerSigV4AuthorizationConfig AWS API Documentation
+    #
+    class MCPServerSigV4AuthorizationConfig < Struct.new(
+      :region,
+      :service,
+      :role_arn,
+      :custom_headers)
+      SENSITIVE = [:custom_headers]
+      include Aws::Structure
+    end
+
+    # Configuration for SigV4-authenticated MCP server integration.
+    #
+    # @!attribute [rw] tools
+    #   List of MCP tools available for the association.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerSigV4Configuration AWS API Documentation
+    #
+    class MCPServerSigV4Configuration < Struct.new(
+      :tools)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Complete service details for SigV4-authenticated MCP server
+    # integration.
+    #
+    # @!attribute [rw] name
+    #   MCP server name.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   MCP server endpoint URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Optional description for the MCP server.
+    #   @return [String]
+    #
+    # @!attribute [rw] authorization_config
+    #   MCP Server SigV4 authorization configuration.
+    #   @return [Types::MCPServerSigV4AuthorizationConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MCPServerSigV4ServiceDetails AWS API Documentation
+    #
+    class MCPServerSigV4ServiceDetails < Struct.new(
+      :name,
+      :endpoint,
+      :description,
+      :authorization_config)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Mixin for webhook update support.
     #
     # @api private
@@ -3179,6 +3251,14 @@ module Aws::DevOpsAgent
     #   Additional context for recommendation
     #   @return [String]
     #
+    # @!attribute [rw] rank_position
+    #   Position in ranked list (1 = highest priority)
+    #   @return [Integer]
+    #
+    # @!attribute [rw] ranked_at
+    #   Timestamp when the recommendation was last ranked
+    #   @return [Time]
+    #
     # @!attribute [rw] created_at
     #   Timestamp when this recommendation was created
     #   @return [Time]
@@ -3204,6 +3284,8 @@ module Aws::DevOpsAgent
       :priority,
       :goal_version,
       :additional_context,
+      :rank_position,
+      :ranked_at,
       :created_at,
       :updated_at,
       :version)
@@ -3520,6 +3602,51 @@ module Aws::DevOpsAgent
       :description,
       :api_key_header)
       SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # Details specific to a registered SigV4-authenticated MCP server.
+    #
+    # @!attribute [rw] name
+    #   MCP server name.
+    #   @return [String]
+    #
+    # @!attribute [rw] endpoint
+    #   MCP server endpoint URL.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   Optional description for the MCP server.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   AWS region for SigV4 signing. Use '*' for SigV4a multi-region
+    #   signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   AWS service name for SigV4 signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   IAM role ARN to assume for SigV4 signing.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_headers
+    #   Custom headers for the SigV4 MCP server.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/RegisteredMCPServerSigV4Details AWS API Documentation
+    #
+    class RegisteredMCPServerSigV4Details < Struct.new(
+      :name,
+      :endpoint,
+      :description,
+      :region,
+      :service,
+      :role_arn,
+      :custom_headers)
+      SENSITIVE = [:description, :custom_headers]
       include Aws::Structure
     end
 
@@ -4118,6 +4245,10 @@ module Aws::DevOpsAgent
     #   PagerDuty integration configuration
     #   @return [Types::PagerDutyConfiguration]
     #
+    # @!attribute [rw] mcpserversigv4
+    #   SigV4-authenticated MCP server integration configuration.
+    #   @return [Types::MCPServerSigV4Configuration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ServiceConfiguration AWS API Documentation
     #
     class ServiceConfiguration < Struct.new(
@@ -4137,6 +4268,7 @@ module Aws::DevOpsAgent
       :azuredevops,
       :mcpservergrafana,
       :pagerduty,
+      :mcpserversigv4,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4158,6 +4290,7 @@ module Aws::DevOpsAgent
       class Azuredevops < ServiceConfiguration; end
       class Mcpservergrafana < ServiceConfiguration; end
       class Pagerduty < ServiceConfiguration; end
+      class Mcpserversigv4 < ServiceConfiguration; end
       class Unknown < ServiceConfiguration; end
     end
 
@@ -4211,6 +4344,10 @@ module Aws::DevOpsAgent
     #   service details.
     #   @return [Types::RegisteredAzureIdentityDetails]
     #
+    # @!attribute [rw] mcpserversigv4
+    #   SigV4-authenticated MCP server-specific service details.
+    #   @return [Types::MCPServerSigV4ServiceDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/ServiceDetails AWS API Documentation
     #
     class ServiceDetails < Struct.new(
@@ -4225,6 +4362,7 @@ module Aws::DevOpsAgent
       :mcpservergrafana,
       :pagerduty,
       :azureidentity,
+      :mcpserversigv4,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -4241,6 +4379,7 @@ module Aws::DevOpsAgent
       class Mcpservergrafana < ServiceDetails; end
       class Pagerduty < ServiceDetails; end
       class Azureidentity < ServiceDetails; end
+      class Mcpserversigv4 < ServiceDetails; end
       class Unknown < ServiceDetails; end
     end
 
@@ -5119,9 +5258,7 @@ module Aws::DevOpsAgent
     #
     class ValidateAwsAssociationsOutput < Aws::EmptyStructure; end
 
-    # A standard error for input validation failures. This should be thrown
-    # by services when a member of the input structure falls outside of the
-    # modeled or documented constraints.
+    # The input fails to satisfy the constraints specified by the service.
     #
     # @!attribute [rw] message
     #   A summary of the validation failure.
@@ -5190,10 +5327,9 @@ module Aws::DevOpsAgent
     # Event stream for chat message responses using the content block model.
     # Events follow a lifecycle: responseCreated -&gt; responseInProgress
     # -&gt; (contentBlockStart/contentBlockDelta/contentBlockStop events)
-    # -&gt; responseCompleted\|responseFailed
-    #
-    # SendMessage always uses content block mode — legacy per-field events
-    # (outputTextDelta, functionCallArgumentsDelta, etc.) are not emitted.
+    # -&gt; responseCompleted\|responseFailed SendMessage always uses
+    # content block mode — legacy per-field events (outputTextDelta,
+    # functionCallArgumentsDelta, etc.) are not emitted.
     #
     # EventStream is an Enumerator of Events.
     #  #event_types #=> Array, returns all modeled event types in the stream

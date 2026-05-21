@@ -1,0 +1,44 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CleanRoomsML
+    module Params
+      type configured_audience_model_output_config = {
+      destination: {
+        s3_destination: {
+          s3_uri: ::String
+        }
+      },
+      role_arn: ::String
+    }
+
+      type logs_configuration_policy = {
+      allowed_account_ids: Array[::String],
+      filter_pattern: ::String?,
+      log_type: ("ALL" | "ERROR_SUMMARY")?,
+      log_redaction_configuration: {
+        entities_to_redact: Array[("ALL_PERSONALLY_IDENTIFIABLE_INFORMATION" | "NUMBERS" | "CUSTOM")],
+        custom_entity_config: {
+          custom_data_identifiers: Array[::String]
+        }?
+      }?
+    }
+
+      type compute_configuration = {
+      worker: {
+        type: ("CR.1X" | "CR.4X")?,
+        number: ::Integer?,
+        properties: {
+          spark: Hash[::String, ::String]?
+        }?
+      }?
+    }
+
+    end
+  end
+end

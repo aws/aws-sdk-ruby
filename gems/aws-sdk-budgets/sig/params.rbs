@@ -1,0 +1,182 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Budgets
+    module Params
+      type cost_types = {
+      include_tax: bool?,
+      include_subscription: bool?,
+      use_blended: bool?,
+      include_refund: bool?,
+      include_credit: bool?,
+      include_upfront: bool?,
+      include_recurring: bool?,
+      include_other_subscription: bool?,
+      include_support: bool?,
+      include_discount: bool?,
+      use_amortized: bool?
+    }
+
+      type calculated_spend = {
+      actual_spend: {
+        amount: ::String,
+        unit: ::String
+      },
+      forecasted_spend: {
+        amount: ::String,
+        unit: ::String
+      }?
+    }
+
+      type auto_adjust_data = {
+      auto_adjust_type: ("HISTORICAL" | "FORECAST"),
+      historical_options: {
+        budget_adjustment_period: ::Integer,
+        look_back_available_periods: ::Integer?
+      }?,
+      last_auto_adjust_time: ::Time?
+    }
+
+      type expression = {
+      or: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          not: untyped?,
+          dimensions: {
+            key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "INVOICING_ENTITY" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "RESERVATION_MODIFIED" | "TAG_KEY" | "COST_CATEGORY_NAME"),
+            values: Array[::String],
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?,
+          tags: {
+            key: ::String?,
+            values: Array[::String]?,
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?,
+          cost_categories: {
+            key: ::String?,
+            values: Array[::String]?,
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?
+        }
+      ]?,
+      and: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          not: untyped?,
+          dimensions: {
+            key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "INVOICING_ENTITY" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "RESERVATION_MODIFIED" | "TAG_KEY" | "COST_CATEGORY_NAME"),
+            values: Array[::String],
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?,
+          tags: {
+            key: ::String?,
+            values: Array[::String]?,
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?,
+          cost_categories: {
+            key: ::String?,
+            values: Array[::String]?,
+            match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+          }?
+        }
+      ]?,
+      not: {
+        or: Array[
+          untyped
+        ]?,
+        and: Array[
+          untyped
+        ]?,
+        not: untyped?,
+        dimensions: {
+          key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "INVOICING_ENTITY" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "RESERVATION_MODIFIED" | "TAG_KEY" | "COST_CATEGORY_NAME"),
+          values: Array[::String],
+          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+        }?,
+        tags: {
+          key: ::String?,
+          values: Array[::String]?,
+          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+        }?,
+        cost_categories: {
+          key: ::String?,
+          values: Array[::String]?,
+          match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+        }?
+      }?,
+      dimensions: {
+        key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "INVOICING_ENTITY" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "RESERVATION_MODIFIED" | "TAG_KEY" | "COST_CATEGORY_NAME"),
+        values: Array[::String],
+        match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+      }?,
+      tags: {
+        key: ::String?,
+        values: Array[::String]?,
+        match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+      }?,
+      cost_categories: {
+        key: ::String?,
+        values: Array[::String]?,
+        match_options: Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]?
+      }?
+    }
+
+      type budget = {
+      budget_name: ::String,
+      budget_limit: {
+        amount: ::String,
+        unit: ::String
+      }?,
+      planned_budget_limits: Hash[::String, {
+          amount: ::String,
+          unit: ::String
+        }]?,
+      cost_filters: Hash[::String, Array[::String]]?,
+      cost_types: Params::cost_types?,
+      time_unit: ("DAILY" | "MONTHLY" | "QUARTERLY" | "ANNUALLY" | "CUSTOM"),
+      time_period: {
+        start: ::Time?,
+        end: ::Time?
+      }?,
+      calculated_spend: Params::calculated_spend?,
+      budget_type: ("USAGE" | "COST" | "RI_UTILIZATION" | "RI_COVERAGE" | "SAVINGS_PLANS_UTILIZATION" | "SAVINGS_PLANS_COVERAGE"),
+      last_updated_time: ::Time?,
+      auto_adjust_data: Params::auto_adjust_data?,
+      filter_expression: Params::expression?,
+      metrics: Array[("BlendedCost" | "UnblendedCost" | "AmortizedCost" | "NetUnblendedCost" | "NetAmortizedCost" | "UsageQuantity" | "NormalizedUsageAmount" | "Hours")]?,
+      billing_view_arn: ::String?,
+      health_status: {
+        status: ("HEALTHY" | "UNHEALTHY")?,
+        status_reason: ("BILLING_VIEW_NO_ACCESS" | "BILLING_VIEW_UNHEALTHY" | "FILTER_INVALID" | "MULTI_YEAR_HISTORICAL_DATA_DISABLED")?,
+        last_updated_time: ::Time?
+      }?
+    }
+
+      type definition = {
+      iam_action_definition: {
+        policy_arn: ::String,
+        roles: Array[::String]?,
+        groups: Array[::String]?,
+        users: Array[::String]?
+      }?,
+      scp_action_definition: {
+        policy_id: ::String,
+        target_ids: Array[::String]
+      }?,
+      ssm_action_definition: {
+        action_sub_type: ("STOP_EC2_INSTANCES" | "STOP_RDS_INSTANCES"),
+        region: ::String,
+        instance_ids: Array[::String]
+      }?
+    }
+
+    end
+  end
+end

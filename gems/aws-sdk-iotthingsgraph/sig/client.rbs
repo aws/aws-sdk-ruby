@@ -114,7 +114,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     definition: {
                                       language: ("GRAPHQL"),
@@ -371,7 +371,7 @@ module Aws
                                {
                                  name: ("NAME" | "NAMESPACE" | "SEMANTIC_TYPE_PATH" | "REFERENCED_ENTITY_ID")?,
                                  value: Array[::String]?
-                               },
+                               }
                              ],
                              ?next_token: ::String,
                              ?max_results: ::Integer,
@@ -406,7 +406,7 @@ module Aws
                                      {
                                        name: ("DEVICE_MODEL_ID"),
                                        value: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?next_token: ::String,
                                    ?max_results: ::Integer
@@ -424,7 +424,7 @@ module Aws
                                        {
                                          name: ("SYSTEM_TEMPLATE_ID" | "STATUS" | "GREENGRASS_GROUP_NAME")?,
                                          value: Array[::String]?
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -442,7 +442,7 @@ module Aws
                                        {
                                          name: ("FLOW_TEMPLATE_ID"),
                                          value: Array[::String]
-                                       },
+                                       }
                                      ],
                                      ?next_token: ::String,
                                      ?max_results: ::Integer
@@ -473,7 +473,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

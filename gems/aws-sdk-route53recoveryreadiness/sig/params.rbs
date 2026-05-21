@@ -1,0 +1,38 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Route53RecoveryReadiness
+    module Params
+      type target_resource = {
+      nlb_resource: {
+        arn: ::String?
+      }?,
+      r53_resource: {
+        domain_name: ::String?,
+        record_set_id: ::String?
+      }?
+    }
+
+      type dns_target_resource = {
+      domain_name: ::String?,
+      hosted_zone_arn: ::String?,
+      record_set_id: ::String?,
+      record_type: ::String?,
+      target_resource: Params::target_resource?
+    }
+
+      type resource = {
+      component_id: ::String?,
+      dns_target_resource: Params::dns_target_resource?,
+      readiness_scopes: Array[::String]?,
+      resource_arn: ::String?
+    }
+
+    end
+  end
+end

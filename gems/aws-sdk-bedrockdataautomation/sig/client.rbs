@@ -109,7 +109,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateBlueprintResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBlueprintResponseSuccess
@@ -143,7 +143,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]
                                           ) -> _CreateDataAutomationLibraryResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataAutomationLibraryResponseSuccess
@@ -160,163 +160,22 @@ module Aws
                                             ?project_description: ::String,
                                             ?project_stage: ("DEVELOPMENT" | "LIVE"),
                                             ?project_type: ("ASYNC" | "SYNC"),
-                                            standard_output_configuration: {
-                                              document: {
-                                                extraction: {
-                                                  granularity: {
-                                                    types: Array[("DOCUMENT" | "PAGE" | "ELEMENT" | "WORD" | "LINE")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED")
-                                                }?,
-                                                output_format: {
-                                                  text_format: {
-                                                    types: Array[("PLAIN_TEXT" | "MARKDOWN" | "HTML" | "CSV")]?
-                                                  },
-                                                  additional_file_format: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?
-                                              }?,
-                                              image: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("IMAGE_SUMMARY" | "IAB")]?
-                                                }?
-                                              }?,
-                                              video: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]?
-                                                }?
-                                              }?,
-                                              audio: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?,
-                                                    type_configuration: {
-                                                      transcript: {
-                                                        speaker_labeling: {
-                                                          state: ("ENABLED" | "DISABLED")
-                                                        }?,
-                                                        channel_labeling: {
-                                                          state: ("ENABLED" | "DISABLED")
-                                                        }?
-                                                      }?
-                                                    }?
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]?
-                                                }?
-                                              }?
-                                            },
+                                            standard_output_configuration: Params::standard_output_configuration,
                                             ?custom_output_configuration: {
                                               blueprints: Array[
                                                 {
                                                   blueprint_arn: ::String,
                                                   blueprint_version: ::String?,
                                                   blueprint_stage: ("DEVELOPMENT" | "LIVE")?
-                                                },
+                                                }
                                               ]?
                                             },
-                                            ?override_configuration: {
-                                              document: {
-                                                splitter: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              image: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              video: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              audio: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                language_configuration: {
-                                                  input_languages: Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]?,
-                                                  generative_output_language: ("DEFAULT" | "EN")?,
-                                                  identify_multiple_languages: bool?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              modality_routing: {
-                                                jpeg: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                png: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                mp4: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                mov: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?
-                                              }?
-                                            },
+                                            ?override_configuration: Params::override_configuration,
                                             ?data_automation_library_configuration: {
                                               libraries: Array[
                                                 {
                                                   library_arn: ::String
-                                                },
+                                                }
                                               ]?
                                             },
                                             ?client_token: ::String,
@@ -328,7 +187,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ]
                                           ) -> _CreateDataAutomationProjectResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataAutomationProjectResponseSuccess
@@ -454,7 +313,7 @@ module Aws
                                                        s3_uri: ::String,
                                                        version: ::String?
                                                      }
-                                                   },
+                                                   }
                                                  ],
                                                  output_configuration: {
                                                    s3_object: {
@@ -471,7 +330,7 @@ module Aws
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeBlueprintOptimizationAsyncResponseSuccess
@@ -500,10 +359,10 @@ module Aws
                                                                       {
                                                                         text: ::String,
                                                                         display_as_text: ::String?
-                                                                      },
+                                                                      }
                                                                     ]
                                                                   }?
-                                                                },
+                                                                }
                                                               ]?,
                                                               delete_entities_info: {
                                                                 entity_ids: Array[::String]
@@ -524,7 +383,7 @@ module Aws
                                                             {
                                                               key: ::String,
                                                               value: ::String
-                                                            },
+                                                            }
                                                           ]
                                                         ) -> _InvokeDataAutomationLibraryIngestionJobResponseSuccess
                                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InvokeDataAutomationLibraryIngestionJobResponseSuccess
@@ -633,7 +492,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -688,163 +547,22 @@ module Aws
                                             project_arn: ::String,
                                             ?project_stage: ("DEVELOPMENT" | "LIVE"),
                                             ?project_description: ::String,
-                                            standard_output_configuration: {
-                                              document: {
-                                                extraction: {
-                                                  granularity: {
-                                                    types: Array[("DOCUMENT" | "PAGE" | "ELEMENT" | "WORD" | "LINE")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED")
-                                                }?,
-                                                output_format: {
-                                                  text_format: {
-                                                    types: Array[("PLAIN_TEXT" | "MARKDOWN" | "HTML" | "CSV")]?
-                                                  },
-                                                  additional_file_format: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?
-                                              }?,
-                                              image: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "LOGOS")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("IMAGE_SUMMARY" | "IAB")]?
-                                                }?
-                                              }?,
-                                              video: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("CONTENT_MODERATION" | "TEXT_DETECTION" | "TRANSCRIPT" | "LOGOS")]?
-                                                  },
-                                                  bounding_box: {
-                                                    state: ("ENABLED" | "DISABLED")
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("VIDEO_SUMMARY" | "IAB" | "CHAPTER_SUMMARY")]?
-                                                }?
-                                              }?,
-                                              audio: {
-                                                extraction: {
-                                                  category: {
-                                                    state: ("ENABLED" | "DISABLED"),
-                                                    types: Array[("AUDIO_CONTENT_MODERATION" | "TRANSCRIPT" | "TOPIC_CONTENT_MODERATION")]?,
-                                                    type_configuration: {
-                                                      transcript: {
-                                                        speaker_labeling: {
-                                                          state: ("ENABLED" | "DISABLED")
-                                                        }?,
-                                                        channel_labeling: {
-                                                          state: ("ENABLED" | "DISABLED")
-                                                        }?
-                                                      }?
-                                                    }?
-                                                  }
-                                                }?,
-                                                generative_field: {
-                                                  state: ("ENABLED" | "DISABLED"),
-                                                  types: Array[("AUDIO_SUMMARY" | "IAB" | "TOPIC_SUMMARY")]?
-                                                }?
-                                              }?
-                                            },
+                                            standard_output_configuration: Params::standard_output_configuration,
                                             ?custom_output_configuration: {
                                               blueprints: Array[
                                                 {
                                                   blueprint_arn: ::String,
                                                   blueprint_version: ::String?,
                                                   blueprint_stage: ("DEVELOPMENT" | "LIVE")?
-                                                },
+                                                }
                                               ]?
                                             },
-                                            ?override_configuration: {
-                                              document: {
-                                                splitter: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              image: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              video: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              audio: {
-                                                modality_processing: {
-                                                  state: ("ENABLED" | "DISABLED")?
-                                                }?,
-                                                language_configuration: {
-                                                  input_languages: Array[("EN" | "DE" | "ES" | "FR" | "IT" | "PT" | "JA" | "KO" | "CN" | "TW" | "HK")]?,
-                                                  generative_output_language: ("DEFAULT" | "EN")?,
-                                                  identify_multiple_languages: bool?
-                                                }?,
-                                                sensitive_data_configuration: {
-                                                  detection_mode: ("DETECTION" | "DETECTION_AND_REDACTION"),
-                                                  detection_scope: Array[("STANDARD" | "CUSTOM")]?,
-                                                  pii_entities_configuration: {
-                                                    pii_entity_types: Array[("ALL" | "ADDRESS" | "AGE" | "NAME" | "EMAIL" | "PHONE" | "USERNAME" | "PASSWORD" | "DRIVER_ID" | "LICENSE_PLATE" | "VEHICLE_IDENTIFICATION_NUMBER" | "CREDIT_DEBIT_CARD_CVV" | "CREDIT_DEBIT_CARD_EXPIRY" | "CREDIT_DEBIT_CARD_NUMBER" | "PIN" | "INTERNATIONAL_BANK_ACCOUNT_NUMBER" | "SWIFT_CODE" | "IP_ADDRESS" | "MAC_ADDRESS" | "URL" | "AWS_ACCESS_KEY" | "AWS_SECRET_KEY" | "US_BANK_ACCOUNT_NUMBER" | "US_BANK_ROUTING_NUMBER" | "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER" | "US_PASSPORT_NUMBER" | "US_SOCIAL_SECURITY_NUMBER" | "CA_HEALTH_NUMBER" | "CA_SOCIAL_INSURANCE_NUMBER" | "UK_NATIONAL_HEALTH_SERVICE_NUMBER" | "UK_NATIONAL_INSURANCE_NUMBER" | "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER")]?,
-                                                    redaction_mask_mode: ("PII" | "ENTITY_TYPE")?
-                                                  }?
-                                                }?
-                                              }?,
-                                              modality_routing: {
-                                                jpeg: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                png: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                mp4: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?,
-                                                mov: ("IMAGE" | "DOCUMENT" | "AUDIO" | "VIDEO")?
-                                              }?
-                                            },
+                                            ?override_configuration: Params::override_configuration,
                                             ?data_automation_library_configuration: {
                                               libraries: Array[
                                                 {
                                                   library_arn: ::String
-                                                },
+                                                }
                                               ]?
                                             },
                                             ?encryption_configuration: {

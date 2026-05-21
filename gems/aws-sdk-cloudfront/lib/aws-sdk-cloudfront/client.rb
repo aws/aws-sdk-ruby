@@ -884,7 +884,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -1674,7 +1674,7 @@ module Aws::CloudFront
     #       },
     #       connection_mode: "direct", # accepts direct, tenant-only
     #       viewer_mtls_config: {
-    #         mode: "required", # accepts required, optional
+    #         mode: "required", # accepts required, optional, passthrough
     #         trust_store_config: {
     #           trust_store_id: "string", # required
     #           advertise_trust_store_ca_names: false,
@@ -1891,7 +1891,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -2359,7 +2359,7 @@ module Aws::CloudFront
     #         },
     #         connection_mode: "direct", # accepts direct, tenant-only
     #         viewer_mtls_config: {
-    #           mode: "required", # accepts required, optional
+    #           mode: "required", # accepts required, optional, passthrough
     #           trust_store_config: {
     #             trust_store_id: "string", # required
     #             advertise_trust_store_ca_names: false,
@@ -2585,7 +2585,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -3832,6 +3832,10 @@ module Aws::CloudFront
     # @option params [required, Types::CaCertificatesBundleSource] :ca_certificates_bundle_source
     #   The CA certificates bundle source for the trust store.
     #
+    # @option params [Boolean] :use_client_certificate_ocsp_endpoint
+    #   A Boolean that determines whether to use the CA certificate's OCSP
+    #   endpoint to check certificate revocation status.
+    #
     # @option params [Types::Tags] :tags
     #   A complex type that contains zero or more `Tag` elements.
     #
@@ -3852,6 +3856,7 @@ module Aws::CloudFront
     #         version: "string",
     #       },
     #     },
+    #     use_client_certificate_ocsp_endpoint: false,
     #     tags: {
     #       items: [
     #         {
@@ -3871,6 +3876,7 @@ module Aws::CloudFront
     #   resp.trust_store.number_of_ca_certificates #=> Integer
     #   resp.trust_store.last_modified_time #=> Time
     #   resp.trust_store.reason #=> String
+    #   resp.trust_store.use_client_certificate_ocsp_endpoint #=> Boolean
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/CreateTrustStore AWS API Documentation
@@ -5684,7 +5690,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -5907,7 +5913,7 @@ module Aws::CloudFront
     #   resp.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -7113,6 +7119,7 @@ module Aws::CloudFront
     #   resp.trust_store.number_of_ca_certificates #=> Integer
     #   resp.trust_store.last_modified_time #=> Time
     #   resp.trust_store.reason #=> String
+    #   resp.trust_store.use_client_certificate_ocsp_endpoint #=> Boolean
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetTrustStore AWS API Documentation
@@ -7990,7 +7997,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -8217,7 +8224,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -8500,7 +8507,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -8726,7 +8733,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -9130,7 +9137,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -9415,7 +9422,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -9715,7 +9722,7 @@ module Aws::CloudFront
     #   resp.distribution_list.items[0].staging #=> Boolean
     #   resp.distribution_list.items[0].connection_mode #=> String, one of "direct", "tenant-only"
     #   resp.distribution_list.items[0].anycast_ip_list_id #=> String
-    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution_list.items[0].viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution_list.items[0].viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -11921,7 +11928,7 @@ module Aws::CloudFront
     #       },
     #       connection_mode: "direct", # accepts direct, tenant-only
     #       viewer_mtls_config: {
-    #         mode: "required", # accepts required, optional
+    #         mode: "required", # accepts required, optional, passthrough
     #         trust_store_config: {
     #           trust_store_id: "string", # required
     #           advertise_trust_store_ca_names: false,
@@ -12140,7 +12147,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -12539,7 +12546,7 @@ module Aws::CloudFront
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.default_value #=> String
     #   resp.distribution.distribution_config.tenant_config.parameter_definitions[0].definition.string_schema.required #=> Boolean
     #   resp.distribution.distribution_config.connection_mode #=> String, one of "direct", "tenant-only"
-    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional"
+    #   resp.distribution.distribution_config.viewer_mtls_config.mode #=> String, one of "required", "optional", "passthrough"
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.trust_store_id #=> String
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.advertise_trust_store_ca_names #=> Boolean
     #   resp.distribution.distribution_config.viewer_mtls_config.trust_store_config.ignore_certificate_expiry #=> Boolean
@@ -13588,8 +13595,12 @@ module Aws::CloudFront
     # @option params [required, String] :id
     #   The trust store ID.
     #
-    # @option params [required, Types::CaCertificatesBundleSource] :ca_certificates_bundle_source
+    # @option params [Types::CaCertificatesBundleSource] :ca_certificates_bundle_source
     #   The CA certificates bundle source.
+    #
+    # @option params [Boolean] :use_client_certificate_ocsp_endpoint
+    #   A Boolean that determines whether to use the CA certificate's OCSP
+    #   endpoint to check certificate revocation status.
     #
     # @option params [required, String] :if_match
     #   The current version (`ETag` value) of the trust store you are
@@ -13604,7 +13615,7 @@ module Aws::CloudFront
     #
     #   resp = client.update_trust_store({
     #     id: "ResourceId", # required
-    #     ca_certificates_bundle_source: { # required
+    #     ca_certificates_bundle_source: {
     #       ca_certificates_bundle_s3_location: {
     #         bucket: "string", # required
     #         key: "string", # required
@@ -13612,6 +13623,7 @@ module Aws::CloudFront
     #         version: "string",
     #       },
     #     },
+    #     use_client_certificate_ocsp_endpoint: false,
     #     if_match: "string", # required
     #   })
     #
@@ -13624,6 +13636,7 @@ module Aws::CloudFront
     #   resp.trust_store.number_of_ca_certificates #=> Integer
     #   resp.trust_store.last_modified_time #=> Time
     #   resp.trust_store.reason #=> String
+    #   resp.trust_store.use_client_certificate_ocsp_endpoint #=> Boolean
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateTrustStore AWS API Documentation
@@ -13804,7 +13817,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApiGatewayV2
+    module Params
+      type cors = {
+      allow_credentials: bool?,
+      allow_headers: Array[::String]?,
+      allow_methods: Array[::String]?,
+      allow_origins: Array[::String]?,
+      expose_headers: Array[::String]?,
+      max_age: ::Integer?
+    }
+
+      type domain_name_configuration = {
+      api_gateway_domain_name: ::String?,
+      certificate_arn: ::String?,
+      certificate_name: ::String?,
+      certificate_upload_date: ::Time?,
+      domain_name_status: ("AVAILABLE" | "UPDATING" | "PENDING_CERTIFICATE_REIMPORT" | "PENDING_OWNERSHIP_VERIFICATION")?,
+      domain_name_status_message: ::String?,
+      endpoint_type: ("REGIONAL" | "EDGE")?,
+      hosted_zone_id: ::String?,
+      ip_address_type: ("ipv4" | "dualstack")?,
+      security_policy: ("TLS_1_0" | "TLS_1_2")?,
+      ownership_verification_certificate_arn: ::String?
+    }
+
+      type authorization = {
+      cognito_config: {
+        app_client_id: ::String,
+        user_pool_arn: ::String,
+        user_pool_domain: ::String
+      }?,
+      none: {
+      }?
+    }
+
+      type endpoint_configuration_request = {
+      acm_managed: {
+        certificate_arn: ::String,
+        domain_name: ::String
+      }?,
+      none: {
+      }?
+    }
+
+      type custom_colors = {
+      accent_color: ::String,
+      background_color: ::String,
+      error_validation_color: ::String,
+      header_color: ::String,
+      navigation_color: ::String,
+      text_color: ::String
+    }
+
+      type portal_theme = {
+      custom_colors: Params::custom_colors,
+      logo_last_uploaded: ::Time?
+    }
+
+      type portal_content = {
+      description: ::String?,
+      display_name: ::String,
+      theme: Params::portal_theme
+    }
+
+      type endpoint_display_content = {
+      none: {
+      }?,
+      overrides: {
+        body: ::String?,
+        endpoint: ::String?,
+        operation_name: ::String?
+      }?
+    }
+
+      type routing_rule_condition = {
+      match_base_paths: {
+        any_of: Array[::String]
+      }?,
+      match_headers: {
+        any_of: Array[
+          {
+            header: ::String,
+            value_glob: ::String
+          }
+        ]
+      }?
+    }
+
+    end
+  end
+end

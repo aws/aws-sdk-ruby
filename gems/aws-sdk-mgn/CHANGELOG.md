@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.68.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.67.0 (2026-05-14)
+------------------
+
+* Feature - Introducing new option for security groups mapping - with MAP-DHCP the service translates security rules from your source environment with DHCP compatibility.
+
 1.66.0 (2026-05-13)
 ------------------
 

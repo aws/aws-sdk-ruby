@@ -4274,7 +4274,9 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] max_items
     #   The maximum number of log events to return in the response. The
-    #   maximum is 10,000 log events.
+    #   maximum is 10,000 log events per request. You can retrieve up to
+    #   100,000 log event results from a query by paginating with the
+    #   `nextToken`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsRequest AWS API Documentation
@@ -4337,7 +4339,9 @@ module Aws::CloudWatchLogs
     # @!attribute [rw] next_token
     #   If there are more log events remaining in the results, the response
     #   includes a `nextToken`. You can use this token in a subsequent
-    #   `GetQueryResults` request to get the next set of results.
+    #   `GetQueryResults` request to get the next set of results. You can
+    #   retrieve up to 100,000 log event results from a query by paginating
+    #   with this token.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/GetQueryResultsResponse AWS API Documentation
@@ -9625,6 +9629,8 @@ module Aws::CloudWatchLogs
     #   The maximum number of log events to return in the query. If the
     #   query string uses the `fields` command, only the specified fields
     #   and their values are returned. The default is 10,000.
+    #
+    #   The maximum value is 100,000.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/StartQueryRequest AWS API Documentation

@@ -196,7 +196,7 @@ module Aws
                                               {
                                                 snapshot_identifier: ::String,
                                                 snapshot_cluster_identifier: ::String?
-                                              },
+                                              }
                                             ]
                                           ) -> _BatchDeleteClusterSnapshotsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteClusterSnapshotsResponseSuccess
@@ -297,7 +297,7 @@ module Aws
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?kms_key_id: ::String,
                             ?enhanced_vpc_routing: bool,
@@ -332,7 +332,7 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 value: ::String?
-                                              },
+                                              }
                                             ]
                                           ) -> _CreateClusterParameterGroupResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterParameterGroupResponseSuccess
@@ -349,7 +349,7 @@ module Aws
                                              {
                                                key: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _CreateClusterSecurityGroupResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSecurityGroupResponseSuccess
@@ -367,7 +367,7 @@ module Aws
                                        {
                                          key: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateClusterSnapshotResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSnapshotResponseSuccess
@@ -385,7 +385,7 @@ module Aws
                                            {
                                              key: ::String?,
                                              value: ::String?
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateClusterSubnetGroupResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateClusterSubnetGroupResponseSuccess
@@ -445,7 +445,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateEventSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSubscriptionResponseSuccess
@@ -461,7 +461,7 @@ module Aws
                                              {
                                                key: ::String?,
                                                value: ::String?
-                                             },
+                                             }
                                            ]
                                          ) -> _CreateHsmClientCertificateResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmClientCertificateResponseSuccess
@@ -482,7 +482,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateHsmConfigurationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateHsmConfigurationResponseSuccess
@@ -511,7 +511,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?additional_encryption_context: Hash[::String, ::String],
                                 ?description: ::String
@@ -533,39 +533,17 @@ module Aws
                                                {
                                                  trusted_token_issuer_arn: ::String?,
                                                  authorized_audiences_list: Array[::String]?
-                                               },
+                                               }
                                              ],
                                              ?service_integrations: Array[
-                                               {
-                                                 lake_formation: Array[
-                                                   {
-                                                     lake_formation_query: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?,
-                                                 s3_access_grants: Array[
-                                                   {
-                                                     read_write_access: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?,
-                                                 redshift: Array[
-                                                   {
-                                                     connect: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?
-                                               },
+                                               Params::service_integrations_union
                                              ],
                                              ?application_type: ("None" | "Lakehouse"),
                                              ?tags: Array[
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ],
                                              ?sso_tag_keys: Array[::String]
                                            ) -> _CreateRedshiftIdcApplicationResponseSuccess
@@ -586,23 +564,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#create_scheduled_action-instance_method
       def create_scheduled_action: (
                                      scheduled_action_name: ::String,
-                                     target_action: {
-                                       resize_cluster: {
-                                         cluster_identifier: ::String,
-                                         cluster_type: ::String?,
-                                         node_type: ::String?,
-                                         number_of_nodes: ::Integer?,
-                                         classic: bool?,
-                                         reserved_node_id: ::String?,
-                                         target_reserved_node_offering_id: ::String?
-                                       }?,
-                                       pause_cluster: {
-                                         cluster_identifier: ::String
-                                       }?,
-                                       resume_cluster: {
-                                         cluster_identifier: ::String
-                                       }?
-                                     },
+                                     target_action: Params::scheduled_action_type,
                                      schedule: ::String,
                                      iam_role: ::String,
                                      ?scheduled_action_description: ::String,
@@ -624,7 +586,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateSnapshotCopyGrantResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotCopyGrantResponseSuccess
@@ -648,7 +610,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ],
                                       ?dry_run: bool,
                                       ?next_invocations: ::Integer
@@ -662,7 +624,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -690,7 +652,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateUsageLimitResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUsageLimitResponseSuccess
@@ -890,15 +852,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#deregister_namespace-instance_method
       def deregister_namespace: (
-                                  namespace_identifier: {
-                                    serverless_identifier: {
-                                      namespace_identifier: ::String,
-                                      workgroup_identifier: ::String
-                                    }?,
-                                    provisioned_identifier: {
-                                      cluster_identifier: ::String
-                                    }?
-                                  },
+                                  namespace_identifier: Params::namespace_identifier_union,
                                   consumer_identifiers: Array[::String]
                                 ) -> _DeregisterNamespaceResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterNamespaceResponseSuccess
@@ -1003,7 +957,7 @@ module Aws
                                           {
                                             attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
                                             sort_order: ("ASC" | "DESC")?
-                                          },
+                                          }
                                         ]
                                       ) -> _DescribeClusterSnapshotsResponseSuccess
                                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeClusterSnapshotsResponseSuccess
@@ -1263,7 +1217,7 @@ module Aws
                                      {
                                        name: ("integration-arn" | "source-arn" | "source-types" | "status"),
                                        values: Array[::String]
-                                     },
+                                     }
                                    ]
                                  ) -> _DescribeIntegrationsResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeIntegrationsResponseSuccess
@@ -1302,7 +1256,7 @@ module Aws
                                                      name: ("NodeType" | "NumberOfNodes" | "EstimatedDiskUtilizationPercent" | "Mode")?,
                                                      operator: ("eq" | "lt" | "gt" | "le" | "ge" | "in" | "between")?,
                                                      values: Array[::String]?
-                                                   },
+                                                   }
                                                  ],
                                                  ?marker: ::String,
                                                  ?max_records: ::Integer
@@ -1430,7 +1384,7 @@ module Aws
                                           {
                                             name: ("cluster-identifier" | "iam-role"),
                                             values: Array[::String]
-                                          },
+                                          }
                                         ],
                                         ?marker: ::String,
                                         ?max_records: ::Integer
@@ -1821,17 +1775,7 @@ module Aws
       def modify_cluster_parameter_group: (
                                             parameter_group_name: ::String,
                                             parameters: Array[
-                                              {
-                                                parameter_name: ::String?,
-                                                parameter_value: ::String?,
-                                                description: ::String?,
-                                                source: ::String?,
-                                                data_type: ::String?,
-                                                allowed_values: ::String?,
-                                                apply_type: ("static" | "dynamic")?,
-                                                is_modifiable: bool?,
-                                                minimum_engine_version: ::String?
-                                              },
+                                              Params::parameter
                                             ]
                                           ) -> _ModifyClusterParameterGroupResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyClusterParameterGroupResponseSuccess
@@ -1973,32 +1917,10 @@ module Aws
                                                {
                                                  trusted_token_issuer_arn: ::String?,
                                                  authorized_audiences_list: Array[::String]?
-                                               },
+                                               }
                                              ],
                                              ?service_integrations: Array[
-                                               {
-                                                 lake_formation: Array[
-                                                   {
-                                                     lake_formation_query: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?,
-                                                 s3_access_grants: Array[
-                                                   {
-                                                     read_write_access: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?,
-                                                 redshift: Array[
-                                                   {
-                                                     connect: {
-                                                       authorization: ("Enabled" | "Disabled")
-                                                     }?
-                                                   },
-                                                 ]?
-                                               },
+                                               Params::service_integrations_union
                                              ]
                                            ) -> _ModifyRedshiftIdcApplicationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyRedshiftIdcApplicationResponseSuccess
@@ -2018,23 +1940,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#modify_scheduled_action-instance_method
       def modify_scheduled_action: (
                                      scheduled_action_name: ::String,
-                                     ?target_action: {
-                                       resize_cluster: {
-                                         cluster_identifier: ::String,
-                                         cluster_type: ::String?,
-                                         node_type: ::String?,
-                                         number_of_nodes: ::Integer?,
-                                         classic: bool?,
-                                         reserved_node_id: ::String?,
-                                         target_reserved_node_offering_id: ::String?
-                                       }?,
-                                       pause_cluster: {
-                                         cluster_identifier: ::String
-                                       }?,
-                                       resume_cluster: {
-                                         cluster_identifier: ::String
-                                       }?
-                                     },
+                                     ?target_action: Params::scheduled_action_type,
                                      ?schedule: ::String,
                                      ?iam_role: ::String,
                                      ?scheduled_action_description: ::String,
@@ -2140,15 +2046,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Redshift/Client.html#register_namespace-instance_method
       def register_namespace: (
-                                namespace_identifier: {
-                                  serverless_identifier: {
-                                    namespace_identifier: ::String,
-                                    workgroup_identifier: ::String
-                                  }?,
-                                  provisioned_identifier: {
-                                    cluster_identifier: ::String
-                                  }?
-                                },
+                                namespace_identifier: Params::namespace_identifier_union,
                                 consumer_identifiers: Array[::String]
                               ) -> _RegisterNamespaceResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterNamespaceResponseSuccess
@@ -2178,17 +2076,7 @@ module Aws
                                            parameter_group_name: ::String,
                                            ?reset_all_parameters: bool,
                                            ?parameters: Array[
-                                             {
-                                               parameter_name: ::String?,
-                                               parameter_value: ::String?,
-                                               description: ::String?,
-                                               source: ::String?,
-                                               data_type: ::String?,
-                                               allowed_values: ::String?,
-                                               apply_type: ("static" | "dynamic")?,
-                                               is_modifiable: bool?,
-                                               minimum_engine_version: ::String?
-                                             },
+                                             Params::parameter
                                            ]
                                          ) -> _ResetClusterParameterGroupResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetClusterParameterGroupResponseSuccess
@@ -2400,7 +2288,7 @@ module Aws
                       {
                         attribute: ("SOURCE_TYPE" | "TOTAL_SIZE" | "CREATE_TIME"),
                         sort_order: ("ASC" | "DESC")?
-                      },
+                      }
                     ]
                   ) -> Client::_DescribeClusterSnapshotsResponseSuccess
                     | (:snapshot_available waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeClusterSnapshotsResponseSuccess

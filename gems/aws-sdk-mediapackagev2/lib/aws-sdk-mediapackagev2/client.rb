@@ -1384,6 +1384,9 @@ module Aws::MediaPackageV2
     #         }, 
     #       }, 
     #       {
+    #         availability_start_time_configuration: {
+    #           fixed_availability_start_time: Time.parse("2026-04-17T23:00:00.00Z"), 
+    #         }, 
     #         base_urls: [
     #           {
     #             dvb_priority: 2, 
@@ -1589,6 +1592,9 @@ module Aws::MediaPackageV2
     #         }, 
     #       }, 
     #       {
+    #         availability_start_time_configuration: {
+    #           fixed_availability_start_time: Time.parse("2026-04-17T23:00:00.00Z"), 
+    #         }, 
     #         base_urls: [
     #           {
     #             dvb_priority: 2, 
@@ -2009,6 +2015,9 @@ module Aws::MediaPackageV2
     #           },
     #         },
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
+    #         availability_start_time_configuration: {
+    #           fixed_availability_start_time: Time.now,
+    #         },
     #       },
     #     ],
     #     mss_manifests: [
@@ -2148,6 +2157,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
+    #   resp.dash_manifests[0].availability_start_time_configuration.fixed_availability_start_time #=> Time
     #   resp.mss_manifests #=> Array
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
@@ -3110,6 +3120,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
+    #   resp.dash_manifests[0].availability_start_time_configuration.fixed_availability_start_time #=> Time
     #   resp.mss_manifests #=> Array
     #   resp.mss_manifests[0].manifest_name #=> String
     #   resp.mss_manifests[0].url #=> String
@@ -5125,6 +5136,9 @@ module Aws::MediaPackageV2
     #           },
     #         },
     #         uri_path_type: "LEAF", # accepts LEAF, ROOT
+    #         availability_start_time_configuration: {
+    #           fixed_availability_start_time: Time.now,
+    #         },
     #       },
     #     ],
     #     mss_manifests: [
@@ -5279,6 +5293,7 @@ module Aws::MediaPackageV2
     #   resp.dash_manifests[0].compactness #=> String, one of "STANDARD", "NONE"
     #   resp.dash_manifests[0].subtitle_configuration.ttml_configuration.ttml_profile #=> String, one of "IMSC_1", "EBU_TT_D_101"
     #   resp.dash_manifests[0].uri_path_type #=> String, one of "LEAF", "ROOT"
+    #   resp.dash_manifests[0].availability_start_time_configuration.fixed_availability_start_time #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediapackagev2-2022-12-25/UpdateOriginEndpoint AWS API Documentation
     #
@@ -5307,7 +5322,7 @@ module Aws::MediaPackageV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediapackagev2'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

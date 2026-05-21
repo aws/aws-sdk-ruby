@@ -1,0 +1,75 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LocationService
+    module Params
+      type device_position_update = {
+      device_id: ::String,
+      sample_time: ::Time,
+      position: Array[::Float],
+      accuracy: {
+        horizontal: ::Float
+      }?,
+      position_properties: Hash[::String, ::String]?
+    }
+
+      type geofence_geometry = {
+      polygon: Array[
+        Array[
+          Array[::Float]
+        ]
+      ]?,
+      circle: {
+        center: Array[::Float],
+        radius: ::Float
+      }?,
+      geobuf: ::String?,
+      multi_polygon: Array[
+        Array[
+          Array[
+            Array[::Float]
+          ]
+        ]
+      ]?
+    }
+
+      type calculate_route_truck_mode_options = {
+      avoid_ferries: bool?,
+      avoid_tolls: bool?,
+      dimensions: {
+        length: ::Float?,
+        height: ::Float?,
+        width: ::Float?,
+        unit: ("Meters" | "Feet")?
+      }?,
+      weight: {
+        total: ::Float?,
+        unit: ("Kilograms" | "Pounds")?
+      }?
+    }
+
+      type api_key_restrictions = {
+      allow_actions: Array[::String],
+      allow_resources: Array[::String],
+      allow_referers: Array[::String]?,
+      allow_android_apps: Array[
+        {
+          package: ::String,
+          certificate_fingerprint: ::String
+        }
+      ]?,
+      allow_apple_apps: Array[
+        {
+          bundle_id: ::String
+        }
+      ]?
+    }
+
+    end
+  end
+end

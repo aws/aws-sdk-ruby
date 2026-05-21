@@ -132,7 +132,7 @@ module Aws
                              value: ::String?,
                              type: ::String?,
                              primary: bool?
-                           },
+                           }
                          ],
                          ?addresses: Array[
                            {
@@ -144,14 +144,14 @@ module Aws
                              formatted: ::String?,
                              type: ::String?,
                              primary: bool?
-                           },
+                           }
                          ],
                          ?phone_numbers: Array[
                            {
                              value: ::String?,
                              type: ::String?,
                              primary: bool?
-                           },
+                           }
                          ],
                          ?user_type: ::String,
                          ?title: ::String,
@@ -164,7 +164,7 @@ module Aws
                              type: ::String?,
                              display: ::String?,
                              primary: bool?
-                           },
+                           }
                          ],
                          ?website: ::String,
                          ?birthdate: ::String,
@@ -173,7 +173,7 @@ module Aws
                              value: ::String?,
                              type: ::String?,
                              primary: bool?
-                           },
+                           }
                          ],
                          ?extensions: Hash[::String, untyped]
                        ) -> _CreateUserResponseSuccess
@@ -291,16 +291,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#get_group_id-instance_method
       def get_group_id: (
                           identity_store_id: ::String,
-                          alternate_identifier: {
-                            external_id: {
-                              issuer: ::String,
-                              id: ::String
-                            }?,
-                            unique_attribute: {
-                              attribute_path: ::String,
-                              attribute_value: untyped
-                            }?
-                          }
+                          alternate_identifier: Params::alternate_identifier
                         ) -> _GetGroupIdResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGroupIdResponseSuccess
 
@@ -327,16 +318,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IdentityStore/Client.html#get_user_id-instance_method
       def get_user_id: (
                          identity_store_id: ::String,
-                         alternate_identifier: {
-                           external_id: {
-                             issuer: ::String,
-                             id: ::String
-                           }?,
-                           unique_attribute: {
-                             attribute_path: ::String,
-                             attribute_value: untyped
-                           }?
-                         }
+                         alternate_identifier: Params::alternate_identifier
                        ) -> _GetUserIdResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetUserIdResponseSuccess
 
@@ -398,7 +380,7 @@ module Aws
                            {
                              attribute_path: ::String,
                              attribute_value: ::String
-                           },
+                           }
                          ]
                        ) -> _ListGroupsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGroupsResponseSuccess
@@ -418,7 +400,7 @@ module Aws
                           {
                             attribute_path: ::String,
                             attribute_value: ::String
-                          },
+                          }
                         ]
                       ) -> _ListUsersResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListUsersResponseSuccess
@@ -434,7 +416,7 @@ module Aws
                             {
                               attribute_path: ::String,
                               attribute_value: untyped?
-                            },
+                            }
                           ]
                         ) -> _UpdateGroupResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupResponseSuccess
@@ -450,7 +432,7 @@ module Aws
                            {
                              attribute_path: ::String,
                              attribute_value: untyped?
-                           },
+                           }
                          ]
                        ) -> _UpdateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateUserResponseSuccess

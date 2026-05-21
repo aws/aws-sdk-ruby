@@ -92,14 +92,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OAM/Client.html#create_link-instance_method
       def create_link: (
                          label_template: ::String,
-                         ?link_configuration: {
-                           log_group_configuration: {
-                             filter: ::String
-                           }?,
-                           metric_configuration: {
-                             filter: ::String
-                           }?
-                         },
+                         ?link_configuration: Params::link_configuration,
                          resource_types: Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor" | "AWS::ApplicationSignals::Service" | "AWS::ApplicationSignals::ServiceLevelObjective")],
                          sink_identifier: ::String,
                          ?tags: Hash[::String, ::String]
@@ -277,14 +270,7 @@ module Aws
       def update_link: (
                          identifier: ::String,
                          ?include_tags: bool,
-                         ?link_configuration: {
-                           log_group_configuration: {
-                             filter: ::String
-                           }?,
-                           metric_configuration: {
-                             filter: ::String
-                           }?
-                         },
+                         ?link_configuration: Params::link_configuration,
                          resource_types: Array[("AWS::CloudWatch::Metric" | "AWS::Logs::LogGroup" | "AWS::XRay::Trace" | "AWS::ApplicationInsights::Application" | "AWS::InternetMonitor::Monitor" | "AWS::ApplicationSignals::Service" | "AWS::ApplicationSignals::ServiceLevelObjective")]
                        ) -> _UpdateLinkResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLinkResponseSuccess

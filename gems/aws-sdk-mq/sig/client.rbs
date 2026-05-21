@@ -101,19 +101,7 @@ module Aws
                            engine_type: ("ACTIVEMQ" | "RABBITMQ"),
                            ?engine_version: ::String,
                            host_instance_type: ::String,
-                           ?ldap_server_metadata: {
-                             hosts: Array[::String],
-                             role_base: ::String,
-                             role_name: ::String?,
-                             role_search_matching: ::String,
-                             role_search_subtree: bool?,
-                             service_account_password: ::String,
-                             service_account_username: ::String,
-                             user_base: ::String,
-                             user_role_name: ::String?,
-                             user_search_matching: ::String,
-                             user_search_subtree: bool?
-                           },
+                           ?ldap_server_metadata: Params::ldap_server_metadata_input,
                            ?logs: {
                              audit: bool?,
                              general: bool?
@@ -135,7 +123,7 @@ module Aws
                                password: ::String,
                                username: ::String,
                                replication_user: bool?
-                             },
+                             }
                            ],
                            ?data_replication_mode: ("NONE" | "CRDR"),
                            ?data_replication_primary_broker_arn: ::String
@@ -452,19 +440,7 @@ module Aws
                            },
                            ?engine_version: ::String,
                            ?host_instance_type: ::String,
-                           ?ldap_server_metadata: {
-                             hosts: Array[::String],
-                             role_base: ::String,
-                             role_name: ::String?,
-                             role_search_matching: ::String,
-                             role_search_subtree: bool?,
-                             service_account_password: ::String,
-                             service_account_username: ::String,
-                             user_base: ::String,
-                             user_role_name: ::String?,
-                             user_search_matching: ::String,
-                             user_search_subtree: bool?
-                           },
+                           ?ldap_server_metadata: Params::ldap_server_metadata_input,
                            ?logs: {
                              audit: bool?,
                              general: bool?

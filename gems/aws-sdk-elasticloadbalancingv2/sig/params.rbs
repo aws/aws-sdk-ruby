@@ -1,0 +1,142 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElasticLoadBalancingV2
+    module Params
+      type authenticate_oidc_action_config = {
+      issuer: ::String,
+      authorization_endpoint: ::String,
+      token_endpoint: ::String,
+      user_info_endpoint: ::String,
+      client_id: ::String,
+      client_secret: ::String?,
+      session_cookie_name: ::String?,
+      scope: ::String?,
+      session_timeout: ::Integer?,
+      authentication_request_extra_params: Hash[::String, ::String]?,
+      on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
+      use_existing_client_secret: bool?
+    }
+
+      type authenticate_cognito_action_config = {
+      user_pool_arn: ::String,
+      user_pool_client_id: ::String,
+      user_pool_domain: ::String,
+      session_cookie_name: ::String?,
+      scope: ::String?,
+      session_timeout: ::Integer?,
+      authentication_request_extra_params: Hash[::String, ::String]?,
+      on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
+    }
+
+      type redirect_action_config = {
+      protocol: ::String?,
+      port: ::String?,
+      host: ::String?,
+      path: ::String?,
+      query: ::String?,
+      status_code: ("HTTP_301" | "HTTP_302")
+    }
+
+      type forward_action_config = {
+      target_groups: Array[
+        {
+          target_group_arn: ::String?,
+          weight: ::Integer?
+        }
+      ]?,
+      target_group_stickiness_config: {
+        enabled: bool?,
+        duration_seconds: ::Integer?
+      }?
+    }
+
+      type jwt_validation_action_config = {
+      jwks_endpoint: ::String,
+      issuer: ::String,
+      additional_claims: Array[
+        {
+          format: ("single-string" | "string-array" | "space-separated-values"),
+          name: ::String,
+          values: Array[::String]
+        }
+      ]?
+    }
+
+      type action = {
+      type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
+      target_group_arn: ::String?,
+      authenticate_oidc_config: Params::authenticate_oidc_action_config?,
+      authenticate_cognito_config: Params::authenticate_cognito_action_config?,
+      order: ::Integer?,
+      redirect_config: Params::redirect_action_config?,
+      fixed_response_config: {
+        message_body: ::String?,
+        status_code: ::String,
+        content_type: ::String?
+      }?,
+      forward_config: Params::forward_action_config?,
+      jwt_validation_config: Params::jwt_validation_action_config?
+    }
+
+      type rule_condition = {
+      field: ::String?,
+      values: Array[::String]?,
+      host_header_config: {
+        values: Array[::String]?,
+        regex_values: Array[::String]?
+      }?,
+      path_pattern_config: {
+        values: Array[::String]?,
+        regex_values: Array[::String]?
+      }?,
+      http_header_config: {
+        http_header_name: ::String?,
+        values: Array[::String]?,
+        regex_values: Array[::String]?
+      }?,
+      query_string_config: {
+        values: Array[
+          {
+            key: ::String?,
+            value: ::String?
+          }
+        ]?
+      }?,
+      http_request_method_config: {
+        values: Array[::String]?
+      }?,
+      source_ip_config: {
+        values: Array[::String]?
+      }?,
+      regex_values: Array[::String]?
+    }
+
+      type rule_transform = {
+      type: ("host-header-rewrite" | "url-rewrite"),
+      host_header_rewrite_config: {
+        rewrites: Array[
+          {
+            regex: ::String,
+            replace: ::String
+          }
+        ]?
+      }?,
+      url_rewrite_config: {
+        rewrites: Array[
+          {
+            regex: ::String,
+            replace: ::String
+          }
+        ]?
+      }?
+    }
+
+    end
+  end
+end

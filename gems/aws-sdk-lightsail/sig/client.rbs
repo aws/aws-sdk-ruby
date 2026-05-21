@@ -152,14 +152,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#close_instance_public_ports-instance_method
       def close_instance_public_ports: (
-                                         port_info: {
-                                           from_port: ::Integer?,
-                                           to_port: ::Integer?,
-                                           protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
-                                           cidrs: Array[::String]?,
-                                           ipv6_cidrs: Array[::String]?,
-                                           cidr_list_aliases: Array[::String]?
-                                         },
+                                         port_info: Params::port_info,
                                          instance_name: ::String
                                        ) -> _CloseInstancePublicPortsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CloseInstancePublicPortsResponseSuccess
@@ -192,7 +185,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ],
                            ?enable_object_versioning: bool
                          ) -> _CreateBucketResponseSuccess
@@ -223,7 +216,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateCertificateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCertificateResponseSuccess
@@ -241,7 +234,7 @@ module Aws
                                               port_info_source: ("DEFAULT" | "INSTANCE" | "NONE" | "CLOSED"),
                                               user_data: ::String?,
                                               availability_zone: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateCloudFormationStackResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCloudFormationStackResponseSuccess
@@ -258,7 +251,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateContactMethodResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactMethodResponseSuccess
@@ -276,7 +269,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ],
                                       ?public_domain_names: Hash[::String, Array[::String]],
                                       ?deployment: {
@@ -286,18 +279,7 @@ module Aws
                                             environment: Hash[::String, ::String]?,
                                             ports: Hash[::String, ("HTTP" | "HTTPS" | "TCP" | "UDP")]?
                                           }]?,
-                                        public_endpoint: {
-                                          container_name: ::String,
-                                          container_port: ::Integer,
-                                          health_check: {
-                                            healthy_threshold: ::Integer?,
-                                            unhealthy_threshold: ::Integer?,
-                                            timeout_seconds: ::Integer?,
-                                            interval_seconds: ::Integer?,
-                                            path: ::String?,
-                                            success_codes: ::String?
-                                          }?
-                                        }?
+                                        public_endpoint: Params::endpoint_request?
                                       },
                                       ?private_registry_access: {
                                         ecr_image_puller_role: {
@@ -320,18 +302,7 @@ module Aws
                                                      environment: Hash[::String, ::String]?,
                                                      ports: Hash[::String, ("HTTP" | "HTTPS" | "TCP" | "UDP")]?
                                                    }],
-                                                 ?public_endpoint: {
-                                                   container_name: ::String,
-                                                   container_port: ::Integer,
-                                                   health_check: {
-                                                     healthy_threshold: ::Integer?,
-                                                     unhealthy_threshold: ::Integer?,
-                                                     timeout_seconds: ::Integer?,
-                                                     interval_seconds: ::Integer?,
-                                                     path: ::String?,
-                                                     success_codes: ::String?
-                                                   }?
-                                                 }
+                                                 ?public_endpoint: Params::endpoint_request
                                                ) -> _CreateContainerServiceDeploymentResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContainerServiceDeploymentResponseSuccess
 
@@ -357,19 +328,10 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ],
                          ?add_ons: Array[
-                           {
-                             add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
-                             auto_snapshot_add_on_request: {
-                               snapshot_time_of_day: ::String?
-                             }?,
-                             stop_instance_on_idle_request: {
-                               threshold: ::String?,
-                               duration: ::String?
-                             }?
-                           },
+                           Params::add_on_request
                          ]
                        ) -> _CreateDiskResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiskResponseSuccess
@@ -388,19 +350,10 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ],
                                        ?add_ons: Array[
-                                         {
-                                           add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
-                                           auto_snapshot_add_on_request: {
-                                             snapshot_time_of_day: ::String?
-                                           }?,
-                                           stop_instance_on_idle_request: {
-                                             threshold: ::String?,
-                                             duration: ::String?
-                                           }?
-                                         },
+                                         Params::add_on_request
                                        ],
                                        ?source_disk_name: ::String,
                                        ?restore_date: ::String,
@@ -421,7 +374,7 @@ module Aws
                                     {
                                       key: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateDiskSnapshotResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDiskSnapshotResponseSuccess
@@ -444,30 +397,12 @@ module Aws
                                  default_cache_behavior: {
                                    behavior: ("dont-cache" | "cache")?
                                  },
-                                 ?cache_behavior_settings: {
-                                   default_ttl: ::Integer?,
-                                   minimum_ttl: ::Integer?,
-                                   maximum_ttl: ::Integer?,
-                                   allowed_http_methods: ::String?,
-                                   cached_http_methods: ::String?,
-                                   forwarded_cookies: {
-                                     option: ("none" | "allow-list" | "all")?,
-                                     cookies_allow_list: Array[::String]?
-                                   }?,
-                                   forwarded_headers: {
-                                     option: ("none" | "allow-list" | "all")?,
-                                     headers_allow_list: Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]?
-                                   }?,
-                                   forwarded_query_strings: {
-                                     option: bool?,
-                                     query_strings_allow_list: Array[::String]?
-                                   }?
-                                 },
+                                 ?cache_behavior_settings: Params::cache_settings,
                                  ?cache_behaviors: Array[
                                    {
                                      path: ::String?,
                                      behavior: ("dont-cache" | "cache")?
-                                   },
+                                   }
                                  ],
                                  bundle_id: ::String,
                                  ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
@@ -475,7 +410,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?certificate_name: ::String,
                                  ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021")
@@ -493,7 +428,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
@@ -505,14 +440,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#create_domain_entry-instance_method
       def create_domain_entry: (
                                  domain_name: ::String,
-                                 domain_entry: {
-                                   id: ::String?,
-                                   name: ::String?,
-                                   target: ::String?,
-                                   is_alias: bool?,
-                                   type: ::String?,
-                                   options: Hash[::String, ::String]?
-                                 }
+                                 domain_entry: Params::domain_entry
                                ) -> _CreateDomainEntryResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainEntryResponseSuccess
 
@@ -542,7 +470,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateInstanceSnapshotResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateInstanceSnapshotResponseSuccess
@@ -564,19 +492,10 @@ module Aws
                                 {
                                   key: ::String?,
                                   value: ::String?
-                                },
+                                }
                               ],
                               ?add_ons: Array[
-                                {
-                                  add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
-                                  auto_snapshot_add_on_request: {
-                                    snapshot_time_of_day: ::String?
-                                  }?,
-                                  stop_instance_on_idle_request: {
-                                    threshold: ::String?,
-                                    duration: ::String?
-                                  }?
-                                },
+                                Params::add_on_request
                               ],
                               ?ip_address_type: ("dualstack" | "ipv4" | "ipv6")
                             ) -> _CreateInstancesResponseSuccess
@@ -593,7 +512,7 @@ module Aws
                                                 {
                                                   original_disk_path: ::String?,
                                                   new_disk_name: ::String?
-                                                },
+                                                }
                                               ]],
                                             availability_zone: ::String,
                                             ?instance_snapshot_name: ::String,
@@ -604,19 +523,10 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 value: ::String?
-                                              },
+                                              }
                                             ],
                                             ?add_ons: Array[
-                                              {
-                                                add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
-                                                auto_snapshot_add_on_request: {
-                                                  snapshot_time_of_day: ::String?
-                                                }?,
-                                                stop_instance_on_idle_request: {
-                                                  threshold: ::String?,
-                                                  duration: ::String?
-                                                }?
-                                              },
+                                              Params::add_on_request
                                             ],
                                             ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                             ?source_instance_name: ::String,
@@ -639,7 +549,7 @@ module Aws
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ]
                            ) -> _CreateKeyPairResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateKeyPairResponseSuccess
@@ -660,7 +570,7 @@ module Aws
                                     {
                                       key: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   ?ip_address_type: ("dualstack" | "ipv4" | "ipv6"),
                                   ?tls_policy_name: ::String
@@ -681,7 +591,7 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _CreateLoadBalancerTlsCertificateResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoadBalancerTlsCertificateResponseSuccess
@@ -706,7 +616,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateRelationalDatabaseResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseResponseSuccess
@@ -729,7 +639,7 @@ module Aws
                                                         {
                                                           key: ::String?,
                                                           value: ::String?
-                                                        },
+                                                        }
                                                       ]
                                                     ) -> _CreateRelationalDatabaseFromSnapshotResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseFromSnapshotResponseSuccess
@@ -746,7 +656,7 @@ module Aws
                                                    {
                                                      key: ::String?,
                                                      value: ::String?
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _CreateRelationalDatabaseSnapshotResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRelationalDatabaseSnapshotResponseSuccess
@@ -881,14 +791,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#delete_domain_entry-instance_method
       def delete_domain_entry: (
                                  domain_name: ::String,
-                                 domain_entry: {
-                                   id: ::String?,
-                                   name: ::String?,
-                                   target: ::String?,
-                                   is_alias: bool?,
-                                   type: ::String?,
-                                   options: Hash[::String, ::String]?
-                                 }
+                                 domain_entry: Params::domain_entry
                                ) -> _DeleteDomainEntryResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDomainEntryResponseSuccess
 
@@ -1048,16 +951,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#enable_add_on-instance_method
       def enable_add_on: (
                            resource_name: ::String,
-                           add_on_request: {
-                             add_on_type: ("AutoSnapshot" | "StopInstanceOnIdle"),
-                             auto_snapshot_add_on_request: {
-                               snapshot_time_of_day: ::String?
-                             }?,
-                             stop_instance_on_idle_request: {
-                               threshold: ::String?,
-                               duration: ::String?
-                             }?
-                           }
+                           add_on_request: Params::add_on_request
                          ) -> _EnableAddOnResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableAddOnResponseSuccess
 
@@ -1856,14 +1750,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#open_instance_public_ports-instance_method
       def open_instance_public_ports: (
-                                        port_info: {
-                                          from_port: ::Integer?,
-                                          to_port: ::Integer?,
-                                          protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
-                                          cidrs: Array[::String]?,
-                                          ipv6_cidrs: Array[::String]?,
-                                          cidr_list_aliases: Array[::String]?
-                                        },
+                                        port_info: Params::port_info,
                                         instance_name: ::String
                                       ) -> _OpenInstancePublicPortsResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OpenInstancePublicPortsResponseSuccess
@@ -1898,7 +1785,7 @@ module Aws
                          {
                            key: ::String?,
                            value: ::String?
-                         },
+                         }
                        ]
                      ) -> _PutAlarmResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAlarmResponseSuccess
@@ -1910,14 +1797,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#put_instance_public_ports-instance_method
       def put_instance_public_ports: (
                                        port_infos: Array[
-                                         {
-                                           from_port: ::Integer?,
-                                           to_port: ::Integer?,
-                                           protocol: ("tcp" | "all" | "udp" | "icmp" | "icmpv6")?,
-                                           cidrs: Array[::String]?,
-                                           ipv6_cidrs: Array[::String]?,
-                                           cidr_list_aliases: Array[::String]?
-                                         },
+                                         Params::port_info
                                        ],
                                        instance_name: ::String
                                      ) -> _PutInstancePublicPortsResponseSuccess
@@ -2099,7 +1979,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -2164,7 +2044,7 @@ module Aws
                                  allowed_headers: Array[::String]?,
                                  expose_headers: Array[::String]?,
                                  max_age_seconds: ::Integer?
-                               },
+                               }
                              ]?
                            }
                          ) -> _UpdateBucketResponseSuccess
@@ -2217,30 +2097,12 @@ module Aws
                                  ?default_cache_behavior: {
                                    behavior: ("dont-cache" | "cache")?
                                  },
-                                 ?cache_behavior_settings: {
-                                   default_ttl: ::Integer?,
-                                   minimum_ttl: ::Integer?,
-                                   maximum_ttl: ::Integer?,
-                                   allowed_http_methods: ::String?,
-                                   cached_http_methods: ::String?,
-                                   forwarded_cookies: {
-                                     option: ("none" | "allow-list" | "all")?,
-                                     cookies_allow_list: Array[::String]?
-                                   }?,
-                                   forwarded_headers: {
-                                     option: ("none" | "allow-list" | "all")?,
-                                     headers_allow_list: Array[("Accept" | "Accept-Charset" | "Accept-Datetime" | "Accept-Encoding" | "Accept-Language" | "Authorization" | "CloudFront-Forwarded-Proto" | "CloudFront-Is-Desktop-Viewer" | "CloudFront-Is-Mobile-Viewer" | "CloudFront-Is-SmartTV-Viewer" | "CloudFront-Is-Tablet-Viewer" | "CloudFront-Viewer-Country" | "Host" | "Origin" | "Referer")]?
-                                   }?,
-                                   forwarded_query_strings: {
-                                     option: bool?,
-                                     query_strings_allow_list: Array[::String]?
-                                   }?
-                                 },
+                                 ?cache_behavior_settings: Params::cache_settings,
                                  ?cache_behaviors: Array[
                                    {
                                      path: ::String?,
                                      behavior: ("dont-cache" | "cache")?
-                                   },
+                                   }
                                  ],
                                  ?is_enabled: bool,
                                  ?viewer_minimum_tls_protocol_version: ("TLSv1.1_2016" | "TLSv1.2_2018" | "TLSv1.2_2019" | "TLSv1.2_2021"),
@@ -2267,14 +2129,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#update_domain_entry-instance_method
       def update_domain_entry: (
                                  domain_name: ::String,
-                                 domain_entry: {
-                                   id: ::String?,
-                                   name: ::String?,
-                                   target: ::String?,
-                                   is_alias: bool?,
-                                   type: ::String?,
-                                   options: Hash[::String, ::String]?
-                                 }
+                                 domain_entry: Params::domain_entry
                                ) -> _UpdateDomainEntryResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainEntryResponseSuccess
 
@@ -2341,7 +2196,7 @@ module Aws
                                                        is_modifiable: bool?,
                                                        parameter_name: ::String?,
                                                        parameter_value: ::String?
-                                                     },
+                                                     }
                                                    ]
                                                  ) -> _UpdateRelationalDatabaseParametersResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRelationalDatabaseParametersResponseSuccess

@@ -55,7 +55,7 @@ module Aws::MigrationHubOrchestrator
   autoload :EndpointProvider, 'aws-sdk-migrationhuborchestrator/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-migrationhuborchestrator/endpoints'
 
-  GEM_VERSION = '1.45.0'
+  GEM_VERSION = '1.46.0'
 
 end
 

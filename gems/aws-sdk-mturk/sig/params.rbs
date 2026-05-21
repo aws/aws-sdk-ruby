@@ -1,0 +1,45 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MTurk
+    module Params
+      type qualification_requirement = {
+      qualification_type_id: ::String,
+      comparator: ("LessThan" | "LessThanOrEqualTo" | "GreaterThan" | "GreaterThanOrEqualTo" | "EqualTo" | "NotEqualTo" | "Exists" | "DoesNotExist" | "In" | "NotIn"),
+      integer_values: Array[::Integer]?,
+      locale_values: Array[
+        {
+          country: ::String,
+          subdivision: ::String?
+        }
+      ]?,
+      required_to_preview: bool?,
+      actions_guarded: ("Accept" | "PreviewAndAccept" | "DiscoverPreviewAndAccept")?
+    }
+
+      type review_policy = {
+      policy_name: ::String,
+      parameters: Array[
+        Params::policy_parameter
+      ]?
+    }
+
+      type policy_parameter = {
+      key: ::String?,
+      values: Array[::String]?,
+      map_entries: Array[
+        {
+          key: ::String?,
+          values: Array[::String]?
+        }
+      ]?
+    }
+
+    end
+  end
+end

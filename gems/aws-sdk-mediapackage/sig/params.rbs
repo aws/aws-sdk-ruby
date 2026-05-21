@@ -1,0 +1,128 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaPackage
+    module Params
+      type speke_key_provider = {
+      certificate_arn: ::String?,
+      encryption_contract_configuration: {
+        preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
+        preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
+      }?,
+      resource_id: ::String,
+      role_arn: ::String,
+      system_ids: Array[::String],
+      url: ::String
+    }
+
+      type cmaf_encryption = {
+      constant_initialization_vector: ::String?,
+      encryption_method: ("SAMPLE_AES" | "AES_CTR")?,
+      key_rotation_interval_seconds: ::Integer?,
+      speke_key_provider: Params::speke_key_provider
+    }
+
+      type cmaf_package_create_or_update_parameters = {
+      encryption: Params::cmaf_encryption?,
+      hls_manifests: Array[
+        Params::hls_manifest_create_or_update_parameters
+      ]?,
+      segment_duration_seconds: ::Integer?,
+      segment_prefix: ::String?,
+      stream_selection: {
+        max_video_bits_per_second: ::Integer?,
+        min_video_bits_per_second: ::Integer?,
+        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+      }?
+    }
+
+      type hls_manifest_create_or_update_parameters = {
+      ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+      id: ::String,
+      include_iframe_only_stream: bool?,
+      manifest_name: ::String?,
+      playlist_type: ("NONE" | "EVENT" | "VOD")?,
+      playlist_window_seconds: ::Integer?,
+      program_date_time_interval_seconds: ::Integer?
+    }
+
+      type dash_encryption = {
+      key_rotation_interval_seconds: ::Integer?,
+      speke_key_provider: Params::speke_key_provider
+    }
+
+      type dash_package = {
+      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+      encryption: Params::dash_encryption?,
+      include_iframe_only_stream: bool?,
+      manifest_layout: ("FULL" | "COMPACT" | "DRM_TOP_LEVEL_COMPACT")?,
+      manifest_window_seconds: ::Integer?,
+      min_buffer_time_seconds: ::Integer?,
+      min_update_period_seconds: ::Integer?,
+      period_triggers: Array[("ADS")]?,
+      profile: ("NONE" | "HBBTV_1_5" | "HYBRIDCAST" | "DVB_DASH_2014")?,
+      segment_duration_seconds: ::Integer?,
+      segment_template_format: ("NUMBER_WITH_TIMELINE" | "TIME_WITH_TIMELINE" | "NUMBER_WITH_DURATION")?,
+      stream_selection: {
+        max_video_bits_per_second: ::Integer?,
+        min_video_bits_per_second: ::Integer?,
+        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+      }?,
+      suggested_presentation_delay_seconds: ::Integer?,
+      utc_timing: ("NONE" | "HTTP-HEAD" | "HTTP-ISO" | "HTTP-XSDATE")?,
+      utc_timing_uri: ::String?
+    }
+
+      type hls_encryption = {
+      constant_initialization_vector: ::String?,
+      encryption_method: ("AES_128" | "SAMPLE_AES")?,
+      key_rotation_interval_seconds: ::Integer?,
+      repeat_ext_x_key: bool?,
+      speke_key_provider: Params::speke_key_provider
+    }
+
+      type hls_package = {
+      ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH" | "DATERANGE")?,
+      ad_triggers: Array[("SPLICE_INSERT" | "BREAK" | "PROVIDER_ADVERTISEMENT" | "DISTRIBUTOR_ADVERTISEMENT" | "PROVIDER_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_PLACEMENT_OPPORTUNITY" | "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY" | "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY")]?,
+      ads_on_delivery_restrictions: ("NONE" | "RESTRICTED" | "UNRESTRICTED" | "BOTH")?,
+      encryption: Params::hls_encryption?,
+      include_dvb_subtitles: bool?,
+      include_iframe_only_stream: bool?,
+      playlist_type: ("NONE" | "EVENT" | "VOD")?,
+      playlist_window_seconds: ::Integer?,
+      program_date_time_interval_seconds: ::Integer?,
+      segment_duration_seconds: ::Integer?,
+      stream_selection: {
+        max_video_bits_per_second: ::Integer?,
+        min_video_bits_per_second: ::Integer?,
+        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+      }?,
+      use_audio_rendition_group: bool?
+    }
+
+      type mss_encryption = {
+      speke_key_provider: Params::speke_key_provider
+    }
+
+      type mss_package = {
+      encryption: Params::mss_encryption?,
+      manifest_window_seconds: ::Integer?,
+      segment_duration_seconds: ::Integer?,
+      stream_selection: {
+        max_video_bits_per_second: ::Integer?,
+        min_video_bits_per_second: ::Integer?,
+        stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
+      }?
+    }
+
+    end
+  end
+end

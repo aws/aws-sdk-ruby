@@ -1,0 +1,99 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Transfer
+    module Params
+      type as_2_connector_config = {
+      local_profile_id: ::String?,
+      partner_profile_id: ::String?,
+      message_subject: ::String?,
+      compression: ("ZLIB" | "DISABLED")?,
+      encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
+      signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
+      mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
+      mdn_response: ("SYNC" | "NONE" | "ASYNC")?,
+      basic_auth_secret_id: ::String?,
+      preserve_content_type: ("ENABLED" | "DISABLED")?,
+      async_mdn_config: {
+        url: ::String?,
+        server_ids: Array[::String]?
+      }?
+    }
+
+      type workflow_details = {
+      on_upload: Array[
+        {
+          workflow_id: ::String,
+          execution_role: ::String
+        }
+      ]?,
+      on_partial_upload: Array[
+        {
+          workflow_id: ::String,
+          execution_role: ::String
+        }
+      ]?
+    }
+
+      type input_file_location = {
+      s3_file_location: {
+        bucket: ::String?,
+        key: ::String?
+      }?,
+      efs_file_location: {
+        file_system_id: ::String?,
+        path: ::String?
+      }?
+    }
+
+      type copy_step_details = {
+      name: ::String?,
+      destination_file_location: Params::input_file_location?,
+      overwrite_existing: ("TRUE" | "FALSE")?,
+      source_file_location: ::String?
+    }
+
+      type tag_step_details = {
+      name: ::String?,
+      tags: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      source_file_location: ::String?
+    }
+
+      type decrypt_step_details = {
+      name: ::String?,
+      type: ("PGP"),
+      source_file_location: ::String?,
+      overwrite_existing: ("TRUE" | "FALSE")?,
+      destination_file_location: Params::input_file_location
+    }
+
+      type workflow_step = {
+      type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")?,
+      copy_step_details: Params::copy_step_details?,
+      custom_step_details: {
+        name: ::String?,
+        target: ::String?,
+        timeout_seconds: ::Integer?,
+        source_file_location: ::String?
+      }?,
+      delete_step_details: {
+        name: ::String?,
+        source_file_location: ::String?
+      }?,
+      tag_step_details: Params::tag_step_details?,
+      decrypt_step_details: Params::decrypt_step_details?
+    }
+
+    end
+  end
+end

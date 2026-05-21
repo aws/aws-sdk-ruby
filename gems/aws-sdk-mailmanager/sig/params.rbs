@@ -1,0 +1,261 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MailManager
+    module Params
+      type ingress_point_configuration = {
+      smtp_password: ::String?,
+      secret_arn: ::String?,
+      tls_auth_configuration: {
+        trust_store: {
+          ca_content: ::String,
+          crl_content: ::String?,
+          kms_key_arn: ::String?
+        }?
+      }?
+    }
+
+      type rule = {
+      name: ::String?,
+      conditions: Array[
+        Params::rule_condition
+      ]?,
+      unless: Array[
+        Params::rule_condition
+      ]?,
+      actions: Array[
+        Params::rule_action
+      ]
+    }
+
+      type rule_boolean_to_evaluate = {
+      attribute: ("READ_RECEIPT_REQUESTED" | "TLS" | "TLS_WRAPPED")?,
+      analysis: {
+        analyzer: ::String,
+        result_field: ::String
+      }?,
+      is_in_address_list: {
+        attribute: ("RECIPIENT" | "MAIL_FROM" | "SENDER" | "FROM" | "TO" | "CC"),
+        address_lists: Array[::String]
+      }?
+    }
+
+      type rule_boolean_expression = {
+      evaluate: Params::rule_boolean_to_evaluate,
+      operator: ("IS_TRUE" | "IS_FALSE")
+    }
+
+      type rule_string_to_evaluate = {
+      attribute: ("MAIL_FROM" | "HELO" | "RECIPIENT" | "SENDER" | "FROM" | "SUBJECT" | "TO" | "CC")?,
+      mime_header_attribute: ::String?,
+      analysis: {
+        analyzer: ::String,
+        result_field: ::String
+      }?,
+      client_certificate_attribute: ("CN" | "SAN_RFC822_NAME" | "SAN_DNS_NAME" | "SAN_DIRECTORY_NAME" | "SAN_UNIFORM_RESOURCE_IDENTIFIER" | "SAN_IP_ADDRESS" | "SAN_REGISTERED_ID" | "SERIAL_NUMBER")?
+    }
+
+      type rule_string_expression = {
+      evaluate: Params::rule_string_to_evaluate,
+      operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+      values: Array[::String]
+    }
+
+      type rule_verdict_expression = {
+      evaluate: {
+        attribute: ("SPF" | "DKIM")?,
+        analysis: {
+          analyzer: ::String,
+          result_field: ::String
+        }?
+      },
+      operator: ("EQUALS" | "NOT_EQUALS"),
+      values: Array[("PASS" | "FAIL" | "GRAY" | "PROCESSING_FAILED")]
+    }
+
+      type rule_condition = {
+      boolean_expression: Params::rule_boolean_expression?,
+      string_expression: Params::rule_string_expression?,
+      number_expression: {
+        evaluate: {
+          attribute: ("MESSAGE_SIZE")?
+        },
+        operator: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN" | "LESS_THAN_OR_EQUAL" | "GREATER_THAN_OR_EQUAL"),
+        value: ::Float
+      }?,
+      ip_expression: {
+        evaluate: {
+          attribute: ("SOURCE_IP")?
+        },
+        operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+        values: Array[::String]
+      }?,
+      verdict_expression: Params::rule_verdict_expression?,
+      dmarc_expression: {
+        operator: ("EQUALS" | "NOT_EQUALS"),
+        values: Array[("NONE" | "QUARANTINE" | "REJECT")]
+      }?
+    }
+
+      type bounce_action = {
+      action_failure_policy: ("CONTINUE" | "DROP")?,
+      role_arn: ::String,
+      sender: ::String,
+      status_code: ::String,
+      smtp_reply_code: ::String,
+      diagnostic_message: ::String,
+      message: ::String?
+    }
+
+      type rule_action = {
+      drop: {
+      }?,
+      relay: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        relay: ::String,
+        mail_from: ("REPLACE" | "PRESERVE")?
+      }?,
+      archive: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        target_archive: ::String
+      }?,
+      write_to_s3: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        role_arn: ::String,
+        s3_bucket: ::String,
+        s3_prefix: ::String?,
+        s3_sse_kms_key_id: ::String?
+      }?,
+      send: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        role_arn: ::String
+      }?,
+      add_header: {
+        header_name: ::String,
+        header_value: ::String
+      }?,
+      replace_recipient: {
+        replace_with: Array[::String]?
+      }?,
+      deliver_to_mailbox: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        mailbox_arn: ::String,
+        role_arn: ::String
+      }?,
+      deliver_to_q_business: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        application_id: ::String,
+        index_id: ::String,
+        role_arn: ::String
+      }?,
+      publish_to_sns: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        topic_arn: ::String,
+        role_arn: ::String,
+        encoding: ("UTF-8" | "BASE64")?,
+        payload_type: ("HEADERS" | "CONTENT")?
+      }?,
+      bounce: Params::bounce_action?,
+      invoke_lambda: {
+        action_failure_policy: ("CONTINUE" | "DROP")?,
+        function_arn: ::String,
+        invocation_type: ("EVENT" | "REQUEST_RESPONSE"),
+        role_arn: ::String,
+        retry_time_minutes: ::Integer?
+      }?
+    }
+
+      type policy_statement = {
+      conditions: Array[
+        Params::policy_condition
+      ],
+      action: ("ALLOW" | "DENY")
+    }
+
+      type ingress_string_expression = {
+      evaluate: {
+        attribute: ("RECIPIENT")?,
+        analysis: {
+          analyzer: ::String,
+          result_field: ::String
+        }?
+      },
+      operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS"),
+      values: Array[::String]
+    }
+
+      type ingress_boolean_to_evaluate = {
+      analysis: {
+        analyzer: ::String,
+        result_field: ::String
+      }?,
+      is_in_address_list: {
+        attribute: ("RECIPIENT"),
+        address_lists: Array[::String]
+      }?
+    }
+
+      type ingress_boolean_expression = {
+      evaluate: Params::ingress_boolean_to_evaluate,
+      operator: ("IS_TRUE" | "IS_FALSE")
+    }
+
+      type policy_condition = {
+      string_expression: Params::ingress_string_expression?,
+      ip_expression: {
+        evaluate: {
+          attribute: ("SENDER_IP")?
+        },
+        operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+        values: Array[::String]
+      }?,
+      ipv_6_expression: {
+        evaluate: {
+          attribute: ("SENDER_IPV6")?
+        },
+        operator: ("CIDR_MATCHES" | "NOT_CIDR_MATCHES"),
+        values: Array[::String]
+      }?,
+      tls_expression: {
+        evaluate: {
+          attribute: ("TLS_PROTOCOL")?
+        },
+        operator: ("MINIMUM_TLS_VERSION" | "IS"),
+        value: ("TLS1_2" | "TLS1_3")
+      }?,
+      boolean_expression: Params::ingress_boolean_expression?
+    }
+
+      type archive_filters = {
+      include: Array[
+        Params::archive_filter_condition
+      ]?,
+      unless: Array[
+        Params::archive_filter_condition
+      ]?
+    }
+
+      type archive_filter_condition = {
+      string_expression: {
+        evaluate: {
+          attribute: ("TO" | "FROM" | "CC" | "SUBJECT" | "ENVELOPE_TO" | "ENVELOPE_FROM")?
+        },
+        operator: ("CONTAINS"),
+        values: Array[::String]
+      }?,
+      boolean_expression: {
+        evaluate: {
+          attribute: ("HAS_ATTACHMENTS")?
+        },
+        operator: ("IS_TRUE" | "IS_FALSE")
+      }?
+    }
+
+    end
+  end
+end

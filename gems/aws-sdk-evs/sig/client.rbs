@@ -127,7 +127,7 @@ module Aws
                                   {
                                     solution_key: ::String,
                                     vsan_key: ::String
-                                  },
+                                  }
                                 ],
                                 initial_vlans: {
                                   vmk_management: {
@@ -170,7 +170,7 @@ module Aws
                                     instance_type: ("i4i.metal" | "i7i.metal-24xl"),
                                     placement_group_id: ::String?,
                                     dedicated_host_id: ::String?
-                                  },
+                                  }
                                 ],
                                 connectivity_info: {
                                   private_route_server_peerings: Array[::String]

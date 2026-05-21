@@ -98,7 +98,7 @@ module Aws
                                     prediction_target: ::String,
                                     prediction_choice: ::Integer?,
                                     edited_value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String
                               ) -> _AcceptPredictionsResponseSuccess
@@ -130,7 +130,7 @@ module Aws
                                            {
                                              asset_id: ::String,
                                              filter_ids: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?asset_permissions: Array[
                                            {
@@ -138,7 +138,7 @@ module Aws
                                              permissions: {
                                                s3: Array[("READ" | "WRITE")]?
                                              }
-                                           },
+                                           }
                                          ]
                                        ) -> _AcceptSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptSubscriptionRequestResponseSuccess
@@ -151,14 +151,7 @@ module Aws
                               domain_identifier: ::String,
                               entity_type: ("DOMAIN_UNIT"),
                               entity_identifier: ::String,
-                              owner: {
-                                user: {
-                                  user_identifier: ::String
-                                }?,
-                                group: {
-                                  group_identifier: ::String
-                                }?
-                              },
+                              owner: Params::owner_properties,
                               ?client_token: ::String
                             ) -> _AddEntityOwnerResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddEntityOwnerResponseSuccess
@@ -173,34 +166,7 @@ module Aws
                               entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE" | "ASSET_TYPE"),
                               entity_identifier: ::String,
                               policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE" | "USE_ASSET_TYPE"),
-                              principal: {
-                                user: {
-                                  user_identifier: ::String?,
-                                  all_users_grant_filter: {
-                                  }?
-                                }?,
-                                group: {
-                                  group_identifier: ::String?
-                                }?,
-                                project: {
-                                  project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
-                                  project_identifier: ::String?,
-                                  project_grant_filter: {
-                                    domain_unit_filter: {
-                                      domain_unit: ::String,
-                                      include_child_domain_units: bool?
-                                    }?
-                                  }?
-                                }?,
-                                domain_unit: {
-                                  domain_unit_designation: ("OWNER"),
-                                  domain_unit_identifier: ::String?,
-                                  domain_unit_grant_filter: {
-                                    all_domain_units_grant_filter: {
-                                    }?
-                                  }?
-                                }?
-                              },
+                              principal: Params::policy_grant_principal,
                               detail: {
                                 create_domain_unit: {
                                   include_child_domain_units: bool?
@@ -305,9 +271,9 @@ module Aws
                                                    type_identifier: ::String?,
                                                    type_revision: ::String?,
                                                    content: ::String?
-                                                 },
+                                                 }
                                                ]
-                                             },
+                                             }
                                            ]
                                          ) -> _BatchPutAttributesMetadataResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutAttributesMetadataResponseSuccess
@@ -363,19 +329,7 @@ module Aws
                                  name: ::String,
                                  ?description: ::String,
                                  resolution_strategy: ("MANUAL"),
-                                 account_source: {
-                                   accounts: Array[
-                                     {
-                                       aws_account_id: ::String,
-                                       supported_regions: Array[::String],
-                                       aws_account_name: ::String?
-                                     },
-                                   ]?,
-                                   custom_account_pool_handler: {
-                                     lambda_function_arn: ::String,
-                                     lambda_execution_role_arn: ::String?
-                                   }?
-                                 }
+                                 account_source: Params::account_source
                                ) -> _CreateAccountPoolResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAccountPoolResponseSuccess
 
@@ -417,7 +371,7 @@ module Aws
                               type_identifier: ::String?,
                               type_revision: ::String?,
                               content: ::String?
-                            },
+                            }
                           ],
                           owning_project_identifier: ::String,
                           ?prediction_configuration: {
@@ -449,70 +403,7 @@ module Aws
                                  asset_identifier: ::String,
                                  name: ::String,
                                  ?description: ::String,
-                                 configuration: {
-                                   column_configuration: {
-                                     included_column_names: Array[::String]?
-                                   }?,
-                                   row_configuration: {
-                                     row_filter: {
-                                       expression: {
-                                         equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         not_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         greater_than: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         less_than: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         greater_than_or_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         less_than_or_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         is_null: {
-                                           column_name: ::String
-                                         }?,
-                                         is_not_null: {
-                                           column_name: ::String
-                                         }?,
-                                         in: {
-                                           column_name: ::String,
-                                           values: Array[::String]
-                                         }?,
-                                         not_in: {
-                                           column_name: ::String,
-                                           values: Array[::String]
-                                         }?,
-                                         like: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         not_like: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?
-                                       }?,
-                                       and: Array[
-                                         untyped,
-                                       ]?,
-                                       or: Array[
-                                         untyped,
-                                       ]?
-                                     },
-                                     sensitive: bool?
-                                   }?
-                                 },
+                                 configuration: Params::asset_filter_configuration,
                                  ?client_token: ::String
                                ) -> _CreateAssetFilterResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAssetFilterResponseSuccess
@@ -554,7 +445,7 @@ module Aws
                                        type_identifier: ::String?,
                                        type_revision: ::String?,
                                        content: ::String?
-                                     },
+                                     }
                                    ],
                                    ?prediction_configuration: {
                                      business_name_generation: {
@@ -622,7 +513,7 @@ module Aws
                                  {
                                    classification: ::String?,
                                    properties: Hash[::String, ::String]?
-                                 },
+                                 }
                                ],
                                ?description: ::String,
                                domain_identifier: ::String,
@@ -789,7 +680,7 @@ module Aws
                                      type_identifier: ::String?,
                                      type_revision: ::String?,
                                      content: ::String?
-                                   },
+                                   }
                                  ],
                                  ?items: Array[
                                    {
@@ -797,7 +688,7 @@ module Aws
                                      identifier: ::String,
                                      revision: ::String?,
                                      glossary_terms: Array[::String]?
-                                   },
+                                   }
                                  ],
                                  ?client_token: ::String
                                ) -> _CreateDataProductResponseSuccess
@@ -833,7 +724,7 @@ module Aws
                                               identifier: ::String,
                                               revision: ::String?,
                                               glossary_terms: Array[::String]?
-                                            },
+                                            }
                                           ],
                                           ?forms_input: Array[
                                             {
@@ -841,7 +732,7 @@ module Aws
                                               type_identifier: ::String?,
                                               type_revision: ::String?,
                                               content: ::String?
-                                            },
+                                            }
                                           ],
                                           ?client_token: ::String
                                         ) -> _CreateDataProductRevisionResponseSuccess
@@ -880,54 +771,7 @@ module Aws
                                 ?environment_identifier: ::String,
                                 ?connection_identifier: ::String,
                                 type: ::String,
-                                ?configuration: {
-                                  glue_run_configuration: {
-                                    data_access_role: ::String?,
-                                    relational_filter_configurations: Array[
-                                      {
-                                        database_name: ::String,
-                                        schema_name: ::String?,
-                                        filter_expressions: Array[
-                                          {
-                                            type: ("INCLUDE" | "EXCLUDE"),
-                                            expression: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ],
-                                    auto_import_data_quality_result: bool?,
-                                    catalog_name: ::String?
-                                  }?,
-                                  redshift_run_configuration: {
-                                    data_access_role: ::String?,
-                                    relational_filter_configurations: Array[
-                                      {
-                                        database_name: ::String,
-                                        schema_name: ::String?,
-                                        filter_expressions: Array[
-                                          {
-                                            type: ("INCLUDE" | "EXCLUDE"),
-                                            expression: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ],
-                                    redshift_credential_configuration: {
-                                      secret_manager_arn: ::String
-                                    }?,
-                                    redshift_storage: {
-                                      redshift_cluster_source: {
-                                        cluster_name: ::String
-                                      }?,
-                                      redshift_serverless_source: {
-                                        workgroup_name: ::String
-                                      }?
-                                    }?
-                                  }?,
-                                  sage_maker_run_configuration: {
-                                    tracking_assets: Hash[::String, Array[::String]]
-                                  }?
-                                },
+                                ?configuration: Params::data_source_configuration_input,
                                 ?recommendation: {
                                   enable_business_name_generation: bool?
                                 },
@@ -943,7 +787,7 @@ module Aws
                                     type_identifier: ::String?,
                                     type_revision: ::String?,
                                     content: ::String?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String
                               ) -> _CreateDataSourceResponseSuccess
@@ -1042,7 +886,7 @@ module Aws
                                   {
                                     name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?glossary_terms: Array[::String],
                                 ?environment_account_identifier: ::String,
@@ -1101,15 +945,7 @@ module Aws
                                             }?
                                           },
                                           ?user_parameters: Array[
-                                            {
-                                              key_name: ::String,
-                                              description: ::String?,
-                                              field_type: ::String,
-                                              default_value: ::String?,
-                                              is_editable: bool?,
-                                              is_optional: bool?,
-                                              is_update_supported: bool?
-                                            },
+                                            Params::custom_parameter
                                           ]
                                         ) -> _CreateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentBlueprintResponseSuccess
@@ -1140,7 +976,7 @@ module Aws
                                           {
                                             name: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?aws_account_id: ::String,
                                         ?aws_account_region: ::String
@@ -1255,6 +1091,39 @@ module Aws
                                      ) -> _CreateListingChangeSetResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateListingChangeSetResponseSuccess
 
+      interface _CreateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#create_notebook-instance_method
+      def create_notebook: (
+                             domain_identifier: ::String,
+                             owning_project_identifier: ::String,
+                             name: ::String,
+                             ?description: ::String,
+                             ?metadata: Hash[::String, ::String],
+                             ?parameters: Hash[::String, ::String],
+                             ?client_token: ::String
+                           ) -> _CreateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotebookResponseSuccess
+
       interface _CreateProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateProjectOutput]
         def domain_id: () -> ::String
@@ -1284,21 +1153,7 @@ module Aws
                             ?domain_unit_id: ::String,
                             ?project_profile_id: ::String,
                             ?user_parameters: Array[
-                              {
-                                environment_id: ::String?,
-                                environment_resolved_account: {
-                                  aws_account_id: ::String,
-                                  region_name: ::String,
-                                  source_account_pool_id: ::String?
-                                }?,
-                                environment_configuration_name: ::String?,
-                                environment_parameters: Array[
-                                  {
-                                    name: ::String?,
-                                    value: ::String?
-                                  },
-                                ]?
-                              },
+                              Params::environment_configuration_user_parameter
                             ],
                             ?project_category: ::String,
                             ?project_execution_role: ::String,
@@ -1309,7 +1164,7 @@ module Aws
                                   group_identifier: ::String?
                                 },
                                 designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
-                              },
+                              }
                             ]
                           ) -> _CreateProjectResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProjectResponseSuccess
@@ -1356,45 +1211,12 @@ module Aws
                                         key: ::String,
                                         value: ::String,
                                         is_value_editable: bool
-                                      },
+                                      }
                                     ],
                                     ?allow_custom_project_resource_tags: bool,
                                     ?project_resource_tags_description: ::String,
                                     ?environment_configurations: Array[
-                                      {
-                                        name: ::String,
-                                        id: ::String?,
-                                        environment_blueprint_id: ::String,
-                                        description: ::String?,
-                                        deployment_mode: ("ON_CREATE" | "ON_DEMAND")?,
-                                        configuration_parameters: {
-                                          ssm_path: ::String?,
-                                          parameter_overrides: Array[
-                                            {
-                                              name: ::String?,
-                                              value: ::String?,
-                                              is_editable: bool?
-                                            },
-                                          ]?,
-                                          resolved_parameters: Array[
-                                            {
-                                              name: ::String?,
-                                              value: ::String?,
-                                              is_editable: bool?
-                                            },
-                                          ]?
-                                        }?,
-                                        aws_account: {
-                                          aws_account_id: ::String?,
-                                          aws_account_id_path: ::String?
-                                        }?,
-                                        account_pools: Array[::String]?,
-                                        aws_region: {
-                                          region_name: ::String?,
-                                          region_name_path: ::String?
-                                        }?,
-                                        deployment_order: ::Integer?
-                                      },
+                                      Params::environment_configuration
                                     ],
                                     ?domain_unit_identifier: ::String
                                   ) -> _CreateProjectProfileResponseSuccess
@@ -1425,30 +1247,8 @@ module Aws
                            }?
                          },
                          action: ("CREATE_LISTING_CHANGE_SET" | "CREATE_SUBSCRIPTION_REQUEST"),
-                         scope: {
-                           asset_type: {
-                             selection_mode: ("ALL" | "SPECIFIC"),
-                             specific_asset_types: Array[::String]?
-                           }?,
-                           data_product: bool?,
-                           project: {
-                             selection_mode: ("ALL" | "SPECIFIC"),
-                             specific_projects: Array[::String]?
-                           }?
-                         },
-                         detail: {
-                           metadata_form_enforcement_detail: {
-                             required_metadata_forms: Array[
-                               {
-                                 type_identifier: ::String,
-                                 type_revision: ::String
-                               },
-                             ]?
-                           }?,
-                           glossary_term_enforcement_detail: {
-                             required_glossary_term_ids: Array[::String]?
-                           }?
-                         },
+                         scope: Params::rule_scope,
+                         detail: Params::rule_detail,
                          ?description: ::String,
                          ?client_token: ::String
                        ) -> _CreateRuleResponseSuccess
@@ -1484,7 +1284,7 @@ module Aws
                                          {
                                            asset_id: ::String,
                                            target_name: ::String
-                                         },
+                                         }
                                        ],
                                        ?client_token: ::String
                                      ) -> _CreateSubscriptionGrantResponseSuccess
@@ -1524,12 +1324,12 @@ module Aws
                                              iam: {
                                                identifier: ::String?
                                              }?
-                                           },
+                                           }
                                          ],
                                          subscribed_listings: Array[
                                            {
                                              identifier: ::String
-                                           },
+                                           }
                                          ],
                                          request_reason: ::String,
                                          ?client_token: ::String,
@@ -1539,7 +1339,7 @@ module Aws
                                              type_identifier: ::String?,
                                              type_revision: ::String?,
                                              content: ::String?
-                                           },
+                                           }
                                          ],
                                          ?asset_permissions: Array[
                                            {
@@ -1547,13 +1347,13 @@ module Aws
                                              permissions: {
                                                s3: Array[("READ" | "WRITE")]?
                                              }
-                                           },
+                                           }
                                          ],
                                          ?asset_scopes: Array[
                                            {
                                              asset_id: ::String,
                                              filter_ids: Array[::String]
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateSubscriptionRequestResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionRequestResponseSuccess
@@ -1587,7 +1387,7 @@ module Aws
                                           {
                                             form_name: ::String,
                                             content: ::String
-                                          },
+                                          }
                                         ],
                                         authorized_principals: Array[::String],
                                         manage_access_role: ::String,
@@ -1818,6 +1618,16 @@ module Aws
                             identifier: ::String
                           ) -> _DeleteListingResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteListingResponseSuccess
+
+      interface _DeleteNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteNotebookOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#delete_notebook-instance_method
+      def delete_notebook: (
+                             domain_identifier: ::String,
+                             identifier: ::String
+                           ) -> _DeleteNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteNotebookResponseSuccess
 
       interface _DeleteProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteProjectOutput]
@@ -2526,6 +2336,54 @@ module Aws
                                        ) -> _GetMetadataGenerationRunResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMetadataGenerationRunResponseSuccess
 
+      interface _GetNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_notebook-instance_method
+      def get_notebook: (
+                          domain_identifier: ::String,
+                          identifier: ::String
+                        ) -> _GetNotebookResponseSuccess
+                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotebookResponseSuccess
+
+      interface _GetNotebookExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookExportOutput]
+        def id: () -> ::String
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def notebook_id: () -> ::String
+        def file_format: () -> ("PDF" | "IPYNB")
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def output_location: () -> Types::OutputLocation
+        def completed_at: () -> ::Time
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#get_notebook_export-instance_method
+      def get_notebook_export: (
+                                 domain_identifier: ::String,
+                                 identifier: ::String
+                               ) -> _GetNotebookExportResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetNotebookExportResponseSuccess
+
       interface _GetNotebookRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetNotebookRunOutput]
         def id: () -> ::String
@@ -3110,6 +2968,23 @@ module Aws
                               ) -> _ListNotebookRunsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebookRunsResponseSuccess
 
+      interface _ListNotebooksResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListNotebooksOutput]
+        def items: () -> ::Array[Types::NotebookSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#list_notebooks-instance_method
+      def list_notebooks: (
+                            domain_identifier: ::String,
+                            owning_project_identifier: ::String,
+                            ?max_results: ::Integer,
+                            ?sort_order: ("ASCENDING" | "DESCENDING"),
+                            ?sort_by: ("CREATED_AT" | "UPDATED_AT"),
+                            ?status: ("ACTIVE" | "ARCHIVED"),
+                            ?next_token: ::String
+                          ) -> _ListNotebooksResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListNotebooksResponseSuccess
+
       interface _ListNotificationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListNotificationsOutput]
         def notifications: () -> ::Array[Types::NotificationOutput]
@@ -3358,7 +3233,7 @@ module Aws
                                               type_revision: ::String?,
                                               timestamp: ::Time,
                                               content: ::String?
-                                            },
+                                            }
                                           ],
                                           ?client_token: ::String
                                         ) -> _PostTimeSeriesDataPointsResponseSuccess
@@ -3408,7 +3283,7 @@ module Aws
                                                            location_registration_role: ::String?,
                                                            location_registration_exclude_s3_locations: Array[::String]?
                                                          }?
-                                                       },
+                                                       }
                                                      ]
                                                    ) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutEnvironmentBlueprintConfigurationResponseSuccess
@@ -3431,22 +3306,9 @@ module Aws
                              entity_pattern: {
                                entity_type: ("LINEAGE_NODE"),
                                identifier: ::String,
-                               filters: {
-                                 filter: {
-                                   attribute: ::String,
-                                   value: ::String?,
-                                   int_value: ::Integer?,
-                                   operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
-                                 }?,
-                                 and: Array[
-                                   untyped,
-                                 ]?,
-                                 or: Array[
-                                   untyped,
-                                 ]?
-                               }?
+                               filters: Params::filter_clause?
                              }?
-                           },
+                           }
                          ],
                          ?max_results: ::Integer,
                          ?next_token: ::String,
@@ -3475,7 +3337,7 @@ module Aws
                                   {
                                     prediction_target: ::String,
                                     prediction_choices: Array[::Integer]?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String
                               ) -> _RejectPredictionsResponseSuccess
@@ -3514,14 +3376,7 @@ module Aws
                                  domain_identifier: ::String,
                                  entity_type: ("DOMAIN_UNIT"),
                                  entity_identifier: ::String,
-                                 owner: {
-                                   user: {
-                                     user_identifier: ::String
-                                   }?,
-                                   group: {
-                                     group_identifier: ::String
-                                   }?
-                                 },
+                                 owner: Params::owner_properties,
                                  ?client_token: ::String
                                ) -> _RemoveEntityOwnerResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveEntityOwnerResponseSuccess
@@ -3535,34 +3390,7 @@ module Aws
                                  entity_type: ("DOMAIN_UNIT" | "ENVIRONMENT_BLUEPRINT_CONFIGURATION" | "ENVIRONMENT_PROFILE" | "ASSET_TYPE"),
                                  entity_identifier: ::String,
                                  policy_type: ("CREATE_DOMAIN_UNIT" | "OVERRIDE_DOMAIN_UNIT_OWNERS" | "ADD_TO_PROJECT_MEMBER_POOL" | "OVERRIDE_PROJECT_OWNERS" | "CREATE_GLOSSARY" | "CREATE_FORM_TYPE" | "CREATE_ASSET_TYPE" | "CREATE_PROJECT" | "CREATE_ENVIRONMENT_PROFILE" | "DELEGATE_CREATE_ENVIRONMENT_PROFILE" | "CREATE_ENVIRONMENT" | "CREATE_ENVIRONMENT_FROM_BLUEPRINT" | "CREATE_PROJECT_FROM_PROJECT_PROFILE" | "USE_ASSET_TYPE"),
-                                 principal: {
-                                   user: {
-                                     user_identifier: ::String?,
-                                     all_users_grant_filter: {
-                                     }?
-                                   }?,
-                                   group: {
-                                     group_identifier: ::String?
-                                   }?,
-                                   project: {
-                                     project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
-                                     project_identifier: ::String?,
-                                     project_grant_filter: {
-                                       domain_unit_filter: {
-                                         domain_unit: ::String,
-                                         include_child_domain_units: bool?
-                                       }?
-                                     }?
-                                   }?,
-                                   domain_unit: {
-                                     domain_unit_designation: ("OWNER"),
-                                     domain_unit_identifier: ::String?,
-                                     domain_unit_grant_filter: {
-                                       all_domain_units_grant_filter: {
-                                       }?
-                                     }?
-                                   }?
-                                 },
+                                 principal: Params::policy_grant_principal,
                                  ?grant_identifier: ::String,
                                  ?client_token: ::String
                                ) -> _RemovePolicyGrantResponseSuccess
@@ -3607,22 +3435,9 @@ module Aws
                     ?search_in: Array[
                       {
                         attribute: ::String
-                      },
+                      }
                     ],
-                    ?filters: {
-                      filter: {
-                        attribute: ::String,
-                        value: ::String?,
-                        int_value: ::Integer?,
-                        operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
-                      }?,
-                      and: Array[
-                        untyped,
-                      ]?,
-                      or: Array[
-                        untyped,
-                      ]?
-                    },
+                    ?filters: Params::filter_clause,
                     ?sort: {
                       attribute: ::String,
                       order: ("ASCENDING" | "DESCENDING")?
@@ -3660,29 +3475,16 @@ module Aws
                              ?search_in: Array[
                                {
                                  attribute: ::String
-                               },
+                               }
                              ],
                              ?max_results: ::Integer,
                              ?next_token: ::String,
-                             ?filters: {
-                               filter: {
-                                 attribute: ::String,
-                                 value: ::String?,
-                                 int_value: ::Integer?,
-                                 operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
-                               }?,
-                               and: Array[
-                                 untyped,
-                               ]?,
-                               or: Array[
-                                 untyped,
-                               ]?
-                             },
+                             ?filters: Params::filter_clause,
                              ?aggregations: Array[
                                {
                                  attribute: ::String,
                                  display_value: ::String?
-                               },
+                               }
                              ],
                              ?sort: {
                                attribute: ::String,
@@ -3708,22 +3510,9 @@ module Aws
                           ?search_in: Array[
                             {
                               attribute: ::String
-                            },
+                            }
                           ],
-                          ?filters: {
-                            filter: {
-                              attribute: ::String,
-                              value: ::String?,
-                              int_value: ::Integer?,
-                              operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
-                            }?,
-                            and: Array[
-                              untyped,
-                            ]?,
-                            or: Array[
-                              untyped,
-                            ]?
-                          },
+                          ?filters: Params::filter_clause,
                           ?sort: {
                             attribute: ::String,
                             order: ("ASCENDING" | "DESCENDING")?
@@ -3796,6 +3585,52 @@ module Aws
                                            owning_project_identifier: ::String
                                          ) -> _StartMetadataGenerationRunResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartMetadataGenerationRunResponseSuccess
+
+      interface _StartNotebookExportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookExportOutput]
+        def id: () -> ::String
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def notebook_id: () -> ::String
+        def file_format: () -> ("PDF" | "IPYNB")
+        def status: () -> ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_notebook_export-instance_method
+      def start_notebook_export: (
+                                   domain_identifier: ::String,
+                                   notebook_identifier: ::String,
+                                   owning_project_identifier: ::String,
+                                   file_format: ("PDF" | "IPYNB"),
+                                   ?client_token: ::String
+                                 ) -> _StartNotebookExportResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookExportResponseSuccess
+
+      interface _StartNotebookImportResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookImportOutput]
+        def notebook_id: () -> ::String
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def domain_id: () -> ::String
+        def owning_project_id: () -> ::String
+        def name: () -> ::String
+        def description: () -> ::String
+        def source_location: () -> Types::SourceLocation
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#start_notebook_import-instance_method
+      def start_notebook_import: (
+                                   domain_identifier: ::String,
+                                   owning_project_identifier: ::String,
+                                   source_location: {
+                                     s3: ::String?
+                                   },
+                                   name: ::String,
+                                   ?description: ::String,
+                                   ?client_token: ::String
+                                 ) -> _StartNotebookImportResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartNotebookImportResponseSuccess
 
       interface _StartNotebookRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartNotebookRunOutput]
@@ -3906,19 +3741,7 @@ module Aws
                                  ?name: ::String,
                                  ?description: ::String,
                                  ?resolution_strategy: ("MANUAL"),
-                                 ?account_source: {
-                                   accounts: Array[
-                                     {
-                                       aws_account_id: ::String,
-                                       supported_regions: Array[::String],
-                                       aws_account_name: ::String?
-                                     },
-                                   ]?,
-                                   custom_account_pool_handler: {
-                                     lambda_function_arn: ::String,
-                                     lambda_execution_role_arn: ::String?
-                                   }?
-                                 }
+                                 ?account_source: Params::account_source
                                ) -> _UpdateAccountPoolResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAccountPoolResponseSuccess
 
@@ -3943,70 +3766,7 @@ module Aws
                                  identifier: ::String,
                                  ?name: ::String,
                                  ?description: ::String,
-                                 ?configuration: {
-                                   column_configuration: {
-                                     included_column_names: Array[::String]?
-                                   }?,
-                                   row_configuration: {
-                                     row_filter: {
-                                       expression: {
-                                         equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         not_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         greater_than: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         less_than: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         greater_than_or_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         less_than_or_equal_to: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         is_null: {
-                                           column_name: ::String
-                                         }?,
-                                         is_not_null: {
-                                           column_name: ::String
-                                         }?,
-                                         in: {
-                                           column_name: ::String,
-                                           values: Array[::String]
-                                         }?,
-                                         not_in: {
-                                           column_name: ::String,
-                                           values: Array[::String]
-                                         }?,
-                                         like: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?,
-                                         not_like: {
-                                           column_name: ::String,
-                                           value: ::String
-                                         }?
-                                       }?,
-                                       and: Array[
-                                         untyped,
-                                       ]?,
-                                       or: Array[
-                                         untyped,
-                                       ]?
-                                     },
-                                     sensitive: bool?
-                                   }?
-                                 }
+                                 ?configuration: Params::asset_filter_configuration
                                ) -> _UpdateAssetFilterResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAssetFilterResponseSuccess
 
@@ -4031,7 +3791,7 @@ module Aws
                                  {
                                    classification: ::String?,
                                    properties: Hash[::String, ::String]?
-                                 },
+                                 }
                                ],
                                domain_identifier: ::String,
                                identifier: ::String,
@@ -4154,60 +3914,13 @@ module Aws
                                     type_identifier: ::String?,
                                     type_revision: ::String?,
                                     content: ::String?
-                                  },
+                                  }
                                 ],
                                 ?schedule: {
                                   timezone: ("UTC" | "AFRICA_JOHANNESBURG" | "AMERICA_MONTREAL" | "AMERICA_SAO_PAULO" | "ASIA_BAHRAIN" | "ASIA_BANGKOK" | "ASIA_CALCUTTA" | "ASIA_DUBAI" | "ASIA_HONG_KONG" | "ASIA_JAKARTA" | "ASIA_KUALA_LUMPUR" | "ASIA_SEOUL" | "ASIA_SHANGHAI" | "ASIA_SINGAPORE" | "ASIA_TAIPEI" | "ASIA_TOKYO" | "AUSTRALIA_MELBOURNE" | "AUSTRALIA_SYDNEY" | "CANADA_CENTRAL" | "CET" | "CST6CDT" | "ETC_GMT" | "ETC_GMT0" | "ETC_GMT_ADD_0" | "ETC_GMT_ADD_1" | "ETC_GMT_ADD_10" | "ETC_GMT_ADD_11" | "ETC_GMT_ADD_12" | "ETC_GMT_ADD_2" | "ETC_GMT_ADD_3" | "ETC_GMT_ADD_4" | "ETC_GMT_ADD_5" | "ETC_GMT_ADD_6" | "ETC_GMT_ADD_7" | "ETC_GMT_ADD_8" | "ETC_GMT_ADD_9" | "ETC_GMT_NEG_0" | "ETC_GMT_NEG_1" | "ETC_GMT_NEG_10" | "ETC_GMT_NEG_11" | "ETC_GMT_NEG_12" | "ETC_GMT_NEG_13" | "ETC_GMT_NEG_14" | "ETC_GMT_NEG_2" | "ETC_GMT_NEG_3" | "ETC_GMT_NEG_4" | "ETC_GMT_NEG_5" | "ETC_GMT_NEG_6" | "ETC_GMT_NEG_7" | "ETC_GMT_NEG_8" | "ETC_GMT_NEG_9" | "EUROPE_DUBLIN" | "EUROPE_LONDON" | "EUROPE_PARIS" | "EUROPE_STOCKHOLM" | "EUROPE_ZURICH" | "ISRAEL" | "MEXICO_GENERAL" | "MST7MDT" | "PACIFIC_AUCKLAND" | "US_CENTRAL" | "US_EASTERN" | "US_MOUNTAIN" | "US_PACIFIC")?,
                                   schedule: ::String?
                                 },
-                                ?configuration: {
-                                  glue_run_configuration: {
-                                    data_access_role: ::String?,
-                                    relational_filter_configurations: Array[
-                                      {
-                                        database_name: ::String,
-                                        schema_name: ::String?,
-                                        filter_expressions: Array[
-                                          {
-                                            type: ("INCLUDE" | "EXCLUDE"),
-                                            expression: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ],
-                                    auto_import_data_quality_result: bool?,
-                                    catalog_name: ::String?
-                                  }?,
-                                  redshift_run_configuration: {
-                                    data_access_role: ::String?,
-                                    relational_filter_configurations: Array[
-                                      {
-                                        database_name: ::String,
-                                        schema_name: ::String?,
-                                        filter_expressions: Array[
-                                          {
-                                            type: ("INCLUDE" | "EXCLUDE"),
-                                            expression: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ],
-                                    redshift_credential_configuration: {
-                                      secret_manager_arn: ::String
-                                    }?,
-                                    redshift_storage: {
-                                      redshift_cluster_source: {
-                                        cluster_name: ::String
-                                      }?,
-                                      redshift_serverless_source: {
-                                        workgroup_name: ::String
-                                      }?
-                                    }?
-                                  }?,
-                                  sage_maker_run_configuration: {
-                                    tracking_assets: Hash[::String, Array[::String]]
-                                  }?
-                                },
+                                ?configuration: Params::data_source_configuration_input,
                                 ?recommendation: {
                                   enable_business_name_generation: bool?
                                 },
@@ -4302,7 +4015,7 @@ module Aws
                                   {
                                     name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?environment_configuration_name: ::String
                               ) -> _UpdateEnvironmentResponseSuccess
@@ -4356,15 +4069,7 @@ module Aws
                                             }?
                                           },
                                           ?user_parameters: Array[
-                                            {
-                                              key_name: ::String,
-                                              description: ::String?,
-                                              field_type: ::String,
-                                              default_value: ::String?,
-                                              is_editable: bool?,
-                                              is_optional: bool?,
-                                              is_update_supported: bool?
-                                            },
+                                            Params::custom_parameter
                                           ]
                                         ) -> _UpdateEnvironmentBlueprintResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentBlueprintResponseSuccess
@@ -4394,7 +4099,7 @@ module Aws
                                           {
                                             name: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?aws_account_id: ::String,
                                         ?aws_account_region: ::String
@@ -4467,6 +4172,51 @@ module Aws
                                 ) -> _UpdateGroupProfileResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateGroupProfileResponseSuccess
 
+      interface _UpdateNotebookResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateNotebookOutput]
+        def id: () -> ::String
+        def name: () -> ::String
+        def owning_project_id: () -> ::String
+        def domain_id: () -> ::String
+        def cell_order: () -> ::Array[Types::CellInformation]
+        def status: () -> ("ACTIVE" | "ARCHIVED")
+        def description: () -> ::String
+        def created_at: () -> ::Time
+        def created_by: () -> ::String
+        def updated_at: () -> ::Time
+        def updated_by: () -> ::String
+        def locked_by: () -> ::String
+        def locked_at: () -> ::Time
+        def lock_expires_at: () -> ::Time
+        def compute_id: () -> ::String
+        def metadata: () -> ::Hash[::String, ::String]
+        def parameters: () -> ::Hash[::String, ::String]
+        def environment_configuration: () -> Types::EnvironmentConfig
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DataZone/Client.html#update_notebook-instance_method
+      def update_notebook: (
+                             domain_identifier: ::String,
+                             identifier: ::String,
+                             ?description: ::String,
+                             ?status: ("ACTIVE" | "ARCHIVED"),
+                             ?name: ::String,
+                             ?cell_order: Array[
+                               {
+                               }
+                             ],
+                             ?metadata: Hash[::String, ::String],
+                             ?parameters: Hash[::String, ::String],
+                             ?environment_configuration: {
+                               image_version: ::String?,
+                               package_config: {
+                                 package_manager: ("UV"),
+                                 package_specification: ::String?
+                               }?
+                             },
+                             ?client_token: ::String
+                           ) -> _UpdateNotebookResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotebookResponseSuccess
+
       interface _UpdateProjectResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateProjectOutput]
         def domain_id: () -> ::String
@@ -4501,25 +4251,11 @@ module Aws
                                   {
                                     code: ::String?,
                                     message: ::String
-                                  },
+                                  }
                                 ]]?
                             },
                             ?user_parameters: Array[
-                              {
-                                environment_id: ::String?,
-                                environment_resolved_account: {
-                                  aws_account_id: ::String,
-                                  region_name: ::String,
-                                  source_account_pool_id: ::String?
-                                }?,
-                                environment_configuration_name: ::String?,
-                                environment_parameters: Array[
-                                  {
-                                    name: ::String?,
-                                    value: ::String?
-                                  },
-                                ]?
-                              },
+                              Params::environment_configuration_user_parameter
                             ],
                             ?project_profile_version: ::String
                           ) -> _UpdateProjectResponseSuccess
@@ -4553,45 +4289,12 @@ module Aws
                                         key: ::String,
                                         value: ::String,
                                         is_value_editable: bool
-                                      },
+                                      }
                                     ],
                                     ?allow_custom_project_resource_tags: bool,
                                     ?project_resource_tags_description: ::String,
                                     ?environment_configurations: Array[
-                                      {
-                                        name: ::String,
-                                        id: ::String?,
-                                        environment_blueprint_id: ::String,
-                                        description: ::String?,
-                                        deployment_mode: ("ON_CREATE" | "ON_DEMAND")?,
-                                        configuration_parameters: {
-                                          ssm_path: ::String?,
-                                          parameter_overrides: Array[
-                                            {
-                                              name: ::String?,
-                                              value: ::String?,
-                                              is_editable: bool?
-                                            },
-                                          ]?,
-                                          resolved_parameters: Array[
-                                            {
-                                              name: ::String?,
-                                              value: ::String?,
-                                              is_editable: bool?
-                                            },
-                                          ]?
-                                        }?,
-                                        aws_account: {
-                                          aws_account_id: ::String?,
-                                          aws_account_id_path: ::String?
-                                        }?,
-                                        account_pools: Array[::String]?,
-                                        aws_region: {
-                                          region_name: ::String?,
-                                          region_name_path: ::String?
-                                        }?,
-                                        deployment_order: ::Integer?
-                                      },
+                                      Params::environment_configuration
                                     ],
                                     ?domain_unit_identifier: ::String
                                   ) -> _UpdateProjectProfileResponseSuccess
@@ -4631,30 +4334,8 @@ module Aws
                          identifier: ::String,
                          ?name: ::String,
                          ?description: ::String,
-                         ?scope: {
-                           asset_type: {
-                             selection_mode: ("ALL" | "SPECIFIC"),
-                             specific_asset_types: Array[::String]?
-                           }?,
-                           data_product: bool?,
-                           project: {
-                             selection_mode: ("ALL" | "SPECIFIC"),
-                             specific_projects: Array[::String]?
-                           }?
-                         },
-                         ?detail: {
-                           metadata_form_enforcement_detail: {
-                             required_metadata_forms: Array[
-                               {
-                                 type_identifier: ::String,
-                                 type_revision: ::String
-                               },
-                             ]?
-                           }?,
-                           glossary_term_enforcement_detail: {
-                             required_glossary_term_ids: Array[::String]?
-                           }?
-                         },
+                         ?scope: Params::rule_scope,
+                         ?detail: Params::rule_detail,
                          ?include_child_domain_units: bool
                        ) -> _UpdateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess
@@ -4743,7 +4424,7 @@ module Aws
                                           {
                                             form_name: ::String,
                                             content: ::String
-                                          },
+                                          }
                                         ],
                                         ?manage_access_role: ::String,
                                         ?provider: ::String,

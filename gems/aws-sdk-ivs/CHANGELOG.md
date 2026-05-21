@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.86.0 (2026-05-18)
+------------------
+
+* Feature - Adds support for up to 3 mediaTailorPlaybackConfiguration objects in an ad configuration resource
+
 1.85.0 (2026-05-13)
 ------------------
 

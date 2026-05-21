@@ -100,30 +100,10 @@ module Aws
       def batch_update_exclusion_windows: (
                                             slo_ids: Array[::String],
                                             ?add_exclusion_windows: Array[
-                                              {
-                                                window: {
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                },
-                                                start_time: ::Time?,
-                                                recurrence_rule: {
-                                                  expression: ::String
-                                                }?,
-                                                reason: ::String?
-                                              },
+                                              Params::exclusion_window
                                             ],
                                             ?remove_exclusion_windows: Array[
-                                              {
-                                                window: {
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                },
-                                                start_time: ::Time?,
-                                                recurrence_rule: {
-                                                  expression: ::String
-                                                }?,
-                                                reason: ::String?
-                                              },
+                                              Params::exclusion_window
                                             ]
                                           ) -> _BatchUpdateExclusionWindowsResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateExclusionWindowsResponseSuccess
@@ -136,193 +116,19 @@ module Aws
       def create_service_level_objective: (
                                             name: ::String,
                                             ?description: ::String,
-                                            ?sli_config: {
-                                              sli_metric_config: {
-                                                key_attributes: Hash[::String, ::String]?,
-                                                operation_name: ::String?,
-                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
-                                                metric_name: ::String?,
-                                                statistic: ::String?,
-                                                period_seconds: ::Integer?,
-                                                metric_source: {
-                                                  metric_source_key_attributes: Hash[::String, ::String],
-                                                  metric_source_attributes: Hash[::String, ::String]?
-                                                }?,
-                                                metric_data_queries: Array[
-                                                  {
-                                                    id: ::String,
-                                                    metric_stat: {
-                                                      metric: {
-                                                        namespace: ::String?,
-                                                        metric_name: ::String?,
-                                                        dimensions: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: ::String
-                                                          },
-                                                        ]?
-                                                      },
-                                                      period: ::Integer,
-                                                      stat: ::String,
-                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                    }?,
-                                                    expression: ::String?,
-                                                    label: ::String?,
-                                                    return_data: bool?,
-                                                    period: ::Integer?,
-                                                    account_id: ::String?
-                                                  },
-                                                ]?,
-                                                dependency_config: {
-                                                  dependency_key_attributes: Hash[::String, ::String],
-                                                  dependency_operation_name: ::String
-                                                }?,
-                                                composite_sli_config: {
-                                                  selection_config: {
-                                                    type: ("EXPLICIT" | "PREFIX" | "REGEX"),
-                                                    pattern: ::String?
-                                                  },
-                                                  components: Array[
-                                                    {
-                                                      operation_name: ::String?
-                                                    },
-                                                  ]?
-                                                }?
-                                              },
-                                              metric_threshold: ::Float?,
-                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
-                                            },
-                                            ?request_based_sli_config: {
-                                              request_based_sli_metric_config: {
-                                                key_attributes: Hash[::String, ::String]?,
-                                                operation_name: ::String?,
-                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
-                                                total_request_count_metric: Array[
-                                                  {
-                                                    id: ::String,
-                                                    metric_stat: {
-                                                      metric: {
-                                                        namespace: ::String?,
-                                                        metric_name: ::String?,
-                                                        dimensions: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: ::String
-                                                          },
-                                                        ]?
-                                                      },
-                                                      period: ::Integer,
-                                                      stat: ::String,
-                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                    }?,
-                                                    expression: ::String?,
-                                                    label: ::String?,
-                                                    return_data: bool?,
-                                                    period: ::Integer?,
-                                                    account_id: ::String?
-                                                  },
-                                                ]?,
-                                                monitored_request_count_metric: {
-                                                  good_count_metric: Array[
-                                                    {
-                                                      id: ::String,
-                                                      metric_stat: {
-                                                        metric: {
-                                                          namespace: ::String?,
-                                                          metric_name: ::String?,
-                                                          dimensions: Array[
-                                                            {
-                                                              name: ::String,
-                                                              value: ::String
-                                                            },
-                                                          ]?
-                                                        },
-                                                        period: ::Integer,
-                                                        stat: ::String,
-                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                      }?,
-                                                      expression: ::String?,
-                                                      label: ::String?,
-                                                      return_data: bool?,
-                                                      period: ::Integer?,
-                                                      account_id: ::String?
-                                                    },
-                                                  ]?,
-                                                  bad_count_metric: Array[
-                                                    {
-                                                      id: ::String,
-                                                      metric_stat: {
-                                                        metric: {
-                                                          namespace: ::String?,
-                                                          metric_name: ::String?,
-                                                          dimensions: Array[
-                                                            {
-                                                              name: ::String,
-                                                              value: ::String
-                                                            },
-                                                          ]?
-                                                        },
-                                                        period: ::Integer,
-                                                        stat: ::String,
-                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                      }?,
-                                                      expression: ::String?,
-                                                      label: ::String?,
-                                                      return_data: bool?,
-                                                      period: ::Integer?,
-                                                      account_id: ::String?
-                                                    },
-                                                  ]?
-                                                }?,
-                                                dependency_config: {
-                                                  dependency_key_attributes: Hash[::String, ::String],
-                                                  dependency_operation_name: ::String
-                                                }?,
-                                                metric_source: {
-                                                  metric_source_key_attributes: Hash[::String, ::String],
-                                                  metric_source_attributes: Hash[::String, ::String]?
-                                                }?,
-                                                metric_name: ::String?,
-                                                composite_sli_config: {
-                                                  selection_config: {
-                                                    type: ("EXPLICIT" | "PREFIX" | "REGEX"),
-                                                    pattern: ::String?
-                                                  },
-                                                  components: Array[
-                                                    {
-                                                      operation_name: ::String?
-                                                    },
-                                                  ]?
-                                                }?
-                                              },
-                                              metric_threshold: ::Float?,
-                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
-                                            },
-                                            ?goal: {
-                                              interval: {
-                                                rolling_interval: {
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                }?,
-                                                calendar_interval: {
-                                                  start_time: ::Time,
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                }?
-                                              }?,
-                                              attainment_goal: ::Float?,
-                                              warning_threshold: ::Float?
-                                            },
+                                            ?sli_config: Params::service_level_indicator_config,
+                                            ?request_based_sli_config: Params::request_based_service_level_indicator_config,
+                                            ?goal: Params::goal,
                                             ?tags: Array[
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?burn_rate_configurations: Array[
                                               {
                                                 look_back_window_minutes: ::Integer
-                                              },
+                                              }
                                             ],
                                             ?create_recommended_slo: bool,
                                             ?auto_investigation_enabled: bool
@@ -410,7 +216,7 @@ module Aws
                                          canary_name: ::String
                                        }?
                                      }
-                                   },
+                                   }
                                  ],
                                  ?detail_level: ("BRIEF" | "DETAILED"),
                                  ?next_token: ::String,
@@ -557,7 +363,7 @@ module Aws
                                    {
                                      attribute_filter_name: ::String,
                                      attribute_filter_values: Array[::String]
-                                   },
+                                   }
                                  ]
                                ) -> _ListServiceStatesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServiceStatesResponseSuccess
@@ -601,7 +407,7 @@ module Aws
                                             grouping_name: ::String,
                                             grouping_source_keys: Array[::String]?,
                                             default_grouping_value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _PutGroupingConfigurationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutGroupingConfigurationResponseSuccess
@@ -624,7 +430,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -647,187 +453,13 @@ module Aws
       def update_service_level_objective: (
                                             id: ::String,
                                             ?description: ::String,
-                                            ?sli_config: {
-                                              sli_metric_config: {
-                                                key_attributes: Hash[::String, ::String]?,
-                                                operation_name: ::String?,
-                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
-                                                metric_name: ::String?,
-                                                statistic: ::String?,
-                                                period_seconds: ::Integer?,
-                                                metric_source: {
-                                                  metric_source_key_attributes: Hash[::String, ::String],
-                                                  metric_source_attributes: Hash[::String, ::String]?
-                                                }?,
-                                                metric_data_queries: Array[
-                                                  {
-                                                    id: ::String,
-                                                    metric_stat: {
-                                                      metric: {
-                                                        namespace: ::String?,
-                                                        metric_name: ::String?,
-                                                        dimensions: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: ::String
-                                                          },
-                                                        ]?
-                                                      },
-                                                      period: ::Integer,
-                                                      stat: ::String,
-                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                    }?,
-                                                    expression: ::String?,
-                                                    label: ::String?,
-                                                    return_data: bool?,
-                                                    period: ::Integer?,
-                                                    account_id: ::String?
-                                                  },
-                                                ]?,
-                                                dependency_config: {
-                                                  dependency_key_attributes: Hash[::String, ::String],
-                                                  dependency_operation_name: ::String
-                                                }?,
-                                                composite_sli_config: {
-                                                  selection_config: {
-                                                    type: ("EXPLICIT" | "PREFIX" | "REGEX"),
-                                                    pattern: ::String?
-                                                  },
-                                                  components: Array[
-                                                    {
-                                                      operation_name: ::String?
-                                                    },
-                                                  ]?
-                                                }?
-                                              },
-                                              metric_threshold: ::Float?,
-                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
-                                            },
-                                            ?request_based_sli_config: {
-                                              request_based_sli_metric_config: {
-                                                key_attributes: Hash[::String, ::String]?,
-                                                operation_name: ::String?,
-                                                metric_type: ("LATENCY" | "AVAILABILITY")?,
-                                                total_request_count_metric: Array[
-                                                  {
-                                                    id: ::String,
-                                                    metric_stat: {
-                                                      metric: {
-                                                        namespace: ::String?,
-                                                        metric_name: ::String?,
-                                                        dimensions: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: ::String
-                                                          },
-                                                        ]?
-                                                      },
-                                                      period: ::Integer,
-                                                      stat: ::String,
-                                                      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                    }?,
-                                                    expression: ::String?,
-                                                    label: ::String?,
-                                                    return_data: bool?,
-                                                    period: ::Integer?,
-                                                    account_id: ::String?
-                                                  },
-                                                ]?,
-                                                monitored_request_count_metric: {
-                                                  good_count_metric: Array[
-                                                    {
-                                                      id: ::String,
-                                                      metric_stat: {
-                                                        metric: {
-                                                          namespace: ::String?,
-                                                          metric_name: ::String?,
-                                                          dimensions: Array[
-                                                            {
-                                                              name: ::String,
-                                                              value: ::String
-                                                            },
-                                                          ]?
-                                                        },
-                                                        period: ::Integer,
-                                                        stat: ::String,
-                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                      }?,
-                                                      expression: ::String?,
-                                                      label: ::String?,
-                                                      return_data: bool?,
-                                                      period: ::Integer?,
-                                                      account_id: ::String?
-                                                    },
-                                                  ]?,
-                                                  bad_count_metric: Array[
-                                                    {
-                                                      id: ::String,
-                                                      metric_stat: {
-                                                        metric: {
-                                                          namespace: ::String?,
-                                                          metric_name: ::String?,
-                                                          dimensions: Array[
-                                                            {
-                                                              name: ::String,
-                                                              value: ::String
-                                                            },
-                                                          ]?
-                                                        },
-                                                        period: ::Integer,
-                                                        stat: ::String,
-                                                        unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
-                                                      }?,
-                                                      expression: ::String?,
-                                                      label: ::String?,
-                                                      return_data: bool?,
-                                                      period: ::Integer?,
-                                                      account_id: ::String?
-                                                    },
-                                                  ]?
-                                                }?,
-                                                dependency_config: {
-                                                  dependency_key_attributes: Hash[::String, ::String],
-                                                  dependency_operation_name: ::String
-                                                }?,
-                                                metric_source: {
-                                                  metric_source_key_attributes: Hash[::String, ::String],
-                                                  metric_source_attributes: Hash[::String, ::String]?
-                                                }?,
-                                                metric_name: ::String?,
-                                                composite_sli_config: {
-                                                  selection_config: {
-                                                    type: ("EXPLICIT" | "PREFIX" | "REGEX"),
-                                                    pattern: ::String?
-                                                  },
-                                                  components: Array[
-                                                    {
-                                                      operation_name: ::String?
-                                                    },
-                                                  ]?
-                                                }?
-                                              },
-                                              metric_threshold: ::Float?,
-                                              comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
-                                            },
-                                            ?goal: {
-                                              interval: {
-                                                rolling_interval: {
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                }?,
-                                                calendar_interval: {
-                                                  start_time: ::Time,
-                                                  duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
-                                                  duration: ::Integer
-                                                }?
-                                              }?,
-                                              attainment_goal: ::Float?,
-                                              warning_threshold: ::Float?
-                                            },
+                                            ?sli_config: Params::service_level_indicator_config,
+                                            ?request_based_sli_config: Params::request_based_service_level_indicator_config,
+                                            ?goal: Params::goal,
                                             ?burn_rate_configurations: Array[
                                               {
                                                 look_back_window_minutes: ::Integer
-                                              },
+                                              }
                                             ],
                                             ?auto_investigation_enabled: bool
                                           ) -> _UpdateServiceLevelObjectiveResponseSuccess

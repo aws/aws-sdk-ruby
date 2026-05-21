@@ -1,0 +1,144 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DevOpsAgent
+    module Params
+      type slack_transmission_target = {
+      ops_oncall_target: {
+        channel_name: ::String?,
+        channel_id: ::String
+      },
+      ops_sre_target: {
+        channel_name: ::String?,
+        channel_id: ::String
+      }?
+    }
+
+      type slack_configuration = {
+      workspace_id: ::String,
+      workspace_name: ::String,
+      transmission_target: Params::slack_transmission_target
+    }
+
+      type service_configuration = {
+      source_aws: {
+        account_id: ::String,
+        account_type: ("source"),
+        assumable_role_arn: ::String,
+        external_id: ::String?
+      }?,
+      aws: {
+        assumable_role_arn: ::String,
+        account_id: ::String,
+        account_type: ("monitor")
+      }?,
+      github: {
+        repo_name: ::String,
+        repo_id: ::String,
+        owner: ::String,
+        owner_type: ("organization" | "user"),
+        instance_identifier: ::String?
+      }?,
+      slack: Params::slack_configuration?,
+      dynatrace: {
+        env_id: ::String,
+        resources: Array[::String]?
+      }?,
+      servicenow: {
+        instance_id: ::String?,
+        auth_scopes: Array[::String]?
+      }?,
+      mcpservernewrelic: {
+        account_id: ::String,
+        endpoint: ::String
+      }?,
+      mcpserverdatadog: {
+      }?,
+      mcpserver: {
+        tools: Array[::String]
+      }?,
+      gitlab: {
+        project_id: ::String,
+        project_path: ::String,
+        instance_identifier: ::String?
+      }?,
+      mcpserversplunk: {
+      }?,
+      event_channel: {
+      }?,
+      azure: {
+        subscription_id: ::String
+      }?,
+      azuredevops: {
+        organization_name: ::String,
+        project_id: ::String,
+        project_name: ::String
+      }?,
+      mcpservergrafana: {
+        endpoint: ::String,
+        organization_id: ::String?,
+        tools: Array[::String]?
+      }?,
+      pagerduty: {
+        services: Array[::String],
+        customer_email: ::String
+      }?,
+      mcpserversigv4: {
+        tools: Array[::String]
+      }?
+    }
+
+      type mcp_server_o_auth_client_credentials_config = {
+      client_name: ::String?,
+      client_id: ::String,
+      exchange_parameters: Hash[::String, ::String]?,
+      client_secret: ::String,
+      exchange_url: ::String,
+      scopes: Array[::String]?
+    }
+
+      type mcp_server_o_auth_3_lo_config = {
+      client_name: ::String?,
+      client_id: ::String,
+      exchange_parameters: Hash[::String, ::String]?,
+      return_to_endpoint: ::String,
+      authorization_url: ::String,
+      exchange_url: ::String,
+      client_secret: ::String?,
+      support_code_challenge: bool?,
+      scopes: Array[::String]?
+    }
+
+      type mcp_server_authorization_config = {
+      o_auth_client_credentials: Params::mcp_server_o_auth_client_credentials_config?,
+      o_auth_3_lo: Params::mcp_server_o_auth_3_lo_config?,
+      api_key: {
+        api_key_name: ::String,
+        api_key_value: ::String,
+        api_key_header: ::String
+      }?,
+      bearer_token: {
+        token_name: ::String,
+        token_value: ::String,
+        authorization_header: ::String?
+      }?,
+      authorization_discovery: {
+        return_to_endpoint: ::String
+      }?
+    }
+
+      type mcp_server_details = {
+      name: ::String,
+      endpoint: ::String,
+      description: ::String?,
+      authorization_config: Params::mcp_server_authorization_config
+    }
+
+    end
+  end
+end

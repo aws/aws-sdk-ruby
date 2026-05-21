@@ -1,0 +1,54 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ManagedBlockchain
+    module Params
+      type member_log_publishing_configuration = {
+      fabric: {
+        ca_logs: {
+          cloudwatch: {
+            enabled: bool?
+          }?
+        }?
+      }?
+    }
+
+      type member_configuration = {
+      name: ::String,
+      description: ::String?,
+      framework_configuration: {
+        fabric: {
+          admin_username: ::String,
+          admin_password: ::String
+        }?
+      },
+      log_publishing_configuration: Params::member_log_publishing_configuration?,
+      tags: Hash[::String, ::String]?,
+      kms_key_arn: ::String?
+    }
+
+      type node_fabric_log_publishing_configuration = {
+      chaincode_logs: {
+        cloudwatch: {
+          enabled: bool?
+        }?
+      }?,
+      peer_logs: {
+        cloudwatch: {
+          enabled: bool?
+        }?
+      }?
+    }
+
+      type node_log_publishing_configuration = {
+      fabric: Params::node_fabric_log_publishing_configuration?
+    }
+
+    end
+  end
+end

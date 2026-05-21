@@ -100,7 +100,7 @@ module Aws
                                        id: ::String?,
                                        title: ::String,
                                        color: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -120,7 +120,7 @@ module Aws
                                        id: ::String,
                                        title: ::String,
                                        color: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -184,125 +184,7 @@ module Aws
                           instance_id: ::String,
                           title: ::String,
                           ?description: ::String,
-                          app_definition: {
-                            cards: Array[
-                              {
-                                text_input: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  placeholder: ::String?,
-                                  default_value: ::String?
-                                }?,
-                                q_query: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  prompt: ::String,
-                                  output_source: ("approved-sources" | "llm")?,
-                                  attribute_filter: {
-                                    and_all_filters: Array[
-                                      untyped,
-                                    ]?,
-                                    or_all_filters: Array[
-                                      untyped,
-                                    ]?,
-                                    not_filter: untyped?,
-                                    equals_to: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    contains_all: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    contains_any: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    greater_than: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    greater_than_or_equals: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    less_than: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    less_than_or_equals: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?
-                                  }?
-                                }?,
-                                q_plugin: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  prompt: ::String,
-                                  plugin_id: ::String,
-                                  action_identifier: ::String?
-                                }?,
-                                file_upload: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  filename: ::String?,
-                                  file_id: ::String?,
-                                  allow_override: bool?
-                                }?,
-                                form_input: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  metadata: {
-                                    schema: {
-                                    }
-                                  },
-                                  compute_mode: ("append" | "replace")?
-                                }?
-                              },
-                            ],
-                            initial_prompt: ::String?
-                          },
+                          app_definition: Params::app_definition_input,
                           ?tags: Hash[::String, ::String]
                         ) -> _CreateQAppResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateQAppResponseSuccess
@@ -532,7 +414,7 @@ module Aws
                                {
                                  body: ::String,
                                  type: ("USER" | "SYSTEM")
-                               },
+                               }
                              ]?,
                              problem_statement: ::String?
                            }
@@ -550,14 +432,7 @@ module Aws
                                  app_id: ::String,
                                  app_version: ::Integer,
                                  ?initial_values: Array[
-                                   {
-                                     card_id: ::String,
-                                     value: ::String,
-                                     submission_mutation: {
-                                       submission_id: ::String,
-                                       mutation_type: ("edit" | "delete" | "add")
-                                     }?
-                                   },
+                                   Params::card_value
                                  ],
                                  ?session_id: ::String,
                                  ?tags: Hash[::String, ::String]
@@ -645,125 +520,7 @@ module Aws
                           app_id: ::String,
                           ?title: ::String,
                           ?description: ::String,
-                          ?app_definition: {
-                            cards: Array[
-                              {
-                                text_input: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  placeholder: ::String?,
-                                  default_value: ::String?
-                                }?,
-                                q_query: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  prompt: ::String,
-                                  output_source: ("approved-sources" | "llm")?,
-                                  attribute_filter: {
-                                    and_all_filters: Array[
-                                      untyped,
-                                    ]?,
-                                    or_all_filters: Array[
-                                      untyped,
-                                    ]?,
-                                    not_filter: untyped?,
-                                    equals_to: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    contains_all: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    contains_any: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    greater_than: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    greater_than_or_equals: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    less_than: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?,
-                                    less_than_or_equals: {
-                                      name: ::String,
-                                      value: {
-                                        string_value: ::String?,
-                                        string_list_value: Array[::String]?,
-                                        long_value: ::Integer?,
-                                        date_value: ::Time?
-                                      }
-                                    }?
-                                  }?
-                                }?,
-                                q_plugin: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  prompt: ::String,
-                                  plugin_id: ::String,
-                                  action_identifier: ::String?
-                                }?,
-                                file_upload: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  filename: ::String?,
-                                  file_id: ::String?,
-                                  allow_override: bool?
-                                }?,
-                                form_input: {
-                                  title: ::String,
-                                  id: ::String,
-                                  type: ("text-input" | "q-query" | "file-upload" | "q-plugin" | "form-input"),
-                                  metadata: {
-                                    schema: {
-                                    }
-                                  },
-                                  compute_mode: ("append" | "replace")?
-                                }?
-                              },
-                            ],
-                            initial_prompt: ::String?
-                          }
+                          ?app_definition: Params::app_definition_input
                         ) -> _UpdateQAppResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQAppResponseSuccess
 
@@ -781,13 +538,13 @@ module Aws
                                         {
                                           action: ("read" | "write"),
                                           principal: ::String
-                                        },
+                                        }
                                       ],
                                       ?revoke_permissions: Array[
                                         {
                                           action: ("read" | "write"),
                                           principal: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateQAppPermissionsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQAppPermissionsResponseSuccess
@@ -802,14 +559,7 @@ module Aws
                                   instance_id: ::String,
                                   session_id: ::String,
                                   ?values: Array[
-                                    {
-                                      card_id: ::String,
-                                      value: ::String,
-                                      submission_mutation: {
-                                        submission_id: ::String,
-                                        mutation_type: ("edit" | "delete" | "add")
-                                      }?
-                                    },
+                                    Params::card_value
                                   ]
                                 ) -> _UpdateQAppSessionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateQAppSessionResponseSuccess

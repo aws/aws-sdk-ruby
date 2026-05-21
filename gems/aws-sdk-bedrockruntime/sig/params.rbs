@@ -1,0 +1,269 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module BedrockRuntime
+    module Params
+      type message = {
+      role: ("user" | "assistant"),
+      content: Array[
+        Params::content_block
+      ]
+    }
+
+      type image_block = {
+      format: ("png" | "jpeg" | "gif" | "webp"),
+      source: {
+        bytes: ::String?,
+        s3_location: {
+          uri: ::String,
+          bucket_owner: ::String?
+        }?
+      },
+      error: {
+        message: ::String?
+      }?
+    }
+
+      type document_source = {
+      bytes: ::String?,
+      s3_location: {
+        uri: ::String,
+        bucket_owner: ::String?
+      }?,
+      text: ::String?,
+      content: Array[
+        {
+          text: ::String?
+        }
+      ]?
+    }
+
+      type document_block = {
+      format: ("pdf" | "csv" | "doc" | "docx" | "xls" | "xlsx" | "html" | "txt" | "md")?,
+      name: ::String,
+      source: Params::document_source,
+      context: ::String?,
+      citations: {
+        enabled: bool
+      }?
+    }
+
+      type video_block = {
+      format: ("mkv" | "mov" | "mp4" | "webm" | "flv" | "mpeg" | "mpg" | "wmv" | "three_gp"),
+      source: {
+        bytes: ::String?,
+        s3_location: {
+          uri: ::String,
+          bucket_owner: ::String?
+        }?
+      }
+    }
+
+      type audio_block = {
+      format: ("mp3" | "opus" | "wav" | "aac" | "flac" | "mp4" | "ogg" | "mkv" | "mka" | "x-aac" | "m4a" | "mpeg" | "mpga" | "pcm" | "webm"),
+      source: {
+        bytes: ::String?,
+        s3_location: {
+          uri: ::String,
+          bucket_owner: ::String?
+        }?
+      },
+      error: {
+        message: ::String?
+      }?
+    }
+
+      type tool_result_block = {
+      tool_use_id: ::String,
+      content: Array[
+        Params::tool_result_content_block
+      ],
+      status: ("success" | "error")?,
+      type: ::String?
+    }
+
+      type guardrail_converse_content_block = {
+      text: {
+        text: ::String,
+        qualifiers: Array[("grounding_source" | "query" | "guard_content")]?
+      }?,
+      image: {
+        format: ("png" | "jpeg"),
+        source: {
+          bytes: ::String?
+        }
+      }?
+    }
+
+      type citations_content_block = {
+      content: Array[
+        {
+          text: ::String?
+        }
+      ]?,
+      citations: Array[
+        Params::citation
+      ]?
+    }
+
+      type search_result_block = {
+      source: ::String,
+      title: ::String,
+      content: Array[
+        {
+          text: ::String
+        }
+      ],
+      citations: {
+        enabled: bool
+      }?
+    }
+
+      type content_block = {
+      text: ::String?,
+      image: Params::image_block?,
+      document: Params::document_block?,
+      video: Params::video_block?,
+      audio: Params::audio_block?,
+      tool_use: {
+        tool_use_id: ::String,
+        name: ::String,
+        input: {
+        },
+        type: ("server_tool_use")?
+      }?,
+      tool_result: Params::tool_result_block?,
+      guard_content: Params::guardrail_converse_content_block?,
+      cache_point: {
+        type: ("default"),
+        ttl: ("5m" | "1h")?
+      }?,
+      reasoning_content: {
+        reasoning_text: {
+          text: ::String,
+          signature: ::String?
+        }?,
+        redacted_content: ::String?
+      }?,
+      citations_content: Params::citations_content_block?,
+      search_result: Params::search_result_block?
+    }
+
+      type tool_result_content_block = {
+      json: {
+      }?,
+      text: ::String?,
+      image: Params::image_block?,
+      document: Params::document_block?,
+      video: Params::video_block?,
+      search_result: Params::search_result_block?
+    }
+
+      type citation_location = {
+      web: {
+        url: ::String?,
+        domain: ::String?
+      }?,
+      document_char: {
+        document_index: ::Integer?,
+        start: ::Integer?,
+        end: ::Integer?
+      }?,
+      document_page: {
+        document_index: ::Integer?,
+        start: ::Integer?,
+        end: ::Integer?
+      }?,
+      document_chunk: {
+        document_index: ::Integer?,
+        start: ::Integer?,
+        end: ::Integer?
+      }?,
+      search_result_location: {
+        search_result_index: ::Integer?,
+        start: ::Integer?,
+        end: ::Integer?
+      }?
+    }
+
+      type citation = {
+      title: ::String?,
+      source: ::String?,
+      source_content: Array[
+        {
+          text: ::String?
+        }
+      ]?,
+      location: Params::citation_location?
+    }
+
+      type system_content_block = {
+      text: ::String?,
+      guard_content: Params::guardrail_converse_content_block?,
+      cache_point: {
+        type: ("default"),
+        ttl: ("5m" | "1h")?
+      }?
+    }
+
+      type tool_choice = {
+      auto: {
+      }?,
+      any: {
+      }?,
+      tool: {
+        name: ::String
+      }?
+    }
+
+      type tool_configuration = {
+      tools: Array[
+        Params::tool
+      ],
+      tool_choice: Params::tool_choice?
+    }
+
+      type tool_specification = {
+      name: ::String,
+      description: ::String?,
+      input_schema: {
+        json: {
+        }?
+      },
+      strict: bool?
+    }
+
+      type tool = {
+      tool_spec: Params::tool_specification?,
+      system_tool: {
+        name: ::String
+      }?,
+      cache_point: {
+        type: ("default"),
+        ttl: ("5m" | "1h")?
+      }?
+    }
+
+      type output_format = {
+      type: ("json_schema"),
+      structure: {
+        json_schema: {
+          schema: ::String,
+          name: ::String?,
+          description: ::String?
+        }?
+      }
+    }
+
+      type output_config = {
+      text_format: Params::output_format?
+    }
+
+    end
+  end
+end

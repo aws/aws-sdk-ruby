@@ -118,7 +118,7 @@ module Aws
                                                connector_arn: ::String,
                                                id: ::String,
                                                parameters: Hash[::String, ::String]?
-                                             },
+                                             }
                                            ]?
                                          },
                                          ?name: ::String,
@@ -142,7 +142,7 @@ module Aws
                                                      connector_arn: ::String,
                                                      id: ::String,
                                                      parameters: Hash[::String, ::String]?
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _CreateConnectorDefinitionVersionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConnectorDefinitionVersionResponseSuccess
@@ -167,7 +167,7 @@ module Aws
                                           id: ::String,
                                           sync_shadow: bool?,
                                           thing_arn: ::String
-                                        },
+                                        }
                                       ]?
                                     },
                                     ?name: ::String,
@@ -192,7 +192,7 @@ module Aws
                                                 id: ::String,
                                                 sync_shadow: bool?,
                                                 thing_arn: ::String
-                                              },
+                                              }
                                             ]
                                           ) -> _CreateCoreDefinitionVersionResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCoreDefinitionVersionResponseSuccess
@@ -232,7 +232,7 @@ module Aws
                                             id: ::String,
                                             sync_shadow: bool?,
                                             thing_arn: ::String
-                                          },
+                                          }
                                         ]?
                                       },
                                       ?name: ::String,
@@ -257,7 +257,7 @@ module Aws
                                                   id: ::String,
                                                   sync_shadow: bool?,
                                                   thing_arn: ::String
-                                                },
+                                                }
                                               ]
                                             ) -> _CreateDeviceDefinitionVersionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeviceDefinitionVersionResponseSuccess
@@ -276,46 +276,9 @@ module Aws
       def create_function_definition: (
                                         ?amzn_client_token: ::String,
                                         ?initial_version: {
-                                          default_config: {
-                                            execution: {
-                                              isolation_mode: ("GreengrassContainer" | "NoContainer")?,
-                                              run_as: {
-                                                gid: ::Integer?,
-                                                uid: ::Integer?
-                                              }?
-                                            }?
-                                          }?,
+                                          default_config: Params::function_default_config?,
                                           functions: Array[
-                                            {
-                                              function_arn: ::String?,
-                                              function_configuration: {
-                                                encoding_type: ("binary" | "json")?,
-                                                environment: {
-                                                  access_sysfs: bool?,
-                                                  execution: {
-                                                    isolation_mode: ("GreengrassContainer" | "NoContainer")?,
-                                                    run_as: {
-                                                      gid: ::Integer?,
-                                                      uid: ::Integer?
-                                                    }?
-                                                  }?,
-                                                  resource_access_policies: Array[
-                                                    {
-                                                      permission: ("ro" | "rw")?,
-                                                      resource_id: ::String
-                                                    },
-                                                  ]?,
-                                                  variables: Hash[::String, ::String]?
-                                                }?,
-                                                exec_args: ::String?,
-                                                executable: ::String?,
-                                                memory_size: ::Integer?,
-                                                pinned: bool?,
-                                                timeout: ::Integer?,
-                                                function_runtime_override: ::String?
-                                              }?,
-                                              id: ::String
-                                            },
+                                            Params::function
                                           ]?
                                         },
                                         ?name: ::String,
@@ -333,47 +296,10 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Greengrass/Client.html#create_function_definition_version-instance_method
       def create_function_definition_version: (
                                                 ?amzn_client_token: ::String,
-                                                ?default_config: {
-                                                  execution: {
-                                                    isolation_mode: ("GreengrassContainer" | "NoContainer")?,
-                                                    run_as: {
-                                                      gid: ::Integer?,
-                                                      uid: ::Integer?
-                                                    }?
-                                                  }?
-                                                },
+                                                ?default_config: Params::function_default_config,
                                                 function_definition_id: ::String,
                                                 ?functions: Array[
-                                                  {
-                                                    function_arn: ::String?,
-                                                    function_configuration: {
-                                                      encoding_type: ("binary" | "json")?,
-                                                      environment: {
-                                                        access_sysfs: bool?,
-                                                        execution: {
-                                                          isolation_mode: ("GreengrassContainer" | "NoContainer")?,
-                                                          run_as: {
-                                                            gid: ::Integer?,
-                                                            uid: ::Integer?
-                                                          }?
-                                                        }?,
-                                                        resource_access_policies: Array[
-                                                          {
-                                                            permission: ("ro" | "rw")?,
-                                                            resource_id: ::String
-                                                          },
-                                                        ]?,
-                                                        variables: Hash[::String, ::String]?
-                                                      }?,
-                                                      exec_args: ::String?,
-                                                      executable: ::String?,
-                                                      memory_size: ::Integer?,
-                                                      pinned: bool?,
-                                                      timeout: ::Integer?,
-                                                      function_runtime_override: ::String?
-                                                    }?,
-                                                    id: ::String
-                                                  },
+                                                  Params::function
                                                 ]
                                               ) -> _CreateFunctionDefinitionVersionResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFunctionDefinitionVersionResponseSuccess
@@ -458,7 +384,7 @@ module Aws
                                             level: ("DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL"),
                                             space: ::Integer?,
                                             type: ("FileSystem" | "AWSCloudWatch")
-                                          },
+                                          }
                                         ]?
                                       },
                                       ?name: ::String,
@@ -484,7 +410,7 @@ module Aws
                                                   level: ("DEBUG" | "INFO" | "WARN" | "ERROR" | "FATAL"),
                                                   space: ::Integer?,
                                                   type: ("FileSystem" | "AWSCloudWatch")
-                                                },
+                                                }
                                               ]
                                             ) -> _CreateLoggerDefinitionVersionResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggerDefinitionVersionResponseSuccess
@@ -504,47 +430,7 @@ module Aws
                                         ?amzn_client_token: ::String,
                                         ?initial_version: {
                                           resources: Array[
-                                            {
-                                              id: ::String,
-                                              name: ::String,
-                                              resource_data_container: {
-                                                local_device_resource_data: {
-                                                  group_owner_setting: {
-                                                    auto_add_group_owner: bool?,
-                                                    group_owner: ::String?
-                                                  }?,
-                                                  source_path: ::String?
-                                                }?,
-                                                local_volume_resource_data: {
-                                                  destination_path: ::String?,
-                                                  group_owner_setting: {
-                                                    auto_add_group_owner: bool?,
-                                                    group_owner: ::String?
-                                                  }?,
-                                                  source_path: ::String?
-                                                }?,
-                                                s3_machine_learning_model_resource_data: {
-                                                  destination_path: ::String?,
-                                                  owner_setting: {
-                                                    group_owner: ::String,
-                                                    group_permission: ("ro" | "rw")
-                                                  }?,
-                                                  s3_uri: ::String?
-                                                }?,
-                                                sage_maker_machine_learning_model_resource_data: {
-                                                  destination_path: ::String?,
-                                                  owner_setting: {
-                                                    group_owner: ::String,
-                                                    group_permission: ("ro" | "rw")
-                                                  }?,
-                                                  sage_maker_job_arn: ::String?
-                                                }?,
-                                                secrets_manager_secret_resource_data: {
-                                                  arn: ::String?,
-                                                  additional_staging_labels_to_download: Array[::String]?
-                                                }?
-                                              }
-                                            },
+                                            Params::resource
                                           ]?
                                         },
                                         ?name: ::String,
@@ -564,47 +450,7 @@ module Aws
                                                 ?amzn_client_token: ::String,
                                                 resource_definition_id: ::String,
                                                 ?resources: Array[
-                                                  {
-                                                    id: ::String,
-                                                    name: ::String,
-                                                    resource_data_container: {
-                                                      local_device_resource_data: {
-                                                        group_owner_setting: {
-                                                          auto_add_group_owner: bool?,
-                                                          group_owner: ::String?
-                                                        }?,
-                                                        source_path: ::String?
-                                                      }?,
-                                                      local_volume_resource_data: {
-                                                        destination_path: ::String?,
-                                                        group_owner_setting: {
-                                                          auto_add_group_owner: bool?,
-                                                          group_owner: ::String?
-                                                        }?,
-                                                        source_path: ::String?
-                                                      }?,
-                                                      s3_machine_learning_model_resource_data: {
-                                                        destination_path: ::String?,
-                                                        owner_setting: {
-                                                          group_owner: ::String,
-                                                          group_permission: ("ro" | "rw")
-                                                        }?,
-                                                        s3_uri: ::String?
-                                                      }?,
-                                                      sage_maker_machine_learning_model_resource_data: {
-                                                        destination_path: ::String?,
-                                                        owner_setting: {
-                                                          group_owner: ::String,
-                                                          group_permission: ("ro" | "rw")
-                                                        }?,
-                                                        sage_maker_job_arn: ::String?
-                                                      }?,
-                                                      secrets_manager_secret_resource_data: {
-                                                        arn: ::String?,
-                                                        additional_staging_labels_to_download: Array[::String]?
-                                                      }?
-                                                    }
-                                                  },
+                                                  Params::resource
                                                 ]
                                               ) -> _CreateResourceDefinitionVersionResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateResourceDefinitionVersionResponseSuccess
@@ -647,7 +493,7 @@ module Aws
                                                   source: ::String,
                                                   subject: ::String,
                                                   target: ::String
-                                                },
+                                                }
                                               ]?
                                             },
                                             ?name: ::String,
@@ -672,7 +518,7 @@ module Aws
                                                         source: ::String,
                                                         subject: ::String,
                                                         target: ::String
-                                                      },
+                                                      }
                                                     ]
                                                   ) -> _CreateSubscriptionDefinitionVersionResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubscriptionDefinitionVersionResponseSuccess
@@ -1452,7 +1298,7 @@ module Aws
                                           id: ::String?,
                                           metadata: ::String?,
                                           port_number: ::Integer?
-                                        },
+                                        }
                                       ],
                                       thing_name: ::String
                                     ) -> _UpdateConnectivityInfoResponseSuccess

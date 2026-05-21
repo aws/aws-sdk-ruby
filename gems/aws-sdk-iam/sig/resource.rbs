@@ -122,7 +122,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> InstanceProfile
                                  | (?Hash[Symbol, untyped]) -> InstanceProfile
@@ -137,7 +137,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> Policy
                        | (?Hash[Symbol, untyped]) -> Policy
@@ -154,7 +154,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> Role
                      | (?Hash[Symbol, untyped]) -> Role
@@ -167,7 +167,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?assertion_encryption_mode: ("Required" | "Allowed"),
                                   ?add_private_key: ::String
@@ -185,7 +185,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> ServerCertificate
                                    | (?Hash[Symbol, untyped]) -> ServerCertificate
@@ -206,7 +206,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> User
                      | (?Hash[Symbol, untyped]) -> User
@@ -219,7 +219,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> VirtualMfaDevice
                                    | (?Hash[Symbol, untyped]) -> VirtualMfaDevice

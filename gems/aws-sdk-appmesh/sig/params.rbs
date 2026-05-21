@@ -1,0 +1,681 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppMesh
+    module Params
+      type grpc_gateway_route_action = {
+      rewrite: {
+        hostname: {
+          default_target_hostname: ("ENABLED" | "DISABLED")?
+        }?
+      }?,
+      target: {
+        port: ::Integer?,
+        virtual_service: {
+          virtual_service_name: ::String
+        }
+      }
+    }
+
+      type grpc_gateway_route_match = {
+      hostname: {
+        exact: ::String?,
+        suffix: ::String?
+      }?,
+      metadata: Array[
+        Params::grpc_gateway_route_metadata
+      ]?,
+      port: ::Integer?,
+      service_name: ::String?
+    }
+
+      type grpc_gateway_route = {
+      action: Params::grpc_gateway_route_action,
+      match: Params::grpc_gateway_route_match
+    }
+
+      type http_gateway_route_rewrite = {
+      hostname: {
+        default_target_hostname: ("ENABLED" | "DISABLED")?
+      }?,
+      path: {
+        exact: ::String?
+      }?,
+      prefix: {
+        default_prefix: ("ENABLED" | "DISABLED")?,
+        value: ::String?
+      }?
+    }
+
+      type http_gateway_route_action = {
+      rewrite: Params::http_gateway_route_rewrite?,
+      target: {
+        port: ::Integer?,
+        virtual_service: {
+          virtual_service_name: ::String
+        }
+      }
+    }
+
+      type http_gateway_route_match = {
+      headers: Array[
+        Params::http_gateway_route_header
+      ]?,
+      hostname: {
+        exact: ::String?,
+        suffix: ::String?
+      }?,
+      method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+      path: {
+        exact: ::String?,
+        regex: ::String?
+      }?,
+      port: ::Integer?,
+      prefix: ::String?,
+      query_parameters: Array[
+        {
+          match: {
+            exact: ::String?
+          }?,
+          name: ::String
+        }
+      ]?
+    }
+
+      type http_gateway_route = {
+      action: Params::http_gateway_route_action,
+      match: Params::http_gateway_route_match
+    }
+
+      type gateway_route_spec = {
+      grpc_route: Params::grpc_gateway_route?,
+      http2_route: Params::http_gateway_route?,
+      http_route: Params::http_gateway_route?,
+      priority: ::Integer?
+    }
+
+      type grpc_metadata_match_method = {
+      exact: ::String?,
+      prefix: ::String?,
+      range: {
+        end: ::Integer,
+        start: ::Integer
+      }?,
+      regex: ::String?,
+      suffix: ::String?
+    }
+
+      type grpc_gateway_route_metadata = {
+      invert: bool?,
+      match: Params::grpc_metadata_match_method?,
+      name: ::String
+    }
+
+      type header_match_method = {
+      exact: ::String?,
+      prefix: ::String?,
+      range: {
+        end: ::Integer,
+        start: ::Integer
+      }?,
+      regex: ::String?,
+      suffix: ::String?
+    }
+
+      type http_gateway_route_header = {
+      invert: bool?,
+      match: Params::header_match_method?,
+      name: ::String
+    }
+
+      type mesh_spec = {
+      egress_filter: {
+        type: ("ALLOW_ALL" | "DROP_ALL")
+      }?,
+      service_discovery: {
+        ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?
+      }?
+    }
+
+      type grpc_route_match = {
+      metadata: Array[
+        Params::grpc_route_metadata
+      ]?,
+      method_name: ::String?,
+      port: ::Integer?,
+      service_name: ::String?
+    }
+
+      type grpc_retry_policy = {
+      grpc_retry_events: Array[("cancelled" | "deadline-exceeded" | "internal" | "resource-exhausted" | "unavailable")]?,
+      http_retry_events: Array[::String]?,
+      max_retries: ::Integer,
+      per_retry_timeout: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      },
+      tcp_retry_events: Array[("connection-error")]?
+    }
+
+      type grpc_timeout = {
+      idle: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      }?,
+      per_request: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      }?
+    }
+
+      type grpc_route = {
+      action: {
+        weighted_targets: Array[
+          {
+            port: ::Integer?,
+            virtual_node: ::String,
+            weight: ::Integer
+          }
+        ]
+      },
+      match: Params::grpc_route_match,
+      retry_policy: Params::grpc_retry_policy?,
+      timeout: Params::grpc_timeout?
+    }
+
+      type http_route_match = {
+      headers: Array[
+        Params::http_route_header
+      ]?,
+      method: ("GET" | "HEAD" | "POST" | "PUT" | "DELETE" | "CONNECT" | "OPTIONS" | "TRACE" | "PATCH")?,
+      path: {
+        exact: ::String?,
+        regex: ::String?
+      }?,
+      port: ::Integer?,
+      prefix: ::String?,
+      query_parameters: Array[
+        {
+          match: {
+            exact: ::String?
+          }?,
+          name: ::String
+        }
+      ]?,
+      scheme: ("http" | "https")?
+    }
+
+      type http_retry_policy = {
+      http_retry_events: Array[::String]?,
+      max_retries: ::Integer,
+      per_retry_timeout: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      },
+      tcp_retry_events: Array[("connection-error")]?
+    }
+
+      type http_timeout = {
+      idle: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      }?,
+      per_request: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      }?
+    }
+
+      type http_route = {
+      action: {
+        weighted_targets: Array[
+          {
+            port: ::Integer?,
+            virtual_node: ::String,
+            weight: ::Integer
+          }
+        ]
+      },
+      match: Params::http_route_match,
+      retry_policy: Params::http_retry_policy?,
+      timeout: Params::http_timeout?
+    }
+
+      type tcp_route = {
+      action: {
+        weighted_targets: Array[
+          {
+            port: ::Integer?,
+            virtual_node: ::String,
+            weight: ::Integer
+          }
+        ]
+      },
+      match: {
+        port: ::Integer?
+      }?,
+      timeout: {
+        idle: {
+          unit: ("s" | "ms")?,
+          value: ::Integer?
+        }?
+      }?
+    }
+
+      type route_spec = {
+      grpc_route: Params::grpc_route?,
+      http2_route: Params::http_route?,
+      http_route: Params::http_route?,
+      priority: ::Integer?,
+      tcp_route: Params::tcp_route?
+    }
+
+      type grpc_route_metadata_match_method = {
+      exact: ::String?,
+      prefix: ::String?,
+      range: {
+        end: ::Integer,
+        start: ::Integer
+      }?,
+      regex: ::String?,
+      suffix: ::String?
+    }
+
+      type grpc_route_metadata = {
+      invert: bool?,
+      match: Params::grpc_route_metadata_match_method?,
+      name: ::String
+    }
+
+      type http_route_header = {
+      invert: bool?,
+      match: Params::header_match_method?,
+      name: ::String
+    }
+
+      type virtual_gateway_client_tls_certificate = {
+      file: {
+        certificate_chain: ::String,
+        private_key: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type virtual_gateway_tls_validation_context_trust = {
+      acm: {
+        certificate_authority_arns: Array[::String]
+      }?,
+      file: {
+        certificate_chain: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type virtual_gateway_tls_validation_context = {
+      subject_alternative_names: {
+        match: {
+          exact: Array[::String]
+        }
+      }?,
+      trust: Params::virtual_gateway_tls_validation_context_trust
+    }
+
+      type virtual_gateway_client_policy_tls = {
+      certificate: Params::virtual_gateway_client_tls_certificate?,
+      enforce: bool?,
+      ports: Array[::Integer]?,
+      validation: Params::virtual_gateway_tls_validation_context
+    }
+
+      type virtual_gateway_client_policy = {
+      tls: Params::virtual_gateway_client_policy_tls?
+    }
+
+      type virtual_gateway_backend_defaults = {
+      client_policy: Params::virtual_gateway_client_policy?
+    }
+
+      type virtual_gateway_file_access_log = {
+      format: {
+        json: Array[
+          {
+            key: ::String,
+            value: ::String
+          }
+        ]?,
+        text: ::String?
+      }?,
+      path: ::String
+    }
+
+      type virtual_gateway_access_log = {
+      file: Params::virtual_gateway_file_access_log?
+    }
+
+      type virtual_gateway_logging = {
+      access_log: Params::virtual_gateway_access_log?
+    }
+
+      type virtual_gateway_spec = {
+      backend_defaults: Params::virtual_gateway_backend_defaults?,
+      listeners: Array[
+        Params::virtual_gateway_listener
+      ],
+      logging: Params::virtual_gateway_logging?
+    }
+
+      type virtual_gateway_connection_pool = {
+      grpc: {
+        max_requests: ::Integer
+      }?,
+      http: {
+        max_connections: ::Integer,
+        max_pending_requests: ::Integer?
+      }?,
+      http2: {
+        max_requests: ::Integer
+      }?
+    }
+
+      type virtual_gateway_health_check_policy = {
+      healthy_threshold: ::Integer,
+      interval_millis: ::Integer,
+      path: ::String?,
+      port: ::Integer?,
+      protocol: ("http" | "http2" | "grpc"),
+      timeout_millis: ::Integer,
+      unhealthy_threshold: ::Integer
+    }
+
+      type virtual_gateway_listener_tls_certificate = {
+      acm: {
+        certificate_arn: ::String
+      }?,
+      file: {
+        certificate_chain: ::String,
+        private_key: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type virtual_gateway_listener_tls_validation_context_trust = {
+      file: {
+        certificate_chain: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type virtual_gateway_listener_tls_validation_context = {
+      subject_alternative_names: {
+        match: {
+          exact: Array[::String]
+        }
+      }?,
+      trust: Params::virtual_gateway_listener_tls_validation_context_trust
+    }
+
+      type virtual_gateway_listener_tls = {
+      certificate: Params::virtual_gateway_listener_tls_certificate,
+      mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+      validation: Params::virtual_gateway_listener_tls_validation_context?
+    }
+
+      type virtual_gateway_listener = {
+      connection_pool: Params::virtual_gateway_connection_pool?,
+      health_check: Params::virtual_gateway_health_check_policy?,
+      port_mapping: {
+        port: ::Integer,
+        protocol: ("http" | "http2" | "grpc")
+      },
+      tls: Params::virtual_gateway_listener_tls?
+    }
+
+      type client_tls_certificate = {
+      file: {
+        certificate_chain: ::String,
+        private_key: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type tls_validation_context_trust = {
+      acm: {
+        certificate_authority_arns: Array[::String]
+      }?,
+      file: {
+        certificate_chain: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type tls_validation_context = {
+      subject_alternative_names: {
+        match: {
+          exact: Array[::String]
+        }
+      }?,
+      trust: Params::tls_validation_context_trust
+    }
+
+      type client_policy_tls = {
+      certificate: Params::client_tls_certificate?,
+      enforce: bool?,
+      ports: Array[::Integer]?,
+      validation: Params::tls_validation_context
+    }
+
+      type client_policy = {
+      tls: Params::client_policy_tls?
+    }
+
+      type backend_defaults = {
+      client_policy: Params::client_policy?
+    }
+
+      type file_access_log = {
+      format: {
+        json: Array[
+          {
+            key: ::String,
+            value: ::String
+          }
+        ]?,
+        text: ::String?
+      }?,
+      path: ::String
+    }
+
+      type access_log = {
+      file: Params::file_access_log?
+    }
+
+      type logging = {
+      access_log: Params::access_log?
+    }
+
+      type aws_cloud_map_service_discovery = {
+      attributes: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?,
+      ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+      namespace_name: ::String,
+      service_name: ::String
+    }
+
+      type service_discovery = {
+      aws_cloud_map: Params::aws_cloud_map_service_discovery?,
+      dns: {
+        hostname: ::String,
+        ip_preference: ("IPv6_PREFERRED" | "IPv4_PREFERRED" | "IPv4_ONLY" | "IPv6_ONLY")?,
+        response_type: ("LOADBALANCER" | "ENDPOINTS")?
+      }?
+    }
+
+      type virtual_node_spec = {
+      backend_defaults: Params::backend_defaults?,
+      backends: Array[
+        Params::backend
+      ]?,
+      listeners: Array[
+        Params::listener
+      ]?,
+      logging: Params::logging?,
+      service_discovery: Params::service_discovery?
+    }
+
+      type virtual_service_backend = {
+      client_policy: Params::client_policy?,
+      virtual_service_name: ::String
+    }
+
+      type backend = {
+      virtual_service: Params::virtual_service_backend?
+    }
+
+      type virtual_node_connection_pool = {
+      grpc: {
+        max_requests: ::Integer
+      }?,
+      http: {
+        max_connections: ::Integer,
+        max_pending_requests: ::Integer?
+      }?,
+      http2: {
+        max_requests: ::Integer
+      }?,
+      tcp: {
+        max_connections: ::Integer
+      }?
+    }
+
+      type health_check_policy = {
+      healthy_threshold: ::Integer,
+      interval_millis: ::Integer,
+      path: ::String?,
+      port: ::Integer?,
+      protocol: ("http" | "tcp" | "http2" | "grpc"),
+      timeout_millis: ::Integer,
+      unhealthy_threshold: ::Integer
+    }
+
+      type outlier_detection = {
+      base_ejection_duration: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      },
+      interval: {
+        unit: ("s" | "ms")?,
+        value: ::Integer?
+      },
+      max_ejection_percent: ::Integer,
+      max_server_errors: ::Integer
+    }
+
+      type listener_timeout = {
+      grpc: Params::grpc_timeout?,
+      http: Params::http_timeout?,
+      http2: Params::http_timeout?,
+      tcp: {
+        idle: {
+          unit: ("s" | "ms")?,
+          value: ::Integer?
+        }?
+      }?
+    }
+
+      type listener_tls_certificate = {
+      acm: {
+        certificate_arn: ::String
+      }?,
+      file: {
+        certificate_chain: ::String,
+        private_key: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type listener_tls_validation_context_trust = {
+      file: {
+        certificate_chain: ::String
+      }?,
+      sds: {
+        secret_name: ::String
+      }?
+    }
+
+      type listener_tls_validation_context = {
+      subject_alternative_names: {
+        match: {
+          exact: Array[::String]
+        }
+      }?,
+      trust: Params::listener_tls_validation_context_trust
+    }
+
+      type listener_tls = {
+      certificate: Params::listener_tls_certificate,
+      mode: ("STRICT" | "PERMISSIVE" | "DISABLED"),
+      validation: Params::listener_tls_validation_context?
+    }
+
+      type listener = {
+      connection_pool: Params::virtual_node_connection_pool?,
+      health_check: Params::health_check_policy?,
+      outlier_detection: Params::outlier_detection?,
+      port_mapping: {
+        port: ::Integer,
+        protocol: ("http" | "tcp" | "http2" | "grpc")
+      },
+      timeout: Params::listener_timeout?,
+      tls: Params::listener_tls?
+    }
+
+      type virtual_router_spec = {
+      listeners: Array[
+        {
+          port_mapping: {
+            port: ::Integer,
+            protocol: ("http" | "tcp" | "http2" | "grpc")
+          }
+        }
+      ]?
+    }
+
+      type virtual_service_provider = {
+      virtual_node: {
+        virtual_node_name: ::String
+      }?,
+      virtual_router: {
+        virtual_router_name: ::String
+      }?
+    }
+
+      type virtual_service_spec = {
+      provider: Params::virtual_service_provider?
+    }
+
+    end
+  end
+end

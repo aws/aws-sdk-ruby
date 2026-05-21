@@ -105,27 +105,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#create_configuration_set_event_destination-instance_method
       def create_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
-                                                        event_destination: {
-                                                          name: ::String,
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")],
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("messageTag" | "emailHeader" | "linkTag"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination
                                                       ) -> _CreateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
 
@@ -174,56 +154,7 @@ module Aws
       def create_receipt_rule: (
                                  rule_set_name: ::String,
                                  ?after: ::String,
-                                 rule: {
-                                   name: ::String,
-                                   enabled: bool?,
-                                   tls_policy: ("Require" | "Optional")?,
-                                   recipients: Array[::String]?,
-                                   actions: Array[
-                                     {
-                                       s3_action: {
-                                         topic_arn: ::String?,
-                                         bucket_name: ::String,
-                                         object_key_prefix: ::String?,
-                                         kms_key_arn: ::String?,
-                                         iam_role_arn: ::String?
-                                       }?,
-                                       bounce_action: {
-                                         topic_arn: ::String?,
-                                         smtp_reply_code: ::String,
-                                         status_code: ::String?,
-                                         message: ::String,
-                                         sender: ::String
-                                       }?,
-                                       workmail_action: {
-                                         topic_arn: ::String?,
-                                         organization_arn: ::String
-                                       }?,
-                                       lambda_action: {
-                                         topic_arn: ::String?,
-                                         function_arn: ::String,
-                                         invocation_type: ("Event" | "RequestResponse")?
-                                       }?,
-                                       stop_action: {
-                                         scope: ("RuleSet"),
-                                         topic_arn: ::String?
-                                       }?,
-                                       add_header_action: {
-                                         header_name: ::String,
-                                         header_value: ::String
-                                       }?,
-                                       sns_action: {
-                                         topic_arn: ::String,
-                                         encoding: ("UTF-8" | "Base64")?
-                                       }?,
-                                       connect_action: {
-                                         instance_arn: ::String,
-                                         iam_role_arn: ::String
-                                       }?
-                                     },
-                                   ]?,
-                                   scan_enabled: bool?
-                                 }
+                                 rule: Params::receipt_rule
                                ) -> _CreateReceiptRuleResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateReceiptRuleResponseSuccess
 
@@ -631,7 +562,7 @@ module Aws
                              {
                                name: ::String,
                                value: ::String
-                             },
+                             }
                            ]?
                          },
                          bounced_recipient_info_list: Array[
@@ -650,10 +581,10 @@ module Aws
                                  {
                                    name: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]?
                              }?
-                           },
+                           }
                          ],
                          ?bounce_sender_arn: ::String
                        ) -> _SendBounceResponseSuccess
@@ -675,7 +606,7 @@ module Aws
                                          {
                                            name: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ],
                                        template: ::String,
                                        ?template_arn: ::String,
@@ -691,10 +622,10 @@ module Aws
                                              {
                                                name: ::String,
                                                value: ::String
-                                             },
+                                             }
                                            ]?,
                                            replacement_template_data: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _SendBulkTemplatedEmailResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendBulkTemplatedEmailResponseSuccess
@@ -747,7 +678,7 @@ module Aws
                           {
                             name: ::String,
                             value: ::String
-                          },
+                          }
                         ],
                         ?configuration_set_name: ::String
                       ) -> _SendEmailResponseSuccess
@@ -771,7 +702,7 @@ module Aws
                               {
                                 name: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?configuration_set_name: ::String
                           ) -> _SendRawEmailResponseSuccess
@@ -797,7 +728,7 @@ module Aws
                                     {
                                       name: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?configuration_set_name: ::String,
                                   template: ::String,
@@ -902,27 +833,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_configuration_set_event_destination-instance_method
       def update_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
-                                                        event_destination: {
-                                                          name: ::String,
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")],
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("messageTag" | "emailHeader" | "linkTag"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination
                                                       ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
 
@@ -969,56 +880,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SES/Client.html#update_receipt_rule-instance_method
       def update_receipt_rule: (
                                  rule_set_name: ::String,
-                                 rule: {
-                                   name: ::String,
-                                   enabled: bool?,
-                                   tls_policy: ("Require" | "Optional")?,
-                                   recipients: Array[::String]?,
-                                   actions: Array[
-                                     {
-                                       s3_action: {
-                                         topic_arn: ::String?,
-                                         bucket_name: ::String,
-                                         object_key_prefix: ::String?,
-                                         kms_key_arn: ::String?,
-                                         iam_role_arn: ::String?
-                                       }?,
-                                       bounce_action: {
-                                         topic_arn: ::String?,
-                                         smtp_reply_code: ::String,
-                                         status_code: ::String?,
-                                         message: ::String,
-                                         sender: ::String
-                                       }?,
-                                       workmail_action: {
-                                         topic_arn: ::String?,
-                                         organization_arn: ::String
-                                       }?,
-                                       lambda_action: {
-                                         topic_arn: ::String?,
-                                         function_arn: ::String,
-                                         invocation_type: ("Event" | "RequestResponse")?
-                                       }?,
-                                       stop_action: {
-                                         scope: ("RuleSet"),
-                                         topic_arn: ::String?
-                                       }?,
-                                       add_header_action: {
-                                         header_name: ::String,
-                                         header_value: ::String
-                                       }?,
-                                       sns_action: {
-                                         topic_arn: ::String,
-                                         encoding: ("UTF-8" | "Base64")?
-                                       }?,
-                                       connect_action: {
-                                         instance_arn: ::String,
-                                         iam_role_arn: ::String
-                                       }?
-                                     },
-                                   ]?,
-                                   scan_enabled: bool?
-                                 }
+                                 rule: Params::receipt_rule
                                ) -> _UpdateReceiptRuleResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateReceiptRuleResponseSuccess
 

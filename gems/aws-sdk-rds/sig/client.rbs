@@ -112,7 +112,7 @@ module Aws
                                     {
                                       key: ::String?,
                                       value: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -199,7 +199,7 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]
                                            ) -> _CopyDBClusterParameterGroupResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBClusterParameterGroupResponseSuccess
@@ -219,7 +219,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ],
                                       ?source_region: ::String
                                     ) -> _CopyDBClusterSnapshotResponseSuccess
@@ -238,7 +238,7 @@ module Aws
                                        {
                                          key: ::String?,
                                          value: ::String?
-                                       },
+                                       }
                                      ]
                                    ) -> _CopyDBParameterGroupResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBParameterGroupResponseSuccess
@@ -256,7 +256,7 @@ module Aws
                                 {
                                   key: ::String?,
                                   value: ::String?
-                                },
+                                }
                               ],
                               ?copy_tags: bool,
                               ?pre_signed_url: ::String,
@@ -282,7 +282,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ]
                              ) -> _CopyOptionGroupResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyOptionGroupResponseSuccess
@@ -302,7 +302,7 @@ module Aws
                                             {
                                               key: ::String?,
                                               value: ::String?
-                                            },
+                                            }
                                           ],
                                           ?target_db_instance_class: ::String,
                                           ?upgrade_target_storage_config: bool,
@@ -370,7 +370,7 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]
                                            ) -> _CreateCustomDBEngineVersionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomDBEngineVersionResponseSuccess
@@ -402,7 +402,7 @@ module Aws
                                  {
                                    key: ::String?,
                                    value: ::String?
-                                 },
+                                 }
                                ],
                                ?storage_encrypted: bool,
                                ?kms_key_id: ::String,
@@ -411,14 +411,7 @@ module Aws
                                ?backtrack_window: ::Integer,
                                ?enable_cloudwatch_logs_exports: Array[::String],
                                ?engine_mode: ::String,
-                               ?scaling_configuration: {
-                                 min_capacity: ::Integer?,
-                                 max_capacity: ::Integer?,
-                                 auto_pause: bool?,
-                                 seconds_until_auto_pause: ::Integer?,
-                                 timeout_action: ::String?,
-                                 seconds_before_timeout: ::Integer?
-                               },
+                               ?scaling_configuration: Params::scaling_configuration,
                                ?rds_custom_cluster_configuration: {
                                  interconnect_subnet_id: ::String?,
                                  transit_gateway_multicast_domain_id: ::String?,
@@ -464,9 +457,9 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ]?
-                                 },
+                                 }
                                ],
                                ?master_user_authentication_type: ("password" | "iam-db-auth"),
                                ?with_express_configuration: bool,
@@ -498,7 +491,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateDBClusterEndpointResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterEndpointResponseSuccess
@@ -516,7 +509,7 @@ module Aws
                                                  {
                                                    key: ::String?,
                                                    value: ::String?
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateDBClusterParameterGroupResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterParameterGroupResponseSuccess
@@ -533,7 +526,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateDBClusterSnapshotResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBClusterSnapshotResponseSuccess
@@ -574,7 +567,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?db_cluster_identifier: ::String,
                                 ?storage_type: ::String,
@@ -603,7 +596,7 @@ module Aws
                                   {
                                     name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?deletion_protection: bool,
                                 ?max_allocated_storage: ::Integer,
@@ -619,14 +612,7 @@ module Aws
                                 ?dedicated_log_volume: bool,
                                 ?engine_lifecycle_support: ::String,
                                 ?additional_storage_volumes: Array[
-                                  {
-                                    volume_name: ::String,
-                                    allocated_storage: ::Integer?,
-                                    iops: ::Integer?,
-                                    max_allocated_storage: ::Integer?,
-                                    storage_throughput: ::Integer?,
-                                    storage_type: ::String?
-                                  },
+                                  Params::additional_storage_volume
                                 ],
                                 ?tag_specifications: Array[
                                   {
@@ -635,9 +621,9 @@ module Aws
                                       {
                                         key: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ],
                                 ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _CreateDBInstanceResponseSuccess
@@ -665,7 +651,7 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ],
                                              ?db_subnet_group_name: ::String,
                                              ?vpc_security_group_ids: Array[::String],
@@ -685,7 +671,7 @@ module Aws
                                                {
                                                  name: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ],
                                              ?use_default_processor_features: bool,
                                              ?deletion_protection: bool,
@@ -707,14 +693,7 @@ module Aws
                                              ?upgrade_storage_config: bool,
                                              ?ca_certificate_identifier: ::String,
                                              ?additional_storage_volumes: Array[
-                                               {
-                                                 volume_name: ::String,
-                                                 allocated_storage: ::Integer?,
-                                                 iops: ::Integer?,
-                                                 max_allocated_storage: ::Integer?,
-                                                 storage_throughput: ::Integer?,
-                                                 storage_type: ::String?
-                                               },
+                                               Params::additional_storage_volume
                                              ],
                                              ?tag_specifications: Array[
                                                {
@@ -723,9 +702,9 @@ module Aws
                                                    {
                                                      key: ::String?,
                                                      value: ::String?
-                                                   },
+                                                   }
                                                  ]?
-                                               },
+                                               }
                                              ],
                                              ?source_region: ::String
                                            ) -> _CreateDBInstanceReadReplicaResponseSuccess
@@ -744,7 +723,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateDBParameterGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBParameterGroupResponseSuccess
@@ -759,14 +738,7 @@ module Aws
                              engine_family: ("MYSQL" | "POSTGRESQL" | "SQLSERVER"),
                              ?default_auth_scheme: ("IAM_AUTH" | "NONE"),
                              ?auth: Array[
-                               {
-                                 description: ::String?,
-                                 user_name: ::String?,
-                                 auth_scheme: ("SECRETS")?,
-                                 secret_arn: ::String?,
-                                 iam_auth: ("DISABLED" | "REQUIRED" | "ENABLED")?,
-                                 client_password_auth_type: ("MYSQL_NATIVE_PASSWORD" | "MYSQL_CACHING_SHA2_PASSWORD" | "POSTGRES_SCRAM_SHA_256" | "POSTGRES_MD5" | "SQL_SERVER_AUTHENTICATION")?
-                               },
+                               Params::user_auth_config
                              ],
                              role_arn: ::String,
                              vpc_subnet_ids: Array[::String],
@@ -778,7 +750,7 @@ module Aws
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ],
                              ?endpoint_network_type: ("IPV4" | "IPV6" | "DUAL"),
                              ?target_connection_network_type: ("IPV4" | "IPV6")
@@ -800,7 +772,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ],
                                       ?endpoint_network_type: ("IPV4" | "IPV6" | "DUAL")
                                     ) -> _CreateDBProxyEndpointResponseSuccess
@@ -818,7 +790,7 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateDBSecurityGroupResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBSecurityGroupResponseSuccess
@@ -849,7 +821,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateDBShardGroupResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBShardGroupResponseSuccess
@@ -866,7 +838,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateDBSnapshotResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBSnapshotResponseSuccess
@@ -884,7 +856,7 @@ module Aws
                                       {
                                         key: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateDBSubnetGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDBSubnetGroupResponseSuccess
@@ -905,7 +877,7 @@ module Aws
                                          {
                                            key: ::String?,
                                            value: ::String?
-                                         },
+                                         }
                                        ]
                                      ) -> _CreateEventSubscriptionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEventSubscriptionResponseSuccess
@@ -928,7 +900,7 @@ module Aws
                                      {
                                        key: ::String?,
                                        value: ::String?
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateGlobalClusterResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGlobalClusterResponseSuccess
@@ -959,7 +931,7 @@ module Aws
                                   {
                                     key: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?data_filter: ::String,
                                 ?description: ::String
@@ -980,7 +952,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateOptionGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateOptionGroupResponseSuccess
@@ -1003,7 +975,7 @@ module Aws
                                       {
                                         key: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateTenantDatabaseResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTenantDatabaseResponseSuccess
@@ -1309,7 +1281,7 @@ module Aws
                                                {
                                                  name: ::String,
                                                  values: Array[::String]
-                                               },
+                                               }
                                              ],
                                              ?marker: ::String,
                                              ?max_records: ::Integer
@@ -1329,7 +1301,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_records: ::Integer,
                                    ?marker: ::String
@@ -1349,7 +1321,7 @@ module Aws
                                                      {
                                                        name: ::String,
                                                        values: Array[::String]
-                                                     },
+                                                     }
                                                    ],
                                                    ?max_records: ::Integer,
                                                    ?marker: ::String
@@ -1369,7 +1341,7 @@ module Aws
                                               {
                                                 name: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?max_records: ::Integer,
                                             ?marker: ::String
@@ -1389,7 +1361,7 @@ module Aws
                                              {
                                                name: ::String,
                                                values: Array[::String]
-                                             },
+                                             }
                                            ],
                                            ?max_records: ::Integer,
                                            ?marker: ::String
@@ -1408,7 +1380,7 @@ module Aws
                                                     {
                                                       name: ::String,
                                                       values: Array[::String]
-                                                    },
+                                                    }
                                                   ],
                                                   ?max_records: ::Integer,
                                                   ?marker: ::String
@@ -1428,7 +1400,7 @@ module Aws
                                               {
                                                 name: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?max_records: ::Integer,
                                             ?marker: ::String
@@ -1459,7 +1431,7 @@ module Aws
                                              {
                                                name: ::String,
                                                values: Array[::String]
-                                             },
+                                             }
                                            ],
                                            ?max_records: ::Integer,
                                            ?marker: ::String,
@@ -1481,7 +1453,7 @@ module Aws
                                     {
                                       name: ::String,
                                       values: Array[::String]
-                                    },
+                                    }
                                   ],
                                   ?max_records: ::Integer,
                                   ?marker: ::String,
@@ -1503,7 +1475,7 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?max_records: ::Integer,
                                          ?marker: ::String,
@@ -1527,7 +1499,7 @@ module Aws
                                                       {
                                                         name: ::String,
                                                         values: Array[::String]
-                                                      },
+                                                      }
                                                     ],
                                                     ?max_records: ::Integer,
                                                     ?marker: ::String,
@@ -1547,7 +1519,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_records: ::Integer,
                                    ?marker: ::String
@@ -1569,7 +1541,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_records: ::Integer,
                                    ?marker: ::String
@@ -1602,7 +1574,7 @@ module Aws
                                             {
                                               name: ::String,
                                               values: Array[::String]
-                                            },
+                                            }
                                           ],
                                           ?max_records: ::Integer,
                                           ?marker: ::String
@@ -1622,7 +1594,7 @@ module Aws
                                       {
                                         name: ::String,
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?max_records: ::Integer,
                                     ?marker: ::String
@@ -1641,7 +1613,7 @@ module Aws
                                    {
                                      name: ::String,
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  ?marker: ::String,
                                  ?max_records: ::Integer
@@ -1661,7 +1633,7 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?marker: ::String,
                                          ?max_records: ::Integer
@@ -1681,7 +1653,7 @@ module Aws
                                                {
                                                  name: ::String,
                                                  values: Array[::String]
-                                               },
+                                               }
                                              ],
                                              ?marker: ::String,
                                              ?max_records: ::Integer
@@ -1701,7 +1673,7 @@ module Aws
                                          {
                                            name: ::String,
                                            values: Array[::String]
-                                         },
+                                         }
                                        ],
                                        ?marker: ::String,
                                        ?max_records: ::Integer
@@ -1722,7 +1694,7 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?max_records: ::Integer,
                                          ?marker: ::String
@@ -1741,7 +1713,7 @@ module Aws
                                            {
                                              name: ::String,
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?max_records: ::Integer,
                                          ?marker: ::String
@@ -1760,7 +1732,7 @@ module Aws
                                         {
                                           name: ::String,
                                           values: Array[::String]
-                                        },
+                                        }
                                       ],
                                       ?marker: ::String,
                                       ?max_records: ::Integer
@@ -1791,7 +1763,7 @@ module Aws
                                                      {
                                                        name: ::String,
                                                        values: Array[::String]
-                                                     },
+                                                     }
                                                    ],
                                                    ?max_records: ::Integer,
                                                    ?marker: ::String,
@@ -1813,7 +1785,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_records: ::Integer,
                                    ?marker: ::String,
@@ -1835,7 +1807,7 @@ module Aws
                                          {
                                            name: ::String,
                                            values: Array[::String]
-                                         },
+                                         }
                                        ],
                                        ?max_records: ::Integer,
                                        ?marker: ::String
@@ -1853,7 +1825,7 @@ module Aws
                                                           {
                                                             name: ::String,
                                                             values: Array[::String]
-                                                          },
+                                                          }
                                                         ],
                                                         ?max_records: ::Integer,
                                                         ?marker: ::String
@@ -1871,7 +1843,7 @@ module Aws
                                                   {
                                                     name: ::String,
                                                     values: Array[::String]
-                                                  },
+                                                  }
                                                 ],
                                                 ?max_records: ::Integer,
                                                 ?marker: ::String
@@ -1889,7 +1861,7 @@ module Aws
                                          {
                                            name: ::String,
                                            values: Array[::String]
-                                         },
+                                         }
                                        ]
                                      ) -> _DescribeEventCategoriesResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeEventCategoriesResponseSuccess
@@ -1906,7 +1878,7 @@ module Aws
                                             {
                                               name: ::String,
                                               values: Array[::String]
-                                            },
+                                            }
                                           ],
                                           ?max_records: ::Integer,
                                           ?marker: ::String
@@ -1930,7 +1902,7 @@ module Aws
                                {
                                  name: ::String,
                                  values: Array[::String]
-                               },
+                               }
                              ],
                              ?max_records: ::Integer,
                              ?marker: ::String
@@ -1950,7 +1922,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?marker: ::String,
                                    ?max_records: ::Integer,
@@ -1970,7 +1942,7 @@ module Aws
                                         {
                                           name: ::String,
                                           values: Array[::String]
-                                        },
+                                        }
                                       ],
                                       ?max_records: ::Integer,
                                       ?marker: ::String
@@ -1989,7 +1961,7 @@ module Aws
                                      {
                                        name: ::String,
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_records: ::Integer,
                                    ?marker: ::String
@@ -2009,7 +1981,7 @@ module Aws
                                              {
                                                name: ::String,
                                                values: Array[::String]
-                                             },
+                                             }
                                            ],
                                            ?max_records: ::Integer,
                                            ?marker: ::String
@@ -2028,7 +2000,7 @@ module Aws
                                       {
                                         name: ::String,
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?marker: ::String,
                                     ?max_records: ::Integer,
@@ -2054,7 +2026,7 @@ module Aws
                                                       {
                                                         name: ::String,
                                                         values: Array[::String]
-                                                      },
+                                                      }
                                                     ],
                                                     ?max_records: ::Integer,
                                                     ?marker: ::String
@@ -2073,7 +2045,7 @@ module Aws
                                                     {
                                                       name: ::String,
                                                       values: Array[::String]
-                                                    },
+                                                    }
                                                   ],
                                                   ?marker: ::String,
                                                   ?max_records: ::Integer
@@ -2099,7 +2071,7 @@ module Aws
                                               {
                                                 name: ::String,
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?max_records: ::Integer,
                                             ?marker: ::String
@@ -2123,7 +2095,7 @@ module Aws
                                                         {
                                                           name: ::String,
                                                           values: Array[::String]
-                                                        },
+                                                        }
                                                       ],
                                                       ?max_records: ::Integer,
                                                       ?marker: ::String
@@ -2143,7 +2115,7 @@ module Aws
                                                         {
                                                           name: ::String,
                                                           values: Array[::String]
-                                                        },
+                                                        }
                                                       ],
                                                       ?default_only: bool,
                                                       ?include_all: bool,
@@ -2166,7 +2138,7 @@ module Aws
                                        {
                                          name: ::String,
                                          values: Array[::String]
-                                       },
+                                       }
                                      ]
                                    ) -> _DescribeSourceRegionsResponseSuccess
                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeSourceRegionsResponseSuccess
@@ -2184,7 +2156,7 @@ module Aws
                                          {
                                            name: ::String,
                                            values: Array[::String]
-                                         },
+                                         }
                                        ],
                                        ?marker: ::String,
                                        ?max_records: ::Integer
@@ -2273,7 +2245,7 @@ module Aws
                                       {
                                         name: ::String,
                                         values: Array[::String]
-                                      },
+                                      }
                                     ]
                                   ) -> _ListTagsForResourceResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTagsForResourceResponseSuccess
@@ -2399,14 +2371,7 @@ module Aws
                                ?db_instance_parameter_group_name: ::String,
                                ?domain: ::String,
                                ?domain_iam_role_name: ::String,
-                               ?scaling_configuration: {
-                                 min_capacity: ::Integer?,
-                                 max_capacity: ::Integer?,
-                                 auto_pause: bool?,
-                                 seconds_until_auto_pause: ::Integer?,
-                                 timeout_action: ::String?,
-                                 seconds_before_timeout: ::Integer?
-                               },
+                               ?scaling_configuration: Params::scaling_configuration,
                                ?deletion_protection: bool,
                                ?enable_http_endpoint: bool,
                                ?copy_tags_to_snapshot: bool,
@@ -2471,19 +2436,7 @@ module Aws
       def modify_db_cluster_parameter_group: (
                                                db_cluster_parameter_group_name: ::String,
                                                parameters: Array[
-                                                 {
-                                                   parameter_name: ::String?,
-                                                   parameter_value: ::String?,
-                                                   description: ::String?,
-                                                   source: ::String?,
-                                                   apply_type: ::String?,
-                                                   data_type: ::String?,
-                                                   allowed_values: ::String?,
-                                                   is_modifiable: bool?,
-                                                   minimum_engine_version: ::String?,
-                                                   apply_method: ("immediate" | "pending-reboot")?,
-                                                   supported_engine_modes: Array[::String]?
-                                                 },
+                                                 Params::parameter
                                                ]
                                              ) -> _ModifyDBClusterParameterGroupResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBClusterParameterGroupResponseSuccess
@@ -2558,7 +2511,7 @@ module Aws
                                   {
                                     name: ::String?,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?use_default_processor_features: bool,
                                 ?deletion_protection: bool,
@@ -2585,7 +2538,7 @@ module Aws
                                     storage_throughput: ::Integer?,
                                     storage_type: ::String?,
                                     set_for_delete: bool?
-                                  },
+                                  }
                                 ],
                                 ?tag_specifications: Array[
                                   {
@@ -2594,9 +2547,9 @@ module Aws
                                       {
                                         key: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ],
                                 ?master_user_authentication_type: ("password" | "iam-db-auth")
                               ) -> _ModifyDBInstanceResponseSuccess
@@ -2610,19 +2563,7 @@ module Aws
       def modify_db_parameter_group: (
                                        db_parameter_group_name: ::String,
                                        parameters: Array[
-                                         {
-                                           parameter_name: ::String?,
-                                           parameter_value: ::String?,
-                                           description: ::String?,
-                                           source: ::String?,
-                                           apply_type: ::String?,
-                                           data_type: ::String?,
-                                           allowed_values: ::String?,
-                                           is_modifiable: bool?,
-                                           minimum_engine_version: ::String?,
-                                           apply_method: ("immediate" | "pending-reboot")?,
-                                           supported_engine_modes: Array[::String]?
-                                         },
+                                         Params::parameter
                                        ]
                                      ) -> _ModifyDBParameterGroupResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBParameterGroupResponseSuccess
@@ -2637,14 +2578,7 @@ module Aws
                              ?new_db_proxy_name: ::String,
                              ?default_auth_scheme: ("IAM_AUTH" | "NONE"),
                              ?auth: Array[
-                               {
-                                 description: ::String?,
-                                 user_name: ::String?,
-                                 auth_scheme: ("SECRETS")?,
-                                 secret_arn: ::String?,
-                                 iam_auth: ("DISABLED" | "REQUIRED" | "ENABLED")?,
-                                 client_password_auth_type: ("MYSQL_NATIVE_PASSWORD" | "MYSQL_CACHING_SHA2_PASSWORD" | "POSTGRES_SCRAM_SHA_256" | "POSTGRES_MD5" | "SQL_SERVER_AUTHENTICATION")?
-                               },
+                               Params::user_auth_config
                              ],
                              ?require_tls: bool,
                              ?idle_client_timeout: ::Integer,
@@ -2698,7 +2632,7 @@ module Aws
                                         {
                                           action_id: ::String,
                                           status: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _ModifyDBRecommendationResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyDBRecommendationResponseSuccess
@@ -2840,9 +2774,9 @@ module Aws
                                          allowed_values: ::String?,
                                          is_modifiable: bool?,
                                          is_collection: bool?
-                                       },
+                                       }
                                      ]?
-                                   },
+                                   }
                                  ],
                                  ?options_to_remove: Array[::String],
                                  ?apply_immediately: bool
@@ -2881,9 +2815,9 @@ module Aws
                                         {
                                           key: ::String?,
                                           value: ::String?
-                                        },
+                                        }
                                       ]?
-                                    },
+                                    }
                                   ]
                                 ) -> _PromoteReadReplicaResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PromoteReadReplicaResponseSuccess
@@ -2911,7 +2845,7 @@ module Aws
                                                        {
                                                          key: ::String?,
                                                          value: ::String?
-                                                       },
+                                                       }
                                                      ]
                                                    ) -> _PurchaseReservedDBInstancesOfferingResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedDBInstancesOfferingResponseSuccess
@@ -3024,19 +2958,7 @@ module Aws
                                               db_cluster_parameter_group_name: ::String,
                                               ?reset_all_parameters: bool,
                                               ?parameters: Array[
-                                                {
-                                                  parameter_name: ::String?,
-                                                  parameter_value: ::String?,
-                                                  description: ::String?,
-                                                  source: ::String?,
-                                                  apply_type: ::String?,
-                                                  data_type: ::String?,
-                                                  allowed_values: ::String?,
-                                                  is_modifiable: bool?,
-                                                  minimum_engine_version: ::String?,
-                                                  apply_method: ("immediate" | "pending-reboot")?,
-                                                  supported_engine_modes: Array[::String]?
-                                                },
+                                                Params::parameter
                                               ]
                                             ) -> _ResetDBClusterParameterGroupResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetDBClusterParameterGroupResponseSuccess
@@ -3050,19 +2972,7 @@ module Aws
                                       db_parameter_group_name: ::String,
                                       ?reset_all_parameters: bool,
                                       ?parameters: Array[
-                                        {
-                                          parameter_name: ::String?,
-                                          parameter_value: ::String?,
-                                          description: ::String?,
-                                          source: ::String?,
-                                          apply_type: ::String?,
-                                          data_type: ::String?,
-                                          allowed_values: ::String?,
-                                          is_modifiable: bool?,
-                                          minimum_engine_version: ::String?,
-                                          apply_method: ("immediate" | "pending-reboot")?,
-                                          supported_engine_modes: Array[::String]?
-                                        },
+                                        Params::parameter
                                       ]
                                     ) -> _ResetDBParameterGroupResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetDBParameterGroupResponseSuccess
@@ -3093,7 +3003,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ],
                                         ?storage_encrypted: bool,
                                         ?kms_key_id: ::String,
@@ -3126,9 +3036,9 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 value: ::String?
-                                              },
+                                              }
                                             ]?
-                                          },
+                                          }
                                         ]
                                       ) -> _RestoreDBClusterFromS3ResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBClusterFromS3ResponseSuccess
@@ -3153,21 +3063,14 @@ module Aws
                                                 {
                                                   key: ::String?,
                                                   value: ::String?
-                                                },
+                                                }
                                               ],
                                               ?kms_key_id: ::String,
                                               ?enable_iam_database_authentication: bool,
                                               ?backtrack_window: ::Integer,
                                               ?enable_cloudwatch_logs_exports: Array[::String],
                                               ?engine_mode: ::String,
-                                              ?scaling_configuration: {
-                                                min_capacity: ::Integer?,
-                                                max_capacity: ::Integer?,
-                                                auto_pause: bool?,
-                                                seconds_until_auto_pause: ::Integer?,
-                                                timeout_action: ::String?,
-                                                seconds_before_timeout: ::Integer?
-                                              },
+                                              ?scaling_configuration: Params::scaling_configuration,
                                               ?db_cluster_parameter_group_name: ::String,
                                               ?deletion_protection: bool,
                                               ?copy_tags_to_snapshot: bool,
@@ -3203,9 +3106,9 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ]?
-                                                },
+                                                }
                                               ],
                                               ?enable_vpc_networking: bool,
                                               ?enable_internet_access_gateway: bool
@@ -3231,7 +3134,7 @@ module Aws
                                                    {
                                                      key: ::String?,
                                                      value: ::String?
-                                                   },
+                                                   }
                                                  ],
                                                  ?kms_key_id: ::String,
                                                  ?enable_iam_database_authentication: bool,
@@ -3253,14 +3156,7 @@ module Aws
                                                    max_capacity: ::Float?,
                                                    seconds_until_auto_pause: ::Integer?
                                                  },
-                                                 ?scaling_configuration: {
-                                                   min_capacity: ::Integer?,
-                                                   max_capacity: ::Integer?,
-                                                   auto_pause: bool?,
-                                                   seconds_until_auto_pause: ::Integer?,
-                                                   timeout_action: ::String?,
-                                                   seconds_before_timeout: ::Integer?
-                                                 },
+                                                 ?scaling_configuration: Params::scaling_configuration,
                                                  ?engine_mode: ::String,
                                                  ?rds_custom_cluster_configuration: {
                                                    interconnect_subnet_id: ::String?,
@@ -3282,9 +3178,9 @@ module Aws
                                                        {
                                                          key: ::String?,
                                                          value: ::String?
-                                                       },
+                                                       }
                                                      ]?
-                                                   },
+                                                   }
                                                  ],
                                                  ?enable_vpc_networking: bool,
                                                  ?enable_internet_access_gateway: bool
@@ -3316,7 +3212,7 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?storage_type: ::String,
                                                   ?tde_credential_arn: ::String,
@@ -3335,7 +3231,7 @@ module Aws
                                                     {
                                                       name: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?use_default_processor_features: bool,
                                                   ?db_parameter_group_name: ::String,
@@ -3352,14 +3248,7 @@ module Aws
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
                                                   ?additional_storage_volumes: Array[
-                                                    {
-                                                      volume_name: ::String,
-                                                      allocated_storage: ::Integer?,
-                                                      iops: ::Integer?,
-                                                      max_allocated_storage: ::Integer?,
-                                                      storage_throughput: ::Integer?,
-                                                      storage_type: ::String?
-                                                    },
+                                                    Params::additional_storage_volume
                                                   ],
                                                   ?tag_specifications: Array[
                                                     {
@@ -3368,9 +3257,9 @@ module Aws
                                                         {
                                                           key: ::String?,
                                                           value: ::String?
-                                                        },
+                                                        }
                                                       ]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?manage_master_user_password: bool,
                                                   ?master_user_secret_kms_key_id: ::String
@@ -3411,7 +3300,7 @@ module Aws
                                            {
                                              key: ::String?,
                                              value: ::String?
-                                           },
+                                           }
                                          ],
                                          ?storage_type: ::String,
                                          ?storage_encrypted: bool,
@@ -3434,7 +3323,7 @@ module Aws
                                            {
                                              name: ::String?,
                                              value: ::String?
-                                           },
+                                           }
                                          ],
                                          ?use_default_processor_features: bool,
                                          ?deletion_protection: bool,
@@ -3446,14 +3335,7 @@ module Aws
                                          ?ca_certificate_identifier: ::String,
                                          ?engine_lifecycle_support: ::String,
                                          ?additional_storage_volumes: Array[
-                                           {
-                                             volume_name: ::String,
-                                             allocated_storage: ::Integer?,
-                                             iops: ::Integer?,
-                                             max_allocated_storage: ::Integer?,
-                                             storage_throughput: ::Integer?,
-                                             storage_type: ::String?
-                                           },
+                                           Params::additional_storage_volume
                                          ],
                                          ?tag_specifications: Array[
                                            {
@@ -3462,9 +3344,9 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]?
-                                           },
+                                           }
                                          ]
                                        ) -> _RestoreDBInstanceFromS3ResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDBInstanceFromS3ResponseSuccess
@@ -3497,7 +3379,7 @@ module Aws
                                                     {
                                                       key: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?storage_type: ::String,
                                                   ?tde_credential_arn: ::String,
@@ -3515,7 +3397,7 @@ module Aws
                                                     {
                                                       name: ::String?,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ],
                                                   ?use_default_processor_features: bool,
                                                   ?db_parameter_group_name: ::String,
@@ -3534,14 +3416,7 @@ module Aws
                                                   ?ca_certificate_identifier: ::String,
                                                   ?engine_lifecycle_support: ::String,
                                                   ?additional_storage_volumes: Array[
-                                                    {
-                                                      volume_name: ::String,
-                                                      allocated_storage: ::Integer?,
-                                                      iops: ::Integer?,
-                                                      max_allocated_storage: ::Integer?,
-                                                      storage_throughput: ::Integer?,
-                                                      storage_type: ::String?
-                                                    },
+                                                    Params::additional_storage_volume
                                                   ],
                                                   ?tag_specifications: Array[
                                                     {
@@ -3550,9 +3425,9 @@ module Aws
                                                         {
                                                           key: ::String?,
                                                           value: ::String?
-                                                        },
+                                                        }
                                                       ]?
-                                                    },
+                                                    }
                                                   ],
                                                   ?manage_master_user_password: bool,
                                                   ?master_user_secret_kms_key_id: ::String
@@ -3626,7 +3501,7 @@ module Aws
                                                                {
                                                                  key: ::String?,
                                                                  value: ::String?
-                                                               },
+                                                               }
                                                              ],
                                                              ?source_region: ::String
                                                            ) -> _StartDBInstanceAutomatedBackupsReplicationResponseSuccess
@@ -3746,7 +3621,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3759,7 +3634,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3774,7 +3649,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3791,7 +3666,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3806,7 +3681,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String
@@ -3818,7 +3693,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String
@@ -3832,7 +3707,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3849,7 +3724,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?max_records: ::Integer,
                     ?marker: ::String,
@@ -3865,7 +3740,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?marker: ::String,
                     ?max_records: ::Integer
@@ -3878,7 +3753,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ],
                     ?marker: ::String,
                     ?max_records: ::Integer

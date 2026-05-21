@@ -46,6 +46,7 @@ module Aws::QConnect
     AIPromptTemplateConfiguration = Shapes::UnionShape.new(name: 'AIPromptTemplateConfiguration')
     AIPromptTemplateType = Shapes::StringShape.new(name: 'AIPromptTemplateType')
     AIPromptType = Shapes::StringShape.new(name: 'AIPromptType')
+    AIPromptTypeList = Shapes::ListShape.new(name: 'AIPromptTypeList')
     AIPromptVersionSummariesList = Shapes::ListShape.new(name: 'AIPromptVersionSummariesList')
     AIPromptVersionSummary = Shapes::StructureShape.new(name: 'AIPromptVersionSummary')
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
@@ -156,6 +157,7 @@ module Aws::QConnect
     CreateQuickResponseResponse = Shapes::StructureShape.new(name: 'CreateQuickResponseResponse')
     CreateSessionRequest = Shapes::StructureShape.new(name: 'CreateSessionRequest')
     CreateSessionResponse = Shapes::StructureShape.new(name: 'CreateSessionResponse')
+    CrossRegionStatus = Shapes::StringShape.new(name: 'CrossRegionStatus')
     CustomAttributes = Shapes::MapShape.new(name: 'CustomAttributes')
     CustomerProfileAttributes = Shapes::StructureShape.new(name: 'CustomerProfileAttributes')
     DataDetails = Shapes::UnionShape.new(name: 'DataDetails')
@@ -351,6 +353,8 @@ module Aws::QConnect
     ListMessageTemplatesResponse = Shapes::StructureShape.new(name: 'ListMessageTemplatesResponse')
     ListMessagesRequest = Shapes::StructureShape.new(name: 'ListMessagesRequest')
     ListMessagesResponse = Shapes::StructureShape.new(name: 'ListMessagesResponse')
+    ListModelsRequest = Shapes::StructureShape.new(name: 'ListModelsRequest')
+    ListModelsResponse = Shapes::StructureShape.new(name: 'ListModelsResponse')
     ListQuickResponsesRequest = Shapes::StructureShape.new(name: 'ListQuickResponsesRequest')
     ListQuickResponsesResponse = Shapes::StructureShape.new(name: 'ListQuickResponsesResponse')
     ListSpansRequest = Shapes::StructureShape.new(name: 'ListSpansRequest')
@@ -402,6 +406,11 @@ module Aws::QConnect
     MessageTemplateVersionSummary = Shapes::StructureShape.new(name: 'MessageTemplateVersionSummary')
     MessageTemplateVersionSummaryList = Shapes::ListShape.new(name: 'MessageTemplateVersionSummaryList')
     MessageType = Shapes::StringShape.new(name: 'MessageType')
+    ModelDisplayName = Shapes::StringShape.new(name: 'ModelDisplayName')
+    ModelId = Shapes::StringShape.new(name: 'ModelId')
+    ModelLifecycle = Shapes::StringShape.new(name: 'ModelLifecycle')
+    ModelSummary = Shapes::StructureShape.new(name: 'ModelSummary')
+    ModelSummaryList = Shapes::ListShape.new(name: 'ModelSummaryList')
     Name = Shapes::StringShape.new(name: 'Name')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptySensitiveString = Shapes::StringShape.new(name: 'NonEmptySensitiveString')
@@ -847,6 +856,8 @@ module Aws::QConnect
     AIPromptTemplateConfiguration.add_member_subclass(:text_full_ai_prompt_edit_template_configuration, Types::AIPromptTemplateConfiguration::TextFullAiPromptEditTemplateConfiguration)
     AIPromptTemplateConfiguration.add_member_subclass(:unknown, Types::AIPromptTemplateConfiguration::Unknown)
     AIPromptTemplateConfiguration.struct_class = Types::AIPromptTemplateConfiguration
+
+    AIPromptTypeList.member = Shapes::ShapeRef.new(shape: AIPromptType)
 
     AIPromptVersionSummariesList.member = Shapes::ShapeRef.new(shape: AIPromptVersionSummary)
 
@@ -2077,6 +2088,17 @@ module Aws::QConnect
     ListMessagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMessagesResponse.struct_class = Types::ListMessagesResponse
 
+    ListModelsRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    ListModelsRequest.add_member(:ai_prompt_type, Shapes::ShapeRef.new(shape: AIPromptType, location: "querystring", location_name: "aiPromptType"))
+    ListModelsRequest.add_member(:model_lifecycle, Shapes::ShapeRef.new(shape: ModelLifecycle, location: "querystring", location_name: "modelLifecycle"))
+    ListModelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListModelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListModelsRequest.struct_class = Types::ListModelsRequest
+
+    ListModelsResponse.add_member(:model_summaries, Shapes::ShapeRef.new(shape: ModelSummaryList, required: true, location_name: "modelSummaries"))
+    ListModelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListModelsResponse.struct_class = Types::ListModelsResponse
+
     ListQuickResponsesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "nextToken"))
     ListQuickResponsesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
     ListQuickResponsesRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
@@ -2292,6 +2314,18 @@ module Aws::QConnect
     MessageTemplateVersionSummary.struct_class = Types::MessageTemplateVersionSummary
 
     MessageTemplateVersionSummaryList.member = Shapes::ShapeRef.new(shape: MessageTemplateVersionSummary)
+
+    ModelSummary.add_member(:model_id, Shapes::ShapeRef.new(shape: ModelId, required: true, location_name: "modelId"))
+    ModelSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: ModelDisplayName, required: true, location_name: "displayName"))
+    ModelSummary.add_member(:cross_region_status, Shapes::ShapeRef.new(shape: CrossRegionStatus, location_name: "crossRegionStatus"))
+    ModelSummary.add_member(:supports_prompt_caching, Shapes::ShapeRef.new(shape: Boolean, location_name: "supportsPromptCaching"))
+    ModelSummary.add_member(:supported_ai_prompt_types, Shapes::ShapeRef.new(shape: AIPromptTypeList, location_name: "supportedAIPromptTypes"))
+    ModelSummary.add_member(:model_lifecycle, Shapes::ShapeRef.new(shape: ModelLifecycle, location_name: "modelLifecycle"))
+    ModelSummary.add_member(:legacy_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "legacyTimestamp"))
+    ModelSummary.add_member(:end_of_life_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endOfLifeTimestamp"))
+    ModelSummary.struct_class = Types::ModelSummary
+
+    ModelSummaryList.member = Shapes::ShapeRef.new(shape: ModelSummary)
 
     NoteTakingAIAgentConfiguration.add_member(:note_taking_ai_prompt_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "noteTakingAIPromptId"))
     NoteTakingAIAgentConfiguration.add_member(:note_taking_ai_guardrail_id, Shapes::ShapeRef.new(shape: UuidWithQualifier, location_name: "noteTakingAIGuardrailId"))
@@ -4185,6 +4219,26 @@ module Aws::QConnect
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_models, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListModels"
+        o.http_method = "GET"
+        o.http_request_uri = "/assistants/{assistantId}/models"
+        o.input = Shapes::ShapeRef.new(shape: ListModelsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListModelsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {

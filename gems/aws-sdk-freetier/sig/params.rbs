@@ -1,0 +1,59 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module FreeTier
+    module Params
+      type expression = {
+      or: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          not: untyped?,
+          dimensions: {
+            key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
+            values: Array[::String],
+            match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+          }?
+        }
+      ]?,
+      and: Array[
+        {
+          or: untyped?,
+          and: untyped?,
+          not: untyped?,
+          dimensions: {
+            key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
+            values: Array[::String],
+            match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+          }?
+        }
+      ]?,
+      not: {
+        or: Array[
+          untyped
+        ]?,
+        and: Array[
+          untyped
+        ]?,
+        not: untyped?,
+        dimensions: {
+          key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
+          values: Array[::String],
+          match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+        }?
+      }?,
+      dimensions: {
+        key: ("SERVICE" | "OPERATION" | "USAGE_TYPE" | "REGION" | "FREE_TIER_TYPE" | "DESCRIPTION" | "USAGE_PERCENTAGE"),
+        values: Array[::String],
+        match_options: Array[("EQUALS" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL")]
+      }?
+    }
+
+    end
+  end
+end

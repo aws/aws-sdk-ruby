@@ -48,7 +48,7 @@ module Aws
                            uri: ::String?
                          }?,
                          permission: ("FULL_CONTROL" | "READ" | "WRITE")?
-                       },
+                       }
                      ]?,
                      target_prefix: ::String,
                      target_object_key_format: {

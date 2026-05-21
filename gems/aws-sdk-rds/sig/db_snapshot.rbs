@@ -158,7 +158,7 @@ module Aws
                       {
                         key: ::String?,
                         value: ::String?
-                      },
+                      }
                     ]
                   ) -> DBSnapshot
                 | (?Hash[Symbol, untyped]) -> DBSnapshot
@@ -171,7 +171,7 @@ module Aws
                     {
                       key: ::String?,
                       value: ::String?
-                    },
+                    }
                   ],
                   ?copy_tags: bool,
                   ?pre_signed_url: ::String,
@@ -209,7 +209,7 @@ module Aws
                        {
                          key: ::String?,
                          value: ::String?
-                       },
+                       }
                      ],
                      ?storage_type: ::String,
                      ?tde_credential_arn: ::String,
@@ -228,7 +228,7 @@ module Aws
                        {
                          name: ::String?,
                          value: ::String?
-                       },
+                       }
                      ],
                      ?use_default_processor_features: bool,
                      ?db_parameter_group_name: ::String,
@@ -252,7 +252,7 @@ module Aws
                          max_allocated_storage: ::Integer?,
                          storage_throughput: ::Integer?,
                          storage_type: ::String?
-                       },
+                       }
                      ],
                      ?tag_specifications: Array[
                        {
@@ -261,9 +261,9 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]?
-                       },
+                       }
                      ],
                      ?manage_master_user_password: bool,
                      ?master_user_secret_kms_key_id: ::String
@@ -297,7 +297,7 @@ module Aws
                       {
                         name: ::String,
                         values: Array[::String]
-                      },
+                      }
                     ]
                   ) -> Event::Collection
                 | (?Hash[Symbol, untyped]) -> Event::Collection

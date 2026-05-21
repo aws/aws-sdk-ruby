@@ -1,0 +1,50 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EventBridge
+    module Params
+      type connection_http_parameters = {
+      header_parameters: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          is_value_secret: bool?
+        }
+      ]?,
+      query_string_parameters: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          is_value_secret: bool?
+        }
+      ]?,
+      body_parameters: Array[
+        {
+          key: ::String?,
+          value: ::String?,
+          is_value_secret: bool?
+        }
+      ]?
+    }
+
+      type failover_config = {
+      primary: {
+        health_check: ::String
+      },
+      secondary: {
+        route: ::String
+      }
+    }
+
+      type routing_config = {
+      failover_config: Params::failover_config
+    }
+
+    end
+  end
+end

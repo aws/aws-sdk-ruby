@@ -99,7 +99,7 @@ module Aws
                                    {
                                      agent_id: ::String,
                                      force: bool?
-                                   },
+                                   }
                                  ]
                                ) -> _BatchDeleteAgentsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchDeleteAgentsResponseSuccess
@@ -137,7 +137,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _CreateTagsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTagsResponseSuccess
@@ -161,7 +161,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ]
                        ) -> _DeleteTagsResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteTagsResponseSuccess
@@ -179,7 +179,7 @@ module Aws
                                  name: ::String,
                                  values: Array[::String],
                                  condition: ::String
-                               },
+                               }
                              ],
                              ?max_results: ::Integer,
                              ?next_token: ::String
@@ -245,7 +245,7 @@ module Aws
                                        name: ::String,
                                        values: Array[::String],
                                        condition: ::String
-                                     },
+                                     }
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -263,7 +263,7 @@ module Aws
                                      {
                                        name: ("IMPORT_TASK_ID" | "STATUS" | "NAME" | "FILE_CLASSIFICATION")?,
                                        values: Array[::String]?
-                                     },
+                                     }
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -281,7 +281,7 @@ module Aws
                              {
                                name: ::String,
                                values: Array[::String]
-                             },
+                             }
                            ],
                            ?max_results: ::Integer,
                            ?next_token: ::String
@@ -335,7 +335,7 @@ module Aws
                                      name: ::String,
                                      values: Array[::String],
                                      condition: ::String
-                                   },
+                                   }
                                  ],
                                  ?max_results: ::Integer,
                                  ?next_token: ::String,
@@ -343,7 +343,7 @@ module Aws
                                    {
                                      field_name: ::String,
                                      sort_order: ("ASC" | "DESC")?
-                                   },
+                                   }
                                  ]
                                ) -> _ListConfigurationsResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListConfigurationsResponseSuccess
@@ -410,7 +410,7 @@ module Aws
                                    name: ::String,
                                    values: Array[::String],
                                    condition: ::String
-                                 },
+                                 }
                                ],
                                ?start_time: ::Time,
                                ?end_time: ::Time,

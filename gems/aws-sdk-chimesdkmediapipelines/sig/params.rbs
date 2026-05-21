@@ -1,0 +1,143 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ChimeSDKMediaPipelines
+    module Params
+      type grid_view_configuration = {
+      content_share_layout: ("PresenterOnly" | "Horizontal" | "Vertical" | "ActiveSpeakerOnly"),
+      presenter_only_configuration: {
+        presenter_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+      }?,
+      active_speaker_only_configuration: {
+        active_speaker_position: ("TopLeft" | "TopRight" | "BottomLeft" | "BottomRight")?
+      }?,
+      horizontal_layout_configuration: {
+        tile_order: ("JoinSequence" | "SpeakerSequence")?,
+        tile_position: ("Top" | "Bottom")?,
+        tile_count: ::Integer?,
+        tile_aspect_ratio: ::String?
+      }?,
+      vertical_layout_configuration: {
+        tile_order: ("JoinSequence" | "SpeakerSequence")?,
+        tile_position: ("Left" | "Right")?,
+        tile_count: ::Integer?,
+        tile_aspect_ratio: ::String?
+      }?,
+      video_attribute: {
+        corner_radius: ::Integer?,
+        border_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+        highlight_color: ("Black" | "Blue" | "Red" | "Green" | "White" | "Yellow")?,
+        border_thickness: ::Integer?
+      }?,
+      canvas_orientation: ("Landscape" | "Portrait")?
+    }
+
+      type composited_video_artifacts_configuration = {
+      layout: ("GridView")?,
+      resolution: ("HD" | "FHD")?,
+      grid_view_configuration: Params::grid_view_configuration
+    }
+
+      type real_time_alert_configuration = {
+      disabled: bool?,
+      rules: Array[
+        Params::real_time_alert_rule
+      ]?
+    }
+
+      type real_time_alert_rule = {
+      type: ("KeywordMatch" | "Sentiment" | "IssueDetection"),
+      keyword_match_configuration: {
+        rule_name: ::String,
+        keywords: Array[::String],
+        negate: bool?
+      }?,
+      sentiment_configuration: {
+        rule_name: ::String,
+        sentiment_type: ("NEGATIVE"),
+        time_period: ::Integer
+      }?,
+      issue_detection_configuration: {
+        rule_name: ::String
+      }?
+    }
+
+      type amazon_transcribe_call_analytics_processor_configuration = {
+      language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR"),
+      vocabulary_name: ::String?,
+      vocabulary_filter_name: ::String?,
+      vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+      language_model_name: ::String?,
+      enable_partial_results_stabilization: bool?,
+      partial_results_stability: ("high" | "medium" | "low")?,
+      content_identification_type: ("PII")?,
+      content_redaction_type: ("PII")?,
+      pii_entity_types: ::String?,
+      filter_partial_results: bool?,
+      post_call_analytics_settings: {
+        output_location: ::String,
+        data_access_role_arn: ::String,
+        content_redaction_output: ("redacted" | "redacted_and_unredacted")?,
+        output_encryption_kms_key_id: ::String?
+      }?,
+      call_analytics_stream_categories: Array[::String]?
+    }
+
+      type amazon_transcribe_processor_configuration = {
+      language_code: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+      vocabulary_name: ::String?,
+      vocabulary_filter_name: ::String?,
+      vocabulary_filter_method: ("remove" | "mask" | "tag")?,
+      show_speaker_label: bool?,
+      enable_partial_results_stabilization: bool?,
+      partial_results_stability: ("high" | "medium" | "low")?,
+      content_identification_type: ("PII")?,
+      content_redaction_type: ("PII")?,
+      pii_entity_types: ::String?,
+      language_model_name: ::String?,
+      filter_partial_results: bool?,
+      identify_language: bool?,
+      identify_multiple_languages: bool?,
+      language_options: ::String?,
+      preferred_language: ("en-US" | "en-GB" | "es-US" | "fr-CA" | "fr-FR" | "en-AU" | "it-IT" | "de-DE" | "pt-BR")?,
+      vocabulary_names: ::String?,
+      vocabulary_filter_names: ::String?
+    }
+
+      type media_insights_pipeline_configuration_element = {
+      type: ("AmazonTranscribeCallAnalyticsProcessor" | "VoiceAnalyticsProcessor" | "AmazonTranscribeProcessor" | "KinesisDataStreamSink" | "LambdaFunctionSink" | "SqsQueueSink" | "SnsTopicSink" | "S3RecordingSink" | "VoiceEnhancementSink"),
+      amazon_transcribe_call_analytics_processor_configuration: Params::amazon_transcribe_call_analytics_processor_configuration?,
+      amazon_transcribe_processor_configuration: Params::amazon_transcribe_processor_configuration?,
+      kinesis_data_stream_sink_configuration: {
+        insights_target: ::String?
+      }?,
+      s3_recording_sink_configuration: {
+        destination: ::String?,
+        recording_file_format: ("Wav" | "Opus")?
+      }?,
+      voice_analytics_processor_configuration: {
+        speaker_search_status: ("Enabled" | "Disabled")?,
+        voice_tone_analysis_status: ("Enabled" | "Disabled")?
+      }?,
+      lambda_function_sink_configuration: {
+        insights_target: ::String?
+      }?,
+      sqs_queue_sink_configuration: {
+        insights_target: ::String?
+      }?,
+      sns_topic_sink_configuration: {
+        insights_target: ::String?
+      }?,
+      voice_enhancement_sink_configuration: {
+        disabled: bool?
+      }?
+    }
+
+    end
+  end
+end

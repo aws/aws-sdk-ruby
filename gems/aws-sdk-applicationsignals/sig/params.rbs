@@ -1,0 +1,145 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ApplicationSignals
+    module Params
+      type exclusion_window = {
+      window: {
+        duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
+        duration: ::Integer
+      },
+      start_time: ::Time?,
+      recurrence_rule: {
+        expression: ::String
+      }?,
+      reason: ::String?
+    }
+
+      type composite_sli_config = {
+      selection_config: {
+        type: ("EXPLICIT" | "PREFIX" | "REGEX"),
+        pattern: ::String?
+      },
+      components: Array[
+        {
+          operation_name: ::String?
+        }
+      ]?
+    }
+
+      type service_level_indicator_metric_config = {
+      key_attributes: Hash[::String, ::String]?,
+      operation_name: ::String?,
+      metric_type: ("LATENCY" | "AVAILABILITY")?,
+      metric_name: ::String?,
+      statistic: ::String?,
+      period_seconds: ::Integer?,
+      metric_source: {
+        metric_source_key_attributes: Hash[::String, ::String],
+        metric_source_attributes: Hash[::String, ::String]?
+      }?,
+      metric_data_queries: Array[
+        Params::metric_data_query
+      ]?,
+      dependency_config: {
+        dependency_key_attributes: Hash[::String, ::String],
+        dependency_operation_name: ::String
+      }?,
+      composite_sli_config: Params::composite_sli_config?
+    }
+
+      type service_level_indicator_config = {
+      sli_metric_config: Params::service_level_indicator_metric_config,
+      metric_threshold: ::Float?,
+      comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
+    }
+
+      type metric = {
+      namespace: ::String?,
+      metric_name: ::String?,
+      dimensions: Array[
+        {
+          name: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type metric_stat = {
+      metric: Params::metric,
+      period: ::Integer,
+      stat: ::String,
+      unit: ("Microseconds" | "Milliseconds" | "Seconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")?
+    }
+
+      type metric_data_query = {
+      id: ::String,
+      metric_stat: Params::metric_stat?,
+      expression: ::String?,
+      label: ::String?,
+      return_data: bool?,
+      period: ::Integer?,
+      account_id: ::String?
+    }
+
+      type monitored_request_count_metric_data_queries = {
+      good_count_metric: Array[
+        Params::metric_data_query
+      ]?,
+      bad_count_metric: Array[
+        Params::metric_data_query
+      ]?
+    }
+
+      type request_based_service_level_indicator_metric_config = {
+      key_attributes: Hash[::String, ::String]?,
+      operation_name: ::String?,
+      metric_type: ("LATENCY" | "AVAILABILITY")?,
+      total_request_count_metric: Array[
+        Params::metric_data_query
+      ]?,
+      monitored_request_count_metric: Params::monitored_request_count_metric_data_queries?,
+      dependency_config: {
+        dependency_key_attributes: Hash[::String, ::String],
+        dependency_operation_name: ::String
+      }?,
+      metric_source: {
+        metric_source_key_attributes: Hash[::String, ::String],
+        metric_source_attributes: Hash[::String, ::String]?
+      }?,
+      metric_name: ::String?,
+      composite_sli_config: Params::composite_sli_config?
+    }
+
+      type request_based_service_level_indicator_config = {
+      request_based_sli_metric_config: Params::request_based_service_level_indicator_metric_config,
+      metric_threshold: ::Float?,
+      comparison_operator: ("GreaterThanOrEqualTo" | "GreaterThan" | "LessThan" | "LessThanOrEqualTo")?
+    }
+
+      type interval = {
+      rolling_interval: {
+        duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
+        duration: ::Integer
+      }?,
+      calendar_interval: {
+        start_time: ::Time,
+        duration_unit: ("MINUTE" | "HOUR" | "DAY" | "MONTH"),
+        duration: ::Integer
+      }?
+    }
+
+      type goal = {
+      interval: Params::interval?,
+      attainment_goal: ::Float?,
+      warning_threshold: ::Float?
+    }
+
+    end
+  end
+end

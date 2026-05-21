@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: git-sync
-        uses: wei/git-sync@v3
+        uses: wei/git-sync@55c6b63b4f21607da0e9877ca9b4d11a29fc6d83 # v3
         with:
           source_repo: 'aws/aws-sdk-ruby'
           source_branch: 'version-3'

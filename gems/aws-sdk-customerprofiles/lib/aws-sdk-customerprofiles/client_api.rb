@@ -2486,6 +2486,7 @@ module Aws::CustomerProfiles
     RecommenderConfig.add_member(:training_frequency, Shapes::ShapeRef.new(shape: RecommenderConfigTrainingFrequencyInteger, location_name: "TrainingFrequency"))
     RecommenderConfig.add_member(:inference_config, Shapes::ShapeRef.new(shape: InferenceConfig, location_name: "InferenceConfig"))
     RecommenderConfig.add_member(:included_columns, Shapes::ShapeRef.new(shape: IncludedColumns, location_name: "IncludedColumns"))
+    RecommenderConfig.add_member(:excluded_columns, Shapes::ShapeRef.new(shape: IncludedColumns, location_name: "ExcludedColumns"))
     RecommenderConfig.struct_class = Types::RecommenderConfig
 
     RecommenderContext.key = Shapes::ShapeRef.new(shape: ContextKey)

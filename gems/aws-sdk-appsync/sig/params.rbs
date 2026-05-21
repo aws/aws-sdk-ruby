@@ -1,0 +1,127 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module AppSync
+    module Params
+      type event_config = {
+      auth_providers: Array[
+        Params::auth_provider
+      ],
+      connection_auth_modes: Array[
+        {
+          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+        }
+      ],
+      default_publish_auth_modes: Array[
+        {
+          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+        }
+      ],
+      default_subscribe_auth_modes: Array[
+        {
+          auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")
+        }
+      ],
+      log_config: {
+        log_level: ("NONE" | "ERROR" | "ALL" | "INFO" | "DEBUG"),
+        cloud_watch_logs_role_arn: ::String
+      }?
+    }
+
+      type auth_provider = {
+      auth_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA"),
+      cognito_config: {
+        user_pool_id: ::String,
+        aws_region: ::String,
+        app_id_client_regex: ::String?
+      }?,
+      open_id_connect_config: {
+        issuer: ::String,
+        client_id: ::String?,
+        iat_ttl: ::Integer?,
+        auth_ttl: ::Integer?
+      }?,
+      lambda_authorizer_config: {
+        authorizer_result_ttl_in_seconds: ::Integer?,
+        authorizer_uri: ::String,
+        identity_validation_expression: ::String?
+      }?
+    }
+
+      type handler_config = {
+      behavior: ("CODE" | "DIRECT"),
+      integration: {
+        data_source_name: ::String,
+        lambda_config: {
+          invoke_type: ("REQUEST_RESPONSE" | "EVENT")?
+        }?
+      }
+    }
+
+      type handler_configs = {
+      on_publish: Params::handler_config?,
+      on_subscribe: Params::handler_config?
+    }
+
+      type dynamodb_data_source_config = {
+      table_name: ::String,
+      aws_region: ::String,
+      use_caller_credentials: bool?,
+      delta_sync_config: {
+        base_table_ttl: ::Integer?,
+        delta_sync_table_name: ::String?,
+        delta_sync_table_ttl: ::Integer?
+      }?,
+      versioned: bool?
+    }
+
+      type http_data_source_config = {
+      endpoint: ::String?,
+      authorization_config: {
+        authorization_type: ("AWS_IAM"),
+        aws_iam_config: {
+          signing_region: ::String?,
+          signing_service_name: ::String?
+        }?
+      }?
+    }
+
+      type relational_database_data_source_config = {
+      relational_database_source_type: ("RDS_HTTP_ENDPOINT")?,
+      rds_http_endpoint_config: {
+        aws_region: ::String?,
+        db_cluster_identifier: ::String?,
+        database_name: ::String?,
+        schema: ::String?,
+        aws_secret_store_arn: ::String?
+      }?
+    }
+
+      type additional_authentication_provider = {
+      authentication_type: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT" | "AWS_LAMBDA")?,
+      open_id_connect_config: {
+        issuer: ::String,
+        client_id: ::String?,
+        iat_ttl: ::Integer?,
+        auth_ttl: ::Integer?
+      }?,
+      user_pool_config: {
+        user_pool_id: ::String,
+        aws_region: ::String,
+        app_id_client_regex: ::String?
+      }?,
+      lambda_authorizer_config: {
+        authorizer_result_ttl_in_seconds: ::Integer?,
+        authorizer_uri: ::String,
+        identity_validation_expression: ::String?
+      }?
+    }
+
+    end
+  end
+end

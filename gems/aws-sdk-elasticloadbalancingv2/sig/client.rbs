@@ -89,7 +89,7 @@ module Aws
                                          {
                                            certificate_arn: ::String?,
                                            is_default: bool?
-                                         },
+                                         }
                                        ]
                                      ) -> _AddListenerCertificatesResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddListenerCertificatesResponseSuccess
@@ -104,7 +104,7 @@ module Aws
                         {
                           key: ::String,
                           value: ::String?
-                        },
+                        }
                       ]
                     ) -> _AddTagsResponseSuccess
                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsResponseSuccess
@@ -122,7 +122,7 @@ module Aws
                                              s3_key: ::String?,
                                              s3_object_version: ::String?,
                                              revocation_type: ("CRL")?
-                                           },
+                                           }
                                          ]
                                        ) -> _AddTrustStoreRevocationsResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTrustStoreRevocationsResponseSuccess
@@ -141,81 +141,17 @@ module Aws
                                {
                                  certificate_arn: ::String?,
                                  is_default: bool?
-                               },
+                               }
                              ],
                              default_actions: Array[
-                               {
-                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
-                                 target_group_arn: ::String?,
-                                 authenticate_oidc_config: {
-                                   issuer: ::String,
-                                   authorization_endpoint: ::String,
-                                   token_endpoint: ::String,
-                                   user_info_endpoint: ::String,
-                                   client_id: ::String,
-                                   client_secret: ::String?,
-                                   session_cookie_name: ::String?,
-                                   scope: ::String?,
-                                   session_timeout: ::Integer?,
-                                   authentication_request_extra_params: Hash[::String, ::String]?,
-                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
-                                   use_existing_client_secret: bool?
-                                 }?,
-                                 authenticate_cognito_config: {
-                                   user_pool_arn: ::String,
-                                   user_pool_client_id: ::String,
-                                   user_pool_domain: ::String,
-                                   session_cookie_name: ::String?,
-                                   scope: ::String?,
-                                   session_timeout: ::Integer?,
-                                   authentication_request_extra_params: Hash[::String, ::String]?,
-                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
-                                 }?,
-                                 order: ::Integer?,
-                                 redirect_config: {
-                                   protocol: ::String?,
-                                   port: ::String?,
-                                   host: ::String?,
-                                   path: ::String?,
-                                   query: ::String?,
-                                   status_code: ("HTTP_301" | "HTTP_302")
-                                 }?,
-                                 fixed_response_config: {
-                                   message_body: ::String?,
-                                   status_code: ::String,
-                                   content_type: ::String?
-                                 }?,
-                                 forward_config: {
-                                   target_groups: Array[
-                                     {
-                                       target_group_arn: ::String?,
-                                       weight: ::Integer?
-                                     },
-                                   ]?,
-                                   target_group_stickiness_config: {
-                                     enabled: bool?,
-                                     duration_seconds: ::Integer?
-                                   }?
-                                 }?,
-                                 jwt_validation_config: {
-                                   jwks_endpoint: ::String,
-                                   issuer: ::String,
-                                   additional_claims: Array[
-                                     {
-                                       format: ("single-string" | "string-array" | "space-separated-values"),
-                                       name: ::String,
-                                       values: Array[::String]
-                                     },
-                                   ]?
-                                 }?
-                               },
+                               Params::action
                              ],
                              ?alpn_policy: Array[::String],
                              ?tags: Array[
                                {
                                  key: ::String,
                                  value: ::String?
-                               },
+                               }
                              ],
                              ?mutual_authentication: {
                                mode: ::String?,
@@ -242,7 +178,7 @@ module Aws
                                       private_i_pv_4_address: ::String?,
                                       i_pv_6_address: ::String?,
                                       source_nat_ipv_6_prefix: ::String?
-                                    },
+                                    }
                                   ],
                                   ?security_groups: Array[::String],
                                   ?scheme: ("internet-facing" | "internal"),
@@ -250,7 +186,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String?
-                                    },
+                                    }
                                   ],
                                   ?type: ("application" | "network" | "gateway"),
                                   ?ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4"),
@@ -270,133 +206,20 @@ module Aws
       def create_rule: (
                          listener_arn: ::String,
                          conditions: Array[
-                           {
-                             field: ::String?,
-                             values: Array[::String]?,
-                             host_header_config: {
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             path_pattern_config: {
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             http_header_config: {
-                               http_header_name: ::String?,
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             query_string_config: {
-                               values: Array[
-                                 {
-                                   key: ::String?,
-                                   value: ::String?
-                                 },
-                               ]?
-                             }?,
-                             http_request_method_config: {
-                               values: Array[::String]?
-                             }?,
-                             source_ip_config: {
-                               values: Array[::String]?
-                             }?,
-                             regex_values: Array[::String]?
-                           },
+                           Params::rule_condition
                          ],
                          priority: ::Integer,
                          actions: Array[
-                           {
-                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
-                             target_group_arn: ::String?,
-                             authenticate_oidc_config: {
-                               issuer: ::String,
-                               authorization_endpoint: ::String,
-                               token_endpoint: ::String,
-                               user_info_endpoint: ::String,
-                               client_id: ::String,
-                               client_secret: ::String?,
-                               session_cookie_name: ::String?,
-                               scope: ::String?,
-                               session_timeout: ::Integer?,
-                               authentication_request_extra_params: Hash[::String, ::String]?,
-                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
-                               use_existing_client_secret: bool?
-                             }?,
-                             authenticate_cognito_config: {
-                               user_pool_arn: ::String,
-                               user_pool_client_id: ::String,
-                               user_pool_domain: ::String,
-                               session_cookie_name: ::String?,
-                               scope: ::String?,
-                               session_timeout: ::Integer?,
-                               authentication_request_extra_params: Hash[::String, ::String]?,
-                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
-                             }?,
-                             order: ::Integer?,
-                             redirect_config: {
-                               protocol: ::String?,
-                               port: ::String?,
-                               host: ::String?,
-                               path: ::String?,
-                               query: ::String?,
-                               status_code: ("HTTP_301" | "HTTP_302")
-                             }?,
-                             fixed_response_config: {
-                               message_body: ::String?,
-                               status_code: ::String,
-                               content_type: ::String?
-                             }?,
-                             forward_config: {
-                               target_groups: Array[
-                                 {
-                                   target_group_arn: ::String?,
-                                   weight: ::Integer?
-                                 },
-                               ]?,
-                               target_group_stickiness_config: {
-                                 enabled: bool?,
-                                 duration_seconds: ::Integer?
-                               }?
-                             }?,
-                             jwt_validation_config: {
-                               jwks_endpoint: ::String,
-                               issuer: ::String,
-                               additional_claims: Array[
-                                 {
-                                   format: ("single-string" | "string-array" | "space-separated-values"),
-                                   name: ::String,
-                                   values: Array[::String]
-                                 },
-                               ]?
-                             }?
-                           },
+                           Params::action
                          ],
                          ?tags: Array[
                            {
                              key: ::String,
                              value: ::String?
-                           },
+                           }
                          ],
                          ?transforms: Array[
-                           {
-                             type: ("host-header-rewrite" | "url-rewrite"),
-                             host_header_rewrite_config: {
-                               rewrites: Array[
-                                 {
-                                   regex: ::String,
-                                   replace: ::String
-                                 },
-                               ]?
-                             }?,
-                             url_rewrite_config: {
-                               rewrites: Array[
-                                 {
-                                   regex: ::String,
-                                   replace: ::String
-                                 },
-                               ]?
-                             }?
-                           },
+                           Params::rule_transform
                          ]
                        ) -> _CreateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
@@ -429,7 +252,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?ip_address_type: ("ipv4" | "ipv6"),
                                  ?target_control_port: ::Integer
@@ -450,7 +273,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _CreateTrustStoreResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTrustStoreResponseSuccess
@@ -522,7 +345,7 @@ module Aws
                                     port: ::Integer?,
                                     availability_zone: ::String?,
                                     quic_server_id: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _DeregisterTargetsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterTargetsResponseSuccess
@@ -689,7 +512,7 @@ module Aws
                                         port: ::Integer?,
                                         availability_zone: ::String?,
                                         quic_server_id: ::String?
-                                      },
+                                      }
                                     ],
                                     ?include: Array[("AnomalyDetection" | "All")]
                                   ) -> _DescribeTargetHealthResponseSuccess
@@ -812,74 +635,10 @@ module Aws
                                {
                                  certificate_arn: ::String?,
                                  is_default: bool?
-                               },
+                               }
                              ],
                              ?default_actions: Array[
-                               {
-                                 type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
-                                 target_group_arn: ::String?,
-                                 authenticate_oidc_config: {
-                                   issuer: ::String,
-                                   authorization_endpoint: ::String,
-                                   token_endpoint: ::String,
-                                   user_info_endpoint: ::String,
-                                   client_id: ::String,
-                                   client_secret: ::String?,
-                                   session_cookie_name: ::String?,
-                                   scope: ::String?,
-                                   session_timeout: ::Integer?,
-                                   authentication_request_extra_params: Hash[::String, ::String]?,
-                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
-                                   use_existing_client_secret: bool?
-                                 }?,
-                                 authenticate_cognito_config: {
-                                   user_pool_arn: ::String,
-                                   user_pool_client_id: ::String,
-                                   user_pool_domain: ::String,
-                                   session_cookie_name: ::String?,
-                                   scope: ::String?,
-                                   session_timeout: ::Integer?,
-                                   authentication_request_extra_params: Hash[::String, ::String]?,
-                                   on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
-                                 }?,
-                                 order: ::Integer?,
-                                 redirect_config: {
-                                   protocol: ::String?,
-                                   port: ::String?,
-                                   host: ::String?,
-                                   path: ::String?,
-                                   query: ::String?,
-                                   status_code: ("HTTP_301" | "HTTP_302")
-                                 }?,
-                                 fixed_response_config: {
-                                   message_body: ::String?,
-                                   status_code: ::String,
-                                   content_type: ::String?
-                                 }?,
-                                 forward_config: {
-                                   target_groups: Array[
-                                     {
-                                       target_group_arn: ::String?,
-                                       weight: ::Integer?
-                                     },
-                                   ]?,
-                                   target_group_stickiness_config: {
-                                     enabled: bool?,
-                                     duration_seconds: ::Integer?
-                                   }?
-                                 }?,
-                                 jwt_validation_config: {
-                                   jwks_endpoint: ::String,
-                                   issuer: ::String,
-                                   additional_claims: Array[
-                                     {
-                                       format: ("single-string" | "string-array" | "space-separated-values"),
-                                       name: ::String,
-                                       values: Array[::String]
-                                     },
-                                   ]?
-                                 }?
-                               },
+                               Params::action
                              ],
                              ?alpn_policy: Array[::String],
                              ?mutual_authentication: {
@@ -903,7 +662,7 @@ module Aws
                                           {
                                             key: ::String?,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _ModifyListenerAttributesResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyListenerAttributesResponseSuccess
@@ -919,7 +678,7 @@ module Aws
                                                {
                                                  key: ::String?,
                                                  value: ::String?
-                                               },
+                                               }
                                              ]
                                            ) -> _ModifyLoadBalancerAttributesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyLoadBalancerAttributesResponseSuccess
@@ -932,126 +691,13 @@ module Aws
       def modify_rule: (
                          rule_arn: ::String,
                          ?conditions: Array[
-                           {
-                             field: ::String?,
-                             values: Array[::String]?,
-                             host_header_config: {
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             path_pattern_config: {
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             http_header_config: {
-                               http_header_name: ::String?,
-                               values: Array[::String]?,
-                               regex_values: Array[::String]?
-                             }?,
-                             query_string_config: {
-                               values: Array[
-                                 {
-                                   key: ::String?,
-                                   value: ::String?
-                                 },
-                               ]?
-                             }?,
-                             http_request_method_config: {
-                               values: Array[::String]?
-                             }?,
-                             source_ip_config: {
-                               values: Array[::String]?
-                             }?,
-                             regex_values: Array[::String]?
-                           },
+                           Params::rule_condition
                          ],
                          ?actions: Array[
-                           {
-                             type: ("forward" | "authenticate-oidc" | "authenticate-cognito" | "redirect" | "fixed-response" | "jwt-validation"),
-                             target_group_arn: ::String?,
-                             authenticate_oidc_config: {
-                               issuer: ::String,
-                               authorization_endpoint: ::String,
-                               token_endpoint: ::String,
-                               user_info_endpoint: ::String,
-                               client_id: ::String,
-                               client_secret: ::String?,
-                               session_cookie_name: ::String?,
-                               scope: ::String?,
-                               session_timeout: ::Integer?,
-                               authentication_request_extra_params: Hash[::String, ::String]?,
-                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?,
-                               use_existing_client_secret: bool?
-                             }?,
-                             authenticate_cognito_config: {
-                               user_pool_arn: ::String,
-                               user_pool_client_id: ::String,
-                               user_pool_domain: ::String,
-                               session_cookie_name: ::String?,
-                               scope: ::String?,
-                               session_timeout: ::Integer?,
-                               authentication_request_extra_params: Hash[::String, ::String]?,
-                               on_unauthenticated_request: ("deny" | "allow" | "authenticate")?
-                             }?,
-                             order: ::Integer?,
-                             redirect_config: {
-                               protocol: ::String?,
-                               port: ::String?,
-                               host: ::String?,
-                               path: ::String?,
-                               query: ::String?,
-                               status_code: ("HTTP_301" | "HTTP_302")
-                             }?,
-                             fixed_response_config: {
-                               message_body: ::String?,
-                               status_code: ::String,
-                               content_type: ::String?
-                             }?,
-                             forward_config: {
-                               target_groups: Array[
-                                 {
-                                   target_group_arn: ::String?,
-                                   weight: ::Integer?
-                                 },
-                               ]?,
-                               target_group_stickiness_config: {
-                                 enabled: bool?,
-                                 duration_seconds: ::Integer?
-                               }?
-                             }?,
-                             jwt_validation_config: {
-                               jwks_endpoint: ::String,
-                               issuer: ::String,
-                               additional_claims: Array[
-                                 {
-                                   format: ("single-string" | "string-array" | "space-separated-values"),
-                                   name: ::String,
-                                   values: Array[::String]
-                                 },
-                               ]?
-                             }?
-                           },
+                           Params::action
                          ],
                          ?transforms: Array[
-                           {
-                             type: ("host-header-rewrite" | "url-rewrite"),
-                             host_header_rewrite_config: {
-                               rewrites: Array[
-                                 {
-                                   regex: ::String,
-                                   replace: ::String
-                                 },
-                               ]?
-                             }?,
-                             url_rewrite_config: {
-                               rewrites: Array[
-                                 {
-                                   regex: ::String,
-                                   replace: ::String
-                                 },
-                               ]?
-                             }?
-                           },
+                           Params::rule_transform
                          ],
                          ?reset_transforms: bool
                        ) -> _ModifyRuleResponseSuccess
@@ -1090,7 +736,7 @@ module Aws
                                               {
                                                 key: ::String?,
                                                 value: ::String?
-                                              },
+                                              }
                                             ]
                                           ) -> _ModifyTargetGroupAttributesResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTargetGroupAttributesResponseSuccess
@@ -1120,7 +766,7 @@ module Aws
                                   port: ::Integer?,
                                   availability_zone: ::String?,
                                   quic_server_id: ::String?
-                                },
+                                }
                               ]
                             ) -> _RegisterTargetsResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterTargetsResponseSuccess
@@ -1135,7 +781,7 @@ module Aws
                                             {
                                               certificate_arn: ::String?,
                                               is_default: bool?
-                                            },
+                                            }
                                           ]
                                         ) -> _RemoveListenerCertificatesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveListenerCertificatesResponseSuccess
@@ -1181,7 +827,7 @@ module Aws
                                    {
                                      rule_arn: ::String?,
                                      priority: ::Integer?
-                                   },
+                                   }
                                  ]
                                ) -> _SetRulePrioritiesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SetRulePrioritiesResponseSuccess
@@ -1216,7 +862,7 @@ module Aws
                              private_i_pv_4_address: ::String?,
                              i_pv_6_address: ::String?,
                              source_nat_ipv_6_prefix: ::String?
-                           },
+                           }
                          ],
                          ?ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4"),
                          ?enable_prefix_for_ipv_6_source_nat: ("on" | "off")
@@ -1253,7 +899,7 @@ module Aws
                         port: ::Integer?,
                         availability_zone: ::String?,
                         quic_server_id: ::String?
-                      },
+                      }
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
                   ) -> Client::_DescribeTargetHealthResponseSuccess
@@ -1266,7 +912,7 @@ module Aws
                         port: ::Integer?,
                         availability_zone: ::String?,
                         quic_server_id: ::String?
-                      },
+                      }
                     ],
                     ?include: Array[("AnomalyDetection" | "All")]
                   ) -> Client::_DescribeTargetHealthResponseSuccess

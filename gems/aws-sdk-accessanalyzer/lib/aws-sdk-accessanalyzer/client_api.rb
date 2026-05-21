@@ -49,6 +49,7 @@ module Aws::AccessAnalyzer
     AnalyzedResourcesList = Shapes::ListShape.new(name: 'AnalyzedResourcesList')
     AnalyzerArn = Shapes::StringShape.new(name: 'AnalyzerArn')
     AnalyzerConfiguration = Shapes::UnionShape.new(name: 'AnalyzerConfiguration')
+    AnalyzerName = Shapes::StringShape.new(name: 'AnalyzerName')
     AnalyzerStatus = Shapes::StringShape.new(name: 'AnalyzerStatus')
     AnalyzerSummary = Shapes::StructureShape.new(name: 'AnalyzerSummary')
     AnalyzersList = Shapes::ListShape.new(name: 'AnalyzersList')
@@ -81,9 +82,12 @@ module Aws::AccessAnalyzer
     CreateAnalyzerRequest = Shapes::StructureShape.new(name: 'CreateAnalyzerRequest')
     CreateAnalyzerResponse = Shapes::StructureShape.new(name: 'CreateAnalyzerResponse')
     CreateArchiveRuleRequest = Shapes::StructureShape.new(name: 'CreateArchiveRuleRequest')
+    CreateServiceLinkedAnalyzerRequest = Shapes::StructureShape.new(name: 'CreateServiceLinkedAnalyzerRequest')
+    CreateServiceLinkedAnalyzerResponse = Shapes::StructureShape.new(name: 'CreateServiceLinkedAnalyzerResponse')
     Criterion = Shapes::StructureShape.new(name: 'Criterion')
     DeleteAnalyzerRequest = Shapes::StructureShape.new(name: 'DeleteAnalyzerRequest')
     DeleteArchiveRuleRequest = Shapes::StructureShape.new(name: 'DeleteArchiveRuleRequest')
+    DeleteServiceLinkedAnalyzerRequest = Shapes::StructureShape.new(name: 'DeleteServiceLinkedAnalyzerRequest')
     DynamodbStreamConfiguration = Shapes::StructureShape.new(name: 'DynamodbStreamConfiguration')
     DynamodbStreamPolicy = Shapes::StringShape.new(name: 'DynamodbStreamPolicy')
     DynamodbTableConfiguration = Shapes::StructureShape.new(name: 'DynamodbTableConfiguration')
@@ -435,7 +439,7 @@ module Aws::AccessAnalyzer
     AnalyzerConfiguration.struct_class = Types::AnalyzerConfiguration
 
     AnalyzerSummary.add_member(:arn, Shapes::ShapeRef.new(shape: AnalyzerArn, required: true, location_name: "arn"))
-    AnalyzerSummary.add_member(:name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "name"))
+    AnalyzerSummary.add_member(:name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location_name: "name"))
     AnalyzerSummary.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
     AnalyzerSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     AnalyzerSummary.add_member(:last_resource_analyzed, Shapes::ShapeRef.new(shape: String, location_name: "lastResourceAnalyzed"))
@@ -444,6 +448,7 @@ module Aws::AccessAnalyzer
     AnalyzerSummary.add_member(:status, Shapes::ShapeRef.new(shape: AnalyzerStatus, required: true, location_name: "status"))
     AnalyzerSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: StatusReason, location_name: "statusReason"))
     AnalyzerSummary.add_member(:configuration, Shapes::ShapeRef.new(shape: AnalyzerConfiguration, location_name: "configuration"))
+    AnalyzerSummary.add_member(:managed_by, Shapes::ShapeRef.new(shape: String, location_name: "managedBy"))
     AnalyzerSummary.struct_class = Types::AnalyzerSummary
 
     AnalyzersList.member = Shapes::ShapeRef.new(shape: AnalyzerSummary)
@@ -559,7 +564,7 @@ module Aws::AccessAnalyzer
     CreateAccessPreviewResponse.add_member(:id, Shapes::ShapeRef.new(shape: AccessPreviewId, required: true, location_name: "id"))
     CreateAccessPreviewResponse.struct_class = Types::CreateAccessPreviewResponse
 
-    CreateAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "analyzerName"))
+    CreateAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location_name: "analyzerName"))
     CreateAnalyzerRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
     CreateAnalyzerRequest.add_member(:archive_rules, Shapes::ShapeRef.new(shape: InlineArchiveRulesList, location_name: "archiveRules"))
     CreateAnalyzerRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
@@ -570,11 +575,20 @@ module Aws::AccessAnalyzer
     CreateAnalyzerResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AnalyzerArn, location_name: "arn"))
     CreateAnalyzerResponse.struct_class = Types::CreateAnalyzerResponse
 
-    CreateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    CreateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     CreateArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "ruleName"))
     CreateArchiveRuleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
     CreateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     CreateArchiveRuleRequest.struct_class = Types::CreateArchiveRuleRequest
+
+    CreateServiceLinkedAnalyzerRequest.add_member(:type, Shapes::ShapeRef.new(shape: Type, required: true, location_name: "type"))
+    CreateServiceLinkedAnalyzerRequest.add_member(:archive_rules, Shapes::ShapeRef.new(shape: InlineArchiveRulesList, location_name: "archiveRules"))
+    CreateServiceLinkedAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateServiceLinkedAnalyzerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AnalyzerConfiguration, location_name: "configuration"))
+    CreateServiceLinkedAnalyzerRequest.struct_class = Types::CreateServiceLinkedAnalyzerRequest
+
+    CreateServiceLinkedAnalyzerResponse.add_member(:arn, Shapes::ShapeRef.new(shape: AnalyzerArn, location_name: "arn"))
+    CreateServiceLinkedAnalyzerResponse.struct_class = Types::CreateServiceLinkedAnalyzerResponse
 
     Criterion.add_member(:eq, Shapes::ShapeRef.new(shape: ValueList, location_name: "eq"))
     Criterion.add_member(:neq, Shapes::ShapeRef.new(shape: ValueList, location_name: "neq"))
@@ -582,14 +596,18 @@ module Aws::AccessAnalyzer
     Criterion.add_member(:exists, Shapes::ShapeRef.new(shape: Boolean, location_name: "exists"))
     Criterion.struct_class = Types::Criterion
 
-    DeleteAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    DeleteAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     DeleteAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteAnalyzerRequest.struct_class = Types::DeleteAnalyzerRequest
 
-    DeleteArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    DeleteArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     DeleteArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     DeleteArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     DeleteArchiveRuleRequest.struct_class = Types::DeleteArchiveRuleRequest
+
+    DeleteServiceLinkedAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
+    DeleteServiceLinkedAnalyzerRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    DeleteServiceLinkedAnalyzerRequest.struct_class = Types::DeleteServiceLinkedAnalyzerRequest
 
     DynamodbStreamConfiguration.add_member(:stream_policy, Shapes::ShapeRef.new(shape: DynamodbStreamPolicy, location_name: "streamPolicy"))
     DynamodbStreamConfiguration.struct_class = Types::DynamodbStreamConfiguration
@@ -761,13 +779,13 @@ module Aws::AccessAnalyzer
     GetAnalyzedResourceResponse.add_member(:resource, Shapes::ShapeRef.new(shape: AnalyzedResource, location_name: "resource"))
     GetAnalyzedResourceResponse.struct_class = Types::GetAnalyzedResourceResponse
 
-    GetAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    GetAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     GetAnalyzerRequest.struct_class = Types::GetAnalyzerRequest
 
     GetAnalyzerResponse.add_member(:analyzer, Shapes::ShapeRef.new(shape: AnalyzerSummary, required: true, location_name: "analyzer"))
     GetAnalyzerResponse.struct_class = Types::GetAnalyzerResponse
 
-    GetArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    GetArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     GetArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     GetArchiveRuleRequest.struct_class = Types::GetArchiveRuleRequest
 
@@ -964,7 +982,7 @@ module Aws::AccessAnalyzer
     ListAnalyzersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "nextToken"))
     ListAnalyzersResponse.struct_class = Types::ListAnalyzersResponse
 
-    ListArchiveRulesRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    ListArchiveRulesRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     ListArchiveRulesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "nextToken"))
     ListArchiveRulesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location: "querystring", location_name: "maxResults"))
     ListArchiveRulesRequest.struct_class = Types::ListArchiveRulesRequest
@@ -1290,14 +1308,14 @@ module Aws::AccessAnalyzer
     UnusedPermissionsRecommendedStep.add_member(:existing_policy_id, Shapes::ShapeRef.new(shape: String, location_name: "existingPolicyId"))
     UnusedPermissionsRecommendedStep.struct_class = Types::UnusedPermissionsRecommendedStep
 
-    UpdateAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    UpdateAnalyzerRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     UpdateAnalyzerRequest.add_member(:configuration, Shapes::ShapeRef.new(shape: AnalyzerConfiguration, location_name: "configuration"))
     UpdateAnalyzerRequest.struct_class = Types::UpdateAnalyzerRequest
 
     UpdateAnalyzerResponse.add_member(:configuration, Shapes::ShapeRef.new(shape: AnalyzerConfiguration, location_name: "configuration"))
     UpdateAnalyzerResponse.struct_class = Types::UpdateAnalyzerResponse
 
-    UpdateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "analyzerName"))
+    UpdateArchiveRuleRequest.add_member(:analyzer_name, Shapes::ShapeRef.new(shape: AnalyzerName, required: true, location: "uri", location_name: "analyzerName"))
     UpdateArchiveRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: Name, required: true, location: "uri", location_name: "ruleName"))
     UpdateArchiveRuleRequest.add_member(:filter, Shapes::ShapeRef.new(shape: FilterCriteriaMap, required: true, location_name: "filter"))
     UpdateArchiveRuleRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
@@ -1477,6 +1495,20 @@ module Aws::AccessAnalyzer
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
       end)
 
+      api.add_operation(:create_service_linked_analyzer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateServiceLinkedAnalyzer"
+        o.http_method = "PUT"
+        o.http_request_uri = "/service-linked-analyzer"
+        o.input = Shapes::ShapeRef.new(shape: CreateServiceLinkedAnalyzerRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateServiceLinkedAnalyzerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
       api.add_operation(:delete_analyzer, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteAnalyzer"
         o.http_method = "DELETE"
@@ -1497,6 +1529,20 @@ module Aws::AccessAnalyzer
         o.input = Shapes::ShapeRef.new(shape: DeleteArchiveRuleRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:delete_service_linked_analyzer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteServiceLinkedAnalyzer"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/service-linked-analyzer/{analyzerName}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteServiceLinkedAnalyzerRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

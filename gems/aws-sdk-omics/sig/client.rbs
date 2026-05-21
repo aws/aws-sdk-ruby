@@ -155,7 +155,7 @@ module Aws
                                                     part_number: ::Integer,
                                                     part_source: ("SOURCE1" | "SOURCE2"),
                                                     checksum: ::String
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _CompleteMultipartReadSetUploadResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompleteMultipartReadSetUploadResponseSuccess
@@ -190,7 +190,7 @@ module Aws
                                          annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")?,
                                          format_to_header: Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]?,
                                          schema: Array[
-                                           Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")],
+                                           Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")]
                                          ]?
                                        }?
                                      }
@@ -217,7 +217,7 @@ module Aws
                                                  annotation_type: ("GENERIC" | "CHR_POS" | "CHR_POS_REF_ALT" | "CHR_START_END_ONE_BASE" | "CHR_START_END_REF_ALT_ONE_BASE" | "CHR_START_END_ZERO_BASE" | "CHR_START_END_REF_ALT_ZERO_BASE")?,
                                                  format_to_header: Hash[("CHR" | "START" | "END" | "REF" | "ALT" | "POS"), ::String]?,
                                                  schema: Array[
-                                                   Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")],
+                                                   Hash[::String, ("LONG" | "INT" | "STRING" | "FLOAT" | "DOUBLE" | "BOOLEAN")]
                                                  ]?
                                                }?
                                              },
@@ -435,35 +435,12 @@ module Aws
                              request_id: ::String,
                              ?accelerators: ("GPU"),
                              ?storage_type: ("STATIC" | "DYNAMIC"),
-                             ?container_registry_map: {
-                               registry_mappings: Array[
-                                 {
-                                   upstream_registry_url: ::String?,
-                                   ecr_repository_prefix: ::String?,
-                                   upstream_repository_prefix: ::String?,
-                                   ecr_account_id: ::String?
-                                 },
-                               ]?,
-                               image_mappings: Array[
-                                 {
-                                   source_image: ::String?,
-                                   destination_image: ::String?
-                                 },
-                               ]?
-                             },
+                             ?container_registry_map: Params::container_registry_map,
                              ?container_registry_map_uri: ::String,
                              ?readme_markdown: ::String,
                              ?parameter_template_path: ::String,
                              ?readme_path: ::String,
-                             ?definition_repository: {
-                               connection_arn: ::String,
-                               full_repository_id: ::String,
-                               source_reference: {
-                                 type: ("BRANCH" | "TAG" | "COMMIT"),
-                                 value: ::String
-                               }?,
-                               exclude_file_patterns: Array[::String]?
-                             },
+                             ?definition_repository: Params::definition_repository,
                              ?workflow_bucket_owner_id: ::String,
                              ?readme_uri: ::String
                            ) -> _CreateWorkflowResponseSuccess
@@ -497,35 +474,12 @@ module Aws
                                      ?storage_capacity: ::Integer,
                                      ?tags: Hash[::String, ::String],
                                      ?workflow_bucket_owner_id: ::String,
-                                     ?container_registry_map: {
-                                       registry_mappings: Array[
-                                         {
-                                           upstream_registry_url: ::String?,
-                                           ecr_repository_prefix: ::String?,
-                                           upstream_repository_prefix: ::String?,
-                                           ecr_account_id: ::String?
-                                         },
-                                       ]?,
-                                       image_mappings: Array[
-                                         {
-                                           source_image: ::String?,
-                                           destination_image: ::String?
-                                         },
-                                       ]?
-                                     },
+                                     ?container_registry_map: Params::container_registry_map,
                                      ?container_registry_map_uri: ::String,
                                      ?readme_markdown: ::String,
                                      ?parameter_template_path: ::String,
                                      ?readme_path: ::String,
-                                     ?definition_repository: {
-                                       connection_arn: ::String,
-                                       full_repository_id: ::String,
-                                       source_reference: {
-                                         type: ("BRANCH" | "TAG" | "COMMIT"),
-                                         value: ::String
-                                       }?,
-                                       exclude_file_patterns: Array[::String]?
-                                     },
+                                     ?definition_repository: Params::definition_repository,
                                      ?readme_uri: ::String
                                    ) -> _CreateWorkflowVersionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowVersionResponseSuccess
@@ -1652,7 +1606,7 @@ module Aws
                                          items: Array[
                                            {
                                              source: ::String
-                                           },
+                                           }
                                          ],
                                          ?version_name: ::String,
                                          ?format_options: {
@@ -1693,7 +1647,7 @@ module Aws
                                            sources: Array[
                                              {
                                                read_set_id: ::String
-                                             },
+                                             }
                                            ]
                                          ) -> _StartReadSetActivationJobResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetActivationJobResponseSuccess
@@ -1715,7 +1669,7 @@ module Aws
                                        sources: Array[
                                          {
                                            read_set_id: ::String
-                                         },
+                                         }
                                        ]
                                      ) -> _StartReadSetExportJobResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetExportJobResponseSuccess
@@ -1747,7 +1701,7 @@ module Aws
                                            name: ::String?,
                                            description: ::String?,
                                            tags: Hash[::String, ::String]?
-                                         },
+                                         }
                                        ]
                                      ) -> _StartReadSetImportJobResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReadSetImportJobResponseSuccess
@@ -1771,7 +1725,7 @@ module Aws
                                             name: ::String,
                                             description: ::String?,
                                             tags: Hash[::String, ::String]?
-                                          },
+                                          }
                                         ]
                                       ) -> _StartReferenceImportJobResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReferenceImportJobResponseSuccess
@@ -1861,7 +1815,7 @@ module Aws
                                    }?,
                                    output_bucket_owner_id: ::String?,
                                    run_tags: Hash[::String, ::String]?
-                                 },
+                                 }
                                ]?,
                                s3_uri_settings: ::String?
                              }
@@ -1879,7 +1833,7 @@ module Aws
                                       items: Array[
                                         {
                                           source: ::String
-                                        },
+                                        }
                                       ],
                                       ?run_left_normalization: bool,
                                       ?annotation_fields: Hash[::String, ::String]

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-05-20)
+------------------
+
+* Feature - Updated API documentation to describe the PublicAndPrivate webserver access mode.
+
+1.74.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.73.0 (2026-05-13)
 ------------------
 

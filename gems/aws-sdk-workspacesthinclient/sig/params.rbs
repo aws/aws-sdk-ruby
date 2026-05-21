@@ -1,0 +1,23 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module WorkSpacesThinClient
+    module Params
+      type maintenance_window = {
+      type: ("SYSTEM" | "CUSTOM"),
+      start_time_hour: ::Integer?,
+      start_time_minute: ::Integer?,
+      end_time_hour: ::Integer?,
+      end_time_minute: ::Integer?,
+      days_of_the_week: Array[("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")]?,
+      apply_time_of: ("UTC" | "DEVICE")?
+    }
+
+    end
+  end
+end

@@ -102,27 +102,7 @@ module Aws
                            client_request_token: ::String,
                            invitation_id: ::String,
                            network_id: ::String,
-                           member_configuration: {
-                             name: ::String,
-                             description: ::String?,
-                             framework_configuration: {
-                               fabric: {
-                                 admin_username: ::String,
-                                 admin_password: ::String
-                               }?
-                             },
-                             log_publishing_configuration: {
-                               fabric: {
-                                 ca_logs: {
-                                   cloudwatch: {
-                                     enabled: bool?
-                                   }?
-                                 }?
-                               }?
-                             }?,
-                             tags: Hash[::String, ::String]?,
-                             kms_key_arn: ::String?
-                           }
+                           member_configuration: Params::member_configuration
                          ) -> _CreateMemberResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMemberResponseSuccess
 
@@ -150,27 +130,7 @@ module Aws
                                 threshold_comparator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUAL_TO")?
                               }?
                             },
-                            member_configuration: {
-                              name: ::String,
-                              description: ::String?,
-                              framework_configuration: {
-                                fabric: {
-                                  admin_username: ::String,
-                                  admin_password: ::String
-                                }?
-                              },
-                              log_publishing_configuration: {
-                                fabric: {
-                                  ca_logs: {
-                                    cloudwatch: {
-                                      enabled: bool?
-                                    }?
-                                  }?
-                                }?
-                              }?,
-                              tags: Hash[::String, ::String]?,
-                              kms_key_arn: ::String?
-                            },
+                            member_configuration: Params::member_configuration,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateNetworkResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNetworkResponseSuccess
@@ -187,20 +147,7 @@ module Aws
                          node_configuration: {
                            instance_type: ::String,
                            availability_zone: ::String?,
-                           log_publishing_configuration: {
-                             fabric: {
-                               chaincode_logs: {
-                                 cloudwatch: {
-                                   enabled: bool?
-                                 }?
-                               }?,
-                               peer_logs: {
-                                 cloudwatch: {
-                                   enabled: bool?
-                                 }?
-                               }?
-                             }?
-                           }?,
+                           log_publishing_configuration: Params::node_log_publishing_configuration?,
                            state_db: ("LevelDB" | "CouchDB")?
                          },
                          ?tags: Hash[::String, ::String]
@@ -220,12 +167,12 @@ module Aws
                                invitations: Array[
                                  {
                                    principal: ::String
-                                 },
+                                 }
                                ]?,
                                removals: Array[
                                  {
                                    member_id: ::String
-                                 },
+                                 }
                                ]?
                              },
                              ?description: ::String,
@@ -461,15 +408,7 @@ module Aws
       def update_member: (
                            network_id: ::String,
                            member_id: ::String,
-                           ?log_publishing_configuration: {
-                             fabric: {
-                               ca_logs: {
-                                 cloudwatch: {
-                                   enabled: bool?
-                                 }?
-                               }?
-                             }?
-                           }
+                           ?log_publishing_configuration: Params::member_log_publishing_configuration
                          ) -> _UpdateMemberResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemberResponseSuccess
 
@@ -481,20 +420,7 @@ module Aws
                          network_id: ::String,
                          ?member_id: ::String,
                          node_id: ::String,
-                         ?log_publishing_configuration: {
-                           fabric: {
-                             chaincode_logs: {
-                               cloudwatch: {
-                                 enabled: bool?
-                               }?
-                             }?,
-                             peer_logs: {
-                               cloudwatch: {
-                                 enabled: bool?
-                               }?
-                             }?
-                           }?
-                         }
+                         ?log_publishing_configuration: Params::node_log_publishing_configuration
                        ) -> _UpdateNodeResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNodeResponseSuccess
 

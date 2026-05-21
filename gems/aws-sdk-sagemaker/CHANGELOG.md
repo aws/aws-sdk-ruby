@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.367.0 (2026-05-19)
+------------------
+
+* Feature - Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.
+
 1.366.0 (2026-05-13)
 ------------------
 

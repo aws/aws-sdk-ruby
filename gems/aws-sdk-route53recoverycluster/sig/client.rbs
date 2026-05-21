@@ -124,7 +124,7 @@ module Aws
                                              {
                                                routing_control_arn: ::String,
                                                routing_control_state: ("On" | "Off")
-                                             },
+                                             }
                                            ],
                                            ?safety_rules_to_override: Array[::String]
                                          ) -> _UpdateRoutingControlStatesResponseSuccess

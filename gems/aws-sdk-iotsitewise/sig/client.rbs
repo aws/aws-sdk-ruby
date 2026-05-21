@@ -144,7 +144,7 @@ module Aws
                                                      end_date: ::Time,
                                                      qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")]?,
                                                      time_ordering: ("ASCENDING" | "DESCENDING")?
-                                                   },
+                                                   }
                                                  ],
                                                  ?next_token: ::String,
                                                  ?max_results: ::Integer
@@ -166,7 +166,7 @@ module Aws
                                                 asset_id: ::String?,
                                                 property_id: ::String?,
                                                 property_alias: ::String?
-                                              },
+                                              }
                                             ],
                                             ?next_token: ::String
                                           ) -> _BatchGetAssetPropertyValueResponseSuccess
@@ -191,7 +191,7 @@ module Aws
                                                         end_date: ::Time?,
                                                         qualities: Array[("GOOD" | "BAD" | "UNCERTAIN")]?,
                                                         time_ordering: ("ASCENDING" | "DESCENDING")?
-                                                      },
+                                                      }
                                                     ],
                                                     ?next_token: ::String,
                                                     ?max_results: ::Integer
@@ -227,9 +227,9 @@ module Aws
                                                       offset_in_nanos: ::Integer?
                                                     },
                                                     quality: ("GOOD" | "BAD" | "UNCERTAIN")?
-                                                  },
+                                                  }
                                                 ]
-                                              },
+                                              }
                                             ]
                                           ) -> _BatchPutAssetPropertyValueResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutAssetPropertyValueResponseSuccess
@@ -241,28 +241,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#create_access_policy-instance_method
       def create_access_policy: (
-                                  access_policy_identity: {
-                                    user: {
-                                      id: ::String
-                                    }?,
-                                    group: {
-                                      id: ::String
-                                    }?,
-                                    iam_user: {
-                                      arn: ::String
-                                    }?,
-                                    iam_role: {
-                                      arn: ::String
-                                    }?
-                                  },
-                                  access_policy_resource: {
-                                    portal: {
-                                      id: ::String
-                                    }?,
-                                    project: {
-                                      id: ::String
-                                    }?
-                                  },
+                                  access_policy_identity: Params::identity,
+                                  access_policy_resource: Params::resource,
                                   access_policy_permission: ("ADMINISTRATOR" | "VIEWER"),
                                   ?client_token: ::String,
                                   ?tags: Hash[::String, ::String]
@@ -301,77 +281,7 @@ module Aws
                                 ?asset_model_external_id: ::String,
                                 ?asset_model_description: ::String,
                                 ?asset_model_properties: Array[
-                                  {
-                                    id: ::String?,
-                                    external_id: ::String?,
-                                    name: ::String,
-                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                    data_type_spec: ::String?,
-                                    unit: ::String?,
-                                    type: {
-                                      attribute: {
-                                        default_value: ::String?
-                                      }?,
-                                      measurement: {
-                                        processing_config: {
-                                          forwarding_config: {
-                                            state: ("DISABLED" | "ENABLED")
-                                          }
-                                        }?
-                                      }?,
-                                      transform: {
-                                        expression: ::String,
-                                        variables: Array[
-                                          {
-                                            name: ::String,
-                                            value: {
-                                              property_id: ::String?,
-                                              hierarchy_id: ::String?,
-                                              property_path: Array[
-                                                {
-                                                  id: ::String?,
-                                                  name: ::String?
-                                                },
-                                              ]?
-                                            }
-                                          },
-                                        ],
-                                        processing_config: {
-                                          compute_location: ("EDGE" | "CLOUD"),
-                                          forwarding_config: {
-                                            state: ("DISABLED" | "ENABLED")
-                                          }?
-                                        }?
-                                      }?,
-                                      metric: {
-                                        expression: ::String?,
-                                        variables: Array[
-                                          {
-                                            name: ::String,
-                                            value: {
-                                              property_id: ::String?,
-                                              hierarchy_id: ::String?,
-                                              property_path: Array[
-                                                {
-                                                  id: ::String?,
-                                                  name: ::String?
-                                                },
-                                              ]?
-                                            }
-                                          },
-                                        ]?,
-                                        window: {
-                                          tumbling: {
-                                            interval: ::String,
-                                            offset: ::String?
-                                          }?
-                                        },
-                                        processing_config: {
-                                          compute_location: ("EDGE" | "CLOUD")
-                                        }?
-                                      }?
-                                    }
-                                  },
+                                  Params::asset_model_property_definition
                                 ],
                                 ?asset_model_hierarchies: Array[
                                   {
@@ -379,7 +289,7 @@ module Aws
                                     external_id: ::String?,
                                     name: ::String,
                                     child_asset_model_id: ::String
-                                  },
+                                  }
                                 ],
                                 ?asset_model_composite_models: Array[
                                   {
@@ -389,79 +299,9 @@ module Aws
                                     description: ::String?,
                                     type: ::String,
                                     properties: Array[
-                                      {
-                                        id: ::String?,
-                                        external_id: ::String?,
-                                        name: ::String,
-                                        data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                        data_type_spec: ::String?,
-                                        unit: ::String?,
-                                        type: {
-                                          attribute: {
-                                            default_value: ::String?
-                                          }?,
-                                          measurement: {
-                                            processing_config: {
-                                              forwarding_config: {
-                                                state: ("DISABLED" | "ENABLED")
-                                              }
-                                            }?
-                                          }?,
-                                          transform: {
-                                            expression: ::String,
-                                            variables: Array[
-                                              {
-                                                name: ::String,
-                                                value: {
-                                                  property_id: ::String?,
-                                                  hierarchy_id: ::String?,
-                                                  property_path: Array[
-                                                    {
-                                                      id: ::String?,
-                                                      name: ::String?
-                                                    },
-                                                  ]?
-                                                }
-                                              },
-                                            ],
-                                            processing_config: {
-                                              compute_location: ("EDGE" | "CLOUD"),
-                                              forwarding_config: {
-                                                state: ("DISABLED" | "ENABLED")
-                                              }?
-                                            }?
-                                          }?,
-                                          metric: {
-                                            expression: ::String?,
-                                            variables: Array[
-                                              {
-                                                name: ::String,
-                                                value: {
-                                                  property_id: ::String?,
-                                                  hierarchy_id: ::String?,
-                                                  property_path: Array[
-                                                    {
-                                                      id: ::String?,
-                                                      name: ::String?
-                                                    },
-                                                  ]?
-                                                }
-                                              },
-                                            ]?,
-                                            window: {
-                                              tumbling: {
-                                                interval: ::String,
-                                                offset: ::String?
-                                              }?
-                                            },
-                                            processing_config: {
-                                              compute_location: ("EDGE" | "CLOUD")
-                                            }?
-                                          }?
-                                        }
-                                      },
+                                      Params::asset_model_property_definition
                                     ]?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String,
                                 ?tags: Hash[::String, ::String]
@@ -486,77 +326,7 @@ module Aws
                                                 ?client_token: ::String,
                                                 ?composed_asset_model_id: ::String,
                                                 ?asset_model_composite_model_properties: Array[
-                                                  {
-                                                    id: ::String?,
-                                                    external_id: ::String?,
-                                                    name: ::String,
-                                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                                    data_type_spec: ::String?,
-                                                    unit: ::String?,
-                                                    type: {
-                                                      attribute: {
-                                                        default_value: ::String?
-                                                      }?,
-                                                      measurement: {
-                                                        processing_config: {
-                                                          forwarding_config: {
-                                                            state: ("DISABLED" | "ENABLED")
-                                                          }
-                                                        }?
-                                                      }?,
-                                                      transform: {
-                                                        expression: ::String,
-                                                        variables: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: {
-                                                              property_id: ::String?,
-                                                              hierarchy_id: ::String?,
-                                                              property_path: Array[
-                                                                {
-                                                                  id: ::String?,
-                                                                  name: ::String?
-                                                                },
-                                                              ]?
-                                                            }
-                                                          },
-                                                        ],
-                                                        processing_config: {
-                                                          compute_location: ("EDGE" | "CLOUD"),
-                                                          forwarding_config: {
-                                                            state: ("DISABLED" | "ENABLED")
-                                                          }?
-                                                        }?
-                                                      }?,
-                                                      metric: {
-                                                        expression: ::String?,
-                                                        variables: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: {
-                                                              property_id: ::String?,
-                                                              hierarchy_id: ::String?,
-                                                              property_path: Array[
-                                                                {
-                                                                  id: ::String?,
-                                                                  name: ::String?
-                                                                },
-                                                              ]?
-                                                            }
-                                                          },
-                                                        ]?,
-                                                        window: {
-                                                          tumbling: {
-                                                            interval: ::String,
-                                                            offset: ::String?
-                                                          }?
-                                                        },
-                                                        processing_config: {
-                                                          compute_location: ("EDGE" | "CLOUD")
-                                                        }?
-                                                      }?
-                                                    }
-                                                  },
+                                                  Params::asset_model_property_definition
                                                 ],
                                                 ?if_match: ::String,
                                                 ?if_none_match: ::String,
@@ -579,7 +349,7 @@ module Aws
                                         bucket: ::String,
                                         key: ::String,
                                         version_id: ::String?
-                                      },
+                                      }
                                     ],
                                     error_report_location: {
                                       bucket: ::String,
@@ -615,19 +385,7 @@ module Aws
                                           result_property: ::String
                                         }?
                                       },
-                                      computation_model_data_binding: Hash[::String, {
-                                          asset_model_property: {
-                                            asset_model_id: ::String,
-                                            property_id: ::String
-                                          }?,
-                                          asset_property: {
-                                            asset_id: ::String,
-                                            property_id: ::String
-                                          }?,
-                                          list: Array[
-                                            untyped,
-                                          ]?
-                                        }],
+                                      computation_model_data_binding: Hash[::String, Params::computation_model_data_binding_value],
                                       ?client_token: ::String,
                                       ?tags: Hash[::String, ::String]
                                     ) -> _CreateComputationModelResponseSuccess
@@ -660,16 +418,7 @@ module Aws
                             ?dataset_id: ::String,
                             dataset_name: ::String,
                             ?dataset_description: ::String,
-                            dataset_source: {
-                              source_type: ("KENDRA"),
-                              source_format: ("KNOWLEDGE_BASE"),
-                              source_detail: {
-                                kendra: {
-                                  knowledge_base_arn: ::String,
-                                  role_arn: ::String
-                                }?
-                              }?
-                            },
+                            dataset_source: Params::dataset_source,
                             ?client_token: ::String,
                             ?tags: Hash[::String, ::String]
                           ) -> _CreateDatasetResponseSuccess
@@ -1778,7 +1527,7 @@ module Aws
                                                         {
                                                           asset_model_property_id: ::String,
                                                           interface_asset_model_property_id: ::String
-                                                        },
+                                                        }
                                                       ]?
                                                     },
                                                     ?client_token: ::String
@@ -1869,28 +1618,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTSiteWise/Client.html#update_access_policy-instance_method
       def update_access_policy: (
                                   access_policy_id: ::String,
-                                  access_policy_identity: {
-                                    user: {
-                                      id: ::String
-                                    }?,
-                                    group: {
-                                      id: ::String
-                                    }?,
-                                    iam_user: {
-                                      arn: ::String
-                                    }?,
-                                    iam_role: {
-                                      arn: ::String
-                                    }?
-                                  },
-                                  access_policy_resource: {
-                                    portal: {
-                                      id: ::String
-                                    }?,
-                                    project: {
-                                      id: ::String
-                                    }?
-                                  },
+                                  access_policy_identity: Params::identity,
+                                  access_policy_resource: Params::resource,
                                   access_policy_permission: ("ADMINISTRATOR" | "VIEWER"),
                                   ?client_token: ::String
                                 ) -> _UpdateAccessPolicyResponseSuccess
@@ -1921,83 +1650,7 @@ module Aws
                                 asset_model_name: ::String,
                                 ?asset_model_description: ::String,
                                 ?asset_model_properties: Array[
-                                  {
-                                    id: ::String?,
-                                    external_id: ::String?,
-                                    name: ::String,
-                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                    data_type_spec: ::String?,
-                                    unit: ::String?,
-                                    type: {
-                                      attribute: {
-                                        default_value: ::String?
-                                      }?,
-                                      measurement: {
-                                        processing_config: {
-                                          forwarding_config: {
-                                            state: ("DISABLED" | "ENABLED")
-                                          }
-                                        }?
-                                      }?,
-                                      transform: {
-                                        expression: ::String,
-                                        variables: Array[
-                                          {
-                                            name: ::String,
-                                            value: {
-                                              property_id: ::String?,
-                                              hierarchy_id: ::String?,
-                                              property_path: Array[
-                                                {
-                                                  id: ::String?,
-                                                  name: ::String?
-                                                },
-                                              ]?
-                                            }
-                                          },
-                                        ],
-                                        processing_config: {
-                                          compute_location: ("EDGE" | "CLOUD"),
-                                          forwarding_config: {
-                                            state: ("DISABLED" | "ENABLED")
-                                          }?
-                                        }?
-                                      }?,
-                                      metric: {
-                                        expression: ::String?,
-                                        variables: Array[
-                                          {
-                                            name: ::String,
-                                            value: {
-                                              property_id: ::String?,
-                                              hierarchy_id: ::String?,
-                                              property_path: Array[
-                                                {
-                                                  id: ::String?,
-                                                  name: ::String?
-                                                },
-                                              ]?
-                                            }
-                                          },
-                                        ]?,
-                                        window: {
-                                          tumbling: {
-                                            interval: ::String,
-                                            offset: ::String?
-                                          }?
-                                        },
-                                        processing_config: {
-                                          compute_location: ("EDGE" | "CLOUD")
-                                        }?
-                                      }?
-                                    },
-                                    path: Array[
-                                      {
-                                        id: ::String?,
-                                        name: ::String?
-                                      },
-                                    ]?
-                                  },
+                                  Params::asset_model_property
                                 ],
                                 ?asset_model_hierarchies: Array[
                                   {
@@ -2005,7 +1658,7 @@ module Aws
                                     external_id: ::String?,
                                     name: ::String,
                                     child_asset_model_id: ::String
-                                  },
+                                  }
                                 ],
                                 ?asset_model_composite_models: Array[
                                   {
@@ -2013,87 +1666,11 @@ module Aws
                                     description: ::String?,
                                     type: ::String,
                                     properties: Array[
-                                      {
-                                        id: ::String?,
-                                        external_id: ::String?,
-                                        name: ::String,
-                                        data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                        data_type_spec: ::String?,
-                                        unit: ::String?,
-                                        type: {
-                                          attribute: {
-                                            default_value: ::String?
-                                          }?,
-                                          measurement: {
-                                            processing_config: {
-                                              forwarding_config: {
-                                                state: ("DISABLED" | "ENABLED")
-                                              }
-                                            }?
-                                          }?,
-                                          transform: {
-                                            expression: ::String,
-                                            variables: Array[
-                                              {
-                                                name: ::String,
-                                                value: {
-                                                  property_id: ::String?,
-                                                  hierarchy_id: ::String?,
-                                                  property_path: Array[
-                                                    {
-                                                      id: ::String?,
-                                                      name: ::String?
-                                                    },
-                                                  ]?
-                                                }
-                                              },
-                                            ],
-                                            processing_config: {
-                                              compute_location: ("EDGE" | "CLOUD"),
-                                              forwarding_config: {
-                                                state: ("DISABLED" | "ENABLED")
-                                              }?
-                                            }?
-                                          }?,
-                                          metric: {
-                                            expression: ::String?,
-                                            variables: Array[
-                                              {
-                                                name: ::String,
-                                                value: {
-                                                  property_id: ::String?,
-                                                  hierarchy_id: ::String?,
-                                                  property_path: Array[
-                                                    {
-                                                      id: ::String?,
-                                                      name: ::String?
-                                                    },
-                                                  ]?
-                                                }
-                                              },
-                                            ]?,
-                                            window: {
-                                              tumbling: {
-                                                interval: ::String,
-                                                offset: ::String?
-                                              }?
-                                            },
-                                            processing_config: {
-                                              compute_location: ("EDGE" | "CLOUD")
-                                            }?
-                                          }?
-                                        },
-                                        path: Array[
-                                          {
-                                            id: ::String?,
-                                            name: ::String?
-                                          },
-                                        ]?
-                                      },
+                                      Params::asset_model_property
                                     ]?,
                                     id: ::String?,
                                     external_id: ::String?
-                                  },
+                                  }
                                 ],
                                 ?client_token: ::String,
                                 ?if_match: ::String,
@@ -2116,83 +1693,7 @@ module Aws
                                                 asset_model_composite_model_name: ::String,
                                                 ?client_token: ::String,
                                                 ?asset_model_composite_model_properties: Array[
-                                                  {
-                                                    id: ::String?,
-                                                    external_id: ::String?,
-                                                    name: ::String,
-                                                    data_type: ("STRING" | "INTEGER" | "DOUBLE" | "BOOLEAN" | "STRUCT"),
-                                                    data_type_spec: ::String?,
-                                                    unit: ::String?,
-                                                    type: {
-                                                      attribute: {
-                                                        default_value: ::String?
-                                                      }?,
-                                                      measurement: {
-                                                        processing_config: {
-                                                          forwarding_config: {
-                                                            state: ("DISABLED" | "ENABLED")
-                                                          }
-                                                        }?
-                                                      }?,
-                                                      transform: {
-                                                        expression: ::String,
-                                                        variables: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: {
-                                                              property_id: ::String?,
-                                                              hierarchy_id: ::String?,
-                                                              property_path: Array[
-                                                                {
-                                                                  id: ::String?,
-                                                                  name: ::String?
-                                                                },
-                                                              ]?
-                                                            }
-                                                          },
-                                                        ],
-                                                        processing_config: {
-                                                          compute_location: ("EDGE" | "CLOUD"),
-                                                          forwarding_config: {
-                                                            state: ("DISABLED" | "ENABLED")
-                                                          }?
-                                                        }?
-                                                      }?,
-                                                      metric: {
-                                                        expression: ::String?,
-                                                        variables: Array[
-                                                          {
-                                                            name: ::String,
-                                                            value: {
-                                                              property_id: ::String?,
-                                                              hierarchy_id: ::String?,
-                                                              property_path: Array[
-                                                                {
-                                                                  id: ::String?,
-                                                                  name: ::String?
-                                                                },
-                                                              ]?
-                                                            }
-                                                          },
-                                                        ]?,
-                                                        window: {
-                                                          tumbling: {
-                                                            interval: ::String,
-                                                            offset: ::String?
-                                                          }?
-                                                        },
-                                                        processing_config: {
-                                                          compute_location: ("EDGE" | "CLOUD")
-                                                        }?
-                                                      }?
-                                                    },
-                                                    path: Array[
-                                                      {
-                                                        id: ::String?,
-                                                        name: ::String?
-                                                      },
-                                                    ]?
-                                                  },
+                                                  Params::asset_model_property
                                                 ],
                                                 ?if_match: ::String,
                                                 ?if_none_match: ::String,
@@ -2226,19 +1727,7 @@ module Aws
                                           result_property: ::String
                                         }?
                                       },
-                                      computation_model_data_binding: Hash[::String, {
-                                          asset_model_property: {
-                                            asset_model_id: ::String,
-                                            property_id: ::String
-                                          }?,
-                                          asset_property: {
-                                            asset_id: ::String,
-                                            property_id: ::String
-                                          }?,
-                                          list: Array[
-                                            untyped,
-                                          ]?
-                                        }],
+                                      computation_model_data_binding: Hash[::String, Params::computation_model_data_binding_value],
                                       ?client_token: ::String
                                     ) -> _UpdateComputationModelResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateComputationModelResponseSuccess
@@ -2267,16 +1756,7 @@ module Aws
                             dataset_id: ::String,
                             dataset_name: ::String,
                             ?dataset_description: ::String,
-                            dataset_source: {
-                              source_type: ("KENDRA"),
-                              source_format: ("KNOWLEDGE_BASE"),
-                              source_detail: {
-                                kendra: {
-                                  knowledge_base_arn: ::String,
-                                  role_arn: ::String
-                                }?
-                              }?
-                            },
+                            dataset_source: Params::dataset_source,
                             ?client_token: ::String
                           ) -> _UpdateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDatasetResponseSuccess

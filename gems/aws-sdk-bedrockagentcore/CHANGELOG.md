@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.34.0 (2026-05-19)
+------------------
+
+* Feature - Add RetryableConflictException (HTTP 409) to InvokeAgentRuntime and StopRuntimeSession to prevent orphaned VMs during concurrent session access. The SDK automatically retries this exception with backoff. Enforcement is not yet active and will be enabled in a future service update.
+
 1.33.0 (2026-05-13)
 ------------------
 

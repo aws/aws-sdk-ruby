@@ -89,7 +89,7 @@ module Aws
                                                       entries: Array[
                                                         {
                                                           grouping_recommendation_id: ::String
-                                                        },
+                                                        }
                                                       ]
                                                     ) -> _AcceptResourceGroupingRecommendationsResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptResourceGroupingRecommendationsResponseSuccess
@@ -118,7 +118,7 @@ module Aws
                                                          resource_group_name: ::String?,
                                                          resource_name: ::String?,
                                                          terraform_source_name: ::String?
-                                                       },
+                                                       }
                                                      ]
                                                    ) -> _AddDraftAppVersionResourceMappingsResponseSuccess
                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddDraftAppVersionResourceMappingsResponseSuccess
@@ -144,7 +144,7 @@ module Aws
                                                       target_region: ::String?
                                                     }?,
                                                     reference_id: ::String
-                                                  },
+                                                  }
                                                 ]
                                               ) -> _BatchUpdateRecommendationStatusResponseSuccess
                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateRecommendationStatusResponseSuccess
@@ -164,7 +164,7 @@ module Aws
                             event_type: ("ScheduledAssessmentFailure" | "DriftDetected"),
                             name: ::String,
                             sns_topic_arn: ::String?
-                          },
+                          }
                         ],
                         name: ::String,
                         ?permission_model: {
@@ -529,14 +529,14 @@ module Aws
                                                      {
                                                        eks_cluster_arn: ::String,
                                                        namespaces: Array[::String]
-                                                     },
+                                                     }
                                                    ],
                                                    ?import_strategy: ("AddOnly" | "ReplaceAll"),
                                                    ?source_arns: Array[::String],
                                                    ?terraform_sources: Array[
                                                      {
                                                        s3_state_file_url: ::String
-                                                     },
+                                                     }
                                                    ]
                                                  ) -> _ImportResourcesToDraftAppVersionResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportResourcesToDraftAppVersionResponseSuccess
@@ -729,14 +729,14 @@ module Aws
                               field: ::String,
                               operator: ("Equals" | "NotEquals" | "GreaterThen" | "GreaterOrEquals" | "LessThen" | "LessOrEquals"),
                               value: ::String?
-                            },
+                            }
                           ],
                           ?data_source: ::String,
                           ?fields: Array[
                             {
                               aggregation: ("Min" | "Max" | "Sum" | "Avg" | "Count")?,
                               name: ::String
-                            },
+                            }
                           ],
                           ?max_results: ::Integer,
                           ?next_token: ::String,
@@ -744,7 +744,7 @@ module Aws
                             {
                               ascending: bool?,
                               field: ::String
-                            },
+                            }
                           ]
                         ) -> _ListMetricsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMetricsResponseSuccess
@@ -894,7 +894,7 @@ module Aws
                                                         {
                                                           grouping_recommendation_id: ::String,
                                                           rejection_reason: ("DistinctBusinessPurpose" | "SeparateDataConcern" | "DistinctUserGroupHandling" | "Other")?
-                                                        },
+                                                        }
                                                       ]
                                                     ) -> _RejectResourceGroupingRecommendationsResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectResourceGroupingRecommendationsResponseSuccess
@@ -1004,7 +1004,7 @@ module Aws
                             event_type: ("ScheduledAssessmentFailure" | "DriftDetected"),
                             name: ::String,
                             sns_topic_arn: ::String?
-                          },
+                          }
                         ],
                         ?permission_model: {
                           cross_account_role_arns: Array[::String]?,

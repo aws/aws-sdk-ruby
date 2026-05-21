@@ -1,0 +1,22 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Textract
+    module Params
+      type document = {
+      bytes: ::String?,
+      s3_object: {
+        bucket: ::String?,
+        name: ::String?,
+        version: ::String?
+      }?
+    }
+
+    end
+  end
+end

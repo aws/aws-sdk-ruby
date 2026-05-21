@@ -1,0 +1,45 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DevOpsGuru
+    module Params
+      type resource_collection = {
+      cloud_formation: {
+        stack_names: Array[::String]?
+      }?,
+      tags: Array[
+        {
+          app_boundary_key: ::String,
+          tag_values: Array[::String]
+        }
+      ]?
+    }
+
+      type list_insights_status_filter = {
+      ongoing: {
+        type: ("REACTIVE" | "PROACTIVE")
+      }?,
+      closed: {
+        type: ("REACTIVE" | "PROACTIVE"),
+        end_time_range: {
+          from_time: ::Time?,
+          to_time: ::Time?
+        }
+      }?,
+      any: {
+        type: ("REACTIVE" | "PROACTIVE"),
+        start_time_range: {
+          from_time: ::Time?,
+          to_time: ::Time?
+        }
+      }?
+    }
+
+    end
+  end
+end

@@ -1,0 +1,318 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module DataZone
+    module Params
+      type owner_properties = {
+      user: {
+        user_identifier: ::String
+      }?,
+      group: {
+        group_identifier: ::String
+      }?
+    }
+
+      type project_policy_grant_principal = {
+      project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD"),
+      project_identifier: ::String?,
+      project_grant_filter: {
+        domain_unit_filter: {
+          domain_unit: ::String,
+          include_child_domain_units: bool?
+        }?
+      }?
+    }
+
+      type domain_unit_policy_grant_principal = {
+      domain_unit_designation: ("OWNER"),
+      domain_unit_identifier: ::String?,
+      domain_unit_grant_filter: {
+        all_domain_units_grant_filter: {
+        }?
+      }?
+    }
+
+      type policy_grant_principal = {
+      user: {
+        user_identifier: ::String?,
+        all_users_grant_filter: {
+        }?
+      }?,
+      group: {
+        group_identifier: ::String?
+      }?,
+      project: Params::project_policy_grant_principal?,
+      domain_unit: Params::domain_unit_policy_grant_principal?
+    }
+
+      type account_source = {
+      accounts: Array[
+        {
+          aws_account_id: ::String,
+          supported_regions: Array[::String],
+          aws_account_name: ::String?
+        }
+      ]?,
+      custom_account_pool_handler: {
+        lambda_function_arn: ::String,
+        lambda_execution_role_arn: ::String?
+      }?
+    }
+
+      type row_filter_expression = {
+      equal_to: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      not_equal_to: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      greater_than: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      less_than: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      greater_than_or_equal_to: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      less_than_or_equal_to: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      is_null: {
+        column_name: ::String
+      }?,
+      is_not_null: {
+        column_name: ::String
+      }?,
+      in: {
+        column_name: ::String,
+        values: Array[::String]
+      }?,
+      not_in: {
+        column_name: ::String,
+        values: Array[::String]
+      }?,
+      like: {
+        column_name: ::String,
+        value: ::String
+      }?,
+      not_like: {
+        column_name: ::String,
+        value: ::String
+      }?
+    }
+
+      type row_filter = {
+      expression: Params::row_filter_expression?,
+      and: Array[
+        {
+          expression: Params::row_filter_expression?,
+          and: untyped?,
+          or: untyped?
+        }
+      ]?,
+      or: Array[
+        {
+          expression: Params::row_filter_expression?,
+          and: untyped?,
+          or: untyped?
+        }
+      ]?
+    }
+
+      type row_filter_configuration = {
+      row_filter: Params::row_filter,
+      sensitive: bool?
+    }
+
+      type asset_filter_configuration = {
+      column_configuration: {
+        included_column_names: Array[::String]?
+      }?,
+      row_configuration: Params::row_filter_configuration?
+    }
+
+      type glue_run_configuration_input = {
+      data_access_role: ::String?,
+      relational_filter_configurations: Array[
+        Params::relational_filter_configuration
+      ],
+      auto_import_data_quality_result: bool?,
+      catalog_name: ::String?
+    }
+
+      type redshift_storage = {
+      redshift_cluster_source: {
+        cluster_name: ::String
+      }?,
+      redshift_serverless_source: {
+        workgroup_name: ::String
+      }?
+    }
+
+      type redshift_run_configuration_input = {
+      data_access_role: ::String?,
+      relational_filter_configurations: Array[
+        Params::relational_filter_configuration
+      ],
+      redshift_credential_configuration: {
+        secret_manager_arn: ::String
+      }?,
+      redshift_storage: Params::redshift_storage?
+    }
+
+      type data_source_configuration_input = {
+      glue_run_configuration: Params::glue_run_configuration_input?,
+      redshift_run_configuration: Params::redshift_run_configuration_input?,
+      sage_maker_run_configuration: {
+        tracking_assets: Hash[::String, Array[::String]]
+      }?
+    }
+
+      type relational_filter_configuration = {
+      database_name: ::String,
+      schema_name: ::String?,
+      filter_expressions: Array[
+        {
+          type: ("INCLUDE" | "EXCLUDE"),
+          expression: ::String
+        }
+      ]?
+    }
+
+      type custom_parameter = {
+      key_name: ::String,
+      description: ::String?,
+      field_type: ::String,
+      default_value: ::String?,
+      is_editable: bool?,
+      is_optional: bool?,
+      is_update_supported: bool?
+    }
+
+      type environment_configuration_user_parameter = {
+      environment_id: ::String?,
+      environment_resolved_account: {
+        aws_account_id: ::String,
+        region_name: ::String,
+        source_account_pool_id: ::String?
+      }?,
+      environment_configuration_name: ::String?,
+      environment_parameters: Array[
+        {
+          name: ::String?,
+          value: ::String?
+        }
+      ]?
+    }
+
+      type environment_configuration_parameters_details = {
+      ssm_path: ::String?,
+      parameter_overrides: Array[
+        {
+          name: ::String?,
+          value: ::String?,
+          is_editable: bool?
+        }
+      ]?,
+      resolved_parameters: Array[
+        {
+          name: ::String?,
+          value: ::String?,
+          is_editable: bool?
+        }
+      ]?
+    }
+
+      type environment_configuration = {
+      name: ::String,
+      id: ::String?,
+      environment_blueprint_id: ::String,
+      description: ::String?,
+      deployment_mode: ("ON_CREATE" | "ON_DEMAND")?,
+      configuration_parameters: Params::environment_configuration_parameters_details?,
+      aws_account: {
+        aws_account_id: ::String?,
+        aws_account_id_path: ::String?
+      }?,
+      account_pools: Array[::String]?,
+      aws_region: {
+        region_name: ::String?,
+        region_name_path: ::String?
+      }?,
+      deployment_order: ::Integer?
+    }
+
+      type rule_scope = {
+      asset_type: {
+        selection_mode: ("ALL" | "SPECIFIC"),
+        specific_asset_types: Array[::String]?
+      }?,
+      data_product: bool?,
+      project: {
+        selection_mode: ("ALL" | "SPECIFIC"),
+        specific_projects: Array[::String]?
+      }?
+    }
+
+      type rule_detail = {
+      metadata_form_enforcement_detail: {
+        required_metadata_forms: Array[
+          {
+            type_identifier: ::String,
+            type_revision: ::String
+          }
+        ]?
+      }?,
+      glossary_term_enforcement_detail: {
+        required_glossary_term_ids: Array[::String]?
+      }?
+    }
+
+      type filter_clause = {
+      filter: {
+        attribute: ::String,
+        value: ::String?,
+        int_value: ::Integer?,
+        operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
+      }?,
+      and: Array[
+        {
+          filter: {
+            attribute: ::String,
+            value: ::String?,
+            int_value: ::Integer?,
+            operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
+          }?,
+          and: untyped?,
+          or: untyped?
+        }
+      ]?,
+      or: Array[
+        {
+          filter: {
+            attribute: ::String,
+            value: ::String?,
+            int_value: ::Integer?,
+            operator: ("EQ" | "LE" | "LT" | "GE" | "GT" | "TEXT_SEARCH")?
+          }?,
+          and: untyped?,
+          or: untyped?
+        }
+      ]?
+    }
+
+    end
+  end
+end

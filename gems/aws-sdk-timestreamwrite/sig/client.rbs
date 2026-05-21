@@ -94,7 +94,7 @@ module Aws
                                           {
                                             source_column: ::String?,
                                             destination_column: ::String?
-                                          },
+                                          }
                                         ],
                                         multi_measure_mappings: {
                                           target_multi_measure_name: ::String?,
@@ -103,7 +103,7 @@ module Aws
                                               source_column: ::String,
                                               target_multi_measure_attribute_name: ::String?,
                                               measure_value_type: ("DOUBLE" | "BIGINT" | "BOOLEAN" | "VARCHAR" | "TIMESTAMP")?
-                                            },
+                                            }
                                           ]
                                         }?,
                                         mixed_measure_mappings: Array[
@@ -117,9 +117,9 @@ module Aws
                                                 source_column: ::String,
                                                 target_multi_measure_attribute_name: ::String?,
                                                 measure_value_type: ("DOUBLE" | "BIGINT" | "BOOLEAN" | "VARCHAR" | "TIMESTAMP")?
-                                              },
+                                              }
                                             ]?
-                                          },
+                                          }
                                         ]?,
                                         measure_name_column: ::String?
                                       }?,
@@ -168,7 +168,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateDatabaseResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatabaseResponseSuccess
@@ -189,26 +189,16 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
-                          ?magnetic_store_write_properties: {
-                            enable_magnetic_store_writes: bool,
-                            magnetic_store_rejected_data_location: {
-                              s3_configuration: {
-                                bucket_name: ::String?,
-                                object_key_prefix: ::String?,
-                                encryption_option: ("SSE_S3" | "SSE_KMS")?,
-                                kms_key_id: ::String?
-                              }?
-                            }?
-                          },
+                          ?magnetic_store_write_properties: Params::magnetic_store_write_properties,
                           ?schema: {
                             composite_partition_key: Array[
                               {
                                 type: ("DIMENSION" | "MEASURE"),
                                 name: ::String?,
                                 enforcement_in_record: ("REQUIRED" | "OPTIONAL")?
-                              },
+                              }
                             ]?
                           }
                         ) -> _CreateTableResponseSuccess
@@ -334,7 +324,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -372,24 +362,14 @@ module Aws
                             memory_store_retention_period_in_hours: ::Integer,
                             magnetic_store_retention_period_in_days: ::Integer
                           },
-                          ?magnetic_store_write_properties: {
-                            enable_magnetic_store_writes: bool,
-                            magnetic_store_rejected_data_location: {
-                              s3_configuration: {
-                                bucket_name: ::String?,
-                                object_key_prefix: ::String?,
-                                encryption_option: ("SSE_S3" | "SSE_KMS")?,
-                                kms_key_id: ::String?
-                              }?
-                            }?
-                          },
+                          ?magnetic_store_write_properties: Params::magnetic_store_write_properties,
                           ?schema: {
                             composite_partition_key: Array[
                               {
                                 type: ("DIMENSION" | "MEASURE"),
                                 name: ::String?,
                                 enforcement_in_record: ("REQUIRED" | "OPTIONAL")?
-                              },
+                              }
                             ]?
                           }
                         ) -> _UpdateTableResponseSuccess
@@ -403,51 +383,9 @@ module Aws
       def write_records: (
                            database_name: ::String,
                            table_name: ::String,
-                           ?common_attributes: {
-                             dimensions: Array[
-                               {
-                                 name: ::String,
-                                 value: ::String,
-                                 dimension_value_type: ("VARCHAR")?
-                               },
-                             ]?,
-                             measure_name: ::String?,
-                             measure_value: ::String?,
-                             measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")?,
-                             time: ::String?,
-                             time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")?,
-                             version: ::Integer?,
-                             measure_values: Array[
-                               {
-                                 name: ::String,
-                                 value: ::String,
-                                 type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
-                               },
-                             ]?
-                           },
+                           ?common_attributes: Params::record,
                            records: Array[
-                             {
-                               dimensions: Array[
-                                 {
-                                   name: ::String,
-                                   value: ::String,
-                                   dimension_value_type: ("VARCHAR")?
-                                 },
-                               ]?,
-                               measure_name: ::String?,
-                               measure_value: ::String?,
-                               measure_value_type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")?,
-                               time: ::String?,
-                               time_unit: ("MILLISECONDS" | "SECONDS" | "MICROSECONDS" | "NANOSECONDS")?,
-                               version: ::Integer?,
-                               measure_values: Array[
-                                 {
-                                   name: ::String,
-                                   value: ::String,
-                                   type: ("DOUBLE" | "BIGINT" | "VARCHAR" | "BOOLEAN" | "TIMESTAMP" | "MULTI")
-                                 },
-                               ]?
-                             },
+                             Params::record
                            ]
                          ) -> _WriteRecordsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _WriteRecordsResponseSuccess

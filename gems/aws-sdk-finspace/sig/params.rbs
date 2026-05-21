@@ -1,0 +1,49 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Finspace
+    module Params
+      type federation_parameters = {
+      saml_metadata_document: ::String?,
+      saml_metadata_url: ::String?,
+      application_call_back_url: ::String?,
+      federation_urn: ::String?,
+      federation_provider_name: ::String?,
+      attribute_map: Hash[::String, ::String]?
+    }
+
+      type kx_dataview_configuration = {
+      dataview_name: ::String?,
+      dataview_version_id: ::String?,
+      changeset_id: ::String?,
+      segment_configurations: Array[
+        {
+          db_paths: Array[::String],
+          volume_name: ::String,
+          on_demand: bool?
+        }
+      ]?
+    }
+
+      type kx_database_configuration = {
+      database_name: ::String,
+      cache_configurations: Array[
+        {
+          cache_type: ::String,
+          db_paths: Array[::String],
+          dataview_name: ::String?
+        }
+      ]?,
+      changeset_id: ::String?,
+      dataview_name: ::String?,
+      dataview_configuration: Params::kx_dataview_configuration?
+    }
+
+    end
+  end
+end

@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ElementalInference
+    module Params
+      type create_output = {
+      name: ::String,
+      output_config: {
+        cropping: {
+        }?,
+        clipping: {
+          callback_metadata: ::String?
+        }?
+      },
+      status: ("ENABLED" | "DISABLED"),
+      description: ::String?
+    }
+
+    end
+  end
+end

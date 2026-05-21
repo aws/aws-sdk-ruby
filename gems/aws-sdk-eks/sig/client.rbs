@@ -109,7 +109,7 @@ module Aws
                                              provider: {
                                                key_arn: ::String?
                                              }?
-                                           },
+                                           }
                                          ],
                                          ?client_request_token: ::String
                                        ) -> _AssociateEncryptionConfigResponseSuccess
@@ -172,7 +172,7 @@ module Aws
                             {
                               service_account: ::String,
                               role_arn: ::String
-                            },
+                            }
                           ],
                           ?namespace_config: {
                             namespace: ::String?
@@ -205,9 +205,9 @@ module Aws
                                          {
                                            id: ::String,
                                            type: ("SSO_USER" | "SSO_GROUP")
-                                         },
+                                         }
                                        ]
-                                     },
+                                     }
                                    ]?,
                                    network_access: {
                                      vpce_ids: Array[::String]?
@@ -247,7 +247,7 @@ module Aws
                                 {
                                   types: Array[("api" | "audit" | "authenticator" | "controllerManager" | "scheduler")]?,
                                   enabled: bool?
-                                },
+                                }
                               ]?
                             },
                             ?client_request_token: ::String,
@@ -258,7 +258,7 @@ module Aws
                                 provider: {
                                   key_arn: ::String?
                                 }?
-                              },
+                              }
                             ],
                             ?outpost_config: {
                               outpost_arns: Array[::String],
@@ -278,18 +278,7 @@ module Aws
                             ?zonal_shift_config: {
                               enabled: bool?
                             },
-                            ?remote_network_config: {
-                              remote_node_networks: Array[
-                                {
-                                  cidrs: Array[::String]?
-                                },
-                              ]?,
-                              remote_pod_networks: Array[
-                                {
-                                  cidrs: Array[::String]?
-                                },
-                              ]?
-                            },
+                            ?remote_network_config: Params::remote_network_config_request,
                             ?compute_config: {
                               enabled: bool?,
                               node_pools: Array[::String]?,
@@ -340,7 +329,7 @@ module Aws
                                       {
                                         namespace: ::String?,
                                         labels: Hash[::String, ::String]?
-                                      },
+                                      }
                                     ],
                                     ?client_request_token: ::String,
                                     ?tags: Hash[::String, ::String]
@@ -375,7 +364,7 @@ module Aws
                                   key: ::String?,
                                   value: ::String?,
                                   effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
-                                },
+                                }
                               ],
                               ?tags: Hash[::String, ::String],
                               ?client_request_token: ::String,
@@ -389,21 +378,7 @@ module Aws
                                 max_unavailable_percentage: ::Integer?,
                                 update_strategy: ("DEFAULT" | "MINIMAL")?
                               },
-                              ?node_repair_config: {
-                                enabled: bool?,
-                                max_unhealthy_node_threshold_count: ::Integer?,
-                                max_unhealthy_node_threshold_percentage: ::Integer?,
-                                max_parallel_nodes_repaired_count: ::Integer?,
-                                max_parallel_nodes_repaired_percentage: ::Integer?,
-                                node_repair_config_overrides: Array[
-                                  {
-                                    node_monitoring_condition: ::String?,
-                                    node_unhealthy_reason: ::String?,
-                                    min_repair_wait_time_mins: ::Integer?,
-                                    repair_action: ("Replace" | "Reboot" | "NoAction")?
-                                  },
-                                ]?
-                              },
+                              ?node_repair_config: Params::node_repair_config,
                               ?capacity_type: ("ON_DEMAND" | "SPOT" | "CAPACITY_BLOCK"),
                               ?version: ::String,
                               ?release_version: ::String,
@@ -1014,7 +989,7 @@ module Aws
                             {
                               service_account: ::String,
                               role_arn: ::String
-                            },
+                            }
                           ]
                         ) -> _UpdateAddonResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAddonResponseSuccess
@@ -1038,9 +1013,9 @@ module Aws
                                            {
                                              id: ::String,
                                              type: ("SSO_USER" | "SSO_GROUP")
-                                           },
+                                           }
                                          ]
-                                       },
+                                       }
                                      ]?,
                                      remove_role_mappings: Array[
                                        {
@@ -1049,9 +1024,9 @@ module Aws
                                            {
                                              id: ::String,
                                              type: ("SSO_USER" | "SSO_GROUP")
-                                           },
+                                           }
                                          ]
-                                       },
+                                       }
                                      ]?
                                    }?,
                                    network_access: {
@@ -1083,7 +1058,7 @@ module Aws
                                        {
                                          types: Array[("api" | "audit" | "authenticator" | "controllerManager" | "scheduler")]?,
                                          enabled: bool?
-                                       },
+                                       }
                                      ]?
                                    },
                                    ?client_request_token: ::String,
@@ -1113,18 +1088,7 @@ module Aws
                                        enabled: bool?
                                      }?
                                    },
-                                   ?remote_network_config: {
-                                     remote_node_networks: Array[
-                                       {
-                                         cidrs: Array[::String]?
-                                       },
-                                     ]?,
-                                     remote_pod_networks: Array[
-                                       {
-                                         cidrs: Array[::String]?
-                                       },
-                                     ]?
-                                   },
+                                   ?remote_network_config: Params::remote_network_config_request,
                                    ?deletion_protection: bool,
                                    ?control_plane_scaling_config: {
                                      tier: ("standard" | "tier-xl" | "tier-2xl" | "tier-4xl" | "tier-8xl")?
@@ -1175,14 +1139,14 @@ module Aws
                                            key: ::String?,
                                            value: ::String?,
                                            effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
-                                         },
+                                         }
                                        ]?,
                                        remove_taints: Array[
                                          {
                                            key: ::String?,
                                            value: ::String?,
                                            effect: ("NO_SCHEDULE" | "NO_EXECUTE" | "PREFER_NO_SCHEDULE")?
-                                         },
+                                         }
                                        ]?
                                      },
                                      ?scaling_config: {
@@ -1195,21 +1159,7 @@ module Aws
                                        max_unavailable_percentage: ::Integer?,
                                        update_strategy: ("DEFAULT" | "MINIMAL")?
                                      },
-                                     ?node_repair_config: {
-                                       enabled: bool?,
-                                       max_unhealthy_node_threshold_count: ::Integer?,
-                                       max_unhealthy_node_threshold_percentage: ::Integer?,
-                                       max_parallel_nodes_repaired_count: ::Integer?,
-                                       max_parallel_nodes_repaired_percentage: ::Integer?,
-                                       node_repair_config_overrides: Array[
-                                         {
-                                           node_monitoring_condition: ::String?,
-                                           node_unhealthy_reason: ::String?,
-                                           min_repair_wait_time_mins: ::Integer?,
-                                           repair_action: ("Replace" | "Reboot" | "NoAction")?
-                                         },
-                                       ]?
-                                     },
+                                     ?node_repair_config: Params::node_repair_config,
                                      ?warm_pool_config: {
                                        enabled: bool?,
                                        min_size: ::Integer?,

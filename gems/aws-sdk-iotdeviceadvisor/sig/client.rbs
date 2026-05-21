@@ -87,21 +87,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#create_suite_definition-instance_method
       def create_suite_definition: (
-                                     suite_definition_configuration: {
-                                       suite_definition_name: ::String,
-                                       devices: Array[
-                                         {
-                                           thing_arn: ::String?,
-                                           certificate_arn: ::String?,
-                                           device_role_arn: ::String?
-                                         },
-                                       ]?,
-                                       intended_for_qualification: bool?,
-                                       is_long_duration_test: bool?,
-                                       root_group: ::String,
-                                       device_permission_role_arn: ::String,
-                                       protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")?
-                                     },
+                                     suite_definition_configuration: Params::suite_definition_configuration,
                                      ?tags: Hash[::String, ::String],
                                      ?client_token: ::String
                                    ) -> _CreateSuiteDefinitionResponseSuccess
@@ -281,21 +267,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IoTDeviceAdvisor/Client.html#update_suite_definition-instance_method
       def update_suite_definition: (
                                      suite_definition_id: ::String,
-                                     suite_definition_configuration: {
-                                       suite_definition_name: ::String,
-                                       devices: Array[
-                                         {
-                                           thing_arn: ::String?,
-                                           certificate_arn: ::String?,
-                                           device_role_arn: ::String?
-                                         },
-                                       ]?,
-                                       intended_for_qualification: bool?,
-                                       is_long_duration_test: bool?,
-                                       root_group: ::String,
-                                       device_permission_role_arn: ::String,
-                                       protocol: ("MqttV3_1_1" | "MqttV5" | "MqttV3_1_1_OverWebSocket" | "MqttV5_OverWebSocket")?
-                                     }
+                                     suite_definition_configuration: Params::suite_definition_configuration
                                    ) -> _UpdateSuiteDefinitionResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSuiteDefinitionResponseSuccess
     end

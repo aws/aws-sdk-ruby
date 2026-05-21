@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.32.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.31.0 (2026-05-15)
+------------------
+
+* Feature - Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.
+
 1.30.0 (2026-05-13)
 ------------------
 

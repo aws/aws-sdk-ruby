@@ -96,7 +96,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _ActivateGatewayResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ActivateGatewayResponseSuccess
@@ -123,7 +123,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _AddTagsToResourceResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddTagsToResourceResponseSuccess
@@ -177,7 +177,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?audit_destination_arn: ::String,
                                    ?cache_attributes: {
@@ -256,7 +256,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateCachediSCSIVolumeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCachediSCSIVolumeResponseSuccess
@@ -291,7 +291,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?file_share_name: ::String,
                                    ?cache_attributes: {
@@ -334,7 +334,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?file_share_name: ::String,
                                    ?cache_attributes: {
@@ -360,7 +360,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
@@ -379,7 +379,7 @@ module Aws
                                                           {
                                                             key: ::String,
                                                             value: ::String
-                                                          },
+                                                          }
                                                         ]
                                                       ) -> _CreateSnapshotFromVolumeRecoveryPointResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotFromVolumeRecoveryPointResponseSuccess
@@ -404,7 +404,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateStorediSCSIVolumeResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateStorediSCSIVolumeResponseSuccess
@@ -423,7 +423,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ]
                             ) -> _CreateTapePoolResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapePoolResponseSuccess
@@ -445,7 +445,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _CreateTapeWithBarcodeResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapeWithBarcodeResponseSuccess
@@ -469,7 +469,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateTapesResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTapesResponseSuccess
@@ -1203,20 +1203,20 @@ module Aws
                                   {
                                     name: ("UploadState" | "UploadFailureReason"),
                                     values: Array[::String]
-                                  },
+                                  }
                                 ],
                                 ?exclusion_filters: Array[
                                   {
                                     name: ("UploadState" | "UploadFailureReason"),
                                     values: Array[::String]
-                                  },
+                                  }
                                 ],
                                 client_token: ::String,
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _StartCacheReportResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCacheReportResponseSuccess
@@ -1244,7 +1244,7 @@ module Aws
                                                        tape_size_in_bytes: ::Integer,
                                                        minimum_num_tapes: ::Integer,
                                                        worm: bool?
-                                                     },
+                                                     }
                                                    ],
                                                    gateway_arn: ::String
                                                  ) -> _UpdateAutomaticTapeCreationPolicyResponseSuccess
@@ -1278,7 +1278,7 @@ module Aws
                                                       days_of_week: Array[::Integer],
                                                       average_upload_rate_limit_in_bits_per_sec: ::Integer?,
                                                       average_download_rate_limit_in_bits_per_sec: ::Integer?
-                                                    },
+                                                    }
                                                   ]
                                                 ) -> _UpdateBandwidthRateLimitScheduleResponseSuccess
                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBandwidthRateLimitScheduleResponseSuccess
@@ -1467,7 +1467,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ]
                                     ) -> _UpdateSnapshotScheduleResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSnapshotScheduleResponseSuccess

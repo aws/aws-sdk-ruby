@@ -119,57 +119,7 @@ module Aws
                                     },
                                     ?priority: ::String,
                                     recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
-                                    ?criteria: {
-                                      region: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      resource_arn: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      ebs_volume_type: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      ebs_volume_size_in_gib: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Integer]?
-                                        },
-                                      ]?,
-                                      estimated_monthly_savings: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Float]?
-                                        },
-                                      ]?,
-                                      resource_tag: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          key: ::String?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      look_back_period_in_days: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Integer]?
-                                        },
-                                      ]?,
-                                      restart_needed: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?
-                                    },
+                                    ?criteria: Params::criteria,
                                     schedule: {
                                       schedule_expression: ::String?,
                                       schedule_expression_timezone: ::String?,
@@ -180,7 +130,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?client_token: ::String
                                   ) -> _CreateAutomationRuleResponseSuccess
@@ -306,7 +256,7 @@ module Aws
                                                {
                                                  name: ("AccountId" | "ResourceType" | "EventType" | "EventStatus"),
                                                  values: Array[::String]
-                                               },
+                                               }
                                              ],
                                              ?start_date_inclusive: ::String,
                                              ?end_date_exclusive: ::String,
@@ -326,7 +276,7 @@ module Aws
                                       {
                                         name: ("AccountId" | "ResourceType" | "EventType" | "EventStatus"),
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?start_time_inclusive: ::Time,
                                     ?end_time_exclusive: ::Time,
@@ -347,57 +297,7 @@ module Aws
                                             account_ids: Array[::String]?
                                           },
                                           recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
-                                          ?criteria: {
-                                            region: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?,
-                                            resource_arn: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?,
-                                            ebs_volume_type: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?,
-                                            ebs_volume_size_in_gib: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::Integer]?
-                                              },
-                                            ]?,
-                                            estimated_monthly_savings: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::Float]?
-                                              },
-                                            ]?,
-                                            resource_tag: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                key: ::String?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?,
-                                            look_back_period_in_days: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::Integer]?
-                                              },
-                                            ]?,
-                                            restart_needed: Array[
-                                              {
-                                                comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                values: Array[::String]?
-                                              },
-                                            ]?
-                                          },
+                                          ?criteria: Params::criteria,
                                           ?max_results: ::Integer,
                                           ?next_token: ::String
                                         ) -> _ListAutomationRulePreviewResponseSuccess
@@ -415,57 +315,7 @@ module Aws
                                                       account_ids: Array[::String]?
                                                     },
                                                     recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
-                                                    ?criteria: {
-                                                      region: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::String]?
-                                                        },
-                                                      ]?,
-                                                      resource_arn: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::String]?
-                                                        },
-                                                      ]?,
-                                                      ebs_volume_type: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::String]?
-                                                        },
-                                                      ]?,
-                                                      ebs_volume_size_in_gib: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::Integer]?
-                                                        },
-                                                      ]?,
-                                                      estimated_monthly_savings: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::Float]?
-                                                        },
-                                                      ]?,
-                                                      resource_tag: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          key: ::String?,
-                                                          values: Array[::String]?
-                                                        },
-                                                      ]?,
-                                                      look_back_period_in_days: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::Integer]?
-                                                        },
-                                                      ]?,
-                                                      restart_needed: Array[
-                                                        {
-                                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                                          values: Array[::String]?
-                                                        },
-                                                      ]?
-                                                    },
+                                                    ?criteria: Params::criteria,
                                                     ?max_results: ::Integer,
                                                     ?next_token: ::String
                                                   ) -> _ListAutomationRulePreviewSummariesResponseSuccess
@@ -482,7 +332,7 @@ module Aws
                                      {
                                        name: ("Name" | "RecommendedActionType" | "Status" | "RuleType" | "OrganizationConfigurationRuleApplyOrder" | "AccountId"),
                                        values: Array[::String]
-                                     },
+                                     }
                                    ],
                                    ?max_results: ::Integer,
                                    ?next_token: ::String
@@ -500,7 +350,7 @@ module Aws
                                                  {
                                                    name: ("ResourceType" | "RecommendedActionType" | "ResourceId" | "LookBackPeriodInDays" | "CurrentResourceDetailsEbsVolumeType" | "ResourceTagsKey" | "ResourceTagsValue" | "AccountId" | "RestartNeeded"),
                                                    values: Array[::String]
-                                                 },
+                                                 }
                                                ],
                                                ?max_results: ::Integer,
                                                ?next_token: ::String
@@ -518,7 +368,7 @@ module Aws
                                         {
                                           name: ("ResourceType" | "RecommendedActionType" | "ResourceId" | "LookBackPeriodInDays" | "CurrentResourceDetailsEbsVolumeType" | "ResourceTagsKey" | "ResourceTagsValue" | "AccountId" | "RestartNeeded"),
                                           values: Array[::String]
-                                        },
+                                        }
                                       ],
                                       ?max_results: ::Integer,
                                       ?next_token: ::String
@@ -571,7 +421,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ],
                           ?client_token: ::String
                         ) -> _TagResourceResponseSuccess
@@ -618,57 +468,7 @@ module Aws
                                     },
                                     ?priority: ::String,
                                     ?recommended_action_types: Array[("SnapshotAndDeleteUnattachedEbsVolume" | "UpgradeEbsVolumeType")],
-                                    ?criteria: {
-                                      region: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      resource_arn: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      ebs_volume_type: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      ebs_volume_size_in_gib: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Integer]?
-                                        },
-                                      ]?,
-                                      estimated_monthly_savings: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Float]?
-                                        },
-                                      ]?,
-                                      resource_tag: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          key: ::String?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?,
-                                      look_back_period_in_days: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::Integer]?
-                                        },
-                                      ]?,
-                                      restart_needed: Array[
-                                        {
-                                          comparison: ("StringEquals" | "StringNotEquals" | "StringEqualsIgnoreCase" | "StringNotEqualsIgnoreCase" | "StringLike" | "StringNotLike" | "NumericEquals" | "NumericNotEquals" | "NumericLessThan" | "NumericLessThanEquals" | "NumericGreaterThan" | "NumericGreaterThanEquals")?,
-                                          values: Array[::String]?
-                                        },
-                                      ]?
-                                    },
+                                    ?criteria: Params::criteria,
                                     ?schedule: {
                                       schedule_expression: ::String?,
                                       schedule_expression_timezone: ::String?,

@@ -145,7 +145,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             chime_bearer: ::String,
                             ?channel_id: ::String,
@@ -184,24 +184,14 @@ module Aws
       def create_channel_flow: (
                                  app_instance_arn: ::String,
                                  processors: Array[
-                                   {
-                                     name: ::String,
-                                     configuration: {
-                                       lambda: {
-                                         resource_arn: ::String,
-                                         invocation_type: ("ASYNC")
-                                       }
-                                     },
-                                     execution_order: ::Integer,
-                                     fallback_action: ("CONTINUE" | "ABORT")
-                                   },
+                                   Params::processor
                                  ],
                                  name: ::String,
                                  ?tags: Array[
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  client_request_token: ::String
                                ) -> _CreateChannelFlowResponseSuccess
@@ -647,7 +637,7 @@ module Aws
                                                       {
                                                         data_type: ("Channel" | "ChannelMessage"),
                                                         resource_arn: ::String
-                                                      },
+                                                      }
                                                     ]
                                                   ) -> _PutMessagingStreamingConfigurationsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutMessagingStreamingConfigurationsResponseSuccess
@@ -680,7 +670,7 @@ module Aws
                                  key: ("MEMBERS"),
                                  values: Array[::String],
                                  operator: ("EQUALS" | "INCLUDES")
-                               },
+                               }
                              ],
                              ?max_results: ::Integer,
                              ?next_token: ::String
@@ -716,7 +706,7 @@ module Aws
                                   ?target: Array[
                                     {
                                       member_arn: ::String?
-                                    },
+                                    }
                                   ]
                                 ) -> _SendChannelMessageResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendChannelMessageResponseSuccess
@@ -728,7 +718,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -762,17 +752,7 @@ module Aws
       def update_channel_flow: (
                                  channel_flow_arn: ::String,
                                  processors: Array[
-                                   {
-                                     name: ::String,
-                                     configuration: {
-                                       lambda: {
-                                         resource_arn: ::String,
-                                         invocation_type: ("ASYNC")
-                                       }
-                                     },
-                                     execution_order: ::Integer,
-                                     fallback_action: ("CONTINUE" | "ABORT")
-                                   },
+                                   Params::processor
                                  ],
                                  name: ::String
                                ) -> _UpdateChannelFlowResponseSuccess

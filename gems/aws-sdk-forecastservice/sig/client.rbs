@@ -96,13 +96,13 @@ module Aws
                                        {
                                          attribute_name: ::String,
                                          transformations: Hash[::String, ::String]
-                                       },
+                                       }
                                      ]?,
                                      additional_datasets: Array[
                                        {
                                          name: ::String,
                                          configuration: Hash[::String, Array[::String]]?
-                                       },
+                                       }
                                      ]?
                                    },
                                    ?encryption_config: {
@@ -116,7 +116,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?monitor_config: {
                                      monitor_name: ::String
@@ -145,7 +145,7 @@ module Aws
                                 {
                                   attribute_name: ::String?,
                                   attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
-                                },
+                                }
                               ]?
                             },
                             ?encryption_config: {
@@ -156,7 +156,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateDatasetResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetResponseSuccess
@@ -174,7 +174,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreateDatasetGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDatasetGroupResponseSuccess
@@ -202,7 +202,7 @@ module Aws
                                          {
                                            key: ::String,
                                            value: ::String
-                                         },
+                                         }
                                        ],
                                        ?format: ::String,
                                        ?import_mode: ("FULL" | "INCREMENTAL")
@@ -233,7 +233,7 @@ module Aws
                                        {
                                          attribute_name: ::String?,
                                          attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
-                                       },
+                                       }
                                      ]?
                                    },
                                    ?enable_visualization: bool,
@@ -243,7 +243,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateExplainabilityResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateExplainabilityResponseSuccess
@@ -267,7 +267,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ],
                                           ?format: ::String
                                         ) -> _CreateExplainabilityExportResponseSuccess
@@ -286,28 +286,9 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
-                             ?time_series_selector: {
-                               time_series_identifiers: {
-                                 data_source: {
-                                   s3_config: {
-                                     path: ::String,
-                                     role_arn: ::String,
-                                     kms_key_arn: ::String?
-                                   }
-                                 }?,
-                                 schema: {
-                                   attributes: Array[
-                                     {
-                                       attribute_name: ::String?,
-                                       attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
-                                     },
-                                   ]?
-                                 }?,
-                                 format: ::String?
-                               }?
-                             }
+                             ?time_series_selector: Params::time_series_selector
                            ) -> _CreateForecastResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateForecastResponseSuccess
 
@@ -330,7 +311,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ],
                                         ?format: ::String
                                       ) -> _CreateForecastExportJobResponseSuccess
@@ -348,7 +329,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
@@ -377,7 +358,7 @@ module Aws
                                     {
                                       name: ::String,
                                       values: Array[::String]
-                                    },
+                                    }
                                   ]?,
                                   continuous_parameter_ranges: Array[
                                     {
@@ -385,7 +366,7 @@ module Aws
                                       max_value: ::Float,
                                       min_value: ::Float,
                                       scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")?
-                                    },
+                                    }
                                   ]?,
                                   integer_parameter_ranges: Array[
                                     {
@@ -393,7 +374,7 @@ module Aws
                                       max_value: ::Integer,
                                       min_value: ::Integer,
                                       scaling_type: ("Auto" | "Linear" | "Logarithmic" | "ReverseLogarithmic")?
-                                    },
+                                    }
                                   ]?
                                 }?
                               },
@@ -403,7 +384,7 @@ module Aws
                                   {
                                     name: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]?
                               },
                               featurization_config: {
@@ -416,9 +397,9 @@ module Aws
                                       {
                                         featurization_method_name: ("filling"),
                                         featurization_method_parameters: Hash[::String, ::String]?
-                                      },
+                                      }
                                     ]?
-                                  },
+                                  }
                                 ]?
                               },
                               ?encryption_config: {
@@ -429,7 +410,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?optimization_metric: ("WAPE" | "RMSE" | "AverageWeightedQuantileLoss" | "MASE" | "MAPE")
                             ) -> _CreatePredictorResponseSuccess
@@ -454,7 +435,7 @@ module Aws
                                                     {
                                                       key: ::String,
                                                       value: ::String
-                                                    },
+                                                    }
                                                   ],
                                                   ?format: ::String
                                                 ) -> _CreatePredictorBacktestExportJobResponseSuccess
@@ -468,31 +449,12 @@ module Aws
       def create_what_if_analysis: (
                                      what_if_analysis_name: ::String,
                                      forecast_arn: ::String,
-                                     ?time_series_selector: {
-                                       time_series_identifiers: {
-                                         data_source: {
-                                           s3_config: {
-                                             path: ::String,
-                                             role_arn: ::String,
-                                             kms_key_arn: ::String?
-                                           }
-                                         }?,
-                                         schema: {
-                                           attributes: Array[
-                                             {
-                                               attribute_name: ::String?,
-                                               attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
-                                             },
-                                           ]?
-                                         }?,
-                                         format: ::String?
-                                       }?
-                                     },
+                                     ?time_series_selector: Params::time_series_selector,
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateWhatIfAnalysisResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatIfAnalysisResponseSuccess
@@ -517,9 +479,9 @@ module Aws
                                              attribute_name: ::String,
                                              attribute_value: ::String,
                                              condition: ("EQUALS" | "NOT_EQUALS" | "LESS_THAN" | "GREATER_THAN")
-                                           },
+                                           }
                                          ]?
-                                       },
+                                       }
                                      ],
                                      ?time_series_replacements_data_source: {
                                        s3_config: {
@@ -532,7 +494,7 @@ module Aws
                                            {
                                              attribute_name: ::String?,
                                              attribute_type: ("string" | "integer" | "float" | "timestamp" | "geolocation")?
-                                           },
+                                           }
                                          ]?
                                        },
                                        format: ::String?,
@@ -542,7 +504,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateWhatIfForecastResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWhatIfForecastResponseSuccess
@@ -566,7 +528,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?format: ::String
                                           ) -> _CreateWhatIfForecastExportResponseSuccess
@@ -991,7 +953,7 @@ module Aws
                                           key: ::String,
                                           value: ::String,
                                           condition: ("IS" | "IS_NOT")
-                                        },
+                                        }
                                       ]
                                     ) -> _ListDatasetImportJobsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDatasetImportJobsResponseSuccess
@@ -1022,7 +984,7 @@ module Aws
                                        key: ::String,
                                        value: ::String,
                                        condition: ("IS" | "IS_NOT")
-                                     },
+                                     }
                                    ]
                                  ) -> _ListExplainabilitiesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExplainabilitiesResponseSuccess
@@ -1041,7 +1003,7 @@ module Aws
                                              key: ::String,
                                              value: ::String,
                                              condition: ("IS" | "IS_NOT")
-                                           },
+                                           }
                                          ]
                                        ) -> _ListExplainabilityExportsResponseSuccess
                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExplainabilityExportsResponseSuccess
@@ -1060,7 +1022,7 @@ module Aws
                                            key: ::String,
                                            value: ::String,
                                            condition: ("IS" | "IS_NOT")
-                                         },
+                                         }
                                        ]
                                      ) -> _ListForecastExportJobsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListForecastExportJobsResponseSuccess
@@ -1079,7 +1041,7 @@ module Aws
                                 key: ::String,
                                 value: ::String,
                                 condition: ("IS" | "IS_NOT")
-                              },
+                              }
                             ]
                           ) -> _ListForecastsResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListForecastsResponseSuccess
@@ -1099,7 +1061,7 @@ module Aws
                                           key: ::String,
                                           value: ::String,
                                           condition: ("IS" | "IS_NOT")
-                                        },
+                                        }
                                       ]
                                     ) -> _ListMonitorEvaluationsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorEvaluationsResponseSuccess
@@ -1118,7 +1080,7 @@ module Aws
                                key: ::String,
                                value: ::String,
                                condition: ("IS" | "IS_NOT")
-                             },
+                             }
                            ]
                          ) -> _ListMonitorsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMonitorsResponseSuccess
@@ -1137,7 +1099,7 @@ module Aws
                                                      key: ::String,
                                                      value: ::String,
                                                      condition: ("IS" | "IS_NOT")
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _ListPredictorBacktestExportJobsResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPredictorBacktestExportJobsResponseSuccess
@@ -1156,7 +1118,7 @@ module Aws
                                  key: ::String,
                                  value: ::String,
                                  condition: ("IS" | "IS_NOT")
-                               },
+                               }
                              ]
                            ) -> _ListPredictorsResponseSuccess
                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPredictorsResponseSuccess
@@ -1185,7 +1147,7 @@ module Aws
                                        key: ::String,
                                        value: ::String,
                                        condition: ("IS" | "IS_NOT")
-                                     },
+                                     }
                                    ]
                                  ) -> _ListWhatIfAnalysesResponseSuccess
                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfAnalysesResponseSuccess
@@ -1204,7 +1166,7 @@ module Aws
                                                key: ::String,
                                                value: ::String,
                                                condition: ("IS" | "IS_NOT")
-                                             },
+                                             }
                                            ]
                                          ) -> _ListWhatIfForecastExportsResponseSuccess
                                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfForecastExportsResponseSuccess
@@ -1223,7 +1185,7 @@ module Aws
                                         key: ::String,
                                         value: ::String,
                                         condition: ("IS" | "IS_NOT")
-                                      },
+                                      }
                                     ]
                                   ) -> _ListWhatIfForecastsResponseSuccess
                                 | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWhatIfForecastsResponseSuccess
@@ -1250,7 +1212,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

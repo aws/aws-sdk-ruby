@@ -100,7 +100,7 @@ module Aws
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?sse_specification: {
                               enabled: bool
@@ -304,7 +304,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -347,7 +347,7 @@ module Aws
                                       {
                                         parameter_name: ::String?,
                                         parameter_value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _UpdateParameterGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateParameterGroupResponseSuccess

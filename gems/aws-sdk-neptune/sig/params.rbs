@@ -1,0 +1,26 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Neptune
+    module Params
+      type parameter = {
+      parameter_name: ::String?,
+      parameter_value: ::String?,
+      description: ::String?,
+      source: ::String?,
+      apply_type: ::String?,
+      data_type: ::String?,
+      allowed_values: ::String?,
+      is_modifiable: bool?,
+      minimum_engine_version: ::String?,
+      apply_method: ("immediate" | "pending-reboot")?
+    }
+
+    end
+  end
+end

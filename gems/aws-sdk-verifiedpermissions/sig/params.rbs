@@ -1,0 +1,104 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module VerifiedPermissions
+    module Params
+      type entities_definition = {
+      entity_list: Array[
+        Params::entity_item
+      ]?,
+      cedar_json: ::String?
+    }
+
+      type entity_item = {
+      identifier: {
+        entity_type: ::String,
+        entity_id: ::String
+      },
+      attributes: Hash[::String, Params::attribute_value]?,
+      parents: Array[
+        {
+          entity_type: ::String,
+          entity_id: ::String
+        }
+      ]?,
+      tags: Hash[::String, Params::cedar_tag_value]?
+    }
+
+      type attribute_value = {
+      boolean: bool?,
+      entity_identifier: {
+        entity_type: ::String,
+        entity_id: ::String
+      }?,
+      long: ::Integer?,
+      string: ::String?,
+      set: Array[untyped]?,
+      record: Hash[::String, untyped]?,
+      ipaddr: ::String?,
+      decimal: ::String?,
+      datetime: ::String?,
+      duration: ::String?
+    }
+
+      type cedar_tag_value = {
+      boolean: bool?,
+      entity_identifier: {
+        entity_type: ::String,
+        entity_id: ::String
+      }?,
+      long: ::Integer?,
+      string: ::String?,
+      set: Array[
+        {
+          boolean: bool?,
+          entity_identifier: {
+            entity_type: ::String,
+            entity_id: ::String
+          }?,
+          long: ::Integer?,
+          string: ::String?,
+          set: untyped?,
+          record: Hash[::String, untyped]?,
+          ipaddr: ::String?,
+          decimal: ::String?,
+          datetime: ::String?,
+          duration: ::String?
+        }
+      ]?,
+      record: Hash[::String, {
+          boolean: bool?,
+          entity_identifier: {
+            entity_type: ::String,
+            entity_id: ::String
+          }?,
+          long: ::Integer?,
+          string: ::String?,
+          set: Array[
+            untyped
+          ]?,
+          record: untyped?,
+          ipaddr: ::String?,
+          decimal: ::String?,
+          datetime: ::String?,
+          duration: ::String?
+        }]?,
+      ipaddr: ::String?,
+      decimal: ::String?,
+      datetime: ::String?,
+      duration: ::String?
+    }
+
+      type context_definition = {
+      context_map: Hash[::String, Params::attribute_value]?,
+      cedar_json: ::String?
+    }
+
+    end
+  end
+end

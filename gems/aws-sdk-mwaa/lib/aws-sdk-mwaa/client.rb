@@ -701,6 +701,11 @@ module Aws::MWAA
     #   Defines the access mode for the Apache Airflow *web server*. For more
     #   information, refer to [Apache Airflow access modes][1].
     #
+    #   If set to `PUBLIC_AND_PRIVATE`, creates both a public network load
+    #   balancer (NLB) for browser access and a private VPC endpoint (VPCE)
+    #   for worker-to-webserver communication. This mode is only available for
+    #   Apache Airflow version 3.2 and later.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
@@ -1481,6 +1486,11 @@ module Aws::MWAA
     #   The Apache Airflow *Web server* access mode. For more information,
     #   refer to [Apache Airflow access modes][1].
     #
+    #   If set to `PUBLIC_AND_PRIVATE`, creates both a public network load
+    #   balancer (NLB) for browser access and a private VPC endpoint (VPCE)
+    #   for worker-to-webserver communication. This mode is only available for
+    #   Apache Airflow version 3.2 and later.
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
@@ -1580,7 +1590,7 @@ module Aws::MWAA
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaa'
-      context[:gem_version] = '1.73.0'
+      context[:gem_version] = '1.75.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

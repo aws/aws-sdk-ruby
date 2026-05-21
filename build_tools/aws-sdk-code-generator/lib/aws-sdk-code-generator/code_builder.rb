@@ -113,8 +113,17 @@ module AwsSdkCodeGenerator
       Enumerator.new do |y|
         prefix = options.fetch(:prefix, '')
         codegenerated_plugins = codegen_plugins(prefix)
+        type_alias_collector = RBS::InputTypeAliasCollector.new(api: @service.api)
+        aliased_shapes = type_alias_collector.shapes_to_alias
+        if aliased_shapes.any?
+          y.yield("#{prefix}/params.rbs", Views::RBS::Params.new(
+            service_name: @service.name,
+            api: @service.api,
+            aliased_shapes: aliased_shapes
+          ).render)
+        end
         unless @service.h2_required_setting?
-          client_class = client_class_rbs(codegenerated_plugins)
+          client_class = client_class_rbs(codegenerated_plugins, aliased_shapes)
           y.yield("#{prefix}/client.rbs", client_class.render)
           y.yield("#{prefix}/resource.rbs", Views::RBS::RootResourceClass.new(
             service_name: @service.name,
@@ -124,7 +133,12 @@ module AwsSdkCodeGenerator
             paginators: @service.paginators
           ).render)
         end
-        y.yield("#{prefix}/async_client.rbs", async_client_class_rbs(codegenerated_plugins).render) if @service.h2_setting?
+        if @service.h2_setting?
+          y.yield("#{prefix}/async_client.rbs", async_client_class_rbs(
+            codegenerated_plugins,
+            aliased_shapes
+          ).render)
+        end
         y.yield("#{prefix}/errors.rbs", Views::RBS::ErrorsModule.new(service: @service).render)
         if @waiters
           y.yield("#{prefix}/waiters.rbs", Views::RBS::WaitersModule.new(
@@ -197,7 +211,7 @@ module AwsSdkCodeGenerator
       ).render
     end
 
-    def client_class_rbs(codegenerated_plugins)
+    def client_class_rbs(codegenerated_plugins, aliased_shapes)
       Views::RBS::ClientClass.new(
         service_name: @service.name,
         codegenerated_plugins: codegenerated_plugins,
@@ -209,7 +223,8 @@ module AwsSdkCodeGenerator
         protocol: @service.protocol,
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
-        protocol_settings: @service.protocol_settings
+        protocol_settings: @service.protocol_settings,
+        aliased_shapes: aliased_shapes
       )
     end
 
@@ -233,7 +248,7 @@ module AwsSdkCodeGenerator
       ).render
     end
 
-    def async_client_class_rbs(codegenerated_plugins)
+    def async_client_class_rbs(codegenerated_plugins, aliased_shapes)
       Views::RBS::AsyncClientClass.new(
         service_name: @service.name,
         codegenerated_plugins: codegenerated_plugins,
@@ -245,7 +260,8 @@ module AwsSdkCodeGenerator
         add_plugins: @service.add_plugins,
         remove_plugins: @service.remove_plugins,
         protocol_settings: @service.protocol_settings,
-        async_client: true
+        async_client: true,
+        aliased_shapes: aliased_shapes
       )
     end
 

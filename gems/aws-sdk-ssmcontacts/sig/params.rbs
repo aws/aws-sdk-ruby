@@ -1,0 +1,81 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SSMContacts
+    module Params
+      type plan = {
+      stages: Array[
+        Params::stage
+      ]?,
+      rotation_ids: Array[::String]?
+    }
+
+      type stage = {
+      duration_in_minutes: ::Integer,
+      targets: Array[
+        Params::target
+      ]
+    }
+
+      type target = {
+      channel_target_info: {
+        contact_channel_id: ::String,
+        retry_interval_in_minutes: ::Integer?
+      }?,
+      contact_target_info: {
+        contact_id: ::String?,
+        is_essential: bool
+      }?
+    }
+
+      type recurrence_settings = {
+      monthly_settings: Array[
+        {
+          day_of_month: ::Integer,
+          hand_off_time: {
+            hour_of_day: ::Integer,
+            minute_of_hour: ::Integer
+          }
+        }
+      ]?,
+      weekly_settings: Array[
+        {
+          day_of_week: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"),
+          hand_off_time: {
+            hour_of_day: ::Integer,
+            minute_of_hour: ::Integer
+          }
+        }
+      ]?,
+      daily_settings: Array[
+        {
+          hour_of_day: ::Integer,
+          minute_of_hour: ::Integer
+        }
+      ]?,
+      number_of_on_calls: ::Integer,
+      shift_coverages: Hash[("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN"), Array[
+          Params::coverage_time
+        ]]?,
+      recurrence_multiplier: ::Integer
+    }
+
+      type coverage_time = {
+      start: {
+        hour_of_day: ::Integer,
+        minute_of_hour: ::Integer
+      }?,
+      end: {
+        hour_of_day: ::Integer,
+        minute_of_hour: ::Integer
+      }?
+    }
+
+    end
+  end
+end

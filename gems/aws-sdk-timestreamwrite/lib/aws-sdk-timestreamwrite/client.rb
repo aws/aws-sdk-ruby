@@ -1684,7 +1684,7 @@ module Aws::TimestreamWrite
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreamwrite'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

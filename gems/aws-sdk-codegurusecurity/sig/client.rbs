@@ -89,7 +89,7 @@ module Aws
                                   {
                                     scan_name: ::String,
                                     finding_id: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _BatchGetFindingsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetFindingsResponseSuccess

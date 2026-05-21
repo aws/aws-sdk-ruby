@@ -107,45 +107,7 @@ module Aws
       def add_application_input: (
                                    application_name: ::String,
                                    current_application_version_id: ::Integer,
-                                   input: {
-                                     name_prefix: ::String,
-                                     input_processing_configuration: {
-                                       input_lambda_processor: {
-                                         resource_arn: ::String
-                                       }
-                                     }?,
-                                     kinesis_streams_input: {
-                                       resource_arn: ::String
-                                     }?,
-                                     kinesis_firehose_input: {
-                                       resource_arn: ::String
-                                     }?,
-                                     input_parallelism: {
-                                       count: ::Integer?
-                                     }?,
-                                     input_schema: {
-                                       record_format: {
-                                         record_format_type: ("JSON" | "CSV"),
-                                         mapping_parameters: {
-                                           json_mapping_parameters: {
-                                             record_row_path: ::String
-                                           }?,
-                                           csv_mapping_parameters: {
-                                             record_row_delimiter: ::String,
-                                             record_column_delimiter: ::String
-                                           }?
-                                         }?
-                                       },
-                                       record_encoding: ::String?,
-                                       record_columns: Array[
-                                         {
-                                           name: ::String,
-                                           mapping: ::String?,
-                                           sql_type: ::String
-                                         },
-                                       ]
-                                     }
-                                   }
+                                   input: Params::input
                                  ) -> _AddApplicationInputResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationInputResponseSuccess
 
@@ -179,21 +141,7 @@ module Aws
       def add_application_output: (
                                     application_name: ::String,
                                     current_application_version_id: ::Integer,
-                                    output: {
-                                      name: ::String,
-                                      kinesis_streams_output: {
-                                        resource_arn: ::String
-                                      }?,
-                                      kinesis_firehose_output: {
-                                        resource_arn: ::String
-                                      }?,
-                                      lambda_output: {
-                                        resource_arn: ::String
-                                      }?,
-                                      destination_schema: {
-                                        record_format_type: ("JSON" | "CSV")
-                                      }
-                                    }
+                                    output: Params::output
                                   ) -> _AddApplicationOutputResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationOutputResponseSuccess
 
@@ -207,35 +155,7 @@ module Aws
       def add_application_reference_data_source: (
                                                    application_name: ::String,
                                                    current_application_version_id: ::Integer,
-                                                   reference_data_source: {
-                                                     table_name: ::String,
-                                                     s3_reference_data_source: {
-                                                       bucket_arn: ::String?,
-                                                       file_key: ::String?
-                                                     }?,
-                                                     reference_schema: {
-                                                       record_format: {
-                                                         record_format_type: ("JSON" | "CSV"),
-                                                         mapping_parameters: {
-                                                           json_mapping_parameters: {
-                                                             record_row_path: ::String
-                                                           }?,
-                                                           csv_mapping_parameters: {
-                                                             record_row_delimiter: ::String,
-                                                             record_column_delimiter: ::String
-                                                           }?
-                                                         }?
-                                                       },
-                                                       record_encoding: ::String?,
-                                                       record_columns: Array[
-                                                         {
-                                                           name: ::String,
-                                                           mapping: ::String?,
-                                                           sql_type: ::String
-                                                         },
-                                                       ]
-                                                     }
-                                                   }
+                                                   reference_data_source: Params::reference_data_source
                                                  ) -> _AddApplicationReferenceDataSourceResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddApplicationReferenceDataSourceResponseSuccess
 
@@ -271,93 +191,13 @@ module Aws
                                 ?application_configuration: {
                                   sql_application_configuration: {
                                     inputs: Array[
-                                      {
-                                        name_prefix: ::String,
-                                        input_processing_configuration: {
-                                          input_lambda_processor: {
-                                            resource_arn: ::String
-                                          }
-                                        }?,
-                                        kinesis_streams_input: {
-                                          resource_arn: ::String
-                                        }?,
-                                        kinesis_firehose_input: {
-                                          resource_arn: ::String
-                                        }?,
-                                        input_parallelism: {
-                                          count: ::Integer?
-                                        }?,
-                                        input_schema: {
-                                          record_format: {
-                                            record_format_type: ("JSON" | "CSV"),
-                                            mapping_parameters: {
-                                              json_mapping_parameters: {
-                                                record_row_path: ::String
-                                              }?,
-                                              csv_mapping_parameters: {
-                                                record_row_delimiter: ::String,
-                                                record_column_delimiter: ::String
-                                              }?
-                                            }?
-                                          },
-                                          record_encoding: ::String?,
-                                          record_columns: Array[
-                                            {
-                                              name: ::String,
-                                              mapping: ::String?,
-                                              sql_type: ::String
-                                            },
-                                          ]
-                                        }
-                                      },
+                                      Params::input
                                     ]?,
                                     outputs: Array[
-                                      {
-                                        name: ::String,
-                                        kinesis_streams_output: {
-                                          resource_arn: ::String
-                                        }?,
-                                        kinesis_firehose_output: {
-                                          resource_arn: ::String
-                                        }?,
-                                        lambda_output: {
-                                          resource_arn: ::String
-                                        }?,
-                                        destination_schema: {
-                                          record_format_type: ("JSON" | "CSV")
-                                        }
-                                      },
+                                      Params::output
                                     ]?,
                                     reference_data_sources: Array[
-                                      {
-                                        table_name: ::String,
-                                        s3_reference_data_source: {
-                                          bucket_arn: ::String?,
-                                          file_key: ::String?
-                                        }?,
-                                        reference_schema: {
-                                          record_format: {
-                                            record_format_type: ("JSON" | "CSV"),
-                                            mapping_parameters: {
-                                              json_mapping_parameters: {
-                                                record_row_path: ::String
-                                              }?,
-                                              csv_mapping_parameters: {
-                                                record_row_delimiter: ::String,
-                                                record_column_delimiter: ::String
-                                              }?
-                                            }?
-                                          },
-                                          record_encoding: ::String?,
-                                          record_columns: Array[
-                                            {
-                                              name: ::String,
-                                              mapping: ::String?,
-                                              sql_type: ::String
-                                            },
-                                          ]
-                                        }
-                                      },
+                                      Params::reference_data_source
                                     ]?
                                   }?,
                                   flink_application_configuration: {
@@ -384,7 +224,7 @@ module Aws
                                       {
                                         property_group_id: ::String,
                                         property_map: Hash[::String, ::String]
-                                      },
+                                      }
                                     ]
                                   }?,
                                   application_code_configuration: {
@@ -409,7 +249,7 @@ module Aws
                                     {
                                       subnet_ids: Array[::String],
                                       security_group_ids: Array[::String]
-                                    },
+                                    }
                                   ]?,
                                   zeppelin_application_configuration: {
                                     monitoring_configuration: {
@@ -427,19 +267,7 @@ module Aws
                                       }
                                     }?,
                                     custom_artifacts_configuration: Array[
-                                      {
-                                        artifact_type: ("UDF" | "DEPENDENCY_JAR"),
-                                        s3_content_location: {
-                                          bucket_arn: ::String,
-                                          file_key: ::String,
-                                          object_version: ::String?
-                                        }?,
-                                        maven_reference: {
-                                          group_id: ::String,
-                                          artifact_id: ::String,
-                                          version: ::String
-                                        }?
-                                      },
+                                      Params::custom_artifact_configuration
                                     ]?
                                   }?,
                                   application_encryption_configuration: {
@@ -450,13 +278,13 @@ module Aws
                                 ?cloud_watch_logging_options: Array[
                                   {
                                     log_stream_arn: ::String
-                                  },
+                                  }
                                 ],
                                 ?tags: Array[
                                   {
                                     key: ::String,
                                     value: ::String?
-                                  },
+                                  }
                                 ],
                                 ?application_mode: ("STREAMING" | "INTERACTIVE")
                               ) -> _CreateApplicationResponseSuccess
@@ -737,7 +565,7 @@ module Aws
                                      input_starting_position_configuration: {
                                        input_starting_position: ("NOW" | "TRIM_HORIZON" | "LAST_STOPPED_POINT")?
                                      }
-                                   },
+                                   }
                                  ]?,
                                  application_restore_configuration: {
                                    application_restore_type: ("SKIP_RESTORE_FROM_SNAPSHOT" | "RESTORE_FROM_LATEST_SNAPSHOT" | "RESTORE_FROM_CUSTOM_SNAPSHOT"),
@@ -768,7 +596,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -810,31 +638,20 @@ module Aws
                                           resource_arn_update: ::String
                                         }?,
                                         input_schema_update: {
-                                          record_format_update: {
-                                            record_format_type: ("JSON" | "CSV"),
-                                            mapping_parameters: {
-                                              json_mapping_parameters: {
-                                                record_row_path: ::String
-                                              }?,
-                                              csv_mapping_parameters: {
-                                                record_row_delimiter: ::String,
-                                                record_column_delimiter: ::String
-                                              }?
-                                            }?
-                                          }?,
+                                          record_format_update: Params::record_format?,
                                           record_encoding_update: ::String?,
                                           record_column_updates: Array[
                                             {
                                               name: ::String,
                                               mapping: ::String?,
                                               sql_type: ::String
-                                            },
+                                            }
                                           ]?
                                         }?,
                                         input_parallelism_update: {
                                           count_update: ::Integer
                                         }?
-                                      },
+                                      }
                                     ]?,
                                     output_updates: Array[
                                       {
@@ -852,7 +669,7 @@ module Aws
                                         destination_schema_update: {
                                           record_format_type: ("JSON" | "CSV")
                                         }?
-                                      },
+                                      }
                                     ]?,
                                     reference_data_source_updates: Array[
                                       {
@@ -862,29 +679,8 @@ module Aws
                                           bucket_arn_update: ::String?,
                                           file_key_update: ::String?
                                         }?,
-                                        reference_schema_update: {
-                                          record_format: {
-                                            record_format_type: ("JSON" | "CSV"),
-                                            mapping_parameters: {
-                                              json_mapping_parameters: {
-                                                record_row_path: ::String
-                                              }?,
-                                              csv_mapping_parameters: {
-                                                record_row_delimiter: ::String,
-                                                record_column_delimiter: ::String
-                                              }?
-                                            }?
-                                          },
-                                          record_encoding: ::String?,
-                                          record_columns: Array[
-                                            {
-                                              name: ::String,
-                                              mapping: ::String?,
-                                              sql_type: ::String
-                                            },
-                                          ]
-                                        }?
-                                      },
+                                        reference_schema_update: Params::source_schema?
+                                      }
                                     ]?
                                   }?,
                                   application_code_configuration_update: {
@@ -923,7 +719,7 @@ module Aws
                                       {
                                         property_group_id: ::String,
                                         property_map: Hash[::String, ::String]
-                                      },
+                                      }
                                     ]
                                   }?,
                                   application_snapshot_configuration_update: {
@@ -937,7 +733,7 @@ module Aws
                                       vpc_configuration_id: ::String,
                                       subnet_id_updates: Array[::String]?,
                                       security_group_id_updates: Array[::String]?
-                                    },
+                                    }
                                   ]?,
                                   zeppelin_application_configuration_update: {
                                     monitoring_configuration_update: {
@@ -955,19 +751,7 @@ module Aws
                                       }?
                                     }?,
                                     custom_artifacts_configuration_update: Array[
-                                      {
-                                        artifact_type: ("UDF" | "DEPENDENCY_JAR"),
-                                        s3_content_location: {
-                                          bucket_arn: ::String,
-                                          file_key: ::String,
-                                          object_version: ::String?
-                                        }?,
-                                        maven_reference: {
-                                          group_id: ::String,
-                                          artifact_id: ::String,
-                                          version: ::String
-                                        }?
-                                      },
+                                      Params::custom_artifact_configuration
                                     ]?
                                   }?,
                                   application_encryption_configuration_update: {
@@ -989,7 +773,7 @@ module Aws
                                   {
                                     cloud_watch_logging_option_id: ::String,
                                     log_stream_arn_update: ::String?
-                                  },
+                                  }
                                 ],
                                 ?conditional_token: ::String,
                                 ?runtime_environment_update: ("SQL-1_0" | "FLINK-1_6" | "FLINK-1_8" | "ZEPPELIN-FLINK-1_0" | "FLINK-1_11" | "FLINK-1_13" | "ZEPPELIN-FLINK-2_0" | "FLINK-1_15" | "ZEPPELIN-FLINK-3_0" | "FLINK-1_18" | "FLINK-1_19" | "FLINK-1_20" | "FLINK-2_2")

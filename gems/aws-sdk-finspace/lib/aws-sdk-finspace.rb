@@ -54,7 +54,7 @@ module Aws::Finspace
   autoload :EndpointProvider, 'aws-sdk-finspace/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-finspace/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

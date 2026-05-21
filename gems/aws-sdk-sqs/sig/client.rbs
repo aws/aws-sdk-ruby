@@ -121,7 +121,7 @@ module Aws
                                                  id: ::String,
                                                  receipt_handle: ::String,
                                                  visibility_timeout: ::Integer?
-                                               },
+                                               }
                                              ]
                                            ) -> _ChangeMessageVisibilityBatchResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ChangeMessageVisibilityBatchResponseSuccess
@@ -157,7 +157,7 @@ module Aws
                                     {
                                       id: ::String,
                                       receipt_handle: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _DeleteMessageBatchResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMessageBatchResponseSuccess
@@ -328,7 +328,7 @@ module Aws
                                       }]?,
                                     message_deduplication_id: ::String?,
                                     message_group_id: ::String?
-                                  },
+                                  }
                                 ]
                               ) -> _SendMessageBatchResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SendMessageBatchResponseSuccess

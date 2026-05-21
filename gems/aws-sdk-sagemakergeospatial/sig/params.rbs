@@ -1,0 +1,74 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerGeospatial
+    module Params
+      type area_of_interest_geometry = {
+      multi_polygon_geometry: {
+        coordinates: Array[
+          Array[
+            Array[
+              Array[::Float]
+            ]
+          ]
+        ]
+      }?,
+      polygon_geometry: {
+        coordinates: Array[
+          Array[
+            Array[::Float]
+          ]
+        ]
+      }?
+    }
+
+      type area_of_interest = {
+      area_of_interest_geometry: Params::area_of_interest_geometry?
+    }
+
+      type property_filters = {
+      logical_operator: ("AND")?,
+      properties: Array[
+        Params::property_filter
+      ]?
+    }
+
+      type property = {
+      eo_cloud_cover: {
+        lower_bound: ::Float,
+        upper_bound: ::Float
+      }?,
+      landsat_cloud_cover_land: {
+        lower_bound: ::Float,
+        upper_bound: ::Float
+      }?,
+      platform: {
+        comparison_operator: ("EQUALS" | "NOT_EQUALS" | "STARTS_WITH")?,
+        value: ::String
+      }?,
+      view_off_nadir: {
+        lower_bound: ::Float,
+        upper_bound: ::Float
+      }?,
+      view_sun_azimuth: {
+        lower_bound: ::Float,
+        upper_bound: ::Float
+      }?,
+      view_sun_elevation: {
+        lower_bound: ::Float,
+        upper_bound: ::Float
+      }?
+    }
+
+      type property_filter = {
+      property: Params::property
+    }
+
+    end
+  end
+end

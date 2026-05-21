@@ -105,7 +105,7 @@ module Aws
                                           availability_zone_mappings: Array[
                                             {
                                               availability_zone: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _AssociateAvailabilityZonesResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateAvailabilityZonesResponseSuccess
@@ -142,7 +142,7 @@ module Aws
                                  {
                                    subnet_id: ::String,
                                    ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
-                                 },
+                                 }
                                ]
                              ) -> _AssociateSubnetsResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSubnetsResponseSuccess
@@ -160,7 +160,7 @@ module Aws
                                                          {
                                                            proxy_rule_group_name: ::String?,
                                                            insert_position: ::Integer?
-                                                         },
+                                                         }
                                                        ],
                                                        update_token: ::String
                                                      ) -> _AttachRuleGroupsToProxyConfigurationResponseSuccess
@@ -180,7 +180,7 @@ module Aws
                                {
                                  subnet_id: ::String,
                                  ip_address_type: ("DUALSTACK" | "IPV4" | "IPV6")?
-                               },
+                               }
                              ],
                              ?delete_protection: bool,
                              ?subnet_change_protection: bool,
@@ -190,7 +190,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              ?encryption_configuration: {
                                key_id: ::String?,
@@ -201,7 +201,7 @@ module Aws
                              ?availability_zone_mappings: Array[
                                {
                                  availability_zone: ::String
-                               },
+                               }
                              ],
                              ?availability_zone_change_protection: bool
                            ) -> _CreateFirewallResponseSuccess
@@ -215,61 +215,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_firewall_policy-instance_method
       def create_firewall_policy: (
                                     firewall_policy_name: ::String,
-                                    firewall_policy: {
-                                      stateless_rule_group_references: Array[
-                                        {
-                                          resource_arn: ::String,
-                                          priority: ::Integer
-                                        },
-                                      ]?,
-                                      stateless_default_actions: Array[::String],
-                                      stateless_fragment_default_actions: Array[::String],
-                                      stateless_custom_actions: Array[
-                                        {
-                                          action_name: ::String,
-                                          action_definition: {
-                                            publish_metric_action: {
-                                              dimensions: Array[
-                                                {
-                                                  value: ::String
-                                                },
-                                              ]
-                                            }?
-                                          }
-                                        },
-                                      ]?,
-                                      stateful_rule_group_references: Array[
-                                        {
-                                          resource_arn: ::String,
-                                          priority: ::Integer?,
-                                          override: {
-                                            action: ("DROP_TO_ALERT")?
-                                          }?,
-                                          deep_threat_inspection: bool?
-                                        },
-                                      ]?,
-                                      stateful_default_actions: Array[::String]?,
-                                      stateful_engine_options: {
-                                        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
-                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?,
-                                        flow_timeouts: {
-                                          tcp_idle_timeout_seconds: ::Integer?
-                                        }?
-                                      }?,
-                                      tls_inspection_configuration_arn: ::String?,
-                                      policy_variables: {
-                                        rule_variables: Hash[::String, {
-                                            definition: Array[::String]
-                                          }]?
-                                      }?,
-                                      enable_tls_session_holding: bool?
-                                    },
+                                    firewall_policy: Params::firewall_policy,
                                     ?description: ::String,
                                     ?tags: Array[
                                       {
                                         key: ::String,
                                         value: ::String
-                                      },
+                                      }
                                     ],
                                     ?dry_run: bool,
                                     ?encryption_configuration: {
@@ -294,7 +246,7 @@ module Aws
                             {
                               port: ::Integer,
                               type: ("HTTP" | "HTTPS")
-                            },
+                            }
                           ],
                           tls_intercept_properties: {
                             pca_arn: ::String?,
@@ -304,7 +256,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _CreateProxyResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyResponseSuccess
@@ -329,7 +281,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String
-                                          },
+                                          }
                                         ]
                                       ) -> _CreateProxyConfigurationResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyConfigurationResponseSuccess
@@ -345,53 +297,20 @@ module Aws
                                      ?description: ::String,
                                      ?rules: {
                                        pre_dns: Array[
-                                         {
-                                           proxy_rule_name: ::String?,
-                                           description: ::String?,
-                                           action: ("ALLOW" | "DENY" | "ALERT")?,
-                                           conditions: Array[
-                                             {
-                                               condition_operator: ::String?,
-                                               condition_key: ::String?,
-                                               condition_values: Array[::String]?
-                                             },
-                                           ]?
-                                         },
+                                         Params::proxy_rule
                                        ]?,
                                        pre_request: Array[
-                                         {
-                                           proxy_rule_name: ::String?,
-                                           description: ::String?,
-                                           action: ("ALLOW" | "DENY" | "ALERT")?,
-                                           conditions: Array[
-                                             {
-                                               condition_operator: ::String?,
-                                               condition_key: ::String?,
-                                               condition_values: Array[::String]?
-                                             },
-                                           ]?
-                                         },
+                                         Params::proxy_rule
                                        ]?,
                                        post_response: Array[
-                                         {
-                                           proxy_rule_name: ::String?,
-                                           description: ::String?,
-                                           action: ("ALLOW" | "DENY" | "ALERT")?,
-                                           conditions: Array[
-                                             {
-                                               condition_operator: ::String?,
-                                               condition_key: ::String?,
-                                               condition_values: Array[::String]?
-                                             },
-                                           ]?
-                                         },
+                                         Params::proxy_rule
                                        ]?
                                      },
                                      ?tags: Array[
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateProxyRuleGroupResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProxyRuleGroupResponseSuccess
@@ -407,49 +326,13 @@ module Aws
                                 ?proxy_rule_group_name: ::String,
                                 rules: {
                                   pre_dns: Array[
-                                    {
-                                      proxy_rule_name: ::String?,
-                                      description: ::String?,
-                                      action: ("ALLOW" | "DENY" | "ALERT")?,
-                                      conditions: Array[
-                                        {
-                                          condition_operator: ::String?,
-                                          condition_key: ::String?,
-                                          condition_values: Array[::String]?
-                                        },
-                                      ]?,
-                                      insert_position: ::Integer?
-                                    },
+                                    Params::create_proxy_rule
                                   ]?,
                                   pre_request: Array[
-                                    {
-                                      proxy_rule_name: ::String?,
-                                      description: ::String?,
-                                      action: ("ALLOW" | "DENY" | "ALERT")?,
-                                      conditions: Array[
-                                        {
-                                          condition_operator: ::String?,
-                                          condition_key: ::String?,
-                                          condition_values: Array[::String]?
-                                        },
-                                      ]?,
-                                      insert_position: ::Integer?
-                                    },
+                                    Params::create_proxy_rule
                                   ]?,
                                   post_response: Array[
-                                    {
-                                      proxy_rule_name: ::String?,
-                                      description: ::String?,
-                                      action: ("ALLOW" | "DENY" | "ALERT")?,
-                                      conditions: Array[
-                                        {
-                                          condition_operator: ::String?,
-                                          condition_key: ::String?,
-                                          condition_values: Array[::String]?
-                                        },
-                                      ]?,
-                                      insert_position: ::Integer?
-                                    },
+                                    Params::create_proxy_rule
                                   ]?
                                 }
                               ) -> _CreateProxyRulesResponseSuccess
@@ -463,106 +346,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_rule_group-instance_method
       def create_rule_group: (
                                rule_group_name: ::String,
-                               ?rule_group: {
-                                 rule_variables: {
-                                   ip_sets: Hash[::String, {
-                                       definition: Array[::String]
-                                     }]?,
-                                   port_sets: Hash[::String, {
-                                       definition: Array[::String]?
-                                     }]?
-                                 }?,
-                                 reference_sets: {
-                                   ip_set_references: Hash[::String, {
-                                       reference_arn: ::String?
-                                     }]?
-                                 }?,
-                                 rules_source: {
-                                   rules_string: ::String?,
-                                   rules_source_list: {
-                                     targets: Array[::String],
-                                     target_types: Array[("TLS_SNI" | "HTTP_HOST")],
-                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
-                                   }?,
-                                   stateful_rules: Array[
-                                     {
-                                       action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
-                                       header: {
-                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC"),
-                                         source: ::String,
-                                         source_port: ::String,
-                                         direction: ("FORWARD" | "ANY"),
-                                         destination: ::String,
-                                         destination_port: ::String
-                                       },
-                                       rule_options: Array[
-                                         {
-                                           keyword: ::String,
-                                           settings: Array[::String]?
-                                         },
-                                       ]
-                                     },
-                                   ]?,
-                                   stateless_rules_and_custom_actions: {
-                                     stateless_rules: Array[
-                                       {
-                                         rule_definition: {
-                                           match_attributes: {
-                                             sources: Array[
-                                               {
-                                                 address_definition: ::String
-                                               },
-                                             ]?,
-                                             destinations: Array[
-                                               {
-                                                 address_definition: ::String
-                                               },
-                                             ]?,
-                                             source_ports: Array[
-                                               {
-                                                 from_port: ::Integer,
-                                                 to_port: ::Integer
-                                               },
-                                             ]?,
-                                             destination_ports: Array[
-                                               {
-                                                 from_port: ::Integer,
-                                                 to_port: ::Integer
-                                               },
-                                             ]?,
-                                             protocols: Array[::Integer]?,
-                                             tcp_flags: Array[
-                                               {
-                                                 flags: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")],
-                                                 masks: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]?
-                                               },
-                                             ]?
-                                           },
-                                           actions: Array[::String]
-                                         },
-                                         priority: ::Integer
-                                       },
-                                     ],
-                                     custom_actions: Array[
-                                       {
-                                         action_name: ::String,
-                                         action_definition: {
-                                           publish_metric_action: {
-                                             dimensions: Array[
-                                               {
-                                                 value: ::String
-                                               },
-                                             ]
-                                           }?
-                                         }
-                                       },
-                                     ]?
-                                   }?
-                                 },
-                                 stateful_rule_options: {
-                                   rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?
-                                 }?
-                               },
+                               ?rule_group: Params::rule_group,
                                ?rules: ::String,
                                type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN"),
                                ?description: ::String,
@@ -571,7 +355,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?dry_run: bool,
                                ?encryption_configuration: {
@@ -597,55 +381,13 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#create_tls_inspection_configuration-instance_method
       def create_tls_inspection_configuration: (
                                                  tls_inspection_configuration_name: ::String,
-                                                 tls_inspection_configuration: {
-                                                   server_certificate_configurations: Array[
-                                                     {
-                                                       server_certificates: Array[
-                                                         {
-                                                           resource_arn: ::String?
-                                                         },
-                                                       ]?,
-                                                       scopes: Array[
-                                                         {
-                                                           sources: Array[
-                                                             {
-                                                               address_definition: ::String
-                                                             },
-                                                           ]?,
-                                                           destinations: Array[
-                                                             {
-                                                               address_definition: ::String
-                                                             },
-                                                           ]?,
-                                                           source_ports: Array[
-                                                             {
-                                                               from_port: ::Integer,
-                                                               to_port: ::Integer
-                                                             },
-                                                           ]?,
-                                                           destination_ports: Array[
-                                                             {
-                                                               from_port: ::Integer,
-                                                               to_port: ::Integer
-                                                             },
-                                                           ]?,
-                                                           protocols: Array[::Integer]?
-                                                         },
-                                                       ]?,
-                                                       certificate_authority_arn: ::String?,
-                                                       check_certificate_revocation_status: {
-                                                         revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
-                                                         unknown_status_action: ("PASS" | "DROP" | "REJECT")?
-                                                       }?
-                                                     },
-                                                   ]?
-                                                 },
+                                                 tls_inspection_configuration: Params::tls_inspection_configuration,
                                                  ?description: ::String,
                                                  ?tags: Array[
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  ?encryption_configuration: {
                                                    key_id: ::String?,
@@ -672,7 +414,7 @@ module Aws
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _CreateVpcEndpointAssociationResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateVpcEndpointAssociationResponseSuccess
@@ -1044,7 +786,7 @@ module Aws
                                              availability_zone_mappings: Array[
                                                {
                                                  availability_zone: ::String
-                                               },
+                                               }
                                              ]
                                            ) -> _DisassociateAvailabilityZonesResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateAvailabilityZonesResponseSuccess
@@ -1303,17 +1045,7 @@ module Aws
                                 ?vpc_endpoint_id: ::String,
                                 ?minimum_flow_age_in_seconds: ::Integer,
                                 flow_filters: Array[
-                                  {
-                                    source_address: {
-                                      address_definition: ::String
-                                    }?,
-                                    destination_address: {
-                                      address_definition: ::String
-                                    }?,
-                                    source_port: ::String?,
-                                    destination_port: ::String?,
-                                    protocols: Array[::String]?
-                                  },
+                                  Params::flow_filter
                                 ]
                               ) -> _StartFlowCaptureResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowCaptureResponseSuccess
@@ -1332,17 +1064,7 @@ module Aws
                               ?vpc_endpoint_id: ::String,
                               ?minimum_flow_age_in_seconds: ::Integer,
                               flow_filters: Array[
-                                {
-                                  source_address: {
-                                    address_definition: ::String
-                                  }?,
-                                  destination_address: {
-                                    address_definition: ::String
-                                  }?,
-                                  source_port: ::String?,
-                                  destination_port: ::String?,
-                                  protocols: Array[::String]?
-                                },
+                                Params::flow_filter
                               ]
                             ) -> _StartFlowFlushResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFlowFlushResponseSuccess
@@ -1357,7 +1079,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1465,55 +1187,7 @@ module Aws
                                     update_token: ::String,
                                     ?firewall_policy_arn: ::String,
                                     ?firewall_policy_name: ::String,
-                                    firewall_policy: {
-                                      stateless_rule_group_references: Array[
-                                        {
-                                          resource_arn: ::String,
-                                          priority: ::Integer
-                                        },
-                                      ]?,
-                                      stateless_default_actions: Array[::String],
-                                      stateless_fragment_default_actions: Array[::String],
-                                      stateless_custom_actions: Array[
-                                        {
-                                          action_name: ::String,
-                                          action_definition: {
-                                            publish_metric_action: {
-                                              dimensions: Array[
-                                                {
-                                                  value: ::String
-                                                },
-                                              ]
-                                            }?
-                                          }
-                                        },
-                                      ]?,
-                                      stateful_rule_group_references: Array[
-                                        {
-                                          resource_arn: ::String,
-                                          priority: ::Integer?,
-                                          override: {
-                                            action: ("DROP_TO_ALERT")?
-                                          }?,
-                                          deep_threat_inspection: bool?
-                                        },
-                                      ]?,
-                                      stateful_default_actions: Array[::String]?,
-                                      stateful_engine_options: {
-                                        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
-                                        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?,
-                                        flow_timeouts: {
-                                          tcp_idle_timeout_seconds: ::Integer?
-                                        }?
-                                      }?,
-                                      tls_inspection_configuration_arn: ::String?,
-                                      policy_variables: {
-                                        rule_variables: Hash[::String, {
-                                            definition: Array[::String]
-                                          }]?
-                                      }?,
-                                      enable_tls_session_holding: bool?
-                                    },
+                                    firewall_policy: Params::firewall_policy,
                                     ?description: ::String,
                                     ?dry_run: bool,
                                     ?encryption_configuration: {
@@ -1556,7 +1230,7 @@ module Aws
                                                 log_type: ("ALERT" | "FLOW" | "TLS"),
                                                 log_destination_type: ("S3" | "CloudWatchLogs" | "KinesisDataFirehose"),
                                                 log_destination: Hash[::String, ::String]
-                                              },
+                                              }
                                             ]
                                           },
                                           ?enable_monitoring_dashboard: bool
@@ -1577,13 +1251,13 @@ module Aws
                             {
                               port: ::Integer,
                               type: ("HTTP" | "HTTPS")
-                            },
+                            }
                           ],
                           ?listener_properties_to_remove: Array[
                             {
                               port: ::Integer,
                               type: ("HTTP" | "HTTPS")
-                            },
+                            }
                           ],
                           ?tls_intercept_properties: {
                             pca_arn: ::String?,
@@ -1629,14 +1303,14 @@ module Aws
                                    condition_operator: ::String?,
                                    condition_key: ::String?,
                                    condition_values: Array[::String]?
-                                 },
+                                 }
                                ],
                                ?remove_conditions: Array[
                                  {
                                    condition_operator: ::String?,
                                    condition_key: ::String?,
                                    condition_values: Array[::String]?
-                                 },
+                                 }
                                ],
                                update_token: ::String
                              ) -> _UpdateProxyRuleResponseSuccess
@@ -1655,7 +1329,7 @@ module Aws
                                                   {
                                                     proxy_rule_group_name: ::String?,
                                                     new_position: ::Integer?
-                                                  },
+                                                  }
                                                 ],
                                                 update_token: ::String
                                               ) -> _UpdateProxyRuleGroupPrioritiesResponseSuccess
@@ -1678,7 +1352,7 @@ module Aws
                                             {
                                               proxy_rule_name: ::String?,
                                               new_position: ::Integer?
-                                            },
+                                            }
                                           ],
                                           update_token: ::String
                                         ) -> _UpdateProxyRulePrioritiesResponseSuccess
@@ -1694,106 +1368,7 @@ module Aws
                                update_token: ::String,
                                ?rule_group_arn: ::String,
                                ?rule_group_name: ::String,
-                               ?rule_group: {
-                                 rule_variables: {
-                                   ip_sets: Hash[::String, {
-                                       definition: Array[::String]
-                                     }]?,
-                                   port_sets: Hash[::String, {
-                                       definition: Array[::String]?
-                                     }]?
-                                 }?,
-                                 reference_sets: {
-                                   ip_set_references: Hash[::String, {
-                                       reference_arn: ::String?
-                                     }]?
-                                 }?,
-                                 rules_source: {
-                                   rules_string: ::String?,
-                                   rules_source_list: {
-                                     targets: Array[::String],
-                                     target_types: Array[("TLS_SNI" | "HTTP_HOST")],
-                                     generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
-                                   }?,
-                                   stateful_rules: Array[
-                                     {
-                                       action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
-                                       header: {
-                                         protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC"),
-                                         source: ::String,
-                                         source_port: ::String,
-                                         direction: ("FORWARD" | "ANY"),
-                                         destination: ::String,
-                                         destination_port: ::String
-                                       },
-                                       rule_options: Array[
-                                         {
-                                           keyword: ::String,
-                                           settings: Array[::String]?
-                                         },
-                                       ]
-                                     },
-                                   ]?,
-                                   stateless_rules_and_custom_actions: {
-                                     stateless_rules: Array[
-                                       {
-                                         rule_definition: {
-                                           match_attributes: {
-                                             sources: Array[
-                                               {
-                                                 address_definition: ::String
-                                               },
-                                             ]?,
-                                             destinations: Array[
-                                               {
-                                                 address_definition: ::String
-                                               },
-                                             ]?,
-                                             source_ports: Array[
-                                               {
-                                                 from_port: ::Integer,
-                                                 to_port: ::Integer
-                                               },
-                                             ]?,
-                                             destination_ports: Array[
-                                               {
-                                                 from_port: ::Integer,
-                                                 to_port: ::Integer
-                                               },
-                                             ]?,
-                                             protocols: Array[::Integer]?,
-                                             tcp_flags: Array[
-                                               {
-                                                 flags: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")],
-                                                 masks: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]?
-                                               },
-                                             ]?
-                                           },
-                                           actions: Array[::String]
-                                         },
-                                         priority: ::Integer
-                                       },
-                                     ],
-                                     custom_actions: Array[
-                                       {
-                                         action_name: ::String,
-                                         action_definition: {
-                                           publish_metric_action: {
-                                             dimensions: Array[
-                                               {
-                                                 value: ::String
-                                               },
-                                             ]
-                                           }?
-                                         }
-                                       },
-                                     ]?
-                                   }?
-                                 },
-                                 stateful_rule_options: {
-                                   rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?
-                                 }?
-                               },
+                               ?rule_group: Params::rule_group,
                                ?rules: ::String,
                                ?type: ("STATELESS" | "STATEFUL" | "STATEFUL_DOMAIN"),
                                ?description: ::String,
@@ -1838,49 +1413,7 @@ module Aws
       def update_tls_inspection_configuration: (
                                                  ?tls_inspection_configuration_arn: ::String,
                                                  ?tls_inspection_configuration_name: ::String,
-                                                 tls_inspection_configuration: {
-                                                   server_certificate_configurations: Array[
-                                                     {
-                                                       server_certificates: Array[
-                                                         {
-                                                           resource_arn: ::String?
-                                                         },
-                                                       ]?,
-                                                       scopes: Array[
-                                                         {
-                                                           sources: Array[
-                                                             {
-                                                               address_definition: ::String
-                                                             },
-                                                           ]?,
-                                                           destinations: Array[
-                                                             {
-                                                               address_definition: ::String
-                                                             },
-                                                           ]?,
-                                                           source_ports: Array[
-                                                             {
-                                                               from_port: ::Integer,
-                                                               to_port: ::Integer
-                                                             },
-                                                           ]?,
-                                                           destination_ports: Array[
-                                                             {
-                                                               from_port: ::Integer,
-                                                               to_port: ::Integer
-                                                             },
-                                                           ]?,
-                                                           protocols: Array[::Integer]?
-                                                         },
-                                                       ]?,
-                                                       certificate_authority_arn: ::String?,
-                                                       check_certificate_revocation_status: {
-                                                         revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
-                                                         unknown_status_action: ("PASS" | "DROP" | "REJECT")?
-                                                       }?
-                                                     },
-                                                   ]?
-                                                 },
+                                                 tls_inspection_configuration: Params::tls_inspection_configuration,
                                                  ?description: ::String,
                                                  ?encryption_configuration: {
                                                    key_id: ::String?,

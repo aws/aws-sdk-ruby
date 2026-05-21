@@ -138,7 +138,7 @@ module Aws
                                  key: ::String,
                                  value: {
                                  }
-                               },
+                               }
                              ],
                              baseline_identifier: ::String,
                              target_identifier: ::String,
@@ -161,7 +161,7 @@ module Aws
                                 key: ::String,
                                 value: {
                                 }
-                              },
+                              }
                             ]
                           ) -> _EnableControlResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _EnableControlResponseSuccess
@@ -411,7 +411,7 @@ module Aws
                                          key: ::String,
                                          value: {
                                          }
-                                       },
+                                       }
                                      ],
                                      enabled_baseline_identifier: ::String
                                    ) -> _UpdateEnabledBaselineResponseSuccess
@@ -428,7 +428,7 @@ module Aws
                                         key: ::String,
                                         value: {
                                         }
-                                      },
+                                      }
                                     ],
                                     enabled_control_identifier: ::String
                                   ) -> _UpdateEnabledControlResponseSuccess

@@ -1,0 +1,71 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SecurityLake
+    module Params
+      type data_lake_lifecycle_configuration = {
+      expiration: {
+        days: ::Integer?
+      }?,
+      transitions: Array[
+        {
+          days: ::Integer?,
+          storage_class: ::String?
+        }
+      ]?
+    }
+
+      type data_lake_configuration = {
+      encryption_configuration: {
+        kms_key_id: ::String?
+      }?,
+      lifecycle_configuration: Params::data_lake_lifecycle_configuration?,
+      region: ::String,
+      replication_configuration: {
+        regions: Array[::String]?,
+        role_arn: ::String?
+      }?
+    }
+
+      type custom_log_source_resource = {
+      attributes: {
+        crawler_arn: ::String?,
+        database_arn: ::String?,
+        table_arn: ::String?
+      }?,
+      provider: {
+        location: ::String?,
+        role_arn: ::String?
+      }?,
+      source_name: ::String?,
+      source_version: ::String?
+    }
+
+      type log_source_resource = {
+      aws_log_source: {
+        source_name: ("ROUTE53" | "VPC_FLOW" | "SH_FINDINGS" | "CLOUD_TRAIL_MGMT" | "LAMBDA_EXECUTION" | "S3_DATA" | "EKS_AUDIT" | "WAF")?,
+        source_version: ::String?
+      }?,
+      custom_log_source: Params::custom_log_source_resource?
+    }
+
+      type notification_configuration = {
+      https_notification_configuration: {
+        authorization_api_key_name: ::String?,
+        authorization_api_key_value: ::String?,
+        endpoint: ::String,
+        http_method: ("POST" | "PUT")?,
+        target_role_arn: ::String
+      }?,
+      sqs_notification_configuration: {
+      }?
+    }
+
+    end
+  end
+end

@@ -1,0 +1,22 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module ECRPublic
+    module Params
+      type repository_catalog_data_input = {
+      description: ::String?,
+      architectures: Array[::String]?,
+      operating_systems: Array[::String]?,
+      logo_image_blob: ::String?,
+      about_text: ::String?,
+      usage_text: ::String?
+    }
+
+    end
+  end
+end

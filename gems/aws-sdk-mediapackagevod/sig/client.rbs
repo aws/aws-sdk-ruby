@@ -137,29 +137,10 @@ module Aws
                                             ?cmaf_package: {
                                               encryption: {
                                                 constant_initialization_vector: ::String?,
-                                                speke_key_provider: {
-                                                  encryption_contract_configuration: {
-                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
-                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
-                                                  }?,
-                                                  role_arn: ::String,
-                                                  system_ids: Array[::String],
-                                                  url: ::String
-                                                }
+                                                speke_key_provider: Params::speke_key_provider
                                               }?,
                                               hls_manifests: Array[
-                                                {
-                                                  ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")?,
-                                                  include_iframe_only_stream: bool?,
-                                                  manifest_name: ::String?,
-                                                  program_date_time_interval_seconds: ::Integer?,
-                                                  repeat_ext_x_key: bool?,
-                                                  stream_selection: {
-                                                    max_video_bits_per_second: ::Integer?,
-                                                    min_video_bits_per_second: ::Integer?,
-                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
-                                                  }?
-                                                },
+                                                Params::hls_manifest
                                               ],
                                               include_encoder_configuration_in_segments: bool?,
                                               segment_duration_seconds: ::Integer?
@@ -177,18 +158,10 @@ module Aws
                                                     min_video_bits_per_second: ::Integer?,
                                                     stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
                                                   }?
-                                                },
+                                                }
                                               ],
                                               encryption: {
-                                                speke_key_provider: {
-                                                  encryption_contract_configuration: {
-                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
-                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
-                                                  }?,
-                                                  role_arn: ::String,
-                                                  system_ids: Array[::String],
-                                                  url: ::String
-                                                }
+                                                speke_key_provider: Params::speke_key_provider
                                               }?,
                                               include_encoder_configuration_in_segments: bool?,
                                               include_iframe_only_stream: bool?,
@@ -200,29 +173,10 @@ module Aws
                                               encryption: {
                                                 constant_initialization_vector: ::String?,
                                                 encryption_method: ("AES_128" | "SAMPLE_AES")?,
-                                                speke_key_provider: {
-                                                  encryption_contract_configuration: {
-                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
-                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
-                                                  }?,
-                                                  role_arn: ::String,
-                                                  system_ids: Array[::String],
-                                                  url: ::String
-                                                }
+                                                speke_key_provider: Params::speke_key_provider
                                               }?,
                                               hls_manifests: Array[
-                                                {
-                                                  ad_markers: ("NONE" | "SCTE35_ENHANCED" | "PASSTHROUGH")?,
-                                                  include_iframe_only_stream: bool?,
-                                                  manifest_name: ::String?,
-                                                  program_date_time_interval_seconds: ::Integer?,
-                                                  repeat_ext_x_key: bool?,
-                                                  stream_selection: {
-                                                    max_video_bits_per_second: ::Integer?,
-                                                    min_video_bits_per_second: ::Integer?,
-                                                    stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
-                                                  }?
-                                                },
+                                                Params::hls_manifest
                                               ],
                                               include_dvb_subtitles: bool?,
                                               segment_duration_seconds: ::Integer?,
@@ -231,15 +185,7 @@ module Aws
                                             id: ::String,
                                             ?mss_package: {
                                               encryption: {
-                                                speke_key_provider: {
-                                                  encryption_contract_configuration: {
-                                                    preset_speke_20_audio: ("PRESET-AUDIO-1" | "PRESET-AUDIO-2" | "PRESET-AUDIO-3" | "SHARED" | "UNENCRYPTED"),
-                                                    preset_speke_20_video: ("PRESET-VIDEO-1" | "PRESET-VIDEO-2" | "PRESET-VIDEO-3" | "PRESET-VIDEO-4" | "PRESET-VIDEO-5" | "PRESET-VIDEO-6" | "PRESET-VIDEO-7" | "PRESET-VIDEO-8" | "SHARED" | "UNENCRYPTED")
-                                                  }?,
-                                                  role_arn: ::String,
-                                                  system_ids: Array[::String],
-                                                  url: ::String
-                                                }
+                                                speke_key_provider: Params::speke_key_provider
                                               }?,
                                               mss_manifests: Array[
                                                 {
@@ -249,7 +195,7 @@ module Aws
                                                     min_video_bits_per_second: ::Integer?,
                                                     stream_order: ("ORIGINAL" | "VIDEO_BITRATE_ASCENDING" | "VIDEO_BITRATE_DESCENDING")?
                                                   }?
-                                                },
+                                                }
                                               ],
                                               segment_duration_seconds: ::Integer?
                                             },

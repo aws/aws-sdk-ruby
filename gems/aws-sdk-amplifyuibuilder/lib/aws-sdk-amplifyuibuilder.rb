@@ -55,7 +55,7 @@ module Aws::AmplifyUIBuilder
   autoload :EndpointProvider, 'aws-sdk-amplifyuibuilder/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-amplifyuibuilder/endpoints'
 
-  GEM_VERSION = '1.56.0'
+  GEM_VERSION = '1.57.0'
 
 end
 

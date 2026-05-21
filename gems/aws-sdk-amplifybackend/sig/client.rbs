@@ -125,42 +125,7 @@ module Aws
       def create_backend_api: (
                                 app_id: ::String,
                                 backend_environment_name: ::String,
-                                resource_config: {
-                                  additional_auth_types: Array[
-                                    {
-                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                      settings: {
-                                        cognito_user_pool_id: ::String?,
-                                        description: ::String?,
-                                        expiration_time: ::Float?,
-                                        open_id_auth_ttl: ::String?,
-                                        open_id_client_id: ::String?,
-                                        open_id_iat_ttl: ::String?,
-                                        open_id_issue_url: ::String?,
-                                        open_id_provider_name: ::String?
-                                      }?
-                                    },
-                                  ]?,
-                                  api_name: ::String?,
-                                  conflict_resolution: {
-                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
-                                  }?,
-                                  default_auth_type: {
-                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                    settings: {
-                                      cognito_user_pool_id: ::String?,
-                                      description: ::String?,
-                                      expiration_time: ::Float?,
-                                      open_id_auth_ttl: ::String?,
-                                      open_id_client_id: ::String?,
-                                      open_id_iat_ttl: ::String?,
-                                      open_id_issue_url: ::String?,
-                                      open_id_provider_name: ::String?
-                                    }?
-                                  }?,
-                                  service: ::String?,
-                                  transform_schema: ::String?
-                                },
+                                resource_config: Params::backend_api_resource_config,
                                 resource_name: ::String
                               ) -> _CreateBackendAPIResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBackendAPIResponseSuccess
@@ -208,26 +173,7 @@ module Aws
                                        o_auth_scopes: Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")],
                                        redirect_sign_in_ur_is: Array[::String],
                                        redirect_sign_out_ur_is: Array[::String],
-                                       social_provider_settings: {
-                                         facebook: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         google: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         login_with_amazon: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         sign_in_with_apple: {
-                                           client_id: ::String?,
-                                           key_id: ::String?,
-                                           private_key: ::String?,
-                                           team_id: ::String?
-                                         }?
-                                       }?
+                                       social_provider_settings: Params::social_provider_settings?
                                      }?,
                                      password_policy: {
                                        additional_constraints: Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]?,
@@ -329,42 +275,7 @@ module Aws
       def delete_backend_api: (
                                 app_id: ::String,
                                 backend_environment_name: ::String,
-                                ?resource_config: {
-                                  additional_auth_types: Array[
-                                    {
-                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                      settings: {
-                                        cognito_user_pool_id: ::String?,
-                                        description: ::String?,
-                                        expiration_time: ::Float?,
-                                        open_id_auth_ttl: ::String?,
-                                        open_id_client_id: ::String?,
-                                        open_id_iat_ttl: ::String?,
-                                        open_id_issue_url: ::String?,
-                                        open_id_provider_name: ::String?
-                                      }?
-                                    },
-                                  ]?,
-                                  api_name: ::String?,
-                                  conflict_resolution: {
-                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
-                                  }?,
-                                  default_auth_type: {
-                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                    settings: {
-                                      cognito_user_pool_id: ::String?,
-                                      description: ::String?,
-                                      expiration_time: ::Float?,
-                                      open_id_auth_ttl: ::String?,
-                                      open_id_client_id: ::String?,
-                                      open_id_iat_ttl: ::String?,
-                                      open_id_issue_url: ::String?,
-                                      open_id_provider_name: ::String?
-                                    }?
-                                  }?,
-                                  service: ::String?,
-                                  transform_schema: ::String?
-                                },
+                                ?resource_config: Params::backend_api_resource_config,
                                 resource_name: ::String
                               ) -> _DeleteBackendAPIResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBackendAPIResponseSuccess
@@ -455,42 +366,7 @@ module Aws
       def get_backend_api: (
                              app_id: ::String,
                              backend_environment_name: ::String,
-                             ?resource_config: {
-                               additional_auth_types: Array[
-                                 {
-                                   mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                   settings: {
-                                     cognito_user_pool_id: ::String?,
-                                     description: ::String?,
-                                     expiration_time: ::Float?,
-                                     open_id_auth_ttl: ::String?,
-                                     open_id_client_id: ::String?,
-                                     open_id_iat_ttl: ::String?,
-                                     open_id_issue_url: ::String?,
-                                     open_id_provider_name: ::String?
-                                   }?
-                                 },
-                               ]?,
-                               api_name: ::String?,
-                               conflict_resolution: {
-                                 resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
-                               }?,
-                               default_auth_type: {
-                                 mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                 settings: {
-                                   cognito_user_pool_id: ::String?,
-                                   description: ::String?,
-                                   expiration_time: ::Float?,
-                                   open_id_auth_ttl: ::String?,
-                                   open_id_client_id: ::String?,
-                                   open_id_iat_ttl: ::String?,
-                                   open_id_issue_url: ::String?,
-                                   open_id_provider_name: ::String?
-                                 }?
-                               }?,
-                               service: ::String?,
-                               transform_schema: ::String?
-                             },
+                             ?resource_config: Params::backend_api_resource_config,
                              resource_name: ::String
                            ) -> _GetBackendAPIResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBackendAPIResponseSuccess
@@ -669,42 +545,7 @@ module Aws
       def update_backend_api: (
                                 app_id: ::String,
                                 backend_environment_name: ::String,
-                                ?resource_config: {
-                                  additional_auth_types: Array[
-                                    {
-                                      mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                      settings: {
-                                        cognito_user_pool_id: ::String?,
-                                        description: ::String?,
-                                        expiration_time: ::Float?,
-                                        open_id_auth_ttl: ::String?,
-                                        open_id_client_id: ::String?,
-                                        open_id_iat_ttl: ::String?,
-                                        open_id_issue_url: ::String?,
-                                        open_id_provider_name: ::String?
-                                      }?
-                                    },
-                                  ]?,
-                                  api_name: ::String?,
-                                  conflict_resolution: {
-                                    resolution_strategy: ("OPTIMISTIC_CONCURRENCY" | "LAMBDA" | "AUTOMERGE" | "NONE")?
-                                  }?,
-                                  default_auth_type: {
-                                    mode: ("API_KEY" | "AWS_IAM" | "AMAZON_COGNITO_USER_POOLS" | "OPENID_CONNECT")?,
-                                    settings: {
-                                      cognito_user_pool_id: ::String?,
-                                      description: ::String?,
-                                      expiration_time: ::Float?,
-                                      open_id_auth_ttl: ::String?,
-                                      open_id_client_id: ::String?,
-                                      open_id_iat_ttl: ::String?,
-                                      open_id_issue_url: ::String?,
-                                      open_id_provider_name: ::String?
-                                    }?
-                                  }?,
-                                  service: ::String?,
-                                  transform_schema: ::String?
-                                },
+                                ?resource_config: Params::backend_api_resource_config,
                                 resource_name: ::String
                               ) -> _UpdateBackendAPIResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBackendAPIResponseSuccess
@@ -751,26 +592,7 @@ module Aws
                                        o_auth_scopes: Array[("PHONE" | "EMAIL" | "OPENID" | "PROFILE" | "AWS_COGNITO_SIGNIN_USER_ADMIN")]?,
                                        redirect_sign_in_ur_is: Array[::String]?,
                                        redirect_sign_out_ur_is: Array[::String]?,
-                                       social_provider_settings: {
-                                         facebook: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         google: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         login_with_amazon: {
-                                           client_id: ::String?,
-                                           client_secret: ::String?
-                                         }?,
-                                         sign_in_with_apple: {
-                                           client_id: ::String?,
-                                           key_id: ::String?,
-                                           private_key: ::String?,
-                                           team_id: ::String?
-                                         }?
-                                       }?
+                                       social_provider_settings: Params::social_provider_settings?
                                      }?,
                                      password_policy: {
                                        additional_constraints: Array[("REQUIRE_DIGIT" | "REQUIRE_LOWERCASE" | "REQUIRE_SYMBOL" | "REQUIRE_UPPERCASE")]?,

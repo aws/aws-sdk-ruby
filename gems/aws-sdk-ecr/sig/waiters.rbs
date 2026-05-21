@@ -37,7 +37,7 @@ module Aws
                       {
                         image_digest: ::String?,
                         image_tag: ::String?
-                      },
+                      }
                     ],
                     ?next_token: ::String,
                     ?max_results: ::Integer,

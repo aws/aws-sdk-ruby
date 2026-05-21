@@ -1,0 +1,172 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CloudDirectory
+    module Params
+      type attribute_key_and_value = {
+      key: {
+        schema_arn: ::String,
+        facet_name: ::String,
+        name: ::String
+      },
+      value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }
+    }
+
+      type attribute_name_and_value = {
+      attribute_name: ::String,
+      value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }
+    }
+
+      type typed_attribute_value_range = {
+      start_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+      start_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?,
+      end_mode: ("FIRST" | "LAST" | "LAST_BEFORE_MISSING_VALUES" | "INCLUSIVE" | "EXCLUSIVE"),
+      end_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?
+    }
+
+      type object_attribute_range = {
+      attribute_key: {
+        schema_arn: ::String,
+        facet_name: ::String,
+        name: ::String
+      }?,
+      range: Params::typed_attribute_value_range?
+    }
+
+      type typed_link_attribute_range = {
+      attribute_name: ::String?,
+      range: Params::typed_attribute_value_range
+    }
+
+      type typed_link_specifier = {
+      typed_link_facet: {
+        schema_arn: ::String,
+        typed_link_name: ::String
+      },
+      source_object_reference: {
+        selector: ::String?
+      },
+      target_object_reference: {
+        selector: ::String?
+      },
+      identity_attribute_values: Array[
+        Params::attribute_name_and_value
+      ]
+    }
+
+      type object_attribute_action = {
+      object_attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+      object_attribute_update_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?
+    }
+
+      type object_attribute_update = {
+      object_attribute_key: {
+        schema_arn: ::String,
+        facet_name: ::String,
+        name: ::String
+      }?,
+      object_attribute_action: Params::object_attribute_action?
+    }
+
+      type link_attribute_action = {
+      attribute_action_type: ("CREATE_OR_UPDATE" | "DELETE")?,
+      attribute_update_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?
+    }
+
+      type link_attribute_update = {
+      attribute_key: {
+        schema_arn: ::String,
+        facet_name: ::String,
+        name: ::String
+      }?,
+      attribute_action: Params::link_attribute_action?
+    }
+
+      type facet_attribute_definition = {
+      type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+      default_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?,
+      is_immutable: bool?,
+      rules: Hash[::String, {
+          type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+          parameters: Hash[::String, ::String]?
+        }]?
+    }
+
+      type facet_attribute = {
+      name: ::String,
+      attribute_definition: Params::facet_attribute_definition?,
+      attribute_reference: {
+        target_facet_name: ::String,
+        target_attribute_name: ::String
+      }?,
+      required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")?
+    }
+
+      type typed_link_attribute_definition = {
+      name: ::String,
+      type: ("STRING" | "BINARY" | "BOOLEAN" | "NUMBER" | "DATETIME" | "VARIANT"),
+      default_value: {
+        string_value: ::String?,
+        binary_value: ::String?,
+        boolean_value: bool?,
+        number_value: ::String?,
+        datetime_value: ::Time?
+      }?,
+      is_immutable: bool?,
+      rules: Hash[::String, {
+          type: ("BINARY_LENGTH" | "NUMBER_COMPARISON" | "STRING_FROM_SET" | "STRING_LENGTH")?,
+          parameters: Hash[::String, ::String]?
+        }]?,
+      required_behavior: ("REQUIRED_ALWAYS" | "NOT_REQUIRED")
+    }
+
+    end
+  end
+end

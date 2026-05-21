@@ -224,7 +224,7 @@ module Aws
                       {
                         attribute_name: ::String,
                         attribute_type: ("S" | "N" | "B")
-                      },
+                      }
                     ],
                     ?billing_mode: ("PROVISIONED" | "PAY_PER_REQUEST"),
                     ?provisioned_throughput: {
@@ -254,7 +254,7 @@ module Aws
                             {
                               attribute_name: ::String,
                               key_type: ("HASH" | "RANGE")
-                            },
+                            }
                           ],
                           projection: {
                             projection_type: ("ALL" | "KEYS_ONLY" | "INCLUDE")?,
@@ -276,7 +276,7 @@ module Aws
                         delete: {
                           index_name: ::String
                         }?
-                      },
+                      }
                     ],
                     ?stream_specification: {
                       stream_enabled: bool,
@@ -307,7 +307,7 @@ module Aws
                               on_demand_throughput_override: {
                                 max_read_request_units: ::Integer?
                               }?
-                            },
+                            }
                           ]?,
                           table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
                         }?,
@@ -329,14 +329,14 @@ module Aws
                               on_demand_throughput_override: {
                                 max_read_request_units: ::Integer?
                               }?
-                            },
+                            }
                           ]?,
                           table_class_override: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS")?
                         }?,
                         delete: {
                           region_name: ::String
                         }?
-                      },
+                      }
                     ],
                     ?table_class: ("STANDARD" | "STANDARD_INFREQUENT_ACCESS"),
                     ?deletion_protection_enabled: bool,
@@ -349,7 +349,7 @@ module Aws
                         delete: {
                           region_name: ::String
                         }?
-                      },
+                      }
                     ],
                     ?on_demand_throughput: {
                       max_read_request_units: ::Integer?,

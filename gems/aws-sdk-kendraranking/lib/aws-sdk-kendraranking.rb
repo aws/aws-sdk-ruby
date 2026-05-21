@@ -54,7 +54,7 @@ module Aws::KendraRanking
   autoload :EndpointProvider, 'aws-sdk-kendraranking/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kendraranking/endpoints'
 
-  GEM_VERSION = '1.44.0'
+  GEM_VERSION = '1.45.0'
 
 end
 

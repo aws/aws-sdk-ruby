@@ -1,0 +1,260 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NetworkFirewall
+    module Params
+      type firewall_policy = {
+      stateless_rule_group_references: Array[
+        {
+          resource_arn: ::String,
+          priority: ::Integer
+        }
+      ]?,
+      stateless_default_actions: Array[::String],
+      stateless_fragment_default_actions: Array[::String],
+      stateless_custom_actions: Array[
+        Params::custom_action
+      ]?,
+      stateful_rule_group_references: Array[
+        Params::stateful_rule_group_reference
+      ]?,
+      stateful_default_actions: Array[::String]?,
+      stateful_engine_options: {
+        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?,
+        stream_exception_policy: ("DROP" | "CONTINUE" | "REJECT")?,
+        flow_timeouts: {
+          tcp_idle_timeout_seconds: ::Integer?
+        }?
+      }?,
+      tls_inspection_configuration_arn: ::String?,
+      policy_variables: {
+        rule_variables: Hash[::String, {
+            definition: Array[::String]
+          }]?
+      }?,
+      enable_tls_session_holding: bool?
+    }
+
+      type custom_action = {
+      action_name: ::String,
+      action_definition: {
+        publish_metric_action: {
+          dimensions: Array[
+            {
+              value: ::String
+            }
+          ]
+        }?
+      }
+    }
+
+      type stateful_rule_group_reference = {
+      resource_arn: ::String,
+      priority: ::Integer?,
+      override: {
+        action: ("DROP_TO_ALERT")?
+      }?,
+      deep_threat_inspection: bool?
+    }
+
+      type proxy_rule = {
+      proxy_rule_name: ::String?,
+      description: ::String?,
+      action: ("ALLOW" | "DENY" | "ALERT")?,
+      conditions: Array[
+        {
+          condition_operator: ::String?,
+          condition_key: ::String?,
+          condition_values: Array[::String]?
+        }
+      ]?
+    }
+
+      type create_proxy_rule = {
+      proxy_rule_name: ::String?,
+      description: ::String?,
+      action: ("ALLOW" | "DENY" | "ALERT")?,
+      conditions: Array[
+        {
+          condition_operator: ::String?,
+          condition_key: ::String?,
+          condition_values: Array[::String]?
+        }
+      ]?,
+      insert_position: ::Integer?
+    }
+
+      type rule_variables = {
+      ip_sets: Hash[::String, {
+          definition: Array[::String]
+        }]?,
+      port_sets: Hash[::String, {
+          definition: Array[::String]?
+        }]?
+    }
+
+      type stateless_rules_and_custom_actions = {
+      stateless_rules: Array[
+        Params::stateless_rule
+      ],
+      custom_actions: Array[
+        Params::custom_action
+      ]?
+    }
+
+      type rules_source = {
+      rules_string: ::String?,
+      rules_source_list: {
+        targets: Array[::String],
+        target_types: Array[("TLS_SNI" | "HTTP_HOST")],
+        generated_rules_type: ("ALLOWLIST" | "DENYLIST" | "REJECTLIST" | "ALERTLIST")
+      }?,
+      stateful_rules: Array[
+        Params::stateful_rule
+      ]?,
+      stateless_rules_and_custom_actions: Params::stateless_rules_and_custom_actions?
+    }
+
+      type rule_group = {
+      rule_variables: Params::rule_variables?,
+      reference_sets: {
+        ip_set_references: Hash[::String, {
+            reference_arn: ::String?
+          }]?
+      }?,
+      rules_source: Params::rules_source,
+      stateful_rule_options: {
+        rule_order: ("DEFAULT_ACTION_ORDER" | "STRICT_ORDER")?
+      }?
+    }
+
+      type header = {
+      protocol: ("IP" | "TCP" | "UDP" | "ICMP" | "HTTP" | "FTP" | "TLS" | "SMB" | "DNS" | "DCERPC" | "SSH" | "SMTP" | "IMAP" | "MSN" | "KRB5" | "IKEV2" | "TFTP" | "NTP" | "DHCP" | "HTTP2" | "QUIC"),
+      source: ::String,
+      source_port: ::String,
+      direction: ("FORWARD" | "ANY"),
+      destination: ::String,
+      destination_port: ::String
+    }
+
+      type stateful_rule = {
+      action: ("PASS" | "DROP" | "ALERT" | "REJECT"),
+      header: Params::header,
+      rule_options: Array[
+        {
+          keyword: ::String,
+          settings: Array[::String]?
+        }
+      ]
+    }
+
+      type match_attributes = {
+      sources: Array[
+        {
+          address_definition: ::String
+        }
+      ]?,
+      destinations: Array[
+        {
+          address_definition: ::String
+        }
+      ]?,
+      source_ports: Array[
+        {
+          from_port: ::Integer,
+          to_port: ::Integer
+        }
+      ]?,
+      destination_ports: Array[
+        {
+          from_port: ::Integer,
+          to_port: ::Integer
+        }
+      ]?,
+      protocols: Array[::Integer]?,
+      tcp_flags: Array[
+        {
+          flags: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")],
+          masks: Array[("FIN" | "SYN" | "RST" | "PSH" | "ACK" | "URG" | "ECE" | "CWR")]?
+        }
+      ]?
+    }
+
+      type rule_definition = {
+      match_attributes: Params::match_attributes,
+      actions: Array[::String]
+    }
+
+      type stateless_rule = {
+      rule_definition: Params::rule_definition,
+      priority: ::Integer
+    }
+
+      type tls_inspection_configuration = {
+      server_certificate_configurations: Array[
+        Params::server_certificate_configuration
+      ]?
+    }
+
+      type server_certificate_configuration = {
+      server_certificates: Array[
+        {
+          resource_arn: ::String?
+        }
+      ]?,
+      scopes: Array[
+        Params::server_certificate_scope
+      ]?,
+      certificate_authority_arn: ::String?,
+      check_certificate_revocation_status: {
+        revoked_status_action: ("PASS" | "DROP" | "REJECT")?,
+        unknown_status_action: ("PASS" | "DROP" | "REJECT")?
+      }?
+    }
+
+      type server_certificate_scope = {
+      sources: Array[
+        {
+          address_definition: ::String
+        }
+      ]?,
+      destinations: Array[
+        {
+          address_definition: ::String
+        }
+      ]?,
+      source_ports: Array[
+        {
+          from_port: ::Integer,
+          to_port: ::Integer
+        }
+      ]?,
+      destination_ports: Array[
+        {
+          from_port: ::Integer,
+          to_port: ::Integer
+        }
+      ]?,
+      protocols: Array[::Integer]?
+    }
+
+      type flow_filter = {
+      source_address: {
+        address_definition: ::String
+      }?,
+      destination_address: {
+        address_definition: ::String
+      }?,
+      source_port: ::String?,
+      destination_port: ::String?,
+      protocols: Array[::String]?
+    }
+
+    end
+  end
+end

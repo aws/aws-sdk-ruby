@@ -108,17 +108,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Ivschat/Client.html#create_logging_configuration-instance_method
       def create_logging_configuration: (
                                           ?name: ::String,
-                                          destination_configuration: {
-                                            s3: {
-                                              bucket_name: ::String
-                                            }?,
-                                            cloud_watch_logs: {
-                                              log_group_name: ::String
-                                            }?,
-                                            firehose: {
-                                              delivery_stream_name: ::String
-                                            }?
-                                          },
+                                          destination_configuration: Params::destination_configuration,
                                           ?tags: Hash[::String, ::String]
                                         ) -> _CreateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateLoggingConfigurationResponseSuccess
@@ -305,17 +295,7 @@ module Aws
       def update_logging_configuration: (
                                           identifier: ::String,
                                           ?name: ::String,
-                                          ?destination_configuration: {
-                                            s3: {
-                                              bucket_name: ::String
-                                            }?,
-                                            cloud_watch_logs: {
-                                              log_group_name: ::String
-                                            }?,
-                                            firehose: {
-                                              delivery_stream_name: ::String
-                                            }?
-                                          }
+                                          ?destination_configuration: Params::destination_configuration
                                         ) -> _UpdateLoggingConfigurationResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateLoggingConfigurationResponseSuccess
 

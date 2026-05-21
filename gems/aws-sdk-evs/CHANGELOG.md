@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.19.0 (2026-05-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.18.0 (2026-05-18)
+------------------
+
+* Feature - Amazon EVS now supports up to 32 hosts per EVS environment, increasing the previous host limit to allow a larger scale of VMware workload deployments and reduce operational overhead.
+
 1.17.0 (2026-05-13)
 ------------------
 

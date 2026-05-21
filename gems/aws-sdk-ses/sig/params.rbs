@@ -1,0 +1,88 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SES
+    module Params
+      type event_destination = {
+      name: ::String,
+      enabled: bool?,
+      matching_event_types: Array[("send" | "reject" | "bounce" | "complaint" | "delivery" | "open" | "click" | "renderingFailure")],
+      kinesis_firehose_destination: {
+        iam_role_arn: ::String,
+        delivery_stream_arn: ::String
+      }?,
+      cloud_watch_destination: {
+        dimension_configurations: Array[
+          {
+            dimension_name: ::String,
+            dimension_value_source: ("messageTag" | "emailHeader" | "linkTag"),
+            default_dimension_value: ::String
+          }
+        ]
+      }?,
+      sns_destination: {
+        topic_arn: ::String
+      }?
+    }
+
+      type receipt_rule = {
+      name: ::String,
+      enabled: bool?,
+      tls_policy: ("Require" | "Optional")?,
+      recipients: Array[::String]?,
+      actions: Array[
+        Params::receipt_action
+      ]?,
+      scan_enabled: bool?
+    }
+
+      type receipt_action = {
+      s3_action: {
+        topic_arn: ::String?,
+        bucket_name: ::String,
+        object_key_prefix: ::String?,
+        kms_key_arn: ::String?,
+        iam_role_arn: ::String?
+      }?,
+      bounce_action: {
+        topic_arn: ::String?,
+        smtp_reply_code: ::String,
+        status_code: ::String?,
+        message: ::String,
+        sender: ::String
+      }?,
+      workmail_action: {
+        topic_arn: ::String?,
+        organization_arn: ::String
+      }?,
+      lambda_action: {
+        topic_arn: ::String?,
+        function_arn: ::String,
+        invocation_type: ("Event" | "RequestResponse")?
+      }?,
+      stop_action: {
+        scope: ("RuleSet"),
+        topic_arn: ::String?
+      }?,
+      add_header_action: {
+        header_name: ::String,
+        header_value: ::String
+      }?,
+      sns_action: {
+        topic_arn: ::String,
+        encoding: ("UTF-8" | "Base64")?
+      }?,
+      connect_action: {
+        instance_arn: ::String,
+        iam_role_arn: ::String
+      }?
+    }
+
+    end
+  end
+end

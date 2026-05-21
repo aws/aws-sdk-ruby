@@ -148,7 +148,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               template_file: ::String
                             ) -> _CreateComponentResponseSuccess
@@ -176,7 +176,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ],
                                 template_major_version: ::String,
                                 ?template_minor_version: ::String,
@@ -200,7 +200,7 @@ module Aws
                                                      {
                                                        key: ::String,
                                                        value: ::String
-                                                     },
+                                                     }
                                                    ]
                                                  ) -> _CreateEnvironmentAccountConnectionResponseSuccess
                                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentAccountConnectionResponseSuccess
@@ -220,7 +220,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateEnvironmentTemplateResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentTemplateResponseSuccess
@@ -244,7 +244,7 @@ module Aws
                                                    {
                                                      key: ::String,
                                                      value: ::String
-                                                   },
+                                                   }
                                                  ],
                                                  template_name: ::String
                                                ) -> _CreateEnvironmentTemplateVersionResponseSuccess
@@ -264,7 +264,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _CreateRepositoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
@@ -285,7 +285,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             template_major_version: ::String,
                             ?template_minor_version: ::String,
@@ -307,7 +307,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ],
                                      ?template_major_version: ::String,
                                      ?template_minor_version: ::String
@@ -343,7 +343,7 @@ module Aws
                                        {
                                          key: ::String,
                                          value: ::String
-                                       },
+                                       }
                                      ]
                                    ) -> _CreateServiceTemplateResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServiceTemplateResponseSuccess
@@ -359,7 +359,7 @@ module Aws
                                                {
                                                  major_version: ::String,
                                                  template_name: ::String
-                                               },
+                                               }
                                              ],
                                              ?description: ::String,
                                              ?major_version: ::String,
@@ -374,7 +374,7 @@ module Aws
                                                {
                                                  key: ::String,
                                                  value: ::String
-                                               },
+                                               }
                                              ],
                                              template_name: ::String
                                            ) -> _CreateServiceTemplateVersionResponseSuccess
@@ -864,7 +864,7 @@ module Aws
                                  {
                                    major_version: ::String,
                                    template_name: ::String
-                                 },
+                                 }
                                ],
                                ?max_results: ::Integer,
                                ?next_token: ::String
@@ -935,7 +935,7 @@ module Aws
                                       {
                                         key: ("name" | "deploymentStatus" | "templateName" | "serviceName" | "deployedTemplateVersionStatus" | "environmentName" | "lastDeploymentAttemptedAtBefore" | "lastDeploymentAttemptedAtAfter" | "createdAtBefore" | "createdAtAfter")?,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     ?max_results: ::Integer,
                                     ?next_token: ::String,
@@ -1031,7 +1031,7 @@ module Aws
                                                         {
                                                           key: ::String?,
                                                           value_string: ::String?
-                                                        },
+                                                        }
                                                       ],
                                                       resource_arn: ::String,
                                                       ?status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED"),
@@ -1059,7 +1059,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1262,7 +1262,7 @@ module Aws
                                                {
                                                  major_version: ::String,
                                                  template_name: ::String
-                                               },
+                                               }
                                              ],
                                              ?description: ::String,
                                              major_version: ::String,

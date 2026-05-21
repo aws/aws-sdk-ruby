@@ -1,0 +1,98 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module MediaTailor
+    module Params
+      type request_output_item = {
+      dash_playlist_settings: {
+        manifest_window_seconds: ::Integer?,
+        min_buffer_time_seconds: ::Integer?,
+        min_update_period_seconds: ::Integer?,
+        suggested_presentation_delay_seconds: ::Integer?
+      }?,
+      hls_playlist_settings: {
+        manifest_window_seconds: ::Integer?,
+        ad_markup_type: Array[("DATERANGE" | "SCTE35_ENHANCED")]?
+      }?,
+      manifest_name: ::String,
+      source_group: ::String
+    }
+
+      type time_signal_message = {
+      segmentation_descriptors: Array[
+        Params::segmentation_descriptor
+      ]?
+    }
+
+      type ad_break = {
+      message_type: ("SPLICE_INSERT" | "TIME_SIGNAL")?,
+      offset_millis: ::Integer,
+      slate: {
+        source_location_name: ::String?,
+        vod_source_name: ::String?
+      }?,
+      splice_insert_message: {
+        avail_num: ::Integer?,
+        avails_expected: ::Integer?,
+        splice_event_id: ::Integer?,
+        unique_program_id: ::Integer?
+      }?,
+      time_signal_message: Params::time_signal_message?,
+      ad_break_metadata: Array[
+        {
+          key: ::String,
+          value: ::String
+        }
+      ]?
+    }
+
+      type segmentation_descriptor = {
+      segmentation_event_id: ::Integer?,
+      segmentation_upid_type: ::Integer?,
+      segmentation_upid: ::String?,
+      segmentation_type_id: ::Integer?,
+      segment_num: ::Integer?,
+      segments_expected: ::Integer?,
+      sub_segment_num: ::Integer?,
+      sub_segments_expected: ::Integer?
+    }
+
+      type audience_media = {
+      audience: ::String?,
+      alternate_media: Array[
+        Params::alternate_media
+      ]?
+    }
+
+      type alternate_media = {
+      source_location_name: ::String?,
+      live_source_name: ::String?,
+      vod_source_name: ::String?,
+      clip_range: {
+        end_offset_millis: ::Integer?,
+        start_offset_millis: ::Integer?
+      }?,
+      scheduled_start_time_millis: ::Integer?,
+      ad_breaks: Array[
+        Params::ad_break
+      ]?,
+      duration_millis: ::Integer?
+    }
+
+      type access_configuration = {
+      access_type: ("S3_SIGV4" | "SECRETS_MANAGER_ACCESS_TOKEN" | "AUTODETECT_SIGV4")?,
+      secrets_manager_access_token_configuration: {
+        header_name: ::String?,
+        secret_arn: ::String?,
+        secret_string_key: ::String?
+      }?
+    }
+
+    end
+  end
+end

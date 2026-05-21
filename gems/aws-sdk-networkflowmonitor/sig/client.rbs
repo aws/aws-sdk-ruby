@@ -96,13 +96,13 @@ module Aws
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             ?remote_resources: Array[
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             scope_arn: ::String,
                             ?client_token: ::String,
@@ -120,15 +120,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFlowMonitor/Client.html#create_scope-instance_method
       def create_scope: (
                           targets: Array[
-                            {
-                              target_identifier: {
-                                target_id: {
-                                  account_id: ::String?
-                                },
-                                target_type: ("ACCOUNT")
-                              },
-                              region: ::String
-                            },
+                            Params::target_resource
                           ],
                           ?client_token: ::String,
                           ?tags: Hash[::String, ::String]
@@ -408,25 +400,25 @@ module Aws
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             ?local_resources_to_remove: Array[
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::Region" | "AWS::EKS::Cluster"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             ?remote_resources_to_add: Array[
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             ?remote_resources_to_remove: Array[
                               {
                                 type: ("AWS::EC2::VPC" | "AWS::AvailabilityZone" | "AWS::EC2::Subnet" | "AWS::AWSService" | "AWS::Region"),
                                 identifier: ::String
-                              },
+                              }
                             ],
                             ?client_token: ::String
                           ) -> _UpdateMonitorResponseSuccess
@@ -443,26 +435,10 @@ module Aws
       def update_scope: (
                           scope_id: ::String,
                           ?resources_to_add: Array[
-                            {
-                              target_identifier: {
-                                target_id: {
-                                  account_id: ::String?
-                                },
-                                target_type: ("ACCOUNT")
-                              },
-                              region: ::String
-                            },
+                            Params::target_resource
                           ],
                           ?resources_to_delete: Array[
-                            {
-                              target_identifier: {
-                                target_id: {
-                                  account_id: ::String?
-                                },
-                                target_type: ("ACCOUNT")
-                              },
-                              region: ::String
-                            },
+                            Params::target_resource
                           ]
                         ) -> _UpdateScopeResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateScopeResponseSuccess

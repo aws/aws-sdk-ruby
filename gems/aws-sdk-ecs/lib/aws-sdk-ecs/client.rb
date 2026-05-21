@@ -483,6 +483,102 @@ module Aws::ECS
 
     # @!group API Operations
 
+    # Continues or rolls back an Amazon ECS service deployment that is
+    # paused at a lifecycle hook.
+    #
+    # When a service deployment reaches a lifecycle stage that has a `PAUSE`
+    # hook configured, the deployment pauses and waits for an explicit
+    # action. Use this API to either continue the deployment to the next
+    # stage or roll back to the previous service revision.
+    #
+    # To find the `hookId` of the paused hook, call
+    # [DescribeServiceDeployments][1] and inspect the `lifecycleHookDetails`
+    # field.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+    #
+    # @option params [required, String] :service_deployment_arn
+    #   The ARN of the service deployment to continue or roll back.
+    #
+    # @option params [required, String] :hook_id
+    #   The ID of the paused lifecycle hook to act on. You can find the
+    #   `hookId` by calling [DescribeServiceDeployments][1] and inspecting the
+    #   `lifecycleHookDetails` field of the service deployment.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
+    #
+    # @option params [String] :action
+    #   The action to take on the paused lifecycle hook. Valid values are:
+    #
+    #   * `CONTINUE` - Proceeds the deployment to the next lifecycle stage.
+    #
+    #   * `ROLLBACK` - Rolls back the deployment to the previous service
+    #     revision.
+    #
+    #   If no value is specified, the default action is `CONTINUE`.
+    #
+    # @return [Types::ContinueServiceDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ContinueServiceDeploymentResponse#service_deployment_arn #service_deployment_arn} => String
+    #
+    #
+    # @example Example: To continue a paused service deployment
+    #
+    #   # This example continues a service deployment that is paused at a lifecycle hook, using the CONTINUE action to proceed to
+    #   # the next deployment stage.
+    #
+    #   resp = client.continue_service_deployment({
+    #     action: "CONTINUE", 
+    #     hook_id: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", 
+    #     service_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #   }
+    #
+    # @example Example: To roll back a paused service deployment
+    #
+    #   # This example rolls back a service deployment that is paused at a lifecycle hook, using the ROLLBACK action to revert to
+    #   # the previous service revision.
+    #
+    #   resp = client.continue_service_deployment({
+    #     action: "ROLLBACK", 
+    #     hook_id: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", 
+    #     service_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.continue_service_deployment({
+    #     service_deployment_arn: "String", # required
+    #     hook_id: "String", # required
+    #     action: "ROLLBACK", # accepts ROLLBACK, CONTINUE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.service_deployment_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContinueServiceDeployment AWS API Documentation
+    #
+    # @overload continue_service_deployment(params = {})
+    # @param [Hash] params ({})
+    def continue_service_deployment(params = {}, options = {})
+      req = build_request(:continue_service_deployment, params)
+      req.send_request(options)
+    end
+
     # Creates a capacity provider. Capacity providers are associated with a
     # cluster and are used in capacity provider strategies to facilitate
     # cluster auto scaling. You can create capacity providers for Amazon ECS
@@ -2178,6 +2274,81 @@ module Aws::ECS
     #     }, 
     #   }
     #
+    # @example Example: To create a service with a pause lifecycle hook
+    #
+    #   # This example creates a service with a blue/green deployment strategy that includes a pause lifecycle hook at the
+    #   # POST_PRODUCTION_TRAFFIC_SHIFT stage. The deployment will pause at that stage until you explicitly continue or roll back
+    #   # using the ContinueServiceDeployment API, or until the 60-minute timeout expires and triggers a rollback.
+    #
+    #   resp = client.create_service({
+    #     deployment_configuration: {
+    #       lifecycle_hooks: [
+    #         {
+    #           lifecycle_stages: [
+    #             "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #           ], 
+    #           target_type: "PAUSE", 
+    #           timeout_configuration: {
+    #             action: "ROLLBACK", 
+    #             timeout_in_minutes: 60, 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       strategy: "BLUE_GREEN", 
+    #     }, 
+    #     desired_count: 2, 
+    #     service_name: "ecs-service-with-pause-hook", 
+    #     task_definition: "ecs-demo", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     service: {
+    #       cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/default", 
+    #       created_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #       deployment_configuration: {
+    #         lifecycle_hooks: [
+    #           {
+    #             lifecycle_stages: [
+    #               "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #             ], 
+    #             target_type: "PAUSE", 
+    #             timeout_configuration: {
+    #               action: "ROLLBACK", 
+    #               timeout_in_minutes: 60, 
+    #             }, 
+    #           }, 
+    #         ], 
+    #         maximum_percent: 200, 
+    #         minimum_healthy_percent: 100, 
+    #         strategy: "BLUE_GREEN", 
+    #       }, 
+    #       deployments: [
+    #         {
+    #           created_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #           desired_count: 2, 
+    #           id: "ecs-svc/9223370564342348388", 
+    #           pending_count: 0, 
+    #           running_count: 0, 
+    #           status: "PRIMARY", 
+    #           task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1", 
+    #           updated_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #         }, 
+    #       ], 
+    #       desired_count: 2, 
+    #       events: [
+    #       ], 
+    #       load_balancers: [
+    #       ], 
+    #       pending_count: 0, 
+    #       running_count: 0, 
+    #       service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-service-with-pause-hook", 
+    #       service_name: "ecs-service-with-pause-hook", 
+    #       status: "ACTIVE", 
+    #       task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1", 
+    #     }, 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.create_service({
@@ -2235,10 +2406,15 @@ module Aws::ECS
     #       bake_time_in_minutes: 1,
     #       lifecycle_hooks: [
     #         {
+    #           target_type: "AWS_LAMBDA", # accepts AWS_LAMBDA, PAUSE
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
-    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRE_PRODUCTION_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
     #           hook_details: {
+    #           },
+    #           timeout_configuration: {
+    #             timeout_in_minutes: 1,
+    #             action: "ROLLBACK", # accepts ROLLBACK, CONTINUE
     #           },
     #         },
     #       ],
@@ -2416,10 +2592,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
-    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.timeout_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
@@ -3651,10 +3830,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
-    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.timeout_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
@@ -5872,6 +6054,70 @@ module Aws::ECS
     #     ], 
     #   }
     #
+    # @example Example: To describe a service deployment with a paused lifecycle hook
+    #
+    #   # This example describes a service deployment that is currently paused at a lifecycle hook. The lifecycleHookDetails field
+    #   # shows the status of the pause hook, including when it will expire and what action will be taken if the timeout is
+    #   # reached.
+    #
+    #   resp = client.describe_service_deployments({
+    #     service_deployment_arns: [
+    #       "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     service_deployments: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:123456789012:cluster/MyCluster", 
+    #         deployment_configuration: {
+    #           deployment_circuit_breaker: {
+    #             enable: false, 
+    #             rollback: false, 
+    #           }, 
+    #           lifecycle_hooks: [
+    #             {
+    #               lifecycle_stages: [
+    #                 "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #               ], 
+    #               target_type: "PAUSE", 
+    #               timeout_configuration: {
+    #                 action: "ROLLBACK", 
+    #                 timeout_in_minutes: 60, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           maximum_percent: 200, 
+    #           minimum_healthy_percent: 100, 
+    #           strategy: "BLUE_GREEN", 
+    #         }, 
+    #         lifecycle_hook_details: [
+    #           {
+    #             expires_at: Time.parse("2026-05-06T17:00:00.000Z"), 
+    #             hook_id: "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", 
+    #             status: "AWAITING_ACTION", 
+    #             target_type: "PAUSE", 
+    #             timeout_action: "ROLLBACK", 
+    #           }, 
+    #         ], 
+    #         lifecycle_stage: "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #         service_arn: "arn:aws:ecs:us-east-1:123456789012:service/MyCluster/MyService", 
+    #         service_deployment_arn: "arn:aws:ecs:us-east-1:123456789012:service-deployment/MyCluster/MyService/r9i43YFjvgF_xlg7m2eJ1r", 
+    #         status: "IN_PROGRESS", 
+    #         target_service_revision: {
+    #           arn: "arn:aws:ecs:us-east-1:123456789012:service-revision/MyCluster/MyService/1234567890123456789", 
+    #           pending_task_count: 1, 
+    #           requested_task_count: 2, 
+    #           running_task_count: 1, 
+    #         }, 
+    #         updated_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_service_deployments({
@@ -5905,6 +6151,13 @@ module Aws::ECS
     #   resp.service_deployments[0].status #=> String, one of "PENDING", "SUCCESSFUL", "STOPPED", "STOP_REQUESTED", "IN_PROGRESS", "ROLLBACK_REQUESTED", "ROLLBACK_IN_PROGRESS", "ROLLBACK_SUCCESSFUL", "ROLLBACK_FAILED"
     #   resp.service_deployments[0].status_reason #=> String
     #   resp.service_deployments[0].lifecycle_stage #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT", "BAKE_TIME", "CLEAN_UP"
+    #   resp.service_deployments[0].lifecycle_hook_details #=> Array
+    #   resp.service_deployments[0].lifecycle_hook_details[0].hook_id #=> String
+    #   resp.service_deployments[0].lifecycle_hook_details[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
+    #   resp.service_deployments[0].lifecycle_hook_details[0].target_arn #=> String
+    #   resp.service_deployments[0].lifecycle_hook_details[0].status #=> String, one of "AWAITING_ACTION", "IN_PROGRESS", "SUCCEEDED", "FAILED", "TIMED_OUT"
+    #   resp.service_deployments[0].lifecycle_hook_details[0].expires_at #=> Time
+    #   resp.service_deployments[0].lifecycle_hook_details[0].timeout_action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.enable #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.deployment_circuit_breaker.rollback #=> Boolean
     #   resp.service_deployments[0].deployment_configuration.maximum_percent #=> Integer
@@ -5916,10 +6169,13 @@ module Aws::ECS
     #   resp.service_deployments[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service_deployments[0].deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
-    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].timeout_configuration.timeout_in_minutes #=> Integer
+    #   resp.service_deployments[0].deployment_configuration.lifecycle_hooks[0].timeout_configuration.action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service_deployments[0].deployment_configuration.linear_configuration.step_percent #=> Float
     #   resp.service_deployments[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service_deployments[0].deployment_configuration.canary_configuration.canary_percent #=> Float
@@ -6275,6 +6531,69 @@ module Aws::ECS
     #     ], 
     #   }
     #
+    # @example Example: To describe a service with a pause lifecycle hook
+    #
+    #   # This example provides descriptive information about the service ``ecs-service-with-pause-hook``, which is configured
+    #   # with a pause lifecycle hook in its deployment configuration.
+    #
+    #   resp = client.describe_services({
+    #     services: [
+    #       "ecs-service-with-pause-hook", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     failures: [
+    #     ], 
+    #     services: [
+    #       {
+    #         cluster_arn: "arn:aws:ecs:us-east-1:012345678910:cluster/default", 
+    #         created_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #         deployment_configuration: {
+    #           lifecycle_hooks: [
+    #             {
+    #               lifecycle_stages: [
+    #                 "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #               ], 
+    #               target_type: "PAUSE", 
+    #               timeout_configuration: {
+    #                 action: "ROLLBACK", 
+    #                 timeout_in_minutes: 60, 
+    #               }, 
+    #             }, 
+    #           ], 
+    #           maximum_percent: 200, 
+    #           minimum_healthy_percent: 100, 
+    #           strategy: "BLUE_GREEN", 
+    #         }, 
+    #         deployments: [
+    #           {
+    #             created_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #             desired_count: 2, 
+    #             id: "ecs-svc/9223370564341623665", 
+    #             pending_count: 0, 
+    #             running_count: 2, 
+    #             status: "PRIMARY", 
+    #             task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1", 
+    #             updated_at: Time.parse("2026-05-06T16:00:00.000Z"), 
+    #           }, 
+    #         ], 
+    #         desired_count: 2, 
+    #         events: [
+    #         ], 
+    #         load_balancers: [
+    #         ], 
+    #         pending_count: 0, 
+    #         running_count: 2, 
+    #         service_arn: "arn:aws:ecs:us-east-1:012345678910:service/default/ecs-service-with-pause-hook", 
+    #         service_name: "ecs-service-with-pause-hook", 
+    #         status: "ACTIVE", 
+    #         task_definition: "arn:aws:ecs:us-east-1:012345678910:task-definition/ecs-demo:1", 
+    #       }, 
+    #     ], 
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_services({
@@ -6326,10 +6645,13 @@ module Aws::ECS
     #   resp.services[0].deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.services[0].deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.services[0].deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
-    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].timeout_configuration.timeout_in_minutes #=> Integer
+    #   resp.services[0].deployment_configuration.lifecycle_hooks[0].timeout_configuration.action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.services[0].deployment_configuration.linear_configuration.step_percent #=> Float
     #   resp.services[0].deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.services[0].deployment_configuration.canary_configuration.canary_percent #=> Float
@@ -14757,6 +15079,35 @@ module Aws::ECS
     #   {
     #   }
     #
+    # @example Example: To update a service to add a pause lifecycle hook
+    #
+    #   # This example updates the my-blue-green-service service to add a pause lifecycle hook at the
+    #   # POST_PRODUCTION_TRAFFIC_SHIFT stage. The deployment will pause at that stage until you explicitly continue or roll back
+    #   # using the ContinueServiceDeployment API, or until the 30-minute timeout expires and triggers a continue.
+    #
+    #   resp = client.update_service({
+    #     deployment_configuration: {
+    #       lifecycle_hooks: [
+    #         {
+    #           lifecycle_stages: [
+    #             "POST_PRODUCTION_TRAFFIC_SHIFT", 
+    #           ], 
+    #           target_type: "PAUSE", 
+    #           timeout_configuration: {
+    #             action: "CONTINUE", 
+    #             timeout_in_minutes: 30, 
+    #           }, 
+    #         }, 
+    #       ], 
+    #       strategy: "BLUE_GREEN", 
+    #     }, 
+    #     service: "my-blue-green-service", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
     # @example Request syntax with placeholder values
     #
     #   resp = client.update_service({
@@ -14787,10 +15138,15 @@ module Aws::ECS
     #       bake_time_in_minutes: 1,
     #       lifecycle_hooks: [
     #         {
+    #           target_type: "AWS_LAMBDA", # accepts AWS_LAMBDA, PAUSE
     #           hook_target_arn: "String",
     #           role_arn: "IAMRoleArn",
-    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
+    #           lifecycle_stages: ["RECONCILE_SERVICE"], # accepts RECONCILE_SERVICE, PRE_SCALE_UP, POST_SCALE_UP, TEST_TRAFFIC_SHIFT, POST_TEST_TRAFFIC_SHIFT, PRE_PRODUCTION_TRAFFIC_SHIFT, PRODUCTION_TRAFFIC_SHIFT, POST_PRODUCTION_TRAFFIC_SHIFT
     #           hook_details: {
+    #           },
+    #           timeout_configuration: {
+    #             timeout_in_minutes: 1,
+    #             action: "ROLLBACK", # accepts ROLLBACK, CONTINUE
     #           },
     #         },
     #       ],
@@ -14986,10 +15342,13 @@ module Aws::ECS
     #   resp.service.deployment_configuration.strategy #=> String, one of "ROLLING", "BLUE_GREEN", "LINEAR", "CANARY"
     #   resp.service.deployment_configuration.bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.lifecycle_hooks #=> Array
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].target_type #=> String, one of "AWS_LAMBDA", "PAUSE"
     #   resp.service.deployment_configuration.lifecycle_hooks[0].hook_target_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].role_arn #=> String
     #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages #=> Array
-    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].lifecycle_stages[0] #=> String, one of "RECONCILE_SERVICE", "PRE_SCALE_UP", "POST_SCALE_UP", "TEST_TRAFFIC_SHIFT", "POST_TEST_TRAFFIC_SHIFT", "PRE_PRODUCTION_TRAFFIC_SHIFT", "PRODUCTION_TRAFFIC_SHIFT", "POST_PRODUCTION_TRAFFIC_SHIFT"
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.timeout_in_minutes #=> Integer
+    #   resp.service.deployment_configuration.lifecycle_hooks[0].timeout_configuration.action #=> String, one of "ROLLBACK", "CONTINUE"
     #   resp.service.deployment_configuration.linear_configuration.step_percent #=> Float
     #   resp.service.deployment_configuration.linear_configuration.step_bake_time_in_minutes #=> Integer
     #   resp.service.deployment_configuration.canary_configuration.canary_percent #=> Float
@@ -15645,7 +16004,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.230.0'
+      context[:gem_version] = '1.232.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

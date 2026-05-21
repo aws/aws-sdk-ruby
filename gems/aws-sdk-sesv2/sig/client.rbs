@@ -93,7 +93,7 @@ module Aws
                                        dimensions: Hash[("EMAIL_IDENTITY" | "CONFIGURATION_SET" | "ISP"), ::String]?,
                                        start_date: ::Time,
                                        end_date: ::Time
-                                     },
+                                     }
                                    ]
                                  ) -> _BatchGetMetricDataResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetMetricDataResponseSuccess
@@ -133,27 +133,13 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?suppression_options: {
                                         suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")]?,
-                                        validation_options: {
-                                          condition_threshold: {
-                                            condition_threshold_enabled: ("ENABLED" | "DISABLED"),
-                                            overall_confidence_threshold: {
-                                              confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
-                                            }?
-                                          }
-                                        }?
+                                        validation_options: Params::suppression_validation_options?
                                       },
-                                      ?vdm_options: {
-                                        dashboard_options: {
-                                          engagement_metrics: ("ENABLED" | "DISABLED")?
-                                        }?,
-                                        guardian_options: {
-                                          optimized_shared_delivery: ("ENABLED" | "DISABLED")?
-                                        }?
-                                      },
+                                      ?vdm_options: Params::vdm_options,
                                       ?archiving_options: {
                                         archive_arn: ::String?
                                       }
@@ -167,32 +153,7 @@ module Aws
       def create_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
                                                         event_destination_name: ::String,
-                                                        event_destination: {
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?,
-                                                          event_bridge_destination: {
-                                                            event_bus_arn: ::String
-                                                          }?,
-                                                          pinpoint_destination: {
-                                                            application_arn: ::String?
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination_definition
                                                       ) -> _CreateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateConfigurationSetEventDestinationResponseSuccess
 
@@ -207,7 +168,7 @@ module Aws
                               {
                                 topic_name: ::String,
                                 subscription_status: ("OPT_IN" | "OPT_OUT")
-                              },
+                              }
                             ],
                             ?unsubscribe_all: bool,
                             ?attributes_data: ::String
@@ -226,14 +187,14 @@ module Aws
                                      display_name: ::String,
                                      description: ::String?,
                                      default_subscription_status: ("OPT_IN" | "OPT_OUT")
-                                   },
+                                   }
                                  ],
                                  ?description: ::String,
                                  ?tags: Array[
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]
                                ) -> _CreateContactListResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactListResponseSuccess
@@ -251,7 +212,7 @@ module Aws
                                                          {
                                                            key: ::String,
                                                            value: ::String
-                                                         },
+                                                         }
                                                        ],
                                                        success_redirection_url: ::String,
                                                        failure_redirection_url: ::String
@@ -268,7 +229,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?scaling_mode: ("STANDARD" | "MANAGED")
                                     ) -> _CreateDedicatedIpPoolResponseSuccess
@@ -283,76 +244,12 @@ module Aws
       def create_deliverability_test_report: (
                                                ?report_name: ::String,
                                                from_email_address: ::String,
-                                               content: {
-                                                 simple: {
-                                                   subject: {
-                                                     data: ::String,
-                                                     charset: ::String?
-                                                   },
-                                                   body: {
-                                                     text: {
-                                                       data: ::String,
-                                                       charset: ::String?
-                                                     }?,
-                                                     html: {
-                                                       data: ::String,
-                                                       charset: ::String?
-                                                     }?
-                                                   },
-                                                   headers: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String
-                                                     },
-                                                   ]?,
-                                                   attachments: Array[
-                                                     {
-                                                       raw_content: ::String,
-                                                       content_disposition: ("ATTACHMENT" | "INLINE")?,
-                                                       file_name: ::String,
-                                                       content_description: ::String?,
-                                                       content_id: ::String?,
-                                                       content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
-                                                       content_type: ::String?
-                                                     },
-                                                   ]?
-                                                 }?,
-                                                 raw: {
-                                                   data: ::String
-                                                 }?,
-                                                 template: {
-                                                   template_name: ::String?,
-                                                   template_arn: ::String?,
-                                                   template_content: {
-                                                     subject: ::String?,
-                                                     text: ::String?,
-                                                     html: ::String?
-                                                   }?,
-                                                   template_data: ::String?,
-                                                   headers: Array[
-                                                     {
-                                                       name: ::String,
-                                                       value: ::String
-                                                     },
-                                                   ]?,
-                                                   attachments: Array[
-                                                     {
-                                                       raw_content: ::String,
-                                                       content_disposition: ("ATTACHMENT" | "INLINE")?,
-                                                       file_name: ::String,
-                                                       content_description: ::String?,
-                                                       content_id: ::String?,
-                                                       content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
-                                                       content_type: ::String?
-                                                     },
-                                                   ]?
-                                                 }?
-                                               },
+                                               content: Params::email_content,
                                                ?tags: Array[
                                                  {
                                                    key: ::String,
                                                    value: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreateDeliverabilityTestReportResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDeliverabilityTestReportResponseSuccess
@@ -370,7 +267,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ],
                                    ?dkim_signing_attributes: {
                                      domain_signing_selector: ::String?,
@@ -408,7 +305,7 @@ module Aws
                                      {
                                        key: ::String,
                                        value: ::String
-                                     },
+                                     }
                                    ]
                                  ) -> _CreateEmailTemplateResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEmailTemplateResponseSuccess
@@ -427,7 +324,7 @@ module Aws
                                      {
                                        name: ("SEND" | "COMPLAINT" | "PERMANENT_BOUNCE" | "TRANSIENT_BOUNCE" | "OPEN" | "CLICK" | "DELIVERY" | "DELIVERY_OPEN" | "DELIVERY_CLICK" | "DELIVERY_COMPLAINT")?,
                                        aggregation: ("RATE" | "VOLUME")?
-                                     },
+                                     }
                                    ],
                                    start_date: ::Time,
                                    end_date: ::Time
@@ -435,22 +332,8 @@ module Aws
                                  message_insights_data_source: {
                                    start_date: ::Time,
                                    end_date: ::Time,
-                                   include: {
-                                     from_email_address: Array[::String]?,
-                                     destination: Array[::String]?,
-                                     subject: Array[::String]?,
-                                     isp: Array[::String]?,
-                                     last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
-                                     last_engagement_event: Array[("OPEN" | "CLICK")]?
-                                   }?,
-                                   exclude: {
-                                     from_email_address: Array[::String]?,
-                                     destination: Array[::String]?,
-                                     subject: Array[::String]?,
-                                     isp: Array[::String]?,
-                                     last_delivery_event: Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]?,
-                                     last_engagement_event: Array[("OPEN" | "CLICK")]?
-                                   }?,
+                                   include: Params::message_insights_filters?,
+                                   exclude: Params::message_insights_filters?,
                                    max_results: ::Integer?
                                  }?
                                },
@@ -495,14 +378,14 @@ module Aws
                                             routes_details: Array[
                                               {
                                                 region: ::String
-                                              },
+                                              }
                                             ]
                                           },
                                           ?tags: Array[
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateMultiRegionEndpointResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultiRegionEndpointResponseSuccess
@@ -523,7 +406,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreateTenantResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateTenantResponseSuccess
@@ -1356,14 +1239,7 @@ module Aws
       def put_configuration_set_suppression_options: (
                                                        configuration_set_name: ::String,
                                                        ?suppressed_reasons: Array[("BOUNCE" | "COMPLAINT")],
-                                                       ?validation_options: {
-                                                         condition_threshold: {
-                                                           condition_threshold_enabled: ("ENABLED" | "DISABLED"),
-                                                           overall_confidence_threshold: {
-                                                             confidence_verdict_threshold: ("MEDIUM" | "HIGH" | "MANAGED")
-                                                           }?
-                                                         }
-                                                       }
+                                                       ?validation_options: Params::suppression_validation_options
                                                      ) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetSuppressionOptionsResponseSuccess
 
@@ -1384,14 +1260,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SESV2/Client.html#put_configuration_set_vdm_options-instance_method
       def put_configuration_set_vdm_options: (
                                                configuration_set_name: ::String,
-                                               ?vdm_options: {
-                                                 dashboard_options: {
-                                                   engagement_metrics: ("ENABLED" | "DISABLED")?
-                                                 }?,
-                                                 guardian_options: {
-                                                   optimized_shared_delivery: ("ENABLED" | "DISABLED")?
-                                                 }?
-                                               }
+                                               ?vdm_options: Params::vdm_options
                                              ) -> _PutConfigurationSetVdmOptionsResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutConfigurationSetVdmOptionsResponseSuccess
 
@@ -1439,7 +1308,7 @@ module Aws
                                                        global: bool?,
                                                        tracked_isps: Array[::String]?
                                                      }?
-                                                   },
+                                                   }
                                                  ]
                                                ) -> _PutDeliverabilityDashboardOptionResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutDeliverabilityDashboardOptionResponseSuccess
@@ -1529,36 +1398,10 @@ module Aws
                                {
                                  name: ::String,
                                  value: ::String
-                               },
+                               }
                              ],
                              default_content: {
-                               template: {
-                                 template_name: ::String?,
-                                 template_arn: ::String?,
-                                 template_content: {
-                                   subject: ::String?,
-                                   text: ::String?,
-                                   html: ::String?
-                                 }?,
-                                 template_data: ::String?,
-                                 headers: Array[
-                                   {
-                                     name: ::String,
-                                     value: ::String
-                                   },
-                                 ]?,
-                                 attachments: Array[
-                                   {
-                                     raw_content: ::String,
-                                     content_disposition: ("ATTACHMENT" | "INLINE")?,
-                                     file_name: ::String,
-                                     content_description: ::String?,
-                                     content_id: ::String?,
-                                     content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
-                                     content_type: ::String?
-                                   },
-                                 ]?
-                               }?
+                               template: Params::template?
                              },
                              bulk_email_entries: Array[
                                {
@@ -1571,7 +1414,7 @@ module Aws
                                    {
                                      name: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]?,
                                  replacement_email_content: {
                                    replacement_template: {
@@ -1582,9 +1425,9 @@ module Aws
                                    {
                                      name: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ]?
-                               },
+                               }
                              ],
                              ?configuration_set_name: ::String,
                              ?endpoint_id: ::String,
@@ -1620,76 +1463,12 @@ module Aws
                         ?reply_to_addresses: Array[::String],
                         ?feedback_forwarding_email_address: ::String,
                         ?feedback_forwarding_email_address_identity_arn: ::String,
-                        content: {
-                          simple: {
-                            subject: {
-                              data: ::String,
-                              charset: ::String?
-                            },
-                            body: {
-                              text: {
-                                data: ::String,
-                                charset: ::String?
-                              }?,
-                              html: {
-                                data: ::String,
-                                charset: ::String?
-                              }?
-                            },
-                            headers: Array[
-                              {
-                                name: ::String,
-                                value: ::String
-                              },
-                            ]?,
-                            attachments: Array[
-                              {
-                                raw_content: ::String,
-                                content_disposition: ("ATTACHMENT" | "INLINE")?,
-                                file_name: ::String,
-                                content_description: ::String?,
-                                content_id: ::String?,
-                                content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
-                                content_type: ::String?
-                              },
-                            ]?
-                          }?,
-                          raw: {
-                            data: ::String
-                          }?,
-                          template: {
-                            template_name: ::String?,
-                            template_arn: ::String?,
-                            template_content: {
-                              subject: ::String?,
-                              text: ::String?,
-                              html: ::String?
-                            }?,
-                            template_data: ::String?,
-                            headers: Array[
-                              {
-                                name: ::String,
-                                value: ::String
-                              },
-                            ]?,
-                            attachments: Array[
-                              {
-                                raw_content: ::String,
-                                content_disposition: ("ATTACHMENT" | "INLINE")?,
-                                file_name: ::String,
-                                content_description: ::String?,
-                                content_id: ::String?,
-                                content_transfer_encoding: ("BASE64" | "QUOTED_PRINTABLE" | "SEVEN_BIT")?,
-                                content_type: ::String?
-                              },
-                            ]?
-                          }?
-                        },
+                        content: Params::email_content,
                         ?email_tags: Array[
                           {
                             name: ::String,
                             value: ::String
-                          },
+                          }
                         ],
                         ?configuration_set_name: ::String,
                         ?endpoint_id: ::String,
@@ -1711,7 +1490,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1744,32 +1523,7 @@ module Aws
       def update_configuration_set_event_destination: (
                                                         configuration_set_name: ::String,
                                                         event_destination_name: ::String,
-                                                        event_destination: {
-                                                          enabled: bool?,
-                                                          matching_event_types: Array[("SEND" | "REJECT" | "BOUNCE" | "COMPLAINT" | "DELIVERY" | "OPEN" | "CLICK" | "RENDERING_FAILURE" | "DELIVERY_DELAY" | "SUBSCRIPTION")]?,
-                                                          kinesis_firehose_destination: {
-                                                            iam_role_arn: ::String,
-                                                            delivery_stream_arn: ::String
-                                                          }?,
-                                                          cloud_watch_destination: {
-                                                            dimension_configurations: Array[
-                                                              {
-                                                                dimension_name: ::String,
-                                                                dimension_value_source: ("MESSAGE_TAG" | "EMAIL_HEADER" | "LINK_TAG"),
-                                                                default_dimension_value: ::String
-                                                              },
-                                                            ]
-                                                          }?,
-                                                          sns_destination: {
-                                                            topic_arn: ::String
-                                                          }?,
-                                                          event_bridge_destination: {
-                                                            event_bus_arn: ::String
-                                                          }?,
-                                                          pinpoint_destination: {
-                                                            application_arn: ::String?
-                                                          }?
-                                                        }
+                                                        event_destination: Params::event_destination_definition
                                                       ) -> _UpdateConfigurationSetEventDestinationResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationSetEventDestinationResponseSuccess
 
@@ -1784,7 +1538,7 @@ module Aws
                               {
                                 topic_name: ::String,
                                 subscription_status: ("OPT_IN" | "OPT_OUT")
-                              },
+                              }
                             ],
                             ?unsubscribe_all: bool,
                             ?attributes_data: ::String
@@ -1803,7 +1557,7 @@ module Aws
                                      display_name: ::String,
                                      description: ::String?,
                                      default_subscription_status: ("OPT_IN" | "OPT_OUT")
-                                   },
+                                   }
                                  ],
                                  ?description: ::String
                                ) -> _UpdateContactListResponseSuccess

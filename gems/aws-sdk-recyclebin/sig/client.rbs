@@ -103,14 +103,14 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ],
                          resource_type: ("EBS_SNAPSHOT" | "EC2_IMAGE" | "EBS_VOLUME"),
                          ?resource_tags: Array[
                            {
                              resource_tag_key: ::String,
                              resource_tag_value: ::String?
-                           },
+                           }
                          ],
                          ?lock_configuration: {
                            unlock_delay: {
@@ -122,7 +122,7 @@ module Aws
                            {
                              resource_tag_key: ::String,
                              resource_tag_value: ::String?
-                           },
+                           }
                          ]
                        ) -> _CreateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRuleResponseSuccess
@@ -170,14 +170,14 @@ module Aws
                           {
                             resource_tag_key: ::String,
                             resource_tag_value: ::String?
-                          },
+                          }
                         ],
                         ?lock_state: ("locked" | "pending_unlock" | "unlocked"),
                         ?exclude_resource_tags: Array[
                           {
                             resource_tag_key: ::String,
                             resource_tag_value: ::String?
-                          },
+                          }
                         ]
                       ) -> _ListRulesResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRulesResponseSuccess
@@ -227,7 +227,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -288,13 +288,13 @@ module Aws
                            {
                              resource_tag_key: ::String,
                              resource_tag_value: ::String?
-                           },
+                           }
                          ],
                          ?exclude_resource_tags: Array[
                            {
                              resource_tag_key: ::String,
                              resource_tag_value: ::String?
-                           },
+                           }
                          ]
                        ) -> _UpdateRuleResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRuleResponseSuccess

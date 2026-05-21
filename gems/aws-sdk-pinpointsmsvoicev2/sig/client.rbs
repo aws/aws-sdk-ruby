@@ -141,7 +141,7 @@ module Aws
                                         {
                                           key: ::String,
                                           value: ::String
-                                        },
+                                        }
                                       ],
                                       ?client_token: ::String
                                     ) -> _CreateConfigurationSetResponseSuccess
@@ -205,7 +205,7 @@ module Aws
                                            {
                                              key: ::String,
                                              value: ::String
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateNotifyConfigurationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateNotifyConfigurationResponseSuccess
@@ -224,7 +224,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?client_token: ::String
                                ) -> _CreateOptOutListResponseSuccess
@@ -256,7 +256,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ],
                          ?client_token: ::String
                        ) -> _CreatePoolResponseSuccess
@@ -279,7 +279,7 @@ module Aws
                                             {
                                               key: ::String,
                                               value: ::String
-                                            },
+                                            }
                                           ]
                                         ) -> _CreateProtectConfigurationResponseSuccess
                                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProtectConfigurationResponseSuccess
@@ -306,7 +306,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?client_token: ::String
                             ) -> _CreateRcsAgentResponseSuccess
@@ -330,7 +330,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String
-                                   },
+                                   }
                                  ],
                                  ?client_token: ::String
                                ) -> _CreateRegistrationResponseSuccess
@@ -370,7 +370,7 @@ module Aws
                                               {
                                                 key: ::String,
                                                 value: ::String
-                                              },
+                                              }
                                             ],
                                             ?client_token: ::String
                                           ) -> _CreateRegistrationAttachmentResponseSuccess
@@ -408,7 +408,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String
-                                                  },
+                                                  }
                                                 ],
                                                 ?client_token: ::String
                                               ) -> _CreateVerifiedDestinationNumberResponseSuccess
@@ -758,7 +758,7 @@ module Aws
                                            {
                                              name: ("event-destination-name" | "matching-event-types" | "default-message-type" | "default-sender-id" | "default-message-feedback-enabled" | "protect-configuration-id"),
                                              values: Array[::String]
-                                           },
+                                           }
                                          ],
                                          ?next_token: ::String,
                                          ?max_results: ::Integer
@@ -780,7 +780,7 @@ module Aws
                                  {
                                    name: ("keyword-action"),
                                    values: Array[::String]
-                                 },
+                                 }
                                ],
                                ?next_token: ::String,
                                ?max_results: ::Integer
@@ -799,7 +799,7 @@ module Aws
                                               {
                                                 name: ("display-name" | "enabled-countries" | "enabled-channels" | "default-template" | "default-pool" | "use-case" | "status" | "deletion-protection-enabled" | "tier-upgrade-status"),
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
@@ -818,7 +818,7 @@ module Aws
                                          {
                                            name: ("template-type" | "channels" | "tier-access" | "supported-countries" | "language-code" | "supported-voice-ids"),
                                            values: Array[::String]
-                                         },
+                                         }
                                        ],
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
@@ -854,7 +854,7 @@ module Aws
                                           {
                                             name: ("end-user-opted-out"),
                                             values: Array[::String]
-                                          },
+                                          }
                                         ],
                                         ?next_token: ::String,
                                         ?max_results: ::Integer
@@ -873,7 +873,7 @@ module Aws
                                       {
                                         name: ("status" | "iso-country-code" | "message-type" | "number-capability" | "number-type" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "deletion-protection-enabled" | "two-way-channel-arn"),
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer,
@@ -893,7 +893,7 @@ module Aws
                               {
                                 name: ("status" | "message-type" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "shared-routes-enabled" | "deletion-protection-enabled" | "two-way-channel-arn"),
                                 values: Array[::String]
-                              },
+                              }
                             ],
                             ?next_token: ::String,
                             ?max_results: ::Integer,
@@ -913,7 +913,7 @@ module Aws
                                                {
                                                  name: ("account-default" | "deletion-protection-enabled"),
                                                  values: Array[::String]
-                                               },
+                                               }
                                              ],
                                              ?next_token: ::String,
                                              ?max_results: ::Integer
@@ -935,7 +935,7 @@ module Aws
                                                         {
                                                           name: ("country-launch-status"),
                                                           values: Array[::String]
-                                                        },
+                                                        }
                                                       ],
                                                       ?max_results: ::Integer,
                                                       ?next_token: ::String
@@ -955,7 +955,7 @@ module Aws
                                    {
                                      name: ("status" | "two-way-enabled" | "self-managed-opt-outs-enabled" | "opt-out-list-name" | "deletion-protection-enabled" | "two-way-channel-arn"),
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  ?next_token: ::String,
                                  ?max_results: ::Integer
@@ -974,7 +974,7 @@ module Aws
                                                  {
                                                    name: ("attachment-status"),
                                                    values: Array[::String]
-                                                 },
+                                                 }
                                                ],
                                                ?next_token: ::String,
                                                ?max_results: ::Integer
@@ -1043,7 +1043,7 @@ module Aws
                                                       {
                                                         name: ("supported-association-resource-type" | "supported-association-iso-country-code"),
                                                         values: Array[::String]
-                                                      },
+                                                      }
                                                     ],
                                                     ?next_token: ::String,
                                                     ?max_results: ::Integer
@@ -1065,7 +1065,7 @@ module Aws
                                               {
                                                 name: ("registration-version-status"),
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
@@ -1084,7 +1084,7 @@ module Aws
                                       {
                                         name: ("registration-type" | "registration-status"),
                                         values: Array[::String]
-                                      },
+                                      }
                                     ],
                                     ?next_token: ::String,
                                     ?max_results: ::Integer
@@ -1102,13 +1102,13 @@ module Aws
                                    {
                                      sender_id: ::String,
                                      iso_country_code: ::String
-                                   },
+                                   }
                                  ],
                                  ?filters: Array[
                                    {
                                      name: ("sender-id" | "iso-country-code" | "message-type" | "deletion-protection-enabled" | "registered"),
                                      values: Array[::String]
-                                   },
+                                   }
                                  ],
                                  ?next_token: ::String,
                                  ?max_results: ::Integer,
@@ -1141,7 +1141,7 @@ module Aws
                                                      {
                                                        name: ("status" | "rcs-agent-id"),
                                                        values: Array[::String]
-                                                     },
+                                                     }
                                                    ],
                                                    ?next_token: ::String,
                                                    ?max_results: ::Integer
@@ -1248,7 +1248,7 @@ module Aws
                                                 {
                                                   name: ("iso-country-code" | "number-capability"),
                                                   values: Array[::String]
-                                                },
+                                                }
                                               ],
                                               ?next_token: ::String,
                                               ?max_results: ::Integer
@@ -1269,7 +1269,7 @@ module Aws
                                                                     {
                                                                       name: ("iso-country-code" | "destination-phone-number-begins-with" | "action" | "expires-before" | "expires-after" | "created-before" | "created-after"),
                                                                       values: Array[::String]
-                                                                    },
+                                                                    }
                                                                   ],
                                                                   ?next_token: ::String,
                                                                   ?max_results: ::Integer
@@ -1291,7 +1291,7 @@ module Aws
                                               {
                                                 name: ("resource-type" | "iso-country-code"),
                                                 values: Array[::String]
-                                              },
+                                              }
                                             ],
                                             ?next_token: ::String,
                                             ?max_results: ::Integer
@@ -1486,7 +1486,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ],
                                   ?client_token: ::String
                                 ) -> _RequestPhoneNumberResponseSuccess
@@ -1513,7 +1513,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ],
                                ?client_token: ::String
                              ) -> _RequestSenderIdResponseSuccess
@@ -1755,7 +1755,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess

@@ -107,7 +107,7 @@ module Aws
                                       {
                                         repository_name: ::String,
                                         branch_name: ::String?
-                                      },
+                                      }
                                     ],
                                     ?client_token: ::String,
                                     ?alias: ::String,
@@ -115,7 +115,7 @@ module Aws
                                       {
                                         runtime: ::String?,
                                         name: ::String?
-                                      },
+                                      }
                                     ],
                                     instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
                                     ?inactivity_timeout_minutes: ::Integer,
@@ -427,7 +427,7 @@ module Aws
                                        key: ::String,
                                        values: Array[::String],
                                        comparison_operator: ::String?
-                                     },
+                                     }
                                    ],
                                    ?next_token: ::String,
                                    ?max_results: ::Integer
@@ -465,7 +465,7 @@ module Aws
                                key: ("hasAccessTo" | "name"),
                                values: Array[::String],
                                comparison_operator: ("EQ" | "GT" | "GE" | "LT" | "LE" | "BEGINS_WITH")?
-                             },
+                             }
                            ]
                          ) -> _ListProjectsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListProjectsResponseSuccess
@@ -524,7 +524,7 @@ module Aws
                                 ?max_results: ::Integer,
                                 ?sort_by: Array[
                                   {
-                                  },
+                                  }
                                 ]
                               ) -> _ListWorkflowRunsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowRunsResponseSuccess
@@ -542,7 +542,7 @@ module Aws
                             ?max_results: ::Integer,
                             ?sort_by: Array[
                               {
-                              },
+                              }
                             ]
                           ) -> _ListWorkflowsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListWorkflowsResponseSuccess
@@ -563,7 +563,7 @@ module Aws
                                      {
                                        runtime: ::String?,
                                        name: ::String?
-                                     },
+                                     }
                                    ],
                                    ?instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
                                    ?inactivity_timeout_minutes: ::Integer
@@ -661,7 +661,7 @@ module Aws
                                       {
                                         runtime: ::String?,
                                         name: ::String?
-                                      },
+                                      }
                                     ],
                                     ?instance_type: ("dev.standard1.small" | "dev.standard1.medium" | "dev.standard1.large" | "dev.standard1.xlarge"),
                                     ?inactivity_timeout_minutes: ::Integer,

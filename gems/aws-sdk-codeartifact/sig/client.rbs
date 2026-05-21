@@ -124,7 +124,7 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ]
                          ) -> _CreateDomainResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDomainResponseSuccess
@@ -144,7 +144,7 @@ module Aws
                                     {
                                       key: ::String,
                                       value: ::String
-                                    },
+                                    }
                                   ]
                                 ) -> _CreatePackageGroupResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePackageGroupResponseSuccess
@@ -162,13 +162,13 @@ module Aws
                                ?upstreams: Array[
                                  {
                                    repository_name: ::String
-                                 },
+                                 }
                                ],
                                ?tags: Array[
                                  {
                                    key: ::String,
                                    value: ::String
-                                 },
+                                 }
                                ]
                              ) -> _CreateRepositoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateRepositoryResponseSuccess
@@ -758,7 +758,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -802,13 +802,13 @@ module Aws
                                                          {
                                                            repository_name: ::String?,
                                                            origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")?
-                                                         },
+                                                         }
                                                        ],
                                                        ?remove_allowed_repositories: Array[
                                                          {
                                                            repository_name: ::String?,
                                                            origin_restriction_type: ("EXTERNAL_UPSTREAM" | "INTERNAL_UPSTREAM" | "PUBLISH")?
-                                                         },
+                                                         }
                                                        ]
                                                      ) -> _UpdatePackageGroupOriginConfigurationResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePackageGroupOriginConfigurationResponseSuccess
@@ -846,7 +846,7 @@ module Aws
                                ?upstreams: Array[
                                  {
                                    repository_name: ::String
-                                 },
+                                 }
                                ]
                              ) -> _UpdateRepositoryResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRepositoryResponseSuccess

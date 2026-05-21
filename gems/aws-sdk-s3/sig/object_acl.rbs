@@ -56,7 +56,7 @@ module Aws
                          uri: ::String?
                        }?,
                        permission: ("FULL_CONTROL" | "WRITE" | "WRITE_ACP" | "READ" | "READ_ACP")?
-                     },
+                     }
                    ]?,
                    owner: {
                      display_name: ::String?,

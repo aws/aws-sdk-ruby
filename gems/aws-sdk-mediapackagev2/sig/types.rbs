@@ -124,6 +124,7 @@ module Aws::MediaPackageV2
       attr_accessor compactness: ("STANDARD" | "NONE")
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       attr_accessor uri_path_type: ("LEAF" | "ROOT")
+      attr_accessor availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration
       SENSITIVE: []
     end
 
@@ -233,6 +234,17 @@ module Aws::MediaPackageV2
       attr_accessor etag: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: []
+    end
+
+    class DashAvailabilityStartTimeConfiguration
+      attr_accessor fixed_availability_start_time: ::Time
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class FixedAvailabilityStartTime < DashAvailabilityStartTimeConfiguration
+      end
+      class Unknown < DashAvailabilityStartTimeConfiguration
+      end
     end
 
     class DashBaseUrl
@@ -448,6 +460,7 @@ module Aws::MediaPackageV2
       attr_accessor compactness: ("STANDARD" | "NONE")
       attr_accessor subtitle_configuration: Types::DashSubtitleConfiguration
       attr_accessor uri_path_type: ("LEAF" | "ROOT")
+      attr_accessor availability_start_time_configuration: Types::DashAvailabilityStartTimeConfiguration
       SENSITIVE: []
     end
 

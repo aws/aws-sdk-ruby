@@ -120,33 +120,10 @@ module Aws
                              enable: bool,
                              ?client_token: ::String,
                              ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
-                             ?data_sources: {
-                               s3_logs: {
-                                 enable: bool
-                               }?,
-                               kubernetes: {
-                                 audit_logs: {
-                                   enable: bool
-                                 }
-                               }?,
-                               malware_protection: {
-                                 scan_ec2_instance_with_findings: {
-                                   ebs_volumes: bool?
-                                 }?
-                               }?
-                             },
+                             ?data_sources: Params::data_source_configurations,
                              ?tags: Hash[::String, ::String],
                              ?features: Array[
-                               {
-                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
-                                 status: ("ENABLED" | "DISABLED")?,
-                                 additional_configuration: Array[
-                                   {
-                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
-                                     status: ("ENABLED" | "DISABLED")?
-                                   },
-                                 ]?
-                               },
+                               Params::detector_feature_configuration
                              ]
                            ) -> _CreateDetectorResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDetectorResponseSuccess
@@ -162,24 +139,7 @@ module Aws
                            ?description: ::String,
                            ?action: ("NOOP" | "ARCHIVE"),
                            ?rank: ::Integer,
-                           finding_criteria: {
-                             criterion: Hash[::String, {
-                                 eq: Array[::String]?,
-                                 neq: Array[::String]?,
-                                 gt: ::Integer?,
-                                 gte: ::Integer?,
-                                 lt: ::Integer?,
-                                 lte: ::Integer?,
-                                 equals: Array[::String]?,
-                                 not_equals: Array[::String]?,
-                                 greater_than: ::Integer?,
-                                 greater_than_or_equal: ::Integer?,
-                                 less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?,
-                                 matches: Array[::String]?,
-                                 not_matches: Array[::String]?
-                               }]?
-                           },
+                           finding_criteria: Params::finding_criteria,
                            ?client_token: ::String,
                            ?tags: Hash[::String, ::String]
                          ) -> _CreateFilterResponseSuccess
@@ -236,7 +196,7 @@ module Aws
                               {
                                 account_id: ::String,
                                 email: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateMembersResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMembersResponseSuccess
@@ -444,7 +404,7 @@ module Aws
                                             greater_than: ::Integer?,
                                             less_than: ::Integer?
                                           }?
-                                        },
+                                        }
                                       ]?
                                     },
                                     ?sort_criteria: {
@@ -551,17 +511,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#get_coverage_statistics-instance_method
       def get_coverage_statistics: (
                                      detector_id: ::String,
-                                     ?filter_criteria: {
-                                       filter_criterion: Array[
-                                         {
-                                           criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
-                                           filter_condition: {
-                                             equals: Array[::String]?,
-                                             not_equals: Array[::String]?
-                                           }?
-                                         },
-                                       ]?
-                                     },
+                                     ?filter_criteria: Params::coverage_filter_criteria,
                                      statistics_type: Array[("COUNT_BY_RESOURCE_TYPE" | "COUNT_BY_COVERAGE_STATUS")]
                                    ) -> _GetCoverageStatisticsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCoverageStatisticsResponseSuccess
@@ -623,24 +573,7 @@ module Aws
       def get_findings_statistics: (
                                      detector_id: ::String,
                                      ?finding_statistic_types: Array[("COUNT_BY_SEVERITY")],
-                                     ?finding_criteria: {
-                                       criterion: Hash[::String, {
-                                           eq: Array[::String]?,
-                                           neq: Array[::String]?,
-                                           gt: ::Integer?,
-                                           gte: ::Integer?,
-                                           lt: ::Integer?,
-                                           lte: ::Integer?,
-                                           equals: Array[::String]?,
-                                           not_equals: Array[::String]?,
-                                           greater_than: ::Integer?,
-                                           greater_than_or_equal: ::Integer?,
-                                           less_than: ::Integer?,
-                                           less_than_or_equal: ::Integer?,
-                                           matches: Array[::String]?,
-                                           not_matches: Array[::String]?
-                                         }]?
-                                     },
+                                     ?finding_criteria: Params::finding_criteria,
                                      ?group_by: ("ACCOUNT" | "DATE" | "FINDING_TYPE" | "RESOURCE" | "SEVERITY"),
                                      ?order_by: ("ASC" | "DESC"),
                                      ?max_results: ::Integer
@@ -878,17 +811,7 @@ module Aws
                            detector_id: ::String,
                            ?next_token: ::String,
                            ?max_results: ::Integer,
-                           ?filter_criteria: {
-                             filter_criterion: Array[
-                               {
-                                 criterion_key: ("ACCOUNT_ID" | "RESOURCE_TYPE" | "COVERAGE_STATUS" | "ADDON_VERSION" | "CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "MANAGEMENT_TYPE" | "EKS_CLUSTER_NAME" | "AGENT_VERSION" | "INSTANCE_ID" | "CLUSTER_ARN")?,
-                                 filter_condition: {
-                                   equals: Array[::String]?,
-                                   not_equals: Array[::String]?
-                                 }?
-                               },
-                             ]?
-                           },
+                           ?filter_criteria: Params::coverage_filter_criteria,
                            ?sort_criteria: {
                              attribute_name: ("ACCOUNT_ID" | "COVERAGE_STATUS" | "ISSUE" | "ADDON_VERSION" | "UPDATED_AT" | "CLUSTER_NAME" | "EKS_CLUSTER_NAME" | "ECS_CLUSTER_NAME" | "INSTANCE_ID")?,
                              order_by: ("ASC" | "DESC")?
@@ -929,24 +852,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/GuardDuty/Client.html#list_findings-instance_method
       def list_findings: (
                            detector_id: ::String,
-                           ?finding_criteria: {
-                             criterion: Hash[::String, {
-                                 eq: Array[::String]?,
-                                 neq: Array[::String]?,
-                                 gt: ::Integer?,
-                                 gte: ::Integer?,
-                                 lt: ::Integer?,
-                                 lte: ::Integer?,
-                                 equals: Array[::String]?,
-                                 not_equals: Array[::String]?,
-                                 greater_than: ::Integer?,
-                                 greater_than_or_equal: ::Integer?,
-                                 less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?,
-                                 matches: Array[::String]?,
-                                 not_matches: Array[::String]?
-                               }]?
-                           },
+                           ?finding_criteria: Params::finding_criteria,
                            ?sort_criteria: {
                              attribute_name: ::String?,
                              order_by: ("ASC" | "DESC")?
@@ -1010,7 +916,7 @@ module Aws
                                         greater_than: ::Integer?,
                                         less_than: ::Integer?
                                       }?
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?sort_criteria: {
@@ -1201,32 +1107,9 @@ module Aws
                              detector_id: ::String,
                              ?enable: bool,
                              ?finding_publishing_frequency: ("FIFTEEN_MINUTES" | "ONE_HOUR" | "SIX_HOURS"),
-                             ?data_sources: {
-                               s3_logs: {
-                                 enable: bool
-                               }?,
-                               kubernetes: {
-                                 audit_logs: {
-                                   enable: bool
-                                 }
-                               }?,
-                               malware_protection: {
-                                 scan_ec2_instance_with_findings: {
-                                   ebs_volumes: bool?
-                                 }?
-                               }?
-                             },
+                             ?data_sources: Params::data_source_configurations,
                              ?features: Array[
-                               {
-                                 name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
-                                 status: ("ENABLED" | "DISABLED")?,
-                                 additional_configuration: Array[
-                                   {
-                                     name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
-                                     status: ("ENABLED" | "DISABLED")?
-                                   },
-                                 ]?
-                               },
+                               Params::detector_feature_configuration
                              ]
                            ) -> _UpdateDetectorResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDetectorResponseSuccess
@@ -1242,24 +1125,7 @@ module Aws
                            ?description: ::String,
                            ?action: ("NOOP" | "ARCHIVE"),
                            ?rank: ::Integer,
-                           ?finding_criteria: {
-                             criterion: Hash[::String, {
-                                 eq: Array[::String]?,
-                                 neq: Array[::String]?,
-                                 gt: ::Integer?,
-                                 gte: ::Integer?,
-                                 lt: ::Integer?,
-                                 lte: ::Integer?,
-                                 equals: Array[::String]?,
-                                 not_equals: Array[::String]?,
-                                 greater_than: ::Integer?,
-                                 greater_than_or_equal: ::Integer?,
-                                 less_than: ::Integer?,
-                                 less_than_or_equal: ::Integer?,
-                                 matches: Array[::String]?,
-                                 not_matches: Array[::String]?
-                               }]?
-                           }
+                           ?finding_criteria: Params::finding_criteria
                          ) -> _UpdateFilterResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFilterResponseSuccess
 
@@ -1318,7 +1184,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ]
                                               }]?,
                                             exclude: Hash[("EC2_INSTANCE_TAG"), {
@@ -1326,7 +1192,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ]
                                               }]?
                                           },
@@ -1342,21 +1208,7 @@ module Aws
       def update_member_detectors: (
                                      detector_id: ::String,
                                      account_ids: Array[::String],
-                                     ?data_sources: {
-                                       s3_logs: {
-                                         enable: bool
-                                       }?,
-                                       kubernetes: {
-                                         audit_logs: {
-                                           enable: bool
-                                         }
-                                       }?,
-                                       malware_protection: {
-                                         scan_ec2_instance_with_findings: {
-                                           ebs_volumes: bool?
-                                         }?
-                                       }?
-                                     },
+                                     ?data_sources: Params::data_source_configurations,
                                      ?features: Array[
                                        {
                                          name: ("S3_DATA_EVENTS" | "EKS_AUDIT_LOGS" | "EBS_MALWARE_PROTECTION" | "RDS_LOGIN_EVENTS" | "LAMBDA_NETWORK_LOGS" | "EKS_RUNTIME_MONITORING" | "RUNTIME_MONITORING")?,
@@ -1365,9 +1217,9 @@ module Aws
                                            {
                                              name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                              status: ("ENABLED" | "DISABLED")?
-                                           },
+                                           }
                                          ]?
-                                       },
+                                       }
                                      ]
                                    ) -> _UpdateMemberDetectorsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMemberDetectorsResponseSuccess
@@ -1404,9 +1256,9 @@ module Aws
                                                      {
                                                        name: ("EKS_ADDON_MANAGEMENT" | "ECS_FARGATE_AGENT_MANAGEMENT" | "EC2_AGENT_MANAGEMENT")?,
                                                        auto_enable: ("NEW" | "NONE" | "ALL")?
-                                                     },
+                                                     }
                                                    ]?
-                                                 },
+                                                 }
                                                ],
                                                ?auto_enable_organization_members: ("NEW" | "ALL" | "NONE")
                                              ) -> _UpdateOrganizationConfigurationResponseSuccess

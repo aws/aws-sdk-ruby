@@ -1,0 +1,22 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module NeptuneGraph
+    module Params
+      type import_options = {
+      neptune: {
+        s3_export_path: ::String,
+        s3_export_kms_key_id: ::String,
+        preserve_default_vertex_labels: bool?,
+        preserve_edge_ids: bool?
+      }?
+    }
+
+    end
+  end
+end

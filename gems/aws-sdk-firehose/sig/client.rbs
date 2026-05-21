@@ -98,28 +98,7 @@ module Aws
                                       key_arn: ::String?,
                                       key_type: ("AWS_OWNED_CMK" | "CUSTOMER_MANAGED_CMK")
                                     },
-                                    ?s3_destination_configuration: {
-                                      role_arn: ::String,
-                                      bucket_arn: ::String,
-                                      prefix: ::String?,
-                                      error_output_prefix: ::String?,
-                                      buffering_hints: {
-                                        size_in_m_bs: ::Integer?,
-                                        interval_in_seconds: ::Integer?
-                                      }?,
-                                      compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                      encryption_configuration: {
-                                        no_encryption_config: ("NoEncryption")?,
-                                        kms_encryption_config: {
-                                          awskms_key_arn: ::String
-                                        }?
-                                      }?,
-                                      cloud_watch_logging_options: {
-                                        enabled: bool?,
-                                        log_group_name: ::String?,
-                                        log_stream_name: ::String?
-                                      }?
-                                    },
+                                    ?s3_destination_configuration: Params::s3_destination_configuration,
                                     ?extended_s3_destination_configuration: {
                                       role_arn: ::String,
                                       bucket_arn: ::String,
@@ -141,90 +120,10 @@ module Aws
                                         log_group_name: ::String?,
                                         log_stream_name: ::String?
                                       }?,
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      processing_configuration: Params::processing_configuration?,
                                       s3_backup_mode: ("Disabled" | "Enabled")?,
-                                      s3_backup_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      }?,
-                                      data_format_conversion_configuration: {
-                                        schema_configuration: {
-                                          role_arn: ::String?,
-                                          catalog_id: ::String?,
-                                          database_name: ::String?,
-                                          table_name: ::String?,
-                                          region: ::String?,
-                                          version_id: ::String?
-                                        }?,
-                                        input_format_configuration: {
-                                          deserializer: {
-                                            open_x_json_ser_de: {
-                                              convert_dots_in_json_keys_to_underscores: bool?,
-                                              case_insensitive: bool?,
-                                              column_to_json_key_mappings: Hash[::String, ::String]?
-                                            }?,
-                                            hive_json_ser_de: {
-                                              timestamp_formats: Array[::String]?
-                                            }?
-                                          }?
-                                        }?,
-                                        output_format_configuration: {
-                                          serializer: {
-                                            parquet_ser_de: {
-                                              block_size_bytes: ::Integer?,
-                                              page_size_bytes: ::Integer?,
-                                              compression: ("UNCOMPRESSED" | "GZIP" | "SNAPPY")?,
-                                              enable_dictionary_compression: bool?,
-                                              max_padding_bytes: ::Integer?,
-                                              writer_version: ("V1" | "V2")?
-                                            }?,
-                                            orc_ser_de: {
-                                              stripe_size_bytes: ::Integer?,
-                                              block_size_bytes: ::Integer?,
-                                              row_index_stride: ::Integer?,
-                                              enable_padding: bool?,
-                                              padding_tolerance: ::Float?,
-                                              compression: ("NONE" | "ZLIB" | "SNAPPY")?,
-                                              bloom_filter_columns: Array[::String]?,
-                                              bloom_filter_false_positive_probability: ::Float?,
-                                              dictionary_key_threshold: ::Float?,
-                                              format_version: ("V0_11" | "V0_12")?
-                                            }?
-                                          }?
-                                        }?,
-                                        enabled: bool?
-                                      }?,
+                                      s3_backup_configuration: Params::s3_destination_configuration?,
+                                      data_format_conversion_configuration: Params::data_format_conversion_configuration?,
                                       dynamic_partitioning_configuration: {
                                         retry_options: {
                                           duration_in_seconds: ::Integer?
@@ -247,65 +146,10 @@ module Aws
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
                                       }?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      s3_configuration: Params::s3_destination_configuration,
+                                      processing_configuration: Params::processing_configuration?,
                                       s3_backup_mode: ("Disabled" | "Enabled")?,
-                                      s3_backup_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      }?,
+                                      s3_backup_configuration: Params::s3_destination_configuration?,
                                       cloud_watch_logging_options: {
                                         enabled: bool?,
                                         log_group_name: ::String?,
@@ -332,42 +176,8 @@ module Aws
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      s3_configuration: Params::s3_destination_configuration,
+                                      processing_configuration: Params::processing_configuration?,
                                       cloud_watch_logging_options: {
                                         enabled: bool?,
                                         log_group_name: ::String?,
@@ -397,42 +207,8 @@ module Aws
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      s3_configuration: Params::s3_destination_configuration,
+                                      processing_configuration: Params::processing_configuration?,
                                       cloud_watch_logging_options: {
                                         enabled: bool?,
                                         log_group_name: ::String?,
@@ -456,42 +232,8 @@ module Aws
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedEventsOnly" | "AllEvents")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      s3_configuration: Params::s3_destination_configuration,
+                                      processing_configuration: Params::processing_configuration?,
                                       cloud_watch_logging_options: {
                                         enabled: bool?,
                                         log_group_name: ::String?,
@@ -528,50 +270,16 @@ module Aws
                                           {
                                             attribute_name: ::String,
                                             attribute_value: ::String
-                                          },
+                                          }
                                         ]?
                                       }?,
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      processing_configuration: Params::processing_configuration?,
                                       role_arn: ::String?,
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedDataOnly" | "AllData")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
+                                      s3_configuration: Params::s3_destination_configuration,
                                       secrets_manager_configuration: {
                                         secret_arn: ::String?,
                                         role_arn: ::String?,
@@ -582,7 +290,7 @@ module Aws
                                       {
                                         key: ::String,
                                         value: ::String?
-                                      },
+                                      }
                                     ],
                                     ?amazon_open_search_serverless_destination_configuration: {
                                       role_arn: ::String,
@@ -596,42 +304,8 @@ module Aws
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedDocumentsOnly" | "AllDocuments")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      s3_configuration: Params::s3_destination_configuration,
+                                      processing_configuration: Params::processing_configuration?,
                                       cloud_watch_logging_options: {
                                         enabled: bool?,
                                         log_group_name: ::String?,
@@ -675,47 +349,13 @@ module Aws
                                         log_group_name: ::String?,
                                         log_stream_name: ::String?
                                       }?,
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      processing_configuration: Params::processing_configuration?,
                                       role_arn: ::String,
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
                                       }?,
                                       s3_backup_mode: ("FailedDataOnly" | "AllData")?,
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      },
+                                      s3_configuration: Params::s3_destination_configuration,
                                       secrets_manager_configuration: {
                                         secret_arn: ::String?,
                                         role_arn: ::String?,
@@ -728,19 +368,7 @@ module Aws
                                     },
                                     ?iceberg_destination_configuration: {
                                       destination_table_configuration_list: Array[
-                                        {
-                                          destination_table_name: ::String,
-                                          destination_database_name: ::String,
-                                          unique_keys: Array[::String]?,
-                                          partition_spec: {
-                                            identity: Array[
-                                              {
-                                                source_name: ::String
-                                              },
-                                            ]?
-                                          }?,
-                                          s3_error_output_prefix: ::String?
-                                        },
+                                        Params::destination_table_configuration
                                       ]?,
                                       schema_evolution_configuration: {
                                         enabled: bool
@@ -757,20 +385,7 @@ module Aws
                                         log_group_name: ::String?,
                                         log_stream_name: ::String?
                                       }?,
-                                      processing_configuration: {
-                                        enabled: bool?,
-                                        processors: Array[
-                                          {
-                                            type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                            parameters: Array[
-                                              {
-                                                parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                                parameter_value: ::String
-                                              },
-                                            ]?
-                                          },
-                                        ]?
-                                      }?,
+                                      processing_configuration: Params::processing_configuration?,
                                       s3_backup_mode: ("FailedDataOnly" | "AllData")?,
                                       retry_options: {
                                         duration_in_seconds: ::Integer?
@@ -781,28 +396,7 @@ module Aws
                                         catalog_arn: ::String?,
                                         warehouse_location: ::String?
                                       },
-                                      s3_configuration: {
-                                        role_arn: ::String,
-                                        bucket_arn: ::String,
-                                        prefix: ::String?,
-                                        error_output_prefix: ::String?,
-                                        buffering_hints: {
-                                          size_in_m_bs: ::Integer?,
-                                          interval_in_seconds: ::Integer?
-                                        }?,
-                                        compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                        encryption_configuration: {
-                                          no_encryption_config: ("NoEncryption")?,
-                                          kms_encryption_config: {
-                                            awskms_key_arn: ::String
-                                          }?
-                                        }?,
-                                        cloud_watch_logging_options: {
-                                          enabled: bool?,
-                                          log_group_name: ::String?,
-                                          log_stream_name: ::String?
-                                        }?
-                                      }
+                                      s3_configuration: Params::s3_destination_configuration
                                     },
                                     ?database_source_configuration: {
                                       type: ("MySQL" | "PostgreSQL"),
@@ -911,7 +505,7 @@ module Aws
                               records: Array[
                                 {
                                   data: ::String
-                                },
+                                }
                               ]
                             ) -> _PutRecordBatchResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutRecordBatchResponseSuccess
@@ -948,7 +542,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _TagDeliveryStreamResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagDeliveryStreamResponseSuccess
@@ -971,28 +565,7 @@ module Aws
                                 delivery_stream_name: ::String,
                                 current_delivery_stream_version_id: ::String,
                                 destination_id: ::String,
-                                ?s3_destination_update: {
-                                  role_arn: ::String?,
-                                  bucket_arn: ::String?,
-                                  prefix: ::String?,
-                                  error_output_prefix: ::String?,
-                                  buffering_hints: {
-                                    size_in_m_bs: ::Integer?,
-                                    interval_in_seconds: ::Integer?
-                                  }?,
-                                  compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                  encryption_configuration: {
-                                    no_encryption_config: ("NoEncryption")?,
-                                    kms_encryption_config: {
-                                      awskms_key_arn: ::String
-                                    }?
-                                  }?,
-                                  cloud_watch_logging_options: {
-                                    enabled: bool?,
-                                    log_group_name: ::String?,
-                                    log_stream_name: ::String?
-                                  }?
-                                },
+                                ?s3_destination_update: Params::s3_destination_update,
                                 ?extended_s3_destination_update: {
                                   role_arn: ::String?,
                                   bucket_arn: ::String?,
@@ -1014,90 +587,10 @@ module Aws
                                     log_group_name: ::String?,
                                     log_stream_name: ::String?
                                   }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  processing_configuration: Params::processing_configuration?,
                                   s3_backup_mode: ("Disabled" | "Enabled")?,
-                                  s3_backup_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  data_format_conversion_configuration: {
-                                    schema_configuration: {
-                                      role_arn: ::String?,
-                                      catalog_id: ::String?,
-                                      database_name: ::String?,
-                                      table_name: ::String?,
-                                      region: ::String?,
-                                      version_id: ::String?
-                                    }?,
-                                    input_format_configuration: {
-                                      deserializer: {
-                                        open_x_json_ser_de: {
-                                          convert_dots_in_json_keys_to_underscores: bool?,
-                                          case_insensitive: bool?,
-                                          column_to_json_key_mappings: Hash[::String, ::String]?
-                                        }?,
-                                        hive_json_ser_de: {
-                                          timestamp_formats: Array[::String]?
-                                        }?
-                                      }?
-                                    }?,
-                                    output_format_configuration: {
-                                      serializer: {
-                                        parquet_ser_de: {
-                                          block_size_bytes: ::Integer?,
-                                          page_size_bytes: ::Integer?,
-                                          compression: ("UNCOMPRESSED" | "GZIP" | "SNAPPY")?,
-                                          enable_dictionary_compression: bool?,
-                                          max_padding_bytes: ::Integer?,
-                                          writer_version: ("V1" | "V2")?
-                                        }?,
-                                        orc_ser_de: {
-                                          stripe_size_bytes: ::Integer?,
-                                          block_size_bytes: ::Integer?,
-                                          row_index_stride: ::Integer?,
-                                          enable_padding: bool?,
-                                          padding_tolerance: ::Float?,
-                                          compression: ("NONE" | "ZLIB" | "SNAPPY")?,
-                                          bloom_filter_columns: Array[::String]?,
-                                          bloom_filter_false_positive_probability: ::Float?,
-                                          dictionary_key_threshold: ::Float?,
-                                          format_version: ("V0_11" | "V0_12")?
-                                        }?
-                                      }?
-                                    }?,
-                                    enabled: bool?
-                                  }?,
+                                  s3_backup_update: Params::s3_destination_update?,
+                                  data_format_conversion_configuration: Params::data_format_conversion_configuration?,
                                   dynamic_partitioning_configuration: {
                                     retry_options: {
                                       duration_in_seconds: ::Integer?
@@ -1120,65 +613,10 @@ module Aws
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
+                                  processing_configuration: Params::processing_configuration?,
                                   s3_backup_mode: ("Disabled" | "Enabled")?,
-                                  s3_backup_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
+                                  s3_backup_update: Params::s3_destination_update?,
                                   cloud_watch_logging_options: {
                                     enabled: bool?,
                                     log_group_name: ::String?,
@@ -1204,42 +642,8 @@ module Aws
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
+                                  processing_configuration: Params::processing_configuration?,
                                   cloud_watch_logging_options: {
                                     enabled: bool?,
                                     log_group_name: ::String?,
@@ -1263,42 +667,8 @@ module Aws
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
+                                  processing_configuration: Params::processing_configuration?,
                                   cloud_watch_logging_options: {
                                     enabled: bool?,
                                     log_group_name: ::String?,
@@ -1317,42 +687,8 @@ module Aws
                                     duration_in_seconds: ::Integer?
                                   }?,
                                   s3_backup_mode: ("FailedEventsOnly" | "AllEvents")?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
+                                  processing_configuration: Params::processing_configuration?,
                                   cloud_watch_logging_options: {
                                     enabled: bool?,
                                     log_group_name: ::String?,
@@ -1389,50 +725,16 @@ module Aws
                                       {
                                         attribute_name: ::String,
                                         attribute_value: ::String
-                                      },
+                                      }
                                     ]?
                                   }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  processing_configuration: Params::processing_configuration?,
                                   role_arn: ::String?,
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
                                   s3_backup_mode: ("FailedDataOnly" | "AllData")?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
                                   secrets_manager_configuration: {
                                     secret_arn: ::String?,
                                     role_arn: ::String?,
@@ -1450,42 +752,8 @@ module Aws
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
+                                  processing_configuration: Params::processing_configuration?,
                                   cloud_watch_logging_options: {
                                     enabled: bool?,
                                     log_group_name: ::String?,
@@ -1512,47 +780,13 @@ module Aws
                                     log_group_name: ::String?,
                                     log_stream_name: ::String?
                                   }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  processing_configuration: Params::processing_configuration?,
                                   role_arn: ::String?,
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
                                   }?,
                                   s3_backup_mode: ("FailedDataOnly" | "AllData")?,
-                                  s3_update: {
-                                    role_arn: ::String?,
-                                    bucket_arn: ::String?,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?,
+                                  s3_update: Params::s3_destination_update?,
                                   secrets_manager_configuration: {
                                     secret_arn: ::String?,
                                     role_arn: ::String?,
@@ -1565,19 +799,7 @@ module Aws
                                 },
                                 ?iceberg_destination_update: {
                                   destination_table_configuration_list: Array[
-                                    {
-                                      destination_table_name: ::String,
-                                      destination_database_name: ::String,
-                                      unique_keys: Array[::String]?,
-                                      partition_spec: {
-                                        identity: Array[
-                                          {
-                                            source_name: ::String
-                                          },
-                                        ]?
-                                      }?,
-                                      s3_error_output_prefix: ::String?
-                                    },
+                                    Params::destination_table_configuration
                                   ]?,
                                   schema_evolution_configuration: {
                                     enabled: bool
@@ -1594,20 +816,7 @@ module Aws
                                     log_group_name: ::String?,
                                     log_stream_name: ::String?
                                   }?,
-                                  processing_configuration: {
-                                    enabled: bool?,
-                                    processors: Array[
-                                      {
-                                        type: ("RecordDeAggregation" | "Decompression" | "CloudWatchLogProcessing" | "Lambda" | "MetadataExtraction" | "AppendDelimiterToRecord"),
-                                        parameters: Array[
-                                          {
-                                            parameter_name: ("LambdaArn" | "NumberOfRetries" | "MetadataExtractionQuery" | "JsonParsingEngine" | "RoleArn" | "BufferSizeInMBs" | "BufferIntervalInSeconds" | "SubRecordType" | "Delimiter" | "CompressionFormat" | "DataMessageExtraction"),
-                                            parameter_value: ::String
-                                          },
-                                        ]?
-                                      },
-                                    ]?
-                                  }?,
+                                  processing_configuration: Params::processing_configuration?,
                                   s3_backup_mode: ("FailedDataOnly" | "AllData")?,
                                   retry_options: {
                                     duration_in_seconds: ::Integer?
@@ -1618,28 +827,7 @@ module Aws
                                     catalog_arn: ::String?,
                                     warehouse_location: ::String?
                                   }?,
-                                  s3_configuration: {
-                                    role_arn: ::String,
-                                    bucket_arn: ::String,
-                                    prefix: ::String?,
-                                    error_output_prefix: ::String?,
-                                    buffering_hints: {
-                                      size_in_m_bs: ::Integer?,
-                                      interval_in_seconds: ::Integer?
-                                    }?,
-                                    compression_format: ("UNCOMPRESSED" | "GZIP" | "ZIP" | "Snappy" | "HADOOP_SNAPPY")?,
-                                    encryption_configuration: {
-                                      no_encryption_config: ("NoEncryption")?,
-                                      kms_encryption_config: {
-                                        awskms_key_arn: ::String
-                                      }?
-                                    }?,
-                                    cloud_watch_logging_options: {
-                                      enabled: bool?,
-                                      log_group_name: ::String?,
-                                      log_stream_name: ::String?
-                                    }?
-                                  }?
+                                  s3_configuration: Params::s3_destination_configuration?
                                 }
                               ) -> _UpdateDestinationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDestinationResponseSuccess

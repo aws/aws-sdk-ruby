@@ -93,7 +93,7 @@ module Aws
                                entry: ::String,
                                target: ::String,
                                type: ("FILE" | "DIRECTORY")?
-                             },
+                             }
                            ],
                            ?policy: ::String,
                            ?posix_profile: {
@@ -124,7 +124,7 @@ module Aws
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?preserve_filename: ("ENABLED" | "DISABLED"),
                               ?enforce_message_signing: ("ENABLED" | "DISABLED"),
@@ -145,29 +145,14 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Transfer/Client.html#create_connector-instance_method
       def create_connector: (
                               ?url: ::String,
-                              ?as_2_config: {
-                                local_profile_id: ::String?,
-                                partner_profile_id: ::String?,
-                                message_subject: ::String?,
-                                compression: ("ZLIB" | "DISABLED")?,
-                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
-                                signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
-                                mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
-                                mdn_response: ("SYNC" | "NONE" | "ASYNC")?,
-                                basic_auth_secret_id: ::String?,
-                                preserve_content_type: ("ENABLED" | "DISABLED")?,
-                                async_mdn_config: {
-                                  url: ::String?,
-                                  server_ids: Array[::String]?
-                                }?
-                              },
+                              ?as_2_config: Params::as_2_connector_config,
                               access_role: ::String,
                               ?logging_role: ::String,
                               ?tags: Array[
                                 {
                                   key: ::String,
                                   value: ::String
-                                },
+                                }
                               ],
                               ?sftp_config: {
                                 user_secret_id: ::String?,
@@ -198,7 +183,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ]
                           ) -> _CreateProfileResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateProfileResponseSuccess
@@ -243,22 +228,9 @@ module Aws
                              {
                                key: ::String,
                                value: ::String
-                             },
+                             }
                            ],
-                           ?workflow_details: {
-                             on_upload: Array[
-                               {
-                                 workflow_id: ::String,
-                                 execution_role: ::String
-                               },
-                             ]?,
-                             on_partial_upload: Array[
-                               {
-                                 workflow_id: ::String,
-                                 execution_role: ::String
-                               },
-                             ]?
-                           },
+                           ?workflow_details: Params::workflow_details,
                            ?structured_log_destinations: Array[::String],
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
@@ -281,7 +253,7 @@ module Aws
                              entry: ::String,
                              target: ::String,
                              type: ("FILE" | "DIRECTORY")?
-                           },
+                           }
                          ],
                          ?policy: ::String,
                          ?posix_profile: {
@@ -296,7 +268,7 @@ module Aws
                            {
                              key: ::String,
                              value: ::String
-                           },
+                           }
                          ],
                          user_name: ::String
                        ) -> _CreateUserResponseSuccess
@@ -322,7 +294,7 @@ module Aws
                               {
                                 key: ::String,
                                 value: ::String
-                              },
+                              }
                             ],
                             ?web_app_endpoint_policy: ("FIPS" | "STANDARD"),
                             ?endpoint_details: {
@@ -344,122 +316,16 @@ module Aws
       def create_workflow: (
                              ?description: ::String,
                              steps: Array[
-                               {
-                                 type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")?,
-                                 copy_step_details: {
-                                   name: ::String?,
-                                   destination_file_location: {
-                                     s3_file_location: {
-                                       bucket: ::String?,
-                                       key: ::String?
-                                     }?,
-                                     efs_file_location: {
-                                       file_system_id: ::String?,
-                                       path: ::String?
-                                     }?
-                                   }?,
-                                   overwrite_existing: ("TRUE" | "FALSE")?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 custom_step_details: {
-                                   name: ::String?,
-                                   target: ::String?,
-                                   timeout_seconds: ::Integer?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 delete_step_details: {
-                                   name: ::String?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 tag_step_details: {
-                                   name: ::String?,
-                                   tags: Array[
-                                     {
-                                       key: ::String,
-                                       value: ::String
-                                     },
-                                   ]?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 decrypt_step_details: {
-                                   name: ::String?,
-                                   type: ("PGP"),
-                                   source_file_location: ::String?,
-                                   overwrite_existing: ("TRUE" | "FALSE")?,
-                                   destination_file_location: {
-                                     s3_file_location: {
-                                       bucket: ::String?,
-                                       key: ::String?
-                                     }?,
-                                     efs_file_location: {
-                                       file_system_id: ::String?,
-                                       path: ::String?
-                                     }?
-                                   }
-                                 }?
-                               },
+                               Params::workflow_step
                              ],
                              ?on_exception_steps: Array[
-                               {
-                                 type: ("COPY" | "CUSTOM" | "TAG" | "DELETE" | "DECRYPT")?,
-                                 copy_step_details: {
-                                   name: ::String?,
-                                   destination_file_location: {
-                                     s3_file_location: {
-                                       bucket: ::String?,
-                                       key: ::String?
-                                     }?,
-                                     efs_file_location: {
-                                       file_system_id: ::String?,
-                                       path: ::String?
-                                     }?
-                                   }?,
-                                   overwrite_existing: ("TRUE" | "FALSE")?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 custom_step_details: {
-                                   name: ::String?,
-                                   target: ::String?,
-                                   timeout_seconds: ::Integer?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 delete_step_details: {
-                                   name: ::String?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 tag_step_details: {
-                                   name: ::String?,
-                                   tags: Array[
-                                     {
-                                       key: ::String,
-                                       value: ::String
-                                     },
-                                   ]?,
-                                   source_file_location: ::String?
-                                 }?,
-                                 decrypt_step_details: {
-                                   name: ::String?,
-                                   type: ("PGP"),
-                                   source_file_location: ::String?,
-                                   overwrite_existing: ("TRUE" | "FALSE")?,
-                                   destination_file_location: {
-                                     s3_file_location: {
-                                       bucket: ::String?,
-                                       key: ::String?
-                                     }?,
-                                     efs_file_location: {
-                                       file_system_id: ::String?,
-                                       path: ::String?
-                                     }?
-                                   }
-                                 }?
-                               },
+                               Params::workflow_step
                              ],
                              ?tags: Array[
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _CreateWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
@@ -697,7 +563,7 @@ module Aws
                                   {
                                     key: ::String,
                                     value: ::String
-                                  },
+                                  }
                                 ]
                               ) -> _ImportCertificateResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportCertificateResponseSuccess
@@ -716,7 +582,7 @@ module Aws
                                {
                                  key: ::String,
                                  value: ::String
-                               },
+                               }
                              ]
                            ) -> _ImportHostKeyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHostKeyResponseSuccess
@@ -958,7 +824,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _StartFileTransferResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartFileTransferResponseSuccess
@@ -1005,7 +871,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String
-                            },
+                            }
                           ]
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -1061,7 +927,7 @@ module Aws
                                entry: ::String,
                                target: ::String,
                                type: ("FILE" | "DIRECTORY")?
-                             },
+                             }
                            ],
                            ?policy: ::String,
                            ?posix_profile: {
@@ -1122,22 +988,7 @@ module Aws
       def update_connector: (
                               connector_id: ::String,
                               ?url: ::String,
-                              ?as_2_config: {
-                                local_profile_id: ::String?,
-                                partner_profile_id: ::String?,
-                                message_subject: ::String?,
-                                compression: ("ZLIB" | "DISABLED")?,
-                                encryption_algorithm: ("AES128_CBC" | "AES192_CBC" | "AES256_CBC" | "DES_EDE3_CBC" | "NONE")?,
-                                signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE")?,
-                                mdn_signing_algorithm: ("SHA256" | "SHA384" | "SHA512" | "SHA1" | "NONE" | "DEFAULT")?,
-                                mdn_response: ("SYNC" | "NONE" | "ASYNC")?,
-                                basic_auth_secret_id: ::String?,
-                                preserve_content_type: ("ENABLED" | "DISABLED")?,
-                                async_mdn_config: {
-                                  url: ::String?,
-                                  server_ids: Array[::String]?
-                                }?
-                              },
+                              ?as_2_config: Params::as_2_connector_config,
                               ?access_role: ::String,
                               ?logging_role: ::String,
                               ?sftp_config: {
@@ -1215,20 +1066,7 @@ module Aws
                            ?protocols: Array[("SFTP" | "FTP" | "FTPS" | "AS2")],
                            ?security_policy_name: ::String,
                            server_id: ::String,
-                           ?workflow_details: {
-                             on_upload: Array[
-                               {
-                                 workflow_id: ::String,
-                                 execution_role: ::String
-                               },
-                             ]?,
-                             on_partial_upload: Array[
-                               {
-                                 workflow_id: ::String,
-                                 execution_role: ::String
-                               },
-                             ]?
-                           },
+                           ?workflow_details: Params::workflow_details,
                            ?structured_log_destinations: Array[::String],
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
@@ -1252,7 +1090,7 @@ module Aws
                              entry: ::String,
                              target: ::String,
                              type: ("FILE" | "DIRECTORY")?
-                           },
+                           }
                          ],
                          ?policy: ::String,
                          ?posix_profile: {

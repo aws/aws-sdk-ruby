@@ -1,0 +1,285 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module QBusiness
+    module Params
+      type document_attribute = {
+      name: ::String,
+      value: {
+        string_value: ::String?,
+        string_list_value: Array[::String]?,
+        long_value: ::Integer?,
+        date_value: ::Time?
+      }
+    }
+
+      type document_attribute_condition = {
+      key: ::String,
+      operator: ("GREATER_THAN" | "GREATER_THAN_OR_EQUALS" | "LESS_THAN" | "LESS_THAN_OR_EQUALS" | "EQUALS" | "NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "EXISTS" | "NOT_EXISTS" | "BEGINS_WITH"),
+      value: {
+        string_value: ::String?,
+        string_list_value: Array[::String]?,
+        long_value: ::Integer?,
+        date_value: ::Time?
+      }?
+    }
+
+      type hook_configuration = {
+      invocation_condition: Params::document_attribute_condition?,
+      lambda_arn: ::String?,
+      s3_bucket_name: ::String?,
+      role_arn: ::String?
+    }
+
+      type document_enrichment_configuration = {
+      inline_configurations: Array[
+        Params::inline_document_enrichment_configuration
+      ]?,
+      pre_extraction_hook_configuration: Params::hook_configuration?,
+      post_extraction_hook_configuration: Params::hook_configuration?
+    }
+
+      type document_attribute_target = {
+      key: ::String,
+      value: {
+        string_value: ::String?,
+        string_list_value: Array[::String]?,
+        long_value: ::Integer?,
+        date_value: ::Time?
+      }?,
+      attribute_value_operator: ("DELETE")?
+    }
+
+      type inline_document_enrichment_configuration = {
+      condition: Params::document_attribute_condition?,
+      target: Params::document_attribute_target?,
+      document_content_operator: ("DELETE")?
+    }
+
+      type media_extraction_configuration = {
+      image_extraction_configuration: {
+        image_extraction_status: ("ENABLED" | "DISABLED")
+      }?,
+      audio_extraction_configuration: {
+        audio_extraction_status: ("ENABLED" | "DISABLED")
+      }?,
+      video_extraction_configuration: {
+        video_extraction_status: ("ENABLED" | "DISABLED")
+      }?
+    }
+
+      type attribute_filter = {
+      and_all_filters: Array[
+        {
+          and_all_filters: untyped?,
+          or_all_filters: untyped?,
+          not_filter: untyped?,
+          equals_to: Params::document_attribute?,
+          contains_all: Params::document_attribute?,
+          contains_any: Params::document_attribute?,
+          greater_than: Params::document_attribute?,
+          greater_than_or_equals: Params::document_attribute?,
+          less_than: Params::document_attribute?,
+          less_than_or_equals: Params::document_attribute?
+        }
+      ]?,
+      or_all_filters: Array[
+        {
+          and_all_filters: untyped?,
+          or_all_filters: untyped?,
+          not_filter: untyped?,
+          equals_to: Params::document_attribute?,
+          contains_all: Params::document_attribute?,
+          contains_any: Params::document_attribute?,
+          greater_than: Params::document_attribute?,
+          greater_than_or_equals: Params::document_attribute?,
+          less_than: Params::document_attribute?,
+          less_than_or_equals: Params::document_attribute?
+        }
+      ]?,
+      not_filter: {
+        and_all_filters: Array[
+          untyped
+        ]?,
+        or_all_filters: Array[
+          untyped
+        ]?,
+        not_filter: untyped?,
+        equals_to: Params::document_attribute?,
+        contains_all: Params::document_attribute?,
+        contains_any: Params::document_attribute?,
+        greater_than: Params::document_attribute?,
+        greater_than_or_equals: Params::document_attribute?,
+        less_than: Params::document_attribute?,
+        less_than_or_equals: Params::document_attribute?
+      }?,
+      equals_to: Params::document_attribute?,
+      contains_all: Params::document_attribute?,
+      contains_any: Params::document_attribute?,
+      greater_than: Params::document_attribute?,
+      greater_than_or_equals: Params::document_attribute?,
+      less_than: Params::document_attribute?,
+      less_than_or_equals: Params::document_attribute?
+    }
+
+      type attachment_input = {
+      data: ::String?,
+      name: ::String?,
+      copy_from: {
+        conversation: {
+          conversation_id: ::String,
+          attachment_id: ::String
+        }?
+      }?
+    }
+
+      type instruction_collection = {
+      response_length: ::String?,
+      target_audience: ::String?,
+      perspective: ::String?,
+      output_style: ::String?,
+      identity: ::String?,
+      tone: ::String?,
+      custom_instructions: ::String?,
+      examples: ::String?
+    }
+
+      type response_configuration = {
+      instruction_collection: Params::instruction_collection?
+    }
+
+      type action_filter_configuration = {
+      document_attribute_filter: Params::attribute_filter
+    }
+
+      type action_configuration = {
+      action: ::String,
+      filter_configuration: Params::action_filter_configuration?
+    }
+
+      type data_accessor_authentication_detail = {
+      authentication_type: ("AWS_IAM_IDC_TTI" | "AWS_IAM_IDC_AUTH_CODE"),
+      authentication_configuration: {
+        idc_trusted_token_issuer_configuration: {
+          idc_trusted_token_issuer_arn: ::String
+        }?
+      }?,
+      external_ids: Array[::String]?
+    }
+
+      type plugin_auth_configuration = {
+      basic_auth_configuration: {
+        secret_arn: ::String,
+        role_arn: ::String
+      }?,
+      o_auth_2_client_credential_configuration: {
+        secret_arn: ::String,
+        role_arn: ::String,
+        authorization_url: ::String?,
+        token_url: ::String?
+      }?,
+      no_auth_configuration: {
+      }?,
+      idc_auth_configuration: {
+        idc_application_arn: ::String,
+        role_arn: ::String
+      }?
+    }
+
+      type custom_plugin_configuration = {
+      description: ::String,
+      api_schema_type: ("OPEN_API_V3"),
+      api_schema: {
+        payload: ::String?,
+        s3: {
+          bucket: ::String,
+          key: ::String
+        }?
+      }?
+    }
+
+      type native_index_configuration = {
+      index_id: ::String,
+      version: ::Integer?,
+      boosting_override: Hash[::String, Params::document_attribute_boosting_configuration]?
+    }
+
+      type retriever_configuration = {
+      native_index_configuration: Params::native_index_configuration?,
+      kendra_index_configuration: {
+        index_id: ::String
+      }?
+    }
+
+      type document_attribute_boosting_configuration = {
+      number_configuration: {
+        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
+        boosting_type: ("PRIORITIZE_LARGER_VALUES" | "PRIORITIZE_SMALLER_VALUES")?
+      }?,
+      string_configuration: {
+        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
+        attribute_value_boosting: Hash[::String, ("LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO" | "THREE" | "FOUR" | "FIVE")]?
+      }?,
+      date_configuration: {
+        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO"),
+        boosting_duration_in_seconds: ::Integer?
+      }?,
+      string_list_configuration: {
+        boosting_level: ("NONE" | "LOW" | "MEDIUM" | "HIGH" | "VERY_HIGH" | "ONE" | "TWO")
+      }?
+    }
+
+      type identity_provider_configuration = {
+      saml_configuration: {
+        authentication_url: ::String
+      }?,
+      open_id_connect_configuration: {
+        secrets_arn: ::String,
+        secrets_role: ::String
+      }?
+    }
+
+      type topic_configuration = {
+      name: ::String,
+      description: ::String?,
+      example_chat_messages: Array[::String]?,
+      rules: Array[
+        Params::rule
+      ]
+    }
+
+      type rule_configuration = {
+      content_blocker_rule: {
+        system_message_override: ::String?
+      }?,
+      content_retrieval_rule: {
+        eligible_data_sources: Array[
+          {
+            index_id: ::String?,
+            data_source_id: ::String?
+          }
+        ]?
+      }?
+    }
+
+      type rule = {
+      included_users_and_groups: {
+        user_ids: Array[::String]?,
+        user_groups: Array[::String]?
+      }?,
+      excluded_users_and_groups: {
+        user_ids: Array[::String]?,
+        user_groups: Array[::String]?
+      }?,
+      rule_type: ("CONTENT_BLOCKER_RULE" | "CONTENT_RETRIEVAL_RULE"),
+      rule_configuration: Params::rule_configuration?
+    }
+
+    end
+  end
+end

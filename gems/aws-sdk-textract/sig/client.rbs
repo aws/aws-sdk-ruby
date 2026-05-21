@@ -88,14 +88,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_document-instance_method
       def analyze_document: (
-                              document: {
-                                bytes: ::String?,
-                                s3_object: {
-                                  bucket: ::String?,
-                                  name: ::String?,
-                                  version: ::String?
-                                }?
-                              },
+                              document: Params::document,
                               feature_types: Array[("TABLES" | "FORMS" | "QUERIES" | "SIGNATURES" | "LAYOUT")],
                               ?human_loop_config: {
                                 human_loop_name: ::String,
@@ -110,7 +103,7 @@ module Aws
                                     text: ::String,
                                     alias: ::String?,
                                     pages: Array[::String]?
-                                  },
+                                  }
                                 ]
                               },
                               ?adapters_config: {
@@ -119,7 +112,7 @@ module Aws
                                     adapter_id: ::String,
                                     pages: Array[::String]?,
                                     version: ::String
-                                  },
+                                  }
                                 ]
                               }
                             ) -> _AnalyzeDocumentResponseSuccess
@@ -132,14 +125,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_expense-instance_method
       def analyze_expense: (
-                             document: {
-                               bytes: ::String?,
-                               s3_object: {
-                                 bucket: ::String?,
-                                 name: ::String?,
-                                 version: ::String?
-                               }?
-                             }
+                             document: Params::document
                            ) -> _AnalyzeExpenseResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AnalyzeExpenseResponseSuccess
 
@@ -152,14 +138,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#analyze_id-instance_method
       def analyze_id: (
                         document_pages: Array[
-                          {
-                            bytes: ::String?,
-                            s3_object: {
-                              bucket: ::String?,
-                              name: ::String?,
-                              version: ::String?
-                            }?
-                          },
+                          Params::document
                         ]
                       ) -> _AnalyzeIDResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AnalyzeIDResponseSuccess
@@ -231,14 +210,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Textract/Client.html#detect_document_text-instance_method
       def detect_document_text: (
-                                  document: {
-                                    bytes: ::String?,
-                                    s3_object: {
-                                      bucket: ::String?,
-                                      name: ::String?,
-                                      version: ::String?
-                                    }?
-                                  }
+                                  document: Params::document
                                 ) -> _DetectDocumentTextResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DetectDocumentTextResponseSuccess
 
@@ -436,7 +408,7 @@ module Aws
                                            text: ::String,
                                            alias: ::String?,
                                            pages: Array[::String]?
-                                         },
+                                         }
                                        ]
                                      },
                                      ?adapters_config: {
@@ -445,7 +417,7 @@ module Aws
                                            adapter_id: ::String,
                                            pages: Array[::String]?,
                                            version: ::String
-                                         },
+                                         }
                                        ]
                                      }
                                    ) -> _StartDocumentAnalysisResponseSuccess

@@ -1,0 +1,36 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module LexModelBuildingService
+    module Params
+      type prompt = {
+      messages: Array[
+        {
+          content_type: ("PlainText" | "SSML" | "CustomPayload"),
+          content: ::String,
+          group_number: ::Integer?
+        }
+      ],
+      max_attempts: ::Integer,
+      response_card: ::String?
+    }
+
+      type statement = {
+      messages: Array[
+        {
+          content_type: ("PlainText" | "SSML" | "CustomPayload"),
+          content: ::String,
+          group_number: ::Integer?
+        }
+      ],
+      response_card: ::String?
+    }
+
+    end
+  end
+end

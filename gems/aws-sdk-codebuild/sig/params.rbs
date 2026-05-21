@@ -1,0 +1,149 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module CodeBuild
+    module Params
+      type scaling_configuration_input = {
+      scaling_type: ("TARGET_TRACKING_SCALING")?,
+      target_tracking_scaling_configs: Array[
+        {
+          metric_type: ("FLEET_UTILIZATION_RATE")?,
+          target_value: ::Float?
+        }
+      ]?,
+      max_capacity: ::Integer?
+    }
+
+      type proxy_configuration = {
+      default_behavior: ("ALLOW_ALL" | "DENY_ALL")?,
+      ordered_proxy_rules: Array[
+        {
+          type: ("DOMAIN" | "IP"),
+          effect: ("ALLOW" | "DENY"),
+          entities: Array[::String]
+        }
+      ]?
+    }
+
+      type project_source = {
+      type: ("CODECOMMIT" | "CODEPIPELINE" | "GITHUB" | "GITLAB" | "GITLAB_SELF_MANAGED" | "S3" | "BITBUCKET" | "GITHUB_ENTERPRISE" | "NO_SOURCE"),
+      location: ::String?,
+      git_clone_depth: ::Integer?,
+      git_submodules_config: {
+        fetch_submodules: bool
+      }?,
+      buildspec: ::String?,
+      auth: {
+        type: ("OAUTH" | "CODECONNECTIONS" | "SECRETS_MANAGER"),
+        resource: ::String?
+      }?,
+      report_build_status: bool?,
+      build_status_config: {
+        context: ::String?,
+        target_url: ::String?
+      }?,
+      insecure_ssl: bool?,
+      source_identifier: ::String?
+    }
+
+      type project_artifacts = {
+      type: ("CODEPIPELINE" | "S3" | "NO_ARTIFACTS"),
+      location: ::String?,
+      path: ::String?,
+      namespace_type: ("NONE" | "BUILD_ID")?,
+      name: ::String?,
+      packaging: ("NONE" | "ZIP")?,
+      override_artifact_name: bool?,
+      encryption_disabled: bool?,
+      artifact_identifier: ::String?,
+      bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+    }
+
+      type docker_server = {
+      compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB" | "ATTRIBUTE_BASED_COMPUTE" | "CUSTOM_INSTANCE_TYPE"),
+      security_group_ids: Array[::String]?,
+      status: {
+        status: ::String?,
+        message: ::String?
+      }?
+    }
+
+      type project_environment = {
+      type: ("WINDOWS_CONTAINER" | "LINUX_CONTAINER" | "LINUX_GPU_CONTAINER" | "ARM_CONTAINER" | "WINDOWS_SERVER_2019_CONTAINER" | "WINDOWS_SERVER_2022_CONTAINER" | "LINUX_LAMBDA_CONTAINER" | "ARM_LAMBDA_CONTAINER" | "LINUX_EC2" | "ARM_EC2" | "WINDOWS_EC2" | "MAC_ARM"),
+      image: ::String,
+      compute_type: ("BUILD_GENERAL1_SMALL" | "BUILD_GENERAL1_MEDIUM" | "BUILD_GENERAL1_LARGE" | "BUILD_GENERAL1_XLARGE" | "BUILD_GENERAL1_2XLARGE" | "BUILD_LAMBDA_1GB" | "BUILD_LAMBDA_2GB" | "BUILD_LAMBDA_4GB" | "BUILD_LAMBDA_8GB" | "BUILD_LAMBDA_10GB" | "ATTRIBUTE_BASED_COMPUTE" | "CUSTOM_INSTANCE_TYPE"),
+      compute_configuration: {
+        v_cpu: ::Integer?,
+        memory: ::Integer?,
+        disk: ::Integer?,
+        machine_type: ("GENERAL" | "NVME")?,
+        instance_type: ::String?
+      }?,
+      fleet: {
+        fleet_arn: ::String?
+      }?,
+      environment_variables: Array[
+        {
+          name: ::String,
+          value: ::String,
+          type: ("PLAINTEXT" | "PARAMETER_STORE" | "SECRETS_MANAGER")?
+        }
+      ]?,
+      privileged_mode: bool?,
+      certificate: ::String?,
+      registry_credential: {
+        credential: ::String,
+        credential_provider: ("SECRETS_MANAGER")
+      }?,
+      image_pull_credentials_type: ("CODEBUILD" | "SERVICE_ROLE")?,
+      docker_server: Params::docker_server?
+    }
+
+      type logs_config = {
+      cloud_watch_logs: {
+        status: ("ENABLED" | "DISABLED"),
+        group_name: ::String?,
+        stream_name: ::String?
+      }?,
+      s3_logs: {
+        status: ("ENABLED" | "DISABLED"),
+        location: ::String?,
+        encryption_disabled: bool?,
+        bucket_owner_access: ("NONE" | "READ_ONLY" | "FULL")?
+      }?
+    }
+
+      type project_build_batch_config = {
+      service_role: ::String?,
+      combine_artifacts: bool?,
+      restrictions: {
+        maximum_builds_allowed: ::Integer?,
+        compute_types_allowed: Array[::String]?,
+        fleets_allowed: Array[::String]?
+      }?,
+      timeout_in_mins: ::Integer?,
+      batch_report_mode: ("REPORT_INDIVIDUAL_BUILDS" | "REPORT_AGGREGATED_BATCH")?
+    }
+
+      type s3_report_export_config = {
+      bucket: ::String?,
+      bucket_owner: ::String?,
+      path: ::String?,
+      packaging: ("ZIP" | "NONE")?,
+      encryption_key: ::String?,
+      encryption_disabled: bool?
+    }
+
+      type report_export_config = {
+      export_config_type: ("S3" | "NO_EXPORT")?,
+      s3_destination: Params::s3_report_export_config?
+    }
+
+    end
+  end
+end

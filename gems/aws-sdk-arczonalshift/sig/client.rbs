@@ -126,14 +126,14 @@ module Aws
                                                  {
                                                    type: ("CLOUDWATCH"),
                                                    alarm_identifier: ::String
-                                                 },
+                                                 }
                                                ],
                                                ?allowed_windows: Array[::String],
                                                outcome_alarms: Array[
                                                  {
                                                    type: ("CLOUDWATCH"),
                                                    alarm_identifier: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _CreatePracticeRunConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePracticeRunConfigurationResponseSuccess
@@ -277,14 +277,14 @@ module Aws
                                                  {
                                                    type: ("CLOUDWATCH"),
                                                    alarm_identifier: ::String
-                                                 },
+                                                 }
                                                ],
                                                ?allowed_windows: Array[::String],
                                                ?outcome_alarms: Array[
                                                  {
                                                    type: ("CLOUDWATCH"),
                                                    alarm_identifier: ::String
-                                                 },
+                                                 }
                                                ]
                                              ) -> _UpdatePracticeRunConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePracticeRunConfigurationResponseSuccess

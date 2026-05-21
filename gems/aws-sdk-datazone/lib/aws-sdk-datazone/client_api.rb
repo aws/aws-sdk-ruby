@@ -157,9 +157,11 @@ module Aws::DataZone
     CloudFormationProperties = Shapes::StructureShape.new(name: 'CloudFormationProperties')
     ColumnFilterConfiguration = Shapes::StructureShape.new(name: 'ColumnFilterConfiguration')
     ColumnNameList = Shapes::ListShape.new(name: 'ColumnNameList')
+    CompletedAt = Shapes::TimestampShape.new(name: 'CompletedAt')
     ComputeConfig = Shapes::StructureShape.new(name: 'ComputeConfig')
     ComputeEnvironments = Shapes::StringShape.new(name: 'ComputeEnvironments')
     ComputeEnvironmentsList = Shapes::ListShape.new(name: 'ComputeEnvironmentsList')
+    ComputeId = Shapes::StringShape.new(name: 'ComputeId')
     ConfigurableActionParameter = Shapes::StructureShape.new(name: 'ConfigurableActionParameter')
     ConfigurableActionParameterList = Shapes::ListShape.new(name: 'ConfigurableActionParameterList')
     ConfigurableActionTypeAuthorization = Shapes::StringShape.new(name: 'ConfigurableActionTypeAuthorization')
@@ -233,6 +235,8 @@ module Aws::DataZone
     CreateGroupProfileOutput = Shapes::StructureShape.new(name: 'CreateGroupProfileOutput')
     CreateListingChangeSetInput = Shapes::StructureShape.new(name: 'CreateListingChangeSetInput')
     CreateListingChangeSetOutput = Shapes::StructureShape.new(name: 'CreateListingChangeSetOutput')
+    CreateNotebookInput = Shapes::StructureShape.new(name: 'CreateNotebookInput')
+    CreateNotebookOutput = Shapes::StructureShape.new(name: 'CreateNotebookOutput')
     CreateProjectFromProjectProfilePolicyGrantDetail = Shapes::StructureShape.new(name: 'CreateProjectFromProjectProfilePolicyGrantDetail')
     CreateProjectInput = Shapes::StructureShape.new(name: 'CreateProjectInput')
     CreateProjectInputResourceTagsMap = Shapes::MapShape.new(name: 'CreateProjectInputResourceTagsMap')
@@ -334,6 +338,8 @@ module Aws::DataZone
     DeleteGlossaryTermOutput = Shapes::StructureShape.new(name: 'DeleteGlossaryTermOutput')
     DeleteListingInput = Shapes::StructureShape.new(name: 'DeleteListingInput')
     DeleteListingOutput = Shapes::StructureShape.new(name: 'DeleteListingOutput')
+    DeleteNotebookInput = Shapes::StructureShape.new(name: 'DeleteNotebookInput')
+    DeleteNotebookOutput = Shapes::StructureShape.new(name: 'DeleteNotebookOutput')
     DeleteProjectInput = Shapes::StructureShape.new(name: 'DeleteProjectInput')
     DeleteProjectMembershipInput = Shapes::StructureShape.new(name: 'DeleteProjectMembershipInput')
     DeleteProjectMembershipOutput = Shapes::StructureShape.new(name: 'DeleteProjectMembershipOutput')
@@ -438,10 +444,12 @@ module Aws::DataZone
     EqualToExpression = Shapes::StructureShape.new(name: 'EqualToExpression')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     EventSummary = Shapes::UnionShape.new(name: 'EventSummary')
+    ExportId = Shapes::StringShape.new(name: 'ExportId')
     ExternalIdentifier = Shapes::StringShape.new(name: 'ExternalIdentifier')
     FailedQueryProcessingErrorMessages = Shapes::ListShape.new(name: 'FailedQueryProcessingErrorMessages')
     FailureCause = Shapes::StructureShape.new(name: 'FailureCause')
     FailureReasons = Shapes::ListShape.new(name: 'FailureReasons')
+    FileFormat = Shapes::StringShape.new(name: 'FileFormat')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterClause = Shapes::UnionShape.new(name: 'FilterClause')
     FilterExpression = Shapes::StructureShape.new(name: 'FilterExpression')
@@ -528,6 +536,10 @@ module Aws::DataZone
     GetListingOutput = Shapes::StructureShape.new(name: 'GetListingOutput')
     GetMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'GetMetadataGenerationRunInput')
     GetMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'GetMetadataGenerationRunOutput')
+    GetNotebookExportInput = Shapes::StructureShape.new(name: 'GetNotebookExportInput')
+    GetNotebookExportOutput = Shapes::StructureShape.new(name: 'GetNotebookExportOutput')
+    GetNotebookInput = Shapes::StructureShape.new(name: 'GetNotebookInput')
+    GetNotebookOutput = Shapes::StructureShape.new(name: 'GetNotebookOutput')
     GetNotebookRunInput = Shapes::StructureShape.new(name: 'GetNotebookRunInput')
     GetNotebookRunOutput = Shapes::StructureShape.new(name: 'GetNotebookRunOutput')
     GetProjectInput = Shapes::StructureShape.new(name: 'GetProjectInput')
@@ -719,6 +731,8 @@ module Aws::DataZone
     ListMetadataGenerationRunsOutput = Shapes::StructureShape.new(name: 'ListMetadataGenerationRunsOutput')
     ListNotebookRunsInput = Shapes::StructureShape.new(name: 'ListNotebookRunsInput')
     ListNotebookRunsOutput = Shapes::StructureShape.new(name: 'ListNotebookRunsOutput')
+    ListNotebooksInput = Shapes::StructureShape.new(name: 'ListNotebooksInput')
+    ListNotebooksOutput = Shapes::StructureShape.new(name: 'ListNotebooksOutput')
     ListNotificationsInput = Shapes::StructureShape.new(name: 'ListNotificationsInput')
     ListNotificationsOutput = Shapes::StructureShape.new(name: 'ListNotificationsOutput')
     ListPolicyGrantsInput = Shapes::StructureShape.new(name: 'ListPolicyGrantsInput')
@@ -803,13 +817,23 @@ module Aws::DataZone
     NotEqualToExpression = Shapes::StructureShape.new(name: 'NotEqualToExpression')
     NotInExpression = Shapes::StructureShape.new(name: 'NotInExpression')
     NotLikeExpression = Shapes::StructureShape.new(name: 'NotLikeExpression')
+    NotebookError = Shapes::StructureShape.new(name: 'NotebookError')
+    NotebookErrorMessageString = Shapes::StringShape.new(name: 'NotebookErrorMessageString')
+    NotebookExportError = Shapes::StructureShape.new(name: 'NotebookExportError')
+    NotebookExportErrorMessageString = Shapes::StringShape.new(name: 'NotebookExportErrorMessageString')
+    NotebookExportStatus = Shapes::StringShape.new(name: 'NotebookExportStatus')
     NotebookId = Shapes::StringShape.new(name: 'NotebookId')
+    NotebookName = Shapes::StringShape.new(name: 'NotebookName')
     NotebookRunError = Shapes::StructureShape.new(name: 'NotebookRunError')
     NotebookRunErrorMessageString = Shapes::StringShape.new(name: 'NotebookRunErrorMessageString')
     NotebookRunId = Shapes::StringShape.new(name: 'NotebookRunId')
     NotebookRunStatus = Shapes::StringShape.new(name: 'NotebookRunStatus')
     NotebookRunSummary = Shapes::StructureShape.new(name: 'NotebookRunSummary')
     NotebookRunSummaryList = Shapes::ListShape.new(name: 'NotebookRunSummaryList')
+    NotebookS3Uri = Shapes::StringShape.new(name: 'NotebookS3Uri')
+    NotebookStatus = Shapes::StringShape.new(name: 'NotebookStatus')
+    NotebookSummary = Shapes::StructureShape.new(name: 'NotebookSummary')
+    NotebookSummaryList = Shapes::ListShape.new(name: 'NotebookSummaryList')
     NotificationOutput = Shapes::StructureShape.new(name: 'NotificationOutput')
     NotificationResource = Shapes::StructureShape.new(name: 'NotificationResource')
     NotificationResourceType = Shapes::StringShape.new(name: 'NotificationResourceType')
@@ -825,6 +849,7 @@ module Aws::DataZone
     OAuth2PropertiesTokenUrlString = Shapes::StringShape.new(name: 'OAuth2PropertiesTokenUrlString')
     OpenLineageRunEventSummary = Shapes::StructureShape.new(name: 'OpenLineageRunEventSummary')
     OpenLineageRunState = Shapes::StringShape.new(name: 'OpenLineageRunState')
+    OutputLocation = Shapes::UnionShape.new(name: 'OutputLocation')
     OverallDeploymentStatus = Shapes::StringShape.new(name: 'OverallDeploymentStatus')
     OverrideDomainUnitOwnersPolicyGrantDetail = Shapes::StructureShape.new(name: 'OverrideDomainUnitOwnersPolicyGrantDetail')
     OverrideProjectOwnersPolicyGrantDetail = Shapes::StructureShape.new(name: 'OverrideProjectOwnersPolicyGrantDetail')
@@ -985,6 +1010,7 @@ module Aws::DataZone
     RunIdentifier = Shapes::StringShape.new(name: 'RunIdentifier')
     RunStatisticsForAssets = Shapes::StructureShape.new(name: 'RunStatisticsForAssets')
     S3AccessGrantLocationId = Shapes::StringShape.new(name: 'S3AccessGrantLocationId')
+    S3Destination = Shapes::StructureShape.new(name: 'S3Destination')
     S3Location = Shapes::StringShape.new(name: 'S3Location')
     S3LocationList = Shapes::ListShape.new(name: 'S3LocationList')
     S3Path = Shapes::StringShape.new(name: 'S3Path')
@@ -993,6 +1019,7 @@ module Aws::DataZone
     S3PropertiesInput = Shapes::StructureShape.new(name: 'S3PropertiesInput')
     S3PropertiesOutput = Shapes::StructureShape.new(name: 'S3PropertiesOutput')
     S3PropertiesPatch = Shapes::StructureShape.new(name: 'S3PropertiesPatch')
+    S3SourceLocation = Shapes::StringShape.new(name: 'S3SourceLocation')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
     SageMakerAssetType = Shapes::StringShape.new(name: 'SageMakerAssetType')
     SageMakerResourceArn = Shapes::StringShape.new(name: 'SageMakerResourceArn')
@@ -1044,6 +1071,7 @@ module Aws::DataZone
     SortFieldProject = Shapes::StringShape.new(name: 'SortFieldProject')
     SortKey = Shapes::StringShape.new(name: 'SortKey')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
+    SourceLocation = Shapes::UnionShape.new(name: 'SourceLocation')
     SparkEmrPropertiesInput = Shapes::StructureShape.new(name: 'SparkEmrPropertiesInput')
     SparkEmrPropertiesInputComputeArnString = Shapes::StringShape.new(name: 'SparkEmrPropertiesInputComputeArnString')
     SparkEmrPropertiesInputInstanceProfileArnString = Shapes::StringShape.new(name: 'SparkEmrPropertiesInputInstanceProfileArnString')
@@ -1077,6 +1105,10 @@ module Aws::DataZone
     StartDataSourceRunOutput = Shapes::StructureShape.new(name: 'StartDataSourceRunOutput')
     StartMetadataGenerationRunInput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunInput')
     StartMetadataGenerationRunOutput = Shapes::StructureShape.new(name: 'StartMetadataGenerationRunOutput')
+    StartNotebookExportInput = Shapes::StructureShape.new(name: 'StartNotebookExportInput')
+    StartNotebookExportOutput = Shapes::StructureShape.new(name: 'StartNotebookExportOutput')
+    StartNotebookImportInput = Shapes::StructureShape.new(name: 'StartNotebookImportInput')
+    StartNotebookImportOutput = Shapes::StructureShape.new(name: 'StartNotebookImportOutput')
     StartNotebookRunInput = Shapes::StructureShape.new(name: 'StartNotebookRunInput')
     StartNotebookRunOutput = Shapes::StructureShape.new(name: 'StartNotebookRunOutput')
     Status = Shapes::StringShape.new(name: 'Status')
@@ -1203,6 +1235,8 @@ module Aws::DataZone
     UpdateGlossaryTermOutput = Shapes::StructureShape.new(name: 'UpdateGlossaryTermOutput')
     UpdateGroupProfileInput = Shapes::StructureShape.new(name: 'UpdateGroupProfileInput')
     UpdateGroupProfileOutput = Shapes::StructureShape.new(name: 'UpdateGroupProfileOutput')
+    UpdateNotebookInput = Shapes::StructureShape.new(name: 'UpdateNotebookInput')
+    UpdateNotebookOutput = Shapes::StructureShape.new(name: 'UpdateNotebookOutput')
     UpdateProjectInput = Shapes::StructureShape.new(name: 'UpdateProjectInput')
     UpdateProjectInputResourceTagsMap = Shapes::MapShape.new(name: 'UpdateProjectInputResourceTagsMap')
     UpdateProjectOutput = Shapes::StructureShape.new(name: 'UpdateProjectOutput')
@@ -2333,6 +2367,36 @@ module Aws::DataZone
     CreateListingChangeSetOutput.add_member(:status, Shapes::ShapeRef.new(shape: ListingStatus, required: true, location_name: "status"))
     CreateListingChangeSetOutput.struct_class = Types::CreateListingChangeSetOutput
 
+    CreateNotebookInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    CreateNotebookInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
+    CreateNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    CreateNotebookInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateNotebookInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    CreateNotebookInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
+    CreateNotebookInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateNotebookInput.struct_class = Types::CreateNotebookInput
+
+    CreateNotebookOutput.add_member(:id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "id"))
+    CreateNotebookOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    CreateNotebookOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    CreateNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    CreateNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
+    CreateNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    CreateNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    CreateNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    CreateNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    CreateNotebookOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    CreateNotebookOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    CreateNotebookOutput.add_member(:locked_by, Shapes::ShapeRef.new(shape: String, location_name: "lockedBy"))
+    CreateNotebookOutput.add_member(:locked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockedAt"))
+    CreateNotebookOutput.add_member(:lock_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockExpiresAt"))
+    CreateNotebookOutput.add_member(:compute_id, Shapes::ShapeRef.new(shape: ComputeId, location_name: "computeId"))
+    CreateNotebookOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    CreateNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
+    CreateNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
+    CreateNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    CreateNotebookOutput.struct_class = Types::CreateNotebookOutput
+
     CreateProjectFromProjectProfilePolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
     CreateProjectFromProjectProfilePolicyGrantDetail.add_member(:project_profiles, Shapes::ShapeRef.new(shape: ProjectProfileList, location_name: "projectProfiles"))
     CreateProjectFromProjectProfilePolicyGrantDetail.struct_class = Types::CreateProjectFromProjectProfilePolicyGrantDetail
@@ -2816,6 +2880,12 @@ module Aws::DataZone
     DeleteListingInput.struct_class = Types::DeleteListingInput
 
     DeleteListingOutput.struct_class = Types::DeleteListingOutput
+
+    DeleteNotebookInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    DeleteNotebookInput.add_member(:identifier, Shapes::ShapeRef.new(shape: NotebookId, required: true, location: "uri", location_name: "identifier"))
+    DeleteNotebookInput.struct_class = Types::DeleteNotebookInput
+
+    DeleteNotebookOutput.struct_class = Types::DeleteNotebookOutput
 
     DeleteProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     DeleteProjectInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "identifier"))
@@ -3694,6 +3764,48 @@ module Aws::DataZone
     GetMetadataGenerationRunOutput.add_member(:type_stats, Shapes::ShapeRef.new(shape: MetadataGenerationRunTypeStats, location_name: "typeStats"))
     GetMetadataGenerationRunOutput.struct_class = Types::GetMetadataGenerationRunOutput
 
+    GetNotebookExportInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetNotebookExportInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ExportId, required: true, location: "uri", location_name: "identifier"))
+    GetNotebookExportInput.struct_class = Types::GetNotebookExportInput
+
+    GetNotebookExportOutput.add_member(:id, Shapes::ShapeRef.new(shape: ExportId, required: true, location_name: "id"))
+    GetNotebookExportOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetNotebookExportOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    GetNotebookExportOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "notebookId"))
+    GetNotebookExportOutput.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "fileFormat"))
+    GetNotebookExportOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookExportStatus, required: true, location_name: "status"))
+    GetNotebookExportOutput.add_member(:output_location, Shapes::ShapeRef.new(shape: OutputLocation, location_name: "outputLocation"))
+    GetNotebookExportOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookExportError, location_name: "error"))
+    GetNotebookExportOutput.add_member(:completed_at, Shapes::ShapeRef.new(shape: CompletedAt, location_name: "completedAt"))
+    GetNotebookExportOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetNotebookExportOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    GetNotebookExportOutput.struct_class = Types::GetNotebookExportOutput
+
+    GetNotebookInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    GetNotebookInput.add_member(:identifier, Shapes::ShapeRef.new(shape: NotebookId, required: true, location: "uri", location_name: "identifier"))
+    GetNotebookInput.struct_class = Types::GetNotebookInput
+
+    GetNotebookOutput.add_member(:id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "id"))
+    GetNotebookOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    GetNotebookOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    GetNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    GetNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
+    GetNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    GetNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    GetNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    GetNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    GetNotebookOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    GetNotebookOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    GetNotebookOutput.add_member(:locked_by, Shapes::ShapeRef.new(shape: String, location_name: "lockedBy"))
+    GetNotebookOutput.add_member(:locked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockedAt"))
+    GetNotebookOutput.add_member(:lock_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockExpiresAt"))
+    GetNotebookOutput.add_member(:compute_id, Shapes::ShapeRef.new(shape: ComputeId, location_name: "computeId"))
+    GetNotebookOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    GetNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
+    GetNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
+    GetNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    GetNotebookOutput.struct_class = Types::GetNotebookOutput
+
     GetNotebookRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     GetNotebookRunInput.add_member(:identifier, Shapes::ShapeRef.new(shape: NotebookRunId, required: true, location: "uri", location_name: "identifier"))
     GetNotebookRunInput.struct_class = Types::GetNotebookRunInput
@@ -4493,6 +4605,19 @@ module Aws::DataZone
     ListNotebookRunsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListNotebookRunsOutput.struct_class = Types::ListNotebookRunsOutput
 
+    ListNotebooksInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    ListNotebooksInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "querystring", location_name: "owningProjectIdentifier"))
+    ListNotebooksInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
+    ListNotebooksInput.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location: "querystring", location_name: "sortOrder"))
+    ListNotebooksInput.add_member(:sort_by, Shapes::ShapeRef.new(shape: SortKey, location: "querystring", location_name: "sortBy"))
+    ListNotebooksInput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location: "querystring", location_name: "status"))
+    ListNotebooksInput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nextToken"))
+    ListNotebooksInput.struct_class = Types::ListNotebooksInput
+
+    ListNotebooksOutput.add_member(:items, Shapes::ShapeRef.new(shape: NotebookSummaryList, location_name: "items"))
+    ListNotebooksOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListNotebooksOutput.struct_class = Types::ListNotebooksOutput
+
     ListNotificationsInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     ListNotificationsInput.add_member(:type, Shapes::ShapeRef.new(shape: NotificationType, required: true, location: "querystring", location_name: "type"))
     ListNotificationsInput.add_member(:after_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location: "querystring", location_name: "afterTimestamp"))
@@ -4827,6 +4952,12 @@ module Aws::DataZone
     NotLikeExpression.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
     NotLikeExpression.struct_class = Types::NotLikeExpression
 
+    NotebookError.add_member(:message, Shapes::ShapeRef.new(shape: NotebookErrorMessageString, required: true, location_name: "message"))
+    NotebookError.struct_class = Types::NotebookError
+
+    NotebookExportError.add_member(:message, Shapes::ShapeRef.new(shape: NotebookExportErrorMessageString, required: true, location_name: "message"))
+    NotebookExportError.struct_class = Types::NotebookExportError
+
     NotebookRunError.add_member(:message, Shapes::ShapeRef.new(shape: NotebookRunErrorMessageString, required: true, location_name: "message"))
     NotebookRunError.struct_class = Types::NotebookRunError
 
@@ -4846,6 +4977,20 @@ module Aws::DataZone
     NotebookRunSummary.struct_class = Types::NotebookRunSummary
 
     NotebookRunSummaryList.member = Shapes::ShapeRef.new(shape: NotebookRunSummary)
+
+    NotebookSummary.add_member(:id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "id"))
+    NotebookSummary.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    NotebookSummary.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    NotebookSummary.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    NotebookSummary.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    NotebookSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    NotebookSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    NotebookSummary.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    NotebookSummary.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    NotebookSummary.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    NotebookSummary.struct_class = Types::NotebookSummary
+
+    NotebookSummaryList.member = Shapes::ShapeRef.new(shape: NotebookSummary)
 
     NotificationOutput.add_member(:identifier, Shapes::ShapeRef.new(shape: TaskId, required: true, location_name: "identifier"))
     NotificationOutput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainIdentifier"))
@@ -4887,6 +5032,12 @@ module Aws::DataZone
     OpenLineageRunEventSummary.add_member(:inputs, Shapes::ShapeRef.new(shape: NameIdentifiers, location_name: "inputs"))
     OpenLineageRunEventSummary.add_member(:outputs, Shapes::ShapeRef.new(shape: NameIdentifiers, location_name: "outputs"))
     OpenLineageRunEventSummary.struct_class = Types::OpenLineageRunEventSummary
+
+    OutputLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3Destination, location_name: "s3"))
+    OutputLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    OutputLocation.add_member_subclass(:s3, Types::OutputLocation::S3)
+    OutputLocation.add_member_subclass(:unknown, Types::OutputLocation::Unknown)
+    OutputLocation.struct_class = Types::OutputLocation
 
     OverrideDomainUnitOwnersPolicyGrantDetail.add_member(:include_child_domain_units, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeChildDomainUnits"))
     OverrideDomainUnitOwnersPolicyGrantDetail.struct_class = Types::OverrideDomainUnitOwnersPolicyGrantDetail
@@ -5482,6 +5633,9 @@ module Aws::DataZone
     RunStatisticsForAssets.add_member(:failed, Shapes::ShapeRef.new(shape: Integer, location_name: "failed"))
     RunStatisticsForAssets.struct_class = Types::RunStatisticsForAssets
 
+    S3Destination.add_member(:uri, Shapes::ShapeRef.new(shape: NotebookS3Uri, location_name: "uri"))
+    S3Destination.struct_class = Types::S3Destination
+
     S3LocationList.member = Shapes::ShapeRef.new(shape: S3Location)
 
     S3Permissions.member = Shapes::ShapeRef.new(shape: S3Permission)
@@ -5662,6 +5816,12 @@ module Aws::DataZone
     SingleSignOn.add_member(:idc_instance_arn, Shapes::ShapeRef.new(shape: SingleSignOnIdcInstanceArnString, location_name: "idcInstanceArn"))
     SingleSignOn.struct_class = Types::SingleSignOn
 
+    SourceLocation.add_member(:s3, Shapes::ShapeRef.new(shape: S3SourceLocation, location_name: "s3"))
+    SourceLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SourceLocation.add_member_subclass(:s3, Types::SourceLocation::S3)
+    SourceLocation.add_member_subclass(:unknown, Types::SourceLocation::Unknown)
+    SourceLocation.struct_class = Types::SourceLocation
+
     SparkEmrPropertiesInput.add_member(:compute_arn, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInputComputeArnString, location_name: "computeArn"))
     SparkEmrPropertiesInput.add_member(:instance_profile_arn, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInputInstanceProfileArnString, location_name: "instanceProfileArn"))
     SparkEmrPropertiesInput.add_member(:java_virtual_env, Shapes::ShapeRef.new(shape: SparkEmrPropertiesInputJavaVirtualEnvString, location_name: "javaVirtualEnv"))
@@ -5765,6 +5925,42 @@ module Aws::DataZone
     StartMetadataGenerationRunOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
     StartMetadataGenerationRunOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
     StartMetadataGenerationRunOutput.struct_class = Types::StartMetadataGenerationRunOutput
+
+    StartNotebookExportInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    StartNotebookExportInput.add_member(:notebook_identifier, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "notebookIdentifier"))
+    StartNotebookExportInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
+    StartNotebookExportInput.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "fileFormat"))
+    StartNotebookExportInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartNotebookExportInput.struct_class = Types::StartNotebookExportInput
+
+    StartNotebookExportOutput.add_member(:id, Shapes::ShapeRef.new(shape: ExportId, required: true, location_name: "id"))
+    StartNotebookExportOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    StartNotebookExportOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    StartNotebookExportOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "notebookId"))
+    StartNotebookExportOutput.add_member(:file_format, Shapes::ShapeRef.new(shape: FileFormat, required: true, location_name: "fileFormat"))
+    StartNotebookExportOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookExportStatus, required: true, location_name: "status"))
+    StartNotebookExportOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StartNotebookExportOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    StartNotebookExportOutput.struct_class = Types::StartNotebookExportOutput
+
+    StartNotebookImportInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    StartNotebookImportInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
+    StartNotebookImportInput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "sourceLocation"))
+    StartNotebookImportInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    StartNotebookImportInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartNotebookImportInput.struct_class = Types::StartNotebookImportInput
+
+    StartNotebookImportOutput.add_member(:notebook_id, Shapes::ShapeRef.new(shape: NotebookId, location_name: "notebookId"))
+    StartNotebookImportOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location_name: "status"))
+    StartNotebookImportOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, location_name: "domainId"))
+    StartNotebookImportOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, location_name: "owningProjectId"))
+    StartNotebookImportOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
+    StartNotebookImportOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    StartNotebookImportOutput.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, location_name: "sourceLocation"))
+    StartNotebookImportOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    StartNotebookImportOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    StartNotebookImportOutput.struct_class = Types::StartNotebookImportOutput
 
     StartNotebookRunInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     StartNotebookRunInput.add_member(:owning_project_identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectIdentifier"))
@@ -6379,6 +6575,39 @@ module Aws::DataZone
     UpdateGroupProfileOutput.add_member(:role_principal_arn, Shapes::ShapeRef.new(shape: String, location_name: "rolePrincipalArn"))
     UpdateGroupProfileOutput.add_member(:role_principal_id, Shapes::ShapeRef.new(shape: String, location_name: "rolePrincipalId"))
     UpdateGroupProfileOutput.struct_class = Types::UpdateGroupProfileOutput
+
+    UpdateNotebookInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
+    UpdateNotebookInput.add_member(:identifier, Shapes::ShapeRef.new(shape: NotebookId, required: true, location: "uri", location_name: "identifier"))
+    UpdateNotebookInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateNotebookInput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, location_name: "status"))
+    UpdateNotebookInput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, location_name: "name"))
+    UpdateNotebookInput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, location_name: "cellOrder"))
+    UpdateNotebookInput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    UpdateNotebookInput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
+    UpdateNotebookInput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
+    UpdateNotebookInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    UpdateNotebookInput.struct_class = Types::UpdateNotebookInput
+
+    UpdateNotebookOutput.add_member(:id, Shapes::ShapeRef.new(shape: NotebookId, required: true, location_name: "id"))
+    UpdateNotebookOutput.add_member(:name, Shapes::ShapeRef.new(shape: NotebookName, required: true, location_name: "name"))
+    UpdateNotebookOutput.add_member(:owning_project_id, Shapes::ShapeRef.new(shape: ProjectId, required: true, location_name: "owningProjectId"))
+    UpdateNotebookOutput.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    UpdateNotebookOutput.add_member(:cell_order, Shapes::ShapeRef.new(shape: CellOrder, required: true, location_name: "cellOrder"))
+    UpdateNotebookOutput.add_member(:status, Shapes::ShapeRef.new(shape: NotebookStatus, required: true, location_name: "status"))
+    UpdateNotebookOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
+    UpdateNotebookOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: CreatedAt, location_name: "createdAt"))
+    UpdateNotebookOutput.add_member(:created_by, Shapes::ShapeRef.new(shape: CreatedBy, location_name: "createdBy"))
+    UpdateNotebookOutput.add_member(:updated_at, Shapes::ShapeRef.new(shape: UpdatedAt, location_name: "updatedAt"))
+    UpdateNotebookOutput.add_member(:updated_by, Shapes::ShapeRef.new(shape: UpdatedBy, location_name: "updatedBy"))
+    UpdateNotebookOutput.add_member(:locked_by, Shapes::ShapeRef.new(shape: String, location_name: "lockedBy"))
+    UpdateNotebookOutput.add_member(:locked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockedAt"))
+    UpdateNotebookOutput.add_member(:lock_expires_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lockExpiresAt"))
+    UpdateNotebookOutput.add_member(:compute_id, Shapes::ShapeRef.new(shape: ComputeId, location_name: "computeId"))
+    UpdateNotebookOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "metadata"))
+    UpdateNotebookOutput.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "parameters"))
+    UpdateNotebookOutput.add_member(:environment_configuration, Shapes::ShapeRef.new(shape: EnvironmentConfig, location_name: "environmentConfiguration"))
+    UpdateNotebookOutput.add_member(:error, Shapes::ShapeRef.new(shape: NotebookError, location_name: "error"))
+    UpdateNotebookOutput.struct_class = Types::UpdateNotebookOutput
 
     UpdateProjectInput.add_member(:domain_identifier, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainIdentifier"))
     UpdateProjectInput.add_member(:identifier, Shapes::ShapeRef.new(shape: ProjectId, required: true, location: "uri", location_name: "identifier"))
@@ -7091,6 +7320,22 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:create_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateNotebook"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebooks"
+        o.input = Shapes::ShapeRef.new(shape: CreateNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:create_project, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateProject"
         o.http_method = "POST"
@@ -7486,6 +7731,20 @@ module Aws::DataZone
         o.output = Shapes::ShapeRef.new(shape: DeleteListingOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:delete_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteNotebook"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebooks/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: DeleteNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -8016,6 +8275,34 @@ module Aws::DataZone
         o.http_request_uri = "/v2/domains/{domainIdentifier}/metadata-generation-runs/{identifier}"
         o.input = Shapes::ShapeRef.new(shape: GetMetadataGenerationRunInput)
         o.output = Shapes::ShapeRef.new(shape: GetMetadataGenerationRunOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNotebook"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebooks/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: GetNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:get_notebook_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetNotebookExport"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebook-exports/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: GetNotebookExportInput)
+        o.output = Shapes::ShapeRef.new(shape: GetNotebookExportOutput)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -8603,6 +8890,25 @@ module Aws::DataZone
         )
       end)
 
+      api.add_operation(:list_notebooks, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListNotebooks"
+        o.http_method = "GET"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebooks"
+        o.input = Shapes::ShapeRef.new(shape: ListNotebooksInput)
+        o.output = Shapes::ShapeRef.new(shape: ListNotebooksOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_notifications, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListNotifications"
         o.http_method = "GET"
@@ -9117,6 +9423,38 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
 
+      api.add_operation(:start_notebook_export, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartNotebookExport"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebook-exports"
+        o.input = Shapes::ShapeRef.new(shape: StartNotebookExportInput)
+        o.output = Shapes::ShapeRef.new(shape: StartNotebookExportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:start_notebook_import, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartNotebookImport"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebook-imports"
+        o.input = Shapes::ShapeRef.new(shape: StartNotebookImportInput)
+        o.output = Shapes::ShapeRef.new(shape: StartNotebookImportOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
       api.add_operation(:start_notebook_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartNotebookRun"
         o.http_method = "POST"
@@ -9371,6 +9709,21 @@ module Aws::DataZone
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+      end)
+
+      api.add_operation(:update_notebook, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateNotebook"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/v2/domains/{domainIdentifier}/notebooks/{identifier}"
+        o.input = Shapes::ShapeRef.new(shape: UpdateNotebookInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateNotebookOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)

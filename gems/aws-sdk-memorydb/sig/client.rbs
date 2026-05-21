@@ -107,7 +107,7 @@ module Aws
                              {
                                key: ::String?,
                                value: ::String?
-                             },
+                             }
                            ]
                          ) -> _CopySnapshotResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopySnapshotResponseSuccess
@@ -124,7 +124,7 @@ module Aws
                           {
                             key: ::String?,
                             value: ::String?
-                          },
+                          }
                         ]
                       ) -> _CreateACLResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateACLResponseSuccess
@@ -156,7 +156,7 @@ module Aws
                               {
                                 key: ::String?,
                                 value: ::String?
-                              },
+                              }
                             ],
                             ?snapshot_window: ::String,
                             acl_name: ::String,
@@ -187,7 +187,7 @@ module Aws
                                            {
                                              key: ::String?,
                                              value: ::String?
-                                           },
+                                           }
                                          ]
                                        ) -> _CreateMultiRegionClusterResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMultiRegionClusterResponseSuccess
@@ -205,7 +205,7 @@ module Aws
                                       {
                                         key: ::String?,
                                         value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _CreateParameterGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateParameterGroupResponseSuccess
@@ -223,7 +223,7 @@ module Aws
                                {
                                  key: ::String?,
                                  value: ::String?
-                               },
+                               }
                              ]
                            ) -> _CreateSnapshotResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSnapshotResponseSuccess
@@ -241,7 +241,7 @@ module Aws
                                    {
                                      key: ::String?,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateSubnetGroupResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSubnetGroupResponseSuccess
@@ -262,7 +262,7 @@ module Aws
                            {
                              key: ::String?,
                              value: ::String?
-                           },
+                           }
                          ]
                        ) -> _CreateUserResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateUserResponseSuccess
@@ -555,7 +555,7 @@ module Aws
                               {
                                 name: ::String,
                                 values: Array[::String]
-                              },
+                              }
                             ],
                             ?max_results: ::Integer,
                             ?next_token: ::String
@@ -618,7 +618,7 @@ module Aws
                                                 {
                                                   key: ::String?,
                                                   value: ::String?
-                                                },
+                                                }
                                               ]
                                             ) -> _PurchaseReservedNodesOfferingResponseSuccess
                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseReservedNodesOfferingResponseSuccess
@@ -646,7 +646,7 @@ module Aws
                             {
                               key: ::String?,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -732,7 +732,7 @@ module Aws
                                       {
                                         parameter_name: ::String?,
                                         parameter_value: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _UpdateParameterGroupResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateParameterGroupResponseSuccess

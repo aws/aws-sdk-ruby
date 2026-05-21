@@ -91,7 +91,7 @@ module Aws
                                       {
                                         file_name: ::String?,
                                         data: ::String?
-                                      },
+                                      }
                                     ]
                                   ) -> _AddAttachmentsToSetResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddAttachmentsToSetResponseSuccess

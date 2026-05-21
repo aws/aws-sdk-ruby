@@ -100,30 +100,13 @@ module Aws
                                  name: ::String,
                                  ?description: ::String,
                                  source_views: Array[::String],
-                                 ?data_filter_expression: {
-                                   dimensions: {
-                                     key: ("LINKED_ACCOUNT"),
-                                     values: Array[::String]
-                                   }?,
-                                   tags: {
-                                     key: ::String,
-                                     values: Array[::String]
-                                   }?,
-                                   cost_categories: {
-                                     key: ::String,
-                                     values: Array[::String]
-                                   }?,
-                                   time_range: {
-                                     begin_date_inclusive: ::Time?,
-                                     end_date_inclusive: ::Time?
-                                   }?
-                                 },
+                                 ?data_filter_expression: Params::expression,
                                  ?client_token: ::String,
                                  ?resource_tags: Array[
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ]
                                ) -> _CreateBillingViewResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillingViewResponseSuccess
@@ -188,7 +171,7 @@ module Aws
                                   {
                                     search_option: ("STARTS_WITH"),
                                     search_value: ::String
-                                  },
+                                  }
                                 ],
                                 ?owner_account_id: ::String,
                                 ?source_account_id: ::String,
@@ -230,7 +213,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -255,24 +238,7 @@ module Aws
                                  arn: ::String,
                                  ?name: ::String,
                                  ?description: ::String,
-                                 ?data_filter_expression: {
-                                   dimensions: {
-                                     key: ("LINKED_ACCOUNT"),
-                                     values: Array[::String]
-                                   }?,
-                                   tags: {
-                                     key: ::String,
-                                     values: Array[::String]
-                                   }?,
-                                   cost_categories: {
-                                     key: ::String,
-                                     values: Array[::String]
-                                   }?,
-                                   time_range: {
-                                     begin_date_inclusive: ::Time?,
-                                     end_date_inclusive: ::Time?
-                                   }?
-                                 }
+                                 ?data_filter_expression: Params::expression
                                ) -> _UpdateBillingViewResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBillingViewResponseSuccess
     end

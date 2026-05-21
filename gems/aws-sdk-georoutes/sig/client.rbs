@@ -99,46 +99,10 @@ module Aws
                                   areas: Array[
                                     {
                                       except: Array[
-                                        {
-                                          bounding_box: Array[::Float]?,
-                                          corridor: {
-                                            line_string: Array[
-                                              Array[::Float],
-                                            ],
-                                            radius: ::Integer
-                                          }?,
-                                          polygon: Array[
-                                            Array[
-                                              Array[::Float],
-                                            ],
-                                          ]?,
-                                          polyline_corridor: {
-                                            polyline: ::String,
-                                            radius: ::Integer
-                                          }?,
-                                          polyline_polygon: Array[::String]?
-                                        },
+                                        Params::isoline_avoidance_area_geometry
                                       ]?,
-                                      geometry: {
-                                        bounding_box: Array[::Float]?,
-                                        corridor: {
-                                          line_string: Array[
-                                            Array[::Float],
-                                          ],
-                                          radius: ::Integer
-                                        }?,
-                                        polygon: Array[
-                                          Array[
-                                            Array[::Float],
-                                          ],
-                                        ]?,
-                                        polyline_corridor: {
-                                          polyline: ::String,
-                                          radius: ::Integer
-                                        }?,
-                                        polyline_polygon: Array[::String]?
-                                      }
-                                    },
+                                      geometry: Params::isoline_avoidance_area_geometry
+                                    }
                                   ]?,
                                   car_shuttle_trains: bool?,
                                   controlled_access_highways: bool?,
@@ -153,7 +117,7 @@ module Aws
                                   zone_categories: Array[
                                     {
                                       category: ("CongestionPricing" | "Environmental" | "Vignette")?
-                                    },
+                                    }
                                   ]?
                                 },
                                 ?depart_now: bool,
@@ -278,12 +242,12 @@ module Aws
                                             bounding_box: Array[::Float]?,
                                             polygon: Array[
                                               Array[
-                                                Array[::Float],
-                                              ],
+                                                Array[::Float]
+                                              ]
                                             ]?,
                                             polyline_polygon: Array[::String]?
                                           }
-                                        },
+                                        }
                                       ]?,
                                       car_shuttle_trains: bool?,
                                       controlled_access_highways: bool?,
@@ -297,7 +261,7 @@ module Aws
                                       zone_categories: Array[
                                         {
                                           category: ("CongestionPricing" | "Environmental" | "Vignette")?
-                                        },
+                                        }
                                       ]?
                                     },
                                     ?depart_now: bool,
@@ -319,7 +283,7 @@ module Aws
                                           }?
                                         }?,
                                         position: Array[::Float]
-                                      },
+                                      }
                                     ],
                                     ?exclude: {
                                       countries: Array[::String]
@@ -343,7 +307,7 @@ module Aws
                                           }?
                                         }?,
                                         position: Array[::Float]
-                                      },
+                                      }
                                     ],
                                     ?routing_boundary: {
                                       geometry: {
@@ -358,8 +322,8 @@ module Aws
                                         bounding_box: Array[::Float]?,
                                         polygon: Array[
                                           Array[
-                                            Array[::Float],
-                                          ],
+                                            Array[::Float]
+                                          ]
                                         ]?
                                       }?,
                                       unbounded: bool?
@@ -434,46 +398,10 @@ module Aws
                                 areas: Array[
                                   {
                                     except: Array[
-                                      {
-                                        corridor: {
-                                          line_string: Array[
-                                            Array[::Float],
-                                          ],
-                                          radius: ::Integer
-                                        }?,
-                                        bounding_box: Array[::Float]?,
-                                        polygon: Array[
-                                          Array[
-                                            Array[::Float],
-                                          ],
-                                        ]?,
-                                        polyline_corridor: {
-                                          polyline: ::String,
-                                          radius: ::Integer
-                                        }?,
-                                        polyline_polygon: Array[::String]?
-                                      },
+                                      Params::route_avoidance_area_geometry
                                     ]?,
-                                    geometry: {
-                                      corridor: {
-                                        line_string: Array[
-                                          Array[::Float],
-                                        ],
-                                        radius: ::Integer
-                                      }?,
-                                      bounding_box: Array[::Float]?,
-                                      polygon: Array[
-                                        Array[
-                                          Array[::Float],
-                                        ],
-                                      ]?,
-                                      polyline_corridor: {
-                                        polyline: ::String,
-                                        radius: ::Integer
-                                      }?,
-                                      polyline_polygon: Array[::String]?
-                                    }
-                                  },
+                                    geometry: Params::route_avoidance_area_geometry
+                                  }
                                 ]?,
                                 car_shuttle_trains: bool?,
                                 controlled_access_highways: bool?,
@@ -488,7 +416,7 @@ module Aws
                                 zone_categories: Array[
                                   {
                                     category: ("CongestionPricing" | "Environmental" | "Vignette")
-                                  },
+                                  }
                                 ]?
                               },
                               ?depart_now: bool,
@@ -515,7 +443,7 @@ module Aws
                                   {
                                     drive_duration: ::Integer,
                                     rest_duration: ::Integer
-                                  },
+                                  }
                                 ]?
                               },
                               ?exclude: {
@@ -632,7 +560,7 @@ module Aws
                                     use_with: ("AnyStreet" | "DividedStreetOnly")?
                                   }?,
                                   stop_duration: ::Integer?
-                                },
+                                }
                               ]
                             ) -> _CalculateRoutesResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CalculateRoutesResponseSuccess
@@ -655,7 +583,7 @@ module Aws
                                       geometry: {
                                         bounding_box: Array[::Float]?
                                       }
-                                    },
+                                    }
                                   ]?,
                                   car_shuttle_trains: bool?,
                                   controlled_access_highways: bool?,
@@ -674,16 +602,7 @@ module Aws
                                 ?departure_time: ::String,
                                 ?destination: Array[::Float],
                                 ?destination_options: {
-                                  access_hours: {
-                                    from: {
-                                      day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
-                                      time_of_day: ::String
-                                    },
-                                    to: {
-                                      day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
-                                      time_of_day: ::String
-                                    }
-                                  }?,
+                                  access_hours: Params::waypoint_optimization_access_hours?,
                                   appointment_time: ::String?,
                                   heading: ::Float?,
                                   id: ::String?,
@@ -742,16 +661,7 @@ module Aws
                                 },
                                 ?waypoints: Array[
                                   {
-                                    access_hours: {
-                                      from: {
-                                        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
-                                        time_of_day: ::String
-                                      },
-                                      to: {
-                                        day_of_week: ("Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday"),
-                                        time_of_day: ::String
-                                      }
-                                    }?,
+                                    access_hours: Params::waypoint_optimization_access_hours?,
                                     appointment_time: ::String?,
                                     before: Array[::Integer]?,
                                     heading: ::Float?,
@@ -762,7 +672,7 @@ module Aws
                                       position: Array[::Float],
                                       use_with: ("AnyStreet" | "DividedStreetOnly")?
                                     }?
-                                  },
+                                  }
                                 ]
                               ) -> _OptimizeWaypointsResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _OptimizeWaypointsResponseSuccess
@@ -786,7 +696,7 @@ module Aws
                                position: Array[::Float],
                                speed: ::Float?,
                                timestamp: ::String?
-                             },
+                             }
                            ],
                            ?travel_mode: ("Car" | "Pedestrian" | "Scooter" | "Truck"),
                            ?travel_mode_options: {

@@ -25,6 +25,7 @@ module AwsSdkCodeGenerator
           @plugins = PluginList.new(options)
           @codegenerated_plugins = options.fetch(:codegenerated_plugins)
           @protocol_settings = options.fetch(:protocol_settings, {})
+          @aliased_shapes = options.fetch(:aliased_shapes, Set.new).to_set
         end
 
         # @return [String|nil]
@@ -68,7 +69,7 @@ module AwsSdkCodeGenerator
                 api: @api,
                 shape: input_shape,
                 newline: true,
-                options: options
+                options: options.merge(aliased_shapes: @aliased_shapes)
               )
               arguments = builder.format(indent: indent)
               include_required = input_shape['required']&.empty?&.!

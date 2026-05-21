@@ -97,7 +97,7 @@ module Aws
                                 protocol: ("TCP" | "ICMP"),
                                 packet_size: ::Integer?,
                                 probe_tags: Hash[::String, ::String]?
-                              },
+                              }
                             ],
                             ?aggregation_period: ::Integer,
                             ?client_token: ::String,

@@ -98,20 +98,7 @@ module Aws
                               }?
                             },
                             ?traffic_percentage_to_monitor: ::Integer,
-                            ?health_events_config: {
-                              availability_score_threshold: ::Float?,
-                              performance_score_threshold: ::Float?,
-                              availability_local_health_events_config: {
-                                status: ("ENABLED" | "DISABLED")?,
-                                health_score_threshold: ::Float?,
-                                min_traffic_impact: ::Float?
-                              }?,
-                              performance_local_health_events_config: {
-                                status: ("ENABLED" | "DISABLED")?,
-                                health_score_threshold: ::Float?,
-                                min_traffic_impact: ::Float?
-                              }?
-                            }
+                            ?health_events_config: Params::health_events_config
                           ) -> _CreateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateMonitorResponseSuccess
 
@@ -282,7 +269,7 @@ module Aws
                              field: ::String?,
                              operator: ("EQUALS" | "NOT_EQUALS")?,
                              values: Array[::String]?
-                           },
+                           }
                          ],
                          ?linked_account_id: ::String
                        ) -> _StartQueryResponseSuccess
@@ -339,20 +326,7 @@ module Aws
                               }?
                             },
                             ?traffic_percentage_to_monitor: ::Integer,
-                            ?health_events_config: {
-                              availability_score_threshold: ::Float?,
-                              performance_score_threshold: ::Float?,
-                              availability_local_health_events_config: {
-                                status: ("ENABLED" | "DISABLED")?,
-                                health_score_threshold: ::Float?,
-                                min_traffic_impact: ::Float?
-                              }?,
-                              performance_local_health_events_config: {
-                                status: ("ENABLED" | "DISABLED")?,
-                                health_score_threshold: ::Float?,
-                                min_traffic_impact: ::Float?
-                              }?
-                            }
+                            ?health_events_config: Params::health_events_config
                           ) -> _UpdateMonitorResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateMonitorResponseSuccess
     end

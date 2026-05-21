@@ -91,7 +91,7 @@ module Aws
                                                                 ?override_allowed_prefixes_to_direct_connect_gateway: Array[
                                                                   {
                                                                     cidr: ::String?
-                                                                  },
+                                                                  }
                                                                 ]
                                                               ) -> _AcceptDirectConnectGatewayAssociationProposalResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AcceptDirectConnectGatewayAssociationProposalResponseSuccess
@@ -169,7 +169,7 @@ module Aws
                                           {
                                             key: ::String,
                                             value: ::String?
-                                          },
+                                          }
                                         ]
                                       ) -> _AllocateHostedConnectionResponseSuccess
                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AllocateHostedConnectionResponseSuccess
@@ -222,7 +222,7 @@ module Aws
                                                     {
                                                       key: ::String,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ]?
                                                 }
                                               ) -> _AllocatePrivateVirtualInterfaceResponseSuccess
@@ -274,13 +274,13 @@ module Aws
                                                  route_filter_prefixes: Array[
                                                    {
                                                      cidr: ::String?
-                                                   },
+                                                   }
                                                  ]?,
                                                  tags: Array[
                                                    {
                                                      key: ::String,
                                                      value: ::String?
-                                                   },
+                                                   }
                                                  ]?
                                                }
                                              ) -> _AllocatePublicVirtualInterfaceResponseSuccess
@@ -308,7 +308,7 @@ module Aws
                                                     {
                                                       key: ::String,
                                                       value: ::String?
-                                                    },
+                                                    }
                                                   ]?
                                                 }
                                               ) -> _AllocateTransitVirtualInterfaceResponseSuccess
@@ -538,7 +538,7 @@ module Aws
                                  {
                                    key: ::String,
                                    value: ::String?
-                                 },
+                                 }
                                ],
                                ?provider_name: ::String,
                                ?request_mac_sec: bool
@@ -556,7 +556,7 @@ module Aws
                                              {
                                                key: ::String,
                                                value: ::String?
-                                             },
+                                             }
                                            ],
                                            ?amazon_side_asn: ::Integer
                                          ) -> _CreateDirectConnectGatewayResponseSuccess
@@ -573,7 +573,7 @@ module Aws
                                                        ?add_allowed_prefixes_to_direct_connect_gateway: Array[
                                                          {
                                                            cidr: ::String?
-                                                         },
+                                                         }
                                                        ],
                                                        ?virtual_gateway_id: ::String
                                                      ) -> _CreateDirectConnectGatewayAssociationResponseSuccess
@@ -591,12 +591,12 @@ module Aws
                                                                 ?add_allowed_prefixes_to_direct_connect_gateway: Array[
                                                                   {
                                                                     cidr: ::String?
-                                                                  },
+                                                                  }
                                                                 ],
                                                                 ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
                                                                   {
                                                                     cidr: ::String?
-                                                                  },
+                                                                  }
                                                                 ]
                                                               ) -> _CreateDirectConnectGatewayAssociationProposalResponseSuccess
                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDirectConnectGatewayAssociationProposalResponseSuccess
@@ -633,7 +633,7 @@ module Aws
                                    {
                                      key: ::String,
                                      value: ::String?
-                                   },
+                                   }
                                  ],
                                  ?provider_name: ::String,
                                  ?request_mac_sec: bool
@@ -675,13 +675,13 @@ module Aws
                           {
                             key: ::String,
                             value: ::String?
-                          },
+                          }
                         ],
                         ?child_connection_tags: Array[
                           {
                             key: ::String,
                             value: ::String?
-                          },
+                          }
                         ],
                         ?provider_name: ::String,
                         ?request_mac_sec: bool
@@ -737,7 +737,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ]?,
                                                 enable_site_link: bool?
                                               }
@@ -789,13 +789,13 @@ module Aws
                                                route_filter_prefixes: Array[
                                                  {
                                                    cidr: ::String?
-                                                 },
+                                                 }
                                                ]?,
                                                tags: Array[
                                                  {
                                                    key: ::String,
                                                    value: ::String?
-                                                 },
+                                                 }
                                                ]?
                                              }
                                            ) -> _CreatePublicVirtualInterfaceResponseSuccess
@@ -823,7 +823,7 @@ module Aws
                                                   {
                                                     key: ::String,
                                                     value: ::String?
-                                                  },
+                                                  }
                                                 ]?,
                                                 enable_site_link: bool?
                                               }
@@ -1272,7 +1272,7 @@ module Aws
                             {
                               key: ::String,
                               value: ::String?
-                            },
+                            }
                           ]
                         ) -> _TagResourceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _TagResourceResponseSuccess
@@ -1342,12 +1342,12 @@ module Aws
                                                        ?add_allowed_prefixes_to_direct_connect_gateway: Array[
                                                          {
                                                            cidr: ::String?
-                                                         },
+                                                         }
                                                        ],
                                                        ?remove_allowed_prefixes_to_direct_connect_gateway: Array[
                                                          {
                                                            cidr: ::String?
-                                                         },
+                                                         }
                                                        ]
                                                      ) -> _UpdateDirectConnectGatewayAssociationResponseSuccess
                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDirectConnectGatewayAssociationResponseSuccess

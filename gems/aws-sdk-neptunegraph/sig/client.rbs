@@ -192,14 +192,7 @@ module Aws
                                             },
                                             ?replica_count: ::Integer,
                                             ?deletion_protection: bool,
-                                            ?import_options: {
-                                              neptune: {
-                                                s3_export_path: ::String,
-                                                s3_export_kms_key_id: ::String,
-                                                preserve_default_vertex_labels: bool?,
-                                                preserve_edge_ids: bool?
-                                              }?
-                                            },
+                                            ?import_options: Params::import_options,
                                             ?max_provisioned_memory: ::Integer,
                                             ?min_provisioned_memory: ::Integer,
                                             ?fail_on_error: bool,
@@ -639,14 +632,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NeptuneGraph/Client.html#start_import_task-instance_method
       def start_import_task: (
-                               ?import_options: {
-                                 neptune: {
-                                   s3_export_path: ::String,
-                                   s3_export_kms_key_id: ::String,
-                                   preserve_default_vertex_labels: bool?,
-                                   preserve_edge_ids: bool?
-                                 }?
-                               },
+                               ?import_options: Params::import_options,
                                ?fail_on_error: bool,
                                source: ::String,
                                ?format: ("CSV" | "OPEN_CYPHER" | "PARQUET" | "NTRIPLES"),
