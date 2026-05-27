@@ -7,6 +7,7 @@ module Aws
       def initialize(bytes)
         @buffer = bytes
         @pos = 0
+        @depth = 0
       end
 
       def decode
@@ -25,10 +26,14 @@ module Aws
       TAG_TYPE_BIGNUM = 2
       TAG_TYPE_NEG_BIGNUM = 3
       TAG_TYPE_BIGDEC = 4
+      MAX_DEPTH = 128 # Value chosen to match other SDKs
 
       # high level, generic decode. Based on the next type. Consumes and returns
       # the next item as a ruby object.
       def decode_item
+        @depth += 1
+        raise Error, "Maximum nesting depth (#{MAX_DEPTH}) exceeded" if @depth > MAX_DEPTH
+
         case (next_type = peek_type)
         when :array
           read_array.times.map { decode_item }
@@ -75,6 +80,8 @@ module Aws
         else
           send("read_#{next_type}")
         end
+      ensure
+        @depth -= 1
       end
 
       # low level streaming interface
@@ -121,8 +128,7 @@ module Aws
         when 0 then val
         when 1 then -1 - val
         else
-          raise Error,
-                "Expected Integer (0,1) got major type: #{major_type}"
+          raise Error, "Expected Integer (0,1) got major type: #{major_type}"
         end
       end
 
@@ -173,8 +179,7 @@ module Aws
 
       def read_reserved_undefined
         _major_type, add_info = read_info
-        raise Error,
-          "Undefined reserved additional information: #{add_info}"
+        raise Error, "Undefined reserved additional information: #{add_info}"
       end
 
       def read_boolean
@@ -183,9 +188,7 @@ module Aws
         when 20 then false
         when 21 then true
         else
-          raise Error,
-                'Invalid Boolean simple type, expected add_info of 20 or 21, ' \
-                 "got: #{add_info}"
+          raise Error, "Invalid Boolean simple type, expected add_info of 20 or 21, got: #{add_info}"
         end
       end
 
@@ -221,7 +224,7 @@ module Aws
             # exp-15-10
             Math.ldexp(1024 + mant, exp - 25)
           end
-        if (b16[15]).zero?
+        if b16[15].zero?
           val
         else
           -val
@@ -250,9 +253,7 @@ module Aws
         when 2 then v
         when 3 then -1 - v
         else
-          raise Error,
-                'Invalid Tag value for BigNum, ' \
-                "expected 2 or 3, got: #{tag_value}"
+          raise Error, "Invalid Tag value for BigNum, expected 2 or 3, got: #{tag_value}"
         end
       end
 
