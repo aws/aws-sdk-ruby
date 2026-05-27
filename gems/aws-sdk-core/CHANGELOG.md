@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Prevent unbounded recursion in CBOR decoder that could cause process termination on malformed responses.
+
 3.249.0 (2026-05-22)
 ------------------
 
