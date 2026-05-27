@@ -63,23 +63,35 @@ module Aws
         end
 
         it 'decodes integer times' do
-          expect(cbor64_decode('wftB14MjtYAAAA=='))
-            .to eq(Time.parse('2020-01-01 12:21:42Z'))
+          expect(cbor64_decode('wftB14MjtYAAAA==')).to eq(Time.parse('2020-01-01 12:21:42Z'))
         end
 
         it 'decodes positive BigNums' do
-          value = 2 ** 64 + 1
+          value = 2**64 + 1
           expect(encode_decode(value)).to eq(value)
         end
 
         it 'decodes negative BigNums' do
-          value = -1*(2 ** 64 + 1)
+          value = -1 * (2**64 + 1)
           expect(encode_decode(value)).to eq(value)
         end
 
         it 'decodes BigDecimals' do
-          value = BigDecimal("273.15")
+          value = BigDecimal('273.15')
           expect(cbor64_decode('xIIhGWqz')).to eq(value)
+        end
+
+        it 'raises when nesting depth exceeds max depth' do
+          # 0xc6 = CBOR tag(6), each one recurses into decode_item.
+          # 128 tags + terminal value = 129 calls to decode_item.
+          payload = ("\xc6".b * 128) + "\x00".b
+          expect { Decoder.new(payload).decode }.to raise_error(Error, /Maximum nesting depth/)
+        end
+
+        it 'decodes payloads within the depth limit' do
+          # 127 tags + terminal value = 128 calls to decode_item (at the limit).
+          payload = ("\xc6".b * 127) + "\x00".b
+          expect { Decoder.new(payload).decode }.not_to raise_error
         end
       end
     end
