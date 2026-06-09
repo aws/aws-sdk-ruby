@@ -44,8 +44,9 @@ module Aws
         end
 
         it 'downloads a single object using Client#get_object' do
-          expect(client).to receive(:get_object).with(single_params.merge(response_target: path)).exactly(1).times
+          client.stub_responses(:get_object, { body: 'body' })
           subject.download(path, single_params)
+          expect(File.read(path)).to eq('body')
         end
 
         it 'downloads a large object in parts' do
@@ -73,7 +74,10 @@ module Aws
 
         it 'supports download object with version_id' do
           params = single_params.merge(version_id: 'foo')
-          expect(client).to receive(:get_object).with(params.merge(response_target: path)).exactly(1).times
+          client.stub_responses(:get_object, lambda do |ctx|
+            expect(ctx.params[:version_id]).to eq('foo')
+            { body: 'body' }
+          end)
 
           subject.download(path, params)
         end
@@ -140,9 +144,8 @@ module Aws
         context 'multipart progress' do
           it 'reports progress for single object' do
             small_file_size = 1024
-            expect(client)
-              .to receive(:get_object)
-              .with(single_params.merge(response_target: path, on_chunk_received: instance_of(Proc))) do |args|
+            allow(File).to receive(:rename) # mocked get_object writes no temp file
+            expect(client).to receive(:get_object).exactly(1).times do |args|
               args[:on_chunk_received].call(Tempfile.new('small-file'), small_file_size, small_file_size)
             end
 
@@ -237,6 +240,17 @@ module Aws
             client.stub_responses(:get_object, { body: 'body', content_range: 'bytes 0-3/4' })
             expect { subject.download(path, range_params.merge(mode: 'get_range', chunk_size: one_meg)) }
               .to raise_error(Aws::S3::MultipartDownloadError)
+          end
+
+          it 'does not overwrite existing file when single object download fails mid-stream' do
+            File.write(path, 'existing content')
+            expect(client).to receive(:get_object) do |params|
+              File.write(params[:response_target], 'partial')
+              raise Aws::S3::Errors::InternalError.new(nil, 'connection lost')
+            end
+
+            expect { subject.download(path, single_params) }.to raise_error(Aws::S3::Errors::InternalError)
+            expect(File.read(path)).to eq('existing content')
           end
 
           it 'does not overwrite existing file when download fails' do
