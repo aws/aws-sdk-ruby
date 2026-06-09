@@ -196,7 +196,9 @@ module Aws
       end
 
       def single_request(opts)
-        params = get_opts(opts[:params]).merge(response_target: opts[:destination])
+        resolve_temp_path(opts)
+        target = opts[:temp_path] || opts[:destination]
+        params = get_opts(opts[:params]).merge(response_target: target)
         params[:on_chunk_received] = single_part_progress(opts) if opts[:progress_callback]
         resp = @client.get_object(params)
         return resp unless opts[:on_checksum_validated]
