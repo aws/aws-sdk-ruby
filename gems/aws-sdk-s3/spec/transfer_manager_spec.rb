@@ -75,7 +75,10 @@ module Aws
         it 'calls progress callback when given' do
           n_calls = 0
           callback = proc { |_b, _p, _t| n_calls += 1 }
-          expect(client).to receive(:get_object) { |args| args[:on_chunk_received]&.call('chunk', 1024, 1024) }
+          expect(client).to receive(:get_object) do |args|
+            File.write(args[:response_target], 'data')
+            args[:on_chunk_received]&.call('chunk', 1024, 1024)
+          end
 
           subject.download_file(path, bucket: 'bucket', key: 'key', progress_callback: callback)
           expect(n_calls).to eq(1)
