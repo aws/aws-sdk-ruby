@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require_relative '../../../../gems/aws-sdk-dynamodbstreams/lib/aws-sdk-dynamodbstreams/plugins/extended_retries'
 require_relative '../../../../gems/aws-sdk-dynamodbstreams/lib/aws-sdk-dynamodbstreams/plugins/simple_attributes'
 
 module BuildTools
@@ -17,7 +18,12 @@ module BuildTools
 
         def add_plugins
           {
-            Aws::DynamoDBStreams::Plugins::SimpleAttributes => { require_path: 'aws-sdk-dynamodbstreams/plugins/simple_attributes' }
+            Aws::DynamoDBStreams::Plugins::ExtendedRetries => {
+              require_path: 'aws-sdk-dynamodbstreams/plugins/extended_retries'
+            },
+            Aws::DynamoDBStreams::Plugins::SimpleAttributes => {
+              require_path: 'aws-sdk-dynamodbstreams/plugins/simple_attributes'
+            }
           }
         end
 

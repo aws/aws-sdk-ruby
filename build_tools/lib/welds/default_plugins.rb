@@ -5,6 +5,8 @@ require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/shared_con
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/invocation_id'
 require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/recursion_detection'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors'
+require_relative '../../../gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses'
 
 module BuildTools
   module Welds
@@ -35,12 +37,18 @@ module BuildTools
           Aws::Core::Plugins::SharedConfig => { require_path: 'aws-sdk-core/plugins/shared_config' },
           Aws::Core::Plugins::UserAgent => { require_path: 'aws-sdk-core/plugins/user_agent' },
           Aws::Core::Plugins::InvocationId => { require_path: 'aws-sdk-core/plugins/invocation_id' },
-          Aws::Core::Plugins::RecursionDetection => { require_path: 'aws-sdk-core/plugins/recursion_detection' }
+          Aws::Core::Plugins::RecursionDetection => { require_path: 'aws-sdk-core/plugins/recursion_detection' },
+          Aws::Core::Plugins::RetryErrors => { require_path: 'aws-sdk-core/plugins/retry_errors' },
+          Aws::Core::Plugins::StubResponses => { require_path: 'aws-sdk-core/plugins/stub_responses' }
         }
       end
 
       def remove_plugins
-        [Smithy::Client::Plugins::UserAgent]
+        [
+          Smithy::Client::Plugins::UserAgent,
+          Smithy::Client::Plugins::RetryErrors,
+          Smithy::Client::Plugins::StubResponses
+        ]
       end
     end
   end

@@ -5,9 +5,10 @@ module Aws
     module Plugins
       # @api private
       class ExtendedRetries < Smithy::Client::Plugin
-        # DynamoDB has more retry attempts and a lower base backoff delay.
-        option(:retry_max_attempts, default: 9)
-        option(:retry_base_delay, default: 0.025)
+        # DynamoDB has more retry attempts
+        option(:max_attempts, default: 4)
+        # ... and a lower base backoff delay for non-throttling errors.
+        option(:retry_backoff_scalar, default: 0.025)
       end
     end
   end

@@ -11,6 +11,8 @@ require_relative 'aws-sdk-core/ec2_metadata'
 require_relative 'aws-sdk-core/endpoint_rules'
 require_relative 'aws-sdk-core/errors'
 require_relative 'aws-sdk-core/util'
+require_relative 'aws-sdk-core/retry'
+require_relative 'aws-sdk-core/http'
 
 # Shared Config
 

@@ -10,7 +10,7 @@ module Aws
 
       describe 'CRC32' do
         it 'rejects responses with an invalid crc32 header' do
-          client_options[:retry_max_attempts] = 1
+          client_options[:max_attempts] = 1
           client.handle(step: :send) do |context|
             context.http_response.signal_done(
               status_code: 200,
